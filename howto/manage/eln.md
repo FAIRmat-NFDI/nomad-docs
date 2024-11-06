@@ -43,6 +43,9 @@ guides to create you own customized of ELNs.
 
     This part of the documentation is still work in progress.
 
+The code base is part of the [FAIRmat-NFDI](https://github.com/FAIRmat-NFDI/nomad-external-eln-integrations){:target="_
+blank"} repository.
+
 
 NOMAD offers integration with third-party ELN providers, simplifying the process of connecting
 and interacting with external platforms. Three main external ELN solutions that are integrated into NOMAD
