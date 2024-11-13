@@ -318,9 +318,43 @@ Here are a few other built-in section definitions and packages of definitions:
 |nomad.datamodel.EntryData|An abstract section definition for the `data` section.|
 |nomad.datamodel.ArchiveSection|Allows to put `normalize` functions into your section definitions.|
 |nomad.datamodel.metainfo.eln.*|A package of section definitions to inherit commonly used quantities for ELNs. These quantities are indexed and allow specialization to utilize the NOMAD search.|
-|nomad.parsing.tabular.TableData|Allows to inherit parsing of references .csv and .xls files.|
 |nomad.datamodel.metainfo.workflow.*|A package of section definitions use by NOMAD to define workflows|
 |nomad.metainfo.*|A package that contains all *definitions* of *definitions*, e.g. NOMAD's "schema language". Here you find *definitions* for what a sections, quantity, subsections, etc. is.|
+|nomad.parsing.tabular.TableData|Allows to inherit parsing of references .csv and .xls files. See the [detailed description](tabular.html) to learn how to include this class and its annotations in a yaml schema.|
+|nomad.datamodel.metainfo.basesections.HDF5Normalizer|Allows to link quantities to hdf5 dataset, improving performance for large data. This class and the related annotations are included in a yaml schema. [Dedicated classes](hdf5.md#how-to-use-hdf5-to-handle-large-quantities) can be used to write a parser.|
+
+### HDF5Normalizer
+
+A different flavor of _**reading**_ HDF5 files into NOMAD quantities is through defining a
+[custom schema](../../tutorial/custom.md) and inheriting `HDF5Normalizer` into base-sections. Two essential components
+of using `HDF5Normalizer` class is to first define a quantity that is annotated with `FileEditQuantity` field
+to enable one to drop/upload the `*.h5` file, and to define relevant quantities annotated with `path`
+attribute under `hdf5`. These quantities are then picked up by the normalizer to extract the values to be found
+denoted by the `path`.
+
+A minimum example to import your hdf5 and map it to NOMAD quantities is by using the following custom schema:
+
+```yaml
+definitions:
+  name: 'hdf5'
+  sections:
+    Test_HDF5:
+      base_sections:
+        - 'nomad.datamodel.data.EntryData'
+        - 'nomad.datamodel.metainfo.basesections.HDF5Normalizer'
+      quantities:
+        datafile:
+          type: str
+          m_annotations:
+            eln:
+              component: FileEditQuantity
+        charge_density:
+          type: np.float32
+          shape: [ '*', '*', '*' ]
+          m_annotations:
+            hdf5:
+              path: '/path/to/charge_density'
+```
 
 
 ## Separating data and schema package

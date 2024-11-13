@@ -10,7 +10,9 @@ cannot scale.
 To address the issue, the option to use auxiliary storage systems optimized for large
 data is implemented. In the following we discuss two quantity types to enable the writing
 of large datasets to HDF5: `HDF5Reference` and `HDF5Dataset`. These are defined in
-`nomad.datamodel.hdf5`.
+`nomad.datamodel.hdf5`. Another class called `HDF5Normalizer` defined in
+`nomad.datamodel.metainfo.basesections` can be inherited
+[and used directly in a yaml schema](basics.md#hdf5normalizer).
 
 ## HDF5Reference
 
@@ -74,38 +76,7 @@ file in another upload, follow the same form for
 To read a dataset, use `read_dataset` and provide a reference. This will return the value
 cast in the type of the dataset.
 
-## HDF5Normalizer
 
-A different flavor of _**reading**_ HDF5 files into NOMAD quantities is through defining a
-[custom schema](../../tutorial/custom.md) and inheriting `HDF5Normalizer` into base-sections. Two essential components
-of using `HDF5Normalizer` class is to first define a quantity that is annotated with `FileEditQuantity` field
-to enable one to drop/upload the `*.h5` file, and to define relevant quantities annotated with `path`
-attribute under `hdf5`. These quantities are then picked up by the normalizer to extract the values to be found
-denoted by the `path`.
-
-A minimum example to import your hdf5 and map it to NOMAD quantities is by using the following custom schema:
-
-```yaml
-definitions:
-  name: 'hdf5'
-  sections:
-    Test_HDF5:
-      base_sections:
-        - 'nomad.datamodel.data.EntryData'
-        - 'nomad.datamodel.metainfo.basesections.HDF5Normalizer'
-      quantities:
-        datafile:
-          type: str
-          m_annotations:
-            eln:
-              component: FileEditQuantity
-        charge_density:
-          type: np.float32
-          shape: [ '*', '*', '*' ]
-          m_annotations:
-            hdf5:
-              path: '/path/to/charge_density'
-```
 
 ## HDF5Dataset
 To use HDF5 storage for archive quantities, one should use `HDF5Dataset`.
@@ -120,7 +91,7 @@ class LargeData(ArchiveSection):
 The assigned value will also be written to the archive HDF5 file and serialized as
 `/uploads/test_upload/archive/test_entry#/data/value`.
 
-To read the dataset, one shall use the context manager to ensure the file is closed properly when done.
+To read the dataset, one shall use the context manager `with` to ensure the file is closed properly when done.
 
 ```python
 archive.data.value = np.ones(3)
@@ -128,23 +99,74 @@ archive.data.value = np.ones(3)
 serialized = archive.m_to_dict()
 serialized['data']['value']
 # '/uploads/test_upload/archive/test_entry#/data/value'
+
 deserialized = archive.m_from_dict(serialized, m_context=archive.m_context)
 with deserialized.data.value as dataset:
     print(dataset[:])
 # array([1., 1., 1.])
 ```
 
+It is possible to assign to an archive quantity an array or another archive quantity.
+In the second case, the dataset created in the HDF5 file will contain a link and not a copy of the array:
+
+```python
+from nomad.datamodel.hdf5 import HDF5Dataset
+
+class LargeData(ArchiveSection):
+    value_1 = Quantity(type=HDF5Dataset)
+    value_2 = Quantity(type=HDF5Dataset)
+```
+
+```python
+archive.data.value_1 = np.ones(3)
+
+archive.data.value_2 = archive.data.value_1
+```
+
+
 ## Visualizing archive HDF5 quantities
 
 NOMAD clients (e.g. NOMAD UI) can pick up on these HDF5 serialized quantities and
 provide respective functionality (e.g. showing a H5Web view).
 
-The [H5WebAnnotation class](../../reference/annotations.html#h5web) contains the attributes that NOMAD will include in the HDF5 file.
-
 <figure markdown>
   ![h5reference](../images/hdf5reference.png)
   <figcaption>Visualizing archive HDF5 reference quantity using H5Web.</figcaption>
 </figure>
+
+When multiple quantities need to be displayed in the same plot, some attributes in the HDF5 file groups are needed,
+in order for h5web to be able to render a plot.
+The [H5WebAnnotation class](../../reference/annotations.html#h5web) contains the attributes to be included in the groups of HDF5 file,
+provided as section annotations.
+
+In the following example, the `value` quantity has a dedicated default h5web rendering.
+Adding some annotation in the corresponding section would trigger another plot rendering, where `value` vs. `time` plot is shown.
+
+```
+class SubstrateHeaterPower(ArchiveSection):
+
+    m_def = Section(a_h5web=H5WebAnnotation(axes='time', signal='value'))
+
+    value = Quantity(
+        type=HDF5Dataset,
+        unit='dimensionless',
+        shape=[],
+        a_h5web=H5WebAnnotation(
+            long_name='power',
+        ),
+    )
+    time = Quantity(
+        type=HDF5Dataset,
+        unit='s'
+        shape=[],
+    )
+```
+
+<figure markdown>
+  ![h5reference](../images/hdf5annotations.png)
+  <figcaption>Including attributes to HDF5 groups to have composite plots using H5Web.</figcaption>
+</figure>
+
 
 
 ## Metadata for large quantities
