@@ -1,7 +1,7 @@
 # How to use base sections
 
 As previously mentioned in [How to write a schema](basics.md#base-sections-and-inheritance),
-base sections can be used when writing custom schemas to inherit properties and *functionality*
+base sections can be used when writing custom schemas to inherit properties and _functionality_
 from already defined sections. Here we explain the properties
 and functionality of specific base sections and how they can be used.
 
@@ -9,13 +9,14 @@ and functionality of specific base sections and how they can be used.
 
 This built-in nomad module contains a set of base sections based on an entity-activity
 model.
+
 <!-- TODO add some sort of link to a standard reference for entity-activity model -->
 
 !!! info
-    In this part of the documentation we use UML Class diagrams to illustrate the
-    inheritance, composition and association between the base sections.
-    For more information on UML Class diagrams please see
-    [en.wikipedia.org/wiki/Class_diagram](https://en.wikipedia.org/wiki/Class_diagram){:target="_blank"}.
+In this part of the documentation we use UML Class diagrams to illustrate the
+inheritance, composition and association between the base sections.
+For more information on UML Class diagrams please see
+[en.wikipedia.org/wiki/Class_diagram](https://en.wikipedia.org/wiki/Class_diagram){:target="\_blank"}.
 
 ![entity activity model](images/base-sections.svg)
 
@@ -26,9 +27,9 @@ section and `nomad.datamodel.EntryData`.
 Furthermore, it is strongly encouraged to use the most specialized section applicable.
 
 !!! example
-    If the user is writing a schema for an instrument in their lab, they should ideally
-    inherit from `Instrument` (and `EntryData`) rather than directly from `Entity` or
-    `BaseSection`.
+If the user is writing a schema for an instrument in their lab, they should ideally
+inherit from `Instrument` (and `EntryData`) rather than directly from `Entity` or
+`BaseSection`.
 
 All sections that are intended to eventually become entries in NOMAD by inheriting from
 the entity-activity base sections inherit from `BaseSection`.
@@ -44,7 +45,7 @@ Theses are:
 ### `Entity`
 
 !!! info
-    By "Entity" we mean:
+By "Entity" we mean:
 
     "An object that persists, endures, or continues to exist through time while maintaining
     its identity."
@@ -62,8 +63,8 @@ The `Collection` section should be inherited when attempting to group entities t
 ![collection sections](images/collection-sections.svg)
 
 !!! example
-    The user wants to write a data schema for a batch of substrates.
-    As this is grouping entities together, they should inherit from `Collection`.
+The user wants to write a data schema for a batch of substrates.
+As this is grouping entities together, they should inherit from `Collection`.
 
 ##### `EntityReference`
 
@@ -74,7 +75,7 @@ The section contains the following quantities:
 - `reference`: A reference to a NOMAD `Entity` entry.
 - `lab_id`: The readable identifier for the entity.
 - `name`: A short descriptive name for the role of this reference
-(inherited from `SectionReference`).
+  (inherited from `SectionReference`).
 
 The normalizer for the `EntityReference` class will attempt to fill the `reference` from
 the `lab_id` or vice versa.
@@ -119,7 +120,7 @@ Otherwise a search query is made for the filled attributes in the following orde
 ### `Activity`
 
 !!! info
-    By "Activity" we mean:
+By "Activity" we mean:
 
     "An action that has a temporal extension and for some time depends on some entity."
 
@@ -139,14 +140,14 @@ The `Experiment` section should be inherited when attempting to group activities
 ![experiment sections](images/experiment-sections.svg)
 
 !!! example
-    In a sample centric view the activities are grouped together by the sample but if the
-    researcher is instead interested in an experiment containing activities on multiple
-    samples, the `Experiment` section can be inherited to group these together.
+In a sample centric view the activities are grouped together by the sample but if the
+researcher is instead interested in an experiment containing activities on multiple
+samples, the `Experiment` section can be inherited to group these together.
 
 #### `Process`
 
 !!! info
-    By "Process" we mean:
+By "Process" we mean:
 
     "A planned process which results in physical changes in a specified input material.
     [ obi : prs obi : mc obi : fg obi : jf obi : bp ]
@@ -168,7 +169,7 @@ The main feature of the `Process` section is that it adds `ProcessSteps` with a 
 ![process sections](images/process-sections.svg)
 
 !!! info
-    By "SynthesisMethod" we mean:
+By "SynthesisMethod" we mean:
 
     "A method used to synthesise a sample."
 
@@ -177,7 +178,7 @@ The main feature of the `Process` section is that it adds `ProcessSteps` with a 
 #### `Measurement`
 
 !!! info
-    By "Measurement" we mean:
+By "Measurement" we mean:
 
     "A planned process with the objective to produce information about the material entity
     that is the evaluant, by physically examining it or its proxies. [ obi : pppb ]"
@@ -192,7 +193,7 @@ of) `CompositeSystem`.
 #### `Analysis`
 
 !!! info
-    By "Analysis" we mean:
+By "Analysis" we mean:
 
     "A planned process that produces output data from input data.
 
@@ -217,21 +218,21 @@ above to provide a standardized readable identifier.
 
 It is in turn composed by the following quantities:
 
-- `institute`: Alias/short name of the home institute of the owner, i.e. *HZB*.
+- `institute`: Alias/short name of the home institute of the owner, i.e. _HZB_.
 - `owner`: Alias for the owner of the identified thing. This should be unique within the
-institute.
+  institute.
 - `datetime`: A datetime associated with the identified thing. In case of an `Activity`,
-this should be the starting time and, in case of an `Entity`, the creation time.
+  this should be the starting time and, in case of an `Entity`, the creation time.
 - `short_name`: A short name of the the identified thing (e.g. the identifier scribed on
-the sample, the process number, or machine name), e.g. 4001-8, YAG-2-34.
-This is to be managed and decided internally by the labs, although we recommend to avoid
-the following characters in it: "_", "/", "\\" and ".".
+  the sample, the process number, or machine name), e.g. 4001-8, YAG-2-34.
+  This is to be managed and decided internally by the labs, although we recommend to avoid
+  the following characters in it: "\_", "/", "\\" and ".".
 - `lab_id`: Full readable id. Ideally a human readable id convention, which is simple,
-understandable and still have chances of becoming unique.
-If the `owner`, `short_name`, `ìnstitute`, and `datetime` are provided, this will
-be formed automatically by joining these components by an underscore (_).
-Spaces in any of the individual components will be replaced with hyphens (-).
-An example would be hzb_oah_20200602_4001-08.
+  understandable and still have chances of becoming unique.
+  If the `owner`, `short_name`, `ìnstitute`, and `datetime` are provided, this will
+  be formed automatically by joining these components by an underscore (\_).
+  Spaces in any of the individual components will be replaced with hyphens (-).
+  An example would be hzb_oah_20200602_4001-08.
 
 If owner is not filled the field will be filled by the first two letters of
 the first name joined with the first two letters of the last name of the author.
@@ -246,11 +247,11 @@ exists, and finally if no other options are available it will use the name of th
 mainfile.
 
 !!! example
-    The user has created a sample section by inheriting from `CompositeSystem` and `EntryData`.
-    Now, the user wants to automatically generate a readable `lab_id` based on the logged
-    in author.
-    This can be accomplished by composing the `ReadableIdentifiers` section into the users
-    sample section:
+The user has created a sample section by inheriting from `CompositeSystem` and `EntryData`.
+Now, the user wants to automatically generate a readable `lab_id` based on the logged
+in author.
+This can be accomplished by composing the `ReadableIdentifiers` section into the users
+sample section:
 
     ```python
     class MySample(CompositeSystem, EntryData):
@@ -271,4 +272,4 @@ mainfile.
 
 This plugin contains more specialized base sections for material processing, is
 maintained by FAIRmat and is currently hosted on
-[https://github.com/FAIRmat-NFDI](https://github.com/FAIRmat-NFDI/AreaA-data_modeling_and_schemas){:target="_blank"}.
+[https://github.com/FAIRmat-NFDI](https://github.com/FAIRmat-NFDI/AreaA-data_modeling_and_schemas){:target="\_blank"}.

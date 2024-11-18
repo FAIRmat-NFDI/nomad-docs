@@ -94,9 +94,9 @@ m_package.__init_metainfo__()
 
 Schema packages typically contain one or several [schema](../../reference/glossary.md#schema) definitions, that can the be used to manually create new entries through the ELN functionality, or also by parsers to create instances of this schema fully automatically. All of the definitions contained in the package should be placed between the contructor call (`m_package = SchemaPackage()`) and the initialization (`m_package.__init_metainfo__()`).
 
-In this basic example we defined two *sections*: `System` and `Simulation`. `System` inherits from most primitive type of section - `MSection` - whereas `Simulation` is defined as a subclass of `Schema` which makes it possible to use this as the root section of an entry. Each section can have two types of properties: *quantities* and *subsections*. Sections and their properties are defined with Python classes and their attributes. Each *quantity* defines a piece of data. Basic quantity attributes are `type`, `shape`, `unit`, and `description`.
+In this basic example we defined two _sections_: `System` and `Simulation`. `System` inherits from most primitive type of section - `MSection` - whereas `Simulation` is defined as a subclass of `Schema` which makes it possible to use this as the root section of an entry. Each section can have two types of properties: _quantities_ and _subsections_. Sections and their properties are defined with Python classes and their attributes. Each _quantity_ defines a piece of data. Basic quantity attributes are `type`, `shape`, `unit`, and `description`.
 
-*Subsections* allow the placement of sections within each other, forming containment hierarchies. Basic subsection attributes are `sub_section`&mdash;a reference to the section definition of the subsection&mdash;and `repeats`&mdash;determines whether a subsection can be included once or multiple times.
+_Subsections_ allow the placement of sections within each other, forming containment hierarchies. Basic subsection attributes are `sub_section`&mdash;a reference to the section definition of the subsection&mdash;and `repeats`&mdash;determines whether a subsection can be included once or multiple times.
 
 To use the above-defined schema and create actual data, we have to instantiate the classes:
 
@@ -110,10 +110,11 @@ print(system.atom_labels)
 print(n_atoms = 3)
 ```
 
-Section *instances* can be used like regular Python objects: quantities and subsections
+Section _instances_ can be used like regular Python objects: quantities and subsections
 can be set and accessed like any other Python attribute. Special metainfo methods, starting
 with `m_` allow us to realize more complex semantics. For example `m_create` will
-instantiate a subsection and add it to the *parent* section in one step.
+instantiate a subsection and add it to the _parent_ section in one step.
+
 <!-- ? m_create is deprecated? -->
 
 Another example for an `m_`-method is:
@@ -144,7 +145,7 @@ This will convert the data into JSON:
 
 In this [guide](../customization/basics.md), we explain how to write and upload schema packages in the `.archive.yaml` format. Writing and uploading such YAML schema packages is a good way for NOMAD users to start exploring schemas, but it has limitations. As a NOMAD developer or Oasis administrator you can add Python schema packages to NOMAD. All built-in NOMAD schemas (e.g. for electronic structure code data) are written in Python and are part of the NOMAD sources (`nomad.datamodel.metainfo.*`).
 
-There is a 1-1 translation between the structure in Python schema packages (written in classes) and YAML (or JSON) schema packages (written in objects). Both use the same fundamental concepts, like *section*, *quantity*, or *subsection*, introduced in [YAML schemas](../customization/basics.md). The main benefit of Python schema packages is the ability to define custom `normalize`-functions.
+There is a 1-1 translation between the structure in Python schema packages (written in classes) and YAML (or JSON) schema packages (written in objects). Both use the same fundamental concepts, like _section_, _quantity_, or _subsection_, introduced in [YAML schemas](../customization/basics.md). The main benefit of Python schema packages is the ability to define custom `normalize`-functions.
 
 `normalize`-functions are attached to sections and are are called when instances of these sections are processed. All files are processed when they are uploaded or changed. To add a `normalize` function, your section has to inherit from `Schema` or `ArchiveSection` which provides the base for this functionality. Here is an example:
 
@@ -177,43 +178,32 @@ we will get a final normalized archive that contains our data like this:
 }
 ```
 
-## Migration guide
-
-By default, schema packages are identified by the full qualified path to the Python module that contains the definitions. An example of a full qualified path could be `nomad_example.schema_packages.mypackage`, where the first part is the Python package name, second part is a subpackage, and the last part is a Python module containing the definitions. This is the easiest way to prevent conflicts between different schema packages: python package names are unique (prevents clashes between packages) and paths inside a package must point to a single python module (prevents clashes within package). This does, however, mean that *if you move your schema definition in the plugin source code, any references to the old definition will break*. This becomes problematic in installations that have lot of old data processed with the old definition location, as those entries will still refer to the old location and will not work correctly.
-
-As it might not be possible, or even wise to prevent changes in the source code layout, and reprocessing all old entries might be impractical, we do provide an alias mechanism to help with migration tasks. Imagine your schema package was contained in `nomad_example.schema_packages.mypackage`, and in a newer version of your plugin you want to move it to `nomad_example.schema_packages.mynewpackage`. The way to do this without completely breaking the old entries is to add an alias in the schema package definition:
-
-```python
-m_package = SchemaPackage(aliases=['nomad_example.schema_packages.mypackage'])
-```
-
-Note that this will only help in scenarious where you have moved the definition and not removed or modified any of them.
-
 ## Definitions
 
 The following describes in detail the schema language for the NOMAD Metainfo and how it is expressed in Python.
 
 ### Common attributes of Metainfo Definitions
 
-In the example, you have already seen the basic Python interface to the Metainfo. *Sections* are
+In the example, you have already seen the basic Python interface to the Metainfo. _Sections_ are
 represented in Python as objects. To define a section, you write a Python class that inherits
 from `MSection`. To define subsections and quantities you use Python properties. The
 definitions themselves are also objects derived from classes. For subsections and
 quantities, you directly instantiate `:class:SubSection` and `:class:Quantity`. For sections
 there is a generated object derived from `:class:Section` and available via
-`m_def` from each *section class* and *section instance*.
+`m_def` from each _section class_ and _section instance_.
+
 <!-- TODO Either fix all cross references with :: syntax here and throughout or remove them -->
 
 These Python classes, used to represent metainfo definitions, form an inheritance
 hierarchy to share common properties
 
 - `name`: each definition has a name. This is typically defined by the corresponding
-Python property. For example, a section class name becomes the section name; a quantity gets the name
-from the variable name used in its Python definition, etc.
-- `description`: each definition should have one. Either set it directly or use *doc strings*
+  Python property. For example, a section class name becomes the section name; a quantity gets the name
+  from the variable name used in its Python definition, etc.
+- `description`: each definition should have one. Either set it directly or use _doc strings_
 - `links`: a list of useful internet references.
 - `more`: a dictionary of custom information. Any additional `kwargs` set when creating a definition
-    are added to `more`.
+  are added to `more`.
 
 ### Sections
 
@@ -221,10 +211,10 @@ Sections are defined with Python classes that extend `MSection` (or other sectio
 
 - `base_sections`: automatically taken from the base classes of the Python class.
 - `extends_base_section`: a boolean that determines the inheritance. If this is `False`,
-normal Python inheritance implies and this section will inherit all properties (subsections,
-quantities) from all base classes. If `True`, all definitions in this section
-will be added to the properties of the base class section. This allows the extension of existing
-sections with additional properties.
+  normal Python inheritance implies and this section will inherit all properties (subsections,
+  quantities) from all base classes. If `True`, all definitions in this section
+  will be added to the properties of the base class section. This allows the extension of existing
+  sections with additional properties.
 
 ### Quantities
 
@@ -232,15 +222,15 @@ Quantity definitions are the main building block of metainfo schemas. Each quant
 represents a single piece of data. Quantities can be defined with the following attributes:
 
 - `type`: can be a primitive Python type (`str`, `int`, `bool`), a numpy
-data type (`np.dtype('float64')`), an `MEnum('item1', ..., 'itemN')`, a predefined
-metainfo type (`Datetime`, `JSON`, `File`, ...), or another section or quantity to define
-a reference type.
+  data type (`np.dtype('float64')`), an `MEnum('item1', ..., 'itemN')`, a predefined
+  metainfo type (`Datetime`, `JSON`, `File`, ...), or another section or quantity to define
+  a reference type.
 - `shape`: defines the dimensionality of the quantity. Examples are: `[]` (number),
-`['*']` (list), `[3, 3]` (3 by 3 matrix), `['n_elements']` (a vector of length defined by
-another quantity `n_elements`).
-- `unit`: a physical unit. We use [Pint](https://pint.readthedocs.io/en/stable/){:target="_blank"} here. You can
-use unit strings that are parsed by Pint, e.g. `meter`, `m`, `m/s^2`. As a convention the
-NOMAD Metainfo uses only SI units.
+  `['*']` (list), `[3, 3]` (3 by 3 matrix), `['n_elements']` (a vector of length defined by
+  another quantity `n_elements`).
+- `unit`: a physical unit. We use [Pint](https://pint.readthedocs.io/en/stable/){:target="\_blank"} here. You can
+  use unit strings that are parsed by Pint, e.g. `meter`, `m`, `m/s^2`. As a convention the
+  NOMAD Metainfo uses only SI units.
 
 ### SubSection
 
@@ -248,9 +238,9 @@ A subsection defines a named property of a section that refers to another sectio
 allows to define that a section that contains another section.
 
 - `sub_section`: (aliases `section_def`, `sub_section_def`) defines the section that can
-be contained.
+  be contained.
 - `repeats`: a boolean that determines whether the subsection relationship allows multiple sections
-or only one.
+  or only one.
 
 ### References and Proxies
 
@@ -273,13 +263,14 @@ you want to refer to as type. Then you can assign respective section instances
 as values.
 
 In Python memory, quantity values that reference other sections simply contain a
-Python reference to the respective *section instance*. However, upon serializing/storing
+Python reference to the respective _section instance_. However, upon serializing/storing
 metainfo data, these references have to be represented differently.
 
 Value references work a little differently. When you read a value reference, it behaves like
 the reference value. Internally, we do not store the values, but instead a reference to the
 section that holds the referenced quantity is stored. Therefore, when you want to
 assign a value reference, use the section with the quantity and not the value itself.
+
 <!-- TODO Add a simply example here -->
 
 References are serialized as URLs. There are different types of reference URLs:
@@ -314,13 +305,13 @@ The above example works, if `System` is eventually defined in the same package.
 
 ### Categories
 
-In the old metainfo this was known as *abstract types*.
+In the old metainfo this was known as _abstract types_.
 
 Categories are defined with Python classes that have `:class:MCategory` as base class.
 Their name and description are taken from the name and docstring of the class. An example
 category looks like this:
 
-``` python
+```python
 class CategoryName(MCategory):
     ''' Category description '''
     m_def = Category(links=['http://further.explanation.eu'], categories=[ParentCategory])
@@ -341,7 +332,7 @@ NOMAD. It therefore defines the top level sections:
 
 - `metadata`: all "administrative" metadata (ids, permissions, publish state, uploads, user metadata, etc.)
 - `results`: a summary with copies and references to data from method specific sections. This also
-presents the [searchable metadata](../develop/search.md).
+  presents the [searchable metadata](../develop/search.md).
 - `workflows`: all workflow metadata
 - Method-specific subsections: e.g. `run`. This is were all parsers are supposed to
 add the parsed data.
@@ -351,10 +342,10 @@ The main NOMAD Python project includes Metainfo definitions in the following mod
 
 - `nomad.metainfo`: defines the Metainfo itself. This includes a self-referencing schema. E.g. there is a section `Section`, etc.
 - `nomad.datamodel`: defines the section `metadata` that contains all "administrative"
-metadata. It also contains the root section `EntryArchive`.
+  metadata. It also contains the root section `EntryArchive`.
 - `nomad.datamodel.metainfo`: defines all the central, method specific (but not parser specific) definitions.
-For example the section `run` with all the simulation definitions (computational material science definitions)
-that are shared among the respective parsers.
+  For example the section `run` with all the simulation definitions (computational material science definitions)
+  that are shared among the respective parsers.
 
 ### Extending existing sections
 
@@ -363,6 +354,7 @@ Parsers can provide their own definitions. By convention, these are placed into 
 to existing sections (e.g. from `nomad.datamodel.metainfo`). By convention, use a `x_mycode_`
 prefix. This is done with the
 `extends_base_section` [Section property](#sections). Here is an example:
+
 <!-- ? Do we want to encourage this as best practice in the future? -->
 
 ```py
@@ -380,8 +372,8 @@ class MyCodeRun(Workflow)
 - Use lower snake case for section properties; use upper camel case for section definitions.
 - Use a `_ref` suffix for references.
 - Use subsections rather than inheritance to add specific quantities to a general section.
-E.g. the section `workflow` contains a section `geometry_optimization` for all geometry optimization specific
-workflow quantities.
+  E.g. the section `workflow` contains a section `geometry_optimization` for all geometry optimization specific
+  workflow quantities.
 - Prefix parser-specific and user-defined definitions with `x_name_`, where `name` is the
 short handle of a code name or other special method prefix.
 <!-- TODO add case examples to the reference pages and add corresponding links here and throughout -->
@@ -434,8 +426,8 @@ where each key is a property (e.g. a quantity or subsection). Of course you can 
 this data in this JSON form. You can expect that the same keys (each item has a formal
 definition) always provides the same type of data. However, not all keys are present in
 every archive, and not all lists might have the same number of objects. This depends on the
-data. For example, some *runs* contain many systems (e.g. geometry optimizations), others
-don't; typically *bulk* systems will have *symmetry* data, non bulk systems might not.
+data. For example, some _runs_ contain many systems (e.g. geometry optimizations), others
+don't; typically _bulk_ systems will have _symmetry_ data, non bulk systems might not.
 To learn what each key means, you need to look up its definition in the Metainfo.
 
 {{ metainfo_data() }}
@@ -456,6 +448,7 @@ JSON data with a higher level interface, which provides the following advantages
 For each section the Python package contains a Python class that corresponds to its
 definition in the metainfo. You can use these classes to access `json_data` downloaded
 via API:
+
 ```python
 from nomad.datamodel import EntryArchive
 
@@ -466,6 +459,7 @@ formula = calc.system_ref.chemical_formula_reduced
 ```
 
 Archive data can also be serialized into JSON again:
+
 ```python
 import json
 
@@ -477,3 +471,188 @@ print(json.dumps(calc.m_to_dict(), indent=2))
 The NOMAD Python package provides utilities to [query large amounts of
 archive data](../programmatic/archive_query.md). This uses the built-in Python schema classes as
 an interface to the data.
+
+## Versioning
+
+Eventually you will change a schema.
+While we might think about schemas before and after a change as version 1 and
+version 2 of the same schema, those are technically two different schemas.
+We replace an existing schema for existing data with a new schema. The intention is
+that the new schema also describes the existing data.
+But, whether this is always the case depends on the type of changes we make and some changes
+will "break" existing data.
+
+What does it mean to "break an entry"? Either, your `*.archive.[json|yaml]`
+raw files cannot be parsed anymore, or processed data (i.e. "archive" data) can not be opened
+anymore. In both cases, NOMAD tries to convert JSON-style data into section definition
+instances, validating the data against the current schema. If items in the data do not match
+a given definitions this process will throw errors.
+
+If every potential section instance that _followed_ a section definition in the old schema
+still _follows_ the _same_ section definition in the new schema, we can safely replace the
+schema. If not, we will need to _migrate_ data to implement the logical transition
+we intended. Otherwise, we will _break_ existing data.
+
+### Save changes and unsafe changes
+
+Generally, _adding_ to a schema is safe. Adding section definition, adding new quantities,
+new sub-sections. All existing data only uses definitions that still exist.
+
+_Removing_ is generally not safe. Removing a quantity, makes NOMAD ignore values in existing
+entries. Removing section definitions, "breaks" entries.
+
+_Changing_ a definition might or might not be safe. In many cases _changing_ is like _removing_ and _adding_ something. Some examples:
+
+- Names determine the identity of definitions and name changes are therefore literally _removing_ and _adding_
+  a definition. They are not safe, unless you add an `alias`.
+- Adding `base_sections` is safe, removing is not. It is as if you _add_ and _remove_ properties.
+- Hoisting a property from a section into a base section is safe (you only _add_ properties).
+  The reverse is not safe (you _remove_ some properties from some definitions).
+- Making the type of a sub-section more generic (you _add_ properties to the sub-section) is safe,
+  making it more specific (you _remove_ properties from the sub-section) is not.
+- Changing quantity `type`, `shape`, or sub section `repeats` is not safe.
+
+There are some changes that do not "break" entries, but change their semantics. If you
+change a `unit` for example. NOMAD will still be able to open entires, but you will
+interpret the values wrong.
+
+Changing annotations will not "break" entries, but might have similar effects to your
+users when old entries might be treated unexpectedly in tools that use these annotations.
+The GUI is probably the most important "tool" here. Changing the ELN annotations for example
+might prohibit users to manipulate old data in the same way they used to do.
+
+### Python module conventions
+
+Eventually, you reach the point were "breaking" changes are unavoidable and you will
+need to create a new major version of your schema.
+
+First, you need to keep a schema version as long as there is data following that schema.
+That means two versions have to exist at the same time.
+Each section instance refers to a schema by its qualified python name that includes
+the respective python module with the schema package.
+
+Therefore, breaking changes should only be introduced in new schema packages. As a convention:
+
+- schema packages cary their major version in the name, e.g. `nomad_example.schema_packages.my_package_v2`
+- schema packages are maintained in version sub-modules, e.g. `nomad_example.schema_packages.my_package.v2`
+
+!!! note
+
+    By convention and assuming the inevitability of breaking changes, you should already start with a `v1` module when developing a new schema package.
+
+Note that only the major version should result in separate python modules, i.e. schema packages.
+Minor and patch versions should not introduce breaking changes by definition and the module
+for the respective major version can be changed safely.
+
+### Migration strategies
+
+!!! warning
+
+    This is preliminary information.
+
+What are strategies to introduce "breaking" changes and migrate existing data to
+the new version of the schema.
+
+#### Schema package aliases
+
+In scenarious where you have moved the definition to a new module and did not create
+other breaking changes you can use schema package aliases.
+
+By default, schema packages are identified by the full qualified path to the Python module
+that contains the definitions. An example of a full qualified path could be
+`nomad_example.schema_packages.mypackage`, where the first part is the Python package name,
+second part is a subpackage, and the last part is a Python module containing the definitions.
+This is the easiest way to prevent conflicts between different schema packages: python package
+names are unique (prevents clashes between packages) and paths inside a package must point
+to a single python module (prevents clashes within package). This does, however, mean that
+_if you move your schema definition to a new (version) module, any references to the old definition will break_.
+To move the same schema to a new module, e.g. `nomad_example.schema_packages.mypackage.v2`,
+and still let existing entries use it with the old module name, you can use a schema package
+alias:
+
+You
+schema package definition:
+
+```python
+m_package = SchemaPackage(aliases=['nomad_example.schema_packages.mypackage'])
+```
+
+!!! note
+
+    This can also be used, if you need to move a schema package for other reasons,
+    e.g. to move schemas from one plugin to another.
+
+#### Offer migration functionality
+
+!!! warning
+
+    This appoach is still tested and we might provide more dedicated functionality
+    in the future.
+
+You will not want to maintain the old version indefinitely. Eventually, you deprecate
+and even remove schema package versions from future plugin releases. Here, you should
+offer functionality that lets users migrate their old data following the old version to
+data following the new version.
+
+##### Processed data
+
+In cases where your schema is instantiated via parser, processed data (i.e. entry "archives"),
+can be migrated by re-processing respective uploads with a new version of the parser
+following the new schema. Users "just" have to be made aware and perform the reprocessing.
+
+##### Raw files
+
+In cases of `*.archive.json` raw files (i.e. you use NOMAD ELNs), the raw files themselves
+have to change. This is harder to achieve as mainfile immutability is baked into NOMAD.
+To apply the same parser-based strategy (see section before), you can add a normalize
+function to the `EntryData` section definition(s) of the old schema version. This
+normalize function
+
+- performs a transformation, i.e. creates and instance of the new
+  version from the given instance of the old version
+- writes the `m_to_dict` of the new version back into the mainfile
+- replaces the `data` section (old version instance) with the transformed (instance of the new version)
+
+Here is some pseudo code:
+
+```py
+
+from ..v2 import MyData as MyDataV2
+
+def normalize(self, archive, logger):
+  transformed = MyDataV2()
+
+  # code that fills transformed from self
+
+  with archive.context.raw_file(archive.metadata.mainfile, 'wt') as f:
+    f.write(json.dumps(dict(data=transformed.m_to_dict())))
+
+  archive.data = transformed
+```
+
+With such a `normalize` function in place, you can apply the re-processing strategy
+to migrate.
+
+!!! warning
+
+    There might be issues with this approach depending on how the `normalize` functions
+    are executed. This only works well, if after replacing data the `normalize` functions
+    of the transformed instance are called and no `normalize` functions of the original
+    instance have been called yet.
+
+    Also this approach has risks. If the process fails in unexpected ways there might be
+    raw file data being lost.
+
+## Schema packages developed by FAIRmat
+
+The following is a list of plugins containing schema packages developed by FAIRmat:
+
+| Description         | Project url                                                                |
+| ------------------- | -------------------------------------------------------------------------- |
+| simulation run      | <https://github.com/nomad-coe/nomad-schema-plugin-run.git>                 |
+| simulation data     | <https://github.com/nomad-coe/nomad-schema-plugin-simulation-data.git>     |
+| simulation workflow | <https://github.com/nomad-coe/nomad-schema-plugin-simulation-workflow.git> |
+| NEXUS               | <https://github.com/FAIRmat-NFDI/pynxtools.git>                            |
+| synthesis           | <https://github.com/FAIRmat-NFDI/AreaA-data_modeling_and_schemas.git>      |
+| material processing | <https://github.com/FAIRmat-NFDI/nomad-material-processing.git>            |
+| measurements        | <https://github.com/FAIRmat-NFDI/nomad-measurements.git>                   |
