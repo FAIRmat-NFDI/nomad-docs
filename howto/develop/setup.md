@@ -8,7 +8,11 @@ run the infrastructure in development mode, learn to run the test suites, and se
 This is not about working with the NOMAD Python package `nomad-lab`. You can find its
 documentation [here](../programmatic/pythonlib.md).
 
+
+
 ## Clone the sources
+
+If you're planning on developing the core `nomad` package alongside other plugins, consider using the `nomad-distro-dev` setup as described at the end of this page.
 
 If not already done, you should clone NOMAD. If you have an account at the
 [MPDCF Gitlab](https://gitlab.mpcdf.mpg.de/){:target="_blank"}, you can clone with the SSH URL:
@@ -687,3 +691,16 @@ your own launch configs in `.vscode/launch.json` (also in `.gitignore`).
 
 The settings expect that you have installed a Python environment at `.pyenv` as
 described in this tutorial (see above).
+
+## `nomad-distro-dev`: Development environment for the core `nomad` package and NOMAD plugins
+
+When developing `nomad` alongside multiple plugins, managing different repositories and installations can become complex.
+`nomad-distro-dev` simplifies this by allowing you to develop `nomad` and multiple plugins in one environment.
+
+Quick Setup
+
+1. Fork the [nomad-distro-dev](https://github.com/FAIRmat-NFDI/nomad-distro-dev) repository on GitHub.
+2. Follow the setup steps listed in the README of the fork.
+3. Once configured, you'll be able to use a single VSCode window to work on nomad and all your plugins.
+
+The setup should generally work without any issues, but there are some troubleshooting tips on this page that you can come back to if needed.
