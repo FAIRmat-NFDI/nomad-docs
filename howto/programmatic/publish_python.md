@@ -7,6 +7,7 @@ The [NOMAD API](https://nomad-lab.eu/prod/rae/docs/api.html){:target="_blank"} a
 We have prepare some simple python functions to facilitate use of this API. For use as demonstrated below, copy the following code into a file called NOMAD_API.py:
 
 ```python
+import os
 import requests
 
 def get_authentication_token(nomad_url, username, password):
@@ -47,11 +48,13 @@ def create_dataset(nomad_url, token, dataset_name):
         return
 
 def upload_to_NOMAD(nomad_url, token, upload_file):
-    '''Upload a single file for NOMAD upload, e.g., zip format'''
+    '''Upload a single file as a new NOMAD upload. Compressed zip/tar files are
+    automatically decompressed.
+    '''
     with open(upload_file, 'rb') as f:
         try:
             response = requests.post(
-                nomad_url + 'uploads',
+                f'{nomad_url}uploads?file_name={os.path.basename(upload_file)}',
                 headers={'Authorization': f'Bearer {token}', 'Accept': 'application/json'},
                 data=f, timeout=30)
             upload_id = response.json().get('upload_id')
@@ -128,7 +131,7 @@ def publish_upload(nomad_url, token, upload_id):
 Now, we will demonstrate how to use these functions. Within a notebook or python script, import the above functions:
 
 ```python
-from Nomad_API import *`
+from Nomad_API import *
 ```
 
 Define the following user information:
