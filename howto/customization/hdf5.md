@@ -143,7 +143,7 @@ In the following example, the `value` quantity has a dedicated default h5web ren
 Adding some annotation in the corresponding section would trigger another plot rendering, where `value` vs. `time` plot is shown.
 
 ```
-class SubstrateHeaterPower(ArchiveSection):
+class MySection(ArchiveSection):
 
     m_def = Section(a_h5web=H5WebAnnotation(axes='time', signal='value'))
 
@@ -167,6 +167,31 @@ class SubstrateHeaterPower(ArchiveSection):
   <figcaption>Including attributes to HDF5 groups to have composite plots using H5Web.</figcaption>
 </figure>
 
+To include plots corresponding to sub sections, one can provide a list of the section
+paths to the argument `paths`. The following example will trigger a rendering of the plot
+corresponding to the first `my_sub` section. One can also use wildcards `*` to include
+all sub sections and `**` to recursively search sub sections.
+
+```
+class MySubSection(ArchiveSection):
+
+    m_def = Section(a_h5web=H5WebAnnotation(axes='x', signal='y'))
+
+    x = Quantity(
+        type=HDF5Reference
+    )
+
+    y = Quantity(
+        type=HDF5Reference
+    )
+
+class MySection(ArchiveSection):
+
+    m_def = Section(a_h5web=H5WebAnnotation(paths=['my_sub/0']))
+
+    my_sub = SubSection(sub_section=MySubSection, repeats=True)
+
+```
 
 
 ## Metadata for large quantities
