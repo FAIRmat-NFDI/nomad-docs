@@ -1,4 +1,4 @@
-# Domain-specific examples for SPM (Scanning Tunneling Spectorscopy)
+# Domain-specific examples for SPM (Scanning Tunneling Spectroscopy)
 
 
 Build upon your understanding of NOMAD's features with domain-specific examples and explanations.
