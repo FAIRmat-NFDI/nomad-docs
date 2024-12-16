@@ -101,10 +101,10 @@ pip install --upgrade pip
 ```
 
 ### Install missing system libraries (e.g. on Windows, MacOS)
-Even though the NOMAD infrastructure is written in Python, there are C libraries 
-required by some of our Python dependencies. Specifically, the libmagic library, 
-which allows determining the MIME type of files, and the hdf5 library, which is 
-essential for handling HDF5 files, must be installed on most Unix/Linux systems. 
+Even though the NOMAD infrastructure is written in Python, there are C libraries
+required by some of our Python dependencies. Specifically, the libmagic library,
+which allows determining the MIME type of files, and the hdf5 library, which is
+essential for handling HDF5 files, must be installed on most Unix/Linux systems.
 
 The absence of these libraries can lead to issues during installation or runtime.
 
@@ -116,7 +116,7 @@ brew install hdf5 libmagic file-formula
 
 For Windows (pre-compiled binaries for `hdf5` are included in the dependencies):
 
--libmagic: We include python-magic-bin as a dependency for Windows users. 
+-libmagic: We include python-magic-bin as a dependency for Windows users.
 If you encounter an error such as NameError: name '_compressions' is not defined, try uninstalling and reinstalling the library:
 
 ```bash
@@ -332,7 +332,7 @@ yarn
 yarn start
 ```
 
-Note that the current codebase requires Node.js version 20. 
+Note that the current codebase requires Node.js version 20.
 
 ### JupyterHub
 
@@ -598,8 +598,9 @@ involve any API traffic.
    ```
 
    As snapshot tests do not connect to the server, the artifacts cannot be
-   fetched dynamically from the server and static files need to be used
-   instead.
+   fetched dynamically from the server and static files need to be used instead.
+   Note that you should not push these files to Git: the CI/CD pipeline will
+   automatically generate them.
 
 2. Run `yarn test` to run the whole suite or `yarn test [<filename>]` to run a
    specific test.
