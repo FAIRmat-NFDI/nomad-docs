@@ -76,7 +76,7 @@ Parsers are small programs that transform data from a recognized *mainfile* into
 structured machine processable tree of data that we call the *archive* or [**processed data**](data.md)
 of the entry. Only one parser is used for each entry. The used parser is determined
 during matching and depends on the file format. [A dedicated guide](../howto/plugins/parsers.md#match-your-raw-file) shows how to match a specific file from your parser. Parsers can be added to NOMAD as
-[plugins](../howto/plugins/parsers.md); this is a list of [all built-in parsers](../reference/parsers.md).
+[plugins](../howto/plugins/parsers.md); this is a list of [all available parsers in the central installation](../reference/parsers.md).
 
 !!! note
     A special case is the parsing of NOMAD archive files. Usually a parser converts a file

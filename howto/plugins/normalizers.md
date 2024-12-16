@@ -130,7 +130,7 @@ plugins:
 If you have the plugin package and `nomad-lab` installed in your Python environment, you can run the normalization as a part of the parsing process using the NOMAD CLI:
 
 ```shell
-nomad parse <filepath> --show-archive
+nomad parse <filepath>
 ```
 
 The output will return the final archive in JSON format.
@@ -148,45 +148,3 @@ p.normalize(a, logger=logging.getLogger())
 
 print(a.m_to_dict())
 ```
-
-## Normalizers developed by FAIRmat
-
-The following is a list of plugins containing normalizers developed by FAIRmat:
-
-| Normalizer class             | Path/Project url                                                            |
-| ---------------------------- | --------------------------------------------------------------------------- |
-| SimulationWorkflowNormalizer | <https://github.com/nomad-coe/nomad-schema-plugin-simulation-workflow.git>  |
-| SystemNormalizer             | <https://github.com/nomad-coe/nomad-normalizer-plugin-system.git>           |
-| SoapNormalizer               | <https://github.com/nomad-coe/nomad-normalizer-plugin-soap.git>             |
-| SpectraNormalizer            | <https://github.com/nomad-coe/nomad-normalizer-plugin-spectra.git>          |
-| DosNormalizer                | <https://github.com/nomad-coe/nomad-normalizer-plugin-dos.git>              |
-| BandStructureNormalizer      | <https://github.com/nomad-coe/nomad-normalizer-plugin-bandstructure.git>    |
-
-To refine an existing normalizer, you should install it via the `nomad-lab` package:
-
-```shell
-pip install nomad-lab
-```
-
-Clone the normalizer project:
-
-```shell
-git clone <normalizer-project-url>
-cd <normalizer-dir>
-```
-
-Either remove the installed normalizer and `pip install` the cloned version:
-
-```shell
-rm -rf <path-to-your-python-env>/lib/python3.11/site-packages/<normalizer-module-name>
-pip install -e .
-```
-
-Or set `PYTHONPATH` so that the cloned code takes precedence over the installed code:
-
-```shell
-PYTHONPATH=. nomad parse <path-to-example-file>
-```
-
-Alternatively, you can also do a full [developer setup](../develop/setup.md) of the NOMAD infrastructure and
-enhance the normalizer there.
