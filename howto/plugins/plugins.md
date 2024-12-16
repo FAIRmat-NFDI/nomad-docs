@@ -2,6 +2,7 @@
 
 The main way to customize a NOMAD installation is through the use of **plugins**. A NOMAD plugin is a Python package that an administrator can install into a NOMAD distribution to add custom features. This page contains shows you how to create, develop and publish a NOMAD plugin. For a high-level overview of the plugin mechanism, see the [NOMAD plugin system](../../explanation/plugin_system.md) -page.
 
+See the [FAIRmat-NFDI GitHub organization page](https://github.com/FAIRmat-NFDI) for a list of plugins developed by FAIRmat. You can also see the list of activated plugins and plugin entry points at the bottom of the *Information page* (`about/information`) of any NOMAD installation, for example check out the [central NOMAD installation](https://nomad-lab.eu/prod/v1/gui/about/information).
 ## Plugin anatomy
 
 !!! tip

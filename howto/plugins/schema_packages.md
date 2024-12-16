@@ -477,17 +477,3 @@ print(json.dumps(calc.m_to_dict(), indent=2))
 The NOMAD Python package provides utilities to [query large amounts of
 archive data](../programmatic/archive_query.md). This uses the built-in Python schema classes as
 an interface to the data.
-
-## Schema packages developed by FAIRmat
-
-The following is a list of plugins containing schema packages developed by FAIRmat:
-
-| Description                  | Project url                                                                |
-| ---------------------------- | -------------------------------------------------------------------------- |
-| simulation run               | <https://github.com/nomad-coe/nomad-schema-plugin-run.git>                 |
-| simulation data              | <https://github.com/nomad-coe/nomad-schema-plugin-simulation-data.git>     |
-| simulation workflow          | <https://github.com/nomad-coe/nomad-schema-plugin-simulation-workflow.git> |
-| NEXUS                        | <https://github.com/FAIRmat-NFDI/pynxtools.git>                            |
-| synthesis                    | <https://github.com/FAIRmat-NFDI/AreaA-data_modeling_and_schemas.git>      |
-| material processing          | <https://github.com/FAIRmat-NFDI/nomad-material-processing.git>            |
-| measurements                 | <https://github.com/FAIRmat-NFDI/nomad-measurements.git>                   |

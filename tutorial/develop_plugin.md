@@ -482,11 +482,10 @@ curl -L -o tests/data/test_sintering.archive.yaml "https://raw.githubusercontent
     module something other than `nomad_sintering`
 
 ### Run the NOMAD CLI
-To run the processing we us the NOMAD CLI method `parse` with the flag `--show-archive`
-and save the output in a json file
+To run the processing we us the NOMAD CLI method `parse`and save the output in a json file
 
 ```sh
-nomad parse tests/data/test_sintering.archive.yaml --show-archive > normalized.archive.json
+nomad parse tests/data/test_sintering.archive.yaml > normalized.archive.json
 ```
 
 However, when we run this we will get an error from NOMAD!

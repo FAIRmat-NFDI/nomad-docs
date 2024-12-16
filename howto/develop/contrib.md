@@ -20,8 +20,7 @@ Everyone can open a [new issue](https://github.com/nomad-coe/nomad/issues/new){:
 
 Use issues to ask questions, report bugs, or suggest features. If in doubt, use the main
 project to engage with us. If you address a specific plugin (e.g. parser), you can also
-post into the respective projects. See also the list of [parsers](../../reference/parsers.md)
-and the list of [built-in plugins](../../reference/plugins.md).
+post into the respective projects. See also the list of [built-in plugins](../../reference/plugins.md).
 
 If you are a member of FAIRmat, the NOMAD CoE, or are a close collaborator, you
 probably have an MPCDF GitLab account (or should ask us for one). Please use the
@@ -90,8 +89,7 @@ parsers). These plugins are also available on the public NOMAD service.
 These plugins are tied to the main project's source code via dependencies.
 
 To contribute to these plugins, use the respective GitHub projects. See also the
-list of [parsers](../../reference/parsers.md) and the list of
-[built-in plugins](../../reference/plugins.md). The same rules apply there. 
+list of [built-in plugins](../../reference/plugins.md). The same rules apply there.
 
 ```shell
 git checkout something-with-changes

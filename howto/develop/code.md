@@ -16,12 +16,7 @@ them all in the `dependencies` directory or its subdirectories) or they are
 listed as PyPI packages in the `pyproject.toml` of the main project (or one of its
 submodules).
 
-You can also have a look at the [list of parsers](../../reference/parsers.md) and
-[built-in plugins](../../reference/plugins.md) that constitute the majority of these
-projects. The only other projects are [MatID](https://github.com/nomad-coe/matid){:target="_blank"},
-[DOS fingerprints](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-dos-fingerprints){:target="_blank"},
-and the
-[NOMAD Remote Tools Hub](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-remote-tools-hub){:target="_blank"}.
+You can also have a look at the [built-in plugins](../../reference/plugins.md) that constitute the majority of these projects. The only other projects are [MatID](https://github.com/nomad-coe/matid){:target="_blank"}, [DOS fingerprints](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-dos-fingerprints){:target="_blank"}, and the [NOMAD Remote Tools Hub](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-remote-tools-hub){:target="_blank"}.
 
 !!! note
     The GitLab organization [nomad-lab](https://gitlab.mpcdf.mpg.de/nomad-lab){:target="_blank"} and the

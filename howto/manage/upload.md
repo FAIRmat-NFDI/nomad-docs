@@ -1,7 +1,6 @@
 # How to upload and publish data for supported formats
 
-This guide describes how to upload data in NOMAD [supported file formats](../../reference/parsers.md). You find a
-list of supported formats on top of each upload page, see below.
+This guide describes how to upload data in NOMAD [supported file formats](../../reference/parsers.md). You find a list of supported formats on top of each upload page, see below.
 
 ## Preparing files
 

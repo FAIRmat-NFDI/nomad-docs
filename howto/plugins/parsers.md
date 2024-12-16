@@ -113,17 +113,35 @@ myparser = MyParserEntryPoint(
 
 You can find all of the available matching criteria in the [`ParserEntryPoint` reference](../../reference/plugins.md#parserentrypoint)
 
-## Running the parser
+## Running a parser
 
-If you have the plugin package and `nomad-lab` installed in your Python environment, you can run the parser against a file using the NOMAD CLI:
+Parsers automatically run for the matched files within a NOMAD distribution, but it is also possible to run the manually for specific files. This can be useful for testing and for connecting them into external software.
 
-```shell
-nomad parse <filepath> --show-archive
+### Using the CLI
+
+If you have installed a NOMAD plugin into a Python virtual environment, you can run a parser from that plugin with the `nomad` command line interface. The following command will uses the CLI to parse a given input file, and store the resulting JSON output into an output file:
+
+```
+nomad parse <input-file> > <output-file>
 ```
 
-The output will return the final archive in JSON format.
+The parse command will automatically match the right parser to your file and run the parser. To skip the parser matching, i.e. the process that determined which parser fits to the given file, you can use the `--parser` argument to provide a parser entry point id:
 
-Parsing can also be run within a python script (or Jupyter notebook), e.g., to facilate debugging, with the following code:
+```
+nomad parse --parser <parser_entry_point_id> <input-file>
+```
+
+You can check the [CLI reference for `nomad parse`](../../reference/cli.md#nomad-parse) for the full list of arguments, but the following should get you started:
+
+- `--show-metadata`: Return json representation of the basic metadata
+- `--skip-normalizers`: Skip any normalizers
+- `--preview-plots`: Optionally previews the generated plots.
+- `--save-plot-dir <directory>`: Specifies a directory to save the plot images.
+
+### Within python code
+
+You can also invoke the NOMAD parsers using Python. This will give you the parse
+results as metainfo objects to conveniently analyze the results in Python. You can either run the parser class directly:
 
 ```python
 from nomad.datamodel import EntryArchive
@@ -135,6 +153,25 @@ a = EntryArchive()
 p.parse('tests/data/example.out', a, logger=logging.getLogger())
 
 print(a.m_to_dict())
+```
+
+Or alternatively through the `parse` function that is also used internally by the CLI:
+
+```python
+import sys
+from nomad.client import parse, normalize_all
+
+# Match and run the parser
+archives = parse('path/to/you/file')
+# Run all normalizers
+for archive in archives:
+    normalize_all(archive)
+
+    # Get the 'main section' section_run as a metainfo object
+    section_run = archive.run[0]
+
+    # Get the same data as JSON serializable Python dict
+    python_dict = section_run.m_to_dict()
 ```
 
 ## Parsing text files
@@ -396,43 +433,3 @@ Aside from `TextParser`, other `FileParser` classes are also defined. These incl
 the parser takes in an XPath-style key to access individual quantities. By default,
 automatic data type conversion is performed, which can be switched off by setting
 `convert=False`.
-
-## Parsers developed by FAIRmat
-
-The following is a list of plugins containin parsers developed by FAIRmat:
-
-| Description                  | Project url                                            |
-| ---------------------------- | ------------------------------------------------------ |
-| electronic structure codes   | <https://github.com/nomad-coe/electronic-parsers.git>  |
-| atomistic codes              | <https://github.com/nomad-coe/atomistic-parsers.git>   |
-| workflow engines             | <https://github.com/nomad-coe/workflow-parsers.git>    |
-| databases                    | <https://github.com/nomad-coe/database-parsers.git>    |
-
-To refine an existing parser, you should install the parser via the `nomad-lab` package:
-
-```shell
-pip install nomad-lab
-```
-
-Clone the parser project:
-
-```shell
-git clone <parser-project-url>
-cd <parser-dir>
-```
-
-Either remove the installed parser and `pip install` the cloned version:
-
-```shell
-rm -rf <path-to-your-python-env>/lib/python3.11/site-packages/<parser-module-name>
-pip install -e .
-```
-
-Or set `PYTHONPATH` so that the cloned code takes precedence over the installed code:
-
-```shell
-PYTHONPATH=. nomad parse <path-to-example-file>
-```
-
-Alternatively, you can also do a full [developer setup](../develop/setup.md) of the NOMAD infrastructure and
-enhance the parser there.
