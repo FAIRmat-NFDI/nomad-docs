@@ -31,6 +31,7 @@ Use NOMAD's functions programmatically and via its APIs.
 - [Publish data using python](programmatic/publish_python.md)
 - [Install nomad-lab](programmatic/pythonlib.md)
 - [Access processed data](programmatic/archive_query.md)
+- [Transform data](programmatic/json_transformer.md)
 
 </div>
 </div>
