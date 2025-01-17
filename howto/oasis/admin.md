@@ -21,6 +21,7 @@ docker exec nomad_oasis_mongo mongorestore /backup
 ```
 
 Now you still have to recreate the elasticsearch index:
+
 ```sh
 docker exec nomad_oasis_app python -m nomad.cli admin uploads index
 ```
@@ -34,18 +35,21 @@ docker exec -ti nomad_oasis_app bash
 ```
 
 For example you can ls or remove uploads:
+
 ```sh
 nomad admin uploads ls
 nomad admin uploads rm -- <upload_id> <upload_id>
 ```
 
 You can also reset the processing (of "stuck") uploads and reprocess:
+
 ```sh
 nomad admin uploads reset -- <upload_id>
 nomad admin uploads process -- <upload_id>
 ```
 
 You can also use the CLI to wipe the whole installation:
+
 ```sh
 nomad admin reset --i-am-really-sure
 ```
@@ -82,7 +86,7 @@ cat file_with_ids.txt | xargs nomad admin uploads ls --
 
 Processing includes the conversion of raw files into NOMAD entries. Files are parsed,
 normalizers are called, the processing results are stored, and the search index
-is updated. In certain scenarios (failed processing, [migration](migrate.md#migration-steps),
+is updated. In certain scenarios (failed processing, [migration](update.md#migration-steps),
 changed plugins) might require that admins process certain uploads again.
 
 ```
@@ -93,7 +97,7 @@ nomad admin uploads process
 
 Each NOMAD entry is represented in NOMAD's search index. Only if an entry is in this
 index, you can find it via the search interface. Some changes between NOMAD versions
-(see also our [migration guide](migrate.md#migration-steps)), might require that
+(see also our [update guide](update.md#migration-steps)), might require that
 you re-index all uploads.
 
 ```

@@ -320,7 +320,7 @@ Here are a few other built-in section definitions and packages of definitions:
 |nomad.datamodel.metainfo.eln.*|A package of section definitions to inherit commonly used quantities for ELNs. These quantities are indexed and allow specialization to utilize the NOMAD search.|
 |nomad.datamodel.metainfo.workflow.*|A package of section definitions use by NOMAD to define workflows|
 |nomad.metainfo.*|A package that contains all *definitions* of *definitions*, e.g. NOMAD's "schema language". Here you find *definitions* for what a sections, quantity, subsections, etc. is.|
-|nomad.parsing.tabular.TableData|Allows to inherit parsing of references .csv and .xls files. See the [detailed description](tabular.html) to learn how to include this class and its annotations in a yaml schema.|
+|nomad.parsing.tabular.TableData|Allows to inherit parsing of references .csv and .xls files. See the [detailed description](tabular.md) to learn how to include this class and its annotations in a yaml schema.|
 |nomad.datamodel.metainfo.basesections.HDF5Normalizer|Allows to link quantities to hdf5 dataset, improving performance for large data. This class and the related annotations are included in a yaml schema. [Dedicated classes](hdf5.md#how-to-use-hdf5-to-handle-large-quantities) can be used to write a parser.|
 
 ### HDF5Normalizer

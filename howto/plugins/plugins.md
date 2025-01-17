@@ -2,10 +2,12 @@
 
 The main way to customize a NOMAD installation is through the use of **plugins**. A NOMAD plugin is a Python package that an administrator can install into a NOMAD distribution to add custom features. This page contains shows you how to create, develop and publish a NOMAD plugin. For a high-level overview of the plugin mechanism, see the [NOMAD plugin system](../../explanation/plugin_system.md) -page.
 
-See the [FAIRmat-NFDI GitHub organization page](https://github.com/FAIRmat-NFDI) for a list of plugins developed by FAIRmat. You can also see the list of activated plugins and plugin entry points at the bottom of the *Information page* (`about/information`) of any NOMAD installation, for example check out the [central NOMAD installation](https://nomad-lab.eu/prod/v1/gui/about/information).
+See the [FAIRmat-NFDI GitHub organization page](https://github.com/FAIRmat-NFDI) for a list of plugins developed by FAIRmat. You can also see the list of activated plugins and plugin entry points at the bottom of the _Information page_ (`about/information`) of any NOMAD installation, for example check out the [central NOMAD installation](https://nomad-lab.eu/prod/v1/gui/about/information).
+
 ## Plugin anatomy
 
 !!! tip
+
     We provide a [template repository](https://github.com/FAIRmat-NFDI/nomad-plugin-template) which you can use to create the initial plugin layout for you.
 
 Plugin Git repositories should roughly follow this layout:
@@ -34,8 +36,8 @@ Plugin Git repositories should roughly follow this layout:
 
 We suggest using the following convention for naming the repository name and the plugin package:
 
- - repository name: `nomad-<plugin name>`
- - package name: `nomad_<plugin name>`
+- repository name: `nomad-<plugin name>`
+- package name: `nomad_<plugin name>`
 
 In the folder structure you can see that a single plugin can contain multiple types of customizations: apps, parsers, schema packages and normalizers. These are called a **plugin entry points** and you will learn more about them next.
 
@@ -182,6 +184,7 @@ As your plugin matures, you should also think about documenting its usage. We re
 ## Publishing a plugin
 
 !!! warning "Attention"
+
     The standard processes for publishing plugins and using plugins from other developers are still being worked out. The "best" practices mentioned in the following are preliminary. We aim to set up a dedicated plugin registry that allows you to publish your plugin and find plugins from others.
 
 ### GitHub repository
@@ -194,13 +197,14 @@ pip install git+https://<repository_url>
 ```
 
 !!! note
+
     If you develop a plugin in the context of [FAIRmat](https://github.com/fairmat-nfdi) or the [NOMAD CoE](https://github.com/nomad-coe), put your plugin repositories in the corresponding GitHub organization.
 
 ### PyPI/pip package
 
-You may additionally publish the plugin package in PyPI. Learn from the PyPI documentation how to [create a package for PyPI](https://packaging.python.org/en/latest/tutorials/packaging-projects/){:target="_blank"}. We recommend to use the `pyproject.toml`-based approach.
+You may additionally publish the plugin package in PyPI. Learn from the PyPI documentation how to [create a package for PyPI](https://packaging.python.org/en/latest/tutorials/packaging-projects/){:target="\_blank"}. We recommend to use the `pyproject.toml`-based approach.
 
-The PyPI documentation provides further information about how to [publish a package to PyPI](https://packaging.python.org/en/latest/tutorials/packaging-projects/#uploading-the-distribution-archives){:target="_blank"}. If you have access to the MPCDF GitLab and NOMAD's presence there, you can also
+The PyPI documentation provides further information about how to [publish a package to PyPI](https://packaging.python.org/en/latest/tutorials/packaging-projects/#uploading-the-distribution-archives){:target="\_blank"}. If you have access to the MPCDF GitLab and NOMAD's presence there, you can also
 use the `nomad-FAIR` package registry:
 
 ```
@@ -213,4 +217,4 @@ twine upload \
 
 ## Installing a plugin
 
-See our documentation on [How to install plugins into a NOMAD Oasis](../oasis/plugins_install.md).
+See our documentation on [How to install plugins into a NOMAD Oasis](../oasis/install.md#plugins).

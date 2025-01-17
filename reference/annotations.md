@@ -30,7 +30,6 @@ This annotation goes in the section that we want to be filled with tabular data,
 It is used to give a name to the instances that might be created by the parser. If it is not provided, the name of the section itself will be used as name.
 Many times it is useful because, i. e., one might want to create a bundle of instances of, say, a "Substrate" class, each instance filename not being "Substrate_1", "Substrate_2", etc., but being named after a quantity contained in the class that is, for example, the specific ID of that sample.
 
-
 ```yaml
 MySection:
   more:
@@ -38,7 +37,7 @@ MySection:
   quantities:
     my_quantity:
       type: np.float64
-      shape: ['*']
+      shape: ["*"]
       description: "my quantity to be filled from the tabular data file"
       unit: K
       m_annotations:
@@ -50,7 +49,10 @@ MySection:
 ```
 
 !!! important
-    The quantity designated as `label_quantity` should not be an array but a integer, float or string, to be set as the name of a file. If an array quantity is chosen, the parser would fall back to the use of the section as name.
+
+    The quantity designated as `label_quantity` should not be an array but a integer, float or string,
+    to be set as the name of a file. If an array quantity is chosen, the parser would fall back to
+    the use of the section as name.
 
 {{ pydantic_model('nomad.datamodel.metainfo.annotations.SchemaAnnotation', heading='## Schema annotation') }}
 
@@ -64,7 +66,7 @@ A practical example is provided in [How To](../howto/customization/tabular.md#pr
 ```yaml
 my_quantity:
   type: np.float64
-  shape: ['*']
+  shape: ["*"]
   description: "my quantity to be filled from the tabular data file"
   unit: K
   m_annotations:
@@ -83,20 +85,20 @@ One special quantity will be dedicated to host the tabular data file. In the fol
 
 ### Available Combinations
 
-|Tutorial ref.|`file_mode`|`mapping_mode`|`sections`|How to ref.|
-|---|---|---|---|---|
-|1|`current_entry`|`column`|`root`|[HowTo](../howto/customization/tabular.md#1-column-mode-current-entry-parse-to-root)|
-|2|`current_entry`|`column`|my path|[HowTo](../howto/customization/tabular.md#2-column-mode-current-entry-parse-to-my-path)|
-|<span style="color:red">np1</span>|`current_entry`|`row`|`root`|<span style="color:red">Not possible</span>|
-|3|`current_entry`|`row`|my path|[HowTo](../howto/customization/tabular.md#3-row-mode-current-entry-parse-to-my-path)|
-|<span style="color:red">np2</span>|`single_new_entry`|`column`|`root`|<span style="color:red">Not possible</span>|
-|4|`single_new_entry`|`column`|my path|[HowTo](../howto/customization/tabular.md#4-column-mode-single-new-entry-parse-to-my-path)|
-|<span style="color:red">np3</span>|`single_new_entry`|`row`|`root`|<span style="color:red">Not possible</span>|
-|5|`single_new_entry`|`row`|my path|[HowTo](../howto/customization/tabular.md#5-row-mode-single-new-entry-parse-to-my-path)|
-|<span style="color:red">np4</span>|`multiple_new_entries`|`column`|`root`|<span style="color:red">Not possible</span>|
-|<span style="color:red">np5</span>|`multiple_new_entries`|`column`|my path|<span style="color:red">Not possible</span>|
-|6|`multiple_new_entries`|`row`|`root`|[HowTo](../howto/customization/tabular.md#6-row-mode-multiple-new-entries-parse-to-root)|
-|7|`multiple_new_entries`|`row`|my path|[HowTo](../howto/customization/tabular.md#7-row-mode-multiple-new-entries-parse-to-my-path)|
+| Tutorial ref.                      | `file_mode`            | `mapping_mode` | `sections` | How to ref.                                                                                 |
+| ---------------------------------- | ---------------------- | -------------- | ---------- | ------------------------------------------------------------------------------------------- |
+| 1                                  | `current_entry`        | `column`       | `root`     | [HowTo](../howto/customization/tabular.md#1-column-mode-current-entry-parse-to-root)        |
+| 2                                  | `current_entry`        | `column`       | my path    | [HowTo](../howto/customization/tabular.md#2-column-mode-current-entry-parse-to-my-path)     |
+| <span style="color:red">np1</span> | `current_entry`        | `row`          | `root`     | <span style="color:red">Not possible</span>                                                 |
+| 3                                  | `current_entry`        | `row`          | my path    | [HowTo](../howto/customization/tabular.md#3-row-mode-current-entry-parse-to-my-path)        |
+| <span style="color:red">np2</span> | `single_new_entry`     | `column`       | `root`     | <span style="color:red">Not possible</span>                                                 |
+| 4                                  | `single_new_entry`     | `column`       | my path    | [HowTo](../howto/customization/tabular.md#4-column-mode-single-new-entry-parse-to-my-path)  |
+| <span style="color:red">np3</span> | `single_new_entry`     | `row`          | `root`     | <span style="color:red">Not possible</span>                                                 |
+| 5                                  | `single_new_entry`     | `row`          | my path    | [HowTo](../howto/customization/tabular.md#5-row-mode-single-new-entry-parse-to-my-path)     |
+| <span style="color:red">np4</span> | `multiple_new_entries` | `column`       | `root`     | <span style="color:red">Not possible</span>                                                 |
+| <span style="color:red">np5</span> | `multiple_new_entries` | `column`       | my path    | <span style="color:red">Not possible</span>                                                 |
+| 6                                  | `multiple_new_entries` | `row`          | `root`     | [HowTo](../howto/customization/tabular.md#6-row-mode-multiple-new-entries-parse-to-root)    |
+| 7                                  | `multiple_new_entries` | `row`          | my path    | [HowTo](../howto/customization/tabular.md#7-row-mode-multiple-new-entries-parse-to-my-path) |
 
 ```yaml
 data_file:
@@ -105,12 +107,12 @@ data_file:
   m_annotations:
     tabular_parser:
       parsing_options:
-        comment: '#'
+        comment: "#"
       mapping_options:
-      - mapping_mode: column
-        file_mode: single_new_entry
-        sections:
-        - my_section/my_quantity
+        - mapping_mode: column
+          file_mode: single_new_entry
+          sections:
+            - my_section/my_quantity
 ```
 
 <!-- The available options are:
@@ -120,8 +122,8 @@ data_file:
 |`parsing_options`|group of options|some pandas `Dataframe` options.|
 |`mapping_options`|list of groups of options|they allow to choose among all the possible modes of parsing data from the spreadsheet file to the NOMAD archive file. Each group of options can be repeated in a list. | -->
 
-
 ## Plot
+
 The PlotSection base section serves as an additional functionality to your sections.
 This base section is designed to simplify the process of creating various types of
 plots, making it easy to use Plotly Express, Plotly Subplot, and the general Plotly graph objects.
@@ -200,6 +202,7 @@ and additionally utilizing different flavours of plot annotations. The different
 {{ pydantic_model('nomad.datamodel.metainfo.annotations.PlotlySubplotsAnnotation', heading='### PlotlySubplotsAnnotation') }}
 
 ### plot annotations in python
+
 For simple plots in Python schema one could use the annotations without normalizer:
 
 ```python
@@ -286,8 +289,9 @@ class CustomSection(PlotSection, EntryData):
 {{ pydantic_model('nomad.datamodel.metainfo.annotations.PlotAnnotation', heading='### PlotAnnotation (Deprecated)') }}
 
 ## H5Web
+
 The H5WebAnnotation provides a way to control how H5Web renders visualization for
-[HDF5Dataset](../howto/customization/hdf5.html#hdf5dataset) quantities. The annotation values are written to the
+[HDF5Dataset](../howto/customization/hdf5.md#hdf5dataset) quantities. The annotation values are written to the
 corresponding HDF5 object attributes and are subsequently read by H5Web.
 
 Usage:
@@ -296,7 +300,9 @@ Usage:
 - Add addictional annotations to trigger the H5Web visualizer to the section containing the Quantity, and, optionally, to its parent sections.
 
 !!! note
-    If an EntryData class contain the `a_h5web` annotation, the H5Web plot is shown in the [entry overview page](../examples/computational_data/uploading.html#entries-overview-page).
+
+    If an EntryData class contain the `a_h5web` annotation, the H5Web plot is shown in the
+    [entry overview page](../examples/computational_data/uploading.md#entries-overview-page).
 
 An example of use of H5WebAnnotation in Python schemas:
 
@@ -347,10 +353,11 @@ class B(EntryData):
 ```
 
 In this example, an H5Web view of the variables `x`, `y`, and `y_err` is displayed in the page of the subsection `A`.
-The plot of variables `x_value` and `y_value` is also displayed; as the `B` class is an `EntryData`, the plot is shown in the [entry overview page](../examples/computational_data/uploading.html#entries-overview-page). Additionally, alongside with the plot of the class `B`, the overview page presents also the plot contained in the subsection `A`, due to the `paths` attribute. The `paths` attribute allows to show in a parent section or subsection the plots originally contained in children subsections. Parents and children refer here to **composed** object.
+The plot of variables `x_value` and `y_value` is also displayed; as the `B` class is an `EntryData`, the plot is shown in the [entry overview page](../examples/computational_data/uploading.md#entries-overview-page). Additionally, alongside with the plot of the class `B`, the overview page presents also the plot contained in the subsection `A`, due to the `paths` attribute. The `paths` attribute allows to show in a parent section or subsection the plots originally contained in children subsections. Parents and children refer here to **composed** object.
 
 !!! note
-    The `paths` variable points in the example above to a [repeated subsection](../howto/plugins/schema_packages.html#schemapackage-class), hence the path provided includes a serial number pointing to the subsection object to be displayed in the entry overview page. To show in the overview page a non-repeatable subsection, no serial number is required in the path.
+
+    The `paths` variable points in the example above to a [repeated subsection](../howto/plugins/schema_packages.md#schemapackage-class), hence the path provided includes a serial number pointing to the subsection object to be displayed in the entry overview page. To show in the overview page a non-repeatable subsection, no serial number is required in the path.
 
 H5Web implements visualization features through the attributes shown above, they can be attached to datasets and groups of an HDF5 file.
 The conventions for the attributes are rooted in the NeXus language and more explanations can be found in the [NXData documentation page](https://manual.nexusformat.org/classes/base_classes/NXdata.html) and in the [Associating plottable data documentation page](https://manual.nexusformat.org/datarules.html#design-findplottable-niac2014).
@@ -358,4 +365,3 @@ The conventions for the attributes are rooted in the NeXus language and more exp
 ### H5WebAnnotation
 
 {{ pydantic_model('nomad.datamodel.metainfo.annotations.H5WebAnnotation', heading = '') }}
-

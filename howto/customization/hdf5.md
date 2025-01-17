@@ -136,7 +136,7 @@ provide respective functionality (e.g. showing a H5Web view).
 
 When multiple quantities need to be displayed in the same plot, some attributes in the HDF5 file groups are needed,
 in order for h5web to be able to render a plot.
-The [H5WebAnnotation class](../../reference/annotations.html#h5web) contains the attributes to be included in the groups of HDF5 file,
+The [H5WebAnnotation class](../../reference/annotations.md#h5web) contains the attributes to be included in the groups of HDF5 file,
 provided as section annotations.
 
 In the following example, the `value` quantity has a dedicated default h5web rendering.

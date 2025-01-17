@@ -89,7 +89,8 @@ async def root():
 Read the official [FastAPI documentation](https://fastapi.tiangolo.com/tutorial/) to learn how to build apps and APIs with
 FastAPI.
 
-If you run NOMAD with this plugin following our [Oasis installation documentation](../oasis/install.md) and our [plugin installation documentation](../oasis/plugins_install.md), you can curl this API and should receive the message:
+If you run NOMAD with this plugin following our [Oasis installation documentation](../oasis/install.md)
+you can curl this API and should receive the message:
 
 ```sh
 curl localhost/nomad-oasis/myapi

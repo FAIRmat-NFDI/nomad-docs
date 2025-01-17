@@ -1,9 +1,9 @@
-# How to migrate Oasis versions
+# How to Update Oasis versions
 
 ## Software versions
 
 We distribute NOMAD as docker images that are available in our
-[public docker registry](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR/container_registry/36){:target="_blank"}.
+[public docker registry](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR/container_registry/36){:target="\_blank"}.
 The a NOMAD image names looks like this:
 
 ```
@@ -21,10 +21,9 @@ Our semantic interpretation of **"minor"** is the following:
 - there are only additions to programming interfaces and config options
 - NOMAD will still operate on existing data, but **the structure of newly processed data might change**
 - minor version might introduce new features that are only available after certain
-actions [migration steps](#migration-steps).
+  actions [migration steps](#migration-steps).
 
-A road-map for major features can be found on our homepage [here](https://nomad-lab.eu/nomad-lab/features.html){:target="_blank"}. You'll find a detailed change log in the source code [here](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR/-/blob/develop/CHANGELOG.md){:target="_blank"}.
-
+A road-map for major features can be found on our homepage [here](https://nomad-lab.eu/nomad-lab/features.html){:target="\_blank"}. You'll find a detailed change log in the source code [here](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR/-/blob/develop/CHANGELOG.md){:target="\_blank"}.
 
 ## Configuration versions
 
@@ -93,17 +92,17 @@ docker compose up -d
 ### to 1.2.0
 
 - We introduced the plugin mechanism. There are now more options to control which schemas
-and parsers are available in your installation. By default all the existing and shipped
-schemas and parsers are enabled. See also [here](customize.md).
+  and parsers are available in your installation. By default all the existing and shipped
+  schemas and parsers are enabled. See also [here](install.md#plugins).
 
 - We changed the archive file format. [Re-processing](admin.md#re-processing) might yield better performance.
 
 - Parsers are now using a different workflow model and the UI now includes a
-workflow card on the overview page of entries with workflows for the new model.
-[Re-processing](admin.md#re-processing) all data will enable this feature for old data. Any analysis build on
-the old workflow model, might not work for new data.
+  workflow card on the overview page of entries with workflows for the new model.
+  [Re-processing](admin.md#re-processing) all data will enable this feature for old data. Any analysis build on
+  the old workflow model, might not work for new data.
 
-- We introduce the *log-transfer* service. This is currently an opt-in feature.
+- We introduce the _log-transfer_ service. This is currently an opt-in feature.
 
 ### from 0.8.x to 1.x
 
@@ -116,6 +115,7 @@ The overall strategy is to create a new mongo database, copy all information, an
 reprocess all data for the new version.
 
 First, shutdown the OASIS and remove all old containers.
+
 ```sh
 docker compose stop
 docker compose rm -f
@@ -127,6 +127,7 @@ are different. The default values contain a version number in those names, if yo
 overwrite those defaults, you should be safe.
 
 Make sure you get the latest images and start the OASIS with the new version of NOMAD:
+
 ```sh
 docker compose pull
 docker compose up -d

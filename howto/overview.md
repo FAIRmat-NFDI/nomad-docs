@@ -4,8 +4,8 @@ hide: toc
 
 # NOMAD How-to guides
 
-
 ## Users
+
 These how-to guides target NOMAD users and cover data management, exploration, analysis with NOMAD graphical web-interface and APIs.
 
 <div markdown="block" class="home-grid">
@@ -37,6 +37,7 @@ Use NOMAD's functions programmatically and via its APIs.
 </div>
 
 ## Data stewards, administrators, and developers
+
 These how-to guides allow advanced users, NOMAD administrators, data stewards, and developers to customize and operate NOMAD and NOMAD Oasis or contribute to NOMAD's development.
 
 <div markdown="block" class="home-grid">
@@ -47,9 +48,8 @@ These how-to guides allow advanced users, NOMAD administrators, data stewards, a
 Host NOMAD for your lab or institution.
 
 - [Install an Oasis](oasis/install.md)
-- [Customize an Oasis](oasis/customize.md)
-- [Install plugins](oasis/plugins_install.md)
-- [Migrate Oasis versions](oasis/migrate.md)
+- [Develop plugins](plugins/plugins.md)
+- [Update an Oasis](oasis/update.md)
 - [Administrate and maintain an Oasis](oasis/admin.md)
 
 </div>

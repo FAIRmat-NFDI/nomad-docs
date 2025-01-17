@@ -90,7 +90,7 @@ section, might indirectly use custom processing functionality.
 
 A parser plugin can define a new parser and therefore add to the *matching*, *parsing*, (and *normalizing*).
 A schema plugin defines new sections that can contain `normalize` functions that add to the *normalizing*.
-See also the how-tos on [plugins installation](../howto/oasis/plugins_install.md), and development of [parsers and schemas](../howto/plugins/plugins.md).
+See also the how-tos on the development of [parsers and schemas](../howto/plugins/plugins.md).
 
 #### Matching
 
