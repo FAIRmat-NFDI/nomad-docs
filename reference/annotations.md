@@ -1,4 +1,4 @@
-# Schema annotations
+# Annotations
 
 Definitions in a schema can have annotations. These annotations provide additional information that NOMAD can use to alter its behavior around these definitions. Annotations are named blocks of key-value pairs:
 
@@ -51,6 +51,9 @@ MySection:
 
 !!! important
     The quantity designated as `label_quantity` should not be an array but a integer, float or string, to be set as the name of a file. If an array quantity is chosen, the parser would fall back to the use of the section as name.
+
+{{ pydantic_model('nomad.datamodel.metainfo.annotations.SchemaAnnotation', heading='## Schema annotation') }}
+
 ## Tabular data
 
 {{ pydantic_model('nomad.datamodel.metainfo.annotations.TabularAnnotation', heading='### `tabular`') }}
