@@ -30,7 +30,7 @@ The entry point defines basic information about your app and is used to automati
 ```python
 from nomad.config.models.plugins import AppEntryPoint
 
-myapp = MyAppEntryPoint(
+myapp = AppEntryPoint(
     name = 'MyApp',
     description = 'My custom app.',
     app = App(...)
@@ -95,7 +95,7 @@ myapp = AppEntryPoint(
         # targeted here. This example makes sure that only entries that use
         # MySchema are included.
         filters_locked={
-            "section_defs.definition_qualified_name:all": [schema]
+            "section_defs.definition_qualified_name": [schema]
         },
         # Controls the menu shown on the left
         menu = Menu(
