@@ -134,13 +134,12 @@ provide respective functionality (e.g. showing a H5Web view).
   <figcaption>Visualizing archive HDF5 reference quantity using H5Web.</figcaption>
 </figure>
 
-When multiple quantities need to be displayed in the same plot, some attributes in the HDF5 file groups are needed,
-in order for h5web to be able to render a plot.
-The [H5WebAnnotation class](../../reference/annotations.md#h5web) contains the attributes to be included in the groups of HDF5 file,
-provided as section annotations.
+When multiple quantities need to be displayed in the same plot, some attributes in the HDF5 file groups are needed, in order for h5web to be able to render a plot.
+The [H5WebAnnotation class](../../reference/annotations.html#h5web) contains the attributes to be included in the groups (dataset) of HDF5 file, provided as section (quantity) annotations.
 
 In the following example, the `value` quantity has a dedicated default h5web rendering.
-Adding some annotation in the corresponding section would trigger another plot rendering, where `value` vs. `time` plot is shown.
+Adding some annotation in the corresponding section would trigger another plot rendering, where `value` vs. `time` plot is shown. The errors to the dataset can be specified by `errors`
+annotation.
 
 ```
 class MySection(ArchiveSection):
@@ -153,12 +152,16 @@ class MySection(ArchiveSection):
         shape=[],
         a_h5web=H5WebAnnotation(
             long_name='power',
+            errors='value_e'
         ),
+    )
+    value_e = Quantity(
+        type=HDF5Dataset
     )
     time = Quantity(
         type=HDF5Dataset,
         unit='s'
-        shape=[],
+        shape=[]
     )
 ```
 
@@ -168,7 +171,7 @@ class MySection(ArchiveSection):
 </figure>
 
 To include plots corresponding to sub sections, one can provide a list of the section
-paths to the argument `paths`. The following example will trigger a rendering of the plot
+paths to the annotation `paths`. The following example will trigger a rendering of the plot
 corresponding to the first `my_sub` section. One can also use wildcards `*` to include
 all sub sections and `**` to recursively search sub sections.
 
