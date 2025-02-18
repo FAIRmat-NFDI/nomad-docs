@@ -178,6 +178,18 @@ we will get a final normalized archive that contains our data like this:
 }
 ```
 
+## Migration guide
+
+By default, schema packages are identified by the full qualified path to the Python module that contains the definitions. An example of a full qualified path could be `nomad_example.schema_packages.mypackage`, where the first part is the Python package name, second part is a subpackage, and the last part is a Python module containing the definitions. This is the easiest way to prevent conflicts between different schema packages: python package names are unique (prevents clashes between packages) and paths inside a package must point to a single python module (prevents clashes within package). This does, however, mean that _if you move your schema definition in the plugin source code, any references to the old definition will break_. This becomes problematic in installations that have lot of old data processed with the old definition location, as those entries will still refer to the old location and will not work correctly.
+
+As it might not be possible, or even wise to prevent changes in the source code layout, and reprocessing all old entries might be impractical, we do provide an alias mechanism to help with migration tasks. Imagine your schema package was contained in `nomad_example.schema_packages.mypackage`, and in a newer version of your plugin you want to move it to `nomad_example.schema_packages.mynewpackage`. The way to do this without completely breaking the old entries is to add an alias in the schema package definition:
+
+```python
+m_package = SchemaPackage(aliases=['nomad_example.schema_packages.mypackage'])
+```
+
+Note that this will only help in scenarious where you have moved the definition and not removed or modified any of them.
+
 ## Definitions
 
 The following describes in detail the schema language for the NOMAD Metainfo and how it is expressed in Python.
@@ -305,6 +317,12 @@ The above example works, if `System` is eventually defined in the same package.
 
 ### Categories
 
+!!! Warning
+
+    Categories are now deprecated.
+    Their previous occurrences should be replaced
+    with respective annotations.
+
 In the old metainfo this was known as _abstract types_.
 
 Categories are defined with Python classes that have `:class:MCategory` as base class.
@@ -316,6 +334,122 @@ class CategoryName(MCategory):
     ''' Category description '''
     m_def = Category(links=['http://further.explanation.eu'], categories=[ParentCategory])
 ```
+
+## Data frames
+
+On top of the core Metainfo concepts like `Sections`, `Quantities`, and `SubSection`, we provide a mechanism for modeling _data frames_.
+
+A NOMAD data frame is a multi-index table with named indices (variables) and columns (fields).
+All columns should match in length, as they are all parametrized by the same indices.
+Both variables and fields are defined standalone using Values.
+A DataFrame may contain any number of Values, though a bare minimum can be defined via the `mandatory_variables` and `mandatory_fields` respectively.
+
+The mechanism is based on a concept called `Values` for storing arrays of numeric data to
+represent a _field_ or _variable_ (or axis, dimension, etc.) and a concept called
+`DataFrame` that combines _fields_ and _variables_ with matching dimensions into a data frame.
+Our `DataFrame` is conceptually close to xarray datasets, pandas data frames, or the NeXus NXData group.
+
+`Values` and `DataFrame` are usually not used directly, instead you will create
+re-usable templates that allow you to use the same type of `Values` (e.g. describing
+physical properties like energies, temperatures, pressures, ...) and the same type of `DataFrame` (e.g.
+describing material properties at different variables like density of states or band gap).
+
+### Illustrating example
+
+```py
+--8<-- "examples/metainfo/data_frames.py:9:31"
+
+--8<-- "examples/metainfo/data_frames.py:41:44"
+
+
+--8<-- "examples/metainfo/data_frames.py:55:63"
+
+```
+
+### Fields vs variables (and dimensions)
+
+Both _fields_ and _variables_ hold values (i.e. columns) in your data frame.
+While _fields_ hold the actual data, _variables_ span the data space and its dimensions (i.e. column indices).
+
+_Variables_ and _dimensions_ are conceptually slightly different. First, _variables_ provide
+the values on a certain dimension (via shared indices). Second, the number of _Variables_ often, but not necessarily,
+are equal to the number of dimensions. If some _variables_ depend on each other, they might
+span shared dimensions. _Fields_ on the other hand always provide values for all dimensions.
+
+Let's compare two datasets; one dataset that you could plot in a heatmap and one that
+you would plot in a scatter plot. In both cases, we have two _variables_ `Temperature` and `Pressure`,
+as well as one _field_ `Energy`.
+
+In the heatmap scenario, we vary `Temperature` and `Pressure` independently and have a
+`Energy` value (i.e. heatmap color/intensity) for each `Temperature` reading at every `Pressure` reading.
+For two values on each _variable_, we respectively we have 4 (2x2) _field_ values:
+
+```py
+--8<-- "examples/metainfo/data_frames.py:89:97"
+```
+
+In the scatter plot scenario, we vary `Temperature` and `Pressure` together.
+We only have one _field_ value (y-axis) for each pair of temperature and pressure (two x-axes)
+values.
+With two combined temperature and pressure readings, we respectively only have two field values:
+
+```py
+--8<-- "examples/metainfo/data_frames.py:100:106"
+```
+
+We can use the `ValueTemplate` kwarg `spanned_dimenions` to define how `Temperature` and
+`Pressure` are related. The given indices refer to the indices of the field values and
+represent the logical dimension of the data space.
+
+The first example without the `spanned_dimensions` is equivalent to this example
+with `spanned_dimensions`. Here we span two independent dimensions:
+
+```py
+--8<-- "examples/metainfo/data_frames.py:109:117"
+```
+
+### Field and variables in the schema vs parsing
+
+The templates allow you to define _mandatory_ _fields_ and _variables_ in the schema.
+These _fields_ and _variables_ have to be provided by the parser when instantiating the
+respective dataset. However, parser can provide additional _fields_ and _variables_.
+This allows to extend what is defined in the template without requiering new definitions.
+
+### Data representation
+
+Each call to `ValueTemplate` and `DatasetTemplate` produces a section definition
+inheriting from `Values` and `DataFrame` respectively.
+
+`Values` sections define a single quantity `values`. The `values` quantity always holds a numpy array
+based on the type and shape given in the template. The shape of the `values` quantity
+is the shape given in the template plus one dimension of arbitrary length.
+_Variable_ values are always a flat list of values anyways (the values themselves can have a higher shape).
+_Field_ values are always flattened. You might provide them in a higher dimensional array
+according to the dimensionality of the _Variables_, but they are always flattened as the
+`value` quantity only provides one additional dimension, because the real number of dimensions
+is only available at runtime. The original (runtime) shape of _fields_ is stored int the `original_shape` `Values` quantity.
+
+`DataFrame` sections define repeating sub-sections for `fields` and `variables`.
+The specific `DataFrame` section defined by the template, will also hold an annotation `DatasetAnnotation` that keeps the `mandatory_fields` and `mandatory_variables` for runtime validation.
+The `fields` and `variables` sub-sections provide a `Values`
+instances for each _field_ in `mandatory_fields` and each _variable_ in `mandatory_variables`,
+but they can also hold additional _fields_ and _variables_ to accommodate more
+_fields_ and _variables_ determined during parsing.
+
+When a `ValuesTemplate` is used (e.g. `some_property = Energy()`), a quantity is created.
+This quantity is a copy of the `values` quantity created by the template.
+This allows to reuse templated value quantities. When a `DatasetTemplate` is used
+(e.g. `some_property = BandGap()`), a sub-section is created. This sub-section targets
+the `DataFrame` section defined by the template.
+
+#### Working with xarrays and pandas
+
+We provide utility function on `DataFrame` that you can use to translate into
+respective xarray datasets and pandas data frames.
+
+!!! Warning
+
+    The documentation on this is still pending.
 
 ## Adding Python schemas to NOMAD
 
