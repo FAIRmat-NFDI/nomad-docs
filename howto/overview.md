@@ -71,6 +71,7 @@ Customize NOMAD, write plugins, and tailor NOMAD Oasis.
 - [Write a schema packages](plugins/schema_packages.md)
 - [Work with units](customization/units.md)
 - [Use HDF5 to handle large quantities](customization/hdf5.md)
+- [Use Mapping parser to write data on archive](customization/mapping_parser.md)
 
 </div>
 <div markdown="block">
