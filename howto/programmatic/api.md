@@ -1,6 +1,6 @@
 # How to use the API
 
-This guide is about using NOMAD's REST APIs directly, e.g. via Python's *request*.
+This guide is about using NOMAD's REST APIs directly, e.g. via Python's `requests` library.
 
 To access the processed data with our client library `nomad-lab` follow
 [How to access processed data](archive_query.md). You can also watch our
@@ -25,17 +25,17 @@ trade-offs between expressiveness, learning curve, and convenience.
 For example to see the metadata for all entries with elements *Ti* and *O* go here:
 [{{ nomad_url() }}/v1/entries?elements=Ti&elements=O]({{ nomad_url() }}/v1/entries?elements=Ti&elements=O)
 
-#### Use *curl* or *wget*
+#### Use `curl` or `wget`
 
-REST API's use resources located via URLs. You access URLs with *curl* or *wget*. Same
+REST API's use resources located via URLs. You access URLs with `curl` or `wget`. Same
 *Ti*, *O* example as before:
 ```sh
 curl "{{ nomad_url() }}/v1/entries?results.material.elements=Ti&results.material.elements=O" | python -m json.tool
 ```
 
-####  Use Python and requests
+####  Use Python and `requests`
 
-Requests is a popular Python library to use the internets HTTP protocol that is used to
+`Requests` is a popular Python library to use the internet's HTTP protocol that is used to
 communicate with REST APIs. Install with `pip install requests`.
 See [the initial example](#using-request).
 
@@ -50,7 +50,7 @@ Install the [NOMAD Python client library](./pythonlib.md) and use it's `ArchiveQ
 functionality for a more convenient query based access of archive data following the
 [How-to access the processed data](archive_query.md) guide.
 
-## Using request
+## Using `requests`
 
 If you are comfortable with REST APIs and using Pythons `requests` library, this example
 demonstrates the basic concepts of NOMAD's main API. You can get more documentation and
@@ -363,10 +363,14 @@ The NOMAD API uses OAuth and tokens to authenticate users. We provide simple ope
 that allow you to acquire an *access token* via username and password:
 
 ```py
+import os
+
 import requests
 
-response = requests.get(
-    '{{ nomad_url() }}/v1/auth/token', params=dict(username='myname', password='mypassword'))
+response = requests.post(
+    '{{ nomad_url() }}/v1/auth/token',
+    data={'username': os.getenv('NOMAD_USERNAME'), 'password': os.getenv('NOMAD_PASSWORD')},
+)
 token = response.json()['access_token']
 
 response = requests.get(
@@ -379,12 +383,14 @@ If you have the [NOMAD Python package](./pythonlib.md) installed. You can use it
 implementation:
 
 ```py
+import os
+
 import requests
 from nomad.client import Auth
 
 response = requests.get(
     '{{ nomad_url() }}/v1/uploads',
-    auth=Auth(user='myname or email', password='mypassword'))
+    auth=Auth(user=os.getenv('NOMAD_USERNAME'), password=os.getenv('NOMAD_PASSWORD')))
 uploads = response.json()['data']
 ```
 
