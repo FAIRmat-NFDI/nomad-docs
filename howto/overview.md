@@ -6,7 +6,8 @@ hide: toc
 
 ## Users
 
-These how-to guides target NOMAD users and cover data management, exploration, analysis with NOMAD graphical web-interface and APIs.
+These how-to guides target NOMAD users and cover data management, exploration, analysis
+with NOMAD graphical web-interface and APIs.
 
 <div markdown="block" class="home-grid">
 <div markdown="block">
@@ -38,7 +39,9 @@ Use NOMAD's functions programmatically and via its APIs.
 
 ## Data stewards, administrators, and developers
 
-These how-to guides allow advanced users, NOMAD administrators, data stewards, and developers to customize and operate NOMAD and NOMAD Oasis or contribute to NOMAD's development.
+These how-to guides allow advanced users, NOMAD administrators, data stewards, and
+developers to customize and operate NOMAD and NOMAD Oasis or contribute to NOMAD's
+development.
 
 <div markdown="block" class="home-grid">
 <div markdown="block">
@@ -90,4 +93,6 @@ Become a NOMAD developer and contribute to the source code.
 
 <h2>One last thing</h2>
 
-If you can't find what you're looking for in our guides, [contact our team](mailto:support@nomad-lab.eu) for personalized help and assistance. Don't worry, we're here to help and learn what we're doing wrong!
+If you can't find what you're looking for in our guides,
+[contact our team](mailto:support@nomad-lab.eu) for personalized help and assistance.
+Don't worry, we're here to help and learn what we're doing wrong!
