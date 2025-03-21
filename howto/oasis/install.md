@@ -494,12 +494,11 @@ to run NOMAD without docker. You can infer the necessary steps from the provided
 
 ## Troubleshooting
 
-Here are some common problems that may occur in an OASIS installation:
+### Time offset between Oasis and the Authentication server
 
-- `jwt.exceptions.ImmatureSignatureError: The token is not yet valid (iat)`:
-  The authentication information from central authentication is contained in a special piece of signed information (JWT) that contains details about the signed in person. This information also contains a timestamp, which indicates a point in time at which the information was issued at, called `iat`. The above error indicates that the server looking at the token thinks that it has not been issued yet.
+If during login you get an error like: `jwt.exceptions.ImmatureSignatureError: The token is not yet valid (iat)`, it most probably means that there is a time difference between the two machines: the one creating the JWT and the other that is validating it. This causes an error where the authentication server looking at the token thinks that it has not been issued yet.
 
-  The underlying reason is a time difference between the two different servers (the one creating the JWT, and the one that is validating it) as these might very well be different physical machines. To fix this problem, you should ensure that the time on the servers is up to date (e.g. a network port on the server may be closed, preventing it from synchronizing the time). Note that the servers do not need to be on the same timezone, as internally everything is converted to UTC+0.
+To fix this problem, you should ensure that the time on the servers is synchronized. It is possible that a network port on one of the servers may be closed, preventing it from synchronizing the time. Note that the servers do not need to be on the same timezone, as internally everything is converted to UTC+0. To check the time on a server, you can on a linux-based machine use the [`timedatectl`](https://man7.org/linux/man-pages/man8/hwclock.8.html) command which will report both the harware clock and the system clock (see [here for the difference](https://developer.toradex.com/software/linux-resources/linux-features/real-time-clock-rtc-linux/#:~:text=Two%20clocks%20are%20important%20in,maintained%20by%20the%20operating%20system.)). For authentication, the system clocks on the two machines need to be set correctly, but you might also need to correct the hardware clock since it initially sets the system clock upon rebooting the machine.
 
 ### NOMAD in networks with restricted Internet access
 
