@@ -2,7 +2,7 @@
 
 Example uploads can be used to add representative collections of data for your plugin. Example uploads are available for end-users in the *Uploads*-page under the *Add example uploads*-button. There, users can instantiate an example upload with a click. This can be very useful for educational or demonstration purposes but also for testing.
 
-This documentation shows you how to write a plugin entry point for an example upload. You should read the [documentation on getting started with plugins](./plugins.md) to have a basic understanding of how plugins and plugin entry points work in the NOMAD ecosystem.
+This documentation shows you how to write a plugin entry point for an example upload. You should read the [introduction to plugins](./plugins.md) to have a basic understanding of how plugins and plugin entry points work in the NOMAD ecosystem.
 
 ## Getting started
 
@@ -25,7 +25,7 @@ See the documentation on [plugin development guidelines](./plugins.md#plugin-dev
 
 ## Example upload entry point
 
-The entry point is an instance of a `ExampleUploadEntryPoint` or its subclass. It defines basic information about your example upload and is used to automatically load the associated data into a NOMAD distribution. The entry point should be defined in `*/example_uploads/__init__.py` like this:
+The entry point is an instance of an `ExampleUploadEntryPoint` or its subclass. It defines basic information about your example upload and is used to automatically load the associated data into a NOMAD distribution. The entry point should be defined in `*/example_uploads/__init__.py` like this:
 
 ```python
 from nomad.config.models.plugins import ExampleUploadEntryPoint
@@ -38,7 +38,7 @@ myexampleupload = ExampleUploadEntryPoint(
 )
 ```
 
-The `resources` field can contain one or several data resources that can be provided directly in the Python package or stored online. You can learn more about different data loading options in the next section. In the reference you can also see all of the available [configuration options for a `ExampleUploadEntryPoint`](../../reference/plugins.md#exampleuploadentrypoint).
+The `resources` field can contain one or several data resources that can be provided directly in the Python package or stored online. You can learn more about different data loading options in the next section. In the reference you can also see all of the available [configuration options for an `ExampleUploadEntryPoint`](../../reference/plugins.md#exampleuploadentrypoint).
 
 The entry point instance should then be added to the `[project.entry-points.'nomad.plugin']` table in `pyproject.toml` in order for the example upload to be automatically detected:
 

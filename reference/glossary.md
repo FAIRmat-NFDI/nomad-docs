@@ -8,7 +8,6 @@ TODO consider the following items:
 - Oasis
 - Package (metainfo)
 - Workflow
-- App (maybe too soon to add since we don't know yet what this really entails)
 -->
 
 This is a list of terms that have a specific meaning for NOMAD and are used through
@@ -42,6 +41,17 @@ An *author* is typically a natural person that has uploaded a piece of data into
 has authorship over it. Often *authors* are [users](#user), but not always.
 Therefore, we have to distinguish between authors and users.
 
+### Dataset
+
+Users can organize [entries](#entry) into *datasets*. Datasets are not created automatically,
+don't confuse them with [uploads](#upload). Datasets can be compared to albums, labels, or tags
+on other platforms. Datasets are used to reference a collection of data and users can get a DOI for their
+datasets.
+
+### Distribution / distro
+
+NOMAD *Distribution* is a Git repository containing the configuration for instantiating a customized NOMAD instance. Distributions define the plugins that should be installed, the configurations files (e.g. `nomad.yaml`) to use, CI pipeline steps for building final Docker images and a `docker-compose.yaml` file that can be used to launch the instance.
+
 ### ELN
 
 Electronic Lab Notebooks (*ELNs*) are a specific kind of [entry](#entry) in NOMAD. These
@@ -58,12 +68,9 @@ associated with [raw files](#raw-file), where one of these files is the [mainfil
 Raw files are processed to create the [processed data](#processed-data) (or the [archive](#archive))
 for an entry.
 
-### Dataset
+### Example upload
 
-Users can organize [entries](#entry) into *datasets*. Datasets are not created automatically,
-don't confuse them with [uploads](#upload). Datasets can be compared to albums, labels, or tags
-on other platforms. Datasets are used to reference a collection of data and users can get a DOI for their
-datasets.
+*Example uploads* are pre-prepared uploads containing data that typically showcases certain features of a plugin. The contents of example uploads can be fixed, created programmatically or fetched from online sources. Example uploads can be instantiated by using the "Example uploads" -button in the "Uploads" -page of the GUI. Example uploads can be defined by creating an example upload [plugin entry point](#plugin-entry-point).
 
 ### Mainfile
 

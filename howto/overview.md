@@ -58,20 +58,30 @@ Host NOMAD for your lab or institution.
 </div>
 <div markdown="block">
 
+### Plugins
+
+Learn how to write NOMAD plugins.
+
+- [Introduction to plugins](plugins/plugins.md)
+- [Write an API](plugins/apis.md)
+- [Write an app](plugins/apps.md)
+- [Write an example upload](plugins/example_uploads.md)
+- [Write a normalizer](plugins/normalizers.md)
+- [Write a parser](plugins/parsers.md)
+- [Write a schema packages](plugins/schema_packages.md)
+
+</div>
+<div markdown="block">
+
 ### Customization
 
-Customize NOMAD, write plugins, and tailor NOMAD Oasis.
+Customize NOMAD and tailor NOMAD Oasis.
 
 - [Write a schema](customization/basics.md)
 - [Define ELNs](customization/elns.md)
 - [Use base sections](customization/base_sections.md)
 - [Parse tabular data](customization/tabular.md)
 - [Define workflows](customization/workflows.md)
-- [Write plugins](plugins/plugins.md)
-- [Write an app](plugins/apps.md)
-- [Write a normalizer](plugins/normalizers.md)
-- [Write a parser](plugins/parsers.md)
-- [Write a schema packages](plugins/schema_packages.md)
 - [Work with units](customization/units.md)
 - [Use HDF5 to handle large quantities](customization/hdf5.md)
 - [Use Mapping parser to write data on archive](customization/mapping_parser.md)

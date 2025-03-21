@@ -43,6 +43,7 @@ How-to guides provide step-by-step instructions for a wide range of tasks, with 
 - Manage and find data
 - Programmatic data access
 - Oasis
+- Plugins
 - Customization
 - Development
 

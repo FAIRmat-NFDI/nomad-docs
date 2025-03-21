@@ -5,7 +5,7 @@ a [FastAPI](https://fastapi.tiangolo.com) apps that can be mounted into the main
 such as `/api/v1`, `/optimade`, etc.
 
 This documentation shows you how to write a plugin entry point for an API.
-You should read the [documentation on getting started with plugins](./plugins.md)
+You should read the [introduction to plugins](./plugins.md)
 to have a basic understanding of how plugins and plugin entry points work in the NOMAD ecosystem.
 
 ## Getting started
