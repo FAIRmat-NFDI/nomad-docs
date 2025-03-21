@@ -2,7 +2,7 @@
 
 NOMAD uses parsers to automatically extract information from raw files and output that information into structured [archives](../../reference/glossary.md#archive). Parsers can decide which files act upon based on the filename, mime type or file contents and can also decide into which schema the information should be populated into.
 
-This documentation shows you how to write a plugin entry point for a parser. You should read the [documentation on getting started with plugins](./plugins.md) to have a basic understanding of how plugins and plugin entry points work in the NOMAD ecosystem.
+This documentation shows you how to write a plugin entry point for a parser. You should read the [introduction to plugins](./plugins.md) to have a basic understanding of how plugins and plugin entry points work in the NOMAD ecosystem.
 
 ## Getting started
 
@@ -162,7 +162,7 @@ import sys
 from nomad.client import parse, normalize_all
 
 # Match and run the parser
-archives = parse('path/to/you/file')
+archives = parse('path/to/your/file')
 # Run all normalizers
 for archive in archives:
     normalize_all(archive)
@@ -406,7 +406,7 @@ argument `skip-normalizers`.
 ## Extending the Metainfo
 There are several built-in schemas NOMAD (`nomad.datamodel.metainfo`).
 <!-- ? What about restructuring this part into the idea of "NOMAD has some predefined section and quantities ... please, check HERE... and HERE... for more information and details"? -->
-In the example above, we have made use of the base section for workflow and extended
+In the example below, we have made use of the base section for workflow and extended
 it to include a code-specific quantity `x_example_magic_value`.
 ```python
 # We extend the existing common definition of section Workflow

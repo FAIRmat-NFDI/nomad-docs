@@ -2,7 +2,7 @@
 
 A normalizer takes the archive of an entry as input and manipulates (usually expands) the given archive. This way, a normalizer can add additional sections and quantities based on the information already available in the archive. All normalizers are executed in the order [determined by their `level`](#control-normalizer-execution-order) after parsing, but the normalizer may decide to not do anything based on the entry contents.
 
-This documentation shows you how to write a plugin entry point for a normaliser. You should read the [documentation on getting started with plugins](./plugins.md) to have a basic understanding of how plugins and plugin entry points work in the NOMAD ecosystem.
+This documentation shows you how to write a plugin entry point for a normaliser. You should read the [introduction to plugins](./plugins.md) to have a basic understanding of how plugins and plugin entry points work in the NOMAD ecosystem.
 
 ## Getting started
 
@@ -27,7 +27,6 @@ See the documentation on [plugin development guidelines](./plugins.md#plugin-dev
 The entry point defines basic information about your normalizer and is used to automatically load the normalizer code into a NOMAD distribution. It is an instance of a `NormalizerEntryPoint` or its subclass and it contains a `load` method which returns a `nomad.normalizing.Normalizer` instance that will perform the actual normalization. You will learn more about the `Normalizer` class in the next sections. The entry point should be defined in `*/normalizers/__init__.py` like this:
 
 ```python
-from pydantic import Field
 from nomad.config.models.plugins import NormalizerEntryPoint
 
 
@@ -62,10 +61,12 @@ mynormalizer = "nomad_example.normalizers:mynormalizer"
 The resource returned by a normalizer entry point must be an instance of a `nomad.normalizing.Normalizer` class. This normalizer definition should be contained in a separate file (e.g. `*/normalizer/mynormalizer.py`) and could look like this:
 
 ```python
-from typing import Dict
+from typing import TYPE_CHECKING
 
-from nomad.datamodel import EntryArchive
 from nomad.normalizing import Normalizer
+
+if TYPE_CHECKING:
+    from nomad.datamodel import EntryArchive
 
 
 class MyNormalizer(Normalizer):
@@ -82,13 +83,13 @@ The minimal requirement is that your class has a `normalize` function, which as 
  - `archive`: The [`EntryArchive` object](../../reference/glossary.md#archive) in which the normalization results will be stored
  - `logger`: Logger that you can use to log normalization events into
 
-## `SystemBasedNormalizer` class
+### `SystemBasedNormalizer` class
 
 `SystemBasedNormalizer` is a special base class for normalizing systems that allows to run the normalization on all (or only the resulting) `representative` systems:
 
 ```python
-from nomad.normalizing import SystemBasedNormalizer
 from nomad.atomutils import get_volume
+from nomad.normalizing import SystemBasedNormalizer
 
 class UnitCellVolumeNormalizer(SystemBasedNormalizer):
     def _normalize_system(self, system, is_representative):
@@ -142,9 +143,9 @@ from nomad.datamodel import EntryArchive
 from nomad_example.normalizers.mynormalizer import MyNormalizer
 import logging
 
-p = MyNormalizer()
-a = EntryArchive()
-p.normalize(a, logger=logging.getLogger())
+normalizer = MyNormalizer()
+entry_archive = EntryArchive()
+normalizer.normalize(entry_archive, logger=logging.getLogger())
 
-print(a.m_to_dict())
+print(entry_archive.m_to_dict())
 ```

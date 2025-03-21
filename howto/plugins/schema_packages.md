@@ -1,8 +1,8 @@
 # How to write a schema package
 
-Schema packages are used to define and distribute custom data definitions that can be used within NOMAD. These schema packages typically contain [schemas](../../reference/glossary.md#schema) that users can select to instantiate manually filled entries using our ELN functionality, or that parsers when organizing data they extract from files. Schema packages may also contain more abstract base classes that other schema packages use.
+Schema packages are used to define and distribute custom data definitions that can be used within NOMAD. These schema packages typically contain [schemas](../../reference/glossary.md#schema) that users can select to instantiate manually filled entries using our ELN functionality, or that parsers select when organizing data they extract from files. Schema packages may also contain more abstract base classes that other schema packages use.
 
-This documentation shows you how to write a plugin entry point for a schema package. You should read the [documentation on getting started with plugins](./plugins.md) to have a basic understanding of how plugins and plugin entry points work in the NOMAD ecosystem.
+This documentation shows you how to write a plugin entry point for a schema package. You should read the [introduction to plugins](./plugins.md) to have a basic understanding of how plugins and plugin entry points work in the NOMAD ecosystem.
 
 ## Getting started
 
@@ -45,7 +45,7 @@ mypackage = MySchemaPackageEntryPoint(
 )
 ```
 
-Here you can see that a new subclass of `SchemaPackageEntryPoint` was defined. In this new class you can override the `load` method to determine how the `SchemaPackage` class is loaded, but you can also extend the `SchemaPackageEntryPoint` model to add new configurable parameters for this schema package as explained [here](./plugins.md#plugin-configuration).
+Here you can see that a new subclass of `SchemaPackageEntryPoint` was defined. In this new class you can override the `load` method to determine how the `SchemaPackage` class is loaded, but you can also extend the `SchemaPackageEntryPoint` model to add new configurable parameters for this schema package as explained [here](../../explanation/plugin_system.md#plugin-configuration).
 
 We also instantiate an object `mypackage` from the new subclass. This is the final entry point instance in which you specify the default parameterization and other details about the schema package. In the reference you can see all of the available [configuration options for a `SchemaPackageEntryPoint`](../../reference/plugins.md#schemapackageentrypoint).
 
@@ -468,6 +468,7 @@ NOMAD. It therefore defines the top level sections:
 - `results`: a summary with copies and references to data from method specific sections. This also
   presents the [searchable metadata](../develop/search.md).
 - `workflows`: all workflow metadata
+- `data`: contains all data from method specific sections by default.
 - Method-specific subsections: e.g. `run`. This is were all parsers are supposed to
 add the parsed data.
 <!-- TODO Update!!! -->
@@ -790,3 +791,4 @@ The following is a list of plugins containing schema packages developed by FAIRm
 | synthesis           | <https://github.com/FAIRmat-NFDI/AreaA-data_modeling_and_schemas.git>      |
 | material processing | <https://github.com/FAIRmat-NFDI/nomad-material-processing.git>            |
 | measurements        | <https://github.com/FAIRmat-NFDI/nomad-measurements.git>                   |
+| catalysis           | <https://github.com/FAIRmat-NFDI/nomad-catalysis-plugin.git>          |
