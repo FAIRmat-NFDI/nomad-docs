@@ -81,7 +81,7 @@ This is a list of supported quantity types.
 |`User`|A type for NOMAD users as values.|
 |`Author`|A complex type for author information.|
 |`{type_kind: Enum, type_data: []}`|Use `type_data` to specify enum values as list of strings.|
-|*<section name>*|To define a quantity that is a reference to a specific section.|
+|`*<section name>*`|To define a quantity that is a reference to a specific section.|
 
 ### Shape
 
