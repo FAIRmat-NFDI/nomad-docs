@@ -118,3 +118,56 @@
 .nomad-button--card-action {
     margin: 1em 0 0 0 !important;
 }
+
+/* CSS compenents for creating an image slider on the docs */
+/* Slider holding the images */
+.image-slider {
+    display: flex;
+    overflow: hidden;
+    position: relative;  /* This ensures that arrows are positioned relative to this container */
+    width: 100%;
+    max-width: 800px;  /* Adjust this as necessary */
+    margin: 0 auto;
+    justify-content: center;  /* Center the images horizontally */
+    align-items: center;
+}
+.image-slider img {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+/* Active class for displaying one image at a time */
+.image-slider img.active {
+    opacity: 1;
+    position: relative;
+}
+
+/* Styling for the navigation arrows */
+.nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1;
+
+}
+
+/* Left arrow positioning */
+.nav-arrow.left {
+    left: 10px;  /* Position on the left edge of the container */
+}
+
+/* Right arrow positioning */
+.nav-arrow.right {
+    right: 10px;  /* Position on the right edge of the container */
+}
+
+
+.nav-arrow:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
