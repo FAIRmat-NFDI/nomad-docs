@@ -143,7 +143,7 @@ use_directory_urls: false
 plugins:
   - search
   - macros:
-      module_name: nomad/mkdocs/__init__
+      module_name: docs/main
   - redirects:
       redirect_maps:
         "pythonlib.md": "howto/programmatic/pythonlib.md"
