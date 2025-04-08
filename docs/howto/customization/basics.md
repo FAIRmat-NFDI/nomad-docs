@@ -6,8 +6,16 @@ This guide explains how to write and upload NOMAD schema packages in the YAML fo
 
 Let's assume we want to describe chemical compositions using the elements they contain.
 The following structured data (in this example as a `.yaml` document) could describe the composition of water.
+
 ```yaml
-{{ yaml_snippet('examples/docs/basic_schema/data.archive.yaml:data', '', 'm_def') }}
+composition: H2O
+elements:
+- label: H
+  density: 8.375e-05
+  isotopes: [1, 2, 3]
+- label: O
+  density: 1.141
+  isotopes: [16, 17, 18]
 ```
 
 In structured data formats (such as `.yaml` or `.json`), data is put into combinations
@@ -31,7 +39,15 @@ the *definition* for elements. This is what the *section definition* looks like 
 
 ```yaml
 Element:
-{{ yaml_snippet('examples/docs/basic_schema/package.archive.yaml:definitions/sections/Element', '  ') }}
+  quantities:
+    label:
+      type: str
+    density:
+      type: np.float64
+      unit: g/cm**3
+    isotopes:
+      type: int
+      shape: ['*']
 ```
 
 A *section definition* provides all the available *keys* for a *section* that instantiates
@@ -42,7 +58,13 @@ Let's have a look at the overall definition for our chemical composition:
 
 ```yaml
 Composition:
-{{ yaml_snippet('examples/docs/basic_schema/package.archive.yaml:definitions/sections/Composition', '  ') }}
+  quantities:
+    composition:
+      type: str
+  sub_sections:
+    elements:
+      section: Element
+      repeats: true
 ```
 
 Again, all possible *keys* (`composition` and `elements`) are defined. But now we see
@@ -122,20 +144,75 @@ files can also be used to convey a schema package.
 You can upload schema packages and data in separate files.
 `schema_package.archive.yaml`
 ```yaml
---8<-- "examples/docs/basic_schema/package.archive.yaml"
+definitions:
+  sections:
+    Element:
+      quantities:
+        label:
+          type: str
+        density:
+          type: np.float64
+          unit: g/cm**3
+        isotopes:
+          type: int
+          shape: ['*']
+    Composition:
+      quantities:
+        composition:
+          type: str
+      sub_sections:
+        elements:
+          section: Element
+          repeats: true
 ```
 
 and `data.archive.yaml`
 ```yaml
---8<-- "examples/docs/basic_schema/data.archive.yaml"
+data:
+  m_def: '../upload/raw/package.archive.yaml#Composition'
+  composition: 'H2O'
+  elements:
+    - label: H
+      density: 0.00008375
+      isotopes: [1, 2, 3]
+    - label: O
+      density: 1.141
+      isotopes: [16, 17, 18]
 ```
 
 Or, you can upload the schema package and data in the same file:
 ```yaml
---8<-- "examples/docs/basic_schema/package.archive.yaml"
+definitions:
+  sections:
+    Element:
+      quantities:
+        label:
+          type: str
+        density:
+          type: np.float64
+          unit: g/cm**3
+        isotopes:
+          type: int
+          shape: ['*']
+    Composition:
+      quantities:
+        composition:
+          type: str
+      sub_sections:
+        elements:
+          section: Element
+          repeats: true
+
 data:
   m_def: Composition
-{{ yaml_snippet('examples/docs/basic_schema/data.archive.yaml:data', '  ', 'm_def') }}
+  composition: H2O
+  elements:
+  - label: H
+    density: 8.375e-05
+    isotopes: [1, 2, 3]
+  - label: O
+    density: 1.141
+    isotopes: [16, 17, 18]
 ```
 
 ## References
@@ -154,7 +231,12 @@ connect a composition section to elements with a quantity:
 
 ```yaml
 Composition:
-{{ yaml_snippet('examples/docs/references/single.archive.yaml:/definitions/sections/Composition', '  ') }}
+  quantities:
+    composition:
+      type: str
+    elements:
+      type: Element
+      shape: ['*']
 ```
 
 Here, `type: Element` refers to the section definition `Element`, very similar to
@@ -165,7 +247,8 @@ We saw above that subsections are represented as nested *objects* in data (forci
 in serialized data. Here is an example `Composition` with references to elements:
 
 ```yaml
-{{ yaml_snippet('examples/docs/references/single.archive.yaml:/data/compositions/0', '') }}
+composition: H2O
+elements: ['#/data/periodic_table/elements/0', '#/data/periodic_table/elements/1']
 ```
 
 These string-references determine the *target* section's place in the same archive.
@@ -175,7 +258,17 @@ Here is the full archive data:
 
 ```yaml
 data:
-{{ yaml_snippet('examples/docs/references/single.archive.yaml:/data', ' ', 'm_def') }}
+ periodic_table:
+   elements:
+   - label: H
+     density: 8.375e-05
+     isotopes: [1, 2, 3]
+   - label: O
+     density: 1.141
+     isotopes: [16, 17, 18]
+ compositions:
+ - composition: H2O
+   elements: ['#/data/periodic_table/elements/0', '#/data/periodic_table/elements/1']
 ```
 
 If you follow the *keys* `data`, `periodic_table`, `elements`, `0`, you reach the
@@ -214,12 +307,51 @@ between two NOMAD entries.
 
 **periodic_table.archive.yaml**
 ```yaml
---8<-- "examples/docs/references/periodic_table.archive.yaml"
+definitions:
+  sections:
+    Element:
+      quantities:
+        label:
+          type: str
+        density:
+          type: np.float64
+          unit: g/cm**3
+        isotopes:
+          type: int
+          shape: ['*']
+    PeriodicTable:
+      sub_sections:
+        elements:
+          repeats: true
+          section: Element
+data:
+  m_def: PeriodicTable
+  elements:
+  - label: H
+    density: 0.00008375
+    isotopes: [1, 2, 3]
+  - label: O
+    density: 1.141
+    isotopes: [16, 17, 18]
 ```
 
 **composition.archive.yaml**
 ```yaml
---8<-- "examples/docs/references/composition.archive.yaml"
+definitions:
+  sections:
+    Composition:
+      quantities:
+        composition:
+          type: str
+        elements:
+          type: ../upload/raw/periodic_table.archive.yaml#Element
+          shape: ['*']
+data:
+  m_def: Composition
+  composition: 'H2O'
+  elements:
+    - ../upload/raw/periodic_table.archive.yaml#data/elements/0
+    - ../upload/raw/periodic_table.archive.yaml#data/elements/1
 ```
 
 These inter-entry references have two parts: `<entry>#<section>`, where *entry*
@@ -242,7 +374,23 @@ Here is a simple schema package with two *specialization* of the same *abstract*
 definition:
 ```yaml
 definitions:
-{{ yaml_snippet('examples/docs/inheritance/basic.archive.yaml:/definitions', '  ') }}
+  sections:
+    Process:
+      quantities:
+        time:
+          type: Datetime
+    Evaporation:
+      base_section: Process
+      quantities:
+        pressure:
+          type: np.float64
+          unit: Pa
+    Annealing:
+      base_section: Process
+      quantities:
+        temperature:
+          type: np.float64
+          unit: K
 ```
 
 The two *specialized* definitions `Annealing` and `Evaporation` define the *abstract*
@@ -251,7 +399,10 @@ inherit the quantity `time`. We do not need to repeat quantities from the base s
 and added quantity:
 
 ```yaml
-{{ yaml_snippet('examples/docs/inheritance/basic.archive.yaml', '', 'definitions') }}
+data:
+  m_def: Evaporation
+  time: '2022-10-13 12:00:00'
+  pressure: 100
 ```
 
 ### Polymorphy
@@ -262,12 +413,35 @@ and `Process`. In another schema, we want to add more *specializations* to what 
 
 **abstract.archive.yaml**
 ```yaml
---8<-- "examples/docs/inheritance/abstract.archive.yaml"
+definitions:
+  sections:
+    Process:
+      quantities:
+        time:
+          type: Datetime
+    Sample:
+      sub_sections:
+        processes:
+          section: Process
+          repeats: true
 ```
 
 **specialized.archive.yaml**
 ```yaml
-{{ yaml_snippet('examples/docs/inheritance/specialized.archive.yaml', '', 'data') }}
+definitions:
+  sections:
+    Evaporation:
+      base_section: ../upload/raw/abstract.archive.yaml#Process
+      quantities:
+        pressure:
+          type: np.float64
+          unit: Pa
+    Annealing:
+      base_section: ../upload/raw/abstract.archive.yaml#Process
+      quantities:
+        temperature:
+          type: np.float64
+          unit: K
 ```
 
 The *section definition* use in the subsection `processes` defines what a contained
@@ -278,7 +452,14 @@ section has to be "at least". Meaning that any section based on a *specializatio
 definitions:
   # see above
 data:
-{{ yaml_snippet('examples/docs/inheritance/specialized.archive.yaml:data', '  ') }}
+  m_def: ../upload/raw/abstract.archive.yaml#Sample
+  processes:
+  - m_def: Evaporation
+    time: '2022-10-13'
+    pressure: 100
+  - m_def: Annealing
+    time: '2022-10-13'
+    temperature: 342
 ```
 
 The fact that a subsection or reference target can have different "forms" (i.e. based on different *specializations*) is called *polymorphism* in object-oriented data modelling.
@@ -306,7 +487,16 @@ Compare this to the previous examples: we used the top-level *keys* `definitions
 and `data` without really explaining why. Here you can see why. The `EntryArchive` *property* `definitions` allows us to put a *schema package* into our archives. And the `EntryArchive` *property* `data` allows us to put *data* into archives that is a *specialization* of `Schema`. The `Schema` definition is empty. It is merely an *abstract* placeholder that allows you to add *specialized* data sections to your archive. Therefore, all *section definitions* that define a top-level data section, should correctly use `nomad.datamodel.Schema` as a base section. This would be the first "correct" example:
 
 ```yaml
---8<-- "examples/docs/inheritance/hello.archive.yaml"
+definitions:
+  sections:
+    Greetings:
+      base_section: nomad.datamodel.EntryData
+      quantities:
+        message:
+          type: str
+data:
+  m_def: MyData
+  message: Hello World
 ```
 
 Here are a few other built-in section definitions and packages of definitions:
@@ -367,21 +557,84 @@ schema packages and data over multiple entries and connect the pieces via *refer
 Here is a simple schema package, stored in a NOMAD entry with mainfile name `package.archive.yaml`:
 
 ```yaml
---8<-- "examples/docs/references/multiple_files/package.archive.yaml"
+ definitions:
+  sections:
+    Composition:
+      quantities:
+        composition:
+          type: str
+        base_composition:
+          type: Composition
+      sub_sections:
+        elements:
+          section: Element
+          repeats: True
+    Element:
+      quantities:
+        label:
+          type: str
+    Solution:
+      quantities:
+        solvent:
+          type: Composition
+      sub_sections:
+        solute:
+          section: Composition             
 ```
 
 Now, we can re-use this schema package in many entries via *references*. Here, we extend
 a schema contained in the package and instantiate definitions is a separate mainfile `data-and-package.archive.yaml`:
 
 ```yaml
---8<-- "examples/docs/references/multiple_files/data-and-package.archive.yaml"
+ definitions:
+  sections:
+    SpecialElement:
+      # Extending the definition from another entry
+      base_section: '../upload/raw/package.archive.yaml#Element'
+      quantities:
+        atomic_weight:
+          type: float
+          unit: 'g/mol'
+data:
+  # Instantiating the definition from another entry
+  m_def: '../upload/raw/package.archive.yaml#Composition'
+  composition: 'H2O'
+  elements:
+    # Implicitly instantiate Element as defined for Composition.elements
+    - label: H
+    # Explicitly instantiate SpecialElement as a polymorph substitute
+    - m_def: SpecialElement
+      label: O
+      atomic_weight: 15.9994         
 ```
 
 Here is a last example that re-uses the schema and references data from the two entries
 above:
 
 ```yaml
---8<-- "examples/docs/references/multiple_files/package.archive.yaml"
+definitions:
+  sections:
+    Composition:
+      quantities:
+        composition:
+          type: str
+        base_composition:
+          type: Composition
+      sub_sections:
+        elements:
+          section: Element
+          repeats: True
+    Element:
+      quantities:
+        label:
+          type: str
+    Solution:
+      quantities:
+        solvent:
+          type: Composition
+      sub_sections:
+        solute:
+          section: Composition
 ```
 
 !!! warning "Attention"
