@@ -1,0 +1,17 @@
+{
+  "data": {
+    "f": {
+      "nested": {
+        "key": "value"
+      }
+    }
+  },
+  "schema": {
+    "rules": {
+      "rule_f_nested_key": {
+        "source": "f.nested.key",
+        "target": "nested_value"
+      }
+    }
+  }
+}

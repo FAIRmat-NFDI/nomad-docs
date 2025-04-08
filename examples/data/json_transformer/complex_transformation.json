@@ -1,0 +1,26 @@
+{
+  "data": {
+    "g": [
+      {
+        "id": 1,
+        "name": "John"
+      },
+      {
+        "id": 2,
+        "name": "Jane"
+      }
+    ]
+  },
+  "schema": {
+    "rules": {
+      "rule_g_ids": {
+        "source": "g[*].id",
+        "target": "ids"
+      },
+      "rule_g_names": {
+        "source": "g[*].name",
+        "target": "names"
+      }
+    }
+  }
+}

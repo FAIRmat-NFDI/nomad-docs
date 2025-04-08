@@ -450,8 +450,6 @@ nomad dev qa
 
 This mimics the tests and checks that the GitLab CI/CD will perform.
 
-If you are migrating an old merge request to a formatted one, please see find the migration guide [here](./migrate-to-autoformatter.md)
-
 #### Custom pytest options
 
 ##### `--celery-inspect-timeout`

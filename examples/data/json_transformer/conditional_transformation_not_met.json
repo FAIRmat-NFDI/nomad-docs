@@ -1,0 +1,22 @@
+{
+  "data": {
+    "a": 1
+  },
+  "schema": {
+    "rules": {
+      "rule_age": {
+        "source": "a",
+        "target": "age",
+        "conditions": [
+          {
+            "regex_condition": {
+              "regex_path": "a",
+              "regex_pattern": "^3\\d$"
+            }
+          }
+        ],
+        "default_value": "default_age"
+      }
+    }
+  }
+}

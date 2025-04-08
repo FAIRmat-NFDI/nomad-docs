@@ -1,0 +1,21 @@
+{
+  "data": {
+    "c": "match_this"
+  },
+  "schema": {
+    "rules": {
+      "rule_c": {
+        "source": "c",
+        "target": "c",
+        "conditions": [
+          {
+            "regex_condition": {
+              "regex_path": "c",
+              "regex_pattern": "^match.*"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

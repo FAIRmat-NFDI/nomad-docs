@@ -1,0 +1,38 @@
+{
+  "data": {
+    "person": {
+      "name": "John Doe",
+      "age": 30,
+      "email": "john.doe@example.com"
+    },
+    "skills": [
+      "Python",
+      "JavaScript",
+      "SQL"
+    ],
+    "experience": [
+      {
+        "company": "Comp A",
+        "years": 5
+      },
+      {
+        "company": "Comp B",
+        "years": 2
+      }
+    ],
+    "projects": [
+      {
+        "name": "Project Alpha",
+        "status": "completed"
+      },
+      {
+        "name": "Project Beta",
+        "status": "in_progress"
+      },
+      {
+        "name": "Project Gamma",
+        "status": "planned"
+      }
+    ]
+  }
+}

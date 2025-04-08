@@ -1,0 +1,40 @@
+{
+  "data": {
+    "users": [
+      {
+        "name": "Alice",
+        "age": 30,
+        "role": "employee",
+        "manager_id": "101"
+      },
+      {
+        "name": "Bob",
+        "age": 40,
+        "role": "manager",
+        "manager_id": "102"
+      },
+      {
+        "name": "Charlie",
+        "age": 35,
+        "role": "employee",
+        "manager_id": "101"
+      }
+    ],
+    "details": [
+      {
+        "id": "101",
+        "specific_manager": {
+          "name": "David",
+          "age": 50
+        }
+      },
+      {
+        "id": "102",
+        "specific_manager": {
+          "name": "Eve",
+          "age": 45
+        }
+      }
+    ]
+  }
+}

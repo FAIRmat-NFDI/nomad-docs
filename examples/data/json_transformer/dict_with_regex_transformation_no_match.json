@@ -1,0 +1,22 @@
+{
+  "data": {
+    "c": "no_match"
+  },
+  "schema": {
+    "rules": {
+      "rule_c_no_match": {
+        "source": "c",
+        "target": "c_no_match",
+        "conditions": [
+          {
+            "regex_condition": {
+              "regex_path": "c",
+              "regex_pattern": "^nomatch.*"
+            }
+          }
+        ],
+        "default_value": "No Match Found"
+      }
+    }
+  }
+}

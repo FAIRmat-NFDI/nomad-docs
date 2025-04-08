@@ -1,0 +1,108 @@
+{
+  "basic_transformation": {
+    "a": 1,
+    "b": 2
+  },
+  "list_transformation": {
+    "a": 1,
+    "b": 2
+  },
+  "dict_to_list_transformation": [
+    1,
+    2
+  ],
+  "list_to_list_transformation": [
+    1,
+    2
+  ],
+  "dict_to_list_with_none_transformation": [
+    null,
+    null,
+    1,
+    null,
+    2
+  ],
+  "dict_with_regex_transformation": {
+    "c": "match_this"
+  },
+  "dict_with_regex_transformation_no_match": {
+    "c_no_match": "No Match Found"
+  },
+  "dict_with_default_transformation": {
+    "a": 1,
+    "b": 2
+  },
+  "dict_with_default_transformation_missing_b": {
+    "a": 1,
+    "b": "default_b"
+  },
+  "dict_with_default_transformation_missing_a_and_b": {
+    "a": "default_a",
+    "b": "default_b"
+  },
+  "nested_transformation": {
+    "nested_value": "value"
+  },
+  "complex_transformation": {
+    "ids": [
+      1,
+      2
+    ],
+    "names": [
+      "John",
+      "Jane"
+    ]
+  },
+  "employee_info": {
+    "manager_details": {
+      "specific_manager": {
+        "name": "David",
+        "age": 50
+      }
+    }
+  },
+  "default_test_transformation_with_a": {
+    "a": 1,
+    "b": 2
+  },
+  "default_test_transformation_without_a": {
+    "a": "default_a",
+    "b": 2
+  },
+  "default_test_transformation_without_a_and_b": {
+    "a": "default_a",
+    "b": "default_b"
+  },
+  "conditional_transformation_not_met": {
+    "age": "default_age"
+  },
+  "conditional_transformation_met": {
+    "age": 30
+  },
+  "comprehensive_example": {
+    "profile": {
+      "full_name": "John Doe",
+      "age": 30,
+      "primary_skill": "Python",
+      "secondary_skills": [
+        "JavaScript",
+        "SQL"
+      ],
+      "active_projects": [
+        "Project Beta",
+        "Project Gamma"
+      ],
+      "phone": "N/A"
+    },
+    "work_history": {
+      "companies": [
+        "Comp A",
+        "Comp B"
+      ],
+      "durations": [
+        5,
+        2
+      ]
+    }
+  }
+}

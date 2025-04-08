@@ -1,0 +1,19 @@
+{
+  "data": {
+    "b": 2
+  },
+  "schema": {
+    "rules": {
+      "rule_a": {
+        "source": "a",
+        "target": "a",
+        "default_value": "default_a"
+      },
+      "rule_b": {
+        "source": "b",
+        "target": "b",
+        "default_value": "default_b"
+      }
+    }
+  }
+}
