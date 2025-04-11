@@ -26,10 +26,31 @@ jobs:
       run: |
         rsync -av --delete gitlab-temp/docs/ docs/
 
-    - name: Commit and push changes (if any)
+    - name: Check for Changes
+      id: check-changes
       run: |
-        git config user.name "github-actions[bot]"
-        git config user.email "github-actions[bot]@users.noreply.github.com"
-        git add docs/
-        git commit -m "Sync docs from GitLab (sparse + rsync)" || echo "No changes to commit"
-        git push origin main
+        if [ -z "$(git status --porcelain)" ]; then
+          echo "changed=false" >> $GITHUB_OUTPUT
+        else
+          echo "changed=true" >> $GITHUB_OUTPUT
+        fi
+
+    # - name: Commit and push changes (if any)
+    #   if: steps.check-changes.outputs.changed == 'true'
+    #   run: |
+    #     git config user.name "github-actions[bot]"
+    #     git config user.email "github-actions[bot]@users.noreply.github.com"
+    #     git add docs/
+    #     git commit -m "Sync docs from GitLab (sparse + rsync)" || echo "No changes to commit"
+    #     git push origin main
+
+    - name: Create Pull Request
+      if: ${{ steps.check-changes.outputs.changed == 'true' }}
+      uses: peter-evans/create-pull-request@v5
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        commit-message: "Update docs"
+        title: "Update docs"
+        body: "This pull request updates docs."
+        branch: update-docs
+        base: main
