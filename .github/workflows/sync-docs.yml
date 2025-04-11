@@ -1,0 +1,35 @@
+name: Sync GitLab NOMAD-FAIR Docs
+
+on:
+  workflow_dispatch:
+
+jobs:
+  sync-docs:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout GitHub repo (main branch)
+      uses: actions/checkout@v4
+
+    - name: Sparse-checkout only 'docs/' from GitLab repo
+      run: |
+        GITLAB_REPO="https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR.git"
+
+        # Clone the repo with sparse-checkout to only get 'docs/'
+        git clone --filter=blob:none --no-checkout --branch develop "$GITLAB_REPO" gitlab-temp
+        cd gitlab-temp
+        git sparse-checkout init --cone
+        git sparse-checkout set docs
+        git checkout
+
+    - name: Rsync 'docs/' into current repo
+      run: |
+        rsync -av --delete gitlab-temp/docs/ docs/
+
+    - name: Commit and push changes (if any)
+      run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+        git add docs/
+        git commit -m "Sync docs from GitLab (sparse + rsync)" || echo "No changes to commit"
+        git push origin main
