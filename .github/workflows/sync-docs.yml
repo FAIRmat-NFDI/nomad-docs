@@ -12,6 +12,9 @@ jobs:
     steps:
     - name: Checkout GitHub repo (main branch)
       uses: actions/checkout@v4
+      # Keep some commits on `nomad-docs`
+      with:
+        ref: '76401a8b524f229ebee2cf0f3f723cd219c2e9ae'
 
     - name: Sparse-checkout only 'docs/' from GitLab repo
       run: |
@@ -27,6 +30,7 @@ jobs:
     - name: Rsync 'docs/' into current repo
       run: |
         rsync -av --delete gitlab-temp/docs/ docs/
+        rm -rf gitlab-temp/
 
     - name: Check for Changes
       id: check-changes
