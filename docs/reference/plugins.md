@@ -1,6 +1,6 @@
 # Plugins
 
-Plugins allow one to add Python-based functionality to NOMAD without a custom NOMAD image or release. Plugins can be installed at NOMAD start-up time. Therefore, a NOMAD installation or [Oasis](../howto/oasis/install.md) can be configured with a different custom set of plugins or disable unnecessary plugins.
+Plugins allow one to add Python-based functionality to NOMAD without a custom NOMAD image or release. Plugins can be installed at NOMAD start-up time. Therefore, a NOMAD installation or [Oasis](../howto/oasis/configure.md) can be configured with a different custom set of plugins or disable unnecessary plugins.
 
 !!! note
 

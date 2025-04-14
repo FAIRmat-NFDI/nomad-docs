@@ -93,7 +93,7 @@ docker compose up -d
 
 - We introduced the plugin mechanism. There are now more options to control which schemas
   and parsers are available in your installation. By default all the existing and shipped
-  schemas and parsers are enabled. See also [here](install.md#plugins).
+  schemas and parsers are enabled. See also [here](configure.md#plugins).
 
 - We changed the archive file format. [Re-processing](admin.md#re-processing) might yield better performance.
 

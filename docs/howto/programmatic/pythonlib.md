@@ -45,7 +45,6 @@ pip install nomad-lab[dev]
 The various extras have the following meaning:
 
 - *parsing*, run all parsers, incl. parsers based on HDF5, netCDF, or asr
-- *infrastructure*, everything to run NOMAD services, see also
-[Oasis documentation](../oasis/install.md#base-linux-without-docker)
+- *infrastructure*, everything to run NOMAD services
 - *dev*, necessary to run development and build tools, e.g. pytest, pylint, mypy
 

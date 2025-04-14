@@ -50,7 +50,7 @@ development.
 
 Host NOMAD for your lab or institution.
 
-- [Install an Oasis](oasis/install.md)
+- [Setup an Oasis](oasis/configure.md)
 - [Develop plugins](plugins/plugins.md)
 - [Update an Oasis](oasis/update.md)
 - [Administrate and maintain an Oasis](oasis/admin.md)
