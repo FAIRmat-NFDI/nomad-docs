@@ -35,15 +35,6 @@ jobs:
           echo "changed=true" >> $GITHUB_OUTPUT
         fi
 
-    # - name: Commit and push changes (if any)
-    #   if: steps.check-changes.outputs.changed == 'true'
-    #   run: |
-    #     git config user.name "github-actions[bot]"
-    #     git config user.email "github-actions[bot]@users.noreply.github.com"
-    #     git add docs/
-    #     git commit -m "Sync docs from GitLab (sparse + rsync)" || echo "No changes to commit"
-    #     git push origin main
-
     - name: Create Pull Request
       if: ${{ steps.check-changes.outputs.changed == 'true' }}
       uses: peter-evans/create-pull-request@v7
