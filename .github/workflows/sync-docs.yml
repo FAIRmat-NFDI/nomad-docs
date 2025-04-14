@@ -5,6 +5,9 @@ on:
   schedule:
     - cron: '0 10 * * 1-5'  # UTC
 
+env:
+  GITLAB_REPO: "https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR.git"
+
 jobs:
   sync-docs:
     runs-on: ubuntu-latest
@@ -18,8 +21,6 @@ jobs:
 
     - name: Sparse-checkout only 'docs/' from GitLab repo
       run: |
-        GITLAB_REPO="https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR.git"
-
         # Clone the repo with sparse-checkout to only get 'docs/'
         git clone --filter=blob:none --no-checkout --branch develop "$GITLAB_REPO" gitlab-temp
         cd gitlab-temp
