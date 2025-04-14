@@ -1,12 +1,6 @@
-# How to install an Oasis
+# Configure an Oasis
 
-<!-- # Operating an OASIS -->
-
-Originally, the NOMAD Central Repository is a service that runs at the Max-Planck's computing facility in Garching, Germany.
-However, the NOMAD software is Open-Source, and everybody can run it. Any service that
-uses NOMAD software independently is called a _NOMAD Oasis_. A _NOMAD Oasis_ does not
-need to be fully isolated. For example, you can publish uploads from your NOMAD Oasis to the
-central NOMAD installation.
+Originally, the NOMAD Central Repository is a service that runs at the Max-Planck's computing facility in Garching, Germany. However, the NOMAD software is Open-Source, and everybody can run it. Any service that uses NOMAD software independently is called a _NOMAD Oasis_. A _NOMAD Oasis_ does not need to be fully isolated. For example, you can publish uploads from your NOMAD Oasis to the central NOMAD installation.
 
 !!! note
 
@@ -15,111 +9,70 @@ central NOMAD installation.
     [register your Oasis with FAIRmat](https://www.fairmat-nfdi.eu/fairmat/oasis_registration)
     and help us to assist you in the future.
 
-## Basic installation
+## Creating a NOMAD distribution for your Oasis
 
-You install NOMAD Oasis from a NOMAD distribution project. We provide a
-[template](https://github.com/FAIRmat-NFDI/nomad-distro-template)
-for these distribution projects.
+The configuration for a NOMAD Oasis is defined in a NOMAD distribution project. We provide a [template](https://github.com/FAIRmat-NFDI/nomad-distro-template) for these distribution projects. A NOMAD distribution project contains all necessary config files and will allow you to version your configuration, install and configure plugins, build custom images automatically, and much more.
 
-!!! warning
+For a production installation, we recommend to create your own distribution project based on the template by pressing the "use this template" button on the top right of the [template's github page](https://github.com/FAIRmat-NFDI/nomad-distro-template). If you wish to instead try out the default setup locally, follow the instructions in "Try  NOMAD Oasis locally".
 
-    You can install NOMAD Oasis by directly using our template as
-    described below. However, for a production installation, we recommend to create your own distribution
-    project based on the template by pressing the
-    "use this template" button on the top right of the [templat's github page](https://github.com/FAIRmat-NFDI/nomad-distro-template).
+???+ "Try NOMAD Oasis locally"
 
-    The project contains all necessery config files and will allow you to version your
-    configuration, build custom images with plugins, and much more. You own distro
-    project is mandatory for configuring plugins.
+	This is an example of how you would deploy a simple, single-machine NOMAD Oasis on your computer. This is meant only as an example and you should see our documentation on [Deploying an Oasis](./deploy.md) for more details on setting up a production deployment.
 
-    The same documentation will also be awailable on the created projects README.md
-    with the necessary github URLs already changed for you.
+	1.  Make sure you have [docker](https://docs.docker.com/engine/install/) installed.
+		Docker nowadays comes with `docker compose` built in. Prior, you needed to
+		install the stand-alone [docker-compose](https://docs.docker.com/compose/install/).
 
-1.  Make sure you have [docker](https://docs.docker.com/engine/install/) installed.
-    Docker nowadays comes with `docker compose` built in. Prior, you needed to
-    install the stand-alone [docker-compose](https://docs.docker.com/compose/install/).
+	2.  Clone the `nomad-distro-template` repository or download the repository as a zip file.
 
-2.  Clone the `nomad-distro-template` repository or download the repository as a zip file.
+		```sh
+		git clone https://github.com/FAIRmat-NFDI/nomad-distro-template.git
+		cd nomad-distro-template
+		```
 
-    ```sh
-    git clone https://github.com/FAIRmat-NFDI/nomad-distro-template.git
-    cd nomad-distro-template
-    ```
+		or
 
-    or
+		```sh
+		curl-L -o nomad-distro-template.zip "https://github.com/FAIRmat-NFDI/nomad-distro-template/archive/main.zip"
+		unzip nomad-distro-template.zip
+		cd nomad-distro-template
+		```
 
-    ```sh
-    curl-L -o nomad-distro-template.zip "https://github.com/FAIRmat-NFDI/nomad-distro-template/archive/main.zip"
-    unzip nomad-distro-template.zip
-    cd nomad-distro-template
-    ```
+	3.  _On Linux only,_ recursively change the owner of the `.volumes` directory to the nomad user (1000)
 
-3.  _On Linux only,_ recursively change the owner of the `.volumes` directory to the nomad user (1000)
+		```sh
+		sudo chown -R 1000 .volumes
+		```
 
-    ```sh
-    sudo chown -R 1000 .volumes
-    ```
+	4.  Pull the images specified in the `docker-compose.yaml`
 
-4.  Pull the images specified in the `docker-compose.yaml`
+		Note that the image needs to be public or you need to provide a PAT (see "Important" note above).
 
-    Note that the image needs to be public or you need to provide a PAT (see "Important" note above).
+		```sh
+		docker compose pull
+		```
 
-    ```sh
-    docker compose pull
-    ```
+	5.  And run it with docker compose in detached (--detach or -d) mode
 
-5.  And run it with docker compose in detached (--detach or -d) mode
+		```sh
+		docker compose up -d
+		```
 
-    ```sh
-    docker compose up -d
-    ```
+	6.  Optionally you can now test that NOMAD is running with
 
-6.  Optionally you can now test that NOMAD is running with
+		```
+		curl localhost/nomad-oasis/alive
+		```
 
-    ```
-    curl localhost/nomad-oasis/alive
-    ```
+	7.  Finally, open [http://localhost/nomad-oasis](http://localhost/nomad-oasis) in your browser to start using your new NOMAD Oasis.
 
-7.  Finally, open [http://localhost/nomad-oasis](http://localhost/nomad-oasis) in your browser to start using your new NOMAD Oasis.
+	To run NORTH (the NOMAD Remote Tools Hub), the `hub` container needs to run docker and
+	the container has to be run under the docker group. You need to replace the default group
+	id `991` in the `docker-compose.yaml`'s `hub` section with your systems docker group id.
+	Run `id` if you are a docker user, or `getent group | grep docker` to find your
+	systems docker gid. The user id 1000 is used as the nomad user inside all containers.
 
-To run NORTH (the NOMAD Remote Tools Hub), the `hub` container needs to run docker and
-the container has to be run under the docker group. You need to replace the default group
-id `991` in the `docker-compose.yaml`'s `hub` section with your systems docker group id.
-Run `id` if you are a docker user, or `getent group | grep docker` to find your
-systems docker gid. The user id 1000 is used as the nomad user inside all containers.
-
-Please see the [Jupyter image](#the-jupyter-image) section below for more information on
-the jupyter NORTH image being generated in this repository.
-
-## Planning your installation
-
-### Hardware consideration
-
-Of course this depends on how much data you need to manage and process. Data storage is
-the obvious aspect here. NOMAD keeps all files that it manages as they are. The files
-that NOMAD processes in addition (e.g. through parsing) are typically smaller than
-the original raw files. Therefore, you can base your storage requirements based on the
-size of the data files that you expect to manage. The additional mongo database and
-elasticsearch index is comparatively small.
-
-Storage speed is another consideration. You can work with NAS systems. All that NOMAD
-needs is a "regular" POSIX filesystem as an interface. So everything you can (e.g. docker host)
-mount should be fine. For processing data obviously relies on read/write speed, but
-this is just a matter of convenience. The processing is designed to run as managed asynchronous
-tasks. Local storage might be favorable for mongodb and elasticsearch operation, but it
-is not a must.
-
-The amount of compute resource (e.g. processor cores) is also a matter of convenience
-(and amount of expected users). Four cpu-cores are typically enough to support a
-research group and run application, processing, and databases in parallel. Smaller systems
-still work, e.g. for testing.
-
-There should be enough RAM to run databases, application, and processing at the same
-time. The minimum requirements here can be quite low, but for processing the metadata
-for individual files is kept in memory. For large DFT geometry-optimizations this can
-add up quickly, especially if many CPU cores are available for processing entries in
-parallel. We recommend at least 2GB per core and a minimum of 8GB. You also need to consider
-RAM and CPU for running tools like jupyter, if you opt to use NOMAD NORTH.
+## Configuring your installation
 
 ### Sharing data through log transfer and data privacy notice
 
@@ -455,42 +408,6 @@ This is an incomplete list of potential things to customize your NOMAD experienc
 - Learn how to use the [tabular parser](../customization/tabular.md) to manage data from .xls or .csv
 - Add specialized [NORTH tools](../manage/north.md)
 - [Restricting user access](admin.md#restricting-access-to-your-oasis)
-
-## Other installation options
-
-### Kubernetes
-
-!!! warning "Attention"
-
-    This is just preliminary documentation and many details are missing.
-
-There is a NOMAD [Helm](https://helm.sh/) chart. First we need to add the
-NOMAD Helm chart repository:
-
-```sh
-helm repo add nomad https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/helm/latest
-```
-
-New we need a minimal `values.yaml` that configures the individual kubernetes resources
-created by our Helm chart:
-
-```yaml
---8<-- "ops/kubernetes/example-values.yaml"
-```
-
-The `jupyterhub`, `mongodb`, `elasticsearch`, `rabbitmq` follow the respective official
-Helm charts configuration.
-
-Run the Helm chart and install NOMAD:
-
-```
-helm update --install nomad nomad/nomad -f values.yaml
-```
-
-### Base Linux (without docker)
-
-Not recommended. We do not provide official support for this type of installation. It is possible
-to run NOMAD without docker. You can infer the necessary steps from the provided `docker-compose.yaml`.
 
 ## Troubleshooting
 
