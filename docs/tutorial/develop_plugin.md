@@ -558,9 +558,7 @@ beginning of that file should look something like:
 ```
 
 ### Next steps
-The next step is to include your new schema in a custom NOMAD Oasis. For more information
-on how to setup a NOMAD Oasis you can have a look at
-[How-to guides/NOMAD Oasis/Install and Oasis](../howto/oasis/install.md).
+The next step is to include your new schema in a custom NOMAD Oasis. For more information on how to configure a NOMAD Oasis you can have a look at [How-to guides/NOMAD Oasis/Configuration](../howto/oasis/configure.md).
 
 Before we move one we should make sure that we have committed our changes to git:
 ```sh

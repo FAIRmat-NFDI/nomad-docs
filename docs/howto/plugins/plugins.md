@@ -148,4 +148,4 @@ twine upload \
 
 ## Installing a plugin
 
-See our documentation on [How to install plugins into a NOMAD Oasis](../oasis/install.md#plugins).
+See our documentation on [How to install plugins into a NOMAD Oasis](../oasis/configure.md#plugins).
