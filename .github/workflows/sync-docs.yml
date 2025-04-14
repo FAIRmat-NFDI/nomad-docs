@@ -2,8 +2,8 @@ name: Sync GitLab NOMAD-FAIR Docs
 
 on:
   workflow_dispatch:
-  # schedule:
-  #   - cron: '0 10 * * 1-5'  # UTC
+  schedule:
+    - cron: '0 10 * * 1-5'  # UTC
 
 jobs:
   sync-docs:
