@@ -15,8 +15,8 @@ env:
 
 jobs:
   mkdocs-build:
-      runs-on: ubuntu-latest
-      steps:
+    runs-on: ubuntu-latest
+    steps:
       - uses: actions/checkout@v4
 
       - name: Install uv
@@ -29,4 +29,7 @@ jobs:
           python-version: ${{ env.PYTHON_VERSION }}
 
       - name: Check mkdocs build
-        run: uv run --with 'nomad-lab[dev, infrastructure]' mkdocs build
+        run: |
+          uv run \
+            --with 'nomad-lab[dev,infrastructure] @ https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR.git' \
+            mkdocs build
