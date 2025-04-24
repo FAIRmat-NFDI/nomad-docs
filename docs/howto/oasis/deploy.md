@@ -1,6 +1,6 @@
 # Deploying an Oasis
 
-Once you have configured your NOMAD Oasis through a distribution project as described in the [configuration how-to](./configure.md), it is time to deploy it. An instance of a NOMAD distribution that is running on a particular machine is called a [deployment](../../reference/glossary.md#deployment). This document contains information about the basic requirements and available alternatives for deploying your NOMAD Oasis.
+Once you have configured your NOMAD Oasis through a distribution project as described in the [configuration how-to](./configure.md), it is time to deploy it. This document contains information about the basic requirements and available alternatives for deploying your NOMAD Oasis.
 
 ## Hardware considerations
 

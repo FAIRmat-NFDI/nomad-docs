@@ -13,7 +13,7 @@ Originally, the NOMAD Central Repository is a service that runs at the Max-Planc
 
 The configuration for a NOMAD Oasis is defined in a NOMAD distribution project. We provide a [template](https://github.com/FAIRmat-NFDI/nomad-distro-template) for these distribution projects. A NOMAD distribution project contains all necessary config files and will allow you to version your configuration, install and configure plugins, build custom images automatically, and much more.
 
-For a production installation, we recommend to create your own distribution project based on the template by pressing the "use this template" button on the top right of the [template's GitHub page](https://github.com/FAIRmat-NFDI/nomad-distro-template). If you wish to instead try out the default setup locally, follow the instructions in "Try  NOMAD Oasis locally".
+For a production installation, we recommend to create your own distribution project based on the template by pressing the "use this template" button on the top right of the [template's github page](https://github.com/FAIRmat-NFDI/nomad-distro-template). If you wish to instead try out the default setup locally, follow the instructions in "Try  NOMAD Oasis locally".
 
 ???+ "Try NOMAD Oasis locally"
 
