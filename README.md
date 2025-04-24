@@ -1,6 +1,6 @@
 ## `nomad-docs`
 
-This repository contains the documentation for the NOMAD website.
+This repository contains the documentation for the central NOMAD distribution.
 
 ### Contributing
 
