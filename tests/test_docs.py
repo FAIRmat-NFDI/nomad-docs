@@ -1,9 +1,9 @@
-from nomad.config import config
 
 import pytest
 from fastapi.testclient import TestClient
 
 from nomad.app.main import app
+from nomad.config import config
 
 
 @pytest.fixture(scope='session')
