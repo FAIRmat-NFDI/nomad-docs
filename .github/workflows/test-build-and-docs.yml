@@ -39,7 +39,7 @@ jobs:
 
       - name: Copy built docs
         run: |
-          SITE_PACKAGES_DIR=$(.venv/bin/python -c "import sysconfig; print(sysconfig.get_paths()['purelib'])")
+          SITE_PACKAGES_DIR=$(uv run python -c "import sysconfig; print(sysconfig.get_paths()['purelib'])")
 
           mkdir -p "$SITE_PACKAGES_DIR/nomad/app/static/docs"
           cp -r site/. "$SITE_PACKAGES_DIR/nomad/app/static/docs"
