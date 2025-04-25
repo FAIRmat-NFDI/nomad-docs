@@ -50,7 +50,7 @@ datasets.
 
 ### Deployment
 
-NOMAD *Deployment* is an instance of a NOMAD [distribution](#distribution-distro) that is running an a machine. This machine can be a virtual machine in the cloud or your local computer
+NOMAD *Deployment* refers to a live instance of a NOMAD [distribution](#distribution-distro) running on a machine. This machine can be a cloud-based virtual machine or a local computer.
 
 ### Distribution / distro
 
