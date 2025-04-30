@@ -50,8 +50,8 @@ development.
 
 Self-hosting NOMAD for your lab or institution.
 
-- [Configure an Oasis](oasis/configure.md)
-- [Deploy an Oasis](oasis/deploy.md)
+- [Setup an Oasis](oasis/configure.md)
+- [Develop plugins](plugins/plugins.md)
 - [Update an Oasis](oasis/update.md)
 - [Perform admin tasks](oasis/admin.md)
 
