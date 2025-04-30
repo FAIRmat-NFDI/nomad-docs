@@ -469,7 +469,7 @@ They are also the reference to which any DOI points.
 
 !!! warning "The relationship between a dataset and its data"
     While the creation or handling of a dataset does not affect the processing of its data (i.e. uploads or entries),
-    this comes with the caveat that newly generated identifiers (e.g. `dataset_id` or `datasets`) will not be updated in the entries data either.
+    this comes with the caveat that newly generated identifiers (e.g. `metadata.datasets`) will not be updated in the entries data either.
     To ensure any modification are reflected there, trigger *reprocessing* another time.
     This will also update the time stamp.
     This is only viable for unpublished entries.
