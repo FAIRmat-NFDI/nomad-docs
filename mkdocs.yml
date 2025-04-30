@@ -28,7 +28,8 @@ nav:
           - Access processed data: howto/programmatic/archive_query.md
           - Transform data: howto/programmatic/json_transformer.md
       - NOMAD Oasis:
-          - Install an Oasis: howto/oasis/install.md
+          - Configure an Oasis: howto/oasis/configure.md
+          - Deploy an Oasis: howto/oasis/deploy.md
           - Update an Oasis: howto/oasis/update.md
           - Perform admin tasks: howto/oasis/admin.md
       - Plugins:

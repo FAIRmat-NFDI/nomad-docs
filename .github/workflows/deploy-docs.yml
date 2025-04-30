@@ -1,0 +1,29 @@
+name: Deploy MkDocs Site
+
+on:
+  push:
+    branches:
+      - main # Triggers deployment on push to the main branch
+
+env:
+  UV_VERSION: 0.6
+  PYTHON_VERSION: 3.12
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: ${{ env.UV_VERSION }}
+
+      - name: Build and Deploy
+        run: |
+          uv run \
+            --with 'nomad-lab[dev,infrastructure] @ https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR.git' \
+            mkdocs gh-deploy --force --remote-branch gh-pages

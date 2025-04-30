@@ -336,7 +336,7 @@ class A(ArchiveSection):
     y_err = Quantity(
         type=HDF5Dataset,
         unit='m',
-        h5web = H5WebAnnotation(
+        a_h5web = H5WebAnnotation(
             long_name='my_y_err_label'
         ))
 

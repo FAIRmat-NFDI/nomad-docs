@@ -46,14 +46,14 @@ development.
 <div markdown="block" class="home-grid">
 <div markdown="block">
 
-### NOMAD Oasis
+### NOMAD Oasis — self-hosting
 
-Host NOMAD for your lab or institution.
+Self-hosting NOMAD for your lab or institution.
 
-- [Setup an Oasis](oasis/configure.md)
-- [Develop plugins](plugins/plugins.md)
+- [Configure an Oasis](oasis/configure.md)
+- [Deploy an Oasis](oasis/deploy.md)
 - [Update an Oasis](oasis/update.md)
-- [Administrate and maintain an Oasis](oasis/admin.md)
+- [Perform admin tasks](oasis/admin.md)
 
 </div>
 <div markdown="block">

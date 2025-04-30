@@ -1,0 +1,49 @@
+name: Check mkdocs build
+
+on:
+  push:
+    branches: ["main"]
+    # tags: ["v*.*.*"]
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:  # Allows running this workflow manually
+
+env:
+  UV_VERSION: 0.6
+  PYTHON_VERSION: 3.12
+
+jobs:
+  test-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: ${{ env.UV_VERSION }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Create venv and install nomad-lab with extras
+        run: |
+          uv venv .venv
+          uv pip install \
+            'nomad-lab[dev,infrastructure] @ https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR.git'
+
+      - name: Check mkdocs build
+        run: |
+          uv run mkdocs build
+
+      - name: Copy built docs
+        run: |
+          SITE_PACKAGES_DIR=$(uv run python -c "import sysconfig; print(sysconfig.get_paths()['purelib'])")
+
+          mkdir -p "$SITE_PACKAGES_DIR/nomad/app/static/docs"
+          cp -r site/. "$SITE_PACKAGES_DIR/nomad/app/static/docs"
+
+      - name: Pytest docs
+        run: |
+          uv run pytest tests
