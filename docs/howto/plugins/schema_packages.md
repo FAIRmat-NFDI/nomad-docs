@@ -62,8 +62,7 @@ The `load`-method of a schema package entry point returns an instance of a `noma
 
 ```python
 from nomad.datamodel.data import Schema
-from nomad.datamodel.metainfo.annotations import ELNAnnotation, ELNComponentEnum
-from nomad.metainfo import SchemaPackage, Quantity, MSection
+from nomad.metainfo import MEnum, MSection, Quantity, SchemaPackage, SubSection
 
 m_package = SchemaPackage()
 
@@ -101,6 +100,8 @@ _Subsections_ allow the placement of sections within each other, forming contain
 To use the above-defined schema and create actual data, we have to instantiate the classes:
 
 ```python
+from nomad.metainfo.example import Run
+
 run = Run()
 system = run.m_create(System)
 system.n_atoms = 3
