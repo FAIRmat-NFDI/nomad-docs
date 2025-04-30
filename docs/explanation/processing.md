@@ -47,33 +47,37 @@ an immediate update on the respective entry with-in one API call.
 ## Processed entities
 
 We differentiate two types of entities that can be processed: **uploads** and **entries**.
-The same entity can only be scheduled for processing, if it is not already scheduled or processing.
-See also the [documentation "from files to data"](./basics.md) to understand the relationships
-between all NOMAD entities.
+The same entity can only be scheduled for processing once at a time.
+It is not allowed to already be processing at the time of scheduling.
+See also the [documentation "from files to data"](./basics.md) to understand the relationships between all NOMAD entities.
 
 ### Uploads
+
 Upload processing is scheduled if one or many files in the upload have changed. Upload processing
 includes the matching step, it creates new entries, and triggers the processing of
 new or afflicted entries. An upload is considered processing as long as any of its entries
 is still processing (or scheduled to be processed).
 
 ### Entries
+
 In most scenarios, entry processing is not triggered individually, but as part of an upload
 processing. Many entries of one upload might be processed at the same time. Some order
 can be enforced through *processing levels*. Levels are part of the parser metadata and
 entries paired to parsers with a higher level are processed after entries with a
 parser of lower level. See also [how to write parsers](../howto/plugins/parsers.md).
 
-
 ## Customize processing
 
-NOMAD provides just the framework for processing. The actual work depends on plugins, parsers
-and schemas for specific file types. While NOMAD comes with a build-in set of plugins, you can build your own plugins to support new file types, ELNs, and workflows.
+NOMAD provides just the framework for processing. The actual work depends on plugins, parsers and schemas for specific file types.
+While NOMAD comes with a build-in set of plugins, you can build your own plugins to support new file types, ELNs, and workflows.
 
 ### Schemas, parsers, plugins
 
 The primary function of a parser is to systematically analyze and organize the incoming data, ensuring adherence to the established schema.
-The interaction between a parser and a schema plays a crucial role in ensuring data consistency to a predefined structure. It takes raw data inputs and utilizes the schema as a guide to interpret and organize the information correctly. By connecting the parser to the schema, users can establish a framework for the expected data structure. The modular nature of the parser and schema relationship allows for flexibility, as the parser can be designed to accommodate various schemas, making it adaptable to different data models or updates in research requirements.
+The interaction between a parser and a schema plays a crucial role in ensuring data consistency to a predefined structure.
+It takes raw data inputs and utilizes the schema as a guide to interprete and organize the information correctly.
+By connecting the parser to the schema, users can establish a framework for the expected data structure.
+The modular nature of the parser and schema relationship allows for flexibility, as the parser can be designed to accommodate various schemas, making it adaptable to different data models or updates in research requirements.
 This process ensures that the resulting filled template meets the compliance standards dictated by the schema.
 
 Processing is run on the NOMAD (Oasis) server as part of the NOMAD app or worker. In

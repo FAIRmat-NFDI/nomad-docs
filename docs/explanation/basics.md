@@ -58,7 +58,7 @@ manually.
 ## Datasets
 
 Users can build collections of entries to form **datasets**. You can imagine datasets
-like tags or albums in other systems. Each entry can be contain in many datasets and
+like tags or albums in other systems. Each entry can be contained in many datasets and
 a dataset can hold many entries. Datasets can also overlap. Datasets are only
 indirectly related to files. The main purpose of **datasets** in NOMAD is to have citable
 collections of data. Users can get a DOI for their datasets. Datasets have no influence
