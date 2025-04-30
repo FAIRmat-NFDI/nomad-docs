@@ -222,7 +222,7 @@ You can add these files to your NOMAD upload. Do so by simply drag and drop the 
     ![An animatation demonstrating the open from file browser dialog in NOMAD ](images/example_3-1_file_browser_dialog.gif)
 
 
-### Uploading Computations Data
+### Uploading Computational Data
 
 ??? example "Download the example files for this exercise"
     We have prepared a set of files for this task that can be downloaded from this [link](https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_3_files/example_files_upload/computations_data/FHI-aims.zip).
@@ -463,9 +463,16 @@ In the following examples, you will learn how to upload a raw file from a SPECS 
 
 ## Create Datasets and Get a DOI
 
-You can organize several entries  by grouping them into common datasets, making it easier to manage related data.
-Datasets are for organizing and referencing curated data. They do not affect how data is processed.
-Users can get a DOI for their datasets.
+You can organize several entries by grouping them into common datasets, making it easier to manage related data.
+Datasets are for organizing and referencing curated data.
+They are also the reference to which any DOI points.
+
+!!! warning "The relationship between a dataset and its data"
+    While the creation or handling of a dataset does not affect the processing of its data (i.e. uploads or entries),
+    this comes with the caveat that newly generated identifiers (e.g. `dataset_id` or `datasets`) will not be updated in the entries data either.
+    To ensure any modification are reflected there, trigger *reprocessing* another time.
+    This will also update the time stamp.
+    This is only viable for unpublished entries.
 
 ### Group Entries into a Dataset
 
