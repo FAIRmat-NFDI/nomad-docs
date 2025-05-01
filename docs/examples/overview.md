@@ -32,19 +32,19 @@ Historically a repository for Density Functional Theory calculations, NOMAD now 
 Thanks to key activities of the FAIRmat project, NOMAD also supports a set of parsing capabilities for standardizing data from materials characterization experiments.
 
 - [Electron microscopy](./experiment_data/em.md)
-{{ category_tag(name='NX', href='./experiment_data/nexus.md', tooltip='Uses NeXus definitions', image='../assets/favicon-nexus.ico', style='border-radius: 50%;')}}
+{{ category_tag(name='NX', href='./experiment_data/nexus.md', tooltip='Uses NeXus definitions', image='../assets/nexus-logo.ico', style='border-radius: 50%;')}}
 - [Photoemission spectroscopy](./experiment_data/mpes.md)
-{{ category_tag(name='NX', href='./experiment_data/nexus.md', tooltip='Uses NeXus definitions', image='../assets/favicon-nexus.ico', style='border-radius: 50%;')}}
+{{ category_tag(name='NX', href='./experiment_data/nexus.md', tooltip='Uses NeXus definitions', image='../assets/nexus-logo.ico', style='border-radius: 50%;')}}
 - [X-ray photoemission spectroscopy](./experiment_data/xps.md)
-{{ category_tag(name='NX', href='./experiment_data/nexus.md', tooltip='Uses NeXus definitions', image='../assets/favicon-nexus.ico', style='border-radius: 50%;')}}
+{{ category_tag(name='NX', href='./experiment_data/nexus.md', tooltip='Uses NeXus definitions', image='../assets/nexus-logo.ico', style='border-radius: 50%;')}}
 - [Optical spectroscopy](./experiment_data/opt.md)
-{{ category_tag(name='NX', href='./experiment_data/nexus.md', tooltip='Uses NeXus definitions', image='../assets/favicon-nexus.ico', style='border-radius: 50%;')}}
+{{ category_tag(name='NX', href='./experiment_data/nexus.md', tooltip='Uses NeXus definitions', image='../assets/nexus-logo.ico', style='border-radius: 50%;')}}
 - [Atom probe tomography](./experiment_data/apm.md)
-{{ category_tag(name='NX', href='./experiment_data/nexus.md', tooltip='Uses NeXus definitions', image='../assets/favicon-nexus.ico', style='border-radius: 50%;')}}
+{{ category_tag(name='NX', href='./experiment_data/nexus.md', tooltip='Uses NeXus definitions', image='../assets/nexus-logo.ico', style='border-radius: 50%;')}}
 - [Scanning tunneling spectroscopy](./experiment_data/sts.md)
-{{ category_tag(name='NX', href='./experiment_data/nexus.md', tooltip='Uses NeXus definitions', image='../assets/favicon-nexus.ico', style='border-radius: 50%;')}}
+{{ category_tag(name='NX', href='./experiment_data/nexus.md', tooltip='Uses NeXus definitions', image='../assets/nexus-logo.ico', style='border-radius: 50%;')}}
 - [pynxtools](./experiment_data/pynxtools.md)
-{{ category_tag(name='NX', href='./experiment_data/nexus.md', tooltip='Uses NeXus definitions', image='../assets/favicon-nexus.ico', style='border-radius: 50%;')}}
+{{ category_tag(name='NX', href='./experiment_data/nexus.md', tooltip='Uses NeXus definitions', image='../assets/nexus-logo.ico', style='border-radius: 50%;')}}
 {{ category_tag(name='plugin', href='../explanation/plugin_system.md', tooltip='Uses NOMAD plugin mechanism', image='../assets/nomad-plugin-logo.png')}}
 
 </div>
