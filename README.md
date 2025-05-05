@@ -15,7 +15,7 @@ You have two options to run the documentation server:
 2. Or manually install the required dependencies and run:
 
 ```bash
-uv run --with 'nomad-lab[dev, infrastructure, parsing]' mkdocs serve
+uv run mkdocs serve
 ```
 
 This will start a local server where you can preview your changes.
