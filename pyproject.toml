@@ -24,10 +24,11 @@ extra-index-url = [
 ]
 
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+requires = ["uv_build>=0.7.3,<0.8.0"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+source-exclude = ["docs/**"]
 
 [dependency-groups]
-dev = [
-    "pytest>=7.4.4",
-]
+dev = ["pytest>=7.4.4"]
