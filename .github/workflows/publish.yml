@@ -1,0 +1,32 @@
+on:
+  release:
+    types:
+      - published
+
+name: release
+
+env:
+  UV_VERSION: 0.7
+  PYTHON_VERSION: 3.12
+
+jobs:
+  pypi-publish:
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      # IMPORTANT: this permission is mandatory for Trusted Publishing
+      id-token: write
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: ${{ env.UV_VERSION }}
+
+      - name: build
+        run: uv build
+
+      - name: Publish package distributions to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
