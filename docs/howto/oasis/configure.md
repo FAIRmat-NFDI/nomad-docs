@@ -6,7 +6,7 @@ Originally, the NOMAD Central Repository is a service that runs at the Max-Planc
 
     **Register your Oasis**
     If you installed (or even just plan to install) a NOMAD Oasis, please
-    [register your Oasis with FAIRmat](https://www.fairmat-nfdi.eu/fairmat/oasis_registration)
+    [register your Oasis with FAIRmat](https://nomad-lab.eu/fairdi/keycloak/auth/realms/nomad-oasis/protocol/openid-connect/registrations?client_id=account&scope=openid%20profile&redirect_uri=https%3A%2F%2Fnomad-lab.eu%2Fnomad-lab%2Fnomad-oasis-registration.html&response_type=code)
     and help us to assist you in the future.
 
 ## Creating a NOMAD distribution for your Oasis
