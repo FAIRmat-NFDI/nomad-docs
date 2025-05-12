@@ -45,7 +45,7 @@ Thanks to key activities of the FAIRmat project, NOMAD also supports a set of pa
 {{ category_tag(name='NX', href='./experiment_data/nexus.md', tooltip='Uses NeXus definitions', image='../assets/nexus-logo.ico', style='border-radius: 50%;')}}
 - [pynxtools](./experiment_data/pynxtools.md)
 {{ category_tag(name='NX', href='./experiment_data/nexus.md', tooltip='Uses NeXus definitions', image='../assets/nexus-logo.ico', style='border-radius: 50%;')}}
-{{ category_tag(name='plugin', href='../explanation/plugin_system.md', tooltip='Uses NOMAD plugin mechanism', image='../assets/nomad-plugin-logo.png')}}
+{{ category_tag(name='plugin', href='../explanation/plugin_system.md', tooltip='Uses NOMAD plugin mechanism', image='../assets/nomad-plugin-logo.svg')}}
 
 </div>
 
