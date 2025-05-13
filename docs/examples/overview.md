@@ -41,7 +41,7 @@ Thanks to key activities of the FAIRmat project, NOMAD also supports a set of pa
 {{ category_tag(name='NX', href='./experiment_data/nexus.md', tooltip='Uses NeXus definitions', image='../assets/nexus-logo.ico', style='border-radius: 50%;')}}
 - [Atom probe tomography](./experiment_data/apm.md)
 {{ category_tag(name='NX', href='./experiment_data/nexus.md', tooltip='Uses NeXus definitions', image='../assets/nexus-logo.ico', style='border-radius: 50%;')}}
-- [Scanning tunneling spectroscopy](./experiment_data/sts.md)
+- [Scanning tunneling spectroscopy](./experiment_data/stm.md)
 {{ category_tag(name='NX', href='./experiment_data/nexus.md', tooltip='Uses NeXus definitions', image='../assets/nexus-logo.ico', style='border-radius: 50%;')}}
 - [pynxtools](./experiment_data/pynxtools.md)
 {{ category_tag(name='NX', href='./experiment_data/nexus.md', tooltip='Uses NeXus definitions', image='../assets/nexus-logo.ico', style='border-radius: 50%;')}}

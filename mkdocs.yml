@@ -71,7 +71,7 @@ nav:
             - X-ray photoemission spectroscopy: examples/experiment_data/xps.md
             - Optical spectroscopy: examples/experiment_data/opt.md
             - Atom probe tomography: examples/experiment_data/apm.md
-            - Scanning tunneling spectroscopy: examples/experiment_data/sts.md
+            - Scanning tunneling spectroscopy: examples/experiment_data/stm.md
             - pynxtools: examples/experiment_data/pynxtools.md
         # - NOMAD-supported plugins:
         # - Databases for specific research topics:
