@@ -61,9 +61,10 @@ mypackage = "nomad_example.schema_packages:mypackage"
 The `load`-method of a schema package entry point returns an instance of a `nomad.metainfo.SchemaPackage` class. This definition should be contained in a separate file (e.g. `*/schema_packages/mypackage.py`) and could look like this:
 
 ```python
+import ase
+
 from nomad.datamodel.data import Schema
-from nomad.datamodel.metainfo.annotations import ELNAnnotation, ELNComponentEnum
-from nomad.metainfo import SchemaPackage, Quantity, MSection
+from nomad.metainfo import MEnum, MSection, Quantity, SchemaPackage, SubSection
 
 m_package = SchemaPackage()
 
@@ -80,7 +81,7 @@ class System(MSection):
         ''')
 
     atom_labels = Quantity(
-        type=MEnum(ase.data.chemical_symbols), shape['n_atoms'])
+        type=MEnum(ase.data.chemical_symbols), shape=['n_atoms'])
     atom_positions = Quantity(type=float, shape=['n_atoms', 3], unit='angstrom')
     simulation_cell = Quantity(type=float, shape=[3, 3], unit='angstrom')
     pbc = Quantity(type=bool, shape=[3])
@@ -101,13 +102,11 @@ _Subsections_ allow the placement of sections within each other, forming contain
 To use the above-defined schema and create actual data, we have to instantiate the classes:
 
 ```python
-run = Run()
-system = run.m_create(System)
+simulation = Simulation()
+system = System()
 system.n_atoms = 3
 system.atom_labels = ['H', 'H', 'O']
-
-print(system.atom_labels)
-print(n_atoms = 3)
+simulation.system.append(system)
 ```
 
 Section _instances_ can be used like regular Python objects: quantities and subsections
@@ -120,24 +119,23 @@ instantiate a subsection and add it to the _parent_ section in one step.
 Another example for an `m_`-method is:
 
 ```python
-run.m_to_json(indent=2)
+simulation.m_to_json(indent=2)
 ```
 
 This will convert the data into JSON:
 
 ```json
 {
-    "m_def" = "Run",
-    "systems": [
-        {
-            "n_atoms" = 3,
-            "atom_labels" = [
-                "H",
-                "H",
-                "O"
-            ]
-        }
-    ]
+  "system": [
+    {
+      "n_atoms": 3,
+      "atom_labels": [
+        "H",
+        "H",
+        "O"
+      ]
+    }
+  ]
 }
 ```
 
