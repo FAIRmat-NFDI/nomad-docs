@@ -1,0 +1,4343 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="The documentation for NOMAD v1.
+">
+      
+      
+        <meta name="author" content="The NOMAD Authors">
+      
+      
+      
+        <link rel="prev" href="annotations.html">
+      
+      
+        <link rel="next" href="cli.html">
+      
+      
+      <link rel="icon" href="../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+    
+    
+      
+        <title>Base Sections - Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.2afb09e1.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Titillium Web";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="#2A4CDF" data-md-color-accent="#008A67">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#base-sections" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="https://nomad-lab.eu" title="Documentation" class="md-header__button md-logo" aria-label="Documentation" data-md-component="logo">
+      
+  <img src="../assets/nomad-logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Base Sections
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/nomad-coe/nomad" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://nomad-lab.eu" title="Documentation" class="md-nav__button md-logo" aria-label="Documentation" data-md-component="logo">
+      
+  <img src="../assets/nomad-logo.png" alt="logo">
+
+    </a>
+    Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/nomad-coe/nomad" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Tutorial
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Tutorial
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/nomad_repo.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Navigating to NOMAD
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/upload_publish.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Uploading and publishing data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/explore.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exploring data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/access_api.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Access data via API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/custom.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Schemas and plugins
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/develop_plugin.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Developing a NOMAD plugin
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    How-to guides
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            How-to guides
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/overview.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Manage and find data
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Manage and find data
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/manage/upload.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Upload and publish data for supported formats
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/manage/eln.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Use ELNs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/manage/explore.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Explore data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/manage/north.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Use NORTH
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Programmatic use
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Programmatic use
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/programmatic/api.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Use the API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/programmatic/download.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Download data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/programmatic/publish_python.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Publish data using python
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/programmatic/pythonlib.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install nomad-lab
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/programmatic/archive_query.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Access processed data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/programmatic/json_transformer.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Transform data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    NOMAD Oasis
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            NOMAD Oasis
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/oasis/configure.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Configure an Oasis
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/oasis/deploy.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Deploy an Oasis
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/oasis/update.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Update an Oasis
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/oasis/admin.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Perform admin tasks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Plugins
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            Plugins
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/plugins/plugins.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction to plugins
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/plugins/apis.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Write an API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/plugins/apps.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Write an app
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/plugins/example_uploads.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Write an example upload
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/plugins/normalizers.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Write a normalizer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/plugins/parsers.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Write a parser
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/plugins/schema_packages.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Write a schema package
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Customization
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            Customization
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/customization/basics.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Write a YAML schema package
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/customization/elns.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Define ELNs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/customization/base_sections.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Use base sections
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/customization/tabular.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Parse tabular data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/customization/workflows.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Define workflows
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/customization/units.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Work with units
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/customization/hdf5.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Use HDF5 to handle large quantities
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Development
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            Development
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/develop/setup.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Get started
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/develop/code.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Navigate the code
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/develop/contrib.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contribute
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/develop/search.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Extend the search
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/develop/release.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Make a release
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Domain-specific examples
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Domain-specific examples
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/overview.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Computational data
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Computational data
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/computational_data/uploading.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quick start
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/computational_data/workflows.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Workflows
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/computational_data/metainfo.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MetaInfo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/computational_data/schema_plugins.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Schema plugins
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/computational_data/parser_plugins.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Parser plugins
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/computational_data/h5md_howto.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    H5MD schema - Howto
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/computational_data/h5md_expl.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    H5MD schema - Explanation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/computational_data/h5md_ref.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    H5MD - Reference
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Experimental data
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            Experimental data
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/experiment_data/em.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Electron microscopy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/experiment_data/mpes.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Photoemission spectroscopy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/experiment_data/xps.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    X-ray photoemission spectroscopy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/experiment_data/opt.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Optical spectroscopy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/experiment_data/apm.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Atom probe tomography
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/experiment_data/stm.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Scanning tunneling spectroscopy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/experiment_data/pynxtools.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    pynxtools
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Explanation
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Explanation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../explanation/basics.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    From files to data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../explanation/data.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data structure
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../explanation/processing.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Processing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../explanation/architecture.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Architecture
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../explanation/plugin_system.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Plugins
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../explanation/oasis.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Federation and Oasis
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Reference
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="config.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Configuration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="annotations.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Annotations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Base Sections
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="basesections.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Base Sections
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#basesection" class="md-nav__link">
+    <span class="md-ellipsis">
+      BaseSection
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Entity
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#activitystep" class="md-nav__link">
+    <span class="md-ellipsis">
+      ActivityStep
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#activity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Activity
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sectionreference" class="md-nav__link">
+    <span class="md-ellipsis">
+      SectionReference
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entityreference" class="md-nav__link">
+    <span class="md-ellipsis">
+      EntityReference
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#experimentstep" class="md-nav__link">
+    <span class="md-ellipsis">
+      ExperimentStep
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#experiment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Experiment
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#collection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Collection
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#elementalcomposition" class="md-nav__link">
+    <span class="md-ellipsis">
+      ElementalComposition
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#system" class="md-nav__link">
+    <span class="md-ellipsis">
+      System
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#instrument" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instrument
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#instrumentreference" class="md-nav__link">
+    <span class="md-ellipsis">
+      InstrumentReference
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#component" class="md-nav__link">
+    <span class="md-ellipsis">
+      Component
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#systemcomponent" class="md-nav__link">
+    <span class="md-ellipsis">
+      SystemComponent
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#puresubstancesection" class="md-nav__link">
+    <span class="md-ellipsis">
+      PureSubstanceSection
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#puresubstancecomponent" class="md-nav__link">
+    <span class="md-ellipsis">
+      PureSubstanceComponent
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compositesystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      CompositeSystem
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compositesystemreference" class="md-nav__link">
+    <span class="md-ellipsis">
+      CompositeSystemReference
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#processstep" class="md-nav__link">
+    <span class="md-ellipsis">
+      ProcessStep
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#process" class="md-nav__link">
+    <span class="md-ellipsis">
+      Process
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#activityresult" class="md-nav__link">
+    <span class="md-ellipsis">
+      ActivityResult
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analysisresult" class="md-nav__link">
+    <span class="md-ellipsis">
+      AnalysisResult
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analysis
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synthesismethod" class="md-nav__link">
+    <span class="md-ellipsis">
+      SynthesisMethod
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#measurementresult" class="md-nav__link">
+    <span class="md-ellipsis">
+      MeasurementResult
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#measurement" class="md-nav__link">
+    <span class="md-ellipsis">
+      Measurement
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#puresubstance" class="md-nav__link">
+    <span class="md-ellipsis">
+      PureSubstance
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pubchempuresubstancesection" class="md-nav__link">
+    <span class="md-ellipsis">
+      PubChemPureSubstanceSection
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#casexperimentalproperty" class="md-nav__link">
+    <span class="md-ellipsis">
+      CASExperimentalProperty
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caspropertycitation" class="md-nav__link">
+    <span class="md-ellipsis">
+      CASPropertyCitation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caspuresubstancesection" class="md-nav__link">
+    <span class="md-ellipsis">
+      CASPureSubstanceSection
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#readableidentifiers" class="md-nav__link">
+    <span class="md-ellipsis">
+      ReadableIdentifiers
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#publicationreference" class="md-nav__link">
+    <span class="md-ellipsis">
+      PublicationReference
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hdf5normalizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      HDF5Normalizer
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="cli.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Command Line Interface (CLI)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="plugins.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Plugins
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="parsers.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Supported parsers
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="code_guidelines.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code guidelines
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="glossary.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Glossary
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    List of NOMAD tutorials
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#basesection" class="md-nav__link">
+    <span class="md-ellipsis">
+      BaseSection
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Entity
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#activitystep" class="md-nav__link">
+    <span class="md-ellipsis">
+      ActivityStep
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#activity" class="md-nav__link">
+    <span class="md-ellipsis">
+      Activity
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sectionreference" class="md-nav__link">
+    <span class="md-ellipsis">
+      SectionReference
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#entityreference" class="md-nav__link">
+    <span class="md-ellipsis">
+      EntityReference
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#experimentstep" class="md-nav__link">
+    <span class="md-ellipsis">
+      ExperimentStep
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#experiment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Experiment
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#collection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Collection
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#elementalcomposition" class="md-nav__link">
+    <span class="md-ellipsis">
+      ElementalComposition
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#system" class="md-nav__link">
+    <span class="md-ellipsis">
+      System
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#instrument" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instrument
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#instrumentreference" class="md-nav__link">
+    <span class="md-ellipsis">
+      InstrumentReference
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#component" class="md-nav__link">
+    <span class="md-ellipsis">
+      Component
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#systemcomponent" class="md-nav__link">
+    <span class="md-ellipsis">
+      SystemComponent
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#puresubstancesection" class="md-nav__link">
+    <span class="md-ellipsis">
+      PureSubstanceSection
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#puresubstancecomponent" class="md-nav__link">
+    <span class="md-ellipsis">
+      PureSubstanceComponent
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compositesystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      CompositeSystem
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#compositesystemreference" class="md-nav__link">
+    <span class="md-ellipsis">
+      CompositeSystemReference
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#processstep" class="md-nav__link">
+    <span class="md-ellipsis">
+      ProcessStep
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#process" class="md-nav__link">
+    <span class="md-ellipsis">
+      Process
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#activityresult" class="md-nav__link">
+    <span class="md-ellipsis">
+      ActivityResult
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analysisresult" class="md-nav__link">
+    <span class="md-ellipsis">
+      AnalysisResult
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analysis" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analysis
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synthesismethod" class="md-nav__link">
+    <span class="md-ellipsis">
+      SynthesisMethod
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#measurementresult" class="md-nav__link">
+    <span class="md-ellipsis">
+      MeasurementResult
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#measurement" class="md-nav__link">
+    <span class="md-ellipsis">
+      Measurement
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#puresubstance" class="md-nav__link">
+    <span class="md-ellipsis">
+      PureSubstance
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pubchempuresubstancesection" class="md-nav__link">
+    <span class="md-ellipsis">
+      PubChemPureSubstanceSection
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#casexperimentalproperty" class="md-nav__link">
+    <span class="md-ellipsis">
+      CASExperimentalProperty
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caspropertycitation" class="md-nav__link">
+    <span class="md-ellipsis">
+      CASPropertyCitation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caspuresubstancesection" class="md-nav__link">
+    <span class="md-ellipsis">
+      CASPureSubstanceSection
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#readableidentifiers" class="md-nav__link">
+    <span class="md-ellipsis">
+      ReadableIdentifiers
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#publicationreference" class="md-nav__link">
+    <span class="md-ellipsis">
+      PublicationReference
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hdf5normalizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      HDF5Normalizer
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="base-sections">Base Sections<a class="headerlink" href="#base-sections" title="Permanent link">&para;</a></h1>
+<p>The <code>nomad.datamodel.metainfo.basesections</code> Metainfo package contains a set of
+<em>base sections</em>. They provides shared definitions across materials science domains and schemas. Some functionality, e.g. the workflow visualisation, depend on these definitions. Inherit from these base sections when you create your own schemas to
+align your definitions with those of other schemas and to make use of respective functionality.</p>
+<h3 id="basesection">BaseSection<a class="headerlink" href="#basesection" title="Permanent link">&para;</a></h3>
+<p><strong>description</strong>: A generic abstract base section that provides a few commonly used properties. If you inherit from this section, but do not need some quantities, list those
+quantities in the <code>eln.hide</code> annotation of your inheriting section definition.</p>
+<p>Besides predefining some quantities, these base sections will add some metadata
+to NOMAD's search. A particular example are <code>tags</code>, if you define a string
+or enum quantity in your sections named <code>tags</code>, its values will be searchable.</p>
+<p><strong>inherits from</strong>: <code>nomad.datamodel.data.ArchiveSection</code></p>
+<p><strong>links</strong>: <a href="http://purl.obolibrary.org/obo/BFO_0000001">http://purl.obolibrary.org/obo/BFO_0000001</a></p>
+<p><strong>properties</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td><code>str</code></td>
+<td>A short human readable and descriptive name.</td>
+</tr>
+<tr>
+<td>datetime</td>
+<td><code>nomad.metainfo.data_type.Datetime</code></td>
+<td>The date and time associated with this section.</td>
+</tr>
+<tr>
+<td>lab_id</td>
+<td><code>str</code></td>
+<td>An ID string that is unique at least for the lab that produced this data.</td>
+</tr>
+<tr>
+<td>description</td>
+<td><code>str</code></td>
+<td>Any information that cannot be captured in the other fields.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>normalization</strong>: </p>
+<ul>
+<li>If the instance is of type <code>EntryData</code>, it sets the archive's entry name based on the instance's name.</li>
+<li>Sets the <code>datetime</code> field to the current time if it is not already set.</li>
+<li>Manages the <code>lab_id</code> field and updates the archive's <code>results.eln.lab_ids</code> list.</li>
+<li>Adds the instance's <code>name</code> and <code>description</code> to the archive's <code>results.eln.names</code> and <code>results.eln.descriptions</code> lists, respectively.</li>
+<li>Handles the <code>tags</code> attribute, if present, and updates the archive's <code>results.eln.tags</code> list.</li>
+<li>Appends the section's name to the archive's <code>results.eln.sections</code> list.</li>
+</ul>
+<h3 id="entity">Entity<a class="headerlink" href="#entity" title="Permanent link">&para;</a></h3>
+<p><strong>description</strong>: An object that persists, endures, or continues to exist through time while maintaining its identity.</p>
+<p><strong>inherits from</strong>: <a href="#basesection"><code>BaseSection</code></a></p>
+<p><strong>links</strong>: <a href="http://purl.obolibrary.org/obo/BFO_0000002">http://purl.obolibrary.org/obo/BFO_0000002</a></p>
+<p><strong>normalization</strong>: </p>
+<ul>
+<li>If the instance is of type <code>EntryData</code>, it sets the archive's entry name based on the instance's name.</li>
+<li>Sets the <code>datetime</code> field to the current time if it is not already set.</li>
+<li>Manages the <code>lab_id</code> field and updates the archive's <code>results.eln.lab_ids</code> list.</li>
+<li>Adds the instance's <code>name</code> and <code>description</code> to the archive's <code>results.eln.names</code> and <code>results.eln.descriptions</code> lists, respectively.</li>
+<li>Handles the <code>tags</code> attribute, if present, and updates the archive's <code>results.eln.tags</code> list.</li>
+<li>Appends the section's name to the archive's <code>results.eln.sections</code> list.</li>
+</ul>
+<h3 id="activitystep">ActivityStep<a class="headerlink" href="#activitystep" title="Permanent link">&para;</a></h3>
+<p><strong>description</strong>: Any dependant step of an <code>Activity</code>.</p>
+<p><strong>inherits from</strong>: <code>nomad.datamodel.data.ArchiveSection</code></p>
+<p><strong>properties</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td><code>str</code></td>
+<td>A short and descriptive name for this step.</td>
+</tr>
+<tr>
+<td>start_time</td>
+<td><code>nomad.metainfo.data_type.Datetime</code></td>
+<td>Optionally, the starting time of the activity step. If omitted, it is assumed to follow directly after the previous step.</td>
+</tr>
+<tr>
+<td>comment</td>
+<td><code>str</code></td>
+<td>Any additional information about the step not captured by the other fields.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="activity">Activity<a class="headerlink" href="#activity" title="Permanent link">&para;</a></h3>
+<p><strong>description</strong>: An action that has a temporal extension and for some time depends on some entity.</p>
+<p><strong>inherits from</strong>: <a href="#basesection"><code>BaseSection</code></a></p>
+<p><strong>links</strong>: <a href="http://purl.obolibrary.org/obo/BFO_0000015">http://purl.obolibrary.org/obo/BFO_0000015</a></p>
+<p><strong>properties</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>datetime</td>
+<td><code>nomad.metainfo.data_type.Datetime</code></td>
+<td>The date and time when this activity was started.</td>
+</tr>
+<tr>
+<td>method</td>
+<td><code>str</code></td>
+<td>A short consistent handle for the applied method.</td>
+</tr>
+<tr>
+<td>location</td>
+<td><code>str</code></td>
+<td>location of the experiment.</td>
+</tr>
+<tr>
+<td>steps</td>
+<td><a href="#activitystep"><code>ActivityStep</code></a></td>
+<td>An ordered list of all the dependant steps that make up this activity.</br><strong>sub-section</strong>, <strong>repeats</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>normalization</strong>: </p>
+<ul>
+<li>Ensures the <code>results.eln.methods</code> list is initialized and appends the method or section name.</li>
+<li>Converts each step in <code>self.steps</code> to a task, using the steps <code>to_task()</code> method, and assigns it to <code>archive.workflow2.tasks</code>.</li>
+</ul>
+<h3 id="sectionreference">SectionReference<a class="headerlink" href="#sectionreference" title="Permanent link">&para;</a></h3>
+<p><strong>description</strong>: A section used for referencing another section.</p>
+<p><strong>inherits from</strong>: <code>nomad.datamodel.data.ArchiveSection</code></p>
+<p><strong>properties</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td><code>str</code></td>
+<td>A short descriptive name for the role of this reference.</td>
+</tr>
+<tr>
+<td>reference</td>
+<td><code>nomad.datamodel.data.ArchiveSection</code></td>
+<td>A reference to a NOMAD archive section.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="entityreference">EntityReference<a class="headerlink" href="#entityreference" title="Permanent link">&para;</a></h3>
+<p><strong>description</strong>: A section used for referencing an Entity.</p>
+<p><strong>inherits from</strong>: <a href="#sectionreference"><code>SectionReference</code></a></p>
+<p><strong>properties</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>reference</td>
+<td><a href="#entity"><code>Entity</code></a></td>
+<td>A reference to a NOMAD <code>Entity</code> entry.</td>
+</tr>
+<tr>
+<td>lab_id</td>
+<td><code>str</code></td>
+<td>The readable identifier for the entity.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>normalization</strong>: </p>
+<p>Will attempt to fill the <code>reference</code> from the <code>lab_id</code> or vice versa.</p>
+<h3 id="experimentstep">ExperimentStep<a class="headerlink" href="#experimentstep" title="Permanent link">&para;</a></h3>
+<p><strong>description</strong>: Any dependant step of an <code>Experiment</code>.</p>
+<p><strong>inherits from</strong>: <a href="#activitystep"><code>ActivityStep</code></a></p>
+<p><strong>properties</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>activity</td>
+<td><a href="#activity"><code>Activity</code></a></td>
+<td>The activity that makes up this step of the experiment.</td>
+</tr>
+<tr>
+<td>lab_id</td>
+<td><code>str</code></td>
+<td>The readable identifier for the activity.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>normalization</strong>: </p>
+<p>Will attempt to fill the <code>activity</code> from the <code>lab_id</code> or vice versa.
+If the activity reference is filled but the start time is not the time will be
+taken from the <code>datetime</code> property of the referenced activity.</p>
+<h3 id="experiment">Experiment<a class="headerlink" href="#experiment" title="Permanent link">&para;</a></h3>
+<p><strong>description</strong>: A section for grouping activities together into an experiment.</p>
+<p><strong>inherits from</strong>: <a href="#activity"><code>Activity</code></a></p>
+<p><strong>properties</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>steps</td>
+<td><a href="#experimentstep"><code>ExperimentStep</code></a></td>
+<td>An ordered list of all the dependant steps that make up this activity.</br><strong>sub-section</strong>, <strong>repeats</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>normalization</strong>: </p>
+<ul>
+<li>Ensures the <code>results.eln.methods</code> list is initialized and appends the method or section name.</li>
+<li>Converts each step in <code>self.steps</code> to a task, using the steps <code>to_task()</code> method, and assigns it to <code>archive.workflow2.tasks</code>.</li>
+</ul>
+<h3 id="collection">Collection<a class="headerlink" href="#collection" title="Permanent link">&para;</a></h3>
+<p><strong>description</strong>: A section for grouping entities together into a collection.</p>
+<p><strong>inherits from</strong>: <a href="#entity"><code>Entity</code></a></p>
+<p><strong>properties</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>entities</td>
+<td><a href="#entityreference"><code>EntityReference</code></a></td>
+<td>References to the entities that make up the collection.</br><strong>sub-section</strong>, <strong>repeats</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>normalization</strong>: </p>
+<ul>
+<li>If the instance is of type <code>EntryData</code>, it sets the archive's entry name based on the instance's name.</li>
+<li>Sets the <code>datetime</code> field to the current time if it is not already set.</li>
+<li>Manages the <code>lab_id</code> field and updates the archive's <code>results.eln.lab_ids</code> list.</li>
+<li>Adds the instance's <code>name</code> and <code>description</code> to the archive's <code>results.eln.names</code> and <code>results.eln.descriptions</code> lists, respectively.</li>
+<li>Handles the <code>tags</code> attribute, if present, and updates the archive's <code>results.eln.tags</code> list.</li>
+<li>Appends the section's name to the archive's <code>results.eln.sections</code> list.</li>
+</ul>
+<h3 id="elementalcomposition">ElementalComposition<a class="headerlink" href="#elementalcomposition" title="Permanent link">&para;</a></h3>
+<p><strong>description</strong>: A section for describing the elemental composition of a system, i.e. the element and its atomic fraction.</p>
+<p><strong>inherits from</strong>: <code>nomad.datamodel.data.ArchiveSection</code></p>
+<p><strong>properties</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>element</td>
+<td><code>['Ac', 'Ag', 'Al', 'Am', 'Ar', 'As', 'At', 'Au', 'B', 'Ba', 'Be', 'Bh', 'Bi', 'Bk', 'Br', 'C', 'Ca', 'Cd', 'Ce', 'Cf', 'Cl', 'Cm', 'Cn', 'Co', 'Cr', 'Cs', 'Cu', 'Db', 'Ds', 'Dy', 'Er', 'Es', 'Eu', 'F', 'Fe', 'Fl', 'Fm', 'Fr', 'Ga', 'Gd', 'Ge', 'H', 'He', 'Hf', 'Hg', 'Ho', 'Hs', 'I', 'In', 'Ir', 'K', 'Kr', 'La', 'Li', 'Lr', 'Lu', 'Lv', 'Mc', 'Md', 'Mg', 'Mn', 'Mo', 'Mt', 'N', 'Na', 'Nb', 'Nd', 'Ne', 'Nh', 'Ni', 'No', 'Np', 'O', 'Og', 'Os', 'P', 'Pa', 'Pb', 'Pd', 'Pm', 'Po', 'Pr', 'Pt', 'Pu', 'Ra', 'Rb', 'Re', 'Rf', 'Rg', 'Rh', 'Rn', 'Ru', 'S', 'Sb', 'Sc', 'Se', 'Sg', 'Si', 'Sm', 'Sn', 'Sr', 'Ta', 'Tb', 'Tc', 'Te', 'Th', 'Ti', 'Tl', 'Tm', 'Ts', 'U', 'V', 'W', 'Xe', 'Y', 'Yb', 'Zn', 'Zr']</code></td>
+<td>The symbol of the element, e.g. 'Pb'.</td>
+</tr>
+<tr>
+<td>atomic_fraction</td>
+<td><code>float64</code></td>
+<td>The atomic fraction of the element in the system it is contained within. Per definition a positive value less than or equal to 1.</td>
+</tr>
+<tr>
+<td>mass_fraction</td>
+<td><code>float64</code></td>
+<td>The mass fraction of the element in the system it is contained within. Per definition a positive value less than or equal to 1.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>normalization</strong>: </p>
+<p>Will add a
+results.material subsection if none exists. Will append the element to the
+elements property of that subsection and a
+nomad.datamodel.results.ElementalComposition instances to the
+elemental_composition property  using the element and atomic fraction from this
+section.</p>
+<h3 id="system">System<a class="headerlink" href="#system" title="Permanent link">&para;</a></h3>
+<p><strong>description</strong>: A base section for any system of materials which is investigated or used to construct other systems.</p>
+<p><strong>inherits from</strong>: <a href="#entity"><code>Entity</code></a></p>
+<p><strong>properties</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>elemental_composition</td>
+<td><a href="#elementalcomposition"><code>ElementalComposition</code></a></td>
+<td>A list of all the elements found in the system together and their respective atomic fraction within the system.</br><strong>sub-section</strong>, <strong>repeats</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>normalization</strong>: </p>
+<p>Will attempt to fill mass fractions or
+atomic fractions if left blank.</p>
+<h3 id="instrument">Instrument<a class="headerlink" href="#instrument" title="Permanent link">&para;</a></h3>
+<p><strong>description</strong>: A base section that can be used for instruments.</p>
+<p><strong>inherits from</strong>: <a href="#entity"><code>Entity</code></a></p>
+<p><strong>normalization</strong>: </p>
+<p>Adds the name of the instrument to the <code>results.eln.instruments</code> list.</p>
+<h3 id="instrumentreference">InstrumentReference<a class="headerlink" href="#instrumentreference" title="Permanent link">&para;</a></h3>
+<p><strong>description</strong>: A section used for referencing an Instrument.</p>
+<p><strong>inherits from</strong>: <a href="#entityreference"><code>EntityReference</code></a></p>
+<p><strong>properties</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>reference</td>
+<td><a href="#instrument"><code>Instrument</code></a></td>
+<td>A reference to a NOMAD <code>Instrument</code> entry.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>normalization</strong>: </p>
+<p>Will attempt to fill the <code>reference</code> from the <code>lab_id</code> or vice versa.</p>
+<h3 id="component">Component<a class="headerlink" href="#component" title="Permanent link">&para;</a></h3>
+<p><strong>description</strong>: A section for describing a component and its role in a composite system.</p>
+<p><strong>inherits from</strong>: <code>nomad.datamodel.data.ArchiveSection</code></p>
+<p><strong>properties</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td><code>str</code></td>
+<td>A short name for the component.</td>
+</tr>
+<tr>
+<td>mass</td>
+<td><code>float64</code></td>
+<td>The mass of the component.</br><strong>unit</strong>=<code>kilogram</code></td>
+</tr>
+<tr>
+<td>mass_fraction</td>
+<td><code>float64</code></td>
+<td>The mass fraction of the component in the composite system.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="systemcomponent">SystemComponent<a class="headerlink" href="#systemcomponent" title="Permanent link">&para;</a></h3>
+<p><strong>description</strong>: A section for describing a system component and its role in a composite system.</p>
+<p><strong>inherits from</strong>: <a href="#component"><code>Component</code></a></p>
+<p><strong>properties</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>system</td>
+<td><a href="#system"><code>System</code></a></td>
+<td>A reference to the component system.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>normalization</strong>: </p>
+<p>If none is set, the normalizer
+will set the name of the component to be that of the referenced system if it has
+one.</p>
+<h3 id="puresubstancesection">PureSubstanceSection<a class="headerlink" href="#puresubstancesection" title="Permanent link">&para;</a></h3>
+<p><strong>description</strong>: A sub section for describing any elemental, molecular or single phase pure substance.</p>
+<p><strong>inherits from</strong>: <code>nomad.datamodel.data.ArchiveSection</code></p>
+<p><strong>properties</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td><code>str</code></td>
+<td>A short name for the substance.</td>
+</tr>
+<tr>
+<td>iupac_name</td>
+<td><code>str</code></td>
+<td>IUPAC name.</td>
+</tr>
+<tr>
+<td>molecular_formula</td>
+<td><code>str</code></td>
+<td>Molecular formula.</td>
+</tr>
+<tr>
+<td>molecular_mass</td>
+<td><code>float64</code></td>
+<td>The mass of the most likely isotopic composition for a single molecule, corresponding to the most intense ion/molecule peak in a mass spectrum.</br><strong>unit</strong>=<code>dalton</code></td>
+</tr>
+<tr>
+<td>molar_mass</td>
+<td><code>float64</code></td>
+<td>The molar mass is the sum of all atomic masses of the constituent atoms in a compound, measured in g/mol. In the absence of explicit isotope labelling, averaged natural abundance is assumed. If an atom bears an explicit isotope label, 100%% isotopic purity is assumed at this location.</br><strong>unit</strong>=<code>gram / mole</code></td>
+</tr>
+<tr>
+<td>monoisotopic_mass</td>
+<td><code>float64</code></td>
+<td>The mass of a molecule, calculated using the mass of the most abundant isotope of each element.</br><strong>unit</strong>=<code>dalton</code></td>
+</tr>
+<tr>
+<td>inchi</td>
+<td><code>str</code></td>
+<td>Inchi.</td>
+</tr>
+<tr>
+<td>inchi_key</td>
+<td><code>str</code></td>
+<td>Inchi key.</td>
+</tr>
+<tr>
+<td>smile</td>
+<td><code>str</code></td>
+<td>Smile.</td>
+</tr>
+<tr>
+<td>canonical_smile</td>
+<td><code>str</code></td>
+<td>Canonical smile.</td>
+</tr>
+<tr>
+<td>cas_number</td>
+<td><code>str</code></td>
+<td>CAS number.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="puresubstancecomponent">PureSubstanceComponent<a class="headerlink" href="#puresubstancecomponent" title="Permanent link">&para;</a></h3>
+<p><strong>description</strong>: A section for describing a substance component and its role in a composite system.</p>
+<p><strong>inherits from</strong>: <a href="#component"><code>Component</code></a></p>
+<p><strong>properties</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>substance_name</td>
+<td><code>str</code></td>
+<td>The name of the substance within the section where this component is contained.</td>
+</tr>
+<tr>
+<td>pure_substance</td>
+<td><a href="#puresubstancesection"><code>PureSubstanceSection</code></a></td>
+<td>Section describing the pure substance that is the component.</br><strong>sub-section</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>normalization</strong>: </p>
+<p>If none is set, the
+normalizer will set the name of the component to be the molecular formula of the
+substance.</p>
+<h3 id="compositesystem">CompositeSystem<a class="headerlink" href="#compositesystem" title="Permanent link">&para;</a></h3>
+<p><strong>description</strong>: A base section for a material systems composed of components. Each component of the composite system is of a (sub)type of <code>System</code>.</p>
+<p><strong>inherits from</strong>: <a href="#system"><code>System</code></a></p>
+<p><strong>properties</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>components</td>
+<td><a href="#component"><code>Component</code></a></td>
+<td>A list of all the components of the composite system containing a name, reference to the system section and mass of that component.</br><strong>sub-section</strong>, <strong>repeats</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>normalization</strong>: </p>
+<p>If the elemental composition list is
+empty, the normalizer will iterate over the components and extract all the
+elements for populating the elemental composition list. If masses are provided for
+all components and the elemental composition of all components contain atomic
+fractions the normalizer will also calculate the atomic fractions for the
+composite system. The populated elemental composition list is added to the results
+by the normalizer in the <code>System</code> super class.</p>
+<h3 id="compositesystemreference">CompositeSystemReference<a class="headerlink" href="#compositesystemreference" title="Permanent link">&para;</a></h3>
+<p><strong>description</strong>: A section used for referencing a CompositeSystem.</p>
+<p><strong>inherits from</strong>: <a href="#entityreference"><code>EntityReference</code></a></p>
+<p><strong>properties</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>reference</td>
+<td><a href="#compositesystem"><code>CompositeSystem</code></a></td>
+<td>A reference to a NOMAD <code>CompositeSystem</code> entry.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>normalization</strong>: </p>
+<p>Will attempt to fill the <code>reference</code> from the <code>lab_id</code> or vice versa.</p>
+<h3 id="processstep">ProcessStep<a class="headerlink" href="#processstep" title="Permanent link">&para;</a></h3>
+<p><strong>description</strong>: Any dependant step of a <code>Process</code>.</p>
+<p><strong>inherits from</strong>: <a href="#activitystep"><code>ActivityStep</code></a></p>
+<p><strong>properties</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>duration</td>
+<td><code>float</code></td>
+<td>The duration time of the process step.</br><strong>unit</strong>=<code>second</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="process">Process<a class="headerlink" href="#process" title="Permanent link">&para;</a></h3>
+<p><strong>description</strong>: A planned process which results in physical changes in a specified input material. [ obi : prs obi : mc obi : fg obi : jf obi : bp ]</p>
+<p>Synonyms:
+ - preparative method
+ - sample preparation
+ - sample preparative method
+ - material transformations</p>
+<p><strong>inherits from</strong>: <a href="#activity"><code>Activity</code></a></p>
+<p><strong>links</strong>: <a href="http://purl.obolibrary.org/obo/OBI_0000094">http://purl.obolibrary.org/obo/OBI_0000094</a></p>
+<p><strong>properties</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>end_time</td>
+<td><code>nomad.metainfo.data_type.Datetime</code></td>
+<td>The date and time when this process was finished.</td>
+</tr>
+<tr>
+<td>steps</td>
+<td><a href="#processstep"><code>ProcessStep</code></a></td>
+<td>An ordered list of all the dependant steps that make up this activity.</br><strong>sub-section</strong>, <strong>repeats</strong></td>
+</tr>
+<tr>
+<td>instruments</td>
+<td><a href="#instrumentreference"><code>InstrumentReference</code></a></td>
+<td>A list of all the instruments and their role in this process.</br><strong>sub-section</strong>, <strong>repeats</strong></td>
+</tr>
+<tr>
+<td>samples</td>
+<td><a href="#compositesystemreference"><code>CompositeSystemReference</code></a></td>
+<td>The samples as that have undergone the process.</br><strong>sub-section</strong>, <strong>repeats</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>normalization</strong>: </p>
+<ul>
+<li>Sets the start time for each step in <code>self.steps</code> if not already set, based on the <code>datetime</code> and <code>duration</code> fields.</li>
+<li>Sets the <code>end_time</code> field to the calculated end time if it is not already set.</li>
+<li>Updates the <code>archive.workflow2.outputs</code> list with links to the samples processed.</li>
+</ul>
+<h3 id="activityresult">ActivityResult<a class="headerlink" href="#activityresult" title="Permanent link">&para;</a></h3>
+<p><strong>description</strong>: A section for the results of an <code>Activity</code>.</p>
+<p><strong>inherits from</strong>: <code>nomad.datamodel.data.ArchiveSection</code></p>
+<p><strong>properties</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td><code>str</code></td>
+<td>A short and descriptive name for the result.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="analysisresult">AnalysisResult<a class="headerlink" href="#analysisresult" title="Permanent link">&para;</a></h3>
+<p><strong>description</strong>: A section for the results of an <code>Analysis</code> process.</p>
+<p><strong>inherits from</strong>: <a href="#activityresult"><code>ActivityResult</code></a></p>
+<h3 id="analysis">Analysis<a class="headerlink" href="#analysis" title="Permanent link">&para;</a></h3>
+<p><strong>description</strong>: A planned process that produces output data from input data. Synonyms:
+- data processing
+- data analysis</p>
+<p><strong>inherits from</strong>: <a href="#activity"><code>Activity</code></a></p>
+<p><strong>links</strong>: <a href="http://purl.obolibrary.org/obo/OBI_0200000">http://purl.obolibrary.org/obo/OBI_0200000</a></p>
+<p><strong>properties</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>inputs</td>
+<td><a href="#sectionreference"><code>SectionReference</code></a></td>
+<td>The input data of the analysis.</br><strong>sub-section</strong>, <strong>repeats</strong></td>
+</tr>
+<tr>
+<td>outputs</td>
+<td><a href="#analysisresult"><code>AnalysisResult</code></a></td>
+<td>The output data of the analysis.</br><strong>sub-section</strong>, <strong>repeats</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>normalization</strong>: </p>
+<ul>
+<li>Updates the <code>archive.workflow2.inputs</code> list with links to the input data.</li>
+<li>Updates the <code>archive.workflow2.outputs</code> list with links to the output data.</li>
+</ul>
+<h3 id="synthesismethod">SynthesisMethod<a class="headerlink" href="#synthesismethod" title="Permanent link">&para;</a></h3>
+<p><strong>description</strong>: A method used to synthesise a sample.</p>
+<p><strong>inherits from</strong>: <a href="#process"><code>Process</code></a></p>
+<p><strong>links</strong>: <a href="http://purl.obolibrary.org/obo/CHMO_0001301">http://purl.obolibrary.org/obo/CHMO_0001301</a></p>
+<p><strong>normalization</strong>: </p>
+<ul>
+<li>Sets the start time for each step in <code>self.steps</code> if not already set, based on the <code>datetime</code> and <code>duration</code> fields.</li>
+<li>Sets the <code>end_time</code> field to the calculated end time if it is not already set.</li>
+<li>Updates the <code>archive.workflow2.outputs</code> list with links to the samples processed.</li>
+</ul>
+<h3 id="measurementresult">MeasurementResult<a class="headerlink" href="#measurementresult" title="Permanent link">&para;</a></h3>
+<p><strong>description</strong>: A section for the results of an <code>Measurement</code> process.</p>
+<p><strong>inherits from</strong>: <a href="#activityresult"><code>ActivityResult</code></a></p>
+<h3 id="measurement">Measurement<a class="headerlink" href="#measurement" title="Permanent link">&para;</a></h3>
+<p><strong>description</strong>: A planned process with the objective to produce information about the material entity that is the evaluant, by physically examining it or its proxies. [ obi : pppb ]</p>
+<p><strong>inherits from</strong>: <a href="#activity"><code>Activity</code></a></p>
+<p><strong>links</strong>: <a href="http://purl.obolibrary.org/obo/OBI_0000070">http://purl.obolibrary.org/obo/OBI_0000070</a></p>
+<p><strong>properties</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>samples</td>
+<td><a href="#compositesystemreference"><code>CompositeSystemReference</code></a></td>
+<td>A list of all the samples measured during the measurement.</br><strong>sub-section</strong>, <strong>repeats</strong></td>
+</tr>
+<tr>
+<td>instruments</td>
+<td><a href="#instrumentreference"><code>InstrumentReference</code></a></td>
+<td>A list of all the instruments and their role in this process.</br><strong>sub-section</strong>, <strong>repeats</strong></td>
+</tr>
+<tr>
+<td>results</td>
+<td><a href="#measurementresult"><code>MeasurementResult</code></a></td>
+<td>The result of the measurement.</br><strong>sub-section</strong>, <strong>repeats</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>normalization</strong>: </p>
+<ul>
+<li>Updates the <code>archive.workflow2.inputs</code> list with links to the input samples.</li>
+<li>Updates the <code>archive.workflow2.outputs</code> list with links to the measurement results.</li>
+</ul>
+<h3 id="puresubstance">PureSubstance<a class="headerlink" href="#puresubstance" title="Permanent link">&para;</a></h3>
+<p><strong>description</strong>: A base section for any elemental, molecular, or single phase pure substance.</p>
+<p><strong>inherits from</strong>: <a href="#system"><code>System</code></a></p>
+<p><strong>links</strong>: <a href="http://purl.obolibrary.org/obo/CHEBI_23367">http://purl.obolibrary.org/obo/CHEBI_23367</a></p>
+<p><strong>properties</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td><code>str</code></td>
+<td>The name of the substance entry.</td>
+</tr>
+<tr>
+<td>lab_id</td>
+<td><code>str</code></td>
+<td>A human human readable substance ID that is at least unique for the lab.</td>
+</tr>
+<tr>
+<td>description</td>
+<td><code>str</code></td>
+<td>A field for adding additional information about the substance that is not captured by the other quantities and subsections.</td>
+</tr>
+<tr>
+<td>pure_substance</td>
+<td><a href="#puresubstancesection"><code>PureSubstanceSection</code></a></td>
+<td>Section with properties describing the substance.</br><strong>sub-section</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>normalization</strong>: </p>
+<p>This method will populate the results.material section and the elemental
+composition sub section using the molecular formula.</p>
+<h3 id="pubchempuresubstancesection">PubChemPureSubstanceSection<a class="headerlink" href="#pubchempuresubstancesection" title="Permanent link">&para;</a></h3>
+<p><strong>description</strong>: A section for pure substances existing as "compounds" in the PubChem database.</p>
+<p><strong>inherits from</strong>: <a href="#puresubstancesection"><code>PureSubstanceSection</code></a></p>
+<p><strong>properties</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>pub_chem_cid</td>
+<td><code>int</code></td>
+<td></td>
+</tr>
+<tr>
+<td>pub_chem_link</td>
+<td><code>str</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>normalization</strong>: </p>
+<p>This method will attempt to get data on the substance instance from the PubChem
+PUG REST API: https://pubchem.ncbi.nlm.nih.gov/docs/pug-rest
+If a PubChem CID is specified the details are retrieved directly.
+Otherwise a search query is made for the filled attributes in the following order:</p>
+<ol>
+<li><code>smile</code></li>
+<li><code>canonical_smile</code></li>
+<li><code>inchi_key</code></li>
+<li><code>iupac_name</code></li>
+<li><code>name</code></li>
+<li><code>molecular_formula</code></li>
+<li><code>cas_number</code></li>
+</ol>
+<h3 id="casexperimentalproperty">CASExperimentalProperty<a class="headerlink" href="#casexperimentalproperty" title="Permanent link">&para;</a></h3>
+<p><strong>description</strong>: A section for experimental properties retrieved from the CAS API.</p>
+<p><strong>inherits from</strong>: <code>nomad.datamodel.data.ArchiveSection</code></p>
+<p><strong>properties</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td><code>str</code></td>
+<td>CAS experimental property name.</td>
+</tr>
+<tr>
+<td>property</td>
+<td><code>str</code></td>
+<td>CAS experimental property.</td>
+</tr>
+<tr>
+<td>sourceNumber</td>
+<td><code>str</code></td>
+<td>CAS experimental property source.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="caspropertycitation">CASPropertyCitation<a class="headerlink" href="#caspropertycitation" title="Permanent link">&para;</a></h3>
+<p><strong>description</strong>: A section for citations of the experimental properties retrieved from the CAS API.</p>
+<p><strong>inherits from</strong>: <code>nomad.datamodel.data.ArchiveSection</code></p>
+<p><strong>properties</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>docUri</td>
+<td><code>str</code></td>
+<td>CAS property citation document uri.</td>
+</tr>
+<tr>
+<td>sourceNumber</td>
+<td><code>int</code></td>
+<td></td>
+</tr>
+<tr>
+<td>source</td>
+<td><code>str</code></td>
+<td>CAS property citation source.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="caspuresubstancesection">CASPureSubstanceSection<a class="headerlink" href="#caspuresubstancesection" title="Permanent link">&para;</a></h3>
+<p><strong>description</strong>: A base section for any <code>PureSubstance</code> with a CAS number.</p>
+<p><strong>inherits from</strong>: <a href="#puresubstancesection"><code>PureSubstanceSection</code></a></p>
+<p><strong>properties</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cas_uri</td>
+<td><code>str</code></td>
+<td>CAS uri</td>
+</tr>
+<tr>
+<td>cas_number</td>
+<td><code>str</code></td>
+<td>CAS number.</td>
+</tr>
+<tr>
+<td>cas_name</td>
+<td><code>str</code></td>
+<td>CAS name.</td>
+</tr>
+<tr>
+<td>image</td>
+<td><code>str</code></td>
+<td>CAS image.</td>
+</tr>
+<tr>
+<td>cas_synonyms</td>
+<td><code>str</code></td>
+<td>CAS synonyms.</br><strong>shape</strong>=<code>['*']</code></td>
+</tr>
+<tr>
+<td>cas_experimental_properties</td>
+<td><a href="#casexperimentalproperty"><code>CASExperimentalProperty</code></a></td>
+<td><strong>sub-section</strong>, <strong>repeats</strong></td>
+</tr>
+<tr>
+<td>cas_property_citations</td>
+<td><a href="#caspropertycitation"><code>CASPropertyCitation</code></a></td>
+<td><strong>sub-section</strong>, <strong>repeats</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>normalization</strong>: </p>
+<p>This method will attempt to get data on the pure substance instance from the CAS
+API: https://commonchemistry.cas.org/api-overview
+If a CAS number is specified the details are retrieved directly.
+Otherwise a search query is made for the filled attributes in the following order:</p>
+<ol>
+<li><code>cas_name</code></li>
+<li><code>inchi</code></li>
+<li><code>inchi_key</code></li>
+<li><code>smile</code></li>
+<li><code>canonical_smile</code></li>
+<li><code>name</code></li>
+</ol>
+<h3 id="readableidentifiers">ReadableIdentifiers<a class="headerlink" href="#readableidentifiers" title="Permanent link">&para;</a></h3>
+<p><strong>description</strong>: A base section that can be used to generate readable IDs. If the <code>owner</code>, <code>short_name</code>, <code>institute</code>, and <code>datetime</code>
+quantities are provided, the lab_id will be automatically created as a combination
+of these four quantities.</p>
+<p><strong>inherits from</strong>: <code>nomad.datamodel.data.ArchiveSection</code></p>
+<p><strong>properties</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>institute</td>
+<td><code>str</code></td>
+<td>Alias/short name of the home institute of the owner, i.e. <em>HZB</em>.</td>
+</tr>
+<tr>
+<td>owner</td>
+<td><code>str</code></td>
+<td>Alias for the owner of the identified thing. This should be unique within the institute.</td>
+</tr>
+<tr>
+<td>datetime</td>
+<td><code>nomad.metainfo.data_type.Datetime</code></td>
+<td>A datetime associated with the identified thing. In case of an <code>Activity</code>, this should be the starting time and, in case of an <code>Entity</code>, the creation time.</td>
+</tr>
+<tr>
+<td>short_name</td>
+<td><code>str</code></td>
+<td>A short name of the the identified thing (e.g. the identifier scribed on the sample, the process number, or machine name), e.g. 4001-8, YAG-2-34. This is to be managed and decided internally by the labs, although we recommend to avoid the following characters in it: "_", "/", "\" and ".".</td>
+</tr>
+<tr>
+<td>lab_id</td>
+<td><code>str</code></td>
+<td>Full readable id. Ideally a human readable id convention, which is simple, understandable and still have chances of becoming unique. If the <code>owner</code>, <code>short_name</code>, <code>ìnstitute</code>, and <code>datetime</code> are provided, this will be formed automatically by joining these components by an underscore (_). Spaces in any of the individual components will be replaced with hyphens (-). An example would be hzb_oah_20200602_4001-08.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>normalization</strong>: </p>
+<p>If owner is not filled the field will be filled by the first two letters of
+the first name joined with the first two letters of the last name of the author.
+If the institute is not filled a institute abreviations will be constructed from
+the author's affiliation.</p>
+<p>If no datetime is filled, the datetime will be taken from the <code>datetime</code>
+property of the parent, if it exists, otherwise the current date and time will be
+used.</p>
+<p>If no short name is filled, the name will be taken from the parent name, if it
+exists, otherwise it will be taken from the archive metadata entry name, if it
+exists, and finally if no other options are available it will use the name of the
+mainfile.</p>
+<h3 id="publicationreference">PublicationReference<a class="headerlink" href="#publicationreference" title="Permanent link">&para;</a></h3>
+<p><strong>description</strong>: A base section that can be used for references.</p>
+<p><strong>inherits from</strong>: <code>nomad.datamodel.data.ArchiveSection</code></p>
+<p><strong>properties</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DOI_number</td>
+<td><code>str</code></td>
+<td>The DOI number referring to the published paper or dataset where the data can be found. Examples: 10.1021/jp5126624 10.1016/j.electacta.2017.06.032</td>
+</tr>
+<tr>
+<td>publication_authors</td>
+<td><code>str</code></td>
+<td>The authors of the publication. If several authors, end with et al. If the DOI number is given correctly, this will be extracted automatically from www.crossref.org</br><strong>shape</strong>=<code>['*']</code></td>
+</tr>
+<tr>
+<td>publication_date</td>
+<td><code>nomad.metainfo.data_type.Datetime</code></td>
+<td>Publication date. If the DOI number is given correctly, this will be extracted automatically from www.crossref.org</td>
+</tr>
+<tr>
+<td>journal</td>
+<td><code>str</code></td>
+<td>Name of the journal where the data is published. If the DOI number is given correctly, this will be extracted automatically from www.crossref.org</td>
+</tr>
+<tr>
+<td>publication_title</td>
+<td><code>str</code></td>
+<td>Title of the publication. If the DOI number is given correctly, this will be extracted automatically from www.crossref.org</td>
+</tr>
+</tbody>
+</table>
+<p><strong>normalization</strong>: </p>
+<ul>
+<li>If a DOI number is provided, retrieves publication details from the CrossRef API.</li>
+<li>Populates the <code>publication_authors</code>, <code>journal</code>, <code>publication_title</code>, and <code>publication_date</code> fields based on the CrossRef response.</li>
+<li>Ensures the DOI number has the prefix <code>https://doi.org/</code>.</li>
+<li>Updates the archive's metadata references with the DOI number if it is not already present.</li>
+</ul>
+<h3 id="hdf5normalizer">HDF5Normalizer<a class="headerlink" href="#hdf5normalizer" title="Permanent link">&para;</a></h3>
+<p><strong>inherits from</strong>: <code>nomad.datamodel.data.ArchiveSection</code></p>
+<p><strong>normalization</strong> without further documentation</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="annotations.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Annotations">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Annotations
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="cli.html" class="md-footer__link md-footer__link--next" aria-label="Next: Command Line Interface (CLI)">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Command Line Interface (CLI)
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.path", "navigation.footer", "navigation.top", "content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+        <script src="../javascript.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>

@@ -1,0 +1,4333 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="The documentation for NOMAD v1.
+">
+      
+      
+        <meta name="author" content="The NOMAD Authors">
+      
+      
+      
+        <link rel="prev" href="config.html">
+      
+      
+        <link rel="next" href="basesections.html">
+      
+      
+      <link rel="icon" href="../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+    
+    
+      
+        <title>Annotations - Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.2afb09e1.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Titillium Web";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="#2A4CDF" data-md-color-accent="#008A67">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#annotations" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="https://nomad-lab.eu" title="Documentation" class="md-header__button md-logo" aria-label="Documentation" data-md-component="logo">
+      
+  <img src="../assets/nomad-logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Annotations
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/nomad-coe/nomad" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://nomad-lab.eu" title="Documentation" class="md-nav__button md-logo" aria-label="Documentation" data-md-component="logo">
+      
+  <img src="../assets/nomad-logo.png" alt="logo">
+
+    </a>
+    Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/nomad-coe/nomad" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Tutorial
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Tutorial
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/nomad_repo.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Navigating to NOMAD
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/upload_publish.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Uploading and publishing data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/explore.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exploring data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/access_api.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Access data via API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/custom.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Schemas and plugins
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/develop_plugin.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Developing a NOMAD plugin
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    How-to guides
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            How-to guides
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/overview.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Manage and find data
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Manage and find data
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/manage/upload.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Upload and publish data for supported formats
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/manage/eln.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Use ELNs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/manage/explore.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Explore data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/manage/north.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Use NORTH
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Programmatic use
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Programmatic use
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/programmatic/api.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Use the API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/programmatic/download.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Download data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/programmatic/publish_python.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Publish data using python
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/programmatic/pythonlib.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install nomad-lab
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/programmatic/archive_query.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Access processed data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/programmatic/json_transformer.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Transform data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    NOMAD Oasis
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            NOMAD Oasis
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/oasis/configure.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Configure an Oasis
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/oasis/deploy.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Deploy an Oasis
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/oasis/update.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Update an Oasis
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/oasis/admin.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Perform admin tasks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Plugins
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            Plugins
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/plugins/plugins.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction to plugins
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/plugins/apis.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Write an API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/plugins/apps.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Write an app
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/plugins/example_uploads.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Write an example upload
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/plugins/normalizers.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Write a normalizer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/plugins/parsers.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Write a parser
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/plugins/schema_packages.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Write a schema package
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Customization
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            Customization
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/customization/basics.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Write a YAML schema package
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/customization/elns.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Define ELNs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/customization/base_sections.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Use base sections
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/customization/tabular.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Parse tabular data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/customization/workflows.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Define workflows
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/customization/units.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Work with units
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/customization/hdf5.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Use HDF5 to handle large quantities
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Development
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            Development
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/develop/setup.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Get started
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/develop/code.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Navigate the code
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/develop/contrib.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contribute
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/develop/search.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Extend the search
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/develop/release.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Make a release
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Domain-specific examples
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Domain-specific examples
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/overview.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Computational data
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Computational data
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/computational_data/uploading.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quick start
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/computational_data/workflows.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Workflows
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/computational_data/metainfo.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MetaInfo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/computational_data/schema_plugins.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Schema plugins
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/computational_data/parser_plugins.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Parser plugins
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/computational_data/h5md_howto.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    H5MD schema - Howto
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/computational_data/h5md_expl.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    H5MD schema - Explanation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/computational_data/h5md_ref.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    H5MD - Reference
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Experimental data
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            Experimental data
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/experiment_data/em.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Electron microscopy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/experiment_data/mpes.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Photoemission spectroscopy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/experiment_data/xps.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    X-ray photoemission spectroscopy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/experiment_data/opt.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Optical spectroscopy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/experiment_data/apm.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Atom probe tomography
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/experiment_data/stm.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Scanning tunneling spectroscopy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/experiment_data/pynxtools.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    pynxtools
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Explanation
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Explanation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../explanation/basics.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    From files to data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../explanation/data.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data structure
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../explanation/processing.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Processing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../explanation/architecture.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Architecture
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../explanation/plugin_system.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Plugins
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../explanation/oasis.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Federation and Oasis
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Reference
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="config.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Configuration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Annotations
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="annotations.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Annotations
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#eln-annotations" class="md-nav__link">
+    <span class="md-ellipsis">
+      ELN annotations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ELN annotations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sectionproperties" class="md-nav__link">
+    <span class="md-ellipsis">
+      SectionProperties
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      Filter
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#browser" class="md-nav__link">
+    <span class="md-ellipsis">
+      Browser
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#display-annotations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Display annotations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Display annotations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#display-annotation-for-quantities" class="md-nav__link">
+    <span class="md-ellipsis">
+      Display annotation for quantities
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#display-annotation-for-sections" class="md-nav__link">
+    <span class="md-ellipsis">
+      Display annotation for sections
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#label_quantity" class="md-nav__link">
+    <span class="md-ellipsis">
+      label_quantity
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#schema-annotation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Schema annotation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tabular-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tabular data
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tabular data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tabular" class="md-nav__link">
+    <span class="md-ellipsis">
+      tabular
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabular_parser" class="md-nav__link">
+    <span class="md-ellipsis">
+      tabular_parser
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabularmappingoptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      TabularMappingOptions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabularparsingoptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      TabularParsingOptions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#available-combinations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Available Combinations
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#plot" class="md-nav__link">
+    <span class="md-ellipsis">
+      Plot
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Plot">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#plotlygraphobjectannotation" class="md-nav__link">
+    <span class="md-ellipsis">
+      PlotlyGraphObjectAnnotation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plotlyexpressannotation" class="md-nav__link">
+    <span class="md-ellipsis">
+      PlotlyExpressAnnotation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plotlyexpresstraceannotation" class="md-nav__link">
+    <span class="md-ellipsis">
+      PlotlyExpressTraceAnnotation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plotlysubplotsannotation" class="md-nav__link">
+    <span class="md-ellipsis">
+      PlotlySubplotsAnnotation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plot-annotations-in-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      plot annotations in python
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plotannotation-deprecated" class="md-nav__link">
+    <span class="md-ellipsis">
+      PlotAnnotation (Deprecated)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#h5web" class="md-nav__link">
+    <span class="md-ellipsis">
+      H5Web
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="H5Web">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#h5webannotation" class="md-nav__link">
+    <span class="md-ellipsis">
+      H5WebAnnotation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="basesections.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Base Sections
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="cli.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Command Line Interface (CLI)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="plugins.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Plugins
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="parsers.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Supported parsers
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="code_guidelines.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code guidelines
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="glossary.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Glossary
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    List of NOMAD tutorials
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#eln-annotations" class="md-nav__link">
+    <span class="md-ellipsis">
+      ELN annotations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ELN annotations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sectionproperties" class="md-nav__link">
+    <span class="md-ellipsis">
+      SectionProperties
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#filter" class="md-nav__link">
+    <span class="md-ellipsis">
+      Filter
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#browser" class="md-nav__link">
+    <span class="md-ellipsis">
+      Browser
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#display-annotations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Display annotations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Display annotations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#display-annotation-for-quantities" class="md-nav__link">
+    <span class="md-ellipsis">
+      Display annotation for quantities
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#display-annotation-for-sections" class="md-nav__link">
+    <span class="md-ellipsis">
+      Display annotation for sections
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#label_quantity" class="md-nav__link">
+    <span class="md-ellipsis">
+      label_quantity
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#schema-annotation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Schema annotation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tabular-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tabular data
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tabular data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tabular" class="md-nav__link">
+    <span class="md-ellipsis">
+      tabular
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabular_parser" class="md-nav__link">
+    <span class="md-ellipsis">
+      tabular_parser
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabularmappingoptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      TabularMappingOptions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tabularparsingoptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      TabularParsingOptions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#available-combinations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Available Combinations
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#plot" class="md-nav__link">
+    <span class="md-ellipsis">
+      Plot
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Plot">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#plotlygraphobjectannotation" class="md-nav__link">
+    <span class="md-ellipsis">
+      PlotlyGraphObjectAnnotation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plotlyexpressannotation" class="md-nav__link">
+    <span class="md-ellipsis">
+      PlotlyExpressAnnotation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plotlyexpresstraceannotation" class="md-nav__link">
+    <span class="md-ellipsis">
+      PlotlyExpressTraceAnnotation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plotlysubplotsannotation" class="md-nav__link">
+    <span class="md-ellipsis">
+      PlotlySubplotsAnnotation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plot-annotations-in-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      plot annotations in python
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plotannotation-deprecated" class="md-nav__link">
+    <span class="md-ellipsis">
+      PlotAnnotation (Deprecated)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#h5web" class="md-nav__link">
+    <span class="md-ellipsis">
+      H5Web
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="H5Web">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#h5webannotation" class="md-nav__link">
+    <span class="md-ellipsis">
+      H5WebAnnotation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="annotations">Annotations<a class="headerlink" href="#annotations" title="Permanent link">&para;</a></h1>
+<p>Definitions in a schema can have annotations. These annotations provide additional information that NOMAD can use to alter its behavior around these definitions. Annotations are named blocks of key-value pairs:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">definitions</span><span class="p">:</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">sections</span><span class="p">:</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nt">MyAnnotatedSection</span><span class="p">:</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">      </span><span class="nt">m_annotations</span><span class="p">:</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">        </span><span class="nt">annotation_name</span><span class="p">:</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">          </span><span class="nt">key1</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">          </span><span class="nt">key2</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">value</span>
+</code></pre></div>
+<p>Many annotations control the representation of data in the GUI. This can be for plots or data entry/editing capabilities.</p>
+<h2 id="eln-annotations">ELN annotations<a class="headerlink" href="#eln-annotations" title="Permanent link">&para;</a></h2>
+<p>These annotations control how data can be entered and edited.
+Use the key <code>eln</code> to add this annotations. For example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Sample</span><span class="p">(</span><span class="n">EntryData</span><span class="p">):</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="n">sample_id</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">a_eln</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="s1">&#39;StringEditQuantity&#39;</span><span class="p">))</span><span class="err">`</span><span class="p">)</span>
+</code></pre></div>
+<p>or in YAML schemas:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">Sample</span><span class="p">:</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">quantities</span><span class="p">:</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">sample_id</span><span class="p">:</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">      </span><span class="nt">m_annotations</span><span class="p">:</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">        </span><span class="nt">eln</span><span class="p">:</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">          </span><span class="nt">component</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">StringEditQuantity</span>
+</code></pre></div></p>
+<p>An <code>eln</code> annotation can be added to <em>section</em> and <em>quantity</em> definitions to different
+effects. In both cases, it controls how sections and quantities are represented in the GUI
+with different parameters; see below.</p>
+<p>The UI gives an overview about all ELN edit annotations and components
+<a href="https://nomad-lab.eu/prod/v1/staging/gui/dev/editQuantity">here</a>.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>component</td>
+<td><code>str</code></td>
+<td>The form field component that is used to make the annotated quantity editable. If no component is given, the quantity won't be editable. This can be used on quantities only.<br/>The supported values are:<br/><code>StringEditQuantity</code>: For editing simple short string values.<br/> <code>URLEditQuantity</code>: For editing strings that are validated to be URLs.<br/> <code>EnumEditQuantity</code>: For Editing enum values. Uses a dropdown list with enum values. This component may be used for short enumerates.<br/> <code>RadioEnumEditQuantity</code>: For Editing enum values. Uses radio buttons.<br/> <code>AutocompleteEditQuantity</code>: For editing enum values. Uses an autocomplete form with dropdown list. This component may be used for longer enumerates.<br/> <code>FileEditQuantity</code>: For editing a reference to a file. Will allow to choose a file or upload a file.<br/> <code>BoolEditQuantity</code>: For editing boolean choices.<br/> <code>NumberEditQuantity</code>: For editing numbers with our without unit.<br/> <code>SliderEditQuantity</code>: For editing numbers with a horizontal slider widget.<br/> <code>DateTimeEditQuantity</code>: For editing datetimes.<br/> <code>RichTextEditQuantity</code>: For editing long styled text with a rich text editor.<br/> <code>ReferenceEditQuantity</code>: For editing references to other sections.<br/> <code>UserEditQuantity</code>: For entering user information. Lets you choose a nomad user or enter information manually.<br/> <code>AuthorEditQuantity</code>: For entering author information manually.</br><em>options:</em><br/> - <code>StringEditQuantity</code><br/> - <code>URLEditQuantity</code><br/> - <code>EnumEditQuantity</code><br/> - <code>RadioEnumEditQuantity</code><br/> - <code>AutocompleteEditQuantity</code><br/> - <code>FileEditQuantity</code><br/> - <code>BoolEditQuantity</code><br/> - <code>NumberEditQuantity</code><br/> - <code>SliderEditQuantity</code><br/> - <code>DateTimeEditQuantity</code><br/> - <code>DateEditQuantity</code><br/> - <code>TimeEditQuantity</code><br/> - <code>RichTextEditQuantity</code><br/> - <code>ReferenceEditQuantity</code><br/> - <code>UserEditQuantity</code><br/> - <code>AuthorEditQuantity</code><br/> - <code>QueryEditQuantity</code><br/> - <code>ActionEditQuantity</code><br/></td>
+</tr>
+<tr>
+<td>label</td>
+<td><code>str</code></td>
+<td>[Deprecated] ELN label annotation has been deprecated and it is advised to utilize display annotation instead. Custom label for the quantity shown on the form field. It is recommended to adhere to the convention of using lowercase letters for the label, except for abbreviations which could be capitalized.</td>
+</tr>
+<tr>
+<td>props</td>
+<td><code>dict[str, Any]</code></td>
+<td>A dictionary with additional props that are passed to the edit component.</td>
+</tr>
+<tr>
+<td>default</td>
+<td><code>Any</code></td>
+<td>Prefills any set form field component with the given value. This is different from the quantities <code>default</code> property. The quantities default is not stored in the data; the default value is assumed if no other value is given. The ELN form field default value will be stored, even if not changed.</td>
+</tr>
+<tr>
+<td>defaultDisplayUnit</td>
+<td><code>str</code></td>
+<td>This attribute is deprecated, use the <code>unit</code> attribute of <code>display</code> annotation instead. Allows to define a default unit to initialize a <code>NumberEditQuantity</code> with. The unit has to be compatible with the unit of the annotation quantity and the annotated quantity must have a unit. Only applies to quantities and with <code>component=NumberEditQuantity</code>.</br><strong>deprecated</strong></td>
+</tr>
+<tr>
+<td>minValue</td>
+<td><code>int | float</code></td>
+<td>Allows to specify a minimum value for quantity annotations with number type. Will show an error, if outside numbers are entered. Only works on quantities and in conjunction with <code>component=NumberEditQuantity</code>.</td>
+</tr>
+<tr>
+<td>maxValue</td>
+<td><code>int | float</code></td>
+<td>Allows to specify a maximum value for quantity annotations with number type. Will show an error, if outside numbers are entered. Only works on quantities and in conjunction with <code>component=NumberEditQuantity</code>.</td>
+</tr>
+<tr>
+<td>showSectionLabel</td>
+<td><code>bool</code></td>
+<td>To customize the ReferenceEditQuantity behaviour. If true the section label will be shown instead of referenced file name and the path to the section.</td>
+</tr>
+<tr>
+<td>hide</td>
+<td><code>list[str]</code></td>
+<td>This attribute is deprecated. Use <code>visible</code> attribute of <code>display</code> annotation instead. Allows you to hide certain quantities from a section editor. Give a list of quantity names. Quantities must exist in the section that this annotation is added to. Can only be used in section annotations.</br><strong>deprecated</strong></td>
+</tr>
+<tr>
+<td>overview</td>
+<td><code>bool</code></td>
+<td>Shows the annotation section on the entry's overview page. Can only be used on section annotations.</td>
+</tr>
+<tr>
+<td>lane_width</td>
+<td><code>str | int</code></td>
+<td>Value to overwrite the css width of the lane used to render the annotation section and its editor.</td>
+</tr>
+<tr>
+<td>properties</td>
+<td><code>SectionProperties</code></td>
+<td>The value to customize the quantities and sub sections of the annotation section. The supported keys: <code>visible</code>: To determine the visible quantities and sub sections by their names<br/> <code>editable</code>: To render things visible but not editable, e.g. in inheritance situations<br/> <code>order</code>: # To order things, properties listed in that order first, then the rest<br/></td>
+</tr>
+</tbody>
+</table>
+<h3 id="sectionproperties">SectionProperties<a class="headerlink" href="#sectionproperties" title="Permanent link">&para;</a></h3>
+<p>The display settings for quantities and subsections. (Deprecated)</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>visible</td>
+<td><code>Filter | None</code></td>
+<td>Defines the visible quantities and subsections. (Deprecated)</br><em>default:</em> <code>1</code></td>
+</tr>
+<tr>
+<td>editable</td>
+<td><code>Filter | None</code></td>
+<td>Defines the editable quantities and subsections. (Deprecated)</td>
+</tr>
+<tr>
+<td>order</td>
+<td><code>list[str] | None</code></td>
+<td>To customize the order of the quantities and subsections. (Deprecated)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="filter">Filter<a class="headerlink" href="#filter" title="Permanent link">&para;</a></h3>
+<p>A filter defined by an include list or and exclude list of the quantities or subsections.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>include</td>
+<td><code>list[str] | None</code></td>
+<td>The list of quantity or subsection names to be included.</td>
+</tr>
+<tr>
+<td>exclude</td>
+<td><code>list[str] | None</code></td>
+<td>The list of quantity or subsection names to be excluded.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="browser">Browser<a class="headerlink" href="#browser" title="Permanent link">&para;</a></h2>
+<p>The <code>browser</code> annotation allows to specify if the processed data browser needs to
+display a quantity differently. It can be applied to quantities. For example</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>    <span class="k">class</span><span class="w"> </span><span class="nc">Experiment</span><span class="p">(</span><span class="n">EntryData</span><span class="p">):</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>        <span class="n">description</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">a_browser</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">render_value</span><span class="o">=</span><span class="s1">&#39;HtmlValue&#39;</span><span class="p">))</span>
+</code></pre></div>
+<p>or in yaml</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">Experiment</span><span class="p">:</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">quantities</span><span class="p">:</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nt">description</span><span class="p">:</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">      </span><span class="nt">m_annotations</span><span class="p">:</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">        </span><span class="nt">browser</span><span class="p">:</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">          </span><span class="nt">render_value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">HtmlValue</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>adaptor</td>
+<td><code>str</code></td>
+<td>Allows to change the <em>Adaptor</em> implementation that is used to render the lane for this quantity. Possible values are:<br/><code>RawFileAdaptor</code>: An adopter that is used to show files, including all file actions, like file preview.</br><em>options:</em><br/> - <code>RawFileAdaptor</code><br/></td>
+</tr>
+<tr>
+<td>render_value</td>
+<td><code>str</code></td>
+<td>Allows to change the <em>Component</em> used to render the value of the quantity. Possible values are:<br/><code>HtmlValue</code>: Renders a string as HTML.<br/> <code>JsonValue</code>: Renders a dict or list in a collapsable tree.</br><em>options:</em><br/> - <code>JsonValue</code><br/> - <code>HtmlValue</code><br/></td>
+</tr>
+</tbody>
+</table>
+<h2 id="display-annotations">Display annotations<a class="headerlink" href="#display-annotations" title="Permanent link">&para;</a></h2>
+<h3 id="display-annotation-for-quantities">Display annotation for quantities<a class="headerlink" href="#display-annotation-for-quantities" title="Permanent link">&para;</a></h3>
+<p>This annotations control how quantities are displayed in the GUI.  Use the
+key <code>display</code> to add this annotation. For example in Python:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Example</span><span class="p">(</span><span class="n">EntryData</span><span class="p">):</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="n">sample_id</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">a_display</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;visible&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
+</code></pre></div>
+<p>or in YAML:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">definitions</span><span class="p">:</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">Example</span><span class="p">:</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="nt">quantities</span><span class="p">:</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">      </span><span class="nt">sample_id</span><span class="p">:</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">        </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">        </span><span class="nt">m_annotations</span><span class="p">:</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">          </span><span class="nt">display</span><span class="p">:</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">            </span><span class="nt">visible</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+</code></pre></div></p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>visible</td>
+<td><code>Filter | None</code></td>
+<td>Defines the visible quantities and subsections.</br><em>default:</em> <code>1</code></td>
+</tr>
+<tr>
+<td>editable</td>
+<td><code>Filter | None</code></td>
+<td>Defines the editable quantities and subsections.</td>
+</tr>
+<tr>
+<td>unit</td>
+<td><code>str | None</code></td>
+<td>To determine the default display unit for quantity.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="display-annotation-for-sections">Display annotation for sections<a class="headerlink" href="#display-annotation-for-sections" title="Permanent link">&para;</a></h3>
+<p>This annotations control how sections are displayed in the GUI. Use the
+key <code>display</code> to add this annotation. For example in Python:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Example</span><span class="p">(</span><span class="n">MSection</span><span class="p">):</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="n">m_def</span> <span class="o">=</span> <span class="n">Section</span><span class="p">(</span><span class="n">a_display</span><span class="o">=</span><span class="p">{</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>        <span class="s1">&#39;visible&#39;</span><span class="p">:</span> <span class="kc">False</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>    <span class="p">})</span>
+</code></pre></div>
+<p>or in YAML:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nt">definitions</span><span class="p">:</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="nt">sections</span><span class="p">:</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="nt">Example</span><span class="p">:</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">      </span><span class="nt">m_annotations</span><span class="p">:</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">        </span><span class="nt">display</span><span class="p">:</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">          </span><span class="nt">visible</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+</code></pre></div></p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>visible</td>
+<td><code>Filter | None</code></td>
+<td>Defines the visible quantities and subsections.</br><em>default:</em> <code>1</code></td>
+</tr>
+<tr>
+<td>editable</td>
+<td><code>Filter | None</code></td>
+<td>Defines the editable quantities and subsections.</td>
+</tr>
+<tr>
+<td>order</td>
+<td><code>list[str] | None</code></td>
+<td>To customize the order of the quantities and subsections.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="label_quantity"><code>label_quantity</code><a class="headerlink" href="#label_quantity" title="Permanent link">&para;</a></h3>
+<p>This annotation goes in the section that we want to be filled with tabular data, not in the single quantities.
+It is used to give a name to the instances that might be created by the parser. If it is not provided, the name of the section itself will be used as name.
+Many times it is useful because, i. e., one might want to create a bundle of instances of, say, a "Substrate" class, each instance filename not being "Substrate_1", "Substrate_2", etc., but being named after a quantity contained in the class that is, for example, the specific ID of that sample.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nt">MySection</span><span class="p">:</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="nt">more</span><span class="p">:</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="nt">label_quantity</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my_quantity</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">  </span><span class="nt">quantities</span><span class="p">:</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">    </span><span class="nt">my_quantity</span><span class="p">:</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">np.float64</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">      </span><span class="nt">shape</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;*&quot;</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">      </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;my</span><span class="nv"> </span><span class="s">quantity</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">filled</span><span class="nv"> </span><span class="s">from</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">tabular</span><span class="nv"> </span><span class="s">data</span><span class="nv"> </span><span class="s">file&quot;</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="w">      </span><span class="nt">unit</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">K</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="w">      </span><span class="nt">m_annotations</span><span class="p">:</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="w">        </span><span class="nt">tabular</span><span class="p">:</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="w">          </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Sheet1/my</span><span class="nv"> </span><span class="s">header&quot;</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="w">        </span><span class="nt">plot</span><span class="p">:</span>
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="w">          </span><span class="nt">x</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">timestamp</span>
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="w">          </span><span class="nt">y</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./my_quantity</span>
+</code></pre></div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The quantity designated as <code>label_quantity</code> should not be an array but a integer, float or string,
+to be set as the name of a file. If an array quantity is chosen, the parser would fall back to
+the use of the section as name.</p>
+</div>
+<h2 id="schema-annotation">Schema annotation<a class="headerlink" href="#schema-annotation" title="Permanent link">&para;</a></h2>
+<p>Used to annotate Schemas to control how and if they are displayed in the GUI.</p>
+<p>You can attach this annotation to a schema class definition using the
+<code>m_def</code> attribute, for example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.datamodel.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">Schema</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.datamodel.metainfo.annotations</span><span class="w"> </span><span class="kn">import</span> <span class="n">SchemaAnnotation</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="k">class</span><span class="w"> </span><span class="nc">MySchema</span><span class="p">(</span><span class="n">Schema</span><span class="p">):</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>    <span class="n">m_def</span> <span class="o">=</span> <span class="n">Section</span><span class="p">(</span><span class="n">a_schema</span><span class="o">=</span><span class="n">SchemaAnnotation</span><span class="p">(</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>        <span class="n">label</span><span class="o">=</span><span class="s1">&#39;My Schema&#39;</span><span class="p">,</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>        <span class="n">enabled</span><span class="o">=</span><span class="kc">False</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>    <span class="p">))</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>label</td>
+<td><code>str</code></td>
+<td>Custom label to show for this schema in the GUI when instantiating new entries from it. If not set, the label set for the section will be used.</br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>enabled</td>
+<td><code>bool</code></td>
+<td>If set to False, the schema will not be available for instantiating entries in the GUI. Note that the schema can still be instantiated regularly with Python even it if is disabled in the GUI.</br><em>default:</em> <code>True</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="tabular-data">Tabular data<a class="headerlink" href="#tabular-data" title="Permanent link">&para;</a></h2>
+<h3 id="tabular"><code>tabular</code><a class="headerlink" href="#tabular" title="Permanent link">&para;</a></h3>
+<p>Allows to map a quantity to a row or a column of a spreadsheet data-file. Should only be used
+in conjunction with <code>tabular_parser</code>.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td><code>str</code></td>
+<td>The column name that should be mapped to the annotation quantity. Has to be the same string that is used in the header, i.e. first <code>.csv</code> line or first excel file <code>row</code>. For excel files with multiple sheets, the name can have the form <code>&lt;sheet name&gt;/&lt;column name&gt;</code>. Otherwise, only the first sheets is used. Has to be applied to the quantity that a column should be mapped to.</td>
+</tr>
+<tr>
+<td>unit</td>
+<td><code>str</code></td>
+<td>The unit of the value in the file. Has to be compatible with the annotated quantity's unit. Will be used to automatically convert the value. If this is not defined, the values will not be converted. Has to be applied to the quantity that a column should be mapped to.</td>
+</tr>
+</tbody>
+</table>
+<p>Each and every quantity to be filled with data from tabular data files should be annotated as the following example.
+A practical example is provided in <a href="../howto/customization/tabular.html#preparing-the-tabular-data-file">How To</a> section.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nt">my_quantity</span><span class="p">:</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">np.float64</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">  </span><span class="nt">shape</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&quot;*&quot;</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;my</span><span class="nv"> </span><span class="s">quantity</span><span class="nv"> </span><span class="s">to</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">filled</span><span class="nv"> </span><span class="s">from</span><span class="nv"> </span><span class="s">the</span><span class="nv"> </span><span class="s">tabular</span><span class="nv"> </span><span class="s">data</span><span class="nv"> </span><span class="s">file&quot;</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">  </span><span class="nt">unit</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">K</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">  </span><span class="nt">m_annotations</span><span class="p">:</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="w">    </span><span class="nt">tabular</span><span class="p">:</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">      </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Sheet1/my</span><span class="nv"> </span><span class="s">header&quot;</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="w">    </span><span class="nt">plot</span><span class="p">:</span>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="w">      </span><span class="nt">x</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">timestamp</span>
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="w">      </span><span class="nt">y</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./my_quantity</span>
+</code></pre></div>
+<h3 id="tabular_parser"><code>tabular_parser</code><a class="headerlink" href="#tabular_parser" title="Permanent link">&para;</a></h3>
+<p>One special quantity will be dedicated to host the tabular data file. In the following examples it is called <code>data_file</code>, it contains the <code>tabular_parser</code> annotation, as shown below.</p>
+<p>Instructs NOMAD to treat a string valued scalar quantity as a file path and
+interprets the contents of this file as tabular data. Supports both
+<code>.csv</code> and Excel files.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>parsing_options</td>
+<td><code>TabularParsingOptions</code></td>
+<td>Options on how to extract the data from csv/xlsx file. Under the hood, NOMAD uses pandas <code>Dataframe</code> to parse the data from tabular files. These are the available options that can be passed down to the parser.<br/>The supported values are:<br/><code>skiprows</code>: Number of rows to be skipped while reading the file.<br/> <code>sep</code>: The character used to separate cells (specific to csv files).<br/> <code>comment</code>: The character denoting the commented lines.<br/> <code>separator</code>: An alias for <code>sep</code>.<br/></br><em>default:</em> Complex object, default value not displayed.</td>
+</tr>
+<tr>
+<td>mapping_options</td>
+<td><code>list[TabularMappingOptions]</code></td>
+<td>A list of directives on how to map the extracted data from the csv/xlsx file to NOMAD. Each directive is a distinct directive, which allows for more modular definition of your tabular parser schema. If no item is provided, the entire schema is treated to be parsed under column mode.<br/>The supported values in each item of this list are:<br/><code>mapping_mode</code>: A <code>list</code> of paths to the repeating sub-sections where the tabular quantities are to be filled from     individual rows of the excel/csv file (i.e. in the row mode). Each path is a <code>/</code> separated list of     nested sub-sections. The targeted sub-sections, will be considered when mapping table rows to quantities.     Has to be used to annotate the quantity that holds the path to the <code>.csv</code> or excel file.<br/> <code>file_mode</code>: The character used to separate cells (specific to csv files).<br/> <code>sections</code>: The character denoting the commented lines.<br/></br><em>default:</em> <code>[]</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="tabularmappingoptions">TabularMappingOptions<a class="headerlink" href="#tabularmappingoptions" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mapping_mode</td>
+<td><code>str</code></td>
+<td>This controls the behaviour of mapping of the extracted data onto NOMAD schema.<br/>The supported values are:<br/><code>row</code>: A <code>list</code> of paths to the repeating sub-sections where the tabular quantities are to be filled from     individual rows of the excel/csv file (i.e. in the row mode). Each path is a <code>/</code> separated list of     nested sub-sections. The targeted sub-sections, will be considered when mapping table rows to quantities.     Has to be used to annotate the quantity that holds the path to the <code>.csv</code> or excel file.<br/> <code>column</code>: A <code>list</code> of paths to the sub-sections where the tabular quantities are to be filled from the     entire column of the excel/csv file (i.e. in the column mode). Each path is a <code>/</code>     separated list of nested sub-sections. The targeted sub-sections, will be     considered when mapping table columns to quantities. Has to be used to annotate the quantity that     holds the path to the <code>.csv</code> or excel file.<br/> <code>enrty</code>: A <code>list</code> of paths to the (sub)sections where the tabular quantities are to be filled from individual rows     of the excel/csv file, to create distinct entries. Each path is a     <code>/</code> separated list of nested sub-sections. The targeted (sub)sections, will be     considered when mapping table rows to quantities. The schema of the resultant entry follows the     (sub)section's schema. In order to parse the entire schema using entry mode, then set the     first item in this list to <code>root</code>.     Has to be used to annotate the quantity that     holds the path to the <code>.csv</code> or excel file.<br/></br><em>default:</em> <code>TabularMode.column</code></br><em>options:</em><br/> - <code>row</code><br/> - <code>column</code><br/></td>
+</tr>
+<tr>
+<td>file_mode</td>
+<td><code>str</code></td>
+<td>This controls the behaviour of the parser towards working physical files in file system.<br/>The supported values are:<br/><code>current_entry</code>: Processing the data into the same NOMAD entry.<br/> <code>single_new_entry</code>: Creating a new entry and processing the data into this new NOMAD entry.<br/> <code>multiple_new_entries</code>: Creating many new entries and processing the data into these new NOMAD entries.<br/></br><em>options:</em><br/> - <code>current_entry</code><br/> - <code>single_new_entry</code><br/> - <code>multiple_new_entries</code><br/></td>
+</tr>
+<tr>
+<td>sections</td>
+<td><code>list[str]</code></td>
+<td>A <code>list</code> of paths to the (sub)sections where the tabular quantities are to be filled from the data extracted from the tabular file.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="tabularparsingoptions">TabularParsingOptions<a class="headerlink" href="#tabularparsingoptions" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>skiprows</td>
+<td><code>list[int] | int</code></td>
+<td>Number of rows to skip</td>
+</tr>
+<tr>
+<td>sep</td>
+<td><code>str</code></td>
+<td>Character identifier of a separator</td>
+</tr>
+<tr>
+<td>comment</td>
+<td><code>str</code></td>
+<td>Character identifier of a commented line</td>
+</tr>
+<tr>
+<td>separator</td>
+<td><code>str</code></td>
+<td>Alias for <code>sep</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="available-combinations">Available Combinations<a class="headerlink" href="#available-combinations" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Tutorial ref.</th>
+<th><code>file_mode</code></th>
+<th><code>mapping_mode</code></th>
+<th><code>sections</code></th>
+<th>How to ref.</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>current_entry</code></td>
+<td><code>column</code></td>
+<td><code>root</code></td>
+<td><a href="../howto/customization/tabular.html#1-column-mode-current-entry-parse-to-root">HowTo</a></td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>current_entry</code></td>
+<td><code>column</code></td>
+<td>my path</td>
+<td><a href="../howto/customization/tabular.html#2-column-mode-current-entry-parse-to-my-path">HowTo</a></td>
+</tr>
+<tr>
+<td><span style="color:red">np1</span></td>
+<td><code>current_entry</code></td>
+<td><code>row</code></td>
+<td><code>root</code></td>
+<td><span style="color:red">Not possible</span></td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>current_entry</code></td>
+<td><code>row</code></td>
+<td>my path</td>
+<td><a href="../howto/customization/tabular.html#3-row-mode-current-entry-parse-to-my-path">HowTo</a></td>
+</tr>
+<tr>
+<td><span style="color:red">np2</span></td>
+<td><code>single_new_entry</code></td>
+<td><code>column</code></td>
+<td><code>root</code></td>
+<td><span style="color:red">Not possible</span></td>
+</tr>
+<tr>
+<td>4</td>
+<td><code>single_new_entry</code></td>
+<td><code>column</code></td>
+<td>my path</td>
+<td><a href="../howto/customization/tabular.html#4-column-mode-single-new-entry-parse-to-my-path">HowTo</a></td>
+</tr>
+<tr>
+<td><span style="color:red">np3</span></td>
+<td><code>single_new_entry</code></td>
+<td><code>row</code></td>
+<td><code>root</code></td>
+<td><span style="color:red">Not possible</span></td>
+</tr>
+<tr>
+<td>5</td>
+<td><code>single_new_entry</code></td>
+<td><code>row</code></td>
+<td>my path</td>
+<td><a href="../howto/customization/tabular.html#5-row-mode-single-new-entry-parse-to-my-path">HowTo</a></td>
+</tr>
+<tr>
+<td><span style="color:red">np4</span></td>
+<td><code>multiple_new_entries</code></td>
+<td><code>column</code></td>
+<td><code>root</code></td>
+<td><span style="color:red">Not possible</span></td>
+</tr>
+<tr>
+<td><span style="color:red">np5</span></td>
+<td><code>multiple_new_entries</code></td>
+<td><code>column</code></td>
+<td>my path</td>
+<td><span style="color:red">Not possible</span></td>
+</tr>
+<tr>
+<td>6</td>
+<td><code>multiple_new_entries</code></td>
+<td><code>row</code></td>
+<td><code>root</code></td>
+<td><a href="../howto/customization/tabular.html#6-row-mode-multiple-new-entries-parse-to-root">HowTo</a></td>
+</tr>
+<tr>
+<td>7</td>
+<td><code>multiple_new_entries</code></td>
+<td><code>row</code></td>
+<td>my path</td>
+<td><a href="../howto/customization/tabular.html#7-row-mode-multiple-new-entries-parse-to-my-path">HowTo</a></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nt">data_file</span><span class="p">:</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">  </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;the</span><span class="nv"> </span><span class="s">tabular</span><span class="nv"> </span><span class="s">data</span><span class="nv"> </span><span class="s">file</span><span class="nv"> </span><span class="s">containing</span><span class="nv"> </span><span class="s">data&quot;</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">  </span><span class="nt">m_annotations</span><span class="p">:</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">    </span><span class="nt">tabular_parser</span><span class="p">:</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">      </span><span class="nt">parsing_options</span><span class="p">:</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">        </span><span class="nt">comment</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;#&quot;</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">      </span><span class="nt">mapping_options</span><span class="p">:</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">mapping_mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">column</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="w">          </span><span class="nt">file_mode</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">single_new_entry</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="w">          </span><span class="nt">sections</span><span class="p">:</span>
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my_section/my_quantity</span>
+</code></pre></div>
+<!-- The available options are:
+
+|**name**|**type**|**description**|
+|---|---|---|
+|`parsing_options`|group of options|some pandas `Dataframe` options.|
+|`mapping_options`|list of groups of options|they allow to choose among all the possible modes of parsing data from the spreadsheet file to the NOMAD archive file. Each group of options can be repeated in a list. | -->
+
+<h2 id="plot">Plot<a class="headerlink" href="#plot" title="Permanent link">&para;</a></h2>
+<p>The PlotSection base section serves as an additional functionality to your sections.
+This base section is designed to simplify the process of creating various types of
+plots, making it easy to use Plotly Express, Plotly Subplot, and the general Plotly graph objects.</p>
+<p>Features:</p>
+<ul>
+<li>Plotly Express: Create simple and quick plots with a high-level, expressive API.</li>
+<li>Plotly Subplot: Organize multiple plots into subplots for more complex visualizations.</li>
+<li>General Plotly Graph Objects: Fine-tune your plots by working directly with Plotly's graph objects.</li>
+</ul>
+<p>Usage:</p>
+<ul>
+<li>Inherit from this base section to leverage its plot functionality.</li>
+<li>Customize your plots using the annotations plotly-express, plotly-subplots, or/and plotly-graph-object.</li>
+</ul>
+<p>The PlotSection class makes it possible to define plots that are shown alongside your data.
+Underneath, we use the Plotly Open Source Graphing Libraries to control the creation of the plots,
+and you can find many useful examples in their documentation.</p>
+<p>In Python schemas, the PlotSection class gives you full freedom to define plots programmatically.
+For example, you could use plotly.express and plotly.graph_objs to define plots like this:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.datamodel.metainfo.plot</span><span class="w"> </span><span class="kn">import</span> <span class="n">PlotSection</span><span class="p">,</span> <span class="n">PlotlyFigure</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.datamodel.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">EntryData</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">plotly.express</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">px</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">plotly.graph_objs</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">go</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="kn">from</span><span class="w"> </span><span class="nn">plotly.subplots</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_subplots</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="k">class</span><span class="w"> </span><span class="nc">CustomSection</span><span class="p">(</span><span class="n">PlotSection</span><span class="p">,</span> <span class="n">EntryData</span><span class="p">):</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>    <span class="n">m_def</span> <span class="o">=</span> <span class="n">Section</span><span class="p">()</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>    <span class="n">time</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;*&#39;</span><span class="p">],</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="n">a_eln</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="s1">&#39;NumberEditQuantity&#39;</span><span class="p">))</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>    <span class="n">substrate_temperature</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;*&#39;</span><span class="p">],</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;K&#39;</span><span class="p">,</span> <span class="n">a_eln</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="s1">&#39;NumberEditQuantity&#39;</span><span class="p">))</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>    <span class="n">chamber_pressure</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;*&#39;</span><span class="p">],</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;Pa&#39;</span><span class="p">,</span> <span class="n">a_eln</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="s1">&#39;NumberEditQuantity&#39;</span><span class="p">))</span>
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">normalize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">archive</span><span class="p">,</span> <span class="n">logger</span><span class="p">):</span>
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>        <span class="nb">super</span><span class="p">(</span><span class="n">CustomSection</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="n">archive</span><span class="p">,</span> <span class="n">logger</span><span class="p">)</span>
+<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>
+<a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a>        <span class="n">first_line</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">substrate_temperature</span><span class="p">)</span>
+<a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a>        <span class="n">second_line</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">chamber_pressure</span><span class="p">)</span>
+<a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a>        <span class="n">figure1</span> <span class="o">=</span> <span class="n">make_subplots</span><span class="p">(</span><span class="n">rows</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">cols</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">shared_yaxes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a>        <span class="n">figure1</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">first_line</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a>        <span class="n">figure1</span><span class="o">.</span><span class="n">add_trace</span><span class="p">(</span><span class="n">second_line</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a>        <span class="n">figure1</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">height</span><span class="o">=</span><span class="mi">400</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">716</span><span class="p">,</span> <span class="n">title_text</span><span class="o">=</span><span class="s2">&quot;Creating Subplots in Plotly&quot;</span><span class="p">)</span>
+<a id="__codelineno-13-22" name="__codelineno-13-22" href="#__codelineno-13-22"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">figures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">PlotlyFigure</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;figure 1&#39;</span><span class="p">,</span> <span class="n">figure</span><span class="o">=</span><span class="n">figure1</span><span class="o">.</span><span class="n">to_plotly_json</span><span class="p">()))</span>
+<a id="__codelineno-13-23" name="__codelineno-13-23" href="#__codelineno-13-23"></a>
+<a id="__codelineno-13-24" name="__codelineno-13-24" href="#__codelineno-13-24"></a>        <span class="n">figure2</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">substrate_temperature</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">chamber_pressure</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">chamber_pressure</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Chamber as a function of Temperature&quot;</span><span class="p">)</span>
+<a id="__codelineno-13-25" name="__codelineno-13-25" href="#__codelineno-13-25"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">figures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">PlotlyFigure</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;figure 2&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">figure</span><span class="o">=</span><span class="n">figure2</span><span class="o">.</span><span class="n">to_plotly_json</span><span class="p">()))</span>
+<a id="__codelineno-13-26" name="__codelineno-13-26" href="#__codelineno-13-26"></a>
+<a id="__codelineno-13-27" name="__codelineno-13-27" href="#__codelineno-13-27"></a>        <span class="n">heatmap_data</span> <span class="o">=</span> <span class="p">[[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">16</span><span class="p">],</span>
+<a id="__codelineno-13-28" name="__codelineno-13-28" href="#__codelineno-13-28"></a>             <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">17</span><span class="p">],</span>
+<a id="__codelineno-13-29" name="__codelineno-13-29" href="#__codelineno-13-29"></a>             <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">18</span><span class="p">],</span>
+<a id="__codelineno-13-30" name="__codelineno-13-30" href="#__codelineno-13-30"></a>             <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">19</span><span class="p">],</span>
+<a id="__codelineno-13-31" name="__codelineno-13-31" href="#__codelineno-13-31"></a>             <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">20</span><span class="p">],</span>
+<a id="__codelineno-13-32" name="__codelineno-13-32" href="#__codelineno-13-32"></a>             <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">21</span><span class="p">],</span>
+<a id="__codelineno-13-33" name="__codelineno-13-33" href="#__codelineno-13-33"></a>             <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">23</span><span class="p">,</span> <span class="mi">22</span><span class="p">]]</span>
+<a id="__codelineno-13-34" name="__codelineno-13-34" href="#__codelineno-13-34"></a>
+<a id="__codelineno-13-35" name="__codelineno-13-35" href="#__codelineno-13-35"></a>        <span class="n">heatmap</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Heatmap</span><span class="p">(</span><span class="n">z</span><span class="o">=</span><span class="n">heatmap_data</span><span class="p">,</span> <span class="n">showscale</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">connectgaps</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">zsmooth</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
+<a id="__codelineno-13-36" name="__codelineno-13-36" href="#__codelineno-13-36"></a>        <span class="n">figure3</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">heatmap</span><span class="p">)</span>
+<a id="__codelineno-13-37" name="__codelineno-13-37" href="#__codelineno-13-37"></a>        <span class="n">figure_json</span> <span class="o">=</span> <span class="n">figure3</span><span class="o">.</span><span class="n">to_plotly_json</span><span class="p">()</span>
+<a id="__codelineno-13-38" name="__codelineno-13-38" href="#__codelineno-13-38"></a>        <span class="n">figure_json</span><span class="p">[</span><span class="s1">&#39;config&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;staticPlot&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
+<a id="__codelineno-13-39" name="__codelineno-13-39" href="#__codelineno-13-39"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">figures</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">PlotlyFigure</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;figure 3&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">figure</span><span class="o">=</span><span class="n">figure_json</span><span class="p">)</span>
+</code></pre></div>
+<p>To customize the plot configuration in python one can add the config to the generated json by to_plotly_json().</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>figure_json[&#39;config&#39;] = {&#39;staticPlot&#39;: True}
+</code></pre></div>
+<p>In YAML schemas, plots can be defined by using the PlotSection as a base class,
+and additionally utilizing different flavours of plot annotations. The different annotation options are described below.</p>
+<h3 id="plotlygraphobjectannotation">PlotlyGraphObjectAnnotation<a class="headerlink" href="#plotlygraphobjectannotation" title="Permanent link">&para;</a></h3>
+<p>Allows to plot figures using plotly graph object.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="w">    </span><span class="nt">Example</span><span class="p">:</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">      </span><span class="nt">base_sections</span><span class="p">:</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;nomad.datamodel.metainfo.plot.PlotSection&#39;</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">      </span><span class="nt">m_annotations</span><span class="p">:</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="w">        </span><span class="nt">plotly_graph_object</span><span class="p">:</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">data</span><span class="p">:</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="w">            </span><span class="nt">x</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;#xArr&#39;</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="w">            </span><span class="nt">y</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;#xArr&#39;</span>
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="w">          </span><span class="nt">layout</span><span class="p">:</span>
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="w">            </span><span class="nt">title</span><span class="p">:</span>
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a><span class="w">              </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;Plotly</span><span class="nv"> </span><span class="s">Graph</span><span class="nv"> </span><span class="s">Object&#39;</span>
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a><span class="w">          </span><span class="nt">label</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;Plotly</span><span class="nv"> </span><span class="s">Graph</span><span class="nv"> </span><span class="s">Object&#39;</span>
+<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a><span class="w">          </span><span class="nt">index</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a><span class="w">          </span><span class="nt">open</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>label</td>
+<td><code>str</code></td>
+<td>Figure label</td>
+</tr>
+<tr>
+<td>data</td>
+<td><code>dict</code></td>
+<td>Plotly data</td>
+</tr>
+<tr>
+<td>layout</td>
+<td><code>dict</code></td>
+<td>Plotly layout</td>
+</tr>
+<tr>
+<td>config</td>
+<td><code>dict</code></td>
+<td>Plotly config</td>
+</tr>
+</tbody>
+</table>
+<h3 id="plotlyexpressannotation">PlotlyExpressAnnotation<a class="headerlink" href="#plotlyexpressannotation" title="Permanent link">&para;</a></h3>
+<p>Allows to plot multi trace figures using plotly Express.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="w">  </span><span class="nt">sections</span><span class="p">:</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">    </span><span class="nt">Example</span><span class="p">:</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">      </span><span class="nt">base_sections</span><span class="p">:</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;nomad.datamodel.metainfo.plot.PlotSection&#39;</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="w">      </span><span class="nt">m_annotations</span><span class="p">:</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="w">        </span><span class="nt">plotly_express</span><span class="p">:</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="w">          </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">scatter</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="w">          </span><span class="nt">x</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;#xArr&#39;</span>
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="w">          </span><span class="nt">y</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;#yArr&#39;</span>
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a><span class="w">          </span><span class="nt">label</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;Example</span><span class="nv"> </span><span class="s">Express</span><span class="nv"> </span><span class="s">Plot&#39;</span>
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a><span class="w">          </span><span class="nt">index</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0</span>
+<a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a><span class="w">          </span><span class="nt">open</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a><span class="w">          </span><span class="nt">layout</span><span class="p">:</span>
+<a id="__codelineno-16-14" name="__codelineno-16-14" href="#__codelineno-16-14"></a><span class="w">            </span><span class="nt">title</span><span class="p">:</span>
+<a id="__codelineno-16-15" name="__codelineno-16-15" href="#__codelineno-16-15"></a><span class="w">              </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;Example</span><span class="nv"> </span><span class="s">Express</span><span class="nv"> </span><span class="s">Plot&#39;</span>
+<a id="__codelineno-16-16" name="__codelineno-16-16" href="#__codelineno-16-16"></a><span class="w">            </span><span class="nt">xaxis</span><span class="p">:</span>
+<a id="__codelineno-16-17" name="__codelineno-16-17" href="#__codelineno-16-17"></a><span class="w">              </span><span class="nt">title</span><span class="p">:</span>
+<a id="__codelineno-16-18" name="__codelineno-16-18" href="#__codelineno-16-18"></a><span class="w">                </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;x</span><span class="nv"> </span><span class="s">axis&#39;</span>
+<a id="__codelineno-16-19" name="__codelineno-16-19" href="#__codelineno-16-19"></a><span class="w">            </span><span class="nt">yaxis</span><span class="p">:</span>
+<a id="__codelineno-16-20" name="__codelineno-16-20" href="#__codelineno-16-20"></a><span class="w">              </span><span class="nt">title</span><span class="p">:</span>
+<a id="__codelineno-16-21" name="__codelineno-16-21" href="#__codelineno-16-21"></a><span class="w">                </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;y</span><span class="nv"> </span><span class="s">axis&#39;</span>
+<a id="__codelineno-16-22" name="__codelineno-16-22" href="#__codelineno-16-22"></a><span class="w">          </span><span class="nt">traces</span><span class="p">:</span>
+<a id="__codelineno-16-23" name="__codelineno-16-23" href="#__codelineno-16-23"></a><span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">scatter</span>
+<a id="__codelineno-16-24" name="__codelineno-16-24" href="#__codelineno-16-24"></a><span class="w">              </span><span class="nt">x</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;#xArr&#39;</span>
+<a id="__codelineno-16-25" name="__codelineno-16-25" href="#__codelineno-16-25"></a><span class="w">              </span><span class="nt">y</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;#zArr&#39;</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>method</td>
+<td><code>str</code></td>
+<td>Plotly express plot method</td>
+</tr>
+<tr>
+<td>layout</td>
+<td><code>dict</code></td>
+<td>Plotly layout</td>
+</tr>
+<tr>
+<td>x</td>
+<td><code>list[float] | list[str] | str</code></td>
+<td>Plotly express x</td>
+</tr>
+<tr>
+<td>y</td>
+<td><code>list[float] | list[str] | str</code></td>
+<td>Plotly express y</td>
+</tr>
+<tr>
+<td>z</td>
+<td><code>list[float] | list[str] | str</code></td>
+<td>Plotly express z</td>
+</tr>
+<tr>
+<td>color</td>
+<td><code>list[float] | list[str] | str</code></td>
+<td>Plotly express color</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td><code>str</code></td>
+<td>Plotly express symbol</td>
+</tr>
+<tr>
+<td>title</td>
+<td><code>str</code></td>
+<td>Plotly express title</td>
+</tr>
+<tr>
+<td>label</td>
+<td><code>str</code></td>
+<td>Figure label</td>
+</tr>
+<tr>
+<td>traces</td>
+<td><code>list[PlotlyExpressTraceAnnotation]</code></td>
+<td>List of traces added to the main trace defined by plotly_express method</br><em>default:</em> <code>[]</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="plotlyexpresstraceannotation">PlotlyExpressTraceAnnotation<a class="headerlink" href="#plotlyexpresstraceannotation" title="Permanent link">&para;</a></h3>
+<p>Allows to plot figures using plotly Express.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>method</td>
+<td><code>str</code></td>
+<td>Plotly express plot method</td>
+</tr>
+<tr>
+<td>layout</td>
+<td><code>dict</code></td>
+<td>Plotly layout</td>
+</tr>
+<tr>
+<td>x</td>
+<td><code>list[float] | list[str] | str</code></td>
+<td>Plotly express x</td>
+</tr>
+<tr>
+<td>y</td>
+<td><code>list[float] | list[str] | str</code></td>
+<td>Plotly express y</td>
+</tr>
+<tr>
+<td>z</td>
+<td><code>list[float] | list[str] | str</code></td>
+<td>Plotly express z</td>
+</tr>
+<tr>
+<td>color</td>
+<td><code>list[float] | list[str] | str</code></td>
+<td>Plotly express color</td>
+</tr>
+<tr>
+<td>symbol</td>
+<td><code>str</code></td>
+<td>Plotly express symbol</td>
+</tr>
+<tr>
+<td>title</td>
+<td><code>str</code></td>
+<td>Plotly express title</td>
+</tr>
+</tbody>
+</table>
+<h3 id="plotlysubplotsannotation">PlotlySubplotsAnnotation<a class="headerlink" href="#plotlysubplotsannotation" title="Permanent link">&para;</a></h3>
+<p>Allows to plot figures in subplots.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="w">    </span><span class="nt">Example</span><span class="p">:</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="w">      </span><span class="nt">base_sections</span><span class="p">:</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;nomad.datamodel.metainfo.plot.PlotSection&#39;</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="w">      </span><span class="nt">m_annotations</span><span class="p">:</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="w">        </span><span class="nt">plotly_subplots</span><span class="p">:</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="w">          </span><span class="nt">parameters</span><span class="p">:</span>
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="w">            </span><span class="nt">rows</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="w">            </span><span class="nt">cols</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="w">          </span><span class="nt">layout</span><span class="p">:</span>
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a><span class="w">            </span><span class="nt">title</span><span class="p">:</span>
+<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a><span class="w">              </span><span class="nt">text</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;All</span><span class="nv"> </span><span class="s">plots&#39;</span>
+<a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a><span class="w">          </span><span class="nt">plotly_express</span><span class="p">:</span>
+<a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a><span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">scatter</span>
+<a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a><span class="w">              </span><span class="nt">x</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;#xArr&#39;</span>
+<a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a><span class="w">              </span><span class="nt">y</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;#yArr&#39;</span>
+<a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a><span class="w">              </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;subplot</span><span class="nv"> </span><span class="s">1&#39;</span>
+<a id="__codelineno-17-17" name="__codelineno-17-17" href="#__codelineno-17-17"></a><span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">scatter</span>
+<a id="__codelineno-17-18" name="__codelineno-17-18" href="#__codelineno-17-18"></a><span class="w">              </span><span class="nt">x</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;#xArr&#39;</span>
+<a id="__codelineno-17-19" name="__codelineno-17-19" href="#__codelineno-17-19"></a><span class="w">              </span><span class="nt">y</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;#zArr&#39;</span>
+<a id="__codelineno-17-20" name="__codelineno-17-20" href="#__codelineno-17-20"></a><span class="w">              </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;subplot</span><span class="nv"> </span><span class="s">2&#39;</span>
+<a id="__codelineno-17-21" name="__codelineno-17-21" href="#__codelineno-17-21"></a><span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">scatter</span>
+<a id="__codelineno-17-22" name="__codelineno-17-22" href="#__codelineno-17-22"></a><span class="w">              </span><span class="nt">x</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;#zArr&#39;</span>
+<a id="__codelineno-17-23" name="__codelineno-17-23" href="#__codelineno-17-23"></a><span class="w">              </span><span class="nt">y</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;#xArr&#39;</span>
+<a id="__codelineno-17-24" name="__codelineno-17-24" href="#__codelineno-17-24"></a><span class="w">              </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;subplot</span><span class="nv"> </span><span class="s">3&#39;</span>
+<a id="__codelineno-17-25" name="__codelineno-17-25" href="#__codelineno-17-25"></a><span class="w">            </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">method</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">scatter</span>
+<a id="__codelineno-17-26" name="__codelineno-17-26" href="#__codelineno-17-26"></a><span class="w">              </span><span class="nt">x</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;#zArr&#39;</span>
+<a id="__codelineno-17-27" name="__codelineno-17-27" href="#__codelineno-17-27"></a><span class="w">              </span><span class="nt">y</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;#yArr&#39;</span>
+<a id="__codelineno-17-28" name="__codelineno-17-28" href="#__codelineno-17-28"></a><span class="w">              </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;subplot</span><span class="nv"> </span><span class="s">4&#39;</span>
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>label</td>
+<td><code>str</code></td>
+<td>Figure label</td>
+</tr>
+<tr>
+<td>layout</td>
+<td><code>dict</code></td>
+<td>Plotly layout</td>
+</tr>
+<tr>
+<td>parameters</td>
+<td><code>dict</code></td>
+<td>plotly.subplots.make_subplots parameters i.e. rows, cols, shared_xaxes, shared_xaxes, horizontal_spacing , ... See <a href="https://plotly.com/python-api-reference/generated/plotly.subplots.make_subplots.html">plotly make_subplots documentation</a> for more information.</td>
+</tr>
+<tr>
+<td>plotly_express</td>
+<td><code>list[PlotlyExpressAnnotation]</code></td>
+<td>List of subplots defined by plotly_express method</br><em>default:</em> <code>[]</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="plot-annotations-in-python">plot annotations in python<a class="headerlink" href="#plot-annotations-in-python" title="Permanent link">&para;</a></h3>
+<p>For simple plots in Python schema one could use the annotations without normalizer:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.datamodel.metainfo.plot</span><span class="w"> </span><span class="kn">import</span> <span class="n">PlotSection</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.metainfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">Quantity</span><span class="p">,</span> <span class="n">Section</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.datamodel.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">EntryData</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="k">class</span><span class="w"> </span><span class="nc">CustomSection</span><span class="p">(</span><span class="n">PlotSection</span><span class="p">,</span> <span class="n">EntryData</span><span class="p">):</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>    <span class="n">m_def</span> <span class="o">=</span> <span class="n">Section</span><span class="p">(</span>
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>        <span class="n">a_plotly_graph_object</span><span class="o">=</span><span class="p">[</span>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>            <span class="p">{</span>
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>                <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;graph object 1&#39;</span><span class="p">,</span>
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>                <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="s1">&#39;#time&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="s1">&#39;#chamber_pressure&#39;</span><span class="p">},</span>
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>                <span class="s1">&#39;layout&#39;</span><span class="p">:</span> <span class="p">{</span>
+<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>                    <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="p">{</span>
+<a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a>                        <span class="s1">&#39;text&#39;</span><span class="p">:</span> <span class="s1">&#39;Plot in section level&#39;</span>
+<a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a>                    <span class="p">},</span>
+<a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a>                    <span class="s1">&#39;xaxis&#39;</span><span class="p">:</span> <span class="p">{</span>
+<a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a>                        <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="p">{</span>
+<a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a>                            <span class="s1">&#39;text&#39;</span><span class="p">:</span> <span class="s1">&#39;x data&#39;</span>
+<a id="__codelineno-18-18" name="__codelineno-18-18" href="#__codelineno-18-18"></a>                        <span class="p">}</span>
+<a id="__codelineno-18-19" name="__codelineno-18-19" href="#__codelineno-18-19"></a>                    <span class="p">},</span>
+<a id="__codelineno-18-20" name="__codelineno-18-20" href="#__codelineno-18-20"></a>                    <span class="s1">&#39;yaxis&#39;</span><span class="p">:</span> <span class="p">{</span>
+<a id="__codelineno-18-21" name="__codelineno-18-21" href="#__codelineno-18-21"></a>                        <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="p">{</span>
+<a id="__codelineno-18-22" name="__codelineno-18-22" href="#__codelineno-18-22"></a>                            <span class="s1">&#39;text&#39;</span><span class="p">:</span> <span class="s1">&#39;y data&#39;</span>
+<a id="__codelineno-18-23" name="__codelineno-18-23" href="#__codelineno-18-23"></a>                        <span class="p">}</span>
+<a id="__codelineno-18-24" name="__codelineno-18-24" href="#__codelineno-18-24"></a>                    <span class="p">}</span>
+<a id="__codelineno-18-25" name="__codelineno-18-25" href="#__codelineno-18-25"></a>                <span class="p">}</span>
+<a id="__codelineno-18-26" name="__codelineno-18-26" href="#__codelineno-18-26"></a>            <span class="p">},</span> <span class="p">{</span>
+<a id="__codelineno-18-27" name="__codelineno-18-27" href="#__codelineno-18-27"></a>                <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;graph object 2&#39;</span><span class="p">,</span>
+<a id="__codelineno-18-28" name="__codelineno-18-28" href="#__codelineno-18-28"></a>                <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="s1">&#39;#time&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="s1">&#39;#substrate_temperature&#39;</span><span class="p">}</span>
+<a id="__codelineno-18-29" name="__codelineno-18-29" href="#__codelineno-18-29"></a>            <span class="p">}</span>
+<a id="__codelineno-18-30" name="__codelineno-18-30" href="#__codelineno-18-30"></a>        <span class="p">],</span>
+<a id="__codelineno-18-31" name="__codelineno-18-31" href="#__codelineno-18-31"></a>        <span class="n">a_plotly_express</span><span class="o">=</span><span class="p">{</span>
+<a id="__codelineno-18-32" name="__codelineno-18-32" href="#__codelineno-18-32"></a>            <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;fig 2&#39;</span><span class="p">,</span>
+<a id="__codelineno-18-33" name="__codelineno-18-33" href="#__codelineno-18-33"></a>            <span class="s1">&#39;index&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+<a id="__codelineno-18-34" name="__codelineno-18-34" href="#__codelineno-18-34"></a>            <span class="s1">&#39;method&#39;</span><span class="p">:</span> <span class="s1">&#39;scatter&#39;</span><span class="p">,</span>
+<a id="__codelineno-18-35" name="__codelineno-18-35" href="#__codelineno-18-35"></a>            <span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="s1">&#39;#substrate_temperature&#39;</span><span class="p">,</span>
+<a id="__codelineno-18-36" name="__codelineno-18-36" href="#__codelineno-18-36"></a>            <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="s1">&#39;#chamber_pressure&#39;</span><span class="p">,</span>
+<a id="__codelineno-18-37" name="__codelineno-18-37" href="#__codelineno-18-37"></a>            <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;#chamber_pressure&#39;</span>
+<a id="__codelineno-18-38" name="__codelineno-18-38" href="#__codelineno-18-38"></a>        <span class="p">},</span>
+<a id="__codelineno-18-39" name="__codelineno-18-39" href="#__codelineno-18-39"></a>        <span class="n">a_plotly_subplots</span><span class="o">=</span><span class="p">{</span>
+<a id="__codelineno-18-40" name="__codelineno-18-40" href="#__codelineno-18-40"></a>            <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;fig 1&#39;</span><span class="p">,</span>
+<a id="__codelineno-18-41" name="__codelineno-18-41" href="#__codelineno-18-41"></a>            <span class="s1">&#39;index&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+<a id="__codelineno-18-42" name="__codelineno-18-42" href="#__codelineno-18-42"></a>            <span class="s1">&#39;parameters&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;rows&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;cols&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">},</span>
+<a id="__codelineno-18-43" name="__codelineno-18-43" href="#__codelineno-18-43"></a>            <span class="s1">&#39;layout&#39;</span><span class="p">:</span> <span class="p">{</span>
+<a id="__codelineno-18-44" name="__codelineno-18-44" href="#__codelineno-18-44"></a>                <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="p">{</span>
+<a id="__codelineno-18-45" name="__codelineno-18-45" href="#__codelineno-18-45"></a>                    <span class="s1">&#39;text&#39;</span><span class="p">:</span> <span class="s1">&#39;All plots&#39;</span>
+<a id="__codelineno-18-46" name="__codelineno-18-46" href="#__codelineno-18-46"></a>                <span class="p">}</span>
+<a id="__codelineno-18-47" name="__codelineno-18-47" href="#__codelineno-18-47"></a>            <span class="p">},</span>
+<a id="__codelineno-18-48" name="__codelineno-18-48" href="#__codelineno-18-48"></a>            <span class="s1">&#39;plotly_express&#39;</span><span class="p">:</span> <span class="p">[</span>
+<a id="__codelineno-18-49" name="__codelineno-18-49" href="#__codelineno-18-49"></a>                <span class="p">{</span>
+<a id="__codelineno-18-50" name="__codelineno-18-50" href="#__codelineno-18-50"></a>                    <span class="s1">&#39;method&#39;</span><span class="p">:</span> <span class="s1">&#39;scatter&#39;</span><span class="p">,</span>
+<a id="__codelineno-18-51" name="__codelineno-18-51" href="#__codelineno-18-51"></a>                    <span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="s1">&#39;#time&#39;</span><span class="p">,</span>
+<a id="__codelineno-18-52" name="__codelineno-18-52" href="#__codelineno-18-52"></a>                    <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="s1">&#39;#chamber_pressure&#39;</span><span class="p">,</span>
+<a id="__codelineno-18-53" name="__codelineno-18-53" href="#__codelineno-18-53"></a>                    <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;#chamber_pressure&#39;</span>
+<a id="__codelineno-18-54" name="__codelineno-18-54" href="#__codelineno-18-54"></a>                <span class="p">},</span>
+<a id="__codelineno-18-55" name="__codelineno-18-55" href="#__codelineno-18-55"></a>                <span class="p">{</span>
+<a id="__codelineno-18-56" name="__codelineno-18-56" href="#__codelineno-18-56"></a>                    <span class="s1">&#39;method&#39;</span><span class="p">:</span> <span class="s1">&#39;scatter&#39;</span><span class="p">,</span>
+<a id="__codelineno-18-57" name="__codelineno-18-57" href="#__codelineno-18-57"></a>                    <span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="s1">&#39;#time&#39;</span><span class="p">,</span>
+<a id="__codelineno-18-58" name="__codelineno-18-58" href="#__codelineno-18-58"></a>                    <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="s1">&#39;#substrate_temperature&#39;</span><span class="p">,</span>
+<a id="__codelineno-18-59" name="__codelineno-18-59" href="#__codelineno-18-59"></a>                    <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;#substrate_temperature&#39;</span>
+<a id="__codelineno-18-60" name="__codelineno-18-60" href="#__codelineno-18-60"></a>                <span class="p">},</span>
+<a id="__codelineno-18-61" name="__codelineno-18-61" href="#__codelineno-18-61"></a>                <span class="p">{</span>
+<a id="__codelineno-18-62" name="__codelineno-18-62" href="#__codelineno-18-62"></a>                    <span class="s1">&#39;method&#39;</span><span class="p">:</span> <span class="s1">&#39;scatter&#39;</span><span class="p">,</span>
+<a id="__codelineno-18-63" name="__codelineno-18-63" href="#__codelineno-18-63"></a>                    <span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="s1">&#39;#substrate_temperature&#39;</span><span class="p">,</span>
+<a id="__codelineno-18-64" name="__codelineno-18-64" href="#__codelineno-18-64"></a>                    <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="s1">&#39;#chamber_pressure&#39;</span><span class="p">,</span>
+<a id="__codelineno-18-65" name="__codelineno-18-65" href="#__codelineno-18-65"></a>                    <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;#chamber_pressure&#39;</span>
+<a id="__codelineno-18-66" name="__codelineno-18-66" href="#__codelineno-18-66"></a>                <span class="p">},</span>
+<a id="__codelineno-18-67" name="__codelineno-18-67" href="#__codelineno-18-67"></a>                <span class="p">{</span>
+<a id="__codelineno-18-68" name="__codelineno-18-68" href="#__codelineno-18-68"></a>                    <span class="s1">&#39;method&#39;</span><span class="p">:</span> <span class="s1">&#39;scatter&#39;</span><span class="p">,</span>
+<a id="__codelineno-18-69" name="__codelineno-18-69" href="#__codelineno-18-69"></a>                    <span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="s1">&#39;#substrate_temperature&#39;</span><span class="p">,</span>
+<a id="__codelineno-18-70" name="__codelineno-18-70" href="#__codelineno-18-70"></a>                    <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="s1">&#39;#chamber_pressure&#39;</span><span class="p">,</span>
+<a id="__codelineno-18-71" name="__codelineno-18-71" href="#__codelineno-18-71"></a>                    <span class="s1">&#39;color&#39;</span><span class="p">:</span> <span class="s1">&#39;#substrate_temperature&#39;</span>
+<a id="__codelineno-18-72" name="__codelineno-18-72" href="#__codelineno-18-72"></a>                <span class="p">}</span>
+<a id="__codelineno-18-73" name="__codelineno-18-73" href="#__codelineno-18-73"></a>            <span class="p">]</span>
+<a id="__codelineno-18-74" name="__codelineno-18-74" href="#__codelineno-18-74"></a>        <span class="p">}</span>
+<a id="__codelineno-18-75" name="__codelineno-18-75" href="#__codelineno-18-75"></a>    <span class="p">)</span>
+<a id="__codelineno-18-76" name="__codelineno-18-76" href="#__codelineno-18-76"></a>    <span class="n">time</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;*&#39;</span><span class="p">],</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="n">a_eln</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="s1">&#39;NumberEditQuantity&#39;</span><span class="p">))</span>
+<a id="__codelineno-18-77" name="__codelineno-18-77" href="#__codelineno-18-77"></a>    <span class="n">substrate_temperature</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;*&#39;</span><span class="p">],</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;K&#39;</span><span class="p">,</span> <span class="n">a_eln</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="s1">&#39;NumberEditQuantity&#39;</span><span class="p">))</span>
+<a id="__codelineno-18-78" name="__codelineno-18-78" href="#__codelineno-18-78"></a>    <span class="n">chamber_pressure</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;*&#39;</span><span class="p">],</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;Pa&#39;</span><span class="p">,</span> <span class="n">a_eln</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="s1">&#39;NumberEditQuantity&#39;</span><span class="p">))</span>
+</code></pre></div>
+<h3 id="plotannotation-deprecated">PlotAnnotation (Deprecated)<a class="headerlink" href="#plotannotation-deprecated" title="Permanent link">&para;</a></h3>
+<p>The <code>PlotAnnotation</code> is now deprecated and will be removed in future releases.
+We recommend transitioning to the use of <code>PlotSection</code> and <code>PlotlyGraphObjectAnnotation</code> for your plotting needs.</p>
+<p>This annotation can be used to add a plot to a section or quantity. Example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Evaporation</span><span class="p">(</span><span class="n">MSection</span><span class="p">):</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>    <span class="n">m_def</span> <span class="o">=</span> <span class="n">Section</span><span class="p">(</span><span class="n">a_plot</span><span class="o">=</span><span class="p">{</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>        <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="s1">&#39;Temperature and Pressure&#39;</span><span class="p">,</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>        <span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="s1">&#39;process_time&#39;</span><span class="p">,</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>        <span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;./substrate_temperature&#39;</span><span class="p">,</span> <span class="s1">&#39;./chamber_pressure&#39;</span><span class="p">],</span>
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>        <span class="s1">&#39;config&#39;</span><span class="p">:</span> <span class="p">{</span>
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>            <span class="s1">&#39;editable&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>            <span class="s1">&#39;scrollZoom&#39;</span><span class="p">:</span> <span class="kc">False</span>
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>        <span class="p">}</span>
+<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a>    <span class="p">})</span>
+<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a>    <span class="n">time</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;*&#39;</span><span class="p">],</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">)</span>
+<a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a>    <span class="n">substrate_temperature</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;*&#39;</span><span class="p">],</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;K&#39;</span><span class="p">)</span>
+<a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a>    <span class="n">chamber_pressure</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;*&#39;</span><span class="p">],</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;Pa&#39;</span><span class="p">)</span>
+</code></pre></div>
+<p>You can create multi-line plots by using lists of the properties <code>y</code> (and <code>x</code>).
+You either have multiple sets of <code>y</code>-values over a single set of <code>x</code>-values. Or
+you have pairs of <code>x</code> and <code>y</code> values. For this purpose the annotation properties
+<code>x</code> and <code>y</code> can reference a single quantity or a list of quantities.
+For repeating sub sections, the section instance can be selected with an index, e.g.
+"sub_section_name/2/parameter_name" or with a slice notation <code>start:stop</code> where
+negative values index from the end of the array, e.g.
+"sub_section_name/1:-5/parameter_name".</p>
+<p>The interactive examples of the plot annotations can be found
+<a href="https://nomad-lab.eu/prod/v1/staging/gui/dev/plot">here</a>.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>label</td>
+<td><code>str</code></td>
+<td>Is passed to plotly to define the label of the plot.</td>
+</tr>
+<tr>
+<td>x</td>
+<td><code>list[str] | str</code></td>
+<td>A path or list of paths to the x-axes values. Each path is a <code>/</code> separated list of sub-section and quantity names that leads from the annotation section to the quantity. Repeating sub sections are indexed between two <code>/</code>s with an integer or a slice <code>start:stop</code>.</br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>y</td>
+<td><code>list[str] | str</code></td>
+<td>A path or list of paths to the y-axes values. list of sub-section and quantity names that leads from the annotation section to the quantity. Repeating sub sections are indexed between two <code>/</code>s with an integer or a slice <code>start:stop</code>.</br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>lines</td>
+<td><code>list[dict]</code></td>
+<td>A list of dicts passed as <code>traces</code> to plotly to configure the lines of the plot. See <a href="https://plotly.com/javascript/reference/scatter/">https://plotly.com/javascript/reference/scatter/</a> for details.</td>
+</tr>
+<tr>
+<td>layout</td>
+<td><code>dict</code></td>
+<td>A dict passed as <code>layout</code> to plotly to configure the plot layout. See <a href="https://plotly.com/javascript/reference/layout/">https://plotly.com/javascript/reference/layout/</a> for details.</td>
+</tr>
+<tr>
+<td>config</td>
+<td><code>dict</code></td>
+<td>A dict passed as <code>config</code> to plotly to configure the plot functionality. See <a href="https://plotly.com/javascript/configuration-options/">https://plotly.com/javascript/configuration-options/</a> for details.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="h5web">H5Web<a class="headerlink" href="#h5web" title="Permanent link">&para;</a></h2>
+<p>The H5WebAnnotation provides a way to control how H5Web renders visualization for
+<a href="../howto/customization/hdf5.html#hdf5dataset">HDF5Dataset</a> quantities. The annotation values are written to the
+corresponding HDF5 object attributes and are subsequently read by H5Web.</p>
+<p>Usage:</p>
+<ul>
+<li>Use this base section as a type in your Quantity.</li>
+<li>Add addictional annotations to trigger the H5Web visualizer to the section containing the Quantity, and, optionally, to its parent sections.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If an EntryData class contain the <code>a_h5web</code> annotation, the H5Web plot is shown in the
+<a href="../examples/computational_data/uploading.html#entries-overview-page">entry overview page</a>.</p>
+</div>
+<p>An example of use of H5WebAnnotation in Python schemas:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.datamodel.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">ArchiveSection</span><span class="p">,</span> <span class="n">EntryData</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.metainfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">Section</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.datamodel.hdf5</span><span class="w"> </span><span class="kn">import</span> <span class="n">HDF5Dataset</span>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.datamodel.metainfo.annotations</span><span class="w"> </span><span class="kn">import</span> <span class="n">H5WebAnnotation</span>
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="k">class</span><span class="w"> </span><span class="nc">A</span><span class="p">(</span><span class="n">ArchiveSection</span><span class="p">):</span>
+<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a>
+<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a>    <span class="n">m_def</span> <span class="o">=</span> <span class="n">Section</span><span class="p">(</span><span class="n">a_h5web</span><span class="o">=</span><span class="n">H5WebAnnotation</span><span class="p">(</span>
+<a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a>        <span class="n">axes</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span>
+<a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a>        <span class="n">signal</span><span class="o">=</span><span class="s1">&#39;y&#39;</span>
+<a id="__codelineno-20-11" name="__codelineno-20-11" href="#__codelineno-20-11"></a>        <span class="n">auxiliary_signals</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;y_err&#39;</span><span class="p">]))</span>
+<a id="__codelineno-20-12" name="__codelineno-20-12" href="#__codelineno-20-12"></a>
+<a id="__codelineno-20-13" name="__codelineno-20-13" href="#__codelineno-20-13"></a>    <span class="n">x</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
+<a id="__codelineno-20-14" name="__codelineno-20-14" href="#__codelineno-20-14"></a>        <span class="nb">type</span><span class="o">=</span><span class="n">HDF5Dataset</span><span class="p">,</span>
+<a id="__codelineno-20-15" name="__codelineno-20-15" href="#__codelineno-20-15"></a>        <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span>
+<a id="__codelineno-20-16" name="__codelineno-20-16" href="#__codelineno-20-16"></a>        <span class="n">a_h5web</span> <span class="o">=</span> <span class="n">H5WebAnnotation</span><span class="p">(</span>
+<a id="__codelineno-20-17" name="__codelineno-20-17" href="#__codelineno-20-17"></a>            <span class="n">long_name</span><span class="o">=</span><span class="s1">&#39;my_x_label (s)&#39;</span>
+<a id="__codelineno-20-18" name="__codelineno-20-18" href="#__codelineno-20-18"></a>        <span class="p">))</span>
+<a id="__codelineno-20-19" name="__codelineno-20-19" href="#__codelineno-20-19"></a>
+<a id="__codelineno-20-20" name="__codelineno-20-20" href="#__codelineno-20-20"></a>    <span class="n">y</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
+<a id="__codelineno-20-21" name="__codelineno-20-21" href="#__codelineno-20-21"></a>        <span class="nb">type</span><span class="o">=</span><span class="n">HDF5Dataset</span><span class="p">,</span>
+<a id="__codelineno-20-22" name="__codelineno-20-22" href="#__codelineno-20-22"></a>        <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;m&#39;</span><span class="p">,</span>
+<a id="__codelineno-20-23" name="__codelineno-20-23" href="#__codelineno-20-23"></a>        <span class="n">a_h5web</span> <span class="o">=</span> <span class="n">H5WebAnnotation</span><span class="p">(</span>
+<a id="__codelineno-20-24" name="__codelineno-20-24" href="#__codelineno-20-24"></a>            <span class="n">long_name</span><span class="o">=</span><span class="s1">&#39;my_y_label (m)&#39;</span>
+<a id="__codelineno-20-25" name="__codelineno-20-25" href="#__codelineno-20-25"></a>        <span class="p">))</span>
+<a id="__codelineno-20-26" name="__codelineno-20-26" href="#__codelineno-20-26"></a>
+<a id="__codelineno-20-27" name="__codelineno-20-27" href="#__codelineno-20-27"></a>    <span class="n">y_err</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
+<a id="__codelineno-20-28" name="__codelineno-20-28" href="#__codelineno-20-28"></a>        <span class="nb">type</span><span class="o">=</span><span class="n">HDF5Dataset</span><span class="p">,</span>
+<a id="__codelineno-20-29" name="__codelineno-20-29" href="#__codelineno-20-29"></a>        <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;m&#39;</span><span class="p">,</span>
+<a id="__codelineno-20-30" name="__codelineno-20-30" href="#__codelineno-20-30"></a>        <span class="n">a_h5web</span> <span class="o">=</span> <span class="n">H5WebAnnotation</span><span class="p">(</span>
+<a id="__codelineno-20-31" name="__codelineno-20-31" href="#__codelineno-20-31"></a>            <span class="n">long_name</span><span class="o">=</span><span class="s1">&#39;my_y_err_label&#39;</span>
+<a id="__codelineno-20-32" name="__codelineno-20-32" href="#__codelineno-20-32"></a>        <span class="p">))</span>
+<a id="__codelineno-20-33" name="__codelineno-20-33" href="#__codelineno-20-33"></a>
+<a id="__codelineno-20-34" name="__codelineno-20-34" href="#__codelineno-20-34"></a><span class="k">class</span><span class="w"> </span><span class="nc">B</span><span class="p">(</span><span class="n">EntryData</span><span class="p">):</span>
+<a id="__codelineno-20-35" name="__codelineno-20-35" href="#__codelineno-20-35"></a>
+<a id="__codelineno-20-36" name="__codelineno-20-36" href="#__codelineno-20-36"></a>    <span class="n">m_def</span> <span class="o">=</span> <span class="n">Section</span><span class="p">(</span><span class="n">a_h5web</span><span class="o">=</span><span class="n">H5WebAnnotation</span><span class="p">(</span>
+<a id="__codelineno-20-37" name="__codelineno-20-37" href="#__codelineno-20-37"></a>      <span class="n">axes</span><span class="o">=</span><span class="s1">&#39;value_x&#39;</span><span class="p">,</span> <span class="n">signal</span><span class="o">=</span><span class="s1">&#39;value_y&#39;</span><span class="p">,</span> <span class="n">paths</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a/0&#39;</span><span class="p">]))</span>
+<a id="__codelineno-20-38" name="__codelineno-20-38" href="#__codelineno-20-38"></a>
+<a id="__codelineno-20-39" name="__codelineno-20-39" href="#__codelineno-20-39"></a>    <span class="n">a</span> <span class="o">=</span> <span class="n">SubSection</span><span class="p">(</span><span class="n">sub_section</span><span class="o">=</span><span class="n">A</span><span class="p">,</span> <span class="n">repeats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-20-40" name="__codelineno-20-40" href="#__codelineno-20-40"></a>
+<a id="__codelineno-20-41" name="__codelineno-20-41" href="#__codelineno-20-41"></a>    <span class="n">value_x</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">HDF5Dataset</span><span class="p">)</span>
+<a id="__codelineno-20-42" name="__codelineno-20-42" href="#__codelineno-20-42"></a>
+<a id="__codelineno-20-43" name="__codelineno-20-43" href="#__codelineno-20-43"></a>    <span class="n">value_y</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">HDF5Dataset</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;m&#39;</span><span class="p">)</span>
+</code></pre></div>
+<p>In this example, an H5Web view of the variables <code>x</code>, <code>y</code>, and <code>y_err</code> is displayed in the page of the subsection <code>A</code>.
+The plot of variables <code>x_value</code> and <code>y_value</code> is also displayed; as the <code>B</code> class is an <code>EntryData</code>, the plot is shown in the <a href="../examples/computational_data/uploading.html#entries-overview-page">entry overview page</a>. Additionally, alongside with the plot of the class <code>B</code>, the overview page presents also the plot contained in the subsection <code>A</code>, due to the <code>paths</code> attribute. The <code>paths</code> attribute allows to show in a parent section or subsection the plots originally contained in children subsections. Parents and children refer here to <strong>composed</strong> object.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code>paths</code> variable points in the example above to a <a href="../howto/plugins/schema_packages.html#schemapackage-class">repeated subsection</a>, hence the path provided includes a serial number pointing to the subsection object to be displayed in the entry overview page. To show in the overview page a non-repeatable subsection, no serial number is required in the path.</p>
+</div>
+<p>H5Web implements visualization features through the attributes shown above, they can be attached to datasets and groups of an HDF5 file.
+The conventions for the attributes are rooted in the NeXus language and more explanations can be found in the <a href="https://manual.nexusformat.org/classes/base_classes/NXdata.html">NXData documentation page</a> and in the <a href="https://manual.nexusformat.org/datarules.html#design-findplottable-niac2014">Associating plottable data documentation page</a>.</p>
+<h3 id="h5webannotation">H5WebAnnotation<a class="headerlink" href="#h5webannotation" title="Permanent link">&para;</a></h3>
+<p>Provides interface to the H5Web visualizer for HDF5 files.
+The annotation can be used for section and quantity definitions in order to
+include group and dataset attributes to the archive HDF5 file.</p>
+<p>Refer to https://h5web.panosc.eu/ for a more detailed description
+of the annotation fields.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>axes</td>
+<td><code>str | list[str]</code></td>
+<td>Names of the HDF5Dataset quantities to plot on the independent axes.</td>
+</tr>
+<tr>
+<td>signal</td>
+<td><code>str</code></td>
+<td>Name of the HDF5Dataset quantity to plot on the dependent axis.</td>
+</tr>
+<tr>
+<td>long_name</td>
+<td><code>str</code></td>
+<td>Label for the hdf5 dataset. Note: this attribute will overwrite also the unit.</td>
+</tr>
+<tr>
+<td>auxiliary_signals</td>
+<td><code>list[str]</code></td>
+<td>Additional datasets to include in plot as signal.</td>
+</tr>
+<tr>
+<td>title</td>
+<td><code>str</code></td>
+<td>Title of the plot</td>
+</tr>
+<tr>
+<td>errors</td>
+<td><code>str</code></td>
+<td>Name of the HDF5Dataset quantity to plot as error bars.</td>
+</tr>
+<tr>
+<td>indices</td>
+<td><code>int | list[int]</code></td>
+<td>Indices of the HDF5Dataset to include in plot.</td>
+</tr>
+<tr>
+<td>paths</td>
+<td><code>list[str]</code></td>
+<td>List of section paths to visualize.</br><em>default:</em> <code>[]</code></td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="config.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Configuration">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Configuration
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="basesections.html" class="md-footer__link md-footer__link--next" aria-label="Next: Base Sections">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Base Sections
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.path", "navigation.footer", "navigation.top", "content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+        <script src="../javascript.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>
