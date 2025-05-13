@@ -126,17 +126,16 @@ This will convert the data into JSON:
 
 ```json
 {
-    "m_def" = "Simulation",
-    "systems": [
-        {
-            "n_atoms" = 3,
-            "atom_labels" = [
-                "H",
-                "H",
-                "O"
-            ]
-        }
-    ]
+  "system": [
+    {
+      "n_atoms": 3,
+      "atom_labels": [
+        "H",
+        "H",
+        "O"
+      ]
+    }
+  ]
 }
 ```
 
