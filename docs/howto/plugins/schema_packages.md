@@ -100,7 +100,7 @@ _Subsections_ allow the placement of sections within each other, forming contain
 To use the above-defined schema and create actual data, we have to instantiate the classes:
 
 ```python
-from nomad.metainfo.example import Run
+# You would need to define your own `Run` class with `System` subsection
 
 run = Run()
 system = run.m_create(System)
