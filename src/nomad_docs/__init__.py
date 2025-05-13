@@ -394,3 +394,53 @@ def define_env(env):
         pkg = getattr(module, "m_package")
 
         return package_markdown_from_package(pkg)
+
+    @env.macro
+    def category_tag(name, **kwargs):  # pylint: disable=unused-variable
+        """
+        Creates a in-line category tag. The tag can be either text or an image.
+        In the case of an image, the text is used as alt text.
+        In the case of a text tag, the text is presented as a pill.
+
+        Optional arguments can be:
+            - tooltip: A tooltip that is shown when hovering over the tag.
+            - href: A link that is opened when clicking on the tag.
+            - image: URL to the image that is shown instead of the text.
+            - style: additional CSS style that is added to the tag.
+
+        Usage in markdown files:
+            ```
+            {{ category_tag('example', tooltip='Example tooltip', href='example.md') }}
+            ```
+            or
+            ```
+            {{ category_tag(name='example', tooltip='Example tooltip', \
+                href='example.md', image='../assets/favicon.ico', \
+                style='border-radius: 50%;')}}
+            ```
+        """
+        # setup anchor tag
+        href = kwargs.get("href", "")
+        if href and href.endswith(".md"):
+            href = href.replace(".md", ".html")
+        tooltip = kwargs.get("tooltip", "")
+        if tooltip:
+            anchor_tag = [f'<a href="{href}" title="{tooltip}">', "</a>"]
+        else:
+            anchor_tag = [f'<a href="{href}">', "</a>"]
+
+        style = kwargs.get("style", "")
+        if style:
+            style = f' style="{style}"'
+
+        image = kwargs.get("image", "")
+        if image:
+            # Render an image-based category tag
+            img_tag = f'<img src="{image}" alt="{name}" class="category-image"{style}>'
+            return f"<span>{anchor_tag[0]}{img_tag}{anchor_tag[1]}</span>"
+        else:
+            # Render a text-based category tag
+            return (
+                f'<span class="category-pill"{style}>'
+                f"{anchor_tag[0]}{name}{anchor_tag[1]}</span>"
+            )

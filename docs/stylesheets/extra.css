@@ -119,6 +119,22 @@
     margin: 1em 0 0 0 !important;
 }
 
+.category-pill {
+    background-color: rgb(248, 248, 248);
+    display: inline-block;
+    font-size: x-small;
+    padding: 2px 4px;
+    margin: 4px 2px;
+    border-radius: 16px;
+}
+
+.category-image {
+    display: inline-block;
+    vertical-align: middle;
+    max-height: 1em;
+    border-radius: 10%;
+}
+
 /* CSS compenents for creating an image slider on the docs */
 /* Slider holding the images */
 .image-slider {
