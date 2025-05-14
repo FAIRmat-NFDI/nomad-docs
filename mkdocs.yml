@@ -11,7 +11,13 @@ nav:
       - Uploading and publishing data: tutorial/upload_publish.md
       - Exploring data: tutorial/explore.md
       - Access data via API: tutorial/access_api.md
-      - Schemas and plugins: tutorial/custom.md
+      - Schemas and plugins:
+          - Introduction: tutorial/customization/custom_schemas.md
+          - YAML schemas: tutorial/customization/custom_yaml.md
+          - Custom ELN with YAML: tutorial/customization/custom_eln.md
+          - Tabular parser in YAML: tutorial/customization/custom_tabular.md
+          - Python schemas: tutorial/customization/custom_python.md
+          - Normalizers: tutorial/customization/custom_normalizer.md
       - Developing a NOMAD plugin: tutorial/develop_plugin.md
   - How-to guides:
       - Overview: howto/overview.md
