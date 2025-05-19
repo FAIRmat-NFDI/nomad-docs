@@ -249,9 +249,9 @@ curl -L -o sintering.archive.yaml "https://raw.githubusercontent.com/FAIRmat-NFD
 
 We will now use an external package `metainfo-yaml2py` to convert the yaml schema package
 into python class definitions.
-First we install the package with `pip`:
+First we install this package, along with another package `setuptools`, using `pip`:
 ```sh
-pip install metainfoyaml2py
+pip install metainfoyaml2py setuptools
 ```
 
 Then we can run the `metainfo-yaml2py` command on the `sintering.archive.yaml` file with
@@ -297,6 +297,12 @@ At the bottom of the toml you will see how this was done for the example and we 
 to replicate that with whatever we called our instance:
 ```toml
 sintering = "nomad_sintering.schema_packages:sintering"
+```
+
+After adding the entry point to `pyproject.toml` file, re-install the package
+to make sure the new entry point is available:
+```sh
+pip install -e '.[dev]' --index-url https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/simple
 ```
 
 Before we continue, we should commit our changes to git:
