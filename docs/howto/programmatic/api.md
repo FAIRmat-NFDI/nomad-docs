@@ -528,16 +528,18 @@ To create a group, send an authenticated POST request to `/groups` including the
 }
 ```
 
-Editing is similar but at another endpoint. The `members` field accepts for convenience
-`add` and `remove` keys followed by a string or a list of strings, so you don't have
-to repeat all members (otherwise use `set` or just the full list):
+Editing is similar but at another endpoint:
 
 ```json
 // POST /groups/{group-id}/edit
 {
-  "members": {
-    "add": "00000000-64e2-8099-4172-7461676e616e"
-  }
+  "group_name": "The Four Musketeers",
+  "members": [
+    "00000000-0000-0000-0000-004174686f73",
+    "00000000-0000-0000-0050-6f7274686f73",
+    "00000000-0000-0000-0000-4172616d6973",
+    "00000000-64e2-8099-4172-7461676e616e"
+  ]
 }
 ```
 
