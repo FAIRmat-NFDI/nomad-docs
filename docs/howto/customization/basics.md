@@ -520,7 +520,15 @@ A different flavor of _**reading**_ HDF5 files into NOMAD quantities is through 
 of using `HDF5Normalizer` class is to first define a quantity that is annotated with `FileEditQuantity` field
 to enable one to drop/upload the `*.h5` file, and to define relevant quantities annotated with `path`
 attribute under `hdf5`. These quantities are then picked up by the normalizer to extract the values to be found
-denoted by the `path`.
+denoted by the `path`. The supported `Hierarchical Data Format` file extensions are:
+
+  - ```.h5```  
+  - ```.hdf5```
+  - ```.he5```
+  - ```.h5part```
+  - ```.nxs```
+  - ```.mat```
+  - ```.nc4```
 
 A minimum example to import your hdf5 and map it to NOMAD quantities is by using the following custom schema:
 
