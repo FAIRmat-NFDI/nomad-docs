@@ -1,0 +1,4138 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="The documentation for NOMAD v1.
+">
+      
+      
+        <meta name="author" content="The NOMAD Authors">
+      
+      
+      
+        <link rel="prev" href="parsers.html">
+      
+      
+        <link rel="next" href="../customization/basics.html">
+      
+      
+      <link rel="icon" href="../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+    
+    
+      
+        <title>Write a schema package - Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.2afb09e1.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Titillium Web";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="#2A4CDF" data-md-color-accent="#008A67">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#how-to-write-a-schema-package" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="https://nomad-lab.eu" title="Documentation" class="md-header__button md-logo" aria-label="Documentation" data-md-component="logo">
+      
+  <img src="../../assets/nomad-logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Write a schema package
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/nomad-coe/nomad" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://nomad-lab.eu" title="Documentation" class="md-nav__button md-logo" aria-label="Documentation" data-md-component="logo">
+      
+  <img src="../../assets/nomad-logo.png" alt="logo">
+
+    </a>
+    Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/nomad-coe/nomad" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Tutorial
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Tutorial
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/nomad_repo.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Navigating to NOMAD
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/upload_publish.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Uploading and publishing data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/explore.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exploring data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/access_api.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Access data via API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/custom.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Schemas and plugins
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../tutorial/develop_plugin.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Developing a NOMAD plugin
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    How-to guides
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            How-to guides
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../overview.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Manage and find data
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Manage and find data
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../manage/upload.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Upload and publish data for supported formats
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../manage/eln.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Use ELNs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../manage/explore.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Explore data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../manage/north.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Use NORTH
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Programmatic use
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Programmatic use
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../programmatic/api.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Use the API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../programmatic/download.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Download data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../programmatic/publish_python.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Publish data using python
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../programmatic/pythonlib.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install nomad-lab
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../programmatic/archive_query.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Access processed data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../programmatic/json_transformer.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Transform data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    NOMAD Oasis
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            NOMAD Oasis
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oasis/configure.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Configure an Oasis
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oasis/deploy.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Deploy an Oasis
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oasis/update.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Update an Oasis
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oasis/admin.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Perform admin tasks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Plugins
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            Plugins
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="plugins.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction to plugins
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="apis.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Write an API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="apps.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Write an app
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="example_uploads.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Write an example upload
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="normalizers.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Write a normalizer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="parsers.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Write a parser
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Write a schema package
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="schema_packages.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Write a schema package
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#getting-started" class="md-nav__link">
+    <span class="md-ellipsis">
+      Getting started
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#schema-package-entry-point" class="md-nav__link">
+    <span class="md-ellipsis">
+      Schema package entry point
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#schemapackage-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      SchemaPackage class
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#schema-packages-python-vs-yaml" class="md-nav__link">
+    <span class="md-ellipsis">
+      Schema packages: Python vs. YAML
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migration-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      Migration guide
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Definitions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Definitions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#common-attributes-of-metainfo-definitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common attributes of Metainfo Definitions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sections" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sections
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quantities" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quantities
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subsection" class="md-nav__link">
+    <span class="md-ellipsis">
+      SubSection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#references-and-proxies" class="md-nav__link">
+    <span class="md-ellipsis">
+      References and Proxies
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#categories" class="md-nav__link">
+    <span class="md-ellipsis">
+      Categories
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-frames" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data frames
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data frames">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#illustrating-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Illustrating example
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fields-vs-variables-and-dimensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fields vs variables (and dimensions)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#field-and-variables-in-the-schema-vs-parsing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Field and variables in the schema vs parsing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-representation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data representation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data representation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#working-with-xarrays-and-pandas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Working with xarrays and pandas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adding-python-schemas-to-nomad" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding Python schemas to NOMAD
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Adding Python schemas to NOMAD">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#schema-super-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Schema super structure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#extending-existing-sections" class="md-nav__link">
+    <span class="md-ellipsis">
+      Extending existing sections
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#schema-conventions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Schema conventions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#use-python-schemas-to-work-with-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Use Python schemas to work with data
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Use Python schemas to work with data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#access-structured-data-via-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      Access structured data via API
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wrap-data-with-python-schema-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Wrap data with Python schema classes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#access-structured-data-via-the-nomad-python-package" class="md-nav__link">
+    <span class="md-ellipsis">
+      Access structured data via the NOMAD Python package
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#versioning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Versioning
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Versioning">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#save-changes-and-unsafe-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Save changes and unsafe changes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-module-conventions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Python module conventions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#migration-strategies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Migration strategies
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Migration strategies">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#schema-package-aliases" class="md-nav__link">
+    <span class="md-ellipsis">
+      Schema package aliases
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#offer-migration-functionality" class="md-nav__link">
+    <span class="md-ellipsis">
+      Offer migration functionality
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Offer migration functionality">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#processed-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Processed data
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#raw-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      Raw files
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#schema-packages-developed-by-fairmat" class="md-nav__link">
+    <span class="md-ellipsis">
+      Schema packages developed by FAIRmat
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Customization
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            Customization
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../customization/basics.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Write a YAML schema package
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../customization/elns.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Define ELNs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../customization/base_sections.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Use base sections
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../customization/tabular.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Parse tabular data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../customization/workflows.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Define workflows
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../customization/units.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Work with units
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../customization/hdf5.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Use HDF5 to handle large quantities
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Development
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            Development
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../develop/setup.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Get started
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../develop/code.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Navigate the code
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../develop/contrib.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contribute
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../develop/search.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Extend the search
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../develop/release.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Make a release
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Domain-specific examples
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Domain-specific examples
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/overview.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Computational data
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Computational data
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/computational_data/uploading.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quick start
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/computational_data/workflows.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Workflows
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/computational_data/metainfo.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MetaInfo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/computational_data/schema_plugins.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Schema plugins
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/computational_data/parser_plugins.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Parser plugins
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/computational_data/h5md_howto.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    H5MD schema - Howto
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/computational_data/h5md_expl.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    H5MD schema - Explanation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/computational_data/h5md_ref.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    H5MD - Reference
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Experimental data
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            Experimental data
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/experiment_data/em.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Electron microscopy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/experiment_data/mpes.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Photoemission spectroscopy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/experiment_data/xps.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    X-ray photoemission spectroscopy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/experiment_data/opt.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Optical spectroscopy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/experiment_data/apm.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Atom probe tomography
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/experiment_data/stm.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Scanning tunneling spectroscopy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/experiment_data/pynxtools.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    pynxtools
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Explanation
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Explanation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../explanation/basics.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    From files to data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../explanation/data.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data structure
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../explanation/processing.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Processing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../explanation/architecture.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Architecture
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../explanation/plugin_system.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Plugins
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../explanation/oasis.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Federation and Oasis
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Reference
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/config.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Configuration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/annotations.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Annotations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/basesections.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Base Sections
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/cli.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Command Line Interface (CLI)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/plugins.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Plugins
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/parsers.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Supported parsers
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/code_guidelines.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code guidelines
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/glossary.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Glossary
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/tutorials.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    List of NOMAD tutorials
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#getting-started" class="md-nav__link">
+    <span class="md-ellipsis">
+      Getting started
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#schema-package-entry-point" class="md-nav__link">
+    <span class="md-ellipsis">
+      Schema package entry point
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#schemapackage-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      SchemaPackage class
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#schema-packages-python-vs-yaml" class="md-nav__link">
+    <span class="md-ellipsis">
+      Schema packages: Python vs. YAML
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#migration-guide" class="md-nav__link">
+    <span class="md-ellipsis">
+      Migration guide
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#definitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Definitions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Definitions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#common-attributes-of-metainfo-definitions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common attributes of Metainfo Definitions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sections" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sections
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quantities" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quantities
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subsection" class="md-nav__link">
+    <span class="md-ellipsis">
+      SubSection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#references-and-proxies" class="md-nav__link">
+    <span class="md-ellipsis">
+      References and Proxies
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#categories" class="md-nav__link">
+    <span class="md-ellipsis">
+      Categories
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-frames" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data frames
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data frames">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#illustrating-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Illustrating example
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fields-vs-variables-and-dimensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fields vs variables (and dimensions)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#field-and-variables-in-the-schema-vs-parsing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Field and variables in the schema vs parsing
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#data-representation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Data representation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Data representation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#working-with-xarrays-and-pandas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Working with xarrays and pandas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adding-python-schemas-to-nomad" class="md-nav__link">
+    <span class="md-ellipsis">
+      Adding Python schemas to NOMAD
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Adding Python schemas to NOMAD">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#schema-super-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Schema super structure
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#extending-existing-sections" class="md-nav__link">
+    <span class="md-ellipsis">
+      Extending existing sections
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#schema-conventions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Schema conventions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#use-python-schemas-to-work-with-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Use Python schemas to work with data
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Use Python schemas to work with data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#access-structured-data-via-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      Access structured data via API
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#wrap-data-with-python-schema-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Wrap data with Python schema classes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#access-structured-data-via-the-nomad-python-package" class="md-nav__link">
+    <span class="md-ellipsis">
+      Access structured data via the NOMAD Python package
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#versioning" class="md-nav__link">
+    <span class="md-ellipsis">
+      Versioning
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Versioning">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#save-changes-and-unsafe-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Save changes and unsafe changes
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-module-conventions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Python module conventions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#migration-strategies" class="md-nav__link">
+    <span class="md-ellipsis">
+      Migration strategies
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Migration strategies">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#schema-package-aliases" class="md-nav__link">
+    <span class="md-ellipsis">
+      Schema package aliases
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#offer-migration-functionality" class="md-nav__link">
+    <span class="md-ellipsis">
+      Offer migration functionality
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Offer migration functionality">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#processed-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Processed data
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#raw-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      Raw files
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#schema-packages-developed-by-fairmat" class="md-nav__link">
+    <span class="md-ellipsis">
+      Schema packages developed by FAIRmat
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="how-to-write-a-schema-package">How to write a schema package<a class="headerlink" href="#how-to-write-a-schema-package" title="Permanent link">&para;</a></h1>
+<p>Schema packages are used to define and distribute custom data definitions that can be used within NOMAD. These schema packages typically contain <a href="../../reference/glossary.html#schema">schemas</a> that users can select to instantiate manually filled entries using our ELN functionality, or that parsers select when organizing data they extract from files. Schema packages may also contain more abstract base classes that other schema packages use.</p>
+<p>This documentation shows you how to write a plugin entry point for a schema package. You should read the <a href="plugins.html">introduction to plugins</a> to have a basic understanding of how plugins and plugin entry points work in the NOMAD ecosystem.</p>
+<h2 id="getting-started">Getting started<a class="headerlink" href="#getting-started" title="Permanent link">&para;</a></h2>
+<p>You can use our <a href="https://github.com/FAIRmat-NFDI/nomad-plugin-template">template repository</a> to create an initial structure for a plugin containing a schema package. The relevant part of the repository layout will look something like this:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>nomad-example
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>   ├── src
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>   │   ├── nomad_example
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>   │   │   ├── schema_packages
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>   │   │   │   ├── __init__.py
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>   │   │   │   ├── mypackage.py
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>   ├── LICENSE.txt
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>   ├── README.md
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>   └── pyproject.toml
+</code></pre></div>
+<p>See the documentation on <a href="plugins.html#plugin-development-guidelines">plugin development guidelines</a> for more details on the best development practices for plugins, including linting, testing and documenting.</p>
+<h2 id="schema-package-entry-point">Schema package entry point<a class="headerlink" href="#schema-package-entry-point" title="Permanent link">&para;</a></h2>
+<p>The entry point defines basic information about your schema package and is used to automatically load it into a NOMAD distribution. It is an instance of a <code>SchemaPackageEntryPoint</code> or its subclass and it contains a <code>load</code> method which returns a <code>nomad.metainfo.SchemaPackage</code> instance that contains section and schema definitions. You will learn more about the <code>SchemaPackage</code> class in the next sections. The entry point should be defined in <code>*/schema_packages/__init__.py</code> like this:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">Field</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.config.models.plugins</span><span class="w"> </span><span class="kn">import</span> <span class="n">SchemaPackageEntryPoint</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="k">class</span><span class="w"> </span><span class="nc">MySchemaPackageEntryPoint</span><span class="p">(</span><span class="n">SchemaPackageEntryPoint</span><span class="p">):</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>        <span class="kn">from</span><span class="w"> </span><span class="nn">nomad_example.schema_packages.mypackage</span><span class="w"> </span><span class="kn">import</span> <span class="n">m_package</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>        <span class="k">return</span> <span class="n">m_package</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="n">mypackage</span> <span class="o">=</span> <span class="n">MySchemaPackageEntryPoint</span><span class="p">(</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>    <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;MyPackage&#39;</span><span class="p">,</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>    <span class="n">description</span> <span class="o">=</span> <span class="s1">&#39;My custom schema package.&#39;</span><span class="p">,</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="p">)</span>
+</code></pre></div>
+<p>Here you can see that a new subclass of <code>SchemaPackageEntryPoint</code> was defined. In this new class you can override the <code>load</code> method to determine how the <code>SchemaPackage</code> class is loaded, but you can also extend the <code>SchemaPackageEntryPoint</code> model to add new configurable parameters for this schema package as explained <a href="../../explanation/plugin_system.html#plugin-configuration">here</a>.</p>
+<p>We also instantiate an object <code>mypackage</code> from the new subclass. This is the final entry point instance in which you specify the default parameterization and other details about the schema package. In the reference you can see all of the available <a href="../../reference/plugins.html#schemapackageentrypoint">configuration options for a <code>SchemaPackageEntryPoint</code></a>.</p>
+<p>The entry point instance should then be added to the <code>[project.entry-points.'nomad.plugin']</code> table in <code>pyproject.toml</code> in order for it to be automatically detected:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">[project.entry-points.</span><span class="s1">&#39;nomad.plugin&#39;</span><span class="k">]</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">mypackage</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;nomad_example.schema_packages:mypackage&quot;</span>
+</code></pre></div>
+<h2 id="schemapackage-class"><code>SchemaPackage</code> class<a class="headerlink" href="#schemapackage-class" title="Permanent link">&para;</a></h2>
+<p>The <code>load</code>-method of a schema package entry point returns an instance of a <code>nomad.metainfo.SchemaPackage</code> class. This definition should be contained in a separate file (e.g. <code>*/schema_packages/mypackage.py</code>) and could look like this:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">ase</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.datamodel.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">Schema</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.metainfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">MEnum</span><span class="p">,</span> <span class="n">MSection</span><span class="p">,</span> <span class="n">Quantity</span><span class="p">,</span> <span class="n">SchemaPackage</span><span class="p">,</span> <span class="n">SubSection</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="n">m_package</span> <span class="o">=</span> <span class="n">SchemaPackage</span><span class="p">()</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="k">class</span><span class="w"> </span><span class="nc">System</span><span class="p">(</span><span class="n">MSection</span><span class="p">):</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="sd">    A system section includes all quantities that describe a single simulated</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="sd">    system (a.k.a. geometry).</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="sd">    &#39;&#39;&#39;</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>    <span class="n">n_atoms</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>        <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;&#39;&#39;</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="s1">        Defines the number of atoms in the system.</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="s1">        &#39;&#39;&#39;</span><span class="p">)</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>    <span class="n">atom_labels</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>        <span class="nb">type</span><span class="o">=</span><span class="n">MEnum</span><span class="p">(</span><span class="n">ase</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">chemical_symbols</span><span class="p">),</span> <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;n_atoms&#39;</span><span class="p">])</span>
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>    <span class="n">atom_positions</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;n_atoms&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;angstrom&#39;</span><span class="p">)</span>
+<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>    <span class="n">simulation_cell</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;angstrom&#39;</span><span class="p">)</span>
+<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>    <span class="n">pbc</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="nb">bool</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>
+<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>
+<a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="k">class</span><span class="w"> </span><span class="nc">Simulation</span><span class="p">(</span><span class="n">Schema</span><span class="p">):</span>
+<a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a>    <span class="n">system</span> <span class="o">=</span> <span class="n">SubSection</span><span class="p">(</span><span class="n">sub_section</span><span class="o">=</span><span class="n">System</span><span class="p">,</span> <span class="n">repeats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a>
+<a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a><span class="n">m_package</span><span class="o">.</span><span class="n">__init_metainfo__</span><span class="p">()</span>
+</code></pre></div>
+<p>Schema packages typically contain one or several <a href="../../reference/glossary.html#schema">schema</a> definitions, that can the be used to manually create new entries through the ELN functionality, or also by parsers to create instances of this schema fully automatically. All of the definitions contained in the package should be placed between the contructor call (<code>m_package = SchemaPackage()</code>) and the initialization (<code>m_package.__init_metainfo__()</code>).</p>
+<p>In this basic example we defined two <em>sections</em>: <code>System</code> and <code>Simulation</code>. <code>System</code> inherits from most primitive type of section - <code>MSection</code> - whereas <code>Simulation</code> is defined as a subclass of <code>Schema</code> which makes it possible to use this as the root section of an entry. Each section can have two types of properties: <em>quantities</em> and <em>subsections</em>. Sections and their properties are defined with Python classes and their attributes. Each <em>quantity</em> defines a piece of data. Basic quantity attributes are <code>type</code>, <code>shape</code>, <code>unit</code>, and <code>description</code>.</p>
+<p><em>Subsections</em> allow the placement of sections within each other, forming containment hierarchies. Basic subsection attributes are <code>sub_section</code>&mdash;a reference to the section definition of the subsection&mdash;and <code>repeats</code>&mdash;determines whether a subsection can be included once or multiple times.</p>
+<p>To use the above-defined schema and create actual data, we have to instantiate the classes:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">simulation</span> <span class="o">=</span> <span class="n">Simulation</span><span class="p">()</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">system</span> <span class="o">=</span> <span class="n">System</span><span class="p">()</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">system</span><span class="o">.</span><span class="n">n_atoms</span> <span class="o">=</span> <span class="mi">3</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">system</span><span class="o">.</span><span class="n">atom_labels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;O&#39;</span><span class="p">]</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="n">simulation</span><span class="o">.</span><span class="n">system</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">system</span><span class="p">)</span>
+</code></pre></div>
+<p>Section <em>instances</em> can be used like regular Python objects: quantities and subsections
+can be set and accessed like any other Python attribute. Special metainfo methods, starting
+with <code>m_</code> allow us to realize more complex semantics. For example <code>m_create</code> will
+instantiate a subsection and add it to the <em>parent</em> section in one step.</p>
+<!-- ? m_create is deprecated? -->
+
+<p>Another example for an <code>m_</code>-method is:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">simulation</span><span class="o">.</span><span class="n">m_to_json</span><span class="p">(</span><span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div>
+<p>This will convert the data into JSON:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">{</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">&quot;system&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">      </span><span class="nt">&quot;n_atoms&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">      </span><span class="nt">&quot;atom_labels&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">        </span><span class="s2">&quot;H&quot;</span><span class="p">,</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">        </span><span class="s2">&quot;H&quot;</span><span class="p">,</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">        </span><span class="s2">&quot;O&quot;</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">      </span><span class="p">]</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">  </span><span class="p">]</span>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="p">}</span>
+</code></pre></div>
+<h2 id="schema-packages-python-vs-yaml">Schema packages: Python vs. YAML<a class="headerlink" href="#schema-packages-python-vs-yaml" title="Permanent link">&para;</a></h2>
+<p>In this <a href="../customization/basics.html">guide</a>, we explain how to write and upload schema packages in the <code>.archive.yaml</code> format. Writing and uploading such YAML schema packages is a good way for NOMAD users to start exploring schemas, but it has limitations. As a NOMAD developer or Oasis administrator you can add Python schema packages to NOMAD. All built-in NOMAD schemas (e.g. for electronic structure code data) are written in Python and are part of the NOMAD sources (<code>nomad.datamodel.metainfo.*</code>).</p>
+<p>There is a 1-1 translation between the structure in Python schema packages (written in classes) and YAML (or JSON) schema packages (written in objects). Both use the same fundamental concepts, like <em>section</em>, <em>quantity</em>, or <em>subsection</em>, introduced in <a href="../customization/basics.html">YAML schemas</a>. The main benefit of Python schema packages is the ability to define custom <code>normalize</code>-functions.</p>
+<p><code>normalize</code>-functions are attached to sections and are are called when instances of these sections are processed. All files are processed when they are uploaded or changed. To add a <code>normalize</code> function, your section has to inherit from <code>Schema</code> or <code>ArchiveSection</code> which provides the base for this functionality. Here is an example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.datamodel</span><span class="w"> </span><span class="kn">import</span> <span class="n">Schema</span><span class="p">,</span> <span class="n">ArchiveSection</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.metainfo.metainfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">Quantity</span><span class="p">,</span> <span class="n">Datetime</span><span class="p">,</span> <span class="n">SubSection</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="k">class</span><span class="w"> </span><span class="nc">Sample</span><span class="p">(</span><span class="n">ArchiveSection</span><span class="p">):</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>    <span class="n">added_date</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">Datetime</span><span class="p">)</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>    <span class="n">formula</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>    <span class="n">sample_id</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">normalize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">archive</span><span class="p">,</span> <span class="n">logger</span><span class="p">):</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>        <span class="nb">super</span><span class="p">(</span><span class="n">Sample</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="n">archive</span><span class="p">,</span> <span class="n">logger</span><span class="p">)</span>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">sample_id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">sample_id</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">added_date</span><span class="si">}</span><span class="s1">--</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">formula</span><span class="si">}</span><span class="s1">&#39;</span>
+<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>
+<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a>
+<a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a><span class="k">class</span><span class="w"> </span><span class="nc">SampleDatabase</span><span class="p">(</span><span class="n">Schema</span><span class="p">):</span>
+<a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a>    <span class="n">samples</span> <span class="o">=</span> <span class="n">SubSection</span><span class="p">(</span><span class="n">section</span><span class="o">=</span><span class="n">Sample</span><span class="p">,</span> <span class="n">repeats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+<p>Make sure to call the <code>super</code> implementation properly to support multiple inheritance. In order to control the order by which the <code>normalize</code> calls are executed, one can define <code>normalizer_level</code> which is set to 0 by default. The normalize functions are always called for any sub section before the parent section. However, the order for any sections on the same level will be from low values of <code>normalizer_level</code> to high.</p>
+<p>If we parse an archive like this:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nt">data</span><span class="p">:</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="nt">m_def</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;examples.archive.custom_schema.SampleDatabase&#39;</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span><span class="nt">samples</span><span class="p">:</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">formula</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NaCl</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">      </span><span class="nt">added_date</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;2022-06-18&#39;</span>
+</code></pre></div>
+<p>we will get a final normalized archive that contains our data like this:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="p">{</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="nt">&quot;data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="nt">&quot;m_def&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;examples.archive.custom_schema.SampleDatabase&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="nt">&quot;samples&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">      </span><span class="p">{</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">        </span><span class="nt">&quot;added_date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2022-06-18T00:00:00+00:00&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">        </span><span class="nt">&quot;formula&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;NaCl&quot;</span><span class="p">,</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">        </span><span class="nt">&quot;sample_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2022-06-18 00:00:00+00:00--NaCl&quot;</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="w">      </span><span class="p">}</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="w">    </span><span class="p">]</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="p">}</span>
+</code></pre></div>
+<h2 id="migration-guide">Migration guide<a class="headerlink" href="#migration-guide" title="Permanent link">&para;</a></h2>
+<p>By default, schema packages are identified by the full qualified path to the Python module that contains the definitions. An example of a full qualified path could be <code>nomad_example.schema_packages.mypackage</code>, where the first part is the Python package name, second part is a subpackage, and the last part is a Python module containing the definitions. This is the easiest way to prevent conflicts between different schema packages: python package names are unique (prevents clashes between packages) and paths inside a package must point to a single python module (prevents clashes within package). This does, however, mean that <em>if you move your schema definition in the plugin source code, any references to the old definition will break</em>. This becomes problematic in installations that have lot of old data processed with the old definition location, as those entries will still refer to the old location and will not work correctly.</p>
+<p>As it might not be possible, or even wise to prevent changes in the source code layout, and reprocessing all old entries might be impractical, we do provide an alias mechanism to help with migration tasks. Imagine your schema package was contained in <code>nomad_example.schema_packages.mypackage</code>, and in a newer version of your plugin you want to move it to <code>nomad_example.schema_packages.mynewpackage</code>. The way to do this without completely breaking the old entries is to add an alias in the schema package definition:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">m_package</span> <span class="o">=</span> <span class="n">SchemaPackage</span><span class="p">(</span><span class="n">aliases</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;nomad_example.schema_packages.mypackage&#39;</span><span class="p">])</span>
+</code></pre></div>
+<p>Note that this will only help in scenarious where you have moved the definition and not removed or modified any of them.</p>
+<h2 id="definitions">Definitions<a class="headerlink" href="#definitions" title="Permanent link">&para;</a></h2>
+<p>The following describes in detail the schema language for the NOMAD Metainfo and how it is expressed in Python.</p>
+<h3 id="common-attributes-of-metainfo-definitions">Common attributes of Metainfo Definitions<a class="headerlink" href="#common-attributes-of-metainfo-definitions" title="Permanent link">&para;</a></h3>
+<p>In the example, you have already seen the basic Python interface to the Metainfo. <em>Sections</em> are
+represented in Python as objects. To define a section, you write a Python class that inherits
+from <code>MSection</code>. To define subsections and quantities you use Python properties. The
+definitions themselves are also objects derived from classes. For subsections and
+quantities, you directly instantiate <code>:class:SubSection</code> and <code>:class:Quantity</code>. For sections
+there is a generated object derived from <code>:class:Section</code> and available via
+<code>m_def</code> from each <em>section class</em> and <em>section instance</em>.</p>
+<!-- TODO Either fix all cross references with :: syntax here and throughout or remove them -->
+
+<p>These Python classes, used to represent metainfo definitions, form an inheritance
+hierarchy to share common properties</p>
+<ul>
+<li><code>name</code>: each definition has a name. This is typically defined by the corresponding
+  Python property. For example, a section class name becomes the section name; a quantity gets the name
+  from the variable name used in its Python definition, etc.</li>
+<li><code>description</code>: each definition should have one. Either set it directly or use <em>doc strings</em></li>
+<li><code>links</code>: a list of useful internet references.</li>
+<li><code>more</code>: a dictionary of custom information. Any additional <code>kwargs</code> set when creating a definition
+  are added to <code>more</code>.</li>
+</ul>
+<h3 id="sections">Sections<a class="headerlink" href="#sections" title="Permanent link">&para;</a></h3>
+<p>Sections are defined with Python classes that extend <code>MSection</code> (or other section classes).</p>
+<ul>
+<li><code>base_sections</code>: automatically taken from the base classes of the Python class.</li>
+<li><code>extends_base_section</code>: a boolean that determines the inheritance. If this is <code>False</code>,
+  normal Python inheritance implies and this section will inherit all properties (subsections,
+  quantities) from all base classes. If <code>True</code>, all definitions in this section
+  will be added to the properties of the base class section. This allows the extension of existing
+  sections with additional properties.</li>
+</ul>
+<h3 id="quantities">Quantities<a class="headerlink" href="#quantities" title="Permanent link">&para;</a></h3>
+<p>Quantity definitions are the main building block of metainfo schemas. Each quantity
+represents a single piece of data. Quantities can be defined with the following attributes:</p>
+<ul>
+<li><code>type</code>: can be a primitive Python type (<code>str</code>, <code>int</code>, <code>bool</code>), a numpy
+  data type (<code>np.dtype('float64')</code>), an <code>MEnum('item1', ..., 'itemN')</code>, a predefined
+  metainfo type (<code>Datetime</code>, <code>JSON</code>, <code>File</code>, ...), or another section or quantity to define
+  a reference type.</li>
+<li><code>shape</code>: defines the dimensionality of the quantity. Examples are: <code>[]</code> (number),
+  <code>['*']</code> (list), <code>[3, 3]</code> (3 by 3 matrix), <code>['n_elements']</code> (a vector of length defined by
+  another quantity <code>n_elements</code>).</li>
+<li><code>unit</code>: a physical unit. We use <a href="https://pint.readthedocs.io/en/stable/" target="_blank">Pint</a> here. You can
+  use unit strings that are parsed by Pint, e.g. <code>meter</code>, <code>m</code>, <code>m/s^2</code>. As a convention the
+  NOMAD Metainfo uses only SI units.</li>
+</ul>
+<h3 id="subsection">SubSection<a class="headerlink" href="#subsection" title="Permanent link">&para;</a></h3>
+<p>A subsection defines a named property of a section that refers to another section. It
+allows to define that a section that contains another section.</p>
+<ul>
+<li><code>sub_section</code>: (aliases <code>section_def</code>, <code>sub_section_def</code>) defines the section that can
+  be contained.</li>
+<li><code>repeats</code>: a boolean that determines whether the subsection relationship allows multiple sections
+  or only one.</li>
+</ul>
+<h3 id="references-and-proxies">References and Proxies<a class="headerlink" href="#references-and-proxies" title="Permanent link">&para;</a></h3>
+<p>Besides creating hierarchies with subsections (e.g. tree structures), the metainfo
+also allows one to create a reference within a section that points to either another section or a quantity
+value:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Calculation</span><span class="p">(</span><span class="n">MSection</span><span class="p">):</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>    <span class="n">system</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">System</span><span class="o">.</span><span class="n">m_def</span><span class="p">)</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>    <span class="n">atom_labels</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">System</span><span class="o">.</span><span class="n">atom_labels</span><span class="p">)</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="n">calc</span> <span class="o">=</span> <span class="n">Calculation</span><span class="p">()</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="n">calc</span><span class="o">.</span><span class="n">system</span> <span class="o">=</span> <span class="n">run</span><span class="o">.</span><span class="n">systems</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="n">calc</span><span class="o">.</span><span class="n">atom_labels</span> <span class="o">=</span> <span class="n">run</span><span class="o">.</span><span class="n">systems</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</code></pre></div>
+<p>To define a reference, define a normal quantity and simply use the section or quantity
+you want to refer to as type. Then you can assign respective section instances
+as values.</p>
+<p>In Python memory, quantity values that reference other sections simply contain a
+Python reference to the respective <em>section instance</em>. However, upon serializing/storing
+metainfo data, these references have to be represented differently.</p>
+<p>Value references work a little differently. When you read a value reference, it behaves like
+the reference value. Internally, we do not store the values, but instead a reference to the
+section that holds the referenced quantity is stored. Therefore, when you want to
+assign a value reference, use the section with the quantity and not the value itself.</p>
+<!-- TODO Add a simply example here -->
+
+<p>References are serialized as URLs. There are different types of reference URLs:</p>
+<ul>
+<li><code>#/run/0/calculation/1</code>: a reference in the same Archive</li>
+<li><code>/run/0/calculation/1</code>: a reference in the same archive (legacy version)</li>
+<li><code>../upload/archive/mainfile/{mainfile}#/run/0</code>: a reference into an Archive of the same upload</li>
+<li><code>/entries/{entry_id}/archive#/run/0/calculation/1</code>: a reference into the Archive of a different entry on the same NOMAD installation</li>
+<li><code>/uploads/{upload_id}/archive/{entry_id}#/run/0/calculation/1</code>: similar to the previous one but based on uploads</li>
+<li><code>https://myoasis.de/api/v1/uploads/{upload_id}/archive/{entry_id}#/run/0/calculation/1</code>: a global reference towards a different NOMAD installation (Oasis)</li>
+</ul>
+<p>The host and path parts of URLs correspond with the <a href="../programmatic/api.html">NOMAD API</a>. The anchors are paths from the root section of an Archive, over its subsections, to the referenced section or quantity value. Each path segment is the name of the subsection or an index in a repeatable subsection: <code>/system/0</code> or <code>/system/0/atom_labels</code>.</p>
+<p>References are automatically serialized by <code>:py:meth:MSection.m_to_dict</code>. When de-serializing
+data with <code>:py:meth:MSection.m_from_dict</code> these references are not resolved right away,
+because the reference section might not yet be available. Instead references are stored
+as <code>:class:MProxy</code> instances. These objects are automatically replaced by the referenced
+object when a respective quantity is accessed.</p>
+<p>If you want to define references, it might not be possible to define the referenced
+section or quantity beforehand, due to the way Python definitions and imports work. In these
+cases, you can use a proxy to reference the reference type. There is a special proxy
+implementation for sections:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Calculation</span><span class="p">(</span><span class="n">MSection</span><span class="p">):</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>    <span class="n">system</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">SectionProxy</span><span class="p">(</span><span class="s1">&#39;System&#39;</span><span class="p">)</span>
+</code></pre></div>
+<p>The strings given to <code>SectionProxy</code> are paths within the available definitions.
+The above example works, if <code>System</code> is eventually defined in the same package.</p>
+<h3 id="categories">Categories<a class="headerlink" href="#categories" title="Permanent link">&para;</a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Categories are now deprecated.
+Their previous occurrences should be replaced
+with respective annotations.</p>
+</div>
+<p>In the old metainfo this was known as <em>abstract types</em>.</p>
+<p>Categories are defined with Python classes that have <code>:class:MCategory</code> as base class.
+Their name and description are taken from the name and docstring of the class. An example
+category looks like this:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">CategoryName</span><span class="p">(</span><span class="n">MCategory</span><span class="p">):</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">    </span><span class="sd">&#39;&#39;&#39; Category description &#39;&#39;&#39;</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>    <span class="n">m_def</span> <span class="o">=</span> <span class="n">Category</span><span class="p">(</span><span class="n">links</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;http://further.explanation.eu&#39;</span><span class="p">],</span> <span class="n">categories</span><span class="o">=</span><span class="p">[</span><span class="n">ParentCategory</span><span class="p">])</span>
+</code></pre></div>
+<h2 id="data-frames">Data frames<a class="headerlink" href="#data-frames" title="Permanent link">&para;</a></h2>
+<p>On top of the core Metainfo concepts like <code>Sections</code>, <code>Quantities</code>, and <code>SubSection</code>, we provide a mechanism for modeling <em>data frames</em>.</p>
+<p>A NOMAD data frame is a multi-index table with named indices (variables) and columns (fields).
+All columns should match in length, as they are all parametrized by the same indices.
+Both variables and fields are defined standalone using Values.
+A DataFrame may contain any number of Values, though a bare minimum can be defined via the <code>mandatory_variables</code> and <code>mandatory_fields</code> respectively.</p>
+<p>The mechanism is based on a concept called <code>Values</code> for storing arrays of numeric data to
+represent a <em>field</em> or <em>variable</em> (or axis, dimension, etc.) and a concept called
+<code>DataFrame</code> that combines <em>fields</em> and <em>variables</em> with matching dimensions into a data frame.
+Our <code>DataFrame</code> is conceptually close to xarray datasets, pandas data frames, or the NeXus NXData group.</p>
+<p><code>Values</code> and <code>DataFrame</code> are usually not used directly, instead you will create
+re-usable templates that allow you to use the same type of <code>Values</code> (e.g. describing
+physical properties like energies, temperatures, pressures, ...) and the same type of <code>DataFrame</code> (e.g.
+describing material properties at different variables like density of states or band gap).</p>
+<h3 id="illustrating-example">Illustrating example<a class="headerlink" href="#illustrating-example" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">Energy</span> <span class="o">=</span> <span class="n">ValuesTemplate</span><span class="p">(</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Energy&#39;</span><span class="p">,</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>    <span class="nb">type</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>    <span class="n">shape</span><span class="o">=</span><span class="p">[],</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>    <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;J&#39;</span><span class="p">,</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>    <span class="n">iri</span><span class="o">=</span><span class="s1">&#39;https://www.wikidata.org/wiki/Q11379&#39;</span><span class="p">,</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="p">)</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="n">Temperature</span> <span class="o">=</span> <span class="n">ValuesTemplate</span><span class="p">(</span>
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Temperature&#39;</span><span class="p">,</span>
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>    <span class="nb">type</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span>
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a>    <span class="n">shape</span><span class="o">=</span><span class="p">[],</span>
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a>    <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;K&#39;</span><span class="p">,</span>
+<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a>    <span class="n">iri</span><span class="o">=</span><span class="s1">&#39;https://www.wikidata.org/wiki/Q11466&#39;</span><span class="p">,</span>
+<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a><span class="p">)</span>
+<a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a>
+<a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a><span class="n">Pressure</span> <span class="o">=</span> <span class="n">ValuesTemplate</span><span class="p">(</span>
+<a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a>    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Pressure&#39;</span><span class="p">,</span>
+<a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a>    <span class="nb">type</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span>
+<a id="__codelineno-14-20" name="__codelineno-14-20" href="#__codelineno-14-20"></a>    <span class="n">shape</span><span class="o">=</span><span class="p">[],</span>
+<a id="__codelineno-14-21" name="__codelineno-14-21" href="#__codelineno-14-21"></a>    <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;Pa&#39;</span><span class="p">,</span>
+<a id="__codelineno-14-22" name="__codelineno-14-22" href="#__codelineno-14-22"></a>    <span class="n">iri</span><span class="o">=</span><span class="s1">&#39;https://www.wikidata.org/wiki/Q39552&#39;</span><span class="p">,</span>
+<a id="__codelineno-14-23" name="__codelineno-14-23" href="#__codelineno-14-23"></a><span class="p">)</span>
+<a id="__codelineno-14-24" name="__codelineno-14-24" href="#__codelineno-14-24"></a>
+<a id="__codelineno-14-25" name="__codelineno-14-25" href="#__codelineno-14-25"></a><span class="n">BandGap</span> <span class="o">=</span> <span class="n">DataFrameTemplate</span><span class="p">(</span>
+<a id="__codelineno-14-26" name="__codelineno-14-26" href="#__codelineno-14-26"></a>    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;BandGap&#39;</span><span class="p">,</span>
+<a id="__codelineno-14-27" name="__codelineno-14-27" href="#__codelineno-14-27"></a>    <span class="n">mandatory_fields</span><span class="o">=</span><span class="p">[</span><span class="n">Energy</span><span class="p">],</span>
+<a id="__codelineno-14-28" name="__codelineno-14-28" href="#__codelineno-14-28"></a><span class="p">)</span>
+<a id="__codelineno-14-29" name="__codelineno-14-29" href="#__codelineno-14-29"></a>
+<a id="__codelineno-14-30" name="__codelineno-14-30" href="#__codelineno-14-30"></a>
+<a id="__codelineno-14-31" name="__codelineno-14-31" href="#__codelineno-14-31"></a><span class="k">class</span><span class="w"> </span><span class="nc">MySection</span><span class="p">(</span><span class="n">MSection</span><span class="p">):</span>
+<a id="__codelineno-14-32" name="__codelineno-14-32" href="#__codelineno-14-32"></a>    <span class="n">band_gaps</span> <span class="o">=</span> <span class="n">BandGap</span><span class="p">()</span>
+<a id="__codelineno-14-33" name="__codelineno-14-33" href="#__codelineno-14-33"></a>
+<a id="__codelineno-14-34" name="__codelineno-14-34" href="#__codelineno-14-34"></a>
+<a id="__codelineno-14-35" name="__codelineno-14-35" href="#__codelineno-14-35"></a><span class="n">my_section</span> <span class="o">=</span> <span class="n">MySection</span><span class="p">()</span>
+<a id="__codelineno-14-36" name="__codelineno-14-36" href="#__codelineno-14-36"></a><span class="n">my_section</span><span class="o">.</span><span class="n">band_gaps</span> <span class="o">=</span> <span class="n">BandGap</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
+<a id="__codelineno-14-37" name="__codelineno-14-37" href="#__codelineno-14-37"></a><span class="n">my_section</span><span class="o">.</span><span class="n">band_gaps</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="n">Energy</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">)]</span>
+<a id="__codelineno-14-38" name="__codelineno-14-38" href="#__codelineno-14-38"></a><span class="n">my_section</span><span class="o">.</span><span class="n">band_gaps</span><span class="o">.</span><span class="n">variables</span> <span class="o">=</span> <span class="p">[</span><span class="n">Temperature</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">220</span><span class="p">)]</span>
+</code></pre></div>
+<h3 id="fields-vs-variables-and-dimensions">Fields vs variables (and dimensions)<a class="headerlink" href="#fields-vs-variables-and-dimensions" title="Permanent link">&para;</a></h3>
+<p>Both <em>fields</em> and <em>variables</em> hold values (i.e. columns) in your data frame.
+While <em>fields</em> hold the actual data, <em>variables</em> span the data space and its dimensions (i.e. column indices).</p>
+<p><em>Variables</em> and <em>dimensions</em> are conceptually slightly different. First, <em>variables</em> provide
+the values on a certain dimension (via shared indices). Second, the number of <em>Variables</em> often, but not necessarily,
+are equal to the number of dimensions. If some <em>variables</em> depend on each other, they might
+span shared dimensions. <em>Fields</em> on the other hand always provide values for all dimensions.</p>
+<p>Let's compare two datasets; one dataset that you could plot in a heatmap and one that
+you would plot in a scatter plot. In both cases, we have two <em>variables</em> <code>Temperature</code> and <code>Pressure</code>,
+as well as one <em>field</em> <code>Energy</code>.</p>
+<p>In the heatmap scenario, we vary <code>Temperature</code> and <code>Pressure</code> independently and have a
+<code>Energy</code> value (i.e. heatmap color/intensity) for each <code>Temperature</code> reading at every <code>Pressure</code> reading.
+For two values on each <em>variable</em>, we respectively we have 4 (2x2) <em>field</em> values:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">my_section</span> <span class="o">=</span> <span class="n">MySection</span><span class="p">()</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="n">my_section</span><span class="o">.</span><span class="n">band_gaps</span> <span class="o">=</span> <span class="n">BandGap</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="n">my_section</span><span class="o">.</span><span class="n">band_gaps</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>    <span class="n">Energy</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.3</span><span class="p">,</span> <span class="mf">1.4</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.6</span><span class="p">,</span> <span class="mf">1.7</span><span class="p">]]))</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="p">]</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="n">my_section</span><span class="o">.</span><span class="n">band_gaps</span><span class="o">.</span><span class="n">variables</span> <span class="o">=</span> <span class="p">[</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>    <span class="n">Temperature</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">220</span><span class="p">),</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>    <span class="n">Pressure</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="mf">1e5</span><span class="p">,</span> <span class="mf">1.2e5</span><span class="p">,</span> <span class="mf">1.4e5</span><span class="p">),</span>
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="p">]</span>
+</code></pre></div>
+<p>In the scatter plot scenario, we vary <code>Temperature</code> and <code>Pressure</code> together.
+We only have one <em>field</em> value (y-axis) for each pair of temperature and pressure (two x-axes)
+values.
+With two combined temperature and pressure readings, we respectively only have two field values:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="n">my_section</span> <span class="o">=</span> <span class="n">MySection</span><span class="p">()</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="n">my_section</span><span class="o">.</span><span class="n">band_gaps</span> <span class="o">=</span> <span class="n">BandGap</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="n">my_section</span><span class="o">.</span><span class="n">band_gaps</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span><span class="n">Energy</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">)]</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="n">my_section</span><span class="o">.</span><span class="n">band_gaps</span><span class="o">.</span><span class="n">variables</span> <span class="o">=</span> <span class="p">[</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>    <span class="n">Temperature</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">220</span><span class="p">,</span> <span class="mi">240</span><span class="p">,</span> <span class="n">spanned_dimensions</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>    <span class="n">Pressure</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="mf">1e5</span><span class="p">,</span> <span class="mf">1.2e5</span><span class="p">,</span> <span class="mf">1.4e5</span><span class="p">,</span> <span class="n">spanned_dimensions</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="p">]</span>
+</code></pre></div>
+<p>We can use the <code>ValueTemplate</code> kwarg <code>spanned_dimenions</code> to define how <code>Temperature</code> and
+<code>Pressure</code> are related. The given indices refer to the indices of the field values and
+represent the logical dimension of the data space.</p>
+<p>The first example without the <code>spanned_dimensions</code> is equivalent to this example
+with <code>spanned_dimensions</code>. Here we span two independent dimensions:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="n">my_section</span> <span class="o">=</span> <span class="n">MySection</span><span class="p">()</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="n">my_section</span><span class="o">.</span><span class="n">band_gaps</span> <span class="o">=</span> <span class="n">BandGap</span><span class="o">.</span><span class="n">create</span><span class="p">()</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="n">my_section</span><span class="o">.</span><span class="n">band_gaps</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>    <span class="n">Energy</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.1</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.3</span><span class="p">,</span> <span class="mf">1.4</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.6</span><span class="p">,</span> <span class="mf">1.7</span><span class="p">]]))</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="p">]</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="n">my_section</span><span class="o">.</span><span class="n">band_gaps</span><span class="o">.</span><span class="n">variables</span> <span class="o">=</span> <span class="p">[</span>
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>    <span class="n">Temperature</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">220</span><span class="p">,</span> <span class="n">spanned_dimensions</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>    <span class="n">Pressure</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="mf">1e5</span><span class="p">,</span> <span class="mf">1.2e5</span><span class="p">,</span> <span class="mf">1.4e5</span><span class="p">,</span> <span class="n">spanned_dimensions</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span>
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="p">]</span>
+</code></pre></div>
+<h3 id="field-and-variables-in-the-schema-vs-parsing">Field and variables in the schema vs parsing<a class="headerlink" href="#field-and-variables-in-the-schema-vs-parsing" title="Permanent link">&para;</a></h3>
+<p>The templates allow you to define <em>mandatory</em> <em>fields</em> and <em>variables</em> in the schema.
+These <em>fields</em> and <em>variables</em> have to be provided by the parser when instantiating the
+respective dataset. However, parser can provide additional <em>fields</em> and <em>variables</em>.
+This allows to extend what is defined in the template without requiering new definitions.</p>
+<h3 id="data-representation">Data representation<a class="headerlink" href="#data-representation" title="Permanent link">&para;</a></h3>
+<p>Each call to <code>ValueTemplate</code> and <code>DatasetTemplate</code> produces a section definition
+inheriting from <code>Values</code> and <code>DataFrame</code> respectively.</p>
+<p><code>Values</code> sections define a single quantity <code>values</code>. The <code>values</code> quantity always holds a numpy array
+based on the type and shape given in the template. The shape of the <code>values</code> quantity
+is the shape given in the template plus one dimension of arbitrary length.
+<em>Variable</em> values are always a flat list of values anyways (the values themselves can have a higher shape).
+<em>Field</em> values are always flattened. You might provide them in a higher dimensional array
+according to the dimensionality of the <em>Variables</em>, but they are always flattened as the
+<code>value</code> quantity only provides one additional dimension, because the real number of dimensions
+is only available at runtime. The original (runtime) shape of <em>fields</em> is stored int the <code>original_shape</code> <code>Values</code> quantity.</p>
+<p><code>DataFrame</code> sections define repeating sub-sections for <code>fields</code> and <code>variables</code>.
+The specific <code>DataFrame</code> section defined by the template, will also hold an annotation <code>DatasetAnnotation</code> that keeps the <code>mandatory_fields</code> and <code>mandatory_variables</code> for runtime validation.
+The <code>fields</code> and <code>variables</code> sub-sections provide a <code>Values</code>
+instances for each <em>field</em> in <code>mandatory_fields</code> and each <em>variable</em> in <code>mandatory_variables</code>,
+but they can also hold additional <em>fields</em> and <em>variables</em> to accommodate more
+<em>fields</em> and <em>variables</em> determined during parsing.</p>
+<p>When a <code>ValuesTemplate</code> is used (e.g. <code>some_property = Energy()</code>), a quantity is created.
+This quantity is a copy of the <code>values</code> quantity created by the template.
+This allows to reuse templated value quantities. When a <code>DatasetTemplate</code> is used
+(e.g. <code>some_property = BandGap()</code>), a sub-section is created. This sub-section targets
+the <code>DataFrame</code> section defined by the template.</p>
+<h4 id="working-with-xarrays-and-pandas">Working with xarrays and pandas<a class="headerlink" href="#working-with-xarrays-and-pandas" title="Permanent link">&para;</a></h4>
+<p>We provide utility function on <code>DataFrame</code> that you can use to translate into
+respective xarray datasets and pandas data frames.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The documentation on this is still pending.</p>
+</div>
+<h2 id="adding-python-schemas-to-nomad">Adding Python schemas to NOMAD<a class="headerlink" href="#adding-python-schemas-to-nomad" title="Permanent link">&para;</a></h2>
+<p>The following describes how to integrate new schema modules into the existing code according
+to best practices.</p>
+<h3 id="schema-super-structure">Schema super structure<a class="headerlink" href="#schema-super-structure" title="Permanent link">&para;</a></h3>
+<p>You should follow the basic <a href="../develop/setup.html">developer's getting started</a> to setup a development environment. This will give you all the necessary libraries and allows you
+to place your modules into the NOMAD code.</p>
+<p>The <code>EntryArchive</code> section definition sets the root of the archive for each entry in
+NOMAD. It therefore defines the top level sections:</p>
+<ul>
+<li><code>metadata</code>: all "administrative" metadata (ids, permissions, publish state, uploads, user metadata, etc.)</li>
+<li><code>results</code>: a summary with copies and references to data from method specific sections. This also
+  presents the <a href="../develop/search.html">searchable metadata</a>.</li>
+<li><code>workflows</code>: all workflow metadata</li>
+<li><code>data</code>: contains all data from method specific sections by default.</li>
+<li>Method-specific subsections: e.g. <code>run</code>. This is were all parsers are supposed to
+add the parsed data.</li>
+</ul>
+<!-- TODO Update!!! -->
+
+<p>The main NOMAD Python project includes Metainfo definitions in the following modules:</p>
+<ul>
+<li><code>nomad.metainfo</code>: defines the Metainfo itself. This includes a self-referencing schema. E.g. there is a section <code>Section</code>, etc.</li>
+<li><code>nomad.datamodel</code>: defines the section <code>metadata</code> that contains all "administrative"
+  metadata. It also contains the root section <code>EntryArchive</code>.</li>
+<li><code>nomad.datamodel.metainfo</code>: defines all the central, method specific (but not parser specific) definitions.
+  For example the section <code>run</code> with all the simulation definitions (computational material science definitions)
+  that are shared among the respective parsers.</li>
+</ul>
+<h3 id="extending-existing-sections">Extending existing sections<a class="headerlink" href="#extending-existing-sections" title="Permanent link">&para;</a></h3>
+<p>Parsers can provide their own definitions. By convention, these are placed into a
+<code>metainfo</code> sub-module of the parser Python module. The definitions here can add properties
+to existing sections (e.g. from <code>nomad.datamodel.metainfo</code>). By convention, use a <code>x_mycode_</code>
+prefix. This is done with the
+<code>extends_base_section</code> <a href="#sections">Section property</a>. Here is an example:</p>
+<!-- ? Do we want to encourage this as best practice in the future? -->
+
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.metainfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">Section</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.datamodel.metainfo.workflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">Workflow</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="k">class</span><span class="w"> </span><span class="nc">MyCodeRun</span><span class="p">(</span><span class="n">Workflow</span><span class="p">)</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>    <span class="n">m_def</span> <span class="o">=</span> <span class="n">Section</span><span class="p">(</span><span class="n">extends_base_section</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>    <span class="n">x_mycode_execution_mode</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>        <span class="nb">type</span><span class="o">=</span><span class="n">MEnum</span><span class="p">(</span><span class="s1">&#39;hpc&#39;</span><span class="p">,</span> <span class="s1">&#39;parallel&#39;</span><span class="p">,</span> <span class="s1">&#39;single&#39;</span><span class="p">),</span> <span class="n">description</span><span class="o">=</span><span class="s1">&#39;...&#39;</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="schema-conventions">Schema conventions<a class="headerlink" href="#schema-conventions" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Use lower snake case for section properties; use upper camel case for section definitions.</li>
+<li>Use a <code>_ref</code> suffix for references.</li>
+<li>Use subsections rather than inheritance to add specific quantities to a general section.
+  E.g. the section <code>workflow</code> contains a section <code>geometry_optimization</code> for all geometry optimization specific
+  workflow quantities.</li>
+<li>Prefix parser-specific and user-defined definitions with <code>x_name_</code>, where <code>name</code> is the
+short handle of a code name or other special method prefix.</li>
+</ul>
+<!-- TODO add case examples to the reference pages and add corresponding links here and throughout -->
+
+<h2 id="use-python-schemas-to-work-with-data">Use Python schemas to work with data<a class="headerlink" href="#use-python-schemas-to-work-with-data" title="Permanent link">&para;</a></h2>
+<h3 id="access-structured-data-via-api">Access structured data via API<a class="headerlink" href="#access-structured-data-via-api" title="Permanent link">&para;</a></h3>
+<p>The <a href="../programmatic/api.html#access-processed-data-archives">API section</a> demonstrates how to access an Archive, i.e.
+retrieve the processed data from a NOMAD entry. This API will give you JSON data likes this:</p>
+<div class="highlight"><span class="filename">https://nomad-lab.eu/prod/v1/api/v1/entries/--dLZstNvL_x05wDg2djQmlU_oKn/archive</span><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="p">{</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="w">    </span><span class="nt">&quot;run&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="w">        </span><span class="p">{</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="w">            </span><span class="nt">&quot;program&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">},</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="w">            </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">],</span>
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="w">            </span><span class="nt">&quot;system&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="w">                </span><span class="p">{</span><span class="err">...</span><span class="p">},</span>
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="w">                </span><span class="p">{</span><span class="err">...</span><span class="p">},</span>
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a><span class="w">                </span><span class="p">{</span><span class="err">...</span><span class="p">},</span>
+<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a><span class="w">                </span><span class="p">{</span><span class="err">...</span><span class="p">},</span>
+<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a><span class="w">                </span><span class="p">{</span>
+<a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a><span class="w">                    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;bulk&quot;</span><span class="p">,</span>
+<a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a><span class="w">                    </span><span class="nt">&quot;configuration_raw_gid&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;-ZnDK8gT9P3_xtArfKlCrDOt9gba&quot;</span><span class="p">,</span>
+<a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a><span class="w">                    </span><span class="nt">&quot;is_representative&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a><span class="w">                    </span><span class="nt">&quot;chemical_composition&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;KKKGaGaGaGaGaGaGaGaGa&quot;</span><span class="p">,</span>
+<a id="__codelineno-19-16" name="__codelineno-19-16" href="#__codelineno-19-16"></a><span class="w">                    </span><span class="nt">&quot;chemical_composition_hill&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Ga9K3&quot;</span><span class="p">,</span>
+<a id="__codelineno-19-17" name="__codelineno-19-17" href="#__codelineno-19-17"></a><span class="w">                    </span><span class="nt">&quot;chemical_composition_reduced&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;K3Ga9&quot;</span><span class="p">,</span>
+<a id="__codelineno-19-18" name="__codelineno-19-18" href="#__codelineno-19-18"></a><span class="w">                    </span><span class="nt">&quot;atoms&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">},</span>
+<a id="__codelineno-19-19" name="__codelineno-19-19" href="#__codelineno-19-19"></a><span class="w">                    </span><span class="nt">&quot;springer_material&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">],</span>
+<a id="__codelineno-19-20" name="__codelineno-19-20" href="#__codelineno-19-20"></a><span class="w">                    </span><span class="nt">&quot;symmetry&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">]</span>
+<a id="__codelineno-19-21" name="__codelineno-19-21" href="#__codelineno-19-21"></a><span class="w">                </span><span class="p">}</span>
+<a id="__codelineno-19-22" name="__codelineno-19-22" href="#__codelineno-19-22"></a><span class="w">            </span><span class="p">]</span>
+<a id="__codelineno-19-23" name="__codelineno-19-23" href="#__codelineno-19-23"></a><span class="w">            </span><span class="nt">&quot;calculation&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">],</span>
+<a id="__codelineno-19-24" name="__codelineno-19-24" href="#__codelineno-19-24"></a><span class="w">        </span><span class="p">}</span>
+<a id="__codelineno-19-25" name="__codelineno-19-25" href="#__codelineno-19-25"></a><span class="w">    </span><span class="p">],</span>
+<a id="__codelineno-19-26" name="__codelineno-19-26" href="#__codelineno-19-26"></a><span class="w">    </span><span class="nt">&quot;workflow&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">...</span><span class="p">],</span>
+<a id="__codelineno-19-27" name="__codelineno-19-27" href="#__codelineno-19-27"></a><span class="w">    </span><span class="nt">&quot;metadata&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">},</span>
+<a id="__codelineno-19-28" name="__codelineno-19-28" href="#__codelineno-19-28"></a><span class="w">    </span><span class="nt">&quot;results&quot;</span><span class="p">:{</span>
+<a id="__codelineno-19-29" name="__codelineno-19-29" href="#__codelineno-19-29"></a><span class="w">        </span><span class="nt">&quot;material&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">},</span>
+<a id="__codelineno-19-30" name="__codelineno-19-30" href="#__codelineno-19-30"></a><span class="w">        </span><span class="nt">&quot;method&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">},</span>
+<a id="__codelineno-19-31" name="__codelineno-19-31" href="#__codelineno-19-31"></a><span class="w">        </span><span class="nt">&quot;properties&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="err">...</span><span class="p">},</span>
+<a id="__codelineno-19-32" name="__codelineno-19-32" href="#__codelineno-19-32"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-19-33" name="__codelineno-19-33" href="#__codelineno-19-33"></a><span class="p">}</span>
+</code></pre></div>
+<p>This will show you the Archive as a hierarchy of JSON objects (each object is a section),
+where each key is a property (e.g. a quantity or subsection). Of course you can use
+this data in this JSON form. You can expect that the same keys (each item has a formal
+definition) always provides the same type of data. However, not all keys are present in
+every archive, and not all lists might have the same number of objects. This depends on the
+data. For example, some <em>runs</em> contain many systems (e.g. geometry optimizations), others
+don't; typically <em>bulk</em> systems will have <em>symmetry</em> data, non bulk systems might not.
+To learn what each key means, you need to look up its definition in the Metainfo.</p>
+<p>You can browse the <a href="https://nomad-lab.eu/prod/v1/gui/analyze/metainfo">NOMAD metainfo schema</a>
+or the archive of each entry (e.g. <a href="https://nomad-lab.eu/prod/v1/gui/search/entries/entry/id/mIyITulZli0FPSoAB3OKt3WrsMTq">a VASP example</a>)
+in the web-interface.</p>
+<h3 id="wrap-data-with-python-schema-classes">Wrap data with Python schema classes<a class="headerlink" href="#wrap-data-with-python-schema-classes" title="Permanent link">&para;</a></h3>
+<p>In Python, JSON data is typically represented as nested combinations of dictionaries
+and lists. Of course, you could work with this right away. To make it easier for Python
+programmers, the <a href="../programmatic/pythonlib.html">NOMAD Python package</a> allows you to use this
+JSON data with a higher level interface, which provides the following advantages:</p>
+<ul>
+<li>code completion in dynamic coding environments like Jupyter notebooks</li>
+<li>a cleaner syntax that uses attributes instead of dictionary access</li>
+<li>all higher dimensional numerical data is represented as numpy arrays</li>
+<li>allows to navigate through references</li>
+<li>numerical data has a Pint unit attached to it</li>
+</ul>
+<p>For each section the Python package contains a Python class that corresponds to its
+definition in the metainfo. You can use these classes to access <code>json_data</code> downloaded
+via API:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.datamodel</span><span class="w"> </span><span class="kn">import</span> <span class="n">EntryArchive</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="n">archive</span> <span class="o">=</span> <span class="n">EntryArchive</span><span class="o">.</span><span class="n">m_from_dict</span><span class="p">(</span><span class="n">json_data</span><span class="p">)</span>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="n">calc</span> <span class="o">=</span> <span class="n">archive</span><span class="o">.</span><span class="n">run</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">calculation</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="n">total_energy_in_ev</span> <span class="o">=</span> <span class="n">calc</span><span class="o">.</span><span class="n">energy</span><span class="o">.</span><span class="n">total</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">units</span><span class="o">.</span><span class="n">eV</span><span class="p">)</span><span class="o">.</span><span class="n">m</span>
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="n">formula</span> <span class="o">=</span> <span class="n">calc</span><span class="o">.</span><span class="n">system_ref</span><span class="o">.</span><span class="n">chemical_formula_reduced</span>
+</code></pre></div>
+<p>Archive data can also be serialized into JSON again:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">calc</span><span class="o">.</span><span class="n">m_to_dict</span><span class="p">(),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+</code></pre></div>
+<h3 id="access-structured-data-via-the-nomad-python-package">Access structured data via the NOMAD Python package<a class="headerlink" href="#access-structured-data-via-the-nomad-python-package" title="Permanent link">&para;</a></h3>
+<p>The NOMAD Python package provides utilities to <a href="../programmatic/archive_query.html">query large amounts of
+archive data</a>. This uses the built-in Python schema classes as
+an interface to the data.</p>
+<h2 id="versioning">Versioning<a class="headerlink" href="#versioning" title="Permanent link">&para;</a></h2>
+<p>Eventually you will change a schema.
+While we might think about schemas before and after a change as version 1 and
+version 2 of the same schema, those are technically two different schemas.
+We replace an existing schema for existing data with a new schema. The intention is
+that the new schema also describes the existing data.
+But, whether this is always the case depends on the type of changes we make and some changes
+will "break" existing data.</p>
+<p>What does it mean to "break an entry"? Either, your <code>*.archive.[json|yaml]</code>
+raw files cannot be parsed anymore, or processed data (i.e. "archive" data) can not be opened
+anymore. In both cases, NOMAD tries to convert JSON-style data into section definition
+instances, validating the data against the current schema. If items in the data do not match
+a given definitions this process will throw errors.</p>
+<p>If every potential section instance that <em>followed</em> a section definition in the old schema
+still <em>follows</em> the <em>same</em> section definition in the new schema, we can safely replace the
+schema. If not, we will need to <em>migrate</em> data to implement the logical transition
+we intended. Otherwise, we will <em>break</em> existing data.</p>
+<h3 id="save-changes-and-unsafe-changes">Save changes and unsafe changes<a class="headerlink" href="#save-changes-and-unsafe-changes" title="Permanent link">&para;</a></h3>
+<p>Generally, <em>adding</em> to a schema is safe. Adding section definition, adding new quantities,
+new sub-sections. All existing data only uses definitions that still exist.</p>
+<p><em>Removing</em> is generally not safe. Removing a quantity, makes NOMAD ignore values in existing
+entries. Removing section definitions, "breaks" entries.</p>
+<p><em>Changing</em> a definition might or might not be safe. In many cases <em>changing</em> is like <em>removing</em> and <em>adding</em> something. Some examples:</p>
+<ul>
+<li>Names determine the identity of definitions and name changes are therefore literally <em>removing</em> and <em>adding</em>
+  a definition. They are not safe, unless you add an <code>alias</code>.</li>
+<li>Adding <code>base_sections</code> is safe, removing is not. It is as if you <em>add</em> and <em>remove</em> properties.</li>
+<li>Hoisting a property from a section into a base section is safe (you only <em>add</em> properties).
+  The reverse is not safe (you <em>remove</em> some properties from some definitions).</li>
+<li>Making the type of a sub-section more generic (you <em>add</em> properties to the sub-section) is safe,
+  making it more specific (you <em>remove</em> properties from the sub-section) is not.</li>
+<li>Changing quantity <code>type</code>, <code>shape</code>, or sub section <code>repeats</code> is not safe.</li>
+</ul>
+<p>There are some changes that do not "break" entries, but change their semantics. If you
+change a <code>unit</code> for example. NOMAD will still be able to open entires, but you will
+interpret the values wrong.</p>
+<p>Changing annotations will not "break" entries, but might have similar effects to your
+users when old entries might be treated unexpectedly in tools that use these annotations.
+The GUI is probably the most important "tool" here. Changing the ELN annotations for example
+might prohibit users to manipulate old data in the same way they used to do.</p>
+<h3 id="python-module-conventions">Python module conventions<a class="headerlink" href="#python-module-conventions" title="Permanent link">&para;</a></h3>
+<p>Eventually, you reach the point were "breaking" changes are unavoidable and you will
+need to create a new major version of your schema.</p>
+<p>First, you need to keep a schema version as long as there is data following that schema.
+That means two versions have to exist at the same time.
+Each section instance refers to a schema by its qualified python name that includes
+the respective python module with the schema package.</p>
+<p>Therefore, breaking changes should only be introduced in new schema packages. As a convention:</p>
+<ul>
+<li>schema packages cary their major version in the name, e.g. <code>nomad_example.schema_packages.my_package_v2</code></li>
+<li>schema packages are maintained in version sub-modules, e.g. <code>nomad_example.schema_packages.my_package.v2</code></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>By convention and assuming the inevitability of breaking changes, you should already start with a <code>v1</code> module when developing a new schema package.</p>
+</div>
+<p>Note that only the major version should result in separate python modules, i.e. schema packages.
+Minor and patch versions should not introduce breaking changes by definition and the module
+for the respective major version can be changed safely.</p>
+<h3 id="migration-strategies">Migration strategies<a class="headerlink" href="#migration-strategies" title="Permanent link">&para;</a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This is preliminary information.</p>
+</div>
+<p>What are strategies to introduce "breaking" changes and migrate existing data to
+the new version of the schema.</p>
+<h4 id="schema-package-aliases">Schema package aliases<a class="headerlink" href="#schema-package-aliases" title="Permanent link">&para;</a></h4>
+<p>In scenarious where you have moved the definition to a new module and did not create
+other breaking changes you can use schema package aliases.</p>
+<p>By default, schema packages are identified by the full qualified path to the Python module
+that contains the definitions. An example of a full qualified path could be
+<code>nomad_example.schema_packages.mypackage</code>, where the first part is the Python package name,
+second part is a subpackage, and the last part is a Python module containing the definitions.
+This is the easiest way to prevent conflicts between different schema packages: python package
+names are unique (prevents clashes between packages) and paths inside a package must point
+to a single python module (prevents clashes within package). This does, however, mean that
+<em>if you move your schema definition to a new (version) module, any references to the old definition will break</em>.
+To move the same schema to a new module, e.g. <code>nomad_example.schema_packages.mypackage.v2</code>,
+and still let existing entries use it with the old module name, you can use a schema package
+alias:</p>
+<p>You
+schema package definition:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="n">m_package</span> <span class="o">=</span> <span class="n">SchemaPackage</span><span class="p">(</span><span class="n">aliases</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;nomad_example.schema_packages.mypackage&#39;</span><span class="p">])</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This can also be used, if you need to move a schema package for other reasons,
+e.g. to move schemas from one plugin to another.</p>
+</div>
+<h4 id="offer-migration-functionality">Offer migration functionality<a class="headerlink" href="#offer-migration-functionality" title="Permanent link">&para;</a></h4>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This appoach is still tested and we might provide more dedicated functionality
+in the future.</p>
+</div>
+<p>You will not want to maintain the old version indefinitely. Eventually, you deprecate
+and even remove schema package versions from future plugin releases. Here, you should
+offer functionality that lets users migrate their old data following the old version to
+data following the new version.</p>
+<h5 id="processed-data">Processed data<a class="headerlink" href="#processed-data" title="Permanent link">&para;</a></h5>
+<p>In cases where your schema is instantiated via parser, processed data (i.e. entry "archives"),
+can be migrated by re-processing respective uploads with a new version of the parser
+following the new schema. Users "just" have to be made aware and perform the reprocessing.</p>
+<h5 id="raw-files">Raw files<a class="headerlink" href="#raw-files" title="Permanent link">&para;</a></h5>
+<p>In cases of <code>*.archive.json</code> raw files (i.e. you use NOMAD ELNs), the raw files themselves
+have to change. This is harder to achieve as mainfile immutability is baked into NOMAD.
+To apply the same parser-based strategy (see section before), you can add a normalize
+function to the <code>EntryData</code> section definition(s) of the old schema version. This
+normalize function</p>
+<ul>
+<li>performs a transformation, i.e. creates and instance of the new
+  version from the given instance of the old version</li>
+<li>writes the <code>m_to_dict</code> of the new version back into the mainfile</li>
+<li>replaces the <code>data</code> section (old version instance) with the transformed (instance of the new version)</li>
+</ul>
+<p>Here is some pseudo code:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">..v2</span><span class="w"> </span><span class="kn">import</span> <span class="n">MyData</span> <span class="k">as</span> <span class="n">MyDataV2</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">normalize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">archive</span><span class="p">,</span> <span class="n">logger</span><span class="p">):</span>
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>  <span class="n">transformed</span> <span class="o">=</span> <span class="n">MyDataV2</span><span class="p">()</span>
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a>
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a>  <span class="c1"># code that fills transformed from self</span>
+<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a>
+<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a>  <span class="k">with</span> <span class="n">archive</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">raw_file</span><span class="p">(</span><span class="n">archive</span><span class="o">.</span><span class="n">metadata</span><span class="o">.</span><span class="n">mainfile</span><span class="p">,</span> <span class="s1">&#39;wt&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a>    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">transformed</span><span class="o">.</span><span class="n">m_to_dict</span><span class="p">())))</span>
+<a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a>
+<a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a>  <span class="n">archive</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">transformed</span>
+</code></pre></div>
+<p>With such a <code>normalize</code> function in place, you can apply the re-processing strategy
+to migrate.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>There might be issues with this approach depending on how the <code>normalize</code> functions
+are executed. This only works well, if after replacing data the <code>normalize</code> functions
+of the transformed instance are called and no <code>normalize</code> functions of the original
+instance have been called yet.</p>
+<p>Also this approach has risks. If the process fails in unexpected ways there might be
+raw file data being lost.</p>
+</div>
+<h2 id="schema-packages-developed-by-fairmat">Schema packages developed by FAIRmat<a class="headerlink" href="#schema-packages-developed-by-fairmat" title="Permanent link">&para;</a></h2>
+<p>The following is a list of plugins containing schema packages developed by FAIRmat:</p>
+<table>
+<thead>
+<tr>
+<th>Description</th>
+<th>Project url</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>simulation run</td>
+<td><a href="https://github.com/nomad-coe/nomad-schema-plugin-run.git">https://github.com/nomad-coe/nomad-schema-plugin-run.git</a></td>
+</tr>
+<tr>
+<td>simulation data</td>
+<td><a href="https://github.com/nomad-coe/nomad-schema-plugin-simulation-data.git">https://github.com/nomad-coe/nomad-schema-plugin-simulation-data.git</a></td>
+</tr>
+<tr>
+<td>simulation workflow</td>
+<td><a href="https://github.com/nomad-coe/nomad-schema-plugin-simulation-workflow.git">https://github.com/nomad-coe/nomad-schema-plugin-simulation-workflow.git</a></td>
+</tr>
+<tr>
+<td>NEXUS</td>
+<td><a href="https://github.com/FAIRmat-NFDI/pynxtools.git">https://github.com/FAIRmat-NFDI/pynxtools.git</a></td>
+</tr>
+<tr>
+<td>synthesis</td>
+<td><a href="https://github.com/FAIRmat-NFDI/AreaA-data_modeling_and_schemas.git">https://github.com/FAIRmat-NFDI/AreaA-data_modeling_and_schemas.git</a></td>
+</tr>
+<tr>
+<td>material processing</td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-material-processing.git">https://github.com/FAIRmat-NFDI/nomad-material-processing.git</a></td>
+</tr>
+<tr>
+<td>measurements</td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-measurements.git">https://github.com/FAIRmat-NFDI/nomad-measurements.git</a></td>
+</tr>
+<tr>
+<td>catalysis</td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-catalysis-plugin.git">https://github.com/FAIRmat-NFDI/nomad-catalysis-plugin.git</a></td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="parsers.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Write a parser">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Write a parser
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../customization/basics.html" class="md-footer__link md-footer__link--next" aria-label="Next: Write a YAML schema package">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Write a YAML schema package
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.path", "navigation.footer", "navigation.top", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+        <script src="../../javascript.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>
