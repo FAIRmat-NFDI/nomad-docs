@@ -299,6 +299,12 @@ to replicate that with whatever we called our instance:
 sintering = "nomad_sintering.schema_packages:sintering"
 ```
 
+After adding the entry point to `pyproject.toml` file, re-install the package
+to make sure the new entry point is available:
+```sh
+pip install -e '.[dev]' --index-url https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/simple
+```
+
 Before we continue, we should commit our changes to git:
 ```sh
 git add -A
@@ -431,7 +437,7 @@ class Sintering(Process, EntryData, ArchiveSection):
         },
     )
 
-    def normalize(self, archive, logger: BoundLogger) -    None:
+    def normalize(self, archive, logger: 'BoundLogger') -> None:
         '''
         The normalizer for the `Sintering` class.
 
@@ -440,19 +446,19 @@ class Sintering(Process, EntryData, ArchiveSection):
             normalized.
             logger (BoundLogger): A structlog logger.
         '''
-        super(Sintering, self).normalize(archive, logger)
+        super().normalize(archive, logger)
         if self.data_file:
-          with archive.m_context.raw_file(self.data_file) as file:
-            df = pd.read_csv(file)
-          steps = []
-          for i, row in df.iterrows():
-            step = TemperatureRamp()
-            step.name = row['step name']
-            step.duration = ureg.Quantity(float(row['duration [min]']), 'min')
-            step.initial_temperature = ureg.Quantity(row['initial temperature [C]'], 'celsius')
-            step.final_temperature = ureg.Quantity(row['final temperature [C]'], 'celsius')
-            steps.append(step)
-        self.steps = steps
+            with archive.m_context.raw_file(self.data_file) as file:
+                df = pd.read_csv(file)
+            steps = []
+            for i, row in df.iterrows():
+                step = TemperatureRamp()
+                step.name = row['step name']
+                step.duration = ureg.Quantity(float(row['duration [min]']), 'min')
+                step.initial_temperature = ureg.Quantity(row['initial temperature [C]'], 'celsius')
+                step.final_temperature = ureg.Quantity(row['final temperature [C]'], 'celsius')
+                steps.append(step)
+            self.steps = steps
 
 ```
 
@@ -518,6 +524,10 @@ def normalize(self, archive: 'EntryArchive', logger: 'BoundLogger') -> None:
             step.name = row['step name']
             # Changed 'min' to 'minutes' here:
             step.duration = ureg.Quantity(float(row['duration [min]']), 'minutes')
+            step.initial_temperature = ureg.Quantity(row['initial temperature [C]'], 'celsius')
+            step.final_temperature = ureg.Quantity(row['final temperature [C]'], 'celsius')
+            steps.append(step)
+        self.steps = steps
 ```
 
 Since we installed our package in editable mode the changes will take effect as soon as we
