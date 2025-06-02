@@ -249,9 +249,9 @@ curl -L -o sintering.archive.yaml "https://raw.githubusercontent.com/FAIRmat-NFD
 
 We will now use an external package `metainfo-yaml2py` to convert the yaml schema package
 into python class definitions.
-First we install this package, along with another package `setuptools`, using `pip`:
+First we install the package with `pip`:
 ```sh
-pip install metainfoyaml2py setuptools
+pip install metainfoyaml2py
 ```
 
 Then we can run the `metainfo-yaml2py` command on the `sintering.archive.yaml` file with
