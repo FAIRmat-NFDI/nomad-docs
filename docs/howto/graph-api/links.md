@@ -11,11 +11,14 @@ For example, an upload is a collection of entries, an entry corresponding to an 
 each user may be the owner of several uploads, etc.
 
 Thus, it is natural to link these data structures together via **special tokens**.
+The following figure illustrates the relationships between the data structures in `NOMAD` with the special tokens highlighted.
+
+![NOMAD graph](graph.svg)
 
 For example, if there is an upload with ID `example_upload_id`, and it has an entry with ID `example_entry_id`,
 the request to fetch the `entry_id`and `entry_create_time` of the entry, together with `upload_create_time` in the upload, would look like this.
 
-```json title="fetching linked data"
+```json title="fetching linked data" hl_lines="5"
 {
   "uploads": {
     "example_upload_id": {
