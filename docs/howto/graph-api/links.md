@@ -68,36 +68,18 @@ Thus, all entries under the upload can be fetched as follows:
 
 ??? warning "no universality"
     The `*` wildcard is not universal and only works for **homogeneous** data.
-    This means it can only be used to represent `upload_id`, `entry_id`, `dataset_id`, etc., for data structures that are of the same type.
-    It won't work in archives, the corresponding metainfo, and alike.
+    This means it can only be used to represent `upload_id`, `entry_id`, `dataset_id`, etc., for data that follows a fixed schema (`MongoDB`).
+    It won't work in archives, the corresponding metainfo (definitions), and alike.
 
 ## Fuzzy Query
 
-The request configuration allows one to perform fuzzy queries to further filter data before fetching the data, via the `query` and `pagination` fields.
+The request configuration allows one to perform fuzzy queries to further filter data before fetching, via the `query` and `pagination` fields.
 
-```py title="request configuration model" hl_lines="13-50"
+```py title="request configuration model" hl_lines="4-24"
 class RequestConfig(BaseModel):
-    """
-    A class to represent the query configuration.
-    An instance of `RequestConfig` shall be attached to each required field.
-    The `RequestConfig` is used to determine the following.
-        1. Whether the field should be included/excluded.
-        2. For reference, whether the reference should be resolved, and how to resolve it.
-    Each field can be handled differently.
-    """
-
     # ... other fields omitted for brevity ...
 
-    pagination: None | (
-        dict
-        | DatasetPagination
-        | EntryProcDataPagination
-        | MetadataPagination
-        | MetainfoPagination
-        | RawDirPagination
-        | UploadProcDataPagination
-        | UserGroupPagination
-    ) = Field(
+    pagination: None | dict = Field(
         None,
         description="""
         The pagination configuration used for MongoDB search.
@@ -106,15 +88,7 @@ class RequestConfig(BaseModel):
         Please refer to `DatasetPagination`, `UploadProcDataPagination`, `MetadataPagination` for details.
         """,
     )
-    query: None | (
-        dict
-        | DatasetQuery
-        | EntryQuery
-        | Metadata
-        | MetainfoQuery
-        | UploadProcDataQuery
-        | UserGroupQuery
-    ) = Field(
+    query: None | dict = Field(
         None,
         description="""
         The query configuration used for either mongo or elastic search.
@@ -151,3 +125,7 @@ For example, if one wants to fetch all entries under an upload with a specific p
   }
 }
 ```
+
+As explained in the comments, depending on the specific token, the query must comply with the corresponding query model.
+The `pagination` field shall also comply with the corresponding pagination model.
+Those models are used in conventional REST endpoints, and one can find more details in the corresponding documentation.
