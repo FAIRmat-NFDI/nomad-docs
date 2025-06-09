@@ -125,9 +125,9 @@ For example, if one wants to fetch the `upload_name` and `upload_create_time`, t
 }
 ```
 
-## Existing Data Structures
+## Existing Data Resources
 
-As of this writing, there are a few existing data structures stored in `MongoDB`:
+As of this writing, there are a few existing data resources stored in `MongoDB`:
 
 1. `uploads` (stored in MongoDB): The metadata of an upload, including, `upload_id`, `upload_name`, `main_author`, etc.
 2. `entries` (stored in MongoDB): The metadata of an entry, including, `entry_id`, `entry_create_time`, `mainfile`, etc.
