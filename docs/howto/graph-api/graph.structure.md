@@ -1,4 +1,4 @@
-# The Graph Part
+# The Graph Structure
 
 In the previous page, we explained how to fetch data from existing data structures.
 This along does not make it a 'graph' because we only have isolated 'nodes'.
@@ -37,6 +37,9 @@ the request to fetch the `entry_id`and `entry_create_time` of the entry, togethe
 Here it uses the special token `entries` to navigate from the upload to the entry.
 If needed, one can further navigate from the entry to the archive, or from the upload to the file system, etc.
 This is the essence of the graph: to link data structures together via edges, allowing for complex queries and data retrieval.
+
+It shall be noted that those 'special tokens' do not exist in the original documents stored in `MongoDB`.
+They are defined by the graph API to establish the relationships between the data structures.
 
 ## Fuzzy Fetching
 

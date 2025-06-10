@@ -23,7 +23,7 @@ The only endpoint involved is `/graph/query`.
 All the magic happens there.
 But before that, we shall first explain some basic concepts.
 
-## Basic Data Fetching
+## Basic Usage (Data Fetching)
 
 Imagine there is an example upload with the upload ID `example_upload_id`.
 The metadata of this upload is stored in `MongoDB`.
@@ -127,7 +127,7 @@ For example, if one wants to fetch the `upload_name` and `upload_create_time`, t
 
 ## Existing Data Resources
 
-As of this writing, there are a few existing data resources stored in `MongoDB`:
+As of this writing, there are a few existing data resources (called `Documents`) stored in `MongoDB`:
 
 1. `uploads` (stored in MongoDB): The metadata of an upload, including, `upload_id`, `upload_name`, `main_author`, etc.
 2. `entries` (stored in MongoDB): The metadata of an entry, including, `entry_id`, `entry_create_time`, `mainfile`, etc.
@@ -148,4 +148,7 @@ For example, to fetch the `entry_id` and `entry_create_time` of an entry with ID
 }
 ```
 
+The top-level keys should be one of `uploads`, `entries`, `datasets`, or `groups` to indicate which data resource to query.
+
 This concludes the basic usage of the `/graph/query` endpoint.
+There are other resources to explore, which will be explained in the subsequent pages.
