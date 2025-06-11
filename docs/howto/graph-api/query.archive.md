@@ -94,7 +94,7 @@ It can be noted that the response and the request have the same structure, and t
 }
 ```
 
-## Advanced CUstomization
+## Advanced Customization
 
 ### List Slicing
 
