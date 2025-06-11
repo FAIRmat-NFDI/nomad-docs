@@ -8,6 +8,42 @@ properties and methods of the mapping parser are explained. The various implemen
 the mapping parser are also defined and `Mapper` which is required to convert a
 mapping parser into another mapping parser is explained as well.
 
+## Fundamentals
+
+The mapping from the source file to the archive is defined by a path (in JMesPath format) to the schema.
+This path is added to `m_annotations`, either overwriting or extending the previous annotations.
+Each mapping corresponds to its own dictionary key, and a parser schema may contain multiple in parallel.
+In the simplest case, e.g. a single quantity, you may simply write. 
+
+<example>
+
+<!-- Given that NOMAD schemas typically follow most conventional file structures, some path parts may overlap. -->
+This works fine for top-level quantities, but those deeper down in the schema have to instantiate their containing sections.
+Sections have levels of annotations at the
+
+1. *definition* level, i.e. `m_def`. <example>
+1. *attribute* level, i.e. the data instance generated during runtime. <example>
+
+The mapping parser will search for the first available annotation in the follwoing order:
+
+1. attribute level. Used for specializing subsections to specific contexts.
+1. definition level. Used for generic paths.
+1. child sections' definitions, i.e. all inheriting sections. Used to bypass any abstract sections, that should not be instantiated themselves. (note)
+
+In the case of quantities, there is no practical distinction between options 1 and 2.
+By convention, we use the shorter *attribute*-level annotation.
+
+### Edge Cases
+
+Subsections that are defined as **repeating** in the schema are automatically picked up by the mapping parser.
+It will look for the repeating unit along the path and instantiate the same number of subsections.
+Array quantities, with `shape=['*']`, have to be handled using an *operator*.
+This is due to `shape` having variable rank, e.g. `shape=['*','*']`.
+
+Recursively defined sections, i.e. section schemas with the same schema as a subsection, should also be handled by an *operator*, or a different annotation key.
+Annotation keys that populate the same archive, can be loaded successively by the _writer_.
+
+
 ## MappingParser
 
 The mapping parser has several abstract properties and methods and the most important
