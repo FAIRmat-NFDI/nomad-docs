@@ -13,9 +13,13 @@ mapping parser into another mapping parser is explained as well.
 The mapping from the source file to the archive is defined by a path (in JMesPath format) to the schema.
 This path is added to `m_annotations`, either overwriting or extending the previous annotations.
 Each mapping corresponds to its own dictionary key, and a parser schema may contain multiple in parallel.
-In the simplest case, e.g. a single quantity, you may simply write. 
+In the simplest case, e.g. a single quantity, you may simply write:
 
-<example>
+```python
+<quantity>.m_annotations.setdefault(MAPPING_ANNOTATION_KEY, {}).update(
+    dict(xml=MapperAnnotation(mapper=<flag>))
+)
+```
 
 <!-- Given that NOMAD schemas typically follow most conventional file structures, some path parts may overlap. -->
 This works fine for top-level quantities, but those deeper down in the schema have to instantiate their containing sections.
