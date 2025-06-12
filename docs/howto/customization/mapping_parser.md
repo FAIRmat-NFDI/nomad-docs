@@ -33,6 +33,34 @@ The mapping parser will search for the first available annotation in the follwoi
 In the case of quantities, there is no practical distinction between options 1 and 2.
 By convention, we use the shorter *attribute*-level annotation.
 
+The following real-world example showcases 
+
+```python
+# 1. GLOBAL m_def annotation (affects ALL Simulation instances)
+general.Simulation.m_def.m_annotations.setdefault(MAPPING_ANNOTATION_KEY, {}).update(
+    dict(xml=MapperAnnotation(mapper='modeling'))
+)
+
+# 2. CLASS INHERITANCE with composition
+class Simulation(general.Simulation):  # Inherits from general.Simulation
+
+    # 3. ATTRIBUTE-LEVEL annotation (parser-specific)
+    general.Simulation.program.m_annotations.setdefault(MAPPING_ANNOTATION_KEY, {}).update(
+        dict(xml=MapperAnnotation(mapper='.generator'))
+    )
+
+    # 4. COMPOSE with the upper section's m_def (includes DFT as subsection)
+    model_method.DFT.m_def.m_annotations.setdefault(MAPPING_ANNOTATION_KEY, {}).update(
+        dict(xml=MapperAnnotation(mapper='.parameters.separator'))
+    )
+
+# 5. SPECIALIZED class with inheritance
+class Program(general.Program):  # Inherits structure, adds parser mappings
+    general.Program.version.m_annotations.setdefault(MAPPING_ANNOTATION_KEY, {}).update(
+        dict(xml=MapperAnnotation(mapper='.i[?"@name"==\'version\'] | [0].__value'))
+    )
+```
+
 ### Edge Cases
 
 **Subsections** that are defined as **repeating** in the schema are automatically picked up by the mapping parser.
