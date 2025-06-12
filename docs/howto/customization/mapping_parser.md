@@ -35,14 +35,38 @@ By convention, we use the shorter *attribute*-level annotation.
 
 ### Edge Cases
 
-Subsections that are defined as **repeating** in the schema are automatically picked up by the mapping parser.
+**Subsections** that are defined as **repeating** in the schema are automatically picked up by the mapping parser.
 It will look for the repeating unit along the path and instantiate the same number of subsections.
-Array quantities, with `shape=['*']`, have to be handled using an *operator*.
+**Array quantities**, meanwhile, with `shape=['*']`, have to be handled using an *operator*.
 This is due to `shape` having variable rank, e.g. `shape=['*','*']`.
 
-Recursively defined sections, i.e. section schemas with the same schema as a subsection, should also be handled by an *operator*, or a different annotation key.
+**Recursive sections**, i.e. section schemas with the same schema as a subsection, should also be handled by an *operator*, or a different annotation key.
 Annotation keys that populate the same archive, can be loaded successively by the _writer_.
 
+Likewise, **references** have to be set by the parser dev in the _writer_.
+They namely require a source and a target, and the schema only defines the source.
+
+## How-To
+
+### Use JMesPath
+
+**Accessing individual elements**:
+
+- Extract the first element: `Mapper(mapper='.array[0]')`
+- Extract last element: `Mapper(mapper='.array[-1]')`
+- Extract specific index with pipe syntax: `Mapper(mapper='.varray | [0].v')`
+
+**Accessing multiple elements**:
+
+- Extract all elements: `Mapper(mapper='.array[*]')`
+- Extract all vertex labels (exciting.py example): `Mapper(mapper=r'bandstructure.vertex[*]."@label"')`
+- Extract from nested structure: `Mapper(mapper='.varray[?"@name"==\'kpointlist\'].v | [0]')`
+
+**Conditional selection**:
+
+- Filter by attribute: `Mapper(mapper='.i[?"@name"==\'program\'] | [0].__value')`
+- Filter by value comparison: `Mapper(mapper='c[?n>=`1`].v | [1]')` <!-- check code rendering -->
+- Complex filter with string matching: `Mapper(mapper='.separator[?"@name"==\'electronic exchange-correlation\']')`
 
 ## MappingParser
 
