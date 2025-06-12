@@ -624,9 +624,7 @@ configuration. To do this, follow these steps:
 
 ## Build custom Oasis image
 
-In general, production Docker images are built via a CI/CD pipeline that is run when pushing commits to [NOMAD's GitLab at MPCDF](https://gitlab.mpcdf.mpg.de/){:target="_blank"}. These images are distributed via NOMAD's GitLab container registry and are suitable for most use cases.
-
-If you need to create a custom Oasis instance (e.g. with custom plugins), you could use the [nomad-distro-template](https://github.com/FAIRmat-NFDI/nomad-distro-template) by clicking the [`Use this template` button](https://github.com/new?template_name=nomad-distro-template&template_owner=FAIRmat-NFDI). For detailed instructions on building and deploying custom Oasis images, please refer to the documentation in that repository.
+To create a custom Oasis image (e.g. with custom plugins), you could use the [nomad-distro-template](https://github.com/FAIRmat-NFDI/nomad-distro-template) by clicking the [`Use this template` button](https://github.com/new?template_name=nomad-distro-template&template_owner=FAIRmat-NFDI). For detailed instructions on building and deploying custom Oasis images, please refer to the documentation in that repository.
 
 ## Setup your IDE
 
