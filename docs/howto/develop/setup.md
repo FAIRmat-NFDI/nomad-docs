@@ -622,42 +622,11 @@ configuration. To do this, follow these steps:
    snapshot file or `yarn test-integration [<filename>]` if you want the
    perform the test without any recording.
 
-## Build the Docker image
+## Build custom Oasis image
 
-Normally the Docker image is build via a CI/CD pipeline that is run when pushing commits
-to [NOMAD's GitLab at MPCDF](https://gitlab.mpcdf.mpg.de/){:target="_blank"}. These images are distributed
-via NOMAD's GitLab container registry. For most purposes you would use these
-automatically-built images.
+In generate, production Docker images are built via a CI/CD pipeline that is run when pushing commits to [NOMAD's GitLab at MPCDF](https://gitlab.mpcdf.mpg.de/){:target="_blank"}. These images are distributed via NOMAD's GitLab container registry and are suitable for most use cases.
 
-If you want to build a custom image, e.g. to be used in your NOMAD Oasis, you can
-run the NOMAD Docker build manually. From the cloned project root run:
-
-```shell
-docker build -t <image-name>:<image-tag> .
-```
-
-This will build the normal image intended for production use. There are other build
-targets: `dev_python` and `dev_node`. Especially `dev_python` might be interesting
-for debugging purposes as it contains all sources and dev dependencies. You
-can build specific targets with:
-
-```shell
-docker build --target dev_python -t <image-name>:<image-tag> .
-```
-
-If you want to build an image directly from a remote Git repository (e.g. for a specific `branch`), run:
-
-```shell
-DOCKER_BUILDKIT=1 docker build --build-arg BUILDKIT_CONTEXT_KEEP_GIT_DIR=1 --pull -t <image-name>:<image-tag> https://github.com/nomad-coe/nomad.git#<branch>
-```
-
-The BuildKit parametrization ensures that the `.git` directory is available in the
-Docker build context. NOMAD's build process requires the `.git` folder to determine the
-package version from version tags in the repository.
-
-The build process installs a substantial amount of dependencies and requires multiple
-Docker images for various build stages. Make sure that Docker has at least 20 GB of
-storage available.
+If you need to create a custom Oasis instance (e.g. with custom plugins), you could use the [nomad-distro-template](https://github.com/FAIRmat-NFDI/nomad-distro-template) by clicking the [`Use this template` button](https://github.com/new?template_name=nomad-distro-template&template_owner=FAIRmat-NFDI). For detailed instructions on building and deploying custom Oasis images, please refer to the documentation in that repository.
 
 ## Setup your IDE
 
