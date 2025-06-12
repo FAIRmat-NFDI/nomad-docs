@@ -19,12 +19,13 @@ In the simplest case, e.g. a single quantity, you may simply write.
 
 <!-- Given that NOMAD schemas typically follow most conventional file structures, some path parts may overlap. -->
 This works fine for top-level quantities, but those deeper down in the schema have to instantiate their containing sections.
-Sections have levels of annotations at the
+These can be defined in _absolute_ terms, or _relative_ to their section above using the *dot notation*, e.g. `.model`. 
+The annotations themselves can be manipulated in two possible way:
 
-1. *definition* level, i.e. `m_def`. <example>
-1. *attribute* level, i.e. the data instance generated during runtime. <example>
+1. *definition* level, i.e. `m_def`.
+1. *attribute* level, i.e. the data instance generated during runtime.
 
-The mapping parser will search for the first available annotation in the follwoing order:
+The mapping parser will search for the first available annotation in the following order:
 
 1. attribute level. Used for specializing subsections to specific contexts.
 1. definition level. Used for generic paths.
@@ -36,26 +37,35 @@ By convention, we use the shorter *attribute*-level annotation.
 The following real-world example showcases 
 
 ```python
-# 1. GLOBAL m_def annotation (affects ALL Simulation instances)
+# GLOBAL m_def annotation
 general.Simulation.m_def.m_annotations.setdefault(MAPPING_ANNOTATION_KEY, {}).update(
     dict(xml=MapperAnnotation(mapper='modeling'))
 )
 
-# 2. CLASS INHERITANCE with composition
+# OPTIONAL CLASS INHERITANCE as a mask
 class Simulation(general.Simulation):  # Inherits from general.Simulation
 
-    # 3. ATTRIBUTE-LEVEL annotation (parser-specific)
+    -------------------------------------------------------------------------
+    2 POSSIBILITIES
+
+    # DEFINITION-LEVEL annotation (generic, default mapping)
+    general.Simulation.m_def.m_annotations.setdefault(MAPPING_ANNOTATION_KEY, {}).update(
+        dict(xml=MapperAnnotation(mapper='.parameters.separator'))
+    )
+
+    # ATTRIBUTE-LEVEL annotation (context-specific)
     general.Simulation.program.m_annotations.setdefault(MAPPING_ANNOTATION_KEY, {}).update(
         dict(xml=MapperAnnotation(mapper='.generator'))
     )
+    -------------------------------------------------------------------------
 
-    # 4. COMPOSE with the upper section's m_def (includes DFT as subsection)
+    # COMPOSE with the UPPER section's m_def (includes DFT as subsection)
     model_method.DFT.m_def.m_annotations.setdefault(MAPPING_ANNOTATION_KEY, {}).update(
         dict(xml=MapperAnnotation(mapper='.parameters.separator'))
     )
 
-# 5. SPECIALIZED class with inheritance
-class Program(general.Program):  # Inherits structure, adds parser mappings
+# continue the mapping of the Program ATTRIBUTES
+class Program(general.Program):
     general.Program.version.m_annotations.setdefault(MAPPING_ANNOTATION_KEY, {}).update(
         dict(xml=MapperAnnotation(mapper='.i[?"@name"==\'version\'] | [0].__value'))
     )
