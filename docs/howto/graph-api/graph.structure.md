@@ -18,7 +18,7 @@ The following figure illustrates the relationships between the data structures i
 For example, if there is an upload with ID `example_upload_id`, and it has an entry with ID `example_entry_id`,
 the request to fetch the `entry_id`and `entry_create_time` of the entry, together with `upload_create_time` in the upload, would look like this.
 
-```json title="fetching linked data" hl_lines="5"
+```json hl_lines="5"
 {
   "uploads": {
     "example_upload_id": {
@@ -49,7 +49,7 @@ How can we achieve this without knowing the exact entry IDs a priori?
 One can use the special key `*` to represent all entries under the upload.
 Thus, all entries under the upload can be fetched as follows:
 
-```json title="fetching all entries under an upload" hl_lines="5"
+```json hl_lines="5"
 {
   "uploads": {
     "example_upload_id": {
@@ -78,7 +78,7 @@ Thus, all entries under the upload can be fetched as follows:
 
 The request configuration allows one to perform fuzzy queries to further filter data before fetching, via the `query` and `pagination` fields.
 
-```py title="request configuration model" hl_lines="4-24"
+```py hl_lines="4-24"
 class RequestConfig(BaseModel):
     # ... other fields omitted for brevity ...
 
@@ -113,7 +113,7 @@ The **root** level is the top-level following the **special tokens**, such as `u
 Combined with fuzzy fetching, one can perform filter and fetch.
 For example, if one wants to fetch all entries under an upload with a specific parser name, the request would look like this.
 
-```json title="fuzzy query with pagination" hl_lines="6"
+```json hl_lines="6"
 {
   "uploads":{
     "example_upload_id":{

@@ -33,7 +33,7 @@ This better helps us to define interactions among different data structures (to 
 If one uses the endpoint `/uploads/{upload_id}` to fetch the upload metadata,
 the response would look like the following (after some restructuring according to the mental model).
 
-```json title="an example upload"
+```json
 {
   "uploads":{
     "example_upload_id":{
@@ -58,7 +58,7 @@ How would one tell the server if, say, for example, only `upload_name` is needed
 With `GraphQL`, one simply needs to '__ask for what you need__', following the structure of the data.
 To mimic this, the request may look like the following.
 
-```json title="a naive request"
+```json
 {
   "uploads":{
     "example_upload_id":{
@@ -72,7 +72,7 @@ But it is not practical to use a string to express potentially complex intention
 Instead, we want to use a more structured way to express the request.
 To this end, `NOMAD` defines a request configuration model (referred to as 'config').
 
-```py title="request configuration model"
+```py
 class RequestConfig(BaseModel):
     """
     A class to represent the query configuration.
@@ -101,7 +101,7 @@ class RequestConfig(BaseModel):
 To fetch the desired field, one shall attach a `RequestConfig` under the key `m_request`.
 The `plain` directive tells the server to include the field in the response.
 
-```json title="the very first query" hl_lines="4"
+```json hl_lines="4"
 {
   "uploads":{
     "example_upload_id":{
@@ -114,7 +114,7 @@ The `plain` directive tells the server to include the field in the response.
 Now it is possible to fetch whatever wanted from the upload metadata.
 For example, if one wants to fetch the `upload_name` and `upload_create_time`, the request would look like this:
 
-```json title="composing a query"
+```json
 {
   "uploads":{
     "example_upload_id":{
@@ -137,7 +137,7 @@ As of this writing, there are a few existing data resources (called `Documents`)
 One can apply the same logic to fetch data from these structures.
 For example, to fetch the `entry_id` and `entry_create_time` of an entry with ID `example_entry_id`, the request would look like this:
 
-```json title="fetching entry metadata"
+```json
 {
   "entries":{
     "example_entry_id":{
