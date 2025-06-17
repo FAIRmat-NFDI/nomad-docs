@@ -172,7 +172,7 @@ either the whole thing or just some properties of this entities.
   purposes.
 
 - Calculation `handle` or `handle_id` are created based on those `pid`.
-  To create hashes we use :py:func:`nomad.utils.hash`.
+  To create hashes we use `nomad.utils.hash`.
 
 ## Logging
 
@@ -194,7 +194,7 @@ There are three important prerequisites to understand about nomad-FAIRDI's loggi
 
 Please follow the following rules when logging:
 
-- If a logger is not already provided, only use :py:func:`nomad.utils.get_logger` to
+- If a logger is not already provided, only use `nomad.utils.get_logger` to
   acquire a new logger. Never use the built-in logging directly. These loggers work like
   the system loggers, but allow you to pass keyword arguments with additional context
   data. See also the [structlog docs](https://structlog.readthedocs.io/en/stable/){:target="_blank"}.
