@@ -27,6 +27,9 @@ nav:
           - Install nomad-lab: howto/programmatic/pythonlib.md
           - Access processed data: howto/programmatic/archive_query.md
           - Transform data: howto/programmatic/json_transformer.md
+          - Graph-style API:
+              - Basics: howto/graph-api/basics.md
+              - Navigation and fuzzy query/fetch: howto/graph-api/graph.structure.md
       - NOMAD Oasis:
           - Configure an Oasis: howto/oasis/configure.md
           - Deploy an Oasis: howto/oasis/deploy.md
