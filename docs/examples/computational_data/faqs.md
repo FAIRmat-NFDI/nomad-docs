@@ -1,0 +1,102 @@
+# Frequently Asked Questions
+
+<!--
+Briefly explain the purpose of the FAQ:
+- who is it for (e.g., developers, end-users, admins)?
+- provide guidance on how to search for answers effectively
+-->
+
+## General Questions
+
+<!--
+- What is Nomad?
+- Who is it for?
+- How to get started?
+- What are the system requirements?
+-->
+
+## Installation & Setup
+
+<!--
+- installation how-to for required code
+- dependencies
+- how to update
+- how to uninstall
+-->
+
+## Usage & Features
+
+<!--
+- what are common tasks, how are they executed
+- what are the key features
+- how to customize settings
+-->
+
+Here are the current nomad deployments (links at bottom of nomad-lab.eu (attached):
+
+Versioning
+official (prod): updated most infrequently (no exact timeline),
+beta (staging): updated more frequently than prod (no exact timeline),
+test: linked to either prod or beta version (unclear to me),
+develop: updated nightly (link not on website https://nomad-lab.eu/prod/v1/develop/gui/about/information),
+example oasis: update nightly,
+
+Other Info
+official, beta, and develop share a database.,
+test has its own database that is wiped occasionally, such that one can test publishing there.,
+example oasis also has its own database. it does not appear that there is a clear data-wiping strategy since it is mainly intended for testing plugins
+
+
+## Troubleshooting
+
+### Getting Help
+
+### Finding resources?
+
+###
+
+<!--
+- Why am I getting [specific error message]?
+- How do I reset/reconfigure?
+- Where can I find logs for debugging?
+- How do I report a bug?
+-->
+
+## Licensing & Support
+
+<!--
+- Is it open-source or proprietory?
+- How do I contact support?
+- Where can I find the documentation/community forum?
+-->
+
+## Advanced Topics
+
+<!--
+- API integration
+- Customization & extensions
+- Performance optimization
+-->
+
+## Preparing and Managing Raw Data
+
+??? info "What happens to the VASP POTCAR upon upload?"
+    For VASP data, NOMAD complies with the licensing of the `POTCAR` files. In agreement with [Georg Kresse](https://www.vasp.at/info/team/){:target="_blank"}, NOMAD extracts the most important information of the `POTCAR` file and stores them in a stripped version called `POTCAR.stripped`. The `POTCAR` files are then automatically removed from the upload, so that you can safely publish your data.
+
+??? info "Can I upload large MD trajectories?"
+    NOMAD has a file size limit of 30 GB per upload. We additionally advise users to further trim their trajectories for efficient use of the platform tools. In general, it is best to upload a representative set of trajectory frames (depending on the use case), to be findable and understandable to other researchers, and then link the entry to the full raw trajectory within your own (local) storage solution, so that it can be easily accessed upon request. Please see the relevant guides for more information: [`nomad-simulation-parsers` >> Guide to preparing Gromacs trajectories for upload to NOMAD ](https://fairmat-nfdi.github.io/nomad-parser-plugins-simulation/parsers/gromacs/gromacs_about.html){:target="_blank"}
+    #TODO - Add sub-section link
+
+??? info "What do I do if my MD engine is not supported?"
+    The most robust approach for integrating your data into NOMAD is via a standardized parser plugin. However, many modern simulation engines that use fully-flexible scriptable input and non-fixed output files challenge or prevent this approach. For these cases, we provide the `H5MD-NOMAD` specification (i.e., schema and file format) that enables users to self-organize and upload data from any MD software package. See [`nomad-simulation-parsers` > H5MD > About](https://fairmat-nfdi.github.io/nomad-parser-plugins-simulation/parsers/h5md/h5md_about.html){:target="_blank"} for details.
+
+## Customization and Development
+
+### What
+
+## Additional Resources
+
+<!--
+- Links to tutorials, guides, or forums
+- Contact information
+-->
