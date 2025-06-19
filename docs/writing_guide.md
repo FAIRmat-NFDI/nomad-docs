@@ -1,6 +1,10 @@
-# Writing Guide
+# Documentation Development and Writing Guide
 
 This is a guide for best practices when contributing to the NOMAD documentation.
+
+## No broken links!
+
+Before merging make sure that the mkdocs logs do not report any broken links. This applies even if these links are not relevant to your changes. If you do not know how to address the broken links, create an issue in the Github repo and tag someone who you think could be of assistance.
 
 ## Images and Data
 
@@ -9,6 +13,10 @@ All assets specific to an individual markdown file should be stored within an im
 ## Sections Hierarchy
 
 single "#" sections should only be used at the beginning of the md file
+
+## Standardized Internal and External Link Naming
+
+Do not use `HERE` as a name for links. For internal links use the path hierarchy to the referenced page or section, separated by >'s. For example: `[Tutorial > Exploring Data > Search Interface & Filters](<path-to-referenced-section>)`. Long paths can be abbreviated to the first and last parts: by using `[Tutorial > ... > Search Interface & Filters](<path-to-referenced-section>)` If the referenced section belongs to the current page, drop the global path, i.e., `[Search Interface & Filters](<path-to-referenced-section>)`. External links to NOMAD plugins or other NOMAD-related documentation should follow the same syntax, with the name of the plugin as the root. For other external links provide some sort of descriptive name and use your discretion.
 
 ## External Links
 

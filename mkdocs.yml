@@ -149,7 +149,6 @@ plugins:
   - redirects:
       redirect_maps:
         "pythonlib.md": "howto/programmatic/pythonlib.md"
-        "oasis.md": "howto/oasis/install.md"
         "develop/gitlab.md": "howto/develop/contrib.md"
   - glightbox
   # - git-revision-date-localized
