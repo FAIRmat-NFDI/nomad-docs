@@ -1,0 +1,6603 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="The documentation for NOMAD v1.
+">
+      
+      
+        <meta name="author" content="The NOMAD Authors">
+      
+      
+      
+        <link rel="prev" href="../explanation/oasis.html">
+      
+      
+        <link rel="next" href="annotations.html">
+      
+      
+      <link rel="icon" href="../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.12">
+    
+    
+      
+        <title>Configuration - Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.2afb09e1.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Titillium Web";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+   <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../assets/javascripts/glightbox.min.js"></script></head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="#2A4CDF" data-md-color-accent="#008A67">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#configuration" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="https://nomad-lab.eu" title="Documentation" class="md-header__button md-logo" aria-label="Documentation" data-md-component="logo">
+      
+  <img src="../assets/nomad-logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Configuration
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/nomad-coe/nomad" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://nomad-lab.eu" title="Documentation" class="md-nav__button md-logo" aria-label="Documentation" data-md-component="logo">
+      
+  <img src="../assets/nomad-logo.png" alt="logo">
+
+    </a>
+    Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/nomad-coe/nomad" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Tutorial
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Tutorial
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/nomad_repo.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Navigating to NOMAD
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/upload_publish.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Uploading and publishing data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/explore.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exploring data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/workflows_projects.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Managing workflows and projects
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/access_api.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Accessing data via API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/custom.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Creating custom schemas
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial/develop_plugin.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Developing NOMAD plugins
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    How-to guides
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            How-to guides
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/overview.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Manage and find data
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Manage and find data
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/manage/upload.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Upload and publish data for supported formats
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/manage/eln.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Use ELNs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/manage/explore.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Explore data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/manage/north.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Use NORTH
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Programmatic use
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Programmatic use
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/programmatic/api.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Use the API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/programmatic/download.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Download data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/programmatic/publish_python.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Publish data using python
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/programmatic/pythonlib.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Install nomad-lab
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/programmatic/archive_query.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Access processed data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/programmatic/json_transformer.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Transform data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3_7" id="__nav_3_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Graph-style API
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            Graph-style API
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/graph-api/basics.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Basics
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/graph-api/graph.structure.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Navigation and fuzzy query/fetch
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    NOMAD Oasis
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            NOMAD Oasis
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/oasis/configure.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Configure an Oasis
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/oasis/deploy.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Deploy an Oasis
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/oasis/update.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Update an Oasis
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/oasis/admin.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Perform admin tasks
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Plugins
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            Plugins
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/plugins/plugins.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction to plugins
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/plugins/apis.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Write an API
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/plugins/apps.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Write an app
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/plugins/example_uploads.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Write an example upload
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/plugins/normalizers.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Write a normalizer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/plugins/parsers.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Write a parser
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/plugins/schema_packages.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Write a schema package
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Customization
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            Customization
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/customization/basics.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Write a YAML schema package
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/customization/elns.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Define ELNs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/customization/base_sections.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Use base sections
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/customization/tabular.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Parse tabular data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/customization/workflows.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Define workflows
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/customization/units.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Work with units
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/customization/hdf5.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Use HDF5 to handle large quantities
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Development
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            Development
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/develop/setup.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Get started
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/develop/code.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Navigate the code
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/develop/contrib.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Contribute
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/develop/search.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Extend the search
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/develop/release.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Make a release
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Domain-specific examples
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Domain-specific examples
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/overview.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Computational data
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            Computational data
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/computational_data/uploading.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Quick start
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/computational_data/workflows.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Workflows
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/computational_data/metainfo.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MetaInfo
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/computational_data/schema_plugins.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Schema plugins
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/computational_data/parser_plugins.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Parser plugins
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/computational_data/h5md_howto.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    H5MD schema - Howto
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/computational_data/h5md_expl.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    H5MD schema - Explanation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/computational_data/h5md_ref.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    H5MD - Reference
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Experimental data
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            Experimental data
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/experiment_data/em.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Electron microscopy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/experiment_data/mpes.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Photoemission spectroscopy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/experiment_data/xps.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    X-ray photoemission spectroscopy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/experiment_data/opt.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Optical spectroscopy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/experiment_data/apm.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Atom probe tomography
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/experiment_data/stm.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Scanning tunneling spectroscopy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/experiment_data/pynxtools.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    pynxtools
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Explanation
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Explanation
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../explanation/basics.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    From files to data
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../explanation/data.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Data structure
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../explanation/processing.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Processing
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../explanation/architecture.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Architecture
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../explanation/plugin_system.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Plugins
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../explanation/oasis.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Federation and Oasis
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Reference
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            Reference
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Configuration
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="config.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Configuration
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Introduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setting-values-from-the-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setting values from the environment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setting-values-from-a-nomadyaml" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setting values from a nomad.yaml
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#user-interface-customization" class="md-nav__link">
+    <span class="md-ellipsis">
+      User interface customization
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#services" class="md-nav__link">
+    <span class="md-ellipsis">
+      Services
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Services">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#services_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      services
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#meta" class="md-nav__link">
+    <span class="md-ellipsis">
+      meta
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#oasis" class="md-nav__link">
+    <span class="md-ellipsis">
+      oasis
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#north" class="md-nav__link">
+    <span class="md-ellipsis">
+      north
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#northtools" class="md-nav__link">
+    <span class="md-ellipsis">
+      NORTHTools
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#northtool" class="md-nav__link">
+    <span class="md-ellipsis">
+      NORTHTool
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#northtoolmaintainer" class="md-nav__link">
+    <span class="md-ellipsis">
+      NORTHToolMaintainer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#northexternalmount" class="md-nav__link">
+    <span class="md-ellipsis">
+      NORTHExternalMount
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#files-databases-external-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      Files, databases, external services
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Files, databases, external services">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rabbitmq" class="md-nav__link">
+    <span class="md-ellipsis">
+      rabbitmq
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fs" class="md-nav__link">
+    <span class="md-ellipsis">
+      fs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#elastic" class="md-nav__link">
+    <span class="md-ellipsis">
+      elastic
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keycloak" class="md-nav__link">
+    <span class="md-ellipsis">
+      keycloak
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mongo" class="md-nav__link">
+    <span class="md-ellipsis">
+      mongo
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logstash" class="md-nav__link">
+    <span class="md-ellipsis">
+      logstash
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mail" class="md-nav__link">
+    <span class="md-ellipsis">
+      mail
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datacite" class="md-nav__link">
+    <span class="md-ellipsis">
+      datacite
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rfc3161_timestamp" class="md-nav__link">
+    <span class="md-ellipsis">
+      rfc3161_timestamp
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Processing
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Processing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#celery" class="md-nav__link">
+    <span class="md-ellipsis">
+      celery
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#normalize" class="md-nav__link">
+    <span class="md-ellipsis">
+      normalize
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#process" class="md-nav__link">
+    <span class="md-ellipsis">
+      process
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reprocess" class="md-nav__link">
+    <span class="md-ellipsis">
+      reprocess
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bundle_export" class="md-nav__link">
+    <span class="md-ellipsis">
+      bundle_export
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bundleexportsettings" class="md-nav__link">
+    <span class="md-ellipsis">
+      BundleExportSettings
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bundle_import" class="md-nav__link">
+    <span class="md-ellipsis">
+      bundle_import
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bundleimportsettings" class="md-nav__link">
+    <span class="md-ellipsis">
+      BundleImportSettings
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reprocess_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reprocess
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#archive" class="md-nav__link">
+    <span class="md-ellipsis">
+      archive
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      User Interface
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="User Interface">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      ui
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#northui" class="md-nav__link">
+    <span class="md-ellipsis">
+      NORTHUI
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Apps
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exampleuploads" class="md-nav__link">
+    <span class="md-ellipsis">
+      ExampleUploads
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#theme" class="md-nav__link">
+    <span class="md-ellipsis">
+      Theme
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unitsystems" class="md-nav__link">
+    <span class="md-ellipsis">
+      UnitSystems
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unitsystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      UnitSystem
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unitsystemunit" class="md-nav__link">
+    <span class="md-ellipsis">
+      UnitSystemUnit
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#entry" class="md-nav__link">
+    <span class="md-ellipsis">
+      Entry
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cards" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cards
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#card" class="md-nav__link">
+    <span class="md-ellipsis">
+      Card
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#others" class="md-nav__link">
+    <span class="md-ellipsis">
+      Others
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Others">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#logtransfer" class="md-nav__link">
+    <span class="md-ellipsis">
+      logtransfer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      tests
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      resources
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#client" class="md-nav__link">
+    <span class="md-ellipsis">
+      client
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gitlab" class="md-nav__link">
+    <span class="md-ellipsis">
+      gitlab
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plugins" class="md-nav__link">
+    <span class="md-ellipsis">
+      plugins
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pluginpackage" class="md-nav__link">
+    <span class="md-ellipsis">
+      PluginPackage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#entrypoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      EntryPoints
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parserentrypoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      ParserEntryPoint
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#appentrypoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      AppEntryPoint
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      Schema
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apientrypoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      APIEntryPoint
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#normalizerentrypoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      NormalizerEntryPoint
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#normalizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Normalizer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parser" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parser
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#schemapackageentrypoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      SchemaPackageEntryPoint
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exampleuploadentrypoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      ExampleUploadEntryPoint
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uploadresource" class="md-nav__link">
+    <span class="md-ellipsis">
+      UploadResource
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="annotations.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Annotations
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="basesections.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Base Sections
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="cli.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Command Line Interface (CLI)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="plugins.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Plugins
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="parsers.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Supported parsers
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="code_guidelines.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Code guidelines
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="glossary.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Glossary
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tutorials.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    List of NOMAD tutorials
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Introduction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setting-values-from-the-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setting values from the environment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setting-values-from-a-nomadyaml" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setting values from a nomad.yaml
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#user-interface-customization" class="md-nav__link">
+    <span class="md-ellipsis">
+      User interface customization
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#services" class="md-nav__link">
+    <span class="md-ellipsis">
+      Services
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Services">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#services_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      services
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#meta" class="md-nav__link">
+    <span class="md-ellipsis">
+      meta
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#oasis" class="md-nav__link">
+    <span class="md-ellipsis">
+      oasis
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#north" class="md-nav__link">
+    <span class="md-ellipsis">
+      north
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#northtools" class="md-nav__link">
+    <span class="md-ellipsis">
+      NORTHTools
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#northtool" class="md-nav__link">
+    <span class="md-ellipsis">
+      NORTHTool
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#northtoolmaintainer" class="md-nav__link">
+    <span class="md-ellipsis">
+      NORTHToolMaintainer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#northexternalmount" class="md-nav__link">
+    <span class="md-ellipsis">
+      NORTHExternalMount
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#files-databases-external-services" class="md-nav__link">
+    <span class="md-ellipsis">
+      Files, databases, external services
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Files, databases, external services">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#rabbitmq" class="md-nav__link">
+    <span class="md-ellipsis">
+      rabbitmq
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fs" class="md-nav__link">
+    <span class="md-ellipsis">
+      fs
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#elastic" class="md-nav__link">
+    <span class="md-ellipsis">
+      elastic
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keycloak" class="md-nav__link">
+    <span class="md-ellipsis">
+      keycloak
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mongo" class="md-nav__link">
+    <span class="md-ellipsis">
+      mongo
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#logstash" class="md-nav__link">
+    <span class="md-ellipsis">
+      logstash
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mail" class="md-nav__link">
+    <span class="md-ellipsis">
+      mail
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datacite" class="md-nav__link">
+    <span class="md-ellipsis">
+      datacite
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rfc3161_timestamp" class="md-nav__link">
+    <span class="md-ellipsis">
+      rfc3161_timestamp
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#processing" class="md-nav__link">
+    <span class="md-ellipsis">
+      Processing
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Processing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#celery" class="md-nav__link">
+    <span class="md-ellipsis">
+      celery
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#normalize" class="md-nav__link">
+    <span class="md-ellipsis">
+      normalize
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#options" class="md-nav__link">
+    <span class="md-ellipsis">
+      Options
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#process" class="md-nav__link">
+    <span class="md-ellipsis">
+      process
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reprocess" class="md-nav__link">
+    <span class="md-ellipsis">
+      reprocess
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bundle_export" class="md-nav__link">
+    <span class="md-ellipsis">
+      bundle_export
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bundleexportsettings" class="md-nav__link">
+    <span class="md-ellipsis">
+      BundleExportSettings
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bundle_import" class="md-nav__link">
+    <span class="md-ellipsis">
+      bundle_import
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bundleimportsettings" class="md-nav__link">
+    <span class="md-ellipsis">
+      BundleImportSettings
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#reprocess_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reprocess
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#archive" class="md-nav__link">
+    <span class="md-ellipsis">
+      archive
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#user-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      User Interface
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="User Interface">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ui" class="md-nav__link">
+    <span class="md-ellipsis">
+      ui
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#northui" class="md-nav__link">
+    <span class="md-ellipsis">
+      NORTHUI
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apps" class="md-nav__link">
+    <span class="md-ellipsis">
+      Apps
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exampleuploads" class="md-nav__link">
+    <span class="md-ellipsis">
+      ExampleUploads
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#theme" class="md-nav__link">
+    <span class="md-ellipsis">
+      Theme
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unitsystems" class="md-nav__link">
+    <span class="md-ellipsis">
+      UnitSystems
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unitsystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      UnitSystem
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unitsystemunit" class="md-nav__link">
+    <span class="md-ellipsis">
+      UnitSystemUnit
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#entry" class="md-nav__link">
+    <span class="md-ellipsis">
+      Entry
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cards" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cards
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#card" class="md-nav__link">
+    <span class="md-ellipsis">
+      Card
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#others" class="md-nav__link">
+    <span class="md-ellipsis">
+      Others
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Others">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#logtransfer" class="md-nav__link">
+    <span class="md-ellipsis">
+      logtransfer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      tests
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#resources" class="md-nav__link">
+    <span class="md-ellipsis">
+      resources
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#client" class="md-nav__link">
+    <span class="md-ellipsis">
+      client
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gitlab" class="md-nav__link">
+    <span class="md-ellipsis">
+      gitlab
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#plugins" class="md-nav__link">
+    <span class="md-ellipsis">
+      plugins
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pluginpackage" class="md-nav__link">
+    <span class="md-ellipsis">
+      PluginPackage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#entrypoints" class="md-nav__link">
+    <span class="md-ellipsis">
+      EntryPoints
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parserentrypoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      ParserEntryPoint
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#appentrypoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      AppEntryPoint
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      Schema
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apientrypoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      APIEntryPoint
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#normalizerentrypoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      NormalizerEntryPoint
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#normalizer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Normalizer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parser" class="md-nav__link">
+    <span class="md-ellipsis">
+      Parser
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#schemapackageentrypoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      SchemaPackageEntryPoint
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exampleuploadentrypoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      ExampleUploadEntryPoint
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uploadresource" class="md-nav__link">
+    <span class="md-ellipsis">
+      UploadResource
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h1>
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
+<p>Many aspects of NOMAD and its operation can be modified through configuration. Most
+configuration items have reasonable defaults and typically only a small subset has to be
+overwritten.</p>
+<p>Configuration items get their value in the following order:</p>
+<ol>
+<li>The item is read from the environment. This has the highest priority and will overwrite
+values in a <code>nomad.yaml</code> file or the NOMAD source-code.</li>
+<li>The value is given in a <code>nomad.yaml</code> configuration file.</li>
+<li>There is no custom value, and the value hard-coded in the NOMAD sources will be used.</li>
+</ol>
+<p>Configuration items are structured. The configuration is hierarchical and items are aggregated
+in potentially nested section. For example the configuration item <code>services.api_host</code> denotes
+the attribute <code>api_host</code> in the configuration section <code>services</code>.</p>
+<h4 id="setting-values-from-the-environment">Setting values from the environment<a class="headerlink" href="#setting-values-from-the-environment" title="Permanent link">&para;</a></h4>
+<p>NOMAD services will look at the environment.
+All environment variables starting with <code>NOMAD_</code> are considered. The rest of the name
+is interpreted as a configuration item. Sections and attributes are concatenated with a <code>_</code>.
+For example, the environment variable <code>NOMAD_SERVICES_API_HOST</code> will set the value for
+the <code>api_host</code> attribute in the <code>services</code> section.</p>
+<h4 id="setting-values-from-a-nomadyaml">Setting values from a <code>nomad.yaml</code><a class="headerlink" href="#setting-values-from-a-nomadyaml" title="Permanent link">&para;</a></h4>
+<p>NOMAD services will look for a <code>nomad.yaml</code> file. By default, they will look in the
+current working directory. This location can be overwritten with the <code>NOMAD_CONFIG</code> environment
+variable.</p>
+<p>The configuration sections and attributes can be denoted with YAML objects and attributes.
+Here is an example <code>nomad.yaml</code> file:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">services</span><span class="p">:</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">api_host</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;localhost&#39;</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="nt">api_base_path</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;/nomad-oasis&#39;</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nt">oasis</span><span class="p">:</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="w">  </span><span class="nt">is_oasis</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">  </span><span class="nt">uses_central_user_management</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="nt">north</span><span class="p">:</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">  </span><span class="nt">jupyterhub_crypt_key</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;978bfb2e13a8448a253c629d8dd84ff89587f30e635b753153960930cad9d36d&#39;</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="nt">meta</span><span class="p">:</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">  </span><span class="nt">deployment</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;oasis&#39;</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">  </span><span class="nt">deployment_url</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;https://my-oasis.org/api&#39;</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">  </span><span class="nt">maintainer_email</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;me@my-oasis.org&#39;</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="nt">logtransfer</span><span class="p">:</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="nt">mongo</span><span class="p">:</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="w">    </span><span class="nt">db_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nomad_oasis_v1</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="nt">elastic</span><span class="p">:</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="w">    </span><span class="nt">entries_index</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nomad_oasis_entries_v1</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="w">    </span><span class="nt">materials_index</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nomad_oasis_materials_v1</span>
+</code></pre></div></p>
+<p>When overwriting an <em>object</em> in the configuration, the new value will be merged with the default value. The new merged object will have all of the attributes of the new object in addition to any old attributes that were not overwritten. This allows you to simply change an individual setting without having to provide the entire structure again, which simplifies customization that happens deep in the configuration hierarchy. When overwriting anything else (numbers, strings, lists etc.) the new value completely replaces the old one.</p>
+<h4 id="user-interface-customization">User interface customization<a class="headerlink" href="#user-interface-customization" title="Permanent link">&para;</a></h4>
+<p>Many of the UI options use a data model that contains the following three fields: <code>include</code>, <code>exclude</code> and <code>options</code>. This structure allows you to easily disable, enable, reorder and modify the UI layout with minimal config rewrite. Here are examples of common customization tasks using the search columns as an example:</p>
+<p>Disable item:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">ui</span><span class="p">:</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">apps</span><span class="p">:</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nt">options</span><span class="p">:</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">      </span><span class="nt">entries</span><span class="p">:</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">        </span><span class="nt">columns</span><span class="p">:</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">          </span><span class="nt">exclude</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;upload_create_time&#39;</span><span class="p p-Indicator">]</span>
+</code></pre></div></p>
+<p>Explicitly select the shown items and their order
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">ui</span><span class="p">:</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">apps</span><span class="p">:</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">options</span><span class="p">:</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">      </span><span class="nt">entries</span><span class="p">:</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">        </span><span class="nt">columns</span><span class="p">:</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">          </span><span class="nt">include</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;entry_id&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;upload_create_time&#39;</span><span class="p p-Indicator">]</span>
+</code></pre></div></p>
+<p>Modify existing option
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">ui</span><span class="p">:</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">apps</span><span class="p">:</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">options</span><span class="p">:</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">      </span><span class="nt">entries</span><span class="p">:</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">        </span><span class="nt">columns</span><span class="p">:</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">          </span><span class="nt">options</span><span class="p">:</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">            </span><span class="nt">upload_create_time</span><span class="p">:</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">              </span><span class="nt">label</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Uploaded&quot;</span>
+</code></pre></div></p>
+<p>Add a new item that does not yet exist in options. Note that by default all options are shown in the order they have been declared unless the order is explicitly given in <code>include</code>.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nt">ui</span><span class="p">:</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="nt">apps</span><span class="p">:</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="nt">options</span><span class="p">:</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">      </span><span class="nt">entries</span><span class="p">:</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">        </span><span class="nt">columns</span><span class="p">:</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">          </span><span class="nt">options</span><span class="p">:</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">            </span><span class="nt">upload_id</span><span class="p">:</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">              </span><span class="nt">label</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Upload</span><span class="nv"> </span><span class="s">ID&quot;</span>
+</code></pre></div></p>
+<p>The following is a reference of all configuration sections and attributes.</p>
+<h2 id="services">Services<a class="headerlink" href="#services" title="Permanent link">&para;</a></h2>
+<h3 id="services_1">services<a class="headerlink" href="#services_1" title="Permanent link">&para;</a></h3>
+<p>Contains basic configuration of the NOMAD services (app, worker, north).</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>api_host</td>
+<td><code>str</code></td>
+<td>The external hostname that clients can use to reach this NOMAD installation.</br><em>default:</em> <code>localhost</code></td>
+</tr>
+<tr>
+<td>api_port</td>
+<td><code>str | int</code></td>
+<td>The port used to expose the NOMAD app and api to clients.</br><em>default:</em> <code>8000</code></td>
+</tr>
+<tr>
+<td>api_base_path</td>
+<td><code>str</code></td>
+<td>The base path prefix for the NOMAD app and api.</br><em>default:</em> <code>/fairdi/nomad/latest</code></td>
+</tr>
+<tr>
+<td>api_secret</td>
+<td><code>str</code></td>
+<td>A secret that is used to issue download and other tokens.</br><em>default:</em> <code>defaultApiSecret</code></td>
+</tr>
+<tr>
+<td>api_timeout</td>
+<td><code>int</code></td>
+<td>If the NOMAD app is run with gunicorn as process manager, this timeout (in s) is passed and worker processes will be restarted, if they do not respond in time.</br><em>default:</em> <code>600</code></td>
+</tr>
+<tr>
+<td>https</td>
+<td><code>bool</code></td>
+<td>Set to <code>True</code>, if external clients are using <em>SSL</em> to connect to this installation. Requires to setup a reverse-proxy (e.g. the one used in the docker-compose based installation) that handles the <em>SSL</em> encryption.</br><em>default:</em> <code>False</code></td>
+</tr>
+<tr>
+<td>https_upload</td>
+<td><code>bool</code></td>
+<td>Set to <code>True</code>, if upload curl commands should suggest the use of SSL for file uploads. This can be configured independently of <code>https</code> to suggest large file via regular HTTP.</br><em>default:</em> <code>False</code></td>
+</tr>
+<tr>
+<td>admin_user_id</td>
+<td><code>str</code></td>
+<td>The admin user <code>user_id</code>. All users are treated the same; there are no particular authorization information attached to user accounts. However, the API will grant the user with the given <code>user_id</code> more rights, e.g. using the <code>admin</code> owner setting in accessing data.</br><em>default:</em> <code>00000000-0000-0000-0000-000000000000</code></td>
+</tr>
+<tr>
+<td>encyclopedia_base</td>
+<td><code>str</code></td>
+<td>This enables links to the given <em>encyclopedia</em> installation in the UI.</br><em>default:</em> <code>https://nomad-lab.eu/prod/rae/encyclopedia/#</code></td>
+</tr>
+<tr>
+<td>optimade_enabled</td>
+<td><code>bool</code></td>
+<td>If true, the app will serve the optimade API.</br><em>default:</em> <code>True</code></td>
+</tr>
+<tr>
+<td>dcat_enabled</td>
+<td><code>bool</code></td>
+<td>If true the app will serve the DCAT API.</br><em>default:</em> <code>True</code></td>
+</tr>
+<tr>
+<td>h5grove_enabled</td>
+<td><code>bool</code></td>
+<td>If true the app will serve the h5grove API.</br><em>default:</em> <code>True</code></td>
+</tr>
+<tr>
+<td>console_log_level</td>
+<td><code>int | str</code></td>
+<td>The log level that controls console logging for all NOMAD services (app, worker, north). The level is given in Python <code>logging</code> log level numbers.</br><em>default:</em> <code>30</code></td>
+</tr>
+<tr>
+<td>upload_limit</td>
+<td><code>int</code></td>
+<td>The maximum allowed unpublished uploads per user. If a user exceeds this amount, the user cannot add more uploads.</br><em>default:</em> <code>10</code></td>
+</tr>
+<tr>
+<td>force_raw_file_decoding</td>
+<td><code>bool</code></td>
+<td>By default, text raw-files are interpreted with utf-8 encoding. If this fails, the actual encoding is guessed. With this setting, we force to assume iso-8859-1 encoding, if a file is not decodable with utf-8.</br><em>default:</em> <code>False</code></td>
+</tr>
+<tr>
+<td>max_entry_download</td>
+<td><code>int</code></td>
+<td>There is an inherent limit in page-based pagination with Elasticsearch. If you increased this limit with your Elasticsearch, you can also adopt this setting accordingly, changing the maximum amount of entries that can be paginated with page-base pagination.<br/>Page-after-value-based pagination is independent and can be used without limitations.</br><em>default:</em> <code>50000</code></td>
+</tr>
+<tr>
+<td>max_entry_metadata_download</td>
+<td><code>int</code></td>
+<td>The maximum amount of entries metadata that can be downloaded.</br><em>default:</em> <code>100000</code></td>
+</tr>
+<tr>
+<td>unavailable_value</td>
+<td><code>str</code></td>
+<td>Value that is used in <code>results</code> section Enum fields (e.g. system type, spacegroup, etc.) to indicate that the value could not be determined.</br><em>default:</em> <code>unavailable</code></td>
+</tr>
+<tr>
+<td>app_token_max_expires_in</td>
+<td><code>int</code></td>
+<td>Maximum expiration time for an app token in seconds. Requests with a higher value will be declined.</br><em>default:</em> <code>2592000</code></td>
+</tr>
+<tr>
+<td>html_resource_http_max_age</td>
+<td><code>int</code></td>
+<td>Used for the max_age cache-control directive on statically served html, js, css resources.</br><em>default:</em> <code>60</code></td>
+</tr>
+<tr>
+<td>image_resource_http_max_age</td>
+<td><code>int</code></td>
+<td>Used for the max_age cache-control directive on statically served image resources.</br><em>default:</em> <code>2592000</code></td>
+</tr>
+<tr>
+<td>upload_members_group_search_enabled</td>
+<td><code>bool</code></td>
+<td>If true, the GUI will show a search for groups as upload members.</br><em>default:</em> <code>True</code></td>
+</tr>
+<tr>
+<td>log_api_queries</td>
+<td><code>bool</code></td>
+<td>If true, all queries to the /entries/query API endpoint will be logged.</br><em>default:</em> <code>True</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="meta">meta<a class="headerlink" href="#meta" title="Permanent link">&para;</a></h3>
+<p>Metadata about the deployment and how it is presented to clients.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>version</td>
+<td><code>str</code></td>
+<td>The NOMAD version string.</br><em>default:</em> <code>1.3.16rc2</code></td>
+</tr>
+<tr>
+<td>commit</td>
+<td><code>str</code></td>
+<td>The source-code commit that this installation's NOMAD version is build from.</br><em>default:</em> ""</td>
+</tr>
+<tr>
+<td>deployment</td>
+<td><code>str</code></td>
+<td>Human-friendly name of this nomad deployment.</br><em>default:</em> <code>devel</code></td>
+</tr>
+<tr>
+<td>deployment_url</td>
+<td><code>str</code></td>
+<td>The NOMAD deployment's url. If not explicitly set, will default to the (api url) read from the configuration.</td>
+</tr>
+<tr>
+<td>label</td>
+<td><code>str</code></td>
+<td>An additional log-stash data key-value pair added to all logs. Can be used to differentiate deployments when analyzing logs.</td>
+</tr>
+<tr>
+<td>service</td>
+<td><code>str</code></td>
+<td>Name for the service that is added to all logs. Depending on how NOMAD is installed, services get a name (app, worker, north) automatically.</br><em>default:</em> <code>unknown nomad service</code></td>
+</tr>
+<tr>
+<td>name</td>
+<td><code>str</code></td>
+<td>Web-site title for the NOMAD UI.</br><em>default:</em> <code>NOMAD</code></br><strong>deprecated</strong></td>
+</tr>
+<tr>
+<td>homepage</td>
+<td><code>str</code></td>
+<td>Provider homepage.</br><em>default:</em> <code>https://nomad-lab.eu</code></br><strong>deprecated</strong></td>
+</tr>
+<tr>
+<td>source_url</td>
+<td><code>str</code></td>
+<td>URL of the NOMAD source-code repository.</br><em>default:</em> <code>https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR</code></br><strong>deprecated</strong></td>
+</tr>
+<tr>
+<td>maintainer_email</td>
+<td><code>str</code></td>
+<td>Email of the NOMAD deployment maintainer.</br><em>default:</em> <code>markus.scheidgen@physik.hu-berlin.de</code></td>
+</tr>
+<tr>
+<td>beta</td>
+<td><code>dict</code></td>
+<td>Additional data that describes how the deployment is labeled as a beta-version in the UI.</br><em>default:</em> Complex object, default value not displayed.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="oasis">oasis<a class="headerlink" href="#oasis" title="Permanent link">&para;</a></h3>
+<p>Settings related to the configuration of a NOMAD Oasis deployment.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>is_oasis</td>
+<td><code>bool</code></td>
+<td>Set to <code>True</code> to indicate that this deployment is a NOMAD Oasis.</br><em>default:</em> <code>False</code></td>
+</tr>
+<tr>
+<td>allowed_users</td>
+<td><code>list[str]</code></td>
+<td>A list of usernames or user account emails. These represent a white-list of allowed users. With this, users will need to login right-away and only the listed users might use this deployment. All API requests must have authentication information as well.</td>
+</tr>
+<tr>
+<td>uses_central_user_management</td>
+<td><code>bool</code></td>
+<td>Set to True to use the central user-management. Typically the NOMAD backend is using the configured <code>keycloak</code> to access user data. With this, the backend will use the API of the central NOMAD (<code>central_nomad_deployment_url</code>) instead.</br><em>default:</em> <code>False</code></td>
+</tr>
+<tr>
+<td>central_nomad_deployment_url</td>
+<td><code>str</code></td>
+<td>The URL of the API of the NOMAD deployment that is considered the <em>central</em> NOMAD.</br><em>default:</em> <code>https://nomad-lab.eu/prod/v1/api</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="north">north<a class="headerlink" href="#north" title="Permanent link">&para;</a></h3>
+<p>Settings related to the operation of the NOMAD remote tools hub service <em>north</em>.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>hub_ip</td>
+<td><code>str</code></td>
+<td>This setting is forwarded to jupyterhub; refer to the jupyterhub <a href="https://jupyterhub.readthedocs.io/en/stable/api/app.html#">documentation</a>.</br><em>default:</em> <code>0.0.0.0</code></td>
+</tr>
+<tr>
+<td>hub_port</td>
+<td><code>int | str</code></td>
+<td>The internal port that NOMAD services use to connect to the jupyterhub API.</br><em>default:</em> <code>9000</code></td>
+</tr>
+<tr>
+<td>windows</td>
+<td><code>bool</code></td>
+<td>Enable windows OS hacks.</br><em>default:</em> <code>True</code></td>
+</tr>
+<tr>
+<td>nomad_access_token_expiry_time</td>
+<td><code>int</code></td>
+<td>All tools are run with an access token for the NOMAD api in the NOMAD_CLIENT_ACCESS_TOKEN environment variable. This token will be automatically used by the nomad-lab Python package, e.g. if you use the ArchiveQuery to access data. This option sets the amount of seconds that this token is valid for.</br><em>default:</em> <code>86400</code></td>
+</tr>
+<tr>
+<td>tools</td>
+<td><code>NORTHTools</code></td>
+<td>The available north tools. Either the tools definitions as dict or a path to a .json file.</br><em>default:</em> Complex object, default value not displayed.</td>
+</tr>
+<tr>
+<td>hub_service_api_token</td>
+<td><code>str</code></td>
+<td>A secret token shared between NOMAD and the NORTH jupyterhub. This needs to be the token of an admin service.</br><em>default:</em> <code>secret-token</code></td>
+</tr>
+<tr>
+<td>enabled</td>
+<td><code>bool | None</code></td>
+<td>Enables or disables the NORTH API and UI views. This is independent of whether you run a jupyter hub or not.</br><em>default:</em> <code>True</code></td>
+</tr>
+<tr>
+<td>hub_connect_ip</td>
+<td><code>str | None</code></td>
+<td>Overwrites the default hostname that can be used from within a north container to reach the host system.<br/>Typically has to be set for non Linux hosts. Set this to <code>host.docker.internal</code> on windows/macos.</td>
+</tr>
+<tr>
+<td>hub_connect_url</td>
+<td><code>str | None</code></td>
+<td>This setting is forwarded to jupyterhub; refer to the jupyterhub <a href="https://jupyterhub.readthedocs.io/en/stable/api/app.html#">documentation</a>.</td>
+</tr>
+<tr>
+<td>docker_network</td>
+<td><code>str | None</code></td>
+<td>This setting is forwarded to jupyterhub; refer to the jupyterhub <a href="https://jupyterhub.readthedocs.io/en/stable/api/app.html#">documentation</a>.</td>
+</tr>
+<tr>
+<td>hub_host</td>
+<td><code>str | None</code></td>
+<td>The internal host name that NOMAD services use to connect to the jupyterhub API.</br><em>default:</em> <code>localhost</code></td>
+</tr>
+<tr>
+<td>jupyterhub_crypt_key</td>
+<td><code>str | None</code></td>
+<td>This setting is forwarded to jupyterhub; refer to the jupyterhub <a href="https://jupyterhub.readthedocs.io/en/stable/api/app.html#">documentation</a>.</td>
+</tr>
+<tr>
+<td>nomad_host</td>
+<td><code>str | None</code></td>
+<td>The NOMAD app host name that spawned containers use.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="northtools">NORTHTools<a class="headerlink" href="#northtools" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>options</td>
+<td><code>dict[str, NORTHTool]</code></td>
+<td>The available plugin.</br><em>default:</em> Complex object, default value not displayed.</td>
+</tr>
+<tr>
+<td>include</td>
+<td><code>list[str] | None</code></td>
+<td>List of included options. If not explicitly defined, all of the options will be included by default.</td>
+</tr>
+<tr>
+<td>exclude</td>
+<td><code>list[str] | None</code></td>
+<td>List of excluded options. Has higher precedence than include.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="northtool">NORTHTool<a class="headerlink" href="#northtool" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>image_pull_policy</td>
+<td><code>str</code></td>
+<td>The image pull policy used in k8s deployments.</br><em>default:</em> <code>Always</code></td>
+</tr>
+<tr>
+<td>privileged</td>
+<td><code>bool</code></td>
+<td>Whether the tool needs to run in privileged mode.</br><em>default:</em> <code>False</code></td>
+</tr>
+<tr>
+<td>with_path</td>
+<td><code>bool</code></td>
+<td>Whether the tool supports a path to a file or directory. This also enables tools to be launched from files in the NOMAD UI.</br><em>default:</em> <code>False</code></td>
+</tr>
+<tr>
+<td>file_extensions</td>
+<td><code>list[str]</code></td>
+<td>The file extensions of files that this tool should be launchable for.</br><em>default:</em> <code>[]</code></td>
+</tr>
+<tr>
+<td>maintainer</td>
+<td><code>list[NORTHToolMaintainer]</code></td>
+<td>The maintainers of the tool.</br><em>default:</em> <code>[]</code></td>
+</tr>
+<tr>
+<td>external_mounts</td>
+<td><code>list[NORTHExternalMount]</code></td>
+<td>Additional mounts to be added to tool containers.</br><em>default:</em> <code>[]</code></td>
+</tr>
+<tr>
+<td>short_description</td>
+<td><code>str | None</code></td>
+<td>A short description of the tool, e.g. shown in the NOMAD GUI.</td>
+</tr>
+<tr>
+<td>description</td>
+<td><code>str | None</code></td>
+<td>A description of the tool, e.g. shown in the NOMAD GUI.</td>
+</tr>
+<tr>
+<td>image</td>
+<td><code>str | None</code></td>
+<td>The docker image (incl. tags) to use for the tool.</td>
+</tr>
+<tr>
+<td>cmd</td>
+<td><code>str | None</code></td>
+<td>The container cmd that is passed to the spawner.</td>
+</tr>
+<tr>
+<td>default_url</td>
+<td><code>str | None</code></td>
+<td>An optional path prefix that is added to the container URL to reach the tool, e.g. "/lab" for jupyterlab.</td>
+</tr>
+<tr>
+<td>path_prefix</td>
+<td><code>str | None</code></td>
+<td>An optional path prefix that is added to the container URL to reach the files, e.g. "lab/tree" for jupyterlab.</td>
+</tr>
+<tr>
+<td>mount_path</td>
+<td><code>str | None</code></td>
+<td>The path in the container where uploads and work directories will be mounted, e.g. /home/jovyan for Jupyter containers.</td>
+</tr>
+<tr>
+<td>icon</td>
+<td><code>str | None</code></td>
+<td>A URL to an icon that is used to represent the tool in the NOMAD UI.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="northtoolmaintainer">NORTHToolMaintainer<a class="headerlink" href="#northtoolmaintainer" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td><code>str</code></td>
+<td><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>email</td>
+<td><code>str</code></td>
+<td><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="northexternalmount">NORTHExternalMount<a class="headerlink" href="#northexternalmount" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>host_path</td>
+<td><code>str</code></td>
+<td><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>bind</td>
+<td><code>str</code></td>
+<td><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>mode</td>
+<td><code>str</code></td>
+<td><em>default:</em> <code>ReadMode.ro</code></br><em>options:</em><br/> - <code>ro</code><br/> - <code>rw</code><br/></td>
+</tr>
+</tbody>
+</table>
+<h2 id="files-databases-external-services">Files, databases, external services<a class="headerlink" href="#files-databases-external-services" title="Permanent link">&para;</a></h2>
+<h3 id="rabbitmq">rabbitmq<a class="headerlink" href="#rabbitmq" title="Permanent link">&para;</a></h3>
+<p>Configures how NOMAD is connecting to RabbitMQ.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>host</td>
+<td><code>str</code></td>
+<td>The name of the host that runs RabbitMQ.</br><em>default:</em> <code>localhost</code></td>
+</tr>
+<tr>
+<td>user</td>
+<td><code>str</code></td>
+<td>The RabbitMQ user that is used to connect.</br><em>default:</em> <code>rabbitmq</code></td>
+</tr>
+<tr>
+<td>password</td>
+<td><code>str</code></td>
+<td>The password that is used to connect.</br><em>default:</em> <code>rabbitmq</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="fs">fs<a class="headerlink" href="#fs" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>tmp</td>
+<td><code>str</code></td>
+<td><em>default:</em> <code>.volumes/fs/tmp</code></td>
+</tr>
+<tr>
+<td>staging</td>
+<td><code>str</code></td>
+<td><em>default:</em> <code>.volumes/fs/staging</code></td>
+</tr>
+<tr>
+<td>staging_external</td>
+<td><code>str</code></td>
+<td></td>
+</tr>
+<tr>
+<td>public</td>
+<td><code>str</code></td>
+<td><em>default:</em> <code>.volumes/fs/public</code></td>
+</tr>
+<tr>
+<td>public_external</td>
+<td><code>str</code></td>
+<td></td>
+</tr>
+<tr>
+<td>north_home</td>
+<td><code>str</code></td>
+<td><em>default:</em> <code>.volumes/fs/north/users</code></td>
+</tr>
+<tr>
+<td>north_home_external</td>
+<td><code>str</code></td>
+<td></td>
+</tr>
+<tr>
+<td>local_tmp</td>
+<td><code>str</code></td>
+<td><em>default:</em> <code>/tmp</code></td>
+</tr>
+<tr>
+<td>prefix_size</td>
+<td><code>int</code></td>
+<td><em>default:</em> <code>2</code></td>
+</tr>
+<tr>
+<td>archive_version_suffix</td>
+<td><code>str | list[str]</code></td>
+<td>This allows to add an additional segment to the names of archive files and thereby allows different NOMAD installations to work with the same storage directories and raw files, but with separate archives.<br/>If this is a list, the first string is used. If the file with the first string does not exist on read, the system will look for the file with the next string, etc.</br><em>default:</em> <code>['v1.2', 'v1']</code></td>
+</tr>
+<tr>
+<td>working_directory</td>
+<td><code>str</code></td>
+<td><em>default:</em> <code>/home/runner/work/nomad-docs/nomad-docs</code></td>
+</tr>
+<tr>
+<td>external_working_directory</td>
+<td><code>str</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="elastic">elastic<a class="headerlink" href="#elastic" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>username</td>
+<td><code>str</code></td>
+<td><em>default:</em> ""</td>
+</tr>
+<tr>
+<td>password</td>
+<td><code>str</code></td>
+<td><em>default:</em> ""</td>
+</tr>
+<tr>
+<td>host</td>
+<td><code>str</code></td>
+<td><em>default:</em> <code>localhost</code></td>
+</tr>
+<tr>
+<td>port</td>
+<td><code>int</code></td>
+<td><em>default:</em> <code>9200</code></td>
+</tr>
+<tr>
+<td>timeout</td>
+<td><code>int</code></td>
+<td><em>default:</em> <code>60</code></td>
+</tr>
+<tr>
+<td>bulk_timeout</td>
+<td><code>int</code></td>
+<td><em>default:</em> <code>600</code></td>
+</tr>
+<tr>
+<td>bulk_size</td>
+<td><code>int</code></td>
+<td><em>default:</em> <code>1000</code></td>
+</tr>
+<tr>
+<td>entries_per_material_cap</td>
+<td><code>int</code></td>
+<td><em>default:</em> <code>1000</code></td>
+</tr>
+<tr>
+<td>entries_index</td>
+<td><code>str</code></td>
+<td><em>default:</em> <code>nomad_entries_v1</code></td>
+</tr>
+<tr>
+<td>materials_index</td>
+<td><code>str</code></td>
+<td><em>default:</em> <code>nomad_materials_v1</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="keycloak">keycloak<a class="headerlink" href="#keycloak" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>server_url</td>
+<td><code>str</code></td>
+<td><em>default:</em> <code>https://nomad-lab.eu/fairdi/keycloak/auth/</code></td>
+</tr>
+<tr>
+<td>public_server_url</td>
+<td><code>str</code></td>
+<td></td>
+</tr>
+<tr>
+<td>realm_name</td>
+<td><code>str</code></td>
+<td><em>default:</em> <code>fairdi_nomad_prod</code></td>
+</tr>
+<tr>
+<td>username</td>
+<td><code>str</code></td>
+<td><em>default:</em> <code>admin</code></td>
+</tr>
+<tr>
+<td>password</td>
+<td><code>str</code></td>
+<td><em>default:</em> <code>password</code></td>
+</tr>
+<tr>
+<td>client_id</td>
+<td><code>str</code></td>
+<td><em>default:</em> <code>nomad_public</code></td>
+</tr>
+<tr>
+<td>client_secret</td>
+<td><code>str</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="mongo">mongo<a class="headerlink" href="#mongo" title="Permanent link">&para;</a></h3>
+<p>Connection and usage settings for MongoDB.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>host</td>
+<td><code>str</code></td>
+<td>The name of the host that runs mongodb.</br><em>default:</em> <code>localhost</code></td>
+</tr>
+<tr>
+<td>port</td>
+<td><code>int</code></td>
+<td>The port to connect with mongodb.</br><em>default:</em> <code>27017</code></td>
+</tr>
+<tr>
+<td>db_name</td>
+<td><code>str</code></td>
+<td>The used mongodb database name.</br><em>default:</em> <code>nomad_v1</code></td>
+</tr>
+<tr>
+<td>username</td>
+<td><code>str | None</code></td>
+<td></td>
+</tr>
+<tr>
+<td>password</td>
+<td><code>str | None</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="logstash">logstash<a class="headerlink" href="#logstash" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>enabled</td>
+<td><code>bool</code></td>
+<td><em>default:</em> <code>False</code></td>
+</tr>
+<tr>
+<td>host</td>
+<td><code>str</code></td>
+<td><em>default:</em> <code>localhost</code></td>
+</tr>
+<tr>
+<td>tcp_port</td>
+<td><code>str</code></td>
+<td><em>default:</em> <code>5000</code></td>
+</tr>
+<tr>
+<td>level</td>
+<td><code>int | str</code></td>
+<td><em>default:</em> <code>10</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="mail">mail<a class="headerlink" href="#mail" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>enabled</td>
+<td><code>bool</code></td>
+<td><em>default:</em> <code>False</code></td>
+</tr>
+<tr>
+<td>with_login</td>
+<td><code>bool</code></td>
+<td><em>default:</em> <code>False</code></td>
+</tr>
+<tr>
+<td>host</td>
+<td><code>str</code></td>
+<td><em>default:</em> ""</td>
+</tr>
+<tr>
+<td>port</td>
+<td><code>int</code></td>
+<td><em>default:</em> <code>8995</code></td>
+</tr>
+<tr>
+<td>user</td>
+<td><code>str</code></td>
+<td><em>default:</em> ""</td>
+</tr>
+<tr>
+<td>password</td>
+<td><code>str</code></td>
+<td><em>default:</em> ""</td>
+</tr>
+<tr>
+<td>from_address</td>
+<td><code>str</code></td>
+<td><em>default:</em> <code>support@nomad-lab.eu</code></td>
+</tr>
+<tr>
+<td>cc_address</td>
+<td><code>str | None</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="datacite">datacite<a class="headerlink" href="#datacite" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mds_host</td>
+<td><code>str</code></td>
+<td><em>default:</em> <code>https://mds.datacite.org</code></td>
+</tr>
+<tr>
+<td>enabled</td>
+<td><code>bool</code></td>
+<td><em>default:</em> <code>False</code></td>
+</tr>
+<tr>
+<td>prefix</td>
+<td><code>str</code></td>
+<td><em>default:</em> <code>10.17172</code></td>
+</tr>
+<tr>
+<td>user</td>
+<td><code>str</code></td>
+<td><em>default:</em> <code>*</code></td>
+</tr>
+<tr>
+<td>password</td>
+<td><code>str</code></td>
+<td><em>default:</em> <code>*</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="rfc3161_timestamp">rfc3161_timestamp<a class="headerlink" href="#rfc3161_timestamp" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>server</td>
+<td><code>str</code></td>
+<td>The rfc3161ng timestamping host.</br><em>default:</em> <code>http://zeitstempel.dfn.de</code></td>
+</tr>
+<tr>
+<td>cert</td>
+<td><code>str</code></td>
+<td>Path to the optional rfc3161ng timestamping server certificate.</td>
+</tr>
+<tr>
+<td>hash_algorithm</td>
+<td><code>str</code></td>
+<td>Hash algorithm used by the rfc3161ng timestamping server.</br><em>default:</em> <code>sha256</code></td>
+</tr>
+<tr>
+<td>username</td>
+<td><code>str</code></td>
+<td></td>
+</tr>
+<tr>
+<td>password</td>
+<td><code>str</code></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="processing">Processing<a class="headerlink" href="#processing" title="Permanent link">&para;</a></h2>
+<h3 id="celery">celery<a class="headerlink" href="#celery" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>max_memory</td>
+<td><code>float</code></td>
+<td><em>default:</em> <code>64000000.0</code></td>
+</tr>
+<tr>
+<td>timeout</td>
+<td><code>int</code></td>
+<td><em>default:</em> <code>1800</code></td>
+</tr>
+<tr>
+<td>acks_late</td>
+<td><code>bool</code></td>
+<td><em>default:</em> <code>False</code></td>
+</tr>
+<tr>
+<td>routing</td>
+<td><code>str</code></td>
+<td><em>default:</em> <code>queue</code></td>
+</tr>
+<tr>
+<td>priorities</td>
+<td><code>dict[str, int]</code></td>
+<td><em>default:</em> Complex object, default value not displayed.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="normalize">normalize<a class="headerlink" href="#normalize" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>normalizers</td>
+<td><code>Options</code></td>
+<td><em>default:</em> Complex object, default value not displayed.</td>
+</tr>
+<tr>
+<td>system_classification_with_clusters_threshold</td>
+<td><code>float</code></td>
+<td>The system size limit for running the dimensionality analysis. For very large systems the dimensionality analysis will get too expensive.</br><em>default:</em> <code>64</code></td>
+</tr>
+<tr>
+<td>clustering_size_limit</td>
+<td><code>float</code></td>
+<td>The system size limit for running the system clustering. For very large systems the clustering will get too expensive.</br><em>default:</em> <code>600</code></td>
+</tr>
+<tr>
+<td>symmetry_tolerance</td>
+<td><code>float</code></td>
+<td>Symmetry tolerance controls the precision used by spglib in order to find symmetries. The atoms are allowed to move this much from their symmetry positions in order for spglib to still detect symmetries. The unit is angstroms. The value of 0.1 is used e.g. by Materials Project according to https://pymatgen.org/pymatgen.symmetry.html#pymatgen.symmetry.analyzer.SpacegroupAnalyzer</br><em>default:</em> <code>0.1</code></td>
+</tr>
+<tr>
+<td>prototype_symmetry_tolerance</td>
+<td><code>float</code></td>
+<td>The symmetry tolerance used in aflow prototype matching. Should only be changed before re-running the prototype detection.</br><em>default:</em> <code>0.1</code></td>
+</tr>
+<tr>
+<td>max_2d_single_cell_size</td>
+<td><code>float</code></td>
+<td>Maximum number of atoms in the single cell of a 2D material for it to be considered valid.</br><em>default:</em> <code>7</code></td>
+</tr>
+<tr>
+<td>cluster_threshold</td>
+<td><code>float</code></td>
+<td>The distance tolerance between atoms for grouping them into the same cluster. Used in detecting system type.</br><em>default:</em> <code>2.5</code></td>
+</tr>
+<tr>
+<td>angle_rounding</td>
+<td><code>float</code></td>
+<td>Defines the "bin size" for rounding cell angles for the material hash in degree.</br><em>default:</em> <code>10.0</code></td>
+</tr>
+<tr>
+<td>flat_dim_threshold</td>
+<td><code>float</code></td>
+<td>The threshold for a system to be considered "flat". Used e.g. when determining if a 2D structure is purely 2-dimensional to allow extra rigid transformations that are improper in 3D but proper in 2D.</br><em>default:</em> <code>0.1</code></td>
+</tr>
+<tr>
+<td>k_space_precision</td>
+<td><code>float</code></td>
+<td>The threshold for point equality in k-space. Unit: 1/m.</br><em>default:</em> <code>150000000.0</code></td>
+</tr>
+<tr>
+<td>band_structure_energy_tolerance</td>
+<td><code>float</code></td>
+<td>The energy threshold for how much a band can be on top or below the fermi level in order to still detect a gap. Unit: Joule.</br><em>default:</em> <code>8.01088e-21</code></td>
+</tr>
+<tr>
+<td>springer_db_path</td>
+<td><code>str | None</code></td>
+<td><em>default:</em> <code>/home/runner/work/nomad-docs/nomad-docs/.venv/lib/python3.12/site-packages/nomad/config/models/normalizing/data/springer.msg</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="options">Options<a class="headerlink" href="#options" title="Permanent link">&para;</a></h3>
+<p>Common configuration class used for enabling/disabling certain
+elements and defining the configuration of each element.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>include</td>
+<td><code>list[str] | None</code></td>
+<td>List of included options. If not explicitly defined, all of the options will be included by default.</td>
+</tr>
+<tr>
+<td>exclude</td>
+<td><code>list[str] | None</code></td>
+<td>List of excluded options. Has higher precedence than include.</td>
+</tr>
+<tr>
+<td>options</td>
+<td><code>dict[str, Any] | None</code></td>
+<td>Contains the available options.</br><em>default:</em> Complex object, default value not displayed.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="process">process<a class="headerlink" href="#process" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>store_package_definition_in_mongo</td>
+<td><code>bool</code></td>
+<td><em>default:</em> <code>False</code></td>
+</tr>
+<tr>
+<td>add_definition_id_to_reference</td>
+<td><code>bool</code></td>
+<td><em>default:</em> <code>False</code></td>
+</tr>
+<tr>
+<td>write_definition_id_to_archive</td>
+<td><code>bool</code></td>
+<td><em>default:</em> <code>False</code></td>
+</tr>
+<tr>
+<td>index_materials</td>
+<td><code>bool</code></td>
+<td><em>default:</em> <code>True</code></td>
+</tr>
+<tr>
+<td>reuse_parser</td>
+<td><code>bool</code></td>
+<td><em>default:</em> <code>True</code></td>
+</tr>
+<tr>
+<td>metadata_file_name</td>
+<td><code>str</code></td>
+<td><em>default:</em> <code>nomad</code></td>
+</tr>
+<tr>
+<td>metadata_file_extensions</td>
+<td><code>tuple</code></td>
+<td><em>default:</em> <code>('json', 'yaml', 'yml')</code></td>
+</tr>
+<tr>
+<td>auxfile_cutoff</td>
+<td><code>int</code></td>
+<td><em>default:</em> <code>100</code></td>
+</tr>
+<tr>
+<td>parser_matching_size</td>
+<td><code>int</code></td>
+<td><em>default:</em> <code>12000</code></td>
+</tr>
+<tr>
+<td>max_upload_size</td>
+<td><code>int</code></td>
+<td><em>default:</em> <code>34359738368</code></td>
+</tr>
+<tr>
+<td>use_empty_parsers</td>
+<td><code>bool</code></td>
+<td><em>default:</em> <code>False</code></td>
+</tr>
+<tr>
+<td>redirect_stdouts</td>
+<td><code>bool</code></td>
+<td>True will redirect lines to stdout (e.g. print output) that occur during processing (e.g. created by parsers or normalizers) as log entries.</br><em>default:</em> <code>False</code></td>
+</tr>
+<tr>
+<td>rfc3161_skip_published</td>
+<td><code>bool</code></td>
+<td><em>default:</em> <code>False</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="reprocess">reprocess<a class="headerlink" href="#reprocess" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>rematch_published</td>
+<td><code>bool</code></td>
+<td><em>default:</em> <code>True</code></td>
+</tr>
+<tr>
+<td>reprocess_existing_entries</td>
+<td><code>bool</code></td>
+<td><em>default:</em> <code>True</code></td>
+</tr>
+<tr>
+<td>use_original_parser</td>
+<td><code>bool</code></td>
+<td><em>default:</em> <code>False</code></td>
+</tr>
+<tr>
+<td>add_matched_entries_to_published</td>
+<td><code>bool</code></td>
+<td><em>default:</em> <code>True</code></td>
+</tr>
+<tr>
+<td>delete_unmatched_published_entries</td>
+<td><code>bool</code></td>
+<td><em>default:</em> <code>False</code></td>
+</tr>
+<tr>
+<td>index_individual_entries</td>
+<td><code>bool</code></td>
+<td><em>default:</em> <code>False</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="bundle_export">bundle_export<a class="headerlink" href="#bundle_export" title="Permanent link">&para;</a></h3>
+<p>Controls behaviour related to exporting bundles.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default_cli_bundle_export_path</td>
+<td><code>str</code></td>
+<td>Default path used when exporting bundles using the CLI command.</br><em>default:</em> <code>./bundles</code></td>
+</tr>
+<tr>
+<td>default_settings</td>
+<td><code>BundleExportSettings</code></td>
+<td>General default settings.</br><em>default:</em> Complex object, default value not displayed.</td>
+</tr>
+<tr>
+<td>default_settings_cli</td>
+<td><code>BundleExportSettings</code></td>
+<td>Additional default settings, applied when exporting using the CLI. This allows to override some of the settings specified in the general default settings above.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="bundleexportsettings">BundleExportSettings<a class="headerlink" href="#bundleexportsettings" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>include_raw_files</td>
+<td><code>bool</code></td>
+<td>If the raw files should be included in the export</br><em>default:</em> <code>True</code></td>
+</tr>
+<tr>
+<td>include_archive_files</td>
+<td><code>bool</code></td>
+<td>If the parsed archive files should be included in the export</br><em>default:</em> <code>True</code></td>
+</tr>
+<tr>
+<td>include_datasets</td>
+<td><code>bool</code></td>
+<td>If the datasets should be included in the export</br><em>default:</em> <code>True</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="bundle_import">bundle_import<a class="headerlink" href="#bundle_import" title="Permanent link">&para;</a></h3>
+<p>Controls behaviour related to importing bundles.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>required_nomad_version</td>
+<td><code>str</code></td>
+<td>Minimum  NOMAD version of bundles required for import.</br><em>default:</em> <code>1.1.2</code></td>
+</tr>
+<tr>
+<td>default_cli_bundle_import_path</td>
+<td><code>str</code></td>
+<td>Default path used when importing bundles using the CLI command.</br><em>default:</em> <code>./bundles</code></td>
+</tr>
+<tr>
+<td>allow_bundles_from_oasis</td>
+<td><code>bool</code></td>
+<td>If oasis admins can "push" bundles to this NOMAD deployment.</br><em>default:</em> <code>False</code></td>
+</tr>
+<tr>
+<td>allow_unpublished_bundles_from_oasis</td>
+<td><code>bool</code></td>
+<td>If oasis admins can "push" bundles of unpublished uploads.</br><em>default:</em> <code>False</code></td>
+</tr>
+<tr>
+<td>default_settings</td>
+<td><code>BundleImportSettings</code></td>
+<td>General default settings.</br><em>default:</em> Complex object, default value not displayed.</td>
+</tr>
+<tr>
+<td>default_settings_cli</td>
+<td><code>BundleImportSettings</code></td>
+<td>Additional default settings, applied when importing using the CLI. This allows to override some of the settings specified in the general default settings above.</br><em>default:</em> Complex object, default value not displayed.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="bundleimportsettings">BundleImportSettings<a class="headerlink" href="#bundleimportsettings" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>include_raw_files</td>
+<td><code>bool</code></td>
+<td>If the raw files should be included in the import</br><em>default:</em> <code>True</code></td>
+</tr>
+<tr>
+<td>include_archive_files</td>
+<td><code>bool</code></td>
+<td>If the parsed archive files should be included in the import</br><em>default:</em> <code>True</code></td>
+</tr>
+<tr>
+<td>include_datasets</td>
+<td><code>bool</code></td>
+<td>If the datasets should be included in the import</br><em>default:</em> <code>True</code></td>
+</tr>
+<tr>
+<td>include_bundle_info</td>
+<td><code>bool</code></td>
+<td>If the bundle_info.json file should be kept (not necessary but may be nice to have.</br><em>default:</em> <code>True</code></td>
+</tr>
+<tr>
+<td>keep_original_timestamps</td>
+<td><code>bool</code></td>
+<td>If all timestamps (create time, publish time etc) should be imported from the bundle.</br><em>default:</em> <code>False</code></td>
+</tr>
+<tr>
+<td>set_from_oasis</td>
+<td><code>bool</code></td>
+<td>If the from_oasis flag and oasis_deployment_url should be set.</br><em>default:</em> <code>True</code></td>
+</tr>
+<tr>
+<td>delete_upload_on_fail</td>
+<td><code>bool</code></td>
+<td>If False, it is just removed from the ES index on failure.</br><em>default:</em> <code>False</code></td>
+</tr>
+<tr>
+<td>delete_bundle_on_fail</td>
+<td><code>bool</code></td>
+<td>Deletes the source bundle if the import fails.</br><em>default:</em> <code>True</code></td>
+</tr>
+<tr>
+<td>delete_bundle_on_success</td>
+<td><code>bool</code></td>
+<td>Deletes the source bundle if the import succeeds.</br><em>default:</em> <code>True</code></td>
+</tr>
+<tr>
+<td>delete_bundle_include_parent_folder</td>
+<td><code>bool</code></td>
+<td>When deleting the bundle, also include parent folder, if empty.</br><em>default:</em> <code>True</code></td>
+</tr>
+<tr>
+<td>trigger_processing</td>
+<td><code>bool</code></td>
+<td>If the upload should be processed when the import is done (not recommended).</br><em>default:</em> <code>False</code></td>
+</tr>
+<tr>
+<td>process_settings</td>
+<td><code>Reprocess</code></td>
+<td>When trigger_processing is set to True, these settings control the reprocessing behaviour (see the config for <code>reprocess</code> for more info). NOTE: reprocessing is no longer the recommended method to import bundles.</br><em>default:</em> Complex object, default value not displayed.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="reprocess_1">Reprocess<a class="headerlink" href="#reprocess_1" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>rematch_published</td>
+<td><code>bool</code></td>
+<td><em>default:</em> <code>True</code></td>
+</tr>
+<tr>
+<td>reprocess_existing_entries</td>
+<td><code>bool</code></td>
+<td><em>default:</em> <code>True</code></td>
+</tr>
+<tr>
+<td>use_original_parser</td>
+<td><code>bool</code></td>
+<td><em>default:</em> <code>False</code></td>
+</tr>
+<tr>
+<td>add_matched_entries_to_published</td>
+<td><code>bool</code></td>
+<td><em>default:</em> <code>True</code></td>
+</tr>
+<tr>
+<td>delete_unmatched_published_entries</td>
+<td><code>bool</code></td>
+<td><em>default:</em> <code>False</code></td>
+</tr>
+<tr>
+<td>index_individual_entries</td>
+<td><code>bool</code></td>
+<td><em>default:</em> <code>False</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="archive">archive<a class="headerlink" href="#archive" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>block_size</td>
+<td><code>int</code></td>
+<td>In case of using blocked TOC, this is the size of each block.</br><em>default:</em> <code>1048576</code></td>
+</tr>
+<tr>
+<td>read_buffer_size</td>
+<td><code>int</code></td>
+<td>GPFS needs at least 256K to achieve decent performance.</br><em>default:</em> <code>1048576</code></td>
+</tr>
+<tr>
+<td>copy_chunk_size</td>
+<td><code>int</code></td>
+<td>The chunk size of every read of binary data. It is used to copy data from one file to another. A small value will result in more syscalls, a large value will result in higher peak memory usage.</br><em>default:</em> <code>16777216</code></td>
+</tr>
+<tr>
+<td>toc_depth</td>
+<td><code>int</code></td>
+<td>Depths of table of contents in the archive.</br><em>default:</em> <code>10</code></td>
+</tr>
+<tr>
+<td>small_obj_optimization_threshold</td>
+<td><code>int</code></td>
+<td>For any child of lists/dicts whose encoded size is smaller than this value, no TOC will be generated.</br><em>default:</em> <code>1048576</code></td>
+</tr>
+<tr>
+<td>fast_loading</td>
+<td><code>bool</code></td>
+<td>When enabled, this flag determines whether to read the whole dict/list at once when a certain mount of children has been visited. This reduces the number of syscalls although data may be repeatedly read. Otherwise, always read children one by one. This may slow down the loading as more syscalls are needed.</br><em>default:</em> <code>True</code></td>
+</tr>
+<tr>
+<td>fast_loading_threshold</td>
+<td><code>float</code></td>
+<td>If the fraction of children that have been visited is less than this threshold, fast loading will be used.</br><em>default:</em> <code>0.6</code></td>
+</tr>
+<tr>
+<td>trivial_size</td>
+<td><code>int</code></td>
+<td>To identify numerical lists.</br><em>default:</em> <code>20</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="user-interface">User Interface<a class="headerlink" href="#user-interface" title="Permanent link">&para;</a></h2>
+<p>These settings affect the behaviour of the user interface. Note that the preferred way for creating custom apps is by using <a href="../howto/plugins/apps.html">app plugin entry points</a>.</p>
+<h3 id="ui">ui<a class="headerlink" href="#ui" title="Permanent link">&para;</a></h3>
+<p>Used to customize the user interface.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>app_base</td>
+<td><code>str</code></td>
+<td>This is automatically set.</td>
+</tr>
+<tr>
+<td>north_base</td>
+<td><code>str</code></td>
+<td>This is automatically set.</td>
+</tr>
+<tr>
+<td>theme</td>
+<td><code>Theme</code></td>
+<td>Controls the site theme and identity.</td>
+</tr>
+<tr>
+<td>unit_systems</td>
+<td><code>UnitSystems</code></td>
+<td>Controls the available unit systems.</td>
+</tr>
+<tr>
+<td>entry</td>
+<td><code>Entry</code></td>
+<td>Controls the entry visualization.</td>
+</tr>
+<tr>
+<td>apps</td>
+<td><code>Apps</code></td>
+<td><strong>deprecated</strong></td>
+</tr>
+<tr>
+<td>north</td>
+<td><code>NORTHUI</code></td>
+<td>NORTH (NOMAD Remote Tools Hub) UI configuration.</br><em>default:</em> Complex object, default value not displayed.</td>
+</tr>
+<tr>
+<td>example_uploads</td>
+<td><code>ExampleUploads</code></td>
+<td>Controls the available example uploads.</br><em>default:</em> Complex object, default value not displayed.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="northui">NORTHUI<a class="headerlink" href="#northui" title="Permanent link">&para;</a></h3>
+<p>NORTH (NOMAD Remote Tools Hub) UI configuration.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>enabled</td>
+<td><code>bool</code></td>
+<td>Whether the NORTH tools are available in the UI. The default value is read from the root-level NORTH configuration.</br><em>default:</em> <code>True</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="apps">Apps<a class="headerlink" href="#apps" title="Permanent link">&para;</a></h3>
+<p>Contains App definitions and controls their availability.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>include</td>
+<td><code>list[str] | None</code></td>
+<td>List of included options. If not explicitly defined, all of the options will be included by default.</td>
+</tr>
+<tr>
+<td>exclude</td>
+<td><code>list[str] | None</code></td>
+<td>List of excluded options. Has higher precedence than include.</td>
+</tr>
+<tr>
+<td>options</td>
+<td><code>dict[str, App] | None</code></td>
+<td>Contains the available app options.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="exampleuploads">ExampleUploads<a class="headerlink" href="#exampleuploads" title="Permanent link">&para;</a></h3>
+<p>Controls the availability of example uploads.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>include</td>
+<td><code>list[str] | None</code></td>
+<td>List of included options. If not explicitly defined, all of the options will be included by default.</td>
+</tr>
+<tr>
+<td>exclude</td>
+<td><code>list[str] | None</code></td>
+<td>List of excluded options. Has higher precedence than include.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="theme">Theme<a class="headerlink" href="#theme" title="Permanent link">&para;</a></h3>
+<p>Theme and identity settings.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>title</td>
+<td><code>str</code></td>
+<td>Site name in the browser tab.</br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="unitsystems">UnitSystems<a class="headerlink" href="#unitsystems" title="Permanent link">&para;</a></h3>
+<p>Controls the available unit systems.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>selected</td>
+<td><code>str</code></td>
+<td>Selected option.</br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>include</td>
+<td><code>list[str] | None</code></td>
+<td>List of included options. If not explicitly defined, all of the options will be included by default.</td>
+</tr>
+<tr>
+<td>exclude</td>
+<td><code>list[str] | None</code></td>
+<td>List of excluded options. Has higher precedence than include.</td>
+</tr>
+<tr>
+<td>options</td>
+<td><code>dict[str, UnitSystem] | None</code></td>
+<td>Contains the available unit systems.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="unitsystem">UnitSystem<a class="headerlink" href="#unitsystem" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>label</td>
+<td><code>str</code></td>
+<td>Short, descriptive label used for this unit system.</br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>units</td>
+<td><code>dict[str, UnitSystemUnit] | None</code></td>
+<td>Contains a mapping from each dimension to a unit. If a unit is not        specified for a dimension, the SI equivalent will be used by default.        The following dimensions are available:         - dimensionless - length - mass - time - current - temperature - luminosity - luminous_flux - substance - angle - information - force - energy - power - pressure - charge - resistance - conductance - inductance - magnetic_flux - magnetic_field - frequency - luminance - illuminance - electric_potential - capacitance - activity</td>
+</tr>
+</tbody>
+</table>
+<h3 id="unitsystemunit">UnitSystemUnit<a class="headerlink" href="#unitsystemunit" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>definition</td>
+<td><code>str</code></td>
+<td>The unit definition. Can be a mathematical expression that combines several units, e.g. <code>(kg * m) / s^2</code>. You should only use units that are registered in the NOMAD unit registry (<code>nomad.units.ureg</code>).</br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>locked</td>
+<td><code>bool | None</code></td>
+<td>Whether the unit is locked in the unit system it is defined in.</br><em>default:</em> <code>False</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="entry">Entry<a class="headerlink" href="#entry" title="Permanent link">&para;</a></h3>
+<p>Controls the entry visualization.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>cards</td>
+<td><code>Cards</code></td>
+<td>Controls the cards that are displayed on the entry overview page.</br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="cards">Cards<a class="headerlink" href="#cards" title="Permanent link">&para;</a></h3>
+<p>Contains the overview page card definitions and controls their visibility.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>include</td>
+<td><code>list[str] | None</code></td>
+<td>List of included options. If not explicitly defined, all of the options will be included by default.</td>
+</tr>
+<tr>
+<td>exclude</td>
+<td><code>list[str] | None</code></td>
+<td>List of excluded options. Has higher precedence than include.</td>
+</tr>
+<tr>
+<td>options</td>
+<td><code>dict[str, Card] | None</code></td>
+<td>Contains the available card options.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="card">Card<a class="headerlink" href="#card" title="Permanent link">&para;</a></h3>
+<p>Definition for a card shown in the entry overview page.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>error</td>
+<td><code>str</code></td>
+<td>The error message to show if an error is encountered within the card.</br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="others">Others<a class="headerlink" href="#others" title="Permanent link">&para;</a></h2>
+<h3 id="logtransfer">logtransfer<a class="headerlink" href="#logtransfer" title="Permanent link">&para;</a></h3>
+<p>Configuration of logtransfer and statistics service.</p>
+<p>When enabled (enabled) an additional logger will write logs to a log file (log_file).
+At regular intervals (transfer_interval) a celery task is scheduled. It will log a set
+of statistics. It will copy the log file (transfer_log_files). Transfer the contents
+of the copy to the central NOMAD (oasis.central_nomad_deployment_url) and delete the copy.
+The transfer is only done if the the log file has a certain size (transfer_threshold). Only a
+maximum amount of logs are transferred (transfer_capacity). Only logs with a certain
+level (level) are considered. The files will be stored in fs.tmp.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>enabled</td>
+<td><code>bool</code></td>
+<td>If enabled this starts process that frequently generates logs with statistics.</br><em>default:</em> <code>False</code></td>
+</tr>
+<tr>
+<td>transfer_threshold</td>
+<td><code>int</code></td>
+<td>The minimum size in bytes of stored logs before logs are transferred. 0 means transfer at every transfer interval.</br><em>default:</em> <code>0</code></td>
+</tr>
+<tr>
+<td>transfer_capacity</td>
+<td><code>int</code></td>
+<td>The maximum number of bytes of stored logs that are transferred. Excess is dropped.</br><em>default:</em> <code>1000000</code></td>
+</tr>
+<tr>
+<td>transfer_interval</td>
+<td><code>int</code></td>
+<td>Time interval in seconds after which stored logs are potentially transferred.</br><em>default:</em> <code>600</code></td>
+</tr>
+<tr>
+<td>level</td>
+<td><code>int | str</code></td>
+<td>The min log level for logs to be transferred.</br><em>default:</em> <code>20</code></td>
+</tr>
+<tr>
+<td>log_file</td>
+<td><code>str</code></td>
+<td>The log file that is used to store logs for transfer.</br><em>default:</em> <code>nomad.log</code></td>
+</tr>
+<tr>
+<td>transfer_log_file</td>
+<td><code>str</code></td>
+<td>The log file that is used to copy logs for transfer.</br><em>default:</em> <code>.transfer.log</code></td>
+</tr>
+<tr>
+<td>file_rollover_wait_time</td>
+<td><code>float</code></td>
+<td>Time in seconds to wait after log file was "rolled over" for transfer.</br><em>default:</em> <code>1</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="tests">tests<a class="headerlink" href="#tests" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default_timeout</td>
+<td><code>int</code></td>
+<td><em>default:</em> <code>60</code></td>
+</tr>
+<tr>
+<td>assume_auth_for_username</td>
+<td><code>str</code></td>
+<td>Will assume that all API calls with no authentication have authentication for the user with the given username.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="resources">resources<a class="headerlink" href="#resources" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>enabled</td>
+<td><code>bool</code></td>
+<td><em>default:</em> <code>False</code></td>
+</tr>
+<tr>
+<td>db_name</td>
+<td><code>str</code></td>
+<td><em>default:</em> <code>nomad_v1_resources</code></td>
+</tr>
+<tr>
+<td>max_time_in_mongo</td>
+<td><code>float</code></td>
+<td>Maximum time a resource is stored in mongodb before being updated.</br><em>default:</em> <code>31536000.0</code></td>
+</tr>
+<tr>
+<td>download_retries</td>
+<td><code>int</code></td>
+<td>Number of retries when downloading resources.</br><em>default:</em> <code>2</code></td>
+</tr>
+<tr>
+<td>download_retry_delay</td>
+<td><code>int</code></td>
+<td>Delay between retries in seconds.</br><em>default:</em> <code>10</code></td>
+</tr>
+<tr>
+<td>max_connections</td>
+<td><code>int</code></td>
+<td>Maximum simultaneous connections used to download resources.</br><em>default:</em> <code>10</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="client">client<a class="headerlink" href="#client" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>user</td>
+<td><code>str</code></td>
+<td></td>
+</tr>
+<tr>
+<td>password</td>
+<td><code>str</code></td>
+<td></td>
+</tr>
+<tr>
+<td>access_token</td>
+<td><code>str</code></td>
+<td></td>
+</tr>
+<tr>
+<td>url</td>
+<td><code>str</code></td>
+<td><em>default:</em> <code>http://nomad-lab.eu/prod/v1/api</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="gitlab">gitlab<a class="headerlink" href="#gitlab" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>private_token</td>
+<td><code>str</code></td>
+<td><em>default:</em> <code>not set</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="plugins">plugins<a class="headerlink" href="#plugins" title="Permanent link">&para;</a></h3>
+<p>Represent a PEP 604 union type</p>
+<p>E.g. for int | str</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>### plugins</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>name</td>
+<td>type</td>
+<td></td>
+</tr>
+<tr>
+<td>----</td>
+<td>----</td>
+<td>-</td>
+</tr>
+<tr>
+<td>entry_points</td>
+<td><code>EntryPoints</code></td>
+<td>Used to control plugin entry points.</br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>plugin_packages</td>
+<td><code>dict[str, PluginPackage]</code></td>
+<td>Contains the installed installed plugin packages with the package name used as a key. This is autogenerated and should not be modified.</br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="pluginpackage">PluginPackage<a class="headerlink" href="#pluginpackage" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td><code>str</code></td>
+<td>Name of the plugin Python package, read from pyproject.toml.</br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>entry_points</td>
+<td><code>list[str]</code></td>
+<td>List of entry point ids contained in this package, read form pyproject.toml</br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>description</td>
+<td><code>str | None</code></td>
+<td>Package description, read from pyproject.toml.</td>
+</tr>
+<tr>
+<td>version</td>
+<td><code>str | None</code></td>
+<td>Plugin package version, read from pyproject.toml.</td>
+</tr>
+<tr>
+<td>homepage</td>
+<td><code>str | None</code></td>
+<td>Link to the plugin package homepage, read from pyproject.toml.</td>
+</tr>
+<tr>
+<td>documentation</td>
+<td><code>str | None</code></td>
+<td>Link to the plugin package documentation page, read from pyproject.toml.</td>
+</tr>
+<tr>
+<td>repository</td>
+<td><code>str | None</code></td>
+<td>Link to the plugin package source code repository, read from pyproject.toml.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="entrypoints">EntryPoints<a class="headerlink" href="#entrypoints" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>options</td>
+<td><code>dict[str, Schema | Normalizer | Parser | SchemaPackageEntryPoint | ParserEntryPoint | NormalizerEntryPoint | AppEntryPoint | ExampleUploadEntryPoint | APIEntryPoint]</code></td>
+<td>The available plugin entry points.</br><em>default:</em> Complex object, default value not displayed.</td>
+</tr>
+<tr>
+<td>include</td>
+<td><code>list[str] | None</code></td>
+<td>List of included options. If not explicitly defined, all of the options will be included by default.</td>
+</tr>
+<tr>
+<td>exclude</td>
+<td><code>list[str] | None</code></td>
+<td>List of excluded options. Has higher precedence than include.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="parserentrypoint">ParserEntryPoint<a class="headerlink" href="#parserentrypoint" title="Permanent link">&para;</a></h3>
+<p>Base model for parser plugin entry points.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>level</td>
+<td><code>int</code></td>
+<td>Integer that determines the execution order of this parser within an upload. Parser with lowest level will be executed first. Note that this only controls the order in which matched parsers are executed, but does not affect the order in which parsers are matched to files.</br><em>default:</em> <code>0</code></td>
+</tr>
+<tr>
+<td>aliases</td>
+<td><code>list[str]</code></td>
+<td>List of alternative parser names.</br><em>default:</em> <code>[]</code></td>
+</tr>
+<tr>
+<td>mainfile_name_re</td>
+<td><code>str</code></td>
+<td>A regular expression that is applied the name of a potential mainfile. If this expression is given, the parser is only considered for a file, if the expression matches.</br><em>default:</em> <code>.*</code></td>
+</tr>
+<tr>
+<td>mainfile_mime_re</td>
+<td><code>str</code></td>
+<td>A regular expression that is applied the mime type of a potential mainfile. If this expression is given, the parser is only considered for a file, if the expression matches.</br><em>default:</em> <code>.*</code></td>
+</tr>
+<tr>
+<td>mainfile_alternative</td>
+<td><code>bool</code></td>
+<td>If True, the parser only matches a file, if no other file in the same directory matches a parser.</br><em>default:</em> <code>False</code></td>
+</tr>
+<tr>
+<td>supported_compressions</td>
+<td><code>list[str]</code></td>
+<td>Files compressed with the given formats (e.g. xz, gz) are uncompressed and matched like normal files.</br><em>default:</em> <code>[]</code></td>
+</tr>
+<tr>
+<td>name</td>
+<td><code>str | None</code></td>
+<td>Name of the plugin entry point.</td>
+</tr>
+<tr>
+<td>description</td>
+<td><code>str | None</code></td>
+<td>A human readable description of the plugin entry point.</td>
+</tr>
+<tr>
+<td>mainfile_contents_re</td>
+<td><code>str | None</code></td>
+<td>A regular expression that is applied the content of a potential mainfile. If this expression is given, the parser is only considered for a file, if the expression matches.</td>
+</tr>
+<tr>
+<td>mainfile_binary_header</td>
+<td><code>bytes | None</code></td>
+<td>Matches a binary file if the given bytes are included in the file.</td>
+</tr>
+<tr>
+<td>mainfile_binary_header_re</td>
+<td><code>bytes | None</code></td>
+<td>Matches a binary file if the given binary regular expression bytes matches the file contents.</td>
+</tr>
+<tr>
+<td>mainfile_contents_dict</td>
+<td><code>dict | None</code></td>
+<td>Is used to match structured data files like JSON or HDF5.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="appentrypoint">AppEntryPoint<a class="headerlink" href="#appentrypoint" title="Permanent link">&para;</a></h3>
+<p>Base model for app plugin entry points.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>app</td>
+<td><code>App</code></td>
+<td>The app configuration.</br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>name</td>
+<td><code>str | None</code></td>
+<td>Name of the plugin entry point.</td>
+</tr>
+<tr>
+<td>description</td>
+<td><code>str | None</code></td>
+<td>A human readable description of the plugin entry point.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="schema">Schema<a class="headerlink" href="#schema" title="Permanent link">&para;</a></h3>
+<p>A Schema describes a NOMAD Python schema that can be loaded as a plugin.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>plugin_type</td>
+<td><code>str</code></td>
+<td>The type of the plugin. This has to be the string <code>schema</code> for schema plugins.</br><em>default:</em> <code>schema</code></td>
+</tr>
+<tr>
+<td>name</td>
+<td><code>str</code></td>
+<td>A short descriptive human readable name for the plugin.</br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>python_package</td>
+<td><code>str</code></td>
+<td>Name of the python package that contains the plugin code and a plugin metadata file called <code>nomad_plugin.yaml</code>.</br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>id</td>
+<td><code>str | None</code></td>
+<td>The unique identifier for this plugin.</td>
+</tr>
+<tr>
+<td>description</td>
+<td><code>str | None</code></td>
+<td>A human readable description of the plugin.</td>
+</tr>
+<tr>
+<td>plugin_documentation_url</td>
+<td><code>str | None</code></td>
+<td>The URL to the plugins main documentation page.</td>
+</tr>
+<tr>
+<td>plugin_source_code_url</td>
+<td><code>str | None</code></td>
+<td>The URL of the plugins main source code repository.</td>
+</tr>
+<tr>
+<td>package_path</td>
+<td><code>str | None</code></td>
+<td>Path of the plugin package. Will be determined using python_package if not explicitly defined.</td>
+</tr>
+<tr>
+<td>key</td>
+<td><code>str | None</code></td>
+<td>Key used to identify this plugin.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="apientrypoint">APIEntryPoint<a class="headerlink" href="#apientrypoint" title="Permanent link">&para;</a></h3>
+<p>Base model for API plugin entry points.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>prefix</td>
+<td><code>str</code></td>
+<td>The prefix for the API. The URL for the API will be the base URL of the NOMAD installation followed by this prefix. The prefix must not collide with any other API prefixes. There is no default, this field must be set.</td>
+</tr>
+<tr>
+<td>name</td>
+<td><code>str | None</code></td>
+<td>Name of the plugin entry point.</td>
+</tr>
+<tr>
+<td>description</td>
+<td><code>str | None</code></td>
+<td>A human readable description of the plugin entry point.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="normalizerentrypoint">NormalizerEntryPoint<a class="headerlink" href="#normalizerentrypoint" title="Permanent link">&para;</a></h3>
+<p>Base model for normalizer plugin entry points.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>level</td>
+<td><code>int</code></td>
+<td>Integer that determines the execution order of this normalizer within the processing of an individual entry. Normalizers with the lowest level is run first.</br><em>default:</em> <code>0</code></td>
+</tr>
+<tr>
+<td>name</td>
+<td><code>str | None</code></td>
+<td>Name of the plugin entry point.</td>
+</tr>
+<tr>
+<td>description</td>
+<td><code>str | None</code></td>
+<td>A human readable description of the plugin entry point.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="normalizer">Normalizer<a class="headerlink" href="#normalizer" title="Permanent link">&para;</a></h3>
+<p>A Normalizer describes a NOMAD normalizer that can be loaded as a plugin.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>plugin_type</td>
+<td><code>str</code></td>
+<td>The type of the plugin. This has to be the string <code>normalizer</code> for normalizer plugins.</br><em>default:</em> <code>normalizer</code></td>
+</tr>
+<tr>
+<td>name</td>
+<td><code>str</code></td>
+<td>A short descriptive human readable name for the plugin.</br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>python_package</td>
+<td><code>str</code></td>
+<td>Name of the python package that contains the plugin code and a plugin metadata file called <code>nomad_plugin.yaml</code>.</br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>normalizer_class_name</td>
+<td><code>str</code></td>
+<td>The fully qualified name of the Python class that implements the normalizer. This class must have a function <code>def normalize(self, logger)</code>.</br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>id</td>
+<td><code>str | None</code></td>
+<td>The unique identifier for this plugin.</td>
+</tr>
+<tr>
+<td>description</td>
+<td><code>str | None</code></td>
+<td>A human readable description of the plugin.</td>
+</tr>
+<tr>
+<td>plugin_documentation_url</td>
+<td><code>str | None</code></td>
+<td>The URL to the plugins main documentation page.</td>
+</tr>
+<tr>
+<td>plugin_source_code_url</td>
+<td><code>str | None</code></td>
+<td>The URL of the plugins main source code repository.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="parser">Parser<a class="headerlink" href="#parser" title="Permanent link">&para;</a></h3>
+<p>A Parser describes a NOMAD parser that can be loaded as a plugin.</p>
+<p>The parser itself is referenced via <code>python_name</code>. For Parser instances <code>python_name</code>
+must refer to a Python class that has a <code>parse</code> function. The other properties are
+used to create a <code>MatchingParserInterface</code>. This comprises general metadata that
+allows users to understand what the parser is, and metadata used to decide if a
+given file "matches" the parser.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>plugin_type</td>
+<td><code>str</code></td>
+<td>The type of the plugin. This has to be the string <code>parser</code> for parser plugins.</br><em>default:</em> <code>parser</code></td>
+</tr>
+<tr>
+<td>name</td>
+<td><code>str</code></td>
+<td>A short descriptive human readable name for the plugin.</br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>python_package</td>
+<td><code>str</code></td>
+<td>Name of the python package that contains the plugin code and a plugin metadata file called <code>nomad_plugin.yaml</code>.</br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>parser_class_name</td>
+<td><code>str</code></td>
+<td>The fully qualified name of the Python class that implements the parser. This class must have a function <code>def parse(self, mainfile, archive, logger)</code>.</br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>parser_as_interface</td>
+<td><code>bool</code></td>
+<td>By default the parser metadata from this config (and the loaded nomad_plugin.yaml) is used to instantiate a parser interface that is lazy loading the actual parser and performs the mainfile matching. If the parser interface matching based on parser metadata is not sufficient and you implemented your own is_mainfile parser method, this setting can be used to use the given parser class directly for parsing and matching.</br><em>default:</em> <code>False</code></td>
+</tr>
+<tr>
+<td>mainfile_name_re</td>
+<td><code>str</code></td>
+<td>A regular expression that is applied the name of a potential mainfile. If this expression is given, the parser is only considered for a file, if the expression matches.</br><em>default:</em> <code>.*</code></td>
+</tr>
+<tr>
+<td>mainfile_mime_re</td>
+<td><code>str</code></td>
+<td>A regular expression that is applied the mime type of a potential mainfile. If this expression is given, the parser is only considered for a file, if the expression matches.</br><em>default:</em> <code>text/.*</code></td>
+</tr>
+<tr>
+<td>mainfile_alternative</td>
+<td><code>bool</code></td>
+<td>If True, the parser only matches a file, if no other file in the same directory matches a parser.</br><em>default:</em> <code>False</code></td>
+</tr>
+<tr>
+<td>supported_compressions</td>
+<td><code>list[str]</code></td>
+<td>Files compressed with the given formats (e.g. xz, gz) are uncompressed and matched like normal files.</br><em>default:</em> <code>[]</code></td>
+</tr>
+<tr>
+<td>domain</td>
+<td><code>str</code></td>
+<td>The domain value <code>dft</code> will apply all normalizers for atomistic codes. Deprecated.</br><em>default:</em> <code>dft</code></td>
+</tr>
+<tr>
+<td>level</td>
+<td><code>int</code></td>
+<td>The order by which the parser is executed with respect to other parsers.</br><em>default:</em> <code>0</code></td>
+</tr>
+<tr>
+<td>id</td>
+<td><code>str | None</code></td>
+<td>The unique identifier for this plugin.</td>
+</tr>
+<tr>
+<td>description</td>
+<td><code>str | None</code></td>
+<td>A human readable description of the plugin.</td>
+</tr>
+<tr>
+<td>plugin_documentation_url</td>
+<td><code>str | None</code></td>
+<td>The URL to the plugins main documentation page.</td>
+</tr>
+<tr>
+<td>plugin_source_code_url</td>
+<td><code>str | None</code></td>
+<td>The URL of the plugins main source code repository.</td>
+</tr>
+<tr>
+<td>mainfile_contents_re</td>
+<td><code>str | None</code></td>
+<td>A regular expression that is applied the content of a potential mainfile. If this expression is given, the parser is only considered for a file, if the expression matches.</td>
+</tr>
+<tr>
+<td>mainfile_binary_header</td>
+<td><code>bytes | None</code></td>
+<td>Matches a binary file if the given bytes are included in the file.</td>
+</tr>
+<tr>
+<td>mainfile_binary_header_re</td>
+<td><code>bytes | None</code></td>
+<td>Matches a binary file if the given binary regular expression bytes matches the file contents.</td>
+</tr>
+<tr>
+<td>mainfile_contents_dict</td>
+<td><code>dict | None</code></td>
+<td>Is used to match structured data files like JSON, HDF5 or csv/excel files. In case of a csv/excel file for example, in order to check if certain columns exist in a given sheet, one can set this attribute to <code>'__has_all_keys': [&lt;column names&gt;]</code>. In case the csv/excel file contains comments that are supposed to be ignored, use this reserved key-value pair <code>'__has_comment': '&lt;symbol&gt;'</code> at the top level of the dictionary. Also in order to check if a certain sheet name with specific column names exist, one may set this attribute to: {'<sheet name>': {'__has_all_keys': [<column names>]}}. Available options are: <i>__has_key: str<i> <i>__has_all_keys: List[str]<i> <i>__has_only_keys: List[str]<i> <i>__has_comment: str<i> (only for csv/xlsx files)</td>
+</tr>
+<tr>
+<td>code_name</td>
+<td><code>str | None</code></td>
+<td></td>
+</tr>
+<tr>
+<td>code_homepage</td>
+<td><code>str | None</code></td>
+<td></td>
+</tr>
+<tr>
+<td>code_category</td>
+<td><code>str | None</code></td>
+<td></td>
+</tr>
+<tr>
+<td>metadata</td>
+<td><code>dict | None</code></td>
+<td>Metadata passed to the UI. Deprecated.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="schemapackageentrypoint">SchemaPackageEntryPoint<a class="headerlink" href="#schemapackageentrypoint" title="Permanent link">&para;</a></h3>
+<p>Base model for schema package plugin entry points.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td><code>str | None</code></td>
+<td>Name of the plugin entry point.</td>
+</tr>
+<tr>
+<td>description</td>
+<td><code>str | None</code></td>
+<td>A human readable description of the plugin entry point.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="exampleuploadentrypoint">ExampleUploadEntryPoint<a class="headerlink" href="#exampleuploadentrypoint" title="Permanent link">&para;</a></h3>
+<p>Base model for example upload plugin entry points.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td><code>str | None</code></td>
+<td>Name of the plugin entry point.</td>
+</tr>
+<tr>
+<td>description</td>
+<td><code>str | None</code></td>
+<td>Longer description of the example upload.</br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>category</td>
+<td><code>str | None</code></td>
+<td>Category for the example upload.</br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>title</td>
+<td><code>str | None</code></td>
+<td>Title of the example upload.</br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>resources</td>
+<td><code>None | list[UploadResource | str] | UploadResource | str</code></td>
+<td>List of data resources for this example upload.</td>
+</tr>
+<tr>
+<td>path</td>
+<td><code>str | None</code></td>
+<td><strong>deprecated</strong></td>
+</tr>
+<tr>
+<td>url</td>
+<td><code>str | None</code></td>
+<td><strong>deprecated</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="uploadresource">UploadResource<a class="headerlink" href="#uploadresource" title="Permanent link">&para;</a></h3>
+<p>Represents a request to include a certain resource into an example
+upload. Can point to a local folder/file, or alternatively to an online
+resource that can be downloaded.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>path</td>
+<td><code>str</code></td>
+<td>Path to a file/folder within the python package (filepaths should start from the package root directory) or to an online URL.</br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>target</td>
+<td><code>str</code></td>
+<td>File path within the upload where the file should be stored.</br><em>default:</em> ""</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../explanation/oasis.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Federation and Oasis">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Federation and Oasis
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="annotations.html" class="md-footer__link md-footer__link--next" aria-label="Next: Annotations">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Annotations
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.path", "navigation.footer", "navigation.top", "content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c8b220af.min.js"></script>
+      
+        <script src="../javascript.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
+</html>
