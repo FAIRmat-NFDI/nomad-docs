@@ -73,7 +73,7 @@ HDF5 group.
 This is the mapping parser for NOMAD archive files or metainfo sections.
 It accepts a schema root node annotated with `MappingAnnotation` as `data_object`.
 `create_mapper` generates the actual mapper as matching the `annotation_key`.
-If a `filepath` is specified, it instead falls back on the [`ArchiveParser`](--ref--).  <!-- TODO: add reference -->
+If a `filepath` is specified, it instead falls back on the `ArchiveParser`. (Note: Under development, more info on the `ArchiveParser` to be added).  <!-- TODO: add reference [`ArchiveParser`](--ref--) -->
 
 The annotation should always point to a parsed value via a `path` (JMesPath format).
 It may optionally specify a multi-argument `operator` for data mangling.  <!-- most operators are binary, would change the name -->

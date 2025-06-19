@@ -10,9 +10,10 @@ nav:
       - Navigating to NOMAD: tutorial/nomad_repo.md
       - Uploading and publishing data: tutorial/upload_publish.md
       - Exploring data: tutorial/explore.md
-      - Access data via API: tutorial/access_api.md
-      - Schemas and plugins: tutorial/custom.md
-      - Developing a NOMAD plugin: tutorial/develop_plugin.md
+      - Managing workflows and projects: tutorial/workflows_projects.md
+      - Accessing data via API: tutorial/access_api.md
+      - Creating custom schemas: tutorial/custom.md
+      - Developing NOMAD plugins: tutorial/develop_plugin.md
   - How-to guides:
       - Overview: howto/overview.md
       - Manage and find data:
@@ -148,7 +149,6 @@ plugins:
   - redirects:
       redirect_maps:
         "pythonlib.md": "howto/programmatic/pythonlib.md"
-        "oasis.md": "howto/oasis/install.md"
         "develop/gitlab.md": "howto/develop/contrib.md"
   - glightbox
   # - git-revision-date-localized

@@ -44,7 +44,7 @@ mynormalizer = MyNormalizerEntryPoint(
 )
 ```
 
-Here you can see that a new subclass of `NormalizerEntryPoint` was defined. In this new class you can override the `load` method to determine how the `Normalizer` class is instantiated, but you can also extend the `NormalizerEntryPoint` model to add new configurable parameters for this normalizer as explained [here](./plugins.md#plugin-configuration).
+Here you can see that a new subclass of `NormalizerEntryPoint` was defined. In this new class you can override the `load` method to determine how the `Normalizer` class is instantiated, but you can also extend the `NormalizerEntryPoint` model to add new configurable parameters for this normalizer as explained in [Explanation > Plugins > Plugin Configuration](../../explanation/plugin_system.md#plugin-configuration).
 
 We also instantiate an object `mynormalizer` from the new subclass. This is the final entry point instance in which you specify the default parameterization and other details about the normalizer. In the reference you can see all of the available [configuration options for a `NormalizerEntryPoint`](../../reference/plugins.md#normalizerentrypoint).
 

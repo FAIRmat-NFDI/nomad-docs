@@ -37,7 +37,7 @@ You can create a user account by following these [steps](overview.md#create-a-no
         - **Organization:** Datasets contains several entries from various uploads. One entry can be contained in many dataset.
         - **Sharing & Publishing:** Datasets are published independent of uploads and you can get a DOI for your datasets.
 
-For more detailed explanation, you can refer to this [page](/explanation/basics.html).
+For more detailed explanation, you can refer to this [page](../explanation/basics.md).
 
 -----------------------------
 
@@ -65,10 +65,44 @@ Follow these steps to create your first upload (click on the arrows to navigate 
     - **Files:** This view shows all the files included in upload, whether they are raw files or processed files. You can also organize these files into folders as needed.
     ![A screenshot of the uploads files page](images/upload_publish_8.png)
 
+??? info "Icons on the upload overview"
+
+    At the top of the `OVERVIEW` tab, you will find several icons that help you to manage your upload:
+
+    ![Top fields in uploads page](images/top_fields_uploads.png){.screenshot}
+
+    The name of the upload can be modified by clicking on the pen icon :fontawesome-solid-pen:. The other icons are used as follows:
+
+    :fontawesome-solid-user-group: **Manage members:** Allows users to invite collaborators by assigning co-authors and reviewers roles.
+
+    :fontawesome-solid-cloud-arrow-down: **Download files:** Downloads all files present in the upload.
+
+    :fontawesome-solid-rotate-left: **Reload:** Reloads the uploads page.
+
+    :fontawesome-solid-rotate: **Reprocess:** Triggers the uploaded data to be processed again.
+
+    :fontawesome-solid-angle-left::fontawesome-solid-angle-right: **API:** Displays a GET request url and corresponding JSON response demonstrating how to access the entries of the upload via the [NOMAD API](./access_api.md) and the expected result, respectively.
+    <!-- See [Filtering and Querying](../filtering_and_querying/overview.md) for more information. -->
+    <!-- TODO  Add API to glossary -->
+
+    :fontawesome-solid-trash: **Delete the upload:** Deletes the upload permanently.
+
+??? info "Components of the upload overview"
+    The remainder of the uploads page is divided into five segments, each presenting a step in the uploading and publishing process:
+
+    `1. Prepare and upload your files:` displays the files and folder structure of the upload. You can add a `README.md` file to the root directory and its contents will be shown above this section
+
+    `2. Process data:` shows the processed data and the generated [entries](../reference/glossary.md#entry) in NOMAD.
+
+    `3. Edit visibility and access:` allows users to make the upload public or share it with specific users before publishing.
+
+    `4. Edit author metadata:` allows users to edit certain metadata fields from all entries recognized in the upload. This includes _comments_, where you can add as much extra information as you want, _references_, where you can add a URL to your upload (e.g., an article DOI), and _datasets_, where you can link the uploaded data to other uploads to define a larger-scale organizational structure (see [Group entries into a dataset](#group-entries-into-a-dataset) below.)
+
+    `5. Publish:` lets users publish data with or without an embargo (i.e., a waiting period before the data are publicly visible).
 
 --------------------
 
-## Share Your Upload
+## Sharing and Publishing Uploads
 
 Uploads in NOMAD can be shared or published. When an upload is shared or published, all entries and files contained within it are also shared or published.
 
@@ -269,13 +303,13 @@ In other words, NOMAD will read the input and output files and provide all infor
 
         For *FHI-aims* files, three main cards appear in the overview page:
 
-        - *Materials* card: shows key information and visulization of the composition and conventional cell.
+        - *Materials* card: Shows key information and visulization of the composition and conventional cell.
         <img src="images/example_3-2_materials_card.png" alt="screenshot of electronic properties card" width="250">
 
-        - *Electronic properties* card: shows the calculated band structure, density of states, and Brillouin zone.
+        - *Electronic properties* card: Shows the calculated band structure, density of states, and Brillouin zone.
         <img src="images/example_3-2_electronic_properties_card.png" alt="screenshot of materials card" width="250">
 
-        - *Workflow Graph* card: illustrates the various steps in the calculation, including their inputs and outputs.
+        - *Workflow Graph* card: Illustrates the various steps in the calculation, including their inputs and outputs.
         <img src="images/example_3-2_workflow_card.png" alt="screenshot of workflow card" width="250">
 
     - **FILES** tab:

@@ -46,7 +46,7 @@ myparser = MyParserEntryPoint(
 )
 ```
 
-Here you can see that a new subclass of `ParserEntryPoint` was defined. In this new class you can override the `load` method to determine how the `Parser` class is instantiated, but you can also extend the `ParserEntryPoint` model to add new configurable parameters for this parser as explained [here](./plugins.md#plugin-configuration).
+Here you can see that a new subclass of `ParserEntryPoint` was defined. In this new class you can override the `load` method to determine how the `Parser` class is instantiated, but you can also extend the `ParserEntryPoint` model to add new configurable parameters for this parser as explained in [Explanation > Plugins > Plugin Configuration](../../explanation/plugin_system.md#plugin-configuration).
 
 We also instantiate an object `myparser` from the new subclass. This is the final entry point instance in which you specify the default parameterization and other details about the parser. In the reference you can see all of the available [configuration options for a `ParserEntryPoint`](../../reference/plugins.md#parserentrypoint).
 
