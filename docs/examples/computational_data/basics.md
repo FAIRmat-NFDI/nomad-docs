@@ -1,11 +1,12 @@
 # NOMAD Basics: A Computational Perspective
 
-Prerequites:
-- generic understanding of NOMAD's [uploading and publishing](../../tutorial/upload_publish.md)
+!!! warning "Attention"
+
+    This part of the documentation is still work in progress.
 
 This page provides an overview of NOMAD's usage with computational data. If you are completely new to NOMAD, we recommend to first read through the [Navigating to NOMAD](../../tutorial/nomad_repo.md), [Uploading and publishing data](../../tutorial/upload_publish.md), and [Exploring data](../../tutorial/explore.md) tutorials.
 
-<!-- TODO - Maybe the parser image and some overview...(maybe copy over the first section of the workflow tutorial and integrate it?) -->
+TODO - Maybe the parser image and some overview...(maybe copy over the first section of the workflow tutorial and integrate it?)
 
 ## Processing of computational data
 

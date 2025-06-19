@@ -64,12 +64,12 @@ nav:
   - Domain-specific examples:
       - Overview: examples/overview.md
       - Computational data:
-          - FAQs: examples/computational_data/faqs.md
-          - Quick start: examples/computational_data/uploading.md
+          - Basics: examples/computational_data/basics.md
           - Workflows: examples/computational_data/workflows.md
           - MetaInfo: examples/computational_data/metainfo.md
           - Schema plugins: examples/computational_data/schema_plugins.md
           - Parser plugins: examples/computational_data/parser_plugins.md
+          - FAQs: examples/computational_data/faqs.md
       - Experimental data:
             - Electron microscopy: examples/experiment_data/em.md
             - Photoemission spectroscopy: examples/experiment_data/mpes.md

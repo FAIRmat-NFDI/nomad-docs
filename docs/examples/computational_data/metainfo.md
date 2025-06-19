@@ -2,6 +2,8 @@
 
 <!-- TODO replace everything below with the new schema description for data, and move to the simulation schema for data repo, then simply place a link here -->
 
+<!-- TODO - already link to any existing DOCS for the new schema? -->
+
 ### Overview of metadata organization for computation
 
 NOMAD stores all processed data in a well defined, structured, and machine readable format, known as the `archive`.
