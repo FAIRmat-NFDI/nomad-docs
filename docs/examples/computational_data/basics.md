@@ -1,108 +1,106 @@
 # NOMAD Basics: A Computational Perspective
 
-!!! warning "Attention"
+## This page contains
 
-    This part of the documentation is still work in progress.
+- An overview of how NOMAD processes and organizes computational data.
 
-This page provides an overview of NOMAD's usage with computational data. If you are completely new to NOMAD, we recommend to first read through the [Navigating to NOMAD](../../tutorial/nomad_repo.md), [Uploading and publishing data](../../tutorial/upload_publish.md), and [Exploring data](../../tutorial/explore.md) tutorials.
+## Recommended preparation
 
-TODO - Maybe the parser image and some overview...(maybe copy over the first section of the workflow tutorial and integrate it?)
+- [Tutorial > Navigating to NOMAD](../../tutorial/nomad_repo.md)
+- [Tutorial > Uploading and publishing data](../../tutorial/upload_publish.md)
+- [Tutorial > Exploring data](../../tutorial/explore.md)
 
-## Processing of computational data
+## Processing of supported simulation data
 
-See [From files to data](../../explanation/data.md) and [Processing](../../explanation/processing.md) for full explanations about data processing in NOMAD.
+NOMAD ingests the raw input and output files from standard simulation software by first identifying a representative file (denoted the **mainfile**) and then employing a [Parser](../../reference/glossary.md#parser) code to extract relevant (meta)data from not only the mainfile, but also other files (**auxillary files**) associated with that simulation via the parser.
 
-When data is uploaded to NOMAD, the software interprets the files and determines which of them is a **mainfile**. Any other files in the upload can be viewed as **auxiliary files**. In the same upload, there might be multiple mainfiles and auxiliary files organized in a folder tree structure.
+<div class="click-zoom">
+    <label>
+        <input type="checkbox">
+        <img src="./images/parsing_illustration.png" alt="" width="80%" title="Click to zoom in">
+    </label>
+</div>
 
-The **mainfiles** are the main output file of a calculation. The presence of a mainfile in the upload is key for NOMAD to recognize a calculation. In NOMAD, we support an array computational codes for first principles calculations, molecular dynamics simulations, and lattice modeling, as well as workflow and database managers. For each code, NOMAD recognizes a single file as the mainfile. For example, the [VASP](https://www.vasp.at/){:target="_blank"} mainfile is by default the `vasprun.xml`, although if the `vasprun.xml` is not present in the upload NOMAD searches the `OUTCAR` file and assigns it as the mainfile (see [VASP POTCAR stripping](#vasp-potcar-stripping)).
+The extracted (meta)data are stored within a structured schema&mdash;the NOMAD [Metainfo](../../reference/glossary.md/#metainfo)&mdash;to provide context for each quantity, enabling interoperability and comparison between, e.g., simulation software. The Metainfo is constructed from [Sections and Subsections](../../reference/glossary.md#section-and-subsection) and [Quantities](../../reference/glossary.md#quantity), which can be conveniently browsed by users with the [Metinfo Browser](https://nomad-lab.eu/prod/v1/gui/analyze/metainfo){:target="_blank"}:
 
-The rest of files which are not the mainfile are **auxiliary files**. These can have several purposes and be supported and recognized by NOMAD in the [parser](../../reference/glossary.md#parser). For example, the `band*.out` or `GW_band*` files in [FHI-aims](https://fhi-aims.org/){:target="_blank"} are auxiliary files that allows the NOMAD FHI-aims parser to recognize band structures in DFT and GW, respectively.
+<div class="click-zoom">
+    <label>
+        <input type="checkbox">
+        <img src="./images/nomad_metainfo.png" alt="" width="100%" title="Click to zoom in">
+    </label>
+</div>
+
+
+In the same upload, there might be multiple mainfiles and auxiliary files organized in a folder tree structure. A separate [Entry](../../reference/glossary.md/#entry) will be created for each mainfile identified. For each entry, an [Archive](../../reference/glossary.md#archive) is created that contains all the extracted (meta)data in a _structured_, _well defined_, and _machine readable_ format. This **metadata** provides context to the raw data, i.e., what were the input methodological parameters, on which material the calculation was performed, etc.
+
+
+
+See the explanation pages [From files to data](../../explanation/basics.md), [Data structure](../../explanation/data.md) and [Processing](../../explanation/processing.md) for a more general description of NOMAD processing.
 
 <!--TODO: add our own supported parsers list with improved info-->
-You can see the full list of supported codes, mainfiles, and auxiliary files in the general NOMAD documentation under [Supported parsers](https://nomad-lab.eu/prod/v1/staging/docs/reference/parsers.html){:target="_blank"}.
+See [Supported Parsers](https://nomad-lab.eu/prod/v1/staging/docs/reference/parsers.html){:target="_blank"} for a full list of supported codes, mainfiles, auxiliary files, etc.
 
-We recommend that the user keeps the folder structure and files generated by the simulation code, but without reaching the [uploads limits](../../howto/manage/upload.md#upload-limits). Please find specific use-case recommendations in [FAQs > Preparing and Managing Raw Data](./faqs.md#preparing-and-managing-raw-data) .
+## Archive sections relevant for computational data
 
-
-## Structured data with the NOMAD metainfo
-
-Once the mainfile has been recognized, a new [entry](../../reference/glossary.md/#entry) in NOMAD is created and a specific [parser](#parsing) is called. The auxliary files are searched by and accessed within the parser.
-<!-- TODO add more info or link properly
-You can check more details in [Writing a parser plugin](../writing_a_parser_plugin/parser_plugin_overview.md) on how to add new parsers in order for NOMAD to support new codes. -->
-
-For this new entry, NOMAD generates a **NOMAD archive**. It will contain all the (meta)information extracted from the unstructured raw data files but in a _structured_, _well defined_, and _machine readable_ format. This **metadata** provides context to the raw data, i.e., what were the input methodological parameters, on which material the calculation was performed, etc. We define the **NOMAD Metainfo** as all the set of [sections, subsections, and quantities](../../reference/glossary.md/#metainfo) used to structure the raw data into a structured _schema_. Further information about the NOMAD Metainfo is available in the general NOMAD documentation page in [Learn > Structured data](https://nomad-lab.eu/prod/v1/staging/docs/learn/data.html){:target="_blank"}.
-
-![The NOMAD metainfo](images/nomad_metainfo.png){.screenshot}
-
-
-## NOMAD sections for computational data
-
-Under the `Entry` / `archive` section, there are several sections and quantities being populated by the parsers. For computational data, only the following sections are populated:
+Under the [`Entry` section of the metainfo browser](https://nomad-lab.eu/prod/v1/gui/analyze/metainfo/nomad.datamodel.datamodel.EntryArchive){:target="_blank"}, there are several sections and quantities being populated by the parsers. For computational data, the relevant sections are:
 
 - `metadata`: contains general and non-code specific metadata. This is mainly information about authors, creation of the entry time, identifiers (id), etc.
-- `run`: contains the [**parsed**](#parsing) and [**normalized**](#normalizing) raw data into the structured NOMAD schema. This is all the possible raw data which can be translated into a structured way.
+- `run`: contains the [Parsed](#parsing) and [Normalized](#normalizing) raw data, according to the *legacy* NOMAD simulation schema, [`runschema`](https://nomad-lab.eu/prod/v1/gui/analyze/metainfo/runschema).
+- `data`:  contains the [Parsed](#parsing) and [Normalized](#normalizing) raw data, according to the *new* NOMAD simulation schema, [`nomad_simulations`](https://nomad-lab.eu/prod/v1/gui/analyze/metainfo/nomad_simulations).
 - `workflow2`: contains metadata about the specific workflow performed within the entry. This is mainly a set of well-defined workflows, e.g., `GeometryOptimization`, and their parameters.
 - `results`: contains the [**normalized**](#normalizing) and [**search indexed**](#search-indexing-and-storing) metadata. This is mainly relevant for searching, filtering, and visualizing data in NOMAD.
 
-??? question "`workflow` and `workflow2` sections: development and refactoring"
-    You have probably noticed the name `workflow2` but also the existence of a section called `workflow` under `archive`. This is because
-    `workflow` is an old version of the workflow section, while `workflow2` is the new version. Sometimes, certain sections suffer a rebranding
-    or _refactoring_, in most cases to add new features or to polish them after we receive years of feedback. In this case, the `workflow` section
-    will remain until all older entries containing such section are reprocessed to transfer this information into `workflow2`.
+
+### Normalization
+
+The parser code reads the code-specific mainfile and auxiliary files and populates the `run` and `workflow2` sections of the `archive`. Subsequently, a cascade of additional code is executed, which varies depending on the exact sections and quantities populated by the parser. This code is responsible for: 1. normalizing or _homogenizing_ certain metadata parsed from different codes, and 2. populating the `results` section.
 
 
-### Parsing
+### Search indexing
 
-A parser is a Python module which reads the code-specific mainfile and auxiliary files and populates the `run` and `workflow2` sections of the `archive`, along with all relevant subsections and quantities.
-<!-- TODO add link to parser plugin or maybe parser explanation -->
-<!-- We explain them more in detail in [Writing a parser plugin](../writing_a_parser_plugin/parser_plugin_overview.md). -->
+Only a fraction of the stored metadata is made avaialable for search. In terms of the parsed and normalized quantities, the `results` section stores the searchable quantities. These metadata can be use to filter the database via the GUI or API.
 
-Parsers are added to NOMAD as _plugins_ and are divided in a set of Github sub-projects under the [main NOMAD repository](https://github.com/nomad-coe/nomad){:target="_blank"}.
-<!-- You can find a detailed list of projects in [Writing a parser plugin - Parser organization](../writing_a_parser_plugin/parser_plugin_overview.md/#parser-organization). -->
+## Organization in NOMAD
 
-<!-- !!! tip "External contributions"
-    We always welcome external contributions for new codes and parsers in our repositories. Furthermore, we are always happy to hear feedback and implement new features
-    into our parsers.
-    TODO add contact info
-    Please, check our [Contact](../contact.md) information to get in touch with us so we can promptly help you! -->
+### Entries
 
+The compilation of all (meta)data obtained from processing of a single mainfile forms an entry&mdash;the fundamental unit of storage within the NOMAD database&mdash;including simulation input/output, author information, and additional general overarching metadata (e.g., references or comments), as well as an `entry_id`&mdash;a unique identifier.
 
-### Normalizing
+Once the processing is finished, the uploads page will show if each mainfile process was a `SUCCESS` or `FAILURE`. The entry information can be browsed by clicking on the :fontawesome-solid-arrow-right: icon. The GUI provides the following structure for navigating an entry:
 
-After the parsing populates the `run` and `workflow2` sections, an extra layer of Python modules is executed on top of the processed NOMAD metadata. This has two main purposes: 1. normalize or _homogenize_ certain metadata parsed from different codes, and 2. populate the `results` section. For example, this is the case of normalizing the density of states (DOS) to its size intensive value, independently of the code used to calculate the DOS. The set of normalizers relevant for computational data are listed in [`/nomad/config/models.py`](https://github.com/nomad-coe/nomad/blob/develop/nomad/config/models.py#L383){:target="_blank"} and are executed in the specific order defined there. Their roles are explained more in detail in [Processing](../../explanation/processing.md).
-
-
-### Search indexing (and storing)
-
-The last step is to store the structured metadata and pass some of it to the search index. The metadata which is passed to the search index is defined in the `results` section. These metadata can then be searched by filtering in the Entries page of NOMAD or by writing a Python script which searches using the NOMAD API.
-<!-- TODO add link or this info somewhere -->
-<!-- , see [Filtering and Querying](../filtering_and_querying/overview.md). -->
-
-
-## Entries OVERVIEW page
-
-Once the parsers and normalizers finish, the Uploads page will show if the processing of the entry was a `SUCCESS` or a `FAILURE`. The entry information can be browsed by clicking on the :fontawesome-solid-arrow-right: icon.
-
-You will land on the `OVERVIEW` page of the entry. On the top menu you can further select the `FILES` page, the `DATA` page, and the `LOGS` page.
+**OVERVIEW tab**
 
 ![Overview page](images/overview_page.png){.screenshot}
 
-The overview page contains a summary of the parsed metadata, e.g., tabular information about the material and methodology of the calculation (in the example, a G0W0 calculation done with the code [exciting](https://www.exciting-code.org/){:target="_blank"} for bulk Si<sub>2</sub>), and visualizations of the system and some relevant properties. We note that all metadata are read directly from `results`.
+The overview page contains a summary of the parsed metadata, e.g., tabular information about the material and methodology of the calculation (in the example, a G0W0 calculation done with the [exciting](https://www.exciting-code.org/){:target="_blank"} code for bulk Si<sub>2</sub>), along with a visualization of the system and some relevant properties.
 
-### LOGS page
+**FILES tab**
 
-In the `LOGS` page, you can find information about the processing. You can read error, warning, and critical messages which can provide insight if the processing of an entry was a `FAILURE`.
+The files page contains a browser for the uploaded file structure, with tools for viewing both the processed and raw data.
 
-![Logs page](images/logs_page.png){.screenshot}
+<!-- TODO - Add image -->
 
-We recommend you to [Get support](https://nomad-lab.eu/nomad-lab/support.html){:target="_blank"} or [contact our team](mailto:support@nomad-lab.eu) in case you find `FAILURE` situations. These might be due to bugs which we are rapidly fixing, and whose origin might be varied: from a new version
-of a code which is not yet supported to wrong handling of potential errors in the parser script. It may also be a problem with the organization of the data in the folders. In order to minimize these situations, we suggest that you read [Best Practices: preparing the data and folder structure](#best-practices-preparing-the-data-and-folder-structure).
+**DATA tab**
 
-### DATA page
-
-The `DATA` page contains all the structured NOMAD metainfo populated by the parser and normalizers. This is the most important page in the entry, as it contains all the relevant metadata which will allow users to find that specific simulation.
+The `DATA` page contains a browser for searching through the metadata stored for the entry, according to the NOMAD Metainfo structure. A downloadable JSON version of the archive can be accessed by clicking on the :fontawesome-solid-cloud-arrow-down: icon.
 
 ![Data page](images/data_page.png){.screenshot}
 
-Furthermore, you can click on the :fontawesome-solid-cloud-arrow-down: icon to download the NOMAD `archive` in a JSON format.
-<!-- We explain more in detail how to work with such files in [Filtering and Querying](../filtering_and_querying/overview.md). -->
+
+**LOGS tab**
+
+The `LOGS` page contains a list of info, warning, and error messages from the processing codes (i.e., parsers and normalizers). These provide insight into any potential issues with the upload, especially in the case that the entry displays the `FAILURE` processing status. Please help improve NOMAD by reporting any major issues that you find: [NOMAD > Support](https://nomad-lab.eu/nomad-lab/support.html){:target="_blank"}.
+
+![Logs page](images/logs_page.png){.screenshot}
+
+
+### Uploads
+NOMAD entries can be organized hierarchically into uploads. Since the parsing execution is dependent on automated identification of representative files, users are free to arbitrarily group simulations together upon upload. In this case, multiple entries will be created with the corresponding simulation data. An additional unique identifier, `upload_id`, will be provided for this group of entries. Although the grouping of entries into an upload is not necessarily scientifically meaningful, it is practically useful for submitting batches of files from multiple simulations to NOMAD.
+
+### Workflows
+NOMAD offers flexibility in the construction of workflows. NOMAD also allows the creation of custom workflows, which are completely general directed graphs, allowing users to link NOMAD entries with one another in order to provide the provenance of the simulation data. Custom workflows are contained within their own entries and, thus, have their own set of unique identifiers. To create a custom workflow, the user is required to upload a workflow yaml file describing the inputs and outputs of each entry within the workflow, with respect to sections of the NOMAD Metainfo schema.
+
+### Datasets
+At the highest level, NOMAD groups entries with the use of data sets. A NOMAD data set allows the user to group a large number of entries, without any specification of links between individual entries. A DOI is also generated when a data set is published, providing a convenient route for referencing all data used for a particular investigation within a publication.
+
+<!-- TODO - add some diagrams to explain the organization and remove anything that is not necessary to explain here? -->
