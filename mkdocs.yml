@@ -85,6 +85,7 @@ nav:
       - Data structure: explanation/data.md
       - Processing: explanation/processing.md
       - Architecture: explanation/architecture.md
+      - Workflows: explanation/workflows.md
       - Plugins: explanation/plugin_system.md
       - Federation and Oasis: explanation/oasis.md
   - Reference:
