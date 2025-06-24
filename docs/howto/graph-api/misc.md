@@ -315,5 +315,5 @@ In the response, we see that the entry `-L073PFe_PxW90kci4UwxMgUO20O` has the co
 ```
 
 ??? note "pagination"
-   The file information listing is always paginated.
-   This is particularly useful when listing files in an upload, as there can be many files.
+    The file information listing is always paginated.
+    This is particularly useful when listing files in an upload, as there can be many files.
