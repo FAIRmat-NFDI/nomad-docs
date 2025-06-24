@@ -79,6 +79,8 @@ nav:
             - Atom probe tomography: examples/experiment_data/apm.md
             - Scanning probe microscopy: examples/experiment_data/spm.md
             - pynxtools: examples/experiment_data/pynxtools.md
+      - Use cases:
+          - Catalysis APP: examples/use_cases/catalysis_app.md
         # - NOMAD-supported plugins:
         # - Databases for specific research topics:
   - Explanation:
