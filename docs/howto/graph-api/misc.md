@@ -226,3 +226,94 @@ Also, the `pagination` field will always be returned, even if not specified in t
     And it is likely that the desired information can be directly fetched from `Elasticsearch`.
     In this case, there is no need to navigate to the `MongoDB` database.
     However, if the request needs to access archive, it has to use `entry -> archive` path if starting from `search`.
+
+## Listing File Information
+
+As each entry corresponds to a main file, and each upload corresponds to a folder, the graph API also provides a convenient way to fetch file information, similar to the `ls` command in Linux.
+There are two ways to access the file system.
+
+1. Inside an upload, use the token `files`.
+2. Inside an entry, use the token `mainfile`.
+
+For example, the following query uses the `mainfile` token to fetch the file information.
+
+```json hl_lines="13"
+{
+   "search":{
+      "m_request":{
+         "query":{
+            "owner":"all",
+            "query":{ "upload_create_time":{ "gt":"2025-01-01" } },
+            "pagination":{ "page_size":1 }
+         }
+      },
+      "*":{
+         "entry":{
+            "entry_create_time":{ "m_request":{ "directive":"plain" } },
+            "mainfile":{ "m_request":{ "directive":"plain" } }
+         }
+      }
+   }
+}
+```
+
+In the response, we see that the entry `-L073PFe_PxW90kci4UwxMgUO20O` has the corresponding main file `OUTCAR_K_nm_5`, which has a size of `47862593` bytes.
+
+```json hl_lines="32-48"
+{
+   "search":{
+      "m_response":{
+         "include":[ "*" ],
+         "query":{
+            "owner":"all",
+            "query":{ "upload_create_time":{ "gt":"2025-01-01" } },
+            "pagination":{
+               "page_size":1,
+               "order":"asc"
+            },
+            "aggregations":{}
+         },
+         "pagination":{
+            "page_size":1,
+            "order_by":"entry_id",
+            "order":"asc",
+            "page_after_value":null,
+            "page":null,
+            "page_offset":null,
+            "total":37,
+            "next_page_after_value":"-L073PFe_PxW90kci4UwxMgUO20O",
+            "page_url":null,
+            "next_page_url":null,
+            "prev_page_url":null,
+            "first_page_url":null
+         }
+      },
+      "-L073PFe_PxW90kci4UwxMgUO20O":{
+         "entry":{
+            "entry_create_time":"2025-06-23T16:34:50.684000",
+            "mainfile":{
+               "OUTCAR_K_nm_5":{
+                  "m_response":{
+                     "directive":"plain",
+                     "include":[ "*" ],
+                     "pagination":{
+                        "page":1,
+                        "page_size":10,
+                        "order":"asc",
+                        "total":1
+                     }
+                  },
+                  "path":"OUTCAR_K_nm_5",
+                  "size":47862593,
+                  "m_is":"File"
+               }
+            }
+         }
+      }
+   }
+}
+```
+
+??? note "pagination"
+   The file information listing is always paginated.
+   This is particularly useful when listing files in an upload, as there can be many files.
