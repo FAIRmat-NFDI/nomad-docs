@@ -132,7 +132,7 @@ To fetch data from the `Elasticsearch` index, one can use the special token `sea
 The top-level request configuration also supports the `query` field.
 This `query` field shall take a valid `Metadata` query object (which itself also contains a `query` field), see the endpoint `/entries/query` for more details.
 
-The following example lists all entries created in 2025 that are visible to the logged in user.
+The following example lists all entries created since 2025 that are visible to the logged in user.
 
 ```json hl_lines="5-8"
 {

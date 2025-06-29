@@ -24,6 +24,10 @@ Thus, to access the archive of an entry with ID `example_entry_id`, one can use 
 }
 ```
 
+??? note "plain directive"
+    The `plain` directive means 'just return the data as it is'.
+    We will introduce other directives later.
+
 The above query will return the contents of the target archive.
 Replacing `example_entry_id` with a valid entry ID will make it ready to be executed.
 
