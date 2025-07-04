@@ -1,44 +1,53 @@
 # How to write data to archive with MappingParser
 
-`MappingParser` is a generic parser class implemented in
-`nomad.parsing.file_parser/mapping_parser.py` to handle the conversion to and from a
+`MappingParser` is a NOMAD parsing framework for handling tree-like data structures.
+It is extensively used for processing highly structured files, like computational output.
+This framework distributes responsiblities between the file processing (building the source tree) and the mapping into the NOMAD schema.
+Some functionality can be inserted in the mapping, the rest is relegated to *normalization* functionalitites of the schema.
+
+![Responsiblity distribution MappingParser](images/mapping_parser_concept.png)
+
+<!-- `nomad.parsing.file_parser/mapping_parser.py` to handle the conversion to and from a
 data object and a python dictionary. We refer to an instance of the
 this class as 'mapping parser' throughout this section. In the following, the abstract
 properties and methods of the mapping parser are explained. The various implementations of
 the mapping parser are also defined and `Mapper` which is required to convert a
-mapping parser into another mapping parser is explained as well.
+mapping parser into another mapping parser is explained as well. -->
 
 ## Fundamentals
 
-The mapping from the source file to the archive is defined by a path (in JMesPath format) to the schema.
+The mapping from the source file to the archive is defined by a path (in [JMesPath](https://jmespath.org/) format) to the schema.
 This path is added to `m_annotations`, either overwriting or extending the previous annotations.
 Each mapping corresponds to its own dictionary key, and a parser schema may contain multiple in parallel.
-In the simplest case, e.g. a single quantity, you may simply write:
+
+In the simplest case, e.g. a _single quantity_, you may simply write:
 
 ```python
 <quantity>.m_annotations.setdefault(MAPPING_ANNOTATION_KEY, {}).update(
-    dict(xml=MapperAnnotation(mapper=<flag>))
+    dict(xml=MapperAnnotation(mapper=<jmes_path>))
 )
 ```
 
 <!-- Given that NOMAD schemas typically follow most conventional file structures, some path parts may overlap. -->
 This works fine for top-level quantities, but those deeper down in the schema have to instantiate their containing sections.
 These can be defined in _absolute_ terms, or _relative_ to their section above using the *dot notation*, e.g. `.model`. 
-The annotations themselves can be manipulated in two possible way:
+The annotations themselves can be manipulated in two possible ways:
 
 1. *definition* level, i.e. `m_def`.
 1. *attribute* level, i.e. the data instance generated during runtime.
 
 The mapping parser will search for the first available annotation in the following order:
 
-1. attribute level. Used for specializing subsections to specific contexts.
-1. definition level. Used for generic paths.
-1. child sections' definitions, i.e. all inheriting sections. Used to bypass any abstract sections, that should not be instantiated themselves. (note)
+1. *attribute level*: specializes subsections to specific contexts.
+1. *definition level*: used for generic paths.
+1. *child sections' definitions* (i.e. all inheriting sections): used to bypass any abstract sections, which should not be instantiated themselves. (note)
+
+![Path annotation in NOMAD datamodel](images/mapping_parser_path.png)
 
 In the case of quantities, there is no practical distinction between options 1 and 2.
-By convention, we use the shorter *attribute*-level annotation.
+By convention, we use the shorter *attribute-level* annotation.
 
-The following real-world example showcases 
+The following real-world example showcases the three annotation techniques listed above.
 
 ```python
 # GLOBAL m_def annotation
@@ -75,12 +84,19 @@ class Program(general.Program):
     )
 ```
 
-### Edge Cases
+### Controlling Repeating Sections
 
 **Subsections** that are defined as **repeating** in the schema are automatically picked up by the mapping parser.
-It will look for the repeating unit along the path and instantiate the same number of subsections.
+It will look for any repeating units along the path and instantiate the same number of subsections, i.e. $\text{no. subsections} = \Pi_i (repeating path segment)_i$.
+To compose parallel branches into the same repeating subsection, i.e. $\text{no. subsections} = \Sigma_i (parallel branch)_i$:
+
+1. generate different mappings and add them to the annotation `dict`. Each mapping comes with its own unique key.
+1. during the *conversion phase*, select `update_mode="append"`. Manipulate the order in the data via the conversion order of the various maps.
+
 **Array quantities**, meanwhile, with `shape=['*']`, have to be handled using an *operator*.
 This is due to `shape` having variable rank, e.g. `shape=['*','*']`.
+
+### Other Edge Cases
 
 **Recursive sections**, i.e. section schemas with the same schema as a subsection, should also be handled by an *operator*, or a different annotation key.
 Annotation keys that populate the same archive, can be loaded successively by the _writer_.
