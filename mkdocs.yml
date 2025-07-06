@@ -48,6 +48,7 @@ nav:
           - Define workflows: howto/customization/workflows.md
           - Work with units: howto/customization/units.md
           - Use HDF5 to handle large quantities: howto/customization/hdf5.md
+          - Use Mapping parser to write data on archive: howto/customization/mapping_parser.md
       - Development:
           - Get started: howto/develop/setup.md
           - Navigate the code: howto/develop/code.md
