@@ -143,6 +143,33 @@ Upon upload to NOMAD, the above zip will produce 2 entries:
 
 - simply give the rules for the prefix
 
+You can also reference entries that you have previously uploaded to NOMAD. In this case, you should replace the path prefix `../upload/archive/mainfile/<mainfile_name>` with `../uploads/<upload_id>/archive/<entry_id>`.
+
+??? Tip "Corresponding `dft.workflow.archive.yaml` from above example"
+
+    ```yaml
+    workflow2:
+      name: DFT SinglePoint
+      inputs:
+        - name: Input system
+          section: '../upload/<upload_id>/archive/<entry_id>#/run/0/system/-1'
+      outputs:
+        - name: Output calculation
+          section: '../upload/<upload_id>/archive/<entry_id>#/run/0/calculation/-1'
+      tasks:
+        - m_def: nomad.datamodel.metainfo.workflow.TaskReference
+          task: '../upload/<upload_id>/archive/<entry_id>#/workflow2'
+          name: DFT
+          inputs:
+            - name: Input structure
+              section: '../upload/<upload_id>/archive/<entry_id>#/run/0/system/-1'
+          outputs:
+            - name: Output calculation
+              section: '../upload/<upload_id>/archive/<entry_id>#/run/0/calculation/-1'
+    ```
+
+
+
 ## Nested Workflows in a single entry
 
 - it is possible to do this, but it's not the intuitive way for me at least, might want to motivate under what conditions this makes sense
