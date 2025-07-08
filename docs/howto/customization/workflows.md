@@ -1,4 +1,4 @@
-# How to define workflows
+# How to define custom workflows
 
 ## What you will learn
 
@@ -6,22 +6,174 @@
 
 ## Recommended preparation
 
+- Basic knowledge of NOMAD Organization + MetaInfo
 -
 
 ## Further resources
+- [Tutorial > Managing workflows and projects](../../tutorial/workflows_projects.md)
+
+# New Structure
+
+## Intro
+
+In NOMAD, [Workflows](../../explanation/workflows.md) are directed graphs with nodes (tasks) that connect multiple [Entries](../../reference/glossary.md#entry) together in a structured way, while specifying information passed between the nodes via inputs/outputs that link to particular sections of the relevant [Archive](../../reference/glossary.md#archive).
+
+Workflows are sometimes created automatically by NOMAD via parser [Plugins](../../explanation/plugin_system.md), for certain supported uploads. Users can also create their own worklow entries by uploading an appropriately formatted workflow YAML. This How-to guide will cover the specifics of this process.
+
+!!! Note
+    In the following, various supported raw data files will be used to form concrete examples that can be reproduced. The nature of these files or their underlying methods of production is irrelevant for the purpose of this How-to.
+
+## Simple worklows with supported tasks
+
+We start with the simplest possible workflow structure&mdash;a single tasks with one input and one output:
+
+```mermaid
+graph LR;
+    A((Inputs)) --> B[DFT];
+    B[DFT] --> C([Output calculation]);
+```
+
+The file associated with this task, `dft.xml`, is a standard DFT calculation that is supported by NOMAD's simulation parsers, i.e., upon upload it will be automatically recognized and parsed to create an entry. Actually, the parser for this file will automically create a "Single Point" workflow within the same entry, which specifies the proper input and output:
+
+<!-- TODO - Add workflow graph image -->
+
+Here, we will reproduce this workflow graph in a separate entry, using the YAML-based approach.
+
+To define this simple workflow, create a file `dft.workflow.archive.yaml` with the following content:
+
+```yaml
+workflow2:
+  name: DFT SinglePoint
+  inputs:
+    - name: Input system
+      section: '../upload/archive/mainfile/dft.xml#/run/0/system/-1'
+  outputs:
+    - name: Output calculation
+      section: '../upload/archive/mainfile/dft.xml#/run/0/calculation/-1'
+  tasks:
+    - m_def: nomad.datamodel.metainfo.workflow.TaskReference
+      task: '../upload/archive/mainfile/dft.xml#/workflow2'
+      name: DFT
+      inputs:
+        - name: Input structure
+          section: '../upload/archive/mainfile/dft.xml#/run/0/system/-1'
+      outputs:
+        - name: Output calculation
+          section: '../upload/archive/mainfile/dft.xml#/run/0/calculation/-1'
+```
+
+!!! Warning "Important"
+    For the created of workflow entries using YAMLs, the file must have the extension `archive.yaml`.
+
+This file is constructed according to NOMAD's [General Workflow Schema](../../explanation/workflows.md#the-built-in-abstract-workflow-schema). The `workflow2` section of the archive has 3 possible subsections: `inputs`, `outputs`, and `tasks`:
+
+**`inputs`**: reference the section containing inputs of the whole workflow. In this case this is the section `run[0].system[-1]` parsed from the mainfile with path `dft.xml`. Note that in general, the path to the mainfile from the upload root should be included: `<path to mainfile from upload root>/dft.xml`.
+
+**`outputs`**: reference the section containing outputs of the whole workflow. In this case this is the section `run[0].calculation[-1]` parsed from the mainfile with path `dft.xml`.
+
+**`tasks`**: reference the section containing tasks of each step in the workflow. These must also contain `inputs` and `outputs` properly referencing the corresponding sections; this will then _link_ inputs/outputs/tasks in the NOMAD Archive. In this case this is a `TaskReference` to the section `workflow2` parsed from the mainfile with path `dft.xml`. `TaskReference` is described below in TODO -- Add link to below
+
+Further considerations:
+
+1. **`task`** and **`section`** reference particular sections of are the archive, with the following path construction:
+  (a) The root path of the upload can be referenced with `../upload/archive/mainfile/`. This assumes that the references entries are contained in the same upload as the workflow YAML. For entries stored in different uploads, see [Referencing Tasks in Different Uploads](#referencing-tasks-in-different-uploads).
+  (b) Starting from there, the original directory tree structure of the upload is maintained. `<path-to-mainfile>/<mainfile-name>`
+  (c) The "mainfile", i.e., the file that NOMAD recognizes to create the entry, is used to reference a particular entry archive.
+  (d) Then, the archive path to the relevant section is specified TODO - link to MetaInfo browser?
+2. **`name`** keys are optional.
+6. **`section`** reference to the uploaded mainfile specific section. The left side of the `#` symbol contains the path to the _mainfile_, while the right contains the path to the _section_.
+
+[Download simple_workflow.zip](data/example_files.zip){ .md-button .nomad-button }
+
+This will produce an extra entry with the following Overview content:
+
+![NOMAD workflow schema](images/singlepoint.png){.screenshot}
+
+Note that you are referencing sections which are lists. Thus, in each case you should be careful to reference the correct section for inputs and outputs (example: a `GeometryOptimization` workflow calculation will have the "Input structure" as `run[0].system[0]`, while the "Output calculation" would also contain `run[0].system[-1]`, and all intermediate steps must input/output the corresponding section system).
+
+!!! note "NOMAD workflow filename"
+    The NOMAD workflow YAML file name, i.e., `<filename>` in the explanation above, can be any custom name defined by the user, but the file **must** keep the extension `.archive.yaml` at the end. This is done in order for NOMAD to recognize this file as a _custom schema_. Custom schemas are widely used in experimental parsing, and you can learn more about them in the [FAIRmat tutorial 8](https://www.fairmat-nfdi.eu/events/fairmat-tutorial-8/tutorial-8-home).
+
+You can extend the workflow meta-information by adding the metholodogical input parameters. These are stored in NOMAD in the section path `run[0].method[-1]`. The new `single_point.archive.yaml` will be:
+
+```yaml
+workflow2:
+  name: SinglePoint
+  inputs:
+    - name: Input structure
+      section: '../upload/archive/mainfile/pressure1/dft_p1.xml#/run/0/system/-1'
+    - name: Input methodology parameters
+      section: '../upload/archive/mainfile/pressure1/dft_p1.xml#/run/0/method/-1'
+  outputs:
+    - name: Output calculation
+      section: '../upload/archive/mainfile/pressure1/dft_p1.xml#/run/0/calculation/-1'
+  tasks:
+    - m_def: nomad.datamodel.metainfo.workflow.TaskReference
+      task: '../upload/archive/mainfile/pressure1/dft_p1.xml#/workflow2'
+      name: DFT at Pressure P1
+      inputs:
+        - name: Input structure
+          section: '../upload/archive/mainfile/pressure1/dft_p1.xml#/run/0/system/-1'
+        - name: Input methodology parameters
+          section: '../upload/archive/mainfile/pressure1/dft_p1.xml#/run/0/method/-1'
+      outputs:
+        - name: Output calculation
+          section: '../upload/archive/mainfile/pressure1/dft_p1.xml#/run/0/calculation/-1'
+```
+
+which in turn produces a similar workflow than before, but with an extra input node:
+
+![SinglePoint workflow visualizer with Method added](images/singlepoint_methodadded.png){.screenshot}
+
+## Referencing Tasks in different uploads
+
+## Nested Workflows in a single entry
+
+## Nested Workflows in multiple entries
+
+## Workflows with custom tasks
+
+### Referencing ELN entries created with the GUI
+
+## Best practices for workflow file management within a single upload?
 
 # **Example - Chema** - Standard and Custom Computational Workflows in NOMAD
 
+# Standard and Custom Computational Workflows in NOMAD
+
 <!-- TODO - Update this and link to utilities and tutorials -->
 
-## Custom Workflows -- From YAML File
+The following examples contain the basic knowledge on understanding and learning to use NOMAD workflows, and its relation with DFT and beyond-DFT (GW, BSE, DMFT, etc.) methodologies. You will use a fictitious example of a simulation workflow with the following files and folder structure:
+```
+.
+├── pressure1
+│   ├── temperature1
+│   │   ├── dmft_p1_t1.hdf5
+│   │   └── ...extra auxiliary files
+│   ├── temperature2
+│   │   ├── dmft_p1_t2.hdf5
+│   │   └── ...extra auxiliary files
+│   ├── dft_p1.xml
+│   ├── tb_p1.wout
+│   └── ...extra auxiliary files
+└── pressure2
+    ├── temperature1
+    │   ├── dmft_p2_t1.hdf5
+    │   └── ...extra auxiliary files
+    ├── temperature2
+    │   ├── dmft_p2_t2.hdf5
+    │   └── ...extra auxiliary files
+    ├── dft_p2.xml
+    ├── tb_p2.wout
+    └── ...extra auxiliary files
+```
 
-To define a workflow manually in NOMAD, you must add a YAML file to the upload folder that contains the relevant input, output, and task information. This file should be named `<filename>.archive.yaml`.
+which can be downloaded here:
+<!-- <center> -->
+[Download example_files.zip](data/example_files.zip){ .md-button .nomad-button }
+<!-- </center> -->
 
-<!-- TODO - not necessarily from same upload explain -->
-<!-- TODO - maybe we shouldn't use the standard classes to avoid confusion -->
-
-<!-- Each of the _mainfiles_ represent an electronic-structure calculation (either [DFT](https://en.wikipedia.org/wiki/Density_functional_theory){:target="_blank"}, [TB](https://en.wikipedia.org/wiki/Tight_binding){:target="_blank"}, or [DMFT](https://en.wikipedia.org/wiki/Dynamical_mean-field_theory){:target="_blank"}) which in turn is then parsed into a singular _entry_ in NOMAD. When dragged into the [NOMAD Upload page](https://nomad-lab.eu/prod/v1/staging/gui/user/uploads){:target="_blank"}, these files should generate 8 entries in total. This folder structure presents a typical workflow calculation which can be represented as a provenance graph:
+Each of the _mainfiles_ represent an electronic-structure calculation (either [DFT](https://en.wikipedia.org/wiki/Density_functional_theory){:target="_blank"}, [TB](https://en.wikipedia.org/wiki/Tight_binding){:target="_blank"}, or [DMFT](https://en.wikipedia.org/wiki/Dynamical_mean-field_theory){:target="_blank"}) which in turn is then parsed into a singular _entry_ in NOMAD. When dragged into the [NOMAD Upload page](https://nomad-lab.eu/prod/v1/staging/gui/user/uploads){:target="_blank"}, these files should generate 8 entries in total. This folder structure presents a typical workflow calculation which can be represented as a provenance graph:
 ```mermaid
 graph LR;
     A2((Inputs)) --> B2[DFT];
@@ -41,11 +193,23 @@ graph LR;
     D11[DMFT at T1] --> E11([Output calculation P1, T1])
     D12[DMFT at T2] --> E12([Output calculation P1, T2])
 ```
-Here, "Input" refers to the all _input_ information given to perform the calculation (e.g., atom positions, model parameters, experimental initial conditions, etc.). "DFT", "TB" and "DMFT" refer to individual _tasks_ of the workflow, which each correspond to a _SinglePoint_ entry in NOMAD. "Output calculation" refers to the _output_ data of each of the final DMFT tasks. -->
+Here, "Input" refers to the all _input_ information given to perform the calculation (e.g., atom positions, model parameters, experimental initial conditions, etc.). "DFT", "TB" and "DMFT" refer to individual _tasks_ of the workflow, which each correspond to a _SinglePoint_ entry in NOMAD. "Output calculation" refers to the _output_ data of each of the final DMFT tasks.
+
+The goal of this part is to set up the following workflows:
+
+1. A `SinglePoint` workflow for one of the calculations (e.g., the DFT one) in the `pressure1` subfolder.
+2. An overarching workflow entry for each pressure P<sub>i=1,2</sub>, grouping all `SinglePoint` "DFT", "TB", "DMFT at T<sub>1</sub>", and "DMFT at T<sub>2</sub>" tasks.
+3. A top level workflow entry, grouping together all pressure calculations.
+
+The files for all these cases can be downloaded here:
+<center>
+[Download worfklowyaml_files.zip](data/workflowyaml_files.zip){ .md-button .nomad-button }
+</center>
+
+ You can try writing these files yourself first, and then compare them with the tested files.
 
 
-<!-- ### Starting example: SinglePoint workflow -->
-### Simple workflow entry
+## Starting example: SinglePoint workflow
 
 NOMAD is able to recognize certain workflows in an automatic way, such as the `SinglePoint` case mentioned above. However, to showcase how to the use workflows in NOMAD, you will learn how to "manually" construct the SinglePoint workflow, represented by the following provenance graph:
 ```mermaid
@@ -53,7 +217,7 @@ graph LR;
     A((Inputs)) --> B[DFT];
     B[DFT] --> C([Output calculation]);
 ```
- In this case, you should include the file `single_point.archive.yaml` with the following content:
+To define a workflow manually in NOMAD, you must add a YAML file to the upload folder that contains the relevant input, output, and task information. This file should be named `<filename>.archive.yaml`. In this case, you should include the file `single_point.archive.yaml` with the following content:
 
 ```yaml
 workflow2:
@@ -80,7 +244,6 @@ Note several things about the content of this file:
 
 1. **`name`** keys are optional.
 2. The root path of the upload can be referenced with `../upload/archive/mainfile/`. Starting from there, the original directory tree structure of the upload is maintained.
-<!-- TODO Explain path for case of not same upload -->
 3. **`inputs`** reference the section containing inputs of the whole workflow. In this case this is the section `run[0].system[-1]` parsed from the mainfile in the path `pressure1/dft_p1.xml`.
 4. **`outputs`** reference the section containing outputs of the whole workflow. In this case this is the section `run[0].calculation[-1]` parsed from the mainfile in the path `pressure1/dft_p1.xml`.
 5. **`tasks`** reference the section containing tasks of each step in the workflow. These must also contain `inputs` and `outputs` properly referencing the corresponding sections; this will then _link_ inputs/outputs/tasks in the NOMAD Archive. In this case this is a `TaskReference` to the section `workflow2` parsed from the mainfile in the path `pressure1/dft_p1.xml`.
@@ -298,7 +461,6 @@ The folder structure used throughout this part is a good example of a clean uplo
 <!-- Another example can be found in [Part II](../part2.md), when you learned how to upload a DFT + GW calculation for bulk Si<sub>2</sub>. In this case, an automatic GW workflow entry was generated. -->
 
 
-
 # **Example - Alvin**
 
 ### Simple workflow entry
@@ -490,7 +652,7 @@ The entry overview page will show an interactive graph of the `workflow2` sectio
 In the following example, a workflow containing three tasks `Single Point`, `Geometry Optimization`
 and `Phonon` is shown.
 
-![workflow visualizer](images/workflow-visualizer-root.png)
+![workflow visualizer](images/workflow-graph-usage.gif)
 
 The nodes (inputs, tasks and outputs) are shown from left to right for the current workflow layer.
 The edges (arrows) from (to) a node denotes an input (output) to a section in the target node.
