@@ -18,28 +18,28 @@
 
 In NOMAD, [Workflows](../../explanation/workflows.md) are directed graphs with nodes (tasks) that connect multiple [Entries](../../reference/glossary.md#entry) together in a structured way, while specifying information passed between the nodes via inputs/outputs that link to particular sections of the relevant [Archive](../../reference/glossary.md#archive).
 
-Workflows are sometimes created automatically by NOMAD via parser [Plugins](../../explanation/plugin_system.md), for certain supported uploads. Users can also create their own worklow entries by uploading an appropriately formatted workflow YAML. This How-to guide will cover the specifics of this process.
+Workflows are sometimes created automatically by NOMAD via parser [Plugins](../../explanation/plugin_system.md), for certain supported uploads. Users can also create their own workflow entries by uploading an appropriately formatted workflow YAML. This How-to guide will cover the specifics of this process.
 
 !!! Note
     In the following, various supported raw data files will be used to form concrete examples that can be reproduced. The nature of these files or their underlying methods of production is irrelevant for the purpose of this How-to.
 
-## Simple worklows with supported tasks
+## Simple workflows with supported tasks
 
-We start with the simplest possible workflow structure&mdash;a single tasks with one input and one output:
+We start with the simplest possible workflow structure&mdash;a single task with one input and one output:
 
 ```mermaid
 graph LR;
-    A((Inputs)) --> B[DFT];
+    A((Input structure)) --> B[DFT];
     B[DFT] --> C([Output calculation]);
 ```
 
-The file associated with this task, `dft.xml`, is a standard DFT calculation that is supported by NOMAD's simulation parsers, i.e., upon upload it will be automatically recognized and parsed to create an entry. Actually, the parser for this file will automically create a "Single Point" workflow within the same entry, which specifies the proper input and output:
+The file associated with this task, `dft.xml`, is a standard DFT calculation that is supported by NOMAD's simulation parsers, i.e., upon upload it will be automatically recognized and parsed to create an entry. Actually, the parser for this file will automically create a "Single Point" workflow within the same entry, which specifies the standard input and outputs for simulation data in NOMAD:
 
 ![NOMAD workflow schema](images/single-point-nomad-workflow-graph.png){.screenshot}
 
 Here, we will reproduce, and customize, this workflow graph in a separate entry, using the YAML-based approach.
 
-To define this simple workflow, create a file `dft.workflow.archive.yaml` with the following content:
+To define the initial workflow, create a file `dft.workflow.archive.yaml` with the following content:
 
 ```yaml
 workflow2:
@@ -67,13 +67,15 @@ workflow2:
 
 This file is constructed according to NOMAD's [General Workflow Schema](../../explanation/workflows.md#the-built-in-abstract-workflow-schema). The `workflow2` section of the archive has 3 possible subsections: `inputs`, `outputs`, and `tasks`:
 
-**`inputs`**: reference the section containing inputs of the whole workflow. In this case this is the section `run[0].system[-1]` parsed from the mainfile with path `dft.xml`. Note that in general, the path to the mainfile from the upload root should be included: `<path to mainfile from upload root>/dft.xml`.
+**`inputs`**: a list of references to the global inputs of the workflow, with name and section attributes. The section corresponds to a path for linking to the relevant archive section. In this case, the relative section path is `run[0].system[-1]`, linked to the entry defined by the mainfile `dft.xml`. The prefix is discussed under `Further considerations` directly below.
 
-**`outputs`**: reference the section containing outputs of the whole workflow. In this case this is the section `run[0].calculation[-1]` parsed from the mainfile with path `dft.xml`.
+**`outputs`**: identical to the inputs list, representing the global outputs of the workflow, with the relative section path `run[0].calculation[-1]` in this case.
 
-**`tasks`**: reference the section containing tasks of each step in the workflow. These must also contain `inputs` and `outputs` properly referencing the corresponding sections; this will then _link_ inputs/outputs/tasks in the NOMAD Archive. In this case this is a `TaskReference` to the section `workflow2` parsed from the mainfile with path `dft.xml`. `TaskReference` is described below in TODO -- Add link to below
+**`tasks`**: a list of references to the tasks/steps of the workflow. These must also contain `inputs` and `outputs` properly referencing the corresponding sections; this will then _link_ inputs/outputs/tasks in the NOMAD Archive. In this case this is a `TaskReference` to the section `workflow2` parsed from the mainfile with path `dft.xml`. `TaskReference` is described below in TODO -- Add link to below
 
 Further considerations:
+
+Note that in general, the path to the mainfile from the upload root should be included: `<path to mainfile from upload root>/dft.xml`.
 
 1. **`task`** and **`section`** reference particular sections of are the archive, with the following path construction:
   (a) The root path of the upload can be referenced with `../upload/archive/mainfile/`. This assumes that the references entries are contained in the same upload as the workflow YAML. For entries stored in different uploads, see [Referencing Tasks in Different Uploads](#referencing-tasks-in-different-uploads).
