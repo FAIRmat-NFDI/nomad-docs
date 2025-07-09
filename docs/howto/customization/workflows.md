@@ -67,33 +67,29 @@ workflow2:
 
 This file is constructed according to NOMAD's [General Workflow Schema](../../explanation/workflows.md#the-built-in-abstract-workflow-schema). The `workflow2` section of the archive has 3 possible subsections: `inputs`, `outputs`, and `tasks`:
 
-**`inputs`**: a list of references to the global inputs of the workflow, with name and section attributes. The section corresponds to a path for linking to the relevant archive section. In this case, the relative section path is `run[0].system[-1]`, linked to the entry defined by the mainfile `dft.xml`. The prefix is discussed under `Further considerations` directly below.
+**`inputs`**: a list of references to the global inputs of the workflow, with `name` and `section` attributes. `section` corresponds to a path for linking to the relevant archive section. In this case, the relative section path is `run[0].system[-1]`, linked to the entry defined by the mainfile `dft.xml`. The prefix is discussed under "Considerations for archive path specification" below.
 
 **`outputs`**: identical to the inputs list, representing the global outputs of the workflow, with the relative section path `run[0].calculation[-1]` in this case.
 
-**`tasks`**: a list of references to the tasks/steps of the workflow. These must also contain `inputs` and `outputs` properly referencing the corresponding sections; this will then _link_ inputs/outputs/tasks in the NOMAD Archive. In this case this is a `TaskReference` to the section `workflow2` parsed from the mainfile with path `dft.xml`. `TaskReference` is described below in TODO -- Add link to below
+**`tasks`**: a list of references to the tasks/steps of the workflow. Each task contains `m_def`, `task`, `inputs`, and `outputs` attributes. `inputs`/`outputs` are task-specific versions of the lists defined above. `task` is the path for linking to the relevant archive section, analogous to the `section` attribute for `inputs`/`outputs`. `m_def` defines the type of task according to NOMAD's MetaInfo scehma, in this case a `TaskReference` to the archive `workflow2` section.  The use of `TaskReference` will be clarified in the
+<!-- TODO add example section  -->
+example below.
 
-Further considerations:
+Considerations for archive path specification:
 
-Note that in general, the path to the mainfile from the upload root should be included: `<path to mainfile from upload root>/dft.xml`.
+- In general, the archive path can be represented as `<prefix>/<entry identifier>/<relative archive path>`.
 
-1. **`task`** and **`section`** reference particular sections of are the archive, with the following path construction:
-  (a) The root path of the upload can be referenced with `../upload/archive/mainfile/`. This assumes that the references entries are contained in the same upload as the workflow YAML. For entries stored in different uploads, see [Referencing Tasks in Different Uploads](#referencing-tasks-in-different-uploads).
-  (b) Starting from there, the original directory tree structure of the upload is maintained. `<path-to-mainfile>/<mainfile-name>`
-  (c) The "mainfile", i.e., the file that NOMAD recognizes to create the entry, is used to reference a particular entry archive.
-  (d) Then, the archive path to the relevant section is specified TODO - link to MetaInfo browser?
-2. **`name`** keys are optional.
-6. **`section`** reference to the uploaded mainfile specific section. The left side of the `#` symbol contains the path to the _mainfile_, while the right contains the path to the _section_.
+- The prefix for the archive path is given by: 1. `../upload/archive/mainfile` for entries that are contained within the same upload as the workflow YAML, or 2. `../uploads/<upload_id>/archive/` for entries contained in distinct uploads as the workflow YAML, where `<upload_id>` is a placeholders for the upload id, which can be obtained from the Overview page of any entry.
 
-Note that you are referencing sections which are lists. Thus, in each case you should be careful to reference the correct section for inputs and outputs (example: a `GeometryOptimization` workflow calculation will have the "Input structure" as `run[0].system[0]`, while the "Output calculation" would also contain `run[0].system[-1]`, and all intermediate steps must input/output the corresponding section system).
+- The entry identifier is `<entry_id>#` (placeholder for the entry id, also found on the Overview page) for case 1, and `<path to mainfile>/<mainfile name>#` for case 2. `<path to mainfile>` is the path from the root of the original upload directory structure.
 
-!!! note "NOMAD workflow filename"
-    The NOMAD workflow YAML file name, i.e., `<filename>` in the explanation above, can be any custom name defined by the user, but the file **must** keep the extension `.archive.yaml` at the end. This is done in order for NOMAD to recognize this file as a _custom schema_. Custom schemas are widely used in experimental parsing, and you can learn more about them in the [FAIRmat tutorial 8](https://www.fairmat-nfdi.eu/events/fairmat-tutorial-8/tutorial-8-home).
+- The relative archive path is the relative path to the archive section to be linked. The archive structure can be investigated using NOMAD's [MetaInfo Browser](https://nomad-lab.eu/prod/v1/gui/analyze/metainfo/nomad.datamodel.datamodel.EntryArchive){:target="_blank"}.
 
+With a basic understanding in hand, you can now download the example data and upload the obtained `.zip` file to NOMAD:
 
 [Download simple_workflow.zip](data/simple_workflow.zip){ .md-button .nomad-button }
 
-`simple_workflow.zip` file structure:
+file structure of `simple_workflow.zip`:
 ```
 .
 ├── dft.xml
@@ -107,7 +103,6 @@ Upon upload to NOMAD, the above zip will produce 2 entries:
 2. a workflow entry with mainfile `dft.workflow.archive.yaml`. The workflow entry will contain the following workflow graph on the Overview page:
 
 ![NOMAD workflow schema](images/single-point-custom-nomad-workflow-graph.png){.screenshot}
-
 
 
 ??? Tip "Adding more workflow metadata"
@@ -143,9 +138,7 @@ Upon upload to NOMAD, the above zip will produce 2 entries:
 
 ## Referencing Tasks in different uploads
 
-- simply give the rules for the prefix
-
-You can also reference entries that you have previously uploaded to NOMAD. In this case, you should replace the path prefix `../upload/archive/mainfile/<mainfile_name>` with `../uploads/<upload_id>/archive/<entry_id>`.
+As already mentioned above, your workflow YAML can reference entries that you have previously uploaded to NOMAD. In this case, you should replace the path prefix `../upload/archive/mainfile/<mainfile_name>` with `../uploads/<upload_id>/archive/<entry_id>`.
 
 ??? Tip "Corresponding `dft.workflow.archive.yaml` from above example"
 
@@ -171,14 +164,62 @@ You can also reference entries that you have previously uploaded to NOMAD. In th
     ```
 
 
-
 ## Nested Workflows in a single entry
 
 - it is possible to do this, but it's not the intuitive way for me at least, might want to motivate under what conditions this makes sense
 
+Since a `Workflow` instance is also a `Tasks` instance due to inheritance, we can nest
+workflows. Here we detailed the `GeometryOpt` as a *nested* workflow:
+
+```yaml
+workflow2:
+  inputs:
+    - name: input system
+      section: '../upload/raw/geom_opt.archive.yaml#/run/0/system/0'
+  outputs:
+    - name: relaxed system
+      section: '../upload/raw/geom_opt.archive.yaml#/run/0/system/-1'
+    - name: ground state calculation of relaxed system
+      section: '../upload/raw/ground_state.archive.yaml#/run/0/calculations/0'
+  tasks:
+    - name: GeometryOpt
+      m_def: nomad.datamodel.metainfo.workflow.Workflow
+      inputs:
+        - name: input system
+          section: '../upload/raw/geom_opt.archive.yaml#/run/0/system/0'
+      outputs:
+        - name: relaxed system
+          section: '../upload/raw/geom_opt.archive.yaml#/run/0/system/-1'
+      tasks:
+        - inputs:
+            - section: '../upload/raw/geom_opt.archive.yaml#/run/0/system/0'
+          outputs:
+            - section: '../upload/raw/geom_opt.archive.yaml#/run/0/system/1'
+            - section: '../upload/raw/geom_opt.archive.yaml#/run/0/calculation/0'
+        - inputs:
+            - section: '../upload/raw/geom_opt.archive.yaml#/run/0/system/1'
+          outputs:
+            - section: '../upload/raw/geom_opt.archive.yaml#/run/0/system/2'
+            - section: '../upload/raw/geom_opt.archive.yaml#/run/0/calculation/1'
+        - inputs:
+            - section: '../upload/raw/geom_opt.archive.yaml#/run/0/system/2'
+          outputs:
+            - section: '../upload/raw/geom_opt.archive.yaml#/run/0/system/3'
+            - section: '../upload/raw/geom_opt.archive.yaml#/run/0/calculation/2'
+    - name: GroundStateCalculation
+      inputs:
+        - name: input system
+          section: '../upload/raw/geom_opt.archive.yaml#/run/0/system/-1'
+      outputs:
+        - name: ground state
+          section: '../upload/raw/ground_state.archive.yaml#/run/0/calculations/0'
+```
+
 ## Nested Workflows in multiple entries
 
 - this actually applies to any reference of a simulation, but maybe we should build upon the previous example, i.e., using a yaml for the underlying workflow entry for clarity.
+
+Whenever a workflow task corresponds to an existing entry that itself is a workflow, with the `workflow2` section of the archive populated, **best practice** is to link directly to this `workflow2` section, i.e., `task: <prefix>/<entry identifier>#/workflow2`. We have already seen this case in [Simple Workflows with Support Tasks](#simple-workflows-with-supported-tasks), as every simulation in NOMAD is implemented with its own `workflow2` section. In this case, and in general, one must then set `m_def: nomad.datamodel.metainfo.workflow.TaskReference`. This is because `Workflow` instances can only contain `Task` instances and not reference them (see [General Workflow Schema](../../explanation/workflows.md#the-built-in-abstract-workflow-schema)).
 
 ## Workflows with custom tasks
 
@@ -522,90 +563,6 @@ This will produce the following entry and its Overview page:
 
 # **Example - Alvin**
 
-### Simple workflow entry
-
-The following archive shows how to create such a workflow based on the given schema.
-Here we only model the `GeometryOpt` and `GroundStateCalculation` as two tasks with
-respective inputs and outputs that use references to entry archives of the respective
-code runs.
-
-```yaml
-workflow2:
-  inputs:
-    - name: input system
-      section: '../upload/raw/geom_opt.archive.yaml#/run/0/system/0'
-  outputs:
-    - name: relaxed system
-      section: '../upload/raw/geom_opt.archive.yaml#/run/0/system/-1'
-    - name: ground state calculation of relaxed system
-      section: '../upload/raw/ground_state.archive.yaml#/run/0/calculations/0'
-  tasks:
-    - name: GeometryOpt
-      inputs:
-        - name: input system
-          section: '../upload/raw/geom_opt.archive.yaml#/run/0/system/0'
-      outputs:
-        - name: relaxed system
-          section: '../upload/raw/geom_opt.archive.yaml#/run/0/system/-1'
-
-    - name: GroundStateCalculation
-      inputs:
-        - name: input system
-          section: '../upload/raw/geom_opt.archive.yaml#/run/0/system/-1'
-      outputs:
-        - name: ground state
-          section: '../upload/raw/ground_state.archive.yaml#/run/0/calculations/0'
-```
-
-
-### Nested workflows in one entry
-
-Since a `Workflow` instance is also a `Tasks` instance due to inheritance, we can nest
-workflows. Here we detailed the `GeometryOpt` as a *nested* workflow:
-
-```yaml
-workflow2:
-  inputs:
-    - name: input system
-      section: '../upload/raw/geom_opt.archive.yaml#/run/0/system/0'
-  outputs:
-    - name: relaxed system
-      section: '../upload/raw/geom_opt.archive.yaml#/run/0/system/-1'
-    - name: ground state calculation of relaxed system
-      section: '../upload/raw/ground_state.archive.yaml#/run/0/calculations/0'
-  tasks:
-    - name: GeometryOpt
-      m_def: nomad.datamodel.metainfo.workflow.Workflow
-      inputs:
-        - name: input system
-          section: '../upload/raw/geom_opt.archive.yaml#/run/0/system/0'
-      outputs:
-        - name: relaxed system
-          section: '../upload/raw/geom_opt.archive.yaml#/run/0/system/-1'
-      tasks:
-        - inputs:
-            - section: '../upload/raw/geom_opt.archive.yaml#/run/0/system/0'
-          outputs:
-            - section: '../upload/raw/geom_opt.archive.yaml#/run/0/system/1'
-            - section: '../upload/raw/geom_opt.archive.yaml#/run/0/calculation/0'
-        - inputs:
-            - section: '../upload/raw/geom_opt.archive.yaml#/run/0/system/1'
-          outputs:
-            - section: '../upload/raw/geom_opt.archive.yaml#/run/0/system/2'
-            - section: '../upload/raw/geom_opt.archive.yaml#/run/0/calculation/1'
-        - inputs:
-            - section: '../upload/raw/geom_opt.archive.yaml#/run/0/system/2'
-          outputs:
-            - section: '../upload/raw/geom_opt.archive.yaml#/run/0/system/3'
-            - section: '../upload/raw/geom_opt.archive.yaml#/run/0/calculation/2'
-    - name: GroundStateCalculation
-      inputs:
-        - name: input system
-          section: '../upload/raw/geom_opt.archive.yaml#/run/0/system/-1'
-      outputs:
-        - name: ground state
-          section: '../upload/raw/ground_state.archive.yaml#/run/0/calculations/0'
-```
 
 ### Nested Workflows in multiple entries
 
@@ -727,3 +684,6 @@ Negative index and percent are also supported. By default, the task nodes can be
 but can be changed to inputs or outputs by clicking on one of the respective nodes. By clicking
 on the `play` button, a force-directed layout of the task nodes is enabled. The other tools
 enable to toggle the legend, go back to a previous view and reset the view.
+
+
+<!-- TODO - Add ../upload/raw/ prefix -->
