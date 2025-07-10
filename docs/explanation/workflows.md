@@ -12,16 +12,21 @@ in `nomad.datamodel.metainfo.workflow` (blue):
 
 ![workflow schema](images/workflow-schema.png)
 
+In this UML diagram, filled diamonds denote a “contains“ relationship with the
+diamond on the containing section. Open arrows denote inheritance and point to the parent section.
+Filled arrows denote sub-sections, named with the arrow label and defined by the section the arrow
+is pointed towards.
+
 The idea is that *workflows* are stored in a top-level archive section along-side other
 sections that contain the *inputs* and *outputs*. This way the *workflow* or *provenance graph*
 is just additional piece of the archive that describes how the data in this (or other archives) is connected.
 
-Let'c consider an example *workflow*. Imagine a geometry optimization and ground state
+### Example workflow
+
+Consider an example *workflow* consisting of a geometry optimization and ground state
 calculation performed by two individual DFT code runs. The code runs are stored in
 NOMAD entries `geom_opt.archive.yaml` and `ground_state.archive.yaml` using the `run`
 top-level section.
-
-### Example workflow
 
 Here is a logical depiction of the workflow and all its tasks, inputs, and outputs.
 
