@@ -10,20 +10,34 @@ consistently structured data from users to augment uploaded files.
 
 ## Create a basic ELN entry
 
-Go to `PUBLISH` / `Uploads`. Here you can create an upload with the `CREATE A NEW UPLOAD`
+Go to `PUBLISH` > `Uploads`. Create a new upload by clicking `CREATE A NEW UPLOAD`
 button. This will bring you to the upload page.
 
-Click the `CREATE ENTRY` button. This will bring-up a dialog to choose an ELN schema.
-All ELNs (as any entry in NOMAD) needs to follow a schema. You can choose from uploaded
-custom schemas or NOMAD built-in schemas. You can choose the `Basic ELN` to create a
-simple ELN entry.
+Click the `CREATE FROM SCHEMA` button. This will bring-up a dialog for *naming your entry*
+and *selecting a schema* for your ELN.
+You can use one of NOMAD's built-in schemas or add your own custom schema (see [How to > Customization > How to write a YAML schema package](../customization/elns.md)).
 
-The name of your ELN entry, will be the filename for your ELN without the `.archive.json`
-ending that will be added automatically. You can always find and download your ELNs
-on the `FILES` tab.
-
+Here we will select the simplest built-in ELN schema, `Basic ELN`.
 The `Basic ELN` offers you simple fields for a *name*, *tags*, a *date/time*, and a rich text
 editor to enter your notes.
+Click on the schema selection box, which will open up a menu with a list of built-in schemas.
+Scroll down, find and select `Basic ELN`, add a name for the entry (e.g., "test-ELN:), and click the `CREATE` button in the bottom right of the pop-up dialog box. The full process is illustrated in the following video:
+
+<video width="100%" controls>
+  <source src="./images/eln-entry-from-gui.webm" alt="" type="video/mp4">
+</video>
+
+Upon entry creation, you will be taken to the `DATA` tab, where you can fill in or edit the predefined ELN quantities in the user-editable ELN interface. Type a dummy description for this entry and then press the :fontawesome-solid-floppy-disk: icon in the upper right. Now, navigate to the `Overview` page to see your changes there.
+
+The editable quantities that you found in your ELN entry (e.g., `short name`, `tags`, `datetime`, `ID`, `description`) appear because they are defined within the `Basic ELN` schema that you selected. NOMAD provides a tool for browsing all such schemas. Go to `ANALYZE > The NOMAD MetaInfo`, then select `nomad > Basic ELN` to view all the quantity definitions and descriptions within this entry class:
+
+<video width="100%" controls>
+  <source src="./images/metainfo-browser-basic-eln.webm" alt="" type="video/mp4">
+</video>
+
+All the metadata that you enter in your ELN is stored in the structured JSON format according to the corresponding schema.
+You can view this JSON by navigating to the `DATA` tab and then clicking on the :fontawesome-solid-cloud-arrow-down: icon. Select the box next to "pretty-print" at the top left for a human-readable view. You can simply copy and paste this content into a JSON file for further use. Alternatively, from the entry, you can download the archive JSON file by navigating to the `FILES` tab and clicking on the :fontawesome-solid-cloud-arrow-down: icon after selecting the file `<entry name>.archive.json`, where `<entry name>` is the name that you entered for this entry.
+
 
 ## Add your own ELN schema
 

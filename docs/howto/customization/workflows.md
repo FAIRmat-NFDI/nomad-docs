@@ -221,27 +221,13 @@ Whenever a workflow task corresponds to an existing entry that itself is a workf
 
 ## Workflows with custom tasks
 
-### Electronic lab notebook (ELN) entries in NOMAD
+*custom tasks:* defined here as tasks for which the corresponding raw files are not automatically recognized by NOMAD, or perhaps there are no raw files at all for the task.
 
-<!-- @andreaa93 - I thought about it a bit, and am still a bit partial towards using the Basic ELN class here. However, feel free to change this demo to some other ELN section. Or you can leave it here in the docs and in person showcase another class, it's up to you. -->
-
-Let's explore the basic functionalities of NOMAD ELNs. You can create a basic ELN entry from `Your uploads` page by clicking `CREATE A NEW UPLOAD > CREATE FROM SCHEMA` and selecting `Basic ELN` under the `Built-in Schema` drop-down menu, as demonstrated in this video:
-
-<video width="100%" controls>
-  <source src="../assets/eln-entry-from-gui.webm" alt="" type="video/mp4">
-</video>
-
-Upon entry creation, you will be taken to the `Data` tab, where you can fill in or edit the predefined ELN quantities in the user-editable ELN interface. Type a dummy description for this entry and then press the :fontawesome-solid-floppy-disk: icon in the upper right. Now, navigate to the `Overview` page to see your changes there.
-
-The editable quantities that you found in your ELN entry (e.g., short name, tags, ID, description) appear because they are defined within the `Basic ELN` schema that you selected in NOMAD. NOMAD provides a tool for browsing all such schemas. Go to `ANALYZE > The NOMAD MetaInfo`, then select `nomad > Basic ELN` to view all the quantity definitions and descriptions within this entry class:
-
-<video width="100%" controls>
-  <source src="../assets/metainfo-browser-basic-eln.webm" alt="" type="video/mp4">
-</video>
+The easiest way to create entries for a custom task is to use one of NOMAD's built-in ELN templates. ELN entries can be created from these schema using the user interface: [How to > Manage > Create a basic ELN entry](../manage/eln.md#create-a-basic-eln-entry).
 
 ### Creating an ELN entry from YAML
 
-Analogous to the simulation code parsers, NOMAD has a parser for its native schema &mdash; the NOMAD MetaInfo. This parser is automatically executed for files named `<file_name>.archive.yaml`. In this way, users can create ELN entries by uploading a yaml file populated according to NOMAD's schema.
+Analogous to the simulation code parsers, NOMAD has a parser for its native schema &mdash; the NOMAD MetaInfo. This parser is automatically executed for files named `<file_name>.archive.yaml`. In this way, users can create ELN entries by uploading a YAML file populated according to NOMAD's schema.
 
 For example, we can create a basic ELN entry by creating and uploading a file, e.g. `basic_eln_entry.archive.yaml`, with the contents:
 
@@ -259,7 +245,7 @@ Uploading this yaml to the test deployment results in an entry with the overview
 <div class="click-zoom">
     <label>
         <input type="checkbox">
-        <img src="../assets/basic-eln-entry.png" alt="Basic ELN Entry" width="100%" title="Click to zoom in">
+        <img src="./images/basic-eln-entry.png" alt="Basic ELN Entry" width="100%" title="Click to zoom in">
     </label>
 </div>
 
@@ -283,7 +269,7 @@ data:
 Uploading to NOMAD should result in the following entry display:
 
 <video width="100%" controls>
-  <source src="../assets/ELNFileManager.webm" alt="" type="video/mp4">
+  <source src="./images/ELNFileManager.webm" alt="" type="video/mp4">
 </video>
 
 You can now create analogous files `create_box.archive.yaml`, `insert_water.archive.yaml`, `workflow_parameters.archive.yaml`, `workflow_scripts.archive.yaml`:
