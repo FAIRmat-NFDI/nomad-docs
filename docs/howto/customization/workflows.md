@@ -234,28 +234,9 @@ workflow2:
 Here, the entry defined by the mainfile `example_workflow.archive.yaml` represents some...
 
 
-## A complex workflow full example
+### Nested example workflow
 
-The following examples contain the basic knowledge on understanding and learning to use NOMAD workflows, and its relation with DFT and beyond-DFT (GW, BSE, DMFT, etc.) methodologies. You will use a fictitious example of a simulation workflow with the following files and folder structure:
-
-
-[Download complex_workflow.zip](data/complex_workflow.zip){ .md-button .nomad-button }
-
-file structure of `complex_workflow.zip`:
-```
-.
-├── DFT
-│   └── dft.xml
-├── TB
-│   ├── tb.wout
-│   └── ...extra auxiliary files
-├── temperature1
-│   └── dmft_t1.hdf5
-└── temperature1
-    └── dmft_t1.hdf5
-```
-
-Each of the _mainfiles_ represent an electronic-structure calculation (either [DFT](https://en.wikipedia.org/wiki/Density_functional_theory){:target="_blank"}, [TB](https://en.wikipedia.org/wiki/Tight_binding){:target="_blank"}, or [DMFT](https://en.wikipedia.org/wiki/Dynamical_mean-field_theory){:target="_blank"}) which in turn is then parsed into a singular _entry_ in NOMAD. When dragged into the [NOMAD Upload page](https://nomad-lab.eu/prod/v1/staging/gui/user/uploads){:target="_blank"}, these files should generate 8 entries in total. This folder structure presents a typical workflow calculation which can be represented as a provenance graph:
+To make the above discussion concrete, consider the following schematic nested workflow:
 
 ```mermaid
 graph LR;
@@ -269,21 +250,26 @@ graph LR;
     D22[DMFT at T2] --> E22([Output calculation T2])
 ```
 
-Here, "Input" refers to the all _input_ information given to perform the calculation (e.g., atom positions, model parameters, experimental initial conditions, etc.). "DFT", "TB" and "DMFT" refer to individual _tasks_ of the workflow, which each correspond to a _SinglePoint_ entry in NOMAD. "Output calculation" refers to the _output_ data of each of the final DMFT tasks.
+Here, "Input" refers to the all _input_ information given to perform the calculation (e.g., atom positions, model parameters, experimental initial conditions, etc.). "DFT", "TB" and "DMFT" refer to individual _tasks_ of the workflow, which each correspond to a _SinglePoint_ entry in NOMAD. "Output calculation" refers to the _output_ data of each of the final DMFT tasks.??????
 
-The goal of this part is to set up the following workflows:
+These workflow contains a series of electronic structure calculations: a DFT and a TB calculation performed in serial, followed by two DMFT calculations performed in parallel at two different temperatures. The mainfiles for these calculations are organized in the following file structure, stored with `complex_workflow.zip`:
 
-1. A `SinglePoint` workflow for one of the calculations (e.g., the DFT one) in the `pressure1` subfolder.
-2. An overarching workflow entry for each pressure P<sub>i=1,2</sub>, grouping all `SinglePoint` "DFT", "TB", "DMFT at T<sub>1</sub>", and "DMFT at T<sub>2</sub>" tasks.
-3. A top level workflow entry, grouping together all pressure calculations.
+```
+.
+├── DFT
+│   └── dft.xml
+├── TB
+│   ├── tb.wout
+│   └── ...extra auxiliary files
+├── temperature1
+│   └── dmft_t1.hdf5
+└── temperature1
+    └── dmft_t1.hdf5
+```
 
-The files for all these cases can be downloaded here:
-<center>
-[Download worfklowyaml_files.zip](data/workflowyaml_files.zip){ .md-button .nomad-button }
-</center>
+You can reproduce the following by downloading the example data:
 
- You can try writing these files yourself first, and then compare them with the tested files.
-
+[Download complex_workflow.zip](data/complex_workflow.zip){ .md-button .nomad-button }
 
 ## Pressure workflows
 
