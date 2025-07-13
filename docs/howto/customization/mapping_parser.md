@@ -87,8 +87,8 @@ class Program(general.Program):
 ### Controlling Repeating Sections
 
 **Subsections** that are defined as **repeating** in the schema are automatically picked up by the mapping parser.
-It will look for any repeating units along the path and instantiate the same number of subsections, i.e. $\text{no. subsections} = \Pi_i (repeating path segment)_i$.
-To compose parallel branches into the same repeating subsection, i.e. $\text{no. subsections} = \Sigma_i (parallel branch)_i$:
+It will look for any repeating units along the path and instantiate the same number of subsections, i.e. $\text{no. subsections} = \prod_{\text{segments}} \text{repeating path segment}$.
+To compose parallel branches into the same repeating subsection, i.e. $\text{no. subsections} = \sum_{\text{branches}} \text{parallel branch}$:
 
 1. generate different mappings and add them to the annotation `dict`. Each mapping comes with its own unique key.
 1. during the *conversion phase*, select `update_mode="append"`. Manipulate the order in the data via the conversion order of the various maps.
