@@ -495,7 +495,7 @@ definitions:
         message:
           type: str
 data:
-  m_def: MyData
+  m_def: Greetings
   message: Hello World
 ```
 
