@@ -13,9 +13,9 @@ You can use our [template repository](https://github.com/FAIRmat-NFDI/nomad-plug
 ```txt
 nomad-example
    ├── src
-   │   ├── nomad_example
-   │   │   ├── apps
-   │   │   │   ├── __init__.py
+   │   └── nomad_example
+   │       └── apps
+   │           └── __init__.py
    ├── LICENSE.txt
    ├── README.md
    └── pyproject.toml
