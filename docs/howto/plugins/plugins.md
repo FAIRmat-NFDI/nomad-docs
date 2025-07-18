@@ -4,6 +4,7 @@ The main way to customize a NOMAD installation is through the use of **plugins**
 
 A single Python plugin package can contain multiple [plugin entry points](../../explanation/plugin_system.md#plugin-entry-points). These entry points represent different types of customizations including:
 
+- [Actions](./actions.md)
 - [APIs](./apis.md)
 - [Apps](./apps.md)
 - [Example uploads](./example_uploads.md)

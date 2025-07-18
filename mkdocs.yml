@@ -41,6 +41,7 @@ nav:
           - Perform admin tasks: howto/oasis/admin.md
       - Plugins:
           - Introduction to plugins: howto/plugins/plugins.md
+          - Write an action: howto/plugins/actions.md
           - Write an API: howto/plugins/apis.md
           - Write an app: howto/plugins/apps.md
           - Write an example upload: howto/plugins/example_uploads.md
