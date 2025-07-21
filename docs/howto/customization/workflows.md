@@ -20,10 +20,10 @@
 
 In NOMAD, [Workflows](../../explanation/workflows.md) are directed graphs with nodes (tasks) that connect multiple [Entries](../../reference/glossary.md#entry) together in a structured way, while specifying information passed between the nodes via inputs/outputs that link to particular sections of the relevant [Archive](../../reference/glossary.md#archive).
 
-Workflows are sometimes created automatically by NOMAD via parser [Plugins](../../explanation/plugin_system.md), for certain supported uploads. Users can also create their own workflow entries by uploading an appropriately formatted workflow YAML. This How-to guide will cover the specifics of this process.
+Workflows are sometimes created automatically by NOMAD via parser [Plugins](../../explanation/plugin_system.md), for certain supported uploads. Users can also create their own workflow entries by uploading an appropriately formatted workflow YAML. This how-to guide will cover the specifics of this process.
 
 !!! Note
-    In the following, various supported raw data files will be used to form concrete examples that can be reproduced. The nature of these files or their underlying methods of production is irrelevant for the purpose of this How-to.
+    In the following, various supported raw data files will be used to form concrete examples that can be reproduced. The nature of these files or their underlying methods of production is irrelevant for the purpose of this how-to.
 
 ## Simple workflows with supported tasks
 
@@ -69,13 +69,11 @@ workflow2:
 
 This file is constructed according to NOMAD's [General Workflow Schema](../../explanation/workflows.md#the-built-in-abstract-workflow-schema). The `workflow2` section of the archive has 3 possible subsections: `inputs`, `outputs`, and `tasks`:
 
-**`inputs`**: a list of references to the global inputs of the workflow, with `name` and `section` attributes. `section` corresponds to a path for linking to the relevant archive section. In this case, the relative section path is `run[0].system[-1]`, linked to the entry defined by the mainfile `dft.xml`. The prefix is discussed under "Considerations for archive path specification" below.
+**`inputs`**: a list of references to the global inputs of the workflow, with `name` and `section` attributes. `section` corresponds to a path for linking to the relevant archive section. In this case, the relative section path is `run[0].system[-1]`, linked to the entry defined by the mainfile `dft.xml`. The prefix is discussed under "Considerations for archive path specification" directly below.
 
 **`outputs`**: identical to the inputs list, representing the global outputs of the workflow, with the relative section path `run[0].calculation[-1]` in this case.
 
-**`tasks`**: a list of references to the tasks/steps of the workflow. Each task contains `m_def`, `task`, `inputs`, and `outputs` attributes. `inputs`/`outputs` are task-specific versions of the lists defined above. `task` is the path for linking to the relevant archive section, analogous to the `section` attribute for `inputs`/`outputs`. `m_def` defines the type of task according to NOMAD's MetaInfo scehma, in this case a `TaskReference` to the archive `workflow2` section.  The use of `TaskReference` will be clarified in the
-<!-- TODO add example section  -->
-example below.
+**`tasks`**: a list of references to the tasks/steps of the workflow. Each task contains `m_def`, `task`, `inputs`, and `outputs` attributes. `inputs`/`outputs` are task-specific versions of the lists defined above. `task` is the path for linking to the relevant archive section, analogous to the `section` attribute for `inputs`/`outputs`. `m_def` defines the type of task according to NOMAD's MetaInfo scehma, in this case a `TaskReference` to the archive `workflow2` section.  The use of `TaskReference` will be clarified in the [Nested workflows > In multiple entries](#in-multiple-entries) example below.
 
 Considerations for archive path specification:
 
@@ -83,7 +81,7 @@ Considerations for archive path specification:
 
 - The prefix for the archive path is given by: 1. `../upload/archive/mainfile` for entries that are contained within the same upload as the workflow YAML, or 2. `../uploads/<upload_id>/archive/` for entries contained in distinct uploads as the workflow YAML, where `<upload_id>` is a placeholders for the upload id, which can be obtained from the Overview page of any entry.
 
-- The entry identifier is `<entry_id>#` (placeholder for the entry id, also found on the Overview page) for case 1, and `<path to mainfile>/<mainfile name>#` for case 2. `<path to mainfile>` is the path from the root of the original upload directory structure.
+- The entry identifier is `<entry_id>#` (placeholder for the entry id, also found on the Overview page) for case 1 of the previous bullet, and `<path to mainfile>/<mainfile name>#` for case 2. `<path to mainfile>` is the path from the root of the original upload directory structure.
 
 - The relative archive path is the relative path to the archive section to be linked. The archive structure can be investigated using NOMAD's [MetaInfo Browser](https://nomad-lab.eu/prod/v1/gui/analyze/metainfo/nomad.datamodel.datamodel.EntryArchive){:target="_blank"}.
 
@@ -140,7 +138,7 @@ Upon upload to NOMAD, the above zip will produce 2 entries:
 
 ## Referencing Tasks in different uploads
 
-As already mentioned above, your workflow YAML can reference entries that you have previously uploaded to NOMAD. In this case, you should replace the path prefix `../upload/archive/mainfile/<mainfile_name>` with `../uploads/<upload_id>/archive/<entry_id>`.
+As already mentioned under "Considerations for archive path specification" above, your workflow YAML can reference entries that you have previously uploaded to NOMAD. In this case, you should replace the path prefix `../upload/archive/mainfile/<mainfile_name>` with `../uploads/<upload_id>/archive/<entry_id>`.
 
 ??? Tip "Corresponding `dft.workflow.archive.yaml` from above example"
 
@@ -171,88 +169,38 @@ Nested, or hierarchical, workflows correspond to workflow graphs containing task
 
 ### In multiple entries
 
-The most common way to construct a nested workflow is by creating separate entries for each (sub-)workflow. In this case, each sub-workflow archive will contain a populated `workflow2` section. Thus, to add a sub-workflow to your workflow YAML, the **best practice** is to directly link to this `workflow2` section, i.e., `task: <prefix>/<entry identifier>#/workflow2`.
+The most common way to construct a nested workflow is by creating separate entries for each (sub-)workflow. In this case, each sub-workflow archive will contain a populated `workflow2` section. Thus, to add a sub-workflow to your workflow YAML, the **best practice** is to directly link to this `workflow2` section, i.e., `task: <prefix>/<entry identifier>/workflow2`.
+
+!!! Warning "Important"
+    When `task` is linked to a `workflow2` section of a different upload, this sub-workflow task must be defined as a `TaskReference` by setting `m_def: nomad.datamodel.metainfo.workflow.TaskReference`. This is because `Workflow` instances can only contain `Task` instances and not reference them (see [General Workflow Schema](../../explanation/workflows.md#the-built-in-abstract-workflow-schema)).
 
 We have already seen this case in [Simple Workflows with Support Tasks](#simple-workflows-with-supported-tasks). Actually, there is a convention in NOMAD that all simulation entries contain a workflow representation, even for single-step workflows. Thus, any workflow containing simulation tasks will be a nested workflow.
 
-In general, a sub-workflow task must be defined as a `TaskReference` by setting `m_def: nomad.datamodel.metainfo.workflow.TaskReference` for the task. This is because `Workflow` instances can only contain `Task` instances and not reference them (see [General Workflow Schema](../../explanation/workflows.md#the-built-in-abstract-workflow-schema)).
 
 ### In a single entry
 
-<!-- ! I do not understand this, is this mainfile different than the workflow yaml?! -->
+Since a `Workflow` instance is also a `Task` instance due to inheritance, we can directly nest workflows within a single entry. Here we illustrate the concept using a concrete computational workflow, represented schematically as:
 
-!!! Warning "TBD"
-
-While less common, it is also possible to create a nested workflow within a single entry.
-
-Since a `Workflow` instance is also a `Task` instance due to inheritance, we can directly nest workflows within a single entry. Here we illustrate the concept using the [Example Workflow](../../explanation/workflows.md#example-workflow): A geometry optimization sub-workflow, followed by a ground state calculation.
-
-```yaml
-workflow2:
-  inputs:
-    - name: input system
-      section: '../upload/archive/mainfile/example_workflow.archive.yaml#/run/0/system/0'
-  outputs:
-    - name: relaxed system
-      section: '../upload/archive/mainfile/example_workflow.archive.yaml#/run/0/system/-1'
-    - name: ground state calculation of relaxed system
-      section: '../upload/archive/mainfile/example_workflow.archive.yaml#/run/0/calculations/0'
-  tasks:
-    - name: GeometryOpt
-      m_def: nomad.datamodel.metainfo.workflow.Workflow
-      inputs:
-        - name: input system
-          section: '../upload/archive/mainfile/example_workflow.archive.yaml#/run/0/system/0'
-      outputs:
-        - name: relaxed system
-          section: '../upload/archive/mainfile/example_workflow.archive.yaml#/run/0/system/-1'
-      tasks:
-        - inputs:
-            - section: '../upload/archive/mainfile/example_workflow.archive.yaml#/run/0/system/0'
-          outputs:
-            - section: '../upload/archive/mainfile/example_workflow.archive.yaml#/run/0/system/1'
-            - section: '../upload/archive/mainfile/example_workflow.archive.yaml#/run/0/calculation/0'
-        - inputs:
-            - section: '../upload/archive/mainfile/example_workflow.archive.yaml#/run/0/system/1'
-          outputs:
-            - section: '../upload/archive/mainfile/example_workflow.archive.yaml#/run/0/system/2'
-            - section: '../upload/archive/mainfile/example_workflow.archive.yaml#/run/0/calculation/1'
-        - inputs:
-            - section: '../upload/archive/mainfile/example_workflow.archive.yaml#/run/0/system/2'
-          outputs:
-            - section: '../upload/archive/mainfile/example_workflow.archive.yaml#/run/0/system/3'
-            - section: '../upload/archive/mainfile/example_workflow.archive.yaml#/run/0/calculation/2'
-    - name: GroundStateCalculation
-      inputs:
-        - name: input system
-          section: '../upload/archive/mainfile/example_workflow.archive.yaml#/run/0/system/-1'
-      outputs:
-        - name: ground state
-          section: '../upload/archive/mainfile/example_workflow.archive.yaml#/run/0/calculations/0'
-```
-
-Here, the entry defined by the mainfile `example_workflow.archive.yaml` represents some...
-
-
-### Nested example workflow
-
-To make the above discussion concrete, consider the following schematic nested workflow:
 
 ```mermaid
 graph LR;
     A2((Inputs)) --> B2[DFT];
-    subgraph
-    B2[DFT] --> C2[TB];
-    C2[TB] --> D21[DMFT at T1];
-    C2[TB] --> D22[DMFT at T2];
+    B2 --> C2[TB];
+    C2 --> D21[DMFT at T1];
+    C2 --> D22[DMFT at T2];
+
+    subgraph DMFT
+        D21;
+        D22;
     end
-    D21[DMFT at T1] --> E21([Output calculation T1])
-    D22[DMFT at T2] --> E22([Output calculation T2])
+
+    D21 --> E21([Output calculation T1])
+    D22 --> E22([Output calculation T2])
 ```
 
-Here, "Input" refers to the all _input_ information given to perform the calculation (e.g., atom positions, model parameters, experimental initial conditions, etc.). "DFT", "TB" and "DMFT" refer to individual _tasks_ of the workflow, which each correspond to a _SinglePoint_ entry in NOMAD. "Output calculation" refers to the _output_ data of each of the final DMFT tasks.??????
+This workflow contains a series of electronic structure calculations: a DFT and a TB calculation performed in serial, followed by two DMFT calculations performed in parallel at two different temperatures. The DMFT workflow task is considered as a sub-workflow.
 
-These workflow contains a series of electronic structure calculations: a DFT and a TB calculation performed in serial, followed by two DMFT calculations performed in parallel at two different temperatures. The mainfiles for these calculations are organized in the following file structure, stored with `complex_workflow.zip`:
+The mainfiles for these calculations are organized in the following file structure, stored with `nested_workflow_one-entry.zip`:
 
 ```
 .
@@ -261,185 +209,109 @@ These workflow contains a series of electronic structure calculations: a DFT and
 ├── TB
 │   ├── tb.wout
 │   └── ...extra auxiliary files
-├── temperature1
-│   └── dmft_t1.hdf5
-└── temperature1
-    └── dmft_t1.hdf5
+├── DMFT
+    ├── T1
+    │    └── dmft_t1.hdf5
+    └── T2
+        └── dmft_t2.hdf5
 ```
 
-You can reproduce the following by downloading the example data:
+We construct the YAML, `nested_workflow_one-entry.archive.yaml` in parts for clarity:
 
-[Download complex_workflow.zip](data/complex_workflow.zip){ .md-button .nomad-button }
-
-## Pressure workflows
-
-Now that you know the basics of the workflow YAML schema, let's try to define an overarching workflow for each of the pressures. For this section, you will learn how to create the workflow YAML schema for the P<sub>1</sub> case; the extension for P<sub>2</sub> is then a matter of changing names and paths in the YAML files. For simplicity, you can skip referencing to methodologies.
-
-Thus, the `inputs` can be defined as:
+The overall `workflow2` section and global workflow `inputs`:
 ```yaml
 workflow2:
-  name: DFT+TB+DMFT at P1
+  name: DFT+TB+DMFT
   inputs:
     - name: Input structure
-      section: '../upload/archive/mainfile/pressure1/dft_p1.xml#/run/0/system/-1'
+      section: '../upload/archive/mainfile/DFT/dft.xml#/run/0/system/-1'
 ```
-and there are two `outputs`, one for each of the DMFT calculations at distinct temperatures:
+
+The global workflow outputs `outputs`:
 ```yaml
   outputs:
-    - name: Output DMFT at P1, T1 calculation
-      section: '../upload/archive/mainfile/pressure1/temperature1/dmft_p1_t1.hdf5#/run/0/calculation/-1'
-    - name: Output DMFT at P1, T2 calculation
-      section: '../upload/archive/mainfile/pressure1/temperature2/dmft_p1_t2.hdf5#/run/0/calculation/-1'
+    - name: Output DMFT at T1 calculation
+      section: '../upload/archive/mainfile/DMFT/T1/dmft_t1.hdf5#/run/0/calculation/-1'
+    - name: Output DMFT at T2 calculation
+      section: '../upload/archive/mainfile/DMFT/T2/dmft_t2.hdf5#/run/0/calculation/-1'
 ```
-Now, `tasks` are defined for each of the methodologies performed (each corresponding to an underlying SinglePoint workflow). To define a valid workflow, each task must contain an input that corresponds to one of the outputs of the previous task. Moreover, the first task should take as input the overall input of the workflow, and the final task should also have as an output the overall workflow output.
-Then:
+
+The workflow `tasks`:
 ```yaml
   tasks:
     - m_def: nomad.datamodel.metainfo.workflow.TaskReference
-      task: '../upload/archive/mainfile/pressure1/dft_p1.xml#/workflow2'
-      name: DFT at P1
+      task: '../upload/archive/mainfile/DFT/dft.xml#/workflow2'
+      name: DFT
       inputs:
         - name: Input structure
-          section: '../upload/archive/mainfile/pressure1/dft_p1.xml#/run/0/system/-1'
+          section: '../upload/archive/mainfile/DFT/dft.xml#/run/0/system/-1'
       outputs:
-        - name: Output DFT at P1 calculation
-          section: '../upload/archive/mainfile/pressure1/dft_p1.xml#/run/0/calculation/-1'
+        - name: Output DFT calculation
+          section: '../upload/archive/mainfile/DFT/dft.xml#/run/0/calculation/-1'
     - m_def: nomad.datamodel.metainfo.workflow.TaskReference
-      task: '../upload/archive/mainfile/pressure1/tb_p1.wout#/workflow2'
-      name: TB at P1
+      task: '../upload/archive/mainfile/TB/tb.wout#/workflow2'
+      name: TB
       inputs:
-        - name: Input DFT at P1 calculation
-          section: '../upload/archive/mainfile/pressure1/dft_p1.xml#/run/0/calculation/-1'
+        - name: Input DFT calculation
+          section: '../upload/archive/mainfile/DFT/dft.xml#/run/0/calculation/-1'
       outputs:
-        - name: Output TB at P1 calculation
-          section: '../upload/archive/mainfile/pressure1/tb_p1.wout#/run/0/calculation/-1'
-    - m_def: nomad.datamodel.metainfo.workflow.TaskReference
-      task: '../upload/archive/mainfile/pressure1/temperature1/dmft_p1_t1.hdf5#/workflow2'
-      name: DMFT at P1 and T1
+        - name: Output TB calculation
+          section: '../upload/archive/mainfile/TB/tb.wout#/run/0/calculation/-1'
+    - m_def: nomad.datamodel.metainfo.workflow.Workflow
+      name: DMFT
       inputs:
-        - name: Input TB at P1 calculation
-          section: '../upload/archive/mainfile/pressure1/tb_p1.wout#/run/0/calculation/-1'
+        - name: input TB calculation
+          section: '../upload/archive/mainfile/TB/tb.wout#/run/0/calculation/-1'
       outputs:
-        - name: Output DMFT at P1, T1 calculation
-          section: '../upload/archive/mainfile/pressure1/temperature1/dmft_p1_t1.hdf5#/run/0/calculation/-1'
-    - m_def: nomad.datamodel.metainfo.workflow.TaskReference
-      task: '../upload/archive/mainfile/pressure1/temperature1/dmft_p1_t1.hdf5#/workflow2'
-      name: DMFT at P1 and T2
-      inputs:
-        - name: Input TB at P1 calculation
-          section: '../upload/archive/mainfile/pressure1/tb_p1.wout#/run/0/calculation/-1'
-      outputs:
-        - name: Output DMFT at P1, T2 calculation
-          section: '../upload/archive/mainfile/pressure1/temperature2/dmft_p1_t2.hdf5#/run/0/calculation/-1'
-```
-Note here:
-
-- The `inputs` for each subsequent step are the `outputs` of the previous step.
-- The final two `outputs` coincide with the `workflow2` `outputs`.
-
-This workflow (`pressure1.archive.yaml`) file will then produce an entry with the following Overview page:
-
-![Pressure P1 workflow visualizer](images/pressure1.png){.screenshot}
-
-Similarly, for P<sub>2</sub> you can upload a new `pressure2.archive.yaml` file with the same content, except when substituting 'pressure1' and 'p1' by their counterparts. This will produce a similar graph than the one showed before but for "P2".
-
-
-## The top-level workflow
-
-After adding the workflow YAML files, Your upload folder directory now looks like:
-```
-.
-├── pressure1
-│   │   ├── dmft_p1_t1.hdf5
-│   │   └── ...extra auxiliary files
-│   ├── temperature2
-│   │   ├── dmft_p1_t2.hdf5
-│   │   └── ...extra auxiliary files
-│   ├── dft_p1.xml
-│   ├── tb_p1.wout
-│   └── ...extra auxiliary files
-├── pressure1.archive.yaml
-├── pressure2
-│   ├── temperature1
-│   │   ├── dmft_p2_t1.hdf5
-│   │   └── ...extra auxiliary files
-│   ├── temperature2
-│   │   ├── dmft_p2_t2.hdf5
-│   │   └── ...extra auxiliary files
-│   ├── dft_p2.xml
-│   ├── tb_p2.wout
-│   └── ...extra auxiliary files
-├── pressure2.archive.yaml
-└── single_point.archive.yaml
-```
-In order to define the general workflow that groups all pressure calculations, YOU can reference directly the previous `pressureX.archive.yaml` files as tasks. Still, `inputs` and `outputs` must be referenced to their corresponding mainfile and section paths.
-
-Create a new `fullworkflow.archive.yaml` file with the `inputs`:
-```yaml
-workflow2:
-  name: Full calculation at different pressures for SrVO3
-  inputs:
-    - name: Input structure at P1
-      section: '../upload/archive/mainfile/pressure1/dft_p1.xml#/run/0/system/-1'
-    - name: Input structure at P2
-      section: '../upload/archive/mainfile/pressure2/dft_p2.xml#/run/0/system/-1'
-```
-And `outputs`:
-```yaml
-  outputs:
-    - name: Output DMFT at P1, T1 calculation
-      section: '../upload/archive/mainfile/pressure1/temperature1/dmft_p1_t1.hdf5#/run/0/calculation/-1'
-    - name: Output DMFT at P1, T2 calculation
-      section: '../upload/archive/mainfile/pressure1/temperature2/dmft_p1_t2.hdf5#/run/0/calculation/-1'
-    - name: Output DMFT at P2, T1 calculation
-      section: '../upload/archive/mainfile/pressure2/temperature1/dmft_p2_t1.hdf5#/run/0/calculation/-1'
-    - name: Output DMFT at P2, T2 calculation
-      section: '../upload/archive/mainfile/pressure2/temperature2/dmft_p2_t2.hdf5#/run/0/calculation/-1'
-```
-Finally, `tasks` references the previous YAML schemas as follows:
-```yaml
-  tasks:
-    - m_def: nomad.datamodel.metainfo.workflow.TaskReference
-      task: '../upload/archive/mainfile/pressure1.archive.yaml#/workflow2'
-      name: DFT+TB+DMFT at P1
-      inputs:
-        - name: Input structure at P1
-          section: '../upload/archive/mainfile/pressure1/dft_p1.xml#/run/0/system/-1'
-      outputs:
-        - name: Output DMFT at P1, T1 calculation
-          section: '../upload/archive/mainfile/pressure1/temperature1/dmft_p1_t1.hdf5#/run/0/calculation/-1'
-        - name: Output DMFT at P1, T2 calculation
-          section: '../upload/archive/mainfile/pressure1/temperature2/dmft_p1_t2.hdf5#/run/0/calculation/-1'
-    - m_def: nomad.datamodel.metainfo.workflow.TaskReference
-      task: '../upload/archive/mainfile/pressure2.archive.yaml#/workflow2'
-      name: DFT+TB+DMFT at P2
-      inputs:
-        - name: Input structure at P2
-          section: '../upload/archive/mainfile/pressure2/dft_p2.xml#/run/0/system/-1'
-      outputs:
-        - name: Output DMFT at P2, T1 calculation
-          section: '../upload/archive/mainfile/pressure2/temperature1/dmft_p2_t1.hdf5#/run/0/calculation/-1'
-        - name: Output DMFT at P2, T2 calculation
-          section: '../upload/archive/mainfile/pressure2/temperature2/dmft_p2_t2.hdf5#/run/0/calculation/-1'
+        - name: Output DMFT at T1 calculation
+          section: '../upload/archive/mainfile/DMFT/T1/dmft_t1.hdf5#/run/0/calculation/-1'
+        - name: Output DMFT at T2 calculation
+          section: '../upload/archive/mainfile/DMFT/T2/dmft_t2.hdf5#/run/0/calculation/-1'
+      tasks:
+        - m_def: nomad.datamodel.metainfo.workflow.TaskReference
+          task: '../upload/archive/mainfile/DMFT/T1/dmft_t1.hdf5#/workflow2'
+          name: DMFT at T1
+          inputs:
+            - name: Input TB calculation
+              section: '../upload/archive/mainfile/TB/tb.wout#/run/0/calculation/-1'
+          outputs:
+            - name: Output DMFT at T1 calculation
+              section: '../upload/archive/mainfile/DMFT/T1/dmft_t1.hdf5#/run/0/calculation/-1'
+        - m_def: nomad.datamodel.metainfo.workflow.TaskReference
+          task: '../upload/archive/mainfile/DMFT/T1/dmft_t1.hdf5#/workflow2'
+          name: DMFT at T2
+          inputs:
+            - name: Input TB calculation
+              section: '../upload/archive/mainfile/TB/tb.wout#/run/0/calculation/-1'
+          outputs:
+            - name: Output DMFT at T2 calculation
+              section: '../upload/archive/mainfile/DMFT/T2/dmft_t2.hdf5#/run/0/calculation/-1'
 ```
 
-This will produce the following entry and its Overview page:
+Most importantly for this example: In contrast to [Nested workflows > In multiple files](#in-multiple-entries), where `TaskReference` was used to define sub-workflows, the task named `DMFT` is defined directly as type `Workflow`.
 
-![Full workflow visualizer](images/fullworkflow.png){.screenshot}
+When uploaded with the example data, this workflow file will produce an entry with the following nested workflow graph on the Overview page:
 
+<video width="100%" controls>
+  <source src="./images/nested_workflow_one-entry.webm" alt="" type="video/mp4">
+</video>
+
+You can reproduce this example by downloading the example data (with workflow YAML included at the root level), and uploading to NOMAD yourself:
+
+[Download nested_workflow_one-entry.zip](data/nested_workflow_one-entry.zip){ .md-button .nomad-button }
 
 
 ## Workflows with custom tasks
 
 *custom tasks:* defined here as tasks for which the corresponding raw files are not automatically recognized by NOMAD, or perhaps there are no raw files at all for the task.
 
-The easiest way to create entries for a custom task is to use one of NOMAD's built-in ELN templates. ELN entries can be created from these schema using the user interface: [How to > Manage > Create a basic ELN entry](../manage/eln.md#create-a-basic-eln-entry).
+The easiest way to create entries for a custom task is to use one of NOMAD's built-in ELN schemas. ELN entries can be created from these schema using the user interface: [How to > Manage > Create a basic ELN entry](../manage/eln.md#create-a-basic-eln-entry).
 
 ### Creating an ELN entry from YAML
 
-Analogous to the simulation code parsers, NOMAD has a parser for its native schema &mdash; the NOMAD MetaInfo. This parser is automatically executed for files named `<file_name>.archive.yaml`. In this way, users can create ELN entries by uploading a YAML file populated according to NOMAD's schema.
+Analogous to the simulation code parsers, NOMAD has a parser for its native schema &mdash; the NOMAD MetaInfo. This parser is automatically executed for files named `<file_name>.archive.yaml`. Actually, this is exactly the functionality that we are using to upload our workflows.
 
-For example, we can create a basic ELN entry by creating and uploading a file, e.g. `basic_eln_entry.archive.yaml`, with the contents:
+In this way, users can also create ELN entries, by uploading a YAML file populated according to one of NOMAD's ELN built-in schemas. For example, we can create a basic ELN entry by creating and uploading a file, e.g. `basic_eln_entry.archive.yaml`, with the contents:
 
 ```yaml
 data:
@@ -448,7 +320,7 @@ data:
   description: "A test ELN entry..."
 ```
 
-The `data` section is created and defined as type `ElnBaseSection`, meaning that we can populate all the quantities (e.g., name and description) living in this section (as seen in the MetaInfo browser above).
+The `data` section is created and defined as type `ElnBaseSection`, meaning that we can populate all the quantities (e.g., name and description) living in this section (as seen in [MetaInfo Browser > ELNBaseSection](https://nomad-lab.eu/prod/v1/gui/analyze/metainfo/nomad/section_definitions@nomad.datamodel.metainfo.eln.ElnBaseSection){:target="_blank"}).
 
 Uploading this yaml to the test deployment results in an entry with the overview page:
 
@@ -463,7 +335,7 @@ Uploading this yaml to the test deployment results in an entry with the overview
 
 `ELNFileManager` is a built-in schema for referencing and annotating files within an ELN entry. You can create an `ELNFileManager` either from the GUI or via the YAML approach, in the same ways as described above.
 
-We can now use these definitions to create an entry file for the step of creating the force field, and link to the output force field file from this step in the workflow:
+For example:
 
 <h4><code>create_force_field.archive.yaml</code></h4>
 ```yaml
@@ -472,17 +344,39 @@ data:
   name: 'Create force field'
   description: 'The force field is defined for input to the MD simulation engine.'
   Files:
-  - file: 'Custom_ELN_Entries/water.top'
+  - file: 'water.top'
     description: 'The force field file for simulation input.'
 ```
 
-Uploading to NOMAD should result in the following entry display:
+Uploading to NOMAD with an empty dummy file called `water.top` should result in the following entry display:
 
 <video width="100%" controls>
   <source src="./images/ELNFileManager.webm" alt="" type="video/mp4">
 </video>
 
-You can now create analogous files `create_box.archive.yaml`, `insert_water.archive.yaml`, `workflow_parameters.archive.yaml`, `workflow_scripts.archive.yaml`:
+
+
+### Example workflow with ELN tasks
+
+For a concrete example, consider the following workflow consisting of 3 tasks for setting up a molecular dynamics simulation. Each task has as input some parameters and an execution script, and outputs some file:
+
+<video width="100%" controls>
+  <source src="./images/md-setup-workflow.webm" alt="MD Setup Workflow" type="video/mp4">
+</video>
+
+Use the `ELNFileManager` class to create entries for each task, as well as for the workflow parameters and execution scripts:
+
+??? success "`create_force_field.archive.yaml`"
+
+    ```yaml
+    data:
+      m_def: 'nomad.datamodel.metainfo.eln.ElnFileManager'
+      name: 'Create force field'
+      description: 'The force field is defined for input to the MD simulation engine.'
+      Files:
+      - file: 'Custom_ELN_Entries/water.top'
+        description: 'The force field file for simulation input.'
+    ```
 
 ??? success "`create_box.archive.yaml`"
 
@@ -531,54 +425,7 @@ You can now create analogous files `create_box.archive.yaml`, `insert_water.arch
         description: 'Creates the appropriate force field files for the simulation engine.'
     ```
 
-### Creating the workflow YAML
-
-NOMAD allows users to connect entries into a workflow, i.e., a directed graph structure. This is achieved using the same parsing functionality as demonstrated with the custom schemas above. In this case, we simply populate the `workflow2` section instead of the `data` section. When uploaded to NOMAD, a new _workflow_ entry will be created, with references to each of the workflow tasks, and also an interactive workflow graph for easy navigation of the entire workflow.
-
-Let's construct this workflow yaml piece by piece, starting with the section definition and global inputs/outputs:
-
-```yaml
-"workflow2":
-  "name": "MD Setup workflow"
-  "inputs":
-    - "name": "workflow parameters"
-      "section": "<path_to_mainfile>/workflow_parameters.archive.yaml#/data"
-    - "name": "workflow scripts"
-      "section": "<path_to_mainfile>/workflow_scripts.archive.yaml#/data/Files"
-  "outputs":
-    - "name": "structure file"
-      "section": "<path_to_mainfile>/insert_water.archive.yaml#/data/Files/0/file"
-    - "name": "force field file"
-      "section": "<path_to_mainfile>/create_force_field.archive.yaml#/data/Files/0/file"
-```
-
-This example denotes full path to each yaml file with placeholders like `<path_to_mainfile> = ../upload/archive/mainfile/Custom_ELN_Entries/`. As we already saw above, the `../upload/` syntax is used to access files that were uploaded together. The `archive/mainfile` directory can be used to access all the mainfiles (i.e., files automatically recognized by NOMAD). `Custom_ELN_Entries/` is the user-defined folder in which the upload is contained.
-
-This workflow takes as input the entire "workflow parameters" entry and a list of workflow scripts, and outputs the structure and force field files.
-
-We now need to define each task, which contains its own inputs and outputs, e.g., the task that creates the force field file:
-
-```yaml
-"workflow2":
-... ### I/Os
-  "tasks":
-... ### Other tasks
-  - "m_def": "nomad.datamodel.metainfo.workflow.TaskReference"
-    "name": "create force field"
-    "task": "<path_to_mainfile>/create_force_field.archive.yaml#/data"
-    "inputs":
-      - "name": "workflow parameters"
-        "section": "<path_to_mainfile>/workflow_parameters.archive.yaml#/data"
-      - "name": "workflow script 2"
-        "section": "<path_to_mainfile>/workflow_scripts.archive.yaml#/data/Files/1/file"
-    "outputs":
-      - "name": "force field file"
-        "section": "<path_to_mainfile>/create_force_field.archive.yaml#/data/Files/0/file"
-```
-
-This task is linked to the entry defined in `create_force_field.archive.yaml`. It takes as input: 1. the entire workflow parameters entry, defined in `workflow_parameters.archive.yaml`, and 2. The second file stored in the files list within the workflow scripts entry, defined by `workflow_scripts.archive.yaml`. The output of this task is the force field file, which is the first file stored in the file list of the create for field entry.
-
-You can now add the "create box" and "insert water" tasks to create the final workflow file:
+Now we construct the workflow YAML, `setup_workflow.archive.yaml`, as in the examples above:
 
 ??? success "`setup_workflow.archive.yaml`"
 
@@ -587,59 +434,53 @@ You can now add the "create box" and "insert water" tasks to create the final wo
       "name": "MD Setup workflow"
       "inputs":
       - "name": "workflow parameters"
-          "section": "<path_to_mainfile>/workflow_parameters.archive.yaml#/data"
+          "section": "../upload/archive/mainfile/Custom_ELN_Entries/workflow_parameters.archive.yaml#/data"
       - "name": "workflow scripts"
-          "section": "<path_to_mainfile>/workflow_scripts.archive.yaml#/data/Files"
+          "section": "../upload/archive/mainfile/Custom_ELN_Entries/workflow_scripts.archive.yaml#/data/Files"
       "outputs":
       - "name": "structure file"
-          "section": "<path_to_mainfile>/insert_water.archive.yaml#/data/Files/0/file"
+          "section": "../upload/archive/mainfile/Custom_ELN_Entries/insert_water.archive.yaml#/data/Files/0/file"
       - "name": "force field file"
-          "section": "<path_to_mainfile>/create_force_field.archive.yaml#/data/Files/0/file"
+          "section": "../upload/archive/mainfile/Custom_ELN_Entries/create_force_field.archive.yaml#/data/Files/0/file"
       "tasks":
       - "m_def": "nomad.datamodel.metainfo.workflow.TaskReference"
           "name": "create box"
-          "task": "<path_to_mainfile>/create_box.archive.yaml#/data"
+          "task": "../upload/archive/mainfile/Custom_ELN_Entries/create_box.archive.yaml#/data"
           "inputs":
           - "name": "workflow parameters"
-          "section": "<path_to_mainfile>/workflow_parameters.archive.yaml#/data"
+          "section": "../upload/archive/mainfile/Custom_ELN_Entries/workflow_parameters.archive.yaml#/data"
           - "name": "workflow script 1"
-          "section": "<path_to_mainfile>/workflow_scripts.archive.yaml#/data/Files/0/file"
+          "section": "../upload/archive/mainfile/Custom_ELN_Entries/workflow_scripts.archive.yaml#/data/Files/0/file"
           "outputs":
           - "name": "initial box"
-          "section": "<path_to_mainfile>/create_box.archive.yaml#/data/Files/0/file"
+          "section": "../upload/archive/mainfile/Custom_ELN_Entries/create_box.archive.yaml#/data/Files/0/file"
       - "m_def": "nomad.datamodel.metainfo.workflow.TaskReference"
           "name": "insert water"
-          "task": "<path_to_mainfile>/insert_water.archive.yaml#/data"
+          "task": "../upload/archive/mainfile/Custom_ELN_Entries/insert_water.archive.yaml#/data"
           "inputs":
           - "name": "initial box"
-          "section": "<path_to_mainfile>/create_box.archive.yaml#/data/Files/0/file"
+          "section": "../upload/archive/mainfile/Custom_ELN_Entries/create_box.archive.yaml#/data/Files/0/file"
           - "name": "workflow script 1"
-          "section": "<path_to_mainfile>/workflow_scripts.archive.yaml#/data/Files/0/file"
+          "section": "../upload/archive/mainfile/Custom_ELN_Entries/workflow_scripts.archive.yaml#/data/Files/0/file"
           "outputs":
           - "name": "structure file"
-          "section": "<path_to_mainfile>/insert_water.archive.yaml#/data/Files/0/file"
+          "section": "../upload/archive/mainfile/Custom_ELN_Entries/insert_water.archive.yaml#/data/Files/0/file"
       - "m_def": "nomad.datamodel.metainfo.workflow.TaskReference"
           "name": "create force field"
-          "task": "<path_to_mainfile>/create_force_field.archive.yaml#/data"
+          "task": "../upload/archive/mainfile/Custom_ELN_Entries/create_force_field.archive.yaml#/data"
           "inputs":
           - "name": "workflow parameters"
-          "section": "<path_to_mainfile>/workflow_parameters.archive.yaml#/data"
+          "section": "../upload/archive/mainfile/Custom_ELN_Entries/workflow_parameters.archive.yaml#/data"
           - "name": "workflow script 2"
-          "section": "<path_to_mainfile>/workflow_scripts.archive.yaml#/data/Files/1/file"
+          "section": "../upload/archive/mainfile/Custom_ELN_Entries/workflow_scripts.archive.yaml#/data/Files/1/file"
           "outputs":
           - "name": "force field file"
-          "section": "<path_to_mainfile>/create_force_field.archive.yaml#/data/Files/0/file"
+          "section": "../upload/archive/mainfile/Custom_ELN_Entries/create_force_field.archive.yaml#/data/Files/0/file"
     ```
 
-Create a new folder called `Custom_ELN_Entries` and place in it all of the completed files.
-Don't forget to:
+To reproduce the workflow shown in the video above, download the example files, entry YAMLs, and workflow YAML defined above, and upload them to NOMAD:
 
-- replace `<path_to_mainfile>` with `../upload/archive/mainfile/Custom_ELN_Entries/` in the last created file `setup_workflow.archive.yaml`
-- include the 5 files previously downloaded (`workflow_script_1.py`, `workflow_script_2.py`, `box.gro`, `water.gro`, `water.top`).
-
-Alternatively, you can download the complete folder here:
-
-[Download Custom_ELN_Entries folder](assets/Custom_ELN_Entries.zip){:target="_blank" .md-button}
+[Download Custom_ELN_Entries.zip](data/Custom_ELN_Entries.zip){ .md-button .nomad-button }
 
 
 ## Referencing ELN entries created with the GUI
@@ -648,33 +489,20 @@ To reference ELN entries created using the NOMAD GUI, use the upload and entry i
 
 ## Creating workflow graphs with the GUI using the ELN interface
 
-- who can provide instructions?
+<!-- TODO - Add example, possibly from Tutorial 16? -->
 
-## Best practices for workflow file management within a single upload?
+!!! Warning
 
-Automatic workflows - from Chema:
+    Coming soon ...
 
-There are some cases where the NOMAD infrastructure is able to recognize certain workflows automatically when processing the uploaded files. The simplest example is any `SinglePoint` calculation, as explained above. Other examples include `GeometryOptimization`, `Phonons`, `GW`, and `MolecularDynamics`. Automated workflow detection may require your folder structure to fulfill certain conditions.
-
-Here are some general guidelines for preparing your upload folder in order to make it easier for the _automatic workflow recognition_ to work:
-
-- Always organize your files in an **top-down structure**, i.e., the initial _tasks_ should be upper in the directory tree, while the later _tasks_ lower on it.
-- Avoid having to go up and down between folders if some properties are derived between these files. These situations are very complicated to predict for the current NOMAD infrastructure.
-- Avoid duplication of files in subfolders. If initially you do a calculation A from which a later calculation B is derived and you want to store B in a subfolder, there is no need to copy the A files inside the subfolder B.
-
-The folder structure used throughout this part is a good example of a clean upload which is friendly and easy to work with when defining NOMAD workflows.
-
-
-
-TODO!!!:
 
 <!-- TODO - also ensuring connections in the workflow visualizer! Somewhere -->
-## How to use the workflow visualizer
-The entry overview page will show an interactive graph of the `workflow2` section if defined.
-In the following example, a workflow containing three tasks `Single Point`, `Geometry Optimization`
-and `Phonon` is shown.
+## Using the workflow visualizer
 
-![workflow visualizer](images/workflow-graph-usage.gif)
+As we have seen above, when a workflow is defined within an entry, The Overview page will show an interactive graph of the `workflow2` section defined.
+The following video demonstrates the basic navigation functionalities of these interactive workflow graphs:
+
+![workflow visualizer](images/workflow-graph-usage.gif){.screenshot}
 
 The nodes (inputs, tasks and outputs) are shown from left to right for the current workflow layer.
 The edges (arrows) from (to) a node denotes an input (output) to a section in the target node.
@@ -691,12 +519,39 @@ but can be changed to inputs or outputs by clicking on one of the respective nod
 on the `play` button, a force-directed layout of the task nodes is enabled. The other tools
 enable to toggle the legend, go back to a previous view and reset the view.
 
+You can also use the graph to navigate to the referenced data, by clicking the labels above any task node or input/output, as shown in the following video:
+
+<video width="100%" controls>
+  <source src="./images/ELNFileManager.webm" alt="" type="video/mp4">
+</video>
+
+Once you leave the workflow entry, you can use either the browser back button or, more generally, the "Entry References" section of the Overview page to navigate back to the workflow entry:
+
+<!-- TODO Add a video of navigating via the references at the bottom of the page. -->
+
+!!! Warning
+
+    Illustrative video coming soon ...
+
+!!! Tip "Proper creation of workflow entries" <!-- ! add tips for creating the visualization properly -->
+
+    To ensure that the workflow visualizer functions correctly:
+
+      - To create a graph edge, at least one `input` of the in-node must match exactly an `output` of the out-node.
+<!-- TODO Add more tips -->
+
 
 ## Advanced Topics
 
 ### Instantiating a workflow from YAML using a standardized workflow class
 
+!!! Warning
+
+    Coming soon ...
+
 ### Extending the workflow schema
+
+<!-- TODO Possibly update this example, and maybe define the scope of usage -->
 
 The abstract workflow schema above allows us to build generalized tools for workflows,
 like workflow searches, navigation in workflow, graphical representations of workflows, etc. But, you can still augment the given section definitions with more information through
@@ -729,6 +584,3 @@ workflow2:
 ```
 
 
-
-
-<!-- TODO - Add ../upload/raw/ prefix -->
