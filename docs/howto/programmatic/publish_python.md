@@ -1,4 +1,17 @@
-# How to publish data using python
+# How to publish data using Python
+
+## What you will learn
+
+- How to use the Python requests module to perform basic data management functions in NOMAD.
+
+## Recommended preparation
+
+- [Tutorial > Uploading and publishing data](../../tutorial/upload_publish.md)
+
+## Further resources
+
+- [How-to guides > Programmatic use > Use the API](./api.md)
+- [nomad-utility-workflows > How-to Guides > Perform API Calls](https://fairmat-nfdi.github.io/nomad-utility-workflows/how_to/use_api_functions.html){:target="_blank"}
 
 ## Uploading, changing metadata, and publishing via python API
 

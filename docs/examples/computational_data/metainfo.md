@@ -37,6 +37,14 @@ archive
      └── results
 ```
 
+Entire subsections of NOMAD's schema can be browsed using the [MetaInfo Browser](https://nomad-lab.eu/prod/v1/gui/analyze/metainfo){:target="_blank"}:
+
+- `run` base schema: [MetaInfo Browser > Entry > run](https://nomad-lab.eu/prod/v1/gui/analyze/metainfo/nomad.datamodel.datamodel.EntryArchive/run){:target="_blank"}
+- `runschema` full schema for `run`: [MetaInfo Browser > runschema](https://nomad-lab.eu/prod/v1/gui/analyze/metainfo/runschema){:target="_blank"}
+- `workflow2` base schema: [MetaInfo Browser > Entry > workflow2](https://nomad-lab.eu/prod/v1/gui/analyze/metainfo/nomad.datamodel.datamodel.EntryArchive/workflow2){:target="_blank"}
+- `simulationworkflowschema` full computational schema for `workflow2`: [MetaInfo Browser > simulationworkflowschema](https://nomad-lab.eu/prod/v1/gui/analyze/metainfo/simulationworkflowschema){:target="_blank"}
+
+
 The most important section of the archive for computational data is the `run` section, which is
 divided into three main subsections: `method`, `system`, and `calculation`. `method` stores
 information about the computational model used to perform the calculation.
@@ -61,6 +69,6 @@ See [Standard and Custom Computational Workflows in NOMAD](./workflows.md) for m
 <!-- TODO specify which workflow sections have to be set by the parser: workflow2 or these standard workflows. -->
 
 !!! warning "Attention"
-    We are currently performing a complete refactoring of the computational MetaInfo schema. Details and updates about this task, and how it may benefit your future usage of NOMAD, will be added below.
+    We are currently performing a complete refactoring of the computational MetaInfo schema. The new schema will be populated under the `data` section of the archive: [MetaInfo Browser > Entry > data](https://nomad-lab.eu/prod/v1/gui/analyze/metainfo/nomad.datamodel.datamodel.EntryArchive/data){:target="_blank"}. A preliminary version of the full schema can be browsed in [MetaInfo Browser > nomad_simulations](https://nomad-lab.eu/prod/v1/gui/analyze/metainfo/nomad_simulations){:target="_blank"}.
 
-<!-- TODO Start adding the description of the Data Schema here -->
+    Further information can be found within the schema plugin docs: [`nomad-simulations` Docs](https://nomad-coe.github.io/nomad-simulations/){:target="_blank"}.

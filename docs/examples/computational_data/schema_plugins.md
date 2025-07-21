@@ -15,9 +15,6 @@ NOMAD uses [Schemas](../../reference/glossary.md#schema) to define the data stru
 
 [Guide to Computational MetaInfo](metainfo.md) describes how these schemas are used to organize standard computational data within an [Entry](../../reference/glossary.md#entry) in the NOMAD repository.
 
-!!! Attention
-    This page is under construction. We will be adding content below to guide you in the development of your own computational schema plugins.
-
 <!-- TODO Add best practices + tips for schema implementation/design -->
 <!-- ### Best practices for computational parser design -->
 

@@ -35,9 +35,6 @@ The general docs contain information about the nuts and bolts of developing a pl
 
 - [How to write a parser](../../howto/plugins/parsers.md): The basics of how NOMAD parsers work, how to configure the files that your parser will match, and how to utilize existing parser classes.
 
-!!! Attention
-    This page is under construction as we convert NOMAD's standard computational parsers to parser plugins. Along the way, we will add content below to guide you in the development of your own computational parser plugins.
-
 <!-- TODO Add best practices + tips for parser implementation/design -->
 <!-- ### Best practices for computational parser design -->
 

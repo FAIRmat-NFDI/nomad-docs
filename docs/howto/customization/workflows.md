@@ -533,7 +533,9 @@ Once you leave the workflow entry, you can use either the browser back button or
 
     Illustrative video coming soon ...
 
-!!! Tip "Proper creation of workflow entries" <!-- ! add tips for creating the visualization properly -->
+!!! Tip "Proper creation of workflow entries"
+
+    <!-- ! add tips for creating the visualization properly -->
 
     To ensure that the workflow visualizer functions correctly:
 

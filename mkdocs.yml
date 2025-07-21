@@ -25,7 +25,7 @@ nav:
       - Programmatic use:
           - Use the API: howto/programmatic/api.md # TODO separate into How-to and Explanation/Reference
           - Download data: howto/programmatic/download.md
-          - Publish data using python: howto/programmatic/publish_python.md
+          - Publish data using Python: howto/programmatic/publish_python.md
           - Install nomad-lab: howto/programmatic/pythonlib.md
           - Access processed data: howto/programmatic/archive_query.md
           - Transform data: howto/programmatic/json_transformer.md
@@ -65,7 +65,6 @@ nav:
       - Overview: examples/overview.md
       - Computational data:
           - Basics: examples/computational_data/basics.md
-          - Workflows: examples/computational_data/workflows.md
           - MetaInfo: examples/computational_data/metainfo.md
           - Schema plugins: examples/computational_data/schema_plugins.md
           - Parser plugins: examples/computational_data/parser_plugins.md

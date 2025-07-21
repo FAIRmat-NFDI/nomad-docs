@@ -1,6 +1,6 @@
 # NOMAD Basics: A Computational Perspective
 
-## This page contains
+## What you will learn
 
 - An overview of how NOMAD processes and organizes computational data.
 
@@ -9,6 +9,12 @@
 - [Tutorial > Navigating to NOMAD](../../tutorial/nomad_repo.md)
 - [Tutorial > Uploading and publishing data](../../tutorial/upload_publish.md)
 - [Tutorial > Exploring data](../../tutorial/explore.md)
+
+## Further resources
+
+- [Tutorial > Managing workflows and projects](../../tutorial/workflows_projects.md)
+- [How-to guides > Programmatic use > Publish data using Python](../../howto/programmatic/publish_python.md)
+- [How-to guides > Customization > Define Workflows](../../howto/customization/workflows.md)
 
 ## Processing of supported simulation data
 

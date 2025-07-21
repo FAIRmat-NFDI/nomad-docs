@@ -9,7 +9,7 @@ Build upon your understanding of NOMAD's features with domain-specific examples 
 
 Historically a repository for Density Functional Theory calculations, NOMAD now supports a wide range of computational methodologies including advanced many-body calculations and classical molecular dynamics simulations, as well as complex simulation workflows.
 
-- [Quick Start: Uploading computational data](./computational_data/uploading.md)
+- [NOMAD Basics: A Computational Perspective](./computational_data/basics.md)
 - [Standard and custom computational workflows](./computational_data/workflows.md)
 - [Guide to computational MetaInfo](./computational_data/metainfo.md)
 - [Guide to computational schema plugins](./computational_data/schema_plugins.md)
@@ -49,9 +49,9 @@ Thanks to key activities of the FAIRmat project, NOMAD also supports a set of pa
 
 </div>
 
-<div markdown="block">
+<!-- <div markdown="block">
 
-</div>
+</div> -->
 </div>
 
 <h2>One last thing</h2>
