@@ -10,14 +10,11 @@ Build upon your understanding of NOMAD's features with domain-specific examples 
 Historically a repository for Density Functional Theory calculations, NOMAD now supports a wide range of computational methodologies including advanced many-body calculations and classical molecular dynamics simulations, as well as complex simulation workflows.
 
 - [NOMAD Basics: A Computational Perspective](./computational_data/basics.md)
-- [Standard and custom computational workflows](./computational_data/workflows.md)
 - [Guide to computational MetaInfo](./computational_data/metainfo.md)
 - [Guide to computational schema plugins](./computational_data/schema_plugins.md)
 - [Guide to computational parser plugins](./computational_data/parser_plugins.md)
-- H5MD: Uploading custom molecular dynamics data
-    - [How-to](./computational_data/h5md_howto.md)
-    - [Explanation](./computational_data/h5md_expl.md)
-    - [Reference](./computational_data/h5md_ref.md)
+- [Frequently Asked Questions](./computational_data/faqs.md)
+
 <!--
 #### subcategory 1
 - links...
