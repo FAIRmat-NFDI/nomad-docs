@@ -1,10 +1,11 @@
 # How to define actions
 
-Actions allow to define executable workflows in NOMAD. They are
-highly versatile and can run either at global level, i.e. interacting
-with the whole data volume, or upload level, i.e. interacting with data in a
-single upload. Dedicated workers can be configured to manage workflows, allowing
-targeted allocation of resources like GPUs for specific tasks.
+Actions allow to define executable workflows in NOMAD. They provide an
+alternative to entry normalize methods and are well-suited for setting up
+long-running workflows, like running training and inferring ML models, or
+workflows that need to be triggered at regular time intervals. Dedicated
+workers can be configured to manage workflows, allowing targeted allocation of
+resources like GPUs for specific tasks.
 
 This documentation shows you how to write a plugin entry point for an action.
 You should read the [introduction to plugins](./plugins.md)
