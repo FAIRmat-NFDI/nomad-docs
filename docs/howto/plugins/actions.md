@@ -195,7 +195,6 @@ from temporalio import workflow
 from temporalio.common import RetryPolicy
 
 with workflow.unsafe.imports_passed_through():
-    from nomad.orchestrator import BaseWorkflow
     from nomad_example.actions.workflows.activities import get_request
     from nomad_example.actions.workflows.models import (
         ExampleWorkflowInput,
@@ -294,14 +293,107 @@ You can add these functionalities in the `normalize` of an
 entries. A schema that uses ELN quantities to trigger actions can look like this:
 
 ```py
+from nomad.datamodel.data import EntryData
+from nomad.datamodel.metainfo.annotations import ELNAnnotation, ELNComponentEnum
+from nomad.datamodel.metainfo.basesections.v1 import PureSubstanceSection
+from nomad.metainfo import Quantity, SchemaPackage, SubSection
+from nomad.orchestrator.base import TaskQueue
+from nomad.orchestrator.utils import get_workflow_status, start_workflow
 
+from nomad_example.actions.models import ExampleWorkflowInput
+
+m_package = SchemaPackage()
+
+
+class ExampleWorkflowSection(EntryData):
+    """A section to run an example workflow using a PubChem CID."""
+
+    cid = Quantity(
+        type=int,
+        description='PubChem CID of the compound.',
+        a_eln=ELNAnnotation(component=ELNComponentEnum.NumberEditQuantity),
+    )
+    workflow_id = Quantity(
+        type=str,
+        description='ID of the `temporalio` workflow.',
+    )
+    workflow_status = Quantity(
+        type=str,
+        description='Status of the workflow.',
+    )
+    pubchem_result = SubSection(
+        section_def=PureSubstanceSection,
+        description='Data populated based on PubChem API call for given CID.',
+    )
+
+    trigger_run_workflow = Quantity(
+        type=bool,
+        description='Starts an asynchronous run of the example workflow.',
+        a_eln=ELNAnnotation(
+            component=ELNComponentEnum.ActionEditQuantity,
+            label='Run Example Workflow',
+        ),
+    )
+
+    def run_workflow(self, archive, logger=None):
+        """Run the workflow with the provided archive."""
+        if not self.cid:
+            logger.warn('No CID provided for the workflow. Cannot run the workflow.')
+            return
+        self.pubchem_result = None
+        self.workflow_status = None
+        self.workflow_id = None
+        workflow_name = 'nomad_example.actions.workflows.ExampleWorkflow'
+        input_data = ExampleWorkflowInput(
+            user_id=archive.metadata.authors[0].user_id,
+            upload_id=archive.metadata.upload_id,
+            cid=self.cid,
+        )
+        self.workflow_id = start_workflow(
+            workflow_name=workflow_name, data=input_data, task_queue=TaskQueue.GPU
+        )
+
+    def normalize(self, archive, logger=None):
+        super().normalize(archive, logger)
+        if self.trigger_run_workflow and self.workflow_status != 'RUNNING':
+            try:
+                self.run_workflow(archive, logger)
+            except Exception as e:
+                logger.error(f'Error running workflow: {e}. ')
+            self.trigger_run_workflow = False
+        if self.workflow_id:
+            try:
+                status = get_workflow_status(self.workflow_id)
+                if status:
+                    self.workflow_status = status.name
+            except Exception as e:
+                logger.error(f'Error getting workflow status: {e}. ')
+
+
+m_package.__init_metainfo__()
 ```
 
-Here we did something.
+Here we define an `EntryData` section with ELN quantities like `cid`, which
+takes a integer input, and `trigger_run_workflow`, which is an actionable
+button. When the `trigger_run_workflow` button is clicked, the `start_workflow`
+function is triggered from inside the `run_workflow` method.
+`workflow_id` quantity is populated as a result, which is used in the next step
+to get the status of the workflow.
 
-## Using workflow artifacts directory
+`get_workflow_status` is triggered using the available `workflow_id` every time
+the entry is saved and the status is saved as a string in `workflow_status`
+quantity. This status can be mainly `RUNNING`, `COMPLETED` or `TERMINATED`.
+It is also possible to re-trigger the workflow if status is not `RUNNING`. Of
+course, the new workflow run will now have a different workflow ID.
 
-- `from nomad.orchestrator.utils import workflow_artifacts_dir`
+After we run the workflow, we can also write back the results into the entry. You will learn about this in the next section.
+
+## Common activities
+
+- Add the code for writing back the results to the entry archive, writing raw
+file, accessing workflow artifact dir
+- link with available orchestrator.utils
+- (Later) Make standard activities available via orchestrator module.
 
 ## Defining workers for task queues
 
