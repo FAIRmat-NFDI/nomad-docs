@@ -39,10 +39,11 @@ for more details on the best development practices for plugins, including lintin
 The entry point defines basic information about your action and is used to
 automatically load it into a NOMAD distribution. It is an instance of a
 `ActionEntryPoint` or its subclass and it contains a `load` method which
-returns a `nomad.orchestrator.base.ActionHandler` instance that contains the
-definition of the workflows and activities, along with the task queue to be
-used for this Action. You will learn more about
-`ActionHandler` class in the next sections. The entry point should be defined
+returns a `ActionHandler` instance.
+
+The `ActionHandler` instance can be used to add workflows and activities, along
+with the task queue where they will be registered. You will learn more about
+`ActionHandler` class in the [next section](#actionhandler-class). The entry point should be defined
 in `*/actions/__init__.py` like this:
 
 ```py
@@ -98,21 +99,25 @@ myaction = "nomad_example.actions:myaction"
 
 The `load`-method of an action entry point returns an instance of a
 `nomad.orchestrator.base.ActionHandler` class which describes the action through
-a collection of activities and a workflow that connects them. We use
-[Temporal](https://docs.temporal.io/temporal)'s workflow-activity
-abstraction here.
+a collection of activities and workflows that connect them. It also specifies the task queue for which the workflows and activities are registered. Once the
+workflows are made available through the `ActionHandler`, they can be triggered
+using the `start_workflow` funtion. This adds a workflow run instance to the specified task queue. You can learn more about it in the [next section](#integrating-action-with-schemas).
 
-Activities are the atomic unit of execution. They should ideally be defined as
+We use [Temporal](https://docs.temporal.io/temporal)'s workflow-activity
+abstraction here. Activities are the atomic unit of execution. They should
+ideally be defined as
 [idempotent](https://docs.temporal.io/activity-definition#idempotency),
 allowing Temporal to retry automatically based on a policy until the activity
 is successfully completed. For example, an idempotent activity that gets data
-from an external resource via API will keep retrying until a status
-code 200 (successful response) is achieved. Workflow defines a sequence of
-activities and flow of data from one activity to another.
+from an external resource via API can keep retrying until a status
+code 200 (successful response) is achieved. Once the activities are
+defined, a workflow arranges them in a sequence and defines flow of data from
+one activity to another.
 
 You can add these definitions in `*/actions/activities.py` and
 `*/actions/workflows.py`. Temporal requires the input and output of the
-activities and workflows to be serializable. We recommend defining Pydantic models for them in `*/actions/models.py`. These files could look like this:
+activities and workflows to be serializable. We recommend defining Pydantic
+models for them in `*/actions/models.py`. These files could look like this:
 
 **nomad_example/actions/models.py**
 
@@ -123,12 +128,14 @@ from nomad.orchestrator.workflows.models import BaseWorkflowInput
 
 
 class ExampleWorkflowInput(BaseWorkflowInput):
+    """Input model for the workflow"""
     cid: int = Field(
         ..., description='PubChem compound identifier for a chemical compound.'
     )
 
 
 class GetRequestInput(BaseModel):
+    """Input model for the activity"""
     url: str = Field(..., description='URL for get request.')
     timeout: int = Field(..., description='Timeout for the request.')
 
@@ -139,8 +146,7 @@ of the workflow and simply extend `BaseModel` class from
 Pydantic to define the input model of the activity.
 
 !!! important
-    We strongly recommend to extend the Pydantic base model `nomad.orchestrator
-    models.BaseWorkflowInput` to define the input model for your workflow. It
+    We strongly recommend to extend the Pydantic base model `BaseWorkflowInput` to define the input model for your workflow. It
     provides additional fields like `user_id` and `upload_id` which are
     required to execute a workflow in NOMAD. If the input to your workflows
     running on `GPU` and `CPU` task queues does not include these fields, the
@@ -239,13 +245,14 @@ can be used to specify retry policies and different types of timeout.
 
 ## Integrating action with schemas
 
-After actions are defined, it is possible to run them from within NOMAD
-entries by integrating them with [schemas](../../reference/glossary.md#schema).
+After actions are defined, it is possible to intergrate their workflows with
+[schemas](../../reference/glossary.md#schema) and run them from NOMAD
+entries.
 
 The workflows defined through `ActionHandler` have unique names associated with
 them. We can run a workflow using `start_workflow`
 function, which takes the workflow name, an instance of its input model, and
-the name of the task queue that should be used:
+the name of the task queue where the workflow run will be added:
 
 ```py
 from nomad.orchestrator.utils import start_workflow
@@ -265,8 +272,8 @@ workflow_id: str = start_workflow(
 ```
 
 !!! important
-    Make sure the task queue used in `start_workflow` function corresponds to
-    the task queue specified in the `ActionHandler` containing this workflow.
+    Make sure the task queue specified in `start_workflow` function is the same
+    task queue where the chosen workflow was registered by its action entry point.
 
 `start_workflow` returns a string containing a unique workflow ID assigned to the
 triggered workflow run. This can be used to get the current status of the
