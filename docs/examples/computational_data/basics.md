@@ -51,10 +51,10 @@ See [Supported Parsers](https://nomad-lab.eu/prod/v1/staging/docs/reference/pars
 Under the [`Entry` section of the metainfo browser](https://nomad-lab.eu/prod/v1/gui/analyze/metainfo/nomad.datamodel.datamodel.EntryArchive){:target="_blank"}, there are several sections and quantities being populated by the parsers. For computational data, the relevant sections are:
 
 - `metadata`: contains general and non-code specific metadata. This is mainly information about authors, creation of the entry time, identifiers (id), etc.
-- `run`: contains the [Parsed](#parsing) and [Normalized](#normalizing) raw data, according to the *legacy* NOMAD simulation schema, [`runschema`](https://nomad-lab.eu/prod/v1/gui/analyze/metainfo/runschema).
-- `data`:  contains the [Parsed](#parsing) and [Normalized](#normalizing) raw data, according to the *new* NOMAD simulation schema, [`nomad_simulations`](https://nomad-lab.eu/prod/v1/gui/analyze/metainfo/nomad_simulations).
+- `run`: contains the [Parsed](../../explanation/processing.md#parsing) and [Normalized](../../explanation/processing.md#normalizing) raw data, according to the *legacy* NOMAD simulation schema, [`runschema`](https://nomad-lab.eu/prod/v1/gui/analyze/metainfo/runschema).
+- `data`:  contains the [Parsed](../../explanation/processing.md#parsing) and [Normalized](../../explanation/processing.md#normalizing) raw data, according to the *new* NOMAD simulation schema, [`nomad_simulations`](https://nomad-lab.eu/prod/v1/gui/analyze/metainfo/nomad_simulations).
 - `workflow2`: contains metadata about the specific workflow performed within the entry. This is mainly a set of well-defined workflows, e.g., `GeometryOptimization`, and their parameters.
-- `results`: contains the [**normalized**](#normalizing) and [**search indexed**](#search-indexing-and-storing) metadata. This is mainly relevant for searching, filtering, and visualizing data in NOMAD.
+- `results`: contains the [Normalized](../../explanation/processing.md#normalizing) and [Search Indexed](../../explanation/basics.md#storing-and-indexing) metadata. This is mainly relevant for searching, filtering, and visualizing data in NOMAD.
 
 
 ### Normalization

@@ -302,7 +302,8 @@ Usage:
 !!! note
 
     If an EntryData class contain the `a_h5web` annotation, the H5Web plot is shown in the
-    [entry overview page](../examples/computational_data/uploading.md#entries-overview-page).
+    entry overview page.
+    <!-- TODO Re-Add link to some definition or example of overview page (and possibly below) -->
 
 An example of use of H5WebAnnotation in Python schemas:
 
@@ -353,7 +354,7 @@ class B(EntryData):
 ```
 
 In this example, an H5Web view of the variables `x`, `y`, and `y_err` is displayed in the page of the subsection `A`.
-The plot of variables `x_value` and `y_value` is also displayed; as the `B` class is an `EntryData`, the plot is shown in the [entry overview page](../examples/computational_data/uploading.md#entries-overview-page). Additionally, alongside with the plot of the class `B`, the overview page presents also the plot contained in the subsection `A`, due to the `paths` attribute. The `paths` attribute allows to show in a parent section or subsection the plots originally contained in children subsections. Parents and children refer here to **composed** object.
+The plot of variables `x_value` and `y_value` is also displayed; as the `B` class is an `EntryData`, the plot is shown in the entry overview page. Additionally, alongside with the plot of the class `B`, the overview page presents also the plot contained in the subsection `A`, due to the `paths` attribute. The `paths` attribute allows to show in a parent section or subsection the plots originally contained in children subsections. Parents and children refer here to **composed** object.
 
 !!! note
 

@@ -10,7 +10,7 @@
 
 ## Recommended preparation
 
-- Basic knowledge of NOMAD Organization + MetaInfo
+- Basic knowledge of NOMAD Organization + MetaInfo: [Explanation > From files to data](../../explanation/basics.md), [Explanation > Data structure](../../explanation/data.md)
 
 ## Further resources
 
@@ -20,7 +20,7 @@
 
 In NOMAD, [Workflows](../../explanation/workflows.md) are directed graphs with nodes (tasks) that connect multiple [Entries](../../reference/glossary.md#entry) together in a structured way, while specifying information passed between the nodes via inputs/outputs that link to particular sections of the relevant [Archive](../../reference/glossary.md#archive).
 
-Workflows are sometimes created automatically by NOMAD via parser [Plugins](../../explanation/plugin_system.md), for certain supported uploads. Users can also create their own workflow entries by uploading an appropriately formatted workflow YAML. This how-to guide will cover the specifics of this process.
+Workflows are sometimes created automatically by NOMAD during [Processing](../../explanation/processing.md), for certain supported uploads. Users can also create their own workflow entries by uploading an appropriately formatted workflow YAML. This how-to guide will cover the specifics of this process.
 
 !!! Note
     In the following, various supported raw data files will be used to form concrete examples that can be reproduced. The nature of these files or their underlying methods of production is irrelevant for the purpose of this how-to.
@@ -67,17 +67,22 @@ workflow2:
 !!! Warning "Important"
     For the creation of workflow entries using YAMLs, the file must have the extension `archive.yaml`.
 
-This file is constructed according to NOMAD's [General Workflow Schema](../../explanation/workflows.md#the-built-in-abstract-workflow-schema). The `workflow2` section of the archive has 3 possible subsections: `inputs`, `outputs`, and `tasks`:
+This file is constructed according to NOMAD's schemas for [Archive Files](../../explanation/data.md#archive-files-a-shared-entry-structure) and [General Workflows](../../explanation/workflows.md#the-built-in-abstract-workflow-schema). The `workflow2` section of the archive has 3 possible subsections: `inputs`, `outputs`, and `tasks`:
 
-**`inputs`**: a list of references to the global inputs of the workflow, with `name` and `section` attributes. `section` corresponds to a path for linking to the relevant archive section. In this case, the relative section path is `run[0].system[-1]`, linked to the entry defined by the mainfile `dft.xml`. The prefix is discussed under "Considerations for archive path specification" directly below.
+**`inputs`**: a list of references to the global inputs of the workflow, with `name` and `section` attributes. `section` corresponds to a path for linking to the relevant archive section. In this case, the relative section path is `run[0].system[-1]`, linked to the entry defined by the mainfile `dft.xml`. The prefix is discussed under [Considerations for archive path specification](#path-specification).
 
 **`outputs`**: identical to the inputs list, representing the global outputs of the workflow, with the relative section path `run[0].calculation[-1]` in this case.
 
-**`tasks`**: a list of references to the tasks/steps of the workflow. Each task contains `m_def`, `task`, `inputs`, and `outputs` attributes. `inputs`/`outputs` are task-specific versions of the lists defined above. `task` is the path for linking to the relevant archive section, analogous to the `section` attribute for `inputs`/`outputs`. `m_def` defines the type of task according to NOMAD's MetaInfo scehma, in this case a `TaskReference` to the archive `workflow2` section.  The use of `TaskReference` will be clarified in the [Nested workflows > In multiple entries](#in-multiple-entries) example below.
+**`tasks`**: a list of references to the tasks/steps of the workflow. Each task contains `m_def`, `task`, `inputs`, and `outputs` attributes. `inputs`/`outputs` are task-specific versions of the lists defined above.
 
-Considerations for archive path specification:
+`task` is the path for linking to the relevant archive section, analogous to the `section` attribute for `inputs`/`outputs`. However, this path **must** reference a task, which in all practical cases corresponds to a `workflow2` section
 
-- In general, the archive path can be represented as `<prefix>/<entry identifier>/<relative archive path>`.
+`m_def` defines the type of task according to NOMAD's MetaInfo schema, in this case a `TaskReference` to the archive `workflow2` section.  The use of `TaskReference` will be clarified in the [Nested workflows > In multiple entries](#in-multiple-entries) example below.
+
+<a id="path-specification"></a>
+**Considerations for archive path specification:**
+
+- In general, the archive path can be represented as `<prefix>/<entry identifier>/<relative archive path>` (see also [How to write a YAML schema package > Different forms of references](./basics.md#different-forms-of-references)).
 
 - The prefix for the archive path is given by: 1. `../upload/archive/mainfile` for entries that are contained within the same upload as the workflow YAML, or 2. `../uploads/<upload_id>/archive/` for entries contained in distinct uploads as the workflow YAML, where `<upload_id>` is a placeholders for the upload id, which can be obtained from the Overview page of any entry.
 
@@ -89,7 +94,7 @@ With a basic understanding in hand, you can now download the example data and up
 
 [Download simple_workflow.zip](data/simple_workflow.zip){ .md-button .nomad-button }
 
-file structure of `simple_workflow.zip`:
+The download `simple_workflow.zip` should have the following structure:
 ```
 .
 ├── dft.xml
@@ -138,7 +143,7 @@ Upon upload to NOMAD, the above zip will produce 2 entries:
 
 ## Referencing Tasks in different uploads
 
-As already mentioned under "Considerations for archive path specification" above, your workflow YAML can reference entries that you have previously uploaded to NOMAD. In this case, you should replace the path prefix `../upload/archive/mainfile/<mainfile_name>` with `../uploads/<upload_id>/archive/<entry_id>`.
+As already mentioned under [Considerations for archive path specification](#path-specification), your workflow YAML can reference entries that you have previously uploaded to NOMAD. In this case, you should replace the path prefix `../upload/archive/mainfile/<mainfile_name>` with `../uploads/<upload_id>/archive/<entry_id>`.
 
 ??? Tip "Corresponding `dft.workflow.archive.yaml` from above example"
 
@@ -309,7 +314,7 @@ The easiest way to create entries for a custom task is to use one of NOMAD's bui
 
 ### Creating an ELN entry from YAML
 
-Analogous to the simulation code parsers, NOMAD has a parser for its native schema &mdash; the NOMAD MetaInfo. This parser is automatically executed for files named `<file_name>.archive.yaml`. Actually, this is exactly the functionality that we are using to upload our workflows.
+Analogous to the simulation code parsers, NOMAD has a parser for its native schema &mdash; the NOMAD MetaInfo. This parser is automatically executed for files named `<file_name>.archive.yaml` (see the Note under [Explanation > From files to data > Parsing](../../explanation/basics.md#parsing)). Actually, this is exactly the functionality that we are using to upload our workflows.
 
 In this way, users can also create ELN entries, by uploading a YAML file populated according to one of NOMAD's ELN built-in schemas. For example, we can create a basic ELN entry by creating and uploading a file, e.g. `basic_eln_entry.archive.yaml`, with the contents:
 
