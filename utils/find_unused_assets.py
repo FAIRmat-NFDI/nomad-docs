@@ -27,9 +27,9 @@ unused_assets = []
 if args.empty_trash:
     if os.path.exists(trash_dir):
         shutil.rmtree(trash_dir)
-        print("🗑️  .trash/ has been permanently emptied.")
+        print(".trash/ has been permanently emptied.")
     else:
-        print("🧼 .trash/ is already empty or does not exist.")
+        print(".trash/ is already empty or does not exist.")
     exit(0)
 
 # --- Scan docs/ tree for unreferenced assets ---
@@ -56,20 +56,20 @@ for root, dirs, files in os.walk(docs_dir):
 # --- Handle results ---
 if unused_assets:
     if args.remove:
-        print("📦 Moving unreferenced assets to .trash/:\n")
+        print("Moving unreferenced assets to .trash/:\n")
         os.makedirs(trash_dir, exist_ok=True)
         for rel_path, full_path in unused_assets:
             dest_path = os.path.join(trash_dir, rel_path)
             os.makedirs(os.path.dirname(dest_path), exist_ok=True)
             shutil.move(full_path, dest_path)
             print(f"- {rel_path}")
-        print("\n✅ Unused assets moved to .trash/")
+        print("\nUnused assets moved to .trash/")
         print(
             "   Use `python utils/find_unused_assets.py --empty-trash` to permanently remove them."
         )
     else:
-        print("🧹 Unreferenced assets found:\n")
+        print("Unreferenced assets found:\n")
         for rel_path, _ in unused_assets:
             print(f"- {rel_path}")
 else:
-    print("✅ All assets are referenced.")
+    print("All assets are referenced.")
