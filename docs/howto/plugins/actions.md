@@ -70,6 +70,7 @@ myaction = MyActionEntryPoint(
     description='My custom action.',
 )
 ```
+
 Here you can see that a new subclass of `MyActionEntryPoint` was defined. In
 this new class you can override the `load` method to determine how the
 `ActionHandler` class is loaded, but you can also extend the
@@ -113,15 +114,16 @@ You can add these definitions in `*/actions/activities.py` and
 `*/actions/workflows.py`. Temporal requires the input and output of the
 activities and workflows to be serializable. We recommend defining Pydantic models for them in `*/actions/models.py`. These files could look like this:
 
+**nomad_example/actions/models.py**
+
 ```py
-# nomad_example/actions/models.py
 
 from pydantic import BaseModel, Field
-from nomad.orchestrator.models import BaseWorkflowInput
+from nomad.orchestrator.workflows.models import BaseWorkflowInput
 
 
 class ExampleWorkflowInput(BaseWorkflowInput):
-    cid: str = Field(
+    cid: int = Field(
         ..., description='PubChem compound identifier for a chemical compound.'
     )
 
@@ -144,9 +146,9 @@ Pydantic to define the input model of the activity.
     running on `GPU` and `CPU` task queues does not include these fields, the
     workflow will fail.
 
-```py
-# nomad_example/actions/activities.py
+**nomad_example/actions/activities.py**
 
+```py
 from temporalio import activity
 
 from nomad_example.actions.workflows.models import GetRequestInput
@@ -178,9 +180,9 @@ asynchronously. Non-blocking activities allow Temporal to efficiently manage
 the task queues, handling multiple workflows at once. We use `GetRequestInput`
 model to define the argument of this activity.
 
-```py
-# nomad_example/actions/workflows.py
+**nomad_example/actions/workflows.py**
 
+```py
 from datetime import timedelta
 
 from temporalio import workflow
@@ -235,13 +237,60 @@ can be used to specify retry policies and different types of timeout.
     required for your action, we strongly recommend to set a custom retry
     policy with finite `maximum_attempts` to avoid forever running workflows.
 
+## Integrating action with schemas
 
+After actions are defined, it is possible to run them from within NOMAD
+entries by integrating them with [schemas](../../reference/glossary.md#schema).
 
-## Integrating with schema packages
+The workflows defined through `ActionHandler` have unique names associated with
+them. We can run a workflow using `start_workflow`
+function, which takes the workflow name, an instance of its input model, and
+the name of the task queue that should be used:
 
-- Starting the workflows from entries (provide upload-id, user-id)
-- ping for the status of the workflow
-- Add a section with start_workflow and ping_workflow code in cookie cutter when Action entry point is selected.
+```py
+from nomad.orchestrator.utils import start_workflow
+from nomad.orchestrator.shared.constant import TaskQueue
+
+from nomad_example.actions.models import ExampleWorkflowInput
+
+workflow_id: str = start_workflow(
+    workflow_name='nomad_example.actions.workflows.ExampleWorkflow',
+    data=ExampleWorkflowInput(
+        user_id='NOMAD User ID',
+        upload_id='NOMAD Upload ID',
+        cid=962,
+    ),
+    task_queue=TaskQueue.CPU,
+)
+```
+
+!!! important
+    Make sure the task queue used in `start_workflow` function corresponds to
+    the task queue specified in the `ActionHandler` containing this workflow.
+
+`start_workflow` returns a string containing a unique workflow ID assigned to the
+triggered workflow run. This can be used to get the current status of the
+workflow using `get_workflow_status` function which
+takes the workflow ID as an input and returns a `WorkflowExecutionStatus` object:
+
+```py
+from nomad.orchestrator.utils import get_workflow_status
+from temporalio.client import WorkflowExecutionStatus
+
+workflow_status: WorkflowExecutionStatus = get_workflow_status(workflow_id)
+
+print(workflow_status.name)  # example output: RUNNING
+```
+
+You can add these functionalities in the `normalize` of an
+[ELN schema](../customization/elns.md) and trigger actions from the ELN
+entries. A schema that uses ELN quantities to trigger actions can look like this:
+
+```py
+
+```
+
+Here we did something.
 
 ## Using workflow artifacts directory
 
@@ -252,7 +301,6 @@ can be used to specify retry policies and different types of timeout.
 - A bit about the task queues
 - How to standard workers for CPU and GPU ("switching on" docker settings)
 - How to define custom workers for the available queues
-
 
 ## Adding to your oasis
 
