@@ -130,7 +130,7 @@ NOMAD clients (e.g. NOMAD UI) can pick up on these HDF5 serialized quantities an
 provide respective functionality (e.g. showing a H5Web view).
 
 <figure markdown>
-  ![h5reference](../images/hdf5reference.png)
+  ![h5reference](./images/hdf5reference.png)
   <figcaption>Visualizing archive HDF5 reference quantity using H5Web.</figcaption>
 </figure>
 
@@ -166,7 +166,7 @@ class MySection(ArchiveSection):
 ```
 
 <figure markdown>
-  ![h5reference](../images/hdf5annotations.png)
+  ![h5reference](./images/hdf5annotations.png)
   <figcaption>Including attributes to HDF5 groups to have composite plots using H5Web.</figcaption>
 </figure>
 
