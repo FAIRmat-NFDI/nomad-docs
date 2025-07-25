@@ -205,9 +205,6 @@ with workflow.unsafe.imports_passed_through():
 class ExampleWorkflow:
     @workflow.run
     async def run(self, data: ExampleWorkflowInput) -> dict:
-        retry_policy = RetryPolicy(
-            maximum_attempts=3,
-        )
         get_request_input = GetRequestInput(
             url='https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/'
             f'cid/{data.cid}/property/Title,SMILES/JSON',
@@ -216,28 +213,53 @@ class ExampleWorkflow:
         result = await workflow.execute_activity(
             get_request,
             get_request_input,
-            start_to_close_timeout=timedelta(seconds=30),
-            retry_policy=retry_policy,
+            start_to_close_timeout=timedelta(seconds=60),
+            retry_policy=RetryPolicy(maximum_attempts=3),
         )
         return result
 ```
 
-Here we define the workflow as a class and describe the
-sequence of activities under `run` method which uses the Temporal decorator
-`workflow.run`. The name of the workflow, defined in the Temporal decorator
-`workflow.defn`, needs to be unique. We recommend using the module path of the
-workflow class as workflow name to ensure uniqueness among all the plugins
-added to a NOMAD installation.
-The workflow defines the flow of data into the activities. Using appropriate
-data models, we pass the data from the workflow input to the activity input.
-The activity is executed by `workflow.execute_activity` function which
-can be used to specify retry policies and different types of timeout.
+Here we make a workflow definition by creating as a Python class and using
+the Temporal decorator `workflow.defn`. We also specify the name of the
+workflow in the decorator which will be used to later identify it for
+execution.
 
 !!! important
-    The default retry policy has unlimited attempts, meaning that if an activity
-    fails, Temporal will keep retrying it forever. If this behavior is not
-    required for your action, we strongly recommend to set a custom retry
-    policy with finite `maximum_attempts` to avoid forever running workflows.
+    Make sure the workflow name is unique. We recommend using the
+    module path of the workflow class as workflow name to ensure uniqueness
+    among all the plugins added to a NOMAD installation.
+
+We define the workflow _function_ in the `run` method of the workflow
+definition class and use the Temporal decorator `workflow.run`. It describes the
+sequence of activities and the flow of data from one to another. Using appropriate data models, we pass the data from the workflow input to the activity inputs.
+
+Each activity is executed by `workflow.execute_activity` function which
+also specifies the activity's retry policy and timeouts.
+[Retry Policy](https://docs.temporal.io/encyclopedia/retry-policies)
+tells Temporal how to retry an activity that failed in the current execution.
+Attributes like `initial_interval`, `backoff_coefficient`, and
+`maximum_interval` control the interval between retries. The attribute
+`maximum_attempts` specifies the maximum retries that can be made in case of
+failures.
+
+Activity timeouts can detect failures, simply because the activity exceeds the
+maximum expected execution time. Temporal provides multiple
+[timeouts](https://docs.temporal.io/encyclopedia/detecting-activity-failures).
+The attribute `start_to_close_timeout` specifies the timeout for an activity
+execution, i.e., the time spent after a worker starts executing an activity
+till it is finished. For most cases, setting this alone is enough and
+recommended. Make sure that the timeout is longer than the maximum possible
+time for the activity execution to complete. For example, while setting one for
+an activity that makes an API call, determine the median call time and add some
+buffer to it.
+
+!!! important
+    The default retry policy has unlimited `maximum_attempts`. We strongly
+    recommend to **always set a custom retry policy** with finite `maximum_attempts` to avoid forever running workflows.
+    In addition, **always set appropriate timeouts** for activities to prevent stuck executions.
+
+
+
 
 ## Integrating action with schemas
 
@@ -256,12 +278,12 @@ from nomad.orchestrator.shared.constant import TaskQueue
 
 from nomad_example.actions.models import ExampleWorkflowInput
 
-workflow_id: str = start_workflow(
+workflow_id = start_workflow(
     workflow_name='nomad_example.actions.workflows.ExampleWorkflow',
     data=ExampleWorkflowInput(
         user_id='NOMAD User ID',
         upload_id='NOMAD Upload ID',
-        cid=962,
+        cid=962,  # CID for Water
     ),
     task_queue=TaskQueue.CPU,
 )
@@ -273,14 +295,13 @@ workflow_id: str = start_workflow(
 
 `start_workflow` returns a string containing a unique workflow ID assigned to the
 triggered workflow run. This can be used to get the current status of the
-workflow using `get_workflow_status` function which
-takes the workflow ID as an input and returns a `WorkflowExecutionStatus` object:
+workflow using `get_workflow_status` function which takes the workflow ID as an
+input and returns a `temporalio.client.WorkflowExecutionStatus` object:
 
 ```py
 from nomad.orchestrator.utils import get_workflow_status
-from temporalio.client import WorkflowExecutionStatus
 
-workflow_status: WorkflowExecutionStatus = get_workflow_status(workflow_id)
+workflow_status = get_workflow_status(workflow_id)
 
 print(workflow_status.name)  # example output: RUNNING
 ```
@@ -392,11 +413,12 @@ function is triggered from inside the `run_workflow` method.
 `workflow_id` quantity is populated as a result, which is used in the next step
 to get the status of the workflow.
 
-`get_workflow_status` is triggered using the available `workflow_id` every time
-the entry is saved and the status is saved as a string in `workflow_status`
-quantity. This status can be mainly `RUNNING`, `COMPLETED` or `TERMINATED`.
-It is also possible to re-trigger the workflow if status is not `RUNNING`. Of
-course, the new workflow run will now have a different workflow ID.
+When `trigger_get_workflow_status` is clicked, the status for the available `workflow_id` is requested and is saved as a string in `workflow_status`
+quantity. This status can be mainly `RUNNING`, `COMPLETED` or `TERMINATED`. Everytime a workflow run is triggered, the status for it is also requested.
+
+It is also possible to re-trigger the workflow run if the status is not
+`RUNNING`. Of course, the new workflow run will now have a different workflow
+ID.
 
 After we run the workflow, we can also write back the results into the entry. You will learn about this in the next section.
 
