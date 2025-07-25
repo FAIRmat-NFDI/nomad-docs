@@ -47,22 +47,24 @@ with the task queue where they will be registered. You will learn more about
 in `*/actions/__init__.py` like this:
 
 ```py
-from nomad.config.models.plugins import ActionEntryPoint
+from temporalio import workflow
+
+with workflow.unsafe.imports_passed_through():
+    from nomad.config.models.plugins import ActionEntryPoint
 
 
 class MyActionEntryPoint(ActionEntryPoint):
-
     def load(self):
         from nomad.orchestrator.base import ActionHandler
         from nomad.orchestrator.shared.constant import TaskQueue
 
-        from nomad_example.actions.workflows import ExampleWorkflow
         from nomad_example.actions.activities import get_request
+        from nomad_example.actions.workflows import ExampleWorkflow
 
         return ActionHandler(
             workflows=[ExampleWorkflow],
             activities=[get_request],
-            task_queue=TaskQueue.CPU
+            task_queue=TaskQueue.CPU,
         )
 
 
@@ -122,13 +124,14 @@ models for them in `*/actions/models.py`. These files could look like this:
 **nomad_example/actions/models.py**
 
 ```py
-
 from pydantic import BaseModel, Field
+
 from nomad.orchestrator.workflows.models import BaseWorkflowInput
 
 
 class ExampleWorkflowInput(BaseWorkflowInput):
     """Input model for the workflow"""
+
     cid: int = Field(
         ..., description='PubChem compound identifier for a chemical compound.'
     )
@@ -136,9 +139,9 @@ class ExampleWorkflowInput(BaseWorkflowInput):
 
 class GetRequestInput(BaseModel):
     """Input model for the activity"""
+
     url: str = Field(..., description='URL for get request.')
     timeout: int = Field(..., description='Timeout for the request.')
-
 ```
 
 Here we extend `BaseWorkflowInput` for defining the input model
@@ -157,7 +160,7 @@ Pydantic to define the input model of the activity.
 ```py
 from temporalio import activity
 
-from nomad_example.actions.workflows.models import GetRequestInput
+from nomad_example.actions.models import GetRequestInput
 
 
 @activity.defn
@@ -172,12 +175,8 @@ async def get_request(data: GetRequestInput):
             data.url,
             timeout=data.timeout,
         ) as response:
-            if response.status != 200:
-                raise ValueError(
-                    f'GET request failed with status {response.status}'
-                )
+            response.raise_for_status()
             return await response.json()
-
 ```
 
 Here we define an activity by using the Temporal decorator `activity.defn` on
@@ -195,8 +194,8 @@ from temporalio import workflow
 from temporalio.common import RetryPolicy
 
 with workflow.unsafe.imports_passed_through():
-    from nomad_example.actions.workflows.activities import get_request
-    from nomad_example.actions.workflows.models import (
+    from nomad_example.actions.activities import get_request
+    from nomad_example.actions.models import (
         ExampleWorkflowInput,
         GetRequestInput,
     )
@@ -210,10 +209,8 @@ class ExampleWorkflow:
             maximum_attempts=3,
         )
         get_request_input = GetRequestInput(
-            url=(
-                'https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/'
-                f'cid/{data.cid}/property/Title,SMILES/JSON',
-            ),
+            url='https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/'
+            f'cid/{data.cid}/property/Title,SMILES/JSON',
             timeout=10,
         )
         result = await workflow.execute_activity(
@@ -305,7 +302,7 @@ from nomad_example.actions.models import ExampleWorkflowInput
 m_package = SchemaPackage()
 
 
-class ExampleWorkflowSection(EntryData):
+class ExampleWorkflow(EntryData):
     """A section to run an example workflow using a PubChem CID."""
 
     cid = Quantity(
@@ -315,11 +312,11 @@ class ExampleWorkflowSection(EntryData):
     )
     workflow_id = Quantity(
         type=str,
-        description='ID of the `temporalio` workflow.',
+        description='Unique ID of the workflow.',
     )
     workflow_status = Quantity(
         type=str,
-        description='Status of the workflow.',
+        description='Status of the workflow based on the available workflow ID.',
     )
     pubchem_result = SubSection(
         section_def=PureSubstanceSection,
@@ -334,40 +331,55 @@ class ExampleWorkflowSection(EntryData):
             label='Run Example Workflow',
         ),
     )
+    trigger_get_workflow_status = Quantity(
+        type=bool,
+        description='Fetches the status for the available workflow ID.',
+        a_eln=ELNAnnotation(
+            component=ELNComponentEnum.ActionEditQuantity,
+            label='Get Workflow Status',
+        ),
+    )
 
     def run_workflow(self, archive, logger=None):
         """Run the workflow with the provided archive."""
-        if not self.cid:
-            logger.warn('No CID provided for the workflow. Cannot run the workflow.')
-            return
-        self.pubchem_result = None
-        self.workflow_status = None
-        self.workflow_id = None
-        workflow_name = 'nomad_example.actions.workflows.ExampleWorkflow'
-        input_data = ExampleWorkflowInput(
-            user_id=archive.metadata.authors[0].user_id,
-            upload_id=archive.metadata.upload_id,
-            cid=self.cid,
-        )
-        self.workflow_id = start_workflow(
-            workflow_name=workflow_name, data=input_data, task_queue=TaskQueue.GPU
-        )
+        try:
+            if not self.cid:
+                logger.warn(
+                    'No CID provided for the workflow. Cannot run the workflow.'
+                )
+                return
+            self.pubchem_result = None
+            self.workflow_status = None
+            self.workflow_id = None
+            workflow_name = 'nomad_example.actions.workflows.ExampleWorkflow'
+            input_data = ExampleWorkflowInput(
+                user_id=archive.metadata.authors[0].user_id,
+                upload_id=archive.metadata.upload_id,
+                cid=self.cid,
+            )
+            self.workflow_id = start_workflow(
+                workflow_name=workflow_name, data=input_data, task_queue=TaskQueue.CPU
+            )
+            self.trigger_get_workflow_status = True
+        except Exception as e:
+            logger.error(f'Error running workflow: {e}')
 
     def normalize(self, archive, logger=None):
         super().normalize(archive, logger)
-        if self.trigger_run_workflow and self.workflow_status != 'RUNNING':
-            try:
+        if self.trigger_run_workflow:
+            if self.workflow_status == 'RUNNING':
+                logger.warn('Workflow is already running. Cannot start a new one.')
+            else:
                 self.run_workflow(archive, logger)
-            except Exception as e:
-                logger.error(f'Error running workflow: {e}. ')
             self.trigger_run_workflow = False
-        if self.workflow_id:
-            try:
-                status = get_workflow_status(self.workflow_id)
-                if status:
+        if self.trigger_get_workflow_status:
+            if self.workflow_id:
+                try:
+                    status = get_workflow_status(self.workflow_id)
                     self.workflow_status = status.name
-            except Exception as e:
-                logger.error(f'Error getting workflow status: {e}. ')
+                except Exception as e:
+                    logger.error(f'Error getting workflow status: {e}. ')
+            self.trigger_get_workflow_status = False
 
 
 m_package.__init_metainfo__()
