@@ -148,12 +148,12 @@ Here we extend `BaseWorkflowInput` for defining the input model
 of the workflow and simply extend `BaseModel` class from
 Pydantic to define the input model of the activity.
 
-!!! important
-    We strongly recommend to extend the Pydantic base model `BaseWorkflowInput` to define the input model for your workflow. It
-    provides additional fields like `user_id` and `upload_id` which are
-    required to execute a workflow in NOMAD. If the input to your workflows
-    running on `GPU` and `CPU` task queues does not include these fields, the
-    workflow will fail.
+!!! tip "Important"
+    Always use the Pydantic base model `BaseWorkflowInput` to define the input
+    model for your workflow. It provides additional fields like `user_id` and
+    `upload_id` which are required to execute a workflow in NOMAD. If the input
+    to your workflows running on `GPU` and `CPU` task queues does not include
+    these fields, the workflow will fail.
 
 **nomad_example/actions/activities.py**
 
@@ -224,7 +224,7 @@ the Temporal decorator `workflow.defn`. We also specify the name of the
 workflow in the decorator which will be used to later identify it for
 execution.
 
-!!! important
+!!! tip "Important"
     Make sure the workflow name is unique. We recommend using the
     module path of the workflow class as workflow name to ensure uniqueness
     among all the plugins added to a NOMAD installation.
@@ -253,7 +253,7 @@ time for the activity execution to complete. For example, while setting one for
 an activity that makes an API call, determine the median call time and add some
 buffer to it.
 
-!!! important
+!!! tip "Important"
     The default retry policy has unlimited `maximum_attempts`. We strongly
     recommend to **always set a custom retry policy** with finite `maximum_attempts` to avoid forever running workflows.
     In addition, **always set appropriate timeouts** for activities to prevent stuck executions.
@@ -289,7 +289,7 @@ workflow_id = start_workflow(
 )
 ```
 
-!!! important
+!!! tip "Important"
     Make sure the task queue specified in `start_workflow` function is the same
     task queue where the chosen workflow was registered by its action entry point.
 
@@ -422,12 +422,23 @@ ID.
 
 After we run the workflow, we can also write back the results into the entry. You will learn about this in the next section.
 
-## Common activities
+## Utilities for database interaction
 
-- Add the code for writing back the results to the entry archive, writing raw
-file, accessing workflow artifact dir
-- link with available orchestrator.utils
-- (Later) Make standard activities available via orchestrator module.
+Interaction with your Oasis's database from Actions provides a powerful way of
+manipulating it. For example, once you run an action, you might want to save
+its output in an existing NOMAD entry, or even create new ones. We provide a
+curated set of utils in `nomad.orchestrator.database.utils` module to perform these tasks.
+
+!!! tip "Important"
+    Since interacting with database directly (bypassing the API endpoint)
+    through Actions is highly risky, we strongly recommend to only do this
+    through the functions defined under `nomad.orchestrator.database.utils`
+    module. If you have to perform a task that is not covered in the utils,
+    please use the available API endpoints and interact with the database via
+    the network. While this entails some network overhead
+
+- A table of utils: read entry, open raw file, update entry, create entry, create raw file, open a file in workflow artifact directory, write a file in workflow artifact directory
+
 
 ## Defining workers for task queues
 
