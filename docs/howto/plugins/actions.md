@@ -34,6 +34,18 @@ nomad-example
 See the documentation on [plugin development guidelines](./plugins.md#plugin-development-guidelines)
 for more details on the best development practices for plugins, including linting, testing and documenting.
 
+You can specify additional extras for your `cpu` or `gpu` workflows in the `pyproject.toml` file in the optional dependencies table.
+
+```toml
+[project]
+name = "nomad-example"
+...
+
+[optional-dependencies]
+gpu-workflow = ["torch"]
+cpu-workflow = ["aiohttp"]
+```
+
 ## Action entry point
 
 The entry point defines basic information about your action and is used to
@@ -448,4 +460,20 @@ curated set of utils in `nomad.orchestrator.database.utils` module to perform th
 
 ## Adding to your oasis
 
-- What are the steps needed for adding these workers and switch on temporal
+Make sure your oasis repo is up to date with the template by following the update [guide](https://github.com/FAIRmat-NFDI/nomad-distro-template?tab=readme-ov-file#updating-the-distribution-from-the-template). This ensures that the 
+necessary containers for `temporal` is setup correctly. 
+
+In addition to configuring the temporal service, you’ll also need to build new Docker images for both the gpu and cpu workers. The relevant extras for these workflows can be set in the pyproject.toml of the distro:
+```toml
+[project]
+name = "nomad-distro-template"
+...
+
+[optional-dependencies]
+plugins = ["nomad-example"]
+gpu-workflow = ["nomad-example[gpu-workflow]"]
+cpu-workflow = ["nomad-example[cpu-workflow]"]
+```
+
+To implement the necessary changes, including image build steps and updates to docker-compose, the Dockerfile, and GitHub Actions, you can refer to this [pull request](https://github.com/FAIRmat-NFDI/nomad-distro-template/pull/109/files).
+as a guide.
