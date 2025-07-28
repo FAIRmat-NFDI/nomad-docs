@@ -3,15 +3,15 @@
 
 ## Guidelines for building a custom schema
 
-NOMAD YAML schema files must have the `.archive.yaml` extension for NOMAD to recognize them as schema files. Below are six main guidelines for creating a custom YAML schema file.
+To define custom YAML schemas in NOMAD, you need to create a YAML file with the `.archive.yaml` extension. These files represent a [schema package](../../reference/glossary.md#schema-package), which can include one or more section and quantity definitions.. Below are six main guidelines for creating a custom YAML schema file.
 
 ??? info "1. NOMAD's `archive.yaml` files start with the `definitions:` keyword, and must have a `name:`, and can have a `description:`."
     
     NOMAD syntax:
     ```yaml
     definitions:
-      name:
-      description:
+      name: ...
+      description: ...
     ```
 
     Example:
@@ -28,13 +28,13 @@ NOMAD YAML schema files must have the `.archive.yaml` extension for NOMAD to rec
 
     ```yaml
     definitions:
-      name:
-      description: 
+      name: ...
+      description: ...
 
       sections:
-        My_first_section:
-        My_second_section:
-        My_third_section:
+        MyFirstSection: ...
+        MySecondSection: ...
+        MyThirdSection: ...
     ```
 
 
@@ -49,28 +49,28 @@ NOMAD YAML schema files must have the `.archive.yaml` extension for NOMAD to rec
       description: This is a custom schema that includes several sections.
 
       sections:
-        My_first_section:
+        MyFirstSection:
           base_sections:
             - nomad.datamodel.data.EntryData
-            - nomad.datamodel.metainfo.eln.Sample
+            - nomad.datamodel.metainfo.eln.ELNSample
   
-        My_second_section:
-        My_third_section:
+        MySecondSection: ...
+        MyThirdSection: ...
     ```
 
     or alternatively in the form of a Python list:
 
     ```yaml
     definitions:
-      name: My NOMAD ELN
+      name: My NOMAD Custom Schema
       description: This is a custom schema that includes several sections.
 
       sections:
-        My_first_section:
-          base_sections: ['nomad.datamodel.data.EntryData', 'nomad.datamodel.metainfo.eln.Sample']
+        MyFirstSection:
+          base_sections: ['nomad.datamodel.data.EntryData', 'nomad.datamodel.metainfo.eln.ELNSample']
   
-        My_second_section:
-        My_third_section:          
+        MySecondSection: ...
+        MyThirdSection: ...          
     ``` 
 
 ??? info "4. Each section can contain quantities, other sections, and subsections."
@@ -80,23 +80,24 @@ NOMAD YAML schema files must have the `.archive.yaml` extension for NOMAD to rec
 
     ```yaml
     definitions:
-      name: My NOMAD ELN
+      name: My NOMAD Custom Schema
       description: This is a custom schema that includes several sections.
 
       sections:
-        My_first_section:
+        MyFirstSection:
           base_sections:
             - nomad.datamodel.data.EntryData
-            - nomad.datamodel.metainfo.eln.Sample
-          quantities:
-
+            - nomad.datamodel.metainfo.eln.ELNSample
+          quantities: 
+            first_quantity:
+              type: str # Uses python type notation like: int, np.float64, etc.
           sub_sections:
-            My_first_subsection:
-              section:
-            My_second_subsection:
-              section:      
-        My_second_section:
-        My_third_section:        
+            my_first_subsection:
+              section: ...
+            my_second_subsection:
+              section: ...     
+        MySecondSection: ...
+        MyThirdSection: ...        
     ```
 
 
@@ -105,44 +106,45 @@ NOMAD YAML schema files must have the `.archive.yaml` extension for NOMAD to rec
 
     ```yaml
     definitions:
-      name: My NOMAD ELN
+      name: My NOMAD Custom Schema
       description: This is a custom schema that includes several sections.
 
       sections:
-        My_first_section:
+        MyFirstSection:
           base_sections:
             - nomad.datamodel.data.EntryData
-            - nomad.datamodel.metainfo.eln.Sample
+            - nomad.datamodel.metainfo.eln.ELNSample
           quantities:
             first_quantity:
-              - type: #For example, str or np.float64
-              - shape: #For example scalar or list (['*'])
-              - unit: #For example, meters, amperes, or seconds
+              type: #For example, str or np.float64
+              shape: #For example scalar or list (['*'])
+              unit: #For example, meters, amperes, or seconds
           sub_sections:
-            My_first_subsection:
-              section:
-            My_second_subsection:
-              section:
-            My_third_subsection:
-              section:
+            my_first_subsection:
+              section: ...
+            my_second_subsection:
+              section: ...
+            my_third_subsection:
+              section: ...
 
-        My_second_section:
-        My_third_section:          
+        MySecondSection: ...
+        MyThirdSection: ...          
     ```
 
 ??? info "6. Sections and quantities can have annotations"
     Annotations provide additional information that NOMAD can use to alter its behavior around these definitions and how users can interact with them. The keyword for annotations is `m_annotations:`.
     Among the various functionalities that annotations provide, they enable the transformation of schema sections, subsections, and quantities into ELN components that users can edit directly within the GUI.
+
     ```yaml
     definitions:
-      name: My NOMAD ELN
+      name: My NOMAD Custom Schema
       description: This is an electronic lab notebook schema that includes several sections.
       
       sections:
-        My_first_section:
+        MyFirst_Section:
           base_sections:
             - nomad.datamodel.data.EntryData
-            - nomad.datamodel.metainfo.eln.Sample
+            - nomad.datamodel.metainfo.eln.ELNSample
           quantities:
             first_quantity:
               - type: #For example, str or np.float64
@@ -151,14 +153,14 @@ NOMAD YAML schema files must have the `.archive.yaml` extension for NOMAD to rec
               m_annotations:
                 annotation_name:
                   key1: value1  
-              sub_section:
-                My_first_subsection:
-                  section:
-                My_second_subsection:
-                  section:
-                My_third_subsection:
-                  section:
+          sub_sections:
+            my_first_subsection:
+              section: ...
+            my_second_subsection:
+              section: ...
+            my_third_subsection:
+              section: ...
 
-        My_second_section:
-        My_third_section:    
+        MySecondSection: ...
+        MyThirdSection: ...    
     ```
