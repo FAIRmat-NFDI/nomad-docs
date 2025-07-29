@@ -35,7 +35,7 @@ Our tutorial documentation covers the basics of using Central NOMAD and NOMAD Oa
 - Add entries for samples, instruments, processes, and more.
 - Explore and search your ELN.
 
-[**Managing workflows and projects**](tutorial/workflows_projects.md)
+[**Managing workflows and projects**](workflows_projects.md)
 
 - Organize and manage complex research workflows using NOMAD.
 - Interface with NOMAD programmatically for automation and high-throughput use.
@@ -48,7 +48,7 @@ Our tutorial documentation covers the basics of using Central NOMAD and NOMAD Oa
 [**Creating custom schemas**](custom.md)
 
 - Create a custom NOMAD ELN schema using YAML files.
-- Create a parser for your tabular data (.xls or .csv). 
+- Create a parser for your tabular data (.xls or .csv).
 
 [**Developing NOMAD plugins**](develop_plugin.md)
 

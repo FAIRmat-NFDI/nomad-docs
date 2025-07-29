@@ -73,8 +73,6 @@ This will install all requirements in a virtual environment and start the local 
 uv run --extra dev pytest
 ```
 
-Here's a section formatted to match your `README.md` style, ready to be copy-pasted:
-
 
 ### How to check and remove unused assets
 

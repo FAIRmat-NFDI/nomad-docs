@@ -34,12 +34,12 @@ Here is a logical depiction of the workflow and all its tasks, inputs, and outpu
 
 ### Standardized versus custom workflows
 
-!!! Attention
-    This section is to be filled in.
+!!! Warning
+    Coming soon...
 
 <!-- TODO - add description here -->
 
-<!-- FROM FONDA CH
+<!-- Below is text copied directly from a book chapter explaining NOMAD workflows, it should be adapted for the docs
 
 \subsection{Workflow storage in NOMAD} \label{sec:NOMAD}
 
