@@ -110,11 +110,19 @@ An Oasis works exactly the same way the official NOMAD works. It is open and eve
 can access published data. Everybody with an account can upload data. This might not be
 what you want.
 
-Currently there are two ways to restrict access to your Oasis. First, you do not
-expose the Oasis to the public internet, e.g. you only make it available on an intra-net or
+Currently there are three ways to restrict access to your Oasis. First, you do not
+expose the Oasis to the public internet, e.g. you make it only available on an intra-net or
 through a VPN.
 
-Second, we offer a simple white-list mechanism. As the Oasis administrator you provide a
+Secondly, you can require authentication for all sensitive endpoints by enabling
+the global `require_authentication` flag in your configuration:
+
+```yaml
+oasis:
+    require_authentication: true
+```
+
+Lastly, we offer a simple white-list mechanism. As the Oasis administrator you provide a
 list of accounts as part of your Oasis configuration. To use the Oasis, all users have to
 be logged in and be on your white list of allowed users. To enable white-listing, you
 can provide a list of NOMAD account email addresses in your `nomad.yaml` like this:
