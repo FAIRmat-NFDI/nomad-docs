@@ -132,22 +132,32 @@ They namely require a source and a target, and the schema only defines the sourc
 
 ## MappingParser
 
-The mapping parser has several abstract properties and methods and the most important
-ones are listed in the following:
+The `MappingParser` defines the source-to-archive mapping.
+The source `data_object` can be an `XML` element tree or a `metainfo` section.
+Settings include:
 
 - `filepath`: path to the input file to be parsed
 - `data_object`: object resulting from loading the file in memory with `load_file`
 - `data`: dictionary representation of `data_object`
-- `mapper`: instance of `Mapper` required by `convert`
 - `load_file`: method to load the file given by `filepath`
+
+It also handles the actual conversion, via three methods.
+Each requires a `Mapper` instance as input:
+
 - `to_dict`: method to convert `data_object` into `data`
 - `from_dict`: method to convert `data` into `data_object`
 - `convert`: method to convert to another mapping parser
 
-`data_object` can be an `XML` element tree or a `metainfo` section for example depending on
-the inheriting class. In order to convert a mapping parser to another parser,
-the target parser must provide a [`Mapper`](#mapper) object. We refer to this simply as
-mapper throughout.
+Conversion can be toggled via the `update` optional key.
+
+| Update Mode | Description                                                                            |
+|-------------|----------------------------------------------------------------------------------------|
+| replace     | Replaces the target data entirely with the source data (default behavior)              |
+| append      | Appends source data to target, preserving existing target values when they exist       |
+| merge       | Merges dictionaries by recursively updating keys, or merges lists starting at index 0  |
+| merge@start | Merges lists starting at the beginning (index 0)                                       |
+| merge@last  | Merges lists starting from the end, calculated as len(source) - len(target)            |
+| merge@<n>   | Merges lists starting at a specific index n (can be negative for relative positioning) |
 
 In the following, we describe the currently implemented mapping parsers.
 
@@ -337,3 +347,5 @@ mapper which source to get the data.
         ),
     )
 ```
+
+
