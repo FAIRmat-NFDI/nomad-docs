@@ -2,8 +2,8 @@
 
 `MappingParser` is a NOMAD parsing framework for handling tree-like data structures.
 It is extensively used for processing highly structured files, like computational output.
-This framework distributes responsiblities between the file processing (building the source tree) and the mapping into the NOMAD schema.
-Some functionality can be inserted in the mapping, the rest is relegated to *normalization* functionalitites of the schema.
+This framework acts as an intermediate step in the [parsing phase](../../explanation/basics.md), where reading the source file is done separtely from building up the archive (i.e. `data`).
+Some functionality can be inserted in the mapping, the rest is relegated to [normalization](../../explanation/basics.md#normalizing) functionalitites of the schema.
 
 ![Responsiblity distribution MappingParser](images/mapping_parser_concept.png)
 
@@ -18,14 +18,17 @@ mapping parser into another mapping parser is explained as well. -->
 
 The NOMAD schema side targets several data paths within the source file.
 These paths are represented using the [JMesPath](https://jmespath.org/) format.
-This path is added to `m_annotations`, either overwriting or extending the previous annotations.
+This path is added to [`m_annotations`](../../reference/annotations.md), either overwriting or extending the previous annotations.
 Each mapping corresponds to its own dictionary key, and a parser schema may contain multiple in parallel.
 
 In the simplest case, e.g. a _single quantity_, you may simply write:
 
 ```python
 <quantity>.m_annotations.setdefault(MAPPING_ANNOTATION_KEY, {}).update(
-    dict(xml=MapperAnnotation(mapper=<jmes_path>))
+    dict(
+        out=MapperAnnotation(mapper=<OUTCAR jmes_path>),
+        xml=MapperAnnotation(mapper=<vasprun.xml jmes_path>),
+    )
 )
 ```
 
