@@ -16,7 +16,8 @@ mapping parser into another mapping parser is explained as well. -->
 
 ## Fundamentals
 
-The mapping from the source file to the archive is defined by a path (in [JMesPath](https://jmespath.org/) format) to the schema.
+The NOMAD schema side targets several data paths within the source file.
+These paths are represented using the [JMesPath](https://jmespath.org/) format.
 This path is added to `m_annotations`, either overwriting or extending the previous annotations.
 Each mapping corresponds to its own dictionary key, and a parser schema may contain multiple in parallel.
 
