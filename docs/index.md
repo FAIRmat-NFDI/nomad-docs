@@ -16,6 +16,7 @@ NOMAD solves the challenge of using heterogeneous and unfindable data.
 <!-- Finally, a paragraph that describes whom the product is useful for. -->
 NOMAD is useful for scientists that work with data, for research groups that need to collaborate on data, and for communities that need to build an archive of FAIR research data.
 
+
 <div markdown="block" class="home-grid">
 <div markdown="block">
 

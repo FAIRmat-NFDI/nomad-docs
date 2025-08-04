@@ -64,6 +64,54 @@ nav:
           - Write a normalizer: howto/develop/normalizing.md
           - Extend the search: howto/develop/search.md
           - Make a release: howto/develop/release.md
+      # - Manage and find data <span class="badge badge-user">U</span>:
+      #     - GUI:
+      #         - Upload and publish data for supported formats: howto/manage/upload.md
+      #         - Use ELNs: howto/manage/eln.md
+      #         - Explore data: howto/manage/explore.md
+      #         - Use NORTH: howto/manage/north.md
+      #     - Programmatic:
+      #         - Use the API: howto/programmatic/api.md # TODO separate into How-to and Explanation/Reference
+      #         - Download data: howto/programmatic/download.md
+      #         - Publish data using Python: howto/programmatic/publish_python.md
+      #         - Install nomad-lab: howto/programmatic/pythonlib.md
+      #         - Access processed data: howto/programmatic/archive_query.md
+      #         - Transform data: howto/programmatic/json_transformer.md
+      #         - Graph-style API:
+      #             - Basics: howto/graph-api/basics.md
+      #             - Navigation and fuzzy query/fetch: howto/graph-api/graph.structure.md
+      #             - Handling archive data: howto/graph-api/query.archive.md
+      #             - Other convenience functionalities: howto/graph-api/misc.md
+      # - Customize <span class="badge badge-advanced">A</span>:
+      #     - YAML (quick):
+      #         - Write a YAML schema package: howto/customization/basics.md
+      #         - Define ELNs: howto/customization/elns.md
+      #         - Use base sections: howto/customization/base_sections.md
+      #         - Parse tabular data: howto/customization/tabular.md
+      #         - Define workflows: howto/customization/workflows.md
+      #     - Python Plugins (robust):
+      #         - Introduction to plugins: howto/plugins/plugins.md
+      #         - Write an API: howto/plugins/apis.md
+      #         - Write an app: howto/plugins/apps.md
+      #         - Write an example upload: howto/plugins/example_uploads.md
+      #         - Write a normalizer: howto/plugins/normalizers.md
+      #         - Write a parser: howto/plugins/parsers.md
+      #         - Write a schema package: howto/plugins/schema_packages.md
+      #         - Work with units: howto/customization/units.md
+      #         - Use HDF5 to handle large quantities: howto/customization/hdf5.md
+      #         - Use mapping annotations to parse efficiently: howto/customization/mapping_parser.md
+      # - Host and develop NOMAD Oasis <span class="badge badge-sysadmin">S</span>:
+      #     - Host:
+      #         - Configure an Oasis: howto/oasis/configure.md
+      #         - Deploy an Oasis: howto/oasis/deploy.md
+      #         - Update an Oasis: howto/oasis/update.md
+      #         - Perform admin tasks: howto/oasis/admin.md
+      #     - Develop:
+      #         - Get started: howto/develop/setup.md
+      #         - Navigate the code: howto/develop/code.md
+      #         - Contribute: howto/develop/contrib.md
+      #         - Extend the search: howto/develop/search.md
+      #         - Make a release: howto/develop/release.md
   - Domain-specific examples:
       - Overview: examples/overview.md
       - Computational data:
