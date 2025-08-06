@@ -27,7 +27,7 @@ NOMAD ingests the raw input and output files from standard simulation software b
     </label>
 </div>
 
-The extracted (meta)data are stored within a structured schema&mdash;the NOMAD [Metainfo](../../reference/glossary.md/#metainfo)&mdash;to provide context for each quantity, enabling interoperability and comparison between, e.g., simulation software. The Metainfo is constructed from [Sections and Subsections](../../reference/glossary.md#section-and-subsection) and [Quantities](../../reference/glossary.md#quantity), which can be conveniently browsed by users with the [Metinfo Browser](https://nomad-lab.eu/prod/v1/gui/analyze/metainfo){:target="_blank"}:
+The extracted (meta)data are stored within a structured schema&mdash;the NOMAD [Metainfo](../../reference/glossary.md#metainfo)&mdash;to provide context for each quantity, enabling interoperability and comparison between, e.g., simulation software. The Metainfo is constructed from [Sections and Subsections](../../reference/glossary.md#section-and-subsection) and [Quantities](../../reference/glossary.md#quantity), which can be conveniently browsed by users with the [Metinfo Browser](https://nomad-lab.eu/prod/v1/gui/analyze/metainfo){:target="_blank"}:
 
 <div class="click-zoom">
     <label>
@@ -37,7 +37,7 @@ The extracted (meta)data are stored within a structured schema&mdash;the NOMAD [
 </div>
 
 
-In the same upload, there might be multiple mainfiles and auxiliary files organized in a folder tree structure. A separate [Entry](../../reference/glossary.md/#entry) will be created for each mainfile identified. For each entry, an [Archive](../../reference/glossary.md#archive) is created that contains all the extracted (meta)data in a _structured_, _well defined_, and _machine readable_ format. This **metadata** provides context to the raw data, i.e., what were the input methodological parameters, on which material the calculation was performed, etc.
+In the same upload, there might be multiple mainfiles and auxiliary files organized in a folder tree structure. A separate [Entry](../../reference/glossary.md#entry) will be created for each mainfile identified. For each entry, an [Archive](../../reference/glossary.md#archive) is created that contains all the extracted (meta)data in a _structured_, _well defined_, and _machine readable_ format. This **metadata** provides context to the raw data, i.e., what were the input methodological parameters, on which material the calculation was performed, etc.
 
 
 
