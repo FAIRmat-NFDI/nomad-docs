@@ -105,7 +105,7 @@ To do so, the necessary information are listed in the table below:
 
 <i>project_url</i>:
         The URL address to the Labfolder project. it should follow this pattern:
-        'https://your-labfolder-server/eln/notebook#?projectIds=your-project-id'. This is used to setup
+        `https://your-labfolder-server/eln/notebook#?projectIds=your-project-id`. This is used to setup
         the server and initialize the NOMAD schema.
 
 <i>labfolder_email</i>:
