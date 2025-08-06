@@ -1,0 +1,8 @@
+{
+  "files": ["docs/**/*.md"],
+  "ignorePatterns": [
+    {
+      "pattern": "^http://localhost"
+    }
+  ]
+}

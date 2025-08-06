@@ -17,6 +17,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Check external links in markdown files
+        uses: tcort/github-action-markdown-link-check@v1
+        with:
+          config-file: .github/workflows/markdown-link-check.json
 
       - name: Install uv
         uses: astral-sh/setup-uv@v5
