@@ -31,7 +31,7 @@ jobs:
         run: |
           uv run \
             --with 'nomad-lab[infrastructure] @ https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR.git' \
-            mkdocs build
+            mkdocs build --strict
 
       - name: Copy built docs
         run: |
