@@ -22,7 +22,7 @@ uses and hybrids are imaginable:
 - Mirror: Use the Oasis as a mirror that hosts a copy of all published NOMAD data
 - FAIRmat: Use Oasis to form a network of repositories to build a federated data infrastructure
   for materials science.
-  This is what we do in the [FAIRmat project](https://www.fair-di.eu/fairmat/consortium){:target="\_blank"}.
+  This is what we do in the [FAIRmat project](https://www.fairmat-nfdi.eu/fairmat){:target="\_blank"}.
 
 <figure markdown>
   ![oasis use-cases](images/oasis-use-cases.png){ width=700 }
