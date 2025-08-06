@@ -18,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Check external links in markdown files
+      - name: Check links in markdown files
         uses: tcort/github-action-markdown-link-check@v1
         with:
           use-quiet-mode: 'yes'
