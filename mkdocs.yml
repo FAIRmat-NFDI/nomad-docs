@@ -59,6 +59,7 @@ nav:
           - Get started: howto/develop/setup.md
           - Navigate the code: howto/develop/code.md
           - Contribute: howto/develop/contrib.md
+          - Write a normalizer: howto/develop/normalizing.md
           - Extend the search: howto/develop/search.md
           - Make a release: howto/develop/release.md
   - Domain-specific examples:
