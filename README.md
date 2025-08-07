@@ -73,37 +73,6 @@ This will install all requirements in a virtual environment and start the local 
 uv run --extra dev pytest
 ```
 
-
-### How to check and remove unused assets
-
-This repository includes a utility to help keep the documentation tree clean by detecting and safely handling **unreferenced assets** such as files in `images/` and `data/` directories.
-
-#### Tool: `utils/find_unused_assets.py`
-
-This script checks whether files stored in `images/` or `data/` subdirectories (under `docs/`) are actually referenced by any Markdown files in the **same folder**. If not, they are considered unreferenced.
-
-#### Usage
-
-From the root of the repository:
-
-```bash
-# List all unreferenced assets
-python utils/find_unused_assets.py
-```
-
-```bash
-# Move unreferenced assets to .trash/ (safe mode)
-python utils/find_unused_assets.py --remove
-```
-> By default, unreferenced files are **not deleted**. They are moved to a `.trash/` folder at the project root so you can review and recover them if needed.
-
-Here you can check if the deletions have mistakenly broken any links before permanent deletion.
-
-```bash
-# Permanently delete all assets in .trash/
-python utils/find_unused_assets.py --empty-trash
-```
-
 ---
 ## Appendix
 
