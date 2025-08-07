@@ -1,4 +1,4 @@
-name: Check mkdocs build
+name: Check mkdocs build and links in markdown files
 
 on:
   push:
@@ -13,7 +13,7 @@ env:
   PYTHON_VERSION: 3.12
 
 jobs:
-  test-docs:
+  check-links:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -25,6 +25,11 @@ jobs:
           config-file: .github/workflows/markdown-link-check.json
           folder-path: 'docs, examples'
           file-path: './README.md'
+
+  test-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
 
       - name: Install uv
         uses: astral-sh/setup-uv@v5
