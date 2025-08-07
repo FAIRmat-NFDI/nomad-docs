@@ -157,7 +157,7 @@ This structure foresees a parent Entry where we collect one or more tabular data
 ### 5. Row mode, single new Entry, parse to my path
 
 <p align="center" width="100%">
-    <img width="100%" src="./tutorial/images/tabular-5.png">
+    <img width="100%" src="./images/tabular-5.png">
 </p>
 
 Example analogous to the previous, where the new created Entry contains now a repeated subsection with a list of instances made from each line of the tabular data file, as show in the [Row mode, current Entry, parse to my path](#3-row-mode-current-entry-parse-to-my-path) case.
@@ -199,7 +199,7 @@ A further comment is needed to explain the combination of this feature with `roo
 ### 7. Row mode, multiple new entries, parse to my path
 
 <p align="center" width="100%">
-    <img width="100%" src="./tutorial/images/tabular-7.png">
+    <img width="100%" src="./images/tabular-7.png">
 </p>
 
 As anticipated in the previous example, `row` mode in connection to `multiple_new_entries` will produce a manyfold of instances of a specific class, each of them being a new Entry. In the present case, each instance will also automatically be placed in a `ReferenceEditQuantity` quantity lying in a subsection defined within the parent Entry, coloured in plum in the following example image.
@@ -220,7 +220,7 @@ As anticipated in the previous example, `row` mode in connection to `multiple_ne
 ### 8. The Sub-Subsection nesting schema
 
 <p align="center" width="100%">
-    <img width="100%" src="./tutorial/images/tabular-8.png">
+    <img width="100%" src="./images/tabular-8.png">
 </p>
 
 If the tabular data file contains multiple columns with exact same name, there is a way to parse them using `row` mode. As explained in previous examples, this mode creates an instance of a subsection of the schema for each row of the file. Whenever column with same name are found they are interpreted as multiple instances of a sub-subsection nested inside the subsection. To build a schema with such a feature it is enough to have two nested classes, each of them bearing a `repeats: true` annotation. This structure can be applied to each and every of the cases above with `row` mode parsing.
