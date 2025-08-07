@@ -30,5 +30,5 @@ build-backend = "uv_build"
 [tool.uv.build-backend]
 source-exclude = ["docs/**"]
 
-[dependency-groups]
+[project.optional-dependencies]
 dev = ["pytest>=7.4.4"]
