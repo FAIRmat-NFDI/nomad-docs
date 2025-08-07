@@ -10,7 +10,7 @@ A variety of file formats are used in the research field of [atom probe tomograp
 
 - [pynxtools-apm](https://fairmat-nfdi.github.io/pynxtools-apm/)
 
-The plugin uses the [ifes_apt_tc_data_modeling Python library](https://github.com/atomprobe-tc/ifes_apt_tc_data_modeling) that is developed together with the [International Field Emission Society](https://fieldemission.org/).
+The plugin uses the [ifes_apt_tc_data_modeling Python library](https://github.com/atomprobe-tc/ifes_apt_tc_data_modeling) that is developed together with the [International Field Emission Society](http://fieldemission.org/).
 
 ### Work with standardized atom probe data in NOMAD and NORTH
 Once standardized, NXapm-compliant data in NOMAD can be explored with domain-specific software tools using a convenient JupyterHub-based service offered by the NOMAD Remote Tools Hub (NORTH).

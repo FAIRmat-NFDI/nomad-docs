@@ -5,9 +5,6 @@
     },
     {
       "pattern": "^http://localhost"
-    },
-    {
-      "pattern": "^https://fieldemission\\.org/$"
     }
   ]
 }
