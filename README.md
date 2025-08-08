@@ -74,6 +74,24 @@ uv run --extra dev pytest
 ```
 
 ---
+
+## Automated Tests
+
+This repository uses GitHub Actions to automatically run a series of tests on every push and pull request to the `main` branch. These tests ensure the quality and integrity of the documentation.
+
+### 1. Link Check
+
+This test checks for broken links in all markdown files (`.md`) within the `docs` and `examples` directories, as well as in the `README.md` file. This ensures that all internal and external links are valid and accessible.
+
+### 2. Documentation Build
+
+This test builds the MkDocs documentation using the `--strict` flag. This flag treats any warnings as errors, ensuring that the documentation is always in a buildable state.
+
+### 3. Pytest
+
+This test runs the `pytest` command to execute all the tests in the `tests` directory. This ensures that all the code examples and other functionalities in the documentation are working as expected.
+
+---
 ## Appendix
 
 ### External Contribution Instructions
