@@ -42,7 +42,7 @@ nomad-example
    └── pyproject.toml
 ```
 
-The boiler plate code makes it easier to define actions. Start with replacing
+The boilerplate code makes it easier to define actions. Start with replacing
 the example code in `activities.py` with your code and adjusting the input data
 model in the `models.py` with the required fields for your activity.
 
