@@ -29,11 +29,14 @@ The relevant part of the repository layout will look something like this:
 nomad-example
    ├── src
    │   ├── nomad_example
-   │   │   ├── myaction
+   │   │   ├── __init__.py
+   │   │   ├── actions
    │   │   │   ├── __init__.py
-   │   │   │   ├── activities.py
-   │   │   │   ├── workflows.py
-   │   │   │   ├── models.py
+   │   │   │   ├── myaction
+   │   │   │   │   ├── __init__.py
+   │   │   │   │   ├── activities.py
+   │   │   │   │   ├── workflows.py
+   │   │   │   │   ├── models.py
    ├── LICENSE.txt
    ├── README.md
    └── pyproject.toml
@@ -126,13 +129,13 @@ detected:
 
 ```toml
 [project.entry-points.'nomad.plugin']
-myaction = "nomad_example.actions:myaction"
+myaction = "nomad_example.actions.myaction:my_action"
 ```
 
 ## `Action` class
 
 The `load`-method of an action entry point returns an instance of a
-`nomad.orchestrator.base.Action` class which describes the action through
+`nomad.actions.Action` class which describes the action through
 a collection of activities and workflows that connect them. It also specifies the task queue for which the workflows and activities are registered. Once the
 workflows are made available through the `Action`, they can be triggered
 using the `start_action` funtion. This adds a workflow run instance to the specified task queue. You can learn more about it in the [next section](#integrating-action-with-schemas).
@@ -148,12 +151,12 @@ code 200 (successful response) is achieved. Once the activities are
 defined, a workflow arranges them in a sequence and defines flow of data from
 one activity to another.
 
-You can add these definitions in `*/actions/activities.py` and
-`*/actions/workflows.py`. Temporal requires the input and output of the
+You can add these definitions in `*/myaction/activities.py` and
+`*/myaction/workflows.py`. Temporal requires the input and output of the
 activities and workflows to be serializable. We recommend defining Pydantic
-models for them in `*/actions/models.py`. These files could look like this:
+models for them in `*/myaction/models.py`. These files could look like this:
 
-**nomad_example/actions/models.py**
+**nomad_example/actions/myaction/models.py**
 
 ```py
 from pydantic import BaseModel, Field
@@ -187,7 +190,7 @@ Pydantic to define the input model of the activity.
     to your workflows running on `GPU` and `CPU` task queues does not include
     these fields, the workflow will fail.
 
-**nomad_example/actions/activities.py**
+**nomad_example/actions/myaction/activities.py**
 
 ```py
 from temporalio import activity
@@ -217,7 +220,7 @@ asynchronously. Non-blocking activities allow Temporal to efficiently manage
 the task queues, handling multiple workflows at once. We use `GetRequestInput`
 model to define the argument of this activity.
 
-**nomad_example/actions/workflows.py**
+**nomad_example/actions/myaction/workflows.py**
 
 ```py
 from datetime import timedelta
@@ -298,12 +301,12 @@ After actions are defined, it is possible to intergrate their workflows with
 [schemas](../../reference/glossary.md#schema) and run them from NOMAD
 entries.
 
-The workflows defined through `Action` have unique names associated with
-them. We can run a workflow using `start_action`
-function, which takes the workflow name and an instance of its input model:
+Every action has a unique name based on the package path of its entry point.
+We can run a workflow using `start_action`
+function, which takes the action name and an instance of its input model:
 
 ```py
-from nomad.orchestrator.utils import start_action
+from nomad.actions.utils import start_action
 
 from nomad_example.actions.myaction.models import ExampleWorkflowInput
 
@@ -436,7 +439,7 @@ function is triggered from inside the `run_action` method.
 to get the status of the workflow.
 
 When `trigger_get_action_status` is clicked, the status for the available `workflow_id` is requested and is saved as a string in `workflow_status`
-quantity. This status can be mainly `RUNNING`, `COMPLETED` or `TERMINATED`. Everytime a workflow run is triggered, the status for it is also requested.
+quantity. This status can be mainly `RUNNING`, `COMPLETED`, `FAILED`, `CANCELLED` or `TERMINATED`. Everytime a workflow run is triggered, the status for it is also requested.
 
 It is also possible to re-trigger the workflow run if the status is not
 `RUNNING`. Of course, the new workflow run will now have a different workflow
@@ -449,12 +452,12 @@ After we run the workflow, we can also write back the results into the entry. Yo
 Interaction with your Oasis's database from Actions provides a powerful way of
 manipulating it. For example, once you run an action, you might want to save
 its output in an existing NOMAD entry, or even create new ones. We provide a
-curated set of utils in `nomad.orchestrator.database.utils` module to perform these tasks.
+curated set of utils in `nomad.actions.database.utils` module to perform these tasks.
 
 !!! tip "Important"
     Since interacting with database directly (bypassing the API endpoint)
     through Actions is highly risky, we strongly recommend to only do this
-    through the functions defined under `nomad.orchestrator.database.utils`
+    through the functions defined under `nomad.actions.database.utils`
     module. If you have to perform a task that is not covered in the utils,
     please use the available API endpoints and interact with the database via
     the network. While this entails some network overhead
