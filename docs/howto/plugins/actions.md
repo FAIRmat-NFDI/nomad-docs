@@ -21,7 +21,7 @@ The relevant part of the repository layout will look something like this:
 nomad-example
    ├── src
    │   ├── nomad_example
-   │   │   ├── actions
+   │   │   ├── myaction
    │   │   │   ├── __init__.py
    │   │   │   ├── activities.py
    │   │   │   ├── workflows.py
@@ -51,14 +51,16 @@ cpu-workflow = ["aiohttp"]
 The entry point defines basic information about your action and is used to
 automatically load it into a NOMAD distribution. It is an instance of a
 `ActionEntryPoint` or its subclass and it contains a `load` method which
-returns a `ActionHandler` instance.
+returns a `Action` instance.
 
-The `ActionHandler` instance can be used to add workflows and activities, along
+The `Action` instance can be used to add workflows and activities, along
 with the task queue where they will be registered. You will learn more about
-`ActionHandler` class in the [next section](#actionhandler-class). The entry point should be defined
+`Action` class in the [next section](#action-class). The entry point should be defined
 in `*/actions/__init__.py` like this:
 
 ```py
+from nomad.actions import TaskQueue
+from pydantic import Field
 from temporalio import workflow
 
 with workflow.unsafe.imports_passed_through():
@@ -66,21 +68,24 @@ with workflow.unsafe.imports_passed_through():
 
 
 class MyActionEntryPoint(ActionEntryPoint):
+    task_queue: str = Field(
+        default=TaskQueue.CPU, description='Determines the task queue for this action'
+    )
+
     def load(self):
-        from nomad.orchestrator.base import ActionHandler
-        from nomad.orchestrator.shared.constant import TaskQueue
+        from nomad.actions import Action
 
-        from nomad_example.actions.activities import get_request
-        from nomad_example.actions.workflows import ExampleWorkflow
+        from nomad_example.actions.myaction.activities import get_request
+        from nomad_example.actions.myaction.workflows import ExampleWorkflow
 
-        return ActionHandler(
-            workflows=[ExampleWorkflow],
+        return Action(
+            task_queue=self.task_queue,
+            workflow=ExampleWorkflow,
             activities=[get_request],
-            task_queue=TaskQueue.CPU,
         )
 
 
-myaction = MyActionEntryPoint(
+my_action = MyActionEntryPoint(
     name='MyAction',
     description='My custom action.',
 )
@@ -88,12 +93,12 @@ myaction = MyActionEntryPoint(
 
 Here you can see that a new subclass of `MyActionEntryPoint` was defined. In
 this new class you can override the `load` method to determine how the
-`ActionHandler` class is loaded, but you can also extend the
+`Action` class is loaded, but you can also extend the
 `ActionEntryPoint` model to add new configurable parameters for this schema
 package as explained [here](../../explanation/plugin_system.
 md#plugin-configuration).
 
-We also instantiate an object `myaction` from the new subclass. This is the
+We also instantiate an object `my_action` from the new subclass. This is the
 final entry point instance in which you specify the default parameterization
 and other details about the action. In the reference you can see all of the
 available
@@ -109,13 +114,13 @@ detected:
 myaction = "nomad_example.actions:myaction"
 ```
 
-## `ActionHandler` class
+## `Action` class
 
 The `load`-method of an action entry point returns an instance of a
-`nomad.orchestrator.base.ActionHandler` class which describes the action through
+`nomad.orchestrator.base.Action` class which describes the action through
 a collection of activities and workflows that connect them. It also specifies the task queue for which the workflows and activities are registered. Once the
-workflows are made available through the `ActionHandler`, they can be triggered
-using the `start_workflow` funtion. This adds a workflow run instance to the specified task queue. You can learn more about it in the [next section](#integrating-action-with-schemas).
+workflows are made available through the `Action`, they can be triggered
+using the `start_action` funtion. This adds a workflow run instance to the specified task queue. You can learn more about it in the [next section](#integrating-action-with-schemas).
 
 We use [Temporal](https://docs.temporal.io/temporal)'s workflow-activity
 abstraction here. Activities are the atomic unit of execution. They should
@@ -172,7 +177,7 @@ Pydantic to define the input model of the activity.
 ```py
 from temporalio import activity
 
-from nomad_example.actions.models import GetRequestInput
+from nomad_example.actions.myaction.models import GetRequestInput
 
 
 @activity.defn
@@ -206,17 +211,20 @@ from temporalio import workflow
 from temporalio.common import RetryPolicy
 
 with workflow.unsafe.imports_passed_through():
-    from nomad_example.actions.activities import get_request
-    from nomad_example.actions.models import (
+    from nomad_example.actions.myaction.activities import get_request
+    from nomad_example.actions.myaction.models import (
         ExampleWorkflowInput,
         GetRequestInput,
     )
 
 
-@workflow.defn(name='nomad_example.actions.workflows.ExampleWorkflow')
+@workflow.defn
 class ExampleWorkflow:
     @workflow.run
     async def run(self, data: ExampleWorkflowInput) -> dict:
+        retry_policy = RetryPolicy(
+            maximum_attempts=3,
+        )
         get_request_input = GetRequestInput(
             url='https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/'
             f'cid/{data.cid}/property/Title,SMILES/JSON',
@@ -226,7 +234,7 @@ class ExampleWorkflow:
             get_request,
             get_request_input,
             start_to_close_timeout=timedelta(seconds=60),
-            retry_policy=RetryPolicy(maximum_attempts=3),
+            retry_policy=retry_policy,
         )
         return result
 ```
@@ -279,41 +287,35 @@ After actions are defined, it is possible to intergrate their workflows with
 [schemas](../../reference/glossary.md#schema) and run them from NOMAD
 entries.
 
-The workflows defined through `ActionHandler` have unique names associated with
-them. We can run a workflow using `start_workflow`
-function, which takes the workflow name, an instance of its input model, and
-the name of the task queue where the workflow run will be added:
+The workflows defined through `Action` have unique names associated with
+them. We can run a workflow using `start_action`
+function, which takes the workflow name and an instance of its input model:
 
 ```py
-from nomad.orchestrator.utils import start_workflow
-from nomad.orchestrator.shared.constant import TaskQueue
+from nomad.orchestrator.utils import start_action
 
-from nomad_example.actions.models import ExampleWorkflowInput
+from nomad_example.actions.myaction.models import ExampleWorkflowInput
 
-workflow_id = start_workflow(
-    workflow_name='nomad_example.actions.workflows.ExampleWorkflow',
+workflow_id = start_action(
+    workflow_name='nomad_example.actions.myaction:my_action',
     data=ExampleWorkflowInput(
         user_id='NOMAD User ID',
         upload_id='NOMAD Upload ID',
         cid=962,  # CID for Water
     ),
-    task_queue=TaskQueue.CPU,
 )
 ```
 
-!!! tip "Important"
-    Make sure the task queue specified in `start_workflow` function is the same
-    task queue where the chosen workflow was registered by its action entry point.
 
-`start_workflow` returns a string containing a unique workflow ID assigned to the
+`start_action` returns a string containing a unique workflow ID assigned to the
 triggered workflow run. This can be used to get the current status of the
-workflow using `get_workflow_status` function which takes the workflow ID as an
+workflow using `get_action_status` function which takes the workflow ID as an
 input and returns a `temporalio.client.WorkflowExecutionStatus` object:
 
 ```py
-from nomad.orchestrator.utils import get_workflow_status
+from nomad.actions.utils import get_action_status
 
-workflow_status = get_workflow_status(workflow_id)
+workflow_status = get_action_status(workflow_id)
 
 print(workflow_status.name)  # example output: RUNNING
 ```
@@ -323,14 +325,13 @@ You can add these functionalities in the `normalize` of an
 entries. A schema that uses ELN quantities to trigger actions can look like this:
 
 ```py
+from nomad.actions.utils import get_action_status, start_action
 from nomad.datamodel.data import EntryData
 from nomad.datamodel.metainfo.annotations import ELNAnnotation, ELNComponentEnum
 from nomad.datamodel.metainfo.basesections.v1 import PureSubstanceSection
 from nomad.metainfo import Quantity, SchemaPackage, SubSection
-from nomad.orchestrator.base import TaskQueue
-from nomad.orchestrator.utils import get_workflow_status, start_workflow
 
-from nomad_example.actions.models import ExampleWorkflowInput
+from nomad_example.actions.myaction.models import ExampleWorkflowInput
 
 m_package = SchemaPackage()
 
@@ -356,25 +357,25 @@ class ExampleWorkflow(EntryData):
         description='Data populated based on PubChem API call for given CID.',
     )
 
-    trigger_run_workflow = Quantity(
+    trigger_run_action = Quantity(
         type=bool,
-        description='Starts an asynchronous run of the example workflow.',
+        description='Starts an asynchronous run of the example action.',
         a_eln=ELNAnnotation(
             component=ELNComponentEnum.ActionEditQuantity,
-            label='Run Example Workflow',
+            label='Run Example Action',
         ),
     )
-    trigger_get_workflow_status = Quantity(
+    trigger_get_action_status = Quantity(
         type=bool,
         description='Fetches the status for the available workflow ID.',
         a_eln=ELNAnnotation(
             component=ELNComponentEnum.ActionEditQuantity,
-            label='Get Workflow Status',
+            label='Get Action Status',
         ),
     )
 
-    def run_workflow(self, archive, logger=None):
-        """Run the workflow with the provided archive."""
+    def run_action(self, archive, logger=None):
+        """Run the action with the provided archive."""
         try:
             if not self.cid:
                 logger.warn(
@@ -384,48 +385,46 @@ class ExampleWorkflow(EntryData):
             self.pubchem_result = None
             self.workflow_status = None
             self.workflow_id = None
-            workflow_name = 'nomad_example.actions.workflows.ExampleWorkflow'
+            workflow_name = 'nomad_example.actions.myaction:my_action'
             input_data = ExampleWorkflowInput(
                 user_id=archive.metadata.authors[0].user_id,
                 upload_id=archive.metadata.upload_id,
                 cid=self.cid,
             )
-            self.workflow_id = start_workflow(
-                workflow_name=workflow_name, data=input_data, task_queue=TaskQueue.CPU
-            )
-            self.trigger_get_workflow_status = True
+            self.workflow_id = start_action(action_name=workflow_name, data=input_data)
+            self.trigger_get_action_status = True
         except Exception as e:
             logger.error(f'Error running workflow: {e}')
 
     def normalize(self, archive, logger=None):
         super().normalize(archive, logger)
-        if self.trigger_run_workflow:
+        if self.trigger_run_action:
             if self.workflow_status == 'RUNNING':
                 logger.warn('Workflow is already running. Cannot start a new one.')
             else:
-                self.run_workflow(archive, logger)
-            self.trigger_run_workflow = False
-        if self.trigger_get_workflow_status:
+                self.run_action(archive, logger)
+            self.trigger_run_action = False
+        if self.trigger_get_action_status:
             if self.workflow_id:
                 try:
-                    status = get_workflow_status(self.workflow_id)
+                    status = get_action_status(self.workflow_id)
                     self.workflow_status = status.name
                 except Exception as e:
                     logger.error(f'Error getting workflow status: {e}. ')
-            self.trigger_get_workflow_status = False
+            self.trigger_get_action_status = False
 
 
 m_package.__init_metainfo__()
 ```
 
 Here we define an `EntryData` section with ELN quantities like `cid`, which
-takes a integer input, and `trigger_run_workflow`, which is an actionable
-button. When the `trigger_run_workflow` button is clicked, the `start_workflow`
-function is triggered from inside the `run_workflow` method.
+takes a integer input, and `trigger_run_action`, which is an actionable
+button. When the `trigger_run_action` button is clicked, the `start_action`
+function is triggered from inside the `run_action` method.
 `workflow_id` quantity is populated as a result, which is used in the next step
 to get the status of the workflow.
 
-When `trigger_get_workflow_status` is clicked, the status for the available `workflow_id` is requested and is saved as a string in `workflow_status`
+When `trigger_get_action_status` is clicked, the status for the available `workflow_id` is requested and is saved as a string in `workflow_status`
 quantity. This status can be mainly `RUNNING`, `COMPLETED` or `TERMINATED`. Everytime a workflow run is triggered, the status for it is also requested.
 
 It is also possible to re-trigger the workflow run if the status is not
