@@ -1,11 +1,19 @@
 # How to define actions
 
-Actions allow to define executable workflows in NOMAD. They provide an
-alternative to entry normalize methods and are well-suited for setting up
-long-running workflows, like running training and inferring ML models, or
-workflows that need to interact with external APIs. Dedicated
-workers can be configured to manage workflows, allowing targeted allocation of
-resources like GPUs for specific tasks.
+Actions allow to define executable workflows in NOMAD. They are an
+alternative to [normalizers](/tutorial/custom.html#custom-normalizers) and can
+be configured to use specialized workers instead of the NOMAD internal worker.
+It allows for better resource allocation like GPUs for specific actions.
+
+!!! tip "Important"
+
+    Defining actions is more complicated when compared to defining
+    normalizers in the schema packages and parser packages. If the processing
+    workflow involves trivial data manipulation (for example, populating a
+    quantity based on another quantity, reading and importing data from a raw
+    file, etc.), consider using normalizers and parsers. On other hand, if your
+    workflow requires robust interaction with an external API, longer
+    processing time (for example, days), or special resource allocation, use actions.
 
 This documentation shows you how to write a plugin entry point for an action.
 You should read the [introduction to plugins](./plugins.md)
@@ -31,10 +39,17 @@ nomad-example
    └── pyproject.toml
 ```
 
+The boiler plate code makes it easier to define actions. Start with replacing
+the example code in `activities.py` with your code and adjusting the input data
+model in the `models.py` with the required fields for your activity.
+
 See the documentation on [plugin development guidelines](./plugins.md#plugin-development-guidelines)
 for more details on the best development practices for plugins, including linting, testing and documenting.
 
-You can specify additional extras for your `cpu` or `gpu` workflows in the `pyproject.toml` file in the optional dependencies table.
+By default, we provide `CPU` and `GPU` task queues. While defining an action,
+it is assigned to one of these queues. If your action depends on packages that
+are not required for the NOMAD installation, you can add them as
+optional dependencies in the `pyproject.toml` for the given task queue:
 
 ```toml
 [project]
@@ -240,14 +255,10 @@ class ExampleWorkflow:
 ```
 
 Here we make a workflow definition by creating as a Python class and using
-the Temporal decorator `workflow.defn`. We also specify the name of the
-workflow in the decorator which will be used to later identify it for
-execution.
-
-!!! tip "Important"
-    Make sure the workflow name is unique. We recommend using the
-    module path of the workflow class as workflow name to ensure uniqueness
-    among all the plugins added to a NOMAD installation.
+the Temporal decorator `workflow.defn`.
+The name of workflow is automatically taken from the unique ID of the
+action entry point, which is nothing but the package path to its definition.
+For our example, it will be `nomad_example.actions.myaction:my_action`.
 
 We define the workflow _function_ in the `run` method of the workflow
 definition class and use the Temporal decorator `workflow.run`. It describes the
