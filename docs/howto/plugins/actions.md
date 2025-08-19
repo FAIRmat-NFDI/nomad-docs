@@ -161,7 +161,17 @@ models for them in `*/myaction/models.py`. These files could look like this:
 ```py
 from pydantic import BaseModel, Field
 
-from nomad.orchestrator.workflows.models import BaseWorkflowInput
+
+class BaseWorkflowInput(BaseModel):
+    """Base input model for workflows"""
+
+    upload_id: str = Field(
+        ...,
+        description='Unique identifier for the upload associated with the workflow.',
+    )
+    user_id: str = Field(
+        ..., description='Unique identifier for the user who initiated the workflow.'
+    )
 
 
 class ExampleWorkflowInput(BaseWorkflowInput):
@@ -184,11 +194,10 @@ of the workflow and simply extend `BaseModel` class from
 Pydantic to define the input model of the activity.
 
 !!! tip "Important"
-    Always use the Pydantic base model `BaseWorkflowInput` to define the input
-    model for your workflow. It provides additional fields like `user_id` and
-    `upload_id` which are required to execute a workflow in NOMAD. If the input
-    to your workflows running on `GPU` and `CPU` task queues does not include
-    these fields, the workflow will fail.
+    We provide a Pydantic base model `BaseWorkflowInput` in the plugin template code and recommend to inherit it for defining the workflow's input
+    model. It provides fields like `user_id` and `upload_id` which are required
+    to execute a workflow in NOMAD. These fields are required to enable
+    database interaction via actions.
 
 **nomad_example/actions/myaction/activities.py**
 
