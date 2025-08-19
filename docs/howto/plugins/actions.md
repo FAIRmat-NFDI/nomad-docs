@@ -465,11 +465,6 @@ curated set of utils in `nomad.actions.database.utils` module to perform these t
 - A table of utils: read entry, open raw file, update entry, create entry, create raw file, open a file in workflow artifact directory, write a file in workflow artifact directory
 
 
-## Defining workers for task queues
-
-- A bit about the task queues
-- How to standard workers for CPU and GPU ("switching on" docker settings)
-- How to define custom workers for the available queues
 
 ## Adding to your oasis
 
