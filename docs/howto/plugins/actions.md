@@ -311,7 +311,7 @@ from nomad.actions.utils import start_action
 from nomad_example.actions.myaction.models import ExampleWorkflowInput
 
 workflow_id = start_action(
-    workflow_name='nomad_example.actions.myaction:my_action',
+    action_name='nomad_example.actions.myaction:my_action',
     data=ExampleWorkflowInput(
         user_id='NOMAD User ID',
         upload_id='NOMAD Upload ID',
@@ -399,13 +399,13 @@ class ExampleWorkflow(EntryData):
             self.pubchem_result = None
             self.workflow_status = None
             self.workflow_id = None
-            workflow_name = 'nomad_example.actions.myaction:my_action'
+            action_name = 'nomad_example.actions.myaction:my_action'
             input_data = ExampleWorkflowInput(
                 user_id=archive.metadata.authors[0].user_id,
                 upload_id=archive.metadata.upload_id,
                 cid=self.cid,
             )
-            self.workflow_id = start_action(action_name=workflow_name, data=input_data)
+            self.workflow_id = start_action(action_name=action_name, data=input_data)
             self.trigger_get_action_status = True
         except Exception as e:
             logger.error(f'Error running workflow: {e}')
@@ -445,31 +445,32 @@ It is also possible to re-trigger the workflow run if the status is not
 `RUNNING`. Of course, the new workflow run will now have a different workflow
 ID.
 
-After we run the workflow, we can also write back the results into the entry. You will learn about this in the next section.
+After we run the workflow, we can also write back the results into the entry
+using the utilities described in the next section.
 
-## Utilities for database interaction
+## Utilities for actions
 
 Interaction with your Oasis's database from Actions provides a powerful way of
 manipulating it. For example, once you run an action, you might want to save
 its output in an existing NOMAD entry, or even create new ones. We provide a
-curated set of utils in `nomad.actions.database.utils` module to perform these tasks.
+curated set of utils in `nomad.actions.utils` module to perform these tasks.
 
 !!! tip "Important"
     Since interacting with database directly (bypassing the API endpoint)
     through Actions is highly risky, we strongly recommend to only do this
-    through the functions defined under `nomad.actions.database.utils`
+    through the functions defined under `nomad.actions.utils`
     module. If you have to perform a task that is not covered in the utils,
     please use the available API endpoints and interact with the database via
-    the network. While this entails some network overhead
+    the network.
 
-- A table of utils: read entry, open raw file, update entry, create entry, create raw file, open a file in workflow artifact directory, write a file in workflow artifact directory
-
-
+!!! note "Note"
+    This part of the documentation is under development.
 
 ## Adding to your oasis
 
-Make sure your oasis repo is up to date with the template by following the update [guide](https://github.com/FAIRmat-NFDI/nomad-distro-template?tab=readme-ov-file#updating-the-distribution-from-the-template). This ensures that the 
-necessary containers for `temporal` is setup correctly. 
+Make sure your oasis repo is up to date with the template by following the
+update [guide](https://github.com/FAIRmat-NFDI/nomad-distro-template?tab=readme-ov-file#updating-the-distribution-from-the-template). This ensures
+that the necessary containers for `temporal` is setup correctly.
 
 In addition to configuring the temporal service, you’ll also need to build new Docker images for both the gpu and cpu workers. The relevant extras for these workflows can be set in the pyproject.toml of the distro:
 ```toml
@@ -483,5 +484,7 @@ gpu-workflow = ["nomad-example[gpu-workflow]"]
 cpu-workflow = ["nomad-example[cpu-workflow]"]
 ```
 
-To implement the necessary changes, including image build steps and updates to docker-compose, the Dockerfile, and GitHub Actions, you can refer to this [pull request](https://github.com/FAIRmat-NFDI/nomad-distro-template/pull/109/files).
+To implement the necessary changes, including image build steps and updates to
+docker-compose, the Dockerfile, and GitHub Actions, you can refer to this
+[pull request](https://github.com/FAIRmat-NFDI/nomad-distro-template/pull/109/files)
 as a guide.
