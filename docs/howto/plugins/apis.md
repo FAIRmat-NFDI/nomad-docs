@@ -37,7 +37,6 @@ Furthermore, it allows you to define a path prefix for your API.
 The entry point should be defined in `*/apis/__init__.py` like this:
 
 ```python
-from pydantic import Field
 from nomad.config.models.plugins import APIEntryPoint
 
 
@@ -78,10 +77,10 @@ from nomad.config import config
 myapi_entry_point = config.get_plugin_entry_point('nomad_example.apis:myapi')
 
 app = FastAPI(
-    root_path=f'{config.services.api_base}/{myapi_entry_points.prefix}'
+    root_path=f'{config.services.api_base_path}/{myapi_entry_point.prefix}'
 )
 
-app.get('/')
+@app.get('/')
 async def root():
     return {"message": "Hello World"}
 ```
@@ -93,5 +92,39 @@ If you run NOMAD with this plugin following our [Oasis configuration documentati
 you can curl this API and should receive the message:
 
 ```sh
-curl localhost/nomad-oasis/myapi
+curl localhost:8000/nomad-oasis/myapi/
+```
+
+In a nomad-distro-dev environment, the API should be accessible at:
+
+```sh
+curl localhost:8000/fairdi/nomad/latest/myapi/
+```
+
+For serving static content, one can use the `mount` operation of FastAPI. An example could look like this:
+
+```python
+from fastapi import FastAPI
+from nomad.config import config
+
+myapi_entry_point = config.get_plugin_entry_point('nomad_example.apis:myapi')
+
+app = FastAPI(
+    root_path=f'{config.services.api_base_path}/{myapi_entry_point.prefix}'
+)
+
+static_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), 'static'))
+app.mount("/static", StaticFiles(directory=static_folder), name="static")
+```
+
+Then e.g. the page `static_page.html` will be available at:
+
+```sh
+curl localhost:8000/nomad-oasis/myapi/static/static_page.html
+```
+
+or 
+
+```sh
+curl localhost:8000/fairdi/nomad/latest/myapi/static_page.html
 ```
