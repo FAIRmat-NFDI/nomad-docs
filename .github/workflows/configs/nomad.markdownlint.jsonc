@@ -1,0 +1,8 @@
+// https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md
+{
+    // Set rules to disabled by default
+    "default": false,
+
+    // MD001/heading-increment: Heading levels should only increment by one level at a time
+    "MD001": true
+}
