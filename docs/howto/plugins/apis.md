@@ -1,7 +1,7 @@
 # How to write an API
 
 APIs allow you to add more APIs to the NOMAD app. More specifically you can create
-a [FastAPI](https://fastapi.tiangolo.com) apps that can be mounted into the main NOMAD app alongside other apis
+a [FastAPI](https://fastapi.tiangolo.com) app that can be mounted into the main NOMAD app alongside other apis
 such as `/api/v1`, `/optimade`, etc.
 
 This documentation shows you how to write a plugin entry point for an API.
@@ -85,23 +85,17 @@ async def root():
     return {"message": "Hello World"}
 ```
 
-Read the official [FastAPI documentation](https://fastapi.tiangolo.com/tutorial/) to learn how to build apps and APIs with
-FastAPI.
+Read the official [FastAPI documentation](https://fastapi.tiangolo.com/tutorial/) to learn how to build apps and APIs with FastAPI.
 
-If you run NOMAD with this plugin following our [Oasis configuration documentation](../oasis/configure.md)
-you can curl this API and should receive the message:
+If you run NOMAD with this plugin following our [Oasis configuration documentation](../oasis/configure.md) with the default configuration, you can curl this API and should receive the message:
 
 ```sh
 curl localhost:8000/nomad-oasis/myapi/
 ```
 
-In a nomad-distro-dev environment, the API should be accessible at:
+### Static files
 
-```sh
-curl localhost:8000/fairdi/nomad/latest/myapi/
-```
-
-For serving static content, one can use the `mount` operation of FastAPI. An example could look like this:
+For serving static content, one can use the `mount` operation of FastAPI. Here is an example of mounting a folder called `static` that is stored next  to the Python code:
 
 ```python
 from fastapi import FastAPI
@@ -117,14 +111,15 @@ static_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), 'static'
 app.mount("/static", StaticFiles(directory=static_folder), name="static")
 ```
 
-Then e.g. the page `static_page.html` will be available at:
+Then e.g. the file `static/static_page.html` will be available at:
 
 ```sh
 curl localhost:8000/nomad-oasis/myapi/static/static_page.html
 ```
 
-or 
-
-```sh
-curl localhost:8000/fairdi/nomad/latest/myapi/static_page.html
-```
+!!! note
+    Note that if you wish to include static files as part of the plugin Python package
+    distributed e.g. in PyPI, you will need to explicitly include them in the
+    `MANIFEST.in` file of your Python package. See more information in [the setuptools
+    guide](https://setuptools.pypa.io/en/latest/userguide/miscellaneous.html#controlling-files-in-the-distribution).
+    
