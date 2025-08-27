@@ -37,7 +37,7 @@ REST API's use resources located via URLs. You access URLs with `curl` or `wget`
 curl "{{ nomad_url() }}/v1/entries?results.material.elements=Ti&results.material.elements=O" | python -m json.tool
 ```
 
-###  Use Python and `requests`
+### Use Python and `requests`
 
 `Requests` is a popular Python library to use the internet's HTTP protocol that is used to
 communicate with REST APIs. Install with `pip install requests`.
