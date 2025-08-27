@@ -10,7 +10,7 @@
     // MD003 - Heading style
     "MD003": true,
     // MD004 - Unordered list style
-    // TODO: maybe not necessary to enforce the same delimiters on different lists
+    // NOTE: maybe not necessary to enforce the same delimiters on different lists
     "MD004": false,
     // MD005 - Inconsistent indentation for list items at the same level
     "MD005": true,
@@ -60,14 +60,14 @@
     // MD032 - Lists should be surrounded by blank lines
     "MD032": true,
     // MD033 - Inline HTML
-    // TODO: some inline HTML might be needed?
+    // NOTE: some inline HTML might be needed?
     "MD033": false,
     // MD034 - Bare URL used
     "MD034": true,
     // MD035 - Horizontal rule style
     "MD035": {"style": "---"},
     // MD036 - Emphasis used instead of a heading
-    // TODO: looks like some are intended as emphasis
+    // NOTE: looks like some are intended as emphasis
     "MD036": false,
     // MD037 - Spaces inside emphasis markers
     "MD037": true,
@@ -78,7 +78,7 @@
     // MD040 - Fenced code blocks should have a language specified
     "MD040": true,
     // MD041 - First line in a file should be a top-level heading
-    // TODO: we should enable this but some files are missing top headers
+    // TODO: enable this but some files are missing top headers
     "MD041": false,
     // MD042 - No empty links
     "MD042": true,
@@ -100,5 +100,21 @@
     // see: https://www.markdownguide.org/basic-syntax/#emphasis
     "MD049": {"style": "asterisk"},
     // MD050 - Strong style (Bold)
-    "MD050": {"style": "asterisk"}
+    "MD050": {"style": "asterisk"},
+    // MD051 - Link fragments should be valid
+    "MD051": true,
+    // MD052 - Reference links and images should use a label that is defined
+    "MD052": true,
+    // MD053 - Link and image reference definitions should be needed
+    "MD053": true,
+    // MD054 - Link and image style
+    "MD054": true,
+    // MD055 - Table pipe style
+    "MD055": {"style": "leading_and_trailing"},
+    // MD056 - Table column count
+    "MD056": true,
+    // MD058 - Tables should be surrounded by blank lines
+    "MD058": true,
+    // MD059 - Link text should be descriptive
+    "MD059": false
 }
