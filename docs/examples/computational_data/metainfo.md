@@ -11,7 +11,7 @@ The schema that defines the organization of (meta)data within the archive is kno
 
 The following diagram is an overarching visualization of the most important archive sections for computational data:
 
-```
+```tree
 archive
 ├── run
 │    ├── method

@@ -26,13 +26,13 @@ If you *do not* have an up-to-date Python installation (3.11 or 3.12), see [Help
 
 #### (a) Standalone
 
-**On macOS and Linux**
+##### On macOS and Linux`
 
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-**On Windows**
+##### On Windows
 
 ```powershell
 powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
@@ -146,25 +146,25 @@ git push origin my-feature-branch
 
 If Python 3.11 is not installed on your system, use the instructions below based on your OS:
 
-**Debian Linux**
+#### Debian Linux
 
 ```bash
 sudo apt install python3.11
 ```
 
-**Red Hat Linux**
+#### Red Hat Linux
 
 ```bash
 sudo dnf install python3.11
 ```
 
-**macOS**
+#### macOS
 
 ```bash
 brew install python@3.11
 ```
 
-**Windows PowerShell**
+#### Windows PowerShell
 
 1. Download the installer from the [official Python website](https://www.python.org/downloads/release/python-3110/).
 2. Run the installer.

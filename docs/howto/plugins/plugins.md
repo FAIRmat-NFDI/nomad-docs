@@ -137,7 +137,7 @@ You may additionally publish the plugin package in PyPI. Learn from the PyPI doc
 The PyPI documentation provides further information about how to [publish a package to PyPI](https://packaging.python.org/en/latest/tutorials/packaging-projects/#uploading-the-distribution-archives){:target="\_blank"}. If you have access to the MPCDF GitLab and NOMAD's presence there, you can also
 use the `nomad-FAIR` package registry:
 
-```
+```sh
 pip install twine
 twine upload \
     -u <username> -p <password> \

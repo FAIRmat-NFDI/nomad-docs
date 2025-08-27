@@ -65,5 +65,16 @@
     // MD034 - Bare URL used
     "MD034": true,
     // MD035 - Horizontal rule style
-    "MD035": true
+    "MD035": true,
+    // MD036 - Emphasis used instead of a heading
+    // TODO: looks like some are intended as emphasis
+    "MD036": false,
+    // MD037 - Spaces inside emphasis markers
+    "MD037": true,
+    // MD038 - Spaces inside code span elements
+    "MD038": true,
+    // MD039 - Spaces inside link text
+    "MD039": true,
+    // MD040 - Fenced code blocks should have a language specified
+    "MD040": true
 }

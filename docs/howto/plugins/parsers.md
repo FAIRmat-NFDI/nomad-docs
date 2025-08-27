@@ -119,13 +119,13 @@ Parsers automatically run for the matched files within a NOMAD distribution, but
 
 If you have installed a NOMAD plugin into a Python virtual environment, you can run a parser from that plugin with the `nomad` command line interface. The following command will uses the CLI to parse a given input file, and store the resulting JSON output into an output file:
 
-```
+```sh
 nomad parse <input-file> > <output-file>
 ```
 
 The parse command will automatically match the right parser to your file and run the parser. To skip the parser matching, i.e. the process that determined which parser fits to the given file, you can use the `--parser` argument to provide a parser entry point id:
 
-```
+```sh
 nomad parse --parser <parser_entry_point_id> <input-file>
 ```
 

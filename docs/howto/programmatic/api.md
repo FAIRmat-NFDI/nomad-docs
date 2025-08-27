@@ -247,7 +247,7 @@ print(result.energy.total.value.to(units('eV')))
 
 This will give you an output like this:
 
-```
+```text
 OOSrTiOOOSrTiOOOSrTiOFF
 -355626.93095025205 electron_volt
 ```
@@ -445,7 +445,7 @@ download file-by-file or entry-by-entry. Therefore, we allow to download a large
 files in one big zip-file. Here, you might want to use a program like *curl* to download
 directly from the shell:
 
-```
+```sh
 curl "{{ nomad_url() }}/v1/entries/raw?results.material.elements=Ti&results.material.elements=O" -o download.zip
 ```
 

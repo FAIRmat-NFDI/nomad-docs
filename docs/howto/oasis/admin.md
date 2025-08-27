@@ -72,13 +72,13 @@ For a complete list refer to the [CLI reference documentation](../../reference/c
 
 Alternatively, you can use a list of upload ids at the end of the command, e.g.:
 
-```
+```sh
 nomad admin uploads ls -- <id1> <id2>
 ```
 
 If you have a list of ids (e.g. in a file), you could use `xargs`:
 
-```
+```sh
 cat file_with_ids.txt | xargs nomad admin uploads ls --
 ```
 
@@ -89,7 +89,7 @@ normalizers are called, the processing results are stored, and the search index
 is updated. In certain scenarios (failed processing, [migration](update.md#migration-steps),
 changed plugins) might require that admins process certain uploads again.
 
-```
+```sh
 nomad admin uploads process
 ```
 
@@ -100,7 +100,7 @@ index, you can find it via the search interface. Some changes between NOMAD vers
 (see also our [update guide](update.md#migration-steps)), might require that
 you re-index all uploads.
 
-```
+```sh
 nomad admin uploads index
 ```
 
@@ -119,7 +119,7 @@ list of accounts as part of your Oasis configuration. To use the Oasis, all user
 be logged in and be on your white list of allowed users. To enable white-listing, you
 can provide a list of NOMAD account email addresses in your `nomad.yaml` like this:
 
-```
+```yaml
 oasis:
     allowed_users:
         - user1@gmail.com
@@ -150,8 +150,8 @@ default number of worker processes (which equals the number of available cores).
 a single core only, you can alter the worker service command in the `docker-compose.yml` and
 add a `--concurrency` argument:
 
-```
-command: python -m celery -A nomad.processing worker -l info --concurrency=1 -Q celery
+```sh
+python -m celery -A nomad.processing worker -l info --concurrency=1 -Q celery
 ```
 
 See also the [celery documentation](https://docs.celeryproject.org/en/stable/userguide/workers.html#id1).
@@ -162,7 +162,7 @@ You can also reduce the usable threads that Python packages based on OpenMP coul
 reduce the threads that might be spawned by a single worker process. Simply set the `OMP_NUM_THREADS`
 environment variable in the worker container in your `docker-compose.yml`:
 
-```
+```yml
 services:
     worker:
         ...
@@ -175,7 +175,7 @@ services:
 
 You can add a `deploy.resources.limits` section to the worker service in the `docker-compose.yml`:
 
-```
+```yml
 services:
     worker:
         ...

@@ -96,7 +96,7 @@ With a basic understanding in hand, you can now download the example data and up
 
 The download `simple_workflow.zip` should have the following structure:
 
-```
+```tree
 .
 ├── dft.xml
 ├── dft.workflow.archive.yaml
@@ -205,7 +205,7 @@ This workflow contains a series of electronic structure calculations: a DFT and 
 
 The mainfiles for these calculations are organized in the following file structure, stored with `nested_workflow_one-entry.zip`:
 
-```
+```tree
 .
 ├── DFT
 │   └── dft.xml

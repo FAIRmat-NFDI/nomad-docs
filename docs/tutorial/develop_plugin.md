@@ -67,7 +67,7 @@ git clone PATH/COPIED/FROM/REPOSITORY
 
 and move inside the top directory
 
-```
+```sh
 cd REPOSITORY_NAME
 ```
 

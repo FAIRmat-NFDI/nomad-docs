@@ -9,7 +9,7 @@ and you can install it with *pip* (or conda).
 
 To install the newest pypi release, simply use pip:
 
-```
+```sh
 pip install nomad-lab
 ```
 
@@ -21,14 +21,14 @@ pip install nomad-lab
 
 To install the latest release developer releases from our GitLab use:
 
-```
+```sh
 pip install nomad-lab --extra-index-url https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/simple
 ```
 
 To install an older version of NOMAD (e.g. v0.10.x), you can of use reference
 the respective version on pypy:
 
-```
+```sh
 pip install nomad-lab==1.0.10
 ```
 
@@ -39,7 +39,7 @@ parsers.
 Other functions, e.g. running the NOMAD infrastructure, require additional dependencies.
 You can use the `[extra]` notation to install these extra requirements:
 
-```
+```sh
 pip install nomad-lab[parsing]
 pip install nomad-lab[infrastructure]
 pip install nomad-lab[dev]
