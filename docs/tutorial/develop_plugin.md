@@ -100,7 +100,7 @@ following for my example:
   [3/12] github_username (foo): hampusnasstrom
   [4/12] plugin_name (foobar): sintering
   [5/12] module_name (sintering):
-  [6/12] short_description (Nomad example template): A schema package plugin for sintering.
+  [6/12] short_description (NOMAD example template): A schema package plugin for sintering.
   [7/12] version (0.1.0):
   [8/12] Select license
     1 - MIT

@@ -67,8 +67,8 @@ For changing the minor or major version, please check the [migration steps](#mig
 
 ### to 1.2.2
 
-We upgraded the Jupyterhub version used for NORTH from 1.0.2 to 4.0.2. By default the
-Jupyterhub database is persisted in the `nomad_oasis_north` container. If you want to
+We upgraded the JupyterHub version used for NORTH from 1.0.2 to 4.0.2. By default the
+JupyterHub database is persisted in the `nomad_oasis_north` container. If you want to
 keep the database (e.g. to not loose any open tools), you will have to upgrade the database.
 Update the NOMAD docker image version and restart the Oasis like this:
 

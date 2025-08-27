@@ -13,7 +13,7 @@ Briefly explain the purpose of the FAQ:
     Coming soon ...
 
 <!--
-- What is Nomad?
+- What is NOMAD?
 - Who is it for?
 - How to get started?
 - What are the system requirements?

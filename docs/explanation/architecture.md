@@ -37,12 +37,12 @@ to constantly provide the latest version of docker image and Python package.
 
 Besides various scientific computing, machine learning, and computational material
 science libraries (e.g. numpy, skikitlearn, tensorflow, ase, spglib, matid, and many more),
-Nomad uses a set of freely available technologies that already solve most
+NOMAD uses a set of freely available technologies that already solve most
 of its processing, storage, availability, and scaling goals. The following is a non
 comprehensive overview of used languages, libraries, frameworks, and services.
 
 <figure markdown>
-  ![nomad stack](images/stack.png)
+  ![NOMAD stack](images/stack.png)
   <figcaption>NOMAD components and dependencies</figcaption>
 </figure>
 
@@ -129,7 +129,7 @@ update nomad with only a few commands.
 
 ### GitLab
 
-Nomad as a software project is managed via [GitLab](https://docs.gitlab.com/){:target="_blank"}.
+NOMAD as a software project is managed via [GitLab](https://docs.gitlab.com/){:target="_blank"}.
 The **nomad@FAIRDI** project is hosted [here](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR){:target="_blank"}.
 GitLab is used to manage versions, different branches of development, tasks and issues,
 as a [registry for Docker images](https://docs.gitlab.com/ee/user/packages/container_registry/index.html){:target="_blank"},
