@@ -65,7 +65,7 @@
     // MD034 - Bare URL used
     "MD034": true,
     // MD035 - Horizontal rule style
-    "MD035": true,
+    "MD035": {"style": "---"},
     // MD036 - Emphasis used instead of a heading
     // TODO: looks like some are intended as emphasis
     "MD036": false,
