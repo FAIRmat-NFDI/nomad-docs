@@ -1,6 +1,6 @@
 # Configure an Oasis
 
-Originally, the NOMAD Central Repository is a service that runs at the Max-Planck's computing facility in Garching, Germany. However, the NOMAD software is Open-Source, and everybody can run it. Any service that uses NOMAD software independently is called a _NOMAD Oasis_. A _NOMAD Oasis_ does not need to be fully isolated. For example, you can publish uploads from your NOMAD Oasis to the central NOMAD installation.
+Originally, the NOMAD Central Repository is a service that runs at the Max-Planck's computing facility in Garching, Germany. However, the NOMAD software is Open-Source, and everybody can run it. Any service that uses NOMAD software independently is called a *NOMAD Oasis*. A *NOMAD Oasis* does not need to be fully isolated. For example, you can publish uploads from your NOMAD Oasis to the central NOMAD installation.
 
 !!! note
 
@@ -36,7 +36,7 @@ For a production installation, we recommend to create your own distribution proj
     cd nomad-distro-template
     ```
 
-  3. _On Linux only,_ recursively change the owner of the `.volumes` directory to the nomad user (1000)
+  3. *On Linux only,* recursively change the owner of the `.volumes` directory to the nomad user (1000)
 
     ```sh
     sudo chown -R 1000 .volumes
@@ -70,7 +70,7 @@ For a production installation, we recommend to create your own distribution proj
 
 ### Sharing data through log transfer and data privacy notice
 
-NOMAD includes a _log transfer_ functions. When enabled this it automatically collects
+NOMAD includes a *log transfer* functions. When enabled this it automatically collects
 and transfers non-personalized logging data to us. Currently, this functionality is experimental
 and requires opt-in. However, in upcoming versions of NOMAD Oasis, we might change to out-out.
 
@@ -146,12 +146,12 @@ Changes necessary:
 A few things to notice:
 
 - The app, worker, and north service use the NOMAD docker image. Here we use the `latest` tag, which
-  gives you the latest _beta_ version of NOMAD. You might want to change this to `stable`,
+  gives you the latest *beta* version of NOMAD. You might want to change this to `stable`,
   a version tag (format is `vX.X.X`, you find all releases [here](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR/-/tags){:target="\_blank"}), or a specific [branch tag](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR/-/branches){:target="\_blank"}.
 - All services use docker volumes for storage. This could be changed to host mounts.
 - It mounts two configuration files that need to be provided (see below): `nomad.yaml`, `nginx.conf`.
 - The only exposed port is `80` (proxy service). This could be changed to a desired port if necessary.
-- The NOMAD images are pulled from our gitlab at MPCDF, the other services use images from a public registry (_dockerhub_).
+- The NOMAD images are pulled from our gitlab at MPCDF, the other services use images from a public registry (*dockerhub*).
 - All containers will be named `nomad_oasis_*`. These names can be used later to reference the container with the `docker` cmd.
 - The services are setup to restart `always`, you might want to change this to `no` while debugging errors to prevent indefinite restarts.
 - Make sure that the `PWD` environment variable is set. NORTH needs to create bind mounts that require absolute paths and we need to pass the current working directory to the configuration from the PWD variable (see hub service in the `docker-compose.yaml`).
@@ -172,7 +172,7 @@ You should change the following:
   users back to this host. Make sure this is the hostname, your users can use.
 - Replace `deployment`, `deployment_url`, and `maintainer_email` with representative values.
   The `deployment_url` should be the url to the deployment's api (should end with `/api`).
-- To enable the _log transfer_ set `logtransfer.enable: true` ([data privacy notice above](#sharing-data-through-log-transfer-and-data-privacy-notice)).
+- To enable the *log transfer* set `logtransfer.enable: true` ([data privacy notice above](#sharing-data-through-log-transfer-and-data-privacy-notice)).
 - You can change `api_base_path` to run NOMAD under a different path prefix.
 - You should generate your own `north.jupyterhub_crypt_key`. You can generate one
   with `openssl rand -hex 32`.
@@ -252,7 +252,7 @@ docker compose up -d mongo elastic rabbitmq
 docker compose up app worker gui
 ```
 
-The `-d` option runs container in the background as _daemons_. Later you can run all at once:
+The `-d` option runs container in the background as *daemons*. Later you can run all at once:
 
 ```sh
 docker compose up -d
@@ -262,7 +262,7 @@ Running all services also contains NORTH. When you use a tool in NORTH for the f
 your docker needs to pull the image that contains this tool. Be aware that this might take longer
 than timeouts allow and starting a tool for the very first time might fail.
 
-You can also use docker to stop and remove faulty containers that run as _daemons_:
+You can also use docker to stop and remove faulty containers that run as *daemons*:
 
 ```sh
 docker stop nomad_oasis_app

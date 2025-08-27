@@ -9,8 +9,8 @@ There are several benefits for using multiple NOMAD installations:
 ## What is a NOMAD Oasis?
 
 The software that runs NOMAD is Open-Source and can be used independently of the NOMAD
-_central installation_ at [http://nomad-lab.eu](http://nomad-lab.eu){:target="\_blank"}.
-We call any NOMAD installation that is not the _central_ one a NOMAD Oasis.
+*central installation* at [http://nomad-lab.eu](http://nomad-lab.eu){:target="\_blank"}.
+We call any NOMAD installation that is not the *central* one a NOMAD Oasis.
 
 ## Use cases
 
@@ -41,8 +41,8 @@ in the web interface) and the NOMAD processes these files to extract data which
 again is stored in files. Therefore, data transfer is basically "just" copying
 files from one installation to another.
 
-We implemented a _bundle_ format for published data. A bundle is a zip file that contains
-all raw files, archive files of an _upload_, and a bit of metadata, e.g. with
+We implemented a *bundle* format for published data. A bundle is a zip file that contains
+all raw files, archive files of an *upload*, and a bit of metadata, e.g. with
 information on upload name, dates, authors, datasets, etc. This bundle format
 is our tranfer file format. Bundles are exported on one end and imported on
 the other.

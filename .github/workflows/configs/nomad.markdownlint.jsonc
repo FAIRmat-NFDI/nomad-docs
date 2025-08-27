@@ -89,7 +89,16 @@
     // TODO: fix these
     "MD045": false,
     // MD046 - Code block style
-    "MD046": false,  // TODO: fix
+    // TODO: need to clean up indentation style
+    // "MD046": {"style": "fenced"},
+    "MD046": false,
     // MD047 - Files should end with a single newline character
-    "MD047": true
+    "MD047": true,
+    // MD048 - Code fence style
+    "MD048": {"style": "backtick"},
+    // MD049 - Emphasis style (Bold, Italic or both)
+    // see: https://www.markdownguide.org/basic-syntax/#emphasis
+    "MD049": {"style": "asterisk"},
+    // MD050 - Strong style (Bold)
+    "MD050": {"style": "asterisk"}
 }

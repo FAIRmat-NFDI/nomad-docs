@@ -65,7 +65,7 @@ An overview of the skills required to use NOMAD and NOMAD Oasis, categorized int
 
 ## Ways to Access NOMAD
 
-There are multiple access points to NOMAD. The general [_landing page_](https://nomad-lab.eu/nomad-lab/){:target="_blank"} provides an overview of NOMAD’s features, along with links to documentation, tutorials, and project history.
+There are multiple access points to NOMAD. The general [*landing page*](https://nomad-lab.eu/nomad-lab/){:target="_blank"} provides an overview of NOMAD’s features, along with links to documentation, tutorials, and project history.
 
 From this page, we can navigate to NOMAD to upload, manage, and explore data.
 

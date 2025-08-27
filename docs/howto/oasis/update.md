@@ -102,7 +102,7 @@ docker compose up -d
   [Re-processing](admin.md#re-processing) all data will enable this feature for old data. Any analysis build on
   the old workflow model, might not work for new data.
 
-- We introduce the _log-transfer_ service. This is currently an opt-in feature.
+- We introduce the *log-transfer* service. This is currently an opt-in feature.
 
 ### from 0.8.x to 1.x
 

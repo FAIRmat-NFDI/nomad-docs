@@ -1,7 +1,7 @@
 # Navigating to the NOMAD repository
 
 There are several access points to the NOMAD repository.
-The general [_landing page_](https://nomad-lab.eu/nomad-lab/){:target="_blank"} will give you a quick rundown of NOMAD's usage and features, and provides several links to documentation, tutorials, and the history behind the project.
+The general [*landing page*](https://nomad-lab.eu/nomad-lab/){:target="_blank"} will give you a quick rundown of NOMAD's usage and features, and provides several links to documentation, tutorials, and the history behind the project.
 
 From this page, we can navigate to the NOMAD repository, where we can upload, manage, and explore data.
 There are 2 public versions available:

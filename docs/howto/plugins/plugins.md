@@ -11,7 +11,7 @@ A single Python plugin package can contain multiple [plugin entry points](../../
 - [Parsers](./parsers.md)
 - [Schema packages](./schema_packages.md)
 
-See the [FAIRmat-NFDI GitHub organization page](https://github.com/FAIRmat-NFDI) for a list of plugins developed by FAIRmat. You can also see the list of activated plugins and plugin entry points at the bottom of the _Information page_ (`about/information`) of any NOMAD installation, for example check out the [central NOMAD installation](https://nomad-lab.eu/prod/v1/gui/about/information).
+See the [FAIRmat-NFDI GitHub organization page](https://github.com/FAIRmat-NFDI) for a list of plugins developed by FAIRmat. You can also see the list of activated plugins and plugin entry points at the bottom of the *Information page* (`about/information`) of any NOMAD installation, for example check out the [central NOMAD installation](https://nomad-lab.eu/prod/v1/gui/about/information).
 
 ## Plugin anatomy
 

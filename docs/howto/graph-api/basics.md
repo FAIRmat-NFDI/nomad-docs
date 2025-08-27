@@ -55,7 +55,7 @@ the response would look like the following (after some restructuring according t
 ```
 
 How would one tell the server if, say, for example, only `upload_name` is needed?
-With `GraphQL`, one simply needs to '__ask for what you need__', following the structure of the data.
+With `GraphQL`, one simply needs to '**ask for what you need**', following the structure of the data.
 To mimic this, the request may look like the following.
 
 ```json

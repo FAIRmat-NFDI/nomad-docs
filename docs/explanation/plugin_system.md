@@ -23,11 +23,11 @@ There are three core components to the plugin system:
 - **Distributions** define lists of plugins and their version. A distribution is a small
   Git and Python project that maintains a list of plugin dependencies in its `pyproject.toml`. We provide a [template repository](https://github.com/FAIRmat-NFDI/nomad-distro-template)
   for a quick start into creating distributions.
-- **Plugins** are Git and Python projects that contain one or many _entry points_.
+- **Plugins** are Git and Python projects that contain one or many *entry points*.
   We provide a [template repository](https://github.com/FAIRmat-NFDI/nomad-plugin-template)
   for a quick start into plugin development.
 - **Entry points** are individual contributions (e.g. parsers, schemas, or apps)
-  which are defined using a feature of Python called [_entry points_](https://setuptools.pypa.io/en/latest/userguide/entry_point.html).
+  which are defined using a feature of Python called [*entry points*](https://setuptools.pypa.io/en/latest/userguide/entry_point.html).
 
 <figure markdown style="width: 100%">
   ``` mermaid

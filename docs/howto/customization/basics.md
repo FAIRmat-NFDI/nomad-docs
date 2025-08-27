@@ -527,7 +527,7 @@ Here are a few other built-in section definitions and packages of definitions:
 
 ### HDF5Normalizer
 
-A different flavor of _**reading**_ HDF5 files into NOMAD quantities is through defining a
+A different flavor of ***reading*** HDF5 files into NOMAD quantities is through defining a
 [custom schema](../../tutorial/custom.md) and inheriting `HDF5Normalizer` into base-sections. Two essential components
 of using `HDF5Normalizer` class is to first define a quantity that is annotated with `FileEditQuantity` field
 to enable one to drop/upload the `*.h5` file, and to define relevant quantities annotated with `path`

@@ -36,7 +36,7 @@ The extracted (meta)data are stored within a structured schema&mdash;the NOMAD [
     </label>
 </div>
 
-In the same upload, there might be multiple mainfiles and auxiliary files organized in a folder tree structure. A separate [Entry](../../reference/glossary.md#entry) will be created for each mainfile identified. For each entry, an [Archive](../../reference/glossary.md#archive) is created that contains all the extracted (meta)data in a _structured_, _well defined_, and _machine readable_ format. This **metadata** provides context to the raw data, i.e., what were the input methodological parameters, on which material the calculation was performed, etc.
+In the same upload, there might be multiple mainfiles and auxiliary files organized in a folder tree structure. A separate [Entry](../../reference/glossary.md#entry) will be created for each mainfile identified. For each entry, an [Archive](../../reference/glossary.md#archive) is created that contains all the extracted (meta)data in a *structured*, *well defined*, and *machine readable* format. This **metadata** provides context to the raw data, i.e., what were the input methodological parameters, on which material the calculation was performed, etc.
 
 See the explanation pages [From files to data](../../explanation/basics.md), [Data structure](../../explanation/data.md) and [Processing](../../explanation/processing.md) for a more general description of NOMAD processing.
 
@@ -55,7 +55,7 @@ Under the [`Entry` section of the metainfo browser](https://nomad-lab.eu/prod/v1
 
 ### Normalization
 
-The parser code reads the code-specific mainfile and auxiliary files and populates the `run` and `workflow2` sections of the `archive`. Subsequently, a cascade of additional code is executed, which varies depending on the exact sections and quantities populated by the parser. This code is responsible for: 1. normalizing or _homogenizing_ certain metadata parsed from different codes, and 2. populating the `results` section.
+The parser code reads the code-specific mainfile and auxiliary files and populates the `run` and `workflow2` sections of the `archive`. Subsequently, a cascade of additional code is executed, which varies depending on the exact sections and quantities populated by the parser. This code is responsible for: 1. normalizing or *homogenizing* certain metadata parsed from different codes, and 2. populating the `results` section.
 
 ### Search indexing
 
