@@ -486,7 +486,7 @@ of testing.
 #### Test structure
 
 We have adopted a `pytest`-like structure for organizing the test utilities:
-each source code folder may contain a `conftest.js` file that contains
+each source code folder may contain a `conftest.spec.js` file that contains
 utilities that are relevant for testing the code in that particular folder.
 These utilities can usually be placed into the following categories:
 
@@ -496,7 +496,7 @@ These utilities can usually be placed into the following categories:
   some parts of the infrastructure to work properly, which is achieved by
   wrapping your component with other components that provide a context. Custom
   render functions can do this automatically for you, e.g. the default render
-  as exported from `src/components/conftest.js` wraps your components with an
+  as exported from `src/components/conftest.spec.js` wraps your components with an
   infrastructure that is very similar to the production app. See
   [here](https://testing-library.com/docs/react-testing-library/setup/#custom-render){:target="_blank"}
   for more information.
@@ -508,7 +508,7 @@ These utilities can usually be placed into the following categories:
 - Custom expects: These are reusable functions that perform actual tests using
   the `expect` function. Whenever the same tests are performed by several
   `*.spec.js` files, you should formalize these common tests into an
-  `expect*` function and place it in a relevant `conftest.js` file.
+  `expect*` function and place it in a relevant `conftest.spec.js` file.
 
 Often your components will need to communicate with the API during tests. One
 should generally avoid using manually created mocks for the API traffic, and
