@@ -613,7 +613,7 @@ configuration. To do this, follow these steps:
 
 2. Have the `nomad appworker` running with the config found in
    `gui/tests/nomad.yaml`:
-   `export NOMAD_CONFIG=gui/tests/nomad.yaml; nomad admin run appworker`
+   `export NOMAD_CONFIG=gui/tests/nomad.yaml && nomad admin run appworker`
 
 3. Activate the correct Python virtual environment before running the tests
    with Yarn (Yarn will run the Python functions that prepare the state).
