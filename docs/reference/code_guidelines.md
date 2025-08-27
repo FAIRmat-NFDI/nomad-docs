@@ -54,7 +54,6 @@ You can run `nomad qa` to run all these tests and checks before committing.
 See [the contributing guide](../howto/develop/contrib.md) for more details on how to work with issues,
 branches, merge requests, and CI/CD.
 
-
 ## Documenting code
 
 Write [Clean Code](https://youtu.be/7EmboKQH8lM){:target="_blank"} that is easy to comprehend.

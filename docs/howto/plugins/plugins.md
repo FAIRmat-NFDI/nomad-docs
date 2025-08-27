@@ -44,7 +44,6 @@ We suggest using the following convention for naming the repository name and the
 - repository name: `nomad-<plugin name>`
 - package name: `nomad_<plugin name>`
 
-
 ### Controlling loading of plugin entry points
 
 By default, plugin entry points are automatically loaded, and as an administrator you only need to install the Python package. You can, however, control which entry points to load by explicitly including/excluding them in your `nomad.yaml`. For example, if a plugin has the following `pyproject.toml`:

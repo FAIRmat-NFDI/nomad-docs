@@ -32,7 +32,6 @@ A series of tutorials will guide you through the main functionality of NOMAD.
 - [Example data and exercises](https://www.fairmat-nfdi.eu/events/fairmat-tutorial-1/tutorial-1-materials){:target="_blank"}
 - [More videos and tutorials on YouTube](https://youtube.com/playlist?list=PLrRaxjvn6FDW-_DzZ4OShfMPcTtnFoynT){:target="_blank"}
 
-
 </div>
 <div markdown="block">
 

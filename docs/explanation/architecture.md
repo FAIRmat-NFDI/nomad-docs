@@ -58,7 +58,6 @@ Tests are written with [pytest](https://docs.pytest.org/en/latest/contents.html)
 Logging is done with [structlog](https://www.structlog.org/en/stable/){:target="_blank"} and *logstash* (see
 Elasticstack below). Documentation is driven by [Sphinx](http://www.sphinx-doc.org/en/master/){:target="_blank"}.
 
-
 ### celery
 
 [Celery](http://celeryproject.org){:target="_blank"} (+ [rabbitmq](https://www.rabbitmq.com/){:target="_blank"})
@@ -67,13 +66,11 @@ We use it to drive the processing of uploaded files.
 It allows us to transparently distribute processing load while keeping processing state
 available to inform the user.
 
-
 ### elastic search
 
 [Elasticsearch](https://www.elastic.co/webinars/getting-started-elasticsearch){:target="_blank"}
 is used to store repository data (not the raw files).
 Elasticsearch enables flexible, scalable search and analytics.
-
 
 ### mongodb
 
@@ -81,13 +78,11 @@ Elasticsearch enables flexible, scalable search and analytics.
 processing of uploaded files and the generated entries. We use
 [mongoengine](http://docs.mongoengine.org/){:target="_blank"} to program with mongodb.
 
-
 ### Keycloak
 
 [Keycloak](https://www.keycloak.org/){:target="_blank"} is used for user management. It manages users and
 provides functions for registration, forgetting passwords, editing user accounts, and single
 sign-on to fairdi@nomad and other related services.
-
 
 ### FastAPI
 
@@ -96,14 +91,12 @@ framework. This allows us to automatically derive a [OpenAPI](https://swagger.io
 of the nomad API.
 Fruthermore, you can browse and use the API via [OpenAPI dashboard](https://swagger.io/tools/swagger-ui/){:target="_blank"}.
 
-
 ### Elasticstack
 
 The [elastic stack](https://www.elastic.co/guide/index.html){:target="_blank"}
 (previously *ELK* stack) is a centralized logging, metrics, and monitoring
 solution that collects data within the cluster and provides a flexible analytics front end
 for that data.
-
 
 ### Javascript, React, Material-UI
 
@@ -116,7 +109,6 @@ efforts manageable. React uses [JSX](https://reactjs.org/docs/introducing-jsx.ht
 The component library [Material-UI](https://material-ui.com/){:target="_blank"}
 (based on Google's popular material design framework) provides a consistent look-and-feel.
 
-
 ### docker
 
 To run a **nomad@FAIRDI** instance, many services have to be orchestrated:
@@ -128,14 +120,12 @@ as pre-build images that can be run flexibly on all types of platforms, networks
 and storage solutions. [Docker-compose](https://docs.docker.com/compose/){:target="_blank"} allows us to
 provide configuration to run the whole nomad stack on a single server node.
 
-
 ### kubernetes + helm
 
 To run and scale nomad on a cluster, you can use [kubernetes](https://kubernetes.io/docs/home/){:target="_blank"}
 to orchestrated the  necessary containers. We provide a [helm](https://docs.helm.sh/){:target="_blank"}
 chart with all necessary service and deployment descriptors that allow you to set up and
 update nomad with only a few commands.
-
 
 ### GitLab
 

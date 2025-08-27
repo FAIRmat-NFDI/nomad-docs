@@ -58,7 +58,6 @@ official, beta, and develop share a database.,
 test has its own database that is wiped occasionally, such that one can test publishing there.,
 example oasis also has its own database. it does not appear that there is a clear data-wiping strategy since it is mainly intended for testing plugins -->
 
-
 ## Troubleshooting
 
 !!! Warning
@@ -68,7 +67,6 @@ example oasis also has its own database. it does not appear that there is a clea
 <!-- ### Getting Help
 
 ### Finding resources? -->
-
 
 <!--
 - Why am I getting [specific error message]?
@@ -124,7 +122,6 @@ example oasis also has its own database. it does not appear that there is a clea
 !!! Warning
 
     Coming soon ...
-
 
 ## Additional Resources
 

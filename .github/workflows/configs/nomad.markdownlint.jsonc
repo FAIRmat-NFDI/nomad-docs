@@ -17,5 +17,9 @@
     // MD009 - Trailing spaces
     "MD009": { "strict": true },
     // MD010 - Hard tabs
-    "MD010": true
+    "MD010": true,
+    // MD011 - Reversed link syntax
+    "MD011": true,
+    // MD012 - Multiple consecutive blank lines
+    "MD012": {"maximum": 1}
 }

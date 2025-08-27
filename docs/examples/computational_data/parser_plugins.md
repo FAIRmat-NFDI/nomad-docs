@@ -24,7 +24,6 @@ parsers are contained within the project, respectively. In the case of multiple 
 for individual parsers are contained within a corresponding subdirectory: `<parserproject>parsers/<parsername>`
 For example, the Quantum Espresso parser files are found in `dependencies/parsers/electronic/electronicparsers/quantumespresso/`.
 
-
 ## Developing your own parser plugin
 
 ### Prerequisites

@@ -76,8 +76,6 @@ file in another upload, follow the same form for
 To read a dataset, use `read_dataset` and provide a reference. This will return the value
 cast in the type of the dataset.
 
-
-
 ## HDF5Dataset
 To use HDF5 storage for archive quantities, one should use `HDF5Dataset`.
 
@@ -122,7 +120,6 @@ archive.data.value_1 = np.ones(3)
 
 archive.data.value_2 = archive.data.value_1
 ```
-
 
 ## Visualizing archive HDF5 quantities
 
@@ -195,7 +192,6 @@ class MySection(ArchiveSection):
     my_sub = SubSection(sub_section=MySubSection, repeats=True)
 
 ```
-
 
 ## Metadata for large quantities
 

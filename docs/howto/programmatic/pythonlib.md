@@ -18,7 +18,6 @@ pip install nomad-lab
     from our GitLab package registry. To use features of a specific commit or
     branch, consider to [clone and build the project](../develop/setup.md) yourself.
 
-
 To install the latest release developer releases from our GitLab use:
 ```
 pip install nomad-lab --extra-index-url https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/simple
@@ -47,4 +46,3 @@ The various extras have the following meaning:
 - *parsing*, run all parsers, incl. parsers based on HDF5, netCDF, or asr
 - *infrastructure*, everything to run NOMAD services
 - *dev*, necessary to run development and build tools, e.g. pytest, pylint, mypy
-

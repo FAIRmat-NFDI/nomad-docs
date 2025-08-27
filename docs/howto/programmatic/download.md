@@ -155,4 +155,3 @@ with one json file per entry. There are no directories and the files are named
 information that tells you more about the entries, e.g. `required.metadata.mainfile`.
 
 See also the [How to access processed data](./archive_query.md) how-to guide.
-

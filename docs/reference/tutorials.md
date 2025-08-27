@@ -56,19 +56,3 @@ Please follow the format:
 
 - 09.02.2022 [FAIRmat Tutorial 1: Publish and Explore Data with NOMAD](https://www.fairmat-nfdi.eu/events/fairmat-tutorial-1/tutorial-1-materials){:target="_blank"}
     + Basic NOMAD guide to prepare, upload, publish data, and reference them with a DOI.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

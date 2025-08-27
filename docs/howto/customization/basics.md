@@ -464,7 +464,6 @@ data:
 
 The fact that a subsection or reference target can have different "forms" (i.e. based on different *specializations*) is called *polymorphism* in object-oriented data modelling.
 
-
 ### Pre-defined sections
 
 NOMAD provides a series of built-in *section definitions*. For example, there is `EntryArchive`, a definition for the top-level object in all NOMAD archives (e.g. `.archive.yaml` files). Here is a simplified except of the *main* NOMAD schema `nomad.datamodel`:
@@ -553,7 +552,6 @@ definitions:
             hdf5:
               path: '/path/to/charge_density'
 ```
-
 
 ## Separating data and schema package
 
@@ -665,7 +663,3 @@ no spaces between words. For example: `SectionLabelOne`, `SectionLabelTwo`.
 lower_case. This convention involves writing all lowercase letters and separating
 words with whitespace. Abbreviations within these labels may be capitalized to
 enhance scientific readability. For example: `quantity label`, `subsection label`, `IV label`.
-
-
-
-

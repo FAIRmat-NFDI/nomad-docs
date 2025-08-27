@@ -99,7 +99,6 @@ Now, let's create an entry using the built-in *Generic Sample ELN* schema for **
     <img src="images/ELN_built-in_12.png" alt="P3HT thin-film sample ELN substance entry" width="400">
 </div>
 
-
 ??? info "Input fields offered by the built-in schema *Generic Sample ELN*"
     The built-in schema *Generic Sample ELN* provides the following fields for input:
 
@@ -342,7 +341,6 @@ To create an entry using the built-in *Experiment ELN* schema for **Characteriza
     - **experiment identifiers:** Specify the additional metadata for the experiment.
 
 The *steps* subsection allows us to reference the various processes and measurements that were part of the experiments. By organizing these elements into a structured and interactive workflow, we can provide a clearer overview of the experimental sequence, enabling better visualization and understanding of how different steps are interconnected.
-
 
 <div style="text-align: center;">
     <img src="images/ELN_built-in_39.gif" alt="interactive workflow gif" width="400">

@@ -68,7 +68,6 @@ Thus, all entries under the upload can be fetched as follows:
     To avoid performance issues, the server will paginate the results by default.
     To control the pagination, one can use the `pagination` field in the request configuration (see below).
 
-
 ??? warning "no universality"
     The `*` wildcard is not universal and only works for **homogeneous** data.
     This means it can only be used to represent `upload_id`, `entry_id`, `dataset_id`, etc., for data that follows a fixed schema (`MongoDB`).

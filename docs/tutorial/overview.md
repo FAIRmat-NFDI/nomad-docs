@@ -40,7 +40,6 @@ Our tutorial documentation covers the basics of using Central NOMAD and NOMAD Oa
 - Organize and manage complex research workflows using NOMAD.
 - Interface with NOMAD programmatically for automation and high-throughput use.
 
-
 [**Accessing data via API**](access_api.md)
 
 - Create simple requests using the NOMAD API.
@@ -74,7 +73,6 @@ Two public versions that are relevant to the tutorials are:
 1. [**Official**](https://nomad-lab.eu/prod/v1/gui/search/entries){:target="_blank"} – The latest stable version of NOMAD.
 
     Access it by clicking the "Open NOMAD" button at the top of the landing page.
-
 
 2. [**Test**](https://nomad-lab.eu/prod/v1/test/gui/search/entries){:target="_blank"} – Runs the latest released version of NOMAD but on temporary test data that is routinely wiped.
 

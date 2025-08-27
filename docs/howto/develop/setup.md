@@ -8,8 +8,6 @@ run the infrastructure in development mode, learn to run the test suites, and se
 This is not about working with the NOMAD Python package `nomad-lab`. You can find its
 documentation [here](../programmatic/pythonlib.md).
 
-
-
 ## Clone the sources
 
 If you're planning on developing the core `nomad` package alongside other plugins, consider using the `nomad-distro-dev` setup as described at the end of this page.
@@ -48,7 +46,6 @@ git checkout -b <my-branch-name>
 ```
 
 This branch can be pushed to the repo, and then later may be merged to the relevant branch.
-
 
 ## Installation
 

@@ -66,7 +66,6 @@ Plugin entry points represent different types of customizations that can be adde
 - [Parsers](../howto/plugins/parsers.md)
 - [Schema packages](../howto/plugins/schema_packages.md)
 
-
 Entry points contain **configuration**, but also a **resource**, which lives in a separate Python module. This split enables lazy-loading: the configuration can be loaded immediately, while the resource is loaded later when/if it is required. This can significantly improve startup times, as long as all time-consuming initializations are performed only when loading the resource. This split also helps to avoid cyclical imports between the plugin code and the `nomad-lab` package.
 
 For example the entry point configuration for a parser is contained in `.../parsers/__init__.py` and it contains e.g. the name, version and any additional entry point-specific parameters that control its behaviour. The entry point has a `load` method than can be called lazily to return the resource, which is a `Parser` instance defined in `.../parsers/myparser.py`.

@@ -81,7 +81,6 @@ Regardless of the cloud provider, the deployment typically follows these steps:
 
 5. Access and test deployment
 
-
 ### Single node deployment with `docker-compose`
 
 #### Amazon Web Services (AWS)

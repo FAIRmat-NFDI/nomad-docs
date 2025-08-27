@@ -11,7 +11,6 @@ analysis.
   <figcaption>Browsing structured data in the NOMAD UI (<a href="https://nomad-lab.eu/prod/v1/gui/search/entries/entry/id/zQJMKax7xk384h_rx7VW_-6bRIgi/data/run/0/system/0/atoms/positions">link</a>)</figcaption>
 </figure>
 
-
 ## Schema language
 
 The bases for structured data are schemas written in a **schema language**. Our

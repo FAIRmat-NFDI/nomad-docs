@@ -134,7 +134,6 @@ nomad-sintering/
 !!! note
     The project `nomad-sintering` is created in a new directory, we have included a helper script to move all the files to the parent level of the repository.
 
-
 ```sh
 sh CHANGE_TO_PLUGIN_NAME/move_template_files.sh
 ```
@@ -243,7 +242,6 @@ We can grab this file from the tutorial repository using curl
 ```sh
 curl -L -o sintering.archive.yaml "https://raw.githubusercontent.com/FAIRmat-NFDI/AreaA-Examples/main/tutorial13/part3/files/sintering.archive.yaml"
 ```
-
 
 ### `metainfo-yaml2py`
 

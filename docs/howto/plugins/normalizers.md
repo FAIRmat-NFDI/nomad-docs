@@ -48,7 +48,6 @@ Here you can see that a new subclass of `NormalizerEntryPoint` was defined. In t
 
 We also instantiate an object `mynormalizer` from the new subclass. This is the final entry point instance in which you specify the default parameterization and other details about the normalizer. In the reference you can see all of the available [configuration options for a `NormalizerEntryPoint`](../../reference/plugins.md#normalizerentrypoint).
 
-
 The entry point instance should then be added to the `[project.entry-points.'nomad.plugin']` table in `pyproject.toml` in order for the normalizer to be automatically detected:
 
 ```toml

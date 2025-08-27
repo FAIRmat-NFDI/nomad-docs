@@ -20,7 +20,6 @@ When contributing, please check the <a href="https://github.com/FAIRmat-NFDI/nom
 
 If you have a `nomad-dev-distro` setup, you can follow the [day to day development](https://github.com/FAIRmat-NFDI/nomad-distro-dev?tab=readme-ov-file#day-to-day-development) instructions to install `nomad-docs` as a submodule there.
 
-
 If you *do not* have an up-to-date Python installation (3.11 or 3.12), see [Help to install Python](#help-to-install-python-311-or-312) below.
 
 ### 1. Install uv
@@ -65,7 +64,6 @@ uv run mkdocs serve
 This will install all requirements in a virtual environment and start the local development server.
 
 > 💡 **Tip:** To compare your local docs with the latest version once you start making significant changes, use the [DEV Deployment DOCS](https://nomad-lab.eu/prod/v1/develop/docs/index.html).
-
 
 ### How to run the tests
 
@@ -165,4 +163,3 @@ brew install python@3.11
 1. Download the installer from the [official Python website](https://www.python.org/downloads/release/python-3110/).
 2. Run the installer.
 3. Make sure to check the box **"Add Python 3.11 to PATH"** during installation.
-

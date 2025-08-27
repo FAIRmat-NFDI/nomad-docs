@@ -20,7 +20,6 @@ Those matched files are now [*mainfiles*](../reference/glossary.md#mainfile) and
   <figcaption>Processing steps and how they interact with files, entries, and archives.</figcaption>
 </figure>
 
-
 ## Processing triggers, scheduling, execution
 
 For most end-users, processing is fully automated and will be automatically run when
@@ -63,7 +62,6 @@ processing. Many entries of one upload might be processed at the same time. Some
 can be enforced through *processing levels*. Levels are part of the parser metadata and
 entries paired to parsers with a higher level are processed after entries with a
 parser of lower level. See also [how to write parsers](../howto/plugins/parsers.md).
-
 
 ## Customize processing
 
