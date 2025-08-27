@@ -1,8 +1,10 @@
 # Developing a NOMAD Plugin
+
 In this tutorial you will learn how to create and develop a NOMAD plugin. As an example we
 will create a plugin to log data for a simple sintering process.
 
 ## Prerequisites
+
 - A GitHub account. This can be created for free on [github.com](https://github.com/signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F&source=header-home).
 - Basic understanding of Python.
 - Basic understanding of NOMAD metainfo, see for example [tutorial 8](https://www.fairmat-nfdi.eu/events/fairmat-tutorial-8/tutorial-8-materials).
@@ -20,6 +22,7 @@ will create a plugin to log data for a simple sintering process.
     * [what is cruft](https://cruft.github.io/cruft/)
 
 ## Create a Git(Hub) repository
+
 Firstly, we recommend to use git to version control your NOMAD plugin.
 There is a GitHub template repository that can be used for this at [github.com/FAIRmat-NFDI/nomad-plugin-template](https://github.com/FAIRmat-NFDI/nomad-plugin-template).
 
@@ -34,6 +37,7 @@ Enter a name (I will use "nomad-sintering" for mine) for your repository and cli
 "Create Repository".
 
 ## Generate the plugin structure
+
 Next, we will use a cookiecutter template to create the basic structure of our NOMAD
 plugin.
 
@@ -43,6 +47,7 @@ There are now two options for how to proceed.
 2. If you have access to a Linux computer you can also run the same steps locally.
 
 ### 1. Using GitHub codespaces
+
 To use a GitHub codespace for the plugin development you should choose the "Create
 codespace on main" option after pressing the green "<> Code" button in the upper right
 corner.
@@ -51,6 +56,7 @@ corner.
 ![Use codespace](./images/codespace_light.png#gh-light-mode-only)
 
 ### 2. Developing locally
+
 If you have a Linux machine and prefer to develop locally you should **instead** click the
 "Local" tab after pressing the green "<> Code" button, copy the path, and clone your
 repository by running:
@@ -74,6 +80,7 @@ python -m pip install --user cruft
 ```
 
 ### Run cruft
+
 The next step is to run cruft to use our cookiecutter template:
 ```sh
 cruft create https://github.com/FAIRmat-NFDI/cookiecutter-nomad-plugin
@@ -168,6 +175,7 @@ and the "Allow GitHub Actions to create and approve pull requests" options and c
 ## Setting up the python environment
 
 ### Creating a virtual environment
+
 Before we can start developing we recommend to create a virtual environment using Python 3.12
 
 ```sh
@@ -176,6 +184,7 @@ source .pyenv/bin/activate
 ```
 
 ### Installing the plugin
+
 Next we should install our plugin package in editable mode and using the nomad package
 index
 
@@ -191,6 +200,7 @@ pip install -e '.[dev]' --index-url https://gitlab.mpcdf.mpg.de/api/v4/projects/
 ## Importing a yaml schema
 
 ### The schema
+
 We will now convert the yaml schema package from part 2 where we described a sintering
 step:
 
@@ -461,10 +471,12 @@ class Sintering(Process, EntryData, ArchiveSection):
 ```
 
 ## Running the normalize function
+
 We will now run the NOMAD processing on a test file to see the normalize function in
 action.
 
 ### Create an archive.json file
+
 The first step is to create the test file.
 We should add a file with the ending `.archive.yaml` or `archive.json` and which contains
 a `data` section and an `m_def` key with the value being our sintering section.
@@ -486,6 +498,7 @@ curl -L -o tests/data/test_sintering.archive.yaml "https://raw.githubusercontent
     module something other than `nomad_sintering`
 
 ### Run the NOMAD CLI
+
 To run the processing we us the NOMAD CLI method `parse`and save the output in a json file
 
 ```sh
@@ -566,6 +579,7 @@ beginning of that file should look something like:
 ```
 
 ### Next steps
+
 The next step is to include your new schema in a custom NOMAD Oasis. For more information on how to configure a NOMAD Oasis you can have a look at [How-to guides/NOMAD Oasis/Configuration](../howto/oasis/configure.md).
 
 Before we move one we should make sure that we have committed our changes to git:

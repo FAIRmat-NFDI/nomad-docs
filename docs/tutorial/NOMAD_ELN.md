@@ -1,4 +1,5 @@
 # Using NOMAD as an Electronic Lab Notebook
+
 In this tutorial, we will explore how to use NOMAD's Electronic Lab Notebook (ELN) functionality to record experiments effectively. You will learn how to create entries for substances and instruments, record samples along with their processing conditions, and the various measurements that make up your experiments. We will also cover NOMAD's built-in ELN templates, which help structure and interlink different aspects of an experiment, providing a clear, visual overview of the entire workflow.
 
 In doing this, we will apply an example of an experiment on preparing solution-processed polymer thin-films and measuring their optical absorption spectrum.
@@ -91,6 +92,7 @@ Once the entry is created, we can fill in the relevant fields with detailed and 
     Use the *Substance ELN* schema and include as many details as you like (e.g., Substance Name, Datetime, Substance ID, Description).
 
 -----------------
+
 ### Create a Sample Entry
 
 Now, let's create an entry using the built-in *Generic Sample ELN* schema for **P3HT Thin Film**. Follow the steps of creating an entry described above and select *Generic Sample ELN* from the drop-down menu in step 4.
@@ -136,6 +138,7 @@ Once the entry is created, we can fill in the relevant fields with detailed and 
     Use the *Generic Sample ELN* schema and include as many details as you like (e.g., Short Name, Datetime, ID, Description).
 
 -----------------
+
 ### Create an Instrument Entry
 
 Now, let's create an entry using the built-in *Instrument ELN* schema for **scale**. Follow the steps of creating an entry described above and select *Instrument ELN* from the drop-down menu in step 4.
@@ -347,6 +350,7 @@ The *steps* subsection allows us to reference the various processes and measurem
 </div>
 
 --------------------
+
 ## Exploring and Searching Your ELN
 
 ??? example "Download the example file for this exercise"

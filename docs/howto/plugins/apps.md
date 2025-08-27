@@ -164,6 +164,7 @@ The following items are supported in menus, and you can read more about them in 
 - `MenuItemNestedObject`: Used to group together menu items so that their query is performed using an Elasticsearch nested query. Note that you cannot yet use nested queries for search quantities originating from custom schemas.
 
 ### Dashboard
+
  The Dashboard field controls the content of the main search interface window. Different widgets can be added which contain terms or numerical information and can be controlled in size and position. There are 4 different types of Widgets:
 - `WidgetTerms`
 - `WidgetHistogram`

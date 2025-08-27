@@ -17,6 +17,7 @@ NOMAD is available in two flavours to address the diverse needs of scientists: [
 Our tutorial documentation covers the basics of using Central NOMAD and NOMAD Oasis. These tasks range from basic operations using the graphical user interface (GUI), to low-barrier tailoring of electronic lab notebooks, and robust customization with plugins.
 
 ### Tutorial Topics
+
 [**Uploading and publishing data**](upload_publish.md)
 
 - Create a NOMAD upload and share it with your colleagues.
@@ -85,6 +86,7 @@ Two public versions that are relevant to the tutorials are:
 </div>
 
 ------------
+
 ## Create a NOMAD User Account
 
 A NOMAD user account is required if you want to upload, share, publish, or analyze your data. However, exploring data in NOMAD does not require an account. Creating a NOMAD user account is quick and free!

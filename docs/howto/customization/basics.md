@@ -84,6 +84,7 @@ a *quantity definition* are:
 The *names* of *quantity definitions* serve as the *key*, used in respective *section objects*.
 
 ### Type
+
 This is a list of supported quantity types.
 
 |type|description|
@@ -218,6 +219,7 @@ data:
 ## References
 
 ### Reference quantities
+
 We already saw that we can define a *part-of* relationship between sections. When we
 want to represent highly inter-linked data, this is often insufficient. *References*
 allow us to create a more lose relationship between sections.
@@ -275,6 +277,7 @@ If you follow the *keys* `data`, `periodic_table`, `elements`, `0`, you reach th
 section that represent hydrogen. Keep in mind that *lists* use index-numbers as *keys*.
 
 ### Schema package references
+
 References can look different depending on the context. Above we saw simple references
 that point from one data section to another. But, you also already a saw a different
 type of reference. Schema packages themselves contain references: when we
@@ -286,6 +289,7 @@ as a special *key* in some objects. Whenever we cannot determine the *section de
 for a *section* by its context (e.g. the *key*/*subsection* used to contain it in a *parent section*), we use `m_def` to provide a reference to the *section definition*.
 
 ### Different forms of references
+
 Depending on where references are used, they might take a different serialized form. Here are a few examples for different reference syntax:
 
 |Example reference|Comments|

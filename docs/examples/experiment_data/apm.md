@@ -6,6 +6,7 @@
 Build upon your understanding of NOMAD's features with domain-specific examples and explanations.
 
 ## Contextualization for the technique and the scientific domain
+
 A variety of file formats are used in the research field of [atom probe tomography](https://www.nature.com/articles/s43586-021-00047-w) to document atom probe measurements and computer simulations. The pynxtools-apm plugin of the pynxtools parsing library solves the challenge of how these formats can be parsed and normalized into a common representation that increases interoperability and adds semantic expressiveness.
 
 - [pynxtools-apm](https://fairmat-nfdi.github.io/pynxtools-apm/)
@@ -13,6 +14,7 @@ A variety of file formats are used in the research field of [atom probe tomograp
 The plugin uses the [ifes_apt_tc_data_modeling Python library](https://github.com/atomprobe-tc/ifes_apt_tc_data_modeling) that is developed together with the [International Field Emission Society](http://fieldemission.org/).
 
 ## Work with standardized atom probe data in NOMAD and NORTH
+
 Once standardized, NXapm-compliant data in NOMAD can be explored with domain-specific software tools using a convenient JupyterHub-based service offered by the NOMAD Remote Tools Hub (NORTH).
 
 For this you should go to `Analyze` (menu bar) and select `NOMAD Remote Tools Hub`.

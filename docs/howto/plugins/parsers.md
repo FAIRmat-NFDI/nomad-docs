@@ -402,6 +402,7 @@ Additionally, the standard [normalizers](../../explanation/processing.md#normali
 argument `skip-normalizers`.
 
 ## Extending the Metainfo
+
 There are several built-in schemas NOMAD (`nomad.datamodel.metainfo`).
 <!-- ? What about restructuring this part into the idea of "NOMAD has some predefined section and quantities ... please, check HERE... and HERE... for more information and details"? -->
 In the example below, we have made use of the base section for workflow and extended
@@ -423,6 +424,7 @@ class ExampleWorkflow(Workflow):
 This is the approach for domain-specific schemas such as for [simulation workflows](https://github.com/nomad-coe/nomad-schema-plugin-simulation-workflow.git). Refer to [how to extend schemas](schema_packages.md#extending-existing-sections).
 
 ## Other FileParser classes
+
 Aside from `TextParser`, other `FileParser` classes are also defined. These include:
 
 - `DataTextParser`: in addition to matching strings as in `TextParser`, this parser uses the `numpy.loadtxt` function to load structured data files. The loaded `numpy.array` data can then be accessed from the property data.

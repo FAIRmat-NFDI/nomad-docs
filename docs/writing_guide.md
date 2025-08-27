@@ -40,6 +40,7 @@ Here is a list of currently used admonitions within the docs:
 - !!! example
 
 ## Adding image sliders
+
 Image sliders can be added using the following syntax:
 
 ```html

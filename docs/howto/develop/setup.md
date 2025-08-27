@@ -98,6 +98,7 @@ pip install --upgrade pip
 ```
 
 ### Install missing system libraries (e.g. on Windows, MacOS)
+
 Even though the NOMAD infrastructure is written in Python, there are C libraries
 required by some of our Python dependencies. Specifically, the libmagic library,
 which allows determining the MIME type of files, and the hdf5 library, which is

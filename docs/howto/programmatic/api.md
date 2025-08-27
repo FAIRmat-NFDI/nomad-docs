@@ -437,6 +437,7 @@ Searching for entries is typically just an initial step. Once you know what entr
 you'll probably want to do one of the following things.
 
 ## Download raw files
+
 You can use [queries](#queries) to download raw files, but typically you don't want to
 download file-by-file or entry-by-entry. Therefore, we allow to download a large set of
 files in one big zip-file. Here, you might want to use a program like *curl* to download
@@ -447,6 +448,7 @@ curl "{{ nomad_url() }}/v1/entries/raw?results.material.elements=Ti&results.mate
 ```
 
 ## Access processed data (archives)
+
 Above under [Using `requests`](#using-requests), you've already learned how to access archive
 data. A special feature of the archive API functions is that you can define what is
 `required` from the archives.

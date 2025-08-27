@@ -77,6 +77,7 @@ To read a dataset, use `read_dataset` and provide a reference. This will return 
 cast in the type of the dataset.
 
 ## HDF5Dataset
+
 To use HDF5 storage for archive quantities, one should use `HDF5Dataset`.
 
 ```python

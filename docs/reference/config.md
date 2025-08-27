@@ -90,12 +90,15 @@ ui:
 The following is a reference of all configuration sections and attributes.
 
 ## Services
+
 {{ config_models(['services', 'meta', 'oasis', 'north']) }}
 
 ## Files, databases, external services
+
 {{ config_models(['fs', 'mongo', 'elastic', 'rabbitmq', 'keycloak', 'logstash', 'datacite', 'rfc3161_timestamp', 'mail'])}}
 
 ## Processing
+
 {{ config_models(['process', 'reprocess', 'bundle_export', 'bundle_import', 'normalize', 'celery', 'archive'])}}
 
 ## User Interface
@@ -105,4 +108,5 @@ These settings affect the behaviour of the user interface. Note that the preferr
 {{ config_models(['ui'])}}
 
 ## Others
+
 {{ config_models() }}

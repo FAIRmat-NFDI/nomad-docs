@@ -51,12 +51,14 @@ See also the [documentation "from files to data"](./basics.md) to understand the
 between all NOMAD entities.
 
 ### Uploads
+
 Upload processing is scheduled if one or many files in the upload have changed. Upload processing
 includes the matching step, it creates new entries, and triggers the processing of
 new or afflicted entries. An upload is considered processing as long as any of its entries
 is still processing (or scheduled to be processed).
 
 ### Entries
+
 In most scenarios, entry processing is not triggered individually, but as part of an upload
 processing. Many entries of one upload might be processed at the same time. Some order
 can be enforced through *processing levels*. Levels are part of the parser metadata and

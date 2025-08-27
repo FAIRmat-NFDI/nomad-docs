@@ -38,11 +38,13 @@ Or, from PyPI:
 ```
 
 #### (b) With pip
+
 ```bash
 pip install uv
 ```
 
 #### (c) With pipx
+
 ```bash
 pipx install uv
 ```
@@ -95,6 +97,7 @@ This test runs the `pytest` command to execute all the tests in the `tests` dire
 - `test_metainfo.py`: This test checks helper functions that extract information from NOMAD's Metainfo models, which are used to automatically generate documentation for these models.
 
 ---
+
 ## Appendix
 
 ### External Contribution Instructions
@@ -119,6 +122,7 @@ git checkout -b my-feature-branch
 #### 4. **Make and Commit Your Changes**
 
 #### 5. **Push to Your Fork**
+
 ```bash
 git push origin my-feature-branch
 ```

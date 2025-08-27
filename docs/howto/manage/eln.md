@@ -52,6 +52,7 @@ Follow the [How-to write a schema](../customization/basics.md) and [How-to defin
 guides to create you own customized of ELNs.
 
 ## Integration of third-party ELNs
+
 !!! warning "Attention"
 
     This part of the documentation is still work in progress.
