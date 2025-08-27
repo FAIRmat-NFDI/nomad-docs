@@ -4,7 +4,7 @@
 
 <!-- TODO - already link to any existing DOCS for the new schema? -->
 
-### Overview of metadata organization for computation
+## Overview of metadata organization for computation
 
 NOMAD stores all processed data in a well defined, structured, and machine readable format, known as the `archive`.
 The schema that defines the organization of (meta)data within the archive is known as the [MetaInfo](../../reference/glossary.md#metainfo). See [Explanation > Data structure](../../explanation/data.md) for general information about data structures and schemas in NOMAD.

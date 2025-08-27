@@ -19,7 +19,7 @@ NOMAD is useful for scientists that work with data, for research groups that nee
 <div markdown="block" class="home-grid">
 <div markdown="block">
 
-### Tutorial
+## Tutorial
 
 A series of tutorials will guide you through the main functionality of NOMAD.
 
@@ -36,7 +36,7 @@ A series of tutorials will guide you through the main functionality of NOMAD.
 </div>
 <div markdown="block">
 
-### How-to guides
+## How-to guides
 
 How-to guides provide step-by-step instructions for a wide range of tasks, with the overarching topics:
 
@@ -53,7 +53,7 @@ How-to guides provide step-by-step instructions for a wide range of tasks, with 
 
 <div markdown="block">
 
-### Explanation
+## Explanation
 
 The explanation section provides background knowledge on what are
 schemas and structured data, how does processing work, the NOMAD architecture, and more.
@@ -61,7 +61,7 @@ schemas and structured data, how does processing work, the NOMAD architecture, a
 </div>
 <div markdown="block">
 
-### Reference
+## Reference
 
 The reference includes all CLI commands and arguments, all configuration options,
 the possible schema annotations and their arguments, and a glossary of used terms.

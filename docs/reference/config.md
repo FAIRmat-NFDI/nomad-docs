@@ -17,7 +17,7 @@ Configuration items are structured. The configuration is hierarchical and items 
 in potentially nested section. For example the configuration item `services.api_host` denotes
 the attribute `api_host` in the configuration section `services`.
 
-#### Setting values from the environment
+### Setting values from the environment
 
 NOMAD services will look at the environment.
 All environment variables starting with `NOMAD_` are considered. The rest of the name
@@ -25,7 +25,7 @@ is interpreted as a configuration item. Sections and attributes are concatenated
 For example, the environment variable `NOMAD_SERVICES_API_HOST` will set the value for
 the `api_host` attribute in the `services` section.
 
-#### Setting values from a `nomad.yaml`
+### Setting values from a `nomad.yaml`
 
 NOMAD services will look for a `nomad.yaml` file. By default, they will look in the
 current working directory. This location can be overwritten with the `NOMAD_CONFIG` environment
@@ -39,7 +39,7 @@ Here is an example `nomad.yaml` file:
 
 When overwriting an *object* in the configuration, the new value will be merged with the default value. The new merged object will have all of the attributes of the new object in addition to any old attributes that were not overwritten. This allows you to simply change an individual setting without having to provide the entire structure again, which simplifies customization that happens deep in the configuration hierarchy. When overwriting anything else (numbers, strings, lists etc.) the new value completely replaces the old one.
 
-#### User interface customization
+### User interface customization
 
 Many of the UI options use a data model that contains the following three fields: `include`, `exclude` and `options`. This structure allows you to easily disable, enable, reorder and modify the UI layout with minimal config rewrite. Here are examples of common customization tasks using the search columns as an example:
 

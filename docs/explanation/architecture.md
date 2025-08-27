@@ -46,7 +46,7 @@ comprehensive overview of used languages, libraries, frameworks, and services.
   <figcaption>NOMAD components and dependencies</figcaption>
 </figure>
 
-#### Python 3
+### Python 3
 
 The *backend* of nomad is written in Python. This includes all parsers, normalizers,
 and other data processing. We only use Python 3 and there is no compatibility with
@@ -59,7 +59,7 @@ Logging is done with [structlog](https://www.structlog.org/en/stable/){:target="
 Elasticstack below). Documentation is driven by [Sphinx](http://www.sphinx-doc.org/en/master/){:target="_blank"}.
 
 
-#### celery
+### celery
 
 [Celery](http://celeryproject.org){:target="_blank"} (+ [rabbitmq](https://www.rabbitmq.com/){:target="_blank"})
 is a popular combination for realizing long running tasks in internet applications.
@@ -68,28 +68,28 @@ It allows us to transparently distribute processing load while keeping processin
 available to inform the user.
 
 
-#### elastic search
+### elastic search
 
 [Elasticsearch](https://www.elastic.co/webinars/getting-started-elasticsearch){:target="_blank"}
 is used to store repository data (not the raw files).
 Elasticsearch enables flexible, scalable search and analytics.
 
 
-#### mongodb
+### mongodb
 
 [Mongodb](https://docs.mongodb.com/){:target="_blank"} is used to store and track the state of the
 processing of uploaded files and the generated entries. We use
 [mongoengine](http://docs.mongoengine.org/){:target="_blank"} to program with mongodb.
 
 
-#### Keycloak
+### Keycloak
 
 [Keycloak](https://www.keycloak.org/){:target="_blank"} is used for user management. It manages users and
 provides functions for registration, forgetting passwords, editing user accounts, and single
 sign-on to fairdi@nomad and other related services.
 
 
-#### FastAPI
+### FastAPI
 
 The ReSTful API is build with the [FastAPI](https://fastapi.tiangolo.com/){:target="_blank"}
 framework. This allows us to automatically derive a [OpenAPI](https://swagger.io/specification/){:target="_blank"} description
@@ -97,7 +97,7 @@ of the nomad API.
 Fruthermore, you can browse and use the API via [OpenAPI dashboard](https://swagger.io/tools/swagger-ui/){:target="_blank"}.
 
 
-#### Elasticstack
+### Elasticstack
 
 The [elastic stack](https://www.elastic.co/guide/index.html){:target="_blank"}
 (previously *ELK* stack) is a centralized logging, metrics, and monitoring
@@ -105,7 +105,7 @@ solution that collects data within the cluster and provides a flexible analytics
 for that data.
 
 
-#### Javascript, React, Material-UI
+### Javascript, React, Material-UI
 
 The frontend (GUI) of **nomad@FAIRDI** is built on the
 [React](https://reactjs.org/docs/getting-started.html){:target="_blank"} component framework.
@@ -117,7 +117,7 @@ The component library [Material-UI](https://material-ui.com/){:target="_blank"}
 (based on Google's popular material design framework) provides a consistent look-and-feel.
 
 
-#### docker
+### docker
 
 To run a **nomad@FAIRDI** instance, many services have to be orchestrated:
 the nomad app, nomad worker, mongodb, Elasticsearch, Keycloak, RabbitMQ,
@@ -129,7 +129,7 @@ and storage solutions. [Docker-compose](https://docs.docker.com/compose/){:targe
 provide configuration to run the whole nomad stack on a single server node.
 
 
-#### kubernetes + helm
+### kubernetes + helm
 
 To run and scale nomad on a cluster, you can use [kubernetes](https://kubernetes.io/docs/home/){:target="_blank"}
 to orchestrated the  necessary containers. We provide a [helm](https://docs.helm.sh/){:target="_blank"}
@@ -137,7 +137,7 @@ chart with all necessary service and deployment descriptors that allow you to se
 update nomad with only a few commands.
 
 
-#### GitLab
+### GitLab
 
 Nomad as a software project is managed via [GitLab](https://docs.gitlab.com/){:target="_blank"}.
 The **nomad@FAIRDI** project is hosted [here](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR){:target="_blank"}.
