@@ -141,7 +141,7 @@ Changes necessary:
 
 - The group in the value of the hub's user parameter needs to match the docker group
   on the host. This should ensure that the user which runs the hub, has the rights to access the host's docker.
-- On Windows or MacOS computers you have to run the `app` and `worker` container without `user: '1000:1000'` and the `north` container with `user: root`.
+- On Windows or macOS computers you have to run the `app` and `worker` container without `user: '1000:1000'` and the `north` container with `user: root`.
 
 A few things to notice:
 
@@ -176,7 +176,7 @@ You should change the following:
 - You can change `api_base_path` to run NOMAD under a different path prefix.
 - You should generate your own `north.jupyterhub_crypt_key`. You can generate one
   with `openssl rand -hex 32`.
-- On Windows or MacOS, you have to add `hub_connect_ip: 'host.docker.internal'` to the `north` section.
+- On Windows or macOS, you have to add `hub_connect_ip: 'host.docker.internal'` to the `north` section.
 
 A few things to notice:
 
@@ -409,7 +409,7 @@ This is an incomplete list of potential things to customize your NOMAD experienc
 
 If during login you get an error like: `jwt.exceptions.ImmatureSignatureError: The token is not yet valid (iat)`, it most probably means that there is a time difference between the two machines: the one creating the JWT and the other that is validating it. This causes an error where the authentication server looking at the token thinks that it has not been issued yet.
 
-To fix this problem, you should ensure that the time on the servers is synchronized. It is possible that a network port on one of the servers may be closed, preventing it from synchronizing the time. Note that the servers do not need to be on the same timezone, as internally everything is converted to UTC+0. To check the time on a server, you can on a linux-based machine use the [`timedatectl`](https://man7.org/linux/man-pages/man8/hwclock.8.html) command which will report both the harware clock and the system clock (see [here for the difference](https://developer.toradex.com/software/linux-resources/linux-features/real-time-clock-rtc-linux/#:~:text=Two%20clocks%20are%20important%20in,maintained%20by%20the%20operating%20system.)). For authentication, the system clocks on the two machines need to be set correctly, but you might also need to correct the hardware clock since it initially sets the system clock upon rebooting the machine.
+To fix this problem, you should ensure that the time on the servers is synchronized. It is possible that a network port on one of the servers may be closed, preventing it from synchronizing the time. Note that the servers do not need to be on the same timezone, as internally everything is converted to UTC+0. To check the time on a server, you can on a Linux-based machine use the [`timedatectl`](https://man7.org/linux/man-pages/man8/hwclock.8.html) command which will report both the harware clock and the system clock (see [here for the difference](https://developer.toradex.com/software/linux-resources/linux-features/real-time-clock-rtc-linux/#:~:text=Two%20clocks%20are%20important%20in,maintained%20by%20the%20operating%20system.)). For authentication, the system clocks on the two machines need to be set correctly, but you might also need to correct the hardware clock since it initially sets the system clock upon rebooting the machine.
 
 ### NOMAD in networks with restricted Internet access
 

@@ -97,7 +97,7 @@ Make sure you have the most recent version of `pip`:
 pip install --upgrade pip
 ```
 
-### Install missing system libraries (e.g. on Windows, MacOS)
+### Install missing system libraries (e.g. on Windows, macOS)
 
 Even though the NOMAD infrastructure is written in Python, there are C libraries
 required by some of our Python dependencies. Specifically, the libmagic library,
@@ -293,7 +293,7 @@ Or both together in one process:
 nomad admin run appworker
 ```
 
-On MacOS you might run into multiprocessing errors. That can be solved as described [here](https://stackoverflow.com/questions/50168647/multiprocessing-causes-python-to-crash-and-gives-an-error-may-have-been-in-progr){:target="_blank"}.
+On macOS you might run into multiprocessing errors. That can be solved as described [here](https://stackoverflow.com/questions/50168647/multiprocessing-causes-python-to-crash-and-gives-an-error-may-have-been-in-progr){:target="_blank"}.
 
 The app will run at port 8000 by default.
 
@@ -356,7 +356,7 @@ north:
 ```
 
 - If you are not on Linux, you need to configure how JupyterHub can reach your host
-  network from docker containers. For Windows and MacOS you need to set `hub_connect_ip`
+  network from docker containers. For Windows and macOS you need to set `hub_connect_ip`
   to `host.docker.internal`. For Linux you can leave it out and use the default
   `172.17.0.1`, unless you changed your docker configuration.
 

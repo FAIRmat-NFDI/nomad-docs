@@ -30,7 +30,7 @@
     "MD041": false,
     // MD044 - Proper names should have the correct capitalization
     // TODO: we should probably add more NOMAD-specific rules
-    "MD044": {"names": ["GitHub", "github.com", "github.io"]},
+    "MD044": {"names": ["GitHub", "github.com", "github.io", "macOS", "Linux"]},
     // MD045 - Images should have alternate text (alt text)
     // TODO: fix these
     "MD045": false,

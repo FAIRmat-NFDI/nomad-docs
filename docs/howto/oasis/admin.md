@@ -138,7 +138,7 @@ oasis:
 ## Configuring for performance
 
 If you run the OASIS on a single computer, like described here (either with docker or bare
-linux), you might run into problems with processing large uploads. If the NOMAD worker
+Linux), you might run into problems with processing large uploads. If the NOMAD worker
 and app are run on the same computer, the app might become unresponsive, when the worker
 consumes all system resources.
 
