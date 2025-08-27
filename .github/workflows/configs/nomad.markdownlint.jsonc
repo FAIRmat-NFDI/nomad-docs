@@ -1,87 +1,33 @@
 // https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md
 {
-    // Set rules to disabled by default
-    // TODO: after enable most rules, revert this to `true`
-    // and remove manual setting to `true`
-    "default": false,
+    // Set rules to enabled by default
+    "default": true,
 
-    // MD001 - Heading levels should only increment by one level at a time
-    "MD001": true,
-    // MD003 - Heading style
-    "MD003": true,
     // MD004 - Unordered list style
     // NOTE: maybe not necessary to enforce the same delimiters on different lists
     "MD004": false,
-    // MD005 - Inconsistent indentation for list items at the same level
-    "MD005": true,
     // MD007 - Unordered list indentation
     "MD007": { "indent": 4 },
     // MD009 - Trailing spaces
     "MD009": { "strict": true },
-    // MD010 - Hard tabs
-    "MD010": true,
-    // MD011 - Reversed link syntax
-    "MD011": true,
     // MD012 - Multiple consecutive blank lines
     "MD012": {"maximum": 1},
     // MD013 - Line length
     // IDEs would auto-wrap long lines
     "MD013": false,
-    // MD014 - Dollar signs used before commands without showing output
-    "MD014": true,
-    // MD018 - No space after hash on atx style heading
-    "MD018": true,
-    // MD019 - Multiple spaces after hash on atx style heading
-    "MD019": true,
-    // MD020 - No space inside hashes on closed atx style heading
-    "MD020": true,
-    // MD021 - Multiple spaces inside hashes on closed atx style heading
-    "MD021": true,
-    // MD022 - Headings should be surrounded by blank lines
-    "MD022": true,
-    // MD023 - Headings must start at the beginning of the line
-    "MD023": true,
-    // MD024 - Multiple headings with the same content
-    "MD024": true,
-    // MD025 - Multiple top-level headings in the same document
-    "MD025": true,
     // MD026 - Trailing punctuation in heading
     "MD026": {"punctuation": ".,;:。，；："},
-    // MD027 - Multiple spaces after blockquote symbol
-    "MD027": true,
-    // MD028 - Blank line inside blockquote
-    "MD028": true,
-    // MD029 - Ordered list item prefix
-    "MD029": true,
-    // MD030 - Spaces after list markers
-    "MD030": true,
-    // MD031 - Fenced code blocks should be surrounded by blank lines
-    "MD031": true,
-    // MD032 - Lists should be surrounded by blank lines
-    "MD032": true,
     // MD033 - Inline HTML
     // NOTE: some inline HTML might be needed?
     "MD033": false,
-    // MD034 - Bare URL used
-    "MD034": true,
     // MD035 - Horizontal rule style
     "MD035": {"style": "---"},
     // MD036 - Emphasis used instead of a heading
     // NOTE: looks like some are intended as emphasis
     "MD036": false,
-    // MD037 - Spaces inside emphasis markers
-    "MD037": true,
-    // MD038 - Spaces inside code span elements
-    "MD038": true,
-    // MD039 - Spaces inside link text
-    "MD039": true,
-    // MD040 - Fenced code blocks should have a language specified
-    "MD040": true,
     // MD041 - First line in a file should be a top-level heading
     // TODO: enable this but some files are missing top headers
     "MD041": false,
-    // MD042 - No empty links
-    "MD042": true,
     // MD044 - Proper names should have the correct capitalization
     // TODO: we should probably add more NOMAD-specific rules
     "MD044": {"names": ["GitHub", "github.com", "github.io"]},
@@ -89,11 +35,8 @@
     // TODO: fix these
     "MD045": false,
     // MD046 - Code block style
-    // TODO: need to clean up indentation style
-    // "MD046": {"style": "fenced"},
+    // NOTE: we have some custom folded text marked by `???`
     "MD046": false,
-    // MD047 - Files should end with a single newline character
-    "MD047": true,
     // MD048 - Code fence style
     "MD048": {"style": "backtick"},
     // MD049 - Emphasis style (Bold, Italic or both)
@@ -101,20 +44,8 @@
     "MD049": {"style": "asterisk"},
     // MD050 - Strong style (Bold)
     "MD050": {"style": "asterisk"},
-    // MD051 - Link fragments should be valid
-    "MD051": true,
-    // MD052 - Reference links and images should use a label that is defined
-    "MD052": true,
-    // MD053 - Link and image reference definitions should be needed
-    "MD053": true,
-    // MD054 - Link and image style
-    "MD054": true,
     // MD055 - Table pipe style
     "MD055": {"style": "leading_and_trailing"},
-    // MD056 - Table column count
-    "MD056": true,
-    // MD058 - Tables should be surrounded by blank lines
-    "MD058": true,
     // MD059 - Link text should be descriptive
     "MD059": false
 }
