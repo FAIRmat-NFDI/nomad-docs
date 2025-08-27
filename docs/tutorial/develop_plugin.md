@@ -288,6 +288,7 @@ If we take a look in that file we can see an example created by the cookiecutter
 We can go ahead and copy the `MySchemaPackageEntryPoint` class and the `mypackage`
 instance and paste them below.
 We then need to change:
+
 1. the name of the class,
 2. the import in the load function to import our sintering schema package,
 3. the name of the instance and the class it uses,

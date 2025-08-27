@@ -56,5 +56,7 @@
     // MD030 - Spaces after list markers
     "MD030": true,
     // MD031 - Fenced code blocks should be surrounded by blank lines
-    "MD031": true
+    "MD031": true,
+    // MD032 - Lists should be surrounded by blank lines
+    "MD032": true
 }

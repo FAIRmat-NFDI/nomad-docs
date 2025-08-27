@@ -166,6 +166,7 @@ The following items are supported in menus, and you can read more about them in 
 ### Dashboard
 
  The Dashboard field controls the content of the main search interface window. Different widgets can be added which contain terms or numerical information and can be controlled in size and position. There are 4 different types of Widgets:
+
 - `WidgetTerms`
 - `WidgetHistogram`
 - `WidgetScatterplot`
