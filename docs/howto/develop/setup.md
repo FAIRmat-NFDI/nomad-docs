@@ -583,25 +583,24 @@ perform calls to a running server where a test state has been prepared. This
 mode can be used to perform integration tests but also to record the snapshot
 files needed by the offline testing.
 
+Before running tests, ensure that the GUI artifacts are up-to-date:
+
+    ```sh
+    ./scripts/generate_gui_test_artifacts.sh
+    ```
+
+    As snapshot tests do not connect to the server, the artifacts cannot be
+    fetched dynamically from the server and static files need to be used instead.
+    Note that you should not push these files to Git: the CI/CD pipeline will
+    automatically generate them.
+
 ##### Offline testing
 
 This is the way our CI pipeline runs the tests and should be used locally, e.g.
 whenever you wish to reproduce pipeline errors or when your tests do not
 involve any API traffic.
 
-1. Ensure that the GUI artifacts are up-to-date:
-
-   ```shell
-   ./scripts/generate_gui_test_artifacts.sh
-   ```
-
-   As snapshot tests do not connect to the server, the artifacts cannot be
-   fetched dynamically from the server and static files need to be used instead.
-   Note that you should not push these files to Git: the CI/CD pipeline will
-   automatically generate them.
-
-2. Run `yarn test` to run the whole suite or `yarn test [<filename>]` to run a
-   specific test.
+Run `yarn test` to run the whole suite, or `yarn test [<filename>]` to run a specific test.
 
 ##### Online testing
 
@@ -611,16 +610,15 @@ configuration. To do this, follow these steps:
 
 1. Have the docker infrastructure running: `docker compose up -d`
 
-2. Have the `nomad appworker` running with the config found in
-   `gui/tests/nomad.yaml`:
-   `export NOMAD_CONFIG=gui/tests/nomad.yaml && nomad admin run appworker`
+2. Have the `nomad appworker` running with the config found in `gui/tests/nomad.yaml`:
+`export NOMAD_CONFIG=gui/tests/nomad.yaml && nomad admin run appworker`
 
 3. Activate the correct Python virtual environment before running the tests
-   with Yarn (Yarn will run the Python functions that prepare the state).
+with Yarn (Yarn will run the Python functions that prepare the state).
 
 4. Run the tests with `yarn test-record [<filename>]` if you wish to record a
-   snapshot file or `yarn test-integration [<filename>]` if you want the
-   perform the test without any recording.
+snapshot file, or `yarn test-integration [<filename>]` if you want the
+perform the test without any recording.
 
 ## Build custom Oasis image
 
