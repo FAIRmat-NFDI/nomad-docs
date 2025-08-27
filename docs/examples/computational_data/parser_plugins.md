@@ -39,8 +39,3 @@ The general docs contain information about the nuts and bolts of developing a pl
 <!-- ### Best practices for computational parser design -->
 
 <!-- ### Tips for implementation of computaional parsers -->
-
-
-
-
-
