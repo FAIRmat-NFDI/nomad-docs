@@ -58,5 +58,12 @@
     // MD031 - Fenced code blocks should be surrounded by blank lines
     "MD031": true,
     // MD032 - Lists should be surrounded by blank lines
-    "MD032": true
+    "MD032": true,
+    // MD033 - Inline HTML
+    // TODO: some inline HTML might be needed?
+    "MD033": false,
+    // MD034 - Bare URL used
+    "MD034": true,
+    // MD035 - Horizontal rule style
+    "MD035": true
 }

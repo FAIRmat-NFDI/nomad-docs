@@ -217,4 +217,4 @@ Click the *pen icon* on any widget to modify its plotted quantities, color mappi
     <img src="images/sn_based_solar_cells_example.gif" alt="Sn-based Solar Cell example" width="800">
 </div>
 
-----------------------
+---

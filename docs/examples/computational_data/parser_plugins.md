@@ -13,7 +13,7 @@ The NOMAD computational parsers can be found within your local NOMAD distributio
 
 * [atomistic](https://github.com/nomad-coe/atomistic-parsers) - Parsers for output from classical molecular simulations, e.g., from Gromacs, Lammps, etc.
 * [database](https://github.com/nomad-coe/database-parsers) - Parsers for various databases, e.g., OpenKim.
-* [eelsdb](https://github.com/nomad-coe/nomad-parser-eelsdb) - Parser for the EELS database (https://eelsdb.eu/; to be integrated in the database project).
+* [eelsdb](https://github.com/nomad-coe/nomad-parser-eelsdb) - Parser for the EELS database (<https://eelsdb.eu/>; to be integrated in the database project).
 * [electronic](https://github.com/nomad-coe/electronic-parsers) - Parsers for output from electronic structure calculations, e.g., from Vasp, Fhiaims, etc. <!-- TODO ab Initio instead of electronic structure?  -->
 * [nexus](https://github.com/nomad-coe/nomad-parser-nexus) - Parsers for combining various instrument output formats and electronic lab notebooks.
 * [workflow](https://github.com/nomad-coe/workflow-parsers) - Parsers for output from task managers and workflow schedulers.

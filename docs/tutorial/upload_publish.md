@@ -39,7 +39,7 @@ You can create a user account by following these [steps](overview.md#create-a-no
 
 For more detailed explanation, you can refer to this [page](../explanation/basics.md).
 
------------------------------
+---
 
 ## Create New Upload
 
@@ -99,7 +99,7 @@ The uploads exist in the *Your uploads* page. Here you can view a list of all yo
 
     `5. Publish:` lets users publish data with or without an embargo (i.e., a waiting period before the data are publicly visible).
 
---------------------
+---
 
 ## Sharing and Publishing Uploads
 
@@ -180,7 +180,7 @@ Alternatively, you can click the `EDIT UPLOAD MEMBERS` button below the list of 
 
     ![screenshot of an embargoed upload](images/embargoed_upload.png)
 
------------------------
+---
 
 ## Add Files to an Upload
 
@@ -485,7 +485,7 @@ In the following examples, you will learn how to upload a raw file from a SPECS 
 
     ![Screenshots of steps 5 - 9](images/example_3-3_NexusDataConverter_2(with_ELN).png)
 
-----------------
+---
 
 ## Create Datasets and Get a DOI
 
@@ -540,4 +540,4 @@ User created datasets exist in the “Your datasets” page page. You can reach 
     <div class="nav-arrow right" id="next3">→</div>
 </div>
 
---------------
+---

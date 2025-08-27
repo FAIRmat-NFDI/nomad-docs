@@ -61,7 +61,7 @@ An overview of the skills required to use NOMAD and NOMAD Oasis, categorized int
 
 <img src="images/overview.png" alt="Competences of NOMAD" width="800">
 
-------
+---
 
 ## Ways to Access NOMAD
 
@@ -85,7 +85,7 @@ Two public versions that are relevant to the tutorials are:
     <img src="images/access_NOMAD.png" alt="Access NOMAD" width="600">
 </div>
 
-------------
+---
 
 ## Create a NOMAD User Account
 
@@ -100,7 +100,7 @@ A NOMAD user account is required if you want to upload, share, publish, or analy
     <img src="images/account_4.png" alt="Image 4">
     <div class="nav-arrow right" id="next">→</div>
 </div>
-----------
+---
 
 ## Login Options via Helmholtz AAI
 
@@ -120,4 +120,4 @@ You will be redirected to your institution’s login page, where you can enter y
     <img src="images/account_6.png" alt="Image 6">
     <div class="nav-arrow right" id="next2">→</div>
 </div>
-----------
+---

@@ -91,7 +91,7 @@ Once the entry is created, we can fill in the relevant fields with detailed and 
 
     Use the *Substance ELN* schema and include as many details as you like (e.g., Substance Name, Datetime, Substance ID, Description).
 
------------------
+---
 
 ### Create a Sample Entry
 
@@ -137,7 +137,7 @@ Once the entry is created, we can fill in the relevant fields with detailed and 
 
     Use the *Generic Sample ELN* schema and include as many details as you like (e.g., Short Name, Datetime, ID, Description).
 
------------------
+---
 
 ### Create an Instrument Entry
 
@@ -178,7 +178,7 @@ Once the entry is created, we can fill in the relevant fields with detailed and 
 
     Use the *Instrument ELN* schema and include as many details as you like (e.g., name, datetime, ID, description).
 
------------------
+---
 
 ### Create a Process Entry
 
@@ -276,7 +276,7 @@ We can now see the changes in the workflow graph based on our modifications in t
     <img src="images/ELN_built-in_38.png" alt="Process workflow graph" width="400">
 </div>
 
------------------
+---
 
 ### Create a Measurement Entry
 
@@ -318,7 +318,7 @@ Once the entry is created, we can fill in the relevant fields with detailed and 
     <div class="nav-arrow right" id="next8">→</div>
 </div>
 
---------------
+---
 
 ### Integrate Your Experiment
 
@@ -349,7 +349,7 @@ The *steps* subsection allows us to reference the various processes and measurem
     <img src="images/ELN_built-in_39.gif" alt="interactive workflow gif" width="400">
 </div>
 
---------------------
+---
 
 ## Exploring and Searching Your ELN
 
@@ -467,4 +467,4 @@ Widgets allow you to customize your search interface to better suit your data ex
         <img src="images/explore_you_ELN_entries.gif" alt="Animation of filtering using widgets" width="800">
     </div>
 
-----------------
+---
