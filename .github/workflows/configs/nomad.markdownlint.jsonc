@@ -9,5 +9,9 @@
     "MD003": true,
     // MD004 - Unordered list style
     // TODO: maybe not necessary to enforce the same delimiters on different lists
-    "MD004": false
+    "MD004": false,
+    // MD005 - Inconsistent indentation for list items at the same level
+    "MD005": true,
+    // MD007 - Unordered list indentation
+    "MD007": { "indent": 4 }
 }

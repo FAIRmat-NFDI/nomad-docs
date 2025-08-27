@@ -79,12 +79,11 @@ class MyParser(MatchingParser):
         logger.info('MyParser called')
 ```
 
-If you are using the `MatchingParser` interface, the minimal requirement is
-that your class has a `parse` function, which will take as input:
+If you are using the `MatchingParser` interface, the minimal requirement is that your class has a `parse` function, which will take as input:
 
- - `mainfile`: Filepath to a raw file that the parser should open and run on
- - `archive`: The [`EntryArchive` object](../../reference/glossary.md#archive) in which the parsing results will be stored
- - `logger`: Logger that you can use to log parsing events into
+- `mainfile`: Filepath to a raw file that the parser should open and run on
+- `archive`: The [`EntryArchive` object](../../reference/glossary.md#archive) in which the parsing results will be stored
+- `logger`: Logger that you can use to log parsing events into
 
 Note here that if using `MatchingParser`, the process of identifying which files the `parse` method is run against is take care of by passing in the required parameters to the instance in the `load` mehod. In the previous section, the `load` method looked something like this:
 
@@ -99,8 +98,7 @@ There we are passing all of the entry configuration options to the parser instan
 
 ## Match your raw file
 
-If you are using the `MatchingParser` interface you can configure which files
-are matched directly in the `ParserEntryPoint`. For example to match only certain file extensions and file contents, you can use the `mainfile_name_re` and `mainfile_contents_re` fields:
+If you are using the `MatchingParser` interface you can configure which files are matched directly in the `ParserEntryPoint`. For example to match only certain file extensions and file contents, you can use the `mainfile_name_re` and `mainfile_contents_re` fields:
 
 ```python
 myparser = MyParserEntryPoint(

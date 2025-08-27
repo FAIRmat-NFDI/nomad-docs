@@ -80,8 +80,8 @@ class MyNormalizer(Normalizer):
 
 The minimal requirement is that your class has a `normalize` function, which as input takes:
 
- - `archive`: The [`EntryArchive` object](../../reference/glossary.md#archive) in which the normalization results will be stored
- - `logger`: Logger that you can use to log normalization events into
+- `archive`: The [`EntryArchive` object](../../reference/glossary.md#archive) in which the normalization results will be stored
+- `logger`: Logger that you can use to log normalization events into
 
 ### `SystemBasedNormalizer` class
 

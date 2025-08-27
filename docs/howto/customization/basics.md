@@ -522,13 +522,13 @@ to enable one to drop/upload the `*.h5` file, and to define relevant quantities 
 attribute under `hdf5`. These quantities are then picked up by the normalizer to extract the values to be found
 denoted by the `path`. The supported `Hierarchical Data Format` file extensions are:
 
-  - ```.h5```  
-  - ```.hdf5```
-  - ```.he5```
-  - ```.h5part```
-  - ```.nxs```
-  - ```.mat```
-  - ```.nc4```
+- ```.h5```
+- ```.hdf5```
+- ```.he5```
+- ```.h5part```
+- ```.nxs```
+- ```.mat```
+- ```.nc4```
 
 A minimum example to import your hdf5 and map it to NOMAD quantities is by using the following custom schema:
 
@@ -587,7 +587,7 @@ Here is a simple schema package, stored in a NOMAD entry with mainfile name `pac
           type: Composition
       sub_sections:
         solute:
-          section: Composition             
+          section: Composition
 ```
 
 Now, we can re-use this schema package in many entries via *references*. Here, we extend
@@ -613,7 +613,7 @@ data:
     # Explicitly instantiate SpecialElement as a polymorph substitute
     - m_def: SpecialElement
       label: O
-      atomic_weight: 15.9994         
+      atomic_weight: 15.9994
 ```
 
 Here is a last example that re-uses the schema and references data from the two entries

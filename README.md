@@ -126,10 +126,11 @@ git push origin my-feature-branch
 ```
 
 #### 6. **Open a Pull Request**
-   - Go to your fork on GitHub.
-   - Click **"Compare & pull request"**.
-   - Choose the base repo (`FAIRmat-NFDI/nomad-docs`) and target branch (e.g., `main`).
-   - Describe your changes and submit the PR.
+
+- Go to your fork on GitHub.
+- Click **"Compare & pull request"**.
+- Choose the base repo (`FAIRmat-NFDI/nomad-docs`) and target branch (e.g., `main`).
+- Describe your changes and submit the PR.
 
 > ✅ Your PR will be reviewed by the maintainers. You don’t need write access to contribute this way.
 

@@ -6,9 +6,9 @@ Once you have configured your NOMAD Oasis through a distribution project as desc
 
 The hardware requirements depend on the volume of data you need to manage and process, the number of concurrent users you have, and how many concurrent remote tools you are running. The following subsections go more into detail about the hardware choices but the minimum recommended hardware is:
 
- - 4 CPU cores
- - 8 GB RAM
- - 30 GB disk space
+- 4 CPU cores
+- 8 GB RAM
+- 30 GB disk space
 
 ### CPU
 
