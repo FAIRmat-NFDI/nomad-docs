@@ -13,5 +13,9 @@
     // MD005 - Inconsistent indentation for list items at the same level
     "MD005": true,
     // MD007 - Unordered list indentation
-    "MD007": { "indent": 4 }
+    "MD007": { "indent": 4 },
+    // MD009 - Trailing spaces
+    "MD009": { "strict": true },
+    // MD010 - Hard tabs
+    "MD010": true
 }

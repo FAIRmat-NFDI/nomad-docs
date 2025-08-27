@@ -122,4 +122,3 @@ curl localhost:8000/nomad-oasis/myapi/static/static_page.html
     distributed e.g. in PyPI, you will need to explicitly include them in the
     `MANIFEST.in` file of your Python package. See more information in [the setuptools
     guide](https://setuptools.pypa.io/en/latest/userguide/miscellaneous.html#controlling-files-in-the-distribution).
-    

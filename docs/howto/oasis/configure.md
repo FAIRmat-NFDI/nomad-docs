@@ -17,60 +17,54 @@ For a production installation, we recommend to create your own distribution proj
 
 ???+ "Try NOMAD Oasis locally"
 
-	This is an example of how you would deploy a simple, single-machine NOMAD Oasis on your computer. This is meant only as an example and you should see our documentation on [Deploying an Oasis](./deploy.md) for more details on setting up a production deployment.
+  This is an example of how you would deploy a simple, single-machine NOMAD Oasis on your computer. This is meant only as an example and you should see our documentation on [Deploying an Oasis](./deploy.md) for more details on setting up a production deployment.
 
-	1.  Make sure you have [docker](https://docs.docker.com/engine/install/) installed.
-		Docker nowadays comes with `docker compose` built in. Prior, you needed to
-		install the stand-alone [docker-compose](https://docs.docker.com/compose/install/).
+  1.  Make sure you have [docker](https://docs.docker.com/engine/install/) installed.  Docker nowadays comes with `docker compose` built in. Prior, you needed to install the stand-alone [docker-compose](https://docs.docker.com/compose/install/).
 
-	2.  Clone the `nomad-distro-template` repository or download the repository as a zip file.
+  2.  Clone the `nomad-distro-template` repository or download the repository as a zip file.
 
-		```sh
-		git clone https://github.com/FAIRmat-NFDI/nomad-distro-template.git
-		cd nomad-distro-template
-		```
+    ```sh
+    git clone https://github.com/FAIRmat-NFDI/nomad-distro-template.git
+    cd nomad-distro-template
+    ```
 
-		or
+    or
 
-		```sh
-		curl-L -o nomad-distro-template.zip "https://github.com/FAIRmat-NFDI/nomad-distro-template/archive/main.zip"
-		unzip nomad-distro-template.zip
-		cd nomad-distro-template
-		```
+    ```sh
+    curl-L -o nomad-distro-template.zip "https://github.com/FAIRmat-NFDI/nomad-distro-template/archive/main.zip"
+    unzip nomad-distro-template.zip
+    cd nomad-distro-template
+    ```
 
-	3.  _On Linux only,_ recursively change the owner of the `.volumes` directory to the nomad user (1000)
+  3. _On Linux only,_ recursively change the owner of the `.volumes` directory to the nomad user (1000)
 
-		```sh
-		sudo chown -R 1000 .volumes
-		```
+    ```sh
+    sudo chown -R 1000 .volumes
+    ```
 
-	4.  Pull the images specified in the `docker-compose.yaml`
+  4. Pull the images specified in the `docker-compose.yaml`
 
-		Note that the image needs to be public or you need to provide a PAT (see "Important" note above).
+    Note that the image needs to be public or you need to provide a PAT (see "Important" note above).
 
-		```sh
-		docker compose pull
-		```
+    ```sh
+    docker compose pull
+    ```
 
-	5.  And run it with docker compose in detached (--detach or -d) mode
+  5. And run it with docker compose in detached (--detach or -d) mode
 
-		```sh
-		docker compose up -d
-		```
+    ```sh
+    docker compose up -d
+    ```
 
-	6.  Optionally you can now test that NOMAD is running with
+  6. Optionally you can now test that NOMAD is running with
 
-		```
-		curl localhost/nomad-oasis/alive
-		```
+    ```
+    curl localhost/nomad-oasis/alive
+    ```
 
-	7.  Finally, open [http://localhost/nomad-oasis](http://localhost/nomad-oasis) in your browser to start using your new NOMAD Oasis.
+  7. Finally, open [http://localhost/nomad-oasis](http://localhost/nomad-oasis) in your browser to start using your new NOMAD Oasis.
 
-	To run NORTH (the NOMAD Remote Tools Hub), the `hub` container needs to run docker and
-	the container has to be run under the docker group. You need to replace the default group
-	id `991` in the `docker-compose.yaml`'s `hub` section with your systems docker group id.
-	Run `id` if you are a docker user, or `getent group | grep docker` to find your
-	systems docker gid. The user id 1000 is used as the nomad user inside all containers.
+  To run NORTH (the NOMAD Remote Tools Hub), the `hub` container needs to run docker and the container has to be run under the docker group. You need to replace the default group id `991` in the `docker-compose.yaml`'s `hub` section with your systems docker group id.  Run `id` if you are a docker user, or `getent group | grep docker` to find your systems docker gid. The user id 1000 is used as the nomad user inside all containers.
 
 ## Configuring your installation
 

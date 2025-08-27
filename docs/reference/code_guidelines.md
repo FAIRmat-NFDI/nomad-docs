@@ -66,7 +66,7 @@ components and their props.
 For all functionality that is exposed to clients (APIs, CLI, schema base classes and
 annotations, UI functionality), you must consider to add explanations, tutorials, and
 examples to [the documentation system](https://github.com/FAIRmat-NFDI/nomad-docs){:target="_blank"}. This is built with
-[mkdocs](https://www.mkdocs.org/){:target="_blank"} and published as part of each NOMAD installation. Additionally, you can refer to the `src/nomad_docs` folder to see how the documentation is generated, and to the `mkdocs.yaml` file to understand its structure. 
+[mkdocs](https://www.mkdocs.org/){:target="_blank"} and published as part of each NOMAD installation. Additionally, you can refer to the `src/nomad_docs` folder to see how the documentation is generated, and to the `mkdocs.yaml` file to understand its structure.
 
 To document Python functions and classes, use Google
 [docstrings](https://github.com/NilsJPWerner/autoDocstring/blob/HEAD/docs/google.md){:target="_blank"}.
