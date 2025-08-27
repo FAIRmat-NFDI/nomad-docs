@@ -609,7 +609,7 @@ When you wish to record API traffic for offline testing, or to perform
 integration tests, you will need to have a server running with the correct
 configuration. To do this, follow these steps:
 
-1. Have the docker infrastructure running: `docker compose up`
+1. Have the docker infrastructure running: `docker compose up -d`
 
 2. Have the `nomad appworker` running with the config found in
    `gui/tests/nomad.yaml`:
