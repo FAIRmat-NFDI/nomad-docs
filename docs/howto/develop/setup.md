@@ -513,9 +513,9 @@ These utilities can usually be placed into the following categories:
 Often your components will need to communicate with the API during tests. One
 should generally avoid using manually created mocks for the API traffic, and
 instead prefer using API responses that originate from an actual API call
-during testing. Manually created mocks require a lot of manual work in creating
-them and keeping them up-to-date and true integration tests are impossible
-to perform without live communication with an API. In order to simplify the API
+during testing. It requires a lot of work to manually create mocks
+and keep them up-to-date, and true integration tests are impossible
+to perform with live communication with an API. In order to simplify the API
 communication during testing, you can use the `startAPI`+`closeAPI` functions, that
 will prepare the API traffic for you. A simple example could look like this:
 
