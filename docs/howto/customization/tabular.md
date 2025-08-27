@@ -14,27 +14,29 @@ In the case there is only one sheet in the Excel file, or when using a `.csv` fi
 
 The data sheets can be stored in one or more files depending on the user needs. Each sheet can independently be organized in one of the following ways:
 
-1) Columns:<br />
- each column contains an array of cells that we want to parse into one quantity. Example: time and temperature arrays to be plotted as x and y.
+1. Columns:
 
-<p align="center" width="100%">
-    <img width="30%" src="images/columns.png">
-</p>
+    each column contains an array of cells that we want to parse into one quantity. Example: time and temperature arrays to be plotted as x and y.
 
-2) Rows:<br />
- each row contains a set of cells that we want to parse into a section, i. e. a set of quantities. Example: an inventory tabular data file (for substrates, precursors, or more) where each column represents a property and each row corresponds to one unit stored in the inventory.
+    <p align="center" width="100%">
+        <img width="30%" src="images/columns.png">
+    </p>
 
-<p align="center" width="100%">
-    <img width="30%" src="images/rows.png">
-</p>
+2. Rows:
 
-3) Rows with repeated columns:<br />
+    each row contains a set of cells that we want to parse into a section, i. e. a set of quantities. Example: an inventory tabular data file (for substrates, precursors, or more) where each column represents a property and each row corresponds to one unit stored in the inventory.
 
-in addition to the mode 2), whenever the parser detects the presence of multiple columns (or multiple sets of columns) with same headers, these are taken as multiple instances of a subsection. More explanations will be delivered when showing the schema for such a structure. Example: a crystal growth process where each row is a step of the crystal growth and the repeated columns describe the "precursor materials", that can be more than one during such processes and they are described by the same "precursor material" section.
+    <p align="center" width="100%">
+        <img width="30%" src="images/rows.png">
+    </p>
 
-<p align="center" width="100%">
-    <img width="45%" src="images/rows_subsection.png">
-</p>
+3. Rows with repeated columns:
+
+    In addition to the mode 2), whenever the parser detects the presence of multiple columns (or multiple sets of columns) with same headers, these are taken as multiple instances of a subsection. More explanations will be delivered when showing the schema for such a structure. Example: a crystal growth process where each row is a step of the crystal growth and the repeated columns describe the "precursor materials", that can be more than one during such processes and they are described by the same "precursor material" section.
+
+    <p align="center" width="100%">
+        <img width="45%" src="images/rows_subsection.png">
+    </p>
 
 Furthermore, we can insert comments before our data, we can use a special character to mark one or more rows as comment rows. The special character is annotated within the schema in the `tabular` annotation, see [schema annotations](../../tutorial/custom.md#to-be-an-entry-or-not-to-be-an-entry):
 

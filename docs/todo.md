@@ -1,3 +1,3 @@
-# Coming soon ...
+# Coming soon
 
 We still have to write this.

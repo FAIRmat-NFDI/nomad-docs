@@ -1,6 +1,8 @@
 // https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md
 {
     // Set rules to disabled by default
+    // TODO: after enable most rules, revert this to `true`
+    // and remove manual setting to `true`
     "default": false,
 
     // MD001 - Heading levels should only increment by one level at a time
@@ -36,5 +38,19 @@
     // MD021 - Multiple spaces inside hashes on closed atx style heading
     "MD021": true,
     // MD022 - Headings should be surrounded by blank lines
-    "MD022": true
+    "MD022": true,
+    // MD023 - Headings must start at the beginning of the line
+    "MD023": true,
+    // MD024 - Multiple headings with the same content
+    "MD024": true,
+    // MD025 - Multiple top-level headings in the same document
+    "MD025": true,
+    // MD026 - Trailing punctuation in heading
+    "MD026": {"punctuation": ".,;:。，；："},
+    // MD027 - Multiple spaces after blockquote symbol
+    "MD027": true,
+    // MD028 - Blank line inside blockquote
+    "MD028": true,
+    // MD029 - Ordered list item prefix
+    "MD029": true
 }
