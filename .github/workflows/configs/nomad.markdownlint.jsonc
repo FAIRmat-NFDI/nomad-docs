@@ -84,5 +84,12 @@
     "MD042": true,
     // MD044 - Proper names should have the correct capitalization
     // TODO: we should probably add more NOMAD-specific rules
-    "MD044": {"names": ["GitHub", "github.com", "github.io"]}
+    "MD044": {"names": ["GitHub", "github.com", "github.io"]},
+    // MD045 - Images should have alternate text (alt text)
+    // TODO: fix these
+    "MD045": false,
+    // MD046 - Code block style
+    "MD046": false,  // TODO: fix
+    // MD047 - Files should end with a single newline character
+    "MD047": true
 }
