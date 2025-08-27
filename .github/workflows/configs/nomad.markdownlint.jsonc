@@ -4,5 +4,7 @@
     "default": false,
 
     // MD001/heading-increment: Heading levels should only increment by one level at a time
-    "MD001": true
+    "MD001": true,
+    // MD003 heading-style - Heading style
+    "MD003": true
 }
