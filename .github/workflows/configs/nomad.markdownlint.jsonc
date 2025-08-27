@@ -52,5 +52,7 @@
     // MD028 - Blank line inside blockquote
     "MD028": true,
     // MD029 - Ordered list item prefix
-    "MD029": true
+    "MD029": true,
+    // MD030 - Spaces after list markers
+    "MD030": true
 }

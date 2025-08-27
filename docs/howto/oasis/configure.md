@@ -19,9 +19,9 @@ For a production installation, we recommend to create your own distribution proj
 
   This is an example of how you would deploy a simple, single-machine NOMAD Oasis on your computer. This is meant only as an example and you should see our documentation on [Deploying an Oasis](./deploy.md) for more details on setting up a production deployment.
 
-  1.  Make sure you have [docker](https://docs.docker.com/engine/install/) installed.  Docker nowadays comes with `docker compose` built in. Prior, you needed to install the stand-alone [docker-compose](https://docs.docker.com/compose/install/).
+  1. Make sure you have [docker](https://docs.docker.com/engine/install/) installed.  Docker nowadays comes with `docker compose` built in. Prior, you needed to install the stand-alone [docker-compose](https://docs.docker.com/compose/install/).
 
-  2.  Clone the `nomad-distro-template` repository or download the repository as a zip file.
+  2. Clone the `nomad-distro-template` repository or download the repository as a zip file.
 
     ```sh
     git clone https://github.com/FAIRmat-NFDI/nomad-distro-template.git
