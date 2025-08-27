@@ -54,5 +54,7 @@
     // MD029 - Ordered list item prefix
     "MD029": true,
     // MD030 - Spaces after list markers
-    "MD030": true
+    "MD030": true,
+    // MD031 - Fenced code blocks should be surrounded by blank lines
+    "MD031": true
 }

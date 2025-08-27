@@ -95,6 +95,7 @@ With a basic understanding in hand, you can now download the example data and up
 [Download simple_workflow.zip](data/simple_workflow.zip){ .md-button .nomad-button }
 
 The download `simple_workflow.zip` should have the following structure:
+
 ```
 .
 ├── dft.xml
@@ -221,6 +222,7 @@ The mainfiles for these calculations are organized in the following file structu
 We construct the YAML, `nested_workflow_one-entry.archive.yaml` in parts for clarity:
 
 The overall `workflow2` section and global workflow `inputs`:
+
 ```yaml
 workflow2:
   name: DFT+TB+DMFT
@@ -230,6 +232,7 @@ workflow2:
 ```
 
 The global workflow outputs `outputs`:
+
 ```yaml
   outputs:
     - name: Output DMFT at T1 calculation
@@ -239,6 +242,7 @@ The global workflow outputs `outputs`:
 ```
 
 The workflow `tasks`:
+
 ```yaml
   tasks:
     - m_def: nomad.datamodel.metainfo.workflow.TaskReference

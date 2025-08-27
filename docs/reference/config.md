@@ -33,6 +33,7 @@ variable.
 
 The configuration sections and attributes can be denoted with YAML objects and attributes.
 Here is an example `nomad.yaml` file:
+
 ```yaml
 --8<-- "ops/docker-compose/nomad-oasis/configs/nomad.yaml"
 ```
@@ -44,6 +45,7 @@ When overwriting an *object* in the configuration, the new value will be merged 
 Many of the UI options use a data model that contains the following three fields: `include`, `exclude` and `options`. This structure allows you to easily disable, enable, reorder and modify the UI layout with minimal config rewrite. Here are examples of common customization tasks using the search columns as an example:
 
 Disable item:
+
 ```yaml
 ui:
   apps:
@@ -54,6 +56,7 @@ ui:
 ```
 
 Explicitly select the shown items and their order
+
 ```yaml
 ui:
   apps:
@@ -64,6 +67,7 @@ ui:
 ```
 
 Modify existing option
+
 ```yaml
 ui:
   apps:
@@ -76,6 +80,7 @@ ui:
 ```
 
 Add a new item that does not yet exist in options. Note that by default all options are shown in the order they have been declared unless the order is explicitly given in `include`.
+
 ```yaml
 ui:
   apps:

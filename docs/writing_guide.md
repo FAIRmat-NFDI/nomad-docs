@@ -52,6 +52,7 @@ Image sliders can be added using the following syntax:
     <div class="nav-arrow right" id="next#">→</div>
 </div>
 ```
+
 To minimize flickering effect during transitions, make all the sliding images of the same size. <!-- we may need to fix this issue from Java or CSS at some point -->
 
 If you use more than one slider on the same page, make sure to give them different id. The same applies for the navigation arrows.

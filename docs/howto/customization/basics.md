@@ -144,6 +144,7 @@ files can also be used to convey a schema package.
 
 You can upload schema packages and data in separate files.
 `schema_package.archive.yaml`
+
 ```yaml
 definitions:
   sections:
@@ -168,6 +169,7 @@ definitions:
 ```
 
 and `data.archive.yaml`
+
 ```yaml
 data:
   m_def: '../upload/raw/package.archive.yaml#Composition'
@@ -182,6 +184,7 @@ data:
 ```
 
 Or, you can upload the schema package and data in the same file:
+
 ```yaml
 definitions:
   sections:
@@ -310,6 +313,7 @@ archive. The following two example files, exemplify this use of reference
 between two NOMAD entries.
 
 **periodic_table.archive.yaml**
+
 ```yaml
 definitions:
   sections:
@@ -340,6 +344,7 @@ data:
 ```
 
 **composition.archive.yaml**
+
 ```yaml
 definitions:
   sections:
@@ -376,6 +381,7 @@ definitions*
 
 Here is a simple schema package with two *specialization* of the same *abstract* section
 definition:
+
 ```yaml
 definitions:
   sections:
@@ -416,6 +422,7 @@ Here is an subsection example. In one schema, we define the relationship between
 and `Process`. In another schema, we want to add more *specializations* to what a process is.
 
 **abstract.archive.yaml**
+
 ```yaml
 definitions:
   sections:
@@ -431,6 +438,7 @@ definitions:
 ```
 
 **specialized.archive.yaml**
+
 ```yaml
 definitions:
   sections:
@@ -452,6 +460,7 @@ The *section definition* use in the subsection `processes` defines what a contai
 section has to be "at least". Meaning that any section based on a *specialization* of `Process` would be a valid `processes` subsection.
 
 **specialized.archive.yaml**
+
 ```yaml
 definitions:
   # see above

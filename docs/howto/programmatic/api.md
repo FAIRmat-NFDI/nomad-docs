@@ -90,6 +90,7 @@ print(json.dumps(response.json(), indent=2))
 ```
 
 This will give you something like this:
+
 ```json
 {
   "owner": "public",
@@ -148,6 +149,7 @@ print(json.dumps(response_json, indent=2))
 ```
 
 The result will look like this:
+
 ```json
 {
   "required": {

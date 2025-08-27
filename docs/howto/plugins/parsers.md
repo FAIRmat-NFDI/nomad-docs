@@ -360,6 +360,7 @@ class Simulation(ArchiveSection):
 
     output = SubSection(sub_section=Output, repeats=True)
 ```
+
 Each of the classes inherit from the base class `ArchiveSection`. This is the abstract class used in NOMAD to define sections and subsections in a schema. The `Model` section is used to store the `sites` and `lattice/cell` information, while the `Output` section is used to store the `energy` quantity.
 Each of the classes that we defined is a sub-class of `ArchiveSection`. This is required in order to assign these sections to the `data` section
 of the NOMAD archive.
@@ -392,6 +393,7 @@ def parse(self, mainfile: str, archive: EntryArchive, logger):
     # put the simulation section into archive data
     archive.data = simulation
 ```
+
 We first assign the code name and version as well as the date that the simulation was performed. For each of the parsed
 calculations, we create a model and an output section to which we write the corresponding
 parsed quantities. Finally, we assign the simulation section to the archive data subsection.
@@ -407,6 +409,7 @@ There are several built-in schemas NOMAD (`nomad.datamodel.metainfo`).
 <!-- ? What about restructuring this part into the idea of "NOMAD has some predefined section and quantities ... please, check HERE... and HERE... for more information and details"? -->
 In the example below, we have made use of the base section for workflow and extended
 it to include a code-specific quantity `x_example_magic_value`.
+
 ```python
 # We extend the existing common definition of section Workflow
 class ExampleWorkflow(Workflow):

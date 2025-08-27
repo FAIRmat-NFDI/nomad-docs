@@ -162,6 +162,7 @@ classes can have a function with the following signature:
 ```py
 def normalize(self, archive: EntryArchive, ...)
 ```
+
 These `normalize` functions can modify the given section instance `self` or the
 entry `archive` as a whole. Through the `archive`, Normalize functions also have access to
 the `context` and can do all kinds of file or processing operations from there.
@@ -280,6 +281,7 @@ would be very much the same, only the part that reads information from the files
 would be different.
 
 It might be good to define a **reader** like this:
+
 ```py
 def reader(mainfile: str) -> Dict[str, Any]
 ```

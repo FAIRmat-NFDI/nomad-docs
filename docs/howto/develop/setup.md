@@ -426,16 +426,19 @@ pytest -sv tests
     will also fail.
 
 We use Ruff and Mypy to maintain code quality. Additionally, we recommend installing the Ruff [plugins](https://docs.astral.sh/ruff/integrations/){:target="_blank"} for your code editor to streamline the process. To execute Ruff and Mypy from the command line, you can utilize the following command:
+
 ```shell
 nomad dev qa --skip-tests
 ```
 
 We use ruff as a linter and as an autoformatter. If you only want to lint your code, you can run:
+
 ```shell
 ruff check .
 ```
 
 To format your code you can run:
+
 ```shell
 ruff format .
 ```

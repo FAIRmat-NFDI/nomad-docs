@@ -8,6 +8,7 @@ Released version of the package are hosted on [pypi](https://pypi.org/project/no
 and you can install it with *pip* (or conda).
 
 To install the newest pypi release, simply use pip:
+
 ```
 pip install nomad-lab
 ```
@@ -19,12 +20,14 @@ pip install nomad-lab
     branch, consider to [clone and build the project](../develop/setup.md) yourself.
 
 To install the latest release developer releases from our GitLab use:
+
 ```
 pip install nomad-lab --extra-index-url https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/simple
 ```
 
 To install an older version of NOMAD (e.g. v0.10.x), you can of use reference
 the respective version on pypy:
+
 ```
 pip install nomad-lab==1.0.10
 ```
@@ -41,6 +44,7 @@ pip install nomad-lab[parsing]
 pip install nomad-lab[infrastructure]
 pip install nomad-lab[dev]
 ```
+
 The various extras have the following meaning:
 
 - *parsing*, run all parsers, incl. parsers based on HDF5, netCDF, or asr

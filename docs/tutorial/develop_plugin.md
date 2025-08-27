@@ -64,12 +64,16 @@ repository by running:
 ```sh
 git clone PATH/COPIED/FROM/REPOSITORY
 ```
+
 and move inside the top directory
+
 ```
 cd REPOSITORY_NAME
 ```
+
 You will also need to install [cruft](https://pypi.org/project/cruft/), preferably using
 `pipx`:
+
 ```sh
 # pipx is strongly recommended.
 pipx install cruft
@@ -82,9 +86,11 @@ python -m pip install --user cruft
 ### Run cruft
 
 The next step is to run cruft to use our cookiecutter template:
+
 ```sh
 cruft create https://github.com/FAIRmat-NFDI/cookiecutter-nomad-plugin
 ```
+
 Cookiecutter prompts you for information regarding your plugin and I will enter the
 following for my example:
 
@@ -149,6 +155,7 @@ sh CHANGE_TO_PLUGIN_NAME/move_template_files.sh
     The `CHANGE_TO_PLUGIN_NAME` should be substituted by the name of the plugin you've created. In the above case it'll be `sh nomad-sintering/move_template_files.sh`.
 
 Finally, we should add the files we created to git and commit the changes we have made:
+
 ```sh
 git add -A
 git commit -m "Generated plugin from cookiecutter template"
@@ -249,6 +256,7 @@ definitions:
 ```
 
 We can grab this file from the tutorial repository using curl
+
 ```sh
 curl -L -o sintering.archive.yaml "https://raw.githubusercontent.com/FAIRmat-NFDI/AreaA-Examples/main/tutorial13/part3/files/sintering.archive.yaml"
 ```
@@ -258,6 +266,7 @@ curl -L -o sintering.archive.yaml "https://raw.githubusercontent.com/FAIRmat-NFD
 We will now use an external package `metainfo-yaml2py` to convert the yaml schema package
 into python class definitions.
 First we install the package with `pip`:
+
 ```sh
 pip install metainfoyaml2py
 ```
@@ -266,6 +275,7 @@ Then we can run the `metainfo-yaml2py` command on the `sintering.archive.yaml` f
 the `-n` flag for adding `normalize()` functions (will be explained later)
 and specify the output directory, with the `-o` flag, to be our `schema_packages`
 directory:
+
 ```sh
 metainfo-yaml2py sintering.archive.yaml -o src/nomad_sintering/schema_packages -n
 ```
@@ -303,17 +313,20 @@ sintering = SinteringEntryPoint(
 Finally, we also need to add our new entry point to the `pyproject.toml`.
 At the bottom of the toml you will see how this was done for the example and we just need
 to replicate that with whatever we called our instance:
+
 ```toml
 sintering = "nomad_sintering.schema_packages:sintering"
 ```
 
 After adding the entry point to `pyproject.toml` file, re-install the package
 to make sure the new entry point is available:
+
 ```sh
 pip install -e '.[dev]' --index-url https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/simple
 ```
 
 Before we continue, we should commit our changes to git:
+
 ```sh
 git add -A
 git commit -m "Added sintering classes from yaml schema"
@@ -339,6 +352,7 @@ ruff check . --fix
 ```
 
 And commit the changes:
+
 ```sh
 git add -A
 git commit -m "Ruff linting"
@@ -354,6 +368,7 @@ function. This allows us to add functionality to our schemas via Python code.
 
 For this tutorial we will assume that we have a recipe file for our hot plate that we will
 parse:
+
 ```csv
 step name,duration [min],initial temperature [C],final temperature [C]
 heating, 30, 25, 300
@@ -363,6 +378,7 @@ cooling, 30, 300, 25
 
 We can grab this file from the tutorial repository and place it in the tests/data
 directory using curl
+
 ```sh
 curl -L -o tests/data/sintering_example.csv "https://raw.githubusercontent.com/FAIRmat-NFDI/AreaA-Examples/main/tutorial13/part3/files/sintering_example.csv"
 ```
@@ -371,6 +387,7 @@ curl -L -o tests/data/sintering_example.csv "https://raw.githubusercontent.com/F
 
 The first thing we need to add is a new `Quantity` in our `Sintering` class to hold the
 recipe file:
+
 ```py
 data_file = Quantity(
     type=str,
@@ -380,6 +397,7 @@ data_file = Quantity(
     },
 )
 ```
+
 Here we have used the `a_eln` component annotation to add a `FileEditQuantity`. You will
 see in part 4 how this looks in the GUI.
 
@@ -398,6 +416,7 @@ if self.data_file:
 
 We will then create a list to hold the steps, iterate over our data frame, create an
 instance of a `TemperatureRamp`, and fill them.
+
 ```py
     steps = []
     for i, row in df.iterrows():
@@ -408,21 +427,25 @@ instance of a `TemperatureRamp`, and fill them.
       step.final_temperature = ureg.Quantity(row['final temperature [C]'], 'celsius')
       steps.append(step)
 ```
+
 Here we have used the NOMAD unit registry to handle all the units.
 
 Finally, we will assign the `self.steps` with our new list of steps.
+
 ```py
   self.steps = steps
 ```
 
 We also need to add the import of pandas and the NOMAD unit registry to the top of our
 `sintering.py` file:
+
 ```py
 from nomad.units import ureg
 import pandas as pd
 ```
 
 Here are all the changes combined:
+
 ```py
 from nomad.units import ureg
 import pandas as pd
@@ -482,6 +505,7 @@ We should add a file with the ending `.archive.yaml` or `archive.json` and which
 a `data` section and an `m_def` key with the value being our sintering section.
 Finally, we should also add the `data_file` key with the value being our `.csv` file from
 before.
+
 ```yaml
 data:
   m_def: nomad_sintering.schema_packages.sintering.Sintering
@@ -490,9 +514,11 @@ data:
 
 We can once again grab this file from the tutorial repository and place it in the
 tests/data directory using curl
+
 ```sh
 curl -L -o tests/data/test_sintering.archive.yaml "https://raw.githubusercontent.com/FAIRmat-NFDI/AreaA-Examples/main/tutorial13/part3/files/test_sintering.archive.yaml"
 ```
+
 !!! warning "Attention"
     You might need to modify the package name for the `m_def` if you called your python
     module something other than `nomad_sintering`
@@ -583,6 +609,7 @@ beginning of that file should look something like:
 The next step is to include your new schema in a custom NOMAD Oasis. For more information on how to configure a NOMAD Oasis you can have a look at [How-to guides/NOMAD Oasis/Configuration](../howto/oasis/configure.md).
 
 Before we move one we should make sure that we have committed our changes to git:
+
 ```sh
 git add -A
 git commit -m "Added a normalize function to the Sintering schema"

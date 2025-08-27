@@ -27,11 +27,13 @@ If you *do not* have an up-to-date Python installation (3.11 or 3.12), see [Help
 #### (a) Standalone
 
 **On macOS and Linux**
+
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
 **On Windows**
+
 ```powershell
 powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
 Or, from PyPI:

@@ -148,12 +148,14 @@ from Nomad_API import *
 ```
 
 Define the following user information:
+
 ```python
 username = 'nomad_email@affiliation.edu'
 password = 'password'
 ```
 
 Define the NOMAD API endpoint:
+
 ```python
 # nomad_url = 'https://nomad-lab.eu/prod/v1/api/v1/'  # production nomad
 nomad_url = 'https://nomad-lab.eu/prod/v1/test/api/v1/'  # test nomad (deleted occassionally)
