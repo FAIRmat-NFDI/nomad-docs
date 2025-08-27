@@ -76,5 +76,13 @@
     // MD039 - Spaces inside link text
     "MD039": true,
     // MD040 - Fenced code blocks should have a language specified
-    "MD040": true
+    "MD040": true,
+    // MD041 - First line in a file should be a top-level heading
+    // TODO: we should enable this but some files are missing top headers
+    "MD041": false,
+    // MD042 - No empty links
+    "MD042": true,
+    // MD044 - Proper names should have the correct capitalization
+    // TODO: we should probably add more NOMAD-specific rules
+    "MD044": {"names": ["GitHub", "github.com", "github.io"]}
 }

@@ -4,7 +4,7 @@ This is a guide for best practices when contributing to the NOMAD documentation.
 
 ## No broken links!
 
-Before merging make sure that the mkdocs logs do not report any broken links. This applies even if these links are not relevant to your changes. If you do not know how to address the broken links, create an issue in the Github repo and tag someone who you think could be of assistance.
+Before merging make sure that the mkdocs logs do not report any broken links. This applies even if these links are not relevant to your changes. If you do not know how to address the broken links, create an issue in the GitHub repo and tag someone who you think could be of assistance.
 
 ## Images and Data
 
@@ -20,7 +20,7 @@ Do not use `HERE` as a name for links. For internal links use the path hierarchy
 
 ## External Links
 
-Use [](){:target="_blank"} for external links to open a new browser window.
+Use `[](){:target="_blank"}` for external links to open a new browser window.
 
 ## Admonitions
 

@@ -271,5 +271,5 @@ notices. In addition we keep a purely informative AUTHORS file.
 
 As the NOMAD ecosystem grows, you might develop libraries that are used by NOMAD instead
 of being part of its main codebase. The same guidelines should apply. You can use
-[GitHub Actions](https://github.com/features/actions){:target="_blank"} if your library is hosted on Github
+[GitHub Actions](https://github.com/features/actions){:target="_blank"} if your library is hosted on GitHub
 to ensure automated linting and tests.
