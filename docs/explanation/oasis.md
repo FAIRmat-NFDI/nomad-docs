@@ -1,3 +1,5 @@
+# Federation and Oasis
+
 ## Why a federated data infrastructure?
 
 There are several benefits for using multiple NOMAD installations:

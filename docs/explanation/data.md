@@ -1,3 +1,5 @@
+# Data structure
+
 NOMAD structures data into **sections**, where each section can contain data and more sections.
 This allows to browse complex data like you would browse files and directories on your computer.
 Each section follows a **definition** and all the contained data and subsection have a

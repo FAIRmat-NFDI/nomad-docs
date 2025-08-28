@@ -1,3 +1,5 @@
+# Basic ELN example
+
 This is a simple example for a basic ELN. It demonstrates the use of a NOMAD schema
 to define different types of entries. Based on this schema the ELN allows you to create
 Samples, Chemicals, and Instruments. The Sample entry type also allows to define

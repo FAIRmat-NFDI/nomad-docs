@@ -1,3 +1,5 @@
+# Write a normalizer
+
 ## The `update_entry` method
 
 The root context, which is available from the `.m_context` of a `EntryArchive`, which could be accessed via `section.m_root().m_context` if `section` is attached to a `EntryArchive`, provides the functionality to update/create child entries on-the-fly and invoke the processing if necessary.

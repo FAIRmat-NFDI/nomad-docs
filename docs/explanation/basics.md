@@ -1,3 +1,4 @@
+# From files to data
 
 NOMAD is based on a *bottom-up* approach to data management. Instead of only supporting data in a specific
 predefined format, we process files to extract data from an extendable variety of data formats.

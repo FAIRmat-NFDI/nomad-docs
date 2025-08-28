@@ -1,3 +1,5 @@
+# Download data
+
 A common use-case for the NOMAD API is to download large amounts of NOMAD data.
 In this how-to guide, we use curl and API endpoints
 that stream .zip files to download many resources with a single request directly from
