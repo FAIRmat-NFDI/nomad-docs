@@ -7,7 +7,7 @@ Refer to the [Reference guide](../../reference/annotations.md) for the full list
 NOMAD and `Excel` support multiple-sheets data manipulations and imports. Each quantity in the schema will be annotated with a source path composed by sheet name and column header. The path to be used with the tabular data displayed below would be `Sheet1/My header 1` and it would be placed it the `tabular` annotation, see [schema annotations](../../tutorial/custom.md#to-be-an-entry-or-not-to-be-an-entry).
 
 <p align="center" width="100%">
-    <img width="30%" src="images/2col.png">
+    <img width="30%" src="images/2col.png" alt="single-sheet Excel file with two columns">
 </p>
 
 In the case there is only one sheet in the Excel file, or when using a `.csv` file that is a single-sheet format, the sheet name is not required in the path.
@@ -16,18 +16,18 @@ The data sheets can be stored in one or more files depending on the user needs. 
 
 1. Columns:
 
-    each column contains an array of cells that we want to parse into one quantity. Example: time and temperature arrays to be plotted as x and y.
+    Each column contains an array of cells that we want to parse into one quantity. Example: time and temperature arrays to be plotted as x and y.
 
     <p align="center" width="100%">
-        <img width="30%" src="images/columns.png">
+        <img width="30%" src="images/columns.png" alt="Each column for an array of data to parse">
     </p>
 
 2. Rows:
 
-    each row contains a set of cells that we want to parse into a section, i. e. a set of quantities. Example: an inventory tabular data file (for substrates, precursors, or more) where each column represents a property and each row corresponds to one unit stored in the inventory.
+    Each row contains a set of cells that we want to parse into a section, i. e. a set of quantities. Example: an inventory tabular data file (for substrates, precursors, or more) where each column represents a property and each row corresponds to one unit stored in the inventory.
 
     <p align="center" width="100%">
-        <img width="30%" src="images/rows.png">
+        <img width="30%" src="images/rows.png" alt="Each row for a section">
     </p>
 
 3. Rows with repeated columns:
@@ -35,13 +35,13 @@ The data sheets can be stored in one or more files depending on the user needs. 
     In addition to the mode 2), whenever the parser detects the presence of multiple columns (or multiple sets of columns) with same headers, these are taken as multiple instances of a subsection. More explanations will be delivered when showing the schema for such a structure. Example: a crystal growth process where each row is a step of the crystal growth and the repeated columns describe the "precursor materials", that can be more than one during such processes and they are described by the same "precursor material" section.
 
     <p align="center" width="100%">
-        <img width="45%" src="images/rows_subsection.png">
+        <img width="45%" src="images/rows_subsection.png" alt="Multiple columns with repeated headers">
     </p>
 
 Furthermore, we can insert comments before our data, we can use a special character to mark one or more rows as comment rows. The special character is annotated within the schema in the `tabular` annotation, see [schema annotations](../../tutorial/custom.md#to-be-an-entry-or-not-to-be-an-entry):
 
 <p align="center" width="100%">
-    <img width="30%" src="images/2col_notes.png">
+    <img width="30%" src="images/2col_notes.png" alt="sheet with annotation before header">
 </p>
 
 ## Inheriting the TableData base section
@@ -83,7 +83,7 @@ In this section eight examples will be presented, containing all the features av
 ### 1. Column mode, current Entry, parse to root
 
 <p align="center" width="100%">
-    <img width="100%" src="./images/tabular-1.png">
+    <img width="100%" src="./images/tabular-1.png" alt="Parse each column to an Entry">
 </p>
 
 The first case gives rise to the simplest data archive file. Here the tabular data file is parsed by columns, directly within the Entry where the `TableData` is inherited and filling the quantities in the root level of the schema (see dedicated how-to to learn [how to inherit tabular parser in your schema](tabular.md#inheriting-the-tabledata-base-section)).
@@ -100,7 +100,7 @@ The first case gives rise to the simplest data archive file. Here the tabular da
 ### 2. Column mode, current Entry, parse to my path
 
 <p align="center" width="100%">
-    <img width="100%" src="./images/tabular-2.png">
+    <img width="100%" src="./images/tabular-2.png" alt="Parse each column to custom path">
 </p>
 
 The parsing mode presented here only differs from the previous for the `sections` annotations. In this case the section that we want to fill with tabular data can be nested arbitrarily deep in the schema and the `sections` annotation must be filled with a forward slash path to the desired section, e. g. `my_sub_section/my_sub_sub_section`.
@@ -118,7 +118,7 @@ The parsing mode presented here only differs from the previous for the `sections
 ### 3. Row mode, current Entry, parse to my path
 
 <p align="center" width="100%">
-    <img width="100%" src="./images/tabular-3.png">
+    <img width="100%" src="./images/tabular-3.png" alt="Parse each row to one instance">
 </p>
 
 The current is the first example of parsing in row mode. This means that every row of the excel file while be placed in one instance of the section that is defined in `sections`. This section must be decorated with `repeats: true` annotation, it will allow to generate multiple instances that will be appended in a list with sequential numbers. Instead of sequential numbers, the list can show specific names if `label_quantity` annotation is appended to the repeated section. This annotation is included in the how-to example. The section is written separately in the schema and it does not need the `EntryData` inheritance because the instances will be grafted directly in the current Entry. As explained [below](#91-row-mode-current-entry-parse-to-root), it is not possible for `row` and `current_entry` to parse directly in the root because we need to create multiple instances of the selected subsection and organize them in a list.
@@ -138,7 +138,7 @@ The current is the first example of parsing in row mode. This means that every r
 ### 4. Column mode, single new Entry, parse to my path
 
 <p align="center" width="100%">
-    <img width="100%" src="./images/tabular-4.png">
+    <img width="100%" src="./images/tabular-4.png" alt="Parse column-wise to new Entry">
 </p>
 
 One more step of complexity is added here: the parsing is not performed in the current Entry, but a new Entry it automatically generated and filled.
@@ -158,7 +158,7 @@ This structure foresees a parent Entry where we collect one or more tabular data
 ### 5. Row mode, single new Entry, parse to my path
 
 <p align="center" width="100%">
-    <img width="100%" src="./images/tabular-5.png">
+    <img width="100%" src="./images/tabular-5.png" alt="Parse row-wise to new Entry">
 </p>
 
 Example analogous to the previous, where the new created Entry contains now a repeated subsection with a list of instances made from each line of the tabular data file, as show in the [Row mode, current Entry, parse to my path](#3-row-mode-current-entry-parse-to-my-path) case.
@@ -179,7 +179,7 @@ Example analogous to the previous, where the new created Entry contains now a re
 ### 6. Row mode, multiple new entries, parse to root
 
 <p align="center" width="100%">
-    <img width="100%" src="./images/tabular-6.png">
+    <img width="100%" src="./images/tabular-6.png" alt="Parse row-wise to multiple new entries in root">
 </p>
 
 The last feature available for tabular parser is now introduced: `multiple_new_entries`. It is only meaningful for `row` mode because each row of the tabular data file will be placed in a new Entry that is an instance of a class defined in the schema, this would not make sense for columns, though, as they usually need to be parsed all together in one class of the schema, for example the "timestamp" and "temperature" columns in a spreadsheet file would need to lie in the same class as they belong to the same part of experiment.
@@ -200,7 +200,7 @@ A further comment is needed to explain the combination of this feature with `roo
 ### 7. Row mode, multiple new entries, parse to my path
 
 <p align="center" width="100%">
-    <img width="100%" src="./images/tabular-7.png">
+    <img width="100%" src="./images/tabular-7.png" alt="Parse row-wise to multiple new entries to custom path">
 </p>
 
 As anticipated in the previous example, `row` mode in connection to `multiple_new_entries` will produce a manyfold of instances of a specific class, each of them being a new Entry. In the present case, each instance will also automatically be placed in a `ReferenceEditQuantity` quantity lying in a subsection defined within the parent Entry, coloured in plum in the following example image.
@@ -221,7 +221,7 @@ As anticipated in the previous example, `row` mode in connection to `multiple_ne
 ### 8. The Sub-Subsection nesting schema
 
 <p align="center" width="100%">
-    <img width="100%" src="./images/tabular-8.png">
+    <img width="100%" src="./images/tabular-8.png" alt="Parse columns with the same name to nested subsection">
 </p>
 
 If the tabular data file contains multiple columns with exact same name, there is a way to parse them using `row` mode. As explained in previous examples, this mode creates an instance of a subsection of the schema for each row of the file. Whenever column with same name are found they are interpreted as multiple instances of a sub-subsection nested inside the subsection. To build a schema with such a feature it is enough to have two nested classes, each of them bearing a `repeats: true` annotation. This structure can be applied to each and every of the cases above with `row` mode parsing.

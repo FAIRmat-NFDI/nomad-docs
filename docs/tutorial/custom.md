@@ -70,13 +70,13 @@ In the following sections, two examples will be illustrated. A [tabular data fil
 We want instantiate an object created from the schema already shown in the first [Tutorial section](#what-is-a-custom-schema) and populate it with the data contained in the following excel file.
 
 <p align="center" width="100%">
-    <img width="30%" src="../howto/customization/images/2col.png">
+    <img width="30%" src="../howto/customization/images/2col.png" alt="table with two columns">
 </p>
 
 The two columns in the file will be stored in a NOMAD Entry archive within two array quantities, as shown in the image below. In the case where the section to be filled is not in the root level of our schema but nested inside, it is useful to check the dedicated [How-to](../howto/customization/tabular.md#2-column-mode-current-entry-parse-to-my-path).
 
 <p align="center" width="100%">
-    <img width="100%" src="images/tabular-1.png">
+    <img width="100%" src="images/tabular-1.png" alt="column-wise parsing into quantities of the same NOMAD Entry">
 </p>
 
 The schema will be decorated by the annotations mentioned at the beginning of this section  and will look like this:
@@ -130,7 +130,7 @@ Here the tabular data file is parsed by columns, directly within the Entry where
 #### Example 2
 
 <p align="center" width="100%">
-    <img width="100%" src="images/tabular-6.png">
+    <img width="100%" src="images/tabular-6.png" alt="row-wise parsing into individual NOMAD Entry">
 </p>
 
 In this example, each row of the tabular data file will be placed in a new Entry that is an instance of a class defined in the schema. This would make sense for, say, an inventory spreadsheet where each row can be a separate entity such as a sample, a substrate, etc.
