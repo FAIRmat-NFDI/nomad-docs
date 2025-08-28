@@ -23,12 +23,12 @@ everything you need.
 There are different tools and libraries to use the NOMAD API that come with different
 trade-offs between expressiveness, learning curve, and convenience.
 
-#### You can use your browser
+### You can use your browser
 
 For example to see the metadata for all entries with elements *Ti* and *O* go here:
 [{{ nomad_url() }}/v1/entries?elements=Ti&elements=O]({{ nomad_url() }}/v1/entries?elements=Ti&elements=O)
 
-#### Use `curl` or `wget`
+### Use `curl` or `wget`
 
 REST API's use resources located via URLs. You access URLs with `curl` or `wget`. Same
 *Ti*, *O* example as before:
@@ -37,18 +37,18 @@ REST API's use resources located via URLs. You access URLs with `curl` or `wget`
 curl "{{ nomad_url() }}/v1/entries?results.material.elements=Ti&results.material.elements=O" | python -m json.tool
 ```
 
-####  Use Python and `requests`
+### Use Python and `requests`
 
 `Requests` is a popular Python library to use the internet's HTTP protocol that is used to
 communicate with REST APIs. Install with `pip install requests`.
 See [Using `requests`](#using-requests).
 
-#### Use our dashboard
+### Use our dashboard
 
 The NOMAD API has an [OpenAPI dashboard]({{ nomad_url() }}/v1). This is an interactive
 documentation of all API functions that allows you to try these functions in the browser.
 
-#### Use NOMAD's Python package
+### Use NOMAD's Python package
 
 Install the [NOMAD Python client library](./pythonlib.md) and use it's `ArchiveQuery`
 functionality for a more convenient query based access of archive data following the
@@ -90,6 +90,7 @@ print(json.dumps(response.json(), indent=2))
 ```
 
 This will give you something like this:
+
 ```json
 {
   "owner": "public",
@@ -148,6 +149,7 @@ print(json.dumps(response_json, indent=2))
 ```
 
 The result will look like this:
+
 ```json
 {
   "required": {
@@ -245,7 +247,7 @@ print(result.energy.total.value.to(units('eV')))
 
 This will give you an output like this:
 
-```
+```text
 OOSrTiOOOSrTiOOOSrTiOFF
 -355626.93095025205 electron_volt
 ```
@@ -437,16 +439,18 @@ Searching for entries is typically just an initial step. Once you know what entr
 you'll probably want to do one of the following things.
 
 ## Download raw files
+
 You can use [queries](#queries) to download raw files, but typically you don't want to
 download file-by-file or entry-by-entry. Therefore, we allow to download a large set of
 files in one big zip-file. Here, you might want to use a program like *curl* to download
 directly from the shell:
 
-```
+```sh
 curl "{{ nomad_url() }}/v1/entries/raw?results.material.elements=Ti&results.material.elements=O" -o download.zip
 ```
 
 ## Access processed data (archives)
+
 Above under [Using `requests`](#using-requests), you've already learned how to access archive
 data. A special feature of the archive API functions is that you can define what is
 `required` from the archives.

@@ -37,16 +37,16 @@ to constantly provide the latest version of docker image and Python package.
 
 Besides various scientific computing, machine learning, and computational material
 science libraries (e.g. numpy, skikitlearn, tensorflow, ase, spglib, matid, and many more),
-Nomad uses a set of freely available technologies that already solve most
+NOMAD uses a set of freely available technologies that already solve most
 of its processing, storage, availability, and scaling goals. The following is a non
 comprehensive overview of used languages, libraries, frameworks, and services.
 
 <figure markdown>
-  ![nomad stack](images/stack.png)
+  ![NOMAD stack](images/stack.png)
   <figcaption>NOMAD components and dependencies</figcaption>
 </figure>
 
-#### Python 3
+### Python 3
 
 The *backend* of nomad is written in Python. This includes all parsers, normalizers,
 and other data processing. We only use Python 3 and there is no compatibility with
@@ -58,8 +58,7 @@ Tests are written with [pytest](https://docs.pytest.org/en/latest/contents.html)
 Logging is done with [structlog](https://www.structlog.org/en/stable/){:target="_blank"} and *logstash* (see
 Elasticstack below). Documentation is driven by [Sphinx](http://www.sphinx-doc.org/en/master/){:target="_blank"}.
 
-
-#### celery
+### celery
 
 [Celery](http://celeryproject.org){:target="_blank"} (+ [rabbitmq](https://www.rabbitmq.com/){:target="_blank"})
 is a popular combination for realizing long running tasks in internet applications.
@@ -67,45 +66,39 @@ We use it to drive the processing of uploaded files.
 It allows us to transparently distribute processing load while keeping processing state
 available to inform the user.
 
-
-#### elastic search
+### elastic search
 
 [Elasticsearch](https://www.elastic.co/webinars/getting-started-elasticsearch){:target="_blank"}
 is used to store repository data (not the raw files).
 Elasticsearch enables flexible, scalable search and analytics.
 
-
-#### mongodb
+### mongodb
 
 [Mongodb](https://docs.mongodb.com/){:target="_blank"} is used to store and track the state of the
 processing of uploaded files and the generated entries. We use
 [mongoengine](http://docs.mongoengine.org/){:target="_blank"} to program with mongodb.
 
-
-#### Keycloak
+### Keycloak
 
 [Keycloak](https://www.keycloak.org/){:target="_blank"} is used for user management. It manages users and
 provides functions for registration, forgetting passwords, editing user accounts, and single
 sign-on to fairdi@nomad and other related services.
 
-
-#### FastAPI
+### FastAPI
 
 The ReSTful API is build with the [FastAPI](https://fastapi.tiangolo.com/){:target="_blank"}
 framework. This allows us to automatically derive a [OpenAPI](https://swagger.io/specification/){:target="_blank"} description
 of the nomad API.
 Fruthermore, you can browse and use the API via [OpenAPI dashboard](https://swagger.io/tools/swagger-ui/){:target="_blank"}.
 
-
-#### Elasticstack
+### Elasticstack
 
 The [elastic stack](https://www.elastic.co/guide/index.html){:target="_blank"}
 (previously *ELK* stack) is a centralized logging, metrics, and monitoring
 solution that collects data within the cluster and provides a flexible analytics front end
 for that data.
 
-
-#### Javascript, React, Material-UI
+### Javascript, React, Material-UI
 
 The frontend (GUI) of **nomad@FAIRDI** is built on the
 [React](https://reactjs.org/docs/getting-started.html){:target="_blank"} component framework.
@@ -116,8 +109,7 @@ efforts manageable. React uses [JSX](https://reactjs.org/docs/introducing-jsx.ht
 The component library [Material-UI](https://material-ui.com/){:target="_blank"}
 (based on Google's popular material design framework) provides a consistent look-and-feel.
 
-
-#### docker
+### docker
 
 To run a **nomad@FAIRDI** instance, many services have to be orchestrated:
 the nomad app, nomad worker, mongodb, Elasticsearch, Keycloak, RabbitMQ,
@@ -128,18 +120,16 @@ as pre-build images that can be run flexibly on all types of platforms, networks
 and storage solutions. [Docker-compose](https://docs.docker.com/compose/){:target="_blank"} allows us to
 provide configuration to run the whole nomad stack on a single server node.
 
-
-#### kubernetes + helm
+### kubernetes + helm
 
 To run and scale nomad on a cluster, you can use [kubernetes](https://kubernetes.io/docs/home/){:target="_blank"}
 to orchestrated the  necessary containers. We provide a [helm](https://docs.helm.sh/){:target="_blank"}
 chart with all necessary service and deployment descriptors that allow you to set up and
 update nomad with only a few commands.
 
+### GitLab
 
-#### GitLab
-
-Nomad as a software project is managed via [GitLab](https://docs.gitlab.com/){:target="_blank"}.
+NOMAD as a software project is managed via [GitLab](https://docs.gitlab.com/){:target="_blank"}.
 The **nomad@FAIRDI** project is hosted [here](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR){:target="_blank"}.
 GitLab is used to manage versions, different branches of development, tasks and issues,
 as a [registry for Docker images](https://docs.gitlab.com/ee/user/packages/container_registry/index.html){:target="_blank"},

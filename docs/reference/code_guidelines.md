@@ -54,7 +54,6 @@ You can run `nomad qa` to run all these tests and checks before committing.
 See [the contributing guide](../howto/develop/contrib.md) for more details on how to work with issues,
 branches, merge requests, and CI/CD.
 
-
 ## Documenting code
 
 Write [Clean Code](https://youtu.be/7EmboKQH8lM){:target="_blank"} that is easy to comprehend.
@@ -66,7 +65,7 @@ components and their props.
 For all functionality that is exposed to clients (APIs, CLI, schema base classes and
 annotations, UI functionality), you must consider to add explanations, tutorials, and
 examples to [the documentation system](https://github.com/FAIRmat-NFDI/nomad-docs){:target="_blank"}. This is built with
-[mkdocs](https://www.mkdocs.org/){:target="_blank"} and published as part of each NOMAD installation. Additionally, you can refer to the `src/nomad_docs` folder to see how the documentation is generated, and to the `mkdocs.yaml` file to understand its structure. 
+[mkdocs](https://www.mkdocs.org/){:target="_blank"} and published as part of each NOMAD installation. Additionally, you can refer to the `src/nomad_docs` folder to see how the documentation is generated, and to the `mkdocs.yaml` file to understand its structure.
 
 To document Python functions and classes, use Google
 [docstrings](https://github.com/NilsJPWerner/autoDocstring/blob/HEAD/docs/google.md){:target="_blank"}.
@@ -272,5 +271,5 @@ notices. In addition we keep a purely informative AUTHORS file.
 
 As the NOMAD ecosystem grows, you might develop libraries that are used by NOMAD instead
 of being part of its main codebase. The same guidelines should apply. You can use
-[GitHub Actions](https://github.com/features/actions){:target="_blank"} if your library is hosted on Github
+[GitHub Actions](https://github.com/features/actions){:target="_blank"} if your library is hosted on GitHub
 to ensure automated linting and tests.

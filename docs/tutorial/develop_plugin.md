@@ -1,8 +1,10 @@
 # Developing a NOMAD Plugin
+
 In this tutorial you will learn how to create and develop a NOMAD plugin. As an example we
 will create a plugin to log data for a simple sintering process.
 
 ## Prerequisites
+
 - A GitHub account. This can be created for free on [github.com](https://github.com/signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F&source=header-home).
 - Basic understanding of Python.
 - Basic understanding of NOMAD metainfo, see for example [tutorial 8](https://www.fairmat-nfdi.eu/events/fairmat-tutorial-8/tutorial-8-materials).
@@ -20,6 +22,7 @@ will create a plugin to log data for a simple sintering process.
     * [what is cruft](https://cruft.github.io/cruft/)
 
 ## Create a Git(Hub) repository
+
 Firstly, we recommend to use git to version control your NOMAD plugin.
 There is a GitHub template repository that can be used for this at [github.com/FAIRmat-NFDI/nomad-plugin-template](https://github.com/FAIRmat-NFDI/nomad-plugin-template).
 
@@ -34,6 +37,7 @@ Enter a name (I will use "nomad-sintering" for mine) for your repository and cli
 "Create Repository".
 
 ## Generate the plugin structure
+
 Next, we will use a cookiecutter template to create the basic structure of our NOMAD
 plugin.
 
@@ -43,6 +47,7 @@ There are now two options for how to proceed.
 2. If you have access to a Linux computer you can also run the same steps locally.
 
 ### 1. Using GitHub codespaces
+
 To use a GitHub codespace for the plugin development you should choose the "Create
 codespace on main" option after pressing the green "<> Code" button in the upper right
 corner.
@@ -51,6 +56,7 @@ corner.
 ![Use codespace](./images/codespace_light.png#gh-light-mode-only)
 
 ### 2. Developing locally
+
 If you have a Linux machine and prefer to develop locally you should **instead** click the
 "Local" tab after pressing the green "<> Code" button, copy the path, and clone your
 repository by running:
@@ -58,12 +64,16 @@ repository by running:
 ```sh
 git clone PATH/COPIED/FROM/REPOSITORY
 ```
+
 and move inside the top directory
-```
+
+```sh
 cd REPOSITORY_NAME
 ```
+
 You will also need to install [cruft](https://pypi.org/project/cruft/), preferably using
 `pipx`:
+
 ```sh
 # pipx is strongly recommended.
 pipx install cruft
@@ -74,10 +84,13 @@ python -m pip install --user cruft
 ```
 
 ### Run cruft
+
 The next step is to run cruft to use our cookiecutter template:
+
 ```sh
 cruft create https://github.com/FAIRmat-NFDI/cookiecutter-nomad-plugin
 ```
+
 Cookiecutter prompts you for information regarding your plugin and I will enter the
 following for my example:
 
@@ -87,7 +100,7 @@ following for my example:
   [3/12] github_username (foo): hampusnasstrom
   [4/12] plugin_name (foobar): sintering
   [5/12] module_name (sintering):
-  [6/12] short_description (Nomad example template): A schema package plugin for sintering.
+  [6/12] short_description (NOMAD example template): A schema package plugin for sintering.
   [7/12] version (0.1.0):
   [8/12] Select license
     1 - MIT
@@ -134,7 +147,6 @@ nomad-sintering/
 !!! note
     The project `nomad-sintering` is created in a new directory, we have included a helper script to move all the files to the parent level of the repository.
 
-
 ```sh
 sh CHANGE_TO_PLUGIN_NAME/move_template_files.sh
 ```
@@ -143,6 +155,7 @@ sh CHANGE_TO_PLUGIN_NAME/move_template_files.sh
     The `CHANGE_TO_PLUGIN_NAME` should be substituted by the name of the plugin you've created. In the above case it'll be `sh nomad-sintering/move_template_files.sh`.
 
 Finally, we should add the files we created to git and commit the changes we have made:
+
 ```sh
 git add -A
 git commit -m "Generated plugin from cookiecutter template"
@@ -169,6 +182,7 @@ and the "Allow GitHub Actions to create and approve pull requests" options and c
 ## Setting up the python environment
 
 ### Creating a virtual environment
+
 Before we can start developing we recommend to create a virtual environment using Python 3.12
 
 ```sh
@@ -177,6 +191,7 @@ source .pyenv/bin/activate
 ```
 
 ### Installing the plugin
+
 Next we should install our plugin package in editable mode and using the nomad package
 index
 
@@ -192,6 +207,7 @@ pip install -e '.[dev]' --index-url https://gitlab.mpcdf.mpg.de/api/v4/projects/
 ## Importing a yaml schema
 
 ### The schema
+
 We will now convert the yaml schema package from part 2 where we described a sintering
 step:
 
@@ -240,16 +256,17 @@ definitions:
 ```
 
 We can grab this file from the tutorial repository using curl
+
 ```sh
 curl -L -o sintering.archive.yaml "https://raw.githubusercontent.com/FAIRmat-NFDI/AreaA-Examples/main/tutorial13/part3/files/sintering.archive.yaml"
 ```
-
 
 ### `metainfo-yaml2py`
 
 We will now use an external package `metainfo-yaml2py` to convert the yaml schema package
 into python class definitions.
 First we install the package with `pip`:
+
 ```sh
 pip install metainfoyaml2py
 ```
@@ -258,6 +275,7 @@ Then we can run the `metainfo-yaml2py` command on the `sintering.archive.yaml` f
 the `-n` flag for adding `normalize()` functions (will be explained later)
 and specify the output directory, with the `-o` flag, to be our `schema_packages`
 directory:
+
 ```sh
 metainfo-yaml2py sintering.archive.yaml -o src/nomad_sintering/schema_packages -n
 ```
@@ -270,6 +288,7 @@ If we take a look in that file we can see an example created by the cookiecutter
 We can go ahead and copy the `MySchemaPackageEntryPoint` class and the `mypackage`
 instance and paste them below.
 We then need to change:
+
 1. the name of the class,
 2. the import in the load function to import our sintering schema package,
 3. the name of the instance and the class it uses,
@@ -295,17 +314,20 @@ sintering = SinteringEntryPoint(
 Finally, we also need to add our new entry point to the `pyproject.toml`.
 At the bottom of the toml you will see how this was done for the example and we just need
 to replicate that with whatever we called our instance:
+
 ```toml
 sintering = "nomad_sintering.schema_packages:sintering"
 ```
 
 After adding the entry point to `pyproject.toml` file, re-install the package
 to make sure the new entry point is available:
+
 ```sh
 pip install -e '.[dev]' --index-url https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/simple
 ```
 
 Before we continue, we should commit our changes to git:
+
 ```sh
 git add -A
 git commit -m "Added sintering classes from yaml schema"
@@ -331,6 +353,7 @@ ruff check . --fix
 ```
 
 And commit the changes:
+
 ```sh
 git add -A
 git commit -m "Ruff linting"
@@ -346,6 +369,7 @@ function. This allows us to add functionality to our schemas via Python code.
 
 For this tutorial we will assume that we have a recipe file for our hot plate that we will
 parse:
+
 ```csv
 step name,duration [min],initial temperature [C],final temperature [C]
 heating, 30, 25, 300
@@ -355,6 +379,7 @@ cooling, 30, 300, 25
 
 We can grab this file from the tutorial repository and place it in the tests/data
 directory using curl
+
 ```sh
 curl -L -o tests/data/sintering_example.csv "https://raw.githubusercontent.com/FAIRmat-NFDI/AreaA-Examples/main/tutorial13/part3/files/sintering_example.csv"
 ```
@@ -363,6 +388,7 @@ curl -L -o tests/data/sintering_example.csv "https://raw.githubusercontent.com/F
 
 The first thing we need to add is a new `Quantity` in our `Sintering` class to hold the
 recipe file:
+
 ```py
 data_file = Quantity(
     type=str,
@@ -372,6 +398,7 @@ data_file = Quantity(
     },
 )
 ```
+
 Here we have used the `a_eln` component annotation to add a `FileEditQuantity`. You will
 see in part 4 how this looks in the GUI.
 
@@ -390,6 +417,7 @@ if self.data_file:
 
 We will then create a list to hold the steps, iterate over our data frame, create an
 instance of a `TemperatureRamp`, and fill them.
+
 ```py
     steps = []
     for i, row in df.iterrows():
@@ -400,21 +428,25 @@ instance of a `TemperatureRamp`, and fill them.
       step.final_temperature = ureg.Quantity(row['final temperature [C]'], 'celsius')
       steps.append(step)
 ```
+
 Here we have used the NOMAD unit registry to handle all the units.
 
 Finally, we will assign the `self.steps` with our new list of steps.
+
 ```py
   self.steps = steps
 ```
 
 We also need to add the import of pandas and the NOMAD unit registry to the top of our
 `sintering.py` file:
+
 ```py
 from nomad.units import ureg
 import pandas as pd
 ```
 
 Here are all the changes combined:
+
 ```py
 from nomad.units import ureg
 import pandas as pd
@@ -463,15 +495,18 @@ class Sintering(Process, EntryData, ArchiveSection):
 ```
 
 ## Running the normalize function
+
 We will now run the NOMAD processing on a test file to see the normalize function in
 action.
 
 ### Create an archive.json file
+
 The first step is to create the test file.
 We should add a file with the ending `.archive.yaml` or `archive.json` and which contains
 a `data` section and an `m_def` key with the value being our sintering section.
 Finally, we should also add the `data_file` key with the value being our `.csv` file from
 before.
+
 ```yaml
 data:
   m_def: nomad_sintering.schema_packages.sintering.Sintering
@@ -480,14 +515,17 @@ data:
 
 We can once again grab this file from the tutorial repository and place it in the
 tests/data directory using curl
+
 ```sh
 curl -L -o tests/data/test_sintering.archive.yaml "https://raw.githubusercontent.com/FAIRmat-NFDI/AreaA-Examples/main/tutorial13/part3/files/test_sintering.archive.yaml"
 ```
+
 !!! warning "Attention"
     You might need to modify the package name for the `m_def` if you called your python
     module something other than `nomad_sintering`
 
 ### Run the NOMAD CLI
+
 To run the processing we us the NOMAD CLI method `parse`and save the output in a json file
 
 ```sh
@@ -568,9 +606,11 @@ beginning of that file should look something like:
 ```
 
 ### Next steps
+
 The next step is to include your new schema in a custom NOMAD Oasis. For more information on how to configure a NOMAD Oasis you can have a look at [How-to guides/NOMAD Oasis/Configuration](../howto/oasis/configure.md).
 
 Before we move one we should make sure that we have committed our changes to git:
+
 ```sh
 git add -A
 git commit -m "Added a normalize function to the Sintering schema"

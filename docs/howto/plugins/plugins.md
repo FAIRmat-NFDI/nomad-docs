@@ -11,7 +11,7 @@ A single Python plugin package can contain multiple [plugin entry points](../../
 - [Parsers](./parsers.md)
 - [Schema packages](./schema_packages.md)
 
-See the [FAIRmat-NFDI GitHub organization page](https://github.com/FAIRmat-NFDI) for a list of plugins developed by FAIRmat. You can also see the list of activated plugins and plugin entry points at the bottom of the _Information page_ (`about/information`) of any NOMAD installation, for example check out the [central NOMAD installation](https://nomad-lab.eu/prod/v1/gui/about/information).
+See the [FAIRmat-NFDI GitHub organization page](https://github.com/FAIRmat-NFDI) for a list of plugins developed by FAIRmat. You can also see the list of activated plugins and plugin entry points at the bottom of the *Information page* (`about/information`) of any NOMAD installation, for example check out the [central NOMAD installation](https://nomad-lab.eu/prod/v1/gui/about/information).
 
 ## Plugin anatomy
 
@@ -43,7 +43,6 @@ We suggest using the following convention for naming the repository name and the
 
 - repository name: `nomad-<plugin name>`
 - package name: `nomad_<plugin name>`
-
 
 ### Controlling loading of plugin entry points
 
@@ -138,7 +137,7 @@ You may additionally publish the plugin package in PyPI. Learn from the PyPI doc
 The PyPI documentation provides further information about how to [publish a package to PyPI](https://packaging.python.org/en/latest/tutorials/packaging-projects/#uploading-the-distribution-archives){:target="\_blank"}. If you have access to the MPCDF GitLab and NOMAD's presence there, you can also
 use the `nomad-FAIR` package registry:
 
-```
+```sh
 pip install twine
 twine upload \
     -u <username> -p <password> \

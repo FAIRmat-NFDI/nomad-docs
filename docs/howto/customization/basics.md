@@ -84,6 +84,7 @@ a *quantity definition* are:
 The *names* of *quantity definitions* serve as the *key*, used in respective *section objects*.
 
 ### Type
+
 This is a list of supported quantity types.
 
 |type|description|
@@ -143,6 +144,7 @@ files can also be used to convey a schema package.
 
 You can upload schema packages and data in separate files.
 `schema_package.archive.yaml`
+
 ```yaml
 definitions:
   sections:
@@ -167,6 +169,7 @@ definitions:
 ```
 
 and `data.archive.yaml`
+
 ```yaml
 data:
   m_def: '../upload/raw/package.archive.yaml#Composition'
@@ -181,6 +184,7 @@ data:
 ```
 
 Or, you can upload the schema package and data in the same file:
+
 ```yaml
 definitions:
   sections:
@@ -218,6 +222,7 @@ data:
 ## References
 
 ### Reference quantities
+
 We already saw that we can define a *part-of* relationship between sections. When we
 want to represent highly inter-linked data, this is often insufficient. *References*
 allow us to create a more lose relationship between sections.
@@ -275,6 +280,7 @@ If you follow the *keys* `data`, `periodic_table`, `elements`, `0`, you reach th
 section that represent hydrogen. Keep in mind that *lists* use index-numbers as *keys*.
 
 ### Schema package references
+
 References can look different depending on the context. Above we saw simple references
 that point from one data section to another. But, you also already a saw a different
 type of reference. Schema packages themselves contain references: when we
@@ -286,6 +292,7 @@ as a special *key* in some objects. Whenever we cannot determine the *section de
 for a *section* by its context (e.g. the *key*/*subsection* used to contain it in a *parent section*), we use `m_def` to provide a reference to the *section definition*.
 
 ### Different forms of references
+
 Depending on where references are used, they might take a different serialized form. Here are a few examples for different reference syntax:
 
 |Example reference|Comments|
@@ -306,6 +313,7 @@ archive. The following two example files, exemplify this use of reference
 between two NOMAD entries.
 
 **periodic_table.archive.yaml**
+
 ```yaml
 definitions:
   sections:
@@ -336,6 +344,7 @@ data:
 ```
 
 **composition.archive.yaml**
+
 ```yaml
 definitions:
   sections:
@@ -372,6 +381,7 @@ definitions*
 
 Here is a simple schema package with two *specialization* of the same *abstract* section
 definition:
+
 ```yaml
 definitions:
   sections:
@@ -412,6 +422,7 @@ Here is an subsection example. In one schema, we define the relationship between
 and `Process`. In another schema, we want to add more *specializations* to what a process is.
 
 **abstract.archive.yaml**
+
 ```yaml
 definitions:
   sections:
@@ -427,6 +438,7 @@ definitions:
 ```
 
 **specialized.archive.yaml**
+
 ```yaml
 definitions:
   sections:
@@ -448,6 +460,7 @@ The *section definition* use in the subsection `processes` defines what a contai
 section has to be "at least". Meaning that any section based on a *specialization* of `Process` would be a valid `processes` subsection.
 
 **specialized.archive.yaml**
+
 ```yaml
 definitions:
   # see above
@@ -463,7 +476,6 @@ data:
 ```
 
 The fact that a subsection or reference target can have different "forms" (i.e. based on different *specializations*) is called *polymorphism* in object-oriented data modelling.
-
 
 ### Pre-defined sections
 
@@ -515,20 +527,20 @@ Here are a few other built-in section definitions and packages of definitions:
 
 ### HDF5Normalizer
 
-A different flavor of _**reading**_ HDF5 files into NOMAD quantities is through defining a
+A different flavor of ***reading*** HDF5 files into NOMAD quantities is through defining a
 [custom schema](../../tutorial/custom.md) and inheriting `HDF5Normalizer` into base-sections. Two essential components
 of using `HDF5Normalizer` class is to first define a quantity that is annotated with `FileEditQuantity` field
 to enable one to drop/upload the `*.h5` file, and to define relevant quantities annotated with `path`
 attribute under `hdf5`. These quantities are then picked up by the normalizer to extract the values to be found
 denoted by the `path`. The supported `Hierarchical Data Format` file extensions are:
 
-  - ```.h5```  
-  - ```.hdf5```
-  - ```.he5```
-  - ```.h5part```
-  - ```.nxs```
-  - ```.mat```
-  - ```.nc4```
+- ```.h5```
+- ```.hdf5```
+- ```.he5```
+- ```.h5part```
+- ```.nxs```
+- ```.mat```
+- ```.nc4```
 
 A minimum example to import your hdf5 and map it to NOMAD quantities is by using the following custom schema:
 
@@ -553,7 +565,6 @@ definitions:
             hdf5:
               path: '/path/to/charge_density'
 ```
-
 
 ## Separating data and schema package
 
@@ -587,7 +598,7 @@ Here is a simple schema package, stored in a NOMAD entry with mainfile name `pac
           type: Composition
       sub_sections:
         solute:
-          section: Composition             
+          section: Composition
 ```
 
 Now, we can re-use this schema package in many entries via *references*. Here, we extend
@@ -613,7 +624,7 @@ data:
     # Explicitly instantiate SpecialElement as a polymorph substitute
     - m_def: SpecialElement
       label: O
-      atomic_weight: 15.9994         
+      atomic_weight: 15.9994
 ```
 
 Here is a last example that re-uses the schema and references data from the two entries
@@ -665,7 +676,3 @@ no spaces between words. For example: `SectionLabelOne`, `SectionLabelTwo`.
 lower_case. This convention involves writing all lowercase letters and separating
 words with whitespace. Abbreviations within these labels may be capitalized to
 enhance scientific readability. For example: `quantity label`, `subsection label`, `IV label`.
-
-
-
-

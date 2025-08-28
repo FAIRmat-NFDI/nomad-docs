@@ -10,4 +10,3 @@ toc_depth: 6
     :prog_name: nomad
     :depth: 1
     :list_subcommands: True
-

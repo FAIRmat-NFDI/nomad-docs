@@ -6,7 +6,7 @@ We distribute NOMAD as docker images that are available in our
 [public docker registry](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR/container_registry/36){:target="\_blank"}.
 The a NOMAD image names looks like this:
 
-```
+```text
 gitlab-registry.mpcdf.mpg.de/nomad-lab/nomad-fair:v1.2.0
 ```
 
@@ -67,12 +67,12 @@ For changing the minor or major version, please check the [migration steps](#mig
 
 ### to 1.2.2
 
-We upgraded the Jupyterhub version used for NORTH from 1.0.2 to 4.0.2. By default the
-Jupyterhub database is persisted in the `nomad_oasis_north` container. If you want to
+We upgraded the JupyterHub version used for NORTH from 1.0.2 to 4.0.2. By default the
+JupyterHub database is persisted in the `nomad_oasis_north` container. If you want to
 keep the database (e.g. to not loose any open tools), you will have to upgrade the database.
 Update the NOMAD docker image version and restart the Oasis like this:
 
-```
+```sh
 docker compose down
 docker compose pull
 docker compose run north python -m jupyterhub upgrade-db
@@ -82,7 +82,7 @@ docker compose up -d
 Alternatively, you can delete the `nomad_oasis_north` container and start with a fresh
 database. Make sure that all north tools are stopped and removed.
 
-```
+```sh
 docker compose down
 docker rm nomad_oasis_north
 docker compose pull
@@ -102,7 +102,7 @@ docker compose up -d
   [Re-processing](admin.md#re-processing) all data will enable this feature for old data. Any analysis build on
   the old workflow model, might not work for new data.
 
-- We introduce the _log-transfer_ service. This is currently an opt-in feature.
+- We introduce the *log-transfer* service. This is currently an opt-in feature.
 
 ### from 0.8.x to 1.x
 

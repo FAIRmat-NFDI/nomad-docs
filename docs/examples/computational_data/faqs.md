@@ -13,7 +13,7 @@ Briefly explain the purpose of the FAQ:
     Coming soon ...
 
 <!--
-- What is Nomad?
+- What is NOMAD?
 - Who is it for?
 - How to get started?
 - What are the system requirements?
@@ -58,7 +58,6 @@ official, beta, and develop share a database.,
 test has its own database that is wiped occasionally, such that one can test publishing there.,
 example oasis also has its own database. it does not appear that there is a clear data-wiping strategy since it is mainly intended for testing plugins -->
 
-
 ## Troubleshooting
 
 !!! Warning
@@ -68,7 +67,6 @@ example oasis also has its own database. it does not appear that there is a clea
 <!-- ### Getting Help
 
 ### Finding resources? -->
-
 
 <!--
 - Why am I getting [specific error message]?
@@ -107,7 +105,7 @@ example oasis also has its own database. it does not appear that there is a clea
     For VASP data, NOMAD complies with the licensing of the `POTCAR` files. In agreement with [Georg Kresse](https://www.vasp.at/info/team/){:target="_blank"}, NOMAD extracts the most important information of the `POTCAR` file and stores them in a stripped version called `POTCAR.stripped`. The `POTCAR` files are then automatically removed from the upload, so that you can safely publish your data.
 
 ??? info "Can I upload large MD trajectories?"
-    NOMAD has a file size limit of 30 GB per upload. We additionally advise users to further trim their trajectories for efficient use of the platform tools. In general, it is best to upload a representative set of trajectory frames (depending on the use case), to be findable and understandable to other researchers, and then link the entry to the full raw trajectory within your own (local) storage solution, so that it can be easily accessed upon request. Please see the relevant guides for more information: [`nomad-simulation-parsers` >> Guide to preparing Gromacs trajectories for upload to NOMAD ](https://fairmat-nfdi.github.io/nomad-parser-plugins-simulation/parsers/gromacs/gromacs_about.html){:target="_blank"}
+    NOMAD has a file size limit of 30 GB per upload. We additionally advise users to further trim their trajectories for efficient use of the platform tools. In general, it is best to upload a representative set of trajectory frames (depending on the use case), to be findable and understandable to other researchers, and then link the entry to the full raw trajectory within your own (local) storage solution, so that it can be easily accessed upon request. Please see the relevant guides for more information: [`nomad-simulation-parsers` >> Guide to preparing Gromacs trajectories for upload to NOMAD](https://fairmat-nfdi.github.io/nomad-parser-plugins-simulation/parsers/gromacs/gromacs_about.html){:target="_blank"}
     <!-- #TODO - Add sub-section link -->
 
 ??? info "What do I do if my MD engine is not supported?"
@@ -124,7 +122,6 @@ example oasis also has its own database. it does not appear that there is a clea
 !!! Warning
 
     Coming soon ...
-
 
 ## Additional Resources
 

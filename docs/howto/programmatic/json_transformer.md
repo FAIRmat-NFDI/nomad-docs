@@ -22,7 +22,6 @@ By the end of this how-to guide, you will:
 - Be able to apply transformation rules to transform data from one format to another.
 - Learn how to customize and extend data conversion rules for specific needs.
 
-
 ## Steps
 
 ### 1. Define Your Transformation Rules

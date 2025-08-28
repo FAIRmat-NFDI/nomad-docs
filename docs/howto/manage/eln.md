@@ -38,7 +38,6 @@ The editable quantities that you found in your ELN entry (e.g., `short name`, `t
 All the metadata that you enter in your ELN is stored in the structured JSON format according to the corresponding schema.
 You can view this JSON by navigating to the `DATA` tab and then clicking on the :fontawesome-solid-cloud-arrow-down: icon. Select the box next to "pretty-print" at the top left for a human-readable view. You can simply copy and paste this content into a JSON file for further use. Alternatively, from the entry, you can download the archive JSON file by navigating to the `FILES` tab and clicking on the :fontawesome-solid-cloud-arrow-down: icon after selecting the file `<entry name>.archive.json`, where `<entry name>` is the name that you entered for this entry.
 
-
 ## Add your own ELN schema
 
 To make NOMAD ELNs more useful, you can define your own schema to create you own data
@@ -53,13 +52,13 @@ Follow the [How-to write a schema](../customization/basics.md) and [How-to defin
 guides to create you own customized of ELNs.
 
 ## Integration of third-party ELNs
+
 !!! warning "Attention"
 
     This part of the documentation is still work in progress.
 
 The code base is part of the [FAIRmat-NFDI](https://github.com/FAIRmat-NFDI/nomad-external-eln-integrations){:target="_
 blank"} repository.
-
 
 NOMAD offers integration with third-party ELN providers, simplifying the process of connecting
 and interacting with external platforms. Three main external ELN solutions that are integrated into NOMAD
@@ -68,7 +67,6 @@ The process of data retrieval and data mapping onto NOMAD's schema
 varies for each of these third-party ELN provider as they inherently allow for certain ways of communicating with their
 database. Below you can find a <b>How-to</b> guide on importing your data from each of these external
 repositories.
-
 
 ### elabFTW integration
 
@@ -95,7 +93,6 @@ There two subsections: 1) <b>experiment_data</b>, and 2) <b>experiment_files</b>
 <b>experiment_data</b> section contains detailed information of the given elabFTW experiment, such as
 links to external resources and extra fields. <b>experiment_files</b> section is a list of subsections
 containing metadata and additional info of the files associated with the experiment.
-
 
 ### Labfolder integration
 

@@ -5,7 +5,7 @@ Build upon your understanding of NOMAD's features with domain-specific examples 
 <div markdown="block" class="home-grid">
 <div markdown="block">
 
-### Computational data
+## Computational data
 
 Historically a repository for Density Functional Theory calculations, NOMAD now supports a wide range of computational methodologies including advanced many-body calculations and classical molecular dynamics simulations, as well as complex simulation workflows.
 
@@ -24,7 +24,7 @@ Historically a repository for Density Functional Theory calculations, NOMAD now 
 </div>
 <div markdown="block">
 
-### Experimental data
+## Experimental data
 
 Thanks to key activities of the FAIRmat project, NOMAD also supports a set of parsing capabilities for standardizing data from materials characterization experiments.
 

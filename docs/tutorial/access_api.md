@@ -13,4 +13,3 @@ against the NOMAD API.
 <div class="youtube">
 <iframe src="https://www.youtube-nocookie.com/embed/G1frBCrxC0g" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
-

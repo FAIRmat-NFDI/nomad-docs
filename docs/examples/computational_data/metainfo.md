@@ -4,14 +4,14 @@
 
 <!-- TODO - already link to any existing DOCS for the new schema? -->
 
-### Overview of metadata organization for computation
+## Overview of metadata organization for computation
 
 NOMAD stores all processed data in a well defined, structured, and machine readable format, known as the `archive`.
 The schema that defines the organization of (meta)data within the archive is known as the [MetaInfo](../../reference/glossary.md#metainfo). See [Explanation > Data structure](../../explanation/data.md) for general information about data structures and schemas in NOMAD.
 
 The following diagram is an overarching visualization of the most important archive sections for computational data:
 
-```
+```tree
 archive
 ├── run
 │    ├── method
@@ -43,7 +43,6 @@ Entire subsections of NOMAD's schema can be browsed using the [MetaInfo Browser]
 - `runschema` full schema for `run`: [MetaInfo Browser > runschema](https://nomad-lab.eu/prod/v1/gui/analyze/metainfo/runschema){:target="_blank"}
 - `workflow2` base schema: [MetaInfo Browser > Entry > workflow2](https://nomad-lab.eu/prod/v1/gui/analyze/metainfo/nomad.datamodel.datamodel.EntryArchive/workflow2){:target="_blank"}
 - `simulationworkflowschema` full computational schema for `workflow2`: [MetaInfo Browser > simulationworkflowschema](https://nomad-lab.eu/prod/v1/gui/analyze/metainfo/simulationworkflowschema){:target="_blank"}
-
 
 The most important section of the archive for computational data is the `run` section, which is
 divided into three main subsections: `method`, `system`, and `calculation`. `method` stores

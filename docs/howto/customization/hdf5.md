@@ -76,9 +76,8 @@ file in another upload, follow the same form for
 To read a dataset, use `read_dataset` and provide a reference. This will return the value
 cast in the type of the dataset.
 
-
-
 ## HDF5Dataset
+
 To use HDF5 storage for archive quantities, one should use `HDF5Dataset`.
 
 ```python
@@ -123,7 +122,6 @@ archive.data.value_1 = np.ones(3)
 archive.data.value_2 = archive.data.value_1
 ```
 
-
 ## Visualizing archive HDF5 quantities
 
 NOMAD clients (e.g. NOMAD UI) can pick up on these HDF5 serialized quantities and
@@ -141,7 +139,7 @@ In the following example, the `value` quantity has a dedicated default h5web ren
 Adding some annotation in the corresponding section would trigger another plot rendering, where `value` vs. `time` plot is shown. The errors to the dataset can be specified by `errors`
 annotation.
 
-```
+```python
 class MySection(ArchiveSection):
 
     m_def = Section(a_h5web=H5WebAnnotation(axes='time', signal='value'))
@@ -175,7 +173,7 @@ paths to the annotation `paths`. The following example will trigger a rendering 
 corresponding to the first `my_sub` section. One can also use wildcards `*` to include
 all sub sections and `**` to recursively search sub sections.
 
-```
+```python
 class MySubSection(ArchiveSection):
 
     m_def = Section(a_h5web=H5WebAnnotation(axes='x', signal='y'))
@@ -195,7 +193,6 @@ class MySection(ArchiveSection):
     my_sub = SubSection(sub_section=MySubSection, repeats=True)
 
 ```
-
 
 ## Metadata for large quantities
 

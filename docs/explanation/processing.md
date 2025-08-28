@@ -20,7 +20,6 @@ Those matched files are now [*mainfiles*](../reference/glossary.md#mainfile) and
   <figcaption>Processing steps and how they interact with files, entries, and archives.</figcaption>
 </figure>
 
-
 ## Processing triggers, scheduling, execution
 
 For most end-users, processing is fully automated and will be automatically run when
@@ -52,18 +51,19 @@ See also the [documentation "from files to data"](./basics.md) to understand the
 between all NOMAD entities.
 
 ### Uploads
+
 Upload processing is scheduled if one or many files in the upload have changed. Upload processing
 includes the matching step, it creates new entries, and triggers the processing of
 new or afflicted entries. An upload is considered processing as long as any of its entries
 is still processing (or scheduled to be processed).
 
 ### Entries
+
 In most scenarios, entry processing is not triggered individually, but as part of an upload
 processing. Many entries of one upload might be processed at the same time. Some order
 can be enforced through *processing levels*. Levels are part of the parser metadata and
 entries paired to parsers with a higher level are processed after entries with a
 parser of lower level. See also [how to write parsers](../howto/plugins/parsers.md).
-
 
 ## Customize processing
 
@@ -162,6 +162,7 @@ classes can have a function with the following signature:
 ```py
 def normalize(self, archive: EntryArchive, ...)
 ```
+
 These `normalize` functions can modify the given section instance `self` or the
 entry `archive` as a whole. Through the `archive`, Normalize functions also have access to
 the `context` and can do all kinds of file or processing operations from there.
@@ -280,6 +281,7 @@ would be very much the same, only the part that reads information from the files
 would be different.
 
 It might be good to define a **reader** like this:
+
 ```py
 def reader(mainfile: str) -> Dict[str, Any]
 ```

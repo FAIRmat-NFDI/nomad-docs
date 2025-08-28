@@ -10,13 +10,12 @@ in your lab and create your own schema based on the concepts shown in this examp
 Consult our [documentation on the NOMAD Archive and Metainfo](https://nomad-lab.eu/prod/v1/docs/archive.html) to learn more about schemas.
 
 This example uploads contains the following entries
-- A schema in NOMAD's *archive.yaml* format: *schema.archive.yaml*
-that defines Three types of ELN entries: sample, instrument, and chemical
-- Three chemicals (as defined in the schema): *Copper_II_Selenide.archive.json*,
-*Tin_II_Selenide.archive.json*,
-*Zinc_Selenide.archive.json*
+
+- A schema in NOMAD's *archive.yaml* format: *schema.archive.yaml* that defines Three types of ELN entries: sample, instrument, and chemical
+- Three chemicals (as defined in the schema):
+    *Copper_II_Selenide.archive.json*,
+    *Tin_II_Selenide.archive.json*,
+    *Zinc_Selenide.archive.json*
 - An instrument *PVD-P*.archive.json
-- A sample (*sample.archive.json*) with two processes (PVD evaporation, hotplate annealing) as sub-sections,
-and references to instrument and chemicals.
-- A *.csv* file. This is not directly parser by NOMAD, but the sample ELN uses it to
-parse data for the PVD evaporation process.
+- A sample (*sample.archive.json*) with two processes (PVD evaporation, hotplate annealing) as sub-sections, and references to instrument and chemicals.
+- A *.csv* file. This is not directly parser by NOMAD, but the sample ELN uses it to parse data for the PVD evaporation process.

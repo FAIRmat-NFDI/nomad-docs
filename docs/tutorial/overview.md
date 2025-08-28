@@ -17,6 +17,7 @@ NOMAD is available in two flavours to address the diverse needs of scientists: [
 Our tutorial documentation covers the basics of using Central NOMAD and NOMAD Oasis. These tasks range from basic operations using the graphical user interface (GUI), to low-barrier tailoring of electronic lab notebooks, and robust customization with plugins.
 
 ### Tutorial Topics
+
 [**Uploading and publishing data**](upload_publish.md)
 
 - Create a NOMAD upload and share it with your colleagues.
@@ -40,7 +41,6 @@ Our tutorial documentation covers the basics of using Central NOMAD and NOMAD Oa
 - Organize and manage complex research workflows using NOMAD.
 - Interface with NOMAD programmatically for automation and high-throughput use.
 
-
 [**Accessing data via API**](access_api.md)
 
 - Create simple requests using the NOMAD API.
@@ -61,11 +61,11 @@ An overview of the skills required to use NOMAD and NOMAD Oasis, categorized int
 
 <img src="images/overview.png" alt="Competences of NOMAD" width="800">
 
-------
+---
 
 ## Ways to Access NOMAD
 
-There are multiple access points to NOMAD. The general [_landing page_](https://nomad-lab.eu/nomad-lab/){:target="_blank"} provides an overview of NOMAD’s features, along with links to documentation, tutorials, and project history.
+There are multiple access points to NOMAD. The general [*landing page*](https://nomad-lab.eu/nomad-lab/){:target="_blank"} provides an overview of NOMAD’s features, along with links to documentation, tutorials, and project history.
 
 From this page, we can navigate to NOMAD to upload, manage, and explore data.
 
@@ -74,7 +74,6 @@ Two public versions that are relevant to the tutorials are:
 1. [**Official**](https://nomad-lab.eu/prod/v1/gui/search/entries){:target="_blank"} – The latest stable version of NOMAD.
 
     Access it by clicking the "Open NOMAD" button at the top of the landing page.
-
 
 2. [**Test**](https://nomad-lab.eu/prod/v1/test/gui/search/entries){:target="_blank"} – Runs the latest released version of NOMAD but on temporary test data that is routinely wiped.
 
@@ -86,7 +85,8 @@ Two public versions that are relevant to the tutorials are:
     <img src="images/access_NOMAD.png" alt="Access NOMAD" width="600">
 </div>
 
-------------
+---
+
 ## Create a NOMAD User Account
 
 A NOMAD user account is required if you want to upload, share, publish, or analyze your data. However, exploring data in NOMAD does not require an account. Creating a NOMAD user account is quick and free!
@@ -100,7 +100,7 @@ A NOMAD user account is required if you want to upload, share, publish, or analy
     <img src="images/account_4.png" alt="Image 4">
     <div class="nav-arrow right" id="next">→</div>
 </div>
-----------
+---
 
 ## Login Options via Helmholtz AAI
 
@@ -120,4 +120,4 @@ You will be redirected to your institution’s login page, where you can enter y
     <img src="images/account_6.png" alt="Image 6">
     <div class="nav-arrow right" id="next2">→</div>
 </div>
-----------
+---

@@ -45,11 +45,9 @@ A few tips that will help us to solve your issues quicker:
     - What NOMAD URL are you using (UI), which package version (Python)?
     - Is there an upload or entry id that we can look at?
     - Example files or code snippets?
-    - Don't screenshot code, copy and paste instead. Use
-      [code blocks](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-and-highlighting-code-blocks#syntax-highlighting){:target="_blank"}.
+    - Don't screenshot code, copy and paste instead. Use [code blocks](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-and-highlighting-code-blocks#syntax-highlighting){:target="_blank"}.
 
-- **Features**: Augment your feature descriptions with a use case that helps us understand
-  the feature and its scope.
+- **Features**: Augment your feature descriptions with a use case that helps us understand the feature and its scope.
 
 ### Issues labels (GitLab)
 
@@ -254,19 +252,13 @@ code. This can only be done if we keep a "clean" history.
 
 ### Amend
 
-While working on a feature, there are certain practices that will help us to create
-a clean history with coherent commits, where each commit stands on its own.
+While working on a feature, there are certain practices that will help us to create a clean history with coherent commits, where each commit stands on its own.
 
 ```shell
 git commit --amend
 ```
 
-If you committed something to your own feature branch and then realize by CI that you have
-some tiny error in it you need to fix, try to amend this fix to the last commit.
-This will avoid unnecessary tiny commits and foster more coherent single commits. With
-`--amend` you are adding changes to the last commit, i.e. editing the last commit. When
-you push, you need to force it, e.g. `git push origin feature-branch --force-with-lease`.
-So be careful, and only use this on your own branches.
+If you committed something to your own feature branch and then realize by CI that you have some tiny error in it you need to fix, try to amend this fix to the last commit. This will avoid unnecessary tiny commits and foster more coherent single commits. With `--amend` you are adding changes to the last commit, i.e. editing the last commit. When you push, you need to force it, e.g. `git push origin feature-branch --force-with-lease`. So be careful, and only use this on your own branches.
 
 ### Rebase
 
@@ -274,15 +266,7 @@ So be careful, and only use this on your own branches.
 git rebase <version-branch>
 ```
 
-Let's assume you work on a bigger feature that takes more time. You might want to merge
-the version branch into your feature branch from time to time to get the recent changes.
-In these cases, use `rebase` and not `merge`. Rebasing puts your branch commits in front
-of the merged commits instead of creating a new commit with two ancestors. It moves the
-point where you initially branched away from the version branch to the current position in
-the version branch. This will avoid merges, merge commits, and generally leaves us with a
-more consistent history. You can also rebase before creating a merge request, which
-allows no-op merges. Ideally, the only real merges that we ever have are between
-version branches.
+Let's assume you work on a bigger feature that takes more time. You might want to merge the version branch into your feature branch from time to time to get the recent changes.  In these cases, use `rebase` and not `merge`. Rebasing puts your branch commits in front of the merged commits instead of creating a new commit with two ancestors. It moves the point where you initially branched away from the version branch to the current position in the version branch. This will avoid merges, merge commits, and generally leaves us with a more consistent history. You can also rebase before creating a merge request, which allows no-op merges. Ideally, the only real merges that we ever have are between version branches.
 
 ### Squash
 
@@ -290,12 +274,6 @@ version branches.
 git merge --squash <other-branch>
 ```
 
-When you need multiple branches to implement a feature and merge between them, try to
-use `--squash`. Squashing puts all commits of the merged branch into a single commit.
-It allows you to have many commits and then squash them into one. This is useful
-if these commits were made just to synchronize between workstations, due to
-unexpected errors in CI/CD, because you needed a save point, etc. Again the goal is to
-have coherent commits, where each commit makes sense on its own.
+When you need multiple branches to implement a feature and merge between them, try to use `--squash`. Squashing puts all commits of the merged branch into a single commit.  It allows you to have many commits and then squash them into one. This is useful if these commits were made just to synchronize between workstations, due to unexpected errors in CI/CD, because you needed a save point, etc. Again the goal is to have coherent commits, where each commit makes sense on its own.
 
-Squashing can also be applied on a selection of commits during an
-[interactive rebase](https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History#_squashing){:target="_blank"}.
+Squashing can also be applied on a selection of commits during an [interactive rebase](https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History#_squashing){:target="_blank"}.

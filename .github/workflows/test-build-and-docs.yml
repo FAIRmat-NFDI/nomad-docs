@@ -18,6 +18,18 @@ env:
   PYTHON_VERSION: 3.12
 
 jobs:
+  lint-markdown:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: DavidAnson/markdownlint-cli2-action@v20
+        with:
+          config: .github/workflows/configs/nomad.markdownlint.jsonc
+          globs: |
+            *.md
+            docs/**/*.md
+
   check-links:
     runs-on: ubuntu-latest
     steps:
@@ -27,7 +39,7 @@ jobs:
         uses: tcort/github-action-markdown-link-check@v1
         with:
           use-quiet-mode: 'yes'
-          config-file: .github/workflows/markdown-link-check.json
+          config-file: .github/workflows/configs/markdown-link-check.json
           folder-path: 'docs, examples'
           file-path: './README.md'
 

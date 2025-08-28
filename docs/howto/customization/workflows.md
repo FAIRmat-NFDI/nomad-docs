@@ -95,7 +95,8 @@ With a basic understanding in hand, you can now download the example data and up
 [Download simple_workflow.zip](data/simple_workflow.zip){ .md-button .nomad-button }
 
 The download `simple_workflow.zip` should have the following structure:
-```
+
+```tree
 .
 ├── dft.xml
 ├── dft.workflow.archive.yaml
@@ -108,7 +109,6 @@ Upon upload to NOMAD, the above zip will produce 2 entries:
 2. a workflow entry with mainfile `dft.workflow.archive.yaml`. The workflow entry will contain the following workflow graph on the Overview page:
 
 ![NOMAD workflow schema](images/single-point-custom-nomad-workflow-graph.png){.screenshot}
-
 
 ??? Tip "Adding more workflow metadata"
 
@@ -181,11 +181,9 @@ The most common way to construct a nested workflow is by creating separate entri
 
 We have already seen this case in [Simple Workflows with Support Tasks](#simple-workflows-with-supported-tasks). Actually, there is a convention in NOMAD that all simulation entries contain a workflow representation, even for single-step workflows. Thus, any workflow containing simulation tasks will be a nested workflow.
 
-
 ### In a single entry
 
 Since a `Workflow` instance is also a `Task` instance due to inheritance, we can directly nest workflows within a single entry. Here we illustrate the concept using a concrete computational workflow, represented schematically as:
-
 
 ```mermaid
 graph LR;
@@ -207,7 +205,7 @@ This workflow contains a series of electronic structure calculations: a DFT and 
 
 The mainfiles for these calculations are organized in the following file structure, stored with `nested_workflow_one-entry.zip`:
 
-```
+```tree
 .
 ├── DFT
 │   └── dft.xml
@@ -224,6 +222,7 @@ The mainfiles for these calculations are organized in the following file structu
 We construct the YAML, `nested_workflow_one-entry.archive.yaml` in parts for clarity:
 
 The overall `workflow2` section and global workflow `inputs`:
+
 ```yaml
 workflow2:
   name: DFT+TB+DMFT
@@ -233,6 +232,7 @@ workflow2:
 ```
 
 The global workflow outputs `outputs`:
+
 ```yaml
   outputs:
     - name: Output DMFT at T1 calculation
@@ -242,6 +242,7 @@ The global workflow outputs `outputs`:
 ```
 
 The workflow `tasks`:
+
 ```yaml
   tasks:
     - m_def: nomad.datamodel.metainfo.workflow.TaskReference
@@ -305,7 +306,6 @@ You can reproduce this example by downloading the example data (with workflow YA
 
 [Download nested_workflow_one-entry.zip](data/nested_workflow_one-entry.zip){ .md-button .nomad-button }
 
-
 ## Workflows with custom tasks
 
 *custom tasks:* defined here as tasks for which the corresponding raw files are not automatically recognized by NOMAD, or perhaps there are no raw files at all for the task.
@@ -358,8 +358,6 @@ Uploading to NOMAD with an empty dummy file called `water.top` should result in 
 <video width="100%" controls>
   <source src="./images/ELNFileManager.webm" alt="" type="video/mp4">
 </video>
-
-
 
 ### Example workflow with ELN tasks
 
@@ -487,7 +485,6 @@ To reproduce the workflow shown in the video above, download the example files, 
 
 [Download Custom_ELN_Entries.zip](data/Custom_ELN_Entries.zip){ .md-button .nomad-button }
 
-
 ## Referencing ELN entries created with the GUI
 
 To reference ELN entries created using the NOMAD GUI, use the upload and entry ids for the archive path specification, as detailed in [Referencing Tasks in Different Uploads](#referencing-tasks-in-different-uploads) above.
@@ -499,7 +496,6 @@ To reference ELN entries created using the NOMAD GUI, use the upload and entry i
 !!! Warning
 
     Coming soon ...
-
 
 <!-- TODO - also ensuring connections in the workflow visualizer! Somewhere -->
 ## Using the workflow visualizer
@@ -547,7 +543,6 @@ Once you leave the workflow entry, you can use either the browser back button or
       - To create a graph edge, at least one `input` of the in-node must match exactly an `output` of the out-node.
 <!-- TODO Add more tips -->
 
-
 ## Advanced Topics
 
 ### Instantiating a workflow from YAML using a standardized workflow class
@@ -589,5 +584,3 @@ workflow2:
   inputs:
     ...
 ```
-
-

@@ -13,17 +13,17 @@ TODO consider the following items:
 This is a list of terms that have a specific meaning for NOMAD and are used through
 out the application and this documentation.
 
-### Annotation
+## Annotation
 
 *Annotations* are part of data [schemas](#schema) and they describe aspects that are not
 directly defining the type or shape of data. They often allow to alter how certain data is
 managed, represented, or edited. See [annotations in the schema documentation](../howto/customization/elns.md#annotations).
 
-### App
+## App
 
 Apps allow you to build customized user interfaces for specific research domains, making it easier to navigate and understand the data. This typically means that certain domain-specific properties are highlighted, different units may be used for physical properties, and specialized dashboards may be presented. This becomes crucial for NOMAD installations to be able to scale with data that contains a mixture of experiments and simulations, different techniques, and physical properties spanning different time and length scales.
 
-### Archive
+## Archive
 
 NOMAD processes (parses and normalizes) all data.
 The entirety of all [processed data](#processed-data) is referred to as the
@@ -35,28 +35,28 @@ The term *archive* is an old synonym for [processed data](#processed-data). Sinc
 has different meaning for different people and is very abstract, we are slowly deprecating
 its use in favor of *processed data* (e.g. NOMAD Repository and NOMAD Archive).
 
-### Author
+## Author
 
 An *author* is typically a natural person that has uploaded a piece of data into NOMAD and
 has authorship over it. Often *authors* are [users](#user), but not always.
 Therefore, we have to distinguish between authors and users.
 
-### Dataset
+## Dataset
 
 Users can organize [entries](#entry) into *datasets*. Datasets are not created automatically,
 don't confuse them with [uploads](#upload). Datasets can be compared to albums, labels, or tags
 on other platforms. Datasets are used to reference a collection of data and users can get a DOI for their
 datasets.
 
-### Deployment
+## Deployment
 
 NOMAD *Deployment* refers to a live instance of a NOMAD [distribution](#distribution--distro) running on a machine. This machine can be a cloud-based virtual machine or a local computer.
 
-### Distribution / distro
+## Distribution / distro
 
 NOMAD *Distribution* is a Git repository containing the configuration for instantiating a customized NOMAD instance. Distributions define the plugins that should be installed, the configurations files (e.g. `nomad.yaml`) to use, CI pipeline steps for building final Docker images and a `docker-compose.yaml` file that can be used to launch the instance.
 
-### ELN
+## ELN
 
 Electronic Lab Notebooks (*ELNs*) are a specific kind of [entry](#entry) in NOMAD. These
 entries can be edited in NOMAD, in contrast to entries that are created by uploading
@@ -64,7 +64,7 @@ and processing data. ELNs offer form fields and other widgets to modify the cont
 an entry. As all entries, *ELNs* are based on a [schema](#schema); how [quantities](#quantity)
 are edited (e.g. which type of widget) can be controlled through [annotations](#annotation).
 
-### Entry
+## Entry
 
 Data in NOMAD is organized in *entries* (as in "database *entry*"). Entries have an
 *entry id*. Entries can be searched for and entries have individual pages on the NOMAD GUI. Entries are always
@@ -72,23 +72,23 @@ associated with [raw files](#raw-file), where one of these files is the [mainfil
 Raw files are processed to create the [processed data](#processed-data) (or the [archive](#archive))
 for an entry.
 
-### Example upload
+## Example upload
 
 *Example uploads* are pre-prepared uploads containing data that typically showcases certain features of a plugin. The contents of example uploads can be fixed, created programmatically or fetched from online sources. Example uploads can be instantiated by using the "Example uploads" -button in the "Uploads" -page of the GUI. Example uploads can be defined by creating an example upload [plugin entry point](#plugin-entry-point).
 
-### Mainfile
+## Mainfile
 
 Each [entry](#entry) has one [raw file](#raw-file) that defines it. This is called the
 *mainfile* of that entry. Typically most, if not all, [processed data](#processed-data)
 of an entry is retrieved from that mainfile.
 
-### Metadata
+## Metadata
 
 In NOMAD *metadata* refers to a specific technical sub-set of [processed data](#processed-data).
 The metadata of an [entry](#entry) comprises ids, timestamps, hashes, authors, datasets,
 references, used schema, and other information.
 
-### Metainfo
+## Metainfo
 
 The term *metainfo* refers to the sum of all [schemas](#schema). In particular it is
 associated with all pre-defined schemas that are used to represent all
@@ -96,7 +96,7 @@ associated with all pre-defined schemas that are used to represent all
 the metainfo provides additional meaning by associated in each piece of data with
 name, description, categories, type, shape, units, and more.
 
-### Normalizer
+## Normalizer
 
 A *normalizer* is a small tool that can refine the [processed data](#processed-data) of an
 [entry](#entry). Normalizers can read and modify processed data and thereby either normalize
@@ -110,7 +110,7 @@ Normalize functions are part of [schemas](#schema) (i.e. [section definitions](#
 They are run at the end of processing on all the sections that instantiate the respective
 section definition.
 
-### Parser
+## Parser
 
 A *parser* is a small program that takes a [mainfile](#mainfile) as input and produces
 [processed data](#processed-data). Parsers transform information from a particular source
@@ -119,21 +119,21 @@ can open and read data from other files (e.g. those referenced in the mainfile).
 a parser is associated with a certain file-format and is only applied to files of that
 format.
 
-### Plugin
+## Plugin
 
 NOMAD installations can be customized through plugins, which are Git repositories containing an installable python package that will add new features upon being installed. Plugins can contain one or many plugin entry points, which represent individual customizations.
 
-### Plugin entry point
+## Plugin entry point
 
 Plugin entry points are used to configure and load different types of NOMAD customizations. There are several entry point types, including entry points for parsers, schema packages and apps. A single plugin may contain multiple entry points.
 
-### Processed data
+## Processed data
 
 NOMAD processes (parses and normalizes) all data. The *processed data* is the outcome of this process.
 Therefore, each NOMAD [entry](#entry) is associated with *processed data* that contains all the parsed and normalized
 information. Processed data always follows a [schema](#schema). Processed data can be retrieved (via API) or downloaded as `.json` data.
 
-### Processing
+## Processing
 
 NOMAD processes (parses and normalizes) all data. During processing, all provided files
 are considered. First, files are matched to [parsers](#parser). Second, files that
@@ -143,7 +143,7 @@ processed data is further refined by running [normalizers](#normalizer). Last, t
 processed data is saved and indexed. The exact processing time depends on the size of the
 uploaded data and users can track the processing state of each entry in the GUI.
 
-### Quantity
+## Quantity
 
 All [processed data](#processed-data) is structured into sections and quantities. Sections
 provide hierarchy and organization, *quantities* refer to the actual pieces of data.
@@ -154,7 +154,7 @@ In a [schema](#schema), quantities are defined by their name, description, type,
 Quantities in processed data are associated with a respective quantity definition from
 the respective schema.
 
-### Raw file
+## Raw file
 
 A *raw file* is any file that was provided by a NOMAD user. A raw-file might produce an
 [entry](#entry), if it is of a supported file-format, but does not have to. Raw files
@@ -164,7 +164,7 @@ always belong to an [upload](#upload) and might be associated with an [entry](#e
 The sum of all raw files is also referred to as the *Repository*. This is an old term
 from when NOMAD was implemented as several services (e.g. NOMAD Repository and NOMAD Archive).
 
-### Results (section `results`)
+## Results (section `results`)
 
 The *results* are a particular section of [processed data](#processed-data). They comprise
 a summary of the most relevant data for an [entry](#entry).
@@ -173,7 +173,7 @@ While all [processed data](#processed-data) can be downloaded and is accessible 
 an entry's *results* (combined with its [metadata](#metadata)) is also searchable and can
 be read quicker and in larger amounts.
 
-### Schema
+## Schema
 
 *Schemas* define possible data structures for [processed data](#processed-data). Like
 a book they organize data hierarchically in *sections* and *subsections*. Schemas
@@ -183,11 +183,11 @@ within them.
 A schema is a collection of [section](#section-and-subsection) and [quantity](#quantity)
 definitions. Schemas are organized in [schema packages](#schema-package), i.e. collections of definitions. All schemas combined form the [metainfo](#metainfo).
 
-### Schema package
+## Schema package
 
 *Schema packages* contain a collection of [schema](#schema) definitions. Schema packages may be defined as [YAML files](../howto/customization/basics.md) or in Python as [plugin entry points](../howto/plugins/schema_packages.md).
 
-### Section and Subsection
+## Section and Subsection
 
 All [processed data](#processed-data) is structured into sections and quantities. *Sections*
 provide hierarchy and organization, *quantities* refer to the actual pieces of data.
@@ -197,7 +197,7 @@ In a [schema](#schema), a section are defined by their name, description, all po
 all properties (subsections, quantities) from other section definitions using them as
 *base sections*.
 
-### Upload
+## Upload
 
 NOMAD organizes [raw-files](#raw-file) (and all [entries](#entry) created from them)
 in *uploads*. Uploads consist of a directory structure of raw-files and a list of
@@ -209,7 +209,7 @@ collaborate and those users can add/remove/change data.
 The owner can publish an upload at some point, where the upload becomes immutable and visible
 to everyone. Uploads are the smallest unit of data that can be individually shared and published.
 
-### User
+## User
 
 A *user* is anyone with a NOMAD account. It is different from an [author](#author) as
 all users can be authors, but not all authors have to be users. All data in NOMAD is always

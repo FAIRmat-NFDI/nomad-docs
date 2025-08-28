@@ -23,7 +23,6 @@ The **Entries** page shows all the uploaded data that are published on NOMAD. Pu
 
 ??? info "Contents of NOMAD's Explore Menu"
 
-
     The following explore pages are currently available:
 
     - **Entries**: Search entries across all domains.
@@ -35,7 +34,6 @@ The **Entries** page shows all the uploaded data that are published on NOMAD. Pu
     <div style="text-align: center;">
         <img src="images/explore_menu2.png" alt="Explore Menu" width="200">
     </div>
-
 
 ---
 
@@ -52,7 +50,6 @@ In the Entries page, you will find a list of possible filters on the left panel.
 <div style="text-align: center;">
     <img src="images/filters_sidebar.png" alt="Entries Search Interface" width="200">
 </div>
-
 
 Filters refine searches dynamically. You can apply the following example to experience this.
 
@@ -85,7 +82,6 @@ Alternatively, you can directly enter the element paths in the search field:
 
 - *results.material.elements = B*
 - *results.material.elements = N*
-
 
 !!! task "Does NOMAD have a bandgap filter?"
     Can you find a filter for bandgap? Does it provide the bandgap value or indicate direct/indirect nature?
@@ -189,7 +185,6 @@ In this example, we will utilize the Solar Cell Explore page, which offers filte
 - Navigate to **EXPLORE** → **Solar Cells**.
 - This dashboard provides predefined filters and plots optimized for solar cell research.
 
-
 <div style="text-align: center;">
     <img src="images/solar_cells_dashboard.png" alt="Solar Cells Dashboard" width="800">
 </div>
@@ -218,9 +213,8 @@ Click the *pen icon* on any widget to modify its plotted quantities, color mappi
 - Hover over scatter plots to inspect data points.
 - Click entries for full metadata, dataset links, and further analysis.
 
-
 <div style="text-align: center;">
     <img src="images/sn_based_solar_cells_example.gif" alt="Sn-based Solar Cell example" width="800">
 </div>
 
-----------------------
+---

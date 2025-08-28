@@ -148,12 +148,14 @@ from Nomad_API import *
 ```
 
 Define the following user information:
+
 ```python
 username = 'nomad_email@affiliation.edu'
 password = 'password'
 ```
 
 Define the NOMAD API endpoint:
+
 ```python
 # nomad_url = 'https://nomad-lab.eu/prod/v1/api/v1/'  # production nomad
 nomad_url = 'https://nomad-lab.eu/prod/v1/test/api/v1/'  # test nomad (deleted occassionally)
@@ -196,7 +198,6 @@ After some time you will get:
 
     Some data, e.g., large systems or molecular dynamics trajectories, take some time to process. In this case, you can call the above function intermittantly, e.g., in a while loop with a sleep call in between, waiting for `last_status_message` to be "Process process_upload completed successfully"
 
-
 Now that the upload processing is complete, we can add coauthors, references, and other comments, as well as link to a dataset and provide a proper name for the upload:
 
 ```python
@@ -222,7 +223,6 @@ print(last_status_message)
 
     'Process edit_upload_metadata completed successfully'
 
-
 Now, we are ready to publish:
 
 ```python
@@ -237,4 +237,3 @@ print(last_status_message)
 ```
 
     'Process publish_upload completed successfully'
-

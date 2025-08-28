@@ -190,7 +190,7 @@ class CustomSection(PlotSection, EntryData):
 
 To customize the plot configuration in python one can add the config to the generated json by to_plotly_json().
 
-```
+```python
 figure_json['config'] = {'staticPlot': True}
 ```
 

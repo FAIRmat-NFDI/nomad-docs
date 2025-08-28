@@ -87,20 +87,10 @@ By default, quantities from custom schemas are not available in an app, and they
 
 Each schema has a unique name within the NOMAD ecosystem, which is needed to target them in the configuration. The name depends on the resource in which the schema is defined in:
 
-- Python schemas are identified by the python path for the class that inherits
-from `Schema`. For example, if you have a python package called `nomad_example`,
-which has a subpackage called `schema_packages`, containing a module called `mypackage.py`, which contains the class `MySchema`, then
-the schema name will be `nomad_example.schema_packages.mypackage.MySchema`.
-- YAML schemas are identified by the entry id of the schema file together with
-the name of the section defined in the YAML schema. For example
-if you have uploaded a schema YAML file containing a section definition called
-`MySchema`, and it has been assigned an `entry_id`, the schema name will be
-`entry_id:<entry_id>.MySchema`.
+- Python schemas are identified by the python path for the class that inherits from `Schema`. For example, if you have a python package called `nomad_example`, which has a subpackage called `schema_packages`, containing a module called `mypackage.py`, which contains the class `MySchema`, then the schema name will be `nomad_example.schema_packages.mypackage.MySchema`.
+- YAML schemas are identified by the entry id of the schema file together with the name of the section defined in the YAML schema. For example if you have uploaded a schema YAML file containing a section definition called `MySchema`, and it has been assigned an `entry_id`, the schema name will be `entry_id:<entry_id>.MySchema`.
 
-The quantities from schemas may be included or excluded by using the [`SearchQuantities`](#app-reference)
-field in the app config. This option supports a wildcard/glob syntax for including/excluding certain
-search quantities. For example, to include all search quantities from the Python schema defined in the class
-`nomad_example.schema_packages.mypackage.MySchema`, you could use:
+The quantities from schemas may be included or excluded by using the [`SearchQuantities`](#app-reference) field in the app config. This option supports a wildcard/glob syntax for including/excluding certain search quantities. For example, to include all search quantities from the Python schema defined in the class `nomad_example.schema_packages.mypackage.MySchema`, you could use:
 
 ```python
 search_quantities=SearchQuantities(
@@ -137,9 +127,7 @@ For example, one could configure the results table to show a new column using on
 
 ### Narrowing down search results in the app
 
-The search results that will show up in the app can be narrowed down by passing
-a dictionary to the `filters_locked` option. In the example app, only
-entries that use `MySchema` are included.
+The search results that will show up in the app can be narrowed down by passing a dictionary to the `filters_locked` option. In the example app, only entries that use `MySchema` are included.
 
 ```python
 filters_locked={
@@ -165,22 +153,24 @@ The `menu` field controls the structure of the menu shown on the left side of th
 
 The following items are supported in menus, and you can read more about them in the App reference:
 
- - [`Menu`](#app-reference): Defines a nested submenu.
- - `MenuItemTerms`: Used to display a set of possible text options.
- - `MenuItemHistogram`: Histogram of numerical values.
- - `MenuItemPeriodictable`: Displays a periodic table.
- - `MenuItemOptimade`: Field for entering OPTIMADE queries.
- - `MenuItemVisibility`: Controls for the query visibility.
- - `MenuItemDefinitions`: Shows a tree of available definitions from which items can be selected for the query.
- - `MenuItemCustomQuantities`: Form for querying custom quantities coming from any schema.
- - `MenuItemNestedObject`: Used to group together menu items so that their query is performed using an Elasticsearch nested query. Note that you cannot yet use nested queries for search quantities originating from custom schemas.
+- [`Menu`](#app-reference): Defines a nested submenu.
+- `MenuItemTerms`: Used to display a set of possible text options.
+- `MenuItemHistogram`: Histogram of numerical values.
+- `MenuItemPeriodictable`: Displays a periodic table.
+- `MenuItemOptimade`: Field for entering OPTIMADE queries.
+- `MenuItemVisibility`: Controls for the query visibility.
+- `MenuItemDefinitions`: Shows a tree of available definitions from which items can be selected for the query.
+- `MenuItemCustomQuantities`: Form for querying custom quantities coming from any schema.
+- `MenuItemNestedObject`: Used to group together menu items so that their query is performed using an Elasticsearch nested query. Note that you cannot yet use nested queries for search quantities originating from custom schemas.
 
 ### Dashboard
+
  The Dashboard field controls the content of the main search interface window. Different widgets can be added which contain terms or numerical information and can be controlled in size and position. There are 4 different types of Widgets:
- `WidgetTerms`,
- `WidgetHistogram`,
- `WidgetScatterplot` and
- `WidgetPeriodicTable`
+
+- `WidgetTerms`
+- `WidgetHistogram`
+- `WidgetScatterplot`
+- `WidgetPeriodicTable`
 
 ```python
 --8<-- "examples/plugins/dashboard.py:13:"

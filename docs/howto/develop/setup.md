@@ -8,8 +8,6 @@ run the infrastructure in development mode, learn to run the test suites, and se
 This is not about working with the NOMAD Python package `nomad-lab`. You can find its
 documentation [here](../programmatic/pythonlib.md).
 
-
-
 ## Clone the sources
 
 If you're planning on developing the core `nomad` package alongside other plugins, consider using the `nomad-distro-dev` setup as described at the end of this page.
@@ -48,7 +46,6 @@ git checkout -b <my-branch-name>
 ```
 
 This branch can be pushed to the repo, and then later may be merged to the relevant branch.
-
 
 ## Installation
 
@@ -100,7 +97,8 @@ Make sure you have the most recent version of `pip`:
 pip install --upgrade pip
 ```
 
-### Install missing system libraries (e.g. on Windows, MacOS)
+### Install missing system libraries (e.g. on Windows, macOS)
+
 Even though the NOMAD infrastructure is written in Python, there are C libraries
 required by some of our Python dependencies. Specifically, the libmagic library,
 which allows determining the MIME type of files, and the hdf5 library, which is
@@ -295,7 +293,7 @@ Or both together in one process:
 nomad admin run appworker
 ```
 
-On MacOS you might run into multiprocessing errors. That can be solved as described [here](https://stackoverflow.com/questions/50168647/multiprocessing-causes-python-to-crash-and-gives-an-error-may-have-been-in-progr){:target="_blank"}.
+On macOS you might run into multiprocessing errors. That can be solved as described [here](https://stackoverflow.com/questions/50168647/multiprocessing-causes-python-to-crash-and-gives-an-error-may-have-been-in-progr){:target="_blank"}.
 
 The app will run at port 8000 by default.
 
@@ -358,7 +356,7 @@ north:
 ```
 
 - If you are not on Linux, you need to configure how JupyterHub can reach your host
-  network from docker containers. For Windows and MacOS you need to set `hub_connect_ip`
+  network from docker containers. For Windows and macOS you need to set `hub_connect_ip`
   to `host.docker.internal`. For Linux you can leave it out and use the default
   `172.17.0.1`, unless you changed your docker configuration.
 
@@ -428,16 +426,19 @@ pytest -sv tests
     will also fail.
 
 We use Ruff and Mypy to maintain code quality. Additionally, we recommend installing the Ruff [plugins](https://docs.astral.sh/ruff/integrations/){:target="_blank"} for your code editor to streamline the process. To execute Ruff and Mypy from the command line, you can utilize the following command:
+
 ```shell
 nomad dev qa --skip-tests
 ```
 
 We use ruff as a linter and as an autoformatter. If you only want to lint your code, you can run:
+
 ```shell
 ruff check .
 ```
 
 To format your code you can run:
+
 ```shell
 ruff format .
 ```

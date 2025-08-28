@@ -1,4 +1,5 @@
 # Using NOMAD as an Electronic Lab Notebook
+
 In this tutorial, we will explore how to use NOMAD's Electronic Lab Notebook (ELN) functionality to record experiments effectively. You will learn how to create entries for substances and instruments, record samples along with their processing conditions, and the various measurements that make up your experiments. We will also cover NOMAD's built-in ELN templates, which help structure and interlink different aspects of an experiment, providing a clear, visual overview of the entire workflow.
 
 In doing this, we will apply an example of an experiment on preparing solution-processed polymer thin-films and measuring their optical absorption spectrum.
@@ -90,7 +91,8 @@ Once the entry is created, we can fill in the relevant fields with detailed and 
 
     Use the *Substance ELN* schema and include as many details as you like (e.g., Substance Name, Datetime, Substance ID, Description).
 
------------------
+---
+
 ### Create a Sample Entry
 
 Now, let's create an entry using the built-in *Generic Sample ELN* schema for **P3HT Thin Film**. Follow the steps of creating an entry described above and select *Generic Sample ELN* from the drop-down menu in step 4.
@@ -98,7 +100,6 @@ Now, let's create an entry using the built-in *Generic Sample ELN* schema for **
 <div style="text-align: center;">
     <img src="images/ELN_built-in_12.png" alt="P3HT thin-film sample ELN substance entry" width="400">
 </div>
-
 
 ??? info "Input fields offered by the built-in schema *Generic Sample ELN*"
     The built-in schema *Generic Sample ELN* provides the following fields for input:
@@ -136,7 +137,8 @@ Once the entry is created, we can fill in the relevant fields with detailed and 
 
     Use the *Generic Sample ELN* schema and include as many details as you like (e.g., Short Name, Datetime, ID, Description).
 
------------------
+---
+
 ### Create an Instrument Entry
 
 Now, let's create an entry using the built-in *Instrument ELN* schema for **scale**. Follow the steps of creating an entry described above and select *Instrument ELN* from the drop-down menu in step 4.
@@ -176,7 +178,7 @@ Once the entry is created, we can fill in the relevant fields with detailed and 
 
     Use the *Instrument ELN* schema and include as many details as you like (e.g., name, datetime, ID, description).
 
------------------
+---
 
 ### Create a Process Entry
 
@@ -274,7 +276,7 @@ We can now see the changes in the workflow graph based on our modifications in t
     <img src="images/ELN_built-in_38.png" alt="Process workflow graph" width="400">
 </div>
 
------------------
+---
 
 ### Create a Measurement Entry
 
@@ -316,7 +318,7 @@ Once the entry is created, we can fill in the relevant fields with detailed and 
     <div class="nav-arrow right" id="next8">→</div>
 </div>
 
---------------
+---
 
 ### Integrate Your Experiment
 
@@ -343,12 +345,12 @@ To create an entry using the built-in *Experiment ELN* schema for **Characteriza
 
 The *steps* subsection allows us to reference the various processes and measurements that were part of the experiments. By organizing these elements into a structured and interactive workflow, we can provide a clearer overview of the experimental sequence, enabling better visualization and understanding of how different steps are interconnected.
 
-
 <div style="text-align: center;">
     <img src="images/ELN_built-in_39.gif" alt="interactive workflow gif" width="400">
 </div>
 
---------------------
+---
+
 ## Exploring and Searching Your ELN
 
 ??? example "Download the example file for this exercise"
@@ -465,4 +467,4 @@ Widgets allow you to customize your search interface to better suit your data ex
         <img src="images/explore_you_ELN_entries.gif" alt="Animation of filtering using widgets" width="800">
     </div>
 
-----------------
+---

@@ -36,10 +36,7 @@ The extracted (meta)data are stored within a structured schema&mdash;the NOMAD [
     </label>
 </div>
 
-
-In the same upload, there might be multiple mainfiles and auxiliary files organized in a folder tree structure. A separate [Entry](../../reference/glossary.md#entry) will be created for each mainfile identified. For each entry, an [Archive](../../reference/glossary.md#archive) is created that contains all the extracted (meta)data in a _structured_, _well defined_, and _machine readable_ format. This **metadata** provides context to the raw data, i.e., what were the input methodological parameters, on which material the calculation was performed, etc.
-
-
+In the same upload, there might be multiple mainfiles and auxiliary files organized in a folder tree structure. A separate [Entry](../../reference/glossary.md#entry) will be created for each mainfile identified. For each entry, an [Archive](../../reference/glossary.md#archive) is created that contains all the extracted (meta)data in a *structured*, *well defined*, and *machine readable* format. This **metadata** provides context to the raw data, i.e., what were the input methodological parameters, on which material the calculation was performed, etc.
 
 See the explanation pages [From files to data](../../explanation/basics.md), [Data structure](../../explanation/data.md) and [Processing](../../explanation/processing.md) for a more general description of NOMAD processing.
 
@@ -56,11 +53,9 @@ Under the [`Entry` section of the metainfo browser](https://nomad-lab.eu/prod/v1
 - `workflow2`: contains metadata about the specific workflow performed within the entry. This is mainly a set of well-defined workflows, e.g., `GeometryOptimization`, and their parameters.
 - `results`: contains the [Normalized](../../explanation/processing.md#normalizing) and [Search Indexed](../../explanation/basics.md#storing-and-indexing) metadata. This is mainly relevant for searching, filtering, and visualizing data in NOMAD.
 
-
 ### Normalization
 
-The parser code reads the code-specific mainfile and auxiliary files and populates the `run` and `workflow2` sections of the `archive`. Subsequently, a cascade of additional code is executed, which varies depending on the exact sections and quantities populated by the parser. This code is responsible for: 1. normalizing or _homogenizing_ certain metadata parsed from different codes, and 2. populating the `results` section.
-
+The parser code reads the code-specific mainfile and auxiliary files and populates the `run` and `workflow2` sections of the `archive`. Subsequently, a cascade of additional code is executed, which varies depending on the exact sections and quantities populated by the parser. This code is responsible for: 1. normalizing or *homogenizing* certain metadata parsed from different codes, and 2. populating the `results` section.
 
 ### Search indexing
 
@@ -92,21 +87,22 @@ The `DATA` page contains a browser for searching through the metadata stored for
 
 ![Data page](images/data_page.png){.screenshot}
 
-
 **LOGS tab**
 
 The `LOGS` page contains a list of info, warning, and error messages from the processing codes (i.e., parsers and normalizers). These provide insight into any potential issues with the upload, especially in the case that the entry displays the `FAILURE` processing status. Please help improve NOMAD by reporting any major issues that you find: [NOMAD > Support](https://nomad-lab.eu/nomad-lab/support.html){:target="_blank"}.
 
 ![Logs page](images/logs_page.png){.screenshot}
 
-
 ### Uploads
+
 NOMAD entries can be organized hierarchically into uploads. Since the parsing execution is dependent on automated identification of representative files, users are free to arbitrarily group simulations together upon upload. In this case, multiple entries will be created with the corresponding simulation data. An additional unique identifier, `upload_id`, will be provided for this group of entries. Although the grouping of entries into an upload is not necessarily scientifically meaningful, it is practically useful for submitting batches of files from multiple simulations to NOMAD.
 
 ### Workflows
+
 NOMAD offers flexibility in the construction of workflows. NOMAD also allows the creation of custom workflows, which are completely general directed graphs, allowing users to link NOMAD entries with one another in order to provide the provenance of the simulation data. Custom workflows are contained within their own entries and, thus, have their own set of unique identifiers. To create a custom workflow, the user is required to upload a workflow yaml file describing the inputs and outputs of each entry within the workflow, with respect to sections of the NOMAD Metainfo schema.
 
 ### Datasets
+
 At the highest level, NOMAD groups entries with the use of data sets. A NOMAD data set allows the user to group a large number of entries, without any specification of links between individual entries. A DOI is also generated when a data set is published, providing a convenient route for referencing all data used for a particular investigation within a publication.
 
 <!-- TODO - add some diagrams to explain the organization and remove anything that is not necessary to explain here? -->

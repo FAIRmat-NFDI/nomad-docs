@@ -20,30 +20,33 @@ When contributing, please check the <a href="https://github.com/FAIRmat-NFDI/nom
 
 If you have a `nomad-dev-distro` setup, you can follow the [day to day development](https://github.com/FAIRmat-NFDI/nomad-distro-dev?tab=readme-ov-file#day-to-day-development) instructions to install `nomad-docs` as a submodule there.
 
-
 If you *do not* have an up-to-date Python installation (3.11 or 3.12), see [Help to install Python](#help-to-install-python-311-or-312) below.
 
 ### 1. Install uv
 
 #### (a) Standalone
 
-**On macOS and Linux**
+##### On macOS and Linux`
+
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh
 ```
 
-**On Windows**
+##### On Windows
+
 ```powershell
 powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
 Or, from PyPI:
 ```
 
 #### (b) With pip
+
 ```bash
 pip install uv
 ```
 
 #### (c) With pipx
+
 ```bash
 pipx install uv
 ```
@@ -65,7 +68,6 @@ uv run mkdocs serve
 This will install all requirements in a virtual environment and start the local development server.
 
 > 💡 **Tip:** To compare your local docs with the latest version once you start making significant changes, use the [DEV Deployment DOCS](https://nomad-lab.eu/prod/v1/develop/docs/index.html).
-
 
 ### How to run the tests
 
@@ -97,6 +99,7 @@ This test runs the `pytest` command to execute all the tests in the `tests` dire
 - `test_metainfo.py`: This test checks helper functions that extract information from NOMAD's Metainfo models, which are used to automatically generate documentation for these models.
 
 ---
+
 ## Appendix
 
 ### External Contribution Instructions
@@ -121,15 +124,17 @@ git checkout -b my-feature-branch
 #### 4. **Make and Commit Your Changes**
 
 #### 5. **Push to Your Fork**
+
 ```bash
 git push origin my-feature-branch
 ```
 
 #### 6. **Open a Pull Request**
-   - Go to your fork on GitHub.
-   - Click **"Compare & pull request"**.
-   - Choose the base repo (`FAIRmat-NFDI/nomad-docs`) and target branch (e.g., `main`).
-   - Describe your changes and submit the PR.
+
+- Go to your fork on GitHub.
+- Click **"Compare & pull request"**.
+- Choose the base repo (`FAIRmat-NFDI/nomad-docs`) and target branch (e.g., `main`).
+- Describe your changes and submit the PR.
 
 > ✅ Your PR will be reviewed by the maintainers. You don’t need write access to contribute this way.
 
@@ -141,27 +146,26 @@ git push origin my-feature-branch
 
 If Python 3.11 is not installed on your system, use the instructions below based on your OS:
 
-**Debian Linux**
+#### Debian Linux
 
 ```bash
 sudo apt install python3.11
 ```
 
-**Red Hat Linux**
+#### Red Hat Linux
 
 ```bash
 sudo dnf install python3.11
 ```
 
-**macOS**
+#### macOS
 
 ```bash
 brew install python@3.11
 ```
 
-**Windows PowerShell**
+#### Windows PowerShell
 
 1. Download the installer from the [official Python website](https://www.python.org/downloads/release/python-3110/).
 2. Run the installer.
 3. Make sure to check the box **"Add Python 3.11 to PATH"** during installation.
-

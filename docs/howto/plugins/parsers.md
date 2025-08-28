@@ -79,12 +79,11 @@ class MyParser(MatchingParser):
         logger.info('MyParser called')
 ```
 
-If you are using the `MatchingParser` interface, the minimal requirement is
-that your class has a `parse` function, which will take as input:
+If you are using the `MatchingParser` interface, the minimal requirement is that your class has a `parse` function, which will take as input:
 
- - `mainfile`: Filepath to a raw file that the parser should open and run on
- - `archive`: The [`EntryArchive` object](../../reference/glossary.md#archive) in which the parsing results will be stored
- - `logger`: Logger that you can use to log parsing events into
+- `mainfile`: Filepath to a raw file that the parser should open and run on
+- `archive`: The [`EntryArchive` object](../../reference/glossary.md#archive) in which the parsing results will be stored
+- `logger`: Logger that you can use to log parsing events into
 
 Note here that if using `MatchingParser`, the process of identifying which files the `parse` method is run against is take care of by passing in the required parameters to the instance in the `load` mehod. In the previous section, the `load` method looked something like this:
 
@@ -99,8 +98,7 @@ There we are passing all of the entry configuration options to the parser instan
 
 ## Match your raw file
 
-If you are using the `MatchingParser` interface you can configure which files
-are matched directly in the `ParserEntryPoint`. For example to match only certain file extensions and file contents, you can use the `mainfile_name_re` and `mainfile_contents_re` fields:
+If you are using the `MatchingParser` interface you can configure which files are matched directly in the `ParserEntryPoint`. For example to match only certain file extensions and file contents, you can use the `mainfile_name_re` and `mainfile_contents_re` fields:
 
 ```python
 myparser = MyParserEntryPoint(
@@ -121,13 +119,13 @@ Parsers automatically run for the matched files within a NOMAD distribution, but
 
 If you have installed a NOMAD plugin into a Python virtual environment, you can run a parser from that plugin with the `nomad` command line interface. The following command will uses the CLI to parse a given input file, and store the resulting JSON output into an output file:
 
-```
+```sh
 nomad parse <input-file> > <output-file>
 ```
 
 The parse command will automatically match the right parser to your file and run the parser. To skip the parser matching, i.e. the process that determined which parser fits to the given file, you can use the `--parser` argument to provide a parser entry point id:
 
-```
+```sh
 nomad parse --parser <parser_entry_point_id> <input-file>
 ```
 
@@ -362,6 +360,7 @@ class Simulation(ArchiveSection):
 
     output = SubSection(sub_section=Output, repeats=True)
 ```
+
 Each of the classes inherit from the base class `ArchiveSection`. This is the abstract class used in NOMAD to define sections and subsections in a schema. The `Model` section is used to store the `sites` and `lattice/cell` information, while the `Output` section is used to store the `energy` quantity.
 Each of the classes that we defined is a sub-class of `ArchiveSection`. This is required in order to assign these sections to the `data` section
 of the NOMAD archive.
@@ -394,6 +393,7 @@ def parse(self, mainfile: str, archive: EntryArchive, logger):
     # put the simulation section into archive data
     archive.data = simulation
 ```
+
 We first assign the code name and version as well as the date that the simulation was performed. For each of the parsed
 calculations, we create a model and an output section to which we write the corresponding
 parsed quantities. Finally, we assign the simulation section to the archive data subsection.
@@ -404,10 +404,12 @@ Additionally, the standard [normalizers](../../explanation/processing.md#normali
 argument `skip-normalizers`.
 
 ## Extending the Metainfo
+
 There are several built-in schemas NOMAD (`nomad.datamodel.metainfo`).
 <!-- ? What about restructuring this part into the idea of "NOMAD has some predefined section and quantities ... please, check HERE... and HERE... for more information and details"? -->
 In the example below, we have made use of the base section for workflow and extended
 it to include a code-specific quantity `x_example_magic_value`.
+
 ```python
 # We extend the existing common definition of section Workflow
 class ExampleWorkflow(Workflow):
@@ -425,6 +427,7 @@ class ExampleWorkflow(Workflow):
 This is the approach for domain-specific schemas such as for [simulation workflows](https://github.com/nomad-coe/nomad-schema-plugin-simulation-workflow.git). Refer to [how to extend schemas](schema_packages.md#extending-existing-sections).
 
 ## Other FileParser classes
+
 Aside from `TextParser`, other `FileParser` classes are also defined. These include:
 
 - `DataTextParser`: in addition to matching strings as in `TextParser`, this parser uses the `numpy.loadtxt` function to load structured data files. The loaded `numpy.array` data can then be accessed from the property data.

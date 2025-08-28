@@ -97,14 +97,14 @@ When data is being displayed by the GUI, the unit can be choosen independently
 from the unit used in storing the data. There are several reasons for doing
 this:
 
- - Maybe the unit is stored in SI units for consistency, but when viewing the
- data you want to view it in some more field-specific units
- - Maybe the unit is stored in some field specific units, but when demonstrating
- your work you wish to use more standardized units.
- - Maybe due to your background, you are more familiar with a specific unit, and
- viewing the data in this unit helps you to understand it better. E.g. a
- physicist might be familiar with working with electron volts, whereas a chemist
- might prefer kilocalorie per mole.
+- Maybe the unit is stored in SI units for consistency, but when viewing the
+data you want to view it in some more field-specific units
+- Maybe the unit is stored in some field specific units, but when demonstrating
+your work you wish to use more standardized units.
+- Maybe due to your background, you are more familiar with a specific unit, and
+viewing the data in this unit helps you to understand it better. E.g. a
+physicist might be familiar with working with electron volts, whereas a chemist
+might prefer kilocalorie per mole.
 
 Currently the display unit is controlled through the [ELN annotation](../../reference/annotations.md#eln-annotations), like this:
 

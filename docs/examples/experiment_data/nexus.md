@@ -18,4 +18,3 @@ Whether you are storing simple measurements or the output of complex multi-compo
 - [FAIRmat NeXus extension proposal](https://fairmat-nfdi.github.io/nexus_definitions/)
 - [NeXusOntology](https://github.com/FAIRmat-NFDI/NeXusOntology/)
 - [NeXus](https://www.nexusformat.org/)
-

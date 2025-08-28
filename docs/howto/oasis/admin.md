@@ -73,6 +73,7 @@ For a complete list refer to the [CLI reference documentation](../../reference/c
 Alternatively, you can use a list of upload ids at the end of the command, e.g.:
 
 ```sh
+```sh
 nomad admin uploads ls -- <id1> <id2>
 ```
 
@@ -137,7 +138,7 @@ oasis:
 ## Configuring for performance
 
 If you run the OASIS on a single computer, like described here (either with docker or bare
-linux), you might run into problems with processing large uploads. If the NOMAD worker
+Linux), you might run into problems with processing large uploads. If the NOMAD worker
 and app are run on the same computer, the app might become unresponsive, when the worker
 consumes all system resources.
 
@@ -170,7 +171,7 @@ You can also reduce the usable threads that Python packages based on OpenMP coul
 reduce the threads that might be spawned by a single worker process. Simply set the `OMP_NUM_THREADS`
 environment variable in the worker container in your `docker-compose.yml`:
 
-```yaml
+```yml
 services:
     worker:
         ...
@@ -183,7 +184,7 @@ services:
 
 You can add a `deploy.resources.limits` section to the worker service in the `docker-compose.yml`:
 
-```yaml
+```yml
 services:
     worker:
         ...
