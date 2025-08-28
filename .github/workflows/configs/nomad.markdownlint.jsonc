@@ -29,7 +29,7 @@
     // TODO: we should probably add more NOMAD-specific rules
     "MD044": { "names": [
         "GitHub", "github.com", "github.io", "macOS", "Linux",
-        "nomad", "NOMAD", "FAIR", "fair", "JupyterHub", "jupyterhub"]
+        "nomad", "NOMAD", "FAIRmat", "fairmat", "FAIR", "fair", "JupyterHub", "jupyterhub"]
     },
     // MD046 - Code block style
     // NOTE: we have some custom collapsible text box marked by `???`
