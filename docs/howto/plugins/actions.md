@@ -1,3 +1,10 @@
+!!! tip "Warning"
+
+NOMAD Actions are a preview feature available starting from NOMAD version `nomad-lab>=1.3.18.dev89`.
+Please note that this is an early release: some functionality may change, and you might encounter bugs.
+
+We’d love your feedback to help us improve NOMAD Actions, please don’t hesitate to reach out and share your thoughts.
+
 # How to define actions
 
 Actions allow to define executable workflows in NOMAD. They are an
@@ -60,8 +67,8 @@ name = "nomad-example"
 ...
 
 [optional-dependencies]
-gpu-workflow = ["torch"]
-cpu-workflow = ["aiohttp"]
+gpu-action = ["torch"]
+cpu-action = ["aiohttp"]
 ```
 
 ## Action entry point
@@ -489,8 +496,8 @@ name = "nomad-distro-template"
 
 [optional-dependencies]
 plugins = ["nomad-example"]
-gpu-workflow = ["nomad-example[gpu-workflow]"]
-cpu-workflow = ["nomad-example[cpu-workflow]"]
+gpu-action = ["nomad-example[gpu-action]"]
+cpu-action = ["nomad-example[cpu-action]"]
 ```
 
 To implement the necessary changes, including image build steps and updates to
