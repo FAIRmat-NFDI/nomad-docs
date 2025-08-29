@@ -8,7 +8,7 @@ We’d love your feedback to help us improve NOMAD Actions, please don’t hesit
 # How to define actions
 
 Actions allow to define executable workflows in NOMAD. They are an
-alternative to [normalizers](/tutorial/custom.html#custom-normalizers) and can
+alternative to [normalizers](../../tutorial/custom.md#custom-normalizers) and can
 be configured to use specialized workers instead of the NOMAD internal worker.
 It allows for better resource allocation like GPUs for specific actions.
 
