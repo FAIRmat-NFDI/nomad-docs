@@ -1,9 +1,9 @@
 !!! tip "Warning"
 
-NOMAD Actions are a preview feature available starting from NOMAD version `nomad-lab>=1.3.18.dev89`.
-Please note that this is an early release: some functionality may change, and you might encounter bugs.
+    NOMAD Actions are a preview feature available starting from NOMAD version `nomad-lab>=1.3.18.dev89`.
+    Please note that this is an early release: some functionality may change, and you might encounter bugs.
 
-We’d love your feedback to help us improve NOMAD Actions, please don’t hesitate to reach out and share your thoughts.
+    We’d love your feedback to help us improve NOMAD Actions, please don’t hesitate to reach out and share your thoughts.
 
 # How to define actions
 
