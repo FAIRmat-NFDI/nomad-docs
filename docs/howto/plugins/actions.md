@@ -279,7 +279,7 @@ The name of workflow is automatically taken from the unique ID of the
 action entry point, which is nothing but the package path to its definition.
 For our example, it will be `nomad_example.actions.myaction:my_action`.
 
-We define the workflow _function_ in the `run` method of the workflow
+We define the workflow *function* in the `run` method of the workflow
 definition class and use the Temporal decorator `workflow.run`. It describes the
 sequence of activities and the flow of data from one to another. Using appropriate data models, we pass the data from the workflow input to the activity inputs.
 
@@ -308,9 +308,6 @@ buffer to it.
     recommend to **always set a custom retry policy** with finite `maximum_attempts` to avoid forever running workflows.
     In addition, **always set appropriate timeouts** for activities to prevent stuck executions.
 
-
-
-
 ## Integrating action with schemas
 
 After actions are defined, it is possible to intergrate their workflows with
@@ -335,7 +332,6 @@ workflow_id = start_action(
     ),
 )
 ```
-
 
 `start_action` returns a string containing a unique workflow ID assigned to the
 triggered workflow run. This can be used to get the current status of the
@@ -489,6 +485,7 @@ update [guide](https://github.com/FAIRmat-NFDI/nomad-distro-template?tab=readme-
 that the necessary containers for `temporal` is setup correctly.
 
 In addition to configuring the temporal service, you’ll also need to build new Docker images for both the gpu and cpu workers. The relevant extras for these workflows can be set in the pyproject.toml of the distro:
+
 ```toml
 [project]
 name = "nomad-distro-template"
