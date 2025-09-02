@@ -1,11 +1,11 @@
+# How to define actions
+
 !!! tip "Warning"
 
     NOMAD Actions are a preview feature available starting from NOMAD version `nomad-lab>=1.3.18.dev89`.
     Please note that this is an early release: some functionality may change, and you might encounter bugs.
 
     We’d love your feedback to help us improve NOMAD Actions, please don’t hesitate to reach out and share your thoughts.
-
-# How to define actions
 
 Actions allow to define executable workflows in NOMAD. They are an
 alternative to [normalizers](../../tutorial/custom.md#custom-normalizers) and can
