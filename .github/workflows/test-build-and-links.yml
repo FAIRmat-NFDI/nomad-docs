@@ -35,13 +35,23 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Check links in markdown files
-        uses: tcort/github-action-markdown-link-check@v1
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
         with:
-          use-quiet-mode: 'yes'
-          config-file: .github/workflows/configs/markdown-link-check.json
-          folder-path: 'docs, examples'
-          file-path: './README.md'
+          node-version: '20'
+
+      - name: Install markdown-link-check
+        run: npm install -g markdown-link-check
+
+      - name: Link check with retry
+        uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 5  # quite slow
+          max_attempts: 3
+          command: |
+            markdown-link-check -q \
+              -c .github/workflows/configs/markdown-link-check.json \
+              ./README.md ./docs ./examples
 
   test-docs:
     runs-on: ubuntu-latest
