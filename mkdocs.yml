@@ -81,6 +81,7 @@ nav:
             - pynxtools: examples/experiment_data/pynxtools.md
       - Use cases:
           - Catalysis APP: examples/use_cases/catalysis_app.md
+          - NEB workflows: examples/use_cases/neb_workflows.md
         # - NOMAD-supported plugins:
         # - Databases for specific research topics:
   - Explanation:
