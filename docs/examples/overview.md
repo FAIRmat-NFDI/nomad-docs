@@ -46,13 +46,15 @@ Thanks to key activities of the FAIRmat project, NOMAD also supports a set of pa
 
 </div>
 
-<!-- <div markdown="block">
+<div markdown="block">
 
 ### Use Cases
 
 NOMAD's plugin system has enabled a growing community of NOMAD users customizing the software to support specific use-case data and pipelines. This section highlights some of the bigger use-case projects.
 
 - [nomad-catalysis](./use_cases/catalysis_app.md)
+{{ category_tag(name='plugin', href='../explanation/plugin_system.md', tooltip='Uses NOMAD plugin mechanism', image='../assets/nomad-plugin-logo.svg')}}
+- [nomad-neb-workflows](./use_cases/neb_workflows.md)
 {{ category_tag(name='plugin', href='../explanation/plugin_system.md', tooltip='Uses NOMAD plugin mechanism', image='../assets/nomad-plugin-logo.svg')}}
 
 </div>
