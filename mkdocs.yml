@@ -24,13 +24,13 @@ nav:
               - Explore data: howto/manage/explore.md
               - Use NORTH: howto/manage/north.md
           - Programmatic:
-              - Install nomad-lab: howto/programmatic/pythonlib.md # Could also go here instead of Install section
+              - Install nomad-lab: howto/programmatic/pythonlib.md
               - Use the API: howto/programmatic/api.md # TODO separate into How-to and Explanation/Reference
               - Download data: howto/programmatic/download.md
               - Publish data using Python: howto/programmatic/publish_python.md
               - Access processed data: howto/programmatic/archive_query.md
               - Transform data: howto/programmatic/json_transformer.md
-              - Graph-style API: # TODO consolidate into a single page with supporting explanation/reference material if necessary
+              - Graph-style API: # TODO consolidate into a single page with supporting explanation/reference material
                   - Basics: howto/graph-api/basics.md
                   - Navigation and fuzzy query/fetch: howto/graph-api/graph.structure.md
                   - Handling archive data: howto/graph-api/query.archive.md
