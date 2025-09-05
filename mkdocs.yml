@@ -16,13 +16,17 @@ nav:
       - Creating custom schemas: tutorial/custom.md
       - Developing NOMAD plugins: tutorial/develop_plugin.md
   - How-to guides:
-      - Overview: howto/overview.md
+      - Overview: howto/overview.md # TODO update once structure is finalized
       - Manage and find data:
           - GUI:
               - Upload and publish data for supported formats: howto/manage/upload.md
               - Use ELNs: howto/manage/eln.md
               - Explore data: howto/manage/explore.md
               - Use NORTH: howto/manage/north.md
+              - Define custom workflows: howto/customization/workflows.md
+              - Write a YAML schema package: howto/customization/basics.md # TODO consider consolidating with parts of the next 2 pages
+              - Define ELNs: howto/customization/elns.md
+              - Parse tabular data: howto/customization/tabular.md
           - Programmatic:
               - Install nomad-lab: howto/programmatic/pythonlib.md
               - Use the API: howto/programmatic/api.md # TODO separate into How-to and Explanation/Reference
@@ -35,33 +39,29 @@ nav:
                   - Navigation and fuzzy query/fetch: howto/graph-api/graph.structure.md
                   - Handling archive data: howto/graph-api/query.archive.md
                   - Other convenience functionalities: howto/graph-api/misc.md
-      - Customize:
-          - Python Plugins (robust):
-              - Overview: howto/plugins/plugins.md # TODO split former Introduction to plugins into short guiding overview + explanation page
-              # - Set up a development environment: howto/plugins/setup.md # TODO distro-dev setup + best practices
-              - Write an action: howto/plugins/actions.md
-              - Write an API: howto/plugins/apis.md
-              - Write an app: howto/plugins/apps.md
-              - Write an example upload: howto/plugins/example_uploads.md
-              - Write a normalizer: howto/plugins/normalizers.md
-              - Write a parser: howto/plugins/parsers.md
-              - Write a schema package: howto/plugins/schema_packages.md
+      - Develop Python plugins:
+          - Overview: howto/plugins/plugins.md # TODO split former Introduction to plugins into short guiding overview + explanation page
+          # - Set up a development environment: howto/plugins/setup.md # TODO distro-dev setup + best practices
+          - Plugin Types:
+              - Actions: howto/plugins/actions.md
+              - APIs: howto/plugins/apis.md
+              - Apps: howto/plugins/apps.md
+              - Example uploads: howto/plugins/example_uploads.md
+              - Normalizers: howto/plugins/normalizers.md
+              - Parsers: howto/plugins/parsers.md
+              - Schemas: howto/plugins/schema_packages.md
+          - Schema Tools:
               - Work with units: howto/customization/units.md
               - Use HDF5 to handle large quantities: howto/customization/hdf5.md
+          - Parsing Tools:
               - Use mapping annotations to parse efficiently: howto/customization/mapping_parser.md
-          - YAML (quick):
-              - Write a YAML schema package: howto/customization/basics.md
-              - Define ELNs: howto/customization/elns.md
-              - Use base sections: howto/customization/base_sections.md
-              - Parse tabular data: howto/customization/tabular.md
-              - Define workflows: howto/customization/workflows.md
-      - Install and Manage a NOMAD Oasis:
+      - Install and manage a NOMAD Oasis:
           # - Install: howto/install/install.md # TODO Would explain what a NOMAD installation means, contains links to `nomad-distro-template`+`nomad-distro-dev`, also contains a small section on the Python library
           - Configure an Oasis: howto/oasis/configure.md
           - Deploy an Oasis: howto/oasis/deploy.md
           - Update an Oasis: howto/oasis/update.md
           - Admin tasks: howto/oasis/admin.md
-      - Development: # TODO strip down to only nomad-lab-specific development
+      - Develop the core software: # TODO strip down to only nomad-lab-specific development
           - Get started: howto/develop/setup.md
           - Navigate the code: howto/develop/code.md
           - Contribute: howto/develop/contrib.md
@@ -90,9 +90,10 @@ nav:
         # - NOMAD-supported plugins:
         # - Databases for specific research topics:
   - Explanation:
-      # - Overview: explanation/overview.md # TODO
+      # - Overview: explanation/overview.md # TODO add guide, organization of sub-pages?
       - From files to data: explanation/basics.md
       - Data structure: explanation/data.md
+      - Base sections: howto/customization/base_sections.md # TODO rewrite as explanation
       - Processing: explanation/processing.md
       - Architecture: explanation/architecture.md
       - Workflows: explanation/workflows.md
