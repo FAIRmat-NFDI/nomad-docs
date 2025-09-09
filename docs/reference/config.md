@@ -1,7 +1,5 @@
 # Configuration
 
-## Introduction
-
 Many aspects of NOMAD and its operation can be modified through configuration. Most configuration items have reasonable defaults and typically only a small subset has to be overwritten. Configuration items are structured hierarchically. For example, the configuration item `services.api_host` denotes the attribute `api_host` in the configuration section `services`.
 
 ## Configuration sources
