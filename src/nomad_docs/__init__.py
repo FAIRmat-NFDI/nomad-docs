@@ -211,7 +211,7 @@ def define_env(env):
             return f"|{name}|`{type_name}`|{content(field)}|\n"
 
         if heading is None:
-            result = f"### {name}\n"
+            result = f"#### {name}\n"
         else:
             result = heading + "\n"
 
