@@ -33,16 +33,18 @@ For example, consider a default configuration that enables several plugins:
 ```yaml
 # In the base nomad.yaml
 plugins:
-  include:
-    - "systemnormalizer:system_normalizer_entry_point"
-    - "atomisticparsers:amber_parser_entry_point"
+  entry_points:
+    include:
+      - "systemnormalizer:system_normalizer_entry_point"
+      - "atomisticparsers:amber_parser_entry_point"
 ```
 If you provide an override file to run only the `systemnormalizer:system_normalizer_entry_point` for your nomad oasis:
 ```yaml
 # In override.yaml
 plugins:
-  include:
-    - "atomisticparsers:amber_parser_entry_point"
+  entry_points:
+    include:
+      - "atomisticparsers:amber_parser_entry_point"
 ```
 The final list of normalizers for that run will be `["atomisticparsers:amber_parser_entry_point"]`. The `systemnormalizer` will be removed for that run because the entire `include` list was replaced.
 
