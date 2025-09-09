@@ -116,13 +116,5 @@ These settings affect the behaviour of the user interface. Note that the preferr
 
 {{ config_models(['ui'])}}
 
-<<<<<<< HEAD
-## Others
-<<<<<<< HEAD
-
-=======
->>>>>>> ce28bd5 (added docs configs)
-=======
 ### Others
->>>>>>> 753567d (Improved congiguration docs.)
 {{ config_models() }}
