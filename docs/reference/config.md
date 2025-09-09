@@ -7,13 +7,11 @@ Many aspects of NOMAD and its operation can be modified through configuration. M
 Configuration items get their value based on a hierarchy of sources. The sources are applied in the following order of precedence, where later sources override earlier ones (see [merging rules](#merging-rules) below):
 
 1.  **Environment Variables:** A variable like `NOMAD_SERVICES_API_HOST`. These have the highest priority and will override all other settings. NOMAD services will inspect the environment for any variables starting with `NOMAD_`. The rest of the name is interpreted as a configuration item, where sections and attributes are concatenated with a `_`. For example, the environment variable `NOMAD_SERVICES_API_HOST` will set the value for the `api_host` attribute in the `services` section.
-
 2.  **Command-Line Configuration Files:** Files passed via the `-f` or `--config-file` flag to the NOMAD CLI. If multiple files are given, they are merged in order, with later files overriding earlier ones. For example, to load an additional configuration file on top of a default configuration, you could do the following:
 
     ```bash
     nomad admin run appworker -f nomad.yaml -f nomad-dev.yaml
     ```
-
 3.  **Default `nomad.yaml`:** A file named `nomad.yaml` in the current working directory, or a file pointed to by the `NOMAD_CONFIG` environment variable. This serves as the base configuration. This file is only automatically read if no file(s) have been specified using the command flag above.
 4.  **Built-in Defaults:** The default values hard-coded in the NOMAD source code. These have the lowest priority. These default values can be found from the `nomad/config/defaults.yaml` file in the source code.
 
@@ -22,12 +20,12 @@ Configuration items get their value based on a hierarchy of sources. The sources
 When configuration is loaded from multiple sources (e.g., a default file and an override file), the values are merged according to the following rules:
 
 -   **Objects (Dictionaries):** When overwriting an *object*, the new value is recursively merged with the existing value. The final merged object will have all attributes from the new object, plus any attributes from the old object that were not overwritten. This allows you to change an individual setting deep in the configuration hierarchy without having to restate the entire structure.
-
 -   **Other Types (Lists, Strings, Numbers):** When overwriting any other data type, such as a list, string, or number, the new value **completely replaces** the old one.
 
 It is crucial to remember that **lists are not appended or merged item-by-item**. When you provide a new list in an override file, it will **completely replace** the original list.
 
 For example, consider a default configuration that enables several plugins:
+
 ```yaml
 # In the base nomad.yaml
 plugins:
@@ -36,7 +34,9 @@ plugins:
       - "systemnormalizer:system_normalizer_entry_point"
       - "atomisticparsers:amber_parser_entry_point"
 ```
+
 If you provide an override file to run only the `systemnormalizer:system_normalizer_entry_point` for your nomad oasis:
+
 ```yaml
 # In override.yaml
 plugins:
@@ -44,6 +44,7 @@ plugins:
     include:
       - "atomisticparsers:amber_parser_entry_point"
 ```
+
 The final list of normalizers for that run will be `["atomisticparsers:amber_parser_entry_point"]`. The `systemnormalizer` will be removed for that run because the entire `include` list was replaced.
 
 If you intend to *add* an item to a list, you must repeat all the original items in your override file and add the new one.
