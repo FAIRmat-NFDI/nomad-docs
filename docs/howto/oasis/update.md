@@ -1,4 +1,4 @@
-# How to Update Oasis versions
+# How to update Oasis versions
 
 ## Software versions
 

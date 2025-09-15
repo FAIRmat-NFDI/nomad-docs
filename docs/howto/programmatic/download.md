@@ -1,4 +1,4 @@
-# Download data
+# How to download data
 
 A common use-case for the NOMAD API is to download large amounts of NOMAD data.
 In this how-to guide, we use curl and API endpoints

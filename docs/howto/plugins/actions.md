@@ -1,4 +1,4 @@
-# How to define actions
+# How to define an action
 
 !!! tip "Warning"
 

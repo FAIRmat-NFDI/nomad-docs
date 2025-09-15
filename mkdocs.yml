@@ -18,28 +18,28 @@ nav:
   - How-to guides:
       - Overview: howto/overview.md # TODO update once structure is finalized
       - Manage and find data:
-          - GUI:
-              - Upload and publish data for supported formats: howto/manage/upload.md
-              - Use ELNs: howto/manage/eln.md
+          - With the GUI:
+              - Upload and publish data: howto/manage/upload.md
+              - Enter data with ELNs: howto/manage/eln.md
               - Explore data: howto/manage/explore.md
-              - Use NORTH: howto/manage/north.md
-              - Define custom workflows: howto/customization/workflows.md
+              - Analyze data in NORTH: howto/manage/north.md # TODO rename depending on how-to content
+              - Create custom workflows: howto/customization/workflows.md
               - Write a YAML schema package: howto/customization/basics.md # TODO consider consolidating with parts of the next 2 pages
-              - Define ELNs: howto/customization/elns.md
+              - Create custom ELNs: howto/customization/elns.md
               - Parse tabular data: howto/customization/tabular.md
-          - Programmatic:
-              - Install nomad-lab: howto/programmatic/pythonlib.md
-              - Use the API: howto/programmatic/api.md # TODO separate into How-to and Explanation/Reference
+          - Programmatically:
+              # - Install nomad-lab: howto/programmatic/pythonlib.md # TODO Integrate into "Use the API"
+              - Overview: howto/programmatic/api.md # TODO separate into How-to and Explanation/Reference
               - Download data: howto/programmatic/download.md
               - Publish data using Python: howto/programmatic/publish_python.md
               - Access processed data: howto/programmatic/archive_query.md
               - Transform data: howto/programmatic/json_transformer.md
-              - Graph-style API: # TODO consolidate into a single page with supporting explanation/reference material
+              - Make Graph-style API Calls: # TODO consolidate into a single page with supporting explanation/reference material
                   - Basics: howto/graph-api/basics.md
                   - Navigation and fuzzy query/fetch: howto/graph-api/graph.structure.md
                   - Handling archive data: howto/graph-api/query.archive.md
                   - Other convenience functionalities: howto/graph-api/misc.md
-      - Develop Python plugins:
+      - Develop plugins:
           - Overview: howto/plugins/plugins.md # TODO split former Introduction to plugins into short guiding overview + explanation page
           # - Set up a development environment: howto/plugins/setup.md # TODO distro-dev setup + best practices
           - Plugin Types:
@@ -50,17 +50,16 @@ nav:
               - Normalizers: howto/plugins/normalizers.md
               - Parsers: howto/plugins/parsers.md
               - Schemas: howto/plugins/schema_packages.md
-          - Schema Tools:
+          - Built-In Tools:
               - Work with units: howto/customization/units.md
-              - Use HDF5 to handle large quantities: howto/customization/hdf5.md
-          - Parsing Tools:
-              - Use mapping annotations to parse efficiently: howto/customization/mapping_parser.md
-      - Install and manage a NOMAD Oasis:
+              - Handle large data: howto/customization/hdf5.md
+              - Parse efficiently: howto/customization/mapping_parser.md # TODO Add clearly scope at the top of this page
+      - Host a NOMAD Oasis:
           # - Install: howto/install/install.md # TODO Would explain what a NOMAD installation means, contains links to `nomad-distro-template`+`nomad-distro-dev`, also contains a small section on the Python library
           - Configure an Oasis: howto/oasis/configure.md
           - Deploy an Oasis: howto/oasis/deploy.md
           - Update an Oasis: howto/oasis/update.md
-          - Admin tasks: howto/oasis/admin.md
+          - Perform Admin tasks: howto/oasis/admin.md
       - Develop the core software: # TODO strip down to only nomad-lab-specific development
           - Get started: howto/develop/setup.md
           - Navigate the code: howto/develop/code.md

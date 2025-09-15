@@ -1,4 +1,4 @@
-# How to write data to archive with MappingParser
+# How to parse efficiently with mapping annotations
 
 `MappingParser` is a NOMAD parsing framework for handling tree-like data structures.
 It is extensively used for processing highly structured files, like computational output.

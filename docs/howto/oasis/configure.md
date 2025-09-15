@@ -1,4 +1,4 @@
-# Configure an Oasis
+# How to configure an Oasis
 
 Originally, the NOMAD Central Repository is a service that runs at the Max-Planck's computing facility in Garching, Germany. However, the NOMAD software is Open-Source, and everybody can run it. Any service that uses NOMAD software independently is called a *NOMAD Oasis*. A *NOMAD Oasis* does not need to be fully isolated. For example, you can publish uploads from your NOMAD Oasis to the central NOMAD installation.
 

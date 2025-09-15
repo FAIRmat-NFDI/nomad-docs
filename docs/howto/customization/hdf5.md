@@ -1,4 +1,4 @@
-# How to use HDF5 to handle large quantities
+# How to handle large data with HDF5
 
 The NOMAD schemas and processed data system are designed to describe and manage
 intricate hierarchies of connected data. This is ideal for metadata and lots of small
