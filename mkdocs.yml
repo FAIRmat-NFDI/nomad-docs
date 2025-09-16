@@ -100,7 +100,7 @@ nav:
       - Federation and Oasis: explanation/oasis.md
   - Reference:
       # - Overview: reference/overview.md # TODO
-      - reference/metainfo.md
+      # - reference/metainfo.md # TODO This file no longer exists ... was it lost somehow?
       - reference/config.md
       - reference/annotations.md
       - reference/basesections.md
