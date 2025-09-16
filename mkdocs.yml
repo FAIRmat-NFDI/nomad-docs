@@ -42,7 +42,7 @@ nav:
       - Develop plugins:
           - Overview: howto/plugins/plugins.md # TODO split former Introduction to plugins into short guiding overview + explanation page
           # - Set up a development environment: howto/plugins/setup.md # TODO distro-dev setup + best practices
-          - Plugin Types:
+          - Entry point types:
               - Actions: howto/plugins/actions.md
               - APIs: howto/plugins/apis.md
               - Apps: howto/plugins/apps.md
@@ -50,7 +50,7 @@ nav:
               - Normalizers: howto/plugins/normalizers.md
               - Parsers: howto/plugins/parsers.md
               - Schemas: howto/plugins/schema_packages.md
-          - Built-In Tools:
+          - Built-in tools:
               - Work with units: howto/customization/units.md
               - Handle large data: howto/customization/hdf5.md
               - Parse efficiently: howto/customization/mapping_parser.md # TODO Add clearly scope at the top of this page
