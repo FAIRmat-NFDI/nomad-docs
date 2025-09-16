@@ -1,6 +1,6 @@
 # How to write a YAML schema package
 
-This guide explains how to write and upload NOMAD schema packages in the YAML format that can be uploaded as part of your data. This is a good way to start out experimenting with custom data structures in NOMAD, but for more advanced use cases you may need to use [Python schema packages](../plugins/schema_packages.md). For more information on how an archive file is composed, visit [Explanation > Data structure](../../explanation/data.md).
+This guide explains how to write and upload NOMAD schema packages in the YAML format that can be uploaded as part of your data. This is a good way to start out experimenting with custom data structures in NOMAD, but for more advanced use cases you may need to use [Python schema packages](../../plugins/types/schema_packages.md). For more information on how an archive file is composed, visit [Explanation > Data structure](../../../explanation/data.md).
 
 ## Example data
 
@@ -29,8 +29,8 @@ The crucial task here is to define what *keys* certain *types of objects* can ha
 In NOMAD, we call *objects* **sections** and we define *types of objects* with **section
 definitions**. Since *objects* can be nested, **sections** become like the sections and
 subsections of a book or paper. Sections are a representation of data and they are
-the building blocks for [**archives**](../../reference/glossary.md#archive). Section definitions form a schema package and they are
-the building blocks for the [**metainfo**](../../reference/glossary.md#metainfo).
+the building blocks for [**archives**](../../../reference/glossary.md#archive). Section definitions form a schema package and they are
+the building blocks for the [**metainfo**](../../../reference/glossary.md#metainfo).
 
 In the above example, we have two *types* of *objects*: an overaching object for the entire structure
 (with *keys* for `composition` and `elements`), and an additional object which describes the internal structure of
@@ -523,12 +523,12 @@ Here are a few other built-in section definitions and packages of definitions:
 |nomad.datamodel.metainfo.workflow.*|A package of section definitions use by NOMAD to define workflows|
 |nomad.metainfo.*|A package that contains all *definitions* of *definitions*, e.g. NOMAD's "schema language". Here you find *definitions* for what a sections, quantity, subsections, etc. is.|
 |nomad.parsing.tabular.TableData|Allows to inherit parsing of references .csv and .xls files. See the [detailed description](tabular.md) to learn how to include this class and its annotations in a yaml schema.|
-|nomad.datamodel.metainfo.basesections.HDF5Normalizer|Allows to link quantities to hdf5 dataset, improving performance for large data. This class and the related annotations are included in a yaml schema. [Dedicated classes](hdf5.md#how-to-handle-large-data-with-hdf5) can be used to write a parser.|
+|nomad.datamodel.metainfo.basesections.HDF5Normalizer|Allows to link quantities to hdf5 dataset, improving performance for large data. This class and the related annotations are included in a yaml schema. [Dedicated classes](../../plugins/tools/hdf5.md#how-to-handle-large-data-with-hdf5) can be used to write a parser.|
 
 ### HDF5Normalizer
 
 A different flavor of ***reading*** HDF5 files into NOMAD quantities is through defining a
-[custom schema](../../tutorial/custom.md) and inheriting `HDF5Normalizer` into base-sections. Two essential components
+[custom schema](../../../tutorial/custom.md) and inheriting `HDF5Normalizer` into base-sections. Two essential components
 of using `HDF5Normalizer` class is to first define a quantity that is annotated with `FileEditQuantity` field
 to enable one to drop/upload the `*.h5` file, and to define relevant quantities annotated with `path`
 attribute under `hdf5`. These quantities are then picked up by the normalizer to extract the values to be found

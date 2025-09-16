@@ -63,7 +63,7 @@ In most scenarios, entry processing is not triggered individually, but as part o
 processing. Many entries of one upload might be processed at the same time. Some order
 can be enforced through *processing levels*. Levels are part of the parser metadata and
 entries paired to parsers with a higher level are processed after entries with a
-parser of lower level. See also [how to write parsers](../howto/plugins/parsers.md).
+parser of lower level. See also [how to write parsers](../howto/plugins/types/parsers.md).
 
 ## Customize processing
 
@@ -115,7 +115,7 @@ uses certain criteria, for example:
 - regular expressions on mimetypes
 - regular expressions on header content
 
-See [How to write a parser](../howto/plugins/parsers.md) for more details.
+See [How to write a parser](../howto/plugins/types/parsers.md) for more details.
 
 The matching step of an upload's processing, will call this function for every file
 and on all parsers. There are some hidden optimizations and additional parameters, but
@@ -197,9 +197,9 @@ to open and read other *auxiliary* files.
 
 A notable special case are ELNs with `normalize` functions and references to files.
 ELNs can be designed to link the ELN with uploaded files via `FileEditQuantities` (see
-also [How to define ELNs](../howto/customization/elns.md#example-eln-schema) or [ELN Annotations](../reference/annotations.md#eln-annotations)).
+also [How to define ELNs](../howto/manage/gui/elns.md#example-eln-schema) or [ELN Annotations](../reference/annotations.md#eln-annotations)).
 The underlying ELN's schema usually defines `normalize` functions that open the referenced
-files for more data. Certain modes of the [tabular parser](../howto/customization/tabular.md), for example, use
+files for more data. Certain modes of the [tabular parser](../howto/manage/gui/tabular.md), for example, use
 this.
 
 ### Single file, multiple entries

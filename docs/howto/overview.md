@@ -18,10 +18,10 @@ with NOMAD's graphical user interface and APIs.
 
 Use NOMAD to manage, explore, and analyze data.
 
-- [Upload and publish data for supported formats](manage/upload.md)
-- [Use ELNs](manage/eln.md)
-- [Explore data](manage/explore.md)
-- [Use NORTH](manage/north.md)
+- [Upload and publish data for supported formats](manage/gui/upload.md)
+- [Use ELNs](manage/gui/eln.md)
+- [Explore data](manage/gui/explore.md)
+- [Use NORTH](manage/gui/north.md)
 
 </div>
 <div markdown="block">
@@ -30,12 +30,12 @@ Use NOMAD to manage, explore, and analyze data.
 
 Use NOMAD's functionalities programmatically.
 
-- [Use the API](programmatic/api.md)
-- [Publish data using python](programmatic/publish_python.md)
-- [Install nomad-lab](programmatic/pythonlib.md)
-- [Access processed data](programmatic/archive_query.md)
-- [Transform data](programmatic/json_transformer.md)
-- [Graph-style API](./graph-api/basics.md)
+- [Use the API](manage/program/api.md)
+- [Publish data using python](manage/program/publish_python.md)
+- [Install nomad-lab](manage/program/pythonlib.md)
+- [Access processed data](manage/program/archive_query.md)
+- [Transform data](manage/program/json_transformer.md)
+- [Graph-style API](manage/program/graph-api/basics.md)
 
 </div>
 </div>
@@ -54,11 +54,10 @@ customize various NOMAD features.
 
 Implement quick and dirty customizationations of NOMAD entries.
 
-- [Write a schema](customization/basics.md)
-- [Define ELNs](customization/elns.md)
-- [Use base sections](customization/base_sections.md)
-- [Parse tabular data](customization/tabular.md)
-- [Define workflows](customization/workflows.md)
+- [Write a schema](manage/gui/yaml.md)
+- [Define ELNs](manage/gui/elns.md)
+- [Parse tabular data](manage/gui/tabular.md)
+- [Define workflows](manage/gui/workflows.md)
 
 </div>
 
@@ -69,15 +68,15 @@ Implement quick and dirty customizationations of NOMAD entries.
 Implement robust and powerful customizations for data ingestion, visualization, search, and more.
 
 - [Introduction to plugins](plugins/plugins.md)
-- [Write an API](plugins/apis.md)
-- [Write an app](plugins/apps.md)
-- [Write an example upload](plugins/example_uploads.md)
-- [Write a normalizer](plugins/normalizers.md)
-- [Write a parser](plugins/parsers.md)
-- [Write a schema packages](plugins/schema_packages.md)
-- [Work with units](customization/units.md)
-- [Use HDF5 to handle large quantities](customization/hdf5.md)
-- [Use Mapping parser to write data on archive](customization/mapping_parser.md)
+- [Write an API](plugins/types/apis.md)
+- [Write an app](plugins/types/apps.md)
+- [Write an example upload](plugins/types/example_uploads.md)
+- [Write a normalizer](plugins/types/normalizers.md)
+- [Write a parser](plugins/types/parsers.md)
+- [Write a schema packages](plugins/types/schema_packages.md)
+- [Work with units](plugins/tools/units.md)
+- [Use HDF5 to handle large quantities](plugins/tools/hdf5.md)
+- [Use Mapping parser to write data on archive](plugins/tools/mapping_parser.md)
 
 </div>
 </div>

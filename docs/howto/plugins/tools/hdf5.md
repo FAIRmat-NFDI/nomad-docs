@@ -12,7 +12,7 @@ data is implemented. In the following we discuss two quantity types to enable th
 of large datasets to HDF5: `HDF5Reference` and `HDF5Dataset`. These are defined in
 `nomad.datamodel.hdf5`. Another class called `HDF5Normalizer` defined in
 `nomad.datamodel.metainfo.basesections` can be inherited
-[and used directly in a yaml schema](basics.md#hdf5normalizer).
+[and used directly in a yaml schema](../../manage/gui/yaml.md#hdf5normalizer).
 
 ## HDF5Reference
 
@@ -66,7 +66,7 @@ We use `write_dataset` to write our data into a raw HDF5 file in `test_upload` w
 filename and dataset location in `path`. Additionally, archive is required to resolve the
 upload metadata. We then assign the reference to the dataset to `value`. To reference a
 file in another upload, follow the same form for
-[reference values](basics.md#different-forms-of-references) e.g.
+[reference values](../../manage/gui/yaml.md#different-forms-of-references) e.g.
 `/uploads/<upload_id>/raw/large_data.hdf5#group/large_field`.
 
 !!! important
@@ -133,7 +133,7 @@ provide respective functionality (e.g. showing a H5Web view).
 </figure>
 
 When multiple quantities need to be displayed in the same plot, some attributes in the HDF5 file groups are needed, in order for h5web to be able to render a plot.
-The [H5WebAnnotation class](../../reference/annotations.md#h5web) contains the attributes to be included in the groups (dataset) of HDF5 file, provided as section (quantity) annotations.
+The [H5WebAnnotation class](../../../reference/annotations.md#h5web) contains the attributes to be included in the groups (dataset) of HDF5 file, provided as section (quantity) annotations.
 
 In the following example, the `value` quantity has a dedicated default h5web rendering.
 Adding some annotation in the corresponding section would trigger another plot rendering, where `value` vs. `time` plot is shown. The errors to the dataset can be specified by `errors`

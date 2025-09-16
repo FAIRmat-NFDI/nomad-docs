@@ -17,7 +17,7 @@ pip install nomad-lab
     The latest develop versions might still be considered beta and might not be published to
     pypi. If you require specific new features you might need to install `nomad-lab`
     from our GitLab package registry. To use features of a specific commit or
-    branch, consider to [clone and build the project](../develop/setup.md) yourself.
+    branch, consider to [clone and build the project](../../develop/setup.md) yourself.
 
 To install the latest release developer releases from our GitLab use:
 

@@ -1,8 +1,8 @@
 # How to write a parser
 
-NOMAD uses parsers to automatically extract information from raw files and output that information into structured [archives](../../reference/glossary.md#archive). Parsers can decide which files act upon based on the filename, mime type or file contents and can also decide into which schema the information should be populated into.
+NOMAD uses parsers to automatically extract information from raw files and output that information into structured [archives](../../../reference/glossary.md#archive). Parsers can decide which files act upon based on the filename, mime type or file contents and can also decide into which schema the information should be populated into.
 
-This documentation shows you how to write a plugin entry point for a parser. You should read the [introduction to plugins](./plugins.md) to have a basic understanding of how plugins and plugin entry points work in the NOMAD ecosystem.
+This documentation shows you how to write a plugin entry point for a parser. You should read the [introduction to plugins](../plugins.md) to have a basic understanding of how plugins and plugin entry points work in the NOMAD ecosystem.
 
 ## Getting started
 
@@ -20,7 +20,7 @@ nomad-example
    └── pyproject.toml
 ```
 
-See the documentation on [plugin development guidelines](./plugins.md#plugin-development-guidelines) for more details on the best development practices for plugin, including linting, testing and documenting.
+See the documentation on [plugin development guidelines](../plugins.md#plugin-development-guidelines) for more details on the best development practices for plugin, including linting, testing and documenting.
 
 ## Parser entry point
 
@@ -46,9 +46,9 @@ myparser = MyParserEntryPoint(
 )
 ```
 
-Here you can see that a new subclass of `ParserEntryPoint` was defined. In this new class you can override the `load` method to determine how the `Parser` class is instantiated, but you can also extend the `ParserEntryPoint` model to add new configurable parameters for this parser as explained in [Explanation > Plugins > Plugin Configuration](../../explanation/plugin_system.md#plugin-configuration).
+Here you can see that a new subclass of `ParserEntryPoint` was defined. In this new class you can override the `load` method to determine how the `Parser` class is instantiated, but you can also extend the `ParserEntryPoint` model to add new configurable parameters for this parser as explained in [Explanation > Plugins > Plugin Configuration](../../../explanation/plugin_system.md#plugin-configuration).
 
-We also instantiate an object `myparser` from the new subclass. This is the final entry point instance in which you specify the default parameterization and other details about the parser. In the reference you can see all of the available [configuration options for a `ParserEntryPoint`](../../reference/plugins.md#parserentrypoint).
+We also instantiate an object `myparser` from the new subclass. This is the final entry point instance in which you specify the default parameterization and other details about the parser. In the reference you can see all of the available [configuration options for a `ParserEntryPoint`](../../../reference/plugins.md#parserentrypoint).
 
 The entry point instance should then be added to the `[project.entry-points.'nomad.plugin']` table in `pyproject.toml` in order for the parser to be automatically detected:
 
@@ -82,7 +82,7 @@ class MyParser(MatchingParser):
 If you are using the `MatchingParser` interface, the minimal requirement is that your class has a `parse` function, which will take as input:
 
 - `mainfile`: Filepath to a raw file that the parser should open and run on
-- `archive`: The [`EntryArchive` object](../../reference/glossary.md#archive) in which the parsing results will be stored
+- `archive`: The [`EntryArchive` object](../../../reference/glossary.md#archive) in which the parsing results will be stored
 - `logger`: Logger that you can use to log parsing events into
 
 Note here that if using `MatchingParser`, the process of identifying which files the `parse` method is run against is take care of by passing in the required parameters to the instance in the `load` mehod. In the previous section, the `load` method looked something like this:
@@ -109,7 +109,7 @@ myparser = MyParserEntryPoint(
 )
 ```
 
-You can find all of the available matching criteria in the [`ParserEntryPoint` reference](../../reference/plugins.md#parserentrypoint)
+You can find all of the available matching criteria in the [`ParserEntryPoint` reference](../../../reference/plugins.md#parserentrypoint)
 
 ## Running a parser
 
@@ -129,7 +129,7 @@ The parse command will automatically match the right parser to your file and run
 nomad parse --parser <parser_entry_point_id> <input-file>
 ```
 
-You can check the [CLI reference for `nomad parse`](../../reference/cli.md#nomad-parse) for the full list of arguments, but the following should get you started:
+You can check the [CLI reference for `nomad parse`](../../../reference/cli.md#nomad-parse) for the full list of arguments, but the following should get you started:
 
 - `--show-metadata`: Return json representation of the basic metadata
 - `--skip-normalizers`: Skip any normalizers
@@ -400,7 +400,7 @@ parsed quantities. Finally, we assign the simulation section to the archive data
 
 Now, [run the parser again](#getting-started) and check that the new archive stores the intended quantities from `tests/data/example.out`.
 
-Additionally, the standard [normalizers](../../explanation/processing.md#normalizing) will be applied as well. This is run automatically during parsing, one can skip these by passing the
+Additionally, the standard [normalizers](../../../explanation/processing.md#normalizing) will be applied as well. This is run automatically during parsing, one can skip these by passing the
 argument `skip-normalizers`.
 
 ## Extending the Metainfo

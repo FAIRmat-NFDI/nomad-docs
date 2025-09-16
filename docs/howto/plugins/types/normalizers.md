@@ -2,7 +2,7 @@
 
 A normalizer takes the archive of an entry as input and manipulates (usually expands) the given archive. This way, a normalizer can add additional sections and quantities based on the information already available in the archive. All normalizers are executed in the order [determined by their `level`](#control-normalizer-execution-order) after parsing, but the normalizer may decide to not do anything based on the entry contents.
 
-This documentation shows you how to write a plugin entry point for a normaliser. You should read the [introduction to plugins](./plugins.md) to have a basic understanding of how plugins and plugin entry points work in the NOMAD ecosystem.
+This documentation shows you how to write a plugin entry point for a normaliser. You should read the [introduction to plugins](../plugins.md) to have a basic understanding of how plugins and plugin entry points work in the NOMAD ecosystem.
 
 ## Getting started
 
@@ -20,7 +20,7 @@ nomad-example
    └── pyproject.toml
 ```
 
-See the documentation on [plugin development guidelines](./plugins.md#plugin-development-guidelines) for more details on the best development practices for plugins, including linting, testing and documenting.
+See the documentation on [plugin development guidelines](../plugins.md#plugin-development-guidelines) for more details on the best development practices for plugins, including linting, testing and documenting.
 
 ## Normalizer entry point
 
@@ -44,9 +44,9 @@ mynormalizer = MyNormalizerEntryPoint(
 )
 ```
 
-Here you can see that a new subclass of `NormalizerEntryPoint` was defined. In this new class you can override the `load` method to determine how the `Normalizer` class is instantiated, but you can also extend the `NormalizerEntryPoint` model to add new configurable parameters for this normalizer as explained in [Explanation > Plugins > Plugin Configuration](../../explanation/plugin_system.md#plugin-configuration).
+Here you can see that a new subclass of `NormalizerEntryPoint` was defined. In this new class you can override the `load` method to determine how the `Normalizer` class is instantiated, but you can also extend the `NormalizerEntryPoint` model to add new configurable parameters for this normalizer as explained in [Explanation > Plugins > Plugin Configuration](../../../explanation/plugin_system.md#plugin-configuration).
 
-We also instantiate an object `mynormalizer` from the new subclass. This is the final entry point instance in which you specify the default parameterization and other details about the normalizer. In the reference you can see all of the available [configuration options for a `NormalizerEntryPoint`](../../reference/plugins.md#normalizerentrypoint).
+We also instantiate an object `mynormalizer` from the new subclass. This is the final entry point instance in which you specify the default parameterization and other details about the normalizer. In the reference you can see all of the available [configuration options for a `NormalizerEntryPoint`](../../../reference/plugins.md#normalizerentrypoint).
 
 The entry point instance should then be added to the `[project.entry-points.'nomad.plugin']` table in `pyproject.toml` in order for the normalizer to be automatically detected:
 
@@ -79,7 +79,7 @@ class MyNormalizer(Normalizer):
 
 The minimal requirement is that your class has a `normalize` function, which as input takes:
 
-- `archive`: The [`EntryArchive` object](../../reference/glossary.md#archive) in which the normalization results will be stored
+- `archive`: The [`EntryArchive` object](../../../reference/glossary.md#archive) in which the normalization results will be stored
 - `logger`: Logger that you can use to log normalization events into
 
 ### `SystemBasedNormalizer` class

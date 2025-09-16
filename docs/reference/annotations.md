@@ -61,7 +61,7 @@ MySection:
 {{ pydantic_model('nomad.datamodel.metainfo.annotations.TabularAnnotation', heading='### `tabular`') }}
 
 Each and every quantity to be filled with data from tabular data files should be annotated as the following example.
-A practical example is provided in [How To](../howto/customization/tabular.md#preparing-the-tabular-data-file) section.
+A practical example is provided in [How To](../howto/manage/gui/tabular.md#preparing-the-tabular-data-file) section.
 
 ```yaml
 my_quantity:
@@ -87,18 +87,18 @@ One special quantity will be dedicated to host the tabular data file. In the fol
 
 | Tutorial ref.                      | `file_mode`            | `mapping_mode` | `sections` | How to ref.                                                                                 |
 | ---------------------------------- | ---------------------- | -------------- | ---------- | ------------------------------------------------------------------------------------------- |
-| 1                                  | `current_entry`        | `column`       | `root`     | [HowTo](../howto/customization/tabular.md#1-column-mode-current-entry-parse-to-root)        |
-| 2                                  | `current_entry`        | `column`       | my path    | [HowTo](../howto/customization/tabular.md#2-column-mode-current-entry-parse-to-my-path)     |
+| 1                                  | `current_entry`        | `column`       | `root`     | [HowTo](../howto/manage/gui/tabular.md#1-column-mode-current-entry-parse-to-root)        |
+| 2                                  | `current_entry`        | `column`       | my path    | [HowTo](../howto/manage/gui/tabular.md#2-column-mode-current-entry-parse-to-my-path)     |
 | <span style="color:red">np1</span> | `current_entry`        | `row`          | `root`     | <span style="color:red">Not possible</span>                                                 |
-| 3                                  | `current_entry`        | `row`          | my path    | [HowTo](../howto/customization/tabular.md#3-row-mode-current-entry-parse-to-my-path)        |
+| 3                                  | `current_entry`        | `row`          | my path    | [HowTo](../howto/manage/gui/tabular.md#3-row-mode-current-entry-parse-to-my-path)        |
 | <span style="color:red">np2</span> | `single_new_entry`     | `column`       | `root`     | <span style="color:red">Not possible</span>                                                 |
-| 4                                  | `single_new_entry`     | `column`       | my path    | [HowTo](../howto/customization/tabular.md#4-column-mode-single-new-entry-parse-to-my-path)  |
+| 4                                  | `single_new_entry`     | `column`       | my path    | [HowTo](../howto/manage/gui/tabular.md#4-column-mode-single-new-entry-parse-to-my-path)  |
 | <span style="color:red">np3</span> | `single_new_entry`     | `row`          | `root`     | <span style="color:red">Not possible</span>                                                 |
-| 5                                  | `single_new_entry`     | `row`          | my path    | [HowTo](../howto/customization/tabular.md#5-row-mode-single-new-entry-parse-to-my-path)     |
+| 5                                  | `single_new_entry`     | `row`          | my path    | [HowTo](../howto/manage/gui/tabular.md#5-row-mode-single-new-entry-parse-to-my-path)     |
 | <span style="color:red">np4</span> | `multiple_new_entries` | `column`       | `root`     | <span style="color:red">Not possible</span>                                                 |
 | <span style="color:red">np5</span> | `multiple_new_entries` | `column`       | my path    | <span style="color:red">Not possible</span>                                                 |
-| 6                                  | `multiple_new_entries` | `row`          | `root`     | [HowTo](../howto/customization/tabular.md#6-row-mode-multiple-new-entries-parse-to-root)    |
-| 7                                  | `multiple_new_entries` | `row`          | my path    | [HowTo](../howto/customization/tabular.md#7-row-mode-multiple-new-entries-parse-to-my-path) |
+| 6                                  | `multiple_new_entries` | `row`          | `root`     | [HowTo](../howto/manage/gui/tabular.md#6-row-mode-multiple-new-entries-parse-to-root)    |
+| 7                                  | `multiple_new_entries` | `row`          | my path    | [HowTo](../howto/manage/gui/tabular.md#7-row-mode-multiple-new-entries-parse-to-my-path) |
 
 ```yaml
 data_file:
@@ -291,7 +291,7 @@ class CustomSection(PlotSection, EntryData):
 ## H5Web
 
 The H5WebAnnotation provides a way to control how H5Web renders visualization for
-[HDF5Dataset](../howto/customization/hdf5.md#hdf5dataset) quantities. The annotation values are written to the
+[HDF5Dataset](../howto/plugins/tools/hdf5.md#hdf5dataset) quantities. The annotation values are written to the
 corresponding HDF5 object attributes and are subsequently read by H5Web.
 
 Usage:
@@ -358,7 +358,7 @@ The plot of variables `x_value` and `y_value` is also displayed; as the `B` clas
 
 !!! note
 
-    The `paths` variable points in the example above to a [repeated subsection](../howto/plugins/schema_packages.md#schemapackage-class), hence the path provided includes a serial number pointing to the subsection object to be displayed in the entry overview page. To show in the overview page a non-repeatable subsection, no serial number is required in the path.
+    The `paths` variable points in the example above to a [repeated subsection](../howto/plugins/types/schema_packages.md#schemapackage-class), hence the path provided includes a serial number pointing to the subsection object to be displayed in the entry overview page. To show in the overview page a non-repeatable subsection, no serial number is required in the path.
 
 H5Web implements visualization features through the attributes shown above, they can be attached to datasets and groups of an HDF5 file.
 The conventions for the attributes are rooted in the NeXus language and more explanations can be found in the [NXData documentation page](https://manual.nexusformat.org/classes/base_classes/NXdata.html) and in the [Associating plottable data documentation page](https://manual.nexusformat.org/datarules.html#design-findplottable-niac2014).

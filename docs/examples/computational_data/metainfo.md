@@ -59,7 +59,7 @@ simulation would be stored under `workflow/results`. Then, the `inputs`, `output
 For some standard workflows, e.g., geometry optimization and molecular dynamics, the NOMAD [normalizers](../../explanation/processing.md#normalizing)
 For non-standard workflows, the parser (or more appropriately the corresponding normalizer) must
 populate these sections accordingly.
-See [Explanation > Workflows](../../explanation/workflows.md) for more information about the general structure of the workflow section, and [How-to Guides > Customization > Define workflows](../../howto/customization/workflows.md) for instructions on how to upload custom workflows to link individual entries in NOMAD.
+See [Explanation > Workflows](../../explanation/workflows.md) for more information about the general structure of the workflow section, and [How-to Guides > Customization > Define workflows](../../howto/manage/gui/workflows.md) for instructions on how to upload custom workflows to link individual entries in NOMAD.
 <!-- TODO Comment from ND - Wouldn't it be easier to say that its subsection reference other sections in run? I think this better summarizes the general rule. -->
 <!-- TODO add graph showing how inputs, outputs, and tasks are connected  -->
 <!-- TODO add reference page of standard computational workflows and link to the above sentence. -->

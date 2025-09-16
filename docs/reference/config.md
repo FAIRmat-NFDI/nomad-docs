@@ -118,7 +118,7 @@ The following is a reference of all configuration sections and attributes.
 
 ### User Interface
 
-These settings affect the behaviour of the user interface. Note that the preferred way for creating custom apps is by using [app plugin entry points](../howto/plugins/apps.md).
+These settings affect the behaviour of the user interface. Note that the preferred way for creating custom apps is by using [app plugin entry points](../howto/plugins/types/apps.md).
 
 {{ config_models(['ui'])}}
 

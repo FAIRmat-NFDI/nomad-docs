@@ -5,7 +5,7 @@ a [FastAPI](https://fastapi.tiangolo.com) app that can be mounted into the main 
 such as `/api/v1`, `/optimade`, etc.
 
 This documentation shows you how to write a plugin entry point for an API.
-You should read the [introduction to plugins](./plugins.md)
+You should read the [introduction to plugins](../plugins.md)
 to have a basic understanding of how plugins and plugin entry points work in the NOMAD ecosystem.
 
 ## Getting started
@@ -26,7 +26,7 @@ nomad-example
    └── pyproject.toml
 ```
 
-See the documentation on [plugin development guidelines](./plugins.md#plugin-development-guidelines)
+See the documentation on [plugin development guidelines](../plugins.md#plugin-development-guidelines)
 for more details on the best development practices for plugins, including linting, testing and documenting.
 
 ## API entry point
@@ -56,7 +56,7 @@ myapi = MyAPIEntryPoint(
 ```
 
 Here you can see that a new subclass of `APIEntryPoint` was defined. In this new class you have to override the `load` method to determine the FastAPI app that makes your API.
-In the reference you can see all of the available [configuration options for a `APIEntryPoint`](../../reference/plugins.md#apientrypoint).
+In the reference you can see all of the available [configuration options for a `APIEntryPoint`](../../../reference/plugins.md#apientrypoint).
 
 The entry point instance should then be added to the `[project.entry-points.'nomad.plugin']` table in `pyproject.toml` in order for it to be automatically detected:
 
@@ -87,7 +87,7 @@ async def root():
 
 Read the official [FastAPI documentation](https://fastapi.tiangolo.com/tutorial/) to learn how to build apps and APIs with FastAPI.
 
-If you run NOMAD with this plugin following our [Oasis configuration documentation](../oasis/configure.md) with the default configuration, you can curl this API and should receive the message:
+If you run NOMAD with this plugin following our [Oasis configuration documentation](../../oasis/configure.md) with the default configuration, you can curl this API and should receive the message:
 
 ```sh
 curl localhost:8000/nomad-oasis/myapi/

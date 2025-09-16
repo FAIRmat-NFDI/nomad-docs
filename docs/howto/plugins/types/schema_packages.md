@@ -1,8 +1,8 @@
 # How to write a schema package
 
-Schema packages are used to define and distribute custom data definitions that can be used within NOMAD. These schema packages typically contain [schemas](../../reference/glossary.md#schema) that users can select to instantiate manually filled entries using our ELN functionality, or that parsers select when organizing data they extract from files. Schema packages may also contain more abstract base classes that other schema packages use.
+Schema packages are used to define and distribute custom data definitions that can be used within NOMAD. These schema packages typically contain [schemas](../../../reference/glossary.md#schema) that users can select to instantiate manually filled entries using our ELN functionality, or that parsers select when organizing data they extract from files. Schema packages may also contain more abstract base classes that other schema packages use.
 
-This documentation shows you how to write a plugin entry point for a schema package. You should read the [introduction to plugins](./plugins.md) to have a basic understanding of how plugins and plugin entry points work in the NOMAD ecosystem.
+This documentation shows you how to write a plugin entry point for a schema package. You should read the [introduction to plugins](../plugins.md) to have a basic understanding of how plugins and plugin entry points work in the NOMAD ecosystem.
 
 ## Getting started
 
@@ -20,7 +20,7 @@ nomad-example
    └── pyproject.toml
 ```
 
-See the documentation on [plugin development guidelines](./plugins.md#plugin-development-guidelines) for more details on the best development practices for plugins, including linting, testing and documenting.
+See the documentation on [plugin development guidelines](../plugins.md#plugin-development-guidelines) for more details on the best development practices for plugins, including linting, testing and documenting.
 
 ## Schema package entry point
 
@@ -45,9 +45,9 @@ mypackage = MySchemaPackageEntryPoint(
 )
 ```
 
-Here you can see that a new subclass of `SchemaPackageEntryPoint` was defined. In this new class you can override the `load` method to determine how the `SchemaPackage` class is loaded, but you can also extend the `SchemaPackageEntryPoint` model to add new configurable parameters for this schema package as explained [here](../../explanation/plugin_system.md#plugin-configuration).
+Here you can see that a new subclass of `SchemaPackageEntryPoint` was defined. In this new class you can override the `load` method to determine how the `SchemaPackage` class is loaded, but you can also extend the `SchemaPackageEntryPoint` model to add new configurable parameters for this schema package as explained [here](../../../explanation/plugin_system.md#plugin-configuration).
 
-We also instantiate an object `mypackage` from the new subclass. This is the final entry point instance in which you specify the default parameterization and other details about the schema package. In the reference you can see all of the available [configuration options for a `SchemaPackageEntryPoint`](../../reference/plugins.md#schemapackageentrypoint).
+We also instantiate an object `mypackage` from the new subclass. This is the final entry point instance in which you specify the default parameterization and other details about the schema package. In the reference you can see all of the available [configuration options for a `SchemaPackageEntryPoint`](../../../reference/plugins.md#schemapackageentrypoint).
 
 The entry point instance should then be added to the `[project.entry-points.'nomad.plugin']` table in `pyproject.toml` in order for it to be automatically detected:
 
@@ -93,7 +93,7 @@ class Simulation(Schema):
 m_package.__init_metainfo__()
 ```
 
-Schema packages typically contain one or several [schema](../../reference/glossary.md#schema) definitions, that can the be used to manually create new entries through the ELN functionality, or also by parsers to create instances of this schema fully automatically. All of the definitions contained in the package should be placed between the contructor call (`m_package = SchemaPackage()`) and the initialization (`m_package.__init_metainfo__()`).
+Schema packages typically contain one or several [schema](../../../reference/glossary.md#schema) definitions, that can the be used to manually create new entries through the ELN functionality, or also by parsers to create instances of this schema fully automatically. All of the definitions contained in the package should be placed between the contructor call (`m_package = SchemaPackage()`) and the initialization (`m_package.__init_metainfo__()`).
 
 In this basic example we defined two *sections*: `System` and `Simulation`. `System` inherits from most primitive type of section - `MSection` - whereas `Simulation` is defined as a subclass of `Schema` which makes it possible to use this as the root section of an entry. Each section can have two types of properties: *quantities* and *subsections*. Sections and their properties are defined with Python classes and their attributes. Each *quantity* defines a piece of data. Basic quantity attributes are `type`, `shape`, `unit`, and `description`.
 
@@ -141,9 +141,9 @@ This will convert the data into JSON:
 
 ## Schema packages: Python vs. YAML
 
-In this [guide](../customization/basics.md), we explain how to write and upload schema packages in the `.archive.yaml` format. Writing and uploading such YAML schema packages is a good way for NOMAD users to start exploring schemas, but it has limitations. As a NOMAD developer or Oasis administrator you can add Python schema packages to NOMAD. All built-in NOMAD schemas (e.g. for electronic structure code data) are written in Python and are part of the NOMAD sources (`nomad.datamodel.metainfo.*`).
+In this [guide](../../manage/gui/yaml.md), we explain how to write and upload schema packages in the `.archive.yaml` format. Writing and uploading such YAML schema packages is a good way for NOMAD users to start exploring schemas, but it has limitations. As a NOMAD developer or Oasis administrator you can add Python schema packages to NOMAD. All built-in NOMAD schemas (e.g. for electronic structure code data) are written in Python and are part of the NOMAD sources (`nomad.datamodel.metainfo.*`).
 
-There is a 1-1 translation between the structure in Python schema packages (written in classes) and YAML (or JSON) schema packages (written in objects). Both use the same fundamental concepts, like *section*, *quantity*, or *subsection*, introduced in [YAML schemas](../customization/basics.md). The main benefit of Python schema packages is the ability to define custom `normalize`-functions.
+There is a 1-1 translation between the structure in Python schema packages (written in classes) and YAML (or JSON) schema packages (written in objects). Both use the same fundamental concepts, like *section*, *quantity*, or *subsection*, introduced in [YAML schemas](../../manage/gui/yaml.md). The main benefit of Python schema packages is the ability to define custom `normalize`-functions.
 
 `normalize`-functions are attached to sections and are are called when instances of these sections are processed. All files are processed when they are uploaded or changed. To add a `normalize` function, your section has to inherit from `Schema` or `ArchiveSection` which provides the base for this functionality. Here is an example:
 
@@ -292,7 +292,7 @@ References are serialized as URLs. There are different types of reference URLs:
 - `/uploads/{upload_id}/archive/{entry_id}#/run/0/calculation/1`: similar to the previous one but based on uploads
 - `https://myoasis.de/api/v1/uploads/{upload_id}/archive/{entry_id}#/run/0/calculation/1`: a global reference towards a different NOMAD installation (Oasis)
 
-The host and path parts of URLs correspond with the [NOMAD API](../programmatic/api.md). The anchors are paths from the root section of an Archive, over its subsections, to the referenced section or quantity value. Each path segment is the name of the subsection or an index in a repeatable subsection: `/system/0` or `/system/0/atom_labels`.
+The host and path parts of URLs correspond with the [NOMAD API](../../manage/program/api.md). The anchors are paths from the root section of an Archive, over its subsections, to the referenced section or quantity value. Each path segment is the name of the subsection or an index in a repeatable subsection: `/system/0` or `/system/0/atom_labels`.
 
 References are automatically serialized by `:py:meth:MSection.m_to_dict`. When de-serializing
 data with `:py:meth:MSection.m_from_dict` these references are not resolved right away,
@@ -456,7 +456,7 @@ to best practices.
 
 ### Schema super structure
 
-You should follow the basic [developer's getting started](../develop/setup.md) to setup a development environment. This will give you all the necessary libraries and allows you
+You should follow the basic [developer's getting started](../../develop/setup.md) to setup a development environment. This will give you all the necessary libraries and allows you
 to place your modules into the NOMAD code.
 
 The `EntryArchive` section definition sets the root of the archive for each entry in
@@ -464,7 +464,7 @@ NOMAD. It therefore defines the top level sections:
 
 - `metadata`: all "administrative" metadata (ids, permissions, publish state, uploads, user metadata, etc.)
 - `results`: a summary with copies and references to data from method specific sections. This also
-  presents the [searchable metadata](../develop/search.md).
+  presents the [searchable metadata](../../develop/search.md).
 - `workflows`: all workflow metadata
 - `data`: contains all data from method specific sections by default.
 - Method-specific subsections: e.g. `run`. This is were all parsers are supposed to
@@ -515,7 +515,7 @@ short handle of a code name or other special method prefix.
 
 ### Access structured data via API
 
-The [API section](../programmatic/api.md#access-processed-data-archives) demonstrates how to access an Archive, i.e.
+The [API section](../../manage/program/api.md#access-processed-data-archives) demonstrates how to access an Archive, i.e.
 retrieve the processed data from a NOMAD entry. This API will give you JSON data likes this:
 
 ```json title="https://nomad-lab.eu/prod/v1/api/v1/entries/--dLZstNvL_x05wDg2djQmlU_oKn/archive"
@@ -569,7 +569,7 @@ To learn what each key means, you need to look up its definition in the Metainfo
 
 In Python, JSON data is typically represented as nested combinations of dictionaries
 and lists. Of course, you could work with this right away. To make it easier for Python
-programmers, the [NOMAD Python package](../programmatic/pythonlib.md) allows you to use this
+programmers, the [NOMAD Python package](../../manage/program/pythonlib.md) allows you to use this
 JSON data with a higher level interface, which provides the following advantages:
 
 - code completion in dynamic coding environments like Jupyter notebooks
@@ -602,7 +602,7 @@ print(json.dumps(calc.m_to_dict(), indent=2))
 ### Access structured data via the NOMAD Python package
 
 The NOMAD Python package provides utilities to [query large amounts of
-archive data](../programmatic/archive_query.md). This uses the built-in Python schema classes as
+archive data](../../manage/program/archive_query.md). This uses the built-in Python schema classes as
 an interface to the data.
 
 ## Versioning

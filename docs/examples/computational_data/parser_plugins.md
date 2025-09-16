@@ -32,7 +32,7 @@ The general docs contain information about the nuts and bolts of developing a pl
 
 - [How to write a plugin](../../howto/plugins/plugins.md): Some basic information about different types of plugins, plugin anatomy, and creating a plugin project.
 
-- [How to write a parser](../../howto/plugins/parsers.md): The basics of how NOMAD parsers work, how to configure the files that your parser will match, and how to utilize existing parser classes.
+- [How to write a parser](../../howto/plugins/types/parsers.md): The basics of how NOMAD parsers work, how to configure the files that your parser will match, and how to utilize existing parser classes.
 
 <!-- TODO Add best practices + tips for parser implementation/design -->
 <!-- ### Best practices for computational parser design -->

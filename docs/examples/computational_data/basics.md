@@ -13,8 +13,8 @@
 ## Further resources
 
 - [Tutorial > Managing workflows and projects](../../tutorial/workflows_projects.md)
-- [How-to guides > Programmatic use > Publish data using Python](../../howto/programmatic/publish_python.md)
-- [How-to guides > Customization > Define Workflows](../../howto/customization/workflows.md)
+- [How-to guides > Programmatic use > Publish data using Python](../../howto/manage/program/publish_python.md)
+- [How-to guides > Customization > Define Workflows](../../howto/manage/gui/workflows.md)
 
 ## Processing of supported simulation data
 

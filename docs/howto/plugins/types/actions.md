@@ -8,7 +8,7 @@
     We’d love your feedback to help us improve NOMAD Actions, please don’t hesitate to reach out and share your thoughts.
 
 Actions allow to define executable workflows in NOMAD. They are an
-alternative to [normalizers](../../tutorial/custom.md#custom-normalizers) and can
+alternative to [normalizers](../../../tutorial/custom.md#custom-normalizers) and can
 be configured to use specialized workers instead of the NOMAD internal worker.
 It allows for better resource allocation like GPUs for specific actions.
 
@@ -23,7 +23,7 @@ It allows for better resource allocation like GPUs for specific actions.
     processing time (for example, days), or special resource allocation, use actions.
 
 This documentation shows you how to write a plugin entry point for an action.
-You should read the [introduction to plugins](./plugins.md)
+You should read the [introduction to plugins](../plugins.md)
 to have a basic understanding of how plugins and plugin entry points work in the NOMAD ecosystem.
 
 ## Getting started
@@ -53,7 +53,7 @@ The boilerplate code makes it easier to define actions. Start with replacing
 the example code in `activities.py` with your code and adjusting the input data
 model in the `models.py` with the required fields for your activity.
 
-See the documentation on [plugin development guidelines](./plugins.md#plugin-development-guidelines)
+See the documentation on [plugin development guidelines](../plugins.md#plugin-development-guidelines)
 for more details on the best development practices for plugins, including linting, testing and documenting.
 
 By default, we provide `CPU` and `GPU` task queues. While defining an action,
@@ -120,14 +120,14 @@ Here you can see that a new subclass of `MyActionEntryPoint` was defined. In
 this new class you can override the `load` method to determine how the
 `Action` class is loaded, but you can also extend the
 `ActionEntryPoint` model to add new configurable parameters for this schema
-package as explained [here](../../explanation/plugin_system.
+package as explained [here](../../../explanation/plugin_system.
 md#plugin-configuration).
 
 We also instantiate an object `my_action` from the new subclass. This is the
 final entry point instance in which you specify the default parameterization
 and other details about the action. In the reference you can see all of the
 available
-[configuration options for a `ActionEntryPoint`](../../reference/plugins.
+[configuration options for a `ActionEntryPoint`](../../../reference/plugins.
 md#actionentrypoint).
 
 The entry point instance should then be added to the `[project.entry-points.
@@ -311,7 +311,7 @@ buffer to it.
 ## Integrating action with schemas
 
 After actions are defined, it is possible to intergrate their workflows with
-[schemas](../../reference/glossary.md#schema) and run them from NOMAD
+[schemas](../../../reference/glossary.md#schema) and run them from NOMAD
 entries.
 
 Every action has a unique name based on the package path of its entry point.
@@ -347,7 +347,7 @@ print(workflow_status.name)  # example output: RUNNING
 ```
 
 You can add these functionalities in the `normalize` of an
-[ELN schema](../customization/elns.md) and trigger actions from the ELN
+[ELN schema](../../manage/gui/elns.md) and trigger actions from the ELN
 entries. A schema that uses ELN quantities to trigger actions can look like this:
 
 ```py

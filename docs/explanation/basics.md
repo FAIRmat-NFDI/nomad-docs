@@ -76,8 +76,8 @@ the entry corresponding to the mainfile, will be processed. Processing consist o
 Parsers are small programs that transform data from a recognized *mainfile* into a
 structured machine processable tree of data that we call the *archive* or [**processed data**](data.md)
 of the entry. Only one parser is used for each entry. The used parser is determined
-during matching and depends on the file format. [A dedicated guide](../howto/plugins/parsers.md#match-your-raw-file) shows how to match a specific file from your parser. Parsers can be added to NOMAD as
-[plugins](../howto/plugins/parsers.md); this is a list of [all available parsers in the central installation](../reference/parsers.md).
+during matching and depends on the file format. [A dedicated guide](../howto/plugins/types/parsers.md#match-your-raw-file) shows how to match a specific file from your parser. Parsers can be added to NOMAD as
+[plugins](../howto/plugins/types/parsers.md); this is a list of [all available parsers in the central installation](../reference/parsers.md).
 
 !!! note
     A special case is the parsing of NOMAD archive files. Usually a parser converts a file
@@ -99,7 +99,7 @@ processed data. Learn more about why to normalize in the documentation on [struc
 There are two principle ways to implement normalization in NOMAD:
 **normalizers** and **normalize** functions.
 
-[Normalizers](../howto/plugins/normalizers.md) are small programs that take processed data as input.
+[Normalizers](../howto/plugins/types/normalizers.md) are small programs that take processed data as input.
 There is a list of normalizers registered in the [NOMAD configuration](../reference/config.md#normalize).
 In the future, normalizers might be
 added as plugins as well. They run in the configured order. Every normalizer is run
@@ -107,18 +107,18 @@ on all entries and the normalizer might decide to do something or not, depending
 it sees in the processed data.
 
 Normalize functions are special functions implemented as part of section definitions
-in [Python schemas](../howto/plugins/schema_packages.md#schema-packages-python-vs-yaml).
+in [Python schemas](../howto/plugins/types/schema_packages.md#schema-packages-python-vs-yaml).
 There is a special normalizer that will go through all processed data and execute these
 function if they are defined. Normalize functions get the respective section instance as
-input. This allows [schema plugin](../howto/plugins/schema_packages.md) developers to add normalizing to their sections.
+input. This allows [schema plugin](../howto/plugins/types/schema_packages.md) developers to add normalizing to their sections.
 Read about our [structured data](./data.md) to learn more about the different sections.
 
 ### Storing and indexing
 
 As a last technical step, the processed data is stored and some information is passed
 into the search index. The store for processed data is internal to NOMAD and processed
-data cannot be accessed directly and only via the [archive API](../howto/programmatic/api.md#access-processed-data-archives)
-or [ArchiveQuery](../howto/programmatic/archive_query.md) Python library functionality.
+data cannot be accessed directly and only via the [archive API](../howto/manage/program/api.md#access-processed-data-archives)
+or [ArchiveQuery](../howto/manage/program/archive_query.md) Python library functionality.
 What information is stored in the search index is determined
 by the *metadata* and *results* sections and cannot be changed by users or plugins.
 However, all scalar values in the processed data are also index as key-values pairs.

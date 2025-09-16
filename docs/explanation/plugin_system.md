@@ -59,12 +59,12 @@ This architecture allows plugin developers to freely choose a suitable granulari
 
 Plugin entry points represent different types of customizations that can be added to a NOMAD installation. The following plugin entry point types are currently supported:
 
-- [APIs](../howto/plugins/apis.md)
-- [Apps](../howto/plugins/apps.md)
-- [Example uploads](../howto/plugins/example_uploads.md)
-- [Normalizers](../howto/plugins/parsers.md)
-- [Parsers](../howto/plugins/parsers.md)
-- [Schema packages](../howto/plugins/schema_packages.md)
+- [APIs](../howto/plugins/types/apis.md)
+- [Apps](../howto/plugins/types/apps.md)
+- [Example uploads](../howto/plugins/types/example_uploads.md)
+- [Normalizers](../howto/plugins/types/parsers.md)
+- [Parsers](../howto/plugins/types/parsers.md)
+- [Schema packages](../howto/plugins/types/schema_packages.md)
 
 Entry points contain **configuration**, but also a **resource**, which lives in a separate Python module. This split enables lazy-loading: the configuration can be loaded immediately, while the resource is loaded later when/if it is required. This can significantly improve startup times, as long as all time-consuming initializations are performed only when loading the resource. This split also helps to avoid cyclical imports between the plugin code and the `nomad-lab` package.
 

@@ -6,7 +6,7 @@
 
 ## Recommended preparation
 
-- [Tutorial > Uploading and publishing data](../../tutorial/upload_publish.md)
+- [Tutorial > Uploading and publishing data](../../../tutorial/upload_publish.md)
 
 ## Further resources
 

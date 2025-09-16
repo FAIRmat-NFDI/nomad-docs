@@ -2,9 +2,9 @@
 
 Apps provide customized views of data in the GUI, making it easier for the users to navigate and understand the data related to a specific domain. This typically means that certain domain-specific properties are highlighted, different units may be used for physical properties, and specialized dashboards may be presented. This becomes crucial for NOMAD installations to be able to scale with data that contains a mixture of experiments and simulations, different techniques, and physical properties spanning different time and length scales.
 
-Apps only affect the way data is *displayed* for the user: if you wish to affect the underlying data structure, you will need to write a [Python schema package](./schema_packages.md) or a [YAML schema package](../customization/basics.md).
+Apps only affect the way data is *displayed* for the user: if you wish to affect the underlying data structure, you will need to write a [Python schema package](./schema_packages.md) or a [YAML schema package](../../manage/gui/yaml.md).
 
-This documentation shows you how to write an plugin entry point for an app. You should read the [introduction to plugins](./plugins.md) to have a basic understanding of how plugins and plugin entry points work in the NOMAD ecosystem.
+This documentation shows you how to write an plugin entry point for an app. You should read the [introduction to plugins](../plugins.md) to have a basic understanding of how plugins and plugin entry points work in the NOMAD ecosystem.
 
 ## Getting started
 
@@ -21,7 +21,7 @@ nomad-example
    └── pyproject.toml
 ```
 
-See the documentation on [plugin development guidelines](./plugins.md#plugin-development-guidelines) for more details on the best development practices for plugins, including linting, testing and documenting.
+See the documentation on [plugin development guidelines](../plugins.md#plugin-development-guidelines) for more details on the best development practices for plugins, including linting, testing and documenting.
 
 ## App entry point
 
@@ -38,7 +38,7 @@ myapp = AppEntryPoint(
 )
 ```
 
-Here we have instantiated an object `myapp` in which you specify the default parameterization and other details about the app. In the reference you can see all of the available [configuration options for an `AppEntryPoint`](../../reference/plugins.md#appentrypoint).
+Here we have instantiated an object `myapp` in which you specify the default parameterization and other details about the app. In the reference you can see all of the available [configuration options for an `AppEntryPoint`](../../../reference/plugins.md#appentrypoint).
 
 The entry point instance should then be added to the `[project.entry-points.'nomad.plugin']` table in `pyproject.toml` in order for the app to be automatically detected:
 
@@ -135,7 +135,7 @@ filters_locked={
 }
 ```
 
-It is also possible to filter by quantities defined in the [`results`](../../reference/glossary.md#results-section-results) section. For example, if you want to limit your app to entries that have the property `catalytic` filled in the `results` section:
+It is also possible to filter by quantities defined in the [`results`](../../../reference/glossary.md#results-section-results) section. For example, if you want to limit your app to entries that have the property `catalytic` filled in the `results` section:
 
 ```python
 filters_locked={

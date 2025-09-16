@@ -4,7 +4,7 @@ This guide is about using NOMAD's REST APIs directly, e.g. via Python's `request
 
 To access the processed data with our client library `nomad-lab` follow
 [How to access processed data](archive_query.md). You can also watch our
-[video tutorial on the API](../../tutorial/access_api.md).
+[video tutorial on the API](../../../tutorial/access_api.md).
 
 ## Different options to use the API
 
@@ -231,7 +231,7 @@ The result will look like this:
 You can work with the results in the given JSON (or respective Python dict/list) data
 already. If you have [NOMAD's Python library](./pythonlib.md) installed, you can take the
 archive data and use the Python interface. The
-[Python interface](../plugins/schema_packages.md#wrap-data-with-python-schema-classes)
+[Python interface](../../plugins/types/schema_packages.md#wrap-data-with-python-schema-classes)
 will help with code-completion (e.g. in notebook environments), resolve archive references
 (e.g. from workflow to calculation to system), and allow unit conversion:
 
@@ -261,7 +261,7 @@ the API:
 - Raw files, the files as they were uploaded to NOMAD.
 - Archive data, all of the extracted data for an entry.
 
-There are also different entities (see also [Datamodel](../../explanation/basics.md))
+There are also different entities (see also [Datamodel](../../../explanation/basics.md))
 with different functions in the API:
 
 - Entries
@@ -513,7 +513,7 @@ page size.
 ## User Groups
 
 You can create a user group and add other users to that group via the API. These groups
-can be used as [upload members](../manage/upload.md#visibility-and-access) to make it
+can be used as [upload members](../gui/upload.md#visibility-and-access) to make it
 easier to give viewing or editing rights for an upload to multiple users at once, e.g.
 a working group.
 

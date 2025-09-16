@@ -19,47 +19,47 @@ nav:
       - Overview: howto/overview.md # TODO update once structure is finalized
       - Manage and find data:
           - With the GUI:
-              - Upload and publish data: howto/manage/upload.md
-              - Enter data with ELNs: howto/manage/eln.md
-              - Explore data: howto/manage/explore.md
-              - Analyze data in NORTH: howto/manage/north.md # TODO rename depending on how-to content
-              - Create custom workflows: howto/customization/workflows.md
-              - Write a YAML schema package: howto/customization/basics.md # TODO consider consolidating with parts of the next 2 pages
-              - Create custom ELNs: howto/customization/elns.md
-              - Parse tabular data: howto/customization/tabular.md
+              - Upload and publish data: howto/manage/gui/upload.md
+              - Enter data with ELNs: howto/manage/gui/eln.md
+              - Explore data: howto/manage/gui/explore.md
+              - Analyze data in NORTH: howto/manage/gui/north.md # TODO rename depending on how-to content
+              - Create custom workflows: howto/manage/gui/workflows.md
+              - Write a YAML schema package: howto/manage/gui/yaml.md # ! renamed from basics.md # TODO consider consolidating with parts of the next 2 pages
+              - Create custom ELNs: howto/manage/gui/elns.md
+              - Parse tabular data: howto/manage/gui/tabular.md
           - Programmatically:
               # - Install nomad-lab: howto/programmatic/pythonlib.md # TODO Integrate into "Use the API"
-              - Overview: howto/programmatic/api.md # TODO separate into How-to and Explanation/Reference
-              - Download data: howto/programmatic/download.md
-              - Publish data using Python: howto/programmatic/publish_python.md
-              - Access processed data: howto/programmatic/archive_query.md
-              - Transform data: howto/programmatic/json_transformer.md
+              - Overview: howto/manage/program/api.md # TODO separate into How-to and Explanation/Reference
+              - Download data: howto/manage/program/download.md
+              - Publish data using Python: howto/manage/program/publish_python.md
+              - Access processed data: howto/manage/program/archive_query.md
+              - Transform data: howto/manage/program/json_transformer.md
               - Make Graph-style API Calls: # TODO consolidate into a single page with supporting explanation/reference material
-                  - Basics: howto/graph-api/basics.md
-                  - Navigation and fuzzy query/fetch: howto/graph-api/graph.structure.md
-                  - Handling archive data: howto/graph-api/query.archive.md
-                  - Other convenience functionalities: howto/graph-api/misc.md
+                  - Basics: howto/manage/program/graph-api/basics.md
+                  - Navigation and fuzzy query/fetch: howto/manage/program/graph-api/graph.structure.md
+                  - Handling archive data: howto/manage/program/graph-api/query.archive.md
+                  - Other convenience functionalities: howto/manage/program/graph-api/misc.md
       - Develop plugins:
           - Overview: howto/plugins/plugins.md # TODO split former Introduction to plugins into short guiding overview + explanation page
           # - Set up a development environment: howto/plugins/setup.md # TODO distro-dev setup + best practices
           - Entry point types:
-              - Actions: howto/plugins/actions.md
-              - APIs: howto/plugins/apis.md
-              - Apps: howto/plugins/apps.md
-              - Example uploads: howto/plugins/example_uploads.md
-              - Normalizers: howto/plugins/normalizers.md
-              - Parsers: howto/plugins/parsers.md
-              - Schemas: howto/plugins/schema_packages.md
+              - Actions: howto/plugins/types/actions.md
+              - APIs: howto/plugins/types/apis.md
+              - Apps: howto/plugins/types/apps.md
+              - Example uploads: howto/plugins/types/example_uploads.md
+              - Normalizers: howto/plugins/types/normalizers.md
+              - Parsers: howto/plugins/types/parsers.md
+              - Schemas: howto/plugins/types/schema_packages.md
           - Built-in tools:
-              - Work with units: howto/customization/units.md
-              - Handle large data: howto/customization/hdf5.md
-              - Parse efficiently: howto/customization/mapping_parser.md # TODO Add clearly scope at the top of this page
+              - Work with units: howto/plugins/tools/units.md
+              - Handle large data: howto/plugins/tools/hdf5.md
+              - Parse efficiently: howto/plugins/tools/mapping_parser.md # TODO Add clearly scope at the top of this page
       - Host a NOMAD Oasis:
-          # - Install: howto/install/install.md # TODO Would explain what a NOMAD installation means, contains links to `nomad-distro-template`+`nomad-distro-dev`, also contains a small section on the Python library
-          - Configure an Oasis: howto/oasis/configure.md
-          - Deploy an Oasis: howto/oasis/deploy.md
-          - Update an Oasis: howto/oasis/update.md
-          - Perform Admin tasks: howto/oasis/admin.md
+          - Install: howto/oasis/install.md # TODO Would explain what a NOMAD installation means, contains links to `nomad-distro-template`+`nomad-distro-dev`, also contains a small section on the Python library
+          - Configure: howto/oasis/configure.md
+          - Deploy: howto/oasis/deploy.md
+          - Update: howto/oasis/update.md
+          - Administer: howto/oasis/admin.md
       - Develop the core software: # TODO strip down to only nomad-lab-specific development
           - Get started: howto/develop/setup.md
           - Navigate the code: howto/develop/code.md
@@ -92,7 +92,7 @@ nav:
       # - Overview: explanation/overview.md # TODO add guide, organization of sub-pages?
       - From files to data: explanation/basics.md
       - Data structure: explanation/data.md
-      - Base sections: howto/customization/base_sections.md # TODO rewrite as explanation
+      - Base sections: explanation/base_sections.md # TODO rewrite as explanation
       - Processing: explanation/processing.md
       - Architecture: explanation/architecture.md
       - Workflows: explanation/workflows.md
@@ -162,7 +162,7 @@ plugins:
       module_name: src/nomad_docs/__init__
   - redirects:
       redirect_maps:
-        "pythonlib.md": "howto/programmatic/pythonlib.md"
+        "pythonlib.md": "howto/manage/program/pythonlib.md"
         "develop/gitlab.md": "howto/develop/contrib.md"
   - glightbox
   # - git-revision-date-localized

@@ -6,7 +6,7 @@ run the infrastructure in development mode, learn to run the test suites, and se
 *Visual Studio Code* for NOMAD development.
 
 This is not about working with the NOMAD Python package `nomad-lab`. You can find its
-documentation [here](../programmatic/pythonlib.md).
+documentation [here](../manage/program/pythonlib.md).
 
 ## Clone the sources
 

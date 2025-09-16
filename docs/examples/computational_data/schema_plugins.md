@@ -1,6 +1,6 @@
 # Guide to computational schema plugins
 
-NOMAD uses [Schemas](../../reference/glossary.md#schema) to define the data structures and organization of [Processed Data](../../reference/glossary.md#processed-data). Schemas can be defined in yaml or Python formats. [How to write a schema](../../howto/customization/basics.md) describes the basics of writing a schema, in the yaml format. Computational schemas in NOMAD have historically been written in Python. There are several existing computational schema plugin projects for reference:
+NOMAD uses [Schemas](../../reference/glossary.md#schema) to define the data structures and organization of [Processed Data](../../reference/glossary.md#processed-data). Schemas can be defined in yaml or Python formats. [How to write a schema](../../howto/manage/gui/yaml.md) describes the basics of writing a schema, in the yaml format. Computational schemas in NOMAD have historically been written in Python. There are several existing computational schema plugin projects for reference:
 
 - [nomad-schema-plugin-run](https://github.com/nomad-coe/nomad-schema-plugin-run): contains schemas for standard processed computational data, stored in the `run` section within the NOMAD archive.
 <!-- ! This naming must change, and I think it is a good moment now to do so. -->

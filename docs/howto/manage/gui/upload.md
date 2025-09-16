@@ -1,6 +1,6 @@
 # How to upload and publish data for supported formats
 
-This guide describes how to upload data in NOMAD [supported file formats](../../reference/parsers.md). You find a list of supported formats on top of each upload page, see below.
+This guide describes how to upload data in NOMAD [supported file formats](../../../reference/parsers.md). You find a list of supported formats on top of each upload page, see below.
 
 ## Preparing files
 
@@ -64,7 +64,7 @@ is published with embargo and vice versa.
     type from *User* to *Group*, search for the group name, and optionally change their
     role. This feature must be enabled in the config file `nomad.yaml`.
 
-    See [API](../programmatic/api.md#user-groups) on how to create and edit user groups.
+    See [API](../program/api.md#user-groups) on how to create and edit user groups.
 
 ## Add user metadata
 
@@ -112,7 +112,7 @@ not remove entries.
 
 - One upload cannot exceed **32 GB** in size.
 - Only **10 non published uploads** are allowed per user.
-- Only uploads with at least one recognized entry can be published. See also [supported codes/formats](../../reference/parsers.md) below.
+- Only uploads with at least one recognized entry can be published. See also [supported codes/formats](../../../reference/parsers.md) below.
 
 ## Strategies for large amounts of data
 
