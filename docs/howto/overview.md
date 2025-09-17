@@ -9,7 +9,6 @@ hide: toc
 These how-to guides cover every-day NOMAD usage including data management, exploration, and analysis
 with NOMAD's graphical user interface and APIs.
 
-
 <div markdown="block" class="home-grid">
 <div markdown="block">
 
@@ -119,4 +118,4 @@ Contribute to the core NOMAD software.
 
 ## Additional Resources
 
-[Support Page](https://nomad-lab.eu/nomad-lab/support.html){.md-button .nomad-button target="_blank" rel="noopener"}.
+[Support Page](https://nomad-lab.eu/nomad-lab/support.html){.md-button .nomad-button target="_blank" rel="noopener"}
