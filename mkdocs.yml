@@ -16,7 +16,7 @@ nav:
       - Creating custom schemas: tutorial/custom.md
       - Developing NOMAD plugins: tutorial/develop_plugin.md
   - How-to guides:
-      - Overview: howto/overview.md # TODO update once structure is finalized
+      - Overview: howto/overview.md
       - Manage and find data:
           - With the GUI:
               - Upload and publish data: howto/manage/gui/upload.md
@@ -24,7 +24,7 @@ nav:
               - Explore data: howto/manage/gui/explore.md
               - Analyze data in NORTH: howto/manage/gui/north.md # TODO rename depending on how-to content
               - Create custom workflows: howto/manage/gui/workflows.md
-              - Write a YAML schema package: howto/manage/gui/yaml.md # TODO consider consolidating with parts of the next 2 pages
+              - Write a YAML schema package: howto/manage/gui/yaml.md # TODO consolidate with parts of the next 2 pages
               - Create custom ELNs: howto/manage/gui/elns.md
               - Parse tabular data: howto/manage/gui/tabular.md
           - Programmatically:

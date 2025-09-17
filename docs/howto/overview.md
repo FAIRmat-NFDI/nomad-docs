@@ -88,7 +88,7 @@ These how-to guides provide technical guidelines for system adminstrators to set
 
 Host a NOMAD Oasis for your lab or institution.
 
-- [Install](oasis/configure.md)
+- [Install](oasis/install.md)
 - [Configure](oasis/configure.md)
 - [Deploy](oasis/deploy.md)
 - [Update](oasis/update.md)

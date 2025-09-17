@@ -62,7 +62,7 @@ Plugin entry points represent different types of customizations that can be adde
 - [APIs](../howto/plugins/types/apis.md)
 - [Apps](../howto/plugins/types/apps.md)
 - [Example uploads](../howto/plugins/types/example_uploads.md)
-- [Normalizers](../howto/plugins/types/parsers.md)
+- [Normalizers](../howto/plugins/types/normalizers.md)
 - [Parsers](../howto/plugins/types/parsers.md)
 - [Schema packages](../howto/plugins/types/schema_packages.md)
 

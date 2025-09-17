@@ -8,7 +8,7 @@ A single Python plugin package can contain multiple [plugin entry points](../../
 - [APIs](./types/apis.md)
 - [Apps](./types/apps.md)
 - [Example uploads](./types/example_uploads.md)
-- [Normalizers](./types/parsers.md)
+- [Normalizers](./types/normalizers.md)
 - [Parsers](./types/parsers.md)
 - [Schema packages](./types/schema_packages.md)
 
