@@ -21,7 +21,7 @@ These paths are represented using the [JMesPath](https://jmespath.org/) format.
 This path is added to [`m_annotations`](../../reference/annotations.md), either overwriting or extending the previous annotations.
 Each mapping corresponds to its own dictionary key, and a parser schema may contain multiple in parallel.
 
-In the simplest case, e.g. a _single quantity_, you may simply write:
+In the simplest case, e.g. a *single quantity*, you may simply write:
 
 ```python
 <quantity>.m_annotations.setdefault(MAPPING_ANNOTATION_KEY, {}).update(
@@ -34,7 +34,7 @@ In the simplest case, e.g. a _single quantity_, you may simply write:
 
 <!-- Given that NOMAD schemas typically follow most conventional file structures, some path parts may overlap. -->
 This works fine for top-level quantities, but those deeper down in the schema have to instantiate their containing sections.
-These can be defined in _absolute_ terms, or _relative_ to their section above using the *dot notation*, e.g. `.model`. 
+These can be defined in *absolute* terms, or *relative* to their section above using the *dot notation*, e.g. `.model`.
 The annotations themselves can be manipulated in two possible ways:
 
 1. *definition* level, i.e. `m_def`.
@@ -103,9 +103,9 @@ This is due to `shape` having variable rank, e.g. `shape=['*','*']`.
 ### Other Edge Cases
 
 **Recursive sections**, i.e. section schemas with the same schema as a subsection, should also be handled by an *operator*, or a different annotation key.
-Annotation keys that populate the same archive, can be loaded successively by the _writer_.
+Annotation keys that populate the same archive, can be loaded successively by the *writer*.
 
-Likewise, **references** have to be set by the parser dev in the _writer_.
+Likewise, **references** have to be set by the parser dev in the *writer*.
 They namely require a source and a target, and the schema only defines the source.
 
 ## How-To
@@ -347,5 +347,3 @@ mapper which source to get the data.
         ),
     )
 ```
-
-
