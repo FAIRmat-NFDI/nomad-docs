@@ -1,4 +1,4 @@
-# How to use NORTH
+# How to analyze data in NORTH
 
 !!! warning "Attention"
 

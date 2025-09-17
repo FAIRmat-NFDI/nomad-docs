@@ -1,4 +1,4 @@
-# How to define custom workflows
+# How to create custom workflows
 
 ## What you will learn
 

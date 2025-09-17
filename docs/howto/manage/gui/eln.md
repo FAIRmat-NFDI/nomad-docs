@@ -1,4 +1,4 @@
-# How to use ELNs
+# How to enter data with ELNs
 
 This guide describes how to manually create entries and enter information
 via ELNs (electronic lab notebooks). NOMAD ELNs allow you to acquire

@@ -24,23 +24,23 @@ nav:
               - Explore data: howto/manage/gui/explore.md
               - Analyze data in NORTH: howto/manage/gui/north.md # TODO rename depending on how-to content
               - Create custom workflows: howto/manage/gui/workflows.md
-              - Write a YAML schema package: howto/manage/gui/yaml.md # ! renamed from basics.md # TODO consider consolidating with parts of the next 2 pages
+              - Write a YAML schema package: howto/manage/gui/yaml.md # TODO consider consolidating with parts of the next 2 pages
               - Create custom ELNs: howto/manage/gui/elns.md
               - Parse tabular data: howto/manage/gui/tabular.md
           - Programmatically:
               # - Install nomad-lab: howto/programmatic/pythonlib.md # TODO Integrate into "Use the API"
-              - Overview: howto/manage/program/api.md # TODO separate into How-to and Explanation/Reference
+              - API Overview: howto/manage/program/api.md # TODO separate into How-to and Explanation/Reference
               - Download data: howto/manage/program/download.md
               - Publish data using Python: howto/manage/program/publish_python.md
               - Access processed data: howto/manage/program/archive_query.md
               - Transform data: howto/manage/program/json_transformer.md
-              - Make Graph-style API Calls: # TODO consolidate into a single page with supporting explanation/reference material
+              - Make graph-style API calls: # TODO consolidate into a single page with supporting explanation/reference material
                   - Basics: howto/manage/program/graph-api/basics.md
                   - Navigation and fuzzy query/fetch: howto/manage/program/graph-api/graph.structure.md
                   - Handling archive data: howto/manage/program/graph-api/query.archive.md
                   - Other convenience functionalities: howto/manage/program/graph-api/misc.md
       - Develop plugins:
-          - Overview: howto/plugins/plugins.md # TODO split former Introduction to plugins into short guiding overview + explanation page
+          - Plugins Overview: howto/plugins/plugins.md # TODO split former Introduction to plugins into short guiding overview + explanation page
           # - Set up a development environment: howto/plugins/setup.md # TODO distro-dev setup + best practices
           - Entry point types:
               - Actions: howto/plugins/types/actions.md

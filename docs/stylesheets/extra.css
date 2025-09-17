@@ -119,6 +119,23 @@
     margin: 1em 0 0 0 !important;
 }
 
+/* Make a button center itself when it has .center */
+.md-typeset .md-button.center,
+.md-typeset a.md-button.center {
+  display: block;            /* become block so margins apply */
+  width: fit-content;        /* shrink to content (fallback: max-content) */
+  margin-left: auto;         /* center */
+  margin-right: auto;        /* center */
+  margin-top: 0.75rem;       /* optional spacing */
+  margin-bottom: 0.75rem;
+}
+
+/* Nicer inline alignment when used inside text */
+.md-typeset .md-button {
+  line-height: 1.25;
+  vertical-align: baseline;
+}
+
 .category-pill {
     background-color: rgb(248, 248, 248);
     display: inline-block;

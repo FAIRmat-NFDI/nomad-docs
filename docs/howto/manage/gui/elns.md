@@ -1,4 +1,4 @@
-# How to define and use ELNs in NOMAD
+# How to create custom ELNs
 
 ## Schemas for ELNs
 

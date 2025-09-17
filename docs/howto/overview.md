@@ -6,104 +6,106 @@ hide: toc
 
 ## Manage and find data
 
-<span class="badge badge-user">U</span> Regular User Tag
-
-These how-to guides target "regular" NOMAD users and cover data management, exploration, and analysis
+These how-to guides cover every-day NOMAD usage including data management, exploration, and analysis
 with NOMAD's graphical user interface and APIs.
+
 
 <div markdown="block" class="home-grid">
 <div markdown="block">
 
-### GUI
+### With the GUI
 
 Use NOMAD to manage, explore, and analyze data.
 
 - [Upload and publish data for supported formats](manage/gui/upload.md)
-- [Use ELNs](manage/gui/eln.md)
+- [Enter data with ELNs](manage/gui/eln.md)
 - [Explore data](manage/gui/explore.md)
-- [Use NORTH](manage/gui/north.md)
+- [Analyze data in NORTH](manage/gui/north.md)
+- [Create custom workflows](manage/gui/workflows.md)
+- [Write a YAML schema package](manage/gui/yaml.md)
+- [Create custom ELNs](manage/gui/elns.md)
+- [Parse tabular data](manage/gui/tabular.md)
 
 </div>
 <div markdown="block">
 
-### Programmatic
+### Programmatically
 
 Use NOMAD's functionalities programmatically.
 
-- [Use the API](manage/program/api.md)
-- [Publish data using python](manage/program/publish_python.md)
-- [Install nomad-lab](manage/program/pythonlib.md)
+[API Overview](manage/program/api.md){ .md-button .nomad-button .center}
+
+- [Download data](manage/program/download.md)
+- [Publish data using Python](manage/program/publish_python.md)
 - [Access processed data](manage/program/archive_query.md)
 - [Transform data](manage/program/json_transformer.md)
-- [Graph-style API](manage/program/graph-api/basics.md)
+- [Make graph-style API calls](manage/program/graph-api/basics.md)
 
 </div>
 </div>
 
-## Customize
+## Develop plugins
 
-<span class="badge badge-advanced">A</span> Advanced User / Application Adminstrator Tag
+These how-to guides direct advanced users, data stewards, and NOMAD application administrators to
+build robust and powerful customized NOMAD support with Python-based plugin software.
 
-These how-to guides direct advanced users, NOMAD application administrators, and data stewards to
-customize various NOMAD features.
+[Plugins Overview](plugins/plugins.md){ .md-button .nomad-button .center}
 
 <div markdown="block" class="home-grid">
 <div markdown="block">
 
-### YAML (quick)
+### Entry point types
 
-Implement quick and dirty customizationations of NOMAD entries.
+NOMAD plugins are connect with the core software via "entry points". There are various types of entry points, with specific roles within the infrastructure for providing support for data ingestion, visualization, search, and more:
 
-- [Write a schema](manage/gui/yaml.md)
-- [Define ELNs](manage/gui/elns.md)
-- [Parse tabular data](manage/gui/tabular.md)
-- [Define workflows](manage/gui/workflows.md)
+- [APIs](plugins/types/apis.md)
+- [Apps](plugins/types/apps.md)
+- [Example uploads](plugins/types/example_uploads.md)
+- [Normalizers](plugins/types/normalizers.md)
+- [Parsers](plugins/types/parsers.md)
+- [Schema packages](plugins/types/schema_packages.md)
 
 </div>
 
 <div markdown="block">
 
-### Python Plugins (robust)
+### Built-in tools
 
-Implement robust and powerful customizations for data ingestion, visualization, search, and more.
+NOMAD's built-in tools ease the plugin development process and help to ensure standardization and efficiency of plugins.
 
-- [Introduction to plugins](plugins/plugins.md)
-- [Write an API](plugins/types/apis.md)
-- [Write an app](plugins/types/apps.md)
-- [Write an example upload](plugins/types/example_uploads.md)
-- [Write a normalizer](plugins/types/normalizers.md)
-- [Write a parser](plugins/types/parsers.md)
-- [Write a schema packages](plugins/types/schema_packages.md)
 - [Work with units](plugins/tools/units.md)
-- [Use HDF5 to handle large quantities](plugins/tools/hdf5.md)
-- [Use Mapping parser to write data on archive](plugins/tools/mapping_parser.md)
+- [Handle large data with HDF5](plugins/tools/hdf5.md)
+- [Parse efficiently with mapping annotations](plugins/tools/mapping_parser.md)
 
 </div>
 </div>
 
-### Host and develop NOMAD Oasis
+## Host a NOMAD Oasis
 
-<span class="badge badge-sysadmin">S</span> System Adminstrator / Developer Tag
+These how-to guides provide technical guidelines for system adminstrators to setup, deploy, and maintain a local installation of NOMAD.
 
-These how-to guides provide technical guidelines for system adminstrators and developers
+<div markdown="block" class="home-grid">
+<div markdown="block">
+
+Host a NOMAD Oasis for your lab or institution.
+
+- [Install](oasis/configure.md)
+- [Configure](oasis/configure.md)
+- [Deploy](oasis/deploy.md)
+- [Update](oasis/update.md)
+- [Administer](oasis/admin.md)
+
+</div>
+
+</div>
+
+## Develop the core software
+
+These how-to guides provide technical guidelines for developers
 of the core NOMAD software.
 
 <div markdown="block" class="home-grid">
 <div markdown="block">
-
-### Host
-
-Host a NOMAD Oasis for your lab or institution.
-
-- [Configure an Oasis](oasis/configure.md)
-- [Deploy an Oasis](oasis/deploy.md)
-- [Update an Oasis](oasis/update.md)
-- [Perform admin tasks](oasis/admin.md)
-
-</div>
-<div markdown="block">
-
-### Develop
 
 Contribute to the core NOMAD software.
 
@@ -115,8 +117,6 @@ Contribute to the core NOMAD software.
 </div>
 </div>
 
-<h2>One last thing</h2>
+## Additional Resources
 
-If you can't find what you're looking for in our guides, you can find additional resources for
-personalized help and assistance on our
-[Support Page](https://nomad-lab.eu/nomad-lab/support.html){:target="_blank"}.
+[Support Page](https://nomad-lab.eu/nomad-lab/support.html){.md-button .nomad-button target="_blank" rel="noopener"}.
