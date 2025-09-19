@@ -10,7 +10,7 @@
 
 ## Further resources
 
-- [How-to guides > Programmatic use > Use the API](./api.md)
+- [API Overview](./api.md)
 - [nomad-utility-workflows > How-to Guides > Perform API Calls](https://fairmat-nfdi.github.io/nomad-utility-workflows/how_to/use_api_functions.html){:target="_blank"}
 
 ## Uploading, changing metadata, and publishing via python API
