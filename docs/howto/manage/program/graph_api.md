@@ -18,9 +18,9 @@
 
 While REST works well for simple data fetching, it often requires multiple requests when building complex pages, since each endpoint provides only fixed data. GraphQL addresses this by letting clients request exactly the fields they need across related resources in a single query, reducing round trips and avoiding over- or under-fetching.
 
-NOMAD mimics this behaviour with a GraphQL-like API, available at the `/graph/query` endpoint.
+NOMAD mimics this behaviour with a GraphQL-like API, available at the `/graph/query` endpoint (see the [NOMAD API Dashboard](https://nomad-lab.eu/prod/v1/api/v1/extensions/docs){:target="_blank"}).
 
-??? note "technical note"
+??? note "Technical Note"
     The implementation can be categorized as a GraphQL-like API implemented within the REST-style framework FastAPI.
     Because GraphQL requires static, explicitly defined schemas ahead of time while NOMAD supports data with dynamic schema,
     it cannot be implemented directly using existing GraphQL tools.
@@ -76,7 +76,7 @@ To mimic this, the request may look like the following:
 
 But it is not practical to use a string to express potentially complex intentions.
 Instead, we want to use a more structured way to express the request.
-To this end, NOMAD defines a request configuration model (sometimes referred to as 'config' or 'request config'):
+To this end, NOMAD defines a request configuration model ([RequestConfig]) (sometimes referred to as 'config' or 'request config'):
 
 ```py
 class RequestConfig(BaseModel):
@@ -101,8 +101,7 @@ class RequestConfig(BaseModel):
     # ... other fields omitted for brevity ...
 ```
 
-??? note "technical note"
-    The complete definition of the `RequestConfig` can be found in [`nomad/graph/model.py`](https://github.com/FAIRmat-NFDI/nomad/blob/develop/nomad/graph/model.py){:target="_blank"}.
+The complete definition of `RequestConfig` can be found in [`nomad/graph/model.py`](https://github.com/FAIRmat-NFDI/nomad/blob/develop/nomad/graph/model.py){:target="_blank"}.
 
 To fetch the desired field, the `RequestConfig` can be attached under the key `m_request`:
 
@@ -195,7 +194,7 @@ Here the special token `entries` is used to navigate from the upload to the entr
 If needed, one can further navigate from the entry to the archive, or from the upload to the file system, etc.
 This is the essence of the graph: to link data structures together via edges, allowing for complex queries and data retrieval.
 
-??? note "technical note"
+??? note "Technical Note"
       These special tokens do not exist in the original documents stored in MongoDB, but are defined by the graph API to establish the relationships between the data structures.
 
 ### Fuzzy Fetching
@@ -220,12 +219,7 @@ One can use the special key `*` to represent all entries under the upload as fol
 }
 ```
 
-??? note "pagination"
-    To avoid performance issues, the server will paginate the results by default.
-    To control the pagination, one can use the `pagination` field in the request configuration (see examples under [Miscellaneous Functionalities](#miscellaneous-functionalities)).
-<!-- TODO -- remove? redundant with directly below, or separate the pagination part -->
-
-??? warning "no universality"
+!!! warning "Wildcard Usage"
     The `*` wildcard is not universal and only works for **homogeneous** data.
     This means it can only be used to represent `upload_id`, `entry_id`, `dataset_id`, etc., for data that follows a fixed schema (e.g., MongoDB).
     It won't work in archives, the corresponding metainfo (definitions), and alike.
@@ -263,6 +257,9 @@ class RequestConfig(BaseModel):
 
     # ... other fields omitted for brevity ...
 ```
+
+!!! note
+    To avoid performance issues, the server will paginate the results by default.
 
 To instruct the server to perform a query, one needs to attach a request config with valid `query` and `pagination` (optional) alongside the `m_request` key under the **root** level.
 The **root** level is the top-level following the **special tokens**, such as `uploads`, `entries`, etc.
@@ -442,7 +439,7 @@ For example, the above request can be equivalently written as:
 
 This format allows flexible nesting.
 
-!!! tip "range slicing"
+!!! tip "Range Slicing"
     It is possible to assign both start and end indices to the `index` field.
     For example, `index: [1, 3]` will return the second to the fourth elements (both inclusive).
     Using the indexing key, it is equivalent to `key[1:3]`.
@@ -655,9 +652,9 @@ Both fields accept a list of keys to include or exclude. The corresponding respo
 }
 ```
 
-Note that 'glob patterns' are expected.
+!!! note
+      `include` and `exclude` fields expect 'glob patterns'. Thus, if the `include` field is set to `*elements`, it will include all keys that end with `elements`.
 <!-- TODO expected or accepted? -->
-Thus, if the `include` field is set to `*elements`, it will include all keys that end with `elements`.
 
 ```json hl_lines="9"
 {
@@ -1217,8 +1214,8 @@ The corresponding response will look like:
 Note that when a `query` field is provided, it will be returned in the `m_response` field.
 Also, the `pagination` field will always be returned, even if not specified in the request.
 
-<!-- TODO - Check about Elasticsearch & MongoDB typesetting -->
-??? note "data duplication"
+<!-- TODO - Check about the rename of this one -->
+!!! tip "Efficient Fetching"
     Some fields are both stored in the MongoDB database and the Elasticsearch index, and often can be fetched more efficiently directly from Elasticsearch.
     However, if the request needs to access archive, the `entry -> archive` path must be used if starting from `search`.
 
@@ -1309,6 +1306,6 @@ In the response, we see that the entry `-L073PFe_PxW90kci4UwxMgUO20O` has the co
 }
 ```
 
-??? note "pagination"
+??? note "Pagination for File Information"
     The file information listing is always paginated.
     This is particularly useful when listing files in an upload, as there can be many files.
