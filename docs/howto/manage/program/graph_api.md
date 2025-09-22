@@ -18,21 +18,23 @@ While REST works well for simple data fetching, it often requires multiple reque
 
 NOMAD mimics this behaviour with a GraphQL-like API, available at the `/graph/query` endpoint.
 
-??? note "technical details"
-    It is categorized as a GraphQL-like API implemented within the REST-style framework FastAPI.
+??? note "technical note"
+    The implementation can be categorized as a GraphQL-like API implemented within the REST-style framework FastAPI.
     Because GraphQL requires static, explicitly defined schemas ahead of time while NOMAD supports data with dynamic schema,
     it cannot be implemented directly using existing GraphQL tools.
     As a result, there are unfortunately no GUI tools available at this time.
 
-## Basic Usage (Data Fetching)
+## Basic Data Fetching
 
 Imagine there is an example upload with the upload ID `<example_upload_id>`.
 The metadata of this upload is stored in MongoDB.
-In our mental model, it is possible to organize all uploads in a tree structure, under the root `uploads`.
-This will help us to define interactions among different data structures in the following sections.
+<!-- In our mental model, it is possible to organize all uploads in a tree structure, under the root `uploads`.
+This will help us to define interactions among different data structures in the following sections. -->
+<!-- TODO - Check with Nathan the meaning  -->
 
 If one uses the endpoint `/uploads/{upload_id}` to fetch the upload metadata,
 the response would look like the following (after some restructuring according to the mental model).
+<!-- TODO - what restructuring? -->
 
 ```json
 {
@@ -57,7 +59,8 @@ the response would look like the following (after some restructuring according t
 
 How would one tell the server if, say, for example, only `upload_name` is needed?
 With GraphQL, one simply needs to '**ask for what you need**', following the structure of the data.
-To mimic this, the request may look like the following.
+To mimic this, the request may look like the following:
+<!-- TODO - make clear here or below that we are using the new endpoint -->
 
 ```json
 {
@@ -71,7 +74,7 @@ To mimic this, the request may look like the following.
 
 But it is not practical to use a string to express potentially complex intentions.
 Instead, we want to use a more structured way to express the request.
-To this end, NOMAD defines a request configuration model (referred to as 'config').
+To this end, NOMAD defines a request configuration model (sometimes referred to as 'config' or 'request config'):
 
 ```py
 class RequestConfig(BaseModel):
@@ -96,11 +99,10 @@ class RequestConfig(BaseModel):
     # ... other fields omitted for brevity ...
 ```
 
-??? note "complete definition"
+??? note "technical note"
     The complete definition of the `RequestConfig` can be found in [`nomad/graph/model.py`](https://github.com/FAIRmat-NFDI/nomad/blob/develop/nomad/graph/model.py){:target="_blank"}.
 
-To fetch the desired field, one shall attach a `RequestConfig` under the key `m_request`.
-The `plain` directive tells the server to include the field in the response.
+To fetch the desired field, the `RequestConfig` can be attached under the key `m_request`:
 
 ```json hl_lines="4"
 {
@@ -111,9 +113,10 @@ The `plain` directive tells the server to include the field in the response.
   }
 }
 ```
+The `plain` directive tells the server to include the field in the response.
 
-Now it is possible to fetch whatever wanted from the upload metadata.
-For example, if one wants to fetch the `upload_name` and `upload_create_time`, the request would look like this:
+Now it is possible to fetch a collection of desired quantities from the upload metadata.
+For example, if one wants to fetch the `upload_name` and `upload_create_time`, the request would be:
 
 ```json
 {
@@ -126,14 +129,16 @@ For example, if one wants to fetch the `upload_name` and `upload_create_time`, t
 }
 ```
 
-## Existing Data Resources
+### Existing Data Resources
 
-There are a few existing data resources (called `Documents`) stored in `MongoDB`:
+<!-- TODO - Add where to find find the full list of documents -->
 
-1. `uploads` (stored in MongoDB): The metadata of an upload, including, `upload_id`, `upload_name`, `main_author`, etc.
-2. `entries` (stored in MongoDB): The metadata of an entry, including, `entry_id`, `entry_create_time`, `mainfile`, etc.
-3. `datasets` (stored in MongoDB): The metadata of a dataset, including, `dataset_id`, `dataset_name`, `user_id`, etc.
-4. `groups` (stored in MongoDB): The metadata of a user group, including, `owner`, `members`, etc.
+There are a few existing data resources (called documents) stored in MongoDB:
+
+1. `uploads`: The metadata of an upload, including, `upload_id`, `upload_name`, `main_author`, etc.
+2. `entries`: The metadata of an entry, including, `entry_id`, `entry_create_time`, `mainfile`, etc.
+3. `datasets`: The metadata of a dataset, including, `dataset_id`, `dataset_name`, `user_id`, etc.
+4. `groups`: The metadata of a user group, including, `owner`, `members`, etc.
 
 One can apply the same logic to fetch data from these structures.
 For example, to fetch the `entry_id` and `entry_create_time` of an entry with ID `<example_entry_id>`, the request would look like this:
@@ -151,20 +156,17 @@ For example, to fetch the `entry_id` and `entry_create_time` of an entry with ID
 
 The top-level keys should be one of `uploads`, `entries`, `datasets`, or `groups` to indicate which data resource to query.
 
-This concludes the basic usage of the `/graph/query` endpoint.
-There are other resources to explore, which will be explained in the subsequent pages.
+## Navigating the Graph Structure
 
-## The Graph Structure
-
-The previous section cover how to fetch data from existing data structures, using only isolated "nodes".
-To leverage the graph structure capabilities and navigate from one data structure to another, we need to introduce 'edges' to link 'nodes' together.
+<!-- The previous sections cover how to fetch data from existing data structures, using only isolated "nodes".
+To leverage the graph structure capabilities and navigate from one data structure to another, we need to introduce 'edges' to link 'nodes' together. -->
 
 The data structures in NOMAD are inherently linked together.
 For example, an upload is a collection of entries, an entry corresponding to an archive, a user group is a collection of users,
 each user may be the owner of several uploads, etc.
 
 Thus, it is natural to link these data structures together via **special tokens**.
-The following figure illustrates the relationships between the data structures in NOMAD with the special tokens highlighted.
+The following schematic illustrates various NOMAD data structures with the special tokens defining links between them.
 
 ![NOMAD graph](./images/graph.svg)
 
@@ -187,20 +189,19 @@ the request to fetch the `entry_id` and `entry_create_time` of the entry, togeth
 }
 ```
 
-Here it uses the special token `entries` to navigate from the upload to the entry.
+Here the special token `entries` is used to navigate from the upload to the entry.
 If needed, one can further navigate from the entry to the archive, or from the upload to the file system, etc.
 This is the essence of the graph: to link data structures together via edges, allowing for complex queries and data retrieval.
 
-It shall be noted that those 'special tokens' do not exist in the original documents stored in `MongoDB`.
-They are defined by the graph API to establish the relationships between the data structures.
+??? note "technical note"
+      These special tokens do not exist in the original documents stored in MongoDB, but are defined by the graph API to establish the relationships between the data structures.
 
 ## Fuzzy Fetching
 
 Imagine we start with an upload with a known ID `<example_upload_id>`, and we want to find all entries that belong to this upload.
-How can we achieve this without knowing the exact entry IDs a priori?
+How can we achieve this without knowing the exact entry IDs?
 
-One can use the special key `*` to represent all entries under the upload.
-Thus, all entries under the upload can be fetched as follows:
+One can use the special key `*` to represent all entries under the upload as follows:
 
 ```json hl_lines="5"
 {
@@ -217,18 +218,20 @@ Thus, all entries under the upload can be fetched as follows:
 }
 ```
 
-??? note "default pagination"
+??? note "pagination"
     To avoid performance issues, the server will paginate the results by default.
-    To control the pagination, one can use the `pagination` field in the request configuration (see below).
+    To control the pagination, one can use the `pagination` field in the request configuration (see examples under [Miscellaneous Functionalities](#miscellaneous-functionalities)).
+<!-- TODO -- remove? redundant with directly below, or separate the pagination part -->
 
 ??? warning "no universality"
     The `*` wildcard is not universal and only works for **homogeneous** data.
-    This means it can only be used to represent `upload_id`, `entry_id`, `dataset_id`, etc., for data that follows a fixed schema (`MongoDB`).
+    This means it can only be used to represent `upload_id`, `entry_id`, `dataset_id`, etc., for data that follows a fixed schema (e.g., MongoDB).
     It won't work in archives, the corresponding metainfo (definitions), and alike.
+<!-- TODO Clarify the writing of the universality note -->
 
 ## Fuzzy Querying
 
-The request configuration allows one to perform fuzzy queries to further filter data before fetching, via the `query` and `pagination` fields.
+The request configuration allows one to perform fuzzy queries to further filter data before fetching via the `query` and `pagination` fields:
 
 ```py hl_lines="4-24"
 class RequestConfig(BaseModel):
@@ -259,11 +262,11 @@ class RequestConfig(BaseModel):
     # ... other fields omitted for brevity ...
 ```
 
-To instruct the server to perform a query, one need to attach a request config with valid `query` and `pagination` (optional) with the `m_request` key under the **root** level.
+To instruct the server to perform a query, one needs to attach a request config with valid `query` and `pagination` (optional) alongside the `m_request` key under the **root** level.
 The **root** level is the top-level following the **special tokens**, such as `uploads`, `entries`, etc.
 
 Combined with fuzzy fetching, one can perform filter and fetch.
-For example, if one wants to fetch all entries under an upload with a specific parser name, the request would look like this.
+For example, if one wants to fetch all entries under an upload with a specific parser name, the request would be:
 
 ```json hl_lines="6"
 {
@@ -281,24 +284,16 @@ For example, if one wants to fetch all entries under an upload with a specific p
 }
 ```
 
-As explained in the comments, depending on the specific token, the query must comply with the corresponding query model.
-The `pagination` field shall also comply with the corresponding pagination model.
-Those models are used in conventional REST endpoints, and one can find more details in the corresponding documentation.
-
-
-## Querying Archive
-
-In the previous page, we explained how to fetch data from different data resources (mainly `MongoDB` documents).
-They are mostly flat (with only a few levels of nesting) and relatively easy to query and fetch.
-
-The very idea can be extended to fetching archives that are stored on the file system.
+Both the query and the pagination fields must comply with the underlying models, depending on the specific token.
+Details can be found in standard REST documentation, as these models are used in conventional REST endpoints.
 
 ## Accessing Archives
 
+The [Basic Data Fetching](#basic-data-fetching) functionality can be extended to fetching NOMAD archives.
 An archive is the processed data of an entry, which is stored on the file system as a binary file.
 Each archive thus corresponds to an entry, and the corresponding entry ID can be used as the unique identifier to access the archive.
 In the graph system, the archive is linked to the corresponding entry via the special token `archive`.
-Thus, to access the archive of an entry with ID `<example_entry_id>`, one can use the following query.
+Thus, to fetch the contents of an archive with entry ID `<example_entry_id>`, one can use the following query:
 
 ```json hl_lines="4-6"
 {
@@ -312,12 +307,9 @@ Thus, to access the archive of an entry with ID `<example_entry_id>`, one can us
 }
 ```
 
-??? note "plain directive"
-    The `plain` directive means 'just return the data as it is'.
-    We will introduce other directives later.
+The `plain` directive means 'just return the data as it is'. Other directives are introduced in the following sections.
 
-The above query will return the contents of the target archive.
-Replacing `<example_entry_id>` with a valid entry ID will make it ready to be executed.
+In the following, let's use the random entry id `x36WdKPMctUOkjXMyV8oQq2zWcSx` to make things more concrete. Our request to fetch the archive becomes:
 
 ```json hl_lines="3-6"
 {
@@ -331,19 +323,19 @@ Replacing `<example_entry_id>` with a valid entry ID will make it ready to be ex
 }
 ```
 
-??? note "a valid example"
-    The following is a valid `curl` command that fetches the archive of a random entry `x36WdKPMctUOkjXMyV8oQq2zWcSx`.
+This request can be perform in practice with `curl`:
 
-    ```bash
-    curl -X 'POST' \
-    'https://nomad-lab.eu/prod/v1/api/v1/graph/query' \
-    -H 'accept: application/json' \
-    -H 'Content-Type: application/json' \
-    -d '{
-    "entries":{ "x36WdKPMctUOkjXMyV8oQq2zWcSx":{ "archive":{ "m_request":{ "directive":"plain" } } } }
-    }'
-    ```
+```bash
+curl -X 'POST' \
+'https://nomad-lab.eu/prod/v1/api/v1/graph/query' \
+-H 'accept: application/json' \
+-H 'Content-Type: application/json' \
+-d '{
+"entries":{ "x36WdKPMctUOkjXMyV8oQq2zWcSx":{ "archive":{ "m_request":{ "directive":"plain" } } } }
+}'
+```
 
+<!-- TODO -- Here I am -->
 ## Nested Fetching
 
 The archive is `JSON` compatible, which means it is effectively a `JSON` object (with tree-like structure).
