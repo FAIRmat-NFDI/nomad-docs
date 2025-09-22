@@ -1,4 +1,4 @@
-name: Check mkdocs build and links in markdown files
+name: Check mkdocs build and links in markdown files, and preview the docs
 
 on:
   push:
