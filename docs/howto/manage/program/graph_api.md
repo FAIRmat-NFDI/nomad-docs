@@ -1,5 +1,7 @@
 # How to make Graph-Style API Calls
 
+<!-- TODO - unify the naming/display of notes throughout -->
+
 ## What you will learn
 
 - How to implement flexible and accurate data fetching with a [GraphQL](https://graphql.org/)-like API.
@@ -196,7 +198,7 @@ This is the essence of the graph: to link data structures together via edges, al
 ??? note "technical note"
       These special tokens do not exist in the original documents stored in MongoDB, but are defined by the graph API to establish the relationships between the data structures.
 
-## Fuzzy Fetching
+### Fuzzy Fetching
 
 Imagine we start with an upload with a known ID `<example_upload_id>`, and we want to find all entries that belong to this upload.
 How can we achieve this without knowing the exact entry IDs?
@@ -229,7 +231,7 @@ One can use the special key `*` to represent all entries under the upload as fol
     It won't work in archives, the corresponding metainfo (definitions), and alike.
 <!-- TODO Clarify the writing of the universality note -->
 
-## Fuzzy Querying
+### Fuzzy Querying
 
 The request configuration allows one to perform fuzzy queries to further filter data before fetching via the `query` and `pagination` fields:
 
@@ -335,12 +337,11 @@ curl -X 'POST' \
 }'
 ```
 
-<!-- TODO -- Here I am -->
-## Nested Fetching
+### Nested Fetching
 
-The archive is `JSON` compatible, which means it is effectively a `JSON` object (with tree-like structure).
-Thus, one can apply the exact same logic and 'express' the intention in the request by using a tree-like structure.
-For example, if one wants to fetch the `n_quantities` under `metadata` in the archive, the request would look like this.
+The archive is `JSON` compatible, which means it is effectively a `JSON` objec, with a tree-like structure.
+Thus, one can apply the exact same fetching logic as in [Accessing Archives](#accessing-archives), while 'expressing' the intention to fetch data from any level of the tree.
+For example, if one wants to fetch `n_quantities` under `metadata`, a subsection of the archive root, the request would be:
 
 ```json hl_lines="6"
 {
@@ -356,8 +357,7 @@ For example, if one wants to fetch the `n_quantities` under `metadata` in the ar
 }
 ```
 
-The following is the response of the above request.
-It can be noted that the response and the request have the same structure, and the intended data is returned.
+The response of the above request is:
 
 ```json hl_lines="6"
 {
@@ -373,13 +373,15 @@ It can be noted that the response and the request have the same structure, and t
 }
 ```
 
-### Advanced Customization
+Note that the response and the request have the same structure, with the intended data returned in lieu of the response config.
+
+### Advanced Fetching
 
 #### List Slicing
 
 If the target data is a list, it is possible to extract a slice of the list by using the `index` field in the request configuration.
 
-The following request fetches the **second** (0-indexed) element of the `processing_logs` list in the archive of the entry with ID `x36WdKPMctUOkjXMyV8oQq2zWcSx`.
+The following request fetches the **second** (0-indexed) element of the `processing_logs` list in the archive of the entry with ID `x36WdKPMctUOkjXMyV8oQq2zWcSx`:
 
 ```json hl_lines="6"
 {
@@ -396,7 +398,7 @@ The following request fetches the **second** (0-indexed) element of the `process
 ```
 
 The exact data will be returned in the corresponding position.
-Since the first element is not requested, it will be `null` in the response.
+Since the first element is not requested, it will be `null` in the response:
 
 ```json hl_lines="6-17"
 {
@@ -424,7 +426,7 @@ Since the first element is not requested, it will be `null` in the response.
 ```
 
 Apart from using the `index` field, one can alternatively use the indexing syntax in the key.
-For example, the above request can be equivalently written as follows.
+For example, the above request can be equivalently written as:
 
 ```json hl_lines="5"
 {
@@ -449,7 +451,7 @@ This format allows flexible nesting.
 
 Sometimes, it is only necessary to know what the archive contains, without needing to fetch all the data.
 In such cases, one can limit the depth of the request by using the `depth` field in the request configuration.
-The following request fetches the archive of the entry `x36WdKPMctUOkjXMyV8oQq2zWcSx` with a depth limit of 1.
+The following request fetches the archive of the entry `x36WdKPMctUOkjXMyV8oQq2zWcSx` with a depth limit of 1:
 
 ```json hl_lines="7"
 {
@@ -486,7 +488,7 @@ The response will contain only the top-level fields of the archive, without any 
 
 The values of each field will be replaced by internal reference strings to indicate that the data is available but not fetched.
 
-There is one exception.
+There is one exception:
 If the value is a primitive (like a string, number, boolean, etc.), it is always returned as is.
 This is because generating internal reference strings for primitive values makes little sense and often has a negative impact on performance.
 
@@ -494,7 +496,7 @@ This is because generating internal reference strings for primitive values makes
 
 Some archives may contain large lists or dictionaries, and not all of them may be needed.
 In such cases, one can limit the size of containers by using `max_list_size` and `max_dict_size` fields in the request configuration.
-The following request fetches the data with a maximum list size of 3.
+The following request fetches the data with a maximum list size of 3:
 
 ```json hl_lines="9"
 {
@@ -515,8 +517,7 @@ The following request fetches the data with a maximum list size of 3.
 }
 ```
 
-The response will contain only lists with a maximum of 3 elements.
-Longer lists will be replaced by internal reference strings.
+The response will contain only lists with a maximum of 3 elements, with longer lists being replaced by internal reference strings:
 
 ```json hl_lines="44 46"
 {
@@ -605,12 +606,11 @@ Longer lists will be replaced by internal reference strings.
 }
 ```
 
-The `max_dict_size` field works similarly for dictionaries: if the dictionary has more than the specified number of keys, it will be replaced by an internal reference string.
+The `max_dict_size` field works similarly for dictionaries: If the dictionary has more than the specified number of keys, it will be replaced by an internal reference string.
 
 #### Filtering Unknown Keys
 
-By providing either `include` or `exclude` fields in the request configuration, one can filter the keys of the archive.
-Both fields accept a list of keys to include or exclude, respectively.
+By providing either `include` or `exclude` fields in the request configuration, one can filter the keys of the archive:
 
 ```json hl_lines="9"
 {
@@ -631,7 +631,7 @@ Both fields accept a list of keys to include or exclude, respectively.
 }
 ```
 
-The corresponding response looks like this.
+Both fields accept a list of keys to include or exclude. The corresponding response looks like:
 
 ```json
 {
@@ -655,8 +655,9 @@ The corresponding response looks like this.
 }
 ```
 
-Note that glob patterns are expected.
-Thus, if  the `include` field is set to `*elements`, it will include all keys that end with `elements`.
+Note that 'glob patterns' are expected.
+<!-- TODO expected or accepted? -->
+Thus, if the `include` field is set to `*elements`, it will include all keys that end with `elements`.
 
 ```json hl_lines="9"
 {
@@ -677,8 +678,7 @@ Thus, if  the `include` field is set to `*elements`, it will include all keys th
 }
 ```
 
-The corresponding response looks like this.
-Note the field `elements_ratios` is not included any more.
+The corresponding response will look like:
 
 ```json
 {
@@ -697,16 +697,19 @@ Note the field `elements_ratios` is not included any more.
 }
 ```
 
+Note the field `elements_ratios` is not included any more.
+
 !!! note
     Only one of the fields `include` and `exclude` can be used in a single request configuration.
     Both fields will not be passed to deeper levels of the archive.
+<!-- TODO Is this last statement an additional note or part of the same note? -->
 
 #### Resolving References
 
 Archives may contain references that point to some other locations in the archive, or even to other entries.
 Conceptually it is similar to the soft links in file systems.
 By using a default request configuration, references will be returned as they are.
-The following request fetches the third `calculations_ref` under the path `workflow2/results`.
+The following request fetches the third `calculations_ref` under the path `workflow2/results`:
 
 ```json hl_lines="7"
 {
@@ -724,7 +727,7 @@ The following request fetches the third `calculations_ref` under the path `workf
 }
 ```
 
-The reference string `#/run/0/calculation/2` is returned, the data it points to is, however, not fetched.
+The response will contain the reference string `#/run/0/calculation/2`, but not the data that it points to:
 
 ```json hl_lines="10"
 {
@@ -749,8 +752,7 @@ The reference string `#/run/0/calculation/2` is returned, the data it points to 
 ??? note "various formats of references"
     The format of the reference string may vary, depending on whether it is a reference to the same entry or to another entry.
 
-To resolve the reference, one shall use the `resolved` directive instead of the default `plain` directive.
-Note the following request also limits the size of the list to 2 elements such that the response has a reasonable length to be presented here.
+To resolve references, i.e., return the data that they point to, one should use the `resolved` directive instead of the default `plain` directive. For example:
 
 ```json hl_lines="9"
 {
@@ -773,15 +775,7 @@ Note the following request also limits the size of the list to 2 elements such t
 }
 ```
 
-The very first change is that the reference string is normalized to `uploads/RzWMitKESo2dQmuE6uQB-Q/entries/x36WdKPMctUOkjXMyV8oQq2zWcSx/archive/run/0/calculation/2`.
-By default, the 'extra' data requested (here, the resolved data) will be added to the response under a fixed path: `uploads/<upload_id>/entries/<entry_id>/archive/<path_to_data>`.
-This fixed path is not affected by any other factors, even if it is a reference to the same entry.
-This is a valid path that can be used to access the data in the **same** response.
-The motivation is to produce a response that is as self-contained as possible.
-
-The second thing to note is that the target `calculation` contains a further reference `method_ref` that points to the method used for the calculation.
-This reference is also resolved, and the corresponding data is fetched and included in the response.
-As a matter of fact, all references will be recursively resolved such that the response contains all the data that is reachable from the original reference.
+Note that, for presentation purposes, this request also limits the size of the returned list to 2 elements. The corresponding response is:
 
 ```json hl_lines="92 13 48-76"
 {
@@ -885,11 +879,21 @@ As a matter of fact, all references will be recursively resolved such that the r
 }
 ```
 
+The first thing to note here is that the reference string has been normalized to `uploads/RzWMitKESo2dQmuE6uQB-Q/entries/x36WdKPMctUOkjXMyV8oQq2zWcSx/archive/run/0/calculation/2`.
+By default, the 'extra' data requested (here, the resolved data) will be added to the response under a fixed path: `uploads/<upload_id>/entries/<entry_id>/archive/<path_to_data>`.
+This fixed path is not affected by any other factors, even if it is a reference to the same entry.
+This is a valid path that can be used to access the data in the **same** response.
+The motivation is to produce a response that is as self-contained as possible.
+
+The second thing to note is that the target `calculation` contains a further reference `method_ref` that points to the method used for the calculation.
+This reference is also resolved, and the corresponding data is fetched and included in the response.
+In general, whenever the `resolved` directive is specified, all references will be recursively resolved such that the response contains all the data that is reachable from the original reference.
+
 #### Controlling Reference Resolution
 
 However, it is **not always** desired to resolve all references.
-It is possible to assign a `resolve_depth` field in the request configuration to control how deep the references should be resolved.
-For example, the following request will resolve only one level of references.
+It is also possible to control how deep the references should be resolved by assigning a `resolve_depth` field in the request configuration.
+For example, the following request will resolve only one level of references:
 
 ```json hl_lines="11"
 {
@@ -913,7 +917,7 @@ For example, the following request will resolve only one level of references.
 }
 ```
 
-As can be seen in the response, the first `method` is **not** resolved any more, since it is at the second level of references.
+As can be seen in the response, the first `method` is no longer resolved, since it belongs to the second level of references.
 Every resolution/redirection is counted as one level.
 
 ```json hl_lines="13"
@@ -992,15 +996,14 @@ Every resolution/redirection is counted as one level.
 ## Miscellaneous Functionalities
 
 Apart from the core functionalities that cover MongoDB database and archive data, there are additional resources that can be fetched.
-In this page, we briefly summarize these functionalities.
 
 ### User Information
 
-As all data are associated with the corresponding users, in our mental model, uploads, entries, datasets, etc., are connected to a user node.
-Accordingly, there is a top level special token `users` that can be used to fetch user information.
-Just like uploads/entires introduced previously, a user ID needs to be specified.
+As all data are associated with the corresponding users, uploads, entries, datasets, etc. are connected to a user node.
+Accordingly, the special token `users` can be used to fetch user information.
+Just like uploads and entries, a user ID needs to be specified.
 
-For example, to fetch the user information of a user with ID `57aaf068-cdd0-43c1-be51-99e0d425c131`, one can use the following query.
+For example, to fetch the user information of a user with ID `57aaf068-cdd0-43c1-be51-99e0d425c131`, one can use the query:
 
 ```json hl_lines="3"
 {
@@ -1014,7 +1017,7 @@ For example, to fetch the user information of a user with ID `57aaf068-cdd0-43c1
 }
 ```
 
-This will return the following response (some fields are omitted).
+This will return the response (some fields are omitted):
 
 ```json
 {
@@ -1031,6 +1034,7 @@ This will return the following response (some fields are omitted).
 }
 ```
 
+<!-- TODO - clarify the meaning of this, not possible otherwise? Most cases of what? -->
 In most cases, one shall only get the user information of the user who is currently logged in.
 This can be done conveniently by using the special token `me`.
 Thus, the above query is equivalent to the following query if `57aaf068-cdd0-43c1-be51-99e0d425c131` is the user ID of the currently logged in user.
@@ -1047,8 +1051,8 @@ Thus, the above query is equivalent to the following query if `57aaf068-cdd0-43c
 }
 ```
 
-Starting from user information, it is possible to navigate to other resources (nodes).
-For example, the following query will list all uploads of the currently logged in user.
+Starting from the user information, it is possible to navigate to other resources (nodes).
+For example, the following query will list all uploads of the currently logged in user:
 
 ```json hl_lines="4"
 {
@@ -1060,7 +1064,7 @@ For example, the following query will list all uploads of the currently logged i
 }
 ```
 
-The response may look like the following.
+The response, a plain list of upload IDs, will look something like:
 
 ```json
 {
@@ -1076,8 +1080,7 @@ The response may look like the following.
 }
 ```
 
-Note it's nothing more than a plain list.
-If one wishes, one can navigate to the corresponding upload to get more information with specific upload IDs, or with a wildcard `*`.
+One can retrieve specific data from each upload by navigating to the corresponding upload. This could be done in a second request using the retrieved upload IDs or, more efficiently, in the initial request with the wildcard `*`:
 
 ```json hl_lines="5-7"
 {
@@ -1093,7 +1096,7 @@ If one wishes, one can navigate to the corresponding upload to get more informat
 }
 ```
 
-The above query will return the creation time of all uploads of the currently logged in user.
+The response will contain the creation time of all uploads of the currently logged in user:
 
 ```json
 {
@@ -1117,13 +1120,13 @@ The above query will return the creation time of all uploads of the currently lo
 
 ### Elasticsearch Metadata
 
-Some of the entry metadata is also stored in `Elasticsearch` indices.
+Some of the entry metadata is also stored in Elasticsearch indices.
 They are similar to the metadata in the MongoDB database, but with more information.
-To fetch data from the `Elasticsearch` index, one can use the special token `search`.
+To fetch data from the Elasticsearch index, one can use the special token `search`.
 The top-level request configuration also supports the `query` field.
-This `query` field shall take a valid `Metadata` query object (which itself also contains a `query` field), see the endpoint `/entries/query` for more details.
+This `query` field shall take a valid `Metadata` query object (which itself also contains a `query` field), see the endpoint `/entries/query` on the [NOMAD API Dashboard](https://nomad-lab.eu/prod/v1/api/v1/extensions/docs){:target="_blank"} for more details.
 
-The following example lists all entries created since 2025 that are visible to the logged in user.
+The following query fetches all entries created since 2025 that are visible to the logged in user:
 
 ```json hl_lines="5-8"
 {
@@ -1140,8 +1143,9 @@ The following example lists all entries created since 2025 that are visible to t
 }
 ```
 
-Each record will be returned as entry metadata, from which one can navigate to the corresponding entry (MongoDB document) and get more information, or further navigate to the archive, etc.
-The following example first queries the `Elasticsearch`, for each hit, it further fetches the `entry_create_time` from the MongoDB database via the `entry` special token.
+Each record will be returned as entry metadata (not shown here), from which one can navigate to the corresponding entry (MongoDB document) and get more information, or further navigate to the archive, etc.
+
+As a more complex example, the following query first queries the Elasticsearch for the same list of entries then, for each hit, further fetches the `entry_create_time` from the MongoDB database via the `entry` special token.
 
 ```json hl_lines="11-19"
 {
@@ -1167,9 +1171,7 @@ The following example first queries the `Elasticsearch`, for each hit, it furthe
 }
 ```
 
-The response will look like the following.
-Note when a `query` field is provided, it will be returned in the `m_response` field.
-Also, the `pagination` field will always be returned, even if not specified in the request.
+The corresponding response will look like:
 
 ```json
 {
@@ -1212,21 +1214,23 @@ Also, the `pagination` field will always be returned, even if not specified in t
 }
 ```
 
+Note that when a `query` field is provided, it will be returned in the `m_response` field.
+Also, the `pagination` field will always be returned, even if not specified in the request.
+
+<!-- TODO - Check about Elasticsearch & MongoDB typesetting -->
 ??? note "data duplication"
-    Some fields are both stored in the `MongoDB` database and the `Elasticsearch` index.
-    And it is likely that the desired information can be directly fetched from `Elasticsearch`.
-    In this case, there is no need to navigate to the `MongoDB` database.
-    However, if the request needs to access archive, it has to use `entry -> archive` path if starting from `search`.
+    Some fields are both stored in the MongoDB database and the Elasticsearch index, and often can be fetched more efficiently directly from Elasticsearch.
+    However, if the request needs to access archive, the `entry -> archive` path must be used if starting from `search`.
 
 ### Listing File Information
 
 As each entry corresponds to a main file, and each upload corresponds to a folder, the graph API also provides a convenient way to fetch file information, similar to the `ls` command in Linux.
 There are two ways to access the file system.
 
-1. Inside an upload, use the token `files`.
-2. Inside an entry, use the token `mainfile`.
+1. Inside an upload, using the token `files`.
+2. Inside an entry, using the token `mainfile`.
 
-For example, the following query uses the `mainfile` token to fetch the file information.
+For example, the following query uses the `mainfile` token to fetch the file information:
 
 ```json hl_lines="13"
 {
@@ -1248,7 +1252,7 @@ For example, the following query uses the `mainfile` token to fetch the file inf
 }
 ```
 
-In the response, we see that the entry `-L073PFe_PxW90kci4UwxMgUO20O` has the corresponding main file `OUTCAR_K_nm_5`, which has a size of `47862593` bytes.
+In the response, we see that the entry `-L073PFe_PxW90kci4UwxMgUO20O` has the corresponding main file `OUTCAR_K_nm_5`, which has a size of `47862593` bytes:
 
 ```json hl_lines="32-48"
 {
