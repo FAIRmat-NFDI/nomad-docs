@@ -1,21 +1,17 @@
 # Querying Archive
 
-In the previous page, we explained how to fetch data from different data resources (mainly `MongoDB` documents).
-They are mostly flat (with only a few levels of nesting) and relatively easy to query and fetch.
-
-The very idea can be extended to fetching archives that are stored on the file system.
-
 ## Accessing Archives
 
+The [Basic Data Fetching](#basic-data-fetching) functionality can be extended to fetching NOMAD archives.
 An archive is the processed data of an entry, which is stored on the file system as a binary file.
 Each archive thus corresponds to an entry, and the corresponding entry ID can be used as the unique identifier to access the archive.
 In the graph system, the archive is linked to the corresponding entry via the special token `archive`.
-Thus, to access the archive of an entry with ID `example_entry_id`, one can use the following query.
+Thus, to fetch the contents of an archive with entry ID `<example_entry_id>`, one can use the following query:
 
 ```json hl_lines="4-6"
 {
    "entries":{
-      "example_entry_id":{
+      "<example_entry_id>":{
          "archive":{
             "m_request":{ "directive":"plain" }
          }
@@ -24,12 +20,9 @@ Thus, to access the archive of an entry with ID `example_entry_id`, one can use 
 }
 ```
 
-??? note "plain directive"
-    The `plain` directive means 'just return the data as it is'.
-    We will introduce other directives later.
+The `plain` directive means 'just return the data as it is'. Other directives are introduced in the following sections.
 
-The above query will return the contents of the target archive.
-Replacing `example_entry_id` with a valid entry ID will make it ready to be executed.
+In the following, let's use the random entry id `x36WdKPMctUOkjXMyV8oQq2zWcSx` to make things more concrete. Our request to fetch the archive becomes:
 
 ```json hl_lines="3-6"
 {
@@ -43,24 +36,23 @@ Replacing `example_entry_id` with a valid entry ID will make it ready to be exec
 }
 ```
 
-??? note "a valid example"
-    The following is a valid `curl` command that fetches the archive of a random entry `x36WdKPMctUOkjXMyV8oQq2zWcSx`.
+This request can be perform in practice with `curl`:
 
-    ```bash
-    curl -X 'POST' \
-    'https://nomad-lab.eu/prod/v1/api/v1/graph/query' \
-    -H 'accept: application/json' \
-    -H 'Content-Type: application/json' \
-    -d '{
-    "entries":{ "x36WdKPMctUOkjXMyV8oQq2zWcSx":{ "archive":{ "m_request":{ "directive":"plain" } } } }
-    }'
-    ```
+```bash
+curl -X 'POST' \
+'https://nomad-lab.eu/prod/v1/api/v1/graph/query' \
+-H 'accept: application/json' \
+-H 'Content-Type: application/json' \
+-d '{
+"entries":{ "x36WdKPMctUOkjXMyV8oQq2zWcSx":{ "archive":{ "m_request":{ "directive":"plain" } } } }
+}'
+```
 
-## Nested Fetching
+### Nested Fetching
 
-The archive is `JSON` compatible, which means it is effectively a `JSON` object (with tree-like structure).
-Thus, one can apply the exact same logic and 'express' the intention in the request by using a tree-like structure.
-For example, if one wants to fetch the `n_quantities` under `metadata` in the archive, the request would look like this.
+The archive is `JSON` compatible, which means it is effectively a `JSON` objec, with a tree-like structure.
+Thus, one can apply the exact same fetching logic as in [Accessing Archives](#accessing-archives), while 'expressing' the intention to fetch data from any level of the tree.
+For example, if one wants to fetch `n_quantities` under `metadata`, a subsection of the archive root, the request would be:
 
 ```json hl_lines="6"
 {
@@ -76,8 +68,7 @@ For example, if one wants to fetch the `n_quantities` under `metadata` in the ar
 }
 ```
 
-The following is the response of the above request.
-It can be noted that the response and the request have the same structure, and the intended data is returned.
+The response of the above request is:
 
 ```json hl_lines="6"
 {
@@ -93,13 +84,15 @@ It can be noted that the response and the request have the same structure, and t
 }
 ```
 
-## Advanced Customization
+Note that the response and the request have the same structure, with the intended data returned in lieu of the response config.
 
-### List Slicing
+### Advanced Fetching
+
+#### List Slicing
 
 If the target data is a list, it is possible to extract a slice of the list by using the `index` field in the request configuration.
 
-The following request fetches the **second** (0-indexed) element of the `processing_logs` list in the archive of the entry with ID `x36WdKPMctUOkjXMyV8oQq2zWcSx`.
+The following request fetches the **second** (0-indexed) element of the `processing_logs` list in the archive of the entry with ID `x36WdKPMctUOkjXMyV8oQq2zWcSx`:
 
 ```json hl_lines="6"
 {
@@ -116,7 +109,7 @@ The following request fetches the **second** (0-indexed) element of the `process
 ```
 
 The exact data will be returned in the corresponding position.
-Since the first element is not requested, it will be `null` in the response.
+Since the first element is not requested, it will be `null` in the response:
 
 ```json hl_lines="6-17"
 {
@@ -144,7 +137,7 @@ Since the first element is not requested, it will be `null` in the response.
 ```
 
 Apart from using the `index` field, one can alternatively use the indexing syntax in the key.
-For example, the above request can be equivalently written as follows.
+For example, the above request can be equivalently written as:
 
 ```json hl_lines="5"
 {
@@ -160,16 +153,16 @@ For example, the above request can be equivalently written as follows.
 
 This format allows flexible nesting.
 
-!!! tip "range slicing"
+!!! tip "Range Slicing"
     It is possible to assign both start and end indices to the `index` field.
     For example, `index: [1, 3]` will return the second to the fourth elements (both inclusive).
     Using the indexing key, it is equivalent to `key[1:3]`.
 
-### Limiting Depth
+#### Limiting Depth
 
 Sometimes, it is only necessary to know what the archive contains, without needing to fetch all the data.
 In such cases, one can limit the depth of the request by using the `depth` field in the request configuration.
-The following request fetches the archive of the entry `x36WdKPMctUOkjXMyV8oQq2zWcSx` with a depth limit of 1.
+The following request fetches the archive of the entry `x36WdKPMctUOkjXMyV8oQq2zWcSx` with a depth limit of 1:
 
 ```json hl_lines="7"
 {
@@ -206,15 +199,15 @@ The response will contain only the top-level fields of the archive, without any 
 
 The values of each field will be replaced by internal reference strings to indicate that the data is available but not fetched.
 
-There is one exception.
+There is one exception:
 If the value is a primitive (like a string, number, boolean, etc.), it is always returned as is.
 This is because generating internal reference strings for primitive values makes little sense and often has a negative impact on performance.
 
-### Limiting Container Size
+#### Limiting Container Size
 
 Some archives may contain large lists or dictionaries, and not all of them may be needed.
 In such cases, one can limit the size of containers by using `max_list_size` and `max_dict_size` fields in the request configuration.
-The following request fetches the data with a maximum list size of 3.
+The following request fetches the data with a maximum list size of 3:
 
 ```json hl_lines="9"
 {
@@ -235,8 +228,7 @@ The following request fetches the data with a maximum list size of 3.
 }
 ```
 
-The response will contain only lists with a maximum of 3 elements.
-Longer lists will be replaced by internal reference strings.
+The response will contain only lists with a maximum of 3 elements, with longer lists being replaced by internal reference strings:
 
 ```json hl_lines="44 46"
 {
@@ -286,7 +278,7 @@ Longer lists will be replaced by internal reference strings.
                   "nsites":404,
                   "species_at_sites":"__INTERNAL__:../uploads/RzWMitKESo2dQmuE6uQB-Q/archive/x36WdKPMctUOkjXMyV8oQq2zWcSx#/metadata/optimade/species_at_sites",
                   "structure_features":[
-                     
+
                   ],
                   "species":[
                      {
@@ -325,12 +317,11 @@ Longer lists will be replaced by internal reference strings.
 }
 ```
 
-The `max_dict_size` field works similarly for dictionaries: if the dictionary has more than the specified number of keys, it will be replaced by an internal reference string.
+The `max_dict_size` field works similarly for dictionaries: If the dictionary has more than the specified number of keys, it will be replaced by an internal reference string.
 
-### Filtering Unknown Keys
+#### Filtering Unknown Keys
 
-By providing either `include` or `exclude` fields in the request configuration, one can filter the keys of the archive.
-Both fields accept a list of keys to include or exclude, respectively.
+By providing either `include` or `exclude` fields in the request configuration, one can filter the keys of the archive:
 
 ```json hl_lines="9"
 {
@@ -351,7 +342,7 @@ Both fields accept a list of keys to include or exclude, respectively.
 }
 ```
 
-The corresponding response looks like this.
+Both fields accept a list of keys to include or exclude. The corresponding response looks like:
 
 ```json
 {
@@ -375,8 +366,8 @@ The corresponding response looks like this.
 }
 ```
 
-Note that glob patterns are expected.
-Thus, if  the `include` field is set to `*elements`, it will include all keys that end with `elements`.
+!!! note
+      `include` and `exclude` fields expect 'glob patterns'. Thus, if the `include` field is set to `*elements`, it will include all keys that end with `elements`.
 
 ```json hl_lines="9"
 {
@@ -397,8 +388,7 @@ Thus, if  the `include` field is set to `*elements`, it will include all keys th
 }
 ```
 
-The corresponding response looks like this.
-Note the field `elements_ratios` is not included any more.
+The corresponding response will look like:
 
 ```json
 {
@@ -417,16 +407,20 @@ Note the field `elements_ratios` is not included any more.
 }
 ```
 
+Note the field `elements_ratios` is not included any more.
+
+<!-- TODO Clarify what deeper means exactly in the following note -->
 !!! note
     Only one of the fields `include` and `exclude` can be used in a single request configuration.
-    Both fields will not be passed to deeper levels of the archive.
+    In either case, the field will not be passed to deeper levels of the archive.
 
-### Resolving References
+
+#### Resolving References
 
 Archives may contain references that point to some other locations in the archive, or even to other entries.
 Conceptually it is similar to the soft links in file systems.
 By using a default request configuration, references will be returned as they are.
-The following request fetches the third `calculations_ref` under the path `workflow2/results`.
+The following request fetches the third `calculations_ref` under the path `workflow2/results`:
 
 ```json hl_lines="7"
 {
@@ -444,7 +438,7 @@ The following request fetches the third `calculations_ref` under the path `workf
 }
 ```
 
-The reference string `#/run/0/calculation/2` is returned, the data it points to is, however, not fetched.
+The response will contain the reference string `#/run/0/calculation/2`, but not the data that it points to:
 
 ```json hl_lines="10"
 {
@@ -469,8 +463,7 @@ The reference string `#/run/0/calculation/2` is returned, the data it points to 
 ??? note "various formats of references"
     The format of the reference string may vary, depending on whether it is a reference to the same entry or to another entry.
 
-To resolve the reference, one shall use the `resolved` directive instead of the default `plain` directive.
-Note the following request also limits the size of the list to 2 elements such that the response has a reasonable length to be presented here.
+To resolve references, i.e., return the data that they point to, one should use the `resolved` directive instead of the default `plain` directive. For example:
 
 ```json hl_lines="9"
 {
@@ -493,15 +486,7 @@ Note the following request also limits the size of the list to 2 elements such t
 }
 ```
 
-The very first change is that the reference string is normalized to `uploads/RzWMitKESo2dQmuE6uQB-Q/entries/x36WdKPMctUOkjXMyV8oQq2zWcSx/archive/run/0/calculation/2`.
-By default, the 'extra' data requested (here, the resolved data) will be added to the response under a fixed path: `uploads/<upload_id>/entries/<entry_id>/archive/<path_to_data>`.
-This fixed path is not affected by any other factors, even if it is a reference to the same entry.
-This is a valid path that can be used to access the data in the **same** response.
-The motivation is to produce a response that is as self-contained as possible.
-
-The second thing to note is that the target `calculation` contains a further reference `method_ref` that points to the method used for the calculation.
-This reference is also resolved, and the corresponding data is fetched and included in the response.
-As a matter of fact, all references will be recursively resolved such that the response contains all the data that is reachable from the original reference.
+Note that, for presentation purposes, this request also limits the size of the returned list to 2 elements. The corresponding response is:
 
 ```json hl_lines="92 13 48-76"
 {
@@ -605,11 +590,21 @@ As a matter of fact, all references will be recursively resolved such that the r
 }
 ```
 
-### Controlling Reference Resolution
+The first thing to note here is that the reference string has been normalized to `uploads/RzWMitKESo2dQmuE6uQB-Q/entries/x36WdKPMctUOkjXMyV8oQq2zWcSx/archive/run/0/calculation/2`.
+By default, the 'extra' data requested (here, the resolved data) will be added to the response under a fixed path: `uploads/<upload_id>/entries/<entry_id>/archive/<path_to_data>`.
+This fixed path is not affected by any other factors, even if it is a reference to the same entry.
+This is a valid path that can be used to access the data in the **same** response.
+The motivation is to produce a response that is as self-contained as possible.
+
+The second thing to note is that the target `calculation` contains a further reference `method_ref` that points to the method used for the calculation.
+This reference is also resolved, and the corresponding data is fetched and included in the response.
+In general, whenever the `resolved` directive is specified, all references will be recursively resolved such that the response contains all the data that is reachable from the original reference.
+
+#### Controlling Reference Resolution
 
 However, it is **not always** desired to resolve all references.
-It is possible to assign a `resolve_depth` field in the request configuration to control how deep the references should be resolved.
-For example, the following request will resolve only one level of references.
+It is also possible to control how deep the references should be resolved by assigning a `resolve_depth` field in the request configuration.
+For example, the following request will resolve only one level of references:
 
 ```json hl_lines="11"
 {
@@ -633,7 +628,7 @@ For example, the following request will resolve only one level of references.
 }
 ```
 
-As can be seen in the response, the first `method` is **not** resolved any more, since it is at the second level of references.
+As can be seen in the response, the first `method` is no longer resolved, since it belongs to the second level of references.
 Every resolution/redirection is counted as one level.
 
 ```json hl_lines="13"

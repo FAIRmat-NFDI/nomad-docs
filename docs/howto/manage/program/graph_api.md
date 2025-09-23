@@ -1,7 +1,5 @@
 # How to make Graph-Style API Calls
 
-<!-- TODO - unify the naming/display of notes throughout -->
-
 ## What you will learn
 
 - How to implement flexible and accurate data fetching with a [GraphQL](https://graphql.org/)-like API.
@@ -28,15 +26,10 @@ NOMAD mimics this behaviour with a GraphQL-like API, available at the `/graph/qu
 
 ## Basic Data Fetching
 
-Imagine there is an example upload with the upload ID `<example_upload_id>`.
-The metadata of this upload is stored in MongoDB.
-<!-- In our mental model, it is possible to organize all uploads in a tree structure, under the root `uploads`.
-This will help us to define interactions among different data structures in the following sections. -->
-<!-- TODO - Check with Nathan the meaning  -->
+Imagine there is an example upload with the upload ID `<example_upload_id>`. The metadata of this upload is stored in MongoDB.
 
-If one uses the endpoint `/uploads/{upload_id}` to fetch the upload metadata,
-the response would look like the following (after some restructuring according to the mental model).
-<!-- TODO - what restructuring? -->
+If one uses the endpoint `/uploads/{upload_id}` to fetch the upload metadata (see [NOMAD API Dashboard](https://nomad-lab.eu/prod/v1/api/v1/extensions/docs){:target="_blank"}),
+the response would look like:
 
 ```json
 {
@@ -59,10 +52,9 @@ the response would look like the following (after some restructuring according t
 }
 ```
 
-How would one tell the server if, say, for example, only `upload_name` is needed?
+What if you would like the response to return only `upload_name`?
 With GraphQL, one simply needs to '**ask for what you need**', following the structure of the data.
-To mimic this, the request may look like the following:
-<!-- TODO - make clear here or below that we are using the new endpoint -->
+Such a request would look like:
 
 ```json
 {
@@ -132,9 +124,7 @@ For example, if one wants to fetch the `upload_name` and `upload_create_time`, t
 
 ### Existing Data Resources
 
-<!-- TODO - Add where to find find the full list of documents -->
-
-There are a few existing data resources (called documents) stored in MongoDB:
+There are a few existing data resources (called documents) stored in MongoDB (see [NOMAD API Dashboard](https://nomad-lab.eu/prod/v1/api/v1/extensions/docs){:target="_blank"} for more details):
 
 1. `uploads`: The metadata of an upload, including, `upload_id`, `upload_name`, `main_author`, etc.
 2. `entries`: The metadata of an entry, including, `entry_id`, `entry_create_time`, `mainfile`, etc.
@@ -222,8 +212,7 @@ One can use the special key `*` to represent all entries under the upload as fol
 !!! warning "Wildcard Usage"
     The `*` wildcard is not universal and only works for **homogeneous** data.
     This means it can only be used to represent `upload_id`, `entry_id`, `dataset_id`, etc., for data that follows a fixed schema (e.g., MongoDB).
-    It won't work in archives, the corresponding metainfo (definitions), and alike.
-<!-- TODO Clarify the writing of the universality note -->
+    It won't work for archive data, the corresponding metainfo (definitions), and alike.
 
 ### Fuzzy Querying
 
@@ -654,7 +643,6 @@ Both fields accept a list of keys to include or exclude. The corresponding respo
 
 !!! note
       `include` and `exclude` fields expect 'glob patterns'. Thus, if the `include` field is set to `*elements`, it will include all keys that end with `elements`.
-<!-- TODO expected or accepted? -->
 
 ```json hl_lines="9"
 {
@@ -696,10 +684,11 @@ The corresponding response will look like:
 
 Note the field `elements_ratios` is not included any more.
 
+<!-- TODO Clarify what deeper means exactly in the following note -->
 !!! note
     Only one of the fields `include` and `exclude` can be used in a single request configuration.
-    Both fields will not be passed to deeper levels of the archive.
-<!-- TODO Is this last statement an additional note or part of the same note? -->
+    In either case, the field will not be passed to deeper levels of the archive.
+
 
 #### Resolving References
 
@@ -1031,10 +1020,8 @@ This will return the response (some fields are omitted):
 }
 ```
 
-<!-- TODO - clarify the meaning of this, not possible otherwise? Most cases of what? -->
-In most cases, one shall only get the user information of the user who is currently logged in.
-This can be done conveniently by using the special token `me`.
-Thus, the above query is equivalent to the following query if `57aaf068-cdd0-43c1-be51-99e0d425c131` is the user ID of the currently logged in user.
+To retrieve your own user information, you can use the special token `me`, assuming you are logged in.
+Thus, the above query is equivalent to the following if `57aaf068-cdd0-43c1-be51-99e0d425c131` is the user ID of the currently logged in user:
 
 ```json hl_lines="3"
 {
@@ -1214,10 +1201,10 @@ The corresponding response will look like:
 Note that when a `query` field is provided, it will be returned in the `m_response` field.
 Also, the `pagination` field will always be returned, even if not specified in the request.
 
-<!-- TODO - Check about the rename of this one -->
+<!-- TODO - Check this rewrite  -->
 !!! tip "Efficient Fetching"
-    Some fields are both stored in the MongoDB database and the Elasticsearch index, and often can be fetched more efficiently directly from Elasticsearch.
-    However, if the request needs to access archive, the `entry -> archive` path must be used if starting from `search`.
+    Some fields are stored in both the MongoDB database and the Elasticsearch index. In this case, they can be fetched more directly from Elasticsearch.
+    However, if the request needs to access an archive, the `entry -> archive` path must be used if starting from `search`.
 
 ### Listing File Information
 

@@ -1,15 +1,16 @@
 # Miscellaneous Functionalities
 
+## Miscellaneous Functionalities
+
 Apart from the core functionalities that cover MongoDB database and archive data, there are additional resources that can be fetched.
-In this page, we briefly summarize these functionalities.
 
-## User Information
+### User Information
 
-As all data are associated with the corresponding users, in our mental model, uploads, entries, datasets, etc., are connected to a user node.
-Accordingly, there is a top level special token `users` that can be used to fetch user information.
-Just like uploads/entires introduced previously, a user ID needs to be specified.
+As all data are associated with the corresponding users, uploads, entries, datasets, etc. are connected to a user node.
+Accordingly, the special token `users` can be used to fetch user information.
+Just like uploads and entries, a user ID needs to be specified.
 
-For example, to fetch the user information of a user with ID `57aaf068-cdd0-43c1-be51-99e0d425c131`, one can use the following query.
+For example, to fetch the user information of a user with ID `57aaf068-cdd0-43c1-be51-99e0d425c131`, one can use the query:
 
 ```json hl_lines="3"
 {
@@ -23,7 +24,7 @@ For example, to fetch the user information of a user with ID `57aaf068-cdd0-43c1
 }
 ```
 
-This will return the following response (some fields are omitted).
+This will return the response (some fields are omitted):
 
 ```json
 {
@@ -40,9 +41,8 @@ This will return the following response (some fields are omitted).
 }
 ```
 
-In most cases, one shall only get the user information of the user who is currently logged in.
-This can be done conveniently by using the special token `me`.
-Thus, the above query is equivalent to the following query if `57aaf068-cdd0-43c1-be51-99e0d425c131` is the user ID of the currently logged in user.
+To retrieve your own user information, you can use the special token `me`, assuming you are logged in.
+Thus, the above query is equivalent to the following if `57aaf068-cdd0-43c1-be51-99e0d425c131` is the user ID of the currently logged in user:
 
 ```json hl_lines="3"
 {
@@ -56,8 +56,8 @@ Thus, the above query is equivalent to the following query if `57aaf068-cdd0-43c
 }
 ```
 
-Starting from user information, it is possible to navigate to other resources (nodes).
-For example, the following query will list all uploads of the currently logged in user.
+Starting from the user information, it is possible to navigate to other resources (nodes).
+For example, the following query will list all uploads of the currently logged in user:
 
 ```json hl_lines="4"
 {
@@ -69,7 +69,7 @@ For example, the following query will list all uploads of the currently logged i
 }
 ```
 
-The response may look like the following.
+The response, a plain list of upload IDs, will look something like:
 
 ```json
 {
@@ -85,8 +85,7 @@ The response may look like the following.
 }
 ```
 
-Note it's nothing more than a plain list.
-If one wishes, one can navigate to the corresponding upload to get more information with specific upload IDs, or with a wildcard `*`.
+One can retrieve specific data from each upload by navigating to the corresponding upload. This could be done in a second request using the retrieved upload IDs or, more efficiently, in the initial request with the wildcard `*`:
 
 ```json hl_lines="5-7"
 {
@@ -102,7 +101,7 @@ If one wishes, one can navigate to the corresponding upload to get more informat
 }
 ```
 
-The above query will return the creation time of all uploads of the currently logged in user.
+The response will contain the creation time of all uploads of the currently logged in user:
 
 ```json
 {
@@ -124,15 +123,15 @@ The above query will return the creation time of all uploads of the currently lo
 }
 ```
 
-## Elasticsearch Metadata
+### Elasticsearch Metadata
 
-Some of the entry metadata is also stored in `Elasticsearch` indices.
+Some of the entry metadata is also stored in Elasticsearch indices.
 They are similar to the metadata in the MongoDB database, but with more information.
-To fetch data from the `Elasticsearch` index, one can use the special token `search`.
+To fetch data from the Elasticsearch index, one can use the special token `search`.
 The top-level request configuration also supports the `query` field.
-This `query` field shall take a valid `Metadata` query object (which itself also contains a `query` field), see the endpoint `/entries/query` for more details.
+This `query` field shall take a valid `Metadata` query object (which itself also contains a `query` field), see the endpoint `/entries/query` on the [NOMAD API Dashboard](https://nomad-lab.eu/prod/v1/api/v1/extensions/docs){:target="_blank"} for more details.
 
-The following example lists all entries created since 2025 that are visible to the logged in user.
+The following query fetches all entries created since 2025 that are visible to the logged in user:
 
 ```json hl_lines="5-8"
 {
@@ -149,8 +148,9 @@ The following example lists all entries created since 2025 that are visible to t
 }
 ```
 
-Each record will be returned as entry metadata, from which one can navigate to the corresponding entry (MongoDB document) and get more information, or further navigate to the archive, etc.
-The following example first queries the `Elasticsearch`, for each hit, it further fetches the `entry_create_time` from the MongoDB database via the `entry` special token.
+Each record will be returned as entry metadata (not shown here), from which one can navigate to the corresponding entry (MongoDB document) and get more information, or further navigate to the archive, etc.
+
+As a more complex example, the following query first queries the Elasticsearch for the same list of entries then, for each hit, further fetches the `entry_create_time` from the MongoDB database via the `entry` special token.
 
 ```json hl_lines="11-19"
 {
@@ -176,9 +176,7 @@ The following example first queries the `Elasticsearch`, for each hit, it furthe
 }
 ```
 
-The response will look like the following.
-Note when a `query` field is provided, it will be returned in the `m_response` field.
-Also, the `pagination` field will always be returned, even if not specified in the request.
+The corresponding response will look like:
 
 ```json
 {
@@ -221,21 +219,23 @@ Also, the `pagination` field will always be returned, even if not specified in t
 }
 ```
 
-??? note "data duplication"
-    Some fields are both stored in the `MongoDB` database and the `Elasticsearch` index.
-    And it is likely that the desired information can be directly fetched from `Elasticsearch`.
-    In this case, there is no need to navigate to the `MongoDB` database.
-    However, if the request needs to access archive, it has to use `entry -> archive` path if starting from `search`.
+Note that when a `query` field is provided, it will be returned in the `m_response` field.
+Also, the `pagination` field will always be returned, even if not specified in the request.
 
-## Listing File Information
+<!-- TODO - Check this rewrite  -->
+!!! tip "Efficient Fetching"
+    Some fields are stored in both the MongoDB database and the Elasticsearch index. In this case, they can be fetched more directly from Elasticsearch.
+    However, if the request needs to access an archive, the `entry -> archive` path must be used if starting from `search`.
+
+### Listing File Information
 
 As each entry corresponds to a main file, and each upload corresponds to a folder, the graph API also provides a convenient way to fetch file information, similar to the `ls` command in Linux.
 There are two ways to access the file system.
 
-1. Inside an upload, use the token `files`.
-2. Inside an entry, use the token `mainfile`.
+1. Inside an upload, using the token `files`.
+2. Inside an entry, using the token `mainfile`.
 
-For example, the following query uses the `mainfile` token to fetch the file information.
+For example, the following query uses the `mainfile` token to fetch the file information:
 
 ```json hl_lines="13"
 {
@@ -257,7 +257,7 @@ For example, the following query uses the `mainfile` token to fetch the file inf
 }
 ```
 
-In the response, we see that the entry `-L073PFe_PxW90kci4UwxMgUO20O` has the corresponding main file `OUTCAR_K_nm_5`, which has a size of `47862593` bytes.
+In the response, we see that the entry `-L073PFe_PxW90kci4UwxMgUO20O` has the corresponding main file `OUTCAR_K_nm_5`, which has a size of `47862593` bytes:
 
 ```json hl_lines="32-48"
 {
@@ -314,6 +314,6 @@ In the response, we see that the entry `-L073PFe_PxW90kci4UwxMgUO20O` has the co
 }
 ```
 
-??? note "pagination"
+??? note "Pagination for File Information"
     The file information listing is always paginated.
     This is particularly useful when listing files in an upload, as there can be many files.
