@@ -1,6 +1,39 @@
 # Documentation Development and Writing Guide
 
-This is a guide for best practices when contributing to the NOMAD documentation.
+This is a guide for best practices when contributing to the NOMAD documentation. Our goal is to make the documentation consistent, clear, and easy to navigate for all users.
+
+## Philosophy: Diátaxis
+
+The NOMAD Docs follow the [Diátaxis framework](https://diataxis.fr/) for technical documentation. This framework organizes content into four distinct types, each serving a different user need:
+
+- **Tutorials**: learning-oriented, step-by-step introductions.
+- **How-to guides**: goal-oriented, practical instructions.
+- **Explanations**: understanding-oriented, clarifications and context.
+- **Reference**: information-oriented, precise and authoritative.
+
+When contributing, identify which type of documentation your addition belongs to. A clear separation will help users quickly find what they need.
+
+> **Tip:** Contributions often span multiple types. For example, a new *How-to* may also require a supporting *Explanation* page. It may help you to first draft all of your material in one place, and then reorganize it according to the Diátaxis structure.
+
+## Best Practice
+
+- **Set the context clearly.** For Tutorials and How-tos, define prerequisite knowledge and list additional resources at the top of the page. For Explanations, provide enough background to orient the reader.
+- **Think in user flows.** Imagine how a user encounters problems or tasks, not how the codebase is organized.
+- **Be as detailed as required, as concise as possible.** Include all steps or context the user needs, but avoid unnecessary narrative.
+- **Prefer clarity over cleverness.** Simple, direct wording beats jargon, metaphors, or over-complicated phrasing.
+- **Stay consistent.** Follow existing terminology, formatting, and naming conventions; introduce new terms sparingly and define them clearly. When in doubt, cross-check other docs pages or ask the managerial team.
+- **Keep essential context in place, centralize reusable content.** Provide enough information directly on the page so the user can follow without friction. For reused, larger blocks of content, keep a single authoritative version and link to it.
+- **Check accuracy with the actual system.** Verify commands, screenshots, and examples against the current NOMAD deployment.
+
+## Styling & Conventions
+
+### Headings & Structure
+
+**One H1 per page:** Use single `#` sections only at the top of the file for the page title.
+
+**Order and depth:** Don’t skip levels (e.g., go ## → ####). Keep sections short; one idea per section.
+
+**Auto-TOC awareness:** Headings populate the ToC; admonition titles do not. Use real headings for navigable sections.
 
 ## No broken links!
 
