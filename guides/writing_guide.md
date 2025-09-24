@@ -90,7 +90,7 @@ If the referenced section belongs to the current page, drop the global path, i.e
 
 **Images and data.** All assets specific to an individual markdown file should be stored within an immediate sub-directory of the file, labeled accordingly. Please use `images/` and `data/` for the image and data files, respectively.
 
-Shared assets between .md files in different locations is currently not allowed. If there is an exceptional case, please create a Github issue and tag a relevant maintainer.
+Sharing assets between .md files in different locations is currently not allowed. If there is an exceptional case, please create a Github issue and tag a relevant maintainer.
 
 ## Admonitions
 
