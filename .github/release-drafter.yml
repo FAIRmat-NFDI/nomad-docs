@@ -1,5 +1,8 @@
 name-template: 'v$RESOLVED_VERSION'
 tag-template: 'v$RESOLVED_VERSION'
+
+include-pre-releases: true
+
 categories:
   - title: '🚀 Features'
     labels:
