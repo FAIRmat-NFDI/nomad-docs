@@ -30,7 +30,7 @@ When contributing, identify which type of documentation your addition belongs to
 
 ### Headings & Structure
 
-**One H1 per page:** Use single `#` sections only at the top of the file for the page title.
+**One H1 per page.** Use single `#` sections only at the top of the file for the page title.
 
 **Order and depth:** Don’t skip levels (e.g., go `##` → `####`). Keep sections short; one idea per section.
 
