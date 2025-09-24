@@ -23,7 +23,8 @@ When contributing, identify which type of documentation your addition belongs to
 - **Prefer clarity over cleverness.** Simple, direct wording beats jargon, metaphors, or over-complicated phrasing.
 - **Stay consistent.** Follow existing terminology, formatting, and naming conventions; introduce new terms sparingly and define them clearly. When in doubt, cross-check other docs pages or ask the documentation maintainers.
 - **Keep essential context in place, centralize reusable content.** Provide enough information directly on the page so the user can follow without friction. For reused, larger blocks of content, keep a single authoritative version and link to it.
-- **Check accuracy with the actual system.** Verify commands, screenshots, and examples against the current NOMAD deployment.
+- **Check accuracy with the actual system.** Verify commands, screenshots, and examples against the current NOMAD deployment. *Only merge a docs PR after the corresponding code changes have been merged into `nomad-lab`’s `develop` branch*.
+
 
 ## Styling & Conventions
 
