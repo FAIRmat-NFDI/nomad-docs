@@ -21,7 +21,7 @@ When contributing, identify which type of documentation your addition belongs to
 - **Think in user flows.** Imagine how a user encounters problems or tasks, not how the codebase is organized.
 - **Be as detailed as required, as concise as possible.** Include all steps or context the user needs, but avoid unnecessary narrative.
 - **Prefer clarity over cleverness.** Simple, direct wording beats jargon, metaphors, or over-complicated phrasing.
-- **Stay consistent.** Follow existing terminology, formatting, and naming conventions; introduce new terms sparingly and define them clearly. When in doubt, cross-check other docs pages or ask the managerial team.
+- **Stay consistent.** Follow existing terminology, formatting, and naming conventions; introduce new terms sparingly and define them clearly. When in doubt, cross-check other docs pages or ask the documentation maintainers.
 - **Keep essential context in place, centralize reusable content.** Provide enough information directly on the page so the user can follow without friction. For reused, larger blocks of content, keep a single authoritative version and link to it.
 - **Check accuracy with the actual system.** Verify commands, screenshots, and examples against the current NOMAD deployment.
 
@@ -37,7 +37,7 @@ When contributing, identify which type of documentation your addition belongs to
 
 ### Links
 
-**No broken links.** Docs must build without link warnings. Broken internal or external links will cause CI/CD to fail. Try to fix all broken links, even if not caused by your changed. If you cannot resolve a broken link, create an issue and tag a relevant maintainer.
+**Link checks.** Broken internal or external links will cause CI/CD to fail. Try to fix them when possible. If you cannot resolve a broken link, create an issue and tag a maintainer.
 
 **Descriptive link naming.** Do not use "here" as a name for links.
 
@@ -49,7 +49,39 @@ If the referenced section belongs to the current page, drop the global path, i.e
 
 **Other external links: descriptive text + new tab.** For other external links, use descriptive names, not raw URLs.
 
-**New window for external links.** All external links should use `[](){:target="_blank"}` to open a new browser window.
+**New window for external links.** All external links should use `[](){:target="_blank" rel="noopener"}` to open a new browser window.
+
+### Terminology, capitalization, and text stylizing
+
+**Use consistent, canonical names.** NOMAD, NOMAD Oasis, MongoDB, Elasticsearch, etc.
+
+**Backticks, quotes, bold, and italics.**
+
+- Use `backticks` for:
+  - Code (e.g., inline commands, file names, parameters, API endpoints, config options, environment variables).
+  - Literal values the user must type, e.g., in the UI.
+
+- Use "double quotes" when quoting actual text strings (e.g., labels in the UI, button names, error messages).
+
+<!-- TODO check bold and it usage and try to be more specific -->
+- Use **bold** for:
+  - Certain UI elements (buttons, menu items, field names).
+  - Bullet list labels for clarity.
+  - Important emphasis (but use sparingly).
+
+- Use *italics* for:
+  - Emphasis in narrative text.
+  - Terms being introduced for the first time.
+
+**Add new terms to glossary.** Add new NOMAD-specific terms to the Glossary. External terms/concepts should link to external definitions, when appropriate (use your best judgement).
+
+## Code, commands, and UI text
+
+**Blocks & highlighting.** Use fenced code blocks with a language tag (e.g., ```bash, ```python).
+
+**Copy-paste ready.** Commands should run as-is. If a placeholder is required, angle-bracket it and explain once: <your_token>.
+
+**UI copy.** Quote exact button/label text in bold or code.
 
 ## Repo Organization
 
