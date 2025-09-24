@@ -270,8 +270,7 @@ For example, if one wants to fetch all entries under an upload with a specific p
 }
 ```
 
-Both the query and the pagination fields must comply with the underlying models, depending on the specific token.
-Details can be found in standard REST documentation, as these models are used in conventional REST endpoints.
+Both the query and the pagination fields must comply with the underlying models, depending on the specific token (see [NOMAD API Dashboard](https://nomad-lab.eu/prod/v1/api/v1/extensions/docs){:target="_blank"}).
 
 ## Accessing Archives
 
