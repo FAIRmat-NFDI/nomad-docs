@@ -12,7 +12,7 @@ This repository contains the documentation for the central NOMAD distribution.
 
 ### Writing Guide
 
-When contributing, please check the <a href="https://github.com/FAIRmat-NFDI/nomad-docs/blob/main/docs/writing_guide.md" target="_blank" rel="noopener">writing guide</a> for best practices.
+When contributing, please check the <a href="https://github.com/FAIRmat-NFDI/nomad-docs/blob/main/guides/writing_guide.md" target="_blank" rel="noopener">writing guide</a> for best practices.
 
 ---
 
