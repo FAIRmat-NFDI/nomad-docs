@@ -76,13 +76,13 @@ nav:
           - Parser plugins: examples/computational_data/parser_plugins.md
           - FAQs: examples/computational_data/faqs.md
       - Experimental data:
-            - Electron microscopy: examples/experiment_data/em.md
-            - Photoemission spectroscopy: examples/experiment_data/mpes.md
-            - X-ray photoemission spectroscopy: examples/experiment_data/xps.md
-            - Optical spectroscopy: examples/experiment_data/opt.md
-            - Atom probe tomography: examples/experiment_data/apm.md
-            - Scanning probe microscopy: examples/experiment_data/spm.md
-            - pynxtools: examples/experiment_data/pynxtools.md
+          - Electron microscopy: examples/experiment_data/em.md
+          - Photoemission spectroscopy: examples/experiment_data/mpes.md
+          - X-ray photoemission spectroscopy: examples/experiment_data/xps.md
+          - Optical spectroscopy: examples/experiment_data/opt.md
+          - Atom probe tomography: examples/experiment_data/apm.md
+          - Scanning probe microscopy: examples/experiment_data/spm.md
+          - pynxtools: examples/experiment_data/pynxtools.md
       - Use cases:
           - Catalysis APP: examples/use_cases/catalysis_app.md
           - NEB workflows: examples/use_cases/neb_workflows.md
@@ -169,6 +169,10 @@ plugins:
   # TODO Fix error in pipeline when this plugin is included
   # (with 'mkdocs-git-revision-date-localized-plugin==1.2.1' in pyproject.toml)
   # see pipeline error here: https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR/-/jobs/2473217
+  - privacy:
+      links_noopener: true
+      links_attr_map:
+        target: _blank
 extra_css:
   - stylesheets/extra.css
 extra_javascript:
