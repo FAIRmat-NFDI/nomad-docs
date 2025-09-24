@@ -35,37 +35,35 @@ When contributing, identify which type of documentation your addition belongs to
 
 **Auto-TOC awareness:** Headings populate the ToC; admonition titles do not. Use real headings for navigable sections.
 
-## No broken links!
+### Links
 
-Before merging make sure that the mkdocs logs do not report any broken links. This applies even if these links are not relevant to your changes. If you do not know how to address the broken links, create an issue in the GitHub repo and tag someone who you think could be of assistance.
+**No broken links.** Docs must build without link warnings. Broken internal or external links will cause CI/CD to fail. Try to fix all broken links, even if not caused by your changed. If you cannot resolve a broken link, create an issue and tag a relevant maintainer.
 
-## Images and Data
+**Descriptive link naming.** Do not use "here" as a name for links.
 
-All assets specific to an individual markdown file should be stored within an immediate sub-directory of the file, labeled accordingly. Please use `images/` and `data/` for the image and data files, respectively.
+**Internal links: standardized naming.** Use the path hierarchy to the referenced page or section, separated by >'s. For example: `[Tutorial > Exploring Data > Search Interface & Filters](<path-to-referenced-section>)`. Long paths can be shortend with `...`, e.g., `[Tutorial > ... > Search Interface & Filters](<path-to-referenced-section>)`, using your best judgement.
 
-## Sections Hierarchy
+If the referenced section belongs to the current page, drop the global path, i.e., `[Search Interface & Filters](<path-to-referenced-section>)`.
 
-single "#" sections should only be used at the beginning of the md file
+**External links to NOMAD-related documentation.** External links to, e.g., NOMAD plugin documentation should follow the same syntax as internal link names, with the name of the plugin as the root.
 
-## File organization should mirror the navigation bar
+**Other external links: descriptive text + new tab.** For other external links, use descriptive names, not raw URLs.
 
-Files and sub-folders should be stored according to the navigation bar organization in `mkdocs.yml`.
+**New window for external links.** All external links should use `[](){:target="_blank"}` to open a new browser window.
 
-## Maintain the accuracy of the overview pages
+## Repo Organization
 
-If you add a new page to the docs, make sure to add this page to the corresponding overview page (when applicable).
+**Keep the navigation structure.** The location of docs .md files should mirror the navigation bar, with subfolders named after the organizational subsections of the bar.
 
-## Standardized Internal and External Link Naming
+**Images and data.** All assets specific to an individual markdown file should be stored within an immediate sub-directory of the file, labeled accordingly. Please use `images/` and `data/` for the image and data files, respectively.
 
-Do not use `HERE` as a name for links. For internal links use the path hierarchy to the referenced page or section, separated by >'s. For example: `[Tutorial > Exploring Data > Search Interface & Filters](<path-to-referenced-section>)`. Long paths can be abbreviated to the first and last parts: by using `[Tutorial > ... > Search Interface & Filters](<path-to-referenced-section>)` If the referenced section belongs to the current page, drop the global path, i.e., `[Search Interface & Filters](<path-to-referenced-section>)`. External links to NOMAD plugins or other NOMAD-related documentation should follow the same syntax, with the name of the plugin as the root. For other external links provide some sort of descriptive name and use your discretion.
-
-## External Links
-
-Use `[](){:target="_blank"}` for external links to open a new browser window.
+Shared assets between .md files in different locations is currently not allowed. If there is an exceptional case, please create a Github issue and tag a relevant maintainer.
 
 ## Admonitions
 
-Here is a list of currently used admonitions within the docs:
+<!-- TODO Do we want to restrict to only these? Or allow custom naming? -->
+**Do not use custom titles for admonitions.**
+Here is a list of currently used admonitions/titles within the docs:
 
 - !!! warning "Attention"
 
@@ -75,10 +73,13 @@ Here is a list of currently used admonitions within the docs:
 
 - !!! tip "Important"
 
-<!-- the following three were added in the preparation in the tutorials pages -->
 - !!! info
+
 - !!! task
+
 - !!! example
+
+If you would like to propose a standard extension, create an issue with your suggestion and a example image of the new admonition.
 
 ## Adding image sliders
 
