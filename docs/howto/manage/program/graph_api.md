@@ -325,7 +325,7 @@ curl -X 'POST' \
 
 ### Nested Fetching
 
-The archive is `JSON` compatible, which means it is effectively a `JSON` objec, with a tree-like structure.
+The archive is `JSON` compatible, which means it is effectively a `JSON` object, with a tree-like structure.
 Thus, one can apply the exact same fetching logic as in [Accessing Archives](#accessing-archives), while 'expressing' the intention to fetch data from any level of the tree.
 For example, if one wants to fetch `n_quantities` under `metadata`, a subsection of the archive root, the request would be:
 
