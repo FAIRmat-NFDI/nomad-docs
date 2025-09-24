@@ -10,10 +10,10 @@ To access the processed data with our client library `nomad-lab` follow
 
 NOMAD offers all its functionality through application programming interfaces (APIs). More
 specifically
-[RESTful HTTP APIs](https://en.wikipedia.org/wiki/Representational_state_transfer){:target="_blank"}
+[RESTful HTTP APIs](https://en.wikipedia.org/wiki/Representational_state_transfer)
 that allows you to use NOMAD as a set of resources (think data) that can be uploaded,
 accessed, downloaded, searched for, etc. via
-[HTTP requests](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol){:target="_blank"}.
+[HTTP requests](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol).
 
 You can get an overview on all NOMAD APIs on the
 [API page]({{ nomad_url() }}../../gui/analyze/apis). We will focus here on NOMAD's main

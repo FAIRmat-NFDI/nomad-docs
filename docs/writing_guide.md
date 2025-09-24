@@ -28,7 +28,7 @@ Do not use `HERE` as a name for links. For internal links use the path hierarchy
 
 ## External Links
 
-Use `[](){:target="_blank"}` for external links to open a new browser window.
+Use `[]()` for external links to open a new browser window.
 
 ## Admonitions
 

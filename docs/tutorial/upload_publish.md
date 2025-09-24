@@ -11,7 +11,7 @@ To begin the journey from uploading raw files to publishing datasets with DOIs i
 ![The key elements in NOMAD](images/upload_publish_2.png)
 
 1. In order to upload data into NOMAD, a **user account** is required.
-You can create a user account by following these [steps](overview.md#create-a-nomad-user-account){:target="_blank"} on the overview page.
+You can create a user account by following these [steps](overview.md#create-a-nomad-user-account) on the overview page.
 
 2. All files and data created by users are organized in NOMAD as **Uploads**, which function as directories within the user’s account. You can create an upload for each project and structure it into nested folder directories for better organization.
 
