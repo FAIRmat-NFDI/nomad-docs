@@ -14,15 +14,13 @@
 
 ## Overview
 
-While REST works well for simple data fetching, it often requires multiple requests when building complex pages, since each endpoint provides only fixed data. GraphQL addresses this by letting clients request exactly the fields they need across related resources in a single query, reducing round trips and avoiding over- or under-fetching.
+While REST works well for simple data fetching, it often requires multiple requests when building complex pages, since each endpoint provides a fixed response format. Hence queries may under- or over-fetch with respect to the requested data. GraphQL addresses this by letting clients request exactly the fields they need across related resources in a single query, reducing round trips.
 
 NOMAD mimics this behaviour with a GraphQL-like API, available at the `/graph/query` endpoint (see the [NOMAD API Dashboard](https://nomad-lab.eu/prod/v1/api/v1/extensions/docs){:target="_blank"}).
 
 ??? note "Technical Note"
-    The implementation can be categorized as a GraphQL-like API implemented within the REST-style framework FastAPI.
-    Because GraphQL requires static, explicitly defined schemas ahead of time while NOMAD supports data with dynamic schema,
-    it cannot be implemented directly using existing GraphQL tools.
-    As a result, there are unfortunately no GUI tools available at this time.
+    The implementation can be categorized as a GraphQL-like API powered by the REST-style framework FastAPI, rather than GraphQL itself.
+    Because GraphQL requires static, explicitly defined schemas ahead of time while NOMAD supports data with dynamic schema, it cannot be implemented directly using existing GraphQL tools. As a result, there are unfortunately no GUI tools available at this time.
 
 ## Basic Data Fetching
 
@@ -210,7 +208,7 @@ One can use the special key `*` to represent all entries under the upload as fol
 ```
 
 !!! warning "Wildcard Usage"
-    The `*` wildcard is not universal and only works for **homogeneous** data.
+    The `*` wildcard is not universal and only works for fixed, NOMAD-wide schemas.
     This means it can only be used to represent `upload_id`, `entry_id`, `dataset_id`, etc., for data that follows a fixed schema (e.g., MongoDB).
     It won't work for archive data, the corresponding metainfo (definitions), and alike.
 
@@ -877,7 +875,7 @@ In general, whenever the `resolved` directive is specified, all references will 
 
 #### Controlling Reference Resolution
 
-However, it is **not always** desired to resolve all references.
+It is **not always** desired to resolve all references.
 It is also possible to control how deep the references should be resolved by assigning a `resolve_depth` field in the request configuration.
 For example, the following request will resolve only one level of references:
 
@@ -985,7 +983,7 @@ Apart from the core functionalities that cover MongoDB database and archive data
 
 ### User Information
 
-As all data are associated with the corresponding users, uploads, entries, datasets, etc. are connected to a user node.
+All data are associated with the corresponding users, uploads, entries, datasets, etc. are connected to a user node.
 Accordingly, the special token `users` can be used to fetch user information.
 Just like uploads and entries, a user ID needs to be specified.
 
