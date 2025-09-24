@@ -1,4 +1,4 @@
-name: Check mkdocs build and links in markdown files
+name: Check mkdocs build and links in markdown files, and preview the docs
 
 on:
   push:
@@ -73,3 +73,9 @@ jobs:
       - name: Pytest docs
         run: |
           uv run pytest tests
+
+      - name: Deploy PR Preview
+        if: github.event_name == 'pull_request'
+        uses: rossjrw/pr-preview-action@v1
+        with:
+          source-dir: site
