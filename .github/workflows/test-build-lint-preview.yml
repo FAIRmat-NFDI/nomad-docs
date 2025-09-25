@@ -35,13 +35,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Check links in markdown files
+      - name: Ensure links in markdown files are alive
         uses: tcort/github-action-markdown-link-check@v1
         with:
           use-quiet-mode: 'yes'
           config-file: .github/workflows/configs/markdown-link-check.json
           folder-path: 'docs, examples'
           file-path: './README.md'
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Ensure external links have `{:target="_blank" rel="noopener"}`.
+        run: |
+          python .github/workflows/check_markdown_links.py
 
   test-docs:
     runs-on: ubuntu-latest
