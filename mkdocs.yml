@@ -4,6 +4,7 @@ site_description: |
 site_author: The NOMAD Authors
 repo_url: https://github.com/nomad-coe/nomad
 edit_uri: ""
+site_url: https://nomad-lab.eu/prod/v1/docs/
 nav:
   - Home: index.md
   - Tutorial:
@@ -169,10 +170,7 @@ plugins:
   # TODO Fix error in pipeline when this plugin is included
   # (with 'mkdocs-git-revision-date-localized-plugin==1.2.1' in pyproject.toml)
   # see pipeline error here: https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR/-/jobs/2473217
-  - privacy:
-      links_noopener: true
-      links_attr_map:
-        target: _blank
+  - mkdocs-plugin-open-external-links-in-new-tab
 extra_css:
   - stylesheets/extra.css
 extra_javascript:
