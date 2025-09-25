@@ -32,8 +32,6 @@ When contributing, identify which type of documentation your addition belongs to
 
 **One H1 per page.** Use single `#` sections only at the top of the file for the page title.
 
-**Order and depth:** Don’t skip levels (e.g., go `##` → `####`). Keep sections short; one idea per section.
-
 **Auto-TOC awareness:** Headings populate the Table of Contents; admonition titles do not. Use real headings for navigable sections.
 
 ### Links
