@@ -361,7 +361,7 @@ The plot of variables `x_value` and `y_value` is also displayed; as the `B` clas
     The `paths` variable points in the example above to a [repeated subsection](../howto/plugins/types/schema_packages.md#schemapackage-class), hence the path provided includes a serial number pointing to the subsection object to be displayed in the entry overview page. To show in the overview page a non-repeatable subsection, no serial number is required in the path.
 
 H5Web implements visualization features through the attributes shown above, they can be attached to datasets and groups of an HDF5 file.
-The conventions for the attributes are rooted in the NeXus language and more explanations can be found in the [NXData documentation page](https://manual.nexusformat.org/classes/base_classes/NXdata.html) and in the [Associating plottable data documentation page](https://manual.nexusformat.org/datarules.html#design-findplottable-niac2014).
+The conventions for the attributes are rooted in the NeXus language and more explanations can be found in the [NXData documentation page](https://manual.nexusformat.org/classes/base_classes/NXdata.html){:target="_blank" rel="noopener"} and in the [Associating plottable data documentation page](https://manual.nexusformat.org/datarules.html#design-findplottable-niac2014){:target="_blank" rel="noopener"}.
 
 ### H5WebAnnotation
 

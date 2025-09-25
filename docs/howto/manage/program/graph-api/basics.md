@@ -1,6 +1,6 @@
 # The Graph(-style) API
 
-A [GraphQL](https://graphql.org/)-like API is implemented to allow flexible and accurate data fetching.
+A [GraphQL](https://graphql.org/){:target="_blank" rel="noopener"}-like API is implemented to allow flexible and accurate data fetching.
 
 ??? note "technical details"
     It is categorized as a `GraphQL`-**like** API implemented within the `REST` style framework `FastAPI`.

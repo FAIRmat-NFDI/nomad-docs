@@ -28,7 +28,7 @@ to have a basic understanding of how plugins and plugin entry points work in the
 
 ## Getting started
 
-You can use our [template repository](https://github.com/FAIRmat-NFDI/nomad-plugin-template) to
+You can use our [template repository](https://github.com/FAIRmat-NFDI/nomad-plugin-template){:target="_blank" rel="noopener"} to
 create an initial structure for a plugin containing an action.
 The relevant part of the repository layout will look something like this:
 
@@ -147,10 +147,10 @@ a collection of activities and workflows that connect them. It also specifies th
 workflows are made available through the `Action`, they can be triggered
 using the `start_action` funtion. This adds a workflow run instance to the specified task queue. You can learn more about it in the [next section](#integrating-action-with-schemas).
 
-We use [Temporal](https://docs.temporal.io/temporal)'s workflow-activity
+We use [Temporal](https://docs.temporal.io/temporal){:target="_blank" rel="noopener"}'s workflow-activity
 abstraction here. Activities are the atomic unit of execution. They should
 ideally be defined as
-[idempotent](https://docs.temporal.io/activity-definition#idempotency),
+[idempotent](https://docs.temporal.io/activity-definition#idempotency){:target="_blank" rel="noopener"},
 allowing Temporal to retry automatically based on a policy until the activity
 is successfully completed. For example, an idempotent activity that gets data
 from an external resource via API can keep retrying until a status
@@ -285,7 +285,7 @@ sequence of activities and the flow of data from one to another. Using appropria
 
 Each activity is executed by `workflow.execute_activity` function which
 also specifies the activity's retry policy and timeouts.
-[Retry Policy](https://docs.temporal.io/encyclopedia/retry-policies)
+[Retry Policy](https://docs.temporal.io/encyclopedia/retry-policies){:target="_blank" rel="noopener"}
 tells Temporal how to retry an activity that failed in the current execution.
 Attributes like `initial_interval`, `backoff_coefficient`, and
 `maximum_interval` control the interval between retries. The attribute
@@ -294,7 +294,7 @@ failures.
 
 Activity timeouts can detect failures, simply because the activity exceeds the
 maximum expected execution time. Temporal provides multiple
-[timeouts](https://docs.temporal.io/encyclopedia/detecting-activity-failures).
+[timeouts](https://docs.temporal.io/encyclopedia/detecting-activity-failures){:target="_blank" rel="noopener"}.
 The attribute `start_to_close_timeout` specifies the timeout for an activity
 execution, i.e., the time spent after a worker starts executing an activity
 till it is finished. For most cases, setting this alone is enough and
@@ -481,7 +481,7 @@ curated set of utils in `nomad.actions.utils` module to perform these tasks.
 ## Adding to your oasis
 
 Make sure your oasis repo is up to date with the template by following the
-update [guide](https://github.com/FAIRmat-NFDI/nomad-distro-template?tab=readme-ov-file#updating-the-distribution-from-the-template). This ensures
+update [guide](https://github.com/FAIRmat-NFDI/nomad-distro-template?tab=readme-ov-file#updating-the-distribution-from-the-template){:target="_blank" rel="noopener"}. This ensures
 that the necessary containers for `temporal` is setup correctly.
 
 In addition to configuring the temporal service, you’ll also need to build new Docker images for both the gpu and cpu workers. The relevant extras for these workflows can be set in the pyproject.toml of the distro:
@@ -499,5 +499,5 @@ cpu-action = ["nomad-example[cpu-action]"]
 
 To implement the necessary changes, including image build steps and updates to
 docker-compose, the Dockerfile, and GitHub Actions, you can refer to this
-[pull request](https://github.com/FAIRmat-NFDI/nomad-distro-template/pull/109/files)
+[pull request](https://github.com/FAIRmat-NFDI/nomad-distro-template/pull/109/files){:target="_blank" rel="noopener"}
 as a guide.

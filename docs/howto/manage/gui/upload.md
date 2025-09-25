@@ -11,7 +11,7 @@ NOMAD will simply extract them and consider the whole directory structure within
 
 ## Create an upload and add files
 
-Open [NOMAD](https://nomad-lab.eu/prod/v1){:target="_blank"} and log in; if you don't have a NOMAD account, please create one.
+Open [NOMAD](https://nomad-lab.eu/prod/v1){:target="_blank" rel="noopener"} and log in; if you don't have a NOMAD account, please create one.
 
 Go to `PUBLISH` / `Uploads`. Here you can create an upload with the `CREATE A NEW UPLOAD`
 button. This will bring you to the upload page.
@@ -121,7 +121,7 @@ and small subset of your data. Use this to simulate a larger upload that you can
 in the normal way. You do not have to publish this test upload; simply delete it before publish,
 once you are satisfied with the results.
 
-Ask for assistance and [Contact us](https://nomad-lab.eu/about/support){:target="_blank"} in advance. This will
+Ask for assistance and [Contact us](https://nomad-lab.eu/about/support){:target="_blank" rel="noopener"} in advance. This will
 allow us to react to your specific situation and eventually prepare additional measures.
 Allow enough time before you need your data to be published. Adding multiple hundreds of
 GBs to NOMAD isn't a trivial feat and will take some time and effort on all sides.
