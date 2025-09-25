@@ -1,6 +1,10 @@
 #!/usr/bin/env python3
 """
 Make sure all external links in markdown have `{:target="_blank" rel="noopener"}`.
+
+TODO:
+- this wouldn't work if there's `()` in the link, e.g.:
+    https://en.wikipedia.org/wiki/Reentrancy_(computing)
 """
 
 import re
