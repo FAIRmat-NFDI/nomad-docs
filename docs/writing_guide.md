@@ -25,7 +25,6 @@ When contributing, identify which type of documentation your addition belongs to
 - **Keep essential context in place, centralize reusable content.** Provide enough information directly on the page so the user can follow without friction. For reused, larger blocks of content, keep a single authoritative version and link to it.
 - **Check accuracy with the actual system.** Verify commands, screenshots, and examples against the current NOMAD deployment. *Only merge a docs PR after the corresponding code changes have been merged into `nomad-lab`’s `develop` branch*.
 
-
 ## Styling & Conventions
 
 ### Headings & Structure
@@ -57,20 +56,20 @@ If the referenced section belongs to the current page, drop the global path, i.e
 **Backticks, quotes, bold, and italics.**
 
 - Use `backticks` for:
-  - Code (e.g., inline commands, file names, parameters, API endpoints, config options, environment variables).
-  - Literal values the user must type, e.g., in the UI.
+    - Code (e.g., inline commands, file names, parameters, API endpoints, config options, environment variables).
+    - Literal values the user must type, e.g., in the UI.
 
 - Use "double quotes" when quoting actual text strings (e.g., labels in the UI, button names, error messages).
 
 <!-- TODO check bold and it usage and try to be more specific -->
 - Use **bold** for:
-  - Certain UI elements (buttons, menu items, field names).
-  - Bullet list labels for clarity.
-  - Important emphasis (but use sparingly).
+    - Certain UI elements (buttons, menu items, field names).
+    - Bullet list labels for clarity.
+    - Important emphasis (but use sparingly).
 
 - Use *italics* for:
-  - Emphasis in narrative text.
-  - Terms being introduced for the first time.
+    - Emphasis in narrative text.
+    - Terms being introduced for the first time.
 
 **Add new terms to glossary.** Add new NOMAD-specific terms to the [Glossary](https://github.com/FAIRmat-NFDI/nomad-docs/blob/main/docs/reference/glossary.md). External terms/concepts should link to external definitions, when appropriate (use your best judgement).
 
@@ -88,7 +87,7 @@ If the referenced section belongs to the current page, drop the global path, i.e
 
 **Images and data.** All assets specific to an individual markdown file should be stored within an immediate sub-directory of the file, labeled accordingly. Please use `images/` and `data/` for the image and data files, respectively.
 
-Sharing assets between .md files in different locations is currently not allowed. If there is an exceptional case, please create a Github issue and tag a relevant maintainer.
+Sharing assets between .md files in different locations is currently not allowed. If there is an exceptional case, please create a GithHub issue and tag a relevant maintainer.
 
 ## Admonitions
 
