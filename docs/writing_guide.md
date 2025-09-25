@@ -10,10 +10,6 @@ Before merging make sure that the mkdocs logs do not report any broken links. Th
 
 All assets specific to an individual markdown file should be stored within an immediate sub-directory of the file, labeled accordingly. Please use `images/` and `data/` for the image and data files, respectively.
 
-## Sections Hierarchy
-
-single "#" sections should only be used at the beginning of the md file
-
 ## File organization should mirror the navigation bar
 
 Files and sub-folders should be stored according to the navigation bar organization in `mkdocs.yml`.
