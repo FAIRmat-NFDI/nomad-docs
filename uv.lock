@@ -1752,12 +1752,15 @@ wheels = [
 ]
 
 [[package]]
-name = "mkdocs-plugin-open-external-links-in-new-tab"
-version = "0.1.2"
-source = { git = "https://github.com/z-aki/mkdocs-plugin-open-external-links-in-new-tab/?rev=v1#5ef62b9688d33ca103fd94d788ba9f5e214d9e6f" }
+name = "mkdocs-open-in-new-tab"
+version = "1.0.8"
+source = { registry = "https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/simple" }
 dependencies = [
-    { name = "lxml" },
     { name = "mkdocs" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/0a/0e/f72a506a21bdb27b807124e00c688226848a388d1fd3980b80ae3cc27203/mkdocs_open_in_new_tab-1.0.8.tar.gz", hash = "sha256:3e0dad08cc9938b0b13097be8e0aa435919de1eeb2d1a648e66b5dee8d57e048", size = 5791, upload-time = "2024-11-18T13:15:13.977Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/21/94/44f3c868495481c868d08eea065c82803f1affd8553d3383b782f497613c/mkdocs_open_in_new_tab-1.0.8-py3-none-any.whl", hash = "sha256:051d767a4467b12d89827e1fea0ec660b05b027c726317fe4fceee5456e36ad2", size = 7717, upload-time = "2024-11-18T13:15:12.286Z" },
 ]
 
 [[package]]
@@ -1941,7 +1944,7 @@ dependencies = [
     { name = "mkdocs-macros-plugin" },
     { name = "mkdocs-material" },
     { name = "mkdocs-material-extensions" },
-    { name = "mkdocs-plugin-open-external-links-in-new-tab" },
+    { name = "mkdocs-open-in-new-tab" },
     { name = "mkdocs-redirects" },
     { name = "nomad-lab", extra = ["infrastructure"] },
     { name = "pydantic" },
@@ -1961,7 +1964,7 @@ requires-dist = [
     { name = "mkdocs-macros-plugin" },
     { name = "mkdocs-material" },
     { name = "mkdocs-material-extensions" },
-    { name = "mkdocs-plugin-open-external-links-in-new-tab", git = "https://github.com/z-aki/mkdocs-plugin-open-external-links-in-new-tab/?rev=v1" },
+    { name = "mkdocs-open-in-new-tab" },
     { name = "mkdocs-redirects" },
     { name = "nomad-lab", extras = ["infrastructure"], specifier = ">=1.3.18.dev89" },
     { name = "pydantic", specifier = ">=2.0" },
