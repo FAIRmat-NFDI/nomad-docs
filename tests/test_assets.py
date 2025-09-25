@@ -1,5 +1,7 @@
 import os
+
 import pytest
+
 
 def find_unused_assets():
     """
