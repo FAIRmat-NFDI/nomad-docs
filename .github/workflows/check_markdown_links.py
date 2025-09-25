@@ -1,20 +1,33 @@
 #!/usr/bin/env python3
+# /// script
+# requires-python = ">=3.12"
+# dependencies = [
+#     "regex",
+# ]
+# ///
 """
 Make sure all external links in markdown have `{:target="_blank" rel="noopener"}`.
-
-TODO:
-- this wouldn't work if there's `()` in the link, e.g.:
-    https://en.wikipedia.org/wiki/Reentrancy_(computing)
 """
 
-import re
 import sys
 from pathlib import Path
 
+import regex
+
 # Match [text](http/https...) with optional {attrs}
-LINK_PATTERN: re.Pattern = re.compile(
-    r'(\[[^\]]+\]\((?:https?)://[^\)]+\))(\{[^\}]*\})?'
-)
+# Handles links with balanced parentheses in the URL
+# Group 1 = the markdown link (text + url)
+# Group 2 = the optional {attrs}
+LINK_PATTERN = regex.compile(r"""
+    (                       # ---- Group 1: the whole markdown link ----
+      \[ [^\]]+ \]          # [text]
+      \( (?:https?|ftp)://  # protocol
+          (?> [^()]+ | \((?R)\) )*  # non-parens OR balanced (...) recursively
+      \)
+    )
+    (\{[^\}]*\})?           # ---- Group 2: optional {attrs} ----
+""", regex.VERBOSE)
+
 
 def normalize_attrs(attrs: str | None) -> str:
     """Ensure target and rel are both present."""
@@ -23,7 +36,7 @@ def normalize_attrs(attrs: str | None) -> str:
 
     inner: str = attrs.strip()[1:-1].strip()  # remove { }
     parts: list[str] = inner.split()
-    attrs_dict: dict = {}
+    attrs_dict: dict[str, str | None] = {}
 
     for part in parts:
         if '=' in part:
@@ -36,13 +49,17 @@ def normalize_attrs(attrs: str | None) -> str:
     attrs_dict["target"] = "_blank"
     attrs_dict["rel"] = "noopener"
 
-    return "{:" + " ".join(f'{k}="{v}"' if v else k for k, v in attrs_dict.items()) + "}"
+    return "{:" + " ".join(
+        f'{k}="{v}"' if v else k
+        for k, v in attrs_dict.items()
+    ) + "}"
+
 
 def process_file(path: Path) -> int:
     """Process one file. Return number of changes."""
     text: str = path.read_text(encoding="utf-8")
 
-    def repl(match):
+    def repl(match: regex.Match) -> str:
         link, attrs = match.groups()
         return link + normalize_attrs(attrs)
 
@@ -54,11 +71,13 @@ def process_file(path: Path) -> int:
         return count
     return 0
 
+
 def main(root="docs") -> int:
     total_changes = 0
     for md_file in Path(root).rglob("*.md"):
         total_changes += process_file(md_file)
     return total_changes
+
 
 if __name__ == "__main__":
     changes = main()

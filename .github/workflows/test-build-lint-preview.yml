@@ -38,18 +38,19 @@ jobs:
       - name: Ensure links in markdown files are alive
         uses: tcort/github-action-markdown-link-check@v1
         with:
-          use-quiet-mode: 'yes'
+          use-quiet-mode: "yes"
           config-file: .github/workflows/configs/markdown-link-check.json
-          folder-path: 'docs, examples'
-          file-path: './README.md'
+          folder-path: "docs, examples"
+          file-path: "./README.md"
 
-      - uses: actions/setup-python@v5
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
         with:
-          python-version: ${{ env.PYTHON_VERSION }}
+          version: ${{ env.UV_VERSION }}
 
-      - name: Ensure external links have `{:target="_blank" rel="noopener"}`.
+      - name: Ensure external links have `{:target="_blank" rel="noopener"}`
         run: |
-          python .github/workflows/check_markdown_links.py
+          uv run .github/workflows/check_markdown_links.py
 
   test-docs:
     runs-on: ubuntu-latest
