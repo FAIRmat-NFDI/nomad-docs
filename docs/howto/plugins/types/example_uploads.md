@@ -6,7 +6,7 @@ This documentation shows you how to write a plugin entry point for an example up
 
 ## Getting started
 
-You can use our [template repository](https://github.com/FAIRmat-NFDI/nomad-plugin-template) to create an initial structure for a plugin containing an example upload. The relevant part of the repository layout will look something like this:
+You can use our [template repository](https://github.com/FAIRmat-NFDI/nomad-plugin-template){:target="_blank" rel="noopener"} to create an initial structure for a plugin containing an example upload. The relevant part of the repository layout will look something like this:
 
 ```txt
 nomad-example
@@ -78,7 +78,7 @@ There are three main ways to include data in an example upload, and you can also
     ]
     ```
 
-    This is convenient if you have relative small example data that can be tracked in version control. The path should be given relative to the package installation location (`src/<package-name>`), and you should ensure that the data is distributed with your Python package. Distribution of additional data files in Python packages is controlled with the `MANIFEST.in` file. If you create a plugin with our [template](https://github.com/FAIRmat-NFDI/nomad-plugin-template), the `src/<package-name>/example_uploads` folder is included automatically in `MANIFEST.in`. If you later add an example upload entry point to your plugin, remember to include the folder by adding the following line to `MANIFEST.in`:
+    This is convenient if you have relative small example data that can be tracked in version control. The path should be given relative to the package installation location (`src/<package-name>`), and you should ensure that the data is distributed with your Python package. Distribution of additional data files in Python packages is controlled with the `MANIFEST.in` file. If you create a plugin with our [template](https://github.com/FAIRmat-NFDI/nomad-plugin-template){:target="_blank" rel="noopener"}, the `src/<package-name>/example_uploads` folder is included automatically in `MANIFEST.in`. If you later add an example upload entry point to your plugin, remember to include the folder by adding the following line to `MANIFEST.in`:
 
     ```sh
     graft src/<package-name>/<path>
@@ -86,7 +86,7 @@ There are three main ways to include data in an example upload, and you can also
 
 2. Data retrieved online:
 
-    If your example uploads are very large (>100MB), storing them in Git may become unpractical. In order to deal with larger uploads, they can be stored in a separate online service. For example, [Zenodo](https://zenodo.org/) is an open and free platform for hosting scientific data. To load such external resources, you can specify one or multiple URLs as resources:
+    If your example uploads are very large (>100MB), storing them in Git may become unpractical. In order to deal with larger uploads, they can be stored in a separate online service. For example, [Zenodo](https://zenodo.org/){:target="_blank" rel="noopener"} is an open and free platform for hosting scientific data. To load such external resources, you can specify one or multiple URLs as resources:
 
     ```python
     # Include single ZIP file (note that ZIP contents are not automatically extracted)

@@ -37,12 +37,12 @@ archive
      └── results
 ```
 
-Entire subsections of NOMAD's schema can be browsed using the [MetaInfo Browser](https://nomad-lab.eu/prod/v1/gui/analyze/metainfo){:target="_blank"}:
+Entire subsections of NOMAD's schema can be browsed using the [MetaInfo Browser](https://nomad-lab.eu/prod/v1/gui/analyze/metainfo){:target="_blank" rel="noopener"}:
 
-- `run` base schema: [MetaInfo Browser > Entry > run](https://nomad-lab.eu/prod/v1/gui/analyze/metainfo/nomad.datamodel.datamodel.EntryArchive/run){:target="_blank"}
-- `runschema` full schema for `run`: [MetaInfo Browser > runschema](https://nomad-lab.eu/prod/v1/gui/analyze/metainfo/runschema){:target="_blank"}
-- `workflow2` base schema: [MetaInfo Browser > Entry > workflow2](https://nomad-lab.eu/prod/v1/gui/analyze/metainfo/nomad.datamodel.datamodel.EntryArchive/workflow2){:target="_blank"}
-- `simulationworkflowschema` full computational schema for `workflow2`: [MetaInfo Browser > simulationworkflowschema](https://nomad-lab.eu/prod/v1/gui/analyze/metainfo/simulationworkflowschema){:target="_blank"}
+- `run` base schema: [MetaInfo Browser > Entry > run](https://nomad-lab.eu/prod/v1/gui/analyze/metainfo/nomad.datamodel.datamodel.EntryArchive/run){:target="_blank" rel="noopener"}
+- `runschema` full schema for `run`: [MetaInfo Browser > runschema](https://nomad-lab.eu/prod/v1/gui/analyze/metainfo/runschema){:target="_blank" rel="noopener"}
+- `workflow2` base schema: [MetaInfo Browser > Entry > workflow2](https://nomad-lab.eu/prod/v1/gui/analyze/metainfo/nomad.datamodel.datamodel.EntryArchive/workflow2){:target="_blank" rel="noopener"}
+- `simulationworkflowschema` full computational schema for `workflow2`: [MetaInfo Browser > simulationworkflowschema](https://nomad-lab.eu/prod/v1/gui/analyze/metainfo/simulationworkflowschema){:target="_blank" rel="noopener"}
 
 The most important section of the archive for computational data is the `run` section, which is
 divided into three main subsections: `method`, `system`, and `calculation`. `method` stores
@@ -68,6 +68,6 @@ See [Explanation > Workflows](../../explanation/workflows.md) for more informati
 <!-- TODO specify which workflow sections have to be set by the parser: workflow2 or these standard workflows. -->
 
 !!! warning "Attention"
-    We are currently performing a complete refactoring of the computational MetaInfo schema. The new schema will be populated under the `data` section of the archive: [MetaInfo Browser > Entry > data](https://nomad-lab.eu/prod/v1/gui/analyze/metainfo/nomad.datamodel.datamodel.EntryArchive/data){:target="_blank"}. A preliminary version of the full schema can be browsed in [MetaInfo Browser > nomad_simulations](https://nomad-lab.eu/prod/v1/gui/analyze/metainfo/nomad_simulations){:target="_blank"}.
+    We are currently performing a complete refactoring of the computational MetaInfo schema. The new schema will be populated under the `data` section of the archive: [MetaInfo Browser > Entry > data](https://nomad-lab.eu/prod/v1/gui/analyze/metainfo/nomad.datamodel.datamodel.EntryArchive/data){:target="_blank" rel="noopener"}. A preliminary version of the full schema can be browsed in [MetaInfo Browser > nomad_simulations](https://nomad-lab.eu/prod/v1/gui/analyze/metainfo/nomad_simulations){:target="_blank" rel="noopener"}.
 
-    Further information can be found within the schema plugin docs: [`nomad-simulations` Docs](https://nomad-coe.github.io/nomad-simulations/){:target="_blank"}.
+    Further information can be found within the schema plugin docs: [`nomad-simulations` Docs](https://nomad-coe.github.io/nomad-simulations/){:target="_blank" rel="noopener"}.

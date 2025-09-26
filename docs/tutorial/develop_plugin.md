@@ -5,26 +5,26 @@ will create a plugin to log data for a simple sintering process.
 
 ## Prerequisites
 
-- A GitHub account. This can be created for free on [github.com](https://github.com/signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F&source=header-home).
+- A GitHub account. This can be created for free on [github.com](https://github.com/signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F&source=header-home){:target="_blank" rel="noopener"}.
 - Basic understanding of Python.
-- Basic understanding of NOMAD metainfo, see for example [tutorial 8](https://www.fairmat-nfdi.eu/events/fairmat-tutorial-8/tutorial-8-materials).
+- Basic understanding of NOMAD metainfo, see for example [tutorial 8](https://www.fairmat-nfdi.eu/events/fairmat-tutorial-8/tutorial-8-materials){:target="_blank" rel="noopener"}.
 
 !!! note
     Several software development concepts are being used during this tutorial.
     Here is a list with some further information on each of them:
 
-    * [what is Git](https://learn.microsoft.com/en-us/devops/develop/git/what-is-git)
-    * [what is VSCode, i. e., an Integrated Development Environment (IDE)](https://aws.amazon.com/what-is/ide/)
-    * [what is Pip](https://realpython.com/lessons/what-is-pip-overview/)
-    * [what is a Python virtual environment](https://realpython.com/python-virtual-environments-a-primer/#why-do-you-need-virtual-environments)
-    * [creating a Python package](https://packaging.python.org/en/latest/tutorials/packaging-projects/)
-    * [uploading a package to PyPI](https://www.freecodecamp.org/news/how-to-create-and-upload-your-first-python-package-to-pypi/)
-    * [what is cruft](https://cruft.github.io/cruft/)
+    * [what is Git](https://learn.microsoft.com/en-us/devops/develop/git/what-is-git){:target="_blank" rel="noopener"}
+    * [what is VSCode, i. e., an Integrated Development Environment (IDE)](https://aws.amazon.com/what-is/ide/){:target="_blank" rel="noopener"}
+    * [what is Pip](https://realpython.com/lessons/what-is-pip-overview/){:target="_blank" rel="noopener"}
+    * [what is a Python virtual environment](https://realpython.com/python-virtual-environments-a-primer/#why-do-you-need-virtual-environments){:target="_blank" rel="noopener"}
+    * [creating a Python package](https://packaging.python.org/en/latest/tutorials/packaging-projects/){:target="_blank" rel="noopener"}
+    * [uploading a package to PyPI](https://www.freecodecamp.org/news/how-to-create-and-upload-your-first-python-package-to-pypi/){:target="_blank" rel="noopener"}
+    * [what is cruft](https://cruft.github.io/cruft/){:target="_blank" rel="noopener"}
 
 ## Create a Git(Hub) repository
 
 Firstly, we recommend to use git to version control your NOMAD plugin.
-There is a GitHub template repository that can be used for this at [github.com/FAIRmat-NFDI/nomad-plugin-template](https://github.com/FAIRmat-NFDI/nomad-plugin-template).
+There is a GitHub template repository that can be used for this at [github.com/FAIRmat-NFDI/nomad-plugin-template](https://github.com/FAIRmat-NFDI/nomad-plugin-template){:target="_blank" rel="noopener"}.
 
 To use the template you should choose the "Create an new repository" option after pressing
 the green "Use this template" button in the upper right corner.
@@ -71,7 +71,7 @@ and move inside the top directory
 cd REPOSITORY_NAME
 ```
 
-You will also need to install [cruft](https://pypi.org/project/cruft/), preferably using
+You will also need to install [cruft](https://pypi.org/project/cruft/){:target="_blank" rel="noopener"}, preferably using
 `pipx`:
 
 ```sh

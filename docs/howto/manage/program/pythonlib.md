@@ -4,7 +4,7 @@ We provide a Python package called `nomad-lab`. The package can be used to run
 certain NOMAD features within local Python programming environments. It includes
 the NOMAD parsers and normalizers, or convenience functions to query the processed data on NOMAD.
 
-Released version of the package are hosted on [pypi](https://pypi.org/project/nomad-lab/){:target="_blank"}
+Released version of the package are hosted on [pypi](https://pypi.org/project/nomad-lab/){:target="_blank" rel="noopener"}
 and you can install it with *pip* (or conda).
 
 To install the newest pypi release, simply use pip:

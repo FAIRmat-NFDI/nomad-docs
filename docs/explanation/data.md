@@ -120,10 +120,10 @@ normalization algorithm needs to be implemented.
 ### Exploring the schema
 
 All built-in definitions that come with NOMAD or one of the installed plugins can
-be explored with the [Metainfo browser](https://nomad-lab.eu/prod/v1/gui/analyze/metainfo/nomad.datamodel.datamodel.EntryArchive){:target="_blank"}. You can start with the root section `EntryArchive`
+be explored with the [Metainfo browser](https://nomad-lab.eu/prod/v1/gui/analyze/metainfo/nomad.datamodel.datamodel.EntryArchive){:target="_blank" rel="noopener"}. You can start with the root section `EntryArchive`
 and browse based on subsections, or explore the Metainfo through packages.
 
-To see all user provided uploaded schemas, you can use a [search for the subsection `definition`](https://nomad-lab.eu/prod/v1/gui/search/entries?quantities=definitions){:target="_blank"}.
+To see all user provided uploaded schemas, you can use a [search for the subsection `definition`](https://nomad-lab.eu/prod/v1/gui/search/entries?quantities=definitions){:target="_blank" rel="noopener"}.
 The subsection `definition` is a top-level `EntryArchive` subsection. See also our
 [how-to on writing and uploading schemas](../howto/manage/gui/yaml.md#uploading-schema-packages).
 
@@ -154,7 +154,7 @@ for all data. However, it is independent of the actual representation of data in
 or how it might be stored in a file or database.
 
 The Metainfo has many serialized forms. You can write `.archive.json` or `.archive.yaml`
-files yourself. NOMAD internally stores all processed data in [message pack](https://msgpack.org/){:target="_blank"}. Some
+files yourself. NOMAD internally stores all processed data in [message pack](https://msgpack.org/){:target="_blank" rel="noopener"}. Some
 of the data is stored in mongodb or elasticsearch. When you request processed data via
 API, you receive it in JSON. When you use the [ArchiveQuery](../howto/manage/program/archive_query.md), all data is represented
 as Python objects (see also [example in schema package documentation](../howto/plugins/types/schema_packages.md#schemapackage-class)).
