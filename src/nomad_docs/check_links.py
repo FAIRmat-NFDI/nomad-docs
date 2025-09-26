@@ -13,14 +13,17 @@ import regex
 # Group 2 = the optional {attrs}
 LINK_PATTERN = regex.compile(
     r"""
-    (                       # Group 1: [text](url)
-      \[[^\]]+\]            # [text]
-      \( (?:https?|ftp)://  # protocol
-          .*?               # lazy URL
-      \)                    # closing paren of Markdown link
+    (                               # Group 1: [text](url)
+      \[[^\]]+\]                    # [text]
+      \(                             # opening paren of URL
+        (?:https?|ftp)://            # protocol
+        (?:[^()\s]+|                 # non-parens
+           \((?:[^()]+|(?R))*\)      # balanced (...)
+        )+
+      \)                             # closing paren of Markdown link
     )
-    (\{[^\}]*\})?           # Group 2: optional {attrs}
-""",
+    (\{[^\}]*\})?                   # Group 2: optional {attrs}
+    """,
     regex.VERBOSE,
 )
 
