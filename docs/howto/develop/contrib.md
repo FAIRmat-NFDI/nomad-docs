@@ -3,8 +3,8 @@
 !!! note
 
     The NOMAD source code is maintained in two synchronized projects on
-    [GitHub](https://github.com/nomad-coe/nomad){:target="_blank"} and a
-    [GitLab run by MPCDF](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR){:target="_blank"}.
+    [GitHub](https://github.com/nomad-coe/nomad){:target="_blank" rel="noopener"} and a
+    [GitLab run by MPCDF](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR){:target="_blank" rel="noopener"}.
     Everyone can contribute on GitHub. The GitLab instance requires an account for active
     contribution.
     This not an ideal situation: there are historic reasons and there is
@@ -15,8 +15,8 @@
 
 ### Issue trackers
 
-Everyone can open a [new issue](https://github.com/nomad-coe/nomad/issues/new){:target="_blank"} in our main
-[GitHub project](https://github.com/nomad-coe/nomad){:target="_blank"}.
+Everyone can open a [new issue](https://github.com/nomad-coe/nomad/issues/new){:target="_blank" rel="noopener"} in our main
+[GitHub project](https://github.com/nomad-coe/nomad){:target="_blank" rel="noopener"}.
 
 Use issues to ask questions, report bugs, or suggest features. If in doubt, use the main
 project to engage with us. If you address a specific plugin (e.g. parser), you can also
@@ -25,7 +25,7 @@ post into the respective projects. See also the list of [built-in plugins](../..
 If you are a member of FAIRmat, the NOMAD CoE, or are a close collaborator, you
 probably have an MPCDF GitLab account (or should ask us for one). Please use the
 issue tracker on our main
-[GitLab project](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR){:target="_blank"}.
+[GitLab project](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR){:target="_blank" rel="noopener"}.
 This is where most of the implementation work is planned and executed.
 
 ### Issue content
@@ -45,7 +45,7 @@ A few tips that will help us to solve your issues quicker:
     - What NOMAD URL are you using (UI), which package version (Python)?
     - Is there an upload or entry id that we can look at?
     - Example files or code snippets?
-    - Don't screenshot code, copy and paste instead. Use [code blocks](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-and-highlighting-code-blocks#syntax-highlighting){:target="_blank"}.
+    - Don't screenshot code, copy and paste instead. Use [code blocks](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-and-highlighting-code-blocks#syntax-highlighting){:target="_blank" rel="noopener"}.
 
 - **Features**: Augment your feature descriptions with a use case that helps us understand the feature and its scope.
 
@@ -101,7 +101,7 @@ potential built-in plugin (i.e. as part of the public NOMAD service).
 
 ## Branches and Tags
 
-On the [main GitLab project](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR){:target="_blank"} we use
+On the [main GitLab project](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR){:target="_blank" rel="noopener"} we use
 *protected* and *feature* branches. You must not commit to protected branches directly
 (even if you have the rights).
 
@@ -117,7 +117,7 @@ On the [main GitLab project](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR){:
 - `vX.X.X` or `vX.X.XrcX`: *tags* for (pre-)releases.
 
 The `develop` branch and release tags are automatically synchronized to the
-[GitHub project](https://github.com/nomad-coe/nomad){:target="_blank"}. Otherwise, this project is mostly
+[GitHub project](https://github.com/nomad-coe/nomad){:target="_blank" rel="noopener"}. Otherwise, this project is mostly
 the target for [pull requests](#pull-requests-pr-github) and does not contain other relevant
 branches.
 
@@ -171,9 +171,9 @@ The trailer value (`Fixed` in the example) has to be one of the following values
 - `Changed` for general improvements, e.g. updated documentation, refactoring,
 improving performance, etc.
 
-These categories are consistent with [keepachangelog.com](https://keepachangelog.com/){:target="_blank"}.
+These categories are consistent with [keepachangelog.com](https://keepachangelog.com/){:target="_blank" rel="noopener"}.
 For more information about the changelog generation read the
-[GitLab documentation](https://docs.gitlab.com/ee/api/repositories.html#add-changelog-data-to-a-changelog-file){:target="_blank"}.
+[GitLab documentation](https://docs.gitlab.com/ee/api/repositories.html#add-changelog-data-to-a-changelog-file){:target="_blank" rel="noopener"}.
 
 ### CI/CD pipeline and review
 
@@ -220,7 +220,7 @@ to the references put in by GitLab.
 
 ## Pull requests (PR, GitHub)
 
-You can fork the [main NOMAD project](https://github.com/nomad-coe/nomad){:target="_blank"} and create pull
+You can fork the [main NOMAD project](https://github.com/nomad-coe/nomad){:target="_blank" rel="noopener"} and create pull
 requests following the usual GitHub flow. Make sure to target the `develop` branch. A team
 member will pick up your pull request and automatically copy it to GitLab to run the
 pipeline and potentially perform the merge. This process is made transparent in the pull
@@ -236,7 +236,7 @@ code. This can only be done if we keep a "clean" history.
 
 - Use descriptive commit messages. Use simple verbs (*added*, *removed*, *refactored*,
   etc.) name features and changed components.
-  [Include issue numbers](https://docs.gitlab.com/ee/user/project/issues/crosslinking_issues.html){:target="_blank"}
+  [Include issue numbers](https://docs.gitlab.com/ee/user/project/issues/crosslinking_issues.html){:target="_blank" rel="noopener"}
   to create links in GitLab.
 
 - Learn how to *amend* to avoid lists of small related commits.
@@ -247,8 +247,8 @@ code. This can only be done if we keep a "clean" history.
 
 - Some videos on more advanced Git usage:
 
-    - [Tools & Concepts for Matering Version Control with Git](https://youtu.be/Uszj_k0DGsg){:target="_blank"}
-    - [Interactive Rebase, Cherry-Picking, Reflog, Submodules, and more](https://youtu.be/qsTthZi23VE){:target="_blank"}
+    - [Tools & Concepts for Matering Version Control with Git](https://youtu.be/Uszj_k0DGsg){:target="_blank" rel="noopener"}
+    - [Interactive Rebase, Cherry-Picking, Reflog, Submodules, and more](https://youtu.be/qsTthZi23VE){:target="_blank" rel="noopener"}
 
 ### Amend
 
@@ -276,4 +276,4 @@ git merge --squash <other-branch>
 
 When you need multiple branches to implement a feature and merge between them, try to use `--squash`. Squashing puts all commits of the merged branch into a single commit.  It allows you to have many commits and then squash them into one. This is useful if these commits were made just to synchronize between workstations, due to unexpected errors in CI/CD, because you needed a save point, etc. Again the goal is to have coherent commits, where each commit makes sense on its own.
 
-Squashing can also be applied on a selection of commits during an [interactive rebase](https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History#_squashing){:target="_blank"}.
+Squashing can also be applied on a selection of commits during an [interactive rebase](https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History#_squashing){:target="_blank" rel="noopener"}.

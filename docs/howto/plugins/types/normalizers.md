@@ -6,7 +6,7 @@ This documentation shows you how to write a plugin entry point for a normaliser.
 
 ## Getting started
 
-You can use our [template repository](https://github.com/FAIRmat-NFDI/nomad-plugin-template) to create an initial structure for a plugin containing a normalizer. The relevant part of the repository layout will look something like this:
+You can use our [template repository](https://github.com/FAIRmat-NFDI/nomad-plugin-template){:target="_blank" rel="noopener"} to create an initial structure for a plugin containing a normalizer. The relevant part of the repository layout will look something like this:
 
 ```txt
 nomad-example

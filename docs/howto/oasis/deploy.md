@@ -20,7 +20,7 @@ There should be enough RAM to run databases, application, and processing at the 
 
 ### Storage
 
-NOMAD keeps all files that it manages as they are. The files that NOMAD processes in addition (e.g. through parsing) are typically smaller than the original raw files. Therefore, you can base your storage requirements based on the size of the data files that you expect to manage. The additional MongoDB database and Elasticsearch index is comparatively small. A minimum storage size of 30GB is enough to host the required docker images and also to run the databases without hitting any [disk-usage watermark errors](https://www.elastic.co/guide/en/elasticsearch/reference/current/fix-watermark-errors.html).
+NOMAD keeps all files that it manages as they are. The files that NOMAD processes in addition (e.g. through parsing) are typically smaller than the original raw files. Therefore, you can base your storage requirements based on the size of the data files that you expect to manage. The additional MongoDB database and Elasticsearch index is comparatively small. A minimum storage size of 30GB is enough to host the required docker images and also to run the databases without hitting any [disk-usage watermark errors](https://www.elastic.co/guide/en/elasticsearch/reference/current/fix-watermark-errors.html){:target="_blank" rel="noopener"}.
 
 Storage speed is another consideration. NOMAD can work with NAS systems. All that NOMAD needs is a POSIX-compliant filesystem as an interface. So everything you can (e.g. Docker host) mount should be compatible. For processing data obviously relies on read/write speed, but this is just a matter of convenience. The processing is designed to run as managed asynchronous tasks. Local storage might be favorable for MongoDB and Elasticsearch operation, but it is not a must.
 
@@ -30,7 +30,7 @@ NOMAD is designed so that it can be run either on a single machine using `docker
 
 ### `docker-compose`
 
-For the single-machine setup with `docker-compose`, the [`nomad-distro-template`](https://github.com/FAIRmat-NFDI/nomad-distro-template) provides a basic `docker-compose.yaml` file and a set of instructions in `README.md` for booting up all of the service.
+For the single-machine setup with `docker-compose`, the [`nomad-distro-template`](https://github.com/FAIRmat-NFDI/nomad-distro-template){:target="_blank" rel="noopener"} provides a basic `docker-compose.yaml` file and a set of instructions in `README.md` for booting up all of the service.
 
 ### kubernetes
 
@@ -38,7 +38,7 @@ For the single-machine setup with `docker-compose`, the [`nomad-distro-template`
 
     This is just preliminary documentation and many details are missing.
 
-There is a NOMAD [Helm](https://helm.sh/) chart. First we need to add the NOMAD Helm chart repository:
+There is a NOMAD [Helm](https://helm.sh/){:target="_blank" rel="noopener"} chart. First we need to add the NOMAD Helm chart repository:
 
 ```sh
 helm repo add nomad https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/helm/latest
@@ -87,7 +87,7 @@ Regardless of the cloud provider, the deployment typically follows these steps:
 
 1. Create an AWS account
 
-    You can do it [here](https://aws.amazon.com/). You will need a credit card
+    You can do it [here](https://aws.amazon.com/){:target="_blank" rel="noopener"}. You will need a credit card
     for creating an account.
 
 2. Create an EC2 instance
@@ -99,12 +99,12 @@ Regardless of the cloud provider, the deployment typically follows these steps:
     - In network settings, ensure that "Auto-assign public IP" is enabled
     - In network settings, ensure that "Allow HTTPS traffic from the internet" is enabled.
     - In network settings, ensure that "Allow HTTP traffic from the internet" is enabled.
-    - In the storage settings, add persistent storage for databases and files stored by NOMAD. The default [EBS (Elastic Block Store)](https://docs.aws.amazon.com/ebs/latest/userguide/what-is-ebs.html) is a recommended option, as it provides durable and scalable storage. Learn more in the [AWS Storage Guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Storage.html). We recommend starting with at least 30 GiB of storage to have space for the docker images and databases.
+    - In the storage settings, add persistent storage for databases and files stored by NOMAD. The default [EBS (Elastic Block Store)](https://docs.aws.amazon.com/ebs/latest/userguide/what-is-ebs.html){:target="_blank" rel="noopener"} is a recommended option, as it provides durable and scalable storage. Learn more in the [AWS Storage Guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Storage.html){:target="_blank" rel="noopener"}. We recommend starting with at least 30 GiB of storage to have space for the docker images and databases.
     - Launch the instance
 
 3. Configure Network & Security
 
-    - Check that inbound traffic is allowed in the [*Network & Security/Security Groups*](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html) settings. Inbound traffic should be allowed for:
+    - Check that inbound traffic is allowed in the [*Network & Security/Security Groups*](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html){:target="_blank" rel="noopener"} settings. Inbound traffic should be allowed for:
         - HTTP: Protocol TCP, port 80, source 0.0.0.0/0
         - HTTPS: Protocol TCP, port 443, source 0.0.0.0/0
         - (Optional) SSH: Protocol TCP, port 22, source 0.0.0.0/0
@@ -113,7 +113,7 @@ Regardless of the cloud provider, the deployment typically follows these steps:
 
     - Check that the OS firewall (e.g. `ufw` for Ubuntu) is also allowing this traffic.
 
-    - Assign an [Elastic (static) IP address](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html), as by default [AWS assigns a dynamic public IP that changes upon instance restart](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html#concepts-public-addresses).
+    - Assign an [Elastic (static) IP address](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html){:target="_blank" rel="noopener"}, as by default [AWS assigns a dynamic public IP that changes upon instance restart](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-instance-addressing.html#concepts-public-addresses){:target="_blank" rel="noopener"}.
 
     - To enable secure communication with the server, read the guide on [setting up secured connection using HTTPS](#secured-connections-using-https). For testing you can skip this step, but HTTPS communication must be enforced in the final production setup.
 
@@ -122,9 +122,9 @@ Regardless of the cloud provider, the deployment typically follows these steps:
 
     - Install docker and docker compose on the virtual machine: you can [read more about the installation here](#installing-docker).
 
-    - Ensure that Git is installed to be able to easily sync the distribution configuration. You can check this by running `git --version`. Generic installations instructions are found [here](https://git-scm.com/downloads/linux).
+    - Ensure that Git is installed to be able to easily sync the distribution configuration. You can check this by running `git --version`. Generic installations instructions are found [here](https://git-scm.com/downloads/linux){:target="_blank" rel="noopener"}.
 
-    - Create a NOMAD Oasis distribution using our template [`nomad-distro-template`](https://github.com/FAIRmat-NFDI/nomad-distro-template). We recommend creating a new repository by presssing the "Use this template button", but for testing it is also possible to use the existing template repository directly.
+    - Create a NOMAD Oasis distribution using our template [`nomad-distro-template`](https://github.com/FAIRmat-NFDI/nomad-distro-template){:target="_blank" rel="noopener"}. We recommend creating a new repository by presssing the "Use this template button", but for testing it is also possible to use the existing template repository directly.
 
     - Follow the deployment instructions in the `README.md` file under *Deploying the distribution/For a new Oasis*. This typically consists of cloning the repository, setting up file priviledges and then running `docker compose pull` + `docker compose up -d`.
 
@@ -134,14 +134,14 @@ Regardless of the cloud provider, the deployment typically follows these steps:
 
 ## Installing Docker
 
-You can find generic [installation instructions here](https://docs.docker.com/engine/install/). On Ubuntu, you can install docker and docker compose with:
+You can find generic [installation instructions here](https://docs.docker.com/engine/install/){:target="_blank" rel="noopener"}. On Ubuntu, you can install docker and docker compose with:
 
 ```sh
 curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
 ```
 
-You will also want to configure docker to be run as a non-root user using [these steps](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user). On Ubuntu, this can be done with:
+You will also want to configure docker to be run as a non-root user using [these steps](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user){:target="_blank" rel="noopener"}. On Ubuntu, this can be done with:
 
 ```sh
 sudo groupadd docker
@@ -167,13 +167,13 @@ Before entering production, you must set up secure connections through HTTPS. Wi
 
     2. Self-signed certificate
 
-        For testing, you can create a [self-signed certificate](https://en.wikipedia.org/wiki/Self-signed_certificate). These are not viable for a production setup, as they are not trusted e.g. by browsers.
+        For testing, you can create a [self-signed certificate](https://en.wikipedia.org/wiki/Self-signed_certificate){:target="_blank" rel="noopener"}. These are not viable for a production setup, as they are not trusted e.g. by browsers.
 
-        For detailed instructions, see the "Deploy Oasis with HTTPS" section in the [`nomad-distro-template` documentation](https://github.com/FAIRmat-NFDI/nomad-distro-template?tab=readme-ov-file#for-a-new-oasis)
+        For detailed instructions, see the "Deploy Oasis with HTTPS" section in the [`nomad-distro-template` documentation](https://github.com/FAIRmat-NFDI/nomad-distro-template?tab=readme-ov-file#for-a-new-oasis){:target="_blank" rel="noopener"}
 
     3. Free certificate from Let's Encrypt
 
-        [Let's Encrypt](https://letsencrypt.org/) is a non-profit organization that provides free TLS certificats. To create a free certificate you must have a domain name. You can follow their tutorials on creating free certificates.
+        [Let's Encrypt](https://letsencrypt.org/){:target="_blank" rel="noopener"} is a non-profit organization that provides free TLS certificats. To create a free certificate you must have a domain name. You can follow their tutorials on creating free certificates.
 
 3. Setup your server to accept HTTPS traffic.
-    To enable HTTPS, you need to mount your TLS certificate and ensure that port 443 is open. A template nginx configuration file is available, see the "Deploy Oasis with HTTPS" section of [`nomad-distro-template` documentation](https://github.com/FAIRmat-NFDI/nomad-distro-template?tab=readme-ov-file#for-a-new-oasis).
+    To enable HTTPS, you need to mount your TLS certificate and ensure that port 443 is open. A template nginx configuration file is available, see the "Deploy Oasis with HTTPS" section of [`nomad-distro-template` documentation](https://github.com/FAIRmat-NFDI/nomad-distro-template?tab=readme-ov-file#for-a-new-oasis){:target="_blank" rel="noopener"}.
