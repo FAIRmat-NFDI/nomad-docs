@@ -38,7 +38,7 @@ Use NOMAD's functionalities programmatically.
 - [Publish data using Python](manage/program/publish_python.md)
 - [Access processed data](manage/program/archive_query.md)
 - [Transform data](manage/program/json_transformer.md)
-- [Make graph-style API calls](manage/program/graph-api/basics.md)
+- [Make graph-style API calls](manage/program/graph_api.md)
 
 </div>
 </div>
@@ -118,4 +118,4 @@ Contribute to the core NOMAD software.
 
 ## Additional Resources
 
-[Support Page](https://nomad-lab.eu/nomad-lab/support.html){:.md-button .nomad-button target="_blank" rel="noopener"}
+[Support Page](https://nomad-lab.eu/nomad-lab/support.html){.md-button .nomad-button target="_blank" rel="noopener"}
