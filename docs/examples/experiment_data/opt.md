@@ -7,4 +7,4 @@ Build upon your understanding of NOMAD's features with domain-specific examples 
 
 <!--- ### Contextualization for the technique and the scientific domain TODO-->
 
-- [pynxtools-ellips](https://fairmat-nfdi.github.io/pynxtools-ellips/){:target="_blank" rel="noopener"}
+- [pynxtools-ellips](https://fairmat-nfdi.github.io/pynxtools-ellips/)
