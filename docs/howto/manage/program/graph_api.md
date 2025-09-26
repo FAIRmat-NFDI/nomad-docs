@@ -7,9 +7,11 @@
 ## Recommended preparation
 
 - [Tutorial > Accessing data via API](../../../tutorial/access_api.md)
+
 - [API Overview](./api.md)
 
 ## Further resources
+
 - [GraphQL](https://graphql.org/){:target="_blank"}
 
 ## Overview
@@ -104,6 +106,7 @@ To fetch the desired field, the `RequestConfig` can be attached under the key `m
   }
 }
 ```
+
 The `plain` directive tells the server to include the field in the response.
 
 Now it is possible to fetch a collection of desired quantities from the upload metadata.
@@ -685,7 +688,6 @@ Note the field `elements_ratios` is not included any more.
 !!! note
     Only one of the fields `include` and `exclude` can be used in a single request configuration.
     In either case, the field will not be passed to deeper levels of the archive.
-
 
 #### Resolving References
 
