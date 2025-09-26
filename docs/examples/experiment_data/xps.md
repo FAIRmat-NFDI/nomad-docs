@@ -15,7 +15,7 @@ A variety of file formats are used in the research field of X-ray photoelectron 
 
 ## How to upload XPS data to NOMAD
 
-Documentation on how to upload XPS data sets from different sources can be found [here](https://fairmat-nfdi.github.io/pynxtools-xps/tutorial/nomad.html)
+Documentation on how to upload XPS data sets from different sources can be found [pynxtools-xps > Tutorials > Convert data to NeXus using NOMAD Oasis](https://fairmat-nfdi.github.io/pynxtools-xps/tutorial/nomad.html)
 
 ## Supported file formats
 

@@ -129,8 +129,8 @@ update nomad with only a few commands.
 
 ### GitLab
 
-NOMAD as a software project is managed via [GitLab](https://docs.gitlab.com/){:target="_blank"}.
-The **nomad@FAIRDI** project is hosted [here](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR){:target="_blank"}.
+NOMAD as a software project is managed via [GitLab](https://docs.gitlab.com/){:target="_blank"}, hosted at
+[**nomad@FAIRDI**](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR){:target="_blank"}.
 GitLab is used to manage versions, different branches of development, tasks and issues,
 as a [registry for Docker images](https://docs.gitlab.com/ee/user/packages/container_registry/index.html){:target="_blank"},
 and [CI/CD platform](https://docs.gitlab.com/ee/ci/){:target="_blank"}.

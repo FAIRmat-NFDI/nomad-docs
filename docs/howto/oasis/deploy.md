@@ -87,7 +87,7 @@ Regardless of the cloud provider, the deployment typically follows these steps:
 
 1. Create an AWS account
 
-    You can do it [here](https://aws.amazon.com/). You will need a credit card
+    Go to [AWS](https://aws.amazon.com/). You will need a credit card
     for creating an account.
 
 2. Create an EC2 instance
@@ -122,7 +122,7 @@ Regardless of the cloud provider, the deployment typically follows these steps:
 
     - Install docker and docker compose on the virtual machine: you can [read more about the installation here](#installing-docker).
 
-    - Ensure that Git is installed to be able to easily sync the distribution configuration. You can check this by running `git --version`. Generic installations instructions are found [here](https://git-scm.com/downloads/linux).
+    - Ensure that Git is installed to be able to easily sync the distribution configuration. You can check this by running `git --version`. Generic installations instructions are found on [git > linux](https://git-scm.com/downloads/linux).
 
     - Create a NOMAD Oasis distribution using our template [`nomad-distro-template`](https://github.com/FAIRmat-NFDI/nomad-distro-template). We recommend creating a new repository by presssing the "Use this template button", but for testing it is also possible to use the existing template repository directly.
 
