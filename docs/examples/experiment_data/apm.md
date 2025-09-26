@@ -7,18 +7,18 @@ Build upon your understanding of NOMAD's features with domain-specific examples 
 
 ## Contextualization for the technique and the scientific domain
 
-A variety of file formats are used in the research field of [atom probe tomography](https://www.nature.com/articles/s43586-021-00047-w) to document atom probe measurements and computer simulations. The pynxtools-apm plugin of the pynxtools parsing library solves the challenge of how these formats can be parsed and normalized into a common representation that increases interoperability and adds semantic expressiveness.
+A variety of file formats are used in the research field of [atom probe tomography](https://www.nature.com/articles/s43586-021-00047-w){:target="_blank" rel="noopener"} to document atom probe measurements and computer simulations. The pynxtools-apm plugin of the pynxtools parsing library solves the challenge of how these formats can be parsed and normalized into a common representation that increases interoperability and adds semantic expressiveness.
 
-- [pynxtools-apm](https://fairmat-nfdi.github.io/pynxtools-apm/)
+- [pynxtools-apm](https://fairmat-nfdi.github.io/pynxtools-apm/){:target="_blank" rel="noopener"}
 
-The plugin uses the [ifes_apt_tc_data_modeling Python library](https://github.com/atomprobe-tc/ifes_apt_tc_data_modeling) that is developed together with the [International Field Emission Society](http://fieldemission.org/).
+The plugin uses the [ifes_apt_tc_data_modeling Python library](https://github.com/atomprobe-tc/ifes_apt_tc_data_modeling){:target="_blank" rel="noopener"} that is developed together with the [International Field Emission Society](http://fieldemission.org/){:target="_blank" rel="noopener"}.
 
 ## Work with standardized atom probe data in NOMAD and NORTH
 
 Once standardized, NXapm-compliant data in NOMAD can be explored with domain-specific software tools using a convenient JupyterHub-based service offered by the NOMAD Remote Tools Hub (NORTH).
 
 For this you should go to `Analyze` (menu bar) and select `NOMAD Remote Tools Hub`.
-If you are using the public Oasis the hub [is available here](https://nomad-lab.eu/prod/v1/gui/analyze/north). This service and toolset of NOMAD offers a set of preconfigured containers. We have configured the `apmtools` container to provide you an example
+If you are using the public Oasis the hub [is available here](https://nomad-lab.eu/prod/v1/gui/analyze/north){:target="_blank" rel="noopener"}. This service and toolset of NOMAD offers a set of preconfigured containers. We have configured the `apmtools` container to provide you an example
 of the capabilities that come with such customizable containers interfaced to an Oasis.
 Mind that if you are using a local Oasis the hub may not have been activated and that
 specific containers need to be pull from the container registry as they are not part of
@@ -27,9 +27,9 @@ a default Oasis development installation.
 Currently, `apmtools` is a specific docker container that offers a graphical user interface
 through the web browser that serves your NOMAD GUI. The container includes three data analysis tools:
 
-- [aptyzer](https://github.com/areichm/APTyzer) by Alexander Reichmann et al.
-- [paraprobe-toolbox](https://gitlab.com/paraprobe/paraprobe-toolbox) by Markus Kühbach et al.
-- [apav](https://gitlab.com/jesseds/apav) by Jesse Smith et al.
+- [aptyzer](https://github.com/areichm/APTyzer){:target="_blank" rel="noopener"} by Alexander Reichmann et al.
+- [paraprobe-toolbox](https://gitlab.com/paraprobe/paraprobe-toolbox){:target="_blank" rel="noopener"} by Markus Kühbach et al.
+- [apav](https://gitlab.com/jesseds/apav){:target="_blank" rel="noopener"} by Jesse Smith et al.
 
 The container is configured such that the data in your uploads are available via the
 `/config/uploads` sub-directory from within the container. Thereby, you can move data

@@ -18,9 +18,9 @@ them carefully.
 The are some *rules* or better strong *guidelines* for writing code. The following
 applies to all Python code (and where applicable, also to Javascript and other code):
 
-- Use an IDE (e.g. [VS Code](https://code.visualstudio.com/){:target="_blank"}) or otherwise automatically
+- Use an IDE (e.g. [VS Code](https://code.visualstudio.com/){:target="_blank" rel="noopener"}) or otherwise automatically
   enforce
-  [code formatting and linting](https://code.visualstudio.com/docs/python/linting){:target="_blank"}.
+  [code formatting and linting](https://code.visualstudio.com/docs/python/linting){:target="_blank" rel="noopener"}.
 
 - Use `nomad qa` before committing. This will run all tests, static type checks, linting,
   etc.
@@ -28,22 +28,22 @@ applies to all Python code (and where applicable, also to Javascript and other c
 - Test the public interface of each submodule (i.e. Python file).
 
 - There is a style guide to Python. Write
-  [PEP 8](https://www.python.org/dev/peps/pep-0008/){:target="_blank"}-compliant Python code. An exception
+  [PEP 8](https://www.python.org/dev/peps/pep-0008/){:target="_blank" rel="noopener"}-compliant Python code. An exception
   is the line cap at 79, which can be broken but keep it 90-ish.
 
-- Be [Pythonic](https://docs.python-guide.org/writing/style/){:target="_blank"} and watch
-  [this talk about best practices](https://www.youtube.com/watch?v=wf-BqAjZb8M){:target="_blank"}.
+- Be [Pythonic](https://docs.python-guide.org/writing/style/){:target="_blank" rel="noopener"} and watch
+  [this talk about best practices](https://www.youtube.com/watch?v=wf-BqAjZb8M){:target="_blank" rel="noopener"}.
 
 - Add docstrings to the *public* interface of each submodule (i.e. Python file). This
   includes APIs that are exposed to other submodules (i.e. other Python files).
 
 - The project structure follows
-  [this guide](https://docs.python-guide.org/writing/structure/){:target="_blank"}. Keep it!
+  [this guide](https://docs.python-guide.org/writing/structure/){:target="_blank" rel="noopener"}. Keep it!
 
 - Write tests for all contributions.
 
 - Adopt *Clean Code* practices. Here is a good
-  [introductory talk to Clean Code](https://youtu.be/7EmboKQH8lM){:target="_blank"}.
+  [introductory talk to Clean Code](https://youtu.be/7EmboKQH8lM){:target="_blank" rel="noopener"}.
 
 ## Enforcing rules with CI/CD
 
@@ -56,7 +56,7 @@ branches, merge requests, and CI/CD.
 
 ## Documenting code
 
-Write [Clean Code](https://youtu.be/7EmboKQH8lM){:target="_blank"} that is easy to comprehend.
+Write [Clean Code](https://youtu.be/7EmboKQH8lM){:target="_blank" rel="noopener"} that is easy to comprehend.
 
 However, you should document the whole publicly exposed interface of a module. For Python
 this includes most classes and functions that you will write, for React its exported
@@ -64,14 +64,14 @@ components and their props.
 
 For all functionality that is exposed to clients (APIs, CLI, schema base classes and
 annotations, UI functionality), you must consider to add explanations, tutorials, and
-examples to [the documentation system](https://github.com/FAIRmat-NFDI/nomad-docs){:target="_blank"}. This is built with
-[mkdocs](https://www.mkdocs.org/){:target="_blank"} and published as part of each NOMAD installation. Additionally, you can refer to the `src/nomad_docs` folder to see how the documentation is generated, and to the `mkdocs.yaml` file to understand its structure.
+examples to [the documentation system](https://github.com/FAIRmat-NFDI/nomad-docs){:target="_blank" rel="noopener"}. This is built with
+[mkdocs](https://www.mkdocs.org/){:target="_blank" rel="noopener"} and published as part of each NOMAD installation. Additionally, you can refer to the `src/nomad_docs` folder to see how the documentation is generated, and to the `mkdocs.yaml` file to understand its structure.
 
 To document Python functions and classes, use Google
-[docstrings](https://github.com/NilsJPWerner/autoDocstring/blob/HEAD/docs/google.md){:target="_blank"}.
+[docstrings](https://github.com/NilsJPWerner/autoDocstring/blob/HEAD/docs/google.md){:target="_blank" rel="noopener"}.
 Use Markdown if you need to add markup but try to reduce this to a minimum.
 You can use VS Code plugins like
-[autoDocstring](https://github.com/NilsJPWerner/autoDocstring/tree/f7bc9f427d5ebcd87e6f5839077a87ecd1cbb404){:target="_blank"}
+[autoDocstring](https://github.com/NilsJPWerner/autoDocstring/tree/f7bc9f427d5ebcd87e6f5839077a87ecd1cbb404){:target="_blank" rel="noopener"}
 to help.
 Always use single quotes, pad single-line docstrings with spaces and start multi-line ones
 on a new line.
@@ -196,7 +196,7 @@ Please follow the following rules when logging:
 - If a logger is not already provided, only use `nomad.utils.get_logger` to
   acquire a new logger. Never use the built-in logging directly. These loggers work like
   the system loggers, but allow you to pass keyword arguments with additional context
-  data. See also the [structlog docs](https://structlog.readthedocs.io/en/stable/){:target="_blank"}.
+  data. See also the [structlog docs](https://structlog.readthedocs.io/en/stable/){:target="_blank" rel="noopener"}.
 
 - In many context, a logger is already provided (e.g. API, processing, parser,
   normalizer). This provided logger has already context information bounded. So it is
@@ -250,13 +250,13 @@ Keys that are present for events related to exceptions:
 
 - `digest`: If an exception was raised, the last 256 characters of the message are stored
   automatically into this key. If you wish to search for exceptions in
-  [Kibana](https://www.elastic.co/de/kibana){:target="_blank"}, you will want to use this value as it will
+  [Kibana](https://www.elastic.co/de/kibana){:target="_blank" rel="noopener"}, you will want to use this value as it will
   be indexed unlike the full exception object.
 
 ## Copyright notices
 
 We follow this
-[recommendation of the Linux Foundation](https://www.linuxfoundation.org/blog/2020/01/copyright-notices-in-open-source-software-projects/){:target="_blank"}
+[recommendation of the Linux Foundation](https://www.linuxfoundation.org/blog/2020/01/copyright-notices-in-open-source-software-projects/){:target="_blank" rel="noopener"}
 for the copyright notice that is placed on top of each source code file.
 
 It is intended to provide a broad generic statement that allows all authors/contributors
@@ -264,12 +264,12 @@ of the NOMAD project to claim their copyright, independent of their organization
 individual ownership.
 
 You can simply copy the notice from another file. From time to time we can use a tool
-like [licenseheaders](https://pypi.org/project/licenseheaders/){:target="_blank"} to ensure correct
+like [licenseheaders](https://pypi.org/project/licenseheaders/){:target="_blank" rel="noopener"} to ensure correct
 notices. In addition we keep a purely informative AUTHORS file.
 
 ## Git submodules and other "in-house" dependencies
 
 As the NOMAD ecosystem grows, you might develop libraries that are used by NOMAD instead
 of being part of its main codebase. The same guidelines should apply. You can use
-[GitHub Actions](https://github.com/features/actions){:target="_blank"} if your library is hosted on GitHub
+[GitHub Actions](https://github.com/features/actions){:target="_blank" rel="noopener"} if your library is hosted on GitHub
 to ensure automated linting and tests.

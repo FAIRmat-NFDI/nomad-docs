@@ -29,8 +29,8 @@ A series of tutorials will guide you through the main functionality of NOMAD.
 - [Create and use custom schemas in NOMAD](tutorial/custom.md)
 - [Developing a NOMAD plugin](tutorial/develop_plugin.md)
 
-- [Example data and exercises](https://www.fairmat-nfdi.eu/events/fairmat-tutorial-1/tutorial-1-materials){:target="_blank"}
-- [More videos and tutorials on YouTube](https://youtube.com/playlist?list=PLrRaxjvn6FDW-_DzZ4OShfMPcTtnFoynT){:target="_blank"}
+- [Example data and exercises](https://www.fairmat-nfdi.eu/events/fairmat-tutorial-1/tutorial-1-materials){:target="_blank" rel="noopener"}
+- [More videos and tutorials on YouTube](https://youtube.com/playlist?list=PLrRaxjvn6FDW-_DzZ4OShfMPcTtnFoynT){:target="_blank" rel="noopener"}
 
 </div>
 <div markdown="block">
@@ -74,10 +74,10 @@ NOMAD is an open source project that warmly welcomes community projects, contrib
 NOMAD is developed by FAIRmat, an open NFDI consortium of over 30 partners building a shared
 data structure of for materials science together.
 
-- [Get support](https://nomad-lab.eu/nomad-lab/support.html){:target="_blank"}
-- [Join our online forum](https://matsci.org/c/nomad/32){:target="_blank"}
+- [Get support](https://nomad-lab.eu/nomad-lab/support.html){:target="_blank" rel="noopener"}
+- [Join our online forum](https://matsci.org/c/nomad/32){:target="_blank" rel="noopener"}
 - [Contribute](howto/develop/contrib.md)
-- [View our roadmap](https://nomad-lab.eu/nomad-lab/features.html){:target="_blank"}
+- [View our roadmap](https://nomad-lab.eu/nomad-lab/features.html){:target="_blank" rel="noopener"}
 - [Code guidelines](reference/code_guidelines.md)
 
 Thinking about using NOMAD for your next project? Get in touch!

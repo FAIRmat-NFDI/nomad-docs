@@ -120,7 +120,7 @@ Dimensions can be given as:
 
 ### Unit
 
-NOMAD manages units and data with units via the [Pint](https://pint.readthedocs.io/en/stable/) Python package. A unit is given as a string that is parsed by pint. These strings can
+NOMAD manages units and data with units via the [Pint](https://pint.readthedocs.io/en/stable/){:target="_blank" rel="noopener"} Python package. A unit is given as a string that is parsed by pint. These strings can
 be simple units (or their aliases) or complex expressions. Here are a few examples:
 `m`, `meter`, `mm`, `millimeter`, `m/s`, `m/s**2`.
 

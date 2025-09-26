@@ -216,7 +216,7 @@ Files can be added to an upload individually, or you can group them into a compr
 ### Uploading Miscellaneous Files
 
 ??? example "Download the example files for this exercise"
-    We have prepared a set of files for this task that can be downloaded from this [link](https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_3_files/example_files_upload/miscellaneous_data/miscellaneous_data.zip).
+    We have prepared a set of files for this task that can be downloaded from this [link](https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_3_files/example_files_upload/miscellaneous_data/miscellaneous_data.zip){:target="_blank" rel="noopener"}.
 
     Download the folder, then uncompress it on your local machine at you preferred directory.
 
@@ -255,13 +255,13 @@ You can add these files to your NOMAD upload. Do so by simply drag and drop the 
 ### Uploading Computations Data
 
 ??? example "Download the example files for this exercise"
-    We have prepared a set of files for this task that can be downloaded from this [link](https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_3_files/example_files_upload/computations_data/FHI-aims.zip).
+    We have prepared a set of files for this task that can be downloaded from this [link](https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_3_files/example_files_upload/computations_data/FHI-aims.zip){:target="_blank" rel="noopener"}.
 
     Download the folder to your local machine at you preferred directory.
 
     This folder contains the input and output files of a DFT calculation for Iron(III) Oxide using the *FHI-aims* code.
 
-    FHI-aims* an all-electron density-functional-theory package that employs numeric atom-centered basis functions. It is designed for accurate and efficient simulations of molecules, clusters, surfaces, and bulk materials across the periodic table. Its advanced treatment of electronic structure allows for precise calculations of material properties, including band structures, total energies, and magnetic properties. [More information in this link](https://fhi-aims.org/)
+    FHI-aims* an all-electron density-functional-theory package that employs numeric atom-centered basis functions. It is designed for accurate and efficient simulations of molecules, clusters, surfaces, and bulk materials across the periodic table. Its advanced treatment of electronic structure allows for precise calculations of material properties, including band structures, total energies, and magnetic properties. [More information in this link](https://fhi-aims.org/){:target="_blank" rel="noopener"}
 
 The calculations in this example were preformed using a code that is supported by NOMAD, i.e. the *FHI-aims* code.
 
@@ -278,7 +278,7 @@ In other words, NOMAD will read the input and output files and provide all infor
     ![Animation of darg and droping a compressed file in NOMAD](images/example_3-2_drag_drop_files.gif)
 
     After uploading files, processing is automatically triggered. This involves identifying supported file formats in NOMAD and extracting relevant (meta)data. The exact processing steps depend on the use case.
-    For example, you can learn more about the [processing of computational data on this link](https://nomad-lab.eu/prod/v1/docs/examples/computational_data/uploading.html#processing-of-computational-data).
+    For example, you can learn more about the [processing of computational data on this link](https://nomad-lab.eu/prod/v1/docs/examples/computational_data/uploading.html#processing-of-computational-data){:target="_blank" rel="noopener"}.
 
     Once processing is complete, NOMAD generates an entry page that presents the data in a structured, hierarchical format based on the NOMAD *metainfo* schema.
 
@@ -324,7 +324,7 @@ In other words, NOMAD will read the input and output files and provide all infor
 ### Uploading Experimental Data
 
 ??? example "Download the example files for this exercise"
-    We have prepared a set of files for this task that can be downloaded from this [link](https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_3_files/example_files_upload/experiments_data/xps_nexus_data.zip).
+    We have prepared a set of files for this task that can be downloaded from this [link](https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_3_files/example_files_upload/experiments_data/xps_nexus_data.zip){:target="_blank" rel="noopener"}.
 
     Download the folder, then uncompress it to your local machine at you preferred directory.
 
@@ -392,11 +392,11 @@ Most scientific instruments generate experimental results in formats other than 
     The reader understands the structure and encoding of the particular data format and provides methods for accessing its contents in a programmatically friendly way.
     It acts as a bridge between raw experimental data and NOMAD by converting the data into the structured file format according to domain-specific application definitions.
 
-    A list of available readers can be found [here](https://fairmat-nfdi.github.io/pynxtools/reference/plugins.html)
+    A list of available readers can be found [here](https://fairmat-nfdi.github.io/pynxtools/reference/plugins.html){:target="_blank" rel="noopener"}
 
     **A NeXus application definition** provides a structured specification of the terms and metadata required in an `.nxs` data file for a particular scientific application. These definitions outline the minimum set of terms that must be included in the data file for it to be considered valid according to the NeXus format.
 
-    A list of NeXuS application definitions developed by FAIRmat can be found [here](https://fairmat-nfdi.github.io/nexus_definitions/)
+    A list of NeXuS application definitions developed by FAIRmat can be found [here](https://fairmat-nfdi.github.io/nexus_definitions/){:target="_blank" rel="noopener"}
 
     NexusDataConverter uses **readers** to interpret the raw data files, and then structures them according to the outlines of the **application definitions**
 
@@ -446,7 +446,7 @@ In the following examples, you will learn how to upload a raw file from a SPECS 
 
     The ELN `.yaml` file can be generated by various ELN software tools or created manually using a text editor.
 
-    For each supported experimental raw file format, FAIRmat provides a template ELN `.yaml` file containing all necessary attributes and parameters to complement the raw file’s data. These templates can be found [here](https://github.com/FAIRmat-NFDI/pynxtools-xps/tree/a2e9524ae8479ffa9cde79daf2010161d8ae75c3/examples)
+    For each supported experimental raw file format, FAIRmat provides a template ELN `.yaml` file containing all necessary attributes and parameters to complement the raw file’s data. These templates can be found [here](https://github.com/FAIRmat-NFDI/pynxtools-xps/tree/a2e9524ae8479ffa9cde79daf2010161d8ae75c3/examples){:target="_blank" rel="noopener"}
 
     While these files can be edited with any text editor, we recommend using **VS Code** for an optimized editing experience.
 
@@ -519,7 +519,7 @@ Alternatively, if you would like to add selected entries from your Upload, click
 User created datasets exist in the “Your datasets” page page. You can reach there by clicking on **Datasets** in the **PUBLISH** menu. Here you can view a list of all your created datasets with their relevant information and assign them a DOI.
 
 !!! warning "Assigning a DOI makes the dataset permanent—it cannot be modified or deleted."
-    If you want to test the process without actually publishing the data, you can do so in the [NOMAD test installation](https://nomad-lab.eu/prod/v1/test/gui/about/information).
+    If you want to test the process without actually publishing the data, you can do so in the [NOMAD test installation](https://nomad-lab.eu/prod/v1/test/gui/about/information){:target="_blank" rel="noopener"}.
 
 **Use the arrow buttons ⬅️➡️ below to follow the steps of exploring and managing your datasets.**
 

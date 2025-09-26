@@ -18,8 +18,8 @@
 
 
 import pytest
-
 from nomad.metainfo import Datetime, MSection, Package, Quantity, Reference
+
 from nomad_docs.metainfo import (
     get_property_description,
     get_property_type_info,

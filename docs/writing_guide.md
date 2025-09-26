@@ -24,7 +24,7 @@ Use descriptive link text (instead of `here/link`). For internal links use the p
 
 ## External Links
 
-Use `[](){:target="_blank"}` for external links to open a new browser window.
+Use `[](){:target="_blank" rel="noopener"}` for external links to open a new browser window.
 
 ## Admonitions
 

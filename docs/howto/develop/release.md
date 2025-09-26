@@ -5,8 +5,8 @@
 NOMAD is a public service, a Git repository, a Python package, and a docker image.
 What exactly is a NOMAD release? It is all of the following:
 
-- a version tag on the main NOMAD [git project](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR),
-e.g. [`v1.3.0`](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR/-/tags/v1.3.0)
+- a version tag on the main NOMAD [git project](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR){:target="_blank" rel="noopener"},
+e.g. [`v1.3.0`](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR/-/tags/v1.3.0){:target="_blank" rel="noopener"}
 - a gitlab release based on a tag with potential release notes
 - a version of the `nomad-lab` Python package released to pypi.org, e.g. `nomad-lab==1.3.0`.
 - a docker image tag, e.g. `gitlab-registry.mpcdf.mpg.de/nomad-lab/nomad-fair:v1.3.0`
@@ -27,7 +27,7 @@ skipped.
 should also be added to the README.md. It is ok, if the updated README.md is not part of the
 release itself.
 - Bump the `stable` docker image tag.
-- Publish the Python package to [pypi.org](https://pypi.org/)
+- Publish the Python package to [pypi.org](https://pypi.org/){:target="_blank" rel="noopener"}
 
 ## How to deal with hotfixes
 

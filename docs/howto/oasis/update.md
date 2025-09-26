@@ -3,7 +3,7 @@
 ## Software versions
 
 We distribute NOMAD as docker images that are available in our
-[public docker registry](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR/container_registry/36){:target="\_blank"}.
+[public docker registry](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR/container_registry/36){:target="_blank" rel="noopener"}.
 The a NOMAD image names looks like this:
 
 ```text
@@ -23,7 +23,7 @@ Our semantic interpretation of **"minor"** is the following:
 - minor version might introduce new features that are only available after certain
   actions [migration steps](#migration-steps).
 
-A road-map for major features can be found on our homepage [here](https://nomad-lab.eu/nomad-lab/features.html){:target="\_blank"}. You'll find a detailed change log in the source code [here](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR/-/blob/develop/CHANGELOG.md){:target="\_blank"}.
+A road-map for major features can be found on our homepage [here](https://nomad-lab.eu/nomad-lab/features.html){:target="_blank" rel="noopener"}. You'll find a detailed change log in the source code [here](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR/-/blob/develop/CHANGELOG.md){:target="_blank" rel="noopener"}.
 
 ## Configuration versions
 
