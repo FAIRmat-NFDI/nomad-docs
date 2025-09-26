@@ -118,4 +118,4 @@ Contribute to the core NOMAD software.
 
 ## Additional Resources
 
-[Support Page](https://nomad-lab.eu/nomad-lab/support.html){.md-button .nomad-button target="_blank" rel="noopener"}
+[Support Page](https://nomad-lab.eu/nomad-lab/support.html){:.md-button .nomad-button target="_blank" rel="noopener"}
