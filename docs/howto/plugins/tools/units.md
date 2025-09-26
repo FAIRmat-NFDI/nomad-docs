@@ -2,13 +2,13 @@
 
 Units are a very important part of any scientific work. Units are also a common
 source of problems when multiple people are working with the same data. Sometimes this has far-reaching consequences as demonstrated by the [Mars Climate Orbiter
-incident](https://en.wikipedia.org/wiki/Mars_Climate_Orbiter#Cause_of_failure){:target="_blank"}. This document explains the possibilities and best practices when working with units within the NOMAD infrastructure.
+incident](https://en.wikipedia.org/wiki/Mars_Climate_Orbiter#Cause_of_failure){:target="_blank" rel="noopener"}. This document explains the possibilities and best practices when working with units within the NOMAD infrastructure.
 
 ## Available unit names
 
 The available unit names are controlled by the `nomad/units/defaults_en.txt`
 file. This is a plain text file that is internally read by the
-[Pint](https://pint.readthedocs.io/en/stable/){:target="_blank"} library that we
+[Pint](https://pint.readthedocs.io/en/stable/){:target="_blank" rel="noopener"} library that we
 use for unit transformations in the NOMAD Python backend. These definitions and the
 associated conversion factors are then used always when transforming between two
 units in the NOMAD platform. Our graphical user interface also performs unit
@@ -18,7 +18,7 @@ translated to the frontend through an environment config file (`env.js`).
 It is possible to add new units in this file to make them available both in the
 Python and in the Javascript environment. You can read more on how units are
 defined
-[here](https://pint.readthedocs.io/en/stable/advanced/defining.html){:target="_blank"}.
+[here](https://pint.readthedocs.io/en/stable/advanced/defining.html){:target="_blank" rel="noopener"}.
 
 All units support the use of SI-prefixes. This means that if the unit `meter`
 has been defined, you are able to then automatically use `kilometers`,

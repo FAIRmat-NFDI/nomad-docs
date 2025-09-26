@@ -13,7 +13,7 @@ documentation [here](../manage/program/pythonlib.md).
 If you're planning on developing the core `nomad` package alongside other plugins, consider using the `nomad-distro-dev` setup as described at the end of this page.
 
 If not already done, you should clone NOMAD. If you have an account at the
-[MPDCF Gitlab](https://gitlab.mpcdf.mpg.de/){:target="_blank"}, you can clone with the SSH URL:
+[MPDCF Gitlab](https://gitlab.mpcdf.mpg.de/){:target="_blank" rel="noopener"}, you can clone with the SSH URL:
 
 ```shell
 git clone git@gitlab.mpcdf.mpg.de:nomad-lab/nomad-FAIR.git nomad
@@ -53,12 +53,12 @@ This branch can be pushed to the repo, and then later may be merged to the relev
 
 The NOMAD code currently requires Python 3.12. You should work in a Python virtual environment.
 
-For developers using VSCode, in case you encounter any issues with breakpoints not [triggering](https://github.com/microsoft/debugpy/issues/1284), consider upgrading to py3.12.
+For developers using VSCode, in case you encounter any issues with breakpoints not [triggering](https://github.com/microsoft/debugpy/issues/1284){:target="_blank" rel="noopener"}, consider upgrading to py3.12.
 
 #### Pyenv
 
 If your host machine has an older version installed,
-you can use [pyenv](https://github.com/pyenv/pyenv){:target="_blank"} to use Python 3.12 in parallel with your
+you can use [pyenv](https://github.com/pyenv/pyenv){:target="_blank" rel="noopener"} to use Python 3.12 in parallel with your
 system's Python.
 
 #### Virtualenv
@@ -66,7 +66,7 @@ system's Python.
 Create a virtual environment. It allows you
 to keep NOMAD and its dependencies separate from your system's Python installation.
 Make sure that the virtual environment is based on Python 3.12.
-Use either the built-in `venv` module (see example) or [virtualenv](https://pypi.org/project/virtualenv/){:target="_blank"}.
+Use either the built-in `venv` module (see example) or [virtualenv](https://pypi.org/project/virtualenv/){:target="_blank" rel="noopener"}.
 
 ```shell
 python3 -m venv .pyenv
@@ -147,7 +147,7 @@ The following command can be used to install NOMAD.
     rm -rf site
     ```
 
-    We use [uv](https://docs.astral.sh/uv/) to install the packages. You can install uv using `pip install uv`.
+    We use [uv](https://docs.astral.sh/uv/){:target="_blank" rel="noopener"} to install the packages. You can install uv using `pip install uv`.
 
 
     Next we install the `nomad` package itself (including all extras). The `-e`
@@ -192,9 +192,9 @@ all the tests, see below.
 
 ### Install Docker
 
-You need to install [Docker](https://docs.docker.com/engine/install/){:target="_blank"}.
+You need to install [Docker](https://docs.docker.com/engine/install/){:target="_blank" rel="noopener"}.
 Docker nowadays comes with Docker Compose (`docker compose`) built-in. Prior, you needed to
-install the standalone [Docker Compose (`docker-compose`)](https://docs.docker.com/compose/install/){:target="_blank"}.
+install the standalone [Docker Compose (`docker-compose`)](https://docs.docker.com/compose/install/){:target="_blank" rel="noopener"}.
 
 ### Run required 3rd party services
 
@@ -215,7 +215,7 @@ The default virtual memory for Elasticsearch will likely be too low. On Linux, y
 sysctl -w vm.max_map_count=262144
 ```
 
-To set this value permanently, see [here](https://www.elastic.co/guide/en/elasticsearch/reference/current/vm-max-map-count.html){:target="_blank"}. Then you can run all services with:
+To set this value permanently, see [here](https://www.elastic.co/guide/en/elasticsearch/reference/current/vm-max-map-count.html){:target="_blank" rel="noopener"}. Then you can run all services with:
 
 ```shell
 cd ops/docker-compose/infrastructure
@@ -223,7 +223,7 @@ docker compose up -d elastic mongo rabbitmq
 cd ../../..
 ```
 
-If your system almost ran out of disk space, Elasticsearch enforces a read-only index block ([read more](https://www.elastic.co/guide/en/elasticsearch/reference/6.2/disk-allocator.html){:target="_blank"}), but
+If your system almost ran out of disk space, Elasticsearch enforces a read-only index block ([read more](https://www.elastic.co/guide/en/elasticsearch/reference/6.2/disk-allocator.html){:target="_blank" rel="noopener"}), but
 after clearing up the disk space you need to reset it manually using the following command:
 
 ```shell
@@ -233,7 +233,7 @@ curl -XPUT -H "Content-Type: application/json" http://localhost:9200/_all/_setti
 Note that the Elasticsearch service has a known problem in quickly hitting the
 virtual memory limits of your OS. If you experience issues with the
 Elasticsearch container not running correctly or crashing, try increasing the
-virtual memory limits as shown [here](https://www.elastic.co/guide/en/elasticsearch/reference/current/vm-max-map-count.html){:target="_blank"}.
+virtual memory limits as shown [here](https://www.elastic.co/guide/en/elasticsearch/reference/current/vm-max-map-count.html){:target="_blank" rel="noopener"}.
 
 To shut down everything, just `ctrl-c` the running output. If you started everything
 in *deamon* mode (`-d`) use:
@@ -293,7 +293,7 @@ Or both together in one process:
 nomad admin run appworker
 ```
 
-On macOS you might run into multiprocessing errors. That can be solved as described [here](https://stackoverflow.com/questions/50168647/multiprocessing-causes-python-to-crash-and-gives-an-error-may-have-been-in-progr){:target="_blank"}.
+On macOS you might run into multiprocessing errors. That can be solved as described [here](https://stackoverflow.com/questions/50168647/multiprocessing-causes-python-to-crash-and-gives-an-error-may-have-been-in-progr){:target="_blank" rel="noopener"}.
 
 The app will run at port 8000 by default.
 
@@ -320,8 +320,8 @@ celery -A nomad.processing worker -l info
 ```
 
 If you run the GUI on its own (e.g. with the React dev server below), you also need to start
-the app manually. The GUI and its dependencies run on [Node.js](https://nodejs.org){:target="_blank"} and
-the [Yarn](https://yarnpkg.com/){:target="_blank"} dependency manager. Read their documentation on how to
+the app manually. The GUI and its dependencies run on [Node.js](https://nodejs.org){:target="_blank" rel="noopener"} and
+the [Yarn](https://yarnpkg.com/){:target="_blank" rel="noopener"} dependency manager. Read their documentation on how to
 install them for your platform.
 
 ```shell
@@ -363,10 +363,10 @@ north:
 - You have to generate a `crypt key` with `openssl rand -hex 32`.
 
 - You might need to install
-  [configurable-http-proxy](https://github.com/jupyterhub/configurable-http-proxy){:target="_blank"}.
+  [configurable-http-proxy](https://github.com/jupyterhub/configurable-http-proxy){:target="_blank" rel="noopener"}.
 
 The `configurable-http-proxy` comes as a Node.js package. See
-[Node.js](https://nodejs.org){:target="_blank"} for how to install `npm`. The proxy can be globally
+[Node.js](https://nodejs.org){:target="_blank" rel="noopener"} for how to install `npm`. The proxy can be globally
 installed with:
 
 ```shell
@@ -425,7 +425,7 @@ pytest -sv tests
     If you excluded plugins in your [NOMAD config](#nomadyaml), then those tests
     will also fail.
 
-We use Ruff and Mypy to maintain code quality. Additionally, we recommend installing the Ruff [plugins](https://docs.astral.sh/ruff/integrations/){:target="_blank"} for your code editor to streamline the process. To execute Ruff and Mypy from the command line, you can utilize the following command:
+We use Ruff and Mypy to maintain code quality. Additionally, we recommend installing the Ruff [plugins](https://docs.astral.sh/ruff/integrations/){:target="_blank" rel="noopener"} for your code editor to streamline the process. To execute Ruff and Mypy from the command line, you can utilize the following command:
 
 ```shell
 nomad dev qa --skip-tests
@@ -470,9 +470,9 @@ Note that if `test1` depends on `fixture1`, and `fixture1` depends on `fixture2`
 ### Frontend tests
 
 We use
-[`testing-library`](https://testing-library.com/docs/react-testing-library/intro/){:target="_blank"}
+[`testing-library`](https://testing-library.com/docs/react-testing-library/intro/){:target="_blank" rel="noopener"}
 to implement our GUI tests and `testing-library` itself uses
-[`Jest`](https://jestjs.io/){:target="_blank"} to run the tests. Tests are written in `*.spec.js`
+[`Jest`](https://jestjs.io/){:target="_blank" rel="noopener"} to run the tests. Tests are written in `*.spec.js`
 files that accompany the implementation. Tests should focus on functionality,
 not on implementation details: `testing-library` is designed to enforce this kind
 of testing.
@@ -480,7 +480,7 @@ of testing.
 !!! note
 
     When testing HTML output, the elements are rendered using
-    [jsdom](https://github.com/jsdom/jsdom){:target="_blank"}: this is not completely identical
+    [jsdom](https://github.com/jsdom/jsdom){:target="_blank" rel="noopener"}: this is not completely identical
     to using an actual browser (e.g. does not support WebGL), but in practice
     is realistic enough for the majority of the test.
 
@@ -492,18 +492,18 @@ utilities that are relevant for testing the code in that particular folder.
 These utilities can usually be placed into the following categories:
 
 - Custom renders: When testing React components, the
-  [`render`](https://testing-library.com/docs/react-testing-library/api/#render){:target="_blank"} function
+  [`render`](https://testing-library.com/docs/react-testing-library/api/#render){:target="_blank" rel="noopener"} function
   is used to display them on the test DOM. Typically your components require
   some parts of the infrastructure to work properly, which is achieved by
   wrapping your component with other components that provide a context. Custom
   render functions can do this automatically for you, e.g. the default render
   as exported from `src/components/conftest.spec.js` wraps your components with an
   infrastructure that is very similar to the production app. See
-  [here](https://testing-library.com/docs/react-testing-library/setup/#custom-render){:target="_blank"}
+  [here](https://testing-library.com/docs/react-testing-library/setup/#custom-render){:target="_blank" rel="noopener"}
   for more information.
 
 - Custom queries: See
-  [here](https://testing-library.com/docs/react-testing-library/setup/#add-custom-queries){:target="_blank"}
+  [here](https://testing-library.com/docs/react-testing-library/setup/#add-custom-queries){:target="_blank" rel="noopener"}
   for more information.
 
 - Custom expects: These are reusable functions that perform actual tests using
@@ -623,7 +623,7 @@ perform the test without any recording.
 
 ## Build custom Oasis image
 
-To create a custom Oasis image (e.g. with custom plugins), you could use the [nomad-distro-template](https://github.com/FAIRmat-NFDI/nomad-distro-template) by clicking the [`Use this template` button](https://github.com/new?template_name=nomad-distro-template&template_owner=FAIRmat-NFDI). For detailed instructions on building and deploying custom Oasis images, please refer to the documentation in that repository.
+To create a custom Oasis image (e.g. with custom plugins), you could use the [nomad-distro-template](https://github.com/FAIRmat-NFDI/nomad-distro-template){:target="_blank" rel="noopener"} by clicking the [`Use this template` button](https://github.com/new?template_name=nomad-distro-template&template_owner=FAIRmat-NFDI){:target="_blank" rel="noopener"}. For detailed instructions on building and deploying custom Oasis images, please refer to the documentation in that repository.
 
 ## Setup your IDE
 
@@ -634,7 +634,7 @@ guidelines, we recommend to use a proper IDE for development and ditch any Vim/E
 
 We strongly recommend that all developers use *Visual Studio Code (VS Code)*. (This is a
 completely different product than *Visual Studio*.) It is available for free
-for all major platforms [here](https://code.visualstudio.com/download){:target="_blank"}.
+for all major platforms [here](https://code.visualstudio.com/download){:target="_blank" rel="noopener"}.
 
 You should launch and run VS Code directly from the project's root directory. The source
 code already contains settings for VS Code in the `.vscode` directory. The settings
@@ -664,7 +664,7 @@ When developing `nomad` alongside multiple plugins, managing different repositor
 
 Quick Setup
 
-1. Fork the [nomad-distro-dev](https://github.com/FAIRmat-NFDI/nomad-distro-dev) repository on GitHub.
+1. Fork the [nomad-distro-dev](https://github.com/FAIRmat-NFDI/nomad-distro-dev){:target="_blank" rel="noopener"} repository on GitHub.
 2. Follow the setup steps listed in the README of the fork.
 3. Once configured, you'll be able to use a single VSCode window to work on nomad and all your plugins.
 

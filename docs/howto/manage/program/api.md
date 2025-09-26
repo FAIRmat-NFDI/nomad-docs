@@ -10,10 +10,10 @@ To access the processed data with our client library `nomad-lab` follow
 
 NOMAD offers all its functionality through application programming interfaces (APIs). More
 specifically
-[RESTful HTTP APIs](https://en.wikipedia.org/wiki/Representational_state_transfer){:target="_blank"}
+[RESTful HTTP APIs](https://en.wikipedia.org/wiki/Representational_state_transfer){:target="_blank" rel="noopener"}
 that allows you to use NOMAD as a set of resources (think data) that can be uploaded,
 accessed, downloaded, searched for, etc. via
-[HTTP requests](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol){:target="_blank"}.
+[HTTP requests](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol){:target="_blank" rel="noopener"}.
 
 You can get an overview on all NOMAD APIs on the
 [API page]({{ nomad_url() }}../../gui/analyze/apis). We will focus here on NOMAD's main
@@ -494,7 +494,7 @@ to send fewer requests in a larger time frame.
 
 Rate limits are enforced based on your IP address. Please note that when you or your
 colleagues are sharing a single external IPs from within a local network, e.g.
-via [NAT](https://en.wikipedia.org/wiki/Network_address_translation),
+via [NAT](https://en.wikipedia.org/wiki/Network_address_translation){:target="_blank" rel="noopener"},
 you are also sharing the rate limits.
 Depending on the NOMAD installation, these limits can be as low as 30 requests per second
 or 10 concurrent requests.

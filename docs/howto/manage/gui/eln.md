@@ -57,11 +57,11 @@ guides to create you own customized of ELNs.
 
     This part of the documentation is still work in progress.
 
-The code base is part of the [FAIRmat-NFDI](https://github.com/FAIRmat-NFDI/nomad-external-eln-integrations){:target="_blank"} repository.
+The code base is part of the [FAIRmat-NFDI](https://github.com/FAIRmat-NFDI/nomad-external-eln-integrations){:target="_blank" rel="noopener"} repository.
 
 NOMAD offers integration with third-party ELN providers, simplifying the process of connecting
 and interacting with external platforms. Three main external ELN solutions that are integrated into NOMAD
-are: [elabFTW](https://www.elabftw.net/){:target="_blank"}, [Labfolder](https://labfolder.com/){:target="_blank"} and [chemotion](https://chemotion.net/){:target="_blank"}.
+are: [elabFTW](https://www.elabftw.net/){:target="_blank" rel="noopener"}, [Labfolder](https://labfolder.com/){:target="_blank" rel="noopener"} and [chemotion](https://chemotion.net/){:target="_blank" rel="noopener"}.
 The process of data retrieval and data mapping onto NOMAD's schema
 varies for each of these third-party ELN provider as they inherently allow for certain ways of communicating with their
 database. Below you can find a <b>How-to</b> guide on importing your data from each of these external
@@ -69,7 +69,7 @@ repositories.
 
 ### elabFTW integration
 
-elabFTW is part of [the ELN Consortium](https://github.com/TheELNConsortium){:target="_blank"}
+elabFTW is part of [the ELN Consortium](https://github.com/TheELNConsortium){:target="_blank" rel="noopener"}
 and supports exporting experimental data in ELN file format. ELNFileFormat is a zipped file
 that contains <b>metadata</b> of your elabFTW project along with all other associated data of
 your experiments.

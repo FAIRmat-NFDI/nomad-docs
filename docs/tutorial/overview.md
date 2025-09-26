@@ -12,7 +12,7 @@ As you go through the tutorial pages, you will encounter embedded boxes with dif
 
 ## Scope of the Tutorials
 
-NOMAD is available in two flavours to address the diverse needs of scientists: [**Central NOMAD**](https://nomad-lab.eu/nomad-lab/nomad.html){:target="_blank"} and [**NOMAD Oasis**](https://nomad-lab.eu/nomad-lab/nomad-oasis.html){:target="_blank"}. To learn more about these solutions, refer to our [web page](https://nomad-lab.eu/){:target="_blank"}.
+NOMAD is available in two flavours to address the diverse needs of scientists: [**Central NOMAD**](https://nomad-lab.eu/nomad-lab/nomad.html){:target="_blank" rel="noopener"} and [**NOMAD Oasis**](https://nomad-lab.eu/nomad-lab/nomad-oasis.html){:target="_blank" rel="noopener"}. To learn more about these solutions, refer to our [web page](https://nomad-lab.eu/){:target="_blank" rel="noopener"}.
 
 Our tutorial documentation covers the basics of using Central NOMAD and NOMAD Oasis. These tasks range from basic operations using the graphical user interface (GUI), to low-barrier tailoring of electronic lab notebooks, and robust customization with plugins.
 
@@ -65,17 +65,17 @@ An overview of the skills required to use NOMAD and NOMAD Oasis, categorized int
 
 ## Ways to Access NOMAD
 
-There are multiple access points to NOMAD. The general [*landing page*](https://nomad-lab.eu/nomad-lab/){:target="_blank"} provides an overview of NOMAD’s features, along with links to documentation, tutorials, and project history.
+There are multiple access points to NOMAD. The general [*landing page*](https://nomad-lab.eu/nomad-lab/){:target="_blank" rel="noopener"} provides an overview of NOMAD’s features, along with links to documentation, tutorials, and project history.
 
 From this page, we can navigate to NOMAD to upload, manage, and explore data.
 
 Two public versions that are relevant to the tutorials are:
 
-1. [**Official**](https://nomad-lab.eu/prod/v1/gui/search/entries){:target="_blank"} – The latest stable version of NOMAD.
+1. [**Official**](https://nomad-lab.eu/prod/v1/gui/search/entries){:target="_blank" rel="noopener"} – The latest stable version of NOMAD.
 
     Access it by clicking the "Open NOMAD" button at the top of the landing page.
 
-2. [**Test**](https://nomad-lab.eu/prod/v1/test/gui/search/entries){:target="_blank"} – Runs the latest released version of NOMAD but on temporary test data that is routinely wiped.
+2. [**Test**](https://nomad-lab.eu/prod/v1/test/gui/search/entries){:target="_blank" rel="noopener"} – Runs the latest released version of NOMAD but on temporary test data that is routinely wiped.
 
     Access it from the *Installations* menu at the bottom of the landing page by selecting "Test."
 
@@ -104,7 +104,7 @@ A NOMAD user account is required if you want to upload, share, publish, or analy
 
 ## Login Options via Helmholtz AAI
 
-You can also log in to NOMAD using your university or research institute credentials, or with social accounts such as GitHub, ORCID, or Google via the [Helmholtz AAI](https://hifis.net/aai/) (Authentication and Authorization Infrastructure).
+You can also log in to NOMAD using your university or research institute credentials, or with social accounts such as GitHub, ORCID, or Google via the [Helmholtz AAI](https://hifis.net/aai/){:target="_blank" rel="noopener"} (Authentication and Authorization Infrastructure).
 
 To sign in, select the Helmholtz AAI option in the login form, then choose your institution or preferred social account from the list.
 

@@ -6,20 +6,20 @@ Originally, the NOMAD Central Repository is a service that runs at the Max-Planc
 
     **Register your Oasis**
     If you installed (or even just plan to install) a NOMAD Oasis, please
-    [register your Oasis with FAIRmat](https://nomad-lab.eu/fairdi/keycloak/auth/realms/nomad-oasis/protocol/openid-connect/registrations?client_id=account&scope=openid%20profile&redirect_uri=https%3A%2F%2Fnomad-lab.eu%2Fnomad-lab%2Fnomad-oasis-registration.html&response_type=code)
+    [register your Oasis with FAIRmat](https://nomad-lab.eu/fairdi/keycloak/auth/realms/nomad-oasis/protocol/openid-connect/registrations?client_id=account&scope=openid%20profile&redirect_uri=https%3A%2F%2Fnomad-lab.eu%2Fnomad-lab%2Fnomad-oasis-registration.html&response_type=code){:target="_blank" rel="noopener"}
     and help us to assist you in the future.
 
 ## Creating a NOMAD distribution for your Oasis
 
-The configuration for a NOMAD Oasis is defined in a NOMAD distribution project. We provide a [template](https://github.com/FAIRmat-NFDI/nomad-distro-template) for these distribution projects. A NOMAD distribution project contains all necessary config files and will allow you to version your configuration, install and configure plugins, build custom images automatically, and much more.
+The configuration for a NOMAD Oasis is defined in a NOMAD distribution project. We provide a [template](https://github.com/FAIRmat-NFDI/nomad-distro-template){:target="_blank" rel="noopener"} for these distribution projects. A NOMAD distribution project contains all necessary config files and will allow you to version your configuration, install and configure plugins, build custom images automatically, and much more.
 
-For a production installation, we recommend to create your own distribution project based on the template by pressing the "use this template" button on the top right of the [template's GitHub page](https://github.com/FAIRmat-NFDI/nomad-distro-template). If you wish to instead try out the default setup locally, follow the instructions in "Try  NOMAD Oasis locally".
+For a production installation, we recommend to create your own distribution project based on the template by pressing the "use this template" button on the top right of the [template's GitHub page](https://github.com/FAIRmat-NFDI/nomad-distro-template){:target="_blank" rel="noopener"}. If you wish to instead try out the default setup locally, follow the instructions in "Try  NOMAD Oasis locally".
 
 ???+ "Try NOMAD Oasis locally"
 
   This is an example of how you would deploy a simple, single-machine NOMAD Oasis on your computer. This is meant only as an example and you should see our documentation on [Deploying an Oasis](./deploy.md) for more details on setting up a production deployment.
 
-  1. Make sure you have [docker](https://docs.docker.com/engine/install/) installed.  Docker nowadays comes with `docker compose` built in. Prior, you needed to install the stand-alone [docker-compose](https://docs.docker.com/compose/install/).
+  1. Make sure you have [docker](https://docs.docker.com/engine/install/){:target="_blank" rel="noopener"} installed.  Docker nowadays comes with `docker compose` built in. Prior, you needed to install the stand-alone [docker-compose](https://docs.docker.com/compose/install/){:target="_blank" rel="noopener"}.
 
   2. Clone the `nomad-distro-template` repository or download the repository as a zip file.
 
@@ -62,7 +62,7 @@ For a production installation, we recommend to create your own distribution proj
     curl localhost/nomad-oasis/alive
     ```
 
-  7. Finally, open [http://localhost/nomad-oasis](http://localhost/nomad-oasis) in your browser to start using your new NOMAD Oasis.
+  7. Finally, open [http://localhost/nomad-oasis](http://localhost/nomad-oasis){:target="_blank" rel="noopener"} in your browser to start using your new NOMAD Oasis.
 
   To run NORTH (the NOMAD Remote Tools Hub), the `hub` container needs to run docker and the container has to be run under the docker group. You need to replace the default group id `991` in the `docker-compose.yaml`'s `hub` section with your systems docker group id.  Run `id` if you are a docker user, or `getent group | grep docker` to find your systems docker gid. The user id 1000 is used as the nomad user inside all containers.
 
@@ -115,7 +115,7 @@ But in principle, you can also run your own user management. See the section on
 
 ## Configuration files
 
-The [`nomad-distro-template`](https://github.com/FAIRmat-NFDI/nomad-distro-template)
+The [`nomad-distro-template`](https://github.com/FAIRmat-NFDI/nomad-distro-template){:target="_blank" rel="noopener"}
 provides all the neccessary configuration files. We strongly recommend to create your own distribution
 project based on the template. This will allow you to version your configuration, build custom
 images with plugins, and much more.
@@ -147,7 +147,7 @@ A few things to notice:
 
 - The app, worker, and north service use the NOMAD docker image. Here we use the `latest` tag, which
   gives you the latest *beta* version of NOMAD. You might want to change this to `stable`,
-  a version tag (format is `vX.X.X`, you find all releases [here](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR/-/tags){:target="\_blank"}), or a specific [branch tag](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR/-/branches){:target="\_blank"}.
+  a version tag (format is `vX.X.X`, you find all releases [here](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR/-/tags){:target="_blank" rel="noopener"}), or a specific [branch tag](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR/-/branches){:target="_blank" rel="noopener"}.
 - All services use docker volumes for storage. This could be changed to host mounts.
 - It mounts two configuration files that need to be provided (see below): `nomad.yaml`, `nginx.conf`.
 - The only exposed port is `80` (proxy service). This could be changed to a desired port if necessary.
@@ -200,7 +200,7 @@ A few things to notice:
 - `client_max_body_size` sets a limit to the possible upload size.
 
 You can add an additional reverse proxy in front or modify the nginx in the docker-compose.yaml
-to [support https](http://nginx.org/en/docs/http/configuring_https_servers.html){:target="\_blank"}.
+to [support https](http://nginx.org/en/docs/http/configuring_https_servers.html){:target="_blank" rel="noopener"}.
 If you operate the GUI container behind another proxy, keep in mind that your proxy should
 not buffer requests/responses to allow streaming of large requests/responses for `api/v1/uploads` and `api/v1/.*/download`.
 An nginx reverse proxy location on an additional reverse proxy, could have these directives
@@ -232,7 +232,7 @@ Only plugins configured in the `pyproject.toml` files, will be installed into th
 image and only those plugins installed in the used docker image are available in your
 Oasis.
 
-Please refer to the [template README](https://github.com/FAIRmat-NFDI/nomad-distro-template?tab=readme-ov-file#adding-a-plugin)
+Please refer to the [template README](https://github.com/FAIRmat-NFDI/nomad-distro-template?tab=readme-ov-file#adding-a-plugin){:target="_blank" rel="noopener"}
 to learn how to add your own plugins.
 
 ## Starting and stopping NOMAD services
@@ -310,7 +310,7 @@ If you want to report problems with your OASIS. Please provide the logs for
 
 ## Provide and connect your own user management
 
-NOMAD uses [keycloak](https://www.keycloak.org/){:target="\_blank"} for its user management. NOMAD uses
+NOMAD uses [keycloak](https://www.keycloak.org/){:target="_blank" rel="noopener"} for its user management. NOMAD uses
 keycloak in two ways. First, the user authentication uses the OpenID Connect/OAuth interfaces provided by keycloak.
 Second, NOMAD uses the keycloak realm-management API to get a list of existing users.
 Keycloak is highly customizable and numerous options to connect keycloak to existing
@@ -409,7 +409,7 @@ This is an incomplete list of potential things to customize your NOMAD experienc
 
 If during login you get an error like: `jwt.exceptions.ImmatureSignatureError: The token is not yet valid (iat)`, it most probably means that there is a time difference between the two machines: the one creating the JWT and the other that is validating it. This causes an error where the authentication server looking at the token thinks that it has not been issued yet.
 
-To fix this problem, you should ensure that the time on the servers is synchronized. It is possible that a network port on one of the servers may be closed, preventing it from synchronizing the time. Note that the servers do not need to be on the same timezone, as internally everything is converted to UTC+0. To check the time on a server, you can on a Linux-based machine use the [`timedatectl`](https://man7.org/linux/man-pages/man8/hwclock.8.html) command which will report both the harware clock and the system clock (see [here for the difference](https://developer.toradex.com/software/linux-resources/linux-features/real-time-clock-rtc-linux/#:~:text=Two%20clocks%20are%20important%20in,maintained%20by%20the%20operating%20system.)). For authentication, the system clocks on the two machines need to be set correctly, but you might also need to correct the hardware clock since it initially sets the system clock upon rebooting the machine.
+To fix this problem, you should ensure that the time on the servers is synchronized. It is possible that a network port on one of the servers may be closed, preventing it from synchronizing the time. Note that the servers do not need to be on the same timezone, as internally everything is converted to UTC+0. To check the time on a server, you can on a Linux-based machine use the [`timedatectl`](https://man7.org/linux/man-pages/man8/hwclock.8.html){:target="_blank" rel="noopener"} command which will report both the harware clock and the system clock (see [here for the difference](https://developer.toradex.com/software/linux-resources/linux-features/real-time-clock-rtc-linux/#:~:text=Two%20clocks%20are%20important%20in,maintained%20by%20the%20operating%20system.){:target="_blank" rel="noopener"}). For authentication, the system clocks on the two machines need to be set correctly, but you might also need to correct the hardware clock since it initially sets the system clock upon rebooting the machine.
 
 ### NOMAD in networks with restricted Internet access
 
@@ -417,7 +417,7 @@ Some network environments do not allow direct Internet connections, and require 
 However, NOMAD needs to connect to the central user management or elasticsearch thus requires an active Internet
 connection (at least on Windows) to work.
 In these cases you need to configure docker to use your proxy.
-See details via this link [https://docs.docker.com/network/proxy/](https://docs.docker.com/network/proxy/).
+See details via this link [https://docs.docker.com/network/proxy/](https://docs.docker.com/network/proxy/){:target="_blank" rel="noopener"}.
 An example file `~/.docker/config.json` could look like this.
 
 ```json
@@ -462,7 +462,7 @@ elastic:
 Unfortunately there is no way yet to use the NORTH tools with the central user management, since the jupyterhub spawner does not respect proxy variables.
 It has not been tested yet when using an authentication which does not require the proxy, e.g. a local keycloak server.
 
-If you have issues please contact us on discord n the [oasis channel](https://discord.com/channels/1201445470485106719/1205480348050395136).
+If you have issues please contact us on discord n the [oasis channel](https://discord.com/channels/1201445470485106719/1205480348050395136){:target="_blank" rel="noopener"}.
 
 ### NOMAD behind a firewall
 
@@ -473,7 +473,7 @@ The corresponding rules need to be added.
 Furthermore, inbound traffic needs to be enabled for the port used on the `nginx` service.
 
 In this case you should make sure this test runs through:
-[https://docs.docker.com/network/network-tutorial-standalone/](https://docs.docker.com/network/network-tutorial-standalone/)
+[https://docs.docker.com/network/network-tutorial-standalone/](https://docs.docker.com/network/network-tutorial-standalone/){:target="_blank" rel="noopener"}
 
 If not please contact your server provider for help.
 
@@ -481,7 +481,7 @@ If not please contact your server provider for help.
 
 Even when run in docker elasticsearch might require you to change your systems resource
 limits as described in the elasticsearch documentation
-[here](https://www.elastic.co/guide/en/elasticsearch/reference/current/setting-system-settings.html).
+[here](https://www.elastic.co/guide/en/elasticsearch/reference/current/setting-system-settings.html){:target="_blank" rel="noopener"}.
 
 You can temporarely change the open files limit like this:
 

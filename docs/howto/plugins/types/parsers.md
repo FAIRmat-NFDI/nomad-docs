@@ -6,7 +6,7 @@ This documentation shows you how to write a plugin entry point for a parser. You
 
 ## Getting started
 
-You can use our [template repository](https://github.com/FAIRmat-NFDI/nomad-plugin-template) to create an initial structure for a plugin containing a parser. The relevant part of the repository layout will look something like this:
+You can use our [template repository](https://github.com/FAIRmat-NFDI/nomad-plugin-template){:target="_blank" rel="noopener"} to create an initial structure for a plugin containing a parser. The relevant part of the repository layout will look something like this:
 
 ```txt
 nomad-example
@@ -174,7 +174,7 @@ for archive in archives:
 
 ## Parsing text files
 
-ASCII text files are amongst the most common files used. Here, we show you how to parse the text by matching specific [regular expressions](https://realpython.com/regex-python/) in these files. For the following example, we will use the project file `tests/data/example.out`:
+ASCII text files are amongst the most common files used. Here, we show you how to parse the text by matching specific [regular expressions](https://realpython.com/regex-python/){:target="_blank" rel="noopener"} in these files. For the following example, we will use the project file `tests/data/example.out`:
 
 <!-- TODO can I get rid of this? -->
 Check out the `master` branch of the `exampleparser` project,
@@ -424,7 +424,7 @@ class ExampleWorkflow(Workflow):
     )
 ```
 <!-- TODO remove x_ notation in the future -->
-This is the approach for domain-specific schemas such as for [simulation workflows](https://github.com/nomad-coe/nomad-schema-plugin-simulation-workflow.git). Refer to [how to extend schemas](schema_packages.md#extending-existing-sections).
+This is the approach for domain-specific schemas such as for [simulation workflows](https://github.com/nomad-coe/nomad-schema-plugin-simulation-workflow.git){:target="_blank" rel="noopener"}. Refer to [how to extend schemas](schema_packages.md#extending-existing-sections).
 
 ## Other FileParser classes
 
