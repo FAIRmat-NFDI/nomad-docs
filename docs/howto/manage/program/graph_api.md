@@ -20,7 +20,7 @@ NOMAD mimics this behaviour with a GraphQL-like API, available at the `/graph/qu
 
 ??? note "Technical Note"
     The implementation can be categorized as a GraphQL-like API powered by the REST-style framework FastAPI, rather than GraphQL itself.
-    Because GraphQL requires static, explicitly defined schemas ahead of time while NOMAD supports data with dynamic schema, it cannot be implemented directly using existing GraphQL tools. As a result, there are unfortunately no GUI tools available at this time.
+    This architectural choice allows for NOMAD's support of dynamic schemas, circumventing GraphQL's static schema requirements.
 
 ## Basic Data Fetching
 
@@ -154,8 +154,8 @@ The data structures in NOMAD are inherently linked together.
 For example, an upload is a collection of entries, an entry corresponding to an archive, a user group is a collection of users,
 each user may be the owner of several uploads, etc.
 
-Thus, it is natural to link these data structures together via **special tokens**.
-The following schematic illustrates various NOMAD data structures with the special tokens defining links between them.
+Thus, it is natural to link these data structures together via **special tokens**, acting as edges of a graph containing the NOMAD data structures as nodes.
+The following schematic illustrates this graph structure:
 
 ![NOMAD graph](./images/graph.svg)
 
@@ -863,8 +863,8 @@ Note that, for presentation purposes, this request also limits the size of the r
 ```
 
 The first thing to note here is that the reference string has been normalized to `uploads/RzWMitKESo2dQmuE6uQB-Q/entries/x36WdKPMctUOkjXMyV8oQq2zWcSx/archive/run/0/calculation/2`.
-By default, the 'extra' data requested (here, the resolved data) will be added to the response under a fixed path: `uploads/<upload_id>/entries/<entry_id>/archive/<path_to_data>`.
-This fixed path is not affected by any other factors, even if it is a reference to the same entry.
+By default, the 'extra' data requested (here, the resolved data) will be added under the fixed response path: `uploads/<upload_id>/entries/<entry_id>/archive/<path_to_data>`.
+This applies even when this path differs from the one specified in the original request, and is unaffected by any other factors, even if it is a reference to the same entry.
 This is a valid path that can be used to access the data in the **same** response.
 The motivation is to produce a response that is as self-contained as possible.
 
@@ -1290,6 +1290,7 @@ In the response, we see that the entry `-L073PFe_PxW90kci4UwxMgUO20O` has the co
 }
 ```
 
+<!-- TODO combine with previous pagination comment -->
 ??? note "Pagination for File Information"
     The file information listing is always paginated.
     This is particularly useful when listing files in an upload, as there can be many files.
