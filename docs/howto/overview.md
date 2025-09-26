@@ -38,7 +38,7 @@ Use NOMAD's functionalities programmatically.
 - [Publish data using Python](manage/program/publish_python.md)
 - [Access processed data](manage/program/archive_query.md)
 - [Transform data](manage/program/json_transformer.md)
-- [Make graph-style API calls](manage/program/graph-api/basics.md)
+- [Make graph-style API calls](manage/program/graph_api.md)
 
 </div>
 </div>
