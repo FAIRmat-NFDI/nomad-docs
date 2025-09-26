@@ -93,21 +93,11 @@ Sharing assets between .md files in different locations is currently not allowed
 
 <!-- TODO Do we want to restrict to only these? Or allow custom naming? -->
 **Do not use custom titles for admonitions.**
-Here is a list of currently used admonitions/titles within the docs:
+Any of the standard amdonition titles are allowed. Additionally, gere is a list of "custom" titles that can be used within the docs:
 
 - !!! warning "Attention"
 
-- !!! note
-
-- !!! tip
-
 - !!! tip "Important"
-
-- !!! info
-
-- !!! task
-
-- !!! example
 
 If you would like to propose a standard extension, create an issue with your suggestion and a example image of the new admonition.
 
