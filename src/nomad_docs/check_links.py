@@ -1,10 +1,3 @@
-#!/usr/bin/env python3
-# /// script
-# requires-python = ">=3.12"
-# dependencies = [
-#     "regex",
-# ]
-# ///
 """
 Make sure all external links in markdown have `{:target="_blank" rel="noopener"}`.
 """
@@ -18,15 +11,18 @@ import regex
 # Handles links with balanced parentheses in the URL
 # Group 1 = the markdown link (text + url)
 # Group 2 = the optional {attrs}
-LINK_PATTERN = regex.compile(r"""
-    (                       # ---- Group 1: the whole markdown link ----
-      \[ [^\]]+ \]          # [text]
+LINK_PATTERN = regex.compile(
+    r"""
+    (                       # Group 1: [text](url)
+      \[[^\]]+\]            # [text]
       \( (?:https?|ftp)://  # protocol
-          (?> [^()]+ | \((?R)\) )*  # non-parens OR balanced (...) recursively
-      \)
+          .*?               # lazy URL
+      \)                    # closing paren of Markdown link
     )
-    (\{[^\}]*\})?           # ---- Group 2: optional {attrs} ----
-""", regex.VERBOSE)
+    (\{[^\}]*\})?           # Group 2: optional {attrs}
+""",
+    regex.VERBOSE,
+)
 
 
 def normalize_attrs(attrs: str | None) -> str:
@@ -39,20 +35,19 @@ def normalize_attrs(attrs: str | None) -> str:
     attrs_dict: dict[str, str | None] = {}
 
     for part in parts:
-        if '=' in part:
+        if "=" in part:
             k, v = part.split("=", 1)
-            attrs_dict[k.strip(':')] = v.strip('"')
+            attrs_dict[k.strip(":")] = v.strip('"')
         else:
-            attrs_dict[part.strip(':')] = None
+            attrs_dict[part.strip(":")] = None
 
     # Always enforce target and rel
     attrs_dict["target"] = "_blank"
     attrs_dict["rel"] = "noopener"
 
-    return "{:" + " ".join(
-        f'{k}="{v}"' if v else k
-        for k, v in attrs_dict.items()
-    ) + "}"
+    return (
+        "{:" + " ".join(f'{k}="{v}"' if v else k for k, v in attrs_dict.items()) + "}"
+    )
 
 
 def process_file(path: Path) -> int:
@@ -83,7 +78,7 @@ if __name__ == "__main__":
     changes = main()
     if changes > 0:
         print(f"\n✗ Found and fixed {changes} issues.")
-        sys.exit(1)   # non-zero exit for CI
+        sys.exit(1)
     else:
         print("\n✓ All external links are correctly annotated.")
         sys.exit(0)
