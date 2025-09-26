@@ -210,7 +210,7 @@ One can use the special key `*` to represent all entries under the upload as fol
 }
 ```
 
-!!! warning "Wildcard Usage"
+!!! warning "Attention"
     The `*` wildcard is not universal and only works for fixed, NOMAD-wide schemas.
     This means it can only be used to represent `upload_id`, `entry_id`, `dataset_id`, etc., for data that follows a fixed schema (e.g., MongoDB).
     It won't work for archive data, the corresponding metainfo (definitions), and alike.
@@ -428,8 +428,8 @@ For example, the above request can be equivalently written as:
 
 This format allows flexible nesting.
 
-!!! tip "Range Slicing"
-    It is possible to assign both start and end indices to the `index` field.
+!!! tip
+    **Range Slicing:** It is possible to assign both start and end indices to the `index` field.
     For example, `index: [1, 3]` will return the second to the fourth elements (both inclusive).
     Using the indexing key, it is equivalent to `key[1:3]`.
 
@@ -1200,8 +1200,7 @@ The corresponding response will look like:
 Note that when a `query` field is provided, it will be returned in the `m_response` field.
 Also, the `pagination` field will always be returned, even if not specified in the request.
 
-<!-- TODO - Check this rewrite  -->
-!!! tip "Efficient Fetching"
+!!! tip
     Some fields are stored in both the MongoDB database and the Elasticsearch index. In this case, they can be fetched more directly from Elasticsearch.
     However, if the request needs to access an archive, the `entry -> archive` path must be used if starting from `search`.
 
