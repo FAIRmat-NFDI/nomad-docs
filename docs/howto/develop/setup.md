@@ -498,7 +498,7 @@ These utilities can usually be placed into the following categories:
   render functions can do this automatically for you, e.g. the default render
   as exported from `src/components/conftest.spec.js` wraps your components with an
   infrastructure that is very similar to the production app. See
-  [React Testing Library > custom-reader](https://testing-library.com/docs/react-testing-library/setup/#custom-render){:target="_blank"}
+  [React Testing Library > custom-render](https://testing-library.com/docs/react-testing-library/setup/#custom-render){:target="_blank"}
   for more information.
 
 - Custom queries: See
