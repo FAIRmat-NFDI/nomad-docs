@@ -355,7 +355,7 @@ The *steps* subsection allows us to reference the various processes and measurem
 
 <!-- TODO consider changing this admonition to a download button -->
 ??? example "Download the example file for this exercise"
-    [Download example data ZIP](https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_4_files/example_NOMAD_ELN.zip).
+    [Download example data ZIP](https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_4_files/example_NOMAD_ELN.zip){:target="_blank" rel="noopener"}.
 
     The file contains multiple NOMAD ELN entries in `.json` format.
 

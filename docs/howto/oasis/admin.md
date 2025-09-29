@@ -6,7 +6,7 @@ To backup your Oasis at least the file data and mongodb data needs to be saved. 
 default all data is stored in a directory called `.volumes` that is created in the
 current working directory of your installation/docker-compose. This directory can be backed up like any other file backup (e.g. rsync).
 
-To backup the mongodb, please refer to the official [mongodb documentation](https://docs.mongodb.com/manual/core/backups/). We suggest a simple mongodump export that is backed up alongside your files. The default configuration mounts `.volumes/mongo` into the mongodb container (as `/backup`) for this purpose. You can use this to export the NOMAD mongo database. Combine this with rsync on the `.volumes` directory and everything should be set. To create a new mongodump run:
+To backup the mongodb, please refer to the official [mongodb documentation](https://docs.mongodb.com/manual/core/backups/){:target="_blank" rel="noopener"}. We suggest a simple mongodump export that is backed up alongside your files. The default configuration mounts `.volumes/mongo` into the mongodb container (as `/backup`) for this purpose. You can use this to export the NOMAD mongo database. Combine this with rsync on the `.volumes` directory and everything should be set. To create a new mongodump run:
 
 ```sh
 docker exec nomad_oasis_mongo mongodump -d nomad_oasis_v1 -o /backup
@@ -163,7 +163,7 @@ add a `--concurrency` argument:
 python -m celery -A nomad.processing worker -l info --concurrency=1 -Q celery
 ```
 
-See also the [celery documentation](https://docs.celeryproject.org/en/stable/userguide/workers.html#id1).
+See also the [celery documentation](https://docs.celeryproject.org/en/stable/userguide/workers.html#id1){:target="_blank" rel="noopener"}.
 
 ### Limiting the use of threads
 
@@ -195,4 +195,4 @@ services:
 ```
 
 The number refers to the percentage use of a single CPU core.
-See also the [docker-compose documentation](https://docs.docker.com/compose/compose-file/compose-file-v3/#resources).
+See also the [docker-compose documentation](https://docs.docker.com/compose/compose-file/compose-file-v3/#resources){:target="_blank" rel="noopener"}.
