@@ -23,7 +23,7 @@ Our semantic interpretation of **"minor"** is the following:
 - minor version might introduce new features that are only available after certain
   actions [migration steps](#migration-steps).
 
-A road-map for major features can be found on our homepage [here](https://nomad-lab.eu/nomad-lab/features.html){:target="_blank" rel="noopener"}. You'll find a detailed change log in the source code [here](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR/-/blob/develop/CHANGELOG.md){:target="_blank" rel="noopener"}.
+A road-map for major features can be found on the [nomad-lab homepage](https://nomad-lab.eu/nomad-lab/features.html){:target="_blank" rel="noopener"}. You'll find a detailed change log in the source code on [nomad-FAIR > CHANGELOG](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR/-/blob/develop/CHANGELOG.md){:target="_blank" rel="noopener"}.
 
 ## Configuration versions
 
@@ -93,7 +93,7 @@ docker compose up -d
 
 - We introduced the plugin mechanism. There are now more options to control which schemas
   and parsers are available in your installation. By default all the existing and shipped
-  schemas and parsers are enabled. See also [here](configure.md#plugins).
+  schemas and parsers are enabled. See also [Configure > Plugins](configure.md#plugins).
 
 - We changed the archive file format. [Re-processing](admin.md#re-processing) might yield better performance.
 

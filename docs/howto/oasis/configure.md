@@ -147,7 +147,7 @@ A few things to notice:
 
 - The app, worker, and north service use the NOMAD docker image. Here we use the `latest` tag, which
   gives you the latest *beta* version of NOMAD. You might want to change this to `stable`,
-  a version tag (format is `vX.X.X`, you find all releases [here](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR/-/tags){:target="_blank" rel="noopener"}), or a specific [branch tag](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR/-/branches){:target="_blank" rel="noopener"}.
+  a version tag (format is `vX.X.X`, you find all releases at [nomad-FAIR > tags](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR/-/tags){:target="_blank" rel="noopener"}), or a specific [nomad-FAIR > branches](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR/-/branches){:target="_blank" rel="noopener"}.
 - All services use docker volumes for storage. This could be changed to host mounts.
 - It mounts two configuration files that need to be provided (see below): `nomad.yaml`, `nginx.conf`.
 - The only exposed port is `80` (proxy service). This could be changed to a desired port if necessary.
@@ -409,7 +409,7 @@ This is an incomplete list of potential things to customize your NOMAD experienc
 
 If during login you get an error like: `jwt.exceptions.ImmatureSignatureError: The token is not yet valid (iat)`, it most probably means that there is a time difference between the two machines: the one creating the JWT and the other that is validating it. This causes an error where the authentication server looking at the token thinks that it has not been issued yet.
 
-To fix this problem, you should ensure that the time on the servers is synchronized. It is possible that a network port on one of the servers may be closed, preventing it from synchronizing the time. Note that the servers do not need to be on the same timezone, as internally everything is converted to UTC+0. To check the time on a server, you can on a Linux-based machine use the [`timedatectl`](https://man7.org/linux/man-pages/man8/hwclock.8.html){:target="_blank" rel="noopener"} command which will report both the harware clock and the system clock (see [here for the difference](https://developer.toradex.com/software/linux-resources/linux-features/real-time-clock-rtc-linux/#:~:text=Two%20clocks%20are%20important%20in,maintained%20by%20the%20operating%20system.){:target="_blank" rel="noopener"}). For authentication, the system clocks on the two machines need to be set correctly, but you might also need to correct the hardware clock since it initially sets the system clock upon rebooting the machine.
+To fix this problem, you should ensure that the time on the servers is synchronized. It is possible that a network port on one of the servers may be closed, preventing it from synchronizing the time. Note that the servers do not need to be on the same timezone, as internally everything is converted to UTC+0. To check the time on a server, you can on a Linux-based machine use the [`timedatectl`](https://man7.org/linux/man-pages/man8/hwclock.8.html){:target="_blank" rel="noopener"} command which will report both the harware clock and the system clock (see [difference](https://developer.toradex.com/software/linux-resources/linux-features/real-time-clock-rtc-linux/#:~:text=Two%20clocks%20are%20important%20in,maintained%20by%20the%20operating%20system.){:target="_blank" rel="noopener"}). For authentication, the system clocks on the two machines need to be set correctly, but you might also need to correct the hardware clock since it initially sets the system clock upon rebooting the machine.
 
 ### NOMAD in networks with restricted Internet access
 
@@ -481,7 +481,7 @@ If not please contact your server provider for help.
 
 Even when run in docker elasticsearch might require you to change your systems resource
 limits as described in the elasticsearch documentation
-[here](https://www.elastic.co/guide/en/elasticsearch/reference/current/setting-system-settings.html){:target="_blank" rel="noopener"}.
+[Elasticsearch documentation > setting-system-settings](https://www.elastic.co/guide/en/elasticsearch/reference/current/setting-system-settings.html){:target="_blank" rel="noopener"}.
 
 You can temporarely change the open files limit like this:
 

@@ -216,7 +216,8 @@ Files can be added to an upload individually, or you can group them into a compr
 ### Uploading Miscellaneous Files
 
 ??? example "Download the example files for this exercise"
-    We have prepared a set of files for this task that can be downloaded from this [link](https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_3_files/example_files_upload/miscellaneous_data/miscellaneous_data.zip){:target="_blank" rel="noopener"}.
+    <!-- TODO consider changing this admonition to a download button -->
+    [Download example data ZIP](https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_3_files/example_files_upload/miscellaneous_data/miscellaneous_data.zip){:target="_blank" rel="noopener"}.
 
     Download the folder, then uncompress it on your local machine at you preferred directory.
 
@@ -255,7 +256,8 @@ You can add these files to your NOMAD upload. Do so by simply drag and drop the 
 ### Uploading Computations Data
 
 ??? example "Download the example files for this exercise"
-    We have prepared a set of files for this task that can be downloaded from this [link](https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_3_files/example_files_upload/computations_data/FHI-aims.zip){:target="_blank" rel="noopener"}.
+    <!-- TODO consider changing this admonition to a download button -->
+    [Download example data ZIP](https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_3_files/example_files_upload/computations_data/FHI-aims.zip){:target="_blank" rel="noopener"}.
 
     Download the folder to your local machine at you preferred directory.
 
@@ -324,7 +326,8 @@ In other words, NOMAD will read the input and output files and provide all infor
 ### Uploading Experimental Data
 
 ??? example "Download the example files for this exercise"
-    We have prepared a set of files for this task that can be downloaded from this [link](https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_3_files/example_files_upload/experiments_data/xps_nexus_data.zip){:target="_blank" rel="noopener"}.
+    <!-- TODO consider changing this admonition to a download button -->
+    [Download example data ZIP](https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_3_files/example_files_upload/experiments_data/xps_nexus_data.zip){:target="_blank" rel="noopener"}.
 
     Download the folder, then uncompress it to your local machine at you preferred directory.
 

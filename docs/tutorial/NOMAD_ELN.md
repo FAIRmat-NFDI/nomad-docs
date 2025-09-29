@@ -353,8 +353,9 @@ The *steps* subsection allows us to reference the various processes and measurem
 
 ## Exploring and Searching Your ELN
 
+<!-- TODO consider changing this admonition to a download button -->
 ??? example "Download the example file for this exercise"
-    We have prepared a compressed file for this task, which can be downloaded from this [link](https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_4_files/example_NOMAD_ELN.zip){:target="_blank" rel="noopener"}.
+    [Download example data ZIP](https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_4_files/example_NOMAD_ELN.zip){:target="_blank" rel="noopener"}.
 
     The file contains multiple NOMAD ELN entries in `.json` format.
 

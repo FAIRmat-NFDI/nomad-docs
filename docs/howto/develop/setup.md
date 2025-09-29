@@ -5,8 +5,7 @@ all sources, set up a *Python* and *Node.js* environment, install all necessary 
 run the infrastructure in development mode, learn to run the test suites, and set up
 *Visual Studio Code* for NOMAD development.
 
-This is not about working with the NOMAD Python package `nomad-lab`. You can find its
-documentation [here](../manage/program/pythonlib.md).
+For installing and using the NOMAD Python package `nomad-lab` directly, see [Manage and find data > Programmatically > API Overview](../manage/program/api.md).
 
 ## Clone the sources
 
@@ -215,7 +214,7 @@ The default virtual memory for Elasticsearch will likely be too low. On Linux, y
 sysctl -w vm.max_map_count=262144
 ```
 
-To set this value permanently, see [here](https://www.elastic.co/guide/en/elasticsearch/reference/current/vm-max-map-count.html){:target="_blank" rel="noopener"}. Then you can run all services with:
+To set this value permanently, see [Elasticsearch documentation > vm-max-map-count](https://www.elastic.co/guide/en/elasticsearch/reference/current/vm-max-map-count.html){:target="_blank" rel="noopener"}. Then you can run all services with:
 
 ```shell
 cd ops/docker-compose/infrastructure
@@ -223,7 +222,7 @@ docker compose up -d elastic mongo rabbitmq
 cd ../../..
 ```
 
-If your system almost ran out of disk space, Elasticsearch enforces a read-only index block ([read more](https://www.elastic.co/guide/en/elasticsearch/reference/6.2/disk-allocator.html){:target="_blank" rel="noopener"}), but
+If your system almost ran out of disk space, Elasticsearch enforces a read-only index block ([Elasticsearch documentation > disk-allocator](https://www.elastic.co/guide/en/elasticsearch/reference/6.2/disk-allocator.html){:target="_blank" rel="noopener"}), but
 after clearing up the disk space you need to reset it manually using the following command:
 
 ```shell
@@ -233,7 +232,7 @@ curl -XPUT -H "Content-Type: application/json" http://localhost:9200/_all/_setti
 Note that the Elasticsearch service has a known problem in quickly hitting the
 virtual memory limits of your OS. If you experience issues with the
 Elasticsearch container not running correctly or crashing, try increasing the
-virtual memory limits as shown [here](https://www.elastic.co/guide/en/elasticsearch/reference/current/vm-max-map-count.html){:target="_blank" rel="noopener"}.
+virtual memory limits as shown [Elasticsearch documentation > vm-max-map-count](https://www.elastic.co/guide/en/elasticsearch/reference/current/vm-max-map-count.html){:target="_blank" rel="noopener"}.
 
 To shut down everything, just `ctrl-c` the running output. If you started everything
 in *deamon* mode (`-d`) use:
@@ -270,7 +269,7 @@ plugins:
     - parsers/nexus
 ```
 
-Note that this will lead to [failing tests](#backend-tests) for the excluded plugins.
+Note that this will lead to failing [backend tests](#backend-tests) for the excluded plugins.
 
 ### App and worker
 
@@ -293,7 +292,7 @@ Or both together in one process:
 nomad admin run appworker
 ```
 
-On macOS you might run into multiprocessing errors. That can be solved as described [here](https://stackoverflow.com/questions/50168647/multiprocessing-causes-python-to-crash-and-gives-an-error-may-have-been-in-progr){:target="_blank" rel="noopener"}.
+On macOS you might run into multiprocessing errors. That can be solved as described on this [stackoverflow thread](https://stackoverflow.com/questions/50168647/multiprocessing-causes-python-to-crash-and-gives-an-error-may-have-been-in-progr){:target="_blank" rel="noopener"}.
 
 The app will run at port 8000 by default.
 
@@ -499,11 +498,11 @@ These utilities can usually be placed into the following categories:
   render functions can do this automatically for you, e.g. the default render
   as exported from `src/components/conftest.spec.js` wraps your components with an
   infrastructure that is very similar to the production app. See
-  [here](https://testing-library.com/docs/react-testing-library/setup/#custom-render){:target="_blank" rel="noopener"}
+  [React Testing Library > custom-render](https://testing-library.com/docs/react-testing-library/setup/#custom-render){:target="_blank" rel="noopener"}
   for more information.
 
 - Custom queries: See
-  [here](https://testing-library.com/docs/react-testing-library/setup/#add-custom-queries){:target="_blank" rel="noopener"}
+  [React Testing Library > custom-queries](https://testing-library.com/docs/react-testing-library/setup/#add-custom-queries){:target="_blank" rel="noopener"}
   for more information.
 
 - Custom expects: These are reusable functions that perform actual tests using
@@ -634,7 +633,7 @@ guidelines, we recommend to use a proper IDE for development and ditch any Vim/E
 
 We strongly recommend that all developers use *Visual Studio Code (VS Code)*. (This is a
 completely different product than *Visual Studio*.) It is available for free
-for all major platforms [here](https://code.visualstudio.com/download){:target="_blank" rel="noopener"}.
+for all major platforms at [Visual Studio Code Downloads](https://code.visualstudio.com/download){:target="_blank" rel="noopener"}.
 
 You should launch and run VS Code directly from the project's root directory. The source
 code already contains settings for VS Code in the `.vscode` directory. The settings

@@ -17,8 +17,8 @@ translated to the frontend through an environment config file (`env.js`).
 
 It is possible to add new units in this file to make them available both in the
 Python and in the Javascript environment. You can read more on how units are
-defined
-[here](https://pint.readthedocs.io/en/stable/advanced/defining.html){:target="_blank" rel="noopener"}.
+defined in the
+[pint documentation](https://pint.readthedocs.io/en/stable/advanced/defining.html){:target="_blank" rel="noopener"}.
 
 All units support the use of SI-prefixes. This means that if the unit `meter`
 has been defined, you are able to then automatically use `kilometers`,
