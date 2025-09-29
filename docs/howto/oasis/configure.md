@@ -481,11 +481,7 @@ If not please contact your server provider for help.
 
 Even when run in docker elasticsearch might require you to change your systems resource
 limits as described in the elasticsearch documentation
-<<<<<<< HEAD
-[Elasticsearch documentation > setting-system-settings](https://www.elastic.co/guide/en/elasticsearch/reference/current/setting-system-settings.html).
-=======
-[here](https://www.elastic.co/guide/en/elasticsearch/reference/current/setting-system-settings.html){:target="_blank" rel="noopener"}.
->>>>>>> origin/main
+[Elasticsearch documentation > setting-system-settings](https://www.elastic.co/guide/en/elasticsearch/reference/current/setting-system-settings.html){:target="_blank" rel="noopener"}.
 
 You can temporarely change the open files limit like this:
 
