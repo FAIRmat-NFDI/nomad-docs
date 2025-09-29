@@ -12,7 +12,7 @@ For installing and using the NOMAD Python package `nomad-lab` directly, see [Man
 If you're planning on developing the core `nomad` package alongside other plugins, consider using the `nomad-distro-dev` setup as described at the end of this page.
 
 If not already done, you should clone NOMAD. If you have an account at the
-[MPDCF Gitlab](https://gitlab.mpcdf.mpg.de/){:target="_blank" rel="noopener"}, you can clone with the SSH URL:
+[MPDCF GitLab](https://gitlab.mpcdf.mpg.de/){:target="_blank" rel="noopener"}, you can clone with the SSH URL:
 
 ```shell
 git clone git@gitlab.mpcdf.mpg.de:nomad-lab/nomad-FAIR.git nomad

@@ -7,7 +7,7 @@ What exactly is a NOMAD release? It is all of the following:
 
 - a version tag on the main NOMAD [git project](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR){:target="_blank" rel="noopener"},
 e.g. [`v1.3.0`](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR/-/tags/v1.3.0){:target="_blank" rel="noopener"}
-- a gitlab release based on a tag with potential release notes
+- a GitLab release based on a tag with potential release notes
 - a version of the `nomad-lab` Python package released to pypi.org, e.g. `nomad-lab==1.3.0`.
 - a docker image tag, e.g. `gitlab-registry.mpcdf.mpg.de/nomad-lab/nomad-fair:v1.3.0`
 - the docker image tag `stable` points to the image with the latest release tag
@@ -18,12 +18,12 @@ e.g. [`v1.3.0`](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR/-/tags/v1.3.0){
 - Deploy the build from this tag to the public NOMAD deployments.
 What deployments are updated might depend on the current needs. But usually
 the production and test deployment should be updated.
-- Release the Python package to the local gitlab registry. (This will update the
+- Release the Python package to the local GitLab registry. (This will update the
 NORTH Jupyter image in the next nightly build and most likely effect plugins)
 - Bump the `latest` docker image tag.
 - For minor and major releases, encourage (Oasis) users to test the public services and the latest docker image for a short trial phase (e.g. 3 days). For patch releases this step should be
 skipped.
-- Create a gitlab release from the tag with potential release notes. Those notes
+- Create a GitLab release from the tag with potential release notes. Those notes
 should also be added to the README.md. It is ok, if the updated README.md is not part of the
 release itself.
 - Bump the `stable` docker image tag.
