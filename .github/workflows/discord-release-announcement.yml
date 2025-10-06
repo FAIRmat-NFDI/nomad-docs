@@ -2,7 +2,7 @@ name: Announce Release to Discord
 
 on:
   release:
-    types: [published, prereleased]  # fire only when you publish (or prerelease)
+    types: [published, prereleased, edited]  # fire only when you publish (or prerelease/draft releases)
   workflow_dispatch: # Allows running this workflow manually
   pull_request:
     branches: ["main"]
@@ -11,31 +11,49 @@ jobs:
   post:
     runs-on: ubuntu-latest
     steps:
-      - name: Post release to Discord via webhook
+      - name: Post release to Discord if body changed
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_RELEASE_WEBHOOK }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
-          # Read the event payload
           PAYLOAD="$(cat "$GITHUB_EVENT_PATH")"
+
           NAME="$(jq -r '.release.name // .release.tag_name' <<<"$PAYLOAD")"
           URL="$(jq -r '.release.html_url' <<<"$PAYLOAD")"
           BODY_RAW="$(jq -r '.release.body // ""' <<<"$PAYLOAD")"
+          RELEASE_ID="$(jq -r '.release.id' <<<"$PAYLOAD")"
 
-          # Truncate overly long bodies (Discord hard cap ~2000 chars per message)
+          # Skip if no changelog at all
+          if [ -z "$BODY_RAW" ] || [ "$BODY_RAW" = "null" ]; then
+            echo "No changelog found, skipping post."
+            exit 0
+          fi
+
+          # Get previous release (might be draft or published)
+          PREV_JSON=$(gh api repos/${GITHUB_REPOSITORY}/releases --jq '. | map(select(.id != '"$RELEASE_ID"')) | sort_by(.created_at) | last')
+          PREV_BODY=$(jq -r '.body // ""' <<<"$PREV_JSON")
+
+          # Compare bodies
+          if [ "$BODY_RAW" = "$PREV_BODY" ]; then
+            echo "No new changes in draft body since last release. Skipping."
+            exit 0
+          fi
+
+          # Truncate long changelogs
           MAX=1800
           if [ ${#BODY_RAW} -gt $MAX ]; then
             BODY="${BODY_RAW:0:$MAX}\n… (truncated)"
           else
             BODY="$BODY_RAW"
           fi
-          if [ -z "$BODY" ] || [ "$BODY" = "null" ]; then
-            BODY="_No changelog provided._"
-          fi
 
-          CONTENT="**📦 New Release:** **$NAME**\n$URL\n\n**Changes**\n$BODY"
+          JSON=$(jq -n \
+            --arg name "$NAME" \
+            --arg url "$URL" \
+            --arg body "$BODY" \
+            '{embeds: [{title: $name, url: $url, description: $body, color: 7506394}]}')
 
-          # Escape backslashes/newlines for JSON
-          JSON=$(jq -n --arg content "$CONTENT" '{content: $content}')
+          echo "Posting new draft/published release update to Discord..."
           curl -sS -X POST -H "Content-Type: application/json" -d "$JSON" "$DISCORD_WEBHOOK"
 
