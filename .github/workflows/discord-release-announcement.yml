@@ -1,56 +1,51 @@
-name: Announce Release to Discord
+name: Announce Merged PR to Discord
 
 on:
-  release:
-    types: [published, prereleased, edited]  # fire only when you publish (or prerelease/draft releases)
-  workflow_dispatch: # Allows running this workflow manually
+  pull_request:
+    types: [closed]
+    branches: ["main"]
+
 jobs:
   post:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
-      - name: Post release to Discord if body changed
+      - name: Post merged PR to Discord
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_RELEASE_WEBHOOK }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euo pipefail
           PAYLOAD="$(cat "$GITHUB_EVENT_PATH")"
 
-          NAME="$(jq -r '.release.name // .release.tag_name' <<<"$PAYLOAD")"
-          URL="$(jq -r '.release.html_url' <<<"$PAYLOAD")"
-          BODY_RAW="$(jq -r '.release.body // ""' <<<"$PAYLOAD")"
-          RELEASE_ID="$(jq -r '.release.id' <<<"$PAYLOAD")"
+          TITLE="$(jq -r '.pull_request.title' <<<"$PAYLOAD")"
+          URL="$(jq -r '.pull_request.html_url' <<<"$PAYLOAD")"
+          BODY_RAW="$(jq -r '.pull_request.body // ""' <<<"$PAYLOAD")"
+          AUTHOR="$(jq -r '.pull_request.user.login' <<<"$PAYLOAD")"
 
-          # Skip if no changelog at all
+          # Handle missing body
           if [ -z "$BODY_RAW" ] || [ "$BODY_RAW" = "null" ]; then
-            echo "No changelog found, skipping post."
-            exit 0
-          fi
-
-          # Get previous release (might be draft or published)
-          PREV_JSON=$(gh api repos/${GITHUB_REPOSITORY}/releases --jq '. | map(select(.id != '"$RELEASE_ID"')) | sort_by(.created_at) | last')
-          PREV_BODY=$(jq -r '.body // ""' <<<"$PREV_JSON")
-
-          # Compare bodies
-          if [ "$BODY_RAW" = "$PREV_BODY" ]; then
-            echo "No new changes in draft body since last release. Skipping."
-            exit 0
-          fi
-
-          # Truncate long changelogs
-          MAX=1800
-          if [ ${#BODY_RAW} -gt $MAX ]; then
-            BODY="${BODY_RAW:0:$MAX}\n… (truncated)"
+            BODY="_No description provided._"
           else
-            BODY="$BODY_RAW"
+            MAX=1800
+            if [ ${#BODY_RAW} -gt $MAX ]; then
+              BODY="${BODY_RAW:0:$MAX}\n… (truncated)"
+            else
+              BODY="$BODY_RAW"
+            fi
           fi
 
           JSON=$(jq -n \
-            --arg name "$NAME" \
+            --arg title "$TITLE" \
             --arg url "$URL" \
+            --arg author "$AUTHOR" \
             --arg body "$BODY" \
-            '{embeds: [{title: $name, url: $url, description: $body, color: 7506394}]}')
+            '{embeds: [{
+              title: $title,
+              url: $url,
+              description: $body,
+              color: 3447003,
+              footer: { text: "Merged by " + $author }
+            }]}')
 
-          echo "Posting new draft/published release update to Discord..."
+          echo "Posting merged PR #$TITLE to Discord..."
           curl -sS -X POST -H "Content-Type: application/json" -d "$JSON" "$DISCORD_WEBHOOK"
-
