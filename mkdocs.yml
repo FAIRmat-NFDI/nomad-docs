@@ -34,11 +34,7 @@ nav:
               - Publish data using Python: howto/manage/program/publish_python.md
               - Access processed data: howto/manage/program/archive_query.md
               - Transform data: howto/manage/program/json_transformer.md
-              - Make graph-style API calls: # TODO consolidate into a single page with supporting explanation/reference material
-                  - Basics: howto/manage/program/graph-api/basics.md
-                  - Navigation and fuzzy query/fetch: howto/manage/program/graph-api/graph.structure.md
-                  - Handling archive data: howto/manage/program/graph-api/query.archive.md
-                  - Other convenience functionalities: howto/manage/program/graph-api/misc.md
+              - Make graph-API calls: howto/manage/program/graph_api.md # TODO consolidate into a single page with supporting explanation/reference material
       - Develop plugins:
           - Plugins Overview: howto/plugins/plugins.md # TODO split former Introduction to plugins into short guiding overview + explanation page
           # - Set up a development environment: howto/plugins/setup.md # TODO distro-dev setup + best practices

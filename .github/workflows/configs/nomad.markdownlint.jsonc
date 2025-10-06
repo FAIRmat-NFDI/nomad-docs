@@ -2,47 +2,85 @@
 {
     // Enable rules by default
     "default": true,
-
     // MD004 - Unordered list style
     // NOTE: maybe not necessary to enforce the same delimiters on different lists
     "MD004": false,
     // MD007 - Unordered list indentation
-    "MD007": { "indent": 4 },
+    "MD007": {
+        "indent": 4
+    },
     // MD009 - Trailing spaces
-    "MD009": { "strict": true },
+    "MD009": {
+        "strict": true
+    },
     // MD012 - Multiple consecutive blank lines
-    "MD012": { "maximum": 1 },
+    "MD012": {
+        "maximum": 1
+    },
     // MD013 - Line length
     // IDEs would auto soft-wrap long lines
     "MD013": false,
     // MD026 - Trailing punctuation in heading
-    "MD026": { "punctuation": ".,;:。，；：" },
+    "MD026": {
+        "punctuation": ".,;:。，；："
+    },
     // MD033 - Inline HTML
     // NOTE: some inline HTML might be needed?
     "MD033": false,
     // MD035 - Horizontal rule style
-    "MD035": { "style": "---" },
+    "MD035": {
+        "style": "---"
+    },
     // MD036 - Emphasis used instead of a heading
     // NOTE: looks like some are intended as emphasis
     "MD036": false,
     // MD044 - Proper names should have the correct capitalization
     // TODO: we should probably add more NOMAD-specific rules
-    "MD044": { "names": [
-        "GitHub", "github.com", "github.io", "macOS", "Linux",
-        "nomad", "NOMAD", "FAIRmat", "fairmat", "FAIR", "fair", "JupyterHub", "jupyterhub"]
+    "MD044": {
+        "names": [
+            "GitHub",
+            "github.com",
+            "github.io",
+            "GitLab",
+            "gitlab.mpcdf.mpg.de",
+            "gitlab-registry.mpcdf.mpg.de",
+            "macOS",
+            "Linux",
+            "nomad",
+            "NOMAD",
+            "FAIRmat",
+            "fairmat",
+            "FAIR",
+            "fair",
+            "JupyterHub",
+            "jupyterhub"
+        ]
     },
     // MD046 - Code block style
     // NOTE: we have some custom collapsible text box marked by `???`
     "MD046": false,
     // MD048 - Code fence style
-    "MD048": { "style": "backtick" },
+    "MD048": {
+        "style": "backtick"
+    },
     // MD049 - Emphasis style (Bold, Italic or both)
     // see: https://www.markdownguide.org/basic-syntax/#emphasis
-    "MD049": { "style": "asterisk" },
+    "MD049": {
+        "style": "asterisk"
+    },
     // MD050 - Strong style (Bold)
-    "MD050": { "style": "asterisk" },
+    "MD050": {
+        "style": "asterisk"
+    },
     // MD055 - Table pipe style
-    "MD055": { "style": "leading_and_trailing" },
+    "MD055": {
+        "style": "leading_and_trailing"
+    },
     // MD059 - Link text should be descriptive
-    "MD059": false
+    "MD059": {
+        "prohibited_texts": [
+            "here", // case-insensitive
+            "link"
+        ]
+    }
 }

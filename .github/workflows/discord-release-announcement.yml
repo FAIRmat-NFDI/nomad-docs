@@ -1,0 +1,51 @@
+name: Announce Merged PR to Discord
+
+on:
+  pull_request:
+    types: [closed]
+    branches: ["main"]
+
+
+jobs:
+  post:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Post merged PR to Discord
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_RELEASE_WEBHOOK }}
+        run: |
+          set -euo pipefail
+          PAYLOAD="$(cat "$GITHUB_EVENT_PATH")"
+
+          TITLE="$(jq -r '.pull_request.title' <<<"$PAYLOAD")"
+          URL="$(jq -r '.pull_request.html_url' <<<"$PAYLOAD")"
+          BODY_RAW="$(jq -r '.pull_request.body // ""' <<<"$PAYLOAD")"
+          AUTHOR="$(jq -r '.pull_request.user.login' <<<"$PAYLOAD")"
+
+          # Handle missing body
+          if [ -z "$BODY_RAW" ] || [ "$BODY_RAW" = "null" ]; then
+            BODY="_No description provided._"
+          else
+            MAX=1800
+            if [ ${#BODY_RAW} -gt $MAX ]; then
+              BODY="${BODY_RAW:0:$MAX}\n… (truncated)"
+            else
+              BODY="$BODY_RAW"
+            fi
+          fi
+          JSON=$(jq -n \
+            --arg title "$TITLE" \
+            --arg url "$URL" \
+            --arg author "$AUTHOR" \
+            --arg body "$BODY" \
+            '{embeds: [{
+              title: $title,
+              url: $url,
+              description: $body,
+              color: 3447003,
+              footer: { text: "Merged by \($author)" }
+            }]}')
+
+          echo "Posting merged PR #$TITLE to Discord..."
+          curl -sS -X POST -H "Content-Type: application/json" -d "$JSON" "$DISCORD_WEBHOOK"

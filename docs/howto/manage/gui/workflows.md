@@ -88,7 +88,7 @@ This file is constructed according to NOMAD's schemas for [Archive Files](../../
 
 - The entry identifier is `<entry_id>#` (placeholder for the entry id, also found on the Overview page) for case 1 of the previous bullet, and `<path to mainfile>/<mainfile name>#` for case 2. `<path to mainfile>` is the path from the root of the original upload directory structure.
 
-- The relative archive path is the relative path to the archive section to be linked. The archive structure can be investigated using NOMAD's [MetaInfo Browser](https://nomad-lab.eu/prod/v1/gui/analyze/metainfo/nomad.datamodel.datamodel.EntryArchive){:target="_blank"}.
+- The relative archive path is the relative path to the archive section to be linked. The archive structure can be investigated using NOMAD's [MetaInfo Browser](https://nomad-lab.eu/prod/v1/gui/analyze/metainfo/nomad.datamodel.datamodel.EntryArchive){:target="_blank" rel="noopener"}.
 
 With a basic understanding in hand, you can now download the example data and upload the obtained `.zip` file to NOMAD:
 
@@ -325,7 +325,7 @@ data:
   description: "A test ELN entry..."
 ```
 
-The `data` section is created and defined as type `ElnBaseSection`, meaning that we can populate all the quantities (e.g., name and description) living in this section (as seen in [MetaInfo Browser > ELNBaseSection](https://nomad-lab.eu/prod/v1/gui/analyze/metainfo/nomad/section_definitions@nomad.datamodel.metainfo.eln.ElnBaseSection){:target="_blank"}).
+The `data` section is created and defined as type `ElnBaseSection`, meaning that we can populate all the quantities (e.g., name and description) living in this section (as seen in [MetaInfo Browser > ELNBaseSection](https://nomad-lab.eu/prod/v1/gui/analyze/metainfo/nomad/section_definitions@nomad.datamodel.metainfo.eln.ElnBaseSection){:target="_blank" rel="noopener"}).
 
 Uploading this yaml to the test deployment results in an entry with the overview page:
 

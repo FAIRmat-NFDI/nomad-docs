@@ -15,6 +15,6 @@ NeXus files can store raw data, processed data, and the metadata necessary to fu
 
 Whether you are storing simple measurements or the output of complex multi-component instruments, NeXus provides a flexible, extensible framework to help ensure your data remains useful and understandable far into the future.
 
-- [FAIRmat NeXus extension proposal](https://fairmat-nfdi.github.io/nexus_definitions/)
-- [NeXusOntology](https://github.com/FAIRmat-NFDI/NeXusOntology/)
-- [NeXus](https://www.nexusformat.org/)
+- [FAIRmat NeXus extension proposal](https://fairmat-nfdi.github.io/nexus_definitions/){:target="_blank" rel="noopener"}
+- [NeXusOntology](https://github.com/FAIRmat-NFDI/NeXusOntology/){:target="_blank" rel="noopener"}
+- [NeXus](https://www.nexusformat.org/){:target="_blank" rel="noopener"}

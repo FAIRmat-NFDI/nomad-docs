@@ -7,4 +7,4 @@ Build upon your understanding of NOMAD's features with domain-specific examples 
 
 <!--- ### Contextualization for pynxtools and its plugins-->
 
-- [pynxtools](https://fairmat-nfdi.github.io/pynxtools/)
+- [pynxtools](https://fairmat-nfdi.github.io/pynxtools/){:target="_blank" rel="noopener"}

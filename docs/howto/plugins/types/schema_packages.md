@@ -6,7 +6,7 @@ This documentation shows you how to write a plugin entry point for a schema pack
 
 ## Getting started
 
-You can use our [template repository](https://github.com/FAIRmat-NFDI/nomad-plugin-template) to create an initial structure for a plugin containing a schema package. The relevant part of the repository layout will look something like this:
+You can use our [template repository](https://github.com/FAIRmat-NFDI/nomad-plugin-template){:target="_blank" rel="noopener"} to create an initial structure for a plugin containing a schema package. The relevant part of the repository layout will look something like this:
 
 ```txt
 nomad-example
@@ -45,7 +45,7 @@ mypackage = MySchemaPackageEntryPoint(
 )
 ```
 
-Here you can see that a new subclass of `SchemaPackageEntryPoint` was defined. In this new class you can override the `load` method to determine how the `SchemaPackage` class is loaded, but you can also extend the `SchemaPackageEntryPoint` model to add new configurable parameters for this schema package as explained [here](../../../explanation/plugin_system.md#plugin-configuration).
+Here you can see that a new subclass of `SchemaPackageEntryPoint` was defined. In this new class you can override the `load` method to determine how the `SchemaPackage` class is loaded, but you can also extend the `SchemaPackageEntryPoint` model to add new configurable parameters for this schema package as explained [Explanation > Plugins > Plugin configuration](../../../explanation/plugin_system.md#plugin-configuration).
 
 We also instantiate an object `mypackage` from the new subclass. This is the final entry point instance in which you specify the default parameterization and other details about the schema package. In the reference you can see all of the available [configuration options for a `SchemaPackageEntryPoint`](../../../reference/plugins.md#schemapackageentrypoint).
 
@@ -238,7 +238,7 @@ represents a single piece of data. Quantities can be defined with the following 
 - `shape`: defines the dimensionality of the quantity. Examples are: `[]` (number),
   `['*']` (list), `[3, 3]` (3 by 3 matrix), `['n_elements']` (a vector of length defined by
   another quantity `n_elements`).
-- `unit`: a physical unit. We use [Pint](https://pint.readthedocs.io/en/stable/){:target="\_blank"} here. You can
+- `unit`: a physical unit. We use [Pint](https://pint.readthedocs.io/en/stable/){:target="_blank" rel="noopener"} here. You can
   use unit strings that are parsed by Pint, e.g. `meter`, `m`, `m/s^2`. As a convention the
   NOMAD Metainfo uses only SI units.
 
