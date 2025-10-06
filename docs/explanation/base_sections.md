@@ -16,7 +16,7 @@ model.
 In this part of the documentation we use UML Class diagrams to illustrate the
 inheritance, composition and association between the base sections.
 For more information on UML Class diagrams please see
-[en.wikipedia.org/wiki/Class_diagram](https://en.wikipedia.org/wiki/Class_diagram){:target="\_blank"}.
+[en.wikipedia.org/wiki/Class_diagram](https://en.wikipedia.org/wiki/Class_diagram){:target="_blank" rel="noopener"}.
 
 ![entity activity model](images/base-sections.svg)
 
@@ -50,7 +50,7 @@ By "Entity" we mean:
     "An object that persists, endures, or continues to exist through time while maintaining
     its identity."
 
-    See [BFO_0000002](http://purl.obolibrary.org/obo/BFO_0000002){:target="_blank"} for semantic context.
+    See [BFO_0000002](http://purl.obolibrary.org/obo/BFO_0000002){:target="_blank" rel="noopener"} for semantic context.
 
 The `Entity` section is currently subclassed by `System`, `Collection` and `Instrument`.
 
@@ -124,7 +124,7 @@ By "Activity" we mean:
 
     "An action that has a temporal extension and for some time depends on some entity."
 
-    See [BFO_0000015](http://purl.obolibrary.org/obo/BFO_0000015){:target="_blank"} for semantic context.
+    See [BFO_0000015](http://purl.obolibrary.org/obo/BFO_0000015){:target="_blank" rel="noopener"} for semantic context.
 
 The `Activity` section is currently subclassed by `Process`, `Measurement`, `Analysis`,
 and `Experiment`.
@@ -159,7 +159,7 @@ By "Process" we mean:
      - sample preparative method
      - material transformations"
 
-    See [OBI_0000094](http://purl.obolibrary.org/obo/OBI_0000094){:target="_blank"} for semantic context.
+    See [OBI_0000094](http://purl.obolibrary.org/obo/OBI_0000094){:target="_blank" rel="noopener"} for semantic context.
 
 The `Process` section is the base for the `SynthesisMethod` section which in turn is
 specialized further in the [`nomad-material-processing`](#plugin-nomad-material-processing)
@@ -173,7 +173,7 @@ By "SynthesisMethod" we mean:
 
     "A method used to synthesise a sample."
 
-    See [CHMO_0001301](http://purl.obolibrary.org/obo/CHMO_0001301){:target="_blank"} for semantic context.
+    See [CHMO_0001301](http://purl.obolibrary.org/obo/CHMO_0001301){:target="_blank" rel="noopener"} for semantic context.
 
 #### `Measurement`
 
@@ -183,7 +183,7 @@ By "Measurement" we mean:
     "A planned process with the objective to produce information about the material entity
     that is the evaluant, by physically examining it or its proxies. [ obi : pppb ]"
 
-    See [OBI_0000070](http://purl.obolibrary.org/obo/OBI_0000070){:target="_blank"} for semantic context.
+    See [OBI_0000070](http://purl.obolibrary.org/obo/OBI_0000070){:target="_blank" rel="noopener"} for semantic context.
 
 The `Measurement` section adds `samples` which are references to instances of (subclasses
 of) `CompositeSystem`.
@@ -202,7 +202,7 @@ By "Analysis" we mean:
      - data processing
      - data analysis"
 
-    See [OBI_0200000](http://purl.obolibrary.org/obo/OBI_0200000){:target="_blank"} for semantic context.
+    See [OBI_0200000](http://purl.obolibrary.org/obo/OBI_0200000){:target="_blank" rel="noopener"} for semantic context.
 
 The `Analysis` section provides `inputs` which are references to any section (including
 sub sections) of some archive.
@@ -272,4 +272,4 @@ sample section:
 
 This plugin contains more specialized base sections for material processing, is
 maintained by FAIRmat and is currently hosted on
-[https://github.com/FAIRmat-NFDI](https://github.com/FAIRmat-NFDI/AreaA-data_modeling_and_schemas){:target="\_blank"}.
+[https://github.com/FAIRmat-NFDI](https://github.com/FAIRmat-NFDI/AreaA-data_modeling_and_schemas){:target="_blank" rel="noopener"}.

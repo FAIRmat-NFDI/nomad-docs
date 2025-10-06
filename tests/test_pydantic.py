@@ -20,9 +20,9 @@ from enum import Enum
 from typing import Annotated, Literal, Optional, Union  # type: ignore
 
 import pytest
+from nomad.config.models.ui import WidgetHistogram, WidgetTerms
 from pydantic import BaseModel, Field
 
-from nomad.config.models.ui import WidgetHistogram, WidgetTerms
 from nomad_docs.pydantic import (
     get_field_default,
     get_field_deprecated,

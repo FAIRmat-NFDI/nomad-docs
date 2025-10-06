@@ -21,13 +21,13 @@ Some key advantages of using plugins:
 There are three core components to the plugin system:
 
 - **Distributions** define lists of plugins and their version. A distribution is a small
-  Git and Python project that maintains a list of plugin dependencies in its `pyproject.toml`. We provide a [template repository](https://github.com/FAIRmat-NFDI/nomad-distro-template)
+  Git and Python project that maintains a list of plugin dependencies in its `pyproject.toml`. We provide a [template repository](https://github.com/FAIRmat-NFDI/nomad-distro-template){:target="_blank" rel="noopener"}
   for a quick start into creating distributions.
 - **Plugins** are Git and Python projects that contain one or many *entry points*.
-  We provide a [template repository](https://github.com/FAIRmat-NFDI/nomad-plugin-template)
+  We provide a [template repository](https://github.com/FAIRmat-NFDI/nomad-plugin-template){:target="_blank" rel="noopener"}
   for a quick start into plugin development.
 - **Entry points** are individual contributions (e.g. parsers, schemas, or apps)
-  which are defined using a feature of Python called [*entry points*](https://setuptools.pypa.io/en/latest/userguide/entry_point.html).
+  which are defined using a feature of Python called [*entry points*](https://setuptools.pypa.io/en/latest/userguide/entry_point.html){:target="_blank" rel="noopener"}.
 
 <figure markdown style="width: 100%">
   ``` mermaid
@@ -80,11 +80,11 @@ mypackage = "nomad_example.schema_packages:mypackage"
 
 Here it is important to use the `nomad.plugin` group name in the `project.entry-points` header. The value on the right side (`"nomad_example.schema_packages:mypackage"`) must be a path pointing to a plugin entry point instance inside the python code. This unique key will be used to identify the plugin entry point when e.g. accessing it to read some of it's configuration values. The name on the left side (`mypackage`) can be set freely.
 
-You can read more about how to write different types of entry points in their dedicated documentation pages or learn more about the [Python entry point mechanism](https://setuptools.pypa.io/en/latest/userguide/entry_point.html).
+You can read more about how to write different types of entry points in their dedicated documentation pages or learn more about the [Python entry point mechanism](https://setuptools.pypa.io/en/latest/userguide/entry_point.html){:target="_blank" rel="noopener"}.
 
 ### Plugin configuration
 
-The plugin entry point configuration is an instance of a [`pydantic`](https://docs.pydantic.dev/latest/) model. This base model may already contain entry point-specific fields (such as the file extensions that a parser plugin will match) but it is also possible to extend this model to define additional fields that control your plugin behaviour.
+The plugin entry point configuration is an instance of a [`pydantic`](https://docs.pydantic.dev/latest/){:target="_blank" rel="noopener"} model. This base model may already contain entry point-specific fields (such as the file extensions that a parser plugin will match) but it is also possible to extend this model to define additional fields that control your plugin behaviour.
 
 Here is an example of a new plugin entry point configuration class and instance for a parser, that has a new custom `parameter` configuration added as a `pydantic` `Field`:
 

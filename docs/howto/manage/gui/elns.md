@@ -18,7 +18,7 @@ definitions:
           key2: value
 ```
 
-Many annotations control the representation of data in the GUI. This can be for plots or data entry/editing capabilities. There are three main categories of annotations relevant to ELNs. You find a reference of all annotations [here](../../../reference/annotations.md).
+Many annotations control the representation of data in the GUI. This can be for plots or data entry/editing capabilities. There are three main categories of annotations relevant to ELNs. You find a reference of all annotations [Reference > Annotations](../../../reference/annotations.md).
 
 ### Example ELN schema
 
@@ -30,4 +30,4 @@ The is the commented ELN schema from our ELN example upload that can be created 
 
 **NOTE: Defining Labels for Quantities**
 
-When defining labels for quantities, utilize the [display annotations](../../../reference/annotations.md#display-annotations) and ensure that you follow the conventions as described [here](./yaml.md#conventions-for-labels).
+When defining labels for quantities, utilize the [display annotations](../../../reference/annotations.md#display-annotations) and ensure that you follow the conventions as described [Write a YAML schema package > Conventions for labels](./yaml.md#conventions-for-labels).
