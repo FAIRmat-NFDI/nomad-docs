@@ -3,6 +3,8 @@ name: Announce Release to Discord
 on:
   release:
     types: [published, prereleased]  # fire only when you publish (or prerelease)
+  workflow_dispatch: # Allows running this workflow manually
+
 
 jobs:
   post:
