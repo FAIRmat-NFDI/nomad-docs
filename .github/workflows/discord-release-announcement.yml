@@ -8,7 +8,12 @@ on:
 
 jobs:
   post:
-    if: github.event.pull_request.merged == true
+    # Only run if:
+    # 1. The PR is merged
+    # 2. The PR has a label named "announcement"
+    if: >
+      github.event.pull_request.merged == true &&
+      contains(join(github.event.pull_request.labels.*.name, ','), 'announcement')
     runs-on: ubuntu-latest
     steps:
       - name: Post merged PR to Discord
