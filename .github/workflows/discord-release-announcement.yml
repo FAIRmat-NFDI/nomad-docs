@@ -4,9 +4,7 @@ on:
   release:
     types: [published, prereleased, edited]  # fire only when you publish (or prerelease/draft releases)
   workflow_dispatch: # Allows running this workflow manually
-  pull_request:
-    branches: ["main"]
-
+  workflow_dispatch: # Allows running this workflow manually
 jobs:
   post:
     runs-on: ubuntu-latest
