@@ -4,7 +4,7 @@ This is a guide for best practices when contributing to the NOMAD documentation.
 
 ## Philosophy: Diátaxis
 
-The NOMAD Docs follow the [Diátaxis framework](https://diataxis.fr/) for technical documentation. This framework organizes content into four distinct types, each serving a different user need:
+The NOMAD Docs follow the [Diátaxis framework](https://diataxis.fr/){:target="_blank" rel="noopener"} for technical documentation. This framework organizes content into four distinct types, each serving a different user need:
 
 - **Tutorials**: learning-oriented, step-by-step introductions.
 - **How-to guides**: goal-oriented, practical instructions.
@@ -41,7 +41,7 @@ When contributing, identify which type of documentation your addition belongs to
 
 If the referenced section belongs to the current page, drop the global path, i.e., `[Search Interface & Filters](<path-to-referenced-section>)`.
 
-**External links to NOMAD-related documentation.** External links to, e.g., NOMAD plugin documentation should follow the same syntax as internal link names, with the name of the plugin as the root. For example, `[NOMAD Utility Workflows > How-to Guides > Create Custom Workflows](https://fairmat-nfdi.github.io/nomad-utility-workflows/how_to/create_custom_workflows.html)`.
+**External links to NOMAD-related documentation.** External links to, e.g., NOMAD plugin documentation should follow the same syntax as internal link names, with the name of the plugin as the root. For example, `[NOMAD Utility Workflows > How-to Guides > Create Custom Workflows](https://fairmat-nfdi.github.io/nomad-utility-workflows/how_to/create_custom_workflows.html){:target="_blank" rel="noopener"}`.
 
 **Other external links: descriptive text + new tab.** For other external links, use descriptive names, not raw URLs.
 
@@ -69,7 +69,7 @@ If the referenced section belongs to the current page, drop the global path, i.e
     - Emphasis in narrative text.
     - Terms being introduced for the first time.
 
-**Add new terms to glossary.** Add new NOMAD-specific terms to the [Glossary](https://github.com/FAIRmat-NFDI/nomad-docs/blob/main/docs/reference/glossary.md). External terms/concepts should link to external definitions, when appropriate (use your best judgement).
+**Add new terms to glossary.** Add new NOMAD-specific terms to the [Glossary](https://github.com/FAIRmat-NFDI/nomad-docs/blob/main/docs/reference/glossary.md){:target="_blank" rel="noopener"}. External terms/concepts should link to external definitions, when appropriate (use your best judgement).
 
 ## Code, commands, and UI text
 
