@@ -43,7 +43,7 @@ When contributing, identify which type of documentation your addition belongs to
 
 If the referenced section belongs to the current page, drop the global path, i.e., `[Search Interface & Filters](<path-to-referenced-section>)`.
 
-**External links to NOMAD-related documentation.** External links to, e.g., NOMAD plugin documentation should follow the same syntax as internal link names, with the name of the plugin as the root. For example, [NOMAD Utility Workflows > How-to Guides > Create Custom Workflows](https://fairmat-nfdi.github.io/nomad-utility-workflows/how_to/create_custom_workflows.html).
+**External links to NOMAD-related documentation.** External links to, e.g., NOMAD plugin documentation should follow the same syntax as internal link names, with the name of the plugin as the root. For example, `[NOMAD Utility Workflows > How-to Guides > Create Custom Workflows](https://fairmat-nfdi.github.io/nomad-utility-workflows/how_to/create_custom_workflows.html)`.
 
 **Other external links: descriptive text + new tab.** For other external links, use descriptive names, not raw URLs.
 
