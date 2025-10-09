@@ -89,7 +89,6 @@ If the referenced section belongs to the current page, drop the global path, i.e
 
 > ⚠️ **Attention:** An admonition is a highlighted block in documentation used to draw attention to important information, such as notes, warnings, tips, or examples.
 
-
 <!-- TODO Do we want to restrict to only these? Or allow custom naming? -->
 **Do not use custom titles for admonitions.**
 Any of the standard amdonition titles are allowed. Additionally, gere is a list of "custom" titles that can be used within the docs:
