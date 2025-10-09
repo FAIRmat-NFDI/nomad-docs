@@ -1,38 +1,56 @@
-name: Announce Release to Discord
+name: Announce Merged PR to Discord
 
 on:
-  release:
-    types: [published, prereleased]  # fire only when you publish (or prerelease)
+  pull_request:
+    types: [closed]
+    branches: ["main"]
+
 
 jobs:
   post:
+    # Only run if:
+    # 1. The PR is merged
+    # 2. The PR has a label named "announcement"
+    if: >
+      github.event.pull_request.merged == true &&
+      contains(join(github.event.pull_request.labels.*.name, ','), 'announcement')
     runs-on: ubuntu-latest
     steps:
-      - name: Post release to Discord via webhook
+      - name: Post merged PR to Discord
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_RELEASE_WEBHOOK }}
         run: |
           set -euo pipefail
-          # Read the event payload
           PAYLOAD="$(cat "$GITHUB_EVENT_PATH")"
-          NAME="$(jq -r '.release.name // .release.tag_name' <<<"$PAYLOAD")"
-          URL="$(jq -r '.release.html_url' <<<"$PAYLOAD")"
-          BODY_RAW="$(jq -r '.release.body // ""' <<<"$PAYLOAD")"
 
-          # Truncate overly long bodies (Discord hard cap ~2000 chars per message)
-          MAX=1800
-          if [ ${#BODY_RAW} -gt $MAX ]; then
-            BODY="${BODY_RAW:0:$MAX}\n… (truncated)"
+          TITLE="$(jq -r '.pull_request.title' <<<"$PAYLOAD")"
+          URL="$(jq -r '.pull_request.html_url' <<<"$PAYLOAD")"
+          BODY_RAW="$(jq -r '.pull_request.body // ""' <<<"$PAYLOAD")"
+          AUTHOR="$(jq -r '.pull_request.user.login' <<<"$PAYLOAD")"
+
+          # Handle missing body
+          if [ -z "$BODY_RAW" ] || [ "$BODY_RAW" = "null" ]; then
+            BODY="_No description provided._"
           else
-            BODY="$BODY_RAW"
+            MAX=1800
+            if [ ${#BODY_RAW} -gt $MAX ]; then
+              BODY="${BODY_RAW:0:$MAX}\n… (truncated)"
+            else
+              BODY="$BODY_RAW"
+            fi
           fi
-          if [ -z "$BODY" ] || [ "$BODY" = "null" ]; then
-            BODY="_No changelog provided._"
-          fi
+          JSON=$(jq -n \
+            --arg title "$TITLE" \
+            --arg url "$URL" \
+            --arg author "$AUTHOR" \
+            --arg body "$BODY" \
+            '{embeds: [{
+              title: $title,
+              url: $url,
+              description: $body,
+              color: 3447003,
+              footer: { text: "Merged by \($author)" }
+            }]}')
 
-          CONTENT="**📦 New Release:** **$NAME**\n$URL\n\n**Changes**\n$BODY"
-
-          # Escape backslashes/newlines for JSON
-          JSON=$(jq -n --arg content "$CONTENT" '{content: $content}')
+          echo "Posting merged PR #$TITLE to Discord..."
           curl -sS -X POST -H "Content-Type: application/json" -d "$JSON" "$DISCORD_WEBHOOK"
-

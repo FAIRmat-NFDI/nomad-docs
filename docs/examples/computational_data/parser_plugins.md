@@ -11,12 +11,12 @@ or electronic lab notebooks) into NOMAD's common Archive format. This page provi
 The NOMAD computational parsers can be found within your local NOMAD distribution under
 `<path_to_nomad-lab>/dependencies/parsers/<parserproject>`, where `<parser_project>` corresponds to the following organization:
 
-* [atomistic](https://github.com/nomad-coe/atomistic-parsers) - Parsers for output from classical molecular simulations, e.g., from Gromacs, Lammps, etc.
-* [database](https://github.com/nomad-coe/database-parsers) - Parsers for various databases, e.g., OpenKim.
-* [eelsdb](https://github.com/nomad-coe/nomad-parser-eelsdb) - Parser for the EELS database (<https://eelsdb.eu/>; to be integrated in the database project).
-* [electronic](https://github.com/nomad-coe/electronic-parsers) - Parsers for output from electronic structure calculations, e.g., from Vasp, Fhiaims, etc. <!-- TODO ab Initio instead of electronic structure?  -->
-* [nexus](https://github.com/nomad-coe/nomad-parser-nexus) - Parsers for combining various instrument output formats and electronic lab notebooks.
-* [workflow](https://github.com/nomad-coe/workflow-parsers) - Parsers for output from task managers and workflow schedulers.
+* [atomistic](https://github.com/nomad-coe/atomistic-parsers){:target="_blank" rel="noopener"} - Parsers for output from classical molecular simulations, e.g., from Gromacs, Lammps, etc.
+* [database](https://github.com/nomad-coe/database-parsers){:target="_blank" rel="noopener"} - Parsers for various databases, e.g., OpenKim.
+* [eelsdb](https://github.com/nomad-coe/nomad-parser-eelsdb){:target="_blank" rel="noopener"} - Parser for the EELS database (<https://eelsdb.eu/>; to be integrated in the database project).
+* [electronic](https://github.com/nomad-coe/electronic-parsers){:target="_blank" rel="noopener"} - Parsers for output from electronic structure calculations, e.g., from Vasp, Fhiaims, etc. <!-- TODO ab Initio instead of electronic structure?  -->
+* [nexus](https://github.com/nomad-coe/nomad-parser-nexus){:target="_blank" rel="noopener"} - Parsers for combining various instrument output formats and electronic lab notebooks.
+* [workflow](https://github.com/nomad-coe/workflow-parsers){:target="_blank" rel="noopener"} - Parsers for output from task managers and workflow schedulers.
 
 You can also examine the source code of the parsers by following the above links to the corresponding GitHub repository for each project. Within each project folder you will find a `test/` directory, containing the [parser tests](../../howto/plugins/plugins.md#testing), and also a directory containing the parsers' source code,
 `<parserproject>parser` or `<parserproject>parsers`, depending on if one or more
