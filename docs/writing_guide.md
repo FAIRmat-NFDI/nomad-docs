@@ -29,15 +29,13 @@ When contributing, identify which type of documentation your addition belongs to
 
 ### Headings & Structure
 
-**One H1 per page.** Use single `#` sections only at the top of the file for the page title.
-
 **Auto-TOC awareness:** Headings populate the Table of Contents; admonition titles do not. Use real headings for navigable sections.
 
 ### Links
 
 **Link checks.** Broken internal or external links will cause CI/CD to fail. Try to fix them when possible. If you cannot resolve a broken link, create an issue and tag a maintainer.
 
-**Descriptive link naming.** Do not use "here" as a name for links.
+**Descriptive link naming.** Use descriptive link text (instead of `here/link`).
 
 **Internal links: standardized naming.** Use the path hierarchy to the referenced page or section, separated by >'s. For example: `[Tutorial > Exploring Data > Search Interface & Filters](<path-to-referenced-section>)`. Long paths can be shortend with `...`, e.g., `[Tutorial > ... > Search Interface & Filters](<path-to-referenced-section>)`, using your best judgement.
 
@@ -85,11 +83,12 @@ If the referenced section belongs to the current page, drop the global path, i.e
 
 **Keep the navigation structure.** The location of docs .md files should mirror the navigation bar, with subfolders named after the organizational subsections of the bar.
 
-**Images and data.** All assets specific to an individual markdown file should be stored within an immediate sub-directory of the file, labeled accordingly. Please use `images/` and `data/` for the image and data files, respectively.
-
-Sharing assets between .md files in different locations is currently not allowed. If there is an exceptional case, please create a GithHub issue and tag a relevant maintainer.
+**Images and data.** All assets specific to an individual markdown file should be stored within an immediate sub-directory of the file, labeled accordingly. Please use `images/` and `data/` for the image and data files, respectively. Sharing assets between .md files in different locations is currently not allowed. If there is an exceptional case, please create a GithHub issue and tag a relevant maintainer.
 
 ## Admonitions
+
+> ⚠️ **Attention:** An admonition is a highlighted block in documentation used to draw attention to important information, such as notes, warnings, tips, or examples.
+
 
 <!-- TODO Do we want to restrict to only these? Or allow custom naming? -->
 **Do not use custom titles for admonitions.**
