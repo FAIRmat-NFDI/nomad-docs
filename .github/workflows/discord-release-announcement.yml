@@ -1,0 +1,38 @@
+name: Announce Release to Discord
+
+on:
+  release:
+    types: [published, prereleased]  # fire only when you publish (or prerelease)
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Post release to Discord via webhook
+        env:
+          DISCORD_WEBHOOK: ${{ secrets.DISCORD_RELEASE_WEBHOOK }}
+        run: |
+          set -euo pipefail
+          # Read the event payload
+          PAYLOAD="$(cat "$GITHUB_EVENT_PATH")"
+          NAME="$(jq -r '.release.name // .release.tag_name' <<<"$PAYLOAD")"
+          URL="$(jq -r '.release.html_url' <<<"$PAYLOAD")"
+          BODY_RAW="$(jq -r '.release.body // ""' <<<"$PAYLOAD")"
+
+          # Truncate overly long bodies (Discord hard cap ~2000 chars per message)
+          MAX=1800
+          if [ ${#BODY_RAW} -gt $MAX ]; then
+            BODY="${BODY_RAW:0:$MAX}\n… (truncated)"
+          else
+            BODY="$BODY_RAW"
+          fi
+          if [ -z "$BODY" ] || [ "$BODY" = "null" ]; then
+            BODY="_No changelog provided._"
+          fi
+
+          CONTENT="**📦 New Release:** **$NAME**\n$URL\n\n**Changes**\n$BODY"
+
+          # Escape backslashes/newlines for JSON
+          JSON=$(jq -n --arg content "$CONTENT" '{content: $content}')
+          curl -sS -X POST -H "Content-Type: application/json" -d "$JSON" "$DISCORD_WEBHOOK"
+
