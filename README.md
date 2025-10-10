@@ -11,8 +11,8 @@ See the releases for different versions of the documentation (from v1.4.0 onward
 - For internal contributions (write access to the repo required), please open a pull request (PR) with your changes. **At least one review from a FAIRmat co-worker is required before merging**. If you are not sure who to assign, please ask in the PR conversation by tagging @ahm531 or @JFRudzinski.
 
 - For external contributions, please follow the [External Contribution Instructions](#external-contribution-instructions)
-- Any contributions that should end up in the next documentation release should target the `develop` branch. When a new version of the NOMAD software is released, the current state of the `develop` branch will be merged into `main` with a corresponding version tag. **Note**: Documentation for features not in the upcoming release should be kept in a separate branch.
-- Any contributions that should end up in the next documentation release should target the `develop` branch. When a new version of the NOMAD software is released, the current state of the `develop` branch will be merged into `main` with a corresponding version tag: this way the documentation can be synced with NOMAD versions. **Note that you should not merge documentation for future features that will not be included in the next release**: keep such documentation in another branch until the time comes to merge them.
+
+- Any contributions that should end up in the next documentation release should target the `develop` branch. When a new version of the NOMAD software is released, the current state of the `develop` branch will be merged into `main` with a corresponding version tag: this way the documentation can be synced with NOMAD versions. **Note that you should not merge documentation for features that will not be included in the next release**: keep them in another branch.
 
 ### Writing Guide
 
