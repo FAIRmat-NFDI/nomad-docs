@@ -1,12 +1,5 @@
 # How to define an action
 
-!!! tip "Warning"
-
-    NOMAD Actions are a preview feature available starting from NOMAD version `nomad-lab>=1.3.18.dev89`.
-    Please note that this is an early release: some functionality may change, and you might encounter bugs.
-
-    We’d love your feedback to help us improve NOMAD Actions, please don’t hesitate to reach out and share your thoughts.
-
 Actions allow to define executable workflows in NOMAD. They are an
 alternative to [normalizers](../../../tutorial/custom.md#custom-normalizers) and can
 be configured to use specialized workers instead of the NOMAD internal worker.
@@ -146,6 +139,9 @@ The `load`-method of an action entry point returns an instance of a
 a collection of activities and workflows that connect them. It also specifies the task queue for which the workflows and activities are registered. Once the
 workflows are made available through the `Action`, they can be triggered
 using the `start_action` funtion. This adds a workflow run instance to the specified task queue. You can learn more about it in the [next section](#integrating-action-with-schemas).
+
+!!! note "Synchronous vs. Asynchronous Activities"
+    When defining activities, it is recommended to use synchronous functions by default. Asynchronous functions should only be used when you need to make asynchronous calls, for example, when interacting with an external API using `aiohttp`. Using blocking synchronous functions in an asynchronous activity can block the event loop and prevent other tasks from running.
 
 We use [Temporal](https://docs.temporal.io/temporal){:target="_blank" rel="noopener"}'s workflow-activity
 abstraction here. Activities are the atomic unit of execution. They should
@@ -319,7 +315,7 @@ We can run a workflow using `start_action`
 function, which takes the action name and an instance of its input model:
 
 ```py
-from nomad.actions.utils import start_action
+from nomad.actions.manager import start_action
 
 from nomad_example.actions.myaction.models import ExampleWorkflowInput
 
@@ -339,7 +335,7 @@ workflow using `get_action_status` function which takes the workflow ID as an
 input and returns a `temporalio.client.WorkflowExecutionStatus` object:
 
 ```py
-from nomad.actions.utils import get_action_status
+from nomad.actions.manager import get_action_status
 
 workflow_status = get_action_status(workflow_id)
 
@@ -351,7 +347,7 @@ You can add these functionalities in the `normalize` of an
 entries. A schema that uses ELN quantities to trigger actions can look like this:
 
 ```py
-from nomad.actions.utils import get_action_status, start_action
+from nomad.actions.manager import get_action_status, start_action
 from nomad.datamodel.data import EntryData
 from nomad.datamodel.metainfo.annotations import ELNAnnotation, ELNComponentEnum
 from nomad.datamodel.metainfo.basesections.v1 import PureSubstanceSection
@@ -465,18 +461,85 @@ using the utilities described in the next section.
 Interaction with your Oasis's database from Actions provides a powerful way of
 manipulating it. For example, once you run an action, you might want to save
 its output in an existing NOMAD entry, or even create new ones. We provide a
-curated set of utils in `nomad.actions.utils` module to perform these tasks.
+curated set of functions in `nomad.actions.manager` module to perform these tasks.
 
 !!! tip "Important"
     Since interacting with database directly (bypassing the API endpoint)
     through Actions is highly risky, we strongly recommend to only do this
-    through the functions defined under `nomad.actions.utils`
+    through the functions defined under `nomad.actions.manager`
     module. If you have to perform a task that is not covered in the utils,
     please use the available API endpoints and interact with the database via
     the network.
 
 !!! note "Note"
     This part of the documentation is under development.
+
+## Handling secrets
+
+When defining actions that interact with external services, you often need to handle sensitive information like API keys or authentication tokens. It is crucial to manage these secrets securely to protect your data and credentials. There are two main approaches to handling secrets in NOMAD actions, depending on whether the secret is shared across an institution or is specific to an individual user.
+
+### Institute-wide secrets
+
+For secrets that are shared across an institution, such as a subscription to a service like an OpenAPI-powered tool, it is recommended to use environment variables. You can set the environment variable in the Docker container that runs the worker. This way, the secret is not hardcoded in the action's source code and can be managed independently by the administrator of the NOMAD oasis.
+
+You can then access the secret in your action's code using `os.environ.get`:
+
+```python
+import os
+
+# Get the API key from an environment variable
+api_key = os.environ.get('OPENAPI_SECRET_KEY')
+
+# Use the API key to interact with the external service
+...
+```
+
+### Individual user secrets
+
+For secrets that are specific to an individual user, such as a personal API key, you can use Pydantic's `SecretStr` and `SecretBytes` types in your action's input model. These types ensure that the secret is not exposed in logs or other outputs.
+
+Here is an example of how to use `SecretStr` in an action's input model:
+
+**nomad_example/actions/myaction/models.py**
+```python
+from pydantic import BaseModel, Field, SecretStr
+
+class MyActionInput(BaseModel):
+    api_key: SecretStr = Field(..., description='The user's personal API key.')
+    ...
+```
+
+When a user triggers the action, they will be prompted to enter their API key. The key will be encrypted and stored securely. You can then access the secret in your action's code by calling the `get_secret_value()` method:
+
+**nomad_example/actions/myaction/activities.py**
+```python
+from temporalio import activity
+from nomad_example.actions.myaction.models import MyActionInput
+
+@activity.defn
+async def my_activity(data: MyActionInput):
+    # Get the secret value
+    api_key = data.api_key.get_secret_value()
+
+    # Use the API key to interact with the external service
+    ...
+```
+
+By using `SecretStr` and `SecretBytes`, you can ensure that individual user secrets are handled securely and are not exposed in the action's logs or other outputs.
+
+Since NOMAD uses `model_dump_json` to serialize the input models, you must provide a `field_serializer` to handle `SecretStr` and `SecretBytes` types. This is required to expose the secret value as plain text during serialization. Make sure to set `when_used` to `'json'` to avoid exposing the secret in other representations.
+
+```python
+from pydantic import BaseModel, Field, SecretStr, SecretBytes, field_serializer
+
+class SimpleModelDumpable(BaseModel):
+    password: SecretStr
+    password_bytes: SecretBytes
+
+    @field_serializer('password', 'password_bytes', when_used='json')
+    def dump_secret(self, v):
+        return v.get_secret_value()
+```
 
 ## Adding to your oasis
 
@@ -501,3 +564,18 @@ To implement the necessary changes, including image build steps and updates to
 docker-compose, the Dockerfile, and GitHub Actions, you can refer to this
 [pull request](https://github.com/FAIRmat-NFDI/nomad-distro-template/pull/109/files){:target="_blank" rel="noopener"}
 as a guide.
+
+## Running actions locally
+
+To run actions locally, you first need to update your fork of the `nomad-distro-dev` repository to the latest version from the FAIRmat upstream.
+Once your fork is up-to-date, you can run the workers using the following commands:
+
+To run the CPU worker:
+```bash
+uv run poe cpuworker
+```
+
+To run the GPU worker:
+```bash
+uv run poe gpuworker
+```
