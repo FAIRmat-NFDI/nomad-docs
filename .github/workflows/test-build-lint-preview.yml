@@ -2,10 +2,10 @@ name: Check mkdocs build and links in markdown files, and preview the docs
 
 on:
   push:
-    branches: ["main"]
+    branches: ["main", "develop"]
     # tags: ["v*.*.*"]
   pull_request:
-    branches: ["main"]
+    branches: ["main", "develop"]
     types:
       - opened
       - synchronize
@@ -38,10 +38,10 @@ jobs:
       - name: Check links in markdown files
         uses: tcort/github-action-markdown-link-check@v1
         with:
-          use-quiet-mode: 'yes'
+          use-quiet-mode: "yes"
           config-file: .github/workflows/configs/markdown-link-check.json
-          folder-path: 'docs, examples'
-          file-path: './README.md'
+          folder-path: "docs, examples"
+          file-path: "./README.md"
 
   test-docs:
     runs-on: ubuntu-latest
