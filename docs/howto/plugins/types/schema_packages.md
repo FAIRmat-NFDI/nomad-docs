@@ -569,7 +569,7 @@ To learn what each key means, you need to look up its definition in the Metainfo
 
 In Python, JSON data is typically represented as nested combinations of dictionaries
 and lists. Of course, you could work with this right away. To make it easier for Python
-programmers, the [NOMAD Python package](../../manage/program/pythonlib.md) allows you to use this
+programmers, the [NOMAD Python package](../../../howto/oasis/install.md#how-to-install-the-nomad-python-library) allows you to use this
 JSON data with a higher level interface, which provides the following advantages:
 
 - code completion in dynamic coding environments like Jupyter notebooks

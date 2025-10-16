@@ -12,7 +12,7 @@ the `nomad-lab` package.
 
 Before diving into this guide, you should be familiar with the following:
 
-- A basic understanding of the `nomad-lab` package. Follow the [How to install nomad-lab](pythonlib.md) guide
+- A basic understanding of the `nomad-lab` package. Follow the [How to install NOMAD Python library](../../../howto/oasis/install.md#how-to-install-the-nomad-python-library) guide
 
 ## What you will know at the end of this how-to guide?
 

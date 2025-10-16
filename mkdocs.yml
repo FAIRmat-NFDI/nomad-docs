@@ -159,7 +159,6 @@ plugins:
       module_name: src/nomad_docs/__init__
   - redirects:
       redirect_maps:
-        "pythonlib.md": "howto/manage/program/pythonlib.md"
         "develop/gitlab.md": "howto/develop/contrib.md"
   - glightbox
   # - git-revision-date-localized
