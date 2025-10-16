@@ -3,8 +3,7 @@ name: Announce Merged PR to Discord
 on:
   pull_request:
     types: [closed]
-    branches: ["main"]
-
+    branches: ["main", "develop"]
 
 jobs:
   post:
