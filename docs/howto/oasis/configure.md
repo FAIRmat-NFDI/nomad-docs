@@ -427,4 +427,3 @@ This is an incomplete list of potential things to customize your NOMAD experienc
 - Write .yaml based [schemas](../manage/gui/yaml.md) and [ELNs](../manage/gui/elns.md)
 - Learn how to use the [tabular parser](../manage/gui/tabular.md) to manage data from .xls or .csv
 - Add specialized [NORTH tools](../manage/gui/north.md)
-- [Restricting user access](./administer.md#restricting-access-to-your-oasis)
