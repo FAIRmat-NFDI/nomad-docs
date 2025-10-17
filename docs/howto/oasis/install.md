@@ -1,8 +1,8 @@
 # How to install a NOMAD Oasis
 
-NOMAD software is Open-Source, and everybody can run it. A self-hosted instance is called a [*NOMAD Oasis*](../../reference/glossary.md#deployment-aka-oasis). A *NOMAD Oasis* does not need to be fully isolated. For example, you can publish uploads from your NOMAD Oasis to the central NOMAD installation. A NOMAD Oasis can be installed on a wide variety of different platforms: from your local laptop to a kubernetes cluster running in the cloud. We also support the three major operating systems: Linux, Windows and macOS.
+NOMAD software is Open-Source, and everybody can run it. A self-hosted instance is called a [*NOMAD Oasis*](../../reference/glossary.md#deployment-nomad-oasis). A *NOMAD Oasis* does not need to be fully isolated. For example, you can publish uploads from your NOMAD Oasis to the central NOMAD installation. A NOMAD Oasis can be installed on a wide variety of different platforms: from your local laptop to a kubernetes cluster running in the cloud. We also support the three major operating systems: Linux, Windows and macOS.
 
-The entire setup for a running a NOMAD Oasis is contained in a Git repository, and is called a [*NOMAD distribution*](../../reference/glossary.md#distribution-aka-distro). We provide different distribution templates to help you get started:
+The entire setup for a running a NOMAD Oasis is contained in a Git repository, and is called a [*NOMAD distribution*](../../reference/glossary.md#distribution-distro). We provide different distribution templates to help you get started:
 
 1. [**NOMAD distribution for production**](https://github.com/FAIRmat-NFDI/nomad-distro-template/)
 
@@ -10,7 +10,7 @@ The entire setup for a running a NOMAD Oasis is contained in a Git repository, a
 
 2. [**NOMAD distribution for development**](https://github.com/FAIRmat-NFDI/nomad-distro-dev)
 
-    Specialized template that allows for a much faster development cycle. This is targeted for plugin developers, Oasis administrators and for developing the `nomad-lab` package.
+    Specialized template that allows for a much faster development cycle. This is targeted for plugin developers, Oasis administrators and for developing the `nomad-lab` package. Should not be used in production.
 
 Once you have created a distribution, you can proceed to learning more about the different [configuration options](./configure.md), different ways to [deploy your distribution](./deploy.md), and also about how to [update](./update.md), [administer](./administer.md) or [troubleshoot](./troubleshoot.md) your Oasis.
 

@@ -18,7 +18,7 @@ The other files are mounted into the docker containers.
 
 ### docker-compose.yaml
 
-The most basic `docker-cmpose.yaml` to run an OASIS looks like this:
+The most basic `docker-compose.yaml` to run an OASIS looks like this:
 
 ```yaml
 --8<-- "ops/docker-compose/nomad-oasis/docker-compose.yaml"

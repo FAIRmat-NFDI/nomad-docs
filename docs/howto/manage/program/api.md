@@ -50,7 +50,7 @@ documentation of all API functions that allows you to try these functions in the
 
 ### Use NOMAD's Python package
 
-Install the [NOMAD Python client library](../../../howto/oasis/install.md#how-to-install-the-nomad-python-library) and use it's `ArchiveQuery`
+Install the [NOMAD Python client library](../../../howto/oasis/install.md#how-to-install-the-nomad-python-library) and use its `ArchiveQuery`
 functionality for a more convenient query based access of archive data following the
 [How-to access the processed data](archive_query.md) guide.
 
