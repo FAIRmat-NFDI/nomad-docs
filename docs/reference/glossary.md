@@ -48,11 +48,11 @@ don't confuse them with [uploads](#upload). Datasets can be compared to albums, 
 on other platforms. Datasets are used to reference a collection of data and users can get a DOI for their
 datasets.
 
-## Deployment
+## Deployment (NOMAD Oasis)
 
-NOMAD *Deployment* refers to a live instance of a NOMAD [distribution](#distribution-distro) running on a machine. This machine can be a cloud-based virtual machine or a local computer.
+NOMAD *Deployment* refers to a live instance of a NOMAD [distribution](#distribution-distro) running on some hardware. A deployment is also known as an *Oasis*.
 
-## Distribution ("distro")
+## Distribution (distro)
 
 NOMAD *Distribution* is a Git repository containing the configuration for instantiating a customized NOMAD instance. Distributions define the plugins that should be installed, the configurations files (e.g. `nomad.yaml`) to use, CI pipeline steps for building final Docker images and a `docker-compose.yaml` file that can be used to launch the instance.
 

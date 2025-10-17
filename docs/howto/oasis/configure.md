@@ -1,118 +1,5 @@
 # How to configure an Oasis
 
-Originally, the NOMAD Central Repository is a service that runs at the Max-Planck's computing facility in Garching, Germany. However, the NOMAD software is Open-Source, and everybody can run it. Any service that uses NOMAD software independently is called a *NOMAD Oasis*. A *NOMAD Oasis* does not need to be fully isolated. For example, you can publish uploads from your NOMAD Oasis to the central NOMAD installation.
-
-!!! note
-
-    **Register your Oasis**
-    If you installed (or even just plan to install) a NOMAD Oasis, please
-    [register your Oasis with FAIRmat](https://nomad-lab.eu/fairdi/keycloak/auth/realms/nomad-oasis/protocol/openid-connect/registrations?client_id=account&scope=openid%20profile&redirect_uri=https%3A%2F%2Fnomad-lab.eu%2Fnomad-lab%2Fnomad-oasis-registration.html&response_type=code){:target="_blank" rel="noopener"}
-    and help us to assist you in the future.
-
-## Creating a NOMAD distribution for your Oasis
-
-The configuration for a NOMAD Oasis is defined in a NOMAD distribution project. We provide a [template](https://github.com/FAIRmat-NFDI/nomad-distro-template){:target="_blank" rel="noopener"} for these distribution projects. A NOMAD distribution project contains all necessary config files and will allow you to version your configuration, install and configure plugins, build custom images automatically, and much more.
-
-For a production installation, we recommend to create your own distribution project based on the template by pressing the "use this template" button on the top right of the [template's GitHub page](https://github.com/FAIRmat-NFDI/nomad-distro-template){:target="_blank" rel="noopener"}. If you wish to instead try out the default setup locally, follow the instructions in "Try  NOMAD Oasis locally".
-
-???+ "Try NOMAD Oasis locally"
-
-  This is an example of how you would deploy a simple, single-machine NOMAD Oasis on your computer. This is meant only as an example and you should see our documentation on [Deploying an Oasis](./deploy.md) for more details on setting up a production deployment.
-
-  1. Make sure you have [docker](https://docs.docker.com/engine/install/){:target="_blank" rel="noopener"} installed.  Docker nowadays comes with `docker compose` built in. Prior, you needed to install the stand-alone [docker-compose](https://docs.docker.com/compose/install/){:target="_blank" rel="noopener"}.
-
-  2. Clone the `nomad-distro-template` repository or download the repository as a zip file.
-
-    ```sh
-    git clone https://github.com/FAIRmat-NFDI/nomad-distro-template.git
-    cd nomad-distro-template
-    ```
-
-    or
-
-    ```sh
-    curl-L -o nomad-distro-template.zip "https://github.com/FAIRmat-NFDI/nomad-distro-template/archive/main.zip"
-    unzip nomad-distro-template.zip
-    cd nomad-distro-template
-    ```
-
-  3. *On Linux only,* recursively change the owner of the `.volumes` directory to the nomad user (1000)
-
-    ```sh
-    sudo chown -R 1000 .volumes
-    ```
-
-  4. Pull the images specified in the `docker-compose.yaml`
-
-    Note that the image needs to be public or you need to provide a PAT (see "Important" note above).
-
-    ```sh
-    docker compose pull
-    ```
-
-  5. And run it with docker compose in detached (--detach or -d) mode
-
-    ```sh
-    docker compose up -d
-    ```
-
-  6. Optionally you can now test that NOMAD is running with
-
-    ```
-    curl localhost/nomad-oasis/alive
-    ```
-
-  7. Finally, open [http://localhost/nomad-oasis](http://localhost/nomad-oasis){:target="_blank" rel="noopener"} in your browser to start using your new NOMAD Oasis.
-
-  To run NORTH (the NOMAD Remote Tools Hub), the `hub` container needs to run docker and the container has to be run under the docker group. You need to replace the default group id `991` in the `docker-compose.yaml`'s `hub` section with your systems docker group id.  Run `id` if you are a docker user, or `getent group | grep docker` to find your systems docker gid. The user id 1000 is used as the nomad user inside all containers.
-
-## Configuring your installation
-
-### Sharing data through log transfer and data privacy notice
-
-NOMAD includes a *log transfer* functions. When enabled this it automatically collects
-and transfers non-personalized logging data to us. Currently, this functionality is experimental
-and requires opt-in. However, in upcoming versions of NOMAD Oasis, we might change to out-out.
-
-To enable this functionality add `logtransfer.enabled: true` to you `nomad.yaml`.
-
-The service collects log-data and aggregated statistics, such as the number of users or the
-number of uploaded datasets. In any case this data does not personally identify any users or
-contains any uploaded data. All data is in an aggregated and anonymized form.
-
-The data is solely used by the NOMAD developers and FAIRmat, including but not limited to:
-
-- Analyzing and monitoring system performance to identify and resolve issues.
-- Improving our NOMAD software based on usage patterns.
-- Generating aggregated and anonymized reports.
-
-We do not share any collected data with any third parties.
-
-We may update this data privacy notice from time to time to reflect changes in our data practices.
-We encourage you to review this notice periodically for any updates.
-
-### Using the central user management
-
-Our recommendation is to use the central user management provided by nomad-lab.eu. We
-simplified its use and you can use it out-of-the-box. You can even run your system
-from `localhost` (e.g. for initial testing). The central user management system is not
-communicating with your OASIS directly. Therefore, you can run your OASIS without
-exposing it to the public internet.
-
-There are two requirements. First, your users must be able to reach the OASIS. If a user is
-logging in, she/he is redirected to the central user management server and after login,
-she/he is redirected back to the OASIS. These redirects are executed by your user's browser
-and do not require direct communication.
-
-Second, your OASIS must be able to request (via HTTP) the central user management and central NOMAD
-installation. This is necessary for non JWT-based authentication methods and to
-retrieve existing users for data-sharing features.
-
-The central user management will make future synchronizing data between NOMAD installations easier
-and generally recommend to use the central system.
-But in principle, you can also run your own user management. See the section on
-[your own user management](#provide-and-connect-your-own-user-management).
-
 ## Configuration files
 
 The [`nomad-distro-template`](https://github.com/FAIRmat-NFDI/nomad-distro-template){:target="_blank" rel="noopener"}
@@ -120,7 +7,7 @@ provides all the neccessary configuration files. We strongly recommend to create
 project based on the template. This will allow you to version your configuration, build custom
 images with plugins, and much more.
 
-In this section, you can learn about settings that you might need to change. The config files are:
+In this section, you can learn about settings that you might need to change. The most relevant config files are:
 
 - `docker-compose.yaml`
 - `configs/nomad.yaml`
@@ -217,24 +104,6 @@ proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 proxy_pass http://<your-oasis-host>/nomad-oasis;
 ```
 
-## Plugins
-
-[Plugins](../plugins/plugins.md) allow the customization of a NOMAD deployment in terms of
-which search apps, normalizers, parsers and schema packages are available. In order for these
-customization to be activated, they have to be configured and installed into an Oasis.
-The basic template comes with a core set of plugins. If you want to configure
-your own set of plugins, using the template and creating your own distro project
-is mandatory.
-
-Plugins are configured via the `pyproject.toml` file. Based on this file
-the distro project CI pipeline creates the NOMAD docker image that is used by your installation.
-Only plugins configured in the `pyproject.toml` files, will be installed into the docker
-image and only those plugins installed in the used docker image are available in your
-Oasis.
-
-Please refer to the [template README](https://github.com/FAIRmat-NFDI/nomad-distro-template?tab=readme-ov-file#adding-a-plugin){:target="_blank" rel="noopener"}
-to learn how to add your own plugins.
-
 ## Starting and stopping NOMAD services
 
 If you prepared the above files, simply use the usual `docker compose` commands to start everything.
@@ -308,7 +177,141 @@ If you want to report problems with your OASIS. Please provide the logs for
 - nomad_oasis_worker
 - nomad_oasis_gui
 
-## Provide and connect your own user management
+## Plugins
+
+[Plugins](../plugins/plugins.md) allow the customization of a NOMAD deployment in terms of
+which search apps, normalizers, parsers and schema packages are available. In order for these
+customization to be activated, they have to be configured and installed into an Oasis.
+The basic template comes with a core set of plugins. If you want to configure
+your own set of plugins, using the template and creating your own distro project
+is mandatory.
+
+Plugins are configured via the `pyproject.toml` file. Based on this file
+the distro project CI pipeline creates the NOMAD docker image that is used by your installation.
+Only plugins configured in the `pyproject.toml` files, will be installed into the docker
+image and only those plugins installed in the used docker image are available in your
+Oasis.
+
+Please refer to the [template README](https://github.com/FAIRmat-NFDI/nomad-distro-template?tab=readme-ov-file#adding-a-plugin){:target="_blank" rel="noopener"}
+to learn how to add your own plugins.
+
+## Configuring for performance
+
+If you run the OASIS on a single computer, like described here (either with docker or bare
+Linux), you might run into problems with processing large uploads. If the NOMAD worker
+and app are run on the same computer, the app might become unresponsive, when the worker
+consumes all system resources.
+
+By default, the worker container might have as many worker processes as the system as CPU cores.
+In addition, each worker process might spawn additional threads and consume
+more than one CPU core.
+
+There are multiple ways to restrict the worker's resource consumption:
+
+- limit the number of worker processes and thereby lower the number of used cores
+- disable or restrict multithreading
+- limit available CPU utilization of the worker's docker container with docker
+
+### Limit the number of worker processes
+
+The worker uses the Python package celery. Celery can be configured to use less than the
+default number of worker processes (which equals the number of available cores). To use only
+a single core only, you can alter the worker service command in the `docker-compose.yml` and
+add a `--concurrency` argument:
+
+```sh
+python -m celery -A nomad.processing worker -l info --concurrency=1 -Q celery
+```
+
+See also the [celery documentation](https://docs.celeryproject.org/en/stable/userguide/workers.html#id1){:target="_blank" rel="noopener"}.
+
+### Limiting the use of threads
+
+You can also reduce the usable threads that Python packages based on OpenMP could use to
+reduce the threads that might be spawned by a single worker process. Simply set the `OMP_NUM_THREADS`
+environment variable in the worker container in your `docker-compose.yml`:
+
+```yml
+services:
+    worker:
+        ...
+        environment:
+            ...
+            OMP_NUM_THREADS: 1
+```
+
+### Limit CPU with docker
+
+You can add a `deploy.resources.limits` section to the worker service in the `docker-compose.yml`:
+
+```yml
+services:
+    worker:
+        ...
+        deploy:
+            resources:
+                limits:
+                    cpus: '0.50'
+```
+
+The number refers to the percentage use of a single CPU core.
+See also the [docker-compose documentation](https://docs.docker.com/compose/compose-file/compose-file-v3/#resources){:target="_blank" rel="noopener"}.
+
+## Restricting access to your Oasis
+
+An Oasis works exactly the same way the official NOMAD works. It is open and everybody
+can access published data. Everybody with an account can upload data. This might not be
+what you want.
+
+Currently there are three ways to restrict access to your Oasis. First, you do not
+expose the Oasis to the public internet, e.g. you make it only available on an intra-net or
+through a VPN.
+
+Secondly, you can require authentication for all sensitive endpoints by enabling
+the global `require_authentication` flag in your configuration:
+
+```yaml
+oasis:
+    require_authentication: true
+```
+
+Lastly, we offer a simple white-list mechanism. As the Oasis administrator you provide a
+list of accounts as part of your Oasis configuration. To use the Oasis, all users have to
+be logged in and be on your white list of allowed users. To enable white-listing, you
+can provide a list of NOMAD account email addresses in your `nomad.yaml` like this:
+
+```yaml
+oasis:
+    allowed_users:
+        - user1@gmail.com
+        - user2@gmail.com
+```
+
+## User management
+
+### Using the central user management
+
+Our recommendation is to use the central user management provided by nomad-lab.eu. We
+simplified its use and you can use it out-of-the-box. You can even run your system
+from `localhost` (e.g. for initial testing). The central user management system is not
+communicating with your OASIS directly. Therefore, you can run your OASIS without
+exposing it to the public internet.
+
+There are two requirements. First, your users must be able to reach the OASIS. If a user is
+logging in, she/he is redirected to the central user management server and after login,
+she/he is redirected back to the OASIS. These redirects are executed by your user's browser
+and do not require direct communication.
+
+Second, your OASIS must be able to request (via HTTP) the central user management and central NOMAD
+installation. This is necessary for non JWT-based authentication methods and to
+retrieve existing users for data-sharing features.
+
+The central user management will make future synchronizing data between NOMAD installations easier
+and generally recommend to use the central system.
+But in principle, you can also run your own user management. See the section on
+[your own user management](#provide-and-connect-your-own-user-management).
+
+### Provide and connect your own user management
 
 NOMAD uses [keycloak](https://www.keycloak.org/){:target="_blank" rel="noopener"} for its user management. NOMAD uses
 keycloak in two ways. First, the user authentication uses the OpenID Connect/OAuth interfaces provided by keycloak.
@@ -393,6 +396,29 @@ A few notes on the realm configuration:
 - We disabled the https requirement on the default realm for simplicity. You should change
   this for a production system.
 
+## Sharing data through log transfer and data privacy notice
+
+NOMAD includes a *log transfer* functions. When enabled this it automatically collects
+and transfers non-personalized logging data to us. Currently, this functionality is experimental
+and requires opt-in. However, in upcoming versions of NOMAD Oasis, we might change to out-out.
+
+To enable this functionality add `logtransfer.enabled: true` to you `nomad.yaml`.
+
+The service collects log-data and aggregated statistics, such as the number of users or the
+number of uploaded datasets. In any case this data does not personally identify any users or
+contains any uploaded data. All data is in an aggregated and anonymized form.
+
+The data is solely used by the NOMAD developers and FAIRmat, including but not limited to:
+
+- Analyzing and monitoring system performance to identify and resolve issues.
+- Improving our NOMAD software based on usage patterns.
+- Generating aggregated and anonymized reports.
+
+We do not share any collected data with any third parties.
+
+We may update this data privacy notice from time to time to reflect changes in our data practices.
+We encourage you to review this notice periodically for any updates.
+
 ## Further steps
 
 This is an incomplete list of potential things to customize your NOMAD experience.
@@ -401,90 +427,3 @@ This is an incomplete list of potential things to customize your NOMAD experienc
 - Write .yaml based [schemas](../manage/gui/yaml.md) and [ELNs](../manage/gui/elns.md)
 - Learn how to use the [tabular parser](../manage/gui/tabular.md) to manage data from .xls or .csv
 - Add specialized [NORTH tools](../manage/gui/north.md)
-- [Restricting user access](./admin.md#restricting-access-to-your-oasis)
-
-## Troubleshooting
-
-### Time offset between Oasis and the Authentication server
-
-If during login you get an error like: `jwt.exceptions.ImmatureSignatureError: The token is not yet valid (iat)`, it most probably means that there is a time difference between the two machines: the one creating the JWT and the other that is validating it. This causes an error where the authentication server looking at the token thinks that it has not been issued yet.
-
-To fix this problem, you should ensure that the time on the servers is synchronized. It is possible that a network port on one of the servers may be closed, preventing it from synchronizing the time. Note that the servers do not need to be on the same timezone, as internally everything is converted to UTC+0. To check the time on a server, you can on a Linux-based machine use the [`timedatectl`](https://man7.org/linux/man-pages/man8/hwclock.8.html){:target="_blank" rel="noopener"} command which will report both the harware clock and the system clock (see [difference](https://developer.toradex.com/software/linux-resources/linux-features/real-time-clock-rtc-linux/#:~:text=Two%20clocks%20are%20important%20in,maintained%20by%20the%20operating%20system.){:target="_blank" rel="noopener"}). For authentication, the system clocks on the two machines need to be set correctly, but you might also need to correct the hardware clock since it initially sets the system clock upon rebooting the machine.
-
-### NOMAD in networks with restricted Internet access
-
-Some network environments do not allow direct Internet connections, and require the use of an outbound proxy.
-However, NOMAD needs to connect to the central user management or elasticsearch thus requires an active Internet
-connection (at least on Windows) to work.
-In these cases you need to configure docker to use your proxy.
-See details via this link [https://docs.docker.com/network/proxy/](https://docs.docker.com/network/proxy/){:target="_blank" rel="noopener"}.
-An example file `~/.docker/config.json` could look like this.
-
-```json
-{
-  "proxies": {
-    "default": {
-      "httpProxy": "http://<proxy>:<port>",
-      "httpsProxy": "http://<proxy>:<port>",
-      "noProxy": "127.0.0.0/8,elastic,localhost"
-    }
-  }
-}
-```
-
-Since not all used services respect proxy variables, one also has to change the docker compose config file `docker-compose.yaml` for elastic search to:
-
-```yaml hl_lines="7 8"
-elastic:
-  restart: unless-stopped
-  image: elasticsearch:7.17.24
-  container_name: nomad_oasis_elastic
-  environment:
-    - ES_JAVA_OPTS=-Xms512m -Xmx512m
-    - ES_JAVA_OPTS=-Djava.net.useSystemProxies=true
-    - ES_JAVA_OPTS=-Dhttps.proxyHost=<proxy> -Dhttps.proxyPort=port -Dhttps.nonProxyHosts=localhost|127.0.0.1|elastic
-    - discovery.type=single-node
-  volumes:
-    - elastic:/usr/share/elasticsearch/data
-  healthcheck:
-    test:
-      - "CMD"
-      - "curl"
-      - "--fail"
-      - "--silent"
-      - "http://elastic:9200/_cat/health"
-    interval: 10s
-    timeout: 10s
-    retries: 30
-    start_period: 60s
-```
-
-Unfortunately there is no way yet to use the NORTH tools with the central user management, since the jupyterhub spawner does not respect proxy variables.
-It has not been tested yet when using an authentication which does not require the proxy, e.g. a local keycloak server.
-
-If you have issues please contact us on discord n the [oasis channel](https://discord.com/channels/1201445470485106719/1205480348050395136){:target="_blank" rel="noopener"}.
-
-### NOMAD behind a firewall
-
-It is also possible that your docker container is not able to talk to each other.
-This could be due to restrictive settings on your server.
-The firewall shall allow both inbound and outbound HTTP and HTTPS traffic.
-The corresponding rules need to be added.
-Furthermore, inbound traffic needs to be enabled for the port used on the `nginx` service.
-
-In this case you should make sure this test runs through:
-[https://docs.docker.com/network/network-tutorial-standalone/](https://docs.docker.com/network/network-tutorial-standalone/){:target="_blank" rel="noopener"}
-
-If not please contact your server provider for help.
-
-### Elasticsearch and open files limit
-
-Even when run in docker elasticsearch might require you to change your systems resource
-limits as described in the elasticsearch documentation
-[Elasticsearch documentation > setting-system-settings](https://www.elastic.co/guide/en/elasticsearch/reference/current/setting-system-settings.html){:target="_blank" rel="noopener"}.
-
-You can temporarely change the open files limit like this:
-
-```sh
-sudo ulimit -n 65535
-```

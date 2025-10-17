@@ -50,7 +50,7 @@ documentation of all API functions that allows you to try these functions in the
 
 ### Use NOMAD's Python package
 
-Install the [NOMAD Python client library](./pythonlib.md) and use it's `ArchiveQuery`
+Install the [NOMAD Python client library](../../../howto/oasis/install.md#how-to-install-the-nomad-python-library) and use its `ArchiveQuery`
 functionality for a more convenient query based access of archive data following the
 [How-to access the processed data](archive_query.md) guide.
 
@@ -229,7 +229,7 @@ The result will look like this:
 ```
 
 You can work with the results in the given JSON (or respective Python dict/list) data
-already. If you have [NOMAD's Python library](./pythonlib.md) installed, you can take the
+already. If you have [NOMAD's Python library](../../../howto/oasis/install.md#how-to-install-the-nomad-python-library) installed, you can take the
 archive data and use the Python interface. The
 [Python interface](../../plugins/types/schema_packages.md#wrap-data-with-python-schema-classes)
 will help with code-completion (e.g. in notebook environments), resolve archive references
@@ -396,7 +396,7 @@ response = requests.get(
 uploads = response.json()['data']
 ```
 
-If you have the [NOMAD Python package](./pythonlib.md) installed. You can use its `Auth`
+If you have the [NOMAD Python package](../../../howto/oasis/install.md#how-to-install-the-nomad-python-library) installed. You can use its `Auth`
 implementation:
 
 ```py

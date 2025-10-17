@@ -92,7 +92,8 @@ Host a NOMAD Oasis for your lab or institution.
 - [Configure](oasis/configure.md)
 - [Deploy](oasis/deploy.md)
 - [Update](oasis/update.md)
-- [Administer](oasis/admin.md)
+- [Administer](oasis/administer.md)
+- [Troubleshoot](oasis/troubleshoot.md)
 
 </div>
 

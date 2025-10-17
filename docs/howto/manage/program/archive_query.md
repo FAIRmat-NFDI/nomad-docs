@@ -7,7 +7,7 @@ based on the schema rather than plain JSON. See also this guide on using
 to work with processed data.
 
 As a requirement, you have to install the `nomad-lab` Python package. Follow the
-[How to install nomad-lab](pythonlib.md) guide.
+[How to install NOMAD Python library](../../../howto/oasis/install.md#how-to-install-the-nomad-python-library) guide.
 
 ## Getting started
 
