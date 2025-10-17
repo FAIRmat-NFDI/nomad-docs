@@ -16,8 +16,7 @@ Once you have created a distribution, you can proceed to learning more about the
 
 !!! note
 
-    If you are installing a NOMAD Oasis, please
-    [register your Oasis with FAIRmat](https://nomad-lab.eu/fairdi/keycloak/auth/realms/nomad-oasis/protocol/openid-connect/registrations?client_id=account&scope=openid%20profile&redirect_uri=https%3A%2F%2Fnomad-lab.eu%2Fnomad-lab%2Fnomad-oasis-registration.html&response_type=code){:target="_blank" rel="noopener"}. This allows us to contact you for important updates and helps us keep track of the number and location of installations.
+    If you are installing a NOMAD Oasis, please <a href="https://nomad-lab.eu/fairdi/keycloak/auth/realms/nomad-oasis/protocol/openid-connect/registrations?client_id=account&scope=openid%20profile&redirect_uri=https%3A%2F%2Fnomad-lab.eu%2Fnomad-lab%2Fnomad-oasis-registration.html&response_type=code" target="_blank" rel="noopener">register your Oasis with FAIRmat</a>. This allows us to contact you for important updates and helps us keep track of the number and location of installations.
 
 ## How to install the NOMAD Python Library
 
@@ -26,7 +25,7 @@ including the API, CLI, upload processing routines etc. This Python package is i
 automatically as part of a NOMAD Oasis, but you can optionally install and use it as a
 stand-alone library for tasks like parsing or programmatic data querying.
 
-You can install the latest stable version from [PyPI](https://pypi.org/project/nomad-lab/){:target="_blank"}:
+You can install the latest stable version from <a href="https://pypi.org/project/nomad-lab/" target="_blank" rel="noopener">PyPI</a>:
 
 ```bash
 pip install nomad-lab
