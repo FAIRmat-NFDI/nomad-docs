@@ -2,7 +2,7 @@
 
 ## Software versions
 
-In order to update your Oasis to a newer software version, you usually should follow the [update guide in the distribution template](https://github.com/FAIRmat-NFDI/nomad-distro-template?tab=readme-ov-file#updating-the-distribution-from-the-template). This makes sure that you get both the most recent version of the configuration files, and the `nomad-lab` Python package.
+In order to update your Oasis to a newer software version, you usually should follow the <a href="https://github.com/FAIRmat-NFDI/nomad-distro-template?tab=readme-ov-file#updating-the-distribution-from-the-template" target="_blank" rel="noopener">update guide in the distribution template</a>. This makes sure that you get both the most recent version of the configuration files, and the `nomad-lab` Python package.
 
 You may also only update the `nomad-lab` Python package in your distribution by doing the following changes in the `pyproject.toml` file:
 

@@ -4,11 +4,11 @@ NOMAD software is Open-Source, and everybody can run it. A self-hosted instance 
 
 The entire setup for a running a NOMAD Oasis is contained in a Git repository, and is called a [*NOMAD distribution*](../../reference/glossary.md#distribution-distro). We provide different distribution templates to help you get started:
 
-1. [**NOMAD distribution for production**](https://github.com/FAIRmat-NFDI/nomad-distro-template/)
+1. **<a href="https://github.com/FAIRmat-NFDI/nomad-distro-template/" target="_blank" rel="noopener">NOMAD distribution for production</a>**
 
     For installing a production-ready, self-hosted NOMAD Oasis for research groups or institutions.
 
-2. [**NOMAD distribution for development**](https://github.com/FAIRmat-NFDI/nomad-distro-dev)
+2. **<a href="https://github.com/FAIRmat-NFDI/nomad-distro-dev/" target="_blank" rel="noopener">NOMAD distribution for development</a>**
 
     Specialized template that allows for a much faster development cycle. This is targeted for plugin developers, Oasis administrators and for developing the `nomad-lab` package. Should not be used in production.
 
