@@ -195,7 +195,6 @@ Oasis.
 Please refer to the [template README](https://github.com/FAIRmat-NFDI/nomad-distro-template?tab=readme-ov-file#adding-a-plugin){:target="_blank" rel="noopener"}
 to learn how to add your own plugins.
 
-
 ## Configuring for performance
 
 If you run the OASIS on a single computer, like described here (either with docker or bare
@@ -311,7 +310,6 @@ The central user management will make future synchronizing data between NOMAD in
 and generally recommend to use the central system.
 But in principle, you can also run your own user management. See the section on
 [your own user management](#provide-and-connect-your-own-user-management).
-
 
 ### Provide and connect your own user management
 
@@ -429,4 +427,4 @@ This is an incomplete list of potential things to customize your NOMAD experienc
 - Write .yaml based [schemas](../manage/gui/yaml.md) and [ELNs](../manage/gui/elns.md)
 - Learn how to use the [tabular parser](../manage/gui/tabular.md) to manage data from .xls or .csv
 - Add specialized [NORTH tools](../manage/gui/north.md)
-- [Restricting user access](./admin.md#restricting-access-to-your-oasis)
+- [Restricting user access](./administer.md#restricting-access-to-your-oasis)

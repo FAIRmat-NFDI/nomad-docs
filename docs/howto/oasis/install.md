@@ -47,5 +47,3 @@ pip install nomad-lab[dev]            # Contains development tools (pytest, pyli
 ```
 
 The `nomad-lab` package and it's dependencies can run natively on Linux, Windows and MacOS.
-
---- 
