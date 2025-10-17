@@ -46,4 +46,4 @@ pip install nomad-lab[infrastructure] # For running the NOMAD infrastructure
 pip install nomad-lab[dev]            # Contains development tools (pytest, pylint, mypy)
 ```
 
-The `nomad-lab` package and it's dependencies can run natively on Linux, Windows and MacOS.
+The `nomad-lab` package and it's dependencies can run natively on Linux, Windows and macOS.
