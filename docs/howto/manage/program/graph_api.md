@@ -978,6 +978,328 @@ Every resolution/redirection is counted as one level.
 }
 ```
 
+## Accessing Definitions
+
+### Basic Usage
+
+The NOMAD archives are collections of sections, each would have its schema/definition.
+One may also want to access the corresponding definition to properly interpret the data.
+To illustrate, we use the following sample archive with custom definition as an example.
+
+```yaml
+---
+definitions:
+  name: test_package_name
+  section_definitions:
+  - name: MySection
+    base_sections:
+    - nomad.datamodel.data.EntryData
+    quantities:
+    - name: my_quantity
+      type:
+        type_kind: python
+        type_data: str
+data:
+  m_def: "#/definitions/section_definitions/0"
+  my_quantity: test_value
+```
+
+A normal query would return the `my_quantity`.
+
+```json
+// query
+{
+   "entries":{
+      "nBdYMQg4mFQED_q2QrKa8HYcGDyO":{
+         "archive":{
+            "data":{
+               "m_request":{
+                  "directive":"plain"
+               }
+            }
+         }
+      }
+   }
+}
+// response
+{
+  "entries": {
+    "nBdYMQg4mFQED_q2QrKa8HYcGDyO": {
+      "archive": {
+        "data": {
+          "my_quantity": "test_value"
+        }
+      }
+    }
+  }
+}
+```
+
+At the section level, one can use the special token `m_def` to access the corresponding definition.
+
+```json hl_lines="6-10"
+{
+   "entries":{
+      "nBdYMQg4mFQED_q2QrKa8HYcGDyO":{
+         "archive":{
+            "data":{
+               "m_def":{
+                  "m_request":{
+                     "directive":"plain"
+                  }
+               },
+               "m_request":{
+                  "directive":"plain"
+               }
+            }
+         }
+      }
+   }
+}
+```
+
+The response would contain the definition.
+
+```json hl_lines="7-27,38-41"
+{
+   "uploads":{
+      "rcPhsTllSDSYTxuON7MA-w":{
+         "entries":{
+            "nBdYMQg4mFQED_q2QrKa8HYcGDyO":{
+               "archive":{
+                  "definitions":{
+                     "section_definitions":[
+                        {
+                           "name":"MySection",
+                           "base_sections":[
+                              "metainfo/nomad.datamodel.data/section_definitions/1"
+                           ],
+                           "quantities":[
+                              {
+                                 "name":"my_quantity",
+                                 "type":{
+                                    "type_kind":"python",
+                                    "type_data":"str"
+                                 },
+                                 "definition_id":"f0c41723ff303e23ad57d2ea032181f1ccf3518c"
+                              }
+                           ],
+                           "definition_id":"c8722ec48248a465c28bd7511ddfad08969b1e9b"
+                        }
+                     ]
+                  }
+               }
+            }
+         }
+      }
+   },
+   "entries":{
+      "nBdYMQg4mFQED_q2QrKa8HYcGDyO":{
+         "archive":{
+            "data":{
+               "my_quantity":"test_value",
+               "m_def":{
+                  "m_def":"uploads/rcPhsTllSDSYTxuON7MA-w/entries/nBdYMQg4mFQED_q2QrKa8HYcGDyO/archive/definitions/section_definitions/0",
+                  "m_def_id":"c8722ec48248a465c28bd7511ddfad08969b1e9b"
+               }
+            }
+         }
+      }
+   }
+}
+```
+
+The definition of any section can also be deemed as a tree-like structure thus can be traversed.
+By default, four lists: `extending_sections`, `base_sections`, `sub_sections` and `quantities` will be returned.
+In this particular example, only `base_sections` and `quantities` are non-empty, the other two are empty thus skipped.
+
+Just like traversing data tree, it is possible to get whatever information available in the section definition.
+For example, there is a list storing all base sections of the current section, named as `all_base_sections`, one can use the following to get it.
+
+```json hl_lines="10-14"
+{
+   "entries":{
+      "nBdYMQg4mFQED_q2QrKa8HYcGDyO":{
+         "archive":{
+            "data":{
+               "m_def":{
+                  "m_request":{
+                     "directive":"plain"
+                  },
+                  "all_base_sections":{
+                     "m_request":{
+                        "directive":"plain"
+                     }
+                  }
+               },
+               "m_request":{
+                  "directive":"plain"
+               }
+            }
+         }
+      }
+   }
+}
+```
+
+The response would contain the corresponding list as follows.
+In principle, the default four lists should be sufficient for general usage.
+Advanced users can retrieve rich information with a priori knowledge of the detailed structure of NOMAD metainfo system.
+
+```json hl_lines="25-28"
+{
+   "uploads":{
+      "rcPhsTllSDSYTxuON7MA-w":{
+         "entries":{
+            "nBdYMQg4mFQED_q2QrKa8HYcGDyO":{
+               "archive":{
+                  "definitions":{
+                     "section_definitions":[
+                        {
+                           "name":"MySection",
+                           "base_sections":[
+                              "metainfo/nomad.datamodel.data/section_definitions/1"
+                           ],
+                           "quantities":[
+                              {
+                                 "name":"my_quantity",
+                                 "type":{
+                                    "type_kind":"python",
+                                    "type_data":"str"
+                                 },
+                                 "definition_id":"f0c41723ff303e23ad57d2ea032181f1ccf3518c"
+                              }
+                           ],
+                           "definition_id":"c8722ec48248a465c28bd7511ddfad08969b1e9b",
+                           "all_base_sections":[
+                              "metainfo/nomad.datamodel.data/section_definitions/0",
+                              "metainfo/nomad.datamodel.data/section_definitions/1"
+                           ]
+                        }
+                     ]
+                  }
+               }
+            }
+         }
+      }
+   },
+   "entries":{
+      "nBdYMQg4mFQED_q2QrKa8HYcGDyO":{
+         "archive":{
+            "data":{
+               "my_quantity":"test_value",
+               "m_def":{
+                  "m_def":"uploads/rcPhsTllSDSYTxuON7MA-w/entries/nBdYMQg4mFQED_q2QrKa8HYcGDyO/archive/definitions/section_definitions/0",
+                  "m_def_id":"c8722ec48248a465c28bd7511ddfad08969b1e9b"
+               }
+            }
+         }
+      }
+   }
+}
+```
+
+### Resolve Dependencies
+
+The definition often contain other definitions, especially in lists `extending_sections` and `base_sections`.
+Those are nothing but references to other sections, to further get information of those dependencies, one can use the `resolved` instead of `plain` and use `depth` or `resolve_depth` to control how deep to go.
+
+```json hl_lines="8-9"
+{
+   "entries":{
+      "nBdYMQg4mFQED_q2QrKa8HYcGDyO":{
+         "archive":{
+            "data":{
+               "m_def":{
+                  "m_request":{
+                     "directive":"resolved",
+                     "depth":1
+                  }
+               },
+               "m_request":{
+                  "directive":"plain"
+               }
+            }
+         }
+      }
+   }
+}
+```
+
+The response resolves one level deep and returns, as a result, `EntryData` is returned under the path `metainfo/nomad.datamodel.data/section_definitions/1`.
+But it's dependency `metainfo/nomad.datamodel.data/section_definitions/0` is not returned.
+
+```json hl_lines="12,36-44"
+{
+   "uploads":{
+      "rcPhsTllSDSYTxuON7MA-w":{
+         "entries":{
+            "nBdYMQg4mFQED_q2QrKa8HYcGDyO":{
+               "archive":{
+                  "definitions":{
+                     "section_definitions":[
+                        {
+                           "name":"MySection",
+                           "base_sections":[
+                              "metainfo/nomad.datamodel.data/section_definitions/1"
+                           ],
+                           "quantities":[
+                              {
+                                 "name":"my_quantity",
+                                 "type":{
+                                    "type_kind":"python",
+                                    "type_data":"str"
+                                 },
+                                 "definition_id":"f0c41723ff303e23ad57d2ea032181f1ccf3518c"
+                              }
+                           ],
+                           "definition_id":"c8722ec48248a465c28bd7511ddfad08969b1e9b"
+                        }
+                     ]
+                  }
+               }
+            }
+         }
+      }
+   },
+   "metainfo":{
+      "nomad.datamodel.data":{
+         "section_definitions":[
+            null,
+            {
+               "name":"EntryData",
+               "description":"An empty base section definition. This can be used to add new top-level sections to an entry.",
+               "base_sections":[
+                  "metainfo/nomad.datamodel.data/section_definitions/0"
+               ],
+               "definition_id":"486f476f18785f5f4bcbac10db7304d7de35636b"
+            }
+         ]
+      }
+   },
+   "entries":{
+      "nBdYMQg4mFQED_q2QrKa8HYcGDyO":{
+         "archive":{
+            "data":{
+               "my_quantity":"test_value",
+               "m_def":{
+                  "m_def":"uploads/rcPhsTllSDSYTxuON7MA-w/entries/nBdYMQg4mFQED_q2QrKa8HYcGDyO/archive/definitions/section_definitions/0",
+                  "m_def_id":"c8722ec48248a465c28bd7511ddfad08969b1e9b"
+               }
+            }
+         }
+      }
+   }
+}
+```
+
+### Useful Settings
+
+The `include` and `exclude` patterns can also be used in fetching definitions, however, they now apply to package names.
+
+There is a flag `export_whole_package` that can be set to true under any section so that the corresponding package (that contains the target section) will be exported as a whole.
+This could be convenient in some use cases.
+
 ## Miscellaneous Functionalities
 
 Apart from the core functionalities that cover MongoDB database and archive data, there are additional resources that can be fetched.
