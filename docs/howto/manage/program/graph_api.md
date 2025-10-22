@@ -1060,7 +1060,7 @@ At the section level, one can use the special token `m_def` to access the corres
 
 The response would contain the definition.
 
-```json hl_lines="7-27,38-41"
+```json hl_lines="7-27 38-41"
 {
    "uploads":{
       "rcPhsTllSDSYTxuON7MA-w":{
@@ -1229,7 +1229,7 @@ Those are nothing but references to other sections, to further get information o
 The response resolves one level deep and returns, as a result, `EntryData` is returned under the path `metainfo/nomad.datamodel.data/section_definitions/1`.
 But it's dependency `metainfo/nomad.datamodel.data/section_definitions/0` is not returned.
 
-```json hl_lines="12,36-44"
+```json hl_lines="12 36-44"
 {
    "uploads":{
       "rcPhsTllSDSYTxuON7MA-w":{
