@@ -1110,8 +1110,8 @@ The response would contain the definition.
 ```
 
 The definition of any section can also be deemed as a tree-like structure thus can be traversed.
-By default, four lists: `extending_sections`, `base_sections`, `sub_sections` and `quantities` will be returned.
-In this particular example, only `base_sections` and `quantities` are non-empty, the other two are empty thus skipped.
+By default, three lists: `base_sections`, `sub_sections` and `quantities` will be returned.
+In this particular example, only `base_sections` and `quantities` are non-empty, the other is empty thus skipped.
 
 Just like traversing data tree, it is possible to get whatever information available in the section definition.
 For example, there is a list storing all base sections of the current section, named as `all_base_sections`, one can use the following to get it.
@@ -1201,7 +1201,7 @@ Advanced users can retrieve rich information with a priori knowledge of the deta
 
 ### Resolve Dependencies
 
-The definition often contain other definitions, especially in lists `extending_sections` and `base_sections`.
+The definition often contain other definitions, especially in `base_sections`.
 Those are nothing but references to other sections, to further get information of those dependencies, one can use the `resolved` instead of `plain` and use `depth` or `resolve_depth` to control how deep to go.
 
 ```json hl_lines="8-9"
