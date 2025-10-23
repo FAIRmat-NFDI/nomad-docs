@@ -225,8 +225,8 @@ services:
     deploy:
       replicas: 4  # default value; adjust based on your system capacity
 ```
-Each replica runs as an independent worker process. Docker will handle restarting and load balancing between them.
 
+Each replica runs as an independent worker process. Docker will handle restarting and load balancing between them.
 
 ### Adjust the Number of Worker Processes (Advanced Option)
 
