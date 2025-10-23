@@ -202,28 +202,44 @@ Linux), you might run into problems with processing large uploads. If the NOMAD 
 and app are run on the same computer, the app might become unresponsive, when the worker
 consumes all system resources.
 
-By default, the worker container might have as many worker processes as the system as CPU cores.
-In addition, each worker process might spawn additional threads and consume
-more than one CPU core.
+By default, the Temporal-based worker setup uses a single process per container. The default deployment template defines **4 replicas** of the worker container, allowing multiple uploads and tasks to be processed in parallel. Depending on your machine and workload, you may want to adjust how many replicas are running and how much CPU and memory they are allowed to use.
 
-There are multiple ways to restrict the worker's resource consumption:
+There are several ways to control resource usage and improve performance:
 
-- limit the number of worker processes and thereby lower the number of used cores
-- disable or restrict multithreading
-- limit available CPU utilization of the worker's docker container with docker
+- Increase or decrease the number of worker **replicas** (recommended)
+- Adjust CPU and memory limits in Docker
+- (Optionally) Increase the number of worker **processes** on the Python side
 
-### Limit the number of worker processes
+---
 
-The worker uses the Python package celery. Celery can be configured to use less than the
-default number of worker processes (which equals the number of available cores). To use only
-a single core only, you can alter the worker service command in the `docker-compose.yml` and
-add a `--concurrency` argument:
+### Increase the Number of Worker Replicas (Recommended)
 
-```sh
-python -m celery -A nomad.processing worker -l info --concurrency=1 -Q celery
+The most robust way to scale worker performance is by changing the number of replicas for the worker container. This ensures that multiple worker instances can process tasks in parallel and that they are properly managed and restarted if one fails.
+
+In your `docker-compose.yml`, you can modify the worker service like this:
+
+```yml
+services:
+  worker:
+    ...
+    deploy:
+      replicas: 4  # default value; adjust based on your system capacity
 ```
 
-See also the [celery documentation](https://docs.celeryproject.org/en/stable/userguide/workers.html#id1){:target="_blank" rel="noopener"}.
+Each replica runs as an independent worker process. Docker will handle restarting and load balancing between them.
+
+### Adjust the Number of Worker Processes (Advanced Option)
+
+If necessary, you can also increase the number of processes within each worker container by modifying the worker command in your docker-compose.yml:
+
+```yml
+services:
+  worker:
+    ...
+    command: python -m nomad.cli admin run action-internal-worker --workers 4
+```
+
+This will run multiple worker processes within a single container. However, this approach is less robust than scaling via replicas, as process-level management (e.g., restarting if one worker crashes) is handled less effectively inside a single container.
 
 ### Limiting the use of threads
 
