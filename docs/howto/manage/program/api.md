@@ -419,7 +419,7 @@ operations.
 
 If the short-term expiration of the default *access token* does not suit your needs,
 you can request an *app token* with a user-defined expiration. For example, you can
-send the GET request `/auth/app_token?expires_in=86400` together with some way of
+send the POST request `/auth/app_token?expires_in=86400` together with some way of
 authentication, e.g. header `Authorization: Bearer <access token>`. The API will return
 an app token, which is valid for 24 hours in subsequent request headers with the format
 `Authorization: Bearer <app token>`. The request will be declined if the expiration is
