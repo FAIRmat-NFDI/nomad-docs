@@ -501,6 +501,7 @@ For secrets that are specific to an individual user, such as a personal API key,
 Here is an example of how to use `SecretStr` in an action's input model:
 
 **nomad_example/actions/myaction/models.py**
+
 ```python
 from pydantic import BaseModel, Field, SecretStr
 
@@ -512,6 +513,7 @@ class MyActionInput(BaseModel):
 When a user triggers the action, they will be prompted to enter their API key. The key will be encrypted and stored securely. You can then access the secret in your action's code by calling the `get_secret_value()` method:
 
 **nomad_example/actions/myaction/activities.py**
+
 ```python
 from temporalio import activity
 from nomad_example.actions.myaction.models import MyActionInput
@@ -571,11 +573,13 @@ To run actions locally, you first need to update your fork of the `nomad-distro-
 Once your fork is up-to-date, you can run the workers using the following commands:
 
 To run the CPU worker:
+
 ```bash
 uv run poe cpuworker
 ```
 
 To run the GPU worker:
+
 ```bash
 uv run poe gpuworker
 ```
