@@ -18,7 +18,6 @@ Use NOMAD to manage, explore, and analyze data.
 
 - [Upload and publish data for supported formats](manage/gui/upload.md)
 - [Enter data with ELNs](manage/gui/eln.md)
-- [Explore data](manage/gui/explore.md)
 - [Analyze data in NORTH](manage/gui/north.md)
 - [Create custom workflows](manage/gui/workflows.md)
 - [Write a YAML schema package](manage/gui/yaml.md)
