@@ -21,7 +21,6 @@ nav:
           - With the GUI:
               - Upload and publish data: howto/manage/gui/upload.md
               - Enter data with ELNs: howto/manage/gui/eln.md
-              - Explore data: howto/manage/gui/explore.md
               - Analyze data in NORTH: howto/manage/gui/north.md # TODO rename depending on how-to content
               - Create custom workflows: howto/manage/gui/workflows.md
               - Write a YAML schema package: howto/manage/gui/yaml.md # TODO consolidate with parts of the next 2 pages
