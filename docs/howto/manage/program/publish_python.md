@@ -27,7 +27,7 @@ def get_authentication_token(nomad_url, username, password):
     '''Get the token for accessing your NOMAD unpublished uploads remotely'''
     try:
         response = requests.get(
-            nomad_url + 'auth/token', params=dict(username=username, password=password), timeout=10)
+            nomad_url + 'auth/token', params=dict(username=username, password=password, grant_type='password'), timeout=10)
         token = response.json().get('access_token')
         if token:
             return token

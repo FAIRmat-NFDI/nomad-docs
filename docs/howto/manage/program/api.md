@@ -376,7 +376,7 @@ Most of the API operations do not require any authorization and can be freely us
 without a user or credentials. However, to upload, edit, or view your own and potentially
 unpublished data, the API needs to authenticate you.
 
-The NOMAD API uses OAuth and tokens to authenticate users. We provide simple operations
+The NOMAD API uses OAuth2 and tokens to authenticate users. We provide simple operations
 that allow you to acquire an *access token* via username and password:
 
 ```py
@@ -386,7 +386,11 @@ import requests
 
 response = requests.post(
     '{{ nomad_url() }}/v1/auth/token',
-    data={'username': os.getenv('NOMAD_USERNAME'), 'password': os.getenv('NOMAD_PASSWORD')},
+    data={
+        'username': os.getenv('NOMAD_USERNAME'),
+        'password': os.getenv('NOMAD_PASSWORD'),
+        'grant_type': 'password',
+    },
 )
 token = response.json()['access_token']
 
