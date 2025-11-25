@@ -118,12 +118,6 @@ The second best format is SVG. SVG files scale to different resolutions, produce
 
 When other options are not suitable, the preferred raster image format is JPG.
 
-## Repo Organization
-
-**Keep the navigation structure.** The location of docs .md files should mirror the navigation bar, with subfolders named after the organizational subsections of the bar.
-
-**Images and data.** All assets specific to an individual markdown file should be stored within an immediate sub-directory of the file, labeled accordingly. Please use `images/` and `data/` for the image and data files, respectively. Sharing assets between .md files in different locations is currently not allowed. If there is an exceptional case, please create a GithHub issue and tag a relevant maintainer.
-
 ### Adding image sliders
 
 Image sliders can be added using the following syntax:
@@ -141,3 +135,9 @@ Image sliders can be added using the following syntax:
 To minimize flickering effect during transitions, make all the sliding images of the same size. <!-- we may need to fix this issue from Java or CSS at some point -->
 
 If you use more than one slider on the same page, make sure to give them different id. The same applies for the navigation arrows.
+
+## Repo Organization
+
+**Keep the navigation structure.** The location of docs .md files should mirror the navigation bar, with subfolders named after the organizational subsections of the bar.
+
+**Images and data.** All assets specific to an individual markdown file should be stored within an immediate sub-directory of the file, labeled accordingly. Please use `images/` and `data/` for the image and data files, respectively. Sharing assets between .md files in different locations is currently not allowed. If there is an exceptional case, please create a GithHub issue and tag a relevant maintainer.
