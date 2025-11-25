@@ -97,7 +97,7 @@ If you would like to propose a standard extension, create an issue with your sug
 
 Images should be used sparingly. Each image that is added should be seen as a costly investment: keeping images up-to-date is very hard when thinking long-term upkeep of the documentation.
 
-Images that can be represented in code should be preferred. The docs support [Mermaid](), and you can add mermaid images inside markdown with:
+Images that can be represented in code should be preferred. The docs support [Mermaid](https://mermaid.js.org/){:target="_blank" rel="noopener"}, and you can add mermaid images inside markdown with:
 
 ````md
 <figure markdown style="width: 100%">
@@ -114,7 +114,7 @@ Images that can be represented in code should be preferred. The docs support [Me
 </figure>
 ````
 
-The second best format is SVG. SVG files scale to different resolutions, produces small file sizes, and are easy to modify later. It is recommended to use [draw.io](https://www.drawio.com/) to produce any complex diagrams, and then export them in the SVG format using the "Include a copy of my diagram" option which allows for easy editing later.
+The second best format is SVG. SVG files scale to different resolutions, produces small file sizes, and are easy to modify later. It is recommended to use [draw.io](https://www.drawio.com/){:target="_blank" rel="noopener"} to produce any complex diagrams, and then export them in the SVG format using the "Include a copy of my diagram" option which allows for easy editing later.
 
 When other options are not suitable, the preferred raster image format is JPG.
 
