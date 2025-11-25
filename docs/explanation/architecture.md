@@ -1,10 +1,10 @@
 # Architecture
 
-## A containerized cloud enabled architecture
+## A containerized, cloud-enabled architecture
 
 NOMAD is a modern web-application that requires a lot of services to run. Some are
 NOMAD specific, others are 3rd party products. While all services can be traditionally
-installed and run on a single sever, NOMAD advocates the use of containers and operating
+installed and run on a single server, NOMAD advocates the use of containers and operating
 NOMAD in a cloud environment.
 
 <figure markdown>
@@ -19,11 +19,11 @@ separation allows to scale the system for various use-cases.
 
 Other services are:
 
-- Proxy (nginx): Proxy that directs traffic
+- Proxy (nginx): Directs external traffic to the right service
 - Authentication (Keycloak): Our SSO user management system (can be used by all Oasises)
 - Remote tools (JupyterHub): Used to run NOMAD Remote Tools Hub (NORTH)
-- Search engine (Elasticsearch): A no-sql database and search engine that drives our search
-- Database (MongoDB): A no-sql database used to maintain processing state and user-metadata
+- Search engine (Elasticsearch): NoSQL database and search engine that drives our search
+- Database (MongoDB): NoSQL database used to maintain processing state and user-metadata
 - Filesystem: A regular file system to maintain all the files (*raw* and *archive*)
 
 All NOMAD software is bundled in a single NOMAD docker image and a Python package
