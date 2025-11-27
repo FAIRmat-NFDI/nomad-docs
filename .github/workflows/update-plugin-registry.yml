@@ -1,0 +1,74 @@
+name: Update Plugin Registry
+
+on:
+  schedule:
+    # Run on the 1st of every month at 00:00 UTC
+    - cron: '0 0 1 * *'
+  workflow_dispatch:
+    # Allow manual triggering of the workflow
+  push:
+    branches:
+      - main
+    paths:
+      - 'scripts/generate_plugin_registry.py'
+      - '.github/workflows/update-plugin-registry.yml'
+
+env:
+  UV_VERSION: 0.6
+  PYTHON_VERSION: 3.12
+
+jobs:
+  update-registry:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: ${{ env.UV_VERSION }}
+
+      - name: Generate Plugin Registry
+        run: |
+          uv run \
+            --with requests \
+            python scripts/generate_plugin_registry.py
+
+      - name: Check for changes
+        id: check_changes
+        run: |
+          if git diff --quiet docs/examples/plugin_registry.md; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Commit and push if changed
+        if: steps.check_changes.outputs.changed == 'true'
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add docs/examples/plugin_registry.md
+          git commit -m "docs: update plugin registry [automated]"
+          git push
+
+      - name: Create Pull Request (if on schedule)
+        if: github.event_name == 'schedule' && steps.check_changes.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "docs: update plugin registry [automated]"
+          title: "Update Plugin Registry"
+          body: |
+            Automated update of the plugin registry page.
+
+            This PR was automatically created by the scheduled workflow.
+
+            Please review the changes and merge if everything looks correct.
+          branch: automated-plugin-registry-update
+          delete-branch: true

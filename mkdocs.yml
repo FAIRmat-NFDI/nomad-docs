@@ -65,6 +65,7 @@ nav:
           - Make a release: howto/develop/release.md
   - Domain-specific examples: # TODO decide uniform structure for navigation to plugins/plugin-docs
       - Overview: examples/overview.md
+      - Plugin Registry: examples/plugin_registry.md
       - Computational data:
           - Basics: examples/computational_data/basics.md
           - MetaInfo: examples/computational_data/metainfo.md
