@@ -159,7 +159,7 @@ The following command can be used to install NOMAD.
     uv pip install -e .[infrastructure,dev] -c requirements-dev.txt
     ```
 
-    Install "default" plugins. TODO: This can be removed once we have proper proper distribution
+    Install "default" plugins. TODO: This can be removed once we have proper distribution
     ```shell
     uv pip install -r requirements-plugins.txt
     ```
