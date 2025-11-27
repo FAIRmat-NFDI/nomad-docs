@@ -7,11 +7,11 @@ In order to update your Oasis to a newer software version, you usually should fo
 You may also only update the `nomad-lab` Python package in your distribution by doing the following changes in the `pyproject.toml` file:
 
 ```toml
-[project] 
+[project]
 ...
-dependencies = ["nomad-lab[parsing, infrastructure]==<version-number>"]
+dependencies = ["nomad-lab[infrastructure]==<version-number>"]
 ...
-dev = ["nomad-lab[parsing, infrastructure, dev]==<version-number>"]
+dev = ["nomad-lab[infrastructure, dev]==<version-number>"]
 ...
 ```
 
