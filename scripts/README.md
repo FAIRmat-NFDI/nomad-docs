@@ -4,7 +4,7 @@ This directory contains scripts for automating documentation tasks.
 
 ## generate_plugin_registry.py
 
-Automatically generates the [Plugin Registry](../docs/examples/plugin_registry.md) page by querying the NOMAD API for all plugins owned by the FAIRmat-NFDI GitHub organization.
+Automatically generates the [Plugin Registry](../docs/examples/plugin_registry.md) page by querying the NOMAD API for all plugins owned by the FAIRmat-NFDI and nomad-coe GitHub organizations.
 
 ### Features
 
@@ -50,10 +50,10 @@ The workflow will:
 
 ### Configuration
 
-To change the GitHub organization being queried, modify the `GITHUB_ORG` constant in the script:
+To change the GitHub organizations being queried, modify the `GITHUB_ORGS` list in the script:
 
 ```python
-GITHUB_ORG = "FAIRmat-NFDI"  # Change this to query different organizations
+GITHUB_ORGS = ["FAIRmat-NFDI", "nomad-coe"]  # Add or remove organizations as needed
 ```
 
 To change the NOMAD API endpoint (e.g., for different deployments):

@@ -15,10 +15,10 @@ import requests
 
 
 NOMAD_API_URL = "https://nomad-lab.eu/prod/v1/oasis/api/v1"
-GITHUB_ORG = "FAIRmat-NFDI"
+GITHUB_ORGS = ["FAIRmat-NFDI", "nomad-coe"]
 
 
-def query_plugins(owner_filter: str = GITHUB_ORG) -> list[dict[str, Any]]:
+def query_plugins(owner_filter: str) -> list[dict[str, Any]]:
     """
     Query NOMAD API for all plugins owned by the specified GitHub organization.
 
@@ -323,8 +323,9 @@ def generate_registry_page(plugins: list[dict[str, Any]], output_path: Path) -> 
     page_content = []
     page_content.append("# NOMAD Plugin Registry")
     page_content.append("")
+    orgs_str = " and ".join([f"**{org}**" for org in GITHUB_ORGS])
     page_content.append(
-        f"This page provides an overview of all NOMAD plugins maintained by the **{GITHUB_ORG}** organization."
+        f"This page provides an overview of all NOMAD plugins maintained by the {orgs_str} organizations."
     )
     page_content.append("")
     page_content.append(
@@ -366,10 +367,11 @@ def generate_registry_page(plugins: list[dict[str, Any]], output_path: Path) -> 
     page_content.append("")
     page_content.append('!!! info "About this page"')
     page_content.append(
-        "    This page is automatically generated from the NOMAD API and updated weekly."
+        "    This page is automatically generated from the NOMAD API and updated monthly."
     )
+    orgs_list = ", ".join(GITHUB_ORGS)
     page_content.append(
-        f"    The data includes all plugins owned by the {GITHUB_ORG} GitHub organization."
+        f"    The data includes all plugins owned by the {orgs_list} GitHub organizations."
     )
     page_content.append(
         "    For more information about NOMAD plugins, see the [plugin documentation](../howto/plugins/plugins.md)."
@@ -389,24 +391,37 @@ def main():
     docs_dir = script_dir.parent / "docs" / "examples"
     output_path = docs_dir / "plugin_registry.md"
 
-    # Query plugins
-    plugins = query_plugins(GITHUB_ORG)
+    # Query plugins from all organizations
+    all_plugins = []
+    for org in GITHUB_ORGS:
+        plugins = query_plugins(org)
+        all_plugins.extend(plugins)
 
-    if not plugins:
+    if not all_plugins:
         print("Warning: No plugins found!")
         # Still generate the page with a message
+        orgs_list = ", ".join(GITHUB_ORGS)
         output_path.write_text(
             "# NOMAD Plugin Registry\n\n"
-            f"No plugins found for organization: {GITHUB_ORG}\n\n"
+            f"No plugins found for organizations: {orgs_list}\n\n"
             f"Last checked: {datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')}\n",
             encoding="utf-8",
         )
         return
 
-    # Generate the registry page
-    generate_registry_page(plugins, output_path)
+    # Remove duplicates based on plugin name (in case same plugin appears in multiple orgs)
+    seen_names = set()
+    unique_plugins = []
+    for plugin in all_plugins:
+        plugin_name = plugin.get("data", {}).get("name", "")
+        if plugin_name and plugin_name not in seen_names:
+            seen_names.add(plugin_name)
+            unique_plugins.append(plugin)
 
-    print(f"Successfully generated plugin registry with {len(plugins)} plugins")
+    # Generate the registry page
+    generate_registry_page(unique_plugins, output_path)
+
+    print(f"Successfully generated plugin registry with {len(unique_plugins)} plugins (from {len(all_plugins)} total entries)")
 
 
 if __name__ == "__main__":
