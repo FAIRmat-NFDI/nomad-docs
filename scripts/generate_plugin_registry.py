@@ -244,7 +244,7 @@ def generate_detailed_list(plugins: list[dict[str, Any]]) -> str:
             )
 
         markdown.append(f"**Owner:** {plugin['owner']}")
-        markdown.append(f"**Stars:** ⭐ {plugin['stars']}")
+        markdown.append(f"**Stars:** {plugin['stars']}")
         markdown.append(f"**Created:** {format_date(plugin['created'])}")
         markdown.append(f"**Last Updated:** {format_date(plugin['last_updated'])}")
         markdown.append("")
@@ -326,16 +326,14 @@ def generate_registry_page(plugins: list[dict[str, Any]], output_path: Path) -> 
     page_content.append("")
     orgs_list = ", ".join(GITHUB_ORGS)
     page_content.append(
-        f"This page is automatically generated from the NOMAD API and updated monthly. "
-        f"The data includes all plugins owned by the {orgs_list} GitHub organizations."
-    )
-    page_content.append("")
-    page_content.append(
+        "This page contains information about all NOMAD plugins owned and maintained by "
+        f" the GitHub organizations: {orgs_list}. "
+        " The information is automatically updated monthly. "
         f"**Last Updated:** {datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')}"
     )
     page_content.append("")
     page_content.append(
-        "[Browse All Plugins in NOMAD](https://nomad-lab.eu/prod/v1/oasis/gui/search/plugins){ .md-button .nomad-button }"
+        "[Browse All Plugins in the NOMAD Plugins App](https://nomad-lab.eu/prod/v1/oasis/gui/search/plugins){ .md-button .nomad-button }"
     )
     page_content.append("")
 
@@ -351,7 +349,7 @@ def generate_registry_page(plugins: list[dict[str, Any]], output_path: Path) -> 
     page_content.append(
         f"- **Deployed on Example Oasis:** {sum(1 for p in plugin_metadata if p['on_example_oasis'])}"
     )
-    page_content.append(f"- **Total Stars:** ⭐ {total_stars}")
+    page_content.append(f"- **Total Stars:** {total_stars}")
     page_content.append("")
     page_content.append("### Plugin Type Distribution")
     page_content.append("")

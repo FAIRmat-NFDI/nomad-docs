@@ -1,10 +1,8 @@
 # NOMAD Plugin Registry
 
-This page is automatically generated from the NOMAD API and updated monthly. The data includes all plugins owned by the FAIRmat-NFDI, nomad-coe GitHub organizations.
+This page contains information about all NOMAD plugins owned and maintained by  the GitHub organizations: FAIRmat-NFDI, nomad-coe.  The information is automatically updated monthly. **Last Updated:** 2025-11-28 19:59 UTC
 
-**Last Updated:** 2025-11-28 14:47 UTC
-
-[Browse All Plugins in NOMAD](https://nomad-lab.eu/prod/v1/oasis/gui/search/plugins){ .md-button .nomad-button }
+[Browse All Plugins in the NOMAD Plugins App](https://nomad-lab.eu/prod/v1/oasis/gui/search/plugins){ .md-button .nomad-button }
 
 ## Statistics
 
@@ -14,7 +12,7 @@ This page is automatically generated from the NOMAD API and updated monthly. The
 - **Available on PyPI:** 34
 - **Deployed on NOMAD Central:** 0
 - **Deployed on Example Oasis:** 0
-- **Total Stars:** ⭐ 164
+- **Total Stars:** 164
 
 ### Plugin Type Distribution
 
@@ -111,7 +109,7 @@ Schema and app for AI Toolkit notebooks.
 
 **Repository:** [https://github.com/FAIRmat-NFDI/nomad-aitoolkit](https://github.com/FAIRmat-NFDI/nomad-aitoolkit)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 0
+**Stars:** 0
 **Created:** 2024-05-24
 **Last Updated:** 2025-01-23
 
@@ -133,7 +131,7 @@ A NOMAD plugin for analysis of FAIR data.
 
 **Repository:** [https://github.com/FAIRmat-NFDI/nomad-analysis](https://github.com/FAIRmat-NFDI/nomad-analysis)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 2
+**Stars:** 2
 **Created:** 2024-02-26
 **Last Updated:** 2025-11-04
 
@@ -157,7 +155,7 @@ A NOMAD plugin containing schemas for automatic XRD analysis.
 
 **Repository:** [https://github.com/FAIRmat-NFDI/nomad-auto-xrd](https://github.com/FAIRmat-NFDI/nomad-auto-xrd)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 1
+**Stars:** 1
 **Created:** 2024-09-13
 **Last Updated:** 2025-11-14
 
@@ -189,7 +187,7 @@ app for battery database
 
 **Repository:** [https://github.com/FAIRmat-NFDI/nomad-battery-database](https://github.com/FAIRmat-NFDI/nomad-battery-database)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 0
+**Stars:** 0
 **Created:** 2025-02-16
 **Last Updated:** 2025-10-30
 
@@ -214,7 +212,7 @@ NOMAD plugin for driving experiments/simulations using bayesian optimization
 
 **Repository:** [https://github.com/FAIRmat-NFDI/nomad-bayesian-optimization](https://github.com/FAIRmat-NFDI/nomad-bayesian-optimization)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 1
+**Stars:** 1
 **Created:** 2024-06-17
 **Last Updated:** 2025-05-07
 
@@ -239,7 +237,7 @@ Parser for HDF5 files coming from NOMAD CAMELS.
 
 **Repository:** [https://github.com/FAIRmat-NFDI/nomad-camels-plugin](https://github.com/FAIRmat-NFDI/nomad-camels-plugin)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 0
+**Stars:** 0
 **Created:** 2024-11-05
 **Last Updated:** 2025-10-31
 
@@ -263,7 +261,7 @@ A NOMAD plugin for heterogeneous catalysis data.
 
 **Repository:** [https://github.com/FAIRmat-NFDI/nomad-catalysis-plugin](https://github.com/FAIRmat-NFDI/nomad-catalysis-plugin)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 4
+**Stars:** 4
 **Created:** 2024-07-15
 **Last Updated:** 2025-11-13
 
@@ -290,7 +288,7 @@ A NOMAD plugin for running CrystaLLM inference in NOMAD installations.
 
 **Repository:** [https://github.com/FAIRmat-NFDI/nomad-crystallm](https://github.com/FAIRmat-NFDI/nomad-crystallm)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 1
+**Stars:** 1
 **Created:** 2025-06-10
 **Last Updated:** 2025-10-28
 
@@ -316,7 +314,7 @@ A NOMAD plugin containing the section definitions of a standard Equation of Stat
 
 **Repository:** [https://github.com/FAIRmat-NFDI/nomad-schema-plugin-eos-workflows](https://github.com/FAIRmat-NFDI/nomad-schema-plugin-eos-workflows)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 0
+**Stars:** 0
 **Created:** 2025-04-01
 **Last Updated:** 2025-04-01
 
@@ -337,7 +335,7 @@ A NOMAD plugin containing the section definitions of a standard Equation of Stat
 
 **Repository:** [https://github.com/FAIRmat-NFDI/nomad-external-eln-integrations](https://github.com/FAIRmat-NFDI/nomad-external-eln-integrations)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 0
+**Stars:** 0
 **Created:** 2024-10-01
 **Last Updated:** 2025-10-28
 
@@ -363,7 +361,7 @@ A mkdocs-based GitHub Pages site for showcasing NOMAD features, examples, and us
 
 **Repository:** [https://github.com/FAIRmat-NFDI/nomad-gallery](https://github.com/FAIRmat-NFDI/nomad-gallery)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 1
+**Stars:** 1
 **Created:** 2025-02-17
 **Last Updated:** 2025-03-03
 
@@ -384,7 +382,7 @@ A plugin for NOMAD containing base sections for material processing.
 
 **Repository:** [https://github.com/FAIRmat-NFDI/nomad-material-processing](https://github.com/FAIRmat-NFDI/nomad-material-processing)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 11
+**Stars:** 11
 **Created:** 2023-08-15
 **Last Updated:** 2025-08-11
 
@@ -416,7 +414,7 @@ An example plugin to demonstrate the use of schemas from the nomad-material-proc
 
 **Repository:** [https://github.com/FAIRmat-NFDI/nomad-material-processing-example](https://github.com/FAIRmat-NFDI/nomad-material-processing-example)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 2
+**Stars:** 2
 **Created:** 2025-02-18
 **Last Updated:** 2025-08-06
 
@@ -440,7 +438,7 @@ A plugin for NOMAD containing base sections for measurements.
 
 **Repository:** [https://github.com/FAIRmat-NFDI/nomad-measurements](https://github.com/FAIRmat-NFDI/nomad-measurements)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 14
+**Stars:** 14
 **Created:** 2023-09-06
 **Last Updated:** 2025-11-03
 
@@ -482,7 +480,7 @@ A NOMAD plugin containing the section definitions of a standard Nudged Elastic B
 
 **Repository:** [https://github.com/FAIRmat-NFDI/nomad-neb-workflows](https://github.com/FAIRmat-NFDI/nomad-neb-workflows)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 3
+**Stars:** 3
 **Created:** 2024-06-21
 **Last Updated:** 2025-11-05
 
@@ -520,7 +518,7 @@ Schema plugin containing shared classes for NMR metadata
 
 **Repository:** [https://github.com/FAIRmat-NFDI/nomad-schema-plugin-nmr](https://github.com/FAIRmat-NFDI/nomad-schema-plugin-nmr)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 0
+**Stars:** 0
 **Created:** 2025-03-25
 **Last Updated:** 2025-10-28
 
@@ -544,7 +542,7 @@ Band structure normalizer plugin for NOMAD.
 
 **Repository:** [https://github.com/nomad-coe/nomad-normalizer-plugin-bandstructure](https://github.com/nomad-coe/nomad-normalizer-plugin-bandstructure)
 **Owner:** nomad-coe
-**Stars:** ⭐ 1
+**Stars:** 1
 **Created:** 2023-12-23
 **Last Updated:** 2025-10-30
 
@@ -570,7 +568,7 @@ DOS normalizer plugin for NOMAD.
 
 **Repository:** [https://github.com/nomad-coe/nomad-normalizer-plugin-dos](https://github.com/nomad-coe/nomad-normalizer-plugin-dos)
 **Owner:** nomad-coe
-**Stars:** ⭐ 0
+**Stars:** 0
 **Created:** 2023-12-20
 **Last Updated:** 2025-10-30
 
@@ -596,7 +594,7 @@ Simulation workflow nomad plugin for NOMAD.
 
 **Repository:** [https://github.com/nomad-coe/nomad-normalizer-plugin-simulation-workflow](https://github.com/nomad-coe/nomad-normalizer-plugin-simulation-workflow)
 **Owner:** nomad-coe
-**Stars:** ⭐ 0
+**Stars:** 0
 **Created:** 2023-12-01
 **Last Updated:** 2025-10-30
 
@@ -620,7 +618,7 @@ SOAP nomad plugin for NOMAD.
 
 **Repository:** [https://github.com/nomad-coe/nomad-normalizer-plugin-soap](https://github.com/nomad-coe/nomad-normalizer-plugin-soap)
 **Owner:** nomad-coe
-**Stars:** ⭐ 0
+**Stars:** 0
 **Created:** 2024-01-15
 **Last Updated:** 2025-10-30
 
@@ -645,7 +643,7 @@ Spectra normalizer plugin for NOMAD.
 
 **Repository:** [https://github.com/nomad-coe/nomad-normalizer-plugin-spectra](https://github.com/nomad-coe/nomad-normalizer-plugin-spectra)
 **Owner:** nomad-coe
-**Stars:** ⭐ 0
+**Stars:** 0
 **Created:** 2024-01-15
 **Last Updated:** 2025-10-30
 
@@ -666,7 +664,7 @@ System normalizer plugin for NOMAD.
 
 **Repository:** [https://github.com/nomad-coe/nomad-normalizer-plugin-system](https://github.com/nomad-coe/nomad-normalizer-plugin-system)
 **Owner:** nomad-coe
-**Stars:** ⭐ 0
+**Stars:** 0
 **Created:** 2023-12-29
 **Last Updated:** 2025-10-30
 
@@ -691,7 +689,7 @@ Nomad example template
 
 **Repository:** [https://github.com/FAIRmat-NFDI/nomad-parser-edmft](https://github.com/FAIRmat-NFDI/nomad-parser-edmft)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 0
+**Stars:** 0
 **Created:** 2024-09-05
 **Last Updated:** 2024-11-04
 
@@ -717,7 +715,7 @@ Standalone NOMAD plugin for parsing FHI-aims calculation files
 
 **Repository:** [https://github.com/FAIRmat-NFDI/nomad-parser-fhiaims](https://github.com/FAIRmat-NFDI/nomad-parser-fhiaims)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 2
+**Stars:** 2
 **Created:** 2024-06-24
 **Last Updated:** 2025-01-09
 
@@ -739,7 +737,7 @@ Parser for trajectory files in GSD format (https://gsd.readthedocs.io/en/v3.3.1/
 
 **Repository:** [https://github.com/FAIRmat-NFDI/nomad-parser-gsd](https://github.com/FAIRmat-NFDI/nomad-parser-gsd)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 1
+**Stars:** 1
 **Created:** 2024-08-28
 **Last Updated:** 2024-12-12
 
@@ -764,7 +762,7 @@ NOMAD parser plugin for h5md-based simulation files.
 
 **Repository:** [https://github.com/FAIRmat-NFDI/nomad-parser-h5md](https://github.com/FAIRmat-NFDI/nomad-parser-h5md)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 1
+**Stars:** 1
 **Created:** 2024-09-10
 **Last Updated:** 2025-04-09
 
@@ -790,7 +788,7 @@ Nomad example template
 
 **Repository:** [https://github.com/FAIRmat-NFDI/nomad-parser-molpro](https://github.com/FAIRmat-NFDI/nomad-parser-molpro)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 0
+**Stars:** 0
 **Created:** 2024-10-10
 **Last Updated:** 2024-10-10
 
@@ -812,7 +810,7 @@ Nomad plugin for ORCA calculations
 
 **Repository:** [https://github.com/FAIRmat-NFDI/nomad-parser-orca](https://github.com/FAIRmat-NFDI/nomad-parser-orca)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 2
+**Stars:** 2
 **Created:** 2024-09-09
 **Last Updated:** 2025-01-17
 
@@ -837,7 +835,7 @@ Plugin for parsing and displaying BOSS PES arftifacts
 
 **Repository:** [https://github.com/FAIRmat-NFDI/nomad-parser-plugin-boss](https://github.com/FAIRmat-NFDI/nomad-parser-plugin-boss)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 1
+**Stars:** 1
 **Created:** 2024-11-19
 **Last Updated:** 2025-11-20
 
@@ -858,7 +856,7 @@ Collection of NOMAD parsers for atomistic codes.
 
 **Repository:** [https://github.com/nomad-coe/atomistic-parsers](https://github.com/nomad-coe/atomistic-parsers)
 **Owner:** nomad-coe
-**Stars:** ⭐ 7
+**Stars:** 7
 **Created:** 2022-02-19
 **Last Updated:** 2025-11-04
 
@@ -897,7 +895,7 @@ Collection of NOMAD parsers for electronic structure codes.
 
 **Repository:** [https://github.com/nomad-coe/electronic-parsers](https://github.com/nomad-coe/electronic-parsers)
 **Owner:** nomad-coe
-**Stars:** ⭐ 23
+**Stars:** 23
 **Created:** 2022-02-19
 **Last Updated:** 2025-11-03
 
@@ -963,7 +961,7 @@ Collection of NOMAD parsers for workflow engines.
 
 **Repository:** [https://github.com/nomad-coe/workflow-parsers](https://github.com/nomad-coe/workflow-parsers)
 **Owner:** nomad-coe
-**Stars:** ⭐ 5
+**Stars:** 5
 **Created:** 2022-02-19
 **Last Updated:** 2025-10-31
 
@@ -997,7 +995,7 @@ A parser and schema for the Python workflow definition.
 
 **Repository:** [https://github.com/FAIRmat-NFDI/nomad-parser-python-workflow-definition](https://github.com/FAIRmat-NFDI/nomad-parser-python-workflow-definition)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 0
+**Stars:** 0
 **Created:** 2025-10-21
 **Last Updated:** 2025-10-21
 
@@ -1019,7 +1017,7 @@ A parser for ro-crate schema plus.
 
 **Repository:** [https://github.com/FAIRmat-NFDI/nomad-parser-ro-crate](https://github.com/FAIRmat-NFDI/nomad-parser-ro-crate)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 0
+**Stars:** 0
 **Created:** 2025-10-23
 **Last Updated:** 2025-10-23
 
@@ -1041,7 +1039,7 @@ NOMAD parser plugin for w2dynamics input/output files.
 
 **Repository:** [https://github.com/FAIRmat-NFDI/nomad-parser-w2dynamics](https://github.com/FAIRmat-NFDI/nomad-parser-w2dynamics)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 1
+**Stars:** 1
 **Created:** 2024-08-27
 **Last Updated:** 2024-08-27
 
@@ -1066,7 +1064,7 @@ A NOMAD parser plugin for Wannier90 input/output files.
 
 **Repository:** [https://github.com/FAIRmat-NFDI/nomad-parser-wannier90](https://github.com/FAIRmat-NFDI/nomad-parser-wannier90)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 2
+**Stars:** 2
 **Created:** 2024-07-04
 **Last Updated:** 2024-08-15
 
@@ -1093,7 +1091,7 @@ A NOMAD parser plugin for YAMBO input/outputs files.
 
 **Repository:** [https://github.com/FAIRmat-NFDI/nomad-parser-yambo](https://github.com/FAIRmat-NFDI/nomad-parser-yambo)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 1
+**Stars:** 1
 **Created:** 2024-07-02
 **Last Updated:** 2024-07-04
 
@@ -1120,7 +1118,7 @@ A plugin for discovering other plugins.
 
 **Repository:** [https://github.com/FAIRmat-NFDI/nomad-plugins](https://github.com/FAIRmat-NFDI/nomad-plugins)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 1
+**Stars:** 1
 **Created:** 2024-12-06
 **Last Updated:** 2025-11-03
 
@@ -1144,7 +1142,7 @@ A NOMAD plugin for polymerization reactions.
 
 **Repository:** [https://github.com/FAIRmat-NFDI/nomad-polymerization-reactions](https://github.com/FAIRmat-NFDI/nomad-polymerization-reactions)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 0
+**Stars:** 0
 **Created:** 2024-08-07
 **Last Updated:** 2024-08-16
 
@@ -1166,7 +1164,7 @@ NOMAD plugin for porous materials
 
 **Repository:** [https://github.com/FAIRmat-NFDI/nomad-porous-materials](https://github.com/FAIRmat-NFDI/nomad-porous-materials)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 0
+**Stars:** 0
 **Created:** 2024-05-09
 **Last Updated:** 2025-04-29
 
@@ -1188,7 +1186,7 @@ Run schema plugin for NOMAD.
 
 **Repository:** [https://github.com/nomad-coe/nomad-schema-plugin-run](https://github.com/nomad-coe/nomad-schema-plugin-run)
 **Owner:** nomad-coe
-**Stars:** ⭐ 1
+**Stars:** 1
 **Created:** 2023-12-05
 **Last Updated:** 2025-10-30
 
@@ -1209,7 +1207,7 @@ Simulation workflow schema plugin for NOMAD.
 
 **Repository:** [https://github.com/nomad-coe/nomad-schema-plugin-simulation-workflow](https://github.com/nomad-coe/nomad-schema-plugin-simulation-workflow)
 **Owner:** nomad-coe
-**Stars:** ⭐ 2
+**Stars:** 2
 **Created:** 2023-11-28
 **Last Updated:** 2025-10-30
 
@@ -1233,7 +1231,7 @@ A repository for housing NOMAD's collection of simulation app plugins.
 
 **Repository:** [https://github.com/FAIRmat-NFDI/nomad-app-plugins-simulation](https://github.com/FAIRmat-NFDI/nomad-app-plugins-simulation)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 2
+**Stars:** 2
 **Created:** 2025-02-24
 **Last Updated:** 2025-10-28
 
@@ -1256,7 +1254,7 @@ A repository for housing NOMAD's collection of simulation parser plugins.
 
 **Repository:** [https://github.com/FAIRmat-NFDI/nomad-parser-plugins-simulation](https://github.com/FAIRmat-NFDI/nomad-parser-plugins-simulation)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 1
+**Stars:** 1
 **Created:** 2025-01-16
 **Last Updated:** 2025-11-20
 
@@ -1304,7 +1302,7 @@ Schema defintions and normalizer for NOMAD simulation workflows
 
 **Repository:** [https://github.com/FAIRmat-NFDI/nomad-simulation-workflow](https://github.com/FAIRmat-NFDI/nomad-simulation-workflow)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 0
+**Stars:** 0
 **Created:** 2024-05-29
 **Last Updated:** 2024-05-29
 
@@ -1326,7 +1324,7 @@ A NOMAD plugin for FAIR schemas for simulation data.
 
 **Repository:** [https://github.com/nomad-coe/nomad-simulations](https://github.com/nomad-coe/nomad-simulations)
 **Owner:** nomad-coe
-**Stars:** ⭐ 7
+**Stars:** 7
 **Created:** 2024-01-17
 **Last Updated:** 2025-11-20
 
@@ -1349,7 +1347,7 @@ NOMAD plugin for thermally activated delayed fluorescent molecules
 
 **Repository:** [https://github.com/FAIRmat-NFDI/nomad-tadf-molecules](https://github.com/FAIRmat-NFDI/nomad-tadf-molecules)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 2
+**Stars:** 2
 **Created:** 2024-06-05
 **Last Updated:** 2025-08-06
 
@@ -1373,7 +1371,7 @@ A example plugin for a demonstration for UniSysCat.
 
 **Repository:** [https://github.com/FAIRmat-NFDI/nomad-unisyscat-plugin](https://github.com/FAIRmat-NFDI/nomad-unisyscat-plugin)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 1
+**Stars:** 1
 **Created:** 2024-05-27
 **Last Updated:** 2024-07-02
 
@@ -1396,7 +1394,7 @@ A module with utilities for interacting with NOMAD via, e.g., a workflow manager
 
 **Repository:** [https://github.com/FAIRmat-NFDI/nomad-utility-workflows](https://github.com/FAIRmat-NFDI/nomad-utility-workflows)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 4
+**Stars:** 4
 **Created:** 2024-10-14
 **Last Updated:** 2025-11-17
 
@@ -1423,7 +1421,7 @@ Topology Normalizer
 
 **Repository:** [https://github.com/FAIRmat-NFDI/nomad-topology-normalizer](https://github.com/FAIRmat-NFDI/nomad-topology-normalizer)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 0
+**Stars:** 0
 **Created:** 2025-04-14
 **Last Updated:** 2025-10-28
 
@@ -1445,7 +1443,7 @@ Perovskite solar cell data schema plugin for NOMAD.
 
 **Repository:** [https://github.com/FAIRmat-NFDI/nomad-perovskite-solar-cells-database](https://github.com/FAIRmat-NFDI/nomad-perovskite-solar-cells-database)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 8
+**Stars:** 8
 **Created:** 2023-12-05
 **Last Updated:** 2025-11-14
 
@@ -1483,7 +1481,7 @@ Extend NeXus for experiments and characterization in Materials Science and Mater
 
 **Repository:** [https://github.com/FAIRmat-NFDI/pynxtools](https://github.com/FAIRmat-NFDI/pynxtools)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 19
+**Stars:** 19
 **Created:** 2021-10-22
 **Last Updated:** 2025-11-13
 
@@ -1518,7 +1516,7 @@ A reader for transferring APM from vendor formats to NeXus and NOMAD.
 
 **Repository:** [https://github.com/FAIRmat-NFDI/pynxtools-apm](https://github.com/FAIRmat-NFDI/pynxtools-apm)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 0
+**Stars:** 0
 **Created:** 2024-03-14
 **Last Updated:** 2025-10-17
 
@@ -1542,7 +1540,7 @@ A reader for transferring ellipsometry data from vendor formats to NeXus and NOM
 
 **Repository:** [https://github.com/FAIRmat-NFDI/pynxtools-ellips](https://github.com/FAIRmat-NFDI/pynxtools-ellips)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 0
+**Stars:** 0
 **Created:** 2024-05-03
 **Last Updated:** 2025-10-17
 
@@ -1566,7 +1564,7 @@ A reader for transferring EM from vendor formats to NeXus and NOMAD.
 
 **Repository:** [https://github.com/FAIRmat-NFDI/pynxtools-em](https://github.com/FAIRmat-NFDI/pynxtools-em)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 3
+**Stars:** 3
 **Created:** 2024-03-18
 **Last Updated:** 2025-10-17
 
@@ -1590,7 +1588,7 @@ pynxtools plugin for reading igor pro waves and packed experiments
 
 **Repository:** [https://github.com/FAIRmat-NFDI/pynxtools-igor](https://github.com/FAIRmat-NFDI/pynxtools-igor)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 0
+**Stars:** 0
 **Created:** 2024-12-05
 **Last Updated:** 2025-10-17
 
@@ -1612,7 +1610,7 @@ pynxtools plugin for reading igor pro waves and packed experiments
 
 **Repository:** [https://github.com/FAIRmat-NFDI/pynxtools-mpes](https://github.com/FAIRmat-NFDI/pynxtools-mpes)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 0
+**Stars:** 0
 **Created:** 2024-02-20
 **Last Updated:** 2025-10-17
 
@@ -1637,7 +1635,7 @@ A reader for transferring Raman data from vendor formats to NeXus and NOMAD.
 
 **Repository:** [https://github.com/FAIRmat-NFDI/pynxtools-raman](https://github.com/FAIRmat-NFDI/pynxtools-raman)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 0
+**Stars:** 0
 **Created:** 2024-06-27
 **Last Updated:** 2025-11-12
 
@@ -1661,7 +1659,7 @@ pynxtools-spm: A pynxtools plugin for SPM (Scanning Probe Microscopy) data reade
 
 **Repository:** [https://github.com/FAIRmat-NFDI/pynxtools-spm](https://github.com/FAIRmat-NFDI/pynxtools-spm)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 0
+**Stars:** 0
 **Created:** 2024-11-19
 **Last Updated:** 2025-11-18
 
@@ -1687,7 +1685,7 @@ A plugin for pynxtools to convert sts and stm files
 
 **Repository:** [https://github.com/FAIRmat-NFDI/pynxtools-stm](https://github.com/FAIRmat-NFDI/pynxtools-stm)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 0
+**Stars:** 0
 **Created:** 2023-11-28
 **Last Updated:** 2025-10-19
 
@@ -1712,7 +1710,7 @@ pynxtools-xps is a pynxtools reader plugin for X-ray photoelectron spectroscopy 
 
 **Repository:** [https://github.com/FAIRmat-NFDI/pynxtools-xps](https://github.com/FAIRmat-NFDI/pynxtools-xps)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 4
+**Stars:** 4
 **Created:** 2024-02-19
 **Last Updated:** 2025-11-13
 
@@ -1736,7 +1734,7 @@ A plugin for RTG SIMS.
 
 **Repository:** [https://github.com/FAIRmat-NFDI/AreaA-data_modeling_and_schemas](https://github.com/FAIRmat-NFDI/AreaA-data_modeling_and_schemas)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 11
+**Stars:** 11
 **Created:** 2022-11-04
 **Last Updated:** 2025-08-05
 
@@ -1760,7 +1758,7 @@ A plugin for NOMAD containing base sections for transmission spectrophotometry.
 
 **Repository:** [https://github.com/FAIRmat-NFDI/AreaA-data_modeling_and_schemas](https://github.com/FAIRmat-NFDI/AreaA-data_modeling_and_schemas)
 **Owner:** FAIRmat-NFDI
-**Stars:** ⭐ 11
+**Stars:** 11
 **Created:** 2022-11-04
 **Last Updated:** 2025-08-05
 
