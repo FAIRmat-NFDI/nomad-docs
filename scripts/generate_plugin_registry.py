@@ -168,10 +168,10 @@ def generate_markdown_table(plugins: list[dict[str, Any]]) -> str:
 
     markdown = []
     markdown.append(
-        "| Plugin | Description | Type(s) | PyPI | Central | Repository | Stars |"
+        "| Plugin | Description | Type(s) | PyPI | Central Deployment | Example Oasis | Repository | Stars |"
     )
     markdown.append(
-        "|--------|-------------|---------|------|---------|------------|-------|"
+        "|--------|-------------|---------|------|--------------------| --------------|------------|-------|"
     )
 
     for plugin in plugins_sorted:
@@ -193,6 +193,7 @@ def generate_markdown_table(plugins: list[dict[str, Any]]) -> str:
         # Format boolean indicators
         pypi = "✓" if plugin["on_pypi"] else "—"
         central = "✓" if plugin["on_central"] else "—"
+        example = "✓" if plugin["on_example_oasis"] else "—"
 
         # Format repository link
         repo_url = plugin["repository"]
@@ -204,7 +205,7 @@ def generate_markdown_table(plugins: list[dict[str, Any]]) -> str:
         stars = plugin["stars"]
 
         markdown.append(
-            f"| **{name}** | {description} | {types} | {pypi} | {central} | {repo_link} | {stars} |"
+            f"| **{name}** | {description} | {types} | {pypi} | {central} | {example} | {repo_link} | {stars} |"
         )
 
     return "\n".join(markdown)
@@ -323,29 +324,58 @@ def generate_registry_page(plugins: list[dict[str, Any]], output_path: Path) -> 
     page_content = []
     page_content.append("# NOMAD Plugin Registry")
     page_content.append("")
-    orgs_str = " and ".join([f"**{org}**" for org in GITHUB_ORGS])
+    orgs_list = ", ".join(GITHUB_ORGS)
     page_content.append(
-        f"This page provides an overview of all NOMAD plugins maintained by the {orgs_str} organizations."
+        f"This page is automatically generated from the NOMAD API and updated monthly. "
+        f"The data includes all plugins owned by the {orgs_list} GitHub organizations."
     )
     page_content.append("")
     page_content.append(
         f"**Last Updated:** {datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')}"
     )
     page_content.append("")
+    page_content.append(
+        "[Browse All Plugins in NOMAD](https://nomad-lab.eu/prod/v1/oasis/gui/search/plugins){ .md-button .nomad-button }"
+    )
+    page_content.append("")
 
     # Statistics section
+    total_stars = sum(p["stars"] for p in plugin_metadata)
     page_content.append("## Statistics")
+    page_content.append("")
+    page_content.append("### Overview")
     page_content.append("")
     page_content.append(f"- **Total Plugins:** {total_plugins}")
     page_content.append(f"- **Available on PyPI:** {on_pypi}")
     page_content.append(f"- **Deployed on NOMAD Central:** {on_central}")
+    page_content.append(
+        f"- **Deployed on Example Oasis:** {sum(1 for p in plugin_metadata if p['on_example_oasis'])}"
+    )
+    page_content.append(f"- **Total Stars:** ⭐ {total_stars}")
+    page_content.append("")
+    page_content.append("### Plugin Type Distribution")
     page_content.append("")
 
     if entry_point_type_counts:
-        page_content.append("**Plugin Types:**")
+        # Generate Mermaid pie chart with increased text size
+        page_content.append(
+            '<div style="transform: scale(0.9); transform-origin: top center; margin-bottom: 40px; margin-left: auto; margin-right: auto; max-width: 100%;">'
+        )
         page_content.append("")
-        for ep_type, count in sorted(entry_point_type_counts.items()):
-            page_content.append(f"- {ep_type}: {count}")
+        page_content.append("```mermaid")
+        page_content.append(
+            "%%{init: {'theme':'base', 'themeVariables': { 'pie1':'#2A4CDF', 'pie2':'#008A67', 'pie3':'#FF6B6B', 'pie4':'#4ECDC4', 'pie5':'#FFE66D', 'pie6':'#A8E6CF', 'pieTitleTextSize': '22px', 'pieSectionTextSize': '22px', 'pieLegendTextSize': '22px'}, 'themeCSS': '.pieCircle { font-size: 22px; font-weight: bold; } .legend text { font-size: 22px; font-weight: bold; margin-left: 8px; } .legend rect { margin-right: 8px; } .slice text { font-size: 22px; font-weight: bold; transform: translate(-15%, -15%); } text.percent { font-size: 22px; font-weight: bold; }' }}%%"
+        )
+        page_content.append("pie showData")
+        for ep_type, count in sorted(
+            entry_point_type_counts.items(), key=lambda x: x[1], reverse=True
+        ):
+            # Escape special characters and quotes in labels
+            safe_label = ep_type.replace('"', '\\"')
+            page_content.append(f'    "{safe_label}" : {count}')
+        page_content.append("```")
+        page_content.append("")
+        page_content.append("</div>")
         page_content.append("")
 
     # Quick reference table
@@ -360,22 +390,6 @@ def generate_registry_page(plugins: list[dict[str, Any]], output_path: Path) -> 
     page_content.append("## Detailed Plugin Information")
     page_content.append("")
     page_content.append(generate_detailed_list(plugin_metadata))
-    page_content.append("")
-
-    # Footer
-    page_content.append("---")
-    page_content.append("")
-    page_content.append('!!! info "About this page"')
-    page_content.append(
-        "    This page is automatically generated from the NOMAD API and updated monthly."
-    )
-    orgs_list = ", ".join(GITHUB_ORGS)
-    page_content.append(
-        f"    The data includes all plugins owned by the {orgs_list} GitHub organizations."
-    )
-    page_content.append(
-        "    For more information about NOMAD plugins, see the [plugin documentation](../howto/plugins/plugins.md)."
-    )
     page_content.append("")
 
     # Write to file
@@ -421,7 +435,9 @@ def main():
     # Generate the registry page
     generate_registry_page(unique_plugins, output_path)
 
-    print(f"Successfully generated plugin registry with {len(unique_plugins)} plugins (from {len(all_plugins)} total entries)")
+    print(
+        f"Successfully generated plugin registry with {len(unique_plugins)} plugins (from {len(all_plugins)} total entries)"
+    )
 
 
 if __name__ == "__main__":
