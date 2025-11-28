@@ -1,31 +1,30 @@
 # Architecture
 
-## A containerized cloud enabled architecture
+## A containerized, cloud-enabled architecture
 
 NOMAD is a modern web-application that requires a lot of services to run. Some are
 NOMAD specific, others are 3rd party products. While all services can be traditionally
-installed and run on a single sever, NOMAD advocates the use of containers and operating
+installed and run on a single server, NOMAD advocates the use of containers and operating
 NOMAD in a cloud environment.
 
 <figure markdown>
-  ![nomad architecture](images/architecture.png)
+  ![nomad architecture](images/architecture.svg)
   <figcaption>NOMAD architecture</figcaption>
 </figure>
 
-NOMAD comprises two main services, its *app* and the *worker*. The *app* services
-our API, graphical user interface, and documentation. It is the outward facing part of
-NOMAD. The worker runs all the processing (parsing, normalization). Their separation allows
-to scale the system for various use-cases.
+The two primary NOMAD services are called *app* and *worker*. The *app* services our API,
+graphical user interface, and documentation. It is the outward facing part of NOMAD. The
+worker runs all the processing (parsing, normalization) and NOMAD Actions. Their
+separation allows to scale the system for various use-cases.
 
 Other services are:
 
-- rabbitmq: a task queue that we use to distribute tasks for the *worker* containers
-- mongodb: a no-sql database used to maintain processing state and user-metadata
-- elasticsearch: a no-sql database and search engine that drives our search
-- a regular file system to maintain all the files (*raw* and *archive*)
-- jupyterhub: run ai toolkit notebooks
-- keycloak: our SSO user management system (can be used by all Oasises)
-- a content management system to provide other web-page content (not part of the Oasis)
+- Proxy (nginx): Directs external traffic to the right service
+- Authentication (Keycloak): Our SSO user management system (can be used by all Oasises)
+- Remote tools (JupyterHub): Used to run NOMAD Remote Tools Hub (NORTH)
+- Search engine (Elasticsearch): NoSQL database and search engine that drives our search
+- Database (MongoDB): NoSQL database used to maintain processing state and user-metadata
+- Filesystem: A regular file system to maintain all the files (*raw* and *archive*)
 
 All NOMAD software is bundled in a single NOMAD docker image and a Python package
 ([nomad-lab on pypi](https://pypi.org/project/nomad-lab/){:target="_blank" rel="noopener"}). The NOMAD docker
@@ -58,21 +57,17 @@ Tests are written with [pytest](https://docs.pytest.org/en/latest/contents.html)
 Logging is done with [structlog](https://www.structlog.org/en/stable/){:target="_blank" rel="noopener"} and *logstash* (see
 Elasticstack below). Documentation is driven by [Sphinx](http://www.sphinx-doc.org/en/master/){:target="_blank" rel="noopener"}.
 
-### celery
+### Temporal
 
-[Celery](http://celeryproject.org){:target="_blank" rel="noopener"} (+ [rabbitmq](https://www.rabbitmq.com/){:target="_blank" rel="noopener"})
-is a popular combination for realizing long running tasks in internet applications.
-We use it to drive the processing of uploaded files.
-It allows us to transparently distribute processing load while keeping processing state
-available to inform the user.
+[Temporal](https://temporal.io/){:target="_blank" rel="noopener"} is a popular combination for realizing long running workflows. We use it to drive the processing of uploaded files and to execute NOMAD Actions. It allows us to transparently distribute processing load while keeping processing state available to inform the user.
 
-### elastic search
+### Elasticsearch
 
 [Elasticsearch](https://www.elastic.co/webinars/getting-started-elasticsearch){:target="_blank" rel="noopener"}
 is used to store repository data (not the raw files).
 Elasticsearch enables flexible, scalable search and analytics.
 
-### mongodb
+### MongoDB
 
 [Mongodb](https://docs.mongodb.com/){:target="_blank" rel="noopener"} is used to store and track the state of the
 processing of uploaded files and the generated entries. We use
@@ -91,7 +86,7 @@ framework. This allows us to automatically derive a [OpenAPI](https://swagger.io
 of the nomad API.
 Fruthermore, you can browse and use the API via [OpenAPI dashboard](https://swagger.io/tools/swagger-ui/){:target="_blank" rel="noopener"}.
 
-### Elasticstack
+### Elastic stack
 
 The [elastic stack](https://www.elastic.co/guide/index.html){:target="_blank" rel="noopener"}
 (previously *ELK* stack) is a centralized logging, metrics, and monitoring
@@ -109,7 +104,7 @@ efforts manageable. React uses [JSX](https://reactjs.org/docs/introducing-jsx.ht
 The component library [Material-UI](https://material-ui.com/){:target="_blank" rel="noopener"}
 (based on Google's popular material design framework) provides a consistent look-and-feel.
 
-### docker
+### Docker
 
 To run a **nomad@FAIRDI** instance, many services have to be orchestrated:
 the nomad app, nomad worker, mongodb, Elasticsearch, Keycloak, RabbitMQ,
@@ -120,7 +115,7 @@ as pre-build images that can be run flexibly on all types of platforms, networks
 and storage solutions. [Docker-compose](https://docs.docker.com/compose/){:target="_blank" rel="noopener"} allows us to
 provide configuration to run the whole nomad stack on a single server node.
 
-### kubernetes + helm
+### Kubernetes + Helm
 
 To run and scale nomad on a cluster, you can use [kubernetes](https://kubernetes.io/docs/home/){:target="_blank" rel="noopener"}
 to orchestrated the  necessary containers. We provide a [helm](https://docs.helm.sh/){:target="_blank" rel="noopener"}
