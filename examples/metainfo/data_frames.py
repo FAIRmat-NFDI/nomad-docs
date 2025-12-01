@@ -7,44 +7,44 @@ from nomad.metainfo.metainfo import MSection, Package, Quantity, SubSection
 m_package = Package()
 
 Energy = ValuesTemplate(
-    name='Energy',
+    name="Energy",
     type=np.float64,
     shape=[],
-    unit='J',
-    iri='https://www.wikidata.org/wiki/Q11379',
+    unit="J",
+    iri="https://www.wikidata.org/wiki/Q11379",
 )
 
 Temperature = ValuesTemplate(
-    name='Temperature',
+    name="Temperature",
     type=np.float64,
     shape=[],
-    unit='K',
-    iri='https://www.wikidata.org/wiki/Q11466',
+    unit="K",
+    iri="https://www.wikidata.org/wiki/Q11466",
 )
 
 Pressure = ValuesTemplate(
-    name='Pressure',
+    name="Pressure",
     type=np.float64,
     shape=[],
-    unit='Pa',
-    iri='https://www.wikidata.org/wiki/Q39552',
+    unit="Pa",
+    iri="https://www.wikidata.org/wiki/Q39552",
 )
 
 Count = ValuesTemplate(
-    name='Count',
+    name="Count",
     type=np.int64,
     shape=[],
-    unit='1',
-    iri='https://www.wikidata.org/wiki/Q1520033',
+    unit="1",
+    iri="https://www.wikidata.org/wiki/Q1520033",
 )
 
 BandGap = DataFrameTemplate(
-    name='BandGap',
+    name="BandGap",
     mandatory_fields=[Energy],
 )
 
 Dos = DataFrameTemplate(
-    name='Dos',
+    name="Dos",
     mandatory_fields=[Count],
     mandatory_variables=[Energy],
 )
@@ -127,7 +127,7 @@ my_section.dos = Dos.create(
 
 # If you have a specialized template section section its a normal sub section
 # and the interface is a bit different
-my_band_gaps = MyBandGap(type='foo')
+my_band_gaps = MyBandGap(type="foo")
 my_section.band_gaps.fields = [Energy.create(1.0, 1.1)]
 my_section.band_gaps.variables = [
     Temperature.create(200, 220, spanned_dimensions=[0]),
@@ -135,12 +135,12 @@ my_section.band_gaps.variables = [
 ]
 
 # Access references values
-print('###', my_section.dos.get_variable(Temperature).get_values())
+print("###", my_section.dos.get_variable(Temperature).get_values())
 
 # Run the constraints to validate field, variables, and dimensions
 my_section.m_all_validate()
 
-print('---- schema ----')
+print("---- schema ----")
 print(json.dumps(m_package.m_to_dict(), indent=2))
-print('---- data ----')
+print("---- data ----")
 print(json.dumps(my_section.m_to_dict(), indent=2))

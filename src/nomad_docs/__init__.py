@@ -29,7 +29,6 @@ from typing import get_args, cast
 
 from inspect import isclass
 
-from pydantic.fields import FieldInfo
 
 from pydantic import BaseModel
 

@@ -143,7 +143,7 @@ def section_markdown_from_section_cls(
         if section_cls.normalize.__doc__:
             result += f"**normalization**: \n\n{utils.strip(section_cls.normalize.__doc__)}\n\n"
         else:
-            result += f"**normalization** without further documentation\n\n"
+            result += "**normalization** without further documentation\n\n"
 
     return result
 
