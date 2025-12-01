@@ -37,6 +37,7 @@ jobs:
         run: |
           uv run \
             --with requests \
+            --with regex \
             python scripts/generate_plugin_registry.py
 
       - name: Check for changes

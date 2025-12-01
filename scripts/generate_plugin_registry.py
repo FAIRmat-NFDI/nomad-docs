@@ -7,15 +7,33 @@ and generates a markdown table with plugin metadata.
 """
 
 import sys
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+import regex
 import requests
 
 
 NOMAD_API_URL = "https://nomad-lab.eu/prod/v1/oasis/api/v1"
 GITHUB_ORGS = ["FAIRmat-NFDI", "nomad-coe"]
+
+# Link pattern for fixing external links
+LINK_PATTERN = regex.compile(
+    r"""
+    (                               # Group 1: [text](url)
+      \[[^\]]+\]                    # [text]
+      \(                             # opening paren of URL
+        (?:https?|ftp)://            # protocol
+        (?:[^()\s]+|                 # non-parens
+           \((?:[^()]+|(?R))*\)      # balanced (...)
+        )+
+      \)                             # closing paren of Markdown link
+    )
+    (\{[^\}]*\})?                   # Group 2: optional {attrs}
+    """,
+    regex.VERBOSE,
+)
 
 
 def query_plugins(owner_filter: str) -> list[dict[str, Any]]:
@@ -148,6 +166,42 @@ def format_date(iso_date: str) -> str:
         return dt.strftime("%Y-%m-%d")
     except (ValueError, AttributeError):
         return iso_date
+
+
+def normalize_attrs(attrs: str | None) -> str:
+    """Ensure target and rel are both present in link attributes."""
+    if not attrs:
+        return '{:target="_blank" rel="noopener"}'
+
+    inner: str = attrs.strip()[1:-1].strip()  # remove { }
+    parts: list[str] = inner.split()
+    attrs_dict: dict[str, str | None] = {}
+
+    for part in parts:
+        if "=" in part:
+            k, v = part.split("=", 1)
+            attrs_dict[k.strip(":")] = v.strip('"')
+        else:
+            attrs_dict[part.strip(":")] = None
+
+    # Always enforce target and rel
+    attrs_dict["target"] = "_blank"
+    attrs_dict["rel"] = "noopener"
+
+    return (
+        "{:" + " ".join(f'{k}="{v}"' if v else k for k, v in attrs_dict.items()) + "}"
+    )
+
+
+def fix_external_links(text: str) -> str:
+    """Fix external links to include target and rel attributes."""
+
+    def repl(match: regex.Match) -> str:
+        link, attrs = match.groups()
+        return link + normalize_attrs(attrs)
+
+    new_text, _ = LINK_PATTERN.subn(repl, text)
+    return new_text
 
 
 def generate_markdown_table(plugins: list[dict[str, Any]]) -> str:
@@ -329,7 +383,7 @@ def generate_registry_page(plugins: list[dict[str, Any]], output_path: Path) -> 
         "This page contains information about all NOMAD plugins owned and maintained by "
         f" the GitHub organizations: {orgs_list}. "
         " The information is automatically updated monthly. "
-        f"**Last Updated:** {datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')}"
+        f"**Last Updated:** {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}"
     )
     page_content.append("")
     page_content.append(
@@ -392,7 +446,12 @@ def generate_registry_page(plugins: list[dict[str, Any]], output_path: Path) -> 
 
     # Write to file
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text("\n".join(page_content), encoding="utf-8")
+    content = "\n".join(page_content)
+    
+    # Fix external links to include target and rel attributes
+    content = fix_external_links(content)
+    
+    output_path.write_text(content, encoding="utf-8")
     print(f"Plugin registry written to {output_path}")
 
 
@@ -416,7 +475,7 @@ def main():
         output_path.write_text(
             "# NOMAD Plugin Registry\n\n"
             f"No plugins found for organizations: {orgs_list}\n\n"
-            f"Last checked: {datetime.utcnow().strftime('%Y-%m-%d %H:%M UTC')}\n",
+            f"Last checked: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}\n",
             encoding="utf-8",
         )
         return
