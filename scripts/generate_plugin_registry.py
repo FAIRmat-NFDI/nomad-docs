@@ -204,6 +204,57 @@ def fix_external_links(text: str) -> str:
     return new_text
 
 
+def fix_markdown_lint_issues(text: str) -> str:
+    """Fix common markdownlint issues in the generated content."""
+    lines = text.split("\n")
+    fixed_lines = []
+    
+    for i, line in enumerate(lines):
+        # Fix MD044: Replace "Nomad" with "nomad" (but not in URLs or "NOMAD")
+        # Only replace standalone "Nomad" that's not part of "NOMAD"
+        if "Nomad" in line and "NOMAD" not in line:
+            line = line.replace("Nomad", "nomad")
+        
+        # Fix MD034: Wrap bare URLs in angle brackets (look for URLs not in markdown links)
+        # Pattern: URL not preceded by ]( 
+        import re
+        # Find bare URLs that are not already in markdown links
+        bare_url_pattern = re.compile(r'(?<!\]\()https?://[^\s<>\[\]]+(?!\))')
+        line = bare_url_pattern.sub(lambda m: f'<{m.group(0)}>', line)
+        
+        fixed_lines.append(line)
+    
+    # Fix MD032: Ensure blank lines around lists
+    final_lines = []
+    for i, line in enumerate(fixed_lines):
+        # Check if current line starts a list
+        is_list_start = line.strip().startswith(("- ", "* ", "1. "))
+        # Check if previous line exists and is not blank and not a list item
+        prev_line = fixed_lines[i-1] if i > 0 else ""
+        prev_is_blank = not prev_line.strip()
+        prev_is_list = prev_line.strip().startswith(("- ", "* ", "1. "))
+        
+        # Add blank line before list if needed
+        if is_list_start and not prev_is_blank and not prev_is_list and i > 0:
+            final_lines.append("")
+        
+        final_lines.append(line)
+    
+    # Fix MD012: Remove multiple consecutive blank lines
+    result_lines = []
+    blank_count = 0
+    for line in final_lines:
+        if not line.strip():
+            blank_count += 1
+            if blank_count <= 1:
+                result_lines.append(line)
+        else:
+            blank_count = 0
+            result_lines.append(line)
+    
+    return "\n".join(result_lines)
+
+
 def generate_markdown_table(plugins: list[dict[str, Any]]) -> str:
     """
     Generate markdown table from plugin metadata.
@@ -225,7 +276,7 @@ def generate_markdown_table(plugins: list[dict[str, Any]]) -> str:
         "| Plugin | Description | Type(s) | PyPI | Central Deployment | Example Oasis | Repository | Stars |"
     )
     markdown.append(
-        "|--------|-------------|---------|------|--------------------| --------------|------------|-------|"
+        "| ------ | ----------- | ------- | ---- | ------------------ | ------------- | ---------- | ----- |"
     )
 
     for plugin in plugins_sorted:
@@ -235,6 +286,9 @@ def generate_markdown_table(plugins: list[dict[str, Any]]) -> str:
             if len(plugin["description"]) > 80
             else plugin["description"]
         )
+        # Replace empty description with placeholder
+        if not description.strip():
+            description = "—"
         description = description.replace("|", "\\|").replace("\n", " ")
 
         # Format entry point types
@@ -450,6 +504,9 @@ def generate_registry_page(plugins: list[dict[str, Any]], output_path: Path) -> 
     
     # Fix external links to include target and rel attributes
     content = fix_external_links(content)
+    
+    # Fix markdownlint issues
+    content = fix_markdown_lint_issues(content)
     
     output_path.write_text(content, encoding="utf-8")
     print(f"Plugin registry written to {output_path}")
