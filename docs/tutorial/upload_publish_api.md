@@ -48,28 +48,32 @@ We assume you are working in a Python 3.11+ environment, preferably in a dedicat
 
 Install the plugin and helper packages:
 
-    ```bash
-    !pip install --upgrade pip
-    !pip install "nomad-utility-workflows[vis]>=0.2.0"
-    !pip install python-dotenv
-    ```
+<!-- markdownlint-disable MD046 -->
+```bash
+!pip install --upgrade pip
+!pip install "nomad-utility-workflows[vis]>=0.2.0"
+!pip install python-dotenv
+```
+<!-- markdownlint-disable MD046 -->
 
 The `nomad-utility-workflows` provides high-level helpers for interacting with the NOMAD API and `python-dotenv` is used to load credentials from a local file, e.g., `env.txt`.
 
 Create a file named `env.txt` in your project folder with the following content and save this file next to your notebook or script and keep it private (do not commit it to version control):
 
-    ```text
-    NOMAD_USERNAME=your_email_or_username
-    NOMAD_PASSWORD=your_password
-    ```
+```text
+NOMAD_USERNAME=your_email_or_username
+NOMAD_PASSWORD=your_password
+```
 
 Before calling any helper functions, load `env.txt` so that the environment variables are visible to `nomad-utility-workflows`:
 
-    ```python
-    from dotenv import load_dotenv
+<!-- markdownlint-disable MD046 -->
+```python
+from dotenv import load_dotenv
 
-    load_dotenv("env.txt")
-    ```
+load_dotenv("env.txt")
+```
+<!-- markdownlint-disable MD046 -->
 
 ??? success "Example notebook output"
 
@@ -81,14 +85,16 @@ This makes `NOMAD_USERNAME` and `NOMAD_PASSWORD` available to the package via en
 
 Now you can check which user you are authenticated as, and confirm that the credentials were loaded correctly using:
 
-    ```python
-    from nomad_utility_workflows.utils.users import who_am_i
+<!-- markdownlint-disable MD046 -->
+```python
+from nomad_utility_workflows.utils.users import who_am_i
 
-    me = who_am_i(url="test")
-    print("Authenticated as:", me.name)
-    print("Username:", me.username)
-    print("Email:", me.email)
-    ```
+me = who_am_i(url="test")
+print("Authenticated as:", me.name)
+print("Username:", me.username)
+print("Email:", me.email)
+```
+<!-- markdownlint-disable MD046 -->
 
 ??? success "Example notebook output"
 
@@ -117,13 +123,15 @@ The helper `upload_files_to_nomad` both **creates a new upload** and **attaches 
 
 As a first example, upload the miscellaneous files to the 'test' NOMAD instance:
 
-    ```python
-    import os
-    from nomad_utility_workflows.utils.uploads import upload_files_to_nomad, get_upload_by_id
+<!-- markdownlint-disable MD046 -->
+```python
+import os
+from nomad_utility_workflows.utils.uploads import upload_files_to_nomad, get_upload_by_id
 
-    misc_zip_path = os.path.abspath("miscellaneous_data.zip")
-    misc_upload_id = upload_files_to_nomad(filename=misc_zip_path, url="test")
-    ```
+misc_zip_path = os.path.abspath("miscellaneous_data.zip")
+misc_upload_id = upload_files_to_nomad(filename=misc_zip_path, url="test")
+```
+<!-- markdownlint-enable MD046 -->
 
 In this code:
 
@@ -132,17 +140,19 @@ In this code:
 
 Let's now inspect the Upload and compare it with what we see in the GUI:
 
-    ```python
-    misc_upload = get_upload_by_id(upload_id = misc_upload_id, url="test")
+<!-- markdownlint-disable MD046 -->
+```python
+misc_upload = get_upload_by_id(upload_id = misc_upload_id, url="test")
 
-    print("Upload summary:")
-    print("----------------")
-    print("Upload ID:      ", misc_upload.upload_id)
-    print("Entries:        ", misc_upload.entries)
-    print("Published:      ", misc_upload.published)
-    print("Embargo:        ", misc_upload.with_embargo)
-    print("GUI URL:        ", misc_upload.nomad_gui_url)
-    ```
+print("Upload summary:")
+print("----------------")
+print("Upload ID:      ", misc_upload.upload_id)
+print("Entries:        ", misc_upload.entries)
+print("Published:      ", misc_upload.published)
+print("Embargo:        ", misc_upload.with_embargo)
+print("GUI URL:        ", misc_upload.nomad_gui_url)
+```
+<!-- markdownlint-enable MD046 -->
 
 ??? success "Example notebook output"
 
@@ -173,13 +183,15 @@ In the NOMAD GUI, the upload you just created looks like this:
 
 You can repeat the same pattern for the DFT example (`FHI-aims.zip`) to create a separate upload for simulated data and inspect its entries:
 
-    ```python
-    dft_zip_path = os.path.abspath("FHI-aims.zip")
-    dft_upload_id = upload_files_to_nomad(filename=dft_zip_path, url="test")
+<!-- markdownlint-disable MD046 -->
+```python
+dft_zip_path = os.path.abspath("FHI-aims.zip")
+dft_upload_id = upload_files_to_nomad(filename=dft_zip_path, url="test")
 
-    dft_upload = get_upload_by_id(upload_id = dft_upload_id, url="test")
-    print("GUI URL:", dft_upload.nomad_gui_url)
-    ```
+dft_upload = get_upload_by_id(upload_id = dft_upload_id, url="test")
+print("GUI URL:", dft_upload.nomad_gui_url)
+```
+<!-- markdownlint-enable MD046 -->
 
 ??? success "Example notebook output"
 
@@ -197,7 +209,7 @@ If you wish, you can check the upload using nomad test deployment GUI. It will l
 <!-- markdownlint-enable MD033 -->
 
 !!! warning
-    Running the next snippet before NOMAD finishes processing the upload may make it _look_ as if the entry is missing. Wait a few seconds and retry to ensure the snippet is executed only after NOMAD processing has completed.
+    Running the next snippet before NOMAD finishes processing the upload may make it *look* as if the entry is missing. Wait a few seconds and retry to ensure the snippet is executed only after NOMAD processing has completed.
 
     ```python
     from nomad_utility_workflows.utils.entries import get_entries_of_upload
@@ -254,19 +266,21 @@ The steps are similar to those you followed for the computations data.
 
 After creating an upload, e.g., the DFT upload, it is important to check whether NOMAD has finished processing it and whether any errors occurred.
 
-    ```python
-    dft_upload = get_upload_by_id(upload_id = dft_upload_id, url="test")
+<!-- markdownlint-disable MD046 -->
+```python
+dft_upload = get_upload_by_id(upload_id = dft_upload_id, url="test")
 
-    print("Upload status:")
-    print("--------------")
-    print("Upload ID:      ", dft_upload.upload_id)
-    print("Process status: ", dft_upload.process_status)
-    print("Errors:         ", dft_upload.errors)
-    print("Warnings:       ", dft_upload.warnings)
-    print("Entries:        ", dft_upload.entries)
-    print("Published:      ", dft_upload.published)
-    print("Open in GUI:    ", dft_upload.nomad_gui_url)
-    ```
+print("Upload status:")
+print("--------------")
+print("Upload ID:      ", dft_upload.upload_id)
+print("Process status: ", dft_upload.process_status)
+print("Errors:         ", dft_upload.errors)
+print("Warnings:       ", dft_upload.warnings)
+print("Entries:        ", dft_upload.entries)
+print("Published:      ", dft_upload.published)
+print("Open in GUI:    ", dft_upload.nomad_gui_url)
+```
+<!-- markdownlint-disable MD046 -->
 
 ??? success "Example notebook output"
 
@@ -290,27 +304,30 @@ This snippet:
 
 Once the upload has been processed successfully, you can list all entries that were created from the uploaded files.
 
-    ```python
-    from nomad_utility_workflows.utils.entries import get_entries_of_upload
+<!-- markdownlint-disable MD046 -->
+```python
+from nomad_utility_workflows.utils.entries import get_entries_of_upload
 
-    dft_entries = get_entries_of_upload(
-        upload_id=dft_upload_id,
-        url="test",
-        with_authentication=True,
+dft_entries = get_entries_of_upload(
+    upload_id=dft_upload_id,
+    url="test",
+    with_authentication=True,
+)
+
+print(f"Found {len(dft_entries)} entries in the DFT upload:\n")
+for entry in dft_entries:
+    print(
+        f"- entry_id: {entry.entry_id}\n"
+        f"  name: {entry.entry_name}\n"
+        f"  parser: {entry.parser_name}\n"
+        f"  published: {entry.published}\n"
+        f"  GUI URL: {entry.nomad_gui_url}\n"
     )
-
-    print(f"Found {len(dft_entries)} entries in the DFT upload:\n")
-    for entry in dft_entries:
-        print(
-            f"- entry_id: {entry.entry_id}\n"
-            f"  name: {entry.entry_name}\n"
-            f"  parser: {entry.parser_name}\n"
-            f"  published: {entry.published}\n"
-            f"  GUI URL: {entry.nomad_gui_url}\n"
-        )
-    ```
+```
+<!-- markdownlint-enable MD046 -->
 
 ??? success "Example notebook output"
+
     ```
     Found 1 entries in the DFT upload:
 
@@ -340,27 +357,30 @@ In the examples below, we use `dft_upload_id` to refer to the DFT upload, but th
 You can update the upload's **name** as well as the **entry-level metadata** (such as comment and references) for all entries contained in the upload. The function `edit_upload_metadata` applies metadata changes to **every
 entry in the upload**, similar to clicking the GUI button **EDIT METADATA OF ALL THE ENTRIES** in the upload page.
 
-    ```python
-    from nomad_utility_workflows.utils.uploads import edit_upload_metadata, get_upload_by_id
-    from nomad_utility_workflows.utils.entries import get_entries_of_upload
+<!-- markdownlint-disable MD046 -->
+```python
+from nomad_utility_workflows.utils.uploads import edit_upload_metadata, get_upload_by_id
+from nomad_utility_workflows.utils.entries import get_entries_of_upload
 
-    metadata_update = {
-        "upload_name": "NOMAD Tutorial, Prepare DFT example for sharing using API",
-        "comment": "DFT upload created as part of the NOMAD API tutorial using nomad-utility-workflows.",
-        "references": ["https://doi.org/xx.xxxx/example-doi"],
-    }
+metadata_update = {
+    "upload_name": "NOMAD Tutorial, Prepare DFT example for sharing using API",
+    "comment": "DFT upload created as part of the NOMAD API tutorial using nomad-utility-workflows.",
+    "references": ["https://doi.org/xx.xxxx/example-doi"],
+}
 
-    # Apply the metadata update
-    edit_upload_metadata(
-        upload_id=dft_upload_id,
-        url="test",
-        upload_metadata=metadata_update,
-    )
-    ```
+# Apply the metadata update
+edit_upload_metadata(
+    upload_id=dft_upload_id,
+    url="test",
+    upload_metadata=metadata_update,
+)
+```
+<!-- markdownlint-enable MD046 -->
 
 ??? success "Example notebook output"
+
     ```
-{'upload_id': 'HJQMQh7tT22gOU1uLbBI_g',
+    {'upload_id': 'HJQMQh7tT22gOU1uLbBI_g',
      'data': {'process_running': False,
       'current_process': '_edit_upload_metadata',
       'process_status': 'SUCCESS',
@@ -390,24 +410,27 @@ entry in the upload**, similar to clicking the GUI button **EDIT METADATA OF ALL
 This code updates the upload name and applies the comment and references to all entries in the upload.
 
 !!! warning
-    Running the next snippet before NOMAD finishes processing the entries may make it _look_ as if the entries metadata is not updated. Wait up to 2 minutes! and retry to ensure the snippet  is executed only after NOMAD processing has completed.
+    Running the next snippet before NOMAD finishes processing the entries may make it *look* as if the entries metadata is not updated. Wait up to 2 minutes! and retry to ensure the snippet  is executed only after NOMAD processing has completed.
 
 To inspect it programmatically try:
 
-    ```python
-    # Upload-level metadata (only the name appears here)
-    updated_upload = get_upload_by_id(dft_upload_id, url="test")
-    print("Upload name (upload-level):", updated_upload.upload_name)
+<!-- markdownlint-disable MD046 -->
+```python
+# Upload-level metadata (only the name appears here)
+updated_upload = get_upload_by_id(dft_upload_id, url="test")
+print("Upload name (upload-level):", updated_upload.upload_name)
 
-    # Entry-level metadata (comment and references live here)
-    entries = get_entries_of_upload(upload_id = dft_upload_id, url="test", with_authentication=True)
-    for entry in entries:
-        print("\nEntry ID:", entry.entry_id)
-        print("Entry comment:", entry.comment)
-        print("Entry references:", entry.references)
-    ```
+# Entry-level metadata (comment and references live here)
+entries = get_entries_of_upload(upload_id = dft_upload_id, url="test", with_authentication=True)
+for entry in entries:
+    print("\nEntry ID:", entry.entry_id)
+    print("Entry comment:", entry.comment)
+    print("Entry references:", entry.references)
+```
+<!-- markdownlint-enable MD046 -->
 
 ??? success "Example notebook output"
+
     ```
     Upload name (upload-level): NOMAD Tutorial, Prepare DFT example for sharing using API
 
@@ -415,6 +438,7 @@ To inspect it programmatically try:
     Entry comment: DFT upload created as part of the NOMAD API tutorial using nomad-utility-workflows.
     Entry references: ['https://doi.org/xx.xxxx/example-doi']
     ```
+
 Retrieving the entries again confirms that the metadata was updated correctly at the entry level.
 
 You can also confirm the changes by clicking **EDIT METADATA OF ALL THE ENTRIES** in the test deployment GUI for that upload. You will see that the metadata has been updated for all the entries of this upload.
@@ -429,32 +453,38 @@ You can also confirm the changes by clicking **EDIT METADATA OF ALL THE ENTRIES*
 
 You can group your upload into a dataset so that related entries can later be queried or managed together.
 
-    ```python
-    from nomad_utility_workflows.utils.datasets import create_dataset
+<!-- markdownlint-disable MD046 -->
+```python
+from nomad_utility_workflows.utils.datasets import create_dataset
 
-    dataset_name = "Example dataset to contain DFT data"
-    dataset_id = create_dataset(dataset_name=dataset_name, url="test")
-    print(f"Created dataset: dataset_id={dataset_id}, dataset_name='{dataset_name}'")
-    ```
+dataset_name = "Example dataset to contain DFT data"
+dataset_id = create_dataset(dataset_name=dataset_name, url="test")
+print(f"Created dataset: dataset_id={dataset_id}, dataset_name='{dataset_name}'")
+```
+<!-- markdownlint-enable MD046 -->
 
 ??? success "Example notebook output"
+
     ```
-Created dataset: dataset_id=431csah2RKSEV3ic38FmTA, dataset_name='Example dataset to contain DFT data'
+    Created dataset: dataset_id=431csah2RKSEV3ic38FmTA, dataset_name='Example dataset to contain DFT data'
     ```
 
 To assign the upload, i.e., the entries of the upload, to the dataset you have created, it is enough that we update the upload's metadata to include the `dataset_id`:
 
-    ```python
-    edit_upload_metadata(
-        upload_id=dft_upload_id,
-        url="test",
-        upload_metadata={"dataset_id": dataset_id},
-    )
-    ```
+<!-- markdownlint-disable MD046 -->
+```python
+edit_upload_metadata(
+    upload_id=dft_upload_id,
+    url="test",
+    upload_metadata={"dataset_id": dataset_id},
+)
+```
+<!-- markdownlint-enable MD046 -->
 
 ??? success "Example notebook output"
+
     ```
-{'upload_id': 'HJQMQh7tT22gOU1uLbBI_g',
+    {'upload_id': 'HJQMQh7tT22gOU1uLbBI_g',
      'data': {'process_running': False,
       'current_process': '_edit_upload_metadata',
       'process_status': 'SUCCESS',
@@ -491,43 +521,49 @@ If you wish, you can collaborate on this upload by sharing it with selected NOMA
 
 Let’s start by searching for the user you want to share your upload with. Replace `SearchSurname` in the snippet below with the name of that NOMAD user.
 
-    ``` python
-    from nomad_utility_workflows.utils.users import search_users_by_name
+<!-- markdownlint-disable MD046 -->
+``` python
+from nomad_utility_workflows.utils.users import search_users_by_name
 
-    candidates = search_users_by_name("SearchSurname", url="test")
+candidates = search_users_by_name("SearchSurname", url="test")
 
-    for user in candidates:
-        print(f"Found the user '{user.name}' with user_id='{user.user_id}'")
-    ```
+for user in candidates:
+    print(f"Found the user '{user.name}' with user_id='{user.user_id}'")
+```
+<!-- markdownlint-enable MD046 -->
 
 ??? success "Example notebook output"
+
     ```
-Found the user 'Test_siamak Test_nakhaie' with user_id='f250f5ab-b05c-4bad-9939-5f4883c7a694'
+    Found the user 'Test_siamak Test_nakhaie' with user_id='f250f5ab-b05c-4bad-9939-5f4883c7a694'
     ```
 
 Once the user appears in the output, copy their `user_id`. In the next step, paste this `user_id` into the appropriate list and comment out all lines related to the role you do not want to assign.
 
-    ```python
-    from nomad_utility_workflows.utils.uploads import edit_upload_metadata
+<!-- markdownlint-disable MD046 -->
+```python
+from nomad_utility_workflows.utils.uploads import edit_upload_metadata
 
-    coauthor_ids = ["paste-user-id-here"]     # write access
-    reviewer_ids = ["paste-user-id-here"]     # read-only access
+coauthor_ids = ["paste-user-id-here"]     # write access
+reviewer_ids = ["paste-user-id-here"]     # read-only access
 
-    edit_upload_metadata(
-        upload_id=dft_upload_id,
-        url="test",
-        upload_metadata={
-            "coauthors": coauthor_ids, # comment out if not needed
-            "reviewers": reviewer_ids, # comment out if not needed
-        },
-    )
+edit_upload_metadata(
+    upload_id=dft_upload_id,
+    url="test",
+    upload_metadata={
+        "coauthors": coauthor_ids, # comment out if not needed
+        "reviewers": reviewer_ids, # comment out if not needed
+    },
+)
 
-    print("Access updated.")
-    ```
+print("Access updated.")
+```
+<!-- markdownlint-enable MD046 -->
 
 ??? success "Example notebook output"
+
     ```
-Access updated.
+    Access updated.
     ```
 If you wish, you can verify this in the upload page by clicking **EDIT UPLOAD MEMBERS**, which will look like similar to:
 
@@ -541,21 +577,24 @@ If you wish, you can verify this in the upload page by clicking **EDIT UPLOAD ME
 
 If you plan to publish your upload to NOMAD but want to delay when it becomes visible to everyone, you can set an embargo period. The example below applies an embargo of one month.
 
-    ```python
-    edit_upload_metadata(
-        upload_id=dft_upload_id,
-        url="test",
-        upload_metadata= {"embargo_length" : 1},
-    )
+<!-- markdownlint-disable MD046 -->
+```python
+edit_upload_metadata(
+    upload_id=dft_upload_id,
+    url="test",
+    upload_metadata= {"embargo_length" : 1},
+)
 
-    upload_with_embargo = get_upload_by_id(dft_upload_id, url="test")
-    print("With embargo:", upload_with_embargo.with_embargo)
-    print("Embargo length:", upload_with_embargo.embargo_length)
-    ```
+upload_with_embargo = get_upload_by_id(dft_upload_id, url="test")
+print("With embargo:", upload_with_embargo.with_embargo)
+print("Embargo length:", upload_with_embargo.embargo_length)
+```
+<!-- markdownlint-enable MD046 -->
 
 ??? success "Example notebook output"
+
     ```
-With embargo: True
+    With embargo: True
     Embargo length: 1.0
     ```
 
@@ -567,13 +606,15 @@ You can now publish your upload on the NOMAD **test** deployment:
     Publishing data on the production server requires that you have the **rights to the data** and are **eligible to release them under the CC BY 4.0 license**, and this action is **irreversible**.
     For this tutorial, we use the test deployment. Please make sure that `url="test"` is set before triggering any publication action.
 
-    ```python
-    from nomad_utility_workflows.utils.uploads import publish_upload
-    from pprint import pprint
+<!-- markdownlint-disable MD046 -->
+```python
+from nomad_utility_workflows.utils.uploads import publish_upload
+from pprint import pprint
 
-    response = publish_upload(upload_id=dft_upload_id, url="test")
-    pprint(response)
-    ```
+response = publish_upload(upload_id=dft_upload_id, url="test")
+pprint(response)
+```
+<!-- markdownlint-enable MD046 -->
 
 ??? success "Example notebook output"
 
