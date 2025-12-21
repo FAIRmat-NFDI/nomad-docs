@@ -7,20 +7,28 @@ In this tutorial, you will learn to interact with the NOMAD API using Python and
 
 ---
 
-## Prerequisites
+## Before you begin
 
-- A basic understanding of Python and how to run Python code in Jupyter notebooks.
-- A NOMAD account with valid credentials for API access.
-- Access to a Python environment where you can install external packages.
-- Familiarity with the key elements of NOMAD as an RDM tool (e.g., uploads, entries, datasets).
-- Having the example ZIP files available in your working directory.
+This tutorial assumes basic familiarity with Python and programmatic workflows.
 
-??? example "Download the example files for this tutorial"
-    [Download miscellaneous_data.zip](https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_3_files/example_files_upload/miscellaneous_data/miscellaneous_data.zip){:target="_blank" rel="noopener"}
+Before starting this tutorial, please make sure you have the following:
 
-    [Download FHI-aims.zip](https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_3_files/example_files_upload/computations_data/FHI-aims.zip){:target="_blank" rel="noopener"}
+1. **NOMAD user account**  
+   In order to interact with the NOMAD API, a user account is required.  
+   You can create a user account by following these [steps](overview.md#create-a-nomad-user-account){:target="_blank" rel="noopener"} on the overview page.
 
-    [Download xps_nexus_data.zip](https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_3_files/example_files_upload/experiments_data/xps_nexus_data.zip){:target="_blank" rel="noopener"}
+2. **Python environment**  
+   A Python **3.11 or newer** environment with permission to install external packages.  
+   The examples in this tutorial are designed to be run in a Jupyter notebook.
+
+3. **Basic Python knowledge**  
+   You should be comfortable running Python code, installing packages, and working with notebooks.
+
+4. **Example files available on your local machine**  
+   This tutorial uses provided example data files for:
+    - [Miscellaneous files (PDF, images, tables)](https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_3_files/example_files_upload/miscellaneous_data/miscellaneous_data.zip){:target="_blank" rel="noopener"},
+    - [Computational data (DFT calculations)](https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_3_files/example_files_upload/computations_data/FHI-aims.zip){:target="_blank" rel="noopener"},
+    - [Experimental data (XPS measurements)](https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_3_files/example_files_upload/experiments_data/xps_nexus_data.zip){:target="_blank" rel="noopener"}.
 
 !!! warning
     The code snippets in this tutorial are designed to be run sequentially in a Jupyter notebook.
@@ -30,13 +38,17 @@ In this tutorial, you will learn to interact with the NOMAD API using Python and
 
 ## What you will learn
 
-By the end of this tutorial, you will be able to programmatically perform the following RDM tasks:
+In this tutorial, you will learn how to programmatically upload, manage, and publish research data in NOMAD using the NOMAD API and Python.
 
-- Authenticate and connect to the NOMAD API using Python.
-- Create uploads from example ZIP files and inspect their processing status and entries.
-- Create a new dataset and assign an upload to it.
-- Edit upload and entry metadata (name, comments, references, datasets).
-- Share uploads with selected users, set embargo periods, and publish uploads on the NOMAD test deployment.
+By the end of this tutorial, you will be able to:
+
+1. Authenticate with the NOMAD API using Python
+2. Upload raw research data to NOMAD and create uploads programmatically
+3. Retrieve uploads and entries and inspect or edit their metadata
+4. Group entries into datasets for curation and organization
+5. Share uploads with collaborators and manage access permissions
+6. Publish uploads on the NOMAD test deployment
+
 
 ---
 
@@ -45,6 +57,84 @@ By the end of this tutorial, you will be able to programmatically perform the fo
 In this tutorial, we will use the NOMAD **test** deployment. Therefore, in all code examples, we will set `url="test"` when calling the helper functions. Later, you can switch to `url="prod"` or a custom NOMAD API URL if needed.
 
 We assume you are working in a Python 3.11+ environment, preferably in a dedicated virtual environment for this tutorial.
+
+??? info "Need help creating a project folder, Python environment, and Jupyter kernel?"
+
+    This optional section shows how to create a **project folder**, set up a **clean Python environment**, and ensure that Jupyter uses the correct kernel for this tutorial.
+
+    ---
+    **1. Create a project folder**
+
+    Open a terminal (or PowerShell on Windows) and run:
+
+    ```bash
+    mkdir nomad-api-tutorial
+    cd nomad-api-tutorial
+    ```
+
+    All files used in this tutorial (notebooks, ZIP files, and `env.txt`) should be placed in this folder.
+
+    ---
+    **2. Create a virtual Python environment**
+
+    ```bash
+    python -m venv nomad-env
+    ```
+
+    ---
+    **3. Activate the environment**
+
+    - Linux / macOS:
+      ```bash
+      source nomad-env/bin/activate
+      ```
+
+    - Windows (PowerShell):
+      ```powershell
+      nomad-env\Scripts\Activate.ps1
+      ```
+
+    Once activated, your terminal prompt should show `(nomad-env)`.
+
+    ---
+    **4. Install Jupyter and required tools**
+
+    ```bash
+    pip install --upgrade pip
+    pip install jupyterlab ipykernel
+    ```
+
+    ---
+    **5. Register the environment as a Jupyter kernel**
+
+    ```bash
+    python -m ipykernel install --user --name nomad-env --display-name "Python (nomad-env)"
+    ```
+
+    This step ensures that Jupyter can use the Python environment created for this tutorial.
+
+    ---
+    **6. Start Jupyter**
+
+    ```bash
+    jupyter lab
+    ```
+
+    Open or create a notebook (`.ipynb`), then select the kernel:
+    **Kernel → Change Kernel… → Python (nomad-env)**.
+
+    ---
+    **7. Verify the selected kernel**
+
+    Run the following cell in your notebook:
+
+    ```python
+    import sys
+    print(sys.executable)
+    ```
+
+    The printed path should point to `nomad-env`. If not, re-select the kernel.
+
 
 Install the plugin and helper packages:
 

@@ -1,4 +1,4 @@
-# Exploring Data in NOMAD
+# Exploring data in NOMAD
 
 In this tutorial, we will learn how to efficiently search and filter entries in NOMAD to find data that matches your criteria.
 
@@ -7,7 +7,7 @@ Finally, we will explore how to create interactive widgets based on selected pro
 
 By the end of this tutorial, you will be able to navigate NOMAD with confidence, quickly locate relevant data, and tailor your searches using interactive filters and widgets.
 
-## Navigate to NOMAD's Explore Entries Page
+## Navigate to NOMAD's explore entries page
 
 The **EXPLORE** menu allows you to navigate and search through a vast amount of materials-science data. It provides several options, each focuses on a specific application or method. They include different sets of filters and/or search widgets that allow users to efficiently filter and narrow down results, making it easier to find relevant entries in specific domains.
 
@@ -37,7 +37,7 @@ The **Entries** page shows all the uploaded data that are published on NOMAD. Pu
 
 ---
 
-### Search Interface & Filters
+### Search interface & filters
 
 In the Entries page, you will find a list of possible filters on the left panel. NOMAD supports advanced searches based on:
 
@@ -66,7 +66,7 @@ You can pin frequently used filters using **(+)** for a customized search interf
 
 ---
 
-### Search Bar: A Quick Way to Explore Data
+### Search bar: a quick way to explore data
 <!-- Add a page in Reference, that explains all possible syntax for the searches in the search bar -->
 
 You can use the NOMAD search bar to find indexed quantities. As you begin typing, all available
@@ -101,7 +101,7 @@ Similarly, you can define a bounded range for the values. For example, to search
 
 ---
 
-### Custom Widgets for Advanced Searches
+### Custom widgets for advanced searches
 
 NOMAD enables searching entries using rich metadata. Some metadata is extracted automatically, while others are user-provided via schemas. Only metadata stored according to schemas is searchable.
 
@@ -120,7 +120,7 @@ Here are the main four widgets:
 
 ---
 
-## Example 1: Finding Alternative ETL Materials for Perovskite Solar Cells
+## Example 1: finding alternative ETL materials for Perovskite solar cells
 
 In the following, we'll walk through an example to help you better understand how to use these widgets. Imagine we are working on solar cell research and have fabricated solar cell devices using the absorber material *CsPbBr2I* (Cesium Lead Bromine Iodide), a mixed halide perovskite.
 
@@ -174,7 +174,7 @@ Now, let us answer the following question:
 
 ---
 
-## Example 2: Exploring Sn-Based Solar Cells
+## Example 2: exploring Sn-based solar cells
 
 Let’s explore how **hole transport layer (HTL) materials** affect efficiency in **Sn-based solar cells** with **C60** as the electron transport layer (ETL).
 

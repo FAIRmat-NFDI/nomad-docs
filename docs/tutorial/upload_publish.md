@@ -1,19 +1,45 @@
-# Uploading and Publishing Data in NOMAD
+# Uploading and publishing data in NOMAD
 
-In this tutorial, we will explore how to upload, share, and research data in NOMAD, using examples from both computational and experimental research. We will start by introducing the key components of NOMAD that facilitate the process, from uploading raw data files to publishing datasets with a Digital Object Identifier (DOI). Step by step, we will guide you through creating and managing uploads, adding files to generate entries that NOMAD processes, and organizing these entries into datasets for publication. By the end of this tutorial, you will have a clear understanding of how to handle different types of research data efficiently within NOMAD.
+In this tutorial, we will explore how to upload, share, and research data in NOMAD, using examples from both computational and experimental research. We will start by introducing the key components of NOMAD that facilitate the process, from uploading raw data files to publishing datasets with a Digital Object Identifier (DOI). Step by step, we will guide you through creating and managing uploads, adding files to generate entries that NOMAD processes, and organizing these entries into datasets for publication. By the end of this tutorial, you will be able to manage the full workflow from raw files to published, FAIR research datasets in NOMAD using the GUI.
 
 ![From raw files to published datasets](images/upload_publish_1.png)
+## Before you begin
+This tutorial requires no prior experience with NOMAD.
 
-## The Key Elements in NOMAD
+Before starting this tutorial, please make sure you have the following:
+
+1. **NOMAD user account**  
+    In order to upload data into NOMAD, a user account is required.
+    You can create a user account by following these [steps](overview.md#create-a-nomad-user-account){:target="_blank" rel="noopener"} on the overview page.
+
+2. **Example files available on your local machine**  
+  This tutorial uses provided example data files for:
+    - [Miscellaneous files (PDF, images, tables)](https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_3_files/example_files_upload/miscellaneous_data/miscellaneous_data.zip){:target="_blank" rel="noopener"},
+    - [Computational data (DFT calculations)](https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_3_files/example_files_upload/computations_data/FHI-aims.zip){:target="_blank" rel="noopener"},
+    - [Experimental data (XPS measurements)](https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_3_files/example_files_upload/experiments_data/xps_nexus_data.zip){:target="_blank" rel="noopener"}.
+
+
+---
+## What you will learn
+
+In this tutorial, you will learn how to:
+
+1. Upload raw research data to NOMAD and organize it using uploads
+2. Understand how NOMAD processes files into structured entries
+3. Share uploads with collaborators and manage access permissions
+4. Publish uploads and understand the role of embargoes
+5. Group entries into datasets for curation and publication
+6. Publish datasets and assign a Digital Object Identifier (DOI)
+
+---
+
+## The key elements in NOMAD
 
 To begin the journey from uploading raw files to publishing datasets with DOIs in NOMAD, you need to understand the key elements of this process in NOMAD, which are illustrated in the figure below.
 
 ![The key elements in NOMAD](images/upload_publish_2.png)
 
-1. In order to upload data into NOMAD, a **user account** is required.
-You can create a user account by following these [steps](overview.md#create-a-nomad-user-account){:target="_blank"} on the overview page.
-
-2. All files and data created by users are organized in NOMAD as **Uploads**, which function as directories within the user’s account. You can create an upload for each project and structure it into nested folder directories for better organization.
+- All files and data created by users are organized in NOMAD as **Uploads**, which function as directories within the user’s account. You can create an upload for each project and structure it into nested folder directories for better organization.
 
     ??? info "Features of NOMAD **Uploads**"
         - **Creation:** Uploads are created and managed by users.
@@ -21,7 +47,7 @@ You can create a user account by following these [steps](overview.md#create-a-no
         - **Organization:** Each upload can contain multiple files organized into directories.
         - **Sharing & Publishing:** Entries and files can only be shared, transferred, or published as complete uploads.
 
-3. Research data in the form of raw files are added to uploads. If NOMAD has a built-in parser for the file formats, it automatically processes the files and creates **Entries**. These entries represent structured data extracted from the raw files.
+- Research data in the form of raw files are added to uploads. If NOMAD has a built-in parser for the file formats, it automatically processes the files and creates **Entries**. These entries represent structured data extracted from the raw files.
 
     ??? info "Features of NOMAD **Entries**"
         - **Creation:** Entries are automatically generated by NOMAD from uploaded raw files or instantiated schemas.
@@ -29,7 +55,7 @@ You can create a user account by following these [steps](overview.md#create-a-no
         - **Organization:** Entries belong to specific uploads and are linked to a raw file that NOMAD has recognized and parsed.
         - **Sharing & Publishing:** Entries can be shared as part of an upload, and individual entries can be added to datasets, which can be published with a DOI.
 
-4. Entries can be grouped into **Datasets**, which allow for better organization of related data. Once the dataset is complete, it can be published with a DOI, making the research data findable, accessible, interoperable, and reusable (FAIR).
+- Entries can be grouped into **Datasets**, which allow for better organization of related data. Once the dataset is complete, it can be published with a DOI, making the research data findable, accessible, interoperable, and reusable (FAIR).
 
     ??? info "Features of NOMAD **Datasets**"
         - **Creation:** Datasets are created and managed by users.
@@ -40,8 +66,7 @@ You can create a user account by following these [steps](overview.md#create-a-no
 For more detailed explanation, you can refer to this [page](../explanation/basics.md).
 
 ---
-
-## Create New Upload
+## Create new upload
 
 The uploads exist in the *Your uploads* page. Here you can view a list of all your uploads with their relevant information. You can also create new uploads or add an example upload prepared by others.
 
@@ -101,7 +126,7 @@ The uploads exist in the *Your uploads* page. Here you can view a list of all yo
 
 ---
 
-## Sharing and Publishing Uploads
+## Sharing and publishing uploads
 
 Uploads in NOMAD can be shared or published. When an upload is shared or published, all entries and files contained within it are also shared or published.
 
@@ -182,7 +207,7 @@ Alternatively, you can click the `EDIT UPLOAD MEMBERS` button below the list of 
 
 ---
 
-## Add Files to an Upload
+## Add files to an upload
 
 Let's start adding files to your NOMAD upload. We will explore three different examples:
 
@@ -213,7 +238,7 @@ Files can be added to an upload individually, or you can group them into a compr
 
     - NOMAD allows you to preview common file formats that are not automatically parsed. This means you can view the contents of the file directly within the platform without having to download it. Examples include: `.txt`, `.csv`, `.pdf`, `.png`, `.jpg`.
 
-### Uploading Miscellaneous Files
+### Uploading miscellaneous files
 
 ??? example "Download the example files for this exercise"
     <!-- TODO consider changing this admonition to a download button -->
@@ -253,7 +278,7 @@ You can add these files to your NOMAD upload. Do so by simply drag and drop the 
 
     ![An animatation demonstrating the open from file browser dialog in NOMAD ](images/example_3-1_file_browser_dialog.gif)
 
-### Uploading Computations Data
+### Uploading computations data
 
 ??? example "Download the example files for this exercise"
     <!-- TODO consider changing this admonition to a download button -->
@@ -323,7 +348,7 @@ In other words, NOMAD will read the input and output files and provide all infor
 
         ![Animation of the data tab](images/example_3-2_data_tab.gif)
 
-### Uploading Experimental Data
+### Uploading experimental data
 
 ??? example "Download the example files for this exercise"
     <!-- TODO consider changing this admonition to a download button -->
@@ -490,13 +515,13 @@ In the following examples, you will learn how to upload a raw file from a SPECS 
 
 ---
 
-## Create Datasets and Get a DOI
+## Create datasets and get a DOI
 
 You can organize several entries  by grouping them into common datasets, making it easier to manage related data.
 Datasets are for organizing and referencing curated data. They do not affect how data is processed.
 Users can get a DOI for their datasets.
 
-### Group Entries into a Dataset
+### Group entries into a dataset
 
 **Step 1:** In the uploads page, click on **EDIT AUTHOR METADATA OF ALL ENTRIES** button. This will add all the Entries in the upload to the dataset.
 
@@ -517,7 +542,7 @@ Alternatively, if you would like to add selected entries from your Upload, click
 
 ![Screenshot of steps 2 - 4 of creating dataset](images/datasets_steps_2-4.png)
 
-### Manage a Dataset and Assign it a DOI
+### Manage a dataset and assign it a DOI
 
 User created datasets exist in the “Your datasets” page page. You can reach there by clicking on **Datasets** in the **PUBLISH** menu. Here you can view a list of all your created datasets with their relevant information and assign them a DOI.
 
