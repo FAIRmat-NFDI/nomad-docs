@@ -6,8 +6,11 @@ They provide a structured learning experience that helps you apply concepts to r
 As you go through the tutorial pages, you will encounter embedded boxes with different colors and icons, each providing distinct types of information or instructions. Below is a list of the various box types and guidance on how to use them:
 
 !!! info "Offers additional information to enhance your understanding of NOMAD."
+
 !!! task "Presents hands-on tasks or questions with instructions to complete them."
+
 !!! example "Shares example files for you to try out, along with explanations of their contents and scientific use cases."
+
 !!! warning "Displays important warnings to consider before proceeding further in the tutorial."
 
 ## Scope of the tutorials

@@ -77,7 +77,7 @@ We assume you are working in a Python 3.11+ environment, preferably in a dedicat
     **2. Create a virtual Python environment**
 
     ```bash
-    python -m venv nomad-env
+    python3 -m venv nomad-env
     ```
 
     ---
@@ -299,13 +299,15 @@ If you wish, you can check the upload using nomad test deployment GUI. It will l
 !!! warning
     Running the next snippet before NOMAD finishes processing the upload may make it *look* as if the entry is missing. Wait a few seconds and retry to ensure the snippet is executed only after NOMAD processing has completed.
 
-    ```python
-    from nomad_utility_workflows.utils.entries import get_entries_of_upload
+To check it programmatically try:
 
-    dft_entries = get_entries_of_upload(upload_id= dft_upload_id, url="test", with_authentication=True)
-    for entry in dft_entries:
-        print(entry.entry_id, entry.nomad_gui_url)
-    ```
+```python
+from nomad_utility_workflows.utils.entries import get_entries_of_upload
+
+dft_entries = get_entries_of_upload(upload_id= dft_upload_id, url="test", with_authentication=True)
+for entry in dft_entries:
+    print(entry.entry_id, entry.nomad_gui_url)
+```
 
 ??? success "Example notebook output"
 
@@ -385,7 +387,7 @@ print("Open in GUI:    ", dft_upload.nomad_gui_url)
     ```
 This snippet:
 
-- Retrieves the latest state of your DFT upload from the NOMAD API, using `dft_upload_id`
+- Retrieves the latest state of your DFT upload from the NOMAD API, using `dft_upload_id`.
 - Shows the processing status and any errors or warnings.
 - Tells you how many entries were created.
 - Provides a direct link to inspect the upload in the NOMAD GUI.

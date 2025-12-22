@@ -1,4 +1,4 @@
-# Upload and publishing data in NOMAD
+# Upload and publish data in NOMAD
 
 In this tutorial, we will explore how to upload, share, and research data in NOMAD, using examples from both computational and experimental research. We will start by introducing the key components of NOMAD that facilitate the process, from uploading raw data files to publishing datasets with a Digital Object Identifier (DOI). Step by step, we will guide you through creating and managing uploads, adding files to generate entries that NOMAD processes, and organizing these entries into datasets for publication. By the end of this tutorial, you will be able to manage the full workflow from raw files to published, FAIR research datasets in NOMAD using the GUI.
 
@@ -129,7 +129,7 @@ The uploads exist in the *Your uploads* page. Here you can view a list of all yo
 
 ---
 
-## Sharing and publishing uploads
+## Share and publish uploads
 
 Uploads in NOMAD can be shared or published. When an upload is shared or published, all entries and files contained within it are also shared or published.
 
@@ -281,7 +281,7 @@ You can add these files to your NOMAD upload. Do so by simply drag and drop the 
 
     ![An animatation demonstrating the open from file browser dialog in NOMAD ](images/example_3-1_file_browser_dialog.gif)
 
-### Upload computations data
+### Upload computational data
 
 ??? example "Download the example files for this exercise"
     <!-- TODO consider changing this admonition to a download button -->
