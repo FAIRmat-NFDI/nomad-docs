@@ -203,7 +203,7 @@ This call confirms which NOMAD account is being used.
 Next, you create uploads in NOMAD from the three example ZIP files.
 The helper `upload_files_to_nomad` both **creates a new upload** and **attaches the given ZIP file** in a single step (in the GUI these are two actions; here they are combined into one API call).
 
-!!! warning "Warning: Use the NOMAD Test deployment only"
+!!! warning
 
     All uploads in this tutorial must be sent to the **[Test Deployment of NOMAD](https://nomad-lab.eu/prod/v1/test/gui/about/information){:target="_blank" rel="noopener"}** The data there **is not persistent** and will be deleted occasionally, which ensures that you can safely test uploading and publishing without affecting public data.
     When running code snippets, always make sure that the `url` parameter is set to `test`, i.e.,
@@ -324,7 +324,7 @@ The steps are similar to those you followed for the computations data.
 
     Upload the file `xps_nexus_data.zip` to the NOMAD **test** deployment and print the GUI URL of the entry created from that upload.
 
-??? info "Solution"
+??? success "Solution"
 
     Here is a ready-to-paste snippet for your Jupyter notebook:
     ```python
@@ -345,7 +345,7 @@ The steps are similar to those you followed for the computations data.
     for entry in xps_entries:
         print(entry.entry_id, entry.nomad_gui_url)
     ```
-??? success "Example notebook output"
+    **Example notebook output**
 
     ```
     Upload GUI URL: https://nomad-lab.eu/prod/v1/test/gui/user/uploads/upload/id/VcjEreRpRQOU5kVWwUnFRg
