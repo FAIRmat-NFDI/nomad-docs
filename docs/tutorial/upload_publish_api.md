@@ -301,6 +301,7 @@ If you wish, you can check the upload using nomad test deployment GUI. It will l
 
 To check it programmatically try:
 
+<!-- markdownlint-disable MD046 -->
 ```python
 from nomad_utility_workflows.utils.entries import get_entries_of_upload
 
@@ -308,6 +309,7 @@ dft_entries = get_entries_of_upload(upload_id= dft_upload_id, url="test", with_a
 for entry in dft_entries:
     print(entry.entry_id, entry.nomad_gui_url)
 ```
+<!-- markdownlint-disable MD046 -->
 
 ??? success "Example notebook output"
 
