@@ -49,7 +49,6 @@ By the end of this tutorial, you will be able to:
 5. Share uploads with collaborators and manage access permissions
 6. Publish uploads on the NOMAD test deployment
 
-
 ---
 
 ## Environment setup
@@ -134,7 +133,6 @@ We assume you are working in a Python 3.11+ environment, preferably in a dedicat
     ```
 
     The printed path should point to `nomad-env`. If not, re-select the kernel.
-
 
 Install the plugin and helper packages:
 

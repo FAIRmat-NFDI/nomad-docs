@@ -3,7 +3,9 @@
 In this tutorial, we will explore how to upload, share, and research data in NOMAD, using examples from both computational and experimental research. We will start by introducing the key components of NOMAD that facilitate the process, from uploading raw data files to publishing datasets with a Digital Object Identifier (DOI). Step by step, we will guide you through creating and managing uploads, adding files to generate entries that NOMAD processes, and organizing these entries into datasets for publication. By the end of this tutorial, you will be able to manage the full workflow from raw files to published, FAIR research datasets in NOMAD using the GUI.
 
 ![From raw files to published datasets](images/upload_publish_1.png)
+
 ## Before you begin
+
 This tutorial requires no prior experience with NOMAD.
 
 Before starting this tutorial, please make sure you have the following:
@@ -18,8 +20,8 @@ Before starting this tutorial, please make sure you have the following:
     - [Computational data (DFT calculations)](https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_3_files/example_files_upload/computations_data/FHI-aims.zip){:target="_blank" rel="noopener"},
     - [Experimental data (XPS measurements)](https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_3_files/example_files_upload/experiments_data/xps_nexus_data.zip){:target="_blank" rel="noopener"}.
 
-
 ---
+
 ## What you will learn
 
 In this tutorial, you will learn how to:
@@ -66,6 +68,7 @@ To begin the journey from uploading raw files to publishing datasets with DOIs i
 For more detailed explanation, you can refer to this [page](../explanation/basics.md).
 
 ---
+
 ## Create new upload
 
 The uploads exist in the *Your uploads* page. Here you can view a list of all your uploads with their relevant information. You can also create new uploads or add an example upload prepared by others.
