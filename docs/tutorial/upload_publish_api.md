@@ -1,7 +1,7 @@
 <!-- markdownlint-disable MD013 -->
 <!-- Disabled MD013: long lines are needed in this tutorial -->
 
-# Upload and publish using NOMAD API
+# Upload and publish data using the NOMAD API
 
 In this tutorial, you will learn to interact with the NOMAD API using Python and the [`nomad-utility-workflows`](https://pypi.org/project/nomad-utility-workflows/){:target="_blank" rel="noopener"} package. You will perform, programmatically, many of the tasks you might otherwise do in the NOMAD GUI: authenticate with your NOMAD account, create uploads from example ZIP files (miscellaneous files, DFT computations, and experimental XPS data), inspect the processing status and entries of those uploads, edit upload and entry metadata, group uploads into datasets, share them with selected users, set embargo periods, and finally publish your uploads on the NOMAD test deployment.
 
@@ -288,7 +288,7 @@ print("GUI URL:", dft_upload.nomad_gui_url)
     ```
 This snippet creates a new upload for the DFT ZIP file and prints a direct GUI link where you can monitor its processing status.
 
-If you wish, you can check the upload using nomad test deployment GUI. It will look like:
+If you wish, you can check the upload using the NOMAD test deployment GUI. It will look like:
 
 <!-- markdownlint-disable MD033 -->
 <div style="text-align: center;">
@@ -442,8 +442,7 @@ In the examples below, we use `dft_upload_id` to refer to the DFT upload, but th
 
 ### Edit upload's metadata
 
-You can update the upload's **name** as well as the **entry-level metadata** (such as comment and references) for all entries contained in the upload. The function `edit_upload_metadata` applies metadata changes to **every
-entry in the upload**, similar to clicking the GUI button **EDIT METADATA OF ALL THE ENTRIES** in the upload page.
+You can update the upload's **name** as well as the **entry-level metadata** (such as comment and references) for all entries contained in the upload. The function `edit_upload_metadata` applies metadata changes to **every entry in the upload**, similar to clicking the GUI button **EDIT METADATA OF ALL THE ENTRIES** in the upload page.
 
 <!-- markdownlint-disable MD046 -->
 ```python
@@ -498,7 +497,7 @@ edit_upload_metadata(
 This code updates the upload name and applies the comment and references to all entries in the upload.
 
 !!! warning
-    Running the next snippet before NOMAD finishes processing the entries may make it *look* as if the entries metadata is not updated. Wait up to 2 minutes! and retry to ensure the snippet  is executed only after NOMAD processing has completed.
+    Running the next snippet before NOMAD finishes processing the entries may make it *look* as if the entries metadata is not updated. Wait up to 2 minutes and retry to ensure the snippet is executed only after NOMAD processing has completed.
 
 To inspect it programmatically try:
 
@@ -653,7 +652,7 @@ print("Access updated.")
     ```
     Access updated.
     ```
-If you wish, you can verify this in the upload page by clicking **EDIT UPLOAD MEMBERS**, which will look like similar to:
+If you wish, you can verify this in the upload page by clicking **EDIT UPLOAD MEMBERS**, which will look similar to:
 
 <!-- markdownlint-disable MD033 -->
 <div style="text-align: center;">
