@@ -1,52 +1,89 @@
-# Developing a NOMAD Plugin
+# Develop a NOMAD Plugin
 
-In this tutorial you will learn how to create and develop a NOMAD plugin. As an example we
-will create a plugin to log data for a simple sintering process.
+In this tutorial, we will explore how to develop and extend NOMAD by creating a custom plugin.
+We will introduce the key concepts behind NOMAD plugins and guide you through the process of setting up a plugin project, defining schema packages, and adding custom functionality using Python. Using the example of a simple sintering process, you will learn how to translate domain-specific knowledge into structured, FAIR-compliant metadata and integrate it into the NOMAD ecosystem. 
 
-## Prerequisites
+## Before you begin
 
-- A GitHub account. This can be created for free on [github.com](https://github.com/signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F&source=header-home){:target="_blank" rel="noopener"}.
-- Basic understanding of Python.
-- Basic understanding of NOMAD metainfo, see for example [tutorial 8](https://www.fairmat-nfdi.eu/events/fairmat-tutorial-8/tutorial-8-materials){:target="_blank" rel="noopener"}.
+This tutorial assumes basic familiarity with software development and is intended for users who
+want to extend NOMAD with custom schemas or processing logic.
 
-!!! note
-    Several software development concepts are being used during this tutorial.
-    Here is a list with some further information on each of them:
+Before starting this tutorial, please make sure you have the following:
 
-    * [what is Git](https://learn.microsoft.com/en-us/devops/develop/git/what-is-git){:target="_blank" rel="noopener"}
-    * [what is VSCode, i. e., an Integrated Development Environment (IDE)](https://aws.amazon.com/what-is/ide/){:target="_blank" rel="noopener"}
-    * [what is Pip](https://realpython.com/lessons/what-is-pip-overview/){:target="_blank" rel="noopener"}
-    * [what is a Python virtual environment](https://realpython.com/python-virtual-environments-a-primer/#why-do-you-need-virtual-environments){:target="_blank" rel="noopener"}
-    * [creating a Python package](https://packaging.python.org/en/latest/tutorials/packaging-projects/){:target="_blank" rel="noopener"}
-    * [uploading a package to PyPI](https://www.freecodecamp.org/news/how-to-create-and-upload-your-first-python-package-to-pypi/){:target="_blank" rel="noopener"}
-    * [what is cruft](https://cruft.github.io/cruft/){:target="_blank" rel="noopener"}
+1. **GitHub account**  
+   Plugin development is based on Git version control and GitHub repositories.  
+   You can create a free account at [github.com/signup](https://github.com/signup){:target="_blank" rel="noopener"}.
 
-## Create a Git(Hub) repository
+2. **Basic understanding of Python**  
+   You should be comfortable reading and writing basic Python code, including modules, functions,
+   and classes.
 
-Firstly, we recommend to use git to version control your NOMAD plugin.
+3. **Basic understanding of NOMAD metainfo**  
+   Familiarity with NOMAD’s metainfo system is helpful. If needed, review [FAIRmat Tutorial 8](https://www.fairmat-nfdi.eu/events/fairmat-tutorial-8/tutorial-8-materials){:target="_blank" rel="noopener"}.
+   
+4. **Local or cloud-based development environment**  
+   You will need either:
+    - A Linux-based local machine with Python ≥ 3.12, or  
+    - Access to GitHub Codespaces for cloud-based development.
+
+??? info "Background concepts used in this tutorial (optional)"
+    This tutorial touches on several common software-development tools and concepts.
+    You do **not** need to master them in advance, but the links below may be helpful
+    if you are unfamiliar with any of them:
+
+    - [what is Git](https://learn.microsoft.com/en-us/devops/develop/git/what-is-git){:target="_blank" rel="noopener"}
+    - [what is VSCode, i. e., an Integrated Development Environment (IDE)](https://aws.amazon.com/what-is/ide/){:target="_blank" rel="noopener"}
+    - [what is Pip](https://realpython.com/lessons/what-is-pip-overview/){:target="_blank" rel="noopener"}
+    - [what is a Python virtual environment](https://realpython.com/python-virtual-environments-a-primer/#why-do-you-need-virtual-environments){:target="_blank" rel="noopener"}
+    - [creating a Python package](https://packaging.python.org/en/latest/tutorials/packaging-projects/){:target="_blank" rel="noopener"}
+    - [uploading a package to PyPI](https://www.freecodecamp.org/news/how-to-create-and-upload-your-first-python-package-to-pypi/){:target="_blank" rel="noopener"}
+    - [what is cruft](https://cruft.github.io/cruft/){:target="_blank" rel="noopener"}
+
+---
+
+## What you will learn
+
+In this tutorial, you will learn how to develop a NOMAD plugin that extends NOMAD with
+custom schemas and processing logic.
+
+By the end of this tutorial, you will be able to:
+
+1. Create and version-control a NOMAD plugin using Git and GitHub
+2. Generate a plugin project using the official NOMAD cookiecutter template
+3. Define custom NOMAD schema packages using YAML and Python
+4. Convert YAML schemas into Python metainfo classes
+5. Register and expose schema packages as NOMAD plugin entry points
+6. Implement custom normalization logic using Python
+7. Test and validate plugin behavior using the NOMAD CLI
+8. Prepare your plugin for integration into a NOMAD Oasis deployment
+
+---
+
+## Create a GitHub repository
+
+Firstly, we recommend using git to version control your NOMAD plugin.
 There is a GitHub template repository that can be used for this at [github.com/FAIRmat-NFDI/nomad-plugin-template](https://github.com/FAIRmat-NFDI/nomad-plugin-template){:target="_blank" rel="noopener"}.
 
-To use the template you should choose the "Create an new repository" option after pressing
+To use the template you should choose the "Create a new repository" option after pressing
 the green "Use this template" button in the upper right corner.
-Please note that you have to be logged into to GitHub to see this option.
+Please note that you have to be logged into GitHub to see this option.
 
 ![Use template](./images/use_template_dark.png#gh-dark-mode-only)
 ![Use template](./images/use_template_light.png#gh-light-mode-only)
 
-Enter a name (I will use "nomad-sintering" for mine) for your repository and click
-"Create Repository".
+Enter a name (e.g. "nomad-sintering") for your repository and click on the "Create repository" button.
 
 ## Generate the plugin structure
 
-Next, we will use a cookiecutter template to create the basic structure of our NOMAD
-plugin.
+Next, we will use a cookiecutter template to create the basic structure of our plugin.
+### Choose your development environment
 
-There are now two options for how to proceed.
+You can proceed in one of two ways:
 
-1. You can use the GitHub codespaces environment to develop your plugin, or
-2. If you have access to a Linux computer you can also run the same steps locally.
+1. Use GitHub Codespaces (cloud-based development), or
+2. Develop locally on Linux.
 
-### 1. Using GitHub codespaces
+**Using GitHub codespaces**
 
 To use a GitHub codespace for the plugin development you should choose the "Create
 codespace on main" option after pressing the green "<> Code" button in the upper right
@@ -55,7 +92,7 @@ corner.
 ![Use codepace](./images/codespace_dark.png#gh-dark-mode-only)
 ![Use codespace](./images/codespace_light.png#gh-light-mode-only)
 
-### 2. Developing locally
+**Developing locally**
 
 If you have a Linux machine and prefer to develop locally you should **instead** click the
 "Local" tab after pressing the green "<> Code" button, copy the path, and clone your
@@ -114,12 +151,11 @@ following for my example:
   [12/12] include_app [y/n] (y): n
 ```
 
-There you go - you just created a minimal NOMAD plugin:
 
-!!! note
+!!! info
     In the above prompt, we pressed `y` for schema_package, this creates a python package
-with a plugin entry point for a schema package.
 
+There you go - you just created a minimal NOMAD plugin with a plugin entry point for a schema package.
 ```no-highlight
 nomad-sintering/
 ├── LICENSE
@@ -144,14 +180,11 @@ nomad-sintering/
         └── test_schema.py
 ```
 
-!!! note
+!!! info
     The project `nomad-sintering` is created in a new directory, we have included a helper script to move all the files to the parent level of the repository.
-
-```sh
-sh CHANGE_TO_PLUGIN_NAME/move_template_files.sh
-```
-
-!!! warning "Attention"
+    ```sh
+    sh CHANGE_TO_PLUGIN_NAME/move_template_files.sh
+    ```
     The `CHANGE_TO_PLUGIN_NAME` should be substituted by the name of the plugin you've created. In the above case it'll be `sh nomad-sintering/move_template_files.sh`.
 
 Finally, we should add the files we created to git and commit the changes we have made:
@@ -162,7 +195,7 @@ git commit -m "Generated plugin from cookiecutter template"
 git push
 ```
 
-### Enable Cruft updates
+### Enable cruft updates
 
 In order to receive updates from our cookiecutter template we have included a GitHub
 action that automatically checks for updates once a week (or by triggering it manually).

@@ -16,7 +16,7 @@ Before starting this tutorial, please make sure you have the following:
 1. **NOMAD user account**  
    In order to interact with the NOMAD API, a user account is required.
    You can create an account by following the steps described in the
-   [NOMAD overview](overview.md#create-a-nomad-user-account){:target="_blank" rel="noopener"}.
+   [overview page](overview.md#create-a-nomad-user-account){:target="_blank" rel="noopener"}.
 
 2. **Python environment**  
    A Python **3.11 or newer** environment with permission to install external packages.  
