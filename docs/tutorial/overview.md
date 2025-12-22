@@ -41,9 +41,6 @@ Our tutorial documentation covers the basics of using Central NOMAD and NOMAD Oa
 - Organize and manage complex research workflows using NOMAD.
 - Interface with NOMAD programmatically for automation and high-throughput use.
 
-[**Accessing data via API**](access_api.md)
-
-- Create simple requests using the NOMAD API.
 
 [**Creating custom schemas**](custom.md)
 

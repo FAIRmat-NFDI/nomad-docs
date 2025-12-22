@@ -105,7 +105,7 @@ The uploads exist in the *Your uploads* page. Here you can view a list of all yo
 
     :fontawesome-solid-rotate: **Reprocess:** Triggers the uploaded data to be processed again.
 
-    :fontawesome-solid-angle-left::fontawesome-solid-angle-right: **API:** Displays a GET request url and corresponding JSON response demonstrating how to access the entries of the upload via the [NOMAD API](./access_api.md) and the expected result, respectively.
+    :fontawesome-solid-angle-left::fontawesome-solid-angle-right: **API:** Displays a GET request url and corresponding JSON response demonstrating how to access the entries of the upload via the NOMAD API and the expected result, respectively.
     <!-- See [Filtering and Querying](../filtering_and_querying/overview.md) for more information. -->
     <!-- TODO  Add API to glossary -->
 
