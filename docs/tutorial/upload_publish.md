@@ -1,4 +1,4 @@
-# Uploading and publishing data in NOMAD
+# Upload and publishing data in NOMAD
 
 In this tutorial, we will explore how to upload, share, and research data in NOMAD, using examples from both computational and experimental research. We will start by introducing the key components of NOMAD that facilitate the process, from uploading raw data files to publishing datasets with a Digital Object Identifier (DOI). Step by step, we will guide you through creating and managing uploads, adding files to generate entries that NOMAD processes, and organizing these entries into datasets for publication. By the end of this tutorial, you will be able to manage the full workflow from raw files to published, FAIR research datasets in NOMAD using the GUI.
 
@@ -238,7 +238,7 @@ Files can be added to an upload individually, or you can group them into a compr
 
     - NOMAD allows you to preview common file formats that are not automatically parsed. This means you can view the contents of the file directly within the platform without having to download it. Examples include: `.txt`, `.csv`, `.pdf`, `.png`, `.jpg`.
 
-### Uploading miscellaneous files
+### Upload miscellaneous files
 
 ??? example "Download the example files for this exercise"
     <!-- TODO consider changing this admonition to a download button -->
@@ -278,7 +278,7 @@ You can add these files to your NOMAD upload. Do so by simply drag and drop the 
 
     ![An animatation demonstrating the open from file browser dialog in NOMAD ](images/example_3-1_file_browser_dialog.gif)
 
-### Uploading computations data
+### Upload computations data
 
 ??? example "Download the example files for this exercise"
     <!-- TODO consider changing this admonition to a download button -->
@@ -348,7 +348,7 @@ In other words, NOMAD will read the input and output files and provide all infor
 
         ![Animation of the data tab](images/example_3-2_data_tab.gif)
 
-### Uploading experimental data
+### Upload experimental data
 
 ??? example "Download the example files for this exercise"
     <!-- TODO consider changing this admonition to a download button -->
