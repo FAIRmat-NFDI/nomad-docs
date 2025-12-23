@@ -76,9 +76,15 @@ We assume you are working in a Python 3.11+ environment, preferably in a dedicat
     ---
     **2. Create a virtual Python environment**
 
-    ```bash
-    python3 -m venv nomad-env
-    ```
+    - Linux / macOS:
+      ```bash
+      python3 -m venv nomad-env
+      ```
+
+    - Windows (PowerShell):
+      ```powershell
+      python -m venv nomad-env
+      ```
 
     ---
     **3. Activate the environment**
@@ -288,18 +294,7 @@ print("GUI URL:", dft_upload.nomad_gui_url)
     ```
 This snippet creates a new upload for the DFT ZIP file and prints a direct GUI link where you can monitor its processing status.
 
-If you wish, you can check the upload using nomad test deployment GUI. It will look like:
-
-<!-- markdownlint-disable MD033 -->
-<div style="text-align: center;">
-    <img src="images/api_gui_upload_comp.png" alt="Screenshot of the NOMAD GUI" width="800">
-</div>
-<!-- markdownlint-enable MD033 -->
-
-!!! warning
-    Running the next snippet before NOMAD finishes processing the upload may make it *look* as if the entry is missing. Wait a few seconds and retry to ensure the snippet is executed only after NOMAD processing has completed.
-
-To check it programmatically try:
+To check whether entries were created, retrieve them, and print their IDs and URLs, you can type the following:
 
 <!-- markdownlint-disable MD046 -->
 ```python
@@ -311,12 +306,26 @@ for entry in dft_entries:
 ```
 <!-- markdownlint-disable MD046 -->
 
+This snippet retrieves all the entries (here only one entry) created from the uploaded computations data and prints each entry’s ID together with its direct GUI URL.
+
 ??? success "Example notebook output"
 
     ```
     cvEq4wXAf3dN4xJv1hM7Mz040C38 https://nomad-lab.eu/prod/v1/test/gui/user/uploads/upload/id/HJQMQh7tT22gOU1uLbBI_g/entry/id/cvEq4wXAf3dN4xJv1hM7Mz040C38
     ```
-This snippet retrieves all the entries (here only one entry) created from the uploaded computations data and prints each entry’s ID together with its direct GUI URL.
+
+!!! warning
+    If NOMAD is still processing the upload, the list may be empty. Wait a few seconds and retry.
+
+You can also inspect the same upload in the NOMAD GUI using the link printed earlier. The upload page will look similar to the example shown below:
+
+<!-- markdownlint-disable MD033 -->
+<div style="text-align: center;">
+    <img src="images/api_gui_upload_comp.png" alt="Screenshot of the NOMAD GUI" width="800">
+</div>
+<!-- markdownlint-enable MD033 -->
+
+
 
 ### Upload experimental data
 
