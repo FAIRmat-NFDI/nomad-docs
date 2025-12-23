@@ -48,7 +48,7 @@ To start with exploring data across all domains in NOMAD, go to **EXPLORE** → 
 
 The **Entries** page shows all the uploaded data that are published on NOMAD. Published entries are accessible without login, while logging in grants access to your private data and those that are shared with you.
 
-??? info "Contents of NOMAD's Explore Menu"
+??? info "Contents of NOMAD's Explore menu"
 
     The following explore pages are currently available:
 
@@ -64,7 +64,7 @@ The **Entries** page shows all the uploaded data that are published on NOMAD. Pu
 
 ---
 
-### Search interface & filters
+### Search interface and filters
 
 In the Entries page, you will find a list of possible filters on the left panel. NOMAD supports advanced searches based on:
 
@@ -147,7 +147,7 @@ Here are the main four widgets:
 
 ---
 
-## Example 1: finding alternative ETL materials for Perovskite solar cells
+## Example 1: find alternative ETL materials for perovskite solar cells
 
 In the following, we'll walk through an example to help you better understand how to use these widgets. Imagine we are working on solar cell research and have fabricated solar cell devices using the absorber material *CsPbBr2I* (Cesium Lead Bromine Iodide), a mixed halide perovskite.
 
@@ -167,7 +167,7 @@ In the following, we'll walk through an example to help you better understand ho
 
 Now, let us answer the following question:
 
-!!! task "**What ETL materials can replace TiO2-c to improve Voc (open-circuit voltage) in perovskite solar cells?**"
+!!! task "What ETL materials can replace TiO2-c to improve Voc (open-circuit voltage) in perovskite solar cells?"
 
     To gain insights into this question, we can utilize NOMAD's widgets to explore relevant data:
 
@@ -201,7 +201,7 @@ Now, let us answer the following question:
 
 ---
 
-## Example 2: exploring Sn-based solar cells
+## Example 2: explore Sn-based solar cells
 
 Let’s explore how **hole transport layer (HTL) materials** affect efficiency in **Sn-based solar cells** with **C60** as the electron transport layer (ETL).
 

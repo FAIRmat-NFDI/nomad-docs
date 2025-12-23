@@ -115,7 +115,7 @@ Once the entry is created, we can fill in the relevant fields with detailed and 
     <div class="nav-arrow right" id="next2">→</div>
 </div>
 
-??? task "Task: Create an ELN entry for substances"
+??? task "Create an ELN entry for substances"
     Create an ELN entry in NOMAD for the following substances:
 
     - Chloroform
@@ -162,7 +162,7 @@ Once the entry is created, we can fill in the relevant fields with detailed and 
     <div class="nav-arrow right" id="next3">→</div>
 </div>
 
-??? task "Task: Create an ELN entry for a sample"
+??? task "Create an ELN entry for a sample"
 
     Create an ELN entry in NOMAD for P3HT solution in chloroform.
     Reference the sample to its components (P3HT powder and chloroform).
@@ -202,7 +202,7 @@ Once the entry is created, we can fill in the relevant fields with detailed and 
     <div class="nav-arrow right" id="next4">→</div>
 </div>
 
-??? task "Task: Create an ELN entry for an instrument"
+??? task "Create an ELN entry for an instrument"
     Create an ELN entry in NOMAD for one of the following instruments:
 
     - Optical Spectrometer
@@ -251,7 +251,7 @@ Once the entry is created, we can fill in the relevant fields with detailed and 
     <div class="nav-arrow right" id="next5">→</div>
 </div>
 
-??? task "Task: Reference a sample to your process ELN"
+??? task "Reference a sample to your process ELN"
     For the Process ELN entry created above, make a reference to a sample entry called *P3HT_solution_in_CF*.
 
     - If the P3HT_solution_in_CF sample entry already exists, simply link to it within the samples subsection of your Process ELN entry.
@@ -297,7 +297,7 @@ The **workflow2** section of the **Preparation of P3HT solution** example can be
     <div class="nav-arrow right" id="next7">→</div>
 </div>
 
-??? task "Task: Reference P3HT powder as input for the process"
+??? task "Reference P3HT powder as input for the process"
     For the Process ELN entry created above, make reference to the substance ELN entry *P3HT Powder* as an input of the process.
 
     *Tip:* Use the workflow2 section of the entry.
@@ -383,7 +383,7 @@ The *steps* subsection allows us to reference the various processes and measurem
 
 ---
 
-## Exploring and searching your ELN
+## Explore and search your ELN
 
 <!-- TODO consider changing this admonition to a download button -->
 ??? example "Download the example file for this exercise"

@@ -130,7 +130,7 @@ The uploads exist in the *Your uploads* page. Here you can view a list of all yo
 
 ---
 
-## Sharing and publishing uploads
+## Share and publish uploads
 
 Uploads in NOMAD can be shared or published. When an upload is shared or published, all entries and files contained within it are also shared or published.
 
@@ -282,7 +282,7 @@ You can add these files to your NOMAD upload. Do so by simply drag and drop the 
 
     ![An animation demonstrating the open from file browser dialog in NOMAD ](images/example_3-1_file_browser_dialog.gif)
 
-### Upload computations data
+### Upload computational data
 
 ??? example "Download the example files for this exercise"
     <!-- TODO consider changing this admonition to a download button -->
