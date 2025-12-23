@@ -325,8 +325,6 @@ You can also inspect the same upload in the NOMAD GUI using the link printed ear
 </div>
 <!-- markdownlint-enable MD033 -->
 
-
-
 ### Upload experimental data
 
 The steps are similar to those you followed for the computations data.
