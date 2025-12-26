@@ -26,7 +26,6 @@ Before starting, make sure you have the following:
 3. **<Prerequisite 3 (optional)>**  
    <Why it is helpful but not required>.
 
-If you are unfamiliar with any of these topics, consult the linked background material before continuing.
 
 <!--
 Rules enforced (do not render):
@@ -45,7 +44,6 @@ In this tutorial, you will learn how to:
 3. <Action + object + context>
 4. <Action + object + context>
 
-These skills enable you to <capability enabled by completing the tutorial>.
 
 <!--
 Rules enforced (do not render):
