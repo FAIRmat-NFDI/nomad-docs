@@ -1,10 +1,10 @@
 # Develop a NOMAD plugin
 
-In this tutorial, we develop a custom NOMAD plugin that adds a schema package and normalization logic to NOMAD. Step by step, we create a plugin repository, generate the plugin structure from the official template, define a domain-specific schema for a sintering process, and implement Python code that adds functionality to the schema. By the end of this tutorial, you will produce a working plugin that can be tested locally and integrated into a NOMAD Oasis deployment.
+In this tutorial, we develop a custom NOMAD plugin that adds a schema package and normalization process to NOMAD. Step by step, we create a plugin repository, generate the plugin structure from the official template, define a domain-specific schema for a sintering process, and implement Python code that adds functionality to the schema. By the end of this tutorial, we will produce a working plugin that can be tested locally and integrated into a NOMAD Oasis deployment.
 
 ## Before you begin
 
-This tutorial assumes basic familiarity with Python and Git and is intended for users who want to extend NOMAD with custom schemas and normalization logic.
+This tutorial assumes basic familiarity with Python and Git and is intended for users who want to extend NOMAD with custom schemas and normalization process.
 
 Before starting this tutorial, make sure you have the following:
 
@@ -46,7 +46,7 @@ By the end of this tutorial, you will be able to:
 2. Generate a plugin project using the official NOMAD cookiecutter template
 3. Define custom NOMAD schema packages using YAML and Python
 4. Register schema packages as NOMAD plugin entry points
-5. Implement normalization logic that adds functionality to a schema
+5. Implement normalization process that adds functionality to a schema
 6. Test and prepare the plugin for integration into a NOMAD Oasis deployment
 
 ---
@@ -340,7 +340,7 @@ git push
 
 ## Implement a normalize function
 
-In this step, you add normalization logic to the schema by implementing a `normalize()` method.
+In this step, you add normalization process to the schema by implementing a `normalize()` method.
 Normalization allows schema sections to derive structured values programmatically using Python.
 
 ??? example "Example input file used for normalization"
@@ -377,7 +377,7 @@ The `a_eln` annotation configures the quantity to accept file uploads in the NOM
 
 Next, implement the normalize() method to read the input file and populate the schema programmatically.
 
-Implement the normalization logic as follows:
+Implement the normalization process as follows:
 
 1. Check if the data file is provided using  `if self.data_file`, if so, open it via 
 `archive.m_context.raw_file()` method and read it with `pd.read_csv(file)`:

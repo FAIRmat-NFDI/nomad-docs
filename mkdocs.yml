@@ -8,14 +8,14 @@ nav:
   - Home: index.md
   - Tutorial:
       - Overview: tutorial/overview.md
-      - Uploading and publishing data: 
+      - Upload and publish data: 
         - With the GUI: tutorial/upload_publish.md
         - Programmatically: tutorial/upload_publish_api.md
-      - Exploring data: tutorial/explore.md
-      - Using NOMAD as an ELN: tutorial/NOMAD_ELN.md
-      - Managing workflows and projects: tutorial/workflows_projects.md
-      - Creating custom schemas: tutorial/custom.md
-      - Developing NOMAD plugins: tutorial/develop_plugin.md
+      - Explore data: tutorial/explore.md
+      - Use NOMAD as an ELN: tutorial/NOMAD_ELN.md
+      - Manage workflows and projects: tutorial/workflows_projects.md
+      - Create custom schemas: tutorial/custom.md
+      - Develop a NOMAD plugin: tutorial/develop_plugin.md
   - How-to guides:
       - Overview: howto/overview.md
       - Manage and find data:
