@@ -1,30 +1,25 @@
 # Explore data in NOMAD
 
-In this tutorial, we will learn how to efficiently search and filter entries in NOMAD to find data that matches your criteria.
-We will work with the **EXPLORE** page in the NOMAD GUI, starting with an overview of the search and filter options available. We will then use these tools to refine our results step by step.
-Finally, we will explore how to create interactive widgets based on selected properties, allowing for a more dynamic and customized filtering experience.
+In this tutorial, we explore published entries in NOMAD using the **EXPLORE** page in the GUI. Step by step, we search across entries, apply and combine filters, and use the search bar to query structured metadata. We then create and customize interactive widgets to build dashboards for more targeted data exploration. By the end of this tutorial, we can find relevant entries and tailor searches using filters, queries, and widgets.
 
-By the end of this tutorial, you will be able to navigate NOMAD with confidence, quickly locate relevant data, and tailor your searches using interactive filters and widgets.
 
 ## Before you begin
 
 This tutorial requires no prior experience with NOMAD.
 
-Before starting, please make sure you have the following:
+Before starting, make sure you have the following:
 
 1. **Access to the NOMAD GUI via a modern web browser**  
-   You can explore published data in NOMAD without logging in using an up-to-date browser such as Firefox, Chrome, or Edge.  
+   You can explore published data in NOMAD without logging in.
 
 2. **Basic familiarity with materials-science concepts**  
-   A general understanding of concepts such as materials composition, electronic properties (e.g., band gap), and experimental or computational methods will be helpful, but not required.
+   Familiarity with composition, electronic properties (for example, band gap), and common experimental or computational methods can be helpful, but it is not required.
 
 ---
 
 ## What you will learn
 
-In this tutorial, you will learn how to explore materials-science data in NOMAD using the graphical user interface.
-
-By the end of this tutorial, you will be able to:
+In this tutorial, you will learn how to:
 
 1. Navigate the **EXPLORE** section of the NOMAD GUI
 2. Search and filter published entries across different domains
