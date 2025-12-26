@@ -3,7 +3,7 @@
 
 # Upload and publish data using the NOMAD API
 
-In this tutorial, you will learn to interact with the NOMAD API using Python and the [`nomad-utility-workflows`](https://pypi.org/project/nomad-utility-workflows/){:target="_blank" rel="noopener"} package. You will perform, programmatically, many of the tasks you might otherwise do in the NOMAD GUI: authenticate with your NOMAD account, create uploads from example ZIP files (miscellaneous files, DFT computations, and experimental XPS data), inspect the processing status and entries of those uploads, edit upload and entry metadata, group uploads into datasets, share them with selected users, set embargo periods, and finally publish your uploads on the NOMAD test deployment.
+In this tutorial, we interact with the NOMAD API using Python and the [`nomad-utility-workflows`](https://pypi.org/project/nomad-utility-workflows/){:target="_blank" rel="noopener"} package. Step by step, we authenticate with a NOMAD account, create uploads from example data files, inspect the generated entries, edit upload and entry metadata, group entries into datasets, and publish uploads on the NOMAD test deployment. By the end of this tutorial, we programmatically reproduce the main upload and publishing workflows available in the NOMAD GUI.
 
 ---
 
@@ -11,14 +11,14 @@ In this tutorial, you will learn to interact with the NOMAD API using Python and
 
 This tutorial assumes basic familiarity with Python and programmatic workflows.
 
-Before starting this tutorial, please make sure you have the following:
+Before starting, make sure you have the following:
 
 1. **NOMAD user account**  
    In order to interact with the NOMAD API, a user account is required.
    You can create an account by following the steps described in the [overview page](overview.md#create-a-nomad-user-account){:target="_blank" rel="noopener"}.
 
 2. **Python environment**  
-   A Python **3.11 or newer** environment with permission to install external packages.  
+   A Python 3.11 or newer environment with permission to install external packages.  
    The examples in this tutorial are designed to be run in a Jupyter notebook.
 
 3. **Basic Python knowledge**  
@@ -38,9 +38,7 @@ Before starting this tutorial, please make sure you have the following:
 
 ## What you will learn
 
-In this tutorial, you will learn how to programmatically upload, manage, and publish research data in NOMAD using the NOMAD API and Python.
-
-By the end of this tutorial, you will be able to:
+In this tutorial, you will learn how to:
 
 1. Authenticate with the NOMAD API using Python
 2. Upload raw research data to NOMAD and create uploads programmatically
