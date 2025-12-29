@@ -3,7 +3,7 @@
 
 # Upload and publish data using the NOMAD API
 
-In this tutorial, we interact with the NOMAD API using Python and the [`nomad-utility-workflows`](https://pypi.org/project/nomad-utility-workflows/){:target="_blank" rel="noopener"} package. Step by step, we authenticate with a NOMAD account, create uploads from example data files, inspect the generated entries, edit upload and entry metadata, group entries into datasets, and publish uploads on the NOMAD test deployment. By the end of this tutorial, we programmatically reproduce the main upload and publishing workflows available in the NOMAD GUI.
+In this tutorial, we interact with the NOMAD API using Python and the [`nomad-utility-workflows`](https://fairmat-nfdi.github.io/nomad-utility-workflows/){:target="_blank" rel="noopener"} package. Step by step, we authenticate with a NOMAD account, create uploads from example data files, inspect the generated entries, edit upload and entry metadata, group entries into datasets, and publish uploads on the NOMAD test deployment. By the end of this tutorial, we programmatically reproduce the main upload and publishing workflows available in the NOMAD GUI.
 
 ---
 
@@ -50,7 +50,7 @@ Before starting, make sure you have the following:
 
 ## Environment setup
 
-In this tutorial, we will use the NOMAD **test** deployment. Therefore, in all code examples, we will set `url="test"` when calling the helper functions. Later, you can switch to `url="prod"` or a custom NOMAD API URL if needed.
+In this tutorial, we will use the [NOMAD test deployment](https://nomad-lab.eu/prod/v1/test/gui/search/entries){:target="_blank" rel="noopener"}. Therefore, in all code examples, we will set `url="test"` when calling the helper functions. Later, you can switch to `url="prod"` or a custom NOMAD API URL if needed.
 
 We assume you are working in a Python 3.11+ environment, preferably in a dedicated virtual environment for this tutorial.
 
