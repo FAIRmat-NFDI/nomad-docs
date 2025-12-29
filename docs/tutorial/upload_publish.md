@@ -5,6 +5,21 @@ In this tutorial, we upload, share, and publish research data in NOMAD using the
 
 ![From raw files to published datasets](images/upload_publish_1.png)
 
+---
+
+## What you will learn
+
+In this tutorial, you will learn how to:
+
+1. Upload raw research data to NOMAD and organize it using uploads
+2. View the entries that NOMAD generates from your files and check their processing status
+3. Share uploads with collaborators and manage access permissions
+4. Publish uploads and understand the role of embargoes
+5. Group entries into datasets for curation and publication
+6. Publish datasets and assign a Digital Object Identifier (DOI)
+
+---
+
 ## Before you begin
 
 This tutorial requires no prior experience with NOMAD.
@@ -21,19 +36,6 @@ Before starting, make sure you have the following:
     - [Miscellaneous files (PDF, images, tables)](https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_3_files/example_files_upload/miscellaneous_data/miscellaneous_data.zip){:target="_blank" rel="noopener"},
     - [Computational data (DFT calculations)](https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_3_files/example_files_upload/computations_data/FHI-aims.zip){:target="_blank" rel="noopener"},
     - [Experimental data (XPS measurements)](https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_3_files/example_files_upload/experiments_data/xps_nexus_data.zip){:target="_blank" rel="noopener"}.
-
----
-
-## What you will learn
-
-In this tutorial, you will learn how to:
-
-1. Upload raw research data to NOMAD and organize it using uploads
-2. View the entries that NOMAD generates from your files and check their processing status
-3. Share uploads with collaborators and manage access permissions
-4. Publish uploads and understand the role of embargoes
-5. Group entries into datasets for curation and publication
-6. Publish datasets and assign a Digital Object Identifier (DOI)
 
 ---
 

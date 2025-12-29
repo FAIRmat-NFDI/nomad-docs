@@ -2,6 +2,20 @@
 
 In this tutorial, we explore published entries in NOMAD using the **EXPLORE** page in the GUI. Step by step, we search across entries, apply and combine filters, and use the search bar to query structured metadata. We then create and customize interactive widgets to build dashboards for more targeted data exploration. By the end of this tutorial, we can find relevant entries and tailor searches using filters, queries, and widgets.
 
+---
+
+## What you will learn
+
+In this tutorial, you will learn how to:
+
+1. Navigate the **EXPLORE** section of the NOMAD GUI
+2. Search and filter published entries across different domains
+3. Use the search bar to query structured metadata and perform range-based searches
+4. Apply and combine filters to refine search results efficiently
+5. Create and customize interactive widgets for advanced data exploration
+6. Use NOMAD’s Explore dashboards to answer concrete scientific questions using real data
+
+---
 
 ## Before you begin
 
@@ -16,18 +30,6 @@ Before starting, make sure you have the following:
    Familiarity with composition, electronic properties (for example, band gap), and common experimental or computational methods can be helpful, but it is not required.
 
 ---
-
-## What you will learn
-
-In this tutorial, you will learn how to:
-
-1. Navigate the **EXPLORE** section of the NOMAD GUI
-2. Search and filter published entries across different domains
-3. Use the search bar to query structured metadata and perform range-based searches
-4. Apply and combine filters to refine search results efficiently
-5. Create and customize interactive widgets for advanced data exploration
-6. Use NOMAD’s Explore dashboards to answer concrete scientific questions using real data
-
 
 ## Navigate to NOMAD's explore entries page
 

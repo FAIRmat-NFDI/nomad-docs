@@ -2,6 +2,20 @@
 
 In this tutorial, we develop a custom NOMAD plugin that adds a schema package and normalization process to NOMAD. Step by step, we create a plugin repository, generate the plugin structure from the official template, define a domain-specific schema for a sintering process, and implement Python code that adds functionality to the schema. By the end of this tutorial, we will produce a working plugin that can be tested locally and integrated into a NOMAD Oasis deployment.
 
+---
+
+## What you will learn
+
+In this tutorial, you will learn how to:
+
+1. Create and version-control a NOMAD plugin repository using Git and GitHub
+2. Generate a plugin project using the official NOMAD cookiecutter template
+3. Define custom NOMAD schema packages using YAML and Python
+4. Register schema packages as NOMAD plugin entry points
+5. Implement normalization process that adds functionality to a schema
+6. Test and prepare the plugin for integration into a NOMAD Oasis deployment
+
+---
 ## Before you begin
 
 This tutorial assumes basic familiarity with Python and Git and is intended for users who want to extend NOMAD with custom schemas and normalization process.
@@ -35,19 +49,6 @@ Before starting this tutorial, make sure you have the following:
     - [creating a Python package](https://packaging.python.org/en/latest/tutorials/packaging-projects/){:target="_blank" rel="noopener"}
     - [uploading a package to PyPI](https://www.freecodecamp.org/news/how-to-create-and-upload-your-first-python-package-to-pypi/){:target="_blank" rel="noopener"}
     - [what is cruft](https://cruft.github.io/cruft/){:target="_blank" rel="noopener"}
-
----
-
-## What you will learn
-
-By the end of this tutorial, you will be able to:
-
-1. Create and version-control a NOMAD plugin repository using Git and GitHub
-2. Generate a plugin project using the official NOMAD cookiecutter template
-3. Define custom NOMAD schema packages using YAML and Python
-4. Register schema packages as NOMAD plugin entry points
-5. Implement normalization process that adds functionality to a schema
-6. Test and prepare the plugin for integration into a NOMAD Oasis deployment
 
 ---
 

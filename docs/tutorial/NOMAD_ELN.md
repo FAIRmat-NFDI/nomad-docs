@@ -2,6 +2,21 @@
 
 In this tutorial, we use NOMAD’s Electronic Lab Notebook (ELN) functionality to document an experiment in the NOMAD GUI. Step by step, we create ELN entries for substances and instruments, record samples with processing conditions, and add measurements that complete the experimental record. We also use NOMAD’s built-in ELN templates to structure and interlink the entries and to view the workflow in the GUI.
 
+---
+
+## What you will learn
+
+In this tutorial, you will learn how to:
+
+1. Create and manage an ELN upload in NOMAD
+2. Create ELN entries for substances, samples, instruments, processes, and measurements using built-in schemas
+3. Reference and interlink ELN entries to represent complete experimental workflows
+4. Document material processing steps and visualize them using workflow graphs
+5. Combine processes and measurements into a single experiment entry
+6. Search, filter, and explore your ELN entries using the NOMAD GUI and custom widgets
+
+---
+
 ## Before you begin
 
 This tutorial requires no prior experience with NOMAD.
@@ -35,16 +50,6 @@ In this tutorial, we will use an example experiment involving the preparation of
     ![Overview of the example entities and activities](images/ELN_2.png)
 ---
 
-## What you will learn
-
-In this tutorial, you will learn how to:
-
-1. Create and manage an ELN upload in NOMAD
-2. Create ELN entries for substances, samples, instruments, processes, and measurements using built-in schemas
-3. Reference and interlink ELN entries to represent complete experimental workflows
-4. Document material processing steps and visualize them using workflow graphs
-5. Combine processes and measurements into a single experiment entry
-6. Search, filter, and explore your ELN entries using the NOMAD GUI and custom widgets
 
 
 ## Create a new ELN upload

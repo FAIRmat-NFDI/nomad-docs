@@ -7,6 +7,18 @@ In this tutorial, we interact with the NOMAD API using Python and the [`nomad-ut
 
 ---
 
+## What you will learn
+
+In this tutorial, you will learn how to:
+
+1. Authenticate with the NOMAD API using Python
+2. Upload raw research data to NOMAD and create uploads programmatically
+3. Retrieve uploads and entries and inspect or edit their metadata
+4. Group entries into datasets for curation and organization
+5. Share uploads with collaborators and manage access permissions
+6. Publish uploads on the NOMAD test deployment
+
+---
 ## Before you begin
 
 This tutorial assumes basic familiarity with Python and programmatic workflows.
@@ -33,19 +45,6 @@ Before starting, make sure you have the following:
 !!! warning
     The code snippets in this tutorial are designed to be run sequentially in a Jupyter notebook.
     Running code snippets out of order may lead to errors, e.g., due to missing imports, variables, or setup steps that were introduced earlier. For a smooth experience, it's suggested to follow the steps in order.
-
----
-
-## What you will learn
-
-In this tutorial, you will learn how to:
-
-1. Authenticate with the NOMAD API using Python
-2. Upload raw research data to NOMAD and create uploads programmatically
-3. Retrieve uploads and entries and inspect or edit their metadata
-4. Group entries into datasets for curation and organization
-5. Share uploads with collaborators and manage access permissions
-6. Publish uploads on the NOMAD test deployment
 
 ---
 
