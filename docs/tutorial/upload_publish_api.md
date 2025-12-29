@@ -3,7 +3,7 @@
 
 # Upload and publish data using the NOMAD API
 
-In this tutorial, we interact with the NOMAD API using Python and the [`nomad-utility-workflows`](https://fairmat-nfdi.github.io/nomad-utility-workflows/){:target="_blank" rel="noopener"} package. Step by step, we authenticate with a NOMAD account, create uploads from example data files, inspect the generated entries, edit upload and entry metadata, group entries into datasets, and publish uploads on the NOMAD test deployment. By the end of this tutorial, we programmatically reproduce the main upload and publishing workflows available in the NOMAD GUI.
+In this tutorial, we interact with the NOMAD API using Python and the [`nomad-utility-workflows`](https://fairmat-nfdi.github.io/nomad-utility-workflows/){:target="_blank" rel="noopener"} package, to programmatically perform the full data upload and publishing workflow. We work with example data files to inspect generated entries, modify metadata, organize entries into datasets, and publish the results on the NOMAD test deployment. By the end of the tutorial, we will have reproduced the core upload and publishing workflows available in the NOMAD GUI.
 
 ---
 

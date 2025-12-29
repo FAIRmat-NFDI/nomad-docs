@@ -1,6 +1,6 @@
 # Use NOMAD as an electronic lab notebook
 
-In this tutorial, we use NOMAD’s Electronic Lab Notebook (ELN) functionality to document an experiment in the NOMAD GUI. Step by step, we create ELN entries for substances and instruments, record samples with processing conditions, and add measurements that complete the experimental record. We also use NOMAD’s built-in ELN templates to structure and interlink the entries and to view the workflow in the GUI.
+In this tutorial, we use NOMAD’s Electronic Lab Notebook (ELN) functionality to document an experiment in the NOMAD GUI. We follow the experimental workflow from defining substances and instruments to recording processing steps and measurements, using built-in ELN templates to structure and interlink the resulting entries. By the end of the tutorial, we will have documented complete experiment as a coherent, navigable ELN record in NOMAD.
 
 ---
 

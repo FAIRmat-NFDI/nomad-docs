@@ -1,6 +1,6 @@
 # Explore data in NOMAD
 
-In this tutorial, we explore published entries in NOMAD using the **EXPLORE** page in the GUI. Step by step, we search across entries, apply and combine filters, and use the search bar to query structured metadata. We then create and customize interactive widgets to build dashboards for more targeted data exploration. By the end of this tutorial, we can find relevant entries and tailor searches using filters, queries, and widgets.
+In this tutorial, we explore published entries in NOMAD using the **EXPLORE** page of the GUI. We follow a step-by-step workflow to search across entries, apply and combine filters, query structured metadata, and build interactive widgets for targeted data exploration. By the end of the tutorial, we will have identified relevant entries and constructed customized searches and dashboards using filters, queries, and widgets.
 
 ---
 

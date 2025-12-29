@@ -1,6 +1,6 @@
 # Develop a NOMAD plugin
 
-In this tutorial, we develop a custom NOMAD plugin that adds a schema package and normalization process to NOMAD. Step by step, we create a plugin repository, generate the plugin structure from the official template, define a domain-specific schema for a sintering process, and implement Python code that adds functionality to the schema. By the end of this tutorial, we will produce a working plugin that can be tested locally and integrated into a NOMAD Oasis deployment.
+In this tutorial, we develop a custom NOMAD plugin that extends NOMAD with a domain-specific schema package and a corresponding normalization process. To follow the full development workflow, we use a sintering process as an example, covering everything from creating a plugin repository and defining schemas to implementing normalization. By the end of the tutorial, we will have produced a working plugin that can be tested locally and integrated into a NOMAD Oasis deployment. 
 
 ---
 
