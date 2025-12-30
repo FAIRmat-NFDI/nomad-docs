@@ -26,7 +26,6 @@ Before starting, make sure you have the following:
 3. **<Prerequisite 3 (optional)>**  
    <Why it is helpful but not required>.
 
-
 <!--
 Rules enforced (do not render):
 
@@ -43,7 +42,6 @@ In this tutorial, you will learn how to:
 2. <Action + object + context>
 3. <Action + object + context>
 4. <Action + object + context>
-
 
 <!--
 Rules enforced (do not render):

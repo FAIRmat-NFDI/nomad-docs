@@ -50,7 +50,6 @@ In this tutorial, we will use an example experiment involving the preparation of
     ![Overview of the example entities and activities](images/ELN_2.png)
 ---
 
-
 ## Create a new ELN upload
 
 In NOMAD, an Electronic Lab Notebook (ELN) is created by initiating a NOMAD upload. This process allows you to structure and document your research data efficiently. For a step-by-step guide on how to create an upload, please refer to [this page](upload_publish.md#create-new-upload){:target="_blank" rel="noopener"}.

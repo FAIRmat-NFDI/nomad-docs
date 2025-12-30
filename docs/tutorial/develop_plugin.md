@@ -1,6 +1,6 @@
 # Develop a NOMAD plugin
 
-In this tutorial, we develop a custom NOMAD plugin that extends NOMAD with a domain-specific schema package and a corresponding normalization process. To follow the full development workflow, we use a sintering process as an example, covering everything from creating a plugin repository and defining schemas to implementing normalization. By the end of the tutorial, we will have produced a working plugin that can be tested locally and integrated into a NOMAD Oasis deployment. 
+In this tutorial, we develop a custom NOMAD plugin that extends NOMAD with a domain-specific schema package and a corresponding normalization process. To follow the full development workflow, we use a sintering process as an example, covering everything from creating a plugin repository and defining schemas to implementing normalization. By the end of the tutorial, we will have produced a working plugin that can be tested locally and integrated into a NOMAD Oasis deployment.
 
 ---
 
@@ -16,6 +16,7 @@ In this tutorial, you will learn how to:
 6. Test and prepare the plugin for integration into a NOMAD Oasis deployment
 
 ---
+
 ## Before you begin
 
 This tutorial assumes basic familiarity with Python and Git and is intended for users who want to extend NOMAD with custom schemas and normalization process.
@@ -34,7 +35,8 @@ Before starting this tutorial, make sure you have the following:
    
 4. **Local or cloud-based development environment**  
    You need either:
-    - A Linux-based local machine with Python ≥ 3.12, or  
+
+    - A Linux-based local machine with Python ≥ 3.12, or
     - Access to GitHub Codespaces for cloud-based development.
 
 ??? info "Background concepts used in this tutorial (optional)"
@@ -60,16 +62,16 @@ First, you will version-control your NOMAD plugin by creating a GitHub repositor
 To create a new repository from the template, select **Use this template** and then choose
 **Create a new repository**. You must be logged in to GitHub to see this option.
 
-
 ![Use template](./images/use_template_dark.png#gh-dark-mode-only)
 ![Use template](./images/use_template_light.png#gh-light-mode-only)
 
-Enter a repository name (for example, `nomad-sintering`) and select **Create repository** to complete the setup. 
-<!-- TODO: add image slider to show the two steps-->
+Enter a repository name (for example, `nomad-sintering`) and select **Create repository** to complete the setup.
+<!-- TODO: add image slider to show the two steps -->
 
 ## Generate the plugin structure
 
 Next, you will generate the initial structure of the plugin by applying the official NOMAD cookiecutter template.
+
 ### Choose a development environment
 
 You can proceed in one of two ways:
@@ -110,6 +112,7 @@ pipx install cruft
 # you can install cruft in your Python user directory.
 python -m pip install --user cruft
 ```
+
 **Run cruft**
 
 Generate the plugin structure by running:
@@ -118,7 +121,7 @@ Generate the plugin structure by running:
 cruft create https://github.com/FAIRmat-NFDI/cookiecutter-nomad-plugin
 ```
 
-Cookiecutter prompts you for information regarding your plugin. Enter values appropriate for your plugin. 
+Cookiecutter prompts you for information regarding your plugin. Enter values appropriate for your plugin.
 For example:
 
 ```no-highlight
@@ -140,6 +143,7 @@ For example:
   [11/12] include_parser [y/n] (y): n
   [12/12] include_app [y/n] (y): n
 ```
+
 Selecting `y` for include_schema_package creates a Python package for the schema.
 
 !!! success "You have just created a minimal NOMAD plugin with a plugin entry point for a schema package"
@@ -167,11 +171,12 @@ Selecting `y` for include_schema_package creates a Python package for the schema
             └── test_schema.py
     ```
 
-
 The plugin is generated in a subdirectory. Move the files to the repository root using the provided helper script:
+
 ```sh
 sh CHANGE_TO_PLUGIN_NAME/move_template_files.sh
 ```
+
 The `CHANGE_TO_PLUGIN_NAME` should be substituted by the name of the plugin you've created. In the above case it'll be `sh nomad-sintering/move_template_files.sh`.
 
 Finally, add the files to Git and commit the changes you have made:
@@ -186,7 +191,7 @@ git push
 
 The template repository includes a GitHub Actions workflow that checks for updates to the cookiecutter template. The workflow runs automatically once a week and can also be triggered manually. To enable this functionality, grant the workflow permission to write to the repository and create pull requests.
 
-From you plugin repository on GitHub, open the **Settings** page, and navigate to **Actions → General** (on the left pane): 
+From you plugin repository on GitHub, open the **Settings** page, and navigate to **Actions → General** (on the left pane):
 
 ![Use template](./images/github_settings_dark.png#gh-dark-mode-only)
 ![Use template](./images/github_settings_light.png#gh-light-mode-only)
@@ -253,11 +258,12 @@ Install the package:
 pip install metainfoyaml2py
 ```
 
-Generate the schema classes from the `sintering.archive.yaml` file and place them in the `schema_packages` directory, by running the `metainfo-yaml2py` command. 
+Generate the schema classes from the `sintering.archive.yaml` file and place them in the `schema_packages` directory, by running the `metainfo-yaml2py` command.
 
 ```sh
 metainfo-yaml2py sintering.archive.yaml -o src/nomad_sintering/schema_packages -n
 ```
+
 The `-n` flag adds `normalize()` functions (will be used below), while the `-o` flag specifies the output directory.
 
 ### Register the schema package
@@ -269,10 +275,10 @@ Register the newly generated schema package as a plugin entry point by updating 
 
 Copy the example `SchemaPackageEntryPoint` provided by the cookiecutter template and update:
 
-1. The entry point class name  
-2. The import path in the `load()` method  
-3. The instance name and referenced class  
-4. The entry point name and description  
+1. The entry point class name
+2. The import path in the `load()` method
+3. The instance name and referenced class
+4. The entry point name and description
 
 For example:
 
@@ -380,38 +386,40 @@ Next, implement the normalize() method to read the input file and populate the s
 
 Implement the normalization process as follows:
 
-1. Check if the data file is provided using  `if self.data_file`, if so, open it via 
-`archive.m_context.raw_file()` method and read it with `pd.read_csv(file)`:
-```py
-if self.data_file:
-  with archive.m_context.raw_file(self.data_file) as file:
-    df = pd.read_csv(file)
-```
+1. Check if the data file is provided using  `if self.data_file`, if so, open it via `archive.m_context.raw_file()` method and read it with `pd.read_csv(file)`:
+
+    ```py
+    if self.data_file:
+    with archive.m_context.raw_file(self.data_file) as file:
+        df = pd.read_csv(file)
+    ```
 
 2. Create a list of processing steps by iterating over the data frame and instantiating `TemperatureRamp` section:
-```py
-    steps = []
-    for i, row in df.iterrows():
-      step = TemperatureRamp()
-      step.name = row['step name']
-      step.duration = ureg.Quantity(float(row['duration [min]']), 'min')
-      step.initial_temperature = ureg.Quantity(row['initial temperature [C]'], 'celsius')
-      step.final_temperature = ureg.Quantity(row['final temperature [C]'], 'celsius')
-      steps.append(step)
-```
-The code snippet above uses the NOMAD unit registry to handle all the units.
+
+    ```py
+        steps = []
+        for i, row in df.iterrows():
+        step = TemperatureRamp()
+        step.name = row['step name']
+        step.duration = ureg.Quantity(float(row['duration [min]']), 'min')
+        step.initial_temperature = ureg.Quantity(row['initial temperature [C]'], 'celsius')
+        step.final_temperature = ureg.Quantity(row['final temperature [C]'], 'celsius')
+        steps.append(step)
+    ```
+    The code snippet above uses the NOMAD unit registry to handle all the units.
 
 3. Assign the generated list to `self.steps`:
-```py
-  self.steps = steps
-```
 
-4. Add the required imports of pandas and the NOMAD unit registry to the top of
-`sintering.py` file: <!-- TODO: this file was not introduced before - calrify in the steps when it should be created -->
-```py
-from nomad.units import ureg
-import pandas as pd
-```
+    ```py
+    self.steps = steps
+    ```
+
+4. Add the required imports of pandas and the NOMAD unit registry to the top of `sintering.py` file: <!-- TODO: this file was not introduced before - calrify in the steps when it should be created -->
+
+    ```py
+    from nomad.units import ureg
+    import pandas as pd
+    ```
 
 !!! success "Complete normalize implementation"
 
@@ -468,9 +476,9 @@ Run NOMAD processing on a test archive file to verify that the `normalize()` met
 ### Create a test file
 
 Create a file ending in `.archive.yaml` (or `.archive.json`) that defines a `data` section with:
+
 - `m_def`: the fully qualified name of your `Sintering` section
 - `data_file`: the CSV recipe file
-
 
 ```yaml
 data:
@@ -506,7 +514,6 @@ could not normalize section (normalizer=MetainfoNormalizer, section=Sintering, e
 This happens because ureg interprets 'min' as milli-inch instead of minutes.
 Fix this by changing the duration unit from 'min' to 'minutes' in `sintering.py`.
 
-
 ```py
 def normalize(self, archive: 'EntryArchive', logger: 'BoundLogger') -> None:
     """
@@ -534,7 +541,7 @@ def normalize(self, archive: 'EntryArchive', logger: 'BoundLogger') -> None:
 ```
 
 Since you installed the package in editable mode the changes will take effect as soon as you
-save. 
+save.
 Rerun the nomad parse command. The output file `normalized.archive.json` should now contain the populated steps section.
 !!! success "The beginning of that file should look something like:"
     ```json

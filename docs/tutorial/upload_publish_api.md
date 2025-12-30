@@ -19,6 +19,7 @@ In this tutorial, you will learn how to:
 6. Publish uploads on the NOMAD test deployment
 
 ---
+
 ## Before you begin
 
 This tutorial assumes basic familiarity with Python and programmatic workflows.
