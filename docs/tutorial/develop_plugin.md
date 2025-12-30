@@ -32,7 +32,7 @@ Before starting this tutorial, make sure you have the following:
 
 3. **Basic understanding of NOMAD metainfo**  
    Familiarity with NOMAD’s metainfo system is helpful. If needed, review [FAIRmat Tutorial 8](https://www.fairmat-nfdi.eu/events/fairmat-tutorial-8/tutorial-8-materials){:target="_blank" rel="noopener"}.
-   
+
 4. **Local or cloud-based development environment**  
    You need either:
 
@@ -406,6 +406,7 @@ Implement the normalization process as follows:
         step.final_temperature = ureg.Quantity(row['final temperature [C]'], 'celsius')
         steps.append(step)
     ```
+
     The code snippet above uses the NOMAD unit registry to handle all the units.
 
 3. Assign the generated list to `self.steps`:
