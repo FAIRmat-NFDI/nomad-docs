@@ -40,7 +40,6 @@ pip install nomad-lab --extra-index-url https://gitlab.mpcdf.mpg.de/api/v4/proje
 The Python package offers different feature sets through optional dependencies:
 
 ```bash
-pip install nomad-lab[parsing]        # For parsing functionality (includes HDF5, netCDF, ASR parsers)
 pip install nomad-lab[infrastructure] # For running the NOMAD infrastructure
 pip install nomad-lab[dev]            # Contains development tools (pytest, pylint, mypy)
 ```
