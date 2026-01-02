@@ -70,4 +70,4 @@ See [Explanation > Workflows](../../explanation/workflows.md) for more informati
 !!! warning "Attention"
     We are currently performing a complete refactoring of the computational MetaInfo schema. The new schema will be populated under the `data` section of the archive: [MetaInfo Browser > Entry > data](https://nomad-lab.eu/prod/v1/gui/analyze/metainfo/nomad.datamodel.datamodel.EntryArchive/data){:target="_blank" rel="noopener"}. A preliminary version of the full schema can be browsed in [MetaInfo Browser > nomad_simulations](https://nomad-lab.eu/prod/v1/gui/analyze/metainfo/nomad_simulations){:target="_blank" rel="noopener"}.
 
-    Further information can be found within the schema plugin docs: [`nomad-simulations` Docs](https://nomad-coe.github.io/nomad-simulations/){:target="_blank" rel="noopener"}.
+    Further information can be found within the schema plugin docs: [`nomad-simulations` Docs](https://fairmat-nfdi.github.io/nomad-simulations/){:target="_blank" rel="noopener"}.
