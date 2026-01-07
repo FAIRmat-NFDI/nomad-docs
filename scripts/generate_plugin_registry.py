@@ -15,8 +15,8 @@ import regex
 import requests
 
 
-NOMAD_API_URL = "https://nomad-lab.eu/prod/v1/oasis/api/v1"
-GITHUB_ORGS = ["FAIRmat-NFDI", "nomad-coe"]
+NOMAD_API_URL = 'https://nomad-lab.eu/prod/v1/oasis/api/v1'
+GITHUB_ORGS = ['FAIRmat-NFDI', 'nomad-coe']
 
 # Link pattern for fixing external links
 LINK_PATTERN = regex.compile(
@@ -47,55 +47,55 @@ def query_plugins(owner_filter: str) -> list[dict[str, Any]]:
         List of plugin data dictionaries
     """
     query_payload = {
-        "owner": "visible",
-        "query": {
-            "and": [
+        'owner': 'visible',
+        'query': {
+            'and': [
                 {
-                    "data.owner#nomad_plugins.schema_packages.plugin.Plugin:any": [
+                    'data.owner#nomad_plugins.schema_packages.plugin.Plugin:any': [
                         owner_filter
                     ]
                 },
-                {"entry_type:all": ["Plugin"]},
+                {'entry_type:all': ['Plugin']},
             ]
         },
-        "pagination": {
-            "order_by": "upload_create_time",
-            "order": "desc",
-            "page_size": 100,
+        'pagination': {
+            'order_by': 'upload_create_time',
+            'order': 'desc',
+            'page_size': 100,
         },
-        "required": {"exclude": ["quantities", "sections", "files"]},
+        'required': {'exclude': ['quantities', 'sections', 'files']},
     }
 
-    url = f"{NOMAD_API_URL}/entries/query"
+    url = f'{NOMAD_API_URL}/entries/query'
     all_plugins = []
 
-    print(f"Querying NOMAD API for {owner_filter} plugins...")
+    print(f'Querying NOMAD API for {owner_filter} plugins...')
 
     try:
         response = requests.post(url, json=query_payload, timeout=30)
         if not response.ok:
-            print(f"API Error Response: {response.text}")
+            print(f'API Error Response: {response.text}')
         response.raise_for_status()
         data = response.json()
 
-        all_plugins.extend(data.get("data", []))
-        total = data.get("pagination", {}).get("total", 0)
+        all_plugins.extend(data.get('data', []))
+        total = data.get('pagination', {}).get('total', 0)
 
-        print(f"Found {total} plugins")
+        print(f'Found {total} plugins')
 
         # Handle pagination if there are more results
         page = 1
         while len(all_plugins) < total:
             page += 1
-            query_payload["pagination"]["page"] = page
+            query_payload['pagination']['page'] = page
             response = requests.post(url, json=query_payload, timeout=30)
             response.raise_for_status()
             data = response.json()
-            all_plugins.extend(data.get("data", []))
-            print(f"Fetched page {page}, total plugins: {len(all_plugins)}")
+            all_plugins.extend(data.get('data', []))
+            print(f'Fetched page {page}, total plugins: {len(all_plugins)}')
 
     except requests.exceptions.RequestException as e:
-        print(f"Error querying NOMAD API: {e}")
+        print(f'Error querying NOMAD API: {e}')
         sys.exit(1)
 
     return all_plugins
@@ -111,50 +111,50 @@ def extract_plugin_metadata(plugin_entry: dict[str, Any]) -> dict[str, Any]:
     Returns:
         Dictionary with extracted metadata
     """
-    data = plugin_entry.get("data", {})
+    data = plugin_entry.get('data', {})
 
     # Extract plugin entry points and their types
-    entry_points = data.get("plugin_entry_points", [])
+    entry_points = data.get('plugin_entry_points', [])
     entry_point_types = set()
     entry_point_names = []
 
     for ep in entry_points:
-        if ep_type := ep.get("type"):
+        if ep_type := ep.get('type'):
             entry_point_types.add(ep_type)
-        if ep_name := ep.get("name"):
+        if ep_name := ep.get('name'):
             entry_point_names.append(ep_name)
 
     # Format authors
-    authors = data.get("authors", [])
+    authors = data.get('authors', [])
     author_list = []
     for author in authors:
-        if name := author.get("name"):
+        if name := author.get('name'):
             author_list.append(name)
 
     # Format maintainers
-    maintainers = data.get("maintainers", [])
+    maintainers = data.get('maintainers', [])
     maintainer_list = []
     for maintainer in maintainers:
-        if name := maintainer.get("name"):
+        if name := maintainer.get('name'):
             maintainer_list.append(name)
 
     return {
-        "name": data.get("name", "Unknown"),
-        "description": data.get("description", ""),
-        "repository": data.get("repository", ""),
-        "owner": data.get("owner", ""),
-        "stars": data.get("stars", 0),
-        "created": data.get("created", ""),
-        "last_updated": data.get("last_updated", ""),
-        "on_central": data.get("on_central", False),
-        "on_example_oasis": data.get("on_example_oasis", False),
-        "on_pypi": data.get("on_pypi", False),
-        "entry_point_types": sorted(entry_point_types),
-        "entry_point_names": entry_point_names,
-        "authors": author_list,
-        "maintainers": maintainer_list,
-        "plugin_dependencies": [
-            dep.get("name", "") for dep in data.get("plugin_dependencies", [])
+        'name': data.get('name', 'Unknown'),
+        'description': data.get('description', ''),
+        'repository': data.get('repository', ''),
+        'owner': data.get('owner', ''),
+        'stars': data.get('stars', 0),
+        'created': data.get('created', ''),
+        'last_updated': data.get('last_updated', ''),
+        'on_central': data.get('on_central', False),
+        'on_example_oasis': data.get('on_example_oasis', False),
+        'on_pypi': data.get('on_pypi', False),
+        'entry_point_types': sorted(entry_point_types),
+        'entry_point_names': entry_point_names,
+        'authors': author_list,
+        'maintainers': maintainer_list,
+        'plugin_dependencies': [
+            dep.get('name', '') for dep in data.get('plugin_dependencies', [])
         ],
     }
 
@@ -162,8 +162,8 @@ def extract_plugin_metadata(plugin_entry: dict[str, Any]) -> dict[str, Any]:
 def format_date(iso_date: str) -> str:
     """Format ISO date string to readable format."""
     try:
-        dt = datetime.fromisoformat(iso_date.replace("Z", "+00:00"))
-        return dt.strftime("%Y-%m-%d")
+        dt = datetime.fromisoformat(iso_date.replace('Z', '+00:00'))
+        return dt.strftime('%Y-%m-%d')
     except (ValueError, AttributeError):
         return iso_date
 
@@ -178,18 +178,18 @@ def normalize_attrs(attrs: str | None) -> str:
     attrs_dict: dict[str, str | None] = {}
 
     for part in parts:
-        if "=" in part:
-            k, v = part.split("=", 1)
-            attrs_dict[k.strip(":")] = v.strip('"')
+        if '=' in part:
+            k, v = part.split('=', 1)
+            attrs_dict[k.strip(':')] = v.strip('"')
         else:
-            attrs_dict[part.strip(":")] = None
+            attrs_dict[part.strip(':')] = None
 
     # Always enforce target and rel
-    attrs_dict["target"] = "_blank"
-    attrs_dict["rel"] = "noopener"
+    attrs_dict['target'] = '_blank'
+    attrs_dict['rel'] = 'noopener'
 
     return (
-        "{:" + " ".join(f'{k}="{v}"' if v else k for k, v in attrs_dict.items()) + "}"
+        '{:' + ' '.join(f'{k}="{v}"' if v else k for k, v in attrs_dict.items()) + '}'
     )
 
 
@@ -206,18 +206,19 @@ def fix_external_links(text: str) -> str:
 
 def fix_markdown_lint_issues(text: str) -> str:
     """Fix common markdownlint issues in the generated content."""
-    lines = text.split("\n")
+    lines = text.split('\n')
     fixed_lines = []
 
     for i, line in enumerate(lines):
         # Fix MD044: Replace "Nomad" with "nomad" (but not in URLs or "NOMAD")
         # Only replace standalone "Nomad" that's not part of "NOMAD"
-        if "Nomad" in line and "NOMAD" not in line:
-            line = line.replace("Nomad", "nomad")
+        if 'Nomad' in line and 'NOMAD' not in line:
+            line = line.replace('Nomad', 'nomad')
 
         # Fix MD034: Wrap bare URLs in angle brackets (look for URLs not in markdown links)
         # Pattern: URL not preceded by ](
         import re
+
         # Find bare URLs that are not already in markdown links
         bare_url_pattern = re.compile(r'(?<!\]\()https?://[^\s<>\[\]]+(?!\))')
         line = bare_url_pattern.sub(lambda m: f'<{m.group(0)}>', line)
@@ -228,15 +229,15 @@ def fix_markdown_lint_issues(text: str) -> str:
     final_lines = []
     for i, line in enumerate(fixed_lines):
         # Check if current line starts a list
-        is_list_start = line.strip().startswith(("- ", "* ", "1. "))
+        is_list_start = line.strip().startswith(('- ', '* ', '1. '))
         # Check if previous line exists and is not blank and not a list item
-        prev_line = fixed_lines[i-1] if i > 0 else ""
+        prev_line = fixed_lines[i - 1] if i > 0 else ''
         prev_is_blank = not prev_line.strip()
-        prev_is_list = prev_line.strip().startswith(("- ", "* ", "1. "))
+        prev_is_list = prev_line.strip().startswith(('- ', '* ', '1. '))
 
         # Add blank line before list if needed
         if is_list_start and not prev_is_blank and not prev_is_list and i > 0:
-            final_lines.append("")
+            final_lines.append('')
 
         final_lines.append(line)
 
@@ -252,7 +253,7 @@ def fix_markdown_lint_issues(text: str) -> str:
             blank_count = 0
             result_lines.append(line)
 
-    return "\n".join(result_lines)
+    return '\n'.join(result_lines)
 
 
 def generate_markdown_table(plugins: list[dict[str, Any]]) -> str:
@@ -266,57 +267,57 @@ def generate_markdown_table(plugins: list[dict[str, Any]]) -> str:
         Markdown formatted table
     """
     if not plugins:
-        return "No plugins found.\n"
+        return 'No plugins found.\n'
 
     # Sort plugins by name
-    plugins_sorted = sorted(plugins, key=lambda x: x["name"].lower())
+    plugins_sorted = sorted(plugins, key=lambda x: x['name'].lower())
 
     markdown = []
     markdown.append(
-        "| Plugin | Description | Type(s) | PyPI | Central Deployment | Example Oasis | Repository | Stars |"
+        '| Plugin | Description | Type(s) | PyPI | Central Deployment | Example Oasis | Repository | Stars |'
     )
     markdown.append(
-        "| ------ | ----------- | ------- | ---- | ------------------ | ------------- | ---------- | ----- |"
+        '| ------ | ----------- | ------- | ---- | ------------------ | ------------- | ---------- | ----- |'
     )
 
     for plugin in plugins_sorted:
-        name = plugin["name"]
+        name = plugin['name']
         description = (
-            plugin["description"][:80] + "..."
-            if len(plugin["description"]) > 80
-            else plugin["description"]
+            plugin['description'][:80] + '...'
+            if len(plugin['description']) > 80
+            else plugin['description']
         )
         # Replace empty description with placeholder
         if not description.strip():
-            description = "—"
-        description = description.replace("|", "\\|").replace("\n", " ")
+            description = '—'
+        description = description.replace('|', '\\|').replace('\n', ' ')
 
         # Format entry point types
         types = (
-            ", ".join(plugin["entry_point_types"])
-            if plugin["entry_point_types"]
-            else "—"
+            ', '.join(plugin['entry_point_types'])
+            if plugin['entry_point_types']
+            else '—'
         )
 
         # Format boolean indicators
-        pypi = "✓" if plugin["on_pypi"] else "—"
-        central = "✓" if plugin["on_central"] else "—"
-        example = "✓" if plugin["on_example_oasis"] else "—"
+        pypi = '✓' if plugin['on_pypi'] else '—'
+        central = '✓' if plugin['on_central'] else '—'
+        example = '✓' if plugin['on_example_oasis'] else '—'
 
         # Format repository link
-        repo_url = plugin["repository"]
+        repo_url = plugin['repository']
         repo_name = (
-            repo_url.split("github.com/")[-1] if "github.com" in repo_url else repo_url
+            repo_url.split('github.com/')[-1] if 'github.com' in repo_url else repo_url
         )
-        repo_link = f"[{repo_name}]({repo_url})" if repo_url else "—"
+        repo_link = f'[{repo_name}]({repo_url})' if repo_url else '—'
 
-        stars = plugin["stars"]
+        stars = plugin['stars']
 
         markdown.append(
-            f"| **{name}** | {description} | {types} | {pypi} | {central} | {example} | {repo_link} | {stars} |"
+            f'| **{name}** | {description} | {types} | {pypi} | {central} | {example} | {repo_link} | {stars} |'
         )
 
-    return "\n".join(markdown)
+    return '\n'.join(markdown)
 
 
 def generate_detailed_list(plugins: list[dict[str, Any]]) -> str:
@@ -330,23 +331,23 @@ def generate_detailed_list(plugins: list[dict[str, Any]]) -> str:
         Markdown formatted detailed list
     """
     if not plugins:
-        return "No plugins found.\n"
+        return 'No plugins found.\n'
 
     # Sort plugins by name
-    plugins_sorted = sorted(plugins, key=lambda x: x["name"].lower())
+    plugins_sorted = sorted(plugins, key=lambda x: x['name'].lower())
 
     markdown = []
 
     for plugin in plugins_sorted:
         markdown.append(f"\n### {plugin['name']}")
-        markdown.append("")
+        markdown.append('')
 
-        if plugin["description"]:
-            markdown.append(plugin["description"])
-            markdown.append("")
+        if plugin['description']:
+            markdown.append(plugin['description'])
+            markdown.append('')
 
         # Repository and metadata
-        if plugin["repository"]:
+        if plugin['repository']:
             markdown.append(
                 f"**Repository:** [{plugin['repository']}]({plugin['repository']})"
             )
@@ -355,55 +356,55 @@ def generate_detailed_list(plugins: list[dict[str, Any]]) -> str:
         markdown.append(f"**Stars:** {plugin['stars']}")
         markdown.append(f"**Created:** {format_date(plugin['created'])}")
         markdown.append(f"**Last Updated:** {format_date(plugin['last_updated'])}")
-        markdown.append("")
+        markdown.append('')
 
         # Deployment status
         deployments = []
-        if plugin["on_pypi"]:
-            deployments.append("PyPI")
-        if plugin["on_central"]:
-            deployments.append("NOMAD Central")
-        if plugin["on_example_oasis"]:
-            deployments.append("Example Oasis")
+        if plugin['on_pypi']:
+            deployments.append('PyPI')
+        if plugin['on_central']:
+            deployments.append('NOMAD Central')
+        if plugin['on_example_oasis']:
+            deployments.append('Example Oasis')
 
         if deployments:
             markdown.append(f"**Available on:** {', '.join(deployments)}")
-            markdown.append("")
+            markdown.append('')
 
         # Entry points
-        if plugin["entry_point_types"]:
+        if plugin['entry_point_types']:
             markdown.append(
                 f"**Plugin Types:** {', '.join(plugin['entry_point_types'])}"
             )
-            markdown.append("")
+            markdown.append('')
 
-        if plugin["entry_point_names"]:
-            markdown.append("**Entry Points:**")
-            for ep_name in plugin["entry_point_names"]:
-                markdown.append(f"- `{ep_name}`")
-            markdown.append("")
+        if plugin['entry_point_names']:
+            markdown.append('**Entry Points:**')
+            for ep_name in plugin['entry_point_names']:
+                markdown.append(f'- `{ep_name}`')
+            markdown.append('')
 
         # Authors and maintainers
-        if plugin["authors"]:
-            authors_str = ", ".join(plugin["authors"])
-            markdown.append(f"**Authors:** {authors_str}")
-            markdown.append("")
+        if plugin['authors']:
+            authors_str = ', '.join(plugin['authors'])
+            markdown.append(f'**Authors:** {authors_str}')
+            markdown.append('')
 
-        if plugin["maintainers"]:
-            maintainers_str = ", ".join(plugin["maintainers"])
-            markdown.append(f"**Maintainers:** {maintainers_str}")
-            markdown.append("")
+        if plugin['maintainers']:
+            maintainers_str = ', '.join(plugin['maintainers'])
+            markdown.append(f'**Maintainers:** {maintainers_str}')
+            markdown.append('')
 
         # Dependencies
-        if plugin["plugin_dependencies"]:
-            markdown.append("**Plugin Dependencies:**")
-            for dep in plugin["plugin_dependencies"]:
-                markdown.append(f"- {dep}")
-            markdown.append("")
+        if plugin['plugin_dependencies']:
+            markdown.append('**Plugin Dependencies:**')
+            for dep in plugin['plugin_dependencies']:
+                markdown.append(f'- {dep}')
+            markdown.append('')
 
-        markdown.append("---")
+        markdown.append('---')
 
-    return "\n".join(markdown)
+    return '\n'.join(markdown)
 
 
 def generate_registry_page(plugins: list[dict[str, Any]], output_path: Path) -> None:
@@ -418,89 +419,89 @@ def generate_registry_page(plugins: list[dict[str, Any]], output_path: Path) -> 
 
     # Generate statistics
     total_plugins = len(plugin_metadata)
-    on_pypi = sum(1 for p in plugin_metadata if p["on_pypi"])
-    on_central = sum(1 for p in plugin_metadata if p["on_central"])
+    on_pypi = sum(1 for p in plugin_metadata if p['on_pypi'])
+    on_central = sum(1 for p in plugin_metadata if p['on_central'])
 
     entry_point_type_counts = {}
     for plugin in plugin_metadata:
-        for ep_type in plugin["entry_point_types"]:
+        for ep_type in plugin['entry_point_types']:
             entry_point_type_counts[ep_type] = (
                 entry_point_type_counts.get(ep_type, 0) + 1
             )
 
     # Build the page
     page_content = []
-    page_content.append("# NOMAD Plugin Registry")
-    page_content.append("")
-    orgs_list = ", ".join(GITHUB_ORGS)
+    page_content.append('# NOMAD Plugin Registry')
+    page_content.append('')
+    orgs_list = ', '.join(GITHUB_ORGS)
     page_content.append(
         "This page contains information about all NOMAD plugins owned and maintained by "
         f" the GitHub organizations: {orgs_list}. "
         " The information is automatically updated monthly. "
         f"**Last Updated:** {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}"
     )
-    page_content.append("")
+    page_content.append('')
     page_content.append(
-        "[Browse All Plugins in the NOMAD Plugins App](https://nomad-lab.eu/prod/v1/oasis/gui/search/plugins){ .md-button .nomad-button }"
+        '[Browse All Plugins in the NOMAD Plugins App](https://nomad-lab.eu/prod/v1/oasis/gui/search/plugins){ .md-button .nomad-button }'
     )
-    page_content.append("")
+    page_content.append('')
 
     # Statistics section
-    total_stars = sum(p["stars"] for p in plugin_metadata)
-    page_content.append("## Statistics")
-    page_content.append("")
-    page_content.append("### Overview")
-    page_content.append("")
-    page_content.append(f"- **Total Plugins:** {total_plugins}")
-    page_content.append(f"- **Available on PyPI:** {on_pypi}")
-    page_content.append(f"- **Deployed on NOMAD Central:** {on_central}")
+    total_stars = sum(p['stars'] for p in plugin_metadata)
+    page_content.append('## Statistics')
+    page_content.append('')
+    page_content.append('### Overview')
+    page_content.append('')
+    page_content.append(f'- **Total Plugins:** {total_plugins}')
+    page_content.append(f'- **Available on PyPI:** {on_pypi}')
+    page_content.append(f'- **Deployed on NOMAD Central:** {on_central}')
     page_content.append(
         f"- **Deployed on Example Oasis:** {sum(1 for p in plugin_metadata if p['on_example_oasis'])}"
     )
-    page_content.append(f"- **Total Stars:** {total_stars}")
-    page_content.append("")
-    page_content.append("### Plugin Type Distribution")
-    page_content.append("")
+    page_content.append(f'- **Total Stars:** {total_stars}')
+    page_content.append('')
+    page_content.append('### Plugin Type Distribution')
+    page_content.append('')
 
     if entry_point_type_counts:
         # Generate Mermaid pie chart with increased text size
         page_content.append(
             '<div style="transform: scale(0.9); transform-origin: top center; margin-bottom: 40px; margin-left: auto; margin-right: auto; max-width: 100%;">'
         )
-        page_content.append("")
-        page_content.append("```mermaid")
+        page_content.append('')
+        page_content.append('```mermaid')
         page_content.append(
             "%%{init: {'theme':'base', 'themeVariables': { 'pie1':'#2A4CDF', 'pie2':'#008A67', 'pie3':'#FF6B6B', 'pie4':'#4ECDC4', 'pie5':'#FFE66D', 'pie6':'#A8E6CF', 'pieTitleTextSize': '22px', 'pieSectionTextSize': '22px', 'pieLegendTextSize': '22px'}, 'themeCSS': '.pieCircle { font-size: 22px; font-weight: bold; } .legend text { font-size: 22px; font-weight: bold; margin-left: 8px; } .legend rect { margin-right: 8px; } .slice text { font-size: 22px; font-weight: bold; transform: translate(-15%, -15%); } text.percent { font-size: 22px; font-weight: bold; }' }}%%"
         )
-        page_content.append("pie showData")
+        page_content.append('pie showData')
         for ep_type, count in sorted(
             entry_point_type_counts.items(), key=lambda x: x[1], reverse=True
         ):
             # Escape special characters and quotes in labels
             safe_label = ep_type.replace('"', '\\"')
             page_content.append(f'    "{safe_label}" : {count}')
-        page_content.append("```")
-        page_content.append("")
-        page_content.append("</div>")
-        page_content.append("")
+        page_content.append('```')
+        page_content.append('')
+        page_content.append('</div>')
+        page_content.append('')
 
     # Quick reference table
-    page_content.append("## Plugin Overview")
-    page_content.append("")
-    page_content.append("Quick reference table of all available plugins:")
-    page_content.append("")
+    page_content.append('## Plugin Overview')
+    page_content.append('')
+    page_content.append('Quick reference table of all available plugins:')
+    page_content.append('')
     page_content.append(generate_markdown_table(plugin_metadata))
-    page_content.append("")
+    page_content.append('')
 
     # Detailed listings
-    page_content.append("## Detailed Plugin Information")
-    page_content.append("")
+    page_content.append('## Detailed Plugin Information')
+    page_content.append('')
     page_content.append(generate_detailed_list(plugin_metadata))
-    page_content.append("")
+    page_content.append('')
 
     # Write to file
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    content = "\n".join(page_content)
+    content = '\n'.join(page_content)
 
     # Fix external links to include target and rel attributes
     content = fix_external_links(content)
@@ -508,16 +509,16 @@ def generate_registry_page(plugins: list[dict[str, Any]], output_path: Path) -> 
     # Fix markdownlint issues
     content = fix_markdown_lint_issues(content)
 
-    output_path.write_text(content, encoding="utf-8")
-    print(f"Plugin registry written to {output_path}")
+    output_path.write_text(content, encoding='utf-8')
+    print(f'Plugin registry written to {output_path}')
 
 
 def main():
     """Main entry point."""
     # Determine output path
     script_dir = Path(__file__).parent
-    docs_dir = script_dir.parent / "docs" / "examples"
-    output_path = docs_dir / "plugin_registry.md"
+    docs_dir = script_dir.parent / 'docs' / 'examples'
+    output_path = docs_dir / 'plugin_registry.md'
 
     # Query plugins from all organizations
     all_plugins = []
@@ -526,14 +527,14 @@ def main():
         all_plugins.extend(plugins)
 
     if not all_plugins:
-        print("Warning: No plugins found!")
+        print('Warning: No plugins found!')
         # Still generate the page with a message
-        orgs_list = ", ".join(GITHUB_ORGS)
+        orgs_list = ', '.join(GITHUB_ORGS)
         output_path.write_text(
             "# NOMAD Plugin Registry\n\n"
             f"No plugins found for organizations: {orgs_list}\n\n"
             f"Last checked: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}\n",
-            encoding="utf-8",
+            encoding='utf-8',
         )
         return
 
@@ -541,7 +542,7 @@ def main():
     seen_names = set()
     unique_plugins = []
     for plugin in all_plugins:
-        plugin_name = plugin.get("data", {}).get("name", "")
+        plugin_name = plugin.get('data', {}).get('name', '')
         if plugin_name and plugin_name not in seen_names:
             seen_names.add(plugin_name)
             unique_plugins.append(plugin)
@@ -550,9 +551,9 @@ def main():
     generate_registry_page(unique_plugins, output_path)
 
     print(
-        f"Successfully generated plugin registry with {len(unique_plugins)} plugins (from {len(all_plugins)} total entries)"
+        f'Successfully generated plugin registry with {len(unique_plugins)} plugins (from {len(all_plugins)} total entries)'
     )
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()

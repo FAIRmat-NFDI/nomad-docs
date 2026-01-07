@@ -8,29 +8,29 @@ import requests
 from nomad.datamodel import EntryArchive
 from nomad.metainfo import units
 
-base_url = "http://nomad-lab.eu/prod/v1/api/v1"
+base_url = 'http://nomad-lab.eu/prod/v1/api/v1'
 
 response = requests.post(
-    f"{base_url}/entries/query",
+    f'{base_url}/entries/query',
     json={
-        "query": {"results.material.elements": {"all": ["Ti", "O"]}},
-        "pagination": {"page_size": 1},
-        "required": {"include": ["entry_id"]},
+        'query': {'results.material.elements': {'all': ['Ti', 'O']}},
+        'pagination': {'page_size': 1},
+        'required': {'include': ['entry_id']},
     },
 )
 response_json = response.json()
 print(json.dumps(response.json(), indent=2))
 
 
-first_entry_id = response_json["data"][0]["entry_id"]
+first_entry_id = response_json['data'][0]['entry_id']
 response = requests.post(
-    f"{base_url}/entries/{first_entry_id}/archive/query",
+    f'{base_url}/entries/{first_entry_id}/archive/query',
     json={
-        "required": {
-            "workflow": {
-                "calculation_result_ref": {
-                    "energy": "*",
-                    "system_ref": {"chemical_composition": "*"},
+        'required': {
+            'workflow': {
+                'calculation_result_ref': {
+                    'energy': '*',
+                    'system_ref': {'chemical_composition': '*'},
                 }
             }
         }
@@ -40,7 +40,7 @@ response_json = response.json()
 print(json.dumps(response_json, indent=2))
 
 
-archive = EntryArchive.m_from_dict(response_json["data"]["archive"])
+archive = EntryArchive.m_from_dict(response_json['data']['archive'])
 result = archive.workflow.results.calculation_result_ref
 print(result.system_ref.chemical_composition)
-print(result.energy.total.value.to(units("eV")))
+print(result.energy.total.value.to(units('eV')))

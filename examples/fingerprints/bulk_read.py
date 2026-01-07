@@ -23,24 +23,24 @@ from nomad.archive import to_json
 
 def read_archive(entries):
     try:
-        upload_id = entries[0]["upload_id"]
+        upload_id = entries[0]['upload_id']
         upload_files = files.UploadFiles.get(upload_id, lambda *args: True)
         assert upload_files is not None
         for entry in entries:
-            entry_id = entry["entry_id"]
-            material_id = entry["material_id"]
+            entry_id = entry['entry_id']
+            material_id = entry['material_id']
             with upload_files.read_archive(entry_id) as archive:
                 entry_archive = to_json(archive[entry_id])
-                for run in entry_archive.get("section_run", []):
-                    for calc in run.get("section_single_configuration_calculation", []):
-                        for dos in calc.get("section_dos", []):
-                            fingerprint = dos.get("section_dos_fingerprint")
+                for run in entry_archive.get('section_run', []):
+                    for calc in run.get('section_single_configuration_calculation', []):
+                        for dos in calc.get('section_dos', []):
+                            fingerprint = dos.get('section_dos_fingerprint')
                             if fingerprint:
                                 yield {
-                                    "upload_id": upload_id,
-                                    "entry_id": entry_id,
-                                    "material_id": material_id,
-                                    "fingerprint": fingerprint,
+                                    'upload_id': upload_id,
+                                    'entry_id': entry_id,
+                                    'material_id': material_id,
+                                    'fingerprint': fingerprint,
                                 }
     except Exception:
         traceback.print_exc()
@@ -50,7 +50,7 @@ nworker = 24
 entry_queue: Any = Queue(maxsize=100)
 result_queue: Any = Queue(maxsize=100)
 producer_end = Event()
-worker_sentinel = "end"
+worker_sentinel = 'end'
 
 
 def worker():
@@ -65,14 +65,14 @@ def worker():
             result_queue.put(result)
 
     result_queue.put(worker_sentinel)
-    print("end worker")
+    print('end worker')
 
 
 def writer():
     ended_worker = 0
     count = 0
-    f = open("local/fingerprints.json", "wt")
-    f.write("[")
+    f = open('local/fingerprints.json', 'wt')
+    f.write('[')
     while not (ended_worker == nworker and result_queue.empty()):
         try:
             result = result_queue.get(block=True, timeout=0.1)
@@ -84,35 +84,35 @@ def writer():
             continue
 
         if count > 0:
-            f.write(",\n")
+            f.write(',\n')
         json.dump(result, f, indent=2)
         count += 1
         if count % 1000 == 0:
             print(count)
 
-    f.write("]")
+    f.write(']')
     f.close()
-    print("end writer")
+    print('end writer')
 
 
 def producer():
-    with open("local/materials.json", "r") as f:
+    with open('local/materials.json', 'r') as f:
         data = json.load(f)
 
     upload_id = None
     entries = []
     for entry in data:
-        if upload_id is not None and upload_id != entry["upload_id"]:
+        if upload_id is not None and upload_id != entry['upload_id']:
             entry_queue.put(entries, block=True)
             entries = []
 
-        upload_id = entry["upload_id"]
+        upload_id = entry['upload_id']
         entries.append(entry)
 
     entry_queue.put(entries, block=True)
 
     producer_end.set()
-    print("end producer")
+    print('end producer')
 
 
 with Pool(processes=nworker + 2) as pool:

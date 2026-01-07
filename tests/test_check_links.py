@@ -6,7 +6,7 @@ from nomad_docs.check_links import main
 
 
 def test_process_file_adds_attrs(tmp_path: Path):
-    mdfile = tmp_path / "example.md"
+    mdfile = tmp_path / 'example.md'
     mdfile.write_text(
         textwrap.dedent("""
         External without attrs: [Google](https://google.com)
@@ -42,7 +42,7 @@ def test_process_file_adds_attrs(tmp_path: Path):
         lines[4]
         == 'External full attrs: [Docs](https://example.com){:target="_blank" rel="noopener"}'
     )
-    assert lines[5] == "Internal link: [Overview](./overview.md)"
+    assert lines[5] == 'Internal link: [Overview](./overview.md)'
     assert (
         lines[6]
         == 'Link with parentheses: [Wiki](https://en.wikipedia.org/wiki/Reentrancy_(computing)){:target="_blank" rel="noopener"}'
@@ -55,6 +55,6 @@ def test_process_file_adds_attrs(tmp_path: Path):
 
 def test_docs_external_links_clean():
     """Ensure external links have target and rel attributes."""
-    docs = Path(__file__).resolve().parent.parent / "docs"
+    docs = Path(__file__).resolve().parent.parent / 'docs'
     changes = main(str(docs))
-    assert changes == 0, "docs contain external links without target/rel attributes."
+    assert changes == 0, 'docs contain external links without target/rel attributes.'

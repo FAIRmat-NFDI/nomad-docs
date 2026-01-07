@@ -38,7 +38,7 @@ for definition, _, _, _ in metainfo.m_traverse():
 
 for package in sections.keys():
     print(
-        f"{package.name}: {sections[package]}, {properties.get(package, 0)}, {quantities.get(package, 0)}"
+        f'{package.name}: {sections[package]}, {properties.get(package, 0)}, {quantities.get(package, 0)}'
     )
 
-print(f"SUM: {all_sections}, {all_properties}, {all_quantities}")
+print(f'SUM: {all_sections}, {all_properties}, {all_quantities}')

@@ -5,10 +5,10 @@ import tarfile
 import os.path
 import zipfile
 
-file = "./file-to-split.tar.gz"
-name = "zip-file-name"
+file = './file-to-split.tar.gz'
+name = 'zip-file-name'
 
-tar_file = tarfile.open(file, "r:gz")
+tar_file = tarfile.open(file, 'r:gz')
 
 size_per_zip = 32 * 1024 * 1024 * 1024
 
@@ -34,13 +34,13 @@ while True:
         current_size = info.size
 
     if current_zip is None:
-        zip_file_name = f"{name}-{current_zip_number}.zip"
+        zip_file_name = f'{name}-{current_zip_number}.zip'
         current_zip = zipfile.ZipFile(
-            zip_file_name, mode="w", compression=0, allowZip64=True
+            zip_file_name, mode='w', compression=0, allowZip64=True
         )
 
     reader = tar_file.extractfile(info)
-    with current_zip.open(info.name, mode="w") as f:
+    with current_zip.open(info.name, mode='w') as f:
         f.write(reader.read())
 
     current_dir = this_dir

@@ -3,16 +3,16 @@ import json
 from nomad.metainfo import MSection
 from nomad.metainfo.metainfo import Package, Quantity, SectionProxy, SubSection
 
-m_package = Package(name="advanced_metainfo_example")
+m_package = Package(name='advanced_metainfo_example')
 
 
 class BaseSection(MSection):
     notes = Quantity(
         type=str,
-        description="Additional notes about this section in Markdown.",
-        links=["https://markdown.org"],
+        description='Additional notes about this section in Markdown.',
+        links=['https://markdown.org'],
         # 'format' does not exist in metainfo schemas, but will be added as 'more'
-        format="Markdown",
+        format='Markdown',
     )
 
     # Section can have inner section definitions. Those will be mapped to 'inner_section_definitions'
@@ -24,12 +24,12 @@ class BaseSection(MSection):
         first_name = Quantity(type=str)
         last_name = Quantity(type=str)
         # 'optional' does not exist in metainfo schemas, but will be added add 'more'
-        email = Quantity(type=str, format="email", optional=True)
+        email = Quantity(type=str, format='email', optional=True)
 
     authors = SubSection(
         # You can use inner sections as usual.
         section_def=User,
-        description="The user that authored this section.",
+        description='The user that authored this section.',
         # Repeats controlles if the multiplicity in instances. Here authors is defined as
         # a list of User objects.
         repeats=True,
@@ -48,7 +48,7 @@ class ApplicationSection(BaseSection):
             # 'deprecated' is an actual metainfo property.
             # Can be added to all definitions. It is a string that describes how to
             # deal with the deprecation propery.
-            deprecated="Use user_id as a replacement"
+            deprecated='Use user_id as a replacement'
         )
 
     # ApplicationSection.User only defined a special version of BaseSection.User. The
@@ -56,7 +56,7 @@ class ApplicationSection(BaseSection):
     # overwrite the section schema that the sub section is using with the new definition.
     authors = SubSection(section_def=User)
 
-    data = SubSection(section_def=SectionProxy("ApplicationData"), repeats=True)
+    data = SubSection(section_def=SectionProxy('ApplicationData'), repeats=True)
 
 
 class ApplicationData(MSection):
@@ -64,25 +64,25 @@ class ApplicationData(MSection):
     value = Quantity(type=str)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     print(
-        "Schema --------------------\n",
+        'Schema --------------------\n',
         json.dumps(m_package.m_to_dict(with_meta=False), indent=2),
     )
 
     archive = ApplicationSection(
-        notes="Some example data about artifical movie life",
+        notes='Some example data about artifical movie life',
         authors=[
             ApplicationSection.User(
-                user_id=1, first_name="Sandor", last_name="Brockhauser"
+                user_id=1, first_name='Sandor', last_name='Brockhauser'
             )
         ],
     )
 
-    archive.data.append(ApplicationData(name="robot", value="THX-1138"))
-    archive.data.append(ApplicationData(name="droid", value="C-3PO"))
+    archive.data.append(ApplicationData(name='robot', value='THX-1138'))
+    archive.data.append(ApplicationData(name='droid', value='C-3PO'))
 
     print(
-        "Data ----------------------\n",
+        'Data ----------------------\n',
         json.dumps(archive.m_to_dict(with_meta=False), indent=2),
     )
