@@ -1,9 +1,9 @@
 import numpy as np
-import plotly.express as px
 import pandas as pd
-from nomad.metainfo import MSection, Quantity, SubSection, Package
+import plotly.express as px
 from nomad.datamodel import Schema
-from nomad.datamodel.metainfo.plot import PlotSection, PlotlyFigure
+from nomad.datamodel.metainfo.plot import PlotlyFigure, PlotSection
+from nomad.metainfo import MSection, Package, Quantity, SubSection
 
 m_package = Package(name='Countries of the World')
 

@@ -3,9 +3,8 @@ This is a brief example on how use requests with authentication to talks to the 
 """
 
 import requests
-
-from nomad.config import config
 from nomad.client import Auth
+from nomad.config import config
 
 nomad_url = config.client.url
 user = 'yourusername'

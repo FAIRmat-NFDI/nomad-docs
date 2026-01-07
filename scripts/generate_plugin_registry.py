@@ -14,7 +14,6 @@ from typing import Any
 import regex
 import requests
 
-
 NOMAD_API_URL = 'https://nomad-lab.eu/prod/v1/oasis/api/v1'
 GITHUB_ORGS = ['FAIRmat-NFDI', 'nomad-coe']
 

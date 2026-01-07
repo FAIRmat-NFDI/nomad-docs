@@ -3,7 +3,6 @@ Demonstrates how to use requests for a simple query and archive access.
 """
 
 import requests
-
 from ase import Atoms
 from nomad.client import ArchiveQuery
 

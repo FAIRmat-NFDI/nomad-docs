@@ -3,12 +3,12 @@ This is a brief example demonstrating the public nomad@FAIRDI API for doing oper
 that might be necessary to integrate external project data.
 """
 
-import requests
 import os.path
 import time
 
-from nomad.config import config
+import requests
 from nomad.client import Auth
+from nomad.config import config
 
 nomad_url = config.client.url
 user = 'youruser'

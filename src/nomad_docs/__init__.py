@@ -20,24 +20,23 @@
 Definitions that are used in the documentation via mkdocs-macro-plugin.
 """
 
-from pydantic.fields import FieldInfo
-import yaml
 import json
 import os.path
-
-from typing import get_args, cast
-
 from inspect import isclass
+from typing import cast, get_args
 
-
-from pydantic import BaseModel
-
+import yaml
 from markdown.extensions.toc import slugify
-
-from nomad.utils import strip
-from nomad.config import config
 from nomad import utils
+from nomad.config import config
+from nomad.config.models.plugins import EntryPointType, ParserEntryPoint
+from nomad.utils import strip
+from pydantic import BaseModel
+from pydantic.fields import FieldInfo
 
+from nomad_docs.metainfo import (
+    package_markdown_from_package,
+)
 from nomad_docs.pydantic import (
     exported_config_models,
     get_field_default,
@@ -46,11 +45,6 @@ from nomad_docs.pydantic import (
     get_field_options,
     get_field_type_info,
 )
-from nomad_docs.metainfo import (
-    package_markdown_from_package,
-)
-
-from nomad.config.models.plugins import ParserEntryPoint, EntryPointType
 
 
 class MyYamlDumper(yaml.Dumper):
@@ -72,7 +66,7 @@ def define_env(env):
 
     @env.macro
     def doc_snippet(key):  # pylint: disable=unused-variable
-        from nomad.app.v1.models import query_documentation, owner_documentation
+        from nomad.app.v1.models import owner_documentation, query_documentation
         from nomad.app.v1.routers.entries import archive_required_documentation
 
         doc_snippets = {

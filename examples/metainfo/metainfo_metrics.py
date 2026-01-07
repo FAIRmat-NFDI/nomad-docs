@@ -2,8 +2,8 @@
 # basic metrics on how many sections and properties are defined
 # per package
 
-from nomad.metainfo import Section, Property, Quantity, Package
 from nomad.datamodel import all_metainfo_packages
+from nomad.metainfo import Package, Property, Quantity, Section
 
 all_sections = 0
 all_properties = 0

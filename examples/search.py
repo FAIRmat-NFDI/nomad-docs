@@ -1,8 +1,7 @@
 from nomad import infrastructure
+from nomad.app.v1.models import MetadataPagination
 from nomad.config import config
 from nomad.search import search
-from nomad.app.v1.models import MetadataPagination
-
 
 config.elastic.host = 'localhost'
 config.elastic.port = 19202

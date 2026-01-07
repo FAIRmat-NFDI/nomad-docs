@@ -2,10 +2,10 @@ from nomad.config.models.ui import (
     Axis,
     Dashboard,
     Layout,
-    WidgetPeriodicTable,
-    WidgetTerms,
     WidgetHistogram,
+    WidgetPeriodicTable,
     WidgetScatterPlot,
+    WidgetTerms,
 )
 
 schema = 'nomad_example.schema_packages.mypackage.MySchema'

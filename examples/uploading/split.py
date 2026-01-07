@@ -1,8 +1,8 @@
 # Simple script that distributes the contents of a tar file over even sized 32GB zip file.
 # It will not split directories to preserve the mainfile/auxiliary file structure.
 
-import tarfile
 import os.path
+import tarfile
 import zipfile
 
 file = './file-to-split.tar.gz'

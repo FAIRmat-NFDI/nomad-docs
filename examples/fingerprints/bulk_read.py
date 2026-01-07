@@ -11,11 +11,11 @@ try to read all fingerprints for upload/calc/material combinations read from an
 input file. The fingerprint data gets writting to an output file.
 """
 
-from typing import Any
-from multiprocessing import Pool, Queue, Event
-from queue import Empty
 import json
 import traceback
+from multiprocessing import Event, Pool, Queue
+from queue import Empty
+from typing import Any
 
 from nomad import files
 from nomad.archive import to_json

@@ -3,15 +3,14 @@ The scenario is that you have a lot of <name>-*.zip files for upload. This scrip
 will add a nomad.json to the uploads, upload them 1 at a time, watch the processing, repeat.
 """
 
-from typing import Dict, Any
 import os.path
 import sys
 import zipfile
+from typing import Any, Dict
 
 import requests
-
-from nomad.config import config
 from nomad.client import Auth, upload_file
+from nomad.config import config
 
 nomad_url = config.client.url
 user = 'youruser'

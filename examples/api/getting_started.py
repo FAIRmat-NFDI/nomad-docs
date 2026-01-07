@@ -3,8 +3,8 @@ Demonstrates how to use requests for a simple query and archive access.
 """
 
 import json
-import requests
 
+import requests
 from nomad.datamodel import EntryArchive
 from nomad.metainfo import units
 

@@ -8,7 +8,7 @@ pagination.
 
 import json
 
-from nomad import infrastructure, config
+from nomad import config, infrastructure
 
 infrastructure.setup_files()
 infrastructure.setup_elastic()

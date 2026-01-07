@@ -24,10 +24,9 @@ from inspect import isclass
 from types import UnionType
 from typing import Annotated, Any, Literal, Union, get_args, get_origin
 
+from nomad import utils
 from pydantic import BaseModel
 from pydantic.fields import FieldInfo
-
-from nomad import utils
 
 exported_config_models = set()  # type: ignore
 
