@@ -6,12 +6,6 @@ on:
     - cron: '0 0 1 * *'
   workflow_dispatch:
     # Allow manual triggering of the workflow
-  push:
-    branches:
-      - main
-    paths:
-      - 'scripts/generate_plugin_registry.py'
-      - '.github/workflows/update-plugin-registry.yml'
 
 env:
   UV_VERSION: 0.6
