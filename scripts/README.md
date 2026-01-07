@@ -27,7 +27,7 @@ Automatically generates the [Plugin Registry](../docs/examples/plugin_registry.m
 python scripts/generate_plugin_registry.py
 
 # Or with uv
-uv run --with requests python scripts/generate_plugin_registry.py
+uv run python scripts/generate_plugin_registry.py
 ```
 
 The script will:
@@ -62,8 +62,3 @@ To change the NOMAD API endpoint (e.g., for different deployments):
 NOMAD_API_URL = "https://nomad-lab.eu/prod/v1/oasis/api/v1"  # Modify as needed
 ```
 
-### Dependencies
-
-- `requests`: For HTTP API calls to NOMAD
-
-These are automatically provided by `uv run --with requests` in the workflow.

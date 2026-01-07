@@ -29,10 +29,7 @@ jobs:
 
       - name: Generate Plugin Registry
         run: |
-          uv run \
-            --with requests \
-            --with regex \
-            python scripts/generate_plugin_registry.py
+          uv run python scripts/generate_plugin_registry.py
 
       - name: Check for changes
         id: check_changes
