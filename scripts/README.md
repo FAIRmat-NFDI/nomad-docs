@@ -45,8 +45,7 @@ The plugin registry is automatically updated via GitHub Actions workflow:
 The workflow will:
 1. Run the generation script
 2. Check for changes
-3. Commit and push updates to the repository
-4. Create a pull request for scheduled runs (for review before deployment)
+3. Create a pull request with any changes for review before merging
 
 ### Configuration
 
