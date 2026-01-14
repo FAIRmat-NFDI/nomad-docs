@@ -14,6 +14,7 @@ You can use our [template repository](https://github.com/FAIRmat-NFDI/nomad-plug
 create an initial structure for a plugin containing a custom NORTH tool.
 The relevant part of the repository layout will look something like this:
 
+<!-- markdownlint-disable MD044 -->
 ```txt
 nomad-example
    ├── .github/workflows
@@ -42,6 +43,7 @@ The `NORTHTool` instance can be used to define which docker image the NORTH tool
 You will learn more about creating these images in the [next section](#creating-north-images). The entry point should be defined
 in `*/north_tools/__init__.py` like this:
 
+<!-- markdownlint-disable MD044 -->
 ```py
 
 from nomad.config.models.north import NORTHTool
