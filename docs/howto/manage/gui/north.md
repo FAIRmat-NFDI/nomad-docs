@@ -14,6 +14,11 @@
 
 - What is NORTH: [Explanation > NORTH](../../../explanation/north.md)
 
+## Launching NORTH tools from NOMAD
+
+All NORTH tools are executed in isolated Docker containers and can be invoked from any
+NOMAD dataset, independent of how the data was originally uploaded or processed.
+
 ## Further resources
 
 - How to create and configure NORTH tools: [How-Tos> ... > Entry point types > NORTH tools](../../../howto/plugins/types/north_tools.md)

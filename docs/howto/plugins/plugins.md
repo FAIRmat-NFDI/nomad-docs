@@ -9,6 +9,7 @@ A single Python plugin package can contain multiple [plugin entry points](../../
 - [Apps](./types/apps.md)
 - [Example uploads](./types/example_uploads.md)
 - [Normalizers](./types/normalizers.md)
+- [NORTH tools](./types/north_tools.md)
 - [Parsers](./types/parsers.md)
 - [Schema packages](./types/schema_packages.md)
 
