@@ -71,11 +71,11 @@ Here you can see that a `NORTHTool` object called `tool` was defined. We also in
 the entry point object `my_north_tool` using the tool. This is the
 final entry point instance in which you specify the default parameterization
 and other details about the NORTH tools. In the reference you can see all of the
-available [configuration options for a `NorthToolEntryPoint`](../../../reference/plugins.
-md#northtoolentrypoint).
+available configuration options for a [`NorthToolEntryPoint`](../../../reference/plugins.
+md#northtoolentrypoint) and a [`NorthTool`](../../../reference/config.md#northtool).
 
-The entry point instance should then be added to the `[project.entry-points.
-'nomad.plugin']` table in `pyproject.toml` in order for it to be automatically
+The entry point instance should then be added to the `[project.entry-points.'nomad.plugin']`
+table in `pyproject.toml` in order for it to be automatically
 detected:
 
 ```toml
