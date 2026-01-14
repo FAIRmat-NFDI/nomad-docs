@@ -86,4 +86,4 @@ invoked via NOMAD. Once registered, custom tools follow the same execution and p
 as built-in tools.
 
 Guidance on developing and registering custom NORTH tools is available in the how-tos:
-[How to develop NORTH tools](../../../howto/plugins/types/north_tools.md).
+[How to develop NORTH tools](../howto/plugins/types/north_tools.md).
