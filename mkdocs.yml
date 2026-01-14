@@ -44,6 +44,7 @@ nav:
               - Apps: howto/plugins/types/apps.md
               - Example uploads: howto/plugins/types/example_uploads.md
               - Normalizers: howto/plugins/types/normalizers.md
+              - NORTH tools: howto/plugins/types/north_tools.md
               - Parsers: howto/plugins/types/parsers.md
               - Schemas: howto/plugins/types/schema_packages.md
           - Built-in tools:
@@ -95,6 +96,7 @@ nav:
       - Workflows: explanation/workflows.md
       - Plugins: explanation/plugin_system.md
       - Federation and Oasis: explanation/oasis.md
+      - NORTH: explanation/north.md
   - Reference:
       # - Overview: reference/overview.md # TODO
       # - reference/metainfo.md # TODO This file no longer exists ... was it lost somehow?
