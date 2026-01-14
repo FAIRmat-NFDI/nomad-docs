@@ -60,6 +60,7 @@ NOMAD plugins are connect with the core software via "entry points". There are v
 - [Apps](plugins/types/apps.md)
 - [Example uploads](plugins/types/example_uploads.md)
 - [Normalizers](plugins/types/normalizers.md)
+- [NORTH tools](plugins/types/north_tools.md)
 - [Parsers](plugins/types/parsers.md)
 - [Schema packages](plugins/types/schema_packages.md)
 
