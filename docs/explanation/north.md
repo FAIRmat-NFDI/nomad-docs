@@ -63,6 +63,29 @@ are already provided as part of the NOMAD ecosystem.
 <!--TODO: add exisiting tools here-->
 <!--This section is intentionally left open to document which tools are currently available, where their
 container images are maintained, and how they can be enabled in a given NOMAD deployment.-->
+Our official recommendation is that desktop-based NORTH tools should be built on top of the `nomad-north-desktop-base` [docker image] (https://github.com/FAIRmat-NFDI/nomad-north-desktop-base). This image provides a [jupyter notebook](jupyter notebook) and graphical user interface that is provided via a light-weight [xfce]() desktop environment. Ubuntu Linux is the base layer of this docker image that connects thereby to the operation system of the host computer.
+
+
+[the GitLab repositories of current NORTH tools](https://gitlab.mpcdf.mpg.de/nomad-lab/north)
+
+[Shortly after its addition to NOMAD as a service](https://joss.theoj.org/papers/10.21105/joss.05388) the NORTH tools required significant refactoring as the docker base images evolved substantially. Initially, build on [Webtop](https://docs.linuxserver.io/images/docker-webtop/), offering a browser-accessible Linux desktop environment packaged in a Docker container.
+
+
+abtem
+apmtools
+base-desktop
+ellips
+fiji
+jupyter
+jupyterhub
+mpes
+nexus
+nionswift
+spm
+sts
+voila
+xps
+
 
 Learn more about running existing NOMAD tools in the how-tos:
 [How-Tos> ... > How to analyze data in NORTH](../howto/manage/gui/north.md).
