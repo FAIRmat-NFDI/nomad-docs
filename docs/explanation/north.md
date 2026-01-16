@@ -72,17 +72,18 @@ Our official recommendation is that desktop-based NORTH tools should be built on
 
 [Since its addition to NOMAD as a service](https://joss.theoj.org/papers/10.21105/joss.05388), the backend and docker images behind NORTH saw significant refactoring. Not only did the docker base images evolve substantially but also most services of NOMAD were refactored into plugins. NORTH tools with demands for a graphical user interface that were initially based on [Webtop](https://docs.linuxserver.io/images/docker-webtop/) are becoming replaced by one that is based on an image from the [Jupyter Docker Stacks project](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html).
 
-In this process, the storage location of the code that FAIRmat developed for NORTH changed. The [initial](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-remote-tools-hub) location is deprecated. The content in the location that was used [subsequently](https://gitlab.mpcdf.mpg.de/nomad-lab/north) is a process of refactoring that moves individual NORTH tools to a service that is anchored at the specific NOMAD parsers that match best thematically functionality-wise.
-## Context, functionality, and status of individual NORTH tools
+In this process, the storage location of the code that FAIRmat developed for NORTH changed. The [initial](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-remote-tools-hub) location is deprecated. The content in the location that was used [subsequently](https://gitlab.mpcdf.mpg.de/nomad-lab/north) is also in a process of refactoring that moves individual NORTH tools to a service that is anchored at the specific NOMAD parsers that fit best thematically and functionality-wise.
+
+## Context, functionality, and status of each NORTH tool
 
 ### abtem
 
-The `abtem` NORTH tool offers services for researchers working in the field of electron microscopy. The tool offers software that relies on stand-alone GUI applications, and command line scripting. The tool bundles one version of [abTEM](https://abtem.readthedocs.io/en/latest/intro.html) (a software by [J. Madsen et al.](https://open-research-europe.ec.europa.eu/articles/1-24) for simulating dynamic electron diffraction using jupyter notebooks), one version of [VESTA](https://jp-minerals.org/vesta/en/) (a software by [K. Momma and F. Izumi](https://doi.org/10.1107/S0021889811038970), a stand-alone GUI application for generating and visualizing crystal structures), and one version of [GPAW](https://gpaw.readthedocs.io/) (an projector augmented-wave-based electronic structure code and software package by [J. J. Mortensen, E. J. Enkovaara et al.](https://iopscience.iop.org/article/10.1088/0953-8984/22/25/253202). The container is 
+`abTEM` is a GUI-based NORTH tool offering software for research on electron microscopy. The tool bundles one version of [abTEM](https://abtem.readthedocs.io/en/latest/intro.html) (a software by [J. Madsen et al.](https://open-research-europe.ec.europa.eu/articles/1-24) for simulating dynamic electron diffraction using jupyter notebooks), one version of [VESTA](https://jp-minerals.org/vesta/en/) (a software by [K. Momma and F. Izumi](https://doi.org/10.1107/S0021889811038970), a stand-alone GUI application for generating and visualizing crystal structures), and one version of [GPAW](https://gpaw.readthedocs.io/) (a software package by [J. J. Mortensen, E. J. Enkovaara et al.](https://iopscience.iop.org/article/10.1088/0953-8984/22/25/253202) for command-line-based scripting of projector augmented-wave-based electronic structure simulations). **The container is to be moved to the [pynxtools-em](https://fairmat-nfdi.github.io/pynxtools-em/) plugin.** 
 
-###
+### apmtools
 
-apmtools
-
+`apmtools` is a GUI-based NORTH tool offering software for research on atom probe microscopy. The tool bundles one version of [APTyzer](https://github.com/areichm/APTyzer) (a jupyter notebook by [A. Reichmann](https://pure.unileoben.ac.at/de/persons/alexander-reichmann/) for visually-guided composition analysis of atom-probe-reconstructed material volume), one version of [paraprobe](https://gitlab.com/paraprobe/) (a software by [M. Kühbach](https://doi.org/10.48550/arXiv.2205.13510) for Python and jupyter notebook-based scripting of data analyses for atom probe, and one version of [apav](https://apav.readthedocs.io/en/latest/index.html) (a Python and jupyter notebook-scripting focusing on analyses of multi-hit and mass spectra [J. Smith et al.](https://joss.theoj.org/papers/10.21105/joss.04862). **The container is to be moved to the [pynxtools-apm](https://fairmat-nfdi.github.io/pynxtools-apm/) plugin.** 
+A summary of the specific data analyses offered by each tool of paraprobe is provided [here](https://fairmat-nfdi.github.io/nexus_definitions/classes/contributed_definitions/apm-structure.html#cc-apm-structure).
 
 base-desktop
 ellips
