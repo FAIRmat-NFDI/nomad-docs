@@ -68,11 +68,22 @@ Our official recommendation is that desktop-based NORTH tools should be built on
 
 [the GitLab repositories of current NORTH tools](https://gitlab.mpcdf.mpg.de/nomad-lab/north)
 
-[Shortly after its addition to NOMAD as a service](https://joss.theoj.org/papers/10.21105/joss.05388) the NORTH tools required significant refactoring as the docker base images evolved substantially. Initially, build on [Webtop](https://docs.linuxserver.io/images/docker-webtop/), offering a browser-accessible Linux desktop environment packaged in a Docker container.
+## NORTH tool source code location
 
+[Since its addition to NOMAD as a service](https://joss.theoj.org/papers/10.21105/joss.05388), the backend and docker images behind NORTH saw significant refactoring. Not only did the docker base images evolve substantially but also most services of NOMAD were refactored into plugins. NORTH tools with demands for a graphical user interface that were initially based on [Webtop](https://docs.linuxserver.io/images/docker-webtop/) are becoming replaced by one that is based on an image from the [Jupyter Docker Stacks project](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html).
 
-abtem
+In this process, the storage location of the code that FAIRmat developed for NORTH changed. The [initial](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-remote-tools-hub) location is deprecated. The content in the location that was used [subsequently](https://gitlab.mpcdf.mpg.de/nomad-lab/north) is a process of refactoring that moves individual NORTH tools to a service that is anchored at the specific NOMAD parsers that match best thematically functionality-wise.
+## Context, functionality, and status of individual NORTH tools
+
+### abtem
+
+The `abtem` NORTH tool offers services for researchers working in the field of electron microscopy. The tool offers software that relies on stand-alone GUI applications, and command line scripting. The tool bundles one version of [abTEM](https://abtem.readthedocs.io/en/latest/intro.html) (a software by [J. Madsen et al.](https://open-research-europe.ec.europa.eu/articles/1-24) for simulating dynamic electron diffraction using jupyter notebooks), one version of [VESTA](https://jp-minerals.org/vesta/en/) (a software by [K. Momma and F. Izumi](https://doi.org/10.1107/S0021889811038970), a stand-alone GUI application for generating and visualizing crystal structures), and one version of [GPAW](https://gpaw.readthedocs.io/) (an projector augmented-wave-based electronic structure code and software package by [J. J. Mortensen, E. J. Enkovaara et al.](https://iopscience.iop.org/article/10.1088/0953-8984/22/25/253202). The container is 
+
+###
+
 apmtools
+
+
 base-desktop
 ellips
 fiji
