@@ -1,6 +1,6 @@
 # NOMAD Plugin Registry
 
-This page contains information about all NOMAD plugins owned and maintained by  the GitHub organizations: FAIRmat-NFDI, nomad-coe.  The information is automatically updated monthly. **Last Updated:** 2026-01-22 07:54 UTC
+This page contains information about all NOMAD plugins owned and maintained by  the GitHub organizations: FAIRmat-NFDI, nomad-coe.  The information is automatically updated monthly. **Last Updated:** 2026-01-22 08:18 UTC
 
 [Browse All Plugins in the NOMAD Plugins App](https://nomad-lab.eu/prod/v1/oasis/gui/search/plugins){:.md-button .nomad-button target="_blank" rel="noopener"}
 
@@ -43,7 +43,7 @@ Quick reference table of all available plugins:
 <td><strong>nomad-aitoolkit </strong>(⭐ 0)<br><small>App, Schema package</small></td>
 <td>Schema and app for AI Toolkit notebooks.</td>
 <td><small>—</small></td>
-<td><a href="https://github.com/FAIRmat-NFDI/nomad-aitoolkit" target="_blank" rel="noopener">Code</a></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-aitoolkit" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/nomad-aitoolkit/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
 <tr>
 <td colspan="4" style="padding: 0; border-top: none;">
@@ -65,7 +65,7 @@ Quick reference table of all available plugins:
 <td><strong>nomad-analysis </strong>(⭐ 2)<br><small>Schema package</small></td>
 <td>A NOMAD plugin for analysis of FAIR data.</td>
 <td><small>PyPI</small></td>
-<td><a href="https://github.com/FAIRmat-NFDI/nomad-analysis" target="_blank" rel="noopener">Code</a></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-analysis" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/nomad-analysis/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
 <tr>
 <td colspan="4" style="padding: 0; border-top: none;">
@@ -110,7 +110,7 @@ Quick reference table of all available plugins:
 <td><strong>nomad-battery-database </strong>(⭐ 1)<br><small>App, Parser, Schema package</small></td>
 <td>app for battery database</td>
 <td><small>PyPI</small></td>
-<td><a href="https://github.com/FAIRmat-NFDI/nomad-battery-database" target="_blank" rel="noopener">Code</a></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-battery-database" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/nomad-battery-database/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
 <tr>
 <td colspan="4" style="padding: 0; border-top: none;">
@@ -154,7 +154,7 @@ Quick reference table of all available plugins:
 <td><strong>nomad-camels-plugin </strong>(⭐ 0)<br><small>App, Parser, Schema package</small></td>
 <td>Parser for HDF5 files coming from NOMAD CAMELS.</td>
 <td><small>—</small></td>
-<td><a href="https://github.com/FAIRmat-NFDI/nomad-camels-plugin" target="_blank" rel="noopener">Code</a></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-camels-plugin" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/nomad-camels-plugin/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
 <tr>
 <td colspan="4" style="padding: 0; border-top: none;">
@@ -176,7 +176,7 @@ Quick reference table of all available plugins:
 <td><strong>nomad-catalysis </strong>(⭐ 4)<br><small>App, Example upload, Parser, Schema package</small></td>
 <td>A NOMAD plugin for heterogeneous catalysis data.</td>
 <td><small>PyPI</small></td>
-<td><a href="https://github.com/FAIRmat-NFDI/nomad-catalysis-plugin" target="_blank" rel="noopener">Code</a></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-catalysis-plugin" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/nomad-catalysis-plugin/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
 <tr>
 <td colspan="4" style="padding: 0; border-top: none;">
@@ -220,7 +220,7 @@ Quick reference table of all available plugins:
 <td><strong>nomad-crystallm </strong>(⭐ 1)<br><small>Schema package</small></td>
 <td>A NOMAD plugin for running CrystaLLM inference in NOMAD installations.</td>
 <td><small>—</small></td>
-<td><a href="https://github.com/FAIRmat-NFDI/nomad-crystallm" target="_blank" rel="noopener">Code</a></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-crystallm" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/nomad-crystallm/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
 <tr>
 <td colspan="4" style="padding: 0; border-top: none;">
@@ -287,7 +287,7 @@ Quick reference table of all available plugins:
 <td><strong>nomad-gallery </strong>(⭐ 1)<br><small>Schema package</small></td>
 <td>A mkdocs-based GitHub Pages site for showcasing NOMAD features, examples, and use cases.</td>
 <td><small>—</small></td>
-<td><a href="https://github.com/FAIRmat-NFDI/nomad-gallery" target="_blank" rel="noopener">Code</a></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-gallery" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/nomad-gallery/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
 <tr>
 <td colspan="4" style="padding: 0; border-top: none;">
@@ -309,7 +309,7 @@ Quick reference table of all available plugins:
 <td><strong>nomad-material-processing </strong>(⭐ 11)<br><small>Schema package</small></td>
 <td>A plugin for NOMAD containing base sections for material processing.</td>
 <td><small>PyPI</small></td>
-<td><a href="https://github.com/FAIRmat-NFDI/nomad-material-processing" target="_blank" rel="noopener">Code</a></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-material-processing" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/nomad-material-processing/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
 <tr>
 <td colspan="4" style="padding: 0; border-top: none;">
@@ -353,7 +353,7 @@ Quick reference table of all available plugins:
 <td><strong>nomad-measurements </strong>(⭐ 14)<br><small>Parser, Schema package</small></td>
 <td>A plugin for NOMAD containing base sections for measurements.</td>
 <td><small>PyPI</small></td>
-<td><a href="https://github.com/FAIRmat-NFDI/nomad-measurements" target="_blank" rel="noopener">Code</a></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-measurements" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/nomad-measurements/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
 <tr>
 <td colspan="4" style="padding: 0; border-top: none;">
@@ -376,7 +376,7 @@ Quick reference table of all available plugins:
 <td><strong>nomad-neb-workflows </strong>(⭐ 4)<br><small>Schema package</small></td>
 <td>A NOMAD plugin containing the section definitions of a standard Nudged Elastic Band (NEB) workflow.</td>
 <td><small>PyPI</small></td>
-<td><a href="https://github.com/FAIRmat-NFDI/nomad-neb-workflows" target="_blank" rel="noopener">Code</a></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-neb-workflows" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/nomad-neb-workflows/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
 <tr>
 <td colspan="4" style="padding: 0; border-top: none;">
@@ -422,7 +422,7 @@ Quick reference table of all available plugins:
 <td><strong>nomad-normalizer-plugin-bandstructure </strong>(⭐ 1)<br><small>Normalizer</small></td>
 <td>Band structure normalizer plugin for NOMAD.</td>
 <td><small>PyPI</small></td>
-<td><a href="https://github.com/nomad-coe/nomad-normalizer-plugin-bandstructure" target="_blank" rel="noopener">Code</a></td>
+<td><a href="https://github.com/nomad-coe/nomad-normalizer-plugin-bandstructure" target="_blank" rel="noopener">Code</a> | <a href="https://nomad-coe.github.io/nomad-normalizer-plugin-bandstructure/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
 <tr>
 <td colspan="4" style="padding: 0; border-top: none;">
@@ -444,7 +444,7 @@ Quick reference table of all available plugins:
 <td><strong>nomad-normalizer-plugin-dos </strong>(⭐ 0)<br><small>Normalizer</small></td>
 <td>DOS normalizer plugin for NOMAD.</td>
 <td><small>PyPI</small></td>
-<td><a href="https://github.com/nomad-coe/nomad-normalizer-plugin-dos" target="_blank" rel="noopener">Code</a></td>
+<td><a href="https://github.com/nomad-coe/nomad-normalizer-plugin-dos" target="_blank" rel="noopener">Code</a> | <a href="https://nomad-coe.github.io/nomad-normalizer-plugin-dos/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
 <tr>
 <td colspan="4" style="padding: 0; border-top: none;">
@@ -466,7 +466,7 @@ Quick reference table of all available plugins:
 <td><strong>nomad-normalizer-plugin-simulation-workflow </strong>(⭐ 0)<br><small>Normalizer</small></td>
 <td>Simulation workflow nomad plugin for NOMAD.</td>
 <td><small>PyPI</small></td>
-<td><a href="https://github.com/nomad-coe/nomad-normalizer-plugin-simulation-workflow" target="_blank" rel="noopener">Code</a></td>
+<td><a href="https://github.com/nomad-coe/nomad-normalizer-plugin-simulation-workflow" target="_blank" rel="noopener">Code</a> | <a href="https://nomad-coe.github.io/nomad-normalizer-plugin-simulation-workflow/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
 <tr>
 <td colspan="4" style="padding: 0; border-top: none;">
@@ -510,7 +510,7 @@ Quick reference table of all available plugins:
 <td><strong>nomad-normalizer-plugin-spectra </strong>(⭐ 0)<br><small>Normalizer</small></td>
 <td>Spectra normalizer plugin for NOMAD.</td>
 <td><small>PyPI</small></td>
-<td><a href="https://github.com/nomad-coe/nomad-normalizer-plugin-spectra" target="_blank" rel="noopener">Code</a></td>
+<td><a href="https://github.com/nomad-coe/nomad-normalizer-plugin-spectra" target="_blank" rel="noopener">Code</a> | <a href="https://nomad-coe.github.io/nomad-normalizer-plugin-spectra/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
 <tr>
 <td colspan="4" style="padding: 0; border-top: none;">
@@ -531,7 +531,7 @@ Quick reference table of all available plugins:
 <td><strong>nomad-normalizer-plugin-system </strong>(⭐ 0)<br><small>Normalizer</small></td>
 <td>System normalizer plugin for NOMAD.</td>
 <td><small>PyPI</small></td>
-<td><a href="https://github.com/nomad-coe/nomad-normalizer-plugin-system" target="_blank" rel="noopener">Code</a></td>
+<td><a href="https://github.com/nomad-coe/nomad-normalizer-plugin-system" target="_blank" rel="noopener">Code</a> | <a href="https://nomad-coe.github.io/nomad-normalizer-plugin-system/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
 <tr>
 <td colspan="4" style="padding: 0; border-top: none;">
@@ -844,7 +844,7 @@ Quick reference table of all available plugins:
 <td><strong>nomad-parser-wannier90 </strong>(⭐ 2)<br><small>Parser, Schema package</small></td>
 <td>A NOMAD parser plugin for Wannier90 input/output files.</td>
 <td><small>PyPI</small></td>
-<td><a href="https://github.com/FAIRmat-NFDI/nomad-parser-wannier90" target="_blank" rel="noopener">Code</a></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-parser-wannier90" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/nomad-parser-wannier90/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
 <tr>
 <td colspan="4" style="padding: 0; border-top: none;">
@@ -867,7 +867,7 @@ Quick reference table of all available plugins:
 <td><strong>nomad-parser-yambo </strong>(⭐ 1)<br><small>Parser, Schema package</small></td>
 <td>A NOMAD parser plugin for YAMBO input/outputs files.</td>
 <td><small>—</small></td>
-<td><a href="https://github.com/FAIRmat-NFDI/nomad-parser-yambo" target="_blank" rel="noopener">Code</a></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-parser-yambo" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/nomad-parser-yambo/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
 <tr>
 <td colspan="4" style="padding: 0; border-top: none;">
@@ -956,7 +956,7 @@ Quick reference table of all available plugins:
 <td><strong>nomad-schema-plugin-run </strong>(⭐ 1)<br><small>Schema package</small></td>
 <td>Run schema plugin for NOMAD.</td>
 <td><small>PyPI</small></td>
-<td><a href="https://github.com/nomad-coe/nomad-schema-plugin-run" target="_blank" rel="noopener">Code</a></td>
+<td><a href="https://github.com/nomad-coe/nomad-schema-plugin-run" target="_blank" rel="noopener">Code</a> | <a href="https://nomad-coe.github.io/nomad-schema-plugin-run/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
 <tr>
 <td colspan="4" style="padding: 0; border-top: none;">
@@ -977,7 +977,7 @@ Quick reference table of all available plugins:
 <td><strong>nomad-schema-plugin-simulation-workflow </strong>(⭐ 2)<br><small>Schema package</small></td>
 <td>Simulation workflow schema plugin for NOMAD.</td>
 <td><small>PyPI</small></td>
-<td><a href="https://github.com/nomad-coe/nomad-schema-plugin-simulation-workflow" target="_blank" rel="noopener">Code</a></td>
+<td><a href="https://github.com/nomad-coe/nomad-schema-plugin-simulation-workflow" target="_blank" rel="noopener">Code</a> | <a href="https://nomad-coe.github.io/nomad-schema-plugin-simulation-workflow/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
 <tr>
 <td colspan="4" style="padding: 0; border-top: none;">
@@ -999,7 +999,7 @@ Quick reference table of all available plugins:
 <td><strong>nomad-simulation-apps </strong>(⭐ 2)<br><small>App</small></td>
 <td>A repository for housing NOMAD's collection of simulation app plugins.</td>
 <td><small>PyPI</small></td>
-<td><a href="https://github.com/FAIRmat-NFDI/nomad-app-plugins-simulation" target="_blank" rel="noopener">Code</a></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-app-plugins-simulation" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/nomad-app-plugins-simulation/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
 <tr>
 <td colspan="4" style="padding: 0; border-top: none;">
@@ -1041,7 +1041,7 @@ Quick reference table of all available plugins:
 <td><strong>nomad-simulation-parsers </strong>(⭐ 1)<br><small>Parser, Schema package</small></td>
 <td>A repository for housing NOMAD's collection of simulation parser plugins.</td>
 <td><small>—</small></td>
-<td><a href="https://github.com/FAIRmat-NFDI/nomad-parser-plugins-simulation" target="_blank" rel="noopener">Code</a></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-parser-plugins-simulation" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/nomad-parser-plugins-simulation/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
 <tr>
 <td colspan="4" style="padding: 0; border-top: none;">
@@ -1086,7 +1086,7 @@ Quick reference table of all available plugins:
 <td><strong>nomad-simulations </strong>(⭐ 7)<br><small>Schema package</small></td>
 <td>A NOMAD plugin for FAIR schemas for simulation data.</td>
 <td><small>PyPI</small></td>
-<td><a href="https://github.com/FAIRmat-NFDI/nomad-simulations" target="_blank" rel="noopener">Code</a></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-simulations" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/nomad-simulations/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
 <tr>
 <td colspan="4" style="padding: 0; border-top: none;">
@@ -1130,7 +1130,7 @@ Quick reference table of all available plugins:
 <td><strong>nomad-unisyscat </strong>(⭐ 1)<br><small>App, Parser, Schema package</small></td>
 <td>A example plugin for a demonstration for UniSysCat.</td>
 <td><small>—</small></td>
-<td><a href="https://github.com/FAIRmat-NFDI/nomad-unisyscat-plugin" target="_blank" rel="noopener">Code</a></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-unisyscat-plugin" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/nomad-unisyscat-plugin/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
 <tr>
 <td colspan="4" style="padding: 0; border-top: none;">
@@ -1152,7 +1152,7 @@ Quick reference table of all available plugins:
 <td><strong>nomad-utility-workflows </strong>(⭐ 4)<br><small>App, Example upload, Normalizer, Parser, Schema package</small></td>
 <td>A module with utilities for interacting with NOMAD via, e.g., a workflow manager.</td>
 <td><small>PyPI</small></td>
-<td><a href="https://github.com/FAIRmat-NFDI/nomad-utility-workflows" target="_blank" rel="noopener">Code</a></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-utility-workflows" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/nomad-utility-workflows/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
 <tr>
 <td colspan="4" style="padding: 0; border-top: none;">
@@ -1196,7 +1196,7 @@ Quick reference table of all available plugins:
 <td><strong>perovskite-solar-cell-database </strong>(⭐ 8)<br><small>App, Parser, Schema package</small></td>
 <td>Perovskite solar cell data schema plugin for NOMAD.</td>
 <td><small>PyPI</small></td>
-<td><a href="https://github.com/FAIRmat-NFDI/nomad-perovskite-solar-cells-database" target="_blank" rel="noopener">Code</a></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-perovskite-solar-cells-database" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/nomad-perovskite-solar-cells-database/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
 <tr>
 <td colspan="4" style="padding: 0; border-top: none;">
@@ -1219,7 +1219,7 @@ Quick reference table of all available plugins:
 <td><strong>pynxtools </strong>(⭐ 19)<br><small>App, Example upload, Parser, Schema package</small></td>
 <td>Extend NeXus for experiments and characterization in Materials Science and Materials Engineering and serve as a NOMAD parser implementation for NeXus.</td>
 <td><small>PyPI</small></td>
-<td><a href="https://github.com/FAIRmat-NFDI/pynxtools" target="_blank" rel="noopener">Code</a></td>
+<td><a href="https://github.com/FAIRmat-NFDI/pynxtools" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/pynxtools/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
 <tr>
 <td colspan="4" style="padding: 0; border-top: none;">
@@ -1241,7 +1241,7 @@ Quick reference table of all available plugins:
 <td><strong>pynxtools-apm </strong>(⭐ 0)<br><small>Example upload</small></td>
 <td>A reader for transferring APM from vendor formats to NeXus and NOMAD.</td>
 <td><small>PyPI</small></td>
-<td><a href="https://github.com/FAIRmat-NFDI/pynxtools-apm" target="_blank" rel="noopener">Code</a></td>
+<td><a href="https://github.com/FAIRmat-NFDI/pynxtools-apm" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/pynxtools-apm/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
 <tr>
 <td colspan="4" style="padding: 0; border-top: none;">
@@ -1263,7 +1263,7 @@ Quick reference table of all available plugins:
 <td><strong>pynxtools-ellips </strong>(⭐ 0)<br><small>Example upload</small></td>
 <td>A reader for transferring ellipsometry data from vendor formats to NeXus and NOMAD.</td>
 <td><small>PyPI</small></td>
-<td><a href="https://github.com/FAIRmat-NFDI/pynxtools-ellips" target="_blank" rel="noopener">Code</a></td>
+<td><a href="https://github.com/FAIRmat-NFDI/pynxtools-ellips" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/pynxtools-ellips/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
 <tr>
 <td colspan="4" style="padding: 0; border-top: none;">
@@ -1285,7 +1285,7 @@ Quick reference table of all available plugins:
 <td><strong>pynxtools-em </strong>(⭐ 3)<br><small>Example upload</small></td>
 <td>A reader for transferring EM from vendor formats to NeXus and NOMAD.</td>
 <td><small>PyPI</small></td>
-<td><a href="https://github.com/FAIRmat-NFDI/pynxtools-em" target="_blank" rel="noopener">Code</a></td>
+<td><a href="https://github.com/FAIRmat-NFDI/pynxtools-em" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/pynxtools-em/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
 <tr>
 <td colspan="4" style="padding: 0; border-top: none;">
@@ -1307,7 +1307,7 @@ Quick reference table of all available plugins:
 <td><strong>pynxtools-igor </strong>(⭐ 0)<br><small>Example upload</small></td>
 <td>pynxtools plugin for reading igor pro waves and packed experiments</td>
 <td><small>PyPI</small></td>
-<td><a href="https://github.com/FAIRmat-NFDI/pynxtools-igor" target="_blank" rel="noopener">Code</a></td>
+<td><a href="https://github.com/FAIRmat-NFDI/pynxtools-igor" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/pynxtools-igor/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
 <tr>
 <td colspan="4" style="padding: 0; border-top: none;">
@@ -1329,7 +1329,7 @@ Quick reference table of all available plugins:
 <td><strong>pynxtools-mpes </strong>(⭐ 0)<br><small>App, Example upload</small></td>
 <td>—</td>
 <td><small>PyPI</small></td>
-<td><a href="https://github.com/FAIRmat-NFDI/pynxtools-mpes" target="_blank" rel="noopener">Code</a></td>
+<td><a href="https://github.com/FAIRmat-NFDI/pynxtools-mpes" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/pynxtools-mpes/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
 <tr>
 <td colspan="4" style="padding: 0; border-top: none;">
@@ -1351,7 +1351,7 @@ Quick reference table of all available plugins:
 <td><strong>pynxtools-raman </strong>(⭐ 0)<br><small>App</small></td>
 <td>A reader for transferring Raman data from vendor formats to NeXus and NOMAD.</td>
 <td><small>PyPI</small></td>
-<td><a href="https://github.com/FAIRmat-NFDI/pynxtools-raman" target="_blank" rel="noopener">Code</a></td>
+<td><a href="https://github.com/FAIRmat-NFDI/pynxtools-raman" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/pynxtools-raman/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
 <tr>
 <td colspan="4" style="padding: 0; border-top: none;">
@@ -1373,7 +1373,7 @@ Quick reference table of all available plugins:
 <td><strong>pynxtools-spm </strong>(⭐ 0)<br><small>App, Example upload</small></td>
 <td>pynxtools-spm: A pynxtools plugin for SPM (Scanning Probe Microscopy) data readers</td>
 <td><small>PyPI</small></td>
-<td><a href="https://github.com/FAIRmat-NFDI/pynxtools-spm" target="_blank" rel="noopener">Code</a></td>
+<td><a href="https://github.com/FAIRmat-NFDI/pynxtools-spm" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/pynxtools-spm/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
 <tr>
 <td colspan="4" style="padding: 0; border-top: none;">
@@ -1395,7 +1395,7 @@ Quick reference table of all available plugins:
 <td><strong>pynxtools-stm </strong>(⭐ 0)<br><small>Example upload</small></td>
 <td>A plugin for pynxtools to convert sts and stm files</td>
 <td><small>PyPI</small></td>
-<td><a href="https://github.com/FAIRmat-NFDI/pynxtools-stm" target="_blank" rel="noopener">Code</a></td>
+<td><a href="https://github.com/FAIRmat-NFDI/pynxtools-stm" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/pynxtools-stm/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
 <tr>
 <td colspan="4" style="padding: 0; border-top: none;">
@@ -1417,7 +1417,7 @@ Quick reference table of all available plugins:
 <td><strong>pynxtools-xps </strong>(⭐ 5)<br><small>Example upload</small></td>
 <td>pynxtools-xps is a pynxtools reader plugin for X-ray photoelectron spectroscopy (XPS) data.</td>
 <td><small>PyPI</small></td>
-<td><a href="https://github.com/FAIRmat-NFDI/pynxtools-xps" target="_blank" rel="noopener">Code</a></td>
+<td><a href="https://github.com/FAIRmat-NFDI/pynxtools-xps" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/pynxtools-xps/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
 <tr>
 <td colspan="4" style="padding: 0; border-top: none;">
@@ -1439,7 +1439,7 @@ Quick reference table of all available plugins:
 <td><strong>rtg-sims </strong>(⭐ 11)<br><small>Parser, Schema package</small></td>
 <td>A plugin for RTG SIMS.</td>
 <td><small>—</small></td>
-<td><a href="https://github.com/FAIRmat-NFDI/AreaA-data_modeling_and_schemas" target="_blank" rel="noopener">Code</a></td>
+<td><a href="https://github.com/FAIRmat-NFDI/AreaA-data_modeling_and_schemas" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/AreaA-data_modeling_and_schemas/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
 <tr>
 <td colspan="4" style="padding: 0; border-top: none;">
@@ -1461,7 +1461,7 @@ Quick reference table of all available plugins:
 <td><strong>transmission </strong>(⭐ 11)<br><small>Parser, Schema package</small></td>
 <td>A plugin for NOMAD containing base sections for transmission spectrophotometry.</td>
 <td><small>PyPI</small></td>
-<td><a href="https://github.com/FAIRmat-NFDI/AreaA-data_modeling_and_schemas" target="_blank" rel="noopener">Code</a></td>
+<td><a href="https://github.com/FAIRmat-NFDI/AreaA-data_modeling_and_schemas" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/AreaA-data_modeling_and_schemas/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
 <tr>
 <td colspan="4" style="padding: 0; border-top: none;">

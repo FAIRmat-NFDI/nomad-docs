@@ -137,10 +137,15 @@ def extract_plugin_metadata(plugin_entry: dict[str, Any]) -> dict[str, Any]:
         if name := maintainer.get('name'):
             maintainer_list.append(name)
 
+    # Check for GitHub Pages documentation
+    repo_url = data.get('repository', '')
+    docs_url = check_github_pages_exists(repo_url)
+    
     return {
         'name': data.get('name', 'Unknown'),
         'description': data.get('description', ''),
-        'repository': data.get('repository', ''),
+        'repository': repo_url,
+        'docs_url': docs_url,
         'owner': data.get('owner', ''),
         'stars': data.get('stars', 0),
         'created': data.get('created', ''),
@@ -156,6 +161,45 @@ def extract_plugin_metadata(plugin_entry: dict[str, Any]) -> dict[str, Any]:
             dep.get('name', '') for dep in data.get('plugin_dependencies', [])
         ],
     }
+
+
+def check_github_pages_exists(repo_url: str) -> str | None:
+    """
+    Check if GitHub Pages documentation exists for a repository.
+    
+    Args:
+        repo_url: GitHub repository URL (e.g., https://github.com/owner/repo)
+    
+    Returns:
+        GitHub Pages URL if it exists, None otherwise
+    """
+    if not repo_url or 'github.com' not in repo_url:
+        return None
+    
+    try:
+        # Extract owner and repo name from GitHub URL
+        # Expected format: https://github.com/owner/repo
+        parts = repo_url.rstrip('/').split('github.com/')[-1].split('/')
+        if len(parts) < 2:
+            return None
+        
+        owner, repo = parts[0], parts[1]
+        
+        # Construct GitHub Pages URL
+        # Convert owner to lowercase for GitHub Pages URL
+        gh_pages_url = f'https://{owner.lower()}.github.io/{repo}/'
+        
+        # Make a HEAD request to check if the page exists
+        response = requests.head(gh_pages_url, timeout=5, allow_redirects=True)
+        
+        # Consider 200 and 301/302 (redirects) as success
+        if response.status_code in (200, 301, 302):
+            return gh_pages_url
+        
+    except (requests.exceptions.RequestException, IndexError, ValueError):
+        pass
+    
+    return None
 
 
 def format_date(iso_date: str) -> str:
@@ -306,16 +350,20 @@ def generate_markdown_table(plugins: list[dict[str, Any]]) -> str:
             deployments.append('Example Oasis')
         deployment_text = '<br> '.join(deployments) if deployments else '—'
 
-        # Format repository link
+        # Format repository and documentation links
         repo_url = plugin['repository']
         # Strip angle brackets if present (e.g., <https://...> becomes https://...)
         if repo_url:
             repo_url = repo_url.strip('<>').strip()
-        repo_link = (
-            f'<a href="{repo_url}" target="_blank" rel="noopener">Code</a>'
-            if repo_url
-            else '—'
-        )
+        
+        docs_url = plugin.get('docs_url')
+        
+        if repo_url and docs_url:
+            links = f'<a href="{repo_url}" target="_blank" rel="noopener">Code</a> | <a href="{docs_url}" target="_blank" rel="noopener">Docs</a>'
+        elif repo_url:
+            links = f'<a href="{repo_url}" target="_blank" rel="noopener">Code</a>'
+        else:
+            links = '—'
 
         stars = plugin['stars']
 
@@ -326,7 +374,7 @@ def generate_markdown_table(plugins: list[dict[str, Any]]) -> str:
         )
         markdown.append(f'<td>{description}</td>')
         markdown.append(f'<td><small>{deployment_text}</small></td>')
-        markdown.append(f'<td>{repo_link}</td>')
+        markdown.append(f'<td>{links}</td>')
         markdown.append('</tr>')
 
         # Detailed information in dropdown
