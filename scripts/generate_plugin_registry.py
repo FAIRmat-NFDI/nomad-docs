@@ -214,12 +214,16 @@ def fix_markdown_lint_issues(text: str) -> str:
         if 'Nomad' in line and 'NOMAD' not in line:
             line = line.replace('Nomad', 'nomad')
 
-        # Fix MD034: Wrap bare URLs in angle brackets (look for URLs not in markdown links)
-        # Pattern: URL not preceded by ](
+        # Fix MD034: Wrap bare URLs in angle brackets (look for URLs not in markdown links or HTML)
+        # Pattern: URL not preceded by ]( or href=" and not followed by " (for HTML)
         import re
 
-        # Find bare URLs that are not already in markdown links
-        bare_url_pattern = re.compile(r'(?<!\]\()https?://[^\s<>\[\]]+(?!\))')
+        # Find bare URLs that are not already in markdown links or HTML href attributes
+        # Negative lookbehind: not preceded by ]( or href=" or href='
+        # Negative lookahead: not followed by " or '
+        bare_url_pattern = re.compile(
+            r'(?<!\]\()(?<!href=")(?<!href=\')https?://[^\s<>\[\]"\']+(?!["\'])'
+        )
         line = bare_url_pattern.sub(lambda m: f'<{m.group(0)}>', line)
 
         fixed_lines.append(line)
@@ -257,13 +261,13 @@ def fix_markdown_lint_issues(text: str) -> str:
 
 def generate_markdown_table(plugins: list[dict[str, Any]]) -> str:
     """
-    Generate markdown table from plugin metadata.
+    Generate markdown table from plugin metadata with embedded details dropdown.
 
     Args:
         plugins: List of plugin metadata dictionaries
 
     Returns:
-        Markdown formatted table
+        Markdown formatted HTML table with collapsible details
     """
     if not plugins:
         return 'No plugins found.\n'
@@ -272,23 +276,17 @@ def generate_markdown_table(plugins: list[dict[str, Any]]) -> str:
     plugins_sorted = sorted(plugins, key=lambda x: x['name'].lower())
 
     markdown = []
+    markdown.append('<table>')
+    markdown.append('<thead>')
     markdown.append(
-        '| Plugin | Description | Type(s) | PyPI | Central Deployment | Example Oasis | Repository | Stars |'
+        '<tr><th>Plugin</th><th>Description</th><th>Deployment</th><th>Links</th></tr>'
     )
-    markdown.append(
-        '| ------ | ----------- | ------- | ---- | ------------------ | ------------- | ---------- | ----- |'
-    )
+    markdown.append('</thead>')
+    markdown.append('<tbody>')
 
     for plugin in plugins_sorted:
         name = plugin['name']
-        description = (
-            plugin['description'][:80] + '...'
-            if len(plugin['description']) > 80
-            else plugin['description']
-        )
-        # Replace empty description with placeholder
-        if not description.strip():
-            description = '—'
+        description = plugin['description'] if plugin['description'].strip() else '—'
         description = description.replace('|', '\\|').replace('\n', ' ')
 
         # Format entry point types
@@ -298,23 +296,91 @@ def generate_markdown_table(plugins: list[dict[str, Any]]) -> str:
             else '—'
         )
 
-        # Format boolean indicators
-        pypi = '✓' if plugin['on_pypi'] else '—'
-        central = '✓' if plugin['on_central'] else '—'
-        example = '✓' if plugin['on_example_oasis'] else '—'
+        # Format deployment status
+        deployments = []
+        if plugin['on_pypi']:
+            deployments.append('PyPI')
+        if plugin['on_central']:
+            deployments.append('NOMAD')
+        if plugin['on_example_oasis']:
+            deployments.append('Example Oasis')
+        deployment_text = '<br> '.join(deployments) if deployments else '—'
 
         # Format repository link
         repo_url = plugin['repository']
-        repo_name = (
-            repo_url.split('github.com/')[-1] if 'github.com' in repo_url else repo_url
+        # Strip angle brackets if present (e.g., <https://...> becomes https://...)
+        if repo_url:
+            repo_url = repo_url.strip('<>').strip()
+        repo_link = (
+            f'<a href="{repo_url}" target="_blank" rel="noopener">Code</a>'
+            if repo_url
+            else '—'
         )
-        repo_link = f'[{repo_name}]({repo_url})' if repo_url else '—'
 
         stars = plugin['stars']
 
+        # Main row
+        markdown.append('<tr>')
         markdown.append(
-            f'| **{name}** | {description} | {types} | {pypi} | {central} | {example} | {repo_link} | {stars} |'
+            f'<td><strong>{name} </strong>(⭐ {stars})<br><small>{types}</small></td>'
         )
+        markdown.append(f'<td>{description}</td>')
+        markdown.append(f'<td><small>{deployment_text}</small></td>')
+        markdown.append(f'<td>{repo_link}</td>')
+        markdown.append('</tr>')
+
+        # Detailed information in dropdown
+        markdown.append('<tr>')
+        markdown.append('<td colspan="4" style="padding: 0; border-top: none;">')
+        markdown.append('<details style="margin: 0; padding: 12px 16px; border: 0px">')
+        markdown.append(
+            '<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>'
+        )
+        markdown.append('<div style="margin-top: 12px; padding-top: 12px;">')
+        markdown.append('<p>')
+
+        # Owner
+        markdown.append(f"<strong>Owner:</strong> {plugin['owner']}<br>")
+
+        # Authors
+        if plugin['authors']:
+            authors_str = ', '.join(plugin['authors'])
+            markdown.append(f'<strong>Authors:</strong> {authors_str}<br>')
+
+        # Maintainers
+        if plugin['maintainers']:
+            maintainers_str = ', '.join(plugin['maintainers'])
+            markdown.append(f'<strong>Maintainers:</strong> {maintainers_str}<br>')
+
+        # Entry points
+        if plugin['entry_point_names']:
+            entry_points_str = ', '.join(
+                f'<code>{ep}</code>' for ep in plugin['entry_point_names']
+            )
+            markdown.append(f'<strong>Entry Points:</strong> {entry_points_str}<br>')
+
+        # Plugin dependencies
+        if plugin['plugin_dependencies']:
+            deps_str = ', '.join(
+                f'<code>{dep}</code>' for dep in plugin['plugin_dependencies']
+            )
+            markdown.append(f'<strong>Plugin Dependencies:</strong> {deps_str}<br>')
+
+        # Dates
+        created = format_date(plugin['created'])
+        updated = format_date(plugin['last_updated'])
+        markdown.append(
+            f'<strong>Created:</strong> {created} | <strong>Last Updated:</strong> {updated}'
+        )
+
+        markdown.append('</p>')
+        markdown.append('</div>')
+        markdown.append('</details>')
+        markdown.append('</td>')
+        markdown.append('</tr>')
+
+    markdown.append('</tbody>')
+    markdown.append('</table>')
 
     return '\n'.join(markdown)
 
@@ -490,12 +556,6 @@ def generate_registry_page(plugins: list[dict[str, Any]], output_path: Path) -> 
     page_content.append('Quick reference table of all available plugins:')
     page_content.append('')
     page_content.append(generate_markdown_table(plugin_metadata))
-    page_content.append('')
-
-    # Detailed listings
-    page_content.append('## Detailed Plugin Information')
-    page_content.append('')
-    page_content.append(generate_detailed_list(plugin_metadata))
     page_content.append('')
 
     # Write to file

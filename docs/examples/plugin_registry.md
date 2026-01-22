@@ -1,6 +1,6 @@
 # NOMAD Plugin Registry
 
-This page contains information about all NOMAD plugins owned and maintained by  the GitHub organizations: FAIRmat-NFDI, nomad-coe.  The information is automatically updated monthly. **Last Updated:** 2025-12-01 20:04 UTC
+This page contains information about all NOMAD plugins owned and maintained by  the GitHub organizations: FAIRmat-NFDI, nomad-coe.  The information is automatically updated monthly. **Last Updated:** 2026-01-22 07:54 UTC
 
 [Browse All Plugins in the NOMAD Plugins App](https://nomad-lab.eu/prod/v1/oasis/gui/search/plugins){:.md-button .nomad-button target="_blank" rel="noopener"}
 
@@ -8,11 +8,11 @@ This page contains information about all NOMAD plugins owned and maintained by  
 
 ### Overview
 
-- **Total Plugins:** 63
+- **Total Plugins:** 65
 - **Available on PyPI:** 34
 - **Deployed on NOMAD Central:** 0
 - **Deployed on Example Oasis:** 0
-- **Total Stars:** 164
+- **Total Stars:** 269
 
 ### Plugin Type Distribution
 
@@ -21,10 +21,10 @@ This page contains information about all NOMAD plugins owned and maintained by  
 ```mermaid
 %%{init: {'theme':'base', 'themeVariables': { 'pie1':'#2A4CDF', 'pie2':'#008A67', 'pie3':'#FF6B6B', 'pie4':'#4ECDC4', 'pie5':'#FFE66D', 'pie6':'#A8E6CF', 'pieTitleTextSize': '22px', 'pieSectionTextSize': '22px', 'pieLegendTextSize': '22px'}, 'themeCSS': '.pieCircle { font-size: 22px; font-weight: bold; } .legend text { font-size: 22px; font-weight: bold; margin-left: 8px; } .legend rect { margin-right: 8px; } .slice text { font-size: 22px; font-weight: bold; transform: translate(-15%, -15%); } text.percent { font-size: 22px; font-weight: bold; }' }}%%
 pie showData
-    "Schema package" : 42
-    "Parser" : 29
-    "App" : 18
-    "Example upload" : 16
+    "Schema package" : 43
+    "Parser" : 30
+    "App" : 20
+    "Example upload" : 17
     "Normalizer" : 10
 ```
 
@@ -34,1840 +34,1449 @@ pie showData
 
 Quick reference table of all available plugins:
 
-| Plugin | Description | Type(s) | PyPI | Central Deployment | Example Oasis | Repository | Stars |
-| ------ | ----------- | ------- | ---- | ------------------ | ------------- | ---------- | ----- |
-| **nomad-aitoolkit** | Schema and app for AI Toolkit notebooks. | App, Schema package | — | — | — | [FAIRmat-NFDI/nomad-aitoolkit](https://github.com/FAIRmat-NFDI/nomad-aitoolkit){:target="_blank" rel="noopener"} | 0 |
-| **nomad-analysis** | A NOMAD plugin for analysis of FAIR data. | Schema package | ✓ | — | — | [FAIRmat-NFDI/nomad-analysis](https://github.com/FAIRmat-NFDI/nomad-analysis){:target="_blank" rel="noopener"} | 2 |
-| **nomad-auto-xrd** | A NOMAD plugin containing schemas for automatic XRD analysis. | App, Example upload, Schema package | — | — | — | [FAIRmat-NFDI/nomad-auto-xrd](https://github.com/FAIRmat-NFDI/nomad-auto-xrd){:target="_blank" rel="noopener"} | 1 |
-| **nomad-battery-database** | app for battery database | App, Parser, Schema package | ✓ | — | — | [FAIRmat-NFDI/nomad-battery-database](https://github.com/FAIRmat-NFDI/nomad-battery-database){:target="_blank" rel="noopener"} | 0 |
-| **nomad-bayesian-optimization** | NOMAD plugin for driving experiments/simulations using bayesian optimization | App, Example upload, Schema package | — | — | — | [FAIRmat-NFDI/nomad-bayesian-optimization](https://github.com/FAIRmat-NFDI/nomad-bayesian-optimization){:target="_blank" rel="noopener"} | 1 |
-| **nomad-camels-plugin** | Parser for HDF5 files coming from NOMAD CAMELS. | App, Parser, Schema package | — | — | — | [FAIRmat-NFDI/nomad-camels-plugin](https://github.com/FAIRmat-NFDI/nomad-camels-plugin){:target="_blank" rel="noopener"} | 0 |
-| **nomad-catalysis** | A NOMAD plugin for heterogeneous catalysis data. | App, Example upload, Parser, Schema package | ✓ | — | — | [FAIRmat-NFDI/nomad-catalysis-plugin](https://github.com/FAIRmat-NFDI/nomad-catalysis-plugin){:target="_blank" rel="noopener"} | 4 |
-| **nomad-crystallm** | A NOMAD plugin for running CrystaLLM inference in NOMAD installations. | Schema package | — | — | — | [FAIRmat-NFDI/nomad-crystallm](https://github.com/FAIRmat-NFDI/nomad-crystallm){:target="_blank" rel="noopener"} | 1 |
-| **nomad-eos-workflows** | A NOMAD plugin containing the section definitions of a standard Equation of Stat... | Schema package | — | — | — | [FAIRmat-NFDI/nomad-schema-plugin-eos-workflows](https://github.com/FAIRmat-NFDI/nomad-schema-plugin-eos-workflows){:target="_blank" rel="noopener"} | 0 |
-| **nomad-external-eln-integrations** | 3rd Party Integration packages | Example upload, Parser, Schema package | — | — | — | [FAIRmat-NFDI/nomad-external-eln-integrations](https://github.com/FAIRmat-NFDI/nomad-external-eln-integrations){:target="_blank" rel="noopener"} | 0 |
-| **nomad-gallery** | A mkdocs-based GitHub Pages site for showcasing NOMAD features, examples, and us... | Schema package | — | — | — | [FAIRmat-NFDI/nomad-gallery](https://github.com/FAIRmat-NFDI/nomad-gallery){:target="_blank" rel="noopener"} | 1 |
-| **nomad-material-processing** | A plugin for NOMAD containing base sections for material processing. | Schema package | ✓ | — | — | [FAIRmat-NFDI/nomad-material-processing](https://github.com/FAIRmat-NFDI/nomad-material-processing){:target="_blank" rel="noopener"} | 11 |
-| **nomad-material-processing-example** | An example plugin to demonstrate the use of schemas from the nomad-material-proc... | App, Example upload, Parser, Schema package | — | — | — | [FAIRmat-NFDI/nomad-material-processing-example](https://github.com/FAIRmat-NFDI/nomad-material-processing-example){:target="_blank" rel="noopener"} | 2 |
-| **nomad-measurements** | A plugin for NOMAD containing base sections for measurements. | Parser, Schema package | ✓ | — | — | [FAIRmat-NFDI/nomad-measurements](https://github.com/FAIRmat-NFDI/nomad-measurements){:target="_blank" rel="noopener"} | 14 |
-| **nomad-neb-workflows** | A NOMAD plugin containing the section definitions of a standard Nudged Elastic B... | Schema package | ✓ | — | — | [FAIRmat-NFDI/nomad-neb-workflows](https://github.com/FAIRmat-NFDI/nomad-neb-workflows){:target="_blank" rel="noopener"} | 3 |
-| **nomad-nmr-schema** | Schema plugin containing shared classes for NMR metadata | Schema package | — | — | — | [FAIRmat-NFDI/nomad-schema-plugin-nmr](https://github.com/FAIRmat-NFDI/nomad-schema-plugin-nmr){:target="_blank" rel="noopener"} | 0 |
-| **nomad-normalizer-plugin-bandstructure** | Band structure normalizer plugin for NOMAD. | Normalizer | ✓ | — | — | [nomad-coe/nomad-normalizer-plugin-bandstructure](https://github.com/nomad-coe/nomad-normalizer-plugin-bandstructure){:target="_blank" rel="noopener"} | 1 |
-| **nomad-normalizer-plugin-dos** | DOS normalizer plugin for NOMAD. | Normalizer | ✓ | — | — | [nomad-coe/nomad-normalizer-plugin-dos](https://github.com/nomad-coe/nomad-normalizer-plugin-dos){:target="_blank" rel="noopener"} | 0 |
-| **nomad-normalizer-plugin-simulation-workflow** | Simulation workflow nomad plugin for NOMAD. | Normalizer | ✓ | — | — | [nomad-coe/nomad-normalizer-plugin-simulation-workflow](https://github.com/nomad-coe/nomad-normalizer-plugin-simulation-workflow){:target="_blank" rel="noopener"} | 0 |
-| **nomad-normalizer-plugin-soap** | SOAP nomad plugin for NOMAD. | Normalizer | ✓ | — | — | [nomad-coe/nomad-normalizer-plugin-soap](https://github.com/nomad-coe/nomad-normalizer-plugin-soap){:target="_blank" rel="noopener"} | 0 |
-| **nomad-normalizer-plugin-spectra** | Spectra normalizer plugin for NOMAD. | Normalizer | ✓ | — | — | [nomad-coe/nomad-normalizer-plugin-spectra](https://github.com/nomad-coe/nomad-normalizer-plugin-spectra){:target="_blank" rel="noopener"} | 0 |
-| **nomad-normalizer-plugin-system** | System normalizer plugin for NOMAD. | Normalizer | ✓ | — | — | [nomad-coe/nomad-normalizer-plugin-system](https://github.com/nomad-coe/nomad-normalizer-plugin-system){:target="_blank" rel="noopener"} | 0 |
-| **nomad-parser-edmft** | nomad example template | Parser, Schema package | — | — | — | [FAIRmat-NFDI/nomad-parser-edmft](https://github.com/FAIRmat-NFDI/nomad-parser-edmft){:target="_blank" rel="noopener"} | 0 |
-| **nomad-parser-fhiaims** | Standalone NOMAD plugin for parsing FHI-aims calculation files | Parser, Schema package | — | — | — | [FAIRmat-NFDI/nomad-parser-fhiaims](https://github.com/FAIRmat-NFDI/nomad-parser-fhiaims){:target="_blank" rel="noopener"} | 2 |
-| **nomad-parser-gsd** | Parser for trajectory files in GSD format (<https://gsd.readthedocs.io/en/v3.3.1/...> | Parser, Schema package | — | — | — | [FAIRmat-NFDI/nomad-parser-gsd](https://github.com/FAIRmat-NFDI/nomad-parser-gsd){:target="_blank" rel="noopener"} | 1 |
-| **nomad-parser-h5md** | NOMAD parser plugin for h5md-based simulation files. | Parser, Schema package | — | — | — | [FAIRmat-NFDI/nomad-parser-h5md](https://github.com/FAIRmat-NFDI/nomad-parser-h5md){:target="_blank" rel="noopener"} | 1 |
-| **nomad-parser-molpro** | nomad example template | Parser, Schema package | — | — | — | [FAIRmat-NFDI/nomad-parser-molpro](https://github.com/FAIRmat-NFDI/nomad-parser-molpro){:target="_blank" rel="noopener"} | 0 |
-| **nomad-parser-orca** | nomad plugin for ORCA calculations | Parser, Schema package | — | — | — | [FAIRmat-NFDI/nomad-parser-orca](https://github.com/FAIRmat-NFDI/nomad-parser-orca){:target="_blank" rel="noopener"} | 2 |
-| **nomad-parser-plugin-boss** | Plugin for parsing and displaying BOSS PES arftifacts | Parser | — | — | — | [FAIRmat-NFDI/nomad-parser-plugin-boss](https://github.com/FAIRmat-NFDI/nomad-parser-plugin-boss){:target="_blank" rel="noopener"} | 1 |
-| **nomad-parser-plugins-atomistic** | Collection of NOMAD parsers for atomistic codes. | Parser | ✓ | — | — | [nomad-coe/atomistic-parsers](https://github.com/nomad-coe/atomistic-parsers){:target="_blank" rel="noopener"} | 7 |
-| **nomad-parser-plugins-electronic** | Collection of NOMAD parsers for electronic structure codes. | Parser | ✓ | — | — | [nomad-coe/electronic-parsers](https://github.com/nomad-coe/electronic-parsers){:target="_blank" rel="noopener"} | 23 |
-| **nomad-parser-plugins-workflow** | Collection of NOMAD parsers for workflow engines. | Parser | ✓ | — | — | [nomad-coe/workflow-parsers](https://github.com/nomad-coe/workflow-parsers){:target="_blank" rel="noopener"} | 5 |
-| **nomad-parser-pwd** | A parser and schema for the Python workflow definition. | Parser, Schema package | — | — | — | [FAIRmat-NFDI/nomad-parser-python-workflow-definition](https://github.com/FAIRmat-NFDI/nomad-parser-python-workflow-definition){:target="_blank" rel="noopener"} | 0 |
-| **nomad-parser-ro-crate** | A parser for ro-crate schema plus. | Parser, Schema package | — | — | — | [FAIRmat-NFDI/nomad-parser-ro-crate](https://github.com/FAIRmat-NFDI/nomad-parser-ro-crate){:target="_blank" rel="noopener"} | 0 |
-| **nomad-parser-w2dynamics** | NOMAD parser plugin for w2dynamics input/output files. | Parser, Schema package | — | — | — | [FAIRmat-NFDI/nomad-parser-w2dynamics](https://github.com/FAIRmat-NFDI/nomad-parser-w2dynamics){:target="_blank" rel="noopener"} | 1 |
-| **nomad-parser-wannier90** | A NOMAD parser plugin for Wannier90 input/output files. | Parser, Schema package | ✓ | — | — | [FAIRmat-NFDI/nomad-parser-wannier90](https://github.com/FAIRmat-NFDI/nomad-parser-wannier90){:target="_blank" rel="noopener"} | 2 |
-| **nomad-parser-yambo** | A NOMAD parser plugin for YAMBO input/outputs files. | Parser, Schema package | — | — | — | [FAIRmat-NFDI/nomad-parser-yambo](https://github.com/FAIRmat-NFDI/nomad-parser-yambo){:target="_blank" rel="noopener"} | 1 |
-| **nomad-plugins** | A plugin for discovering other plugins. | App, Schema package | ✓ | — | — | [FAIRmat-NFDI/nomad-plugins](https://github.com/FAIRmat-NFDI/nomad-plugins){:target="_blank" rel="noopener"} | 1 |
-| **nomad-polymerization-reactions** | A NOMAD plugin for polymerization reactions. | App, Schema package | — | — | — | [FAIRmat-NFDI/nomad-polymerization-reactions](https://github.com/FAIRmat-NFDI/nomad-polymerization-reactions){:target="_blank" rel="noopener"} | 0 |
-| **nomad-porous-materials** | NOMAD plugin for porous materials | App, Normalizer | — | — | — | [FAIRmat-NFDI/nomad-porous-materials](https://github.com/FAIRmat-NFDI/nomad-porous-materials){:target="_blank" rel="noopener"} | 0 |
-| **nomad-schema-plugin-run** | Run schema plugin for NOMAD. | Schema package | ✓ | — | — | [nomad-coe/nomad-schema-plugin-run](https://github.com/nomad-coe/nomad-schema-plugin-run){:target="_blank" rel="noopener"} | 1 |
-| **nomad-schema-plugin-simulation-workflow** | Simulation workflow schema plugin for NOMAD. | Schema package | ✓ | — | — | [nomad-coe/nomad-schema-plugin-simulation-workflow](https://github.com/nomad-coe/nomad-schema-plugin-simulation-workflow){:target="_blank" rel="noopener"} | 2 |
-| **nomad-simulation-apps** | A repository for housing NOMAD's collection of simulation app plugins. | App | ✓ | — | — | [FAIRmat-NFDI/nomad-app-plugins-simulation](https://github.com/FAIRmat-NFDI/nomad-app-plugins-simulation){:target="_blank" rel="noopener"} | 2 |
-| **nomad-simulation-parsers** | A repository for housing NOMAD's collection of simulation parser plugins. | Parser, Schema package | — | — | — | [FAIRmat-NFDI/nomad-parser-plugins-simulation](https://github.com/FAIRmat-NFDI/nomad-parser-plugins-simulation){:target="_blank" rel="noopener"} | 1 |
-| **nomad-simulation-workflow** | Schema defintions and normalizer for NOMAD simulation workflows | Normalizer, Schema package | — | — | — | [FAIRmat-NFDI/nomad-simulation-workflow](https://github.com/FAIRmat-NFDI/nomad-simulation-workflow){:target="_blank" rel="noopener"} | 0 |
-| **nomad-simulations** | A NOMAD plugin for FAIR schemas for simulation data. | Schema package | ✓ | — | — | [nomad-coe/nomad-simulations](https://github.com/nomad-coe/nomad-simulations){:target="_blank" rel="noopener"} | 7 |
-| **nomad-tadf-molecules** | NOMAD plugin for thermally activated delayed fluorescent molecules | App, Example upload, Parser, Schema package | — | — | — | [FAIRmat-NFDI/nomad-tadf-molecules](https://github.com/FAIRmat-NFDI/nomad-tadf-molecules){:target="_blank" rel="noopener"} | 2 |
-| **nomad-unisyscat** | A example plugin for a demonstration for UniSysCat. | App, Parser, Schema package | — | — | — | [FAIRmat-NFDI/nomad-unisyscat-plugin](https://github.com/FAIRmat-NFDI/nomad-unisyscat-plugin){:target="_blank" rel="noopener"} | 1 |
-| **nomad-utility-workflows** | A module with utilities for interacting with NOMAD via, e.g., a workflow manager... | App, Example upload, Normalizer, Parser, Schema package | ✓ | — | — | [FAIRmat-NFDI/nomad-utility-workflows](https://github.com/FAIRmat-NFDI/nomad-utility-workflows){:target="_blank" rel="noopener"} | 4 |
-| **nomad_topology_normalizer** | Topology Normalizer | Normalizer, Schema package | — | — | — | [FAIRmat-NFDI/nomad-topology-normalizer](https://github.com/FAIRmat-NFDI/nomad-topology-normalizer){:target="_blank" rel="noopener"} | 0 |
-| **perovskite-solar-cell-database** | Perovskite solar cell data schema plugin for NOMAD. | App, Parser, Schema package | ✓ | — | — | [FAIRmat-NFDI/nomad-perovskite-solar-cells-database](https://github.com/FAIRmat-NFDI/nomad-perovskite-solar-cells-database){:target="_blank" rel="noopener"} | 8 |
-| **pynxtools** | Extend NeXus for experiments and characterization in Materials Science and Mater... | App, Example upload, Parser, Schema package | ✓ | — | — | [FAIRmat-NFDI/pynxtools](https://github.com/FAIRmat-NFDI/pynxtools){:target="_blank" rel="noopener"} | 19 |
-| **pynxtools-apm** | A reader for transferring APM from vendor formats to NeXus and NOMAD. | Example upload | ✓ | — | — | [FAIRmat-NFDI/pynxtools-apm](https://github.com/FAIRmat-NFDI/pynxtools-apm){:target="_blank" rel="noopener"} | 0 |
-| **pynxtools-ellips** | A reader for transferring ellipsometry data from vendor formats to NeXus and NOM... | Example upload | ✓ | — | — | [FAIRmat-NFDI/pynxtools-ellips](https://github.com/FAIRmat-NFDI/pynxtools-ellips){:target="_blank" rel="noopener"} | 0 |
-| **pynxtools-em** | A reader for transferring EM from vendor formats to NeXus and NOMAD. | Example upload | ✓ | — | — | [FAIRmat-NFDI/pynxtools-em](https://github.com/FAIRmat-NFDI/pynxtools-em){:target="_blank" rel="noopener"} | 3 |
-| **pynxtools-igor** | pynxtools plugin for reading igor pro waves and packed experiments | Example upload | ✓ | — | — | [FAIRmat-NFDI/pynxtools-igor](https://github.com/FAIRmat-NFDI/pynxtools-igor){:target="_blank" rel="noopener"} | 0 |
-| **pynxtools-mpes** | — | App, Example upload | ✓ | — | — | [FAIRmat-NFDI/pynxtools-mpes](https://github.com/FAIRmat-NFDI/pynxtools-mpes){:target="_blank" rel="noopener"} | 0 |
-| **pynxtools-raman** | A reader for transferring Raman data from vendor formats to NeXus and NOMAD. | App | ✓ | — | — | [FAIRmat-NFDI/pynxtools-raman](https://github.com/FAIRmat-NFDI/pynxtools-raman){:target="_blank" rel="noopener"} | 0 |
-| **pynxtools-spm** | pynxtools-spm: A pynxtools plugin for SPM (Scanning Probe Microscopy) data reade... | Example upload | ✓ | — | — | [FAIRmat-NFDI/pynxtools-spm](https://github.com/FAIRmat-NFDI/pynxtools-spm){:target="_blank" rel="noopener"} | 0 |
-| **pynxtools-stm** | A plugin for pynxtools to convert sts and stm files | Example upload | ✓ | — | — | [FAIRmat-NFDI/pynxtools-stm](https://github.com/FAIRmat-NFDI/pynxtools-stm){:target="_blank" rel="noopener"} | 0 |
-| **pynxtools-xps** | pynxtools-xps is a pynxtools reader plugin for X-ray photoelectron spectroscopy ... | Example upload | ✓ | — | — | [FAIRmat-NFDI/pynxtools-xps](https://github.com/FAIRmat-NFDI/pynxtools-xps){:target="_blank" rel="noopener"} | 4 |
-| **rtg-sims** | A plugin for RTG SIMS. | Parser, Schema package | — | — | — | [FAIRmat-NFDI/AreaA-data_modeling_and_schemas](https://github.com/FAIRmat-NFDI/AreaA-data_modeling_and_schemas){:target="_blank" rel="noopener"} | 11 |
-| **transmission** | A plugin for NOMAD containing base sections for transmission spectrophotometry. | Parser, Schema package | ✓ | — | — | [FAIRmat-NFDI/AreaA-data_modeling_and_schemas](https://github.com/FAIRmat-NFDI/AreaA-data_modeling_and_schemas){:target="_blank" rel="noopener"} | 11 |
-
-## Detailed Plugin Information
-
-### nomad-aitoolkit
-
-Schema and app for AI Toolkit notebooks.
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/nomad-aitoolkit>](https://github.com/FAIRmat-NFDI/nomad-aitoolkit){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 0
-**Created:** 2024-05-24
-**Last Updated:** 2025-01-23
-
-**Plugin Types:** App, Schema package
-
-**Entry Points:**
-
-- `aitookitschema`
-- `aitookitapp`
-
-**Authors:** Adam Fekete
-
-**Maintainers:** Adam Fekete
-
----
-
-### nomad-analysis
-
-A NOMAD plugin for analysis of FAIR data.
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/nomad-analysis>](https://github.com/FAIRmat-NFDI/nomad-analysis){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 2
-**Created:** 2024-02-26
-**Last Updated:** 2025-11-04
-
-**Available on:** PyPI
-
-**Plugin Types:** Schema package
-
-**Entry Points:**
-
-- `general_analysis_schema`
-- `jupyter_analysis_schema`
-
-**Authors:** Sarthak Kapoor, Jose M. Pizarro, Andrea Albino, Hampus Näsström, Sebastian Brückner
-
-**Maintainers:** FAIRmat
-
----
-
-### nomad-auto-xrd
-
-A NOMAD plugin containing schemas for automatic XRD analysis.
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/nomad-auto-xrd>](https://github.com/FAIRmat-NFDI/nomad-auto-xrd){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 1
-**Created:** 2024-09-13
-**Last Updated:** 2025-11-14
-
-**Plugin Types:** App, Example upload, Schema package
-
-**Entry Points:**
-
-- `schema`
-- `models_app`
-- `example_upload`
-- `auto_xrd_training_action`
-- `auto_xrd_training_wandb_action`
-- `auto_xrd_analysis_action`
-
-**Authors:** Pepe Márquez, Sarthak Kapoor
-
-**Maintainers:** FAIRmat
-
-**Plugin Dependencies:**
-
-- nomad-measurements
-- nomad-schema-plugin-run
-- nomad-schema-plugin-simulation-workflow
-- nomad-analysis
-
----
-
-### nomad-battery-database
-
-app for battery database
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/nomad-battery-database>](https://github.com/FAIRmat-NFDI/nomad-battery-database){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 0
-**Created:** 2025-02-16
-**Last Updated:** 2025-10-30
-
-**Available on:** PyPI
-
-**Plugin Types:** App, Parser, Schema package
-
-**Entry Points:**
-
-- `parser_entry_point`
-- `schema_package_entry_point`
-- `app_entry_point`
-
-**Authors:** Uday Gajera
-
-**Maintainers:** Uday Gajera
-
----
-
-### nomad-bayesian-optimization
-
-NOMAD plugin for driving experiments/simulations using bayesian optimization
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/nomad-bayesian-optimization>](https://github.com/FAIRmat-NFDI/nomad-bayesian-optimization){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 1
-**Created:** 2024-06-17
-**Last Updated:** 2025-05-07
-
-**Plugin Types:** App, Example upload, Schema package
-
-**Entry Points:**
-
-- `nomad_bayesian_optimization.apps:bayesian_optimization_tasks`
-- `nomad_bayesian_optimization.schema_packages:experiments`
-- `nomad_bayesian_optimization.schema_packages:bayesian_optimization`
-- `nomad_bayesian_optimization.example_uploads:getting_started`
-- `nomad_bayesian_optimization.example_uploads:optimization_tasks`
-
-**Authors:** Lauri Himanen
-
-**Maintainers:** Lauri Himanen
-
----
-
-### nomad-camels-plugin
-
-Parser for HDF5 files coming from NOMAD CAMELS.
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/nomad-camels-plugin>](https://github.com/FAIRmat-NFDI/nomad-camels-plugin){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 0
-**Created:** 2024-11-05
-**Last Updated:** 2025-11-26
-
-**Plugin Types:** App, Parser, Schema package
-
-**Entry Points:**
-
-- `camels_schema_package`
-- `camels_parser`
-- `camelsDiode_parser`
-- `camels_app`
-
-**Authors:** Alexander Fuchs
-
-**Maintainers:** Alexander Fuchs
-
----
-
-### nomad-catalysis
-
-A NOMAD plugin for heterogeneous catalysis data.
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/nomad-catalysis-plugin>](https://github.com/FAIRmat-NFDI/nomad-catalysis-plugin){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 4
-**Created:** 2024-07-15
-**Last Updated:** 2025-11-13
-
-**Available on:** PyPI
-
-**Plugin Types:** App, Example upload, Parser, Schema package
-
-**Entry Points:**
-
-- `catalysis`
-- `catalysis_app`
-- `catalysis_parser`
-- `catalysis_collection`
-- `example_catalysis`
-
-**Authors:** Julia Schumann, Hampus Näsström, Michael Götte
-
-**Maintainers:** Julia Schumann, FAIRmat
-
----
-
-### nomad-crystallm
-
-A NOMAD plugin for running CrystaLLM inference in NOMAD installations.
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/nomad-crystallm>](https://github.com/FAIRmat-NFDI/nomad-crystallm){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 1
-**Created:** 2025-06-10
-**Last Updated:** 2025-10-28
-
-**Plugin Types:** Schema package
-
-**Entry Points:**
-
-- `crystallm_inference`
-- `crystallm_schemas`
-
-**Authors:** Ahmed Ilyas, Sarthak Kapoor
-
-**Maintainers:** FAIRmat
-
-**Plugin Dependencies:**
-
-- nomad-schema-plugin-run
-- nomad-schema-plugin-simulation-workflow
-
----
-
-### nomad-eos-workflows
-
-A NOMAD plugin containing the section definitions of a standard Equation of State (EoS) workflow.
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/nomad-schema-plugin-eos-workflows>](https://github.com/FAIRmat-NFDI/nomad-schema-plugin-eos-workflows){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 0
-**Created:** 2025-04-01
-**Last Updated:** 2025-04-01
-
-**Plugin Types:** Schema package
-
-**Entry Points:**
-
-- `schema_package_entry_point`
-
-**Authors:** Joseph Rudzinski
-
-**Maintainers:** Joseph Rudzinski
-
----
-
-### nomad-external-eln-integrations
-
-3rd Party Integration packages
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/nomad-external-eln-integrations>](https://github.com/FAIRmat-NFDI/nomad-external-eln-integrations){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 0
-**Created:** 2024-10-01
-**Last Updated:** 2025-10-28
-
-**Plugin Types:** Example upload, Parser, Schema package
-
-**Entry Points:**
-
-- `elabftwparser`
-- `chemotionparser`
-- `labfolderschema`
-- `elabftwschema`
-- `openbisschema`
-- `elabftwexample`
-
-**Authors:** Amir Golparvar
-
-**Maintainers:** Amir Golparvar
-
----
-
-### nomad-gallery
-
-A mkdocs-based GitHub Pages site for showcasing NOMAD features, examples, and use cases.
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/nomad-gallery>](https://github.com/FAIRmat-NFDI/nomad-gallery){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 1
-**Created:** 2025-02-17
-**Last Updated:** 2025-03-03
-
-**Plugin Types:** Schema package
-
-**Entry Points:**
-
-- `schema_package_entry_point`
-
-**Authors:** Joseph Rudzinski
-
-**Maintainers:** Joseph Rudzinski
-
----
-
-### nomad-material-processing
-
-A plugin for NOMAD containing base sections for material processing.
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/nomad-material-processing>](https://github.com/FAIRmat-NFDI/nomad-material-processing){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 11
-**Created:** 2023-08-15
-**Last Updated:** 2025-08-11
-
-**Available on:** PyPI
-
-**Plugin Types:** Schema package
-
-**Entry Points:**
-
-- `general_schema`
-- `solution_schema`
-- `vd_schema`
-- `cvd_schema`
-- `movpe_schema`
-- `pvd_schema`
-- `mbe_schema`
-- `pld_schema`
-- `sputtering_schema`
-- `thermal_schema`
-
-**Authors:** Andrea Albino, Sebastian Brückner, Michael Götte, Ahmed Ilyas, Sarthak Kapoor, José A. Márquez, Hampus Näsström, Markus Scheidgen
-
-**Maintainers:** FAIRmat
-
----
-
-### nomad-material-processing-example
-
-An example plugin to demonstrate the use of schemas from the nomad-material-processing plugin.
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/nomad-material-processing-example>](https://github.com/FAIRmat-NFDI/nomad-material-processing-example){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 2
-**Created:** 2025-02-18
-**Last Updated:** 2025-08-06
-
-**Plugin Types:** App, Example upload, Parser, Schema package
-
-**Entry Points:**
-
-- `parser_entry_point`
-- `schema_package_entry_point`
-- `app_entry_point`
-- `example_upload_entry_point`
-
-**Authors:** Sarthak Kapoor
-
-**Maintainers:** Sarthak Kapoor
-
----
-
-### nomad-measurements
-
-A plugin for NOMAD containing base sections for measurements.
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/nomad-measurements>](https://github.com/FAIRmat-NFDI/nomad-measurements){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 14
-**Created:** 2023-09-06
-**Last Updated:** 2025-11-28
-
-**Available on:** PyPI
-
-**Plugin Types:** Parser, Schema package
-
-**Entry Points:**
-
-- `general_schema`
-- `xrd_schema`
-- `xrd_parser`
-- `qd_eto_schema`
-- `qd_act_schema`
-- `qd_acms_schema`
-- `qd_mpms_schema`
-- `qd_resisitivity_schema`
-- `qd_eto_parser`
-- `qd_act_parser`
-- `qd_acms_parser`
-- `qd_mpms_parser`
-- `qd_resistivity_parser`
-- `qd_sequence_parser`
-- `transmission_schema`
-- `transmission_parser`
-- `mapping_schema`
-
-**Authors:** Andrea Albino, Sebastian Brückner, Sarthak Kapoor, José A. Márquez, Rubel Mozumder, Hampus Näsström
-
-**Maintainers:** FAIRmat
-
-**Plugin Dependencies:**
-
-- pynxtools
-
----
-
-### nomad-neb-workflows
-
-A NOMAD plugin containing the section definitions of a standard Nudged Elastic Band (NEB) workflow.
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/nomad-neb-workflows>](https://github.com/FAIRmat-NFDI/nomad-neb-workflows){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 3
-**Created:** 2024-06-21
-**Last Updated:** 2025-11-05
-
-**Available on:** PyPI
-
-**Plugin Types:** Schema package
-
-**Entry Points:**
-
-- `nomad_neb_workflows_plugin`
-
-**Authors:** Julia Schumann, Uday Gajera, Jose M. Pizarro, Hampus Näsström
-
-**Maintainers:** Julia Schumann, Uday Gajera, Hampus Näsström
-
-**Plugin Dependencies:**
-
-- nomad-parser-plugins-electronic
-- nomad-normalizer-plugin-bandstructure
-- nomad-normalizer-plugin-dos
-- nomad-normalizer-plugin-spectra
-- nomad-simulations
-- nomad-schema-plugin-run
-- nomad-normalizer-plugin-soap
-- nomad-schema-plugin-simulation-workflow
-- nomad-parser-plugins-workflow
-- nomad-parser-plugins-atomistic
-- nomad-parser-plugins-database
-- nomad-normalizer-plugin-simulation-workflow
-- nomad-normalizer-plugin-system
-
----
-
-### nomad-nmr-schema
-
-Schema plugin containing shared classes for NMR metadata
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/nomad-schema-plugin-nmr>](https://github.com/FAIRmat-NFDI/nomad-schema-plugin-nmr){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 0
-**Created:** 2025-03-25
-**Last Updated:** 2025-10-28
-
-**Plugin Types:** Schema package
-
-**Entry Points:**
-
-- `nmr_schema`
-
-**Authors:** Andrea Albino
-
-**Maintainers:** Andrea Albino
-
-**Plugin Dependencies:**
-
-- nomad-simulations
-
----
-
-### nomad-normalizer-plugin-bandstructure
-
-Band structure normalizer plugin for NOMAD.
-
-**Repository:** [<https://github.com/nomad-coe/nomad-normalizer-plugin-bandstructure>](https://github.com/nomad-coe/nomad-normalizer-plugin-bandstructure){:target="_blank" rel="noopener"}
-**Owner:** nomad-coe
-**Stars:** 1
-**Created:** 2023-12-23
-**Last Updated:** 2025-10-30
-
-**Available on:** PyPI
-
-**Plugin Types:** Normalizer
-
-**Entry Points:**
-
-- `bandstructurenormalizer`
-
-**Authors:** The NOMAD Authors
-
-**Plugin Dependencies:**
-
-- nomad-schema-plugin-run
-- nomad-schema-plugin-simulation-workflow
-- nomad-normalizer-plugin-system
-
----
-
-### nomad-normalizer-plugin-dos
-
-DOS normalizer plugin for NOMAD.
-
-**Repository:** [<https://github.com/nomad-coe/nomad-normalizer-plugin-dos>](https://github.com/nomad-coe/nomad-normalizer-plugin-dos){:target="_blank" rel="noopener"}
-**Owner:** nomad-coe
-**Stars:** 0
-**Created:** 2023-12-20
-**Last Updated:** 2025-10-30
-
-**Available on:** PyPI
-
-**Plugin Types:** Normalizer
-
-**Entry Points:**
-
-- `dosnormalizer`
-
-**Authors:** The NOMAD Authors
-
-**Plugin Dependencies:**
-
-- nomad-schema-plugin-run
-- nomad-schema-plugin-simulation-workflow
-- nomad-normalizer-plugin-system
-
----
-
-### nomad-normalizer-plugin-simulation-workflow
-
-Simulation workflow nomad plugin for NOMAD.
-
-**Repository:** [<https://github.com/nomad-coe/nomad-normalizer-plugin-simulation-workflow>](https://github.com/nomad-coe/nomad-normalizer-plugin-simulation-workflow){:target="_blank" rel="noopener"}
-**Owner:** nomad-coe
-**Stars:** 0
-**Created:** 2023-12-01
-**Last Updated:** 2025-10-30
-
-**Available on:** PyPI
-
-**Plugin Types:** Normalizer
-
-**Entry Points:**
-
-- `simulationworkflownormalizer`
-
-**Authors:** The NOMAD Authors
-
-**Plugin Dependencies:**
-
-- nomad-schema-plugin-simulation-workflow
-
----
-
-### nomad-normalizer-plugin-soap
-
-SOAP nomad plugin for NOMAD.
-
-**Repository:** [<https://github.com/nomad-coe/nomad-normalizer-plugin-soap>](https://github.com/nomad-coe/nomad-normalizer-plugin-soap){:target="_blank" rel="noopener"}
-**Owner:** nomad-coe
-**Stars:** 0
-**Created:** 2024-01-15
-**Last Updated:** 2025-10-30
-
-**Available on:** PyPI
-
-**Plugin Types:** Normalizer
-
-**Entry Points:**
-
-- `soapnormalizer`
-
-**Authors:** The NOMAD Authors
-
-**Plugin Dependencies:**
-
-- nomad-schema-plugin-run
-- nomad-schema-plugin-simulation-workflow
-
----
-
-### nomad-normalizer-plugin-spectra
-
-Spectra normalizer plugin for NOMAD.
-
-**Repository:** [<https://github.com/nomad-coe/nomad-normalizer-plugin-spectra>](https://github.com/nomad-coe/nomad-normalizer-plugin-spectra){:target="_blank" rel="noopener"}
-**Owner:** nomad-coe
-**Stars:** 0
-**Created:** 2024-01-15
-**Last Updated:** 2025-10-30
-
-**Available on:** PyPI
-
-**Plugin Types:** Normalizer
-
-**Entry Points:**
-
-- `spectranormalizer`
-
-**Authors:** The NOMAD Authors
-
----
-
-### nomad-normalizer-plugin-system
-
-System normalizer plugin for NOMAD.
-
-**Repository:** [<https://github.com/nomad-coe/nomad-normalizer-plugin-system>](https://github.com/nomad-coe/nomad-normalizer-plugin-system){:target="_blank" rel="noopener"}
-**Owner:** nomad-coe
-**Stars:** 0
-**Created:** 2023-12-29
-**Last Updated:** 2025-10-30
-
-**Available on:** PyPI
-
-**Plugin Types:** Normalizer
-
-**Entry Points:**
-
-- `systemnormalizer`
-
-**Authors:** The NOMAD Authors
-
-**Plugin Dependencies:**
-
-- nomad-schema-plugin-run
-- nomad-schema-plugin-simulation-workflow
-
----
-
-### nomad-parser-edmft
-
-nomad example template
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/nomad-parser-edmft>](https://github.com/FAIRmat-NFDI/nomad-parser-edmft){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 0
-**Created:** 2024-09-05
-**Last Updated:** 2024-11-04
-
-**Plugin Types:** Parser, Schema package
-
-**Entry Points:**
-
-- `parser_entry_point`
-- `schema_package_entry_point`
-
-**Authors:** Jose Pizarro
-
-**Maintainers:** Jose Pizarro
-
-**Plugin Dependencies:**
-
-- nomad-simulations
-- nomad-schema-plugin-simulation-workflow
-
----
-
-### nomad-parser-fhiaims
-
-Standalone NOMAD plugin for parsing FHI-aims calculation files
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/nomad-parser-fhiaims>](https://github.com/FAIRmat-NFDI/nomad-parser-fhiaims){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 2
-**Created:** 2024-06-24
-**Last Updated:** 2025-01-09
-
-**Plugin Types:** Parser, Schema package
-
-**Entry Points:**
-
-- `fhiaimsparser`
-- `fhiaimsschemapackage`
-
-**Authors:** Nathan Daelman
-
-**Maintainers:** Nathan Daelman
-
----
-
-### nomad-parser-gsd
-
-Parser for trajectory files in GSD format (<https://gsd.readthedocs.io/en/v3.3.1/).>
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/nomad-parser-gsd>](https://github.com/FAIRmat-NFDI/nomad-parser-gsd){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 1
-**Created:** 2024-08-28
-**Last Updated:** 2024-12-12
-
-**Plugin Types:** Parser, Schema package
-
-**Entry Points:**
-
-- `parser_entry_point`
-- `schema_package_entry_point`
-
-**Authors:** Bernadette Mohr
-
-**Maintainers:** Bernadette Mohr
-
-**Plugin Dependencies:**
-
-- nomad-simulations
-
----
-
-### nomad-parser-h5md
-
-NOMAD parser plugin for h5md-based simulation files.
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/nomad-parser-h5md>](https://github.com/FAIRmat-NFDI/nomad-parser-h5md){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 1
-**Created:** 2024-09-10
-**Last Updated:** 2025-04-09
-
-**Plugin Types:** Parser, Schema package
-
-**Entry Points:**
-
-- `h5md_parser_entry_point`
-- `h5md_schema_package_entry_point`
-
-**Authors:** Joseph Rudzinski
-
-**Maintainers:** Joseph Rudzinski
-
-**Plugin Dependencies:**
-
-- nomad-schema-plugin-simulation-workflow
-- nomad-simulations
-
----
-
-### nomad-parser-molpro
-
-nomad example template
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/nomad-parser-molpro>](https://github.com/FAIRmat-NFDI/nomad-parser-molpro){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 0
-**Created:** 2024-10-10
-**Last Updated:** 2024-10-10
-
-**Plugin Types:** Parser, Schema package
-
-**Entry Points:**
-
-- `parser_entry_point`
-- `schema_package_entry_point`
-
-**Authors:** Esma Boydas
-
-**Maintainers:** Esma Boydas
-
----
-
-### nomad-parser-orca
-
-nomad plugin for ORCA calculations
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/nomad-parser-orca>](https://github.com/FAIRmat-NFDI/nomad-parser-orca){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 2
-**Created:** 2024-09-09
-**Last Updated:** 2025-01-17
-
-**Plugin Types:** Parser, Schema package
-
-**Entry Points:**
-
-- `parser_entry_point`
-- `schema_package_entry_point`
-
-**Authors:** Esma Boydas
-
-**Maintainers:** Esma Boydas
-
-**Plugin Dependencies:**
-
-- nomad-simulations
-
----
-
-### nomad-parser-plugin-boss
-
-Plugin for parsing and displaying BOSS PES arftifacts
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/nomad-parser-plugin-boss>](https://github.com/FAIRmat-NFDI/nomad-parser-plugin-boss){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 1
-**Created:** 2024-11-19
-**Last Updated:** 2025-11-20
-
-**Plugin Types:** Parser
-
-**Entry Points:**
-
-- `parser_entry_point`
-
-**Authors:** Nathan Daelman
-
-**Maintainers:** Nathan Daelman
-
----
-
-### nomad-parser-plugins-atomistic
-
-Collection of NOMAD parsers for atomistic codes.
-
-**Repository:** [<https://github.com/nomad-coe/atomistic-parsers>](https://github.com/nomad-coe/atomistic-parsers){:target="_blank" rel="noopener"}
-**Owner:** nomad-coe
-**Stars:** 7
-**Created:** 2022-02-19
-**Last Updated:** 2025-11-04
-
-**Available on:** PyPI
-
-**Plugin Types:** Parser
-
-**Entry Points:**
-
-- `amberparser`
-- `asapparser`
-- `aseparser`
-- `bopfoxparser`
-- `dftbplusparser`
-- `dlpolyparser`
-- `gromacsparser`
-- `gromosparser`
-- `gulpparser`
-- `h5mdparser`
-- `lammpsparser`
-- `libatomsparser`
-- `namdparser`
-- `tinkerparser`
-- `xtbparser`
-
-**Authors:** The NOMAD Authors
-
-**Plugin Dependencies:**
-
-- nomad-schema-plugin-run
-- nomad-schema-plugin-simulation-workflow
-
----
-
-### nomad-parser-plugins-electronic
-
-Collection of NOMAD parsers for electronic structure codes.
-
-**Repository:** [<https://github.com/nomad-coe/electronic-parsers>](https://github.com/nomad-coe/electronic-parsers){:target="_blank" rel="noopener"}
-**Owner:** nomad-coe
-**Stars:** 23
-**Created:** 2022-02-19
-**Last Updated:** 2025-11-24
-
-**Available on:** PyPI
-
-**Plugin Types:** Parser
-
-**Entry Points:**
-
-- `abacusparser`
-- `abinitparser`
-- `amsparser`
-- `atkparser`
-- `bigdftparser`
-- `castepparser`
-- `charmmparser`
-- `cp2kparser`
-- `cpmdparser`
-- `crystalparser`
-- `dmol3parser`
-- `edmftparser`
-- `elkparser`
-- `excitingparser`
-- `fhiaimsparser`
-- `fleurparser`
-- `fploparser`
-- `gamessparser`
-- `gaussianparser`
-- `gpawparser`
-- `magresparser`
-- `molcasparser`
-- `mopacparser`
-- `nwchemparser`
-- `oceanparser`
-- `octopusparser`
-- `onetepparser`
-- `openmxparser`
-- `orcaparser`
-- `psi4parser`
-- `qballparser`
-- `qboxparser`
-- `quantumespressoparser`
-- `siestaparser`
-- `soliddmftparser`
-- `tbstudioparser`
-- `turbomoleparser`
-- `vaspparser`
-- `w2dynamicsparser`
-- `wannier90parser`
-- `wien2kparser`
-- `yamboparser`
-
-**Authors:** The NOMAD Authors
-
-**Plugin Dependencies:**
-
-- nomad-schema-plugin-run
-- nomad-schema-plugin-simulation-workflow
-
----
-
-### nomad-parser-plugins-workflow
-
-Collection of NOMAD parsers for workflow engines.
-
-**Repository:** [<https://github.com/nomad-coe/workflow-parsers>](https://github.com/nomad-coe/workflow-parsers){:target="_blank" rel="noopener"}
-**Owner:** nomad-coe
-**Stars:** 5
-**Created:** 2022-02-19
-**Last Updated:** 2025-10-31
-
-**Available on:** PyPI
-
-**Plugin Types:** Parser
-
-**Entry Points:**
-
-- `aflowparser`
-- `asrparser`
-- `atomateparser`
-- `elasticparser`
-- `fhivibesparser`
-- `lobsterparser`
-- `phonopyparser`
-- `quantum_espresso_epwparser`
-- `quantum_espresso_phononparser`
-- `quantum_espresso_xspectraparser`
-
-**Authors:** The NOMAD Authors
-
-**Plugin Dependencies:**
-
-- nomad-schema-plugin-run
-- nomad-schema-plugin-simulation-workflow
-
----
-
-### nomad-parser-pwd
-
-A parser and schema for the Python workflow definition.
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/nomad-parser-python-workflow-definition>](https://github.com/FAIRmat-NFDI/nomad-parser-python-workflow-definition){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 0
-**Created:** 2025-10-21
-**Last Updated:** 2025-11-29
-
-**Plugin Types:** Parser, Schema package
-
-**Entry Points:**
-
-- `parser_entry_point`
-- `schema_package_entry_point`
-
-**Authors:** Joseph Rudzinski
-
-**Maintainers:** Joseph Rudzinski
-
----
-
-### nomad-parser-ro-crate
-
-A parser for ro-crate schema plus.
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/nomad-parser-ro-crate>](https://github.com/FAIRmat-NFDI/nomad-parser-ro-crate){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 0
-**Created:** 2025-10-23
-**Last Updated:** 2025-10-23
-
-**Plugin Types:** Parser, Schema package
-
-**Entry Points:**
-
-- `parser_entry_point`
-- `schema_package_entry_point`
-
-**Authors:** Joseph Rudzinski
-
-**Maintainers:** Joseph Rudzinski
-
----
-
-### nomad-parser-w2dynamics
-
-NOMAD parser plugin for w2dynamics input/output files.
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/nomad-parser-w2dynamics>](https://github.com/FAIRmat-NFDI/nomad-parser-w2dynamics){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 1
-**Created:** 2024-08-27
-**Last Updated:** 2024-08-27
-
-**Plugin Types:** Parser, Schema package
-
-**Entry Points:**
-
-- `parser_entry_point`
-- `schema_package_entry_point`
-
-**Authors:** Jose Pizarro
-
-**Maintainers:** Jose Pizarro
-
-**Plugin Dependencies:**
-
-- nomad-simulations
-
----
-
-### nomad-parser-wannier90
-
-A NOMAD parser plugin for Wannier90 input/output files.
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/nomad-parser-wannier90>](https://github.com/FAIRmat-NFDI/nomad-parser-wannier90){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 2
-**Created:** 2024-07-04
-**Last Updated:** 2024-08-15
-
-**Available on:** PyPI
-
-**Plugin Types:** Parser, Schema package
-
-**Entry Points:**
-
-- `nomad_parser_wannier90_plugin`
-- `nomad_parser_wannier90_schema`
-
-**Authors:** Jose M. Pizarro
-
-**Maintainers:** Jose M. Pizarro
-
-**Plugin Dependencies:**
-
-- nomad-simulations
-
----
-
-### nomad-parser-yambo
-
-A NOMAD parser plugin for YAMBO input/outputs files.
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/nomad-parser-yambo>](https://github.com/FAIRmat-NFDI/nomad-parser-yambo){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 1
-**Created:** 2024-07-02
-**Last Updated:** 2024-07-04
-
-**Plugin Types:** Parser, Schema package
-
-**Entry Points:**
-
-- `nomad_parser_yambo_plugin`
-- `nomad_parser_yambo_schema`
-
-**Authors:** Jose M. Pizarro
-
-**Maintainers:** Jose M. Pizarro
-
-**Plugin Dependencies:**
-
-- nomad-simulations
-- nomad-schema-plugin-run
-- nomad-schema-plugin-simulation-workflow
-
----
-
-### nomad-plugins
-
-A plugin for discovering other plugins.
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/nomad-plugins>](https://github.com/FAIRmat-NFDI/nomad-plugins){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 1
-**Created:** 2024-12-06
-**Last Updated:** 2025-11-03
-
-**Available on:** PyPI
-
-**Plugin Types:** App, Schema package
-
-**Entry Points:**
-
-- `schema_package_entry_point`
-- `plugin_app_entry_point`
-
-**Authors:** Hampus Näsström
-
-**Maintainers:** Hampus Näsström
-
----
-
-### nomad-polymerization-reactions
-
-A NOMAD plugin for polymerization reactions.
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/nomad-polymerization-reactions>](https://github.com/FAIRmat-NFDI/nomad-polymerization-reactions){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 0
-**Created:** 2024-08-07
-**Last Updated:** 2024-08-16
-
-**Plugin Types:** App, Schema package
-
-**Entry Points:**
-
-- `polymerization_schema`
-- `polymerization_app`
-
-**Authors:** Pepe Márquez, Sarthak Kapoor
-
-**Maintainers:** Pepe Márquez, Sarthak Kapoor
-
----
-
-### nomad-porous-materials
-
-NOMAD plugin for porous materials
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/nomad-porous-materials>](https://github.com/FAIRmat-NFDI/nomad-porous-materials){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 0
-**Created:** 2024-05-09
-**Last Updated:** 2025-04-29
-
-**Plugin Types:** App, Normalizer
-
-**Entry Points:**
-
-- `porositynormalizer`
-- `mofapp`
-
-**Authors:** Lauri Himanen
-
-**Maintainers:** Lauri Himanen
-
----
-
-### nomad-schema-plugin-run
-
-Run schema plugin for NOMAD.
-
-**Repository:** [<https://github.com/nomad-coe/nomad-schema-plugin-run>](https://github.com/nomad-coe/nomad-schema-plugin-run){:target="_blank" rel="noopener"}
-**Owner:** nomad-coe
-**Stars:** 1
-**Created:** 2023-12-05
-**Last Updated:** 2025-10-30
-
-**Available on:** PyPI
-
-**Plugin Types:** Schema package
-
-**Entry Points:**
-
-- `runschema`
-
-**Authors:** The NOMAD Authors
-
----
-
-### nomad-schema-plugin-simulation-workflow
-
-Simulation workflow schema plugin for NOMAD.
-
-**Repository:** [<https://github.com/nomad-coe/nomad-schema-plugin-simulation-workflow>](https://github.com/nomad-coe/nomad-schema-plugin-simulation-workflow){:target="_blank" rel="noopener"}
-**Owner:** nomad-coe
-**Stars:** 2
-**Created:** 2023-11-28
-**Last Updated:** 2025-10-30
-
-**Available on:** PyPI
-
-**Plugin Types:** Schema package
-
-**Entry Points:**
-
-- `simulationworkflowschema`
-
-**Authors:** The NOMAD Authors
-
-**Plugin Dependencies:**
-
-- nomad-schema-plugin-run
-
----
-
-### nomad-simulation-apps
-
-A repository for housing NOMAD's collection of simulation app plugins.
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/nomad-app-plugins-simulation>](https://github.com/FAIRmat-NFDI/nomad-app-plugins-simulation){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 2
-**Created:** 2025-02-24
-**Last Updated:** 2025-10-28
-
-**Available on:** PyPI
-
-**Plugin Types:** App
-
-**Entry Points:**
-
-- `alexandria_app`
-
-**Authors:** Martin Kuban
-
-**Maintainers:** Martin Kuban
-
----
-
-### nomad-simulation-parsers
-
-A repository for housing NOMAD's collection of simulation parser plugins.
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/nomad-parser-plugins-simulation>](https://github.com/FAIRmat-NFDI/nomad-parser-plugins-simulation){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 1
-**Created:** 2025-01-16
-**Last Updated:** 2025-11-20
-
-**Plugin Types:** Parser, Schema package
-
-**Entry Points:**
-
-- `abinit_parser`
-- `abinit_schema_package`
-- `ams_parser`
-- `ams_schema_package`
-- `crystal_parser`
-- `crystal_schema_package`
-- `exciting_parser`
-- `exciting_schema_package`
-- `fhiaims_parser`
-- `fhiaims_schema_package`
-- `gpaw_parser`
-- `gpaw_schema_package`
-- `h5md_parser`
-- `h5md_schema_package`
-- `lammps_parser`
-- `octopus_parser`
-- `octopus_schema_package`
-- `phonopy_parser`
-- `phonopy_schema_package`
-- `quantumespresso_parser`
-- `quantumespresso_schema_package`
-- `vasp_parser`
-- `vasp_schema_package`
-- `wannier90_parser`
-- `wannier90_schema_package`
-
-**Authors:** Esma B. Boydas, Nathan Daelman, Alvin N. Ladines, Bernadette Mohr, Joseph F. Rudzinski
-
-**Maintainers:** Nathan Daelman, Alvin N. Ladines, Joseph F. Rudzinski
-
-**Plugin Dependencies:**
-
-- nomad-simulations
-
----
-
-### nomad-simulation-workflow
-
-Schema defintions and normalizer for NOMAD simulation workflows
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/nomad-simulation-workflow>](https://github.com/FAIRmat-NFDI/nomad-simulation-workflow){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 0
-**Created:** 2024-05-29
-**Last Updated:** 2024-05-29
-
-**Plugin Types:** Normalizer, Schema package
-
-**Entry Points:**
-
-- `mypackage`
-- `mynormalizer`
-
-**Authors:** Alvin Noe Ladines
-
-**Maintainers:** Alvin Noe Ladines
-
----
-
-### nomad-simulations
-
-A NOMAD plugin for FAIR schemas for simulation data.
-
-**Repository:** [<https://github.com/nomad-coe/nomad-simulations>](https://github.com/nomad-coe/nomad-simulations){:target="_blank" rel="noopener"}
-**Owner:** nomad-coe
-**Stars:** 7
-**Created:** 2024-01-17
-**Last Updated:** 2025-11-20
-
-**Available on:** PyPI
-
-**Plugin Types:** Schema package
-
-**Entry Points:**
-
-- `nomad_simulations_plugin`
-
-**Authors:** Jose M. Pizarro, Nathan Daelman, Bernadette Mohr, Joseph F. Rudzinski
-
-**Maintainers:** Jose M. Pizarro, Joseph F. Rudzinski
-
----
-
-### nomad-tadf-molecules
-
-NOMAD plugin for thermally activated delayed fluorescent molecules
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/nomad-tadf-molecules>](https://github.com/FAIRmat-NFDI/nomad-tadf-molecules){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 2
-**Created:** 2024-06-05
-**Last Updated:** 2025-08-06
-
-**Plugin Types:** App, Example upload, Parser, Schema package
-
-**Entry Points:**
-
-- `parser`
-- `package`
-- `app`
-- `example_upload`
-
-**Authors:** Lauri Himanen
-
-**Maintainers:** Lauri Himanen
-
----
-
-### nomad-unisyscat
-
-A example plugin for a demonstration for UniSysCat.
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/nomad-unisyscat-plugin>](https://github.com/FAIRmat-NFDI/nomad-unisyscat-plugin){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 1
-**Created:** 2024-05-27
-**Last Updated:** 2024-07-02
-
-**Plugin Types:** App, Parser, Schema package
-
-**Entry Points:**
-
-- `myparser`
-- `mypackage`
-- `myapp`
-
-**Authors:** Julia Schumann, Pepe Marquez, Ahmed Mansour
-
-**Maintainers:** Julia Schumann, Pepe Marquez
-
----
-
-### nomad-utility-workflows
-
-A module with utilities for interacting with NOMAD via, e.g., a workflow manager.
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/nomad-utility-workflows>](https://github.com/FAIRmat-NFDI/nomad-utility-workflows){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 4
-**Created:** 2024-10-14
-**Last Updated:** 2025-11-17
-
-**Available on:** PyPI
-
-**Plugin Types:** App, Example upload, Normalizer, Parser, Schema package
-
-**Entry Points:**
-
-- `parser_entry_point`
-- `schema_package_entry_point`
-- `normalizer_entry_point`
-- `app_entry_point`
-- `example_upload_entry_point`
-
-**Authors:** Joseph F. Rudzinski
-
-**Maintainers:** Joseph F. Rudzinski
-
----
-
-### nomad_topology_normalizer
-
-Topology Normalizer
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/nomad-topology-normalizer>](https://github.com/FAIRmat-NFDI/nomad-topology-normalizer){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 0
-**Created:** 2025-04-14
-**Last Updated:** 2025-10-28
-
-**Plugin Types:** Normalizer, Schema package
-
-**Entry Points:**
-
-- `schema_package_entry_point`
-- `topology_normalizer_plugin`
-
-**Authors:** Amir Golparvar
-
-**Maintainers:** Amir Golparvar
-
----
-
-### perovskite-solar-cell-database
-
-Perovskite solar cell data schema plugin for NOMAD.
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/nomad-perovskite-solar-cells-database>](https://github.com/FAIRmat-NFDI/nomad-perovskite-solar-cells-database){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 8
-**Created:** 2023-12-05
-**Last Updated:** 2025-11-14
-
-**Available on:** PyPI
-
-**Plugin Types:** App, Parser, Schema package
-
-**Entry Points:**
-
-- `perovskite_solar_cell`
-- `perovskite_solar_cell_database_app`
-- `perovskite_composition`
-- `ion_parser`
-- `perovskite_ions_app`
-- `perovskite_tandem_cell`
-- `perovskite_tandem_json_parser`
-- `solar_cell_app`
-- `tandem_app`
-- `llm_extraction_schema`
-- `llm_extractor_schema`
-- `llm_extracted_solar_cells`
-
-**Authors:** Jose Marquez, Yaru Wang, Hampus Näsström
-
-**Maintainers:** Jose Marquez, Hampus Näsström
-
-**Plugin Dependencies:**
-
-- nomad-schema-plugin-run
-- nomad-schema-plugin-simulation-workflow
-
----
-
-### pynxtools
-
-Extend NeXus for experiments and characterization in Materials Science and Materials Engineering and serve as a NOMAD parser implementation for NeXus.
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/pynxtools>](https://github.com/FAIRmat-NFDI/pynxtools){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 19
-**Created:** 2021-10-22
-**Last Updated:** 2025-11-28
-
-**Available on:** PyPI
-
-**Plugin Types:** App, Example upload, Parser, Schema package
-
-**Entry Points:**
-
-- `nexus_parser`
-- `nexus_schema`
-- `nexus_data_converter`
-- `nexus_app`
-- `simple_nexus_example`
-
-**Authors:** The NOMAD Authors
-
-**Plugin Dependencies:**
-
-- pynxtools-ellips
-- pynxtools-xps
-- pynxtools-apm
-- pynxtools-raman
-- pynxtools-spm
-- pynxtools-em
-- pynxtools-igor
-- pynxtools-mpes
-
----
-
-### pynxtools-apm
-
-A reader for transferring APM from vendor formats to NeXus and NOMAD.
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/pynxtools-apm>](https://github.com/FAIRmat-NFDI/pynxtools-apm){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 0
-**Created:** 2024-03-14
-**Last Updated:** 2025-10-17
-
-**Available on:** PyPI
-
-**Plugin Types:** Example upload
-
-**Entry Points:**
-
-- `apm_example`
-
-**Authors:** The NOMAD Authors
-
-**Plugin Dependencies:**
-
-- pynxtools
-
----
-
-### pynxtools-ellips
-
-A reader for transferring ellipsometry data from vendor formats to NeXus and NOMAD.
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/pynxtools-ellips>](https://github.com/FAIRmat-NFDI/pynxtools-ellips){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 0
-**Created:** 2024-05-03
-**Last Updated:** 2025-10-17
-
-**Available on:** PyPI
-
-**Plugin Types:** Example upload
-
-**Entry Points:**
-
-- `ellips_example`
-
-**Authors:** The NOMAD Authors
-
-**Plugin Dependencies:**
-
-- pynxtools
-
----
-
-### pynxtools-em
-
-A reader for transferring EM from vendor formats to NeXus and NOMAD.
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/pynxtools-em>](https://github.com/FAIRmat-NFDI/pynxtools-em){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 3
-**Created:** 2024-03-18
-**Last Updated:** 2025-11-28
-
-**Available on:** PyPI
-
-**Plugin Types:** Example upload
-
-**Entry Points:**
-
-- `em_example`
-
-**Authors:** The NOMAD Authors
-
-**Plugin Dependencies:**
-
-- pynxtools
-
----
-
-### pynxtools-igor
-
-pynxtools plugin for reading igor pro waves and packed experiments
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/pynxtools-igor>](https://github.com/FAIRmat-NFDI/pynxtools-igor){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 0
-**Created:** 2024-12-05
-**Last Updated:** 2025-10-17
-
-**Available on:** PyPI
-
-**Plugin Types:** Example upload
-
-**Entry Points:**
-
-- `igor_example`
-
-**Authors:** The NOMAD Authors
-
-**Plugin Dependencies:**
-
-- pynxtools
-
----
-
-### pynxtools-mpes
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/pynxtools-mpes>](https://github.com/FAIRmat-NFDI/pynxtools-mpes){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 0
-**Created:** 2024-02-20
-**Last Updated:** 2025-10-17
-
-**Available on:** PyPI
-
-**Plugin Types:** App, Example upload
-
-**Entry Points:**
-
-- `mpes_example`
-- `mpes_app`
-
-**Authors:** The NOMAD Authors
-
-**Plugin Dependencies:**
-
-- pynxtools
-
----
-
-### pynxtools-raman
-
-A reader for transferring Raman data from vendor formats to NeXus and NOMAD.
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/pynxtools-raman>](https://github.com/FAIRmat-NFDI/pynxtools-raman){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 0
-**Created:** 2024-06-27
-**Last Updated:** 2025-11-12
-
-**Available on:** PyPI
-
-**Plugin Types:** App
-
-**Entry Points:**
-
-- `raman_app`
-
-**Authors:** The NOMAD Authors
-
-**Plugin Dependencies:**
-
-- pynxtools
-
----
-
-### pynxtools-spm
-
-pynxtools-spm: A pynxtools plugin for SPM (Scanning Probe Microscopy) data readers
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/pynxtools-spm>](https://github.com/FAIRmat-NFDI/pynxtools-spm){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 0
-**Created:** 2024-11-19
-**Last Updated:** 2025-11-18
-
-**Available on:** PyPI
-
-**Plugin Types:** Example upload
-
-**Entry Points:**
-
-- `sts_example`
-- `stm_example`
-- `afm_example`
-
-**Authors:** The NOMAD Authors
-
-**Plugin Dependencies:**
-
-- pynxtools
-
----
-
-### pynxtools-stm
-
-A plugin for pynxtools to convert sts and stm files
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/pynxtools-stm>](https://github.com/FAIRmat-NFDI/pynxtools-stm){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 0
-**Created:** 2023-11-28
-**Last Updated:** 2025-10-19
-
-**Available on:** PyPI
-
-**Plugin Types:** Example upload
-
-**Entry Points:**
-
-- `sts_example`
-- `stm_example`
-
-**Authors:** The NOMAD Authors
-
-**Plugin Dependencies:**
-
-- pynxtools
-
----
-
-### pynxtools-xps
-
-pynxtools-xps is a pynxtools reader plugin for X-ray photoelectron spectroscopy (XPS) data.
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/pynxtools-xps>](https://github.com/FAIRmat-NFDI/pynxtools-xps){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 4
-**Created:** 2024-02-19
-**Last Updated:** 2025-11-13
-
-**Available on:** PyPI
-
-**Plugin Types:** Example upload
-
-**Entry Points:**
-
-- `xps_example_upload_entry_point`
-
-**Authors:** The NOMAD authors
-
-**Plugin Dependencies:**
-
-- pynxtools
-
----
-
-### rtg-sims
-
-A plugin for RTG SIMS.
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/AreaA-data_modeling_and_schemas>](https://github.com/FAIRmat-NFDI/AreaA-data_modeling_and_schemas){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 11
-**Created:** 2022-11-04
-**Last Updated:** 2025-08-05
-
-**Plugin Types:** Parser, Schema package
-
-**Entry Points:**
-
-- `schema`
-- `parser`
-
-**Authors:** Andrea Albino, Sebastian Brückner, Sarthak Kapoor, Hampus Näsström
-
-**Plugin Dependencies:**
-
-- nomad-measurements
-- nomad-material-processing
-
----
-
-### transmission
-
-A plugin for NOMAD containing base sections for transmission spectrophotometry.
-
-**Repository:** [<https://github.com/FAIRmat-NFDI/AreaA-data_modeling_and_schemas>](https://github.com/FAIRmat-NFDI/AreaA-data_modeling_and_schemas){:target="_blank" rel="noopener"}
-**Owner:** FAIRmat-NFDI
-**Stars:** 11
-**Created:** 2022-11-04
-**Last Updated:** 2025-08-05
-
-**Available on:** PyPI
-
-**Plugin Types:** Parser, Schema package
-
-**Entry Points:**
-
-- `transmission_schema`
-- `transmission_parser`
-
-**Plugin Dependencies:**
-
-- nomad-material-processing
-
----
+<table>
+<thead>
+<tr><th>Plugin</th><th>Description</th><th>Deployment</th><th>Links</th></tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>nomad-aitoolkit </strong>(⭐ 0)<br><small>App, Schema package</small></td>
+<td>Schema and app for AI Toolkit notebooks.</td>
+<td><small>—</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-aitoolkit" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> Adam Fekete<br>
+<strong>Maintainers:</strong> Adam Fekete<br>
+<strong>Entry Points:</strong> <code>aitookitschema</code>, <code>aitookitapp</code><br>
+<strong>Created:</strong> 2024-05-24 | <strong>Last Updated:</strong> 2025-01-23
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-analysis </strong>(⭐ 2)<br><small>Schema package</small></td>
+<td>A NOMAD plugin for analysis of FAIR data.</td>
+<td><small>PyPI</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-analysis" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> Sarthak Kapoor, Jose M. Pizarro, Andrea Albino, Hampus Näsström, Sebastian Brückner<br>
+<strong>Maintainers:</strong> FAIRmat<br>
+<strong>Entry Points:</strong> <code>general_analysis_schema</code>, <code>jupyter_analysis_schema</code><br>
+<strong>Created:</strong> 2024-02-26 | <strong>Last Updated:</strong> 2025-11-04
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-auto-xrd </strong>(⭐ 1)<br><small>App, Example upload, Schema package</small></td>
+<td>A NOMAD plugin containing schemas for automatic XRD analysis.</td>
+<td><small>—</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-auto-xrd" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> Pepe Márquez, Sarthak Kapoor<br>
+<strong>Maintainers:</strong> FAIRmat<br>
+<strong>Entry Points:</strong> <code>schema</code>, <code>models_app</code>, <code>example_upload</code>, <code>auto_xrd_training_action</code>, <code>auto_xrd_training_wandb_action</code>, <code>auto_xrd_analysis_action</code><br>
+<strong>Plugin Dependencies:</strong> <code>nomad-measurements</code>, <code>nomad-analysis</code>, <code>nomad-schema-plugin-simulation-workflow</code>, <code>nomad-schema-plugin-run</code><br>
+<strong>Created:</strong> 2024-09-13 | <strong>Last Updated:</strong> 2025-12-18
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-battery-database </strong>(⭐ 1)<br><small>App, Parser, Schema package</small></td>
+<td>app for battery database</td>
+<td><small>PyPI</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-battery-database" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> Uday Gajera<br>
+<strong>Maintainers:</strong> Uday Gajera<br>
+<strong>Entry Points:</strong> <code>parser_entry_point</code>, <code>schema_package_entry_point</code>, <code>app_entry_point</code><br>
+<strong>Created:</strong> 2025-02-16 | <strong>Last Updated:</strong> 2025-12-13
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-bayesian-optimization </strong>(⭐ 1)<br><small>App, Example upload, Schema package</small></td>
+<td>NOMAD plugin for driving experiments/simulations using bayesian optimization</td>
+<td><small>—</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-bayesian-optimization" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> Lauri Himanen<br>
+<strong>Maintainers:</strong> Lauri Himanen<br>
+<strong>Entry Points:</strong> <code>nomad_bayesian_optimization.apps:bayesian_optimization_tasks</code>, <code>nomad_bayesian_optimization.schema_packages:experiments</code>, <code>nomad_bayesian_optimization.schema_packages:bayesian_optimization</code>, <code>nomad_bayesian_optimization.example_uploads:getting_started</code>, <code>nomad_bayesian_optimization.example_uploads:optimization_tasks</code><br>
+<strong>Created:</strong> 2024-06-17 | <strong>Last Updated:</strong> 2025-05-07
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-camels-plugin </strong>(⭐ 0)<br><small>App, Parser, Schema package</small></td>
+<td>Parser for HDF5 files coming from NOMAD CAMELS.</td>
+<td><small>—</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-camels-plugin" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> Alexander Fuchs<br>
+<strong>Maintainers:</strong> Alexander Fuchs<br>
+<strong>Entry Points:</strong> <code>camels_schema_package</code>, <code>camels_parser</code>, <code>camelsDiode_parser</code>, <code>camels_app</code><br>
+<strong>Created:</strong> 2024-11-05 | <strong>Last Updated:</strong> 2025-12-18
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-catalysis </strong>(⭐ 4)<br><small>App, Example upload, Parser, Schema package</small></td>
+<td>A NOMAD plugin for heterogeneous catalysis data.</td>
+<td><small>PyPI</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-catalysis-plugin" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> Julia Schumann, Hampus Näsström, Michael Götte<br>
+<strong>Maintainers:</strong> Julia Schumann, FAIRmat<br>
+<strong>Entry Points:</strong> <code>catalysis</code>, <code>catalysis_app</code>, <code>catalysis_parser</code>, <code>catalysis_collection</code>, <code>example_catalysis</code><br>
+<strong>Created:</strong> 2024-07-15 | <strong>Last Updated:</strong> 2025-11-13
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-countries </strong>(⭐ 100)<br><small>App, Parser, Schema package</small></td>
+<td>Countries of the world plugin</td>
+<td><small>—</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> John Doe<br>
+<strong>Maintainers:</strong> John Doe<br>
+<strong>Entry Points:</strong> <code>countryparser</code>, <code>countrypackage</code>, <code>countryapp</code><br>
+<strong>Created:</strong> 2021-02-18 | <strong>Last Updated:</strong> 2025-12-18
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-crystallm </strong>(⭐ 1)<br><small>Schema package</small></td>
+<td>A NOMAD plugin for running CrystaLLM inference in NOMAD installations.</td>
+<td><small>—</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-crystallm" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> Ahmed Ilyas, Sarthak Kapoor<br>
+<strong>Maintainers:</strong> FAIRmat<br>
+<strong>Entry Points:</strong> <code>crystallm_inference</code>, <code>crystallm_schemas</code><br>
+<strong>Plugin Dependencies:</strong> <code>nomad-schema-plugin-run</code>, <code>nomad-schema-plugin-simulation-workflow</code><br>
+<strong>Created:</strong> 2025-06-10 | <strong>Last Updated:</strong> 2025-10-28
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-eos-workflows </strong>(⭐ 0)<br><small>Schema package</small></td>
+<td>A NOMAD plugin containing the section definitions of a standard Equation of State (EoS) workflow.</td>
+<td><small>—</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-schema-plugin-eos-workflows" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> Joseph Rudzinski<br>
+<strong>Maintainers:</strong> Joseph Rudzinski<br>
+<strong>Entry Points:</strong> <code>schema_package_entry_point</code><br>
+<strong>Created:</strong> 2025-04-01 | <strong>Last Updated:</strong> 2025-04-01
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-external-eln-integrations </strong>(⭐ 0)<br><small>Example upload, Parser, Schema package</small></td>
+<td>3rd Party Integration packages</td>
+<td><small>—</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-external-eln-integrations" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> Amir Golparvar<br>
+<strong>Maintainers:</strong> Amir Golparvar<br>
+<strong>Entry Points:</strong> <code>elabftwparser</code>, <code>chemotionparser</code>, <code>labfolderschema</code>, <code>elabftwschema</code>, <code>openbisschema</code>, <code>elabftwexample</code><br>
+<strong>Created:</strong> 2024-10-01 | <strong>Last Updated:</strong> 2025-10-28
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-gallery </strong>(⭐ 1)<br><small>Schema package</small></td>
+<td>A mkdocs-based GitHub Pages site for showcasing NOMAD features, examples, and use cases.</td>
+<td><small>—</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-gallery" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> Joseph Rudzinski<br>
+<strong>Maintainers:</strong> Joseph Rudzinski<br>
+<strong>Entry Points:</strong> <code>schema_package_entry_point</code><br>
+<strong>Created:</strong> 2025-02-17 | <strong>Last Updated:</strong> 2025-12-14
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-material-processing </strong>(⭐ 11)<br><small>Schema package</small></td>
+<td>A plugin for NOMAD containing base sections for material processing.</td>
+<td><small>PyPI</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-material-processing" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> Andrea Albino, Sebastian Brückner, Michael Götte, Ahmed Ilyas, Sarthak Kapoor, José A. Márquez, Hampus Näsström, Markus Scheidgen<br>
+<strong>Maintainers:</strong> FAIRmat<br>
+<strong>Entry Points:</strong> <code>general_schema</code>, <code>solution_schema</code>, <code>vd_schema</code>, <code>cvd_schema</code>, <code>movpe_schema</code>, <code>pvd_schema</code>, <code>mbe_schema</code>, <code>pld_schema</code>, <code>sputtering_schema</code>, <code>thermal_schema</code><br>
+<strong>Created:</strong> 2023-08-15 | <strong>Last Updated:</strong> 2025-08-11
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-material-processing-example </strong>(⭐ 2)<br><small>App, Example upload, Parser, Schema package</small></td>
+<td>An example plugin to demonstrate the use of schemas from the nomad-material-processing plugin.</td>
+<td><small>—</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-material-processing-example" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> Sarthak Kapoor<br>
+<strong>Maintainers:</strong> Sarthak Kapoor<br>
+<strong>Entry Points:</strong> <code>parser_entry_point</code>, <code>schema_package_entry_point</code>, <code>app_entry_point</code>, <code>example_upload_entry_point</code><br>
+<strong>Created:</strong> 2025-02-18 | <strong>Last Updated:</strong> 2025-08-06
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-measurements </strong>(⭐ 14)<br><small>Parser, Schema package</small></td>
+<td>A plugin for NOMAD containing base sections for measurements.</td>
+<td><small>PyPI</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-measurements" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> Andrea Albino, Sebastian Brückner, Sarthak Kapoor, José A. Márquez, Rubel Mozumder, Hampus Näsström<br>
+<strong>Maintainers:</strong> FAIRmat<br>
+<strong>Entry Points:</strong> <code>general_schema</code>, <code>xrd_schema</code>, <code>xrd_parser</code>, <code>qd_eto_schema</code>, <code>qd_act_schema</code>, <code>qd_acms_schema</code>, <code>qd_mpms_schema</code>, <code>qd_resisitivity_schema</code>, <code>qd_eto_parser</code>, <code>qd_act_parser</code>, <code>qd_acms_parser</code>, <code>qd_mpms_parser</code>, <code>qd_resistivity_parser</code>, <code>qd_sequence_parser</code>, <code>transmission_schema</code>, <code>transmission_parser</code>, <code>mapping_schema</code><br>
+<strong>Plugin Dependencies:</strong> <code>pynxtools</code><br>
+<strong>Created:</strong> 2023-09-06 | <strong>Last Updated:</strong> 2025-11-28
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-neb-workflows </strong>(⭐ 4)<br><small>Schema package</small></td>
+<td>A NOMAD plugin containing the section definitions of a standard Nudged Elastic Band (NEB) workflow.</td>
+<td><small>PyPI</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-neb-workflows" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> Julia Schumann, Uday Gajera, Jose M. Pizarro, Hampus Näsström<br>
+<strong>Maintainers:</strong> Julia Schumann, Uday Gajera, Hampus Näsström<br>
+<strong>Entry Points:</strong> <code>nomad_neb_workflows_plugin</code><br>
+<strong>Plugin Dependencies:</strong> <code>nomad-normalizer-plugin-simulation-workflow</code>, <code>nomad-normalizer-plugin-soap</code>, <code>nomad-simulations</code>, <code>nomad-normalizer-plugin-spectra</code>, <code>nomad-schema-plugin-run</code>, <code>nomad-normalizer-plugin-bandstructure</code>, <code>nomad-parser-plugins-workflow</code>, <code>nomad-parser-plugins-database</code>, <code>nomad-normalizer-plugin-system</code>, <code>nomad-schema-plugin-simulation-workflow</code>, <code>nomad-parser-plugins-electronic</code>, <code>nomad-normalizer-plugin-dos</code>, <code>nomad-parser-plugins-atomistic</code><br>
+<strong>Created:</strong> 2024-06-21 | <strong>Last Updated:</strong> 2025-12-13
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-nmr-schema </strong>(⭐ 0)<br><small>Schema package</small></td>
+<td>Schema plugin containing shared classes for NMR metadata</td>
+<td><small>—</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-schema-plugin-nmr" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> Andrea Albino<br>
+<strong>Maintainers:</strong> Andrea Albino<br>
+<strong>Entry Points:</strong> <code>nmr_schema</code><br>
+<strong>Plugin Dependencies:</strong> <code>nomad-simulations</code><br>
+<strong>Created:</strong> 2025-03-25 | <strong>Last Updated:</strong> 2025-12-17
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-normalizer-plugin-bandstructure </strong>(⭐ 1)<br><small>Normalizer</small></td>
+<td>Band structure normalizer plugin for NOMAD.</td>
+<td><small>PyPI</small></td>
+<td><a href="https://github.com/nomad-coe/nomad-normalizer-plugin-bandstructure" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> nomad-coe<br>
+<strong>Authors:</strong> The NOMAD Authors<br>
+<strong>Entry Points:</strong> <code>bandstructurenormalizer</code><br>
+<strong>Plugin Dependencies:</strong> <code>nomad-normalizer-plugin-system</code>, <code>nomad-schema-plugin-run</code>, <code>nomad-schema-plugin-simulation-workflow</code><br>
+<strong>Created:</strong> 2023-12-23 | <strong>Last Updated:</strong> 2025-10-30
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-normalizer-plugin-dos </strong>(⭐ 0)<br><small>Normalizer</small></td>
+<td>DOS normalizer plugin for NOMAD.</td>
+<td><small>PyPI</small></td>
+<td><a href="https://github.com/nomad-coe/nomad-normalizer-plugin-dos" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> nomad-coe<br>
+<strong>Authors:</strong> The NOMAD Authors<br>
+<strong>Entry Points:</strong> <code>dosnormalizer</code><br>
+<strong>Plugin Dependencies:</strong> <code>nomad-normalizer-plugin-system</code>, <code>nomad-schema-plugin-run</code>, <code>nomad-schema-plugin-simulation-workflow</code><br>
+<strong>Created:</strong> 2023-12-20 | <strong>Last Updated:</strong> 2025-10-30
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-normalizer-plugin-simulation-workflow </strong>(⭐ 0)<br><small>Normalizer</small></td>
+<td>Simulation workflow nomad plugin for NOMAD.</td>
+<td><small>PyPI</small></td>
+<td><a href="https://github.com/nomad-coe/nomad-normalizer-plugin-simulation-workflow" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> nomad-coe<br>
+<strong>Authors:</strong> The NOMAD Authors<br>
+<strong>Entry Points:</strong> <code>simulationworkflownormalizer</code><br>
+<strong>Plugin Dependencies:</strong> <code>nomad-schema-plugin-simulation-workflow</code><br>
+<strong>Created:</strong> 2023-12-01 | <strong>Last Updated:</strong> 2025-10-30
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-normalizer-plugin-soap </strong>(⭐ 0)<br><small>Normalizer</small></td>
+<td>SOAP nomad plugin for NOMAD.</td>
+<td><small>PyPI</small></td>
+<td><a href="https://github.com/nomad-coe/nomad-normalizer-plugin-soap" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> nomad-coe<br>
+<strong>Authors:</strong> The NOMAD Authors<br>
+<strong>Entry Points:</strong> <code>soapnormalizer</code><br>
+<strong>Plugin Dependencies:</strong> <code>nomad-schema-plugin-run</code>, <code>nomad-schema-plugin-simulation-workflow</code><br>
+<strong>Created:</strong> 2024-01-15 | <strong>Last Updated:</strong> 2025-10-30
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-normalizer-plugin-spectra </strong>(⭐ 0)<br><small>Normalizer</small></td>
+<td>Spectra normalizer plugin for NOMAD.</td>
+<td><small>PyPI</small></td>
+<td><a href="https://github.com/nomad-coe/nomad-normalizer-plugin-spectra" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> nomad-coe<br>
+<strong>Authors:</strong> The NOMAD Authors<br>
+<strong>Entry Points:</strong> <code>spectranormalizer</code><br>
+<strong>Created:</strong> 2024-01-15 | <strong>Last Updated:</strong> 2025-10-30
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-normalizer-plugin-system </strong>(⭐ 0)<br><small>Normalizer</small></td>
+<td>System normalizer plugin for NOMAD.</td>
+<td><small>PyPI</small></td>
+<td><a href="https://github.com/nomad-coe/nomad-normalizer-plugin-system" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> nomad-coe<br>
+<strong>Authors:</strong> The NOMAD Authors<br>
+<strong>Entry Points:</strong> <code>systemnormalizer</code><br>
+<strong>Plugin Dependencies:</strong> <code>nomad-schema-plugin-run</code>, <code>nomad-schema-plugin-simulation-workflow</code><br>
+<strong>Created:</strong> 2023-12-29 | <strong>Last Updated:</strong> 2025-10-30
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-parser-edmft </strong>(⭐ 0)<br><small>Parser, Schema package</small></td>
+<td>nomad example template</td>
+<td><small>—</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-parser-edmft" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> Jose Pizarro<br>
+<strong>Maintainers:</strong> Jose Pizarro<br>
+<strong>Entry Points:</strong> <code>parser_entry_point</code>, <code>schema_package_entry_point</code><br>
+<strong>Plugin Dependencies:</strong> <code>nomad-simulations</code>, <code>nomad-schema-plugin-simulation-workflow</code><br>
+<strong>Created:</strong> 2024-09-05 | <strong>Last Updated:</strong> 2024-11-04
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-parser-fhiaims </strong>(⭐ 2)<br><small>Parser, Schema package</small></td>
+<td>Standalone NOMAD plugin for parsing FHI-aims calculation files</td>
+<td><small>—</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-parser-fhiaims" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> Nathan Daelman<br>
+<strong>Maintainers:</strong> Nathan Daelman<br>
+<strong>Entry Points:</strong> <code>fhiaimsparser</code>, <code>fhiaimsschemapackage</code><br>
+<strong>Created:</strong> 2024-06-24 | <strong>Last Updated:</strong> 2025-01-09
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-parser-gsd </strong>(⭐ 1)<br><small>Parser, Schema package</small></td>
+<td>Parser for trajectory files in GSD format (<https://gsd.readthedocs.io/en/v3.3.1/).></td>
+<td><small>—</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-parser-gsd" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> Bernadette Mohr<br>
+<strong>Maintainers:</strong> Bernadette Mohr<br>
+<strong>Entry Points:</strong> <code>parser_entry_point</code>, <code>schema_package_entry_point</code><br>
+<strong>Plugin Dependencies:</strong> <code>nomad-simulations</code><br>
+<strong>Created:</strong> 2024-08-28 | <strong>Last Updated:</strong> 2024-12-12
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-parser-h5md </strong>(⭐ 1)<br><small>Parser, Schema package</small></td>
+<td>NOMAD parser plugin for h5md-based simulation files.</td>
+<td><small>—</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-parser-h5md" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> Joseph Rudzinski<br>
+<strong>Maintainers:</strong> Joseph Rudzinski<br>
+<strong>Entry Points:</strong> <code>h5md_parser_entry_point</code>, <code>h5md_schema_package_entry_point</code><br>
+<strong>Plugin Dependencies:</strong> <code>nomad-schema-plugin-simulation-workflow</code>, <code>nomad-simulations</code><br>
+<strong>Created:</strong> 2024-09-10 | <strong>Last Updated:</strong> 2025-04-09
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-parser-molpro </strong>(⭐ 0)<br><small>Parser, Schema package</small></td>
+<td>nomad example template</td>
+<td><small>—</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-parser-molpro" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> Esma Boydas<br>
+<strong>Maintainers:</strong> Esma Boydas<br>
+<strong>Entry Points:</strong> <code>parser_entry_point</code>, <code>schema_package_entry_point</code><br>
+<strong>Created:</strong> 2024-10-10 | <strong>Last Updated:</strong> 2024-10-10
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-parser-orca </strong>(⭐ 2)<br><small>Parser, Schema package</small></td>
+<td>nomad plugin for ORCA calculations</td>
+<td><small>—</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-parser-orca" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> Esma Boydas<br>
+<strong>Maintainers:</strong> Esma Boydas<br>
+<strong>Entry Points:</strong> <code>parser_entry_point</code>, <code>schema_package_entry_point</code><br>
+<strong>Plugin Dependencies:</strong> <code>nomad-simulations</code><br>
+<strong>Created:</strong> 2024-09-09 | <strong>Last Updated:</strong> 2025-01-17
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-parser-plugin-boss </strong>(⭐ 1)<br><small>Parser</small></td>
+<td>Plugin for parsing and displaying BOSS PES arftifacts</td>
+<td><small>—</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-parser-plugin-boss" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> Nathan Daelman<br>
+<strong>Maintainers:</strong> Nathan Daelman<br>
+<strong>Entry Points:</strong> <code>parser_entry_point</code><br>
+<strong>Created:</strong> 2024-11-19 | <strong>Last Updated:</strong> 2025-11-20
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-parser-plugins-atomistic </strong>(⭐ 7)<br><small>Parser</small></td>
+<td>Collection of NOMAD parsers for atomistic codes.</td>
+<td><small>PyPI</small></td>
+<td><a href="https://github.com/nomad-coe/atomistic-parsers" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> nomad-coe<br>
+<strong>Authors:</strong> The NOMAD Authors<br>
+<strong>Entry Points:</strong> <code>amberparser</code>, <code>asapparser</code>, <code>aseparser</code>, <code>bopfoxparser</code>, <code>dftbplusparser</code>, <code>dlpolyparser</code>, <code>gromacsparser</code>, <code>gromosparser</code>, <code>gulpparser</code>, <code>h5mdparser</code>, <code>lammpsparser</code>, <code>libatomsparser</code>, <code>namdparser</code>, <code>tinkerparser</code>, <code>xtbparser</code><br>
+<strong>Plugin Dependencies:</strong> <code>nomad-schema-plugin-run</code>, <code>nomad-schema-plugin-simulation-workflow</code><br>
+<strong>Created:</strong> 2022-02-19 | <strong>Last Updated:</strong> 2025-11-04
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-parser-plugins-electronic </strong>(⭐ 23)<br><small>Parser</small></td>
+<td>Collection of NOMAD parsers for electronic structure codes.</td>
+<td><small>PyPI</small></td>
+<td><a href="https://github.com/nomad-coe/electronic-parsers" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> nomad-coe<br>
+<strong>Authors:</strong> The NOMAD Authors<br>
+<strong>Entry Points:</strong> <code>abacusparser</code>, <code>abinitparser</code>, <code>amsparser</code>, <code>atkparser</code>, <code>bigdftparser</code>, <code>castepparser</code>, <code>charmmparser</code>, <code>cp2kparser</code>, <code>cpmdparser</code>, <code>crystalparser</code>, <code>dmol3parser</code>, <code>edmftparser</code>, <code>elkparser</code>, <code>excitingparser</code>, <code>fhiaimsparser</code>, <code>fleurparser</code>, <code>fploparser</code>, <code>gamessparser</code>, <code>gaussianparser</code>, <code>gpawparser</code>, <code>magresparser</code>, <code>molcasparser</code>, <code>mopacparser</code>, <code>nwchemparser</code>, <code>oceanparser</code>, <code>octopusparser</code>, <code>onetepparser</code>, <code>openmxparser</code>, <code>orcaparser</code>, <code>psi4parser</code>, <code>qballparser</code>, <code>qboxparser</code>, <code>quantumespressoparser</code>, <code>siestaparser</code>, <code>soliddmftparser</code>, <code>tbstudioparser</code>, <code>turbomoleparser</code>, <code>vaspparser</code>, <code>w2dynamicsparser</code>, <code>wannier90parser</code>, <code>wien2kparser</code>, <code>yamboparser</code><br>
+<strong>Plugin Dependencies:</strong> <code>nomad-schema-plugin-simulation-workflow</code>, <code>nomad-schema-plugin-run</code><br>
+<strong>Created:</strong> 2022-02-19 | <strong>Last Updated:</strong> 2025-12-18
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-parser-plugins-workflow </strong>(⭐ 5)<br><small>Parser</small></td>
+<td>Collection of NOMAD parsers for workflow engines.</td>
+<td><small>PyPI</small></td>
+<td><a href="https://github.com/nomad-coe/workflow-parsers" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> nomad-coe<br>
+<strong>Authors:</strong> The NOMAD Authors<br>
+<strong>Entry Points:</strong> <code>aflowparser</code>, <code>asrparser</code>, <code>atomateparser</code>, <code>elasticparser</code>, <code>fhivibesparser</code>, <code>lobsterparser</code>, <code>phonopyparser</code>, <code>quantum_espresso_epwparser</code>, <code>quantum_espresso_phononparser</code>, <code>quantum_espresso_xspectraparser</code><br>
+<strong>Plugin Dependencies:</strong> <code>nomad-schema-plugin-run</code>, <code>nomad-schema-plugin-simulation-workflow</code><br>
+<strong>Created:</strong> 2022-02-19 | <strong>Last Updated:</strong> 2025-10-31
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-parser-pwd </strong>(⭐ 0)<br><small>Parser, Schema package</small></td>
+<td>A parser and schema for the Python workflow definition.</td>
+<td><small>—</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-parser-python-workflow-definition" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> Joseph Rudzinski<br>
+<strong>Maintainers:</strong> Joseph Rudzinski<br>
+<strong>Entry Points:</strong> <code>parser_entry_point</code>, <code>schema_package_entry_point</code><br>
+<strong>Created:</strong> 2025-10-21 | <strong>Last Updated:</strong> 2025-12-15
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-parser-ro-crate </strong>(⭐ 0)<br><small>Parser, Schema package</small></td>
+<td>A parser for ro-crate schema plus.</td>
+<td><small>—</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-parser-ro-crate" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> Joseph Rudzinski<br>
+<strong>Maintainers:</strong> Joseph Rudzinski<br>
+<strong>Entry Points:</strong> <code>parser_entry_point</code>, <code>schema_package_entry_point</code><br>
+<strong>Created:</strong> 2025-10-23 | <strong>Last Updated:</strong> 2025-10-23
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-parser-w2dynamics </strong>(⭐ 1)<br><small>Parser, Schema package</small></td>
+<td>NOMAD parser plugin for w2dynamics input/output files.</td>
+<td><small>—</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-parser-w2dynamics" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> Jose Pizarro<br>
+<strong>Maintainers:</strong> Jose Pizarro<br>
+<strong>Entry Points:</strong> <code>parser_entry_point</code>, <code>schema_package_entry_point</code><br>
+<strong>Plugin Dependencies:</strong> <code>nomad-simulations</code><br>
+<strong>Created:</strong> 2024-08-27 | <strong>Last Updated:</strong> 2024-08-27
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-parser-wannier90 </strong>(⭐ 2)<br><small>Parser, Schema package</small></td>
+<td>A NOMAD parser plugin for Wannier90 input/output files.</td>
+<td><small>PyPI</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-parser-wannier90" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> Jose M. Pizarro<br>
+<strong>Maintainers:</strong> Jose M. Pizarro<br>
+<strong>Entry Points:</strong> <code>nomad_parser_wannier90_plugin</code>, <code>nomad_parser_wannier90_schema</code><br>
+<strong>Plugin Dependencies:</strong> <code>nomad-simulations</code><br>
+<strong>Created:</strong> 2024-07-04 | <strong>Last Updated:</strong> 2024-08-15
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-parser-yambo </strong>(⭐ 1)<br><small>Parser, Schema package</small></td>
+<td>A NOMAD parser plugin for YAMBO input/outputs files.</td>
+<td><small>—</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-parser-yambo" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> Jose M. Pizarro<br>
+<strong>Maintainers:</strong> Jose M. Pizarro<br>
+<strong>Entry Points:</strong> <code>nomad_parser_yambo_plugin</code>, <code>nomad_parser_yambo_schema</code><br>
+<strong>Plugin Dependencies:</strong> <code>nomad-simulations</code>, <code>nomad-schema-plugin-simulation-workflow</code>, <code>nomad-schema-plugin-run</code><br>
+<strong>Created:</strong> 2024-07-02 | <strong>Last Updated:</strong> 2024-07-04
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-plugins </strong>(⭐ 1)<br><small>App, Schema package</small></td>
+<td>A plugin for discovering other plugins.</td>
+<td><small>PyPI</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-plugins" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> Hampus Näsström<br>
+<strong>Maintainers:</strong> Hampus Näsström<br>
+<strong>Entry Points:</strong> <code>schema_package_entry_point</code>, <code>plugin_app_entry_point</code><br>
+<strong>Created:</strong> 2024-12-06 | <strong>Last Updated:</strong> 2025-11-03
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-polymerization-reactions </strong>(⭐ 2)<br><small>App, Schema package</small></td>
+<td>A NOMAD plugin for polymerization reactions.</td>
+<td><small>—</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-polymerization-reactions" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> Pepe Márquez, Sarthak Kapoor<br>
+<strong>Maintainers:</strong> Pepe Márquez, Sarthak Kapoor<br>
+<strong>Entry Points:</strong> <code>polymerization_schema</code>, <code>polymerization_app</code><br>
+<strong>Created:</strong> 2024-08-07 | <strong>Last Updated:</strong> 2025-12-17
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-porous-materials </strong>(⭐ 0)<br><small>App, Normalizer</small></td>
+<td>NOMAD plugin for porous materials</td>
+<td><small>—</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-porous-materials" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> Lauri Himanen<br>
+<strong>Maintainers:</strong> Lauri Himanen<br>
+<strong>Entry Points:</strong> <code>porositynormalizer</code>, <code>mofapp</code><br>
+<strong>Created:</strong> 2024-05-09 | <strong>Last Updated:</strong> 2025-04-29
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-schema-plugin-run </strong>(⭐ 1)<br><small>Schema package</small></td>
+<td>Run schema plugin for NOMAD.</td>
+<td><small>PyPI</small></td>
+<td><a href="https://github.com/nomad-coe/nomad-schema-plugin-run" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> nomad-coe<br>
+<strong>Authors:</strong> The NOMAD Authors<br>
+<strong>Entry Points:</strong> <code>runschema</code><br>
+<strong>Created:</strong> 2023-12-05 | <strong>Last Updated:</strong> 2025-10-30
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-schema-plugin-simulation-workflow </strong>(⭐ 2)<br><small>Schema package</small></td>
+<td>Simulation workflow schema plugin for NOMAD.</td>
+<td><small>PyPI</small></td>
+<td><a href="https://github.com/nomad-coe/nomad-schema-plugin-simulation-workflow" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> nomad-coe<br>
+<strong>Authors:</strong> The NOMAD Authors<br>
+<strong>Entry Points:</strong> <code>simulationworkflowschema</code><br>
+<strong>Plugin Dependencies:</strong> <code>nomad-schema-plugin-run</code><br>
+<strong>Created:</strong> 2023-11-28 | <strong>Last Updated:</strong> 2025-10-30
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-simulation-apps </strong>(⭐ 2)<br><small>App</small></td>
+<td>A repository for housing NOMAD's collection of simulation app plugins.</td>
+<td><small>PyPI</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-app-plugins-simulation" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> Martin Kuban<br>
+<strong>Maintainers:</strong> Martin Kuban<br>
+<strong>Entry Points:</strong> <code>alexandria_app</code><br>
+<strong>Created:</strong> 2025-02-24 | <strong>Last Updated:</strong> 2025-10-28
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-simulation-examples </strong>(⭐ 0)<br><small>Example upload</small></td>
+<td>Example uploads for multiple simulation codes for NOMAD development.</td>
+<td><small>—</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-simulation-examples" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Entry Points:</strong> <code>example_gromacs</code>, <code>example_lammps</code>, <code>example_orca</code>, <code>example_vasp</code><br>
+<strong>Created:</strong> 2025-12-11 | <strong>Last Updated:</strong> 2025-12-16
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-simulation-parsers </strong>(⭐ 1)<br><small>Parser, Schema package</small></td>
+<td>A repository for housing NOMAD's collection of simulation parser plugins.</td>
+<td><small>—</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-parser-plugins-simulation" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> Esma B. Boydas, Nathan Daelman, Alvin N. Ladines, Bernadette Mohr, Joseph F. Rudzinski<br>
+<strong>Maintainers:</strong> Nathan Daelman, Alvin N. Ladines, Joseph F. Rudzinski<br>
+<strong>Entry Points:</strong> <code>abinit_parser</code>, <code>abinit_schema_package</code>, <code>ams_parser</code>, <code>ams_schema_package</code>, <code>crystal_parser</code>, <code>crystal_schema_package</code>, <code>exciting_parser</code>, <code>exciting_schema_package</code>, <code>fhiaims_parser</code>, <code>fhiaims_schema_package</code>, <code>gpaw_parser</code>, <code>gpaw_schema_package</code>, <code>gromacs_parser</code>, <code>gromacs_schema_package</code>, <code>h5md_parser</code>, <code>h5md_schema_package</code>, <code>lammps_parser</code>, <code>octopus_parser</code>, <code>octopus_schema_package</code>, <code>phonopy_parser</code>, <code>phonopy_schema_package</code>, <code>quantumespresso_parser</code>, <code>quantumespresso_schema_package</code>, <code>vasp_parser</code>, <code>vasp_schema_package</code>, <code>wannier90_parser</code>, <code>wannier90_schema_package</code><br>
+<strong>Plugin Dependencies:</strong> <code>nomad-simulations</code>, <code>nomad-schema-plugin-simulation-workflow</code><br>
+<strong>Created:</strong> 2025-01-16 | <strong>Last Updated:</strong> 2025-12-11
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-simulation-workflow </strong>(⭐ 0)<br><small>Normalizer, Schema package</small></td>
+<td>Schema defintions and normalizer for NOMAD simulation workflows</td>
+<td><small>—</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-simulation-workflow" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> Alvin Noe Ladines<br>
+<strong>Maintainers:</strong> Alvin Noe Ladines<br>
+<strong>Entry Points:</strong> <code>mypackage</code>, <code>mynormalizer</code><br>
+<strong>Created:</strong> 2024-05-29 | <strong>Last Updated:</strong> 2024-05-29
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-simulations </strong>(⭐ 7)<br><small>Schema package</small></td>
+<td>A NOMAD plugin for FAIR schemas for simulation data.</td>
+<td><small>PyPI</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-simulations" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> Jose M. Pizarro, Nathan Daelman, Bernadette Mohr, Joseph F. Rudzinski<br>
+<strong>Maintainers:</strong> Jose M. Pizarro, Joseph F. Rudzinski<br>
+<strong>Entry Points:</strong> <code>nomad_simulations_plugin</code><br>
+<strong>Created:</strong> 2024-01-17 | <strong>Last Updated:</strong> 2026-01-02
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-tadf-molecules </strong>(⭐ 2)<br><small>App, Example upload, Parser, Schema package</small></td>
+<td>NOMAD plugin for thermally activated delayed fluorescent molecules</td>
+<td><small>—</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-tadf-molecules" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> Lauri Himanen<br>
+<strong>Maintainers:</strong> Lauri Himanen<br>
+<strong>Entry Points:</strong> <code>parser</code>, <code>package</code>, <code>app</code>, <code>example_upload</code><br>
+<strong>Created:</strong> 2024-06-05 | <strong>Last Updated:</strong> 2025-08-06
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-unisyscat </strong>(⭐ 1)<br><small>App, Parser, Schema package</small></td>
+<td>A example plugin for a demonstration for UniSysCat.</td>
+<td><small>—</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-unisyscat-plugin" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> Julia Schumann, Pepe Marquez, Ahmed Mansour<br>
+<strong>Maintainers:</strong> Julia Schumann, Pepe Marquez<br>
+<strong>Entry Points:</strong> <code>myparser</code>, <code>mypackage</code>, <code>myapp</code><br>
+<strong>Created:</strong> 2024-05-27 | <strong>Last Updated:</strong> 2024-07-02
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad-utility-workflows </strong>(⭐ 4)<br><small>App, Example upload, Normalizer, Parser, Schema package</small></td>
+<td>A module with utilities for interacting with NOMAD via, e.g., a workflow manager.</td>
+<td><small>PyPI</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-utility-workflows" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> Joseph F. Rudzinski<br>
+<strong>Maintainers:</strong> Joseph F. Rudzinski<br>
+<strong>Entry Points:</strong> <code>parser_entry_point</code>, <code>schema_package_entry_point</code>, <code>normalizer_entry_point</code>, <code>app_entry_point</code>, <code>example_upload_entry_point</code><br>
+<strong>Created:</strong> 2024-10-14 | <strong>Last Updated:</strong> 2025-11-17
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>nomad_topology_normalizer </strong>(⭐ 0)<br><small>Normalizer, Schema package</small></td>
+<td>Topology Normalizer</td>
+<td><small>—</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-topology-normalizer" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> Amir Golparvar<br>
+<strong>Maintainers:</strong> Amir Golparvar<br>
+<strong>Entry Points:</strong> <code>schema_package_entry_point</code>, <code>topology_normalizer_plugin</code><br>
+<strong>Created:</strong> 2025-04-14 | <strong>Last Updated:</strong> 2025-10-28
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>perovskite-solar-cell-database </strong>(⭐ 8)<br><small>App, Parser, Schema package</small></td>
+<td>Perovskite solar cell data schema plugin for NOMAD.</td>
+<td><small>PyPI</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/nomad-perovskite-solar-cells-database" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> Jose Marquez, Yaru Wang, Hampus Näsström<br>
+<strong>Maintainers:</strong> Jose Marquez, Hampus Näsström<br>
+<strong>Entry Points:</strong> <code>perovskite_solar_cell</code>, <code>perovskite_solar_cell_database_app</code>, <code>perovskite_composition</code>, <code>ion_parser</code>, <code>perovskite_ions_app</code>, <code>perovskite_tandem_cell</code>, <code>perovskite_tandem_json_parser</code>, <code>solar_cell_app</code>, <code>tandem_app</code>, <code>llm_extraction_schema</code>, <code>llm_extractor_schema</code>, <code>llm_extracted_solar_cells</code><br>
+<strong>Plugin Dependencies:</strong> <code>nomad-schema-plugin-run</code>, <code>nomad-schema-plugin-simulation-workflow</code><br>
+<strong>Created:</strong> 2023-12-05 | <strong>Last Updated:</strong> 2026-01-02
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>pynxtools </strong>(⭐ 19)<br><small>App, Example upload, Parser, Schema package</small></td>
+<td>Extend NeXus for experiments and characterization in Materials Science and Materials Engineering and serve as a NOMAD parser implementation for NeXus.</td>
+<td><small>PyPI</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/pynxtools" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> The NOMAD Authors<br>
+<strong>Entry Points:</strong> <code>nexus_parser</code>, <code>nexus_schema</code>, <code>nexus_data_converter</code>, <code>nexus_app</code>, <code>simple_nexus_example</code><br>
+<strong>Plugin Dependencies:</strong> <code>pynxtools-igor</code>, <code>pynxtools-ellips</code>, <code>pynxtools-em</code>, <code>pynxtools-apm</code>, <code>pynxtools-mpes</code>, <code>pynxtools-spm</code>, <code>pynxtools-raman</code>, <code>pynxtools-xps</code><br>
+<strong>Created:</strong> 2021-10-22 | <strong>Last Updated:</strong> 2025-11-28
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>pynxtools-apm </strong>(⭐ 0)<br><small>Example upload</small></td>
+<td>A reader for transferring APM from vendor formats to NeXus and NOMAD.</td>
+<td><small>PyPI</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/pynxtools-apm" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> The NOMAD Authors<br>
+<strong>Entry Points:</strong> <code>apm_example</code><br>
+<strong>Plugin Dependencies:</strong> <code>pynxtools</code><br>
+<strong>Created:</strong> 2024-03-14 | <strong>Last Updated:</strong> 2025-12-01
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>pynxtools-ellips </strong>(⭐ 0)<br><small>Example upload</small></td>
+<td>A reader for transferring ellipsometry data from vendor formats to NeXus and NOMAD.</td>
+<td><small>PyPI</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/pynxtools-ellips" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> The NOMAD Authors<br>
+<strong>Entry Points:</strong> <code>ellips_example</code><br>
+<strong>Plugin Dependencies:</strong> <code>pynxtools</code><br>
+<strong>Created:</strong> 2024-05-03 | <strong>Last Updated:</strong> 2025-10-17
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>pynxtools-em </strong>(⭐ 3)<br><small>Example upload</small></td>
+<td>A reader for transferring EM from vendor formats to NeXus and NOMAD.</td>
+<td><small>PyPI</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/pynxtools-em" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> The NOMAD Authors<br>
+<strong>Entry Points:</strong> <code>em_example</code><br>
+<strong>Plugin Dependencies:</strong> <code>pynxtools</code><br>
+<strong>Created:</strong> 2024-03-18 | <strong>Last Updated:</strong> 2025-11-28
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>pynxtools-igor </strong>(⭐ 0)<br><small>Example upload</small></td>
+<td>pynxtools plugin for reading igor pro waves and packed experiments</td>
+<td><small>PyPI</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/pynxtools-igor" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> The NOMAD Authors<br>
+<strong>Entry Points:</strong> <code>igor_example</code><br>
+<strong>Plugin Dependencies:</strong> <code>pynxtools</code><br>
+<strong>Created:</strong> 2024-12-05 | <strong>Last Updated:</strong> 2025-10-17
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>pynxtools-mpes </strong>(⭐ 0)<br><small>App, Example upload</small></td>
+<td>—</td>
+<td><small>PyPI</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/pynxtools-mpes" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> The NOMAD Authors<br>
+<strong>Entry Points:</strong> <code>mpes_example</code>, <code>mpes_app</code><br>
+<strong>Plugin Dependencies:</strong> <code>pynxtools</code><br>
+<strong>Created:</strong> 2024-02-20 | <strong>Last Updated:</strong> 2025-10-17
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>pynxtools-raman </strong>(⭐ 0)<br><small>App</small></td>
+<td>A reader for transferring Raman data from vendor formats to NeXus and NOMAD.</td>
+<td><small>PyPI</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/pynxtools-raman" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> The NOMAD Authors<br>
+<strong>Entry Points:</strong> <code>raman_app</code><br>
+<strong>Plugin Dependencies:</strong> <code>pynxtools</code><br>
+<strong>Created:</strong> 2024-06-27 | <strong>Last Updated:</strong> 2025-11-12
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>pynxtools-spm </strong>(⭐ 0)<br><small>App, Example upload</small></td>
+<td>pynxtools-spm: A pynxtools plugin for SPM (Scanning Probe Microscopy) data readers</td>
+<td><small>PyPI</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/pynxtools-spm" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> The NOMAD Authors<br>
+<strong>Entry Points:</strong> <code>sts_example</code>, <code>stm_example</code>, <code>afm_example</code>, <code>spm_app</code><br>
+<strong>Plugin Dependencies:</strong> <code>pynxtools</code><br>
+<strong>Created:</strong> 2024-11-19 | <strong>Last Updated:</strong> 2025-12-11
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>pynxtools-stm </strong>(⭐ 0)<br><small>Example upload</small></td>
+<td>A plugin for pynxtools to convert sts and stm files</td>
+<td><small>PyPI</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/pynxtools-stm" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> The NOMAD Authors<br>
+<strong>Entry Points:</strong> <code>sts_example</code>, <code>stm_example</code><br>
+<strong>Plugin Dependencies:</strong> <code>pynxtools</code><br>
+<strong>Created:</strong> 2023-11-28 | <strong>Last Updated:</strong> 2025-10-19
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>pynxtools-xps </strong>(⭐ 5)<br><small>Example upload</small></td>
+<td>pynxtools-xps is a pynxtools reader plugin for X-ray photoelectron spectroscopy (XPS) data.</td>
+<td><small>PyPI</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/pynxtools-xps" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> The NOMAD authors<br>
+<strong>Entry Points:</strong> <code>xps_example_upload_entry_point</code><br>
+<strong>Plugin Dependencies:</strong> <code>pynxtools</code><br>
+<strong>Created:</strong> 2024-02-19 | <strong>Last Updated:</strong> 2025-12-08
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>rtg-sims </strong>(⭐ 11)<br><small>Parser, Schema package</small></td>
+<td>A plugin for RTG SIMS.</td>
+<td><small>—</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/AreaA-data_modeling_and_schemas" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Authors:</strong> Andrea Albino, Sebastian Brückner, Sarthak Kapoor, Hampus Näsström<br>
+<strong>Entry Points:</strong> <code>schema</code>, <code>parser</code><br>
+<strong>Plugin Dependencies:</strong> <code>nomad-measurements</code>, <code>nomad-material-processing</code><br>
+<strong>Created:</strong> 2022-11-04 | <strong>Last Updated:</strong> 2025-08-05
+</p>
+</div>
+</details>
+</td>
+</tr>
+<tr>
+<td><strong>transmission </strong>(⭐ 11)<br><small>Parser, Schema package</small></td>
+<td>A plugin for NOMAD containing base sections for transmission spectrophotometry.</td>
+<td><small>PyPI</small></td>
+<td><a href="https://github.com/FAIRmat-NFDI/AreaA-data_modeling_and_schemas" target="_blank" rel="noopener">Code</a></td>
+</tr>
+<tr>
+<td colspan="4" style="padding: 0; border-top: none;">
+<details style="margin: 0; padding: 12px 16px; border: 0px">
+<summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
+<div style="margin-top: 12px; padding-top: 12px;">
+<p>
+<strong>Owner:</strong> FAIRmat-NFDI<br>
+<strong>Entry Points:</strong> <code>transmission_schema</code>, <code>transmission_parser</code><br>
+<strong>Plugin Dependencies:</strong> <code>nomad-material-processing</code><br>
+<strong>Created:</strong> 2022-11-04 | <strong>Last Updated:</strong> 2025-08-05
+</p>
+</div>
+</details>
+</td>
+</tr>
+</tbody>
+</table>
