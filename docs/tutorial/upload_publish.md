@@ -311,7 +311,7 @@ In other words, NOMAD will read the input and output files and provide all infor
     ![Animation of drag and drop a compressed file in NOMAD](images/example_3-2_drag_drop_files.gif)
 
     After uploading files, processing is automatically triggered. This involves identifying supported file formats in NOMAD and extracting relevant (meta)data. The exact processing steps depend on the use case.
-    For example, you can learn more about the [processing of computational data on this link](https://nomad-lab.eu/prod/v1/docs/examples/computational_data/uploading.html#processing-of-computational-data){:target="_blank" rel="noopener"}.
+    For example, you can learn more about the [processing of computational data on this link](../examples/computational_data/basics.md){:target="_blank" rel="noopener"}.
 
     Once processing is complete, NOMAD generates an entry page that presents the data in a structured, hierarchical format based on the NOMAD *metainfo* schema.
 
