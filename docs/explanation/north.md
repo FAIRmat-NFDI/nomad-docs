@@ -61,7 +61,7 @@ TODO what the term official tool means should be documented, does official mean 
 
 ## Official base images
 
-Using base image within the [`nomad-north-desktop-base`](https://github.com/FAIRmat-NFDI/nomad-north-desktop-base) repository is the recommended best practice to build a NORTH tool if that demands a graphical user interface. Its desktop-base image builds on the [Jupyter Docker Stacks project](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html), offering
+Using the base image within the [`nomad-north-desktop-base`](https://github.com/FAIRmat-NFDI/nomad-north-desktop-base) repository is the recommended best practice to build a NORTH tool if that demands a graphical user interface. Its desktop-base image builds on the [Jupyter Docker Stacks project](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html), offering
 a [conda](https://anaconda.org) environment with a Jupyter Notebook and graphical user interface via a light-weight [xfce](https://www.xfce.org/) desktop environment. Ubuntu Linux is the base layer of this docker image, connecting the container to the operation system of the host computer.
 
 <!--REMOVE WHEN REFACTORING COMPLETED
