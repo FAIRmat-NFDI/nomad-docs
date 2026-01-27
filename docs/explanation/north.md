@@ -2,8 +2,8 @@
 
 ## Introduction
 
-NORTH (NOMAD Remote Tools Hub) is a NOMAD service of data parsing and data analysis tools
-which run in isolated containerized environments that connect to NOMAD's data storage.
+NORTH (NOMAD Remote Tools Hub) is a NOMAD service of data parsing and analysis tools
+which runs in isolated containerized environments that connect to NOMAD's data storage.
 These reproducible and secure functionalities are accessible via the web browser.
 NORTH provides a standardized way to run heterogeneous tools that are written in different
 programming languages and with different dependencies, without coupling them directly
@@ -15,8 +15,9 @@ From a user’s perspective, NORTH can be used for running complex or tool-speci
 directly on data that is stored inside NOMAD, be this API-retrievable input from NOMAD entries
 or data from ones uploads. Results achieved within the container can be written back
 (using the [NOMAD API](../howto/manage/program/api.md)) as derived data, metadata, or artifacts.
-Allowing an indexing of these results after a reprocessing of the upload, provided the results
-use data structures that NOMAD understands.
+Running a reprocessing of an upload afterwards allows for an indexing of these results obtained
+with NORTH, provided that the software tools in NORTH write using data structures and schemas
+that NOMAD understands.
 
 The connection between the container and the NOMAD file system removes the need
 for copying and downloading large datasets. Container images remove the need for installing
@@ -24,7 +25,9 @@ analysis software locally and assure consistent execution independent of the use
 system. Instead, the tools are executed remotely within the infrastructure
 that a NOMAD deployment provides. These capabilities of NORTH are especially important in
 collaborative research settings enabling other users to rerun the same analysis, or apply
-existent parameterizations to new data.
+existent parameterizations to new data. Provided a server installation and cloud configuration
+is used, this also enables to spawn multiple instances of the same tool.
+The central deployment of NOMAD is one example that substantiates these capabilities.
 
 Unlike the central NOMAD services (which are optimized for data ingestion, storage, indexing,
 and search), NORTH is designed for computationally intensive, tool-specific, or rapidly evolving
@@ -37,8 +40,8 @@ into the NOMAD core.
 Architecturally, NORTH acts as a dedicated execution layer that is separate from the
 NOMAD core services. Tools are executed as Docker containers, with each run isolated
 from other tools and the NOMAD services themselves. NOMAD is responsible for launching
-NORTH ad configuring the tools, while NORTH manages container startup, execution, and
-teardown through its JupyterHub service.
+NORTH and configuring the tools, while NORTH is responsible for managing container startup,
+execution, and teardown, all managed through its JupyterHub service.
 
 **TODO clarify which and then give the link to the repo behind JupyterHub service, one of these?**
 https://gitlab.mpcdf.mpg.de/nomad-lab/north/jupyterhub or https://github.com/FAIRmat-NFDI/nomad-north
@@ -51,12 +54,6 @@ as Docker containers and registered with NOMAD. A number of such tools, maintain
 are already provided as plugins to the NOMAD ecosystem. These tools are based either on jupyter-
 or on desktop-based images. Creating ones own containers and connecting these to the service
 is also possible.
-
-## Code location & refactoring history
-
-<!-- REMOVE FROM THE DOCUMENTATION WITH THAT NOMAD VERSION THAT COMPLETES THE REFACTORING OF NORTH-->
-[Since its addition to NOMAD as a service](https://joss.theoj.org/papers/10.21105/joss.05388), the backend and docker images behind NORTH tools have been in a process of significant refactoring: Docker base images evolved, most services of NOMAD were refactored into plugins, NORTH tools that were initially based on [Webtop](https://docs.linuxserver.io/images/docker-webtop/) get based on [nomad-north-desktop-base](https://github.com/FAIRmat-NFDI/nomad-north-desktop-base). These developments took place in different repositories. This is a technical note that developers who work with NORTH tools should be aware of to avoid working with outdated container images. In summary, tool source code from the [initially used](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-remote-tools-hub) and the [subsequently used](https://gitlab.mpcdf.mpg.de/nomad-lab/north) repository locations will soon become deprecated.
-Instead, users should consult the reference for the NOMAD plugins which details which plugins offer NORTH tool entry points.
 
 <!--## How to connect and use specific NORTH tools in a NOMAD deployment
 TODO move this part as part of a how-to
@@ -149,7 +146,7 @@ EITHER REPLACED by generic jupyter-based image provided by pynxtools-plugin-temp
 Learn more about running existing NOMAD tools in the how-tos:
 [How-Tos> ... > How to analyze data in NORTH](../howto/manage/gui/north.md).
 
-## Customization and user-provided tools
+## Custom user-provided tools
 
 <!--NOMAD OASIS or NOMAD deployments-->
 In addition to centrally provided tools, users can package their own tools as Docker containers
@@ -158,9 +155,6 @@ who run their own [NOMAD](./oasis.md) deployment. In this context, institution- 
 analysis software may call for connecting proprietary or tools whose license does not allow exposing
 services outside the local infrastructure. Given that the requirements of NORTH can be decoupled
 from those of the NOMAD core system is a clear user benefit.
-
-
-### Writing and customizing containers
 
 Developing a custom NORTH tool typically involves defining the tool logic and dependencies,
 packaging the tool as a Docker container, and registering the container so that it can be
@@ -171,15 +165,23 @@ Guidance on developing and registering custom NORTH tools is available in the ho
 [How to develop NORTH tools](../howto/plugins/types/north_tools.md).
 
 
-### Compatibility between data schemas
+## Data schema interoperability
 
 Beyond its importance for managing the expectations as to how NOMAD reacts to and what
 individual NORTH tools offer, it is important to know that using different data schemas
-in a NORTH tool compared to the NOMAD deployment is not without challenges.
+in a NORTH tool compared to the NOMAD deployment does not always come without challenges.
 
 Users may face issues when reprocessing uploads when results have been stored in these
 uploads from a NORTH tool analysis whose application wrote a different version of the
-data schema than used in NOMAD deployment. Eventual incompatibilities in parts or
-entirely are possible. The refactoring of individual NORTH tools and moving these
-as functionalities of the plugin make reducing such incompatibilities a task of
-the plugin developers.
+data schema than used for the NOMAD deployment. Eventual incompatibilities in parts or
+entirely are possible. Having now individual NORTH tools as optional functionality
+additions of a NOMAD plugin offload the responsibility to reduce the incompatibilities
+between different schema versions to the plugin developers.
+
+## NORTH refactoring history
+
+**Deprecation note, remove when refactoring complete**
+
+[Since its addition to NOMAD as a service](https://joss.theoj.org/papers/10.21105/joss.05388), the backend and docker images behind NORTH tools have been in a process of significant refactoring: Docker base images evolved, most services of NOMAD were refactored into plugins, NORTH tools that were initially based on [Webtop](https://docs.linuxserver.io/images/docker-webtop/) got based on [nomad-north-desktop-base](https://github.com/FAIRmat-NFDI/nomad-north-desktop-base). These developments took place in different repositories. This is a technical note that developers who work with NORTH tools should be aware of to avoid working with outdated container images. In summary, tool source code from the [initially used](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-remote-tools-hub) and the [subsequently used](https://gitlab.mpcdf.mpg.de/nomad-lab/north) repository locations will soon become deprecated.
+Instead, users should consult the reference for the NOMAD plugins which details which plugins offer NORTH tool entry points.
+
