@@ -58,7 +58,6 @@ Relevant for a given NOMAD deployment is always the specific configuration YAML 
 <!--## Defining official & community tools
 TODO what the term official tool means should be documented, does official mean just something that is in any of the projects tracked by the automated plugin collection algorithm, e.g., FAIRmat-NFDI or nomad-coe, or does official mean more, i.e., demands for sophisticated documentation and maintenance strategy by NOMAD/FAIRmat officials-->
 
-
 ## Official base images
 
 Using the base image within the [`nomad-north-desktop-base`](https://github.com/FAIRmat-NFDI/nomad-north-desktop-base) repository is the recommended best practice to build a NORTH tool if that demands a graphical user interface. Its desktop-base image builds on the [Jupyter Docker Stacks project](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html), offering
@@ -81,6 +80,7 @@ A how-to for building from these images is available [How-tos > ... > How to cre
 
 Consult the reference section of the documentation to find details about individual NOMAD plugins and the eventual NORTH tools these provide.
 
+<!-- markdownlint-disable MD044 -->
 <!--MOVE THESE HERE INDIVIDUAL DOCUMENTATION TO A NORTH ENTRY POINT SPECIFIC SECTION IN THE PLUGINS
 ### abtem
 
@@ -109,7 +109,6 @@ MOVE to pynxtools-mpes, stressing here wine part, eventually multiple tools as d
 DEPRECATE, pynxtools
 [`nexus`](https://gitlab.mpcdf.mpg.de/nomad-lab/north/nexus) is GUI-based NORTH tool offering software for **converting data using the pynxtools parsers** and validating these against NeXus application definitions using the stand alone HDF5 file parser offered by pynxtools as well as using other software tools that are offered by the [NeXus user community](https://www.nexusformat.org/)
 **The container is to be renamed `nomad-north-nexus`, I could be a good idea to move it to the [pynxtools](https://fairmat-nfdi.github.io/pynxtools/) plugin.**
-
 
 ### nionswift
 
@@ -161,13 +160,12 @@ as built-in tools.
 Guidance on developing and registering custom NORTH tools is available in the how-tos:
 [How to develop NORTH tools](../howto/plugins/types/north_tools.md).
 
-
 ## Data schema interoperability
 
 Beyond its importance for managing the expectations as to how NOMAD reacts to and what
 individual NORTH tools offer, it is important to know that using different data schemas
 in a NORTH tool compared to the NOMAD deployment does not always come without challenges.
- 
+
 Users may encounter issues when reprocessing uploads that contain results from a NORTH tool
 analysis, if the tool wrote data using a schema version different from the one used in the
 NOMAD deployment. This can lead to partial or complete incompatibilities. By providing
@@ -189,4 +187,3 @@ In summary, tool source code from the [initially used](https://gitlab.mpcdf.mpg.
 and the [subsequently used](https://gitlab.mpcdf.mpg.de/nomad-lab/north) repository locations
 will soon become deprecated.
 <!-- ADD WHEN PR186 MERGED Instead, users should consult the [NOMAD plugin registry](../examples/plugin_registry.md) which details which plugins offer NORTH tool entry points.-->
-
