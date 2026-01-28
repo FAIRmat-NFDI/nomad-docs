@@ -41,7 +41,7 @@ The entry point defines basic information about your NORTH tool and is used to
 automatically load it into a NOMAD distribution. It is an instance of a
 `NorthToolEntryPoint` or its subclass.
 
-The `NORTHTool` instance can be used to define which docker image the NORTH tools is to run.
+The `NORTHTool` instance can be used to define which Docker image the NORTH tools is to run.
 You will learn more about creating these images in the [next section](#creating-north-images). The entry point should be defined
 in `*/north_tools/__init__.py` like this:
 
@@ -52,7 +52,7 @@ from nomad.config.models.north import NORTHTool
 from nomad.config.models.plugins import NorthToolEntryPoint
 
 tool = NORTHTool(
-    image='<ghcr.io/FAIRMat-NFDI/nomad-example/jupyter:latest>',
+    image='ghcr.io/FAIRMat-NFDI/nomad-example/jupyter:latest',
     description='An example Jupyter Notebook served in NORTH',
     external_mounts=[],
     file_extensions=['ipynb'],
@@ -71,6 +71,9 @@ tool = NORTHTool(
 my_north_tool = NorthToolEntryPoint(id='my-north-tool', north_tool=tool)
 ```
 
+!!! note
+    To test a Docker image in NOMAD NORTH tool, you do not need to publish the Docker image in a registry but can build it locally and add the image in the NORTHTool configuration. NOMAD NORTH tool will check for local images first before pulling from a registry. 
+
 Here you can see that a `NORTHTool` object called `tool` was defined. We also instantiate
 the entry point object `my_north_tool` using the tool. This is the
 final entry point instance in which you specify the default parameterization
@@ -83,7 +86,7 @@ md#northtoolentrypoint) and a [`NorthTool`](../../../reference/config.md#northto
 When defining your NORTH tool, consider these important configuration options:
 
 - **image**: Location of the Docker image (e.g., `ghcr.io/<username>/<plugin-name>:latest`). This should point to a container registry where your image is published.
-- **file_extensions**: The file extensions of files that this tool should be launchable for..
+- **file_extensions**: The file extensions of files that this tool should be launchable for.
 - **mount_path**: The directory inside the container where NOMAD data or other relevant files for data analysis will be mounted (e.g., `/home/jovyan/data` for Jupyter-based tools).
 - **default_url**: The optional suffix of URL path when the tool launches (e.g., `/lab` for JupyterLab).
 - **with_path**: Boolean, whether the tool supports a path to a file or directory. This also enables tools to be launched from files in the NOMAD UI.
@@ -104,7 +107,7 @@ mynorthtool = "nomad_example.north_tools:my_north_tool"
 ## Creating `NORTH` images
 The core of a NORTH tool is the container image that contains the actual software tools, examples,
 and environment needed to run the tool. In this section we will discuss how to create
-such images. Docker images can be build either locally or remotely, instructed via the GitHub CI (discussed later).
+such images. Docker images can be built either locally or remotely, instructed via the GitHub CI (discussed later).
 
 ### Prerequisites
 
@@ -125,6 +128,9 @@ NORTH tools support images from various container registries:
 - **Quay.io**: `quay.io/<username>/<image-name>` - Red Hat's container registry with strong security features.
 - **Private registries**: Custom registry URLs for organization-specific deployments.
 
+!!! note "Publishing Your Images"
+    You are not required to push your images to FAIRmat repositories. You can publish images to your own GitHub Container Registry (e.g., `ghcr.io/<your-username>/<your-repo>`) or any other registry you have access to.
+
 ### Jupyter-based tools
 Jupyter-based NORTH tools provide users with an interactive computing environment for data analysis 
 and visualization. These tools are particularly useful for exploratory data analysis, creating 
@@ -132,7 +138,7 @@ reproducible workflows, and sharing computational narratives.
 
 #### Dockerfile Structure
 
-A Dockerfile for a Jupyter-based NORTH tool typically consists of several stages. Here, we will go through a typical docker file splitting the discussion in several parts.  For full example of the Dockerfile follow [Dockerfile in cookiecutter-nomad-plugin](https://github.com/FAIRmat-NFDI/cookiecutter-nomad-plugin/blob/main/%7B%7Bcookiecutter.plugin_name%7D%7D/py_sources/src/north_tools/%7B%7Bcookiecutter.north_tool_name%7D%7D/Dockerfile) 
+A Dockerfile for a Jupyter-based NORTH tool typically consists of several stages. Here, we will go through a typical Dockerfile splitting the discussion in several parts. For a full example of the Dockerfile, follow [Dockerfile in cookiecutter-nomad-plugin](https://github.com/FAIRmat-NFDI/cookiecutter-nomad-plugin/blob/main/%7B%7Bcookiecutter.plugin_name%7D%7D/py_sources/src/north_tools/%7B%7Bcookiecutter.north_tool_name%7D%7D/Dockerfile) 
 
 The build arguments at the top allow customization of the image:
 
@@ -152,7 +158,7 @@ In this part of the Dockerfile, we define several [build variables](https://docs
 - `JUPYTER_TAG`: Specifies the version tag of the base Jupyter image (e.g., `2025-10-20`)
 - `UV_VERSION`: Specifies the version of the uv package manager image
 - `PLUGIN_NAME`: Specifies the name of your plugin. Used for copying plugin code into the image. 
-  If you want to keep the plugin code inside the image permanently, comment out the cleanup line `RUN rm -rf ${HOME}/${PLUGIN_NAME}`.
+  If you want to keep the plugin code inside the image permanently, consciously comment out the cleanup line `RUN rm -rf ${HOME}/${PLUGIN_NAME}`.
 
 We use a multi-stage build approach:
 1. First stage (`uv_stage`): Copies the uv binary from the official uv image
@@ -172,7 +178,7 @@ COPY --from=uv_stage /uv /uvx /bin/
 USER root
 
 # Define environment variables
-# With pre-exinsting NB_USER="jovyan" and NB_UID=100, NB_GID=1000
+# With pre-existing NB_USER="jovyan" and NB_UID=100, NB_GID=1000
 ENV HOME=/home/${NB_USER}
 ENV CONDA_DIR=/opt/conda
 
@@ -205,9 +211,9 @@ RUN apt-get install nodejs -y \
 3. **Switch to root**: System packages require root privileges
 4. **Environment variables**: Define `HOME` and `CONDA_DIR` for consistent paths
 5. **System dependencies**: Install essential build tools, libraries, and utilities:
-   - Build tools: `gcc`, `build-essential`
-   - Libraries: `libgomp1`, `libmagic1`
-   - Utilities: `curl`, `git`, `zip`, `unzip`, `file`
+    - Build tools: `build-essential` (includes `gcc`, `g++`, `make`, and related tools)
+    - Libraries: `libmagic1`
+    - Utilities: `curl`, `git`, `zip`, `unzip`, `file`
 6. **Node.js upgrade**: Install Node.js 24+ (required for JupyterLab >= 4.4.10, as the scipy-notebook base image typically includes Node.js 18)
 7. **Cleanup**: Remove package manager cache to reduce image size
 
@@ -251,10 +257,10 @@ RUN touch ${HOME}/.hushlogin
 
 1. **Switch to non-root user**: Security best practice - run the application as `${NB_USER}` (typically `jovyan`)
 2. **Configure uv**: Set environment variables for uv to work with the conda environment:
-   - `UV_PROJECT_ENVIRONMENT`: Points to conda directory
-   - `UV_SYSTEM_PYTHON`: Use system Python (conda's Python) instead of creating a new virtual environment
-   - `UV_LINK_MODE=copy`: Copy packages instead of linking
-   - `UV_NO_CACHE=1`: Disable caching to reduce image size
+    - `UV_PROJECT_ENVIRONMENT`: Points to conda directory
+    - `UV_SYSTEM_PYTHON`: Use system Python (conda's Python) instead of creating a new virtual environment
+    - `UV_LINK_MODE=copy`: Copy packages instead of linking
+    - `UV_NO_CACHE=1`: Disable caching to reduce image size
 3. **Copy plugin code**: Copy your plugin source code into the container
 4. **Install dependencies**: Use `uv pip install` to install dependencies from the `north` dependency group in `pyproject.toml`
 5. **Cleanup plugin code**: Remove the plugin source code (unless you want to keep it)
@@ -262,7 +268,7 @@ RUN touch ${HOME}/.hushlogin
 7. **Fix permissions**: Ensure proper file permissions for the user
 8. **Configure startup**: Create `.hushlogin` to suppress login messages
 
-The structure described above provides a solid foundation for Jupyter-based NORTH tools but not necessarily reprsenting the exact Dockerfile you need. But, the concepts will help you to customize the [Dockerfile in cookiecutter-nomad-plugin](https://github.com/FAIRmat-NFDI/cookiecutter-nomad-plugin/blob/main/%7B%7Bcookiecutter.plugin_name%7D%7D/py_sources/src/north_tools/%7B%7Bcookiecutter.north_tool_name%7D%7D/Dockerfile) based on your specific requirements.
+The structure described above provides a solid foundation for Jupyter-based NORTH tools but not necessarily representing the exact Dockerfile you need. However, the concepts will help you to customize the [Dockerfile in cookiecutter-nomad-plugin](https://github.com/FAIRmat-NFDI/cookiecutter-nomad-plugin/blob/main/%7B%7Bcookiecutter.plugin_name%7D%7D/py_sources/src/north_tools/%7B%7Bcookiecutter.north_tool_name%7D%7D/Dockerfile) based on your specific requirements.
 
 ### Building the Image Locally
 
@@ -313,7 +319,7 @@ north = [
 
 You can install these dependencies using either:
 
-```dockerfile
+```Dockerfile
 # Option 1: Install from dependency group (recommended)
 RUN --mount=type=cache,target=/root/.cache/uv \
     uv pip install --group north
@@ -327,11 +333,10 @@ RUN --mount=type=cache,target=/root/.cache/uv \
 
 If your tool requires additional system packages, add them to the `RUN apt-get install` section:
 
-```dockerfile
+```Dockerfile
 RUN apt-get update \
  && apt-get install --yes --quiet --no-install-recommends \
       # Essential packages
-      libgomp1 \
       libmagic1 \
       # Add your custom packages
       postgresql-client \
@@ -344,7 +349,7 @@ RUN apt-get update \
 
 To include JupyterLab extensions, install them before building JupyterLab:
 
-```dockerfile
+```Dockerfile
 RUN uv pip install \
     jupyterlab-h5web \
     jupyterlab-git \
@@ -373,7 +378,7 @@ and tagging scheme.
 docker build ... -t my-tool:dev
 ```
 
-**For published images:** Follow semantic versioning (SemVer):
+**For published images:** Follow [semantic versioning (SemVer)](https://semver.org/):
 - **Version tags**: `v1.0.0`, `v1.2.3`, etc. - Specific releases
 - **latest tag**: Points to the most recent stable release
 - **main/develop tags**: Track the main or development branch
@@ -409,7 +414,7 @@ docker run --rm -p 8888:8888 \
 
 #### Automated Notebook Execution
 
-Test Jupyter notebooks non-interactively i.e., run conatainer and execute a notebook inside it. Once the test is done, the container will exit and the  container will be removed.
+Test Jupyter notebooks non-interactively, i.e., run a container and execute a notebook inside it. Once the test is done, the container will exit and be removed.
 
 ```bash
 docker run --rm -p 8888:8888 \
