@@ -52,7 +52,7 @@ from nomad.config.models.north import NORTHTool
 from nomad.config.models.plugins import NorthToolEntryPoint
 
 tool = NORTHTool(
-    image='ghcr.io/FAIRMat-NFDI/nomad-example/jupyter:latest',
+    image='<ghcr.io/FAIRMat-NFDI/nomad-example/jupyter:latest>',
     description='An example Jupyter Notebook served in NORTH',
     external_mounts=[],
     file_extensions=['ipynb'],
@@ -78,6 +78,20 @@ and other details about the NORTH tools. In the reference you can see all of the
 available configuration options for a [`NorthToolEntryPoint`](../../../reference/plugins.
 md#northtoolentrypoint) and a [`NorthTool`](../../../reference/config.md#northtool).
 
+### Key Configuration Options
+
+When defining your NORTH tool, consider these important configuration options:
+
+- **image**: Location of the Docker image (e.g., `ghcr.io/<username>/<plugin-name>:latest`). This should point to a container registry where your image is published.
+- **file_extensions**: The file extensions of files that this tool should be launchable for..
+- **mount_path**: The directory inside the container where NOMAD data or other relevant files for data analysis will be mounted (e.g., `/home/jovyan/data` for Jupyter-based tools).
+- **default_url**: The optional suffix of URL path when the tool launches (e.g., `/lab` for JupyterLab).
+- **with_path**: Boolean, whether the tool supports a path to a file or directory. This also enables tools to be launched from files in the NOMAD UI.
+- **display_name**: The name of the tool displayed in the list NOMAD NORTH tools.
+- **description**: A brief description of what the tool does.
+- **maintainer**: List of maintainer information with name and email.
+- **image_pull_policy**: When to pull the image in K8s deployments.
+
 The entry point instance should then be added to the `[project.entry-points.'nomad.plugin']`
 table in `pyproject.toml` in order for it to be automatically
 detected:
@@ -89,31 +103,40 @@ mynorthtool = "nomad_example.north_tools:my_north_tool"
 
 ## Creating `NORTH` images
 The core of a NORTH tool is the container image that contains the actual software tools, examples,
-and enviornment needed and so on to run the tool. In this section we will discuss how to create
-such images. As a requirement, one needs to have [Docker](https://www.docker.com/get-started){:target="_blank" rel="noopener"}
-installed on the local system. Which allows to build and test the images locally before publishing them
-to a container registry. Otherways to create container images in an automated way (e.g., using CI/CD pipelines)
-are also possible and which is our goal to do it and keep the images up to date automatically along with developments
-of the nomad-plugin containing the NORTH tool.
+and environment needed to run the tool. In this section we will discuss how to create
+such images. Docker images can be build either locally or remotely, instructed via the GitHub CI (discussed later).
 
-- What to include in the discussion
-   - Basic requreirements for NORTH images e.g., Docker installation, Find the a slim base image
-   - Add a reference to the best practices for creating a Docker image from Docker docs
-   - Docker registries (GHCR, DockerHub, Bitbucket etc)
-   - TODO: Give links of the docker where one can read the documentation for corresponding docker commands.
+### Prerequisites
 
-### Juypter-based tools
-The purpose of having Jupyter image based NORTH tools is to provide users with an interactive
-environment for data analysis and visualization on the data that is generated and stored
-using the plugins that is hosting this NORTH tool. Docker file should start with some arguments and the arguments can be used
-to customize the image build. Here, you can customize the image according to your needs by adding
-more dependencies, tools, and configurations. Then the variables are followed by the base image.
+Before creating NORTH images, ensure you have:
+
+- **Docker installed**: [Get Docker](https://www.docker.com/get-started){:target="_blank" rel="noopener"} installed on your local system. This allows you to build and test images locally before publishing.
+- **Base image selected**: Choose an appropriate slim base image for your tool (e.g., `<image-name:tag>` like `quay.io/jupyter/scipy-notebook:2025-10-20` for Jupyter-based tools).
+- **Container registry access**: Access to a container registry for publishing your images (see [Docker registries](#docker-registries)).
+
+For Docker best practices, refer to the [official Docker documentation](https://docs.docker.com/develop/dev-best-practices/){:target="_blank" rel="noopener"}.
+
+### Docker Registries
+
+NORTH tools support images from various container registries:
+
+- **GitHub Container Registry (GHCR)**: `ghcr.io/<username>/<image-name>` - Recommended for GitHub-hosted projects. Integrates seamlessly with GitHub Actions.
+- **Docker Hub**: `docker.io/<username>/<image-name>` - Popular public registry with free tier for public images.
+- **Quay.io**: `quay.io/<username>/<image-name>` - Red Hat's container registry with strong security features.
+- **Private registries**: Custom registry URLs for organization-specific deployments.
+
+### Jupyter-based tools
+Jupyter-based NORTH tools provide users with an interactive computing environment for data analysis 
+and visualization. These tools are particularly useful for exploratory data analysis, creating 
+reproducible workflows, and sharing computational narratives.
+
+#### Dockerfile Structure
+
+A Dockerfile for a Jupyter-based NORTH tool typically consists of several stages. Here, we will go through a typical docker file splitting the discussion in several parts.  For full example of the Dockerfile follow [Dockerfile in cookiecutter-nomad-plugin](https://github.com/FAIRmat-NFDI/cookiecutter-nomad-plugin/blob/main/%7B%7Bcookiecutter.plugin_name%7D%7D/py_sources/src/north_tools/%7B%7Bcookiecutter.north_tool_name%7D%7D/Dockerfile) 
+
+The build arguments at the top allow customization of the image:
 
 ```Dockerfile
-# Part from docker/Dockerfile.jupyter
-
-# Global ARG variables
-# ARG are accessible until the next FROM instruction
 ARG BASE_JUPYTER=quay.io/jupyter/scipy-notebook
 ARG JUPYTER_TAG=2025-10-20
 ARG UV_VERSION=0.9
@@ -123,19 +146,23 @@ FROM ghcr.io/astral-sh/uv:${UV_VERSION} AS uv_stage
 FROM ${BASE_JUPYTER}:${JUPYTER_TAG} AS scipy_notebook
 ```
 
-In this part of the Dockerfile, we define several global (ARG are accessible  until the FROM instruction) arguments  
-- `BASE_JUPYTER` specifies the base Jupyter image
-- `JUPYTER_TAG` specifies the tag of the Jupyter base image
-- `UV_VERSION` specifies the version of the UV image
-- `PLUGIN_NAME` specifies the name of the plugin if someone wants to keep the entire plugin code inside the image 
-    In this case conciously comment out the line `RUN rm -rf ${HOME}/${PLUGIN_NAME}` in dockerfile
+In this part of the Dockerfile, we define several [build variables](https://docs.docker.com/build/building/variables/). Unlike [ENV variables](https://docs.docker.com/build/building/variables/#environment-variables) that are available to the container at runtime, mind [scoping](https://docs.docker.com/build/building/variables/#scoping) of ARG variables.
 
-Next we specify the shell environment, copy built uv files from uv stage to the current stage, make global ARG variables available as environment variables,
-setup environment variables, and install required dependencies.
+- `BASE_JUPYTER`: Specifies the base Jupyter image (e.g., `<image-name>` like `quay.io/jupyter/scipy-notebook`)
+- `JUPYTER_TAG`: Specifies the version tag of the base Jupyter image (e.g., `2025-10-20`)
+- `UV_VERSION`: Specifies the version of the uv package manager image
+- `PLUGIN_NAME`: Specifies the name of your plugin. Used for copying plugin code into the image. 
+  If you want to keep the plugin code inside the image permanently, comment out the cleanup line `RUN rm -rf ${HOME}/${PLUGIN_NAME}`.
+
+We use a multi-stage build approach:
+1. First stage (`uv_stage`): Copies the uv binary from the official uv image
+2. Second stage (`scipy_notebook`): Builds on the Jupyter base image with uv included for environment management.
+
+#### System Setup and Dependencies
+
+Next, we configure the shell environment, copy the uv package manager, and install system dependencies:
 
 ```Dockerfile
-# Part from docker/Dockerfile.jupyter
-
 # https://github.com/hadolint/hadolint/wiki/DL4006
 # https://github.com/koalaman/shellcheck/wiki/SC3014
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
@@ -154,10 +181,8 @@ ARG PLUGIN_NAME
 
 RUN apt-get update \
  && apt-get install --yes --quiet --no-install-recommends \
-      libgomp1 \
       libmagic1 \
       file \
-      gcc \
       build-essential \
       curl \
       zip \
@@ -173,15 +198,24 @@ RUN apt-get install nodejs -y \
        # clean cache and logs
        && rm -rf /var/lib/apt/lists/* /var/log/* /var/tmp/* ~/.npm
 ```
- By coping the build uv files from the pre-built uv stage, we ensure that the necessary uv components are included in the final image and
- using uv as package manager.
+**Key steps in this section:**
 
-Finally, we switch to the non-root user, setup uv environment variables, copy the plugin code into the image,
-install dependencies using uv, build jupyter lab, clean up, and copy example files.
+1. **Shell configuration**: Use bash with pipefail for safer script execution
+2. **Copy uv binary**: Copies the uv package manager from the `uv_stage` for fast Python package installation
+3. **Switch to root**: System packages require root privileges
+4. **Environment variables**: Define `HOME` and `CONDA_DIR` for consistent paths
+5. **System dependencies**: Install essential build tools, libraries, and utilities:
+   - Build tools: `gcc`, `build-essential`
+   - Libraries: `libgomp1`, `libmagic1`
+   - Utilities: `curl`, `git`, `zip`, `unzip`, `file`
+6. **Node.js upgrade**: Install Node.js 24+ (required for JupyterLab >= 4.4.10, as the scipy-notebook base image typically includes Node.js 18)
+7. **Cleanup**: Remove package manager cache to reduce image size
+
+#### Python Dependencies and Final Setup
+
+Finally, we switch back to the non-root user and install Python dependencies:
 
 ```Dockerfile
-# Part from docker/Dockerfile.jupyter
-
 USER ${NB_USER}
 
 # uv env
@@ -198,9 +232,8 @@ COPY --chown=${NB_USER}:${NB_GID} . ${HOME}/${PLUGIN_NAME}
 WORKDIR ${HOME}/${PLUGIN_NAME}
 
 # https://docs.astral.sh/uv/guides/integration/docker/#intermediate-layers
-# Install dependencies
 RUN --mount=type=cache,target=/root/.cache/uv \
-    uv sync --locked --no-editable --extra=north --extra=nomad --inexact
+    uv pip install . --group north
 
 WORKDIR ${HOME}
 RUN rm -rf ${HOME}/${PLUGIN_NAME}
@@ -214,45 +247,109 @@ WORKDIR ${HOME}
 RUN touch ${HOME}/.hushlogin
 ```
 
-The parts described above provide a basic structure for Dockerfiles used to create Jupyter-based docker images for NORTH tools.
-Developers or users can customize these Dockerfiles further based on their specific requirements,
-such as adding more dependencies, tools, and configurations.
+**Key steps in this section:**
 
-With such a Dockerfile, one can build the image locally using the following command:
+1. **Switch to non-root user**: Security best practice - run the application as `${NB_USER}` (typically `jovyan`)
+2. **Configure uv**: Set environment variables for uv to work with the conda environment:
+   - `UV_PROJECT_ENVIRONMENT`: Points to conda directory
+   - `UV_SYSTEM_PYTHON`: Use system Python (conda's Python) instead of creating a new virtual environment
+   - `UV_LINK_MODE=copy`: Copy packages instead of linking
+   - `UV_NO_CACHE=1`: Disable caching to reduce image size
+3. **Copy plugin code**: Copy your plugin source code into the container
+4. **Install dependencies**: Use `uv pip install` to install dependencies from the `north` dependency group in `pyproject.toml`
+5. **Cleanup plugin code**: Remove the plugin source code (unless you want to keep it)
+6. **Build JupyterLab**: Compile JupyterLab extensions and assets
+7. **Fix permissions**: Ensure proper file permissions for the user
+8. **Configure startup**: Create `.hushlogin` to suppress login messages
+
+The structure described above provides a solid foundation for Jupyter-based NORTH tools but not necessarily reprsenting the exact Dockerfile you need. But, the concepts will help you to customize the [Dockerfile in cookiecutter-nomad-plugin](https://github.com/FAIRmat-NFDI/cookiecutter-nomad-plugin/blob/main/%7B%7Bcookiecutter.plugin_name%7D%7D/py_sources/src/north_tools/%7B%7Bcookiecutter.north_tool_name%7D%7D/Dockerfile) based on your specific requirements.
+
+### Building the Image Locally
+
+With such a Dockerfile, you can build the image locally for testing:
 
 ```bash
-docker build -f src/<module_name>/north_tools/Dockerfile.jupyter --build-arg PLUGIN_NAME=<plugin_name> --build-arg \
---build-arg EXAMPLES_DIR=<examples_dir> -t <image_name>:<tag> .
+docker build -f src/<module_name>/north_tools/<tool_name>/Dockerfile \
+  --build-arg PLUGIN_NAME=<plugin_name> \
+  --build-arg JUPYTER_TAG=<jupyter_tag> \
+  --build-arg UV_VERSION=<uv_version> \
+  -t <image_name>:<tag> .
 ```
 
-The script `scripts/get_git_version.sh` is a simple script that extracts the current git version or tag of the plugin which comes with [template repository](https://github.com/FAIRmat-NFDI/nomad-plugin-template){:target="_blank" rel="noopener"} or one can write the following script in a file.
+**Parameters:**
+- `<module_name>`: Your Python module name (e.g., `nomad_example`)
+- `<tool_name>`: Your NORTH tool name (e.g., `my_tool`)
+- `<plugin_name>`: Your plugin name (e.g., `nomad-example-plugin`) Optionally can be left to default as code is removed after build process.
+- `<jupyter_tag>`: Jupyter base image tag (e.g., `2025-10-20`) optionally can be left to default
+- `<uv_version>`: UV version (e.g., `0.9`) optionally can be left to default
+- `<image_name>`: Your image name (e.g., `my-jupyter-tool`)
+- `<tag>`: Version tag (e.g., `latest`, `v1.0.0`)
 
+**Example:**
 ```bash
-#!/bin/bash
+docker build -f src/foobar/north_tools/my_tool/Dockerfile \
+  --build-arg PLUGIN_NAME=foobar \
+  --build-arg JUPYTER_TAG=2025-10-20 \
+  --build-arg UV_VERSION=0.9 \
+  -t ghcr.io/myusername/foobar:latest .
+```
 
-# Find tagged version or construct dynamic version from latest tag, number of commits since tag and git hash
-set -euo pipefail
+### Managing Python Dependencies
 
-git_semver() {
-  # Tagged version
-  if git describe --tags --exact-match >/dev/null 2>&1; then
-    git describe --tags --exact-match | sed 's/^v//'
-    return
-  fi
-  # Declare local variable for tag, commits, and hash
-  local tag commits hash
+Python dependencies for your NORTH tool should be defined in the `pyproject.toml` file using dependency groups:
 
-  tag=$(git describe --tags --abbrev=0 2>/dev/null || echo "0.0.0")
-  commits=$(git rev-list "${tag}"..HEAD --count 2>/dev/null || echo "0")
-  hash=$(git rev-parse --short HEAD 2>/dev/null || echo "unknown")
+```toml
+[dependency-groups]
+north = [
+    "jupyterlab",
+    "ipywidgets",
+    "pandas>=2.0.0",
+    "matplotlib>=3.5.0",
+    # Add your specific dependencies here
+]
+```
 
-  # Strip leading "v" if present
-  tag=${tag#v}
+**Installation in Dockerfile:**
 
-  echo "${tag}+${commits}.g${hash}"
-}
+You can install these dependencies using either:
 
-git_semver || echo "0.0.0+0.gunknown"
+```dockerfile
+# Option 1: Install from dependency group (recommended)
+RUN --mount=type=cache,target=/root/.cache/uv \
+    uv pip install --group north
+
+# Option 2: Full sync with locked dependencies
+RUN --mount=type=cache,target=/root/.cache/uv \
+    uv sync --locked --no-editable --extra=north --extra=nomad --inexact
+```
+
+### Adding Custom System Dependencies
+
+If your tool requires additional system packages, add them to the `RUN apt-get install` section:
+
+```dockerfile
+RUN apt-get update \
+ && apt-get install --yes --quiet --no-install-recommends \
+      # Essential packages
+      libgomp1 \
+      libmagic1 \
+      # Add your custom packages
+      postgresql-client \
+      graphviz \
+      # Clean up
+ && rm -rf /var/lib/apt/lists/* /var/log/* /var/tmp/*
+```
+
+### Adding JupyterLab Extensions
+
+To include JupyterLab extensions, install them before building JupyterLab:
+
+```dockerfile
+RUN uv pip install \
+    jupyterlab-h5web \
+    jupyterlab-git \
+    # Add more extensions as needed
+ && jupyter lab build --dev-build=False --minimize=False
 ```
 
 ### Tools requiring a Desktop environment
@@ -267,29 +364,90 @@ git_semver || echo "0.0.0+0.gunknown"
 
 ## Versioning and tagging `NORTH` images
 When creating container images for NORTH tools, it is important to follow a consistent versioning
-and tagging scheme. This helps users identify the correct version of the tool they need and
-ensures compatibility with the NOMAD platform. For locally built image one can give any tag
-in the build command as shown in the previous section. 
-However, when publishing the images to a container registry, it is recommended to use semantic versioning (SemVer) for tagging the images and add an additinal
-`latest` tag for the most recent stable release. Image with a tag according to the pull request can also be created for testing purposes before merging the pull request.  
+and tagging scheme.
+
+### Tagging Strategy
+
+**For local builds:** You can use any tag during development:
+```bash
+docker build ... -t my-tool:dev
+```
+
+**For published images:** Follow semantic versioning (SemVer):
+- **Version tags**: `v1.0.0`, `v1.2.3`, etc. - Specific releases
+- **latest tag**: Points to the most recent stable release
+- **main/develop tags**: Track the main or development branch
+- **PR tags**: `pr-123` for testing pull requests before merging
+
+**GitHub Actions automatically creates:**
+- `ghcr.io/<username>/<repo>:v1.0.0` - When you tag a release
+- `ghcr.io/<username>/<repo>:main` - On push to main branch  
+- `ghcr.io/<username>/<repo>:pr-123` - For pull request #123
+- `ghcr.io/<username>/<repo>:latest` - Points to the latest tagged release  
 
 ## Testing NORTH tool
-After successfully creating a docker image for your NORTH tool, it is crucial to test it thoroughly
-to ensure that it functions as expected within the NOMAD environment. One can test the image by cteating
-containers from the image either locally or using automated testing in a CI/CD pipeline.
+After successfully creating a Docker image for your NORTH tool, thorough testing ensures it functions 
+correctly within the NOMAD environment.
 
-### Local testing
-For local testing, one needs to run corresponding image container by mounting the test data directory to the container. And then access the tool via a web browser. Here is an example command to run a Jupyter-based NORTH tool container locally:
+### Local Testing
 
-```bash
-docker run -p 8888:8888 --mount type=bind,src="/local/path/to/test/data",dst="/home/jovyan/work/test" <image_name>:<tag>
-```
-Or, Run a command that starts the image container and runs the command inside the container:
+#### Interactive Testing
+
+Run the container interactively with a local data mount:
 
 ```bash
-docker run --rm -p 8888:8888 --mount type=bind,src="/local/path/to/test/data",dst="/home/jovyan/test" <image_name>:<tag>  /bin/bash -c "jupyter execute /home/jovyan/test/<path/to/notebook>"
+docker run --rm -p 8888:8888 \
+  --mount type=bind,src="/local/path/to/test/data",dst="/home/jovyan/test" \
+  <image_name>:<tag>
 ```
 
-### Automated testing
-To make the testing process developer amicable and to ensure that the Jupyter-based NORTH tools
-work as expected after adding new features or version compatibility of the analysis software we recommend to set up automated testing using CI/CD pipelines. 
+**Then:**
+1. Open your browser to `http://localhost:8888`
+2. Navigate to the mounted test data
+3. Test your analysis workflows
+4. Verify all dependencies are working
+
+#### Automated Notebook Execution
+
+Test Jupyter notebooks non-interactively i.e., run conatainer and execute a notebook inside it. Once the test is done, the container will exit and the  container will be removed.
+
+```bash
+docker run --rm -p 8888:8888 \
+  --mount type=bind,src="/local/path/to/test/data",dst="/home/jovyan/test" \
+  <image_name>:<tag> \
+  /bin/bash -c "jupyter execute /home/jovyan/test/<path/to/notebook>.ipynb"
+```
+
+This validates that:
+- All notebook cells execute without errors
+- Dependencies are correctly installed
+- Data can be read and processed
+
+#### Testing with Shell Access
+
+For debugging, run with an interactive shell:
+
+```bash
+docker run --rm -it \
+  --mount type=bind,src="/local/path/to/test/data",dst="/home/jovyan/test" \
+  <image_name>:<tag> \
+  /bin/bash
+```
+
+Inside the container, you can check several things:
+
+```bash
+# Check installed packages
+uv pip list
+# or
+pip list
+
+# Verify Python version
+python --version
+
+# Test imports
+python -c "import jupyterlab; print(jupyterlab.__version__)"
+
+# Check JupyterLab
+jupyter lab --version
+```
