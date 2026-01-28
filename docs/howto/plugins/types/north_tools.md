@@ -25,7 +25,9 @@ nomad-example
    │   │   ├── north_tools
    |   |   |   ├── my_tool
    |   │   │   │   ├── __init__.py
-   |   │   │   │   ├── examples
+   |   │   │   │   ├── Dockerfile
+   |   |   │   │   └── README.md
+   |   │   |   └── __init__.py
    ├── LICENSE.txt
    ├── README.md
    ├── Dockerfile
