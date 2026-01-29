@@ -91,6 +91,7 @@ mynorthtool = "nomad_example.north_tools.my_tool:my_north_tool"
 ```
 
 ## Creating `NORTH` images
+
 The core of a NORTH tool is the container image that contains the actual software tools, examples,
 and environment needed to run the tool. In this section we will discuss how to create
 such images. Docker images can be built either locally or remotely (via the GitHub or GitLab CI).
@@ -100,7 +101,7 @@ such images. Docker images can be built either locally or remotely (via the GitH
 Before creating NORTH images, ensure you have:
 
 - **Docker installed**: [Get Docker](https://www.docker.com/get-started){:target="_blank" rel="noopener"} installed on your local system. This allows you to build and test images locally before publishing.
-- **Container registry access**: Access to a container registry for publishing your images (see [Docker registries](#docker-registries)) if you plan to store your images remotely for long-term use.
+- **Container registry access**: Access to a container registry for publishing your images if you plan to store your images remotely for long-term use.
 
 !!! tip "Important"
     For Docker best practices, refer to the [official Docker documentation](https://docs.docker.com/develop/dev-best-practices/){:target="_blank" rel="noopener"}.
@@ -117,12 +118,13 @@ Before creating NORTH images, ensure you have:
     You are not required to push your images to FAIRmat repositories. Only FAIRmat maintainers can publish to FAIRmat registries. You can publish images to your own GitHub Container Registry (e.g., `ghcr.io/<your-username>/<your-repo>`) or any other registry you have access to.
 
 ### Jupyter-based tools
-Jupyter-based NORTH tools provide users with an interactive computing environment for data analysis 
-and visualization. 
+
+Jupyter-based NORTH tools provide users with an interactive computing environment for data analysis
+and visualization.
 
 #### Dockerfile Structure
 
-A Dockerfile for a Jupyter-based NORTH tool typically consists of several stages. Here, we will go through a typical Dockerfile splitting the discussion in several parts. You can find a full example of a Dockerfile for a Juypter-based NORTH tool in [our cookiecutter-nomad-plugin template](https://github.com/FAIRmat-NFDI/cookiecutter-nomad-plugin/blob/main/%7B%7Bcookiecutter.plugin_name%7D%7D/py_sources/src/north_tools/%7B%7Bcookiecutter.north_tool_name%7D%7D/Dockerfile) 
+A Dockerfile for a Jupyter-based NORTH tool typically consists of several stages. Here, we will go through a typical Dockerfile splitting the discussion in several parts. You can find a full example of a Dockerfile for a Juypter-based NORTH tool in [our cookiecutter-nomad-plugin template](https://github.com/FAIRmat-NFDI/cookiecutter-nomad-plugin/blob/main/%7B%7Bcookiecutter.plugin_name%7D%7D/py_sources/src/north_tools/%7B%7Bcookiecutter.north_tool_name%7D%7D/Dockerfile)
 
 The build arguments at the top allow customization of the image:
 
@@ -141,7 +143,7 @@ In this part of the Dockerfile, we define several [build variables](https://docs
 - `BASE_JUPYTER`: Specifies the base Jupyter image (e.g., `<image-name>` like `quay.io/jupyter/scipy-notebook`)
 - `JUPYTER_TAG`: Specifies the version tag of the base Jupyter image (e.g., `2025-10-20`)
 - `UV_VERSION`: Specifies the version of the [`uv` package manager](https://docs.astral.sh/uv/) via Docker [image](https://docs.astral.sh/uv/guides/integration/docker/#getting-started)
-- `PLUGIN_NAME`: Specifies the name of your plugin. Used for copying plugin code into the image. 
+- `PLUGIN_NAME`: Specifies the name of your plugin. Used for copying plugin code into the image.
   If you want to keep the plugin code inside the image permanently, consciously comment out the cleanup line `RUN rm -rf ${HOME}/${PLUGIN_NAME}`.
 
 We use a multi-stage build approach: In the first stage (`uv_stage`) copies the `uv` binary from the official `uv` image. In the second stage (`scipy_notebook`) builds on the Jupyter base image with `uv` included for environment management.
@@ -186,6 +188,7 @@ RUN apt-get install nodejs -y \
        # clean cache and logs
        && rm -rf /var/lib/apt/lists/* /var/log/* /var/tmp/* ~/.npm
 ```
+
 The key steps in this stage are:
 
 1. **Shell configuration**: Use bash with pipefail for safer script execution
@@ -305,6 +308,7 @@ north = [
     software created for non-Linux environments), we refer to the existing example tools. -->
 
 ## Versioning and tagging `NORTH` images
+
 When creating container images for NORTH tools, it is important to follow a consistent versioning
 and tagging scheme.
 
@@ -326,11 +330,12 @@ For published images, you may follow [semantic versioning (SemVer)](https://semv
 GitHub Actions automatically creates:
 
 - `ghcr.io/<username>/<repo>:v1.0.0` - When you tag a release
-- `ghcr.io/<username>/<repo>:main` - On push to main branch  
+- `ghcr.io/<username>/<repo>:main` - On push to main branch
 - `ghcr.io/<username>/<repo>:pr-123` - For pull request #123
-- `ghcr.io/<username>/<repo>:latest` - Points to the latest tagged release  
+- `ghcr.io/<username>/<repo>:latest` - Points to the latest tagged release
 
 ## Testing NORTH tool
+
 After having successfully created a Docker image for your NORTH tool, thorough testing ensures it functions correctly.
 
 ### Local Testing
