@@ -124,7 +124,7 @@ and visualization.
 
 #### Dockerfile Structure
 
-A Dockerfile for a Jupyter-based NORTH tool typically consists of several stages. Here, we will go through a typical Dockerfile splitting the discussion in several parts. You can find a full example of a Dockerfile for a Juypter-based NORTH tool in [our cookiecutter-nomad-plugin template](https://github.com/FAIRmat-NFDI/cookiecutter-nomad-plugin/blob/main/%7B%7Bcookiecutter.plugin_name%7D%7D/py_sources/src/north_tools/%7B%7Bcookiecutter.north_tool_name%7D%7D/Dockerfile)
+A Dockerfile for a Jupyter-based NORTH tool typically consists of several stages. Here, we will go through a typical Dockerfile splitting the discussion in several parts. You can find a full example of a Dockerfile for a Juypter-based NORTH tool in [our cookiecutter-nomad-plugin template](https://github.com/FAIRmat-NFDI/cookiecutter-nomad-plugin/blob/main/%7B%7Bcookiecutter.plugin_name%7D%7D/py_sources/src/north_tools/%7B%7Bcookiecutter.north_tool_name%7D%7D/Dockerfile){:target="_blank" rel="noopener"}
 
 The build arguments at the top allow customization of the image:
 
@@ -138,11 +138,11 @@ FROM ghcr.io/astral-sh/uv:${UV_VERSION} AS uv_stage
 FROM ${BASE_JUPYTER}:${JUPYTER_TAG} AS scipy_notebook
 ```
 
-In this part of the Dockerfile, we define several [build variables](https://docs.docker.com/build/building/variables/). Unlike [ENV variables](https://docs.docker.com/build/building/variables/#environment-variables) that are available to the container at runtime, ARG variables are [scoped](https://docs.docker.com/build/building/variables/#scoping) to the build stage in which they are defined.
+In this part of the Dockerfile, we define several [build variables](https://docs.docker.com/build/building/variables/){:target="_blank" rel="noopener"}. Unlike [ENV variables](https://docs.docker.com/build/building/variables/#environment-variables){:target="_blank" rel="noopener"} that are available to the container at runtime, ARG variables are [scoped](https://docs.docker.com/build/building/variables/#scoping){:target="_blank" rel="noopener"} to the build stage in which they are defined.
 
 - `BASE_JUPYTER`: Specifies the base Jupyter image (e.g., `<image-name>` like `quay.io/jupyter/scipy-notebook`)
 - `JUPYTER_TAG`: Specifies the version tag of the base Jupyter image (e.g., `2025-10-20`)
-- `UV_VERSION`: Specifies the version of the [`uv` package manager](https://docs.astral.sh/uv/) via Docker [image](https://docs.astral.sh/uv/guides/integration/docker/#getting-started)
+- `UV_VERSION`: Specifies the version of the [`uv` package manager](https://docs.astral.sh/uv/){:target="_blank" rel="noopener"} via Docker [image](https://docs.astral.sh/uv/guides/integration/docker/#getting-started){:target="_blank" rel="noopener"}
 - `PLUGIN_NAME`: Specifies the name of your plugin. Used for copying plugin code into the image.
   If you want to keep the plugin code inside the image permanently, consciously comment out the cleanup line `RUN rm -rf ${HOME}/${PLUGIN_NAME}`.
 
@@ -150,7 +150,7 @@ We use a multi-stage build approach: In the first stage (`uv_stage`) copies the 
 
 #### System Setup and Dependencies
 
-Next, we configure the shell environment, copy the [`uv` package manager](https://docs.astral.sh/uv/), and install system dependencies:
+Next, we configure the shell environment, copy the [`uv` package manager](https://docs.astral.sh/uv/){:target="_blank" rel="noopener"}, and install system dependencies:
 
 ```Dockerfile
 # https://github.com/hadolint/hadolint/wiki/DL4006
@@ -192,7 +192,7 @@ RUN apt-get install nodejs -y \
 The key steps in this stage are:
 
 1. **Shell configuration**: Use bash with pipefail for safer script execution
-2. **Copy `uv` binary**: Copies the [`uv` package manager](https://docs.astral.sh/uv/) from the `uv_stage` for fast Python package installation
+2. **Copy `uv` binary**: Copies the [`uv` package manager](https://docs.astral.sh/uv/){:target="_blank" rel="noopener"} from the `uv_stage` for fast Python package installation
 3. **Switch to root**: Installing system packages require root privileges
 4. **Environment variables**: Define `HOME` and `CONDA_DIR` for consistent paths
 5. **System dependencies**: Install essential build tools, libraries, and utilities:
@@ -253,7 +253,7 @@ The key steps in this section are:
 7. **Fix permissions**: Ensure proper file permissions for the user
 8. **Configure startup**: Create `.hushlogin` to suppress login messages
 
-The structure described above provides a solid foundation for Jupyter-based NORTH tools but does not necessarily represent the exact Dockerfile you need. However, these building blocks will help you to customize the [Dockerfile in cookiecutter-nomad-plugin](https://github.com/FAIRmat-NFDI/cookiecutter-nomad-plugin/blob/main/%7B%7Bcookiecutter.plugin_name%7D%7D/py_sources/src/north_tools/%7B%7Bcookiecutter.north_tool_name%7D%7D/Dockerfile) based on your specific requirements.
+The structure described above provides a solid foundation for Jupyter-based NORTH tools but does not necessarily represent the exact Dockerfile you need. However, these building blocks will help you to customize the [Dockerfile in cookiecutter-nomad-plugin](https://github.com/FAIRmat-NFDI/cookiecutter-nomad-plugin/blob/main/%7B%7Bcookiecutter.plugin_name%7D%7D/py_sources/src/north_tools/%7B%7Bcookiecutter.north_tool_name%7D%7D/Dockerfile){:target="_blank" rel="noopener"} based on your specific requirements.
 
 ### Building the image locally
 
@@ -284,7 +284,7 @@ Example:
 
 ### Managing Python dependencies
 
-Python dependencies for your NORTH tool should be defined in the `pyproject.toml` file using [dependency groups](https://packaging.python.org/en/latest/specifications/dependency-groups/):
+Python dependencies for your NORTH tool should be defined in the `pyproject.toml` file using [dependency groups](https://packaging.python.org/en/latest/specifications/dependency-groups/){:target="_blank" rel="noopener"}:
 
 ```toml
 [dependency-groups]
@@ -320,7 +320,7 @@ For local builds, you can use any tag during development:
 docker build ... -t my-tool:dev
 ```
 
-For published images, you may follow [semantic versioning (SemVer)](https://semver.org/):
+For published images, you may follow [semantic versioning (SemVer)](https://semver.org/){:target="_blank" rel="noopener"}:
 
 - **Version tags**: `v1.0.0`, `v1.2.3`, etc. - Specific releases
 - **latest tag**: Points to the most recent stable release
