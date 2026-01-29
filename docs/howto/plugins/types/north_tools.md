@@ -90,7 +90,7 @@ table in `pyproject.toml` in order for it to be automatically detected:
 mynorthtool = "nomad_example.north_tools.my_tool:my_north_tool"
 ```
 
-## Creating `NORTH` images
+## Creating NORTH images
 
 The core of a NORTH tool is the container image that contains the actual software tools, examples,
 and environment needed to run the tool. In this section we will discuss how to create
@@ -122,7 +122,7 @@ Before creating NORTH images, ensure you have:
 Jupyter-based NORTH tools provide users with an interactive computing environment for data analysis
 and visualization.
 
-#### Dockerfile Structure
+#### Dockerfile structure
 
 A Dockerfile for a Jupyter-based NORTH tool typically consists of several stages. Here, we will go through a typical Dockerfile splitting the discussion in several parts. You can find a full example of a Dockerfile for a Juypter-based NORTH tool in [our cookiecutter-nomad-plugin template](https://github.com/FAIRmat-NFDI/cookiecutter-nomad-plugin/blob/main/%7B%7Bcookiecutter.plugin_name%7D%7D/py_sources/src/north_tools/%7B%7Bcookiecutter.north_tool_name%7D%7D/Dockerfile){:target="_blank" rel="noopener"}
 
@@ -148,7 +148,7 @@ In this part of the Dockerfile, we define several [build variables](https://docs
 
 We use a multi-stage build approach: In the first stage (`uv_stage`) copies the `uv` binary from the official `uv` image. In the second stage (`scipy_notebook`) builds on the Jupyter base image with `uv` included for environment management.
 
-#### System Setup and Dependencies
+#### System setup and dependencies
 
 Next, we configure the shell environment, copy the [`uv` package manager](https://docs.astral.sh/uv/){:target="_blank" rel="noopener"}, and install system dependencies:
 
@@ -202,7 +202,7 @@ The key steps in this stage are:
 6. **Node.js upgrade**: Install `Node.js` 24+ (required for `JupyterLab >= 4.4.10`, as the scipy-notebook base image typically includes `Node.js` 18)
 7. **Cleanup**: Remove package manager cache to reduce image size
 
-#### Python Dependencies and Final Setup
+#### Python dependencies and final setup
 
 Finally, we switch back to the non-root user and install Python dependencies:
 
@@ -307,12 +307,12 @@ north = [
     (including those that need build tools, have special (local) licensing, or those that run
     software created for non-Linux environments), we refer to the existing example tools. -->
 
-## Versioning and tagging `NORTH` images
+## Versioning and tagging NORTH images
 
 When creating container images for NORTH tools, it is important to follow a consistent versioning
 and tagging scheme.
 
-### Tagging Strategy
+### Tagging strategy
 
 For local builds, you can use any tag during development:
 
@@ -338,9 +338,9 @@ GitHub Actions automatically creates:
 
 After having successfully created a Docker image for your NORTH tool, thorough testing ensures it functions correctly.
 
-### Local Testing
+### Local testing
 
-#### Interactive Testing
+#### Interactive testing
 
 Run the container interactively with a local data mount:
 
@@ -357,7 +357,7 @@ Then,
 3. Test your analysis workflows
 4. Verify all dependencies are working
 
-#### Automated Notebook Execution
+#### Automated notebook execution
 
 You can also test the container non-interactively, i.e., run the container and execute a Jupyter notebook inside it. Once the test is done, the container will exit and be removed.
 

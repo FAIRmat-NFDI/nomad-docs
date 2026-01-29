@@ -72,7 +72,7 @@ the possible schema annotations and their arguments, and a glossary of used term
 
 NOMAD is an open source project that warmly welcomes community projects, contributions, suggestions, fixes and constructive feedback.
 NOMAD is developed by FAIRmat, an open NFDI consortium of over 30 partners building a shared
-data structure of for materials science together.
+data structure for materials science together.
 
 - [Get support](https://nomad-lab.eu/nomad-lab/support.html){:target="_blank" rel="noopener"}
 - [Join our online forum](https://matsci.org/c/nomad/32){:target="_blank" rel="noopener"}
