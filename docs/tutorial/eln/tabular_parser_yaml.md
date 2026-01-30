@@ -53,6 +53,7 @@ definitions:
   sections:
     Optical_absorption:
 ```
+
 **Where to paste:** at the very top of your `optical_absorption.archive.yaml` file.
 
 ## Step 2: Add the base sections for parsing and plotting
@@ -65,6 +66,7 @@ Now inherit the base sections that make this section (1) create an entry, (2) pa
         - nomad.parsing.tabular.TableData
         - nomad.datamodel.metainfo.plot.PlotSection
 ```
+
 **Where to paste:** under the name of your main section `Optical_absorption:` and one level (two spaces) indented with respect to it.
 
 ## Step 3: Define the quantities of your schema
@@ -90,13 +92,14 @@ Now define the quantities your tabular parser section needs:
           shape: ['*']
 
 ```
+
 **Where to paste:** under your main section `Optical_absorption:`, aligned with `base_sections:`.
 
 ## Step 4: Instruct NOMAD how to treat the quantities
 
 In Step 3 you defined the quantities. Now you add `m_annotations:` blocks so NOMAD knows how to handle these quantities in the GUI and during parsing.
 
-* **The `data_file` quantity**
+- **The `data_file` quantity**
 
 You will add three annotations to `data_file`.
 
@@ -106,13 +109,16 @@ The first one is a GUI element which enables drag-and-drop or file selection for
             eln:
               component: FileEditQuantity
 ```
+
 The second one tells the NOMAD GUI to show a raw-file selection lane for that quantity, so you can pick a file from the files already inside your NOMAD upload (and it also supports file actions like preview in the GUI).
 
 ```yaml
             browser:
               adaptor: RawFileAdaptor
 ```
+
 The third one instructs NOMAD to apply the tabular parser to extract the data from the uploaded file:
+
 ```yaml
             tabular_parser:
               parsing_options:
@@ -124,6 +130,7 @@ The third one instructs NOMAD to apply the tabular parser to extract the data fr
                   sections:
                     - '#root'
 ```
+
 In the above snippet that annotates the `data_file` quantity, you tell NOMAD to apply the `tabular_parser` when a file is provided in this field. Under `parsing_options`, you configure how the file should be read: `comment: '#'` tells the parser to ignore commented lines, and `skiprows: [1]` skips the second row of the CSV (row index `1`), because it contains the units. This way, the remaining rows can be parsed as numeric values. Under `mapping_options`, you tell NOMAD how to map the parsed table into your schema. With `mapping_mode: column`, NOMAD reads each CSV column as an array. `file_mode: current_entry` means the parser should read the file you attached in this entry (via `data_file`). Finally, `sections: ['#root']` tells NOMAD to write the parsed quantities directly into the root section of this entry (your `Optical_absorption` section), where `wavelength` and `absorbance` are defined.
 
 Now combine the three annotations into a single `m_annotations:` block under `data_file`, so NOMAD can accept a file in the GUI and parse it with the tabular parser:
@@ -144,9 +151,10 @@ Now combine the three annotations into a single `m_annotations:` block under `da
                   sections:
                     - '#root'
 ```
+
 **Where to paste:** inside your `data_file:` quantity block, aligned with `type:` .
 
-* **The `wavelength` quantity**
+- **The `wavelength` quantity**
 
 This quantity will be filled with values extracted from the CSV column whose header is `Wavelength`. Add a `tabular` annotation under `wavelength` so NOMAD knows which column to map into this quantity:
 
@@ -155,9 +163,10 @@ This quantity will be filled with values extracted from the CSV column whose hea
             tabular:
               name: Wavelength
 ```
+
 **Where to paste:** inside your `wavelength:` quantity block, aligned with `type:`.
 
-* **The `absorbance` quantity**
+- **The `absorbance` quantity**
 
 This quantity will be filled with values extracted from the CSV column whose header is `Absorbance`. Add the following annotation under `absorbance` quantity:
 
@@ -166,6 +175,7 @@ This quantity will be filled with values extracted from the CSV column whose hea
             tabular:
               name: Absorbance
 ```
+
 **Where to paste:** inside your `absorbance:` quantity block, aligned with `type:`.
 
 !!! note "Use the exact column header"
@@ -186,6 +196,7 @@ In the `plotly_graph_object` annotation, the `data` block selects what to plot o
           layout:
             title: Optical Spectrum
 ```
+
 **Where to paste:** inside your `Optical_absorption:` section definition, aligned with `base_sections:` and `quantities:`.
 
 ??? example "Milestone: A working tabular-parser schema"
@@ -267,6 +278,7 @@ If you only want to publish your data and graph, consider adding a short descrip
                 eln:
                   component: RichTextEditQuantity
 ```
+
 **Where to paste:** in your `Optical_absorption:` section definition, inside `quantities:` block, aligned with `data_file:`, `wavelength:`, and `absorbance:`.
 
 ??? info "NOMAD's editable ELN components"

@@ -78,6 +78,7 @@ definitions:
   name: Processing of polymers thin-films
   sections:
 ```
+
 **Where to paste:** at the very top of `polymer_processing.archive.yaml`.
 <!-- **How to read it:** this schema file has a name, and it defines the following sections. -->
 
@@ -94,6 +95,7 @@ To make this section compatible with NOMAD’s data model, you inherit from `nom
       base_sections:
         - nomad.datamodel.data.EntryData
 ```
+
 **Where to paste:** directly under `sections:`, and indented one level (two spaces) with respect to it.
 
 ??? example "Your file so far (after Step 3)"
@@ -105,6 +107,7 @@ To make this section compatible with NOMAD’s data model, you inherit from `nom
           base_sections:
             - nomad.datamodel.data.EntryData
     ```
+
     **How to read it:** so far, this `.archive.yaml` file defines a NOMAD schema package which has a definition. The schema package's `definitions` tells, it has a `name` and defines `sections`. The section `Experiment_Information` inherits from NOMAD base sections (using the `base_sections:` keyword). The one here is `nomad.datamodel.data.EntryData`.
 
 ---
@@ -133,6 +136,7 @@ Each quantity has a `type`. You can optionally provide a `default` value. If a q
         Additional_Notes:
           type: str
 ```
+
 **Where to paste:** inside `Experiment_Information`, at the same indentation level as `base_sections:`, i.e., `quantities:` aligns with `base_sections:`.
 
 ---
@@ -152,6 +156,7 @@ Let’s annotate the `Name` quantity. Since `m_annotations:` keyword is used to 
               component: StringEditQuantity
 
 ```
+
 **How to read it:** The quantity `Name` has `type: str` and `default: Experiment title`; `m_annotations:` tells NOMAD to treat it as an ELN field (`eln:`) and to render it with `component: StringEditQuantity`.
 
 Now annotate the remaining quantities in the same way by setting the ELN `component` to `StringEditQuantity` for `Researcher`, `DateTimeEditQuantity` for `Date`, and `RichTextEditQuantity` for `Additional_Notes`.
@@ -272,6 +277,7 @@ Now, let’s define the `Sample` subsection. NOMAD already provides a base secti
                 overview: true
                 hide: ['chemical_formula']
 ```
+
 **Where to paste:** under `sub_sections:` → `Sample:` → `section:` (i.e., replace the placeholder content inside the `Sample` subsection definition, such that the `base_sections:` keyword of the above snippet is one level, i.e., two spaces, indented with respect to the `section:` keyword.
 
 In the above snippet, `overview: true` instructs NOMAD to show the subsection in the entry’s **OVERVIEW** tab, and `hide: ['chemical_formula']`, hides the `chemical_formula` field (inherited from `nomad.datamodel.metainfo.eln.ELNSample`) from your custom ELN.
@@ -295,6 +301,7 @@ Now, let’s define the `Solution` subsection. Like `Sample`, it inherits from N
                   eln:
                     component: NumberEditQuantity
 ```
+
 **Where to paste:** paste the above snippet (the `Solution:` section definition) inside your `sub_sections:` list, aligned with `Sample:` and `Preparation:` section definitions. It should replace the placeholder `Solution: section: ...` block.
 
 In addition to hiding `chemical_formula`, this subsection also hides the inherited `description` field. It introduces a new quantity `Concentration` as a numeric value (`type: np.float64`) with unit `mg/ml`, rendered in the GUI as an ELN editable numerical field using `component: NumberEditQuantity`.
@@ -350,6 +357,7 @@ Finally, define the `Preparation` subsection. NOMAD provides a base section for 
               eln:
                 overview: true
 ```
+
 **Where to paste:** paste this `Preparation:` section definition under `sub_sections:`, aligned with `Sample` and `Solution` section definitions.
 
 ---
