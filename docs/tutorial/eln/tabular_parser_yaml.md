@@ -1,3 +1,6 @@
+<!-- markdownlint-disable MD013 -->
+<!-- Disabled MD013: long lines are needed in this tutorial -->
+
 # Parse tabular measurement data with the tabular parser
 
 It is very common to export measurement data into a tabular format such as `.csv` or `.xlsx`. In this tutorial, you will use NOMAD’s tabular parser to turn such a file into a NOMAD entry where the data is parsed into quantities and visualized as a plot in the ELN. You will first build a small schema for optical absorption data, and then reuse the same parser section inside your custom polymer-processing ELN schema. This tutorial uses a `.csv` example file.
@@ -11,8 +14,7 @@ Before starting, make sure you have:
 1. A NOMAD user account
 2. Knowledge about custom YAML schemas from the previous tutorial: [Create a custom ELN schema in NOMAD using YAML](custom_eln_yaml.md)
 3. The custom polymer-processing schema file [`polymer_processing.archive.yaml`](custom_eln_yaml.md#step-1-create-the-schema-file) from the previous tutorial
-4. The example measurement file [`P3HT_optical.csv`](../../examples/data/tabular/P3HT_optical.csv){:download}
-
+4. The example measurement file [`P3HT_optical.csv`](P3HT_optical.csv){:download}
 
 ---
 
@@ -25,7 +27,7 @@ You will learn how to:
 3. Visualize the parsed data in the ELN using a plot annotation
 4. Reuse the same tabular-parser section inside your polymer-processing ELN schema to attach measurement data to your custom template
 
---- 
+---
 
 ## A quick map of what you are building
 
@@ -153,7 +155,7 @@ This quantity will be filled with values extracted from the CSV column whose hea
             tabular:
               name: Wavelength
 ```
-**Where to paste:** inside your `wavelength:` quantity block, aligned with `type:`. 
+**Where to paste:** inside your `wavelength:` quantity block, aligned with `type:`.
 
 * **The `absorbance` quantity**
 
@@ -254,7 +256,6 @@ In the `plotly_graph_object` annotation, the `data` block selects what to plot o
         <div class="nav-arrow right" id="next_milestone_tabular_parser">→</div>
     </div>
 
-
 ## Step 6 (optional): Add a short description field
 
 If you only want to publish your data and graph, consider adding a short description. Add the following quantity to your `quantities:` block:
@@ -277,7 +278,6 @@ You can reuse the `Optical_absorption` section you created in this tutorial insi
 
 You can include this section definition wherever it fits your template, e.g. as another subsection under `Experiment_Information`, aligned with `Sample`, `Solution`, and `Preparation`. This lets you upload an optical-absorption file and view the plot directly in the same ELN entry.
 
-
 ??? example "Example: Add `Optical_absorption` as a subsection of your polymer-processing schema"
     In your `polymer_processing.archive.yaml`, add an `Optical_absorption` subsection under `Experiment_Information` and give it the same section definition you built in this tutorial (the one that includes `TableData` and `PlotSection`).
 
@@ -288,11 +288,11 @@ You can include this section definition wherever it fits your template, e.g. as 
       name: Processing of polymers thin-films
       sections:
         Experiment_Information:
-          base_sections: 
+          base_sections:
             - nomad.datamodel.data.EntryData
           quantities:
             Name:
-              type: str  
+              type: str
               default: Experiment title
               m_annotations:
                 eln:
@@ -371,7 +371,7 @@ You can include this section definition wherever it fits your template, e.g. as 
             Preparation:
               section:
                 base_sections:
-                  - nomad.datamodel.metainfo.eln.Process  
+                  - nomad.datamodel.metainfo.eln.Process
                 m_annotations:
                   eln:
                     overview: true
@@ -386,7 +386,7 @@ You can include this section definition wherever it fits your template, e.g. as 
                     type: str
                     m_annotations:
                       eln:
-                        component: RichTextEditQuantity          
+                        component: RichTextEditQuantity
                   data_file:
                     type: str
                     m_annotations:
@@ -422,5 +422,5 @@ You can include this section definition wherever it fits your template, e.g. as 
                       x: "#wavelength"
                       y: "#absorbance"
                     layout:
-                      title: Optical Spectrum            
+                      title: Optical Spectrum
     ```
