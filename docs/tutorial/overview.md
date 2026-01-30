@@ -39,7 +39,6 @@ Our tutorial documentation covers the basics of using Central NOMAD and NOMAD Oa
 - [Create a custom ELN schema using YAML](eln/custom_eln_yaml.md) and extend it with subsections for your experiment structure.
 - [Parse tabular measurement data](eln/tabular_parser_yaml.md) with the NOMAD's tabular parser and visualize it directly in the ELN.
 
-
 [**Managing workflows and projects**](workflows_projects.md)
 
 - Organize and manage complex research workflows using NOMAD.
