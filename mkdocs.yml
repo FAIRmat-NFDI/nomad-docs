@@ -12,7 +12,10 @@ nav:
         - With the GUI: tutorial/upload_publish.md
         - Programmatically: tutorial/upload_publish_api.md
       - Explore data: tutorial/explore.md
-      - Use NOMAD as an ELN: tutorial/NOMAD_ELN.md
+      - Use NOMAD as an ELN:
+        - Built-in ELN templates: tutorial/eln/built_in_templates.md
+        - Custom ELN with YAML: tutorial/eln/custom_eln_yaml.md
+        - Tabular Parser for ELN: tutorial/eln/tabular_parser_yaml.md
       - Manage workflows and projects: tutorial/workflows_projects.md
       - Create custom schemas: tutorial/custom.md
       - Develop a NOMAD plugin: tutorial/develop_plugin.md

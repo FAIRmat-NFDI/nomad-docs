@@ -33,11 +33,12 @@ Our tutorial documentation covers the basics of using Central NOMAD and NOMAD Oa
 - Create custom widgets for a personalized search experience.
 - Use the NOMAD domain-specific apps.
 
-[**Using NOMAD as an ELN**](NOMAD_ELN.md)
+[**Using NOMAD as an ELN**](eln/built_in_templates.md)
 
-- Create an ELN using the built-in NOMAD templates.
-- Add entries for samples, instruments, processes, and more.
-- Explore and search your ELN.
+- [Use built-in ELN templates](eln/built_in_templates.md) to create an ELN in NOMAD and interlink substances, samples, instruments, processes, and measurements.
+- [Create a custom ELN schema using YAML](eln/custom_eln_yaml.md) and extend it with subsections for your experiment structure.
+- [Parse tabular measurement data](eln/tabular_parser_yaml.md) with the NOMAD's tabular parser and visualize it directly in the ELN.
+
 
 [**Managing workflows and projects**](workflows_projects.md)
 
