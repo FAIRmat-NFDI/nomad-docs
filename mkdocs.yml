@@ -155,8 +155,6 @@ extra:
   generator: false
   homepage: https://nomad-lab.eu
 use_directory_urls: false
-hooks:
-  - fix_404.py  # force absolute path in 404 page
 plugins:
   - search
   - macros:
