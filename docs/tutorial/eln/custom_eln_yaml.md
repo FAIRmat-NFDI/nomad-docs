@@ -524,7 +524,7 @@ Finally, define the `Preparation` subsection. NOMAD provides a base section for 
         ```
 
     ??? info "3. Sections can inherit from NOMAD's `base_sections` or other sections."
-        When inheriting structure and definition from an existing section, use the `base_sections:` keyword and list the desired base sections you would like to inherit from. The keyword `base_sections:` additionally allows you to also inherit from other sections (e.g., within the same schema or even a section that have been published in NOMAD, see [schema package references in NOMAD Documentation](https://nomad-lab.eu/prod/v1/docs/howto/customization/basics.html#schema-package-references){:target="_blank"}). Inherited sections can be given in a python list, or subsequent indented lines starting with a dash, `-`.
+        When inheriting structure and definition from an existing section, use the `base_sections:` keyword and list the desired base sections you would like to inherit from. The keyword `base_sections:` additionally allows you to also inherit from other sections (e.g., within the same schema or even a section that have been published in NOMAD, see [schema package references in NOMAD Documentation](https://nomad-lab.eu/prod/v1/docs/howto/customization/basics.html#schema-package-references){:target="_blank" rel="noopener"}). Inherited sections can be given in a python list, or subsequent indented lines starting with a dash, `-`.
 
         Example:
 
@@ -559,7 +559,7 @@ Finally, define the `Preparation` subsection. NOMAD provides a base section for 
         ```
 
     ??? info "4. Each section can contain quantities, other sections, and subsections."
-        Each section can define quantities, representing parameters such as measurement conditions or sample properties. In addition, sections **can also contain** subsections. When including subsections, you need to tell NOMAD the subsections you included are themselves a section. How? By including the keyword `section:` in the next indented line (see bottom example). A list of editable quantities can be found [here](https://nomad-lab.eu/prod/v1/gui/dev/editquantity){:target="_blank"}.
+        Each section can define quantities, representing parameters such as measurement conditions or sample properties. In addition, sections **can also contain** subsections. When including subsections, you need to tell NOMAD the subsections you included are themselves a section. How? By including the keyword `section:` in the next indented line (see bottom example). A list of editable quantities can be found [here](https://nomad-lab.eu/prod/v1/gui/dev/editquantity){:target="_blank" rel="noopener"}.
 
         NOMAD syntax is:
 
@@ -625,7 +625,7 @@ Finally, define the `Preparation` subsection. NOMAD provides a base section for 
           description: This is an electronic lab notebook schema that includes several sections.
 
           sections:
-            MyFirst_Section:
+            MyFirstSection:
               base_sections:
                 - nomad.datamodel.data.EntryData
                 - nomad.datamodel.metainfo.eln.ELNSample

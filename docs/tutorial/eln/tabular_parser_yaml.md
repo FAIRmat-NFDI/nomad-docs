@@ -282,7 +282,7 @@ If you only want to publish your data and graph, consider adding a short descrip
 **Where to paste:** in your `Optical_absorption:` section definition, inside `quantities:` block, aligned with `data_file:`, `wavelength:`, and `absorbance:`.
 
 ??? info "NOMAD's editable ELN components"
-    For a list of editable components in NOMAD, see [editable quantities](https://nomad-lab.eu/prod/v1/gui/dev/editquantity).
+    For a list of editable components in NOMAD, see [editable quantities](https://nomad-lab.eu/prod/v1/gui/dev/editquantity){:target="_blank" rel="noopener"}.
 
 ## Add optical absorption data to your polymer-processing ELN template
 
