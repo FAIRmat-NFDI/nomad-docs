@@ -5,30 +5,41 @@ def find_unused_assets():
     """
     Finds unused assets in the docs/ directory.
 
-    An asset is considered unused if it is not referenced in any markdown file
-    in the same directory.
+    An asset is considered unused if its filename does not appear in any
+    Markdown file in the same section of the docs (the parent folder and its
+    subfolders), ignoring the images/ and data/ folders.
     """
     docs_dir = os.path.join(os.path.dirname(__file__), "..", "docs")
-    unused_assets = []
     asset_dirs = ["images", "data"]
+    unused_assets = []
 
-    for root, dirs, files in os.walk(docs_dir):
-        md_text = ""
-        for file in files:
-            if file.endswith(".md"):
-                with open(os.path.join(root, file), "r", encoding="utf-8") as f:
-                    md_text += f.read()
+    for asset_subdir in asset_dirs:
+        for root, _, _ in os.walk(docs_dir):
+            if os.path.basename(root) != asset_subdir:
+                continue
 
-        for asset_subdir in asset_dirs:
-            asset_path = os.path.join(root, asset_subdir)
-            if os.path.isdir(asset_path):
-                for asset_file in os.listdir(asset_path):
-                    full_path = os.path.join(asset_path, asset_file)
-                    if os.path.isdir(full_path):
-                        continue
-                    if asset_file not in md_text:
-                        rel_path = os.path.relpath(full_path, docs_dir)
-                        unused_assets.append(rel_path)
+            parent_dir = os.path.dirname(root)
+
+            md_text_parts = []
+            for md_root, md_dirs, md_files in os.walk(parent_dir):
+                md_dirs[:] = [d for d in md_dirs if d not in asset_dirs]
+                for fn in md_files:
+                    if fn.endswith(".md"):
+                        path = os.path.join(md_root, fn)
+                        with open(path, "r", encoding="utf-8") as f:
+                            md_text_parts.append(f.read())
+
+            md_text = "\n".join(md_text_parts)
+
+            for asset_file in os.listdir(root):
+                full_path = os.path.join(root, asset_file)
+                if os.path.isdir(full_path):
+                    continue
+
+                if asset_file not in md_text:
+                    rel_path = os.path.relpath(full_path, docs_dir)
+                    unused_assets.append(rel_path)
+
     return unused_assets
 
 
