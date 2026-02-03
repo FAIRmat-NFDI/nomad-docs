@@ -11,6 +11,24 @@ Guidelines (do not render):
 - Do not repeat the “What you will learn” list.
 -->
 
+## What you will learn
+
+In this tutorial, you will learn how to:
+
+1. <Action + object + context>
+2. <Action + object + context>
+3. <Action + object + context>
+4. <Action + object + context>
+
+<!--
+Rules enforced (do not render):
+
+- Use “you will”
+- Each item must be actionable and testable
+- Avoid vague verbs (e.g. understand, become familiar with)
+- Maximum 6 items
+-->
+
 ## Before you begin
 
 This tutorial assumes basic familiarity with <domain or tool> and is intended for <target audience>.
@@ -34,20 +52,4 @@ Rules enforced (do not render):
 - Only hard prerequisites (accounts, software, skills)
 -->
 
-## What you will learn
 
-In this tutorial, you will learn how to:
-
-1. <Action + object + context>
-2. <Action + object + context>
-3. <Action + object + context>
-4. <Action + object + context>
-
-<!--
-Rules enforced (do not render):
-
-- Use “you will”
-- Each item must be actionable and testable
-- Avoid vague verbs (e.g. understand, become familiar with)
-- Maximum 6 items
--->
