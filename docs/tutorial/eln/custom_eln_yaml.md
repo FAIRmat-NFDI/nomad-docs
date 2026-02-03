@@ -3,43 +3,53 @@
 
 # Create a custom ELN schema in NOMAD using YAML
 
-In this tutorial, you will create a **custom ELN schema** in NOMAD by writing a `.archive.yaml` file. The schema will let you document polymer thin-film processing experiments (e.g., experiment metadata, sample, solution, preparation steps, etc.) in a structured way, and display selected parts directly in the NOMAD ELN interface.
+In this tutorial, we create a custom ELN schema in NOMAD by writing a YAML-based schema file. We follow a step-by-step workflow to build a structured ELN template for documenting polymer thin-film processing experiments and displaying selected fields in the NOMAD ELN overview. By the end of the tutorial, we will have a functional custom ELN schema that can be uploaded to NOMAD and used to document experiments in the GUI.
 
 ---
 
+## What you will learn
+
+In this tutorial, you will learn how to:
+
+1. Create a custom ELN schema package using a `.archive.yaml` file
+2. Define sections and quantities in a NOMAD schema
+3. Reuse existing NOMAD data models by inheriting from NOMAD base sections
+4. Configure ELN form fields using annotations
+5. Structure an ELN template using nexted subsections
+6. Apply a custom ELN schema to document experiments in the NOMAD ELN
+
+---
 ## Before you begin
 
-Make sure you have:
+Before starting, make sure you have:
 
-1. A NOMAD user account
-2. Basic understanding of uploads and entries in NOMAD
-3. Basic familiarity with YAML configuration files
-4. A YAML-capable editor or IDE (e.g., VS Code)
+1. **NOMAD user account**  
+   Creating and editing ELN entries requires a NOMAD user account.  
+   You can create an account by following the steps described in the
+   [overview page](../overview.md#create-a-nomad-user-account){:target="_blank" rel="noopener"}.
+   
+2. **Basic understanding of uploads and entries**  
+   Familiarity with uploads, entries, and how they relate to each other can be helpful. These concepts are introduced in the section [key elements in NOMAD](../upload_publish.md#the-key-elements-in-nomad){:target="_blank" rel="noopener"} and will be reinforced throughout the tutorial.
 
-If any of these terms are unfamiliar, refer to the glossary:
+3. **Familiarity with key NOMAD schema concepts (optional)**  
+   It may be helpful to familiarize yourself with the following concepts before starting:
+    - [Schema package](../../reference/glossary.md#schema-package){:target="_blank" rel="noopener"}, [Schema](../../reference/glossary.md#schema){:target="_blank" rel="noopener"}
+    - [Section and Subsection](../../reference/glossary.md#section-and-subsection){:target="_blank" rel="noopener"}, [Quantity](../../reference/glossary.md#quantity){:target="_blank" rel="noopener"}
+    - [Annotation](../../reference/glossary.md#annotation){:target="_blank" rel="noopener"}
 
-- [Schema package](../../reference/glossary.md#schema-package), [Schema](../../reference/glossary.md#schema)
-- [Section and Subsection](../../reference/glossary.md#section-and-subsection), [Quantity](../../reference/glossary.md#quantity)
-- [Annotation](../../reference/glossary.md#annotation)
-- [ELN](../../reference/glossary.md#eln), [Entry](../../reference/glossary.md#entry), [Upload](../../reference/glossary.md#upload)
+
+3. **Basic familiarity with YAML configuration files**  
+   This tutorial uses YAML to define the structure of a custom ELN schema. Prior experience with YAML syntax and indentation is helpful, but deep knowledge of YAML is not required.
+
+4. **A YAML-capable editor or IDE (e.g., VS Code)**  
+    You will edit a YAML file during the tutorial. Using an editor or IDE with YAML support (for example, VS Code) is recommended.
+
 
 !!! info "YAML indentation matters"
     YAML uses indentation to define hierarchical structure. Indent by **two spaces** for **each level**. If NOMAD reports a YAML error, check that keys at the same level align.
 
 ---
 
-## What you will learn
-
-You will learn how to:
-
-1. Create a `.archive.yaml` schema package file
-2. Define sections and quantities
-3. Inherit from NOMAD base sections (`base_sections`)
-4. Use annotations (`m_annotations`) to turn quantities into ELN form fields
-5. Add nested subsections to build a structured ELN template
-6. Build a working custom ELN template for a polymer thin-film experiment (including `Sample`, `Solution`, and `Preparation`)
-
----
 
 ## A quick map of what you are building
 
