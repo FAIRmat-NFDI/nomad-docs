@@ -452,5 +452,4 @@ celerybeat-schedule.dat
 celerybeat-schedule.bak
 celerybeat-schedule.db
 
-.gemini/
 gha-creds-*.json
