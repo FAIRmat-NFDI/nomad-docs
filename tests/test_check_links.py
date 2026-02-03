@@ -57,4 +57,4 @@ def test_docs_external_links_clean():
     """Ensure external links have target and rel attributes."""
     docs = Path(__file__).resolve().parent.parent / "docs"
     changes = main(str(docs))
-    assert changes == 0, "docs contain external links without target/rel attributes."
+    assert changes == 0, 'docs contain external links without target/rel attributes. you should append `{:target="_blank" rel="noopener"}` to each external link.'
