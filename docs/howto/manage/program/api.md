@@ -307,7 +307,7 @@ if you are [logged in](#authentication).
 
 When you issue a query, usually not all results can be returned. Instead, an API returns
 only one *page*. This behavior is controlled through pagination parameters, like
-`page_site`, `page`, `page_offset`, or `page_after_value`.
+`page_size`, `page`, `page_offset`, or `page_after_value`.
 
 Let's consider a search for entries as an example.
 
