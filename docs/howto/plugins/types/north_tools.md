@@ -124,7 +124,7 @@ and visualization.
 
 #### Dockerfile structure
 
-A Dockerfile for a Jupyter-based NORTH tool typically consists of several stages. Here, we will go through a typical Dockerfile splitting the discussion in several parts. You can find a full example of a Dockerfile for a Juypter-based NORTH tool in [our cookiecutter-nomad-plugin template](https://github.com/FAIRmat-NFDI/cookiecutter-nomad-plugin/blob/main/%7B%7Bcookiecutter.plugin_name%7D%7D/py_sources/src/north_tools/%7B%7Bcookiecutter.north_tool_name%7D%7D/Dockerfile){:target="_blank" rel="noopener"}
+A Dockerfile for a Jupyter-based NORTH tool typically consists of several stages. Here, we will go through a typical Dockerfile splitting the discussion in several parts. You can find a full example of a Dockerfile for a Juypter-based NORTH tool in [nomad-north-jupyter](https://github.com/FAIRmat-NFDI/nomad-north-jupyter/blob/main/src/nomad_north_jupyter/north_tools/my_north_tool/Dockerfile){:target="_blank" rel="noopener"}
 
 The build arguments at the top allow customization of the image:
 
