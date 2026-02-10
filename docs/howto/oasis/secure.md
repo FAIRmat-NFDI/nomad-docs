@@ -16,7 +16,7 @@ NOMAD deployments can set up multi-factor authentication (MFA) through a custom 
 
 By default, an Oasis works like the official NOMAD: published data is openly accessible and anybody with a NOMAD account can upload and view the data. For deployments that require restricted access, NOMAD provides several mechanisms. To summarize:
 
-- Custom Keycloak: You can host your own Keycloak instance which provides you full control over the allowed users, and zero-downtime modifications to user access. See more [here](configure.md#provide-and-connect-your-own-user-management).
+- Custom Keycloak: You can [host your own Keycloak instance](configure.md#provide-and-connect-your-own-user-management) which provides you full control over the allowed users, and zero-downtime modifications to user access.
 - Network-level restriction: Do not expose the Oasis to the public internet by making it only available on an intranet or through a VPN.
 - Setup Oasis-specific rules: See the section on [restricting access to your Oasis](configure.md#restricting-access-to-your-oasis).
 
@@ -83,7 +83,7 @@ Through these logs you can monitor logs for unusual access patterns or errors.
 
 NOMAD is composed of several components, each with a separate update and vulnerability lifecycle:
 
-- Python: Dependencies for deployments are managed via `pyproject.toml`. Administrators should regularly check for known vulnerabilities in Python dependencies using tools such as [`pip-audit`](https://pypi.org/project/pip-audit/){:target="_blank" rel="noopener"} or [`safety`](https://pypi.org/project/safety/){:target="_blank" rel="noopener"}. 
+- Python: Dependencies for deployments are managed via `pyproject.toml`. Administrators should regularly check for known vulnerabilities in Python dependencies using tools such as [`pip-audit`](https://pypi.org/project/pip-audit/){:target="_blank" rel="noopener"} or [`safety`](https://pypi.org/project/safety/){:target="_blank" rel="noopener"}.
 - Javascript: The NOMAD front-end dependencies are managed via the `package.json` file. These dependencies are regularly checked for known vulnerabilities using [`npm-audit`](https://docs.npmjs.com/cli/v8/commands/npm-audit){:target="_blank" rel="noopener"}.
 - Docker images: Docker images are used to deploy different parts of the NOMAD infrastructure. Use container scanning tools such as [Trivy](https://trivy.dev/){:target="_blank" rel="noopener"} or [Grype](https://github.com/anchore/grype){:target="_blank" rel="noopener"} to detect vulnerabilities in the image layers.
 
