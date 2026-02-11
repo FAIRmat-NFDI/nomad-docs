@@ -3,7 +3,7 @@
 
 # Create a custom ELN schema in NOMAD using YAML
 
-In this tutorial, we create a custom ELN schema in NOMAD by writing a YAML-based schema file. We follow a step-by-step workflow to build a structured ELN template for documenting polymer thin-film processing experiments and displaying selected fields in the NOMAD ELN overview. By the end of the tutorial, we will have a functional custom ELN schema that can be uploaded to NOMAD and used to document experiments in the GUI.
+In this tutorial, we create a custom ELN using a YAML-based schema file to structure experimental data in NOMAD. We follow a step-by-step workflow to define sections, quantities, and annotations that shape how the experiment is represented in the GUI. By the end of the tutorial, we will have a functional custom ELN schema that can be uploaded and tested in NOMAD.
 
 ---
 
@@ -13,13 +13,15 @@ In this tutorial, you will learn how to:
 
 1. Create a custom ELN schema package using a `.archive.yaml` file
 2. Define sections and quantities in a NOMAD schema
-3. Reuse existing NOMAD data models by inheriting from NOMAD base sections
-4. Configure ELN form fields using annotations
-5. Structure an ELN template using nexted subsections
-6. Apply a custom ELN schema to document experiments in the NOMAD ELN
+3. Reuse existing data models by inheriting from NOMAD base sections
+4. Configure ELN input fields using annotations
+5. Structure an ELN template using nested subsections
+6. Apply a custom ELN schema to document experiments in NOMAD
 
 ---
 ## Before you begin
+
+This tutorial does not require prior experience with creating custom schemas in NOMAD. However, familiarity with the [NOMAD ELN functionality](built_in_templates.md){:target="_blank" rel="noopener"} is helpful.
 
 Before starting, make sure you have:
 
@@ -29,14 +31,7 @@ Before starting, make sure you have:
    [overview page](../overview.md#create-a-nomad-user-account){:target="_blank" rel="noopener"}.
    
 2. **Basic understanding of uploads and entries**  
-   Familiarity with uploads, entries, and how they relate to each other can be helpful. These concepts are introduced in the section [key elements in NOMAD](../upload_publish.md#the-key-elements-in-nomad){:target="_blank" rel="noopener"} and will be reinforced throughout the tutorial.
-
-3. **Familiarity with key NOMAD schema concepts (optional)**  
-   It may be helpful to familiarize yourself with the following concepts before starting:
-    - [Schema package](../../reference/glossary.md#schema-package){:target="_blank" rel="noopener"}, [Schema](../../reference/glossary.md#schema){:target="_blank" rel="noopener"}
-    - [Section and Subsection](../../reference/glossary.md#section-and-subsection){:target="_blank" rel="noopener"}, [Quantity](../../reference/glossary.md#quantity){:target="_blank" rel="noopener"}
-    - [Annotation](../../reference/glossary.md#annotation){:target="_blank" rel="noopener"}
-
+   Familiarity with uploads, entries, and how they relate to each other can be helpful. These concepts are introduced in the section [key elements in NOMAD](../upload_publish.md#the-key-elements-in-nomad){:target="_blank" rel="noopener"}.
 
 3. **Basic familiarity with YAML configuration files**  
    This tutorial uses YAML to define the structure of a custom ELN schema. Prior experience with YAML syntax and indentation is helpful, but deep knowledge of YAML is not required.
@@ -44,63 +39,58 @@ Before starting, make sure you have:
 4. **A YAML-capable editor or IDE (e.g., VS Code)**  
     You will edit a YAML file during the tutorial. Using an editor or IDE with YAML support (for example, VS Code) is recommended.
 
-
-!!! info "YAML indentation matters"
-    YAML uses indentation to define hierarchical structure. Indent by **two spaces** for **each level**. If NOMAD reports a YAML error, check that keys at the same level align.
+5. **Optional: familiarity with key NOMAD schema concepts**  
+   It may be helpful to review the following concepts:
+    - [Schema package](../../reference/glossary.md#schema-package){:target="_blank" rel="noopener"}, [Schema](../../reference/glossary.md#schema){:target="_blank" rel="noopener"}
+    - [Section and Subsection](../../reference/glossary.md#section-and-subsection){:target="_blank" rel="noopener"}, [Quantity](../../reference/glossary.md#quantity){:target="_blank" rel="noopener"}
+    - [Annotation](../../reference/glossary.md#annotation){:target="_blank" rel="noopener"}
 
 In this tutorial, we use an example experiment focused on the processing of polymer thin films to illustrate how experimental information can be documented in a custom NOMAD ELN schema.
 
-??? example "About the example experiment used in this exercise"
-    In this execise, you will work with an experiment involving solution processing of polymer thin films. You will create a custom ELN schema to capture the essential metadata associated with such an experiment.
+??? example "About the example experiment used in this tutorial"
 
-    The experiment is described using general contextual information, including its name, the responsible researcher, the date, and free-text notes. This information provides the overall context for the ELN entry.
+    We will use an example experiment involving the solution processing of polymer thin films to illustrate how experimental metadata can be structured in a custom ELN schema.
 
-    In addition, the experiment description includes:
+    The experiment is represented by general contextual metadata, including its name, the responsible researcher, the date, and free-text notes.
+
+    In addition, the schema captures:
 
     - Information about the **sample** involved in the experiment.
-
-    - Details of the **polymer solution** used during processing, including its concentration and composition.
-
+    - Details of the **polymer solution**, including its concentration and composition.
     - The **substances** used to prepare the solution, together with the corresponding mass and volume.
+    - A high-level description of the **processing step**.
 
-    - A description of the preparation step representing the **processing procedure** at a high level.
-
-    Together, these elements form a coherent ELN representation of a polymer thin-film processing experiment, demonstrating how experimental metadata, materials, and preparation steps can be captured in a structured way using a custom NOMAD schema.
-
+    These elements mirror the structure that you will implement in the YAML schema and demonstrate how experimental metadata, materials, and preparation steps can be organized in a structured and reusable way.
 
 ---
 
-## A quick map of what you are building
+## Overview of the schema structure
 
-You will build a single NOMAD schema package defined in a `.archive.yaml` file. This schema describes how example polymer thin-film processing experiment is represented in the NOMAD ELN.  
-Inside the schema package, you define one main section representing the experiment and extend it using the following core elements: 
+You will create a single NOMAD schema package defined in a `.archive.yaml` file. This file describes how a polymer thin-film processing experiment is structured in the NOMAD ELN. 
 
-- **Sections** define logical blocks of information (for example, an experiment or a sample).
-- **Quantities** define the data fields stored within a section, such as concentration, chemical names, or description. 
-- **Subsections** are sections nested inside other sections to group related information, such as solvent, substances, or processing conditions. 
-- **Annotations** control how sections and quantities are displayed and edited in the NOMAD ELN.
+The schema package consists of:
 
-
-Keep this mental model in mind while you follow the steps below. After Step 5 you will already have a **working minimal schema** that can be uploaded to NOMAD. In the subsequent steps, you will extend this schema with additional structure to reflect the different parts of the example experiment.
+- **`definitions`**: Declares the schema package and its metadata.
+- **`sections`**: Defines logical blocks of information (for example, the experiment itself).
+- **`quantities`**: Defines individual data fields within a section (such as name, date, or concentration).
+- **`base_sections`**: Reuses existing NOMAD data models by inheritance.
+- **`sub_sections`**: Introduces nested sections to group related information.
+- **`m_annotations`**: Controls how sections and quantities are displayed and edited in the ELN interface.
 
 ---
 
 ## Step 1: Create the schema file
 
-Create a new file named `polymer_processing.archive.yaml`.
+Create a new file named `polymer_processing.archive.yaml` in a local working directory. This file will contain the custom ELN schema definitions for the example experiment in this tutorial.
 
 ??? info "The `.archive.yaml` extension is needed"
     NOMAD recognizes files with the `.archive.yaml` extension as **schema packages**, meaning they can contain one or more section and quantity definitions.
 
 ---
 
-## Step 2: Start defining your schema
+## Step 2: Define the schema package
 
-In your schema file, start defining the schema package:
-
-- Add `definitions:` to start the schema package. This is where you define metadata of your schema such as its name and the sections it contains.
-- Indent one level (two spaces) and use `name:` to give a descriptive name to your schema.
-- Add `sections:` at the same indentation level as `name:` to define your first section in the next step.
+Open `polymer_processing.archive.yaml` and add the following content:
 
 ```yaml
 definitions:
@@ -108,16 +98,30 @@ definitions:
   sections:
 ```
 
-**Where to paste:** at the very top of `polymer_processing.archive.yaml`.
-<!-- **How to read it:** this schema file has a name, and it defines the following sections. -->
+- The `definitions:` key declares a schema package and contains the metadata of your schema such as its name and the sections it contains.
+
+- The `name:` key provides a human-readable identifier for the package.
+
+- The `sections:` key inroduces a block where the section definitions of your ELN schema will be defined.
+
+Note that `name:` and `sections:` must be indented **one level** under `definitions:`.
+
+!!! info "YAML indentation matters"
+    YAML uses indentation to define hierarchical structure. Indent by **two spaces** for **each level**. 
+    
+    If NOMAD reports a YAML error, check that keys at the same level align.
+
+At this point, the file defines an empty schema package that can now be extended with section definitions.
 
 ---
 
 ## Step 3: Add your main experiment section
 
-A schema must contain at least one section. Here, let's define `Experiment_Information` as the main section that will hold experiment-related metadata.
+A schema must contain at least one section. Here, you will define a section called `Experiment_Information` that will represent the experiment entry and hold all related metadata.
 
-To make this section compatible with NOMAD’s data model, you inherit from `nomad.datamodel.data.EntryData` using `base_sections:`.
+To ensure that this section is treated as a valid entry that is compatible with NOMAD's data model, inherit from the base section `nomad.datamodel.data.EntryData`, using the `base_sections:` key.
+
+Add the following content to the schema file:
 
 ```yaml
     Experiment_Information:
@@ -126,6 +130,8 @@ To make this section compatible with NOMAD’s data model, you inherit from `nom
 ```
 
 **Where to paste:** directly under `sections:`, and indented one level (two spaces) with respect to it.
+
+Note that `base_sections:` must be indented **one level** under `Experiment_Information:`, and will include an indented list for the base sections to inherit from. 
 
 ??? task "Checkpoint 1"
     Your file so far (after Step 3) should look like the following:
@@ -138,20 +144,15 @@ To make this section compatible with NOMAD’s data model, you inherit from `nom
             - nomad.datamodel.data.EntryData
     ```
 
-    **How to read it:** so far, this `.archive.yaml` file defines a NOMAD schema package which has a definition. The schema package's `definitions` tells, it has a `name` and defines `sections`. The section `Experiment_Information` inherits from NOMAD base sections (using the `base_sections:` keyword). The one here is `nomad.datamodel.data.EntryData`.
+    **How to read it:** so far, this `.archive.yaml` file defines a NOMAD schema package which has a definition. The schema package's `definitions` tells, it has a `name` and defines `sections`. The section `Experiment_Information` inherits from NOMAD base sections (using the `base_sections:` key). The one here is `nomad.datamodel.data.EntryData`.
 
 ---
 
 ## Step 4: Add quantities to the main section
 
-Now add the fields you want to store for each experiment entry:
+Quantities define the individual data fields that will be stored for each experiment entry. They are added using the keyword `quantities`.
 
-- `Name`
-- `Researcher`
-- `Date`
-- `Additional_Notes`
-
-Each quantity has a `type`. You can optionally provide a `default` value. If a quantity represents a physical value, you can also add a `unit`.
+Define the quantities `Name`, `Researcher`, `Date` and `Additional_Notes`, by adding the following content to the schema file: 
 
 ```yaml
       quantities:
@@ -169,13 +170,44 @@ Each quantity has a `type`. You can optionally provide a `default` value. If a q
 
 **Where to paste:** inside `Experiment_Information`, at the same indentation level as `base_sections:`, i.e., `quantities:` aligns with `base_sections:`.
 
+- Each quantity is defined by a name (for example, `Name` or `Date`).
+
+- The `type:` key specifies the data type.
+
+- The optional `default:` key provides a placeholder value.
+
+- If a quantity represents a physical value, you can also add a `unit` keyword.
+
+??? task "Checkpoint 2"
+    Your file so far (after Step 4) should look like the following:
+    ```yaml
+    definitions:
+      name: Processing of polymers thin-films
+      sections:
+        Experiment_Information:
+          base_sections:
+            - nomad.datamodel.data.EntryData
+          quantities:
+            Name:
+              type: str
+              default: Experiment title
+            Researcher:
+              type: str
+              default: Name of the researcher who performed the experiment
+            Date:
+              type: Datetime
+            Additional_Notes:
+              type: str
+    ```
 ---
 
 ## Step 5: Turn quantities into ELN fields
 
-Quantities define what data your schema can store. To control how NOMAD shows and edits those quantities in the GUI, you will use **annotations** by add an `m_annotations:` block to the quantity definitions. In this schema, you add an `eln:` annotation to make each quantity appear as an ELN field, and you choose which ELN `component:` should be used to edit it.
+So far, you have defined the data structure of your schema.  
+Next, you will configure how these quantities are displayed and edited in the NOMAD ELN interface.
 
-Let’s annotate the `Name` quantity. Since `m_annotations:` keyword is used to annotate the `Name` quantity, indent it one level (two spaces) with respect to `Name:` such that it aligns with `type:` and `default:` in the `Name` block. Use `component: StringEditQuantity` for short text fields
+To do this, add an `m_annotations:` block to each quantity.
+For example, update the `Name` quantity as follows:
 
 ```yaml
         Name:
@@ -187,44 +219,26 @@ Let’s annotate the `Name` quantity. Since `m_annotations:` keyword is used to 
 
 ```
 
-**How to read it:** The quantity `Name` has `type: str` and `default: Experiment title`; `m_annotations:` tells NOMAD to treat it as an ELN field (`eln:`) and to render it with `component: StringEditQuantity`.
+- The `m_annotations:` key adds additional behavior to a section or quantity.
 
-Now annotate the remaining quantities in the same way by setting the ELN `component` to `StringEditQuantity` for `Researcher`, `DateTimeEditQuantity` for `Date`, and `RichTextEditQuantity` for `Additional_Notes`.
+- The `eln:` key declares that the quantity is editable in the ELN interface.
 
-??? info "NOMAD's editable ELN components"
-    For a list of editable components in NOMAD, see [editable quantities](https://nomad-lab.eu/prod/v1/gui/dev/editquantity){:target="_blank" rel="noopener"}.
+- The `component:` key defines which input widget is used in the GUI.
 
-Check that your `quantities:` block now looks like the annotated version below. If it doesn’t, replace your current `quantities:` block (from Step 4) with this one.
+For a list of editable components in NOMAD, see [editable quantities](https://nomad-lab.eu/prod/v1/gui/dev/editquantity){:target="_blank" rel="noopener"}.
 
-```yaml
-      quantities:
-        Name:
-          type: str
-          default: Experiment title
-          m_annotations:
-            eln:
-              component: StringEditQuantity
-        Researcher:
-          type: str
-          default: Name of the researcher who performed the experiment
-          m_annotations:
-            eln:
-              component: StringEditQuantity
-        Date:
-          type: Datetime
-          m_annotations:
-            eln:
-              component: DateTimeEditQuantity
-        Additional_Notes:
-          type: str
-          m_annotations:
-            eln:
-              component: RichTextEditQuantity
-```
 
-You have reached the milestone: your schema is now functional, so you can upload it and test it in NOMAD.
+Now update the remaining quantities:
 
-??? task "Checkpoint 2"
+- Use `StringEditQuantity` for `Researcher`
+
+- Use `DateTimeEditQuantity` for `Date`
+
+- Use `RichTextEditQuantity` for `Additional_Notes`
+
+After completing this step, your schema defines both structure and GUI behavior for the main experiment fields.
+
+??? task "Checkpoint 3 - Test your schema in NOMAD"
     This is the complete `polymer_processing.archive.yaml` file up to this point. Use it as a checkpoint to compare against your file.
 
     ```yaml
@@ -258,33 +272,30 @@ You have reached the milestone: your schema is now functional, so you can upload
                 eln:
                   component: RichTextEditQuantity
     ```
+    You have reached the milestone: your schema is now functional.
 
-You can now upload this file to NOMAD and verify that it creates an ELN entry with the fields you defined.
+    You can now upload this file to NOMAD and verify that it creates an ELN entry with the fields you defined.
 
-<p><strong>Use the arrow buttons ⬅️➡️ below to follow the steps for uploading the schema and creating a test ELN entry.</strong></p>
-<div class="image-slider" id="slider_milestone_custom_yaml">
-    <div class="nav-arrow left" id="prev_milestone_custom_yaml">←</div>
-    <img src="images/mileston_custom_yaml_1.png" alt="Step 1" class="active">
-    <img src="images/mileston_custom_yaml_2.png" alt="Step 2">
-    <img src="images/mileston_custom_yaml_3.png" alt="Step 3">
-    <img src="images/mileston_custom_yaml_4.png" alt="Step 4">
-    <img src="images/mileston_custom_yaml_5.png" alt="Step 5">
-    <div class="nav-arrow right" id="next_milestone_custom_yaml">→</div>
-</div>
+    <p><strong>Use the arrow buttons ⬅️➡️ below to follow the steps for uploading the schema and creating a test ELN entry.</strong></p>
+    <div class="image-slider" id="slider_milestone_custom_yaml">
+        <div class="nav-arrow left" id="prev_milestone_custom_yaml">←</div>
+        <img src="images/mileston_custom_yaml_1.png" alt="Step 1" class="active">
+        <img src="images/mileston_custom_yaml_2.png" alt="Step 2">
+        <img src="images/mileston_custom_yaml_3.png" alt="Step 3">
+        <img src="images/mileston_custom_yaml_4.png" alt="Step 4">
+        <img src="images/mileston_custom_yaml_5.png" alt="Step 5">
+        <div class="nav-arrow right" id="next_milestone_custom_yaml">→</div>
+    </div>
 
 ---
 
 ## Step 6: Add subsections for sample, solution, and processing
 
-Now extend your ELN schema by adding subsections under `Experiment_Information`. Subsections allow you to group related information,such as sample details, solution composition, and preparation steps, into separate blocks within the ELN template.
+Subsections define nested sections within a section. They allow you to group related information,such as sample details, solution composition, and preparation steps, into separate blocks within the ELN template.
 
-- Introduce the keyword `sub_sections:` inside the `Experiment_Information` section. Place `sub_sections:` at the same indentation level as `base_sections:` and `quantities:`. 
+In this step, you will extend your ELN schema by adding subsections under `Experiment_Information:` using the `sub_sections:` key.  
 
-- Under `sub_sections:`, list the subsection names (`Sample`, `Solution`, and `Preparation`). 
-
-- For each subsection, add the keyword `section:` one level deeper. The `section:` keyword indicates that a new section definition follows.
-
-Based on the instructions above, you should have a structure like this, with the keyword `sub_sections:` aligned with the `base_sections:` and `quantities:` keywords of your main section `Experiment_Information`:
+Define the subsections `Sample`, `Solution`, and `Preparation`, by adding the following content to the schema file: 
 
 ```yaml
       sub_sections:
@@ -299,11 +310,65 @@ Based on the instructions above, you should have a structure like this, with the
             ...
 ```
 
-Next, you  define each subsection (`Sample`, `Solution`, and `Preparation`) using the same building blocks as you learned in steps 3 to 5, such as `base_sections:`, `quantities:`, and `m_annotations:`). These elements go under `section:` and are indented one level (two spaces) deeper.
+- The `sub_sections:` key introduces nested sections inside Experiment_Information.
 
-**The sample subsection:**
+- Each subsection is defined by a name (for example, `Sample` or `Solution`)
 
-First, define the `Sample` subsection. NOMAD already provides a generic base section for samples: `nomad.datamodel.metainfo.eln.ELNSample`. By inheriting from it, you reuse NOMAD’s built-in sample structure instead of defining all sample quantities yourself. You can then tailor what is shown in the ELN by annotating the subsection and hiding inherited fields you don’t need.
+- The `section:` key indicates that a section definition follows.
+
+??? task "Checkpoint 4"
+    This is the complete `polymer_processing.archive.yaml` file up to this point. Use it as a checkpoint to compare against your file.
+
+    ```yaml
+    definitions:
+      name: Processing of polymers thin-films
+      sections:
+        Experiment_Information:
+          base_sections:
+            - nomad.datamodel.data.EntryData
+          quantities:
+            Name:
+              type: str
+              default: Experiment title
+              m_annotations:
+                eln:
+                  component: StringEditQuantity
+            Researcher:
+              type: str
+              default: Name of the researcher who performed the experiment
+              m_annotations:
+                eln:
+                  component: StringEditQuantity
+            Date:
+              type: Datetime
+              m_annotations:
+                eln:
+                  component: DateTimeEditQuantity
+            Additional_Notes:
+              type: str
+              m_annotations:
+                eln:
+                  component: RichTextEditQuantity
+          sub_sections:
+            Sample:
+              section:
+            Solution:
+              section:
+            Preparation:
+              section:
+    ```
+
+Next, you will define each subsection (`Sample`, `Solution`, and `Preparation`) using the same building blocks introduced in steps 3 to 5, such as `base_sections:`, `quantities:`, and `m_annotations:`. 
+
+These elements go under `section:` and are indented one level deeper with respect to it.
+
+**The sample subsection**
+
+NOMAD already provides a generic base section for samples, i.e. `nomad.datamodel.metainfo.eln.ELNSample`. 
+By inheriting from it, you reuse NOMAD’s built-in sample structure instead of defining all the quantities yourself. 
+You can then tailor what is shown in the ELN by annotating the subsection and hiding inherited fields you don’t need.
+
+Add the following content to the schema file:
 
 ```yaml
             base_sections:
@@ -314,17 +379,19 @@ First, define the `Sample` subsection. NOMAD already provides a generic base sec
                 hide: ['chemical_formula']
 ```
 
-**Where to paste:** under `sub_sections:` → `Sample:` → `section:` (i.e., replace the placeholder content inside the `Sample` subsection definition, such that the `base_sections:` keyword of the above snippet is one level, i.e., two spaces, indented with respect to the `section:` keyword.
+**Where to paste:** under `sub_sections:` → `Sample:` → `section:`, with the `base_sections:` key of the above snippet is one level, i.e., two spaces, indented with respect to the `section:` key.
 
-In the above snippet, `overview: true` instructs NOMAD to show the quantities of the subsection in the entry’s **OVERVIEW** tab in the GUI. The `hide: ['chemical_formula']` line, hides the `chemical_formula` field (inherited from `nomad.datamodel.metainfo.eln.ELNSample`) from your custom ELN.
+- In the above snippet, `overview: true` instructs NOMAD to show the quantities of the subsection in the entry’s **OVERVIEW** tab in the GUI. 
+
+- The `hide: ['chemical_formula']` line, hides the `chemical_formula` field (inherited from `nomad.datamodel.metainfo.eln.ELNSample`) from your custom ELN.
 
 **The solution subsection:**
 
-Now, let’s define the `Solution` subsection. Like `Sample`, it inherits from NOMAD’s built-in sample base section `nomad.datamodel.metainfo.eln.ELNSample`. Here, you also hide inherited fields you don’t need, and you add a new quantity `Concentration` to capture a numeric value with a unit.
+Define the `Solution` subsection by inheriting from the base section `nomad.datamodel.metainfo.eln.ELNSample`, hiding the inherited fields `chemical_formula` and `description`, and adding a new quantity `Concentration` to capture a numeric value with a unit.
+
+To achieve this, add the following content to your schema file:
 
 ```yaml
-        Solution:
-          section:
             base_sections:
               - nomad.datamodel.metainfo.eln.ELNSample
             m_annotations:
@@ -340,14 +407,105 @@ Now, let’s define the `Solution` subsection. Like `Sample`, it inherits from N
                     component: NumberEditQuantity
 ```
 
-**Where to paste:** paste the above snippet (the `Solution:` section definition) inside your `sub_sections:` list, aligned with `Sample:` and `Preparation:` section definitions. It should replace the placeholder `Solution: section: ...` block.
+**Where to paste:** under `sub_sections:` → `Solution:` → `section:`, with the `base_sections:` key of the above snippet is one level, i.e., two spaces, indented with respect to the `section:` key.
 
-In addition to hiding `chemical_formula`, this subsection also hides the inherited `description` field. It introduces a new quantity `Concentration` as a numeric value (`type: np.float64`) with unit `mg/ml`, rendered in the GUI as an ELN editable numerical field using `component: NumberEditQuantity`.
+- `overview: true` shows the Solution subsection in the entry’s OVERVIEW tab in the GUI.
 
+- `hide: ['chemical_formula', 'description']` hides inherited fields from ELNSample that are not needed in this template.
 
-Now extend the `Solution` subsection with two nested subsections, `Solute` and `Solvent`. This lets you record the solution composition by linking to existing substance entries and capturing the corresponding mass and volume.
+- The `Concentration` quantity adds a numeric field with the `unit` mg/ml, rendered in the GUI using `NumberEditQuantity`.
 
-Paste the following `sub_sections:` block inside the `Solution` definition, aligned with the existing `quantities:` block in `Solution`.
+**The preparation subsection**
+
+NOMAD already provides a generic base section for processes, i.e. `nomad.datamodel.metainfo.eln.Process`. By inheriting from it, you can document preparation steps using NOMAD’s built-in process structure instead of defining all the quantities yourself.
+
+Add the following content to the schema file:
+
+```yaml
+            base_sections:
+              - nomad.datamodel.metainfo.eln.Process
+            m_annotations:
+              eln:
+                overview: true
+```
+
+**Where to paste:** under `sub_sections:` → `Preparation:` → `section:`, with the `base_sections:` key of the above snippet is one level, i.e., two spaces, indented with respect to the `section:` key.
+
+??? task "Checkpoint 5"
+    This is the complete `polymer_processing.archive.yaml` file up to this point. Use it as a checkpoint to compare against your file.
+
+    ```yaml
+    definitions:
+      name: Processing of polymers thin-films
+      sections:
+        Experiment_Information:
+          base_sections:
+            - nomad.datamodel.data.EntryData
+          quantities:
+            Name:
+              type: str
+              default: Experiment title
+              m_annotations:
+                eln:
+                  component: StringEditQuantity
+            Researcher:
+              type: str
+              default: Name of the researcher who performed the experiment
+              m_annotations:
+                eln:
+                  component: StringEditQuantity
+            Date:
+              type: Datetime
+              m_annotations:
+                eln:
+                  component: DateTimeEditQuantity
+            Additional_Notes:
+              type: str
+              m_annotations:
+                eln:
+                  component: RichTextEditQuantity
+          sub_sections:
+            Sample:
+              section:
+                base_sections:
+                  - nomad.datamodel.metainfo.eln.ELNSample
+                m_annotations:
+                  eln:
+                    overview: true
+                    hide: ['chemical_formula']
+            Solution:
+              section:
+                base_sections:
+                  - nomad.datamodel.metainfo.eln.ELNSample
+                m_annotations:
+                  eln:
+                    overview: true
+                    hide: ['chemical_formula', 'description']
+                quantities:
+                  Concentration:
+                    type: np.float64
+                    unit: mg/ml
+                    m_annotations:
+                      eln:
+                        component: NumberEditQuantity
+            Preparation:
+              section:
+                base_sections:
+                  - nomad.datamodel.metainfo.eln.Process
+                m_annotations:
+                  eln:
+                    overview: true
+    ```
+
+---
+
+**Nested subsections**
+
+It is also possible to define subsections within other subsections. In this case, you will extend the `Solution` subsection by adding two nested subsections, `Solute` and `Solvent`.
+
+These nested subsections allow you to record the solution composition by linking to existing substance entries and capturing the corresponding mass and volume.
+
+Add the following `sub_sections:` block inside the `Solution` subsection:
 
 ```yaml
             sub_sections:
@@ -382,26 +540,14 @@ Paste the following `sub_sections:` block inside the `Solution` definition, alig
                           component: NumberEditQuantity
                           defaultDisplayUnit: milliliter
 ```
+**Where to paste:** inside `Solution:` → `section:`, at the same indentation level as `base_sections:`, `m_annotations:`, and `quantities:`.
 
-In this snippet, the `Substance` quantity uses `ReferenceEditQuantity` so you can link to an existing `ELNSubstance` entry in your upload. `Mass` and `Volume` are numeric ELN inputs with physical units, and `defaultDisplayUnit` controls which unit is shown by default in the GUI.
+- The `Substance` quantity uses `ReferenceEditQuantity` to link to an existing `ELNSubstance` entry.
 
-**The preparation subsection**
+- `Mass` and `Volume` are numeric quantities with physical units.
 
-Finally, define the `Preparation` subsection. NOMAD provides a base section for processes: `nomad.datamodel.metainfo.eln.Process`. By inheriting from it, you can document preparation steps using NOMAD’s built-in process structure.
+- `defaultDisplayUnit` controls which unit is shown by default in the GUI.
 
-```yaml
-        Preparation:
-          section:
-            base_sections:
-              - nomad.datamodel.metainfo.eln.Process
-            m_annotations:
-              eln:
-                overview: true
-```
-
-**Where to paste:** paste this `Preparation:` section definition under `sub_sections:`, aligned with `Sample` and `Solution` section definitions.
-
----
 
 ??? warning "Indentation check"
     Indentation matters in YAML because it defines the structure of your schema.
@@ -410,7 +556,7 @@ Finally, define the `Preparation` subsection. NOMAD provides a base section for 
     - Keys that define a section (`base_sections`, `quantities`, `sub_sections`, `m_annotations`) must be indented one level (two spaces) deeper than the section name.
     - Keys that define a quantity (`type`, `unit`, `default`, `m_annotations`) must be indented one level (two spaces) deeper than the quantity name.
 
-??? task "Checkpoint 3 (final file)"
+??? task "Checkpoint 6 (final file)"
     This is the complete `polymer_processing.archive.yaml` file up to this point. Use it as a checkpoint to compare against your file.
 
     ```yaml
@@ -524,168 +670,3 @@ You can now upload this file to NOMAD and verify that it creates an ELN entry wi
     <img src="images/final_custom_yaml_5.png" alt="Step 5">
     <div class="nav-arrow right" id="next_final_custom_yaml">→</div>
 </div>
-
-??? info "Reference appendix: the 6 guidelines to make a customized YAML schema package (optional)"
-    This appendix is a reference copy of the six guidelines that the tutorial steps build on.
-
-    ## Guidelines for building a custom schema
-
-    To define custom YAML schemas in NOMAD, you need to create a YAML file with the `.archive.yaml` extension. These files represent a [schema package](../../reference/glossary.md#schema-package), which can include one or more section and quantity definitions. Below are six main guidelines for creating a custom YAML schema file.
-
-    ??? info "1. NOMAD's `archive.yaml` files start with the `definitions:` keyword, and must have a `name:`, and can have a `description:`."
-
-        NOMAD syntax:
-        ```yaml
-        definitions:
-          name: ...
-          description: ...
-        ```
-
-        Example:
-        ```yaml
-        definitions:
-          name: My NOMAD Custom Schema
-          description: This is a custom schema that includes several sections.
-        ```
-    ??? info "2. A schema can have several sections."
-
-        The keyword to introduce different sections of a schema is `sections:`.
-
-        NOMAD syntax:
-
-        ```yaml
-        definitions:
-          name: ...
-          description: ...
-
-          sections:
-            MyFirstSection: ...
-            MySecondSection: ...
-            MyThirdSection: ...
-        ```
-
-    ??? info "3. Sections can inherit from NOMAD's `base_sections` or other sections."
-        When inheriting structure and definition from an existing section, use the `base_sections:` keyword and list the desired base sections you would like to inherit from. The keyword `base_sections:` additionally allows you to also inherit from other sections (e.g., within the same schema or even a section that have been published in NOMAD, see [schema package references in NOMAD Documentation](https://nomad-lab.eu/prod/v1/docs/howto/customization/basics.html#schema-package-references){:target="_blank" rel="noopener"}). Inherited sections can be given in a python list, or subsequent indented lines starting with a dash, `-`.
-
-        Example:
-
-        ```yaml
-        definitions:
-          name: My NOMAD Custom Schema
-          description: This is a custom schema that includes several sections.
-
-          sections:
-            MyFirstSection:
-              base_sections:
-                - nomad.datamodel.data.EntryData
-                - nomad.datamodel.metainfo.eln.ELNSample
-
-            MySecondSection: ...
-            MyThirdSection: ...
-        ```
-
-        or alternatively in the form of a Python list:
-
-        ```yaml
-        definitions:
-          name: My NOMAD Custom Schema
-          description: This is a custom schema that includes several sections.
-
-          sections:
-            MyFirstSection:
-              base_sections: ['nomad.datamodel.data.EntryData', 'nomad.datamodel.metainfo.eln.ELNSample']
-
-            MySecondSection: ...
-            MyThirdSection: ...
-        ```
-
-    ??? info "4. Each section can contain quantities, other sections, and subsections."
-        Each section can define quantities, representing parameters such as measurement conditions or sample properties. In addition, sections **can also contain** subsections. When including subsections, you need to tell NOMAD the subsections you included are themselves a section. How? By including the keyword `section:` in the next indented line (see bottom example). A list of editable quantities can be found [here](https://nomad-lab.eu/prod/v1/gui/dev/editquantity){:target="_blank" rel="noopener"}.
-
-        NOMAD syntax is:
-
-        ```yaml
-        definitions:
-          name: My NOMAD Custom Schema
-          description: This is a custom schema that includes several sections.
-
-          sections:
-            MyFirstSection:
-              base_sections:
-                - nomad.datamodel.data.EntryData
-                - nomad.datamodel.metainfo.eln.ELNSample
-              quantities:
-                first_quantity:
-                  type: str # Uses python type notation like: int, np.float64, etc.
-              sub_sections:
-                my_first_subsection:
-                  section: ...
-                my_second_subsection:
-                  section: ...
-            MySecondSection: ...
-            MyThirdSection: ...
-        ```
-
-    ??? info "5. Quantities can be defined with type, shape, unit and other properties"
-        Quantities define possible primitive values. The basic properties that can go into a quantity definition are `type`, `shape`, and `unit`.
-
-        ```yaml
-        definitions:
-          name: My NOMAD Custom Schema
-          description: This is a custom schema that includes several sections.
-
-          sections:
-            MyFirstSection:
-              base_sections:
-                - nomad.datamodel.data.EntryData
-                - nomad.datamodel.metainfo.eln.ELNSample
-              quantities:
-                first_quantity:
-                  type: #For example, str or np.float64
-                  shape: #For example scalar or list (['*'])
-                  unit: #For example, meters, amperes, or seconds
-              sub_sections:
-                my_first_subsection:
-                  section: ...
-                my_second_subsection:
-                  section: ...
-                my_third_subsection:
-                  section: ...
-
-            MySecondSection: ...
-            MyThirdSection: ...
-        ```
-
-    ??? info "6. Sections and quantities can have annotations"
-        Annotations provide additional information that NOMAD can use to alter its behavior around these definitions and how users can interact with them. The keyword for annotations is `m_annotations:`.
-        Among the various functionalities that annotations provide, they enable the transformation of schema sections, subsections, and quantities into ELN components that users can edit directly within the GUI.
-
-        ```yaml
-        definitions:
-          name: My NOMAD Custom Schema
-          description: This is an electronic lab notebook schema that includes several sections.
-
-          sections:
-            MyFirstSection:
-              base_sections:
-                - nomad.datamodel.data.EntryData
-                - nomad.datamodel.metainfo.eln.ELNSample
-              quantities:
-                first_quantity:
-                  type: #For example, str or np.float64
-                  shape: #For example scalar or list (['*'])
-                  unit: #For example, meters, amperes, or seconds
-                  m_annotations:
-                    annotation_name:
-                      key1: value1
-              sub_sections:
-                my_first_subsection:
-                  section: ...
-                my_second_subsection:
-                  section: ...
-                my_third_subsection:
-                  section: ...
-
-            MySecondSection: ...
-            MyThirdSection: ...
-        ```
