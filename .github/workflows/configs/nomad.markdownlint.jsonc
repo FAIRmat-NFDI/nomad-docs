@@ -83,5 +83,9 @@
             "here", // case-insensitive
             "link"
         ]
+    },
+    // MD060 - Table column style
+    "MD060": {
+	    "style": "any"
     }
 }
