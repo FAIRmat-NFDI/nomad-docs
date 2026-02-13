@@ -4,14 +4,14 @@ This directory contains scripts for automating documentation tasks.
 
 ## generate_plugin_registry.py
 
-Automatically generates the [Plugin Registry](../docs/examples/plugin_registry.md) page by querying the NOMAD API for all plugins owned by the FAIRmat-NFDI and nomad-coe GitHub organizations.
+Automatically generates the [Plugin Registry](../docs/examples/plugin_registry.md) page by querying the NOMAD API for all available plugin entries.
 
 ### Features
 
 - Queries the NOMAD Oasis API for plugin metadata
-- Filters plugins by GitHub organization (default: FAIRmat-NFDI)
-- Generates statistics (total plugins, PyPI availability, deployment status, plugin types)
+- Retrieves all plugin entries from NOMAD (no owner restriction)
 - Creates a quick reference table with key metadata
+- Adds interactive filtering (entry-point type and owner: FAIRmat, Non-FAIRmat, and owners with 5+ plugins)
 - Provides detailed information for each plugin including:
   - Description and repository links
   - Stars, creation/update dates
@@ -31,7 +31,7 @@ uv run python scripts/generate_plugin_registry.py
 ```
 
 The script will:
-1. Query the NOMAD API at `https://nomad-lab.eu/prod/v1/oasis/api/v1/entries/query`
+1. Query the NOMAD API at `https://nomad-lab.eu/prod/v1/api/v1/entries/query` (and fall back to `.../oasis/...` if needed)
 2. Extract and process plugin metadata
 3. Generate the markdown file at `docs/examples/plugin_registry.md`
 
@@ -49,15 +49,8 @@ The workflow will:
 
 ### Configuration
 
-To change the GitHub organizations being queried, modify the `GITHUB_ORGS` list in the script:
-
-```python
-GITHUB_ORGS = ["FAIRmat-NFDI", "nomad-coe"]  # Add or remove organizations as needed
-```
-
 To change the NOMAD API endpoint (e.g., for different deployments):
 
 ```python
-NOMAD_API_URL = "https://nomad-lab.eu/prod/v1/oasis/api/v1"  # Modify as needed
+NOMAD_API_URL = "https://nomad-lab.eu/prod/v1/api/v1"  # Modify as needed
 ```
-

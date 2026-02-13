@@ -227,8 +227,8 @@
 }
 
 .plugin-registry-filter {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: auto minmax(10rem, 15rem) auto minmax(10rem, 15rem) auto minmax(10rem, 14rem) auto 1fr;
     align-items: center;
     gap: 0.75rem;
     margin: 0.75rem 0 1rem 0;
@@ -241,11 +241,12 @@
 .plugin-registry-filter__label {
     font-weight: 600;
     color: #2a4cdf;
+    white-space: nowrap;
 }
 
 .plugin-registry-filter__select {
-    min-width: 14rem;
-    max-width: 100%;
+    min-width: 0;
+    width: 100%;
     padding: 0.35rem 0.5rem;
     border: 1px solid rgba(42, 76, 223, 0.25);
     border-radius: 0.35rem;
@@ -253,6 +254,9 @@
 }
 
 .plugin-registry-filter__clear {
+    grid-column: 5;
+    grid-row: 2;
+    justify-self: start;
     padding: 0.35rem 0.7rem;
     border: 1px solid rgba(42, 76, 223, 0.3);
     border-radius: 0.35rem;
@@ -262,8 +266,21 @@
     font-weight: 600;
 }
 
+.plugin-registry-filter__label--sort {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.plugin-registry-filter__sort {
+    grid-column: 2 / 5;
+    grid-row: 2;
+}
+
 .plugin-registry-filter__count {
-    margin-left: auto;
+    grid-column: 1 / -1;
+    grid-row: 3;
+    display: block;
+    margin-top: 0.15rem;
     color: rgba(0, 0, 0, 0.7);
     font-size: 0.85rem;
 }
@@ -280,7 +297,17 @@
     margin: 0 0 0.6rem 0;
 }
 
-.plugin-registry-chart__content {
+.plugin-registry-chart__panels {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.plugin-registry-chart__panel-title {
+    margin: 0 0 0.5rem 0;
+}
+
+.plugin-registry-chart__panel-content {
     display: grid;
     grid-template-columns: 170px 1fr;
     gap: 1rem;
@@ -390,7 +417,27 @@
 }
 
 @media (max-width: 48rem) {
-    .plugin-registry-chart__content {
+    .plugin-registry-filter {
+        grid-template-columns: 1fr;
+    }
+
+    .plugin-registry-filter__label--sort,
+    .plugin-registry-filter__sort,
+    .plugin-registry-filter__clear,
+    .plugin-registry-filter__count {
+        grid-column: auto;
+        grid-row: auto;
+    }
+
+    .plugin-registry-filter__count {
+        justify-self: start;
+    }
+
+    .plugin-registry-chart__panels {
+        grid-template-columns: 1fr;
+    }
+
+    .plugin-registry-chart__panel-content {
         grid-template-columns: 1fr;
     }
 
@@ -399,8 +446,5 @@
         height: 130px;
     }
 
-    .plugin-registry-filter__count {
-        width: 100%;
-        margin-left: 0;
-    }
+    .plugin-registry-filter__count { width: 100%; margin-left: 0; }
 }

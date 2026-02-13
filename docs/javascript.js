@@ -65,7 +65,15 @@ function initPluginRegistryFilters() {
                 row.querySelector("details");
 
             if (!isDetailsRow) {
-                currentGroup = { mainRow: row, detailRow: null, types: [] };
+                currentGroup = {
+                    mainRow: row,
+                    detailRow: null,
+                    types: [],
+                    ownerNormalized: "",
+                    ownerDisplay: "",
+                    pluginName: "",
+                    stars: 0
+                };
                 groupedRows.push(currentGroup);
             } else if (currentGroup && !currentGroup.detailRow) {
                 currentGroup.detailRow = row;
@@ -95,8 +103,68 @@ function initPluginRegistryFilters() {
                 .filter((item) => item && item !== "—");
         }
 
+        function extractOwnerInfo(mainRow, detailRow) {
+            if (mainRow.dataset.owner) {
+                const owner = (mainRow.dataset.owner || "").trim();
+                return { normalized: normalize(owner), display: owner };
+            }
+
+            if (!detailRow) {
+                return { normalized: "", display: "" };
+            }
+
+            const ownerLabel = Array.from(detailRow.querySelectorAll("strong")).find((node) =>
+                normalize(node.textContent).startsWith("owner:")
+            );
+            if (!ownerLabel) {
+                return { normalized: "", display: "" };
+            }
+
+            let textNode = ownerLabel.nextSibling;
+            while (textNode && !(textNode.textContent || "").trim()) {
+                textNode = textNode.nextSibling;
+            }
+            const owner = ((textNode && textNode.textContent) || "").trim();
+            return { normalized: normalize(owner), display: owner };
+        }
+
+        function extractPluginName(mainRow) {
+            if (mainRow.dataset.pluginName) {
+                return (mainRow.dataset.pluginName || "").trim();
+            }
+            const strong = mainRow.querySelector("td strong");
+            if (!strong) {
+                return "";
+            }
+            return (strong.textContent || "").trim();
+        }
+
+        function extractStars(mainRow) {
+            if (mainRow.dataset.stars) {
+                const parsed = Number.parseInt(mainRow.dataset.stars, 10);
+                return Number.isFinite(parsed) ? parsed : 0;
+            }
+            const firstCell = mainRow.querySelector("td");
+            const text = (firstCell?.textContent || "");
+            const match = text.match(/⭐\s*(\d+)/);
+            if (!match) {
+                return 0;
+            }
+            const parsed = Number.parseInt(match[1], 10);
+            return Number.isFinite(parsed) ? parsed : 0;
+        }
+
+        function isFairmatOwner(ownerNormalized) {
+            return ["fairmat-nfdi", "nomad-coe", "nomadcoe"].includes(ownerNormalized);
+        }
+
         groupedRows.forEach((group) => {
             group.types = extractTypes(group.mainRow);
+            const ownerInfo = extractOwnerInfo(group.mainRow, group.detailRow);
+            group.ownerNormalized = ownerInfo.normalized;
+            group.ownerDisplay = ownerInfo.display;
+            group.pluginName = extractPluginName(group.mainRow);
+            group.stars = extractStars(group.mainRow);
         });
 
         const availableTypes = Array.from(
@@ -118,8 +186,24 @@ function initPluginRegistryFilters() {
         function titleCase(value) {
             return (value || "")
                 .split(" ")
-                .map((word) => word ? word.charAt(0).toUpperCase() + word.slice(1) : "")
+                .map((word) => {
+                    const normalizedWord = normalize(word);
+                    if (normalizedWord === "api") {
+                        return "API";
+                    }
+                    return word ? word.charAt(0).toUpperCase() + word.slice(1) : "";
+                })
                 .join(" ");
+        }
+
+        function formatLegendLabel(label) {
+            if (normalize(label) === "fairmat") {
+                return "FAIRmat";
+            }
+            if (normalize(label) === "unknown") {
+                return "Unknown";
+            }
+            return titleCase(label);
         }
 
         function findPreviousSiblingWithAttr(startNode, attrName) {
@@ -138,19 +222,49 @@ function initPluginRegistryFilters() {
             table.parentNode.insertBefore(filterRoot, table);
         }
 
-        let filterLabel = filterRoot.querySelector(".plugin-registry-filter__label");
+        let filterLabel = filterRoot.querySelector(".plugin-registry-filter__label--type");
         if (!filterLabel) {
             filterLabel = document.createElement("label");
-            filterLabel.className = "plugin-registry-filter__label";
+            filterLabel.className = "plugin-registry-filter__label plugin-registry-filter__label--type";
             filterLabel.textContent = "Containing";
             filterRoot.appendChild(filterLabel);
         }
 
-        let filterSelect = filterRoot.querySelector(".plugin-registry-filter__select");
+        let filterSelect = filterRoot.querySelector(".plugin-registry-filter__type");
         if (!filterSelect) {
             filterSelect = document.createElement("select");
-            filterSelect.className = "plugin-registry-filter__select";
+            filterSelect.className = "plugin-registry-filter__select plugin-registry-filter__type";
             filterRoot.appendChild(filterSelect);
+        }
+
+        let ownerLabel = filterRoot.querySelector(".plugin-registry-filter__label--owner");
+        if (!ownerLabel) {
+            ownerLabel = document.createElement("label");
+            ownerLabel.className = "plugin-registry-filter__label plugin-registry-filter__label--owner";
+            ownerLabel.textContent = "Owner";
+            filterRoot.appendChild(ownerLabel);
+        }
+
+        let ownerSelect = filterRoot.querySelector(".plugin-registry-filter__owner");
+        if (!ownerSelect) {
+            ownerSelect = document.createElement("select");
+            ownerSelect.className = "plugin-registry-filter__select plugin-registry-filter__owner";
+            filterRoot.appendChild(ownerSelect);
+        }
+
+        let sortLabel = filterRoot.querySelector(".plugin-registry-filter__label--sort");
+        if (!sortLabel) {
+            sortLabel = document.createElement("label");
+            sortLabel.className = "plugin-registry-filter__label plugin-registry-filter__label--sort";
+            sortLabel.textContent = "Sort";
+            filterRoot.appendChild(sortLabel);
+        }
+
+        let sortSelect = filterRoot.querySelector(".plugin-registry-filter__sort");
+        if (!sortSelect) {
+            sortSelect = document.createElement("select");
+            sortSelect.className = "plugin-registry-filter__select plugin-registry-filter__sort";
+            filterRoot.appendChild(sortSelect);
         }
 
         let clearButton = filterRoot.querySelector(".plugin-registry-filter__clear");
@@ -169,69 +283,245 @@ function initPluginRegistryFilters() {
             countNode.setAttribute("aria-live", "polite");
             filterRoot.appendChild(countNode);
         }
+        if (countNode.parentElement === filterRoot) {
+            filterRoot.appendChild(countNode);
+        }
 
         if (!filterSelect.id) {
             filterSelect.id = `plugin-registry-type-filter-${tableIndex}`;
         }
         filterLabel.setAttribute("for", filterSelect.id);
+        if (!ownerSelect.id) {
+            ownerSelect.id = `plugin-registry-owner-filter-${tableIndex}`;
+        }
+        ownerLabel.setAttribute("for", ownerSelect.id);
+        if (!sortSelect.id) {
+            sortSelect.id = `plugin-registry-sort-${tableIndex}`;
+        }
+        sortLabel.setAttribute("for", sortSelect.id);
 
         let chartRoot = findPreviousSiblingWithAttr(table, "data-plugin-registry-chart");
         if (!chartRoot) {
             chartRoot = document.createElement("div");
             chartRoot.className = "plugin-registry-chart";
             chartRoot.setAttribute("data-plugin-registry-chart", "true");
-            chartRoot.innerHTML = `
-                <p class="plugin-registry-chart__title"><strong>Plugin Type Distribution (Filtered)</strong></p>
-                <div class="plugin-registry-chart__content">
-                    <div class="plugin-registry-chart__pie-wrap">
-                        <div class="plugin-registry-chart__pie" role="img" aria-label="Plugin type distribution pie chart">
-                            <span class="plugin-registry-chart__pie-total">0</span>
-                        </div>
-                    </div>
-                    <div class="plugin-registry-chart__legend"></div>
-                </div>`;
             table.parentNode.insertBefore(chartRoot, table);
+        }
+
+        const chartPanelsMarkup = `
+            <p class="plugin-registry-chart__title"><strong>Filtered Distributions</strong></p>
+            <div class="plugin-registry-chart__panels">
+                <section class="plugin-registry-chart__panel" data-chart-kind="type">
+                    <p class="plugin-registry-chart__panel-title"><strong>Containing (Type)</strong></p>
+                    <div class="plugin-registry-chart__panel-content">
+                        <div class="plugin-registry-chart__pie-wrap">
+                            <div class="plugin-registry-chart__pie" role="img" aria-label="Plugin type distribution pie chart">
+                                <span class="plugin-registry-chart__pie-total">0</span>
+                            </div>
+                        </div>
+                        <div class="plugin-registry-chart__legend"></div>
+                    </div>
+                </section>
+                <section class="plugin-registry-chart__panel" data-chart-kind="owner">
+                    <p class="plugin-registry-chart__panel-title"><strong>Owner</strong></p>
+                    <div class="plugin-registry-chart__panel-content">
+                        <div class="plugin-registry-chart__pie-wrap">
+                            <div class="plugin-registry-chart__pie" role="img" aria-label="Plugin owner distribution pie chart">
+                                <span class="plugin-registry-chart__pie-total">0</span>
+                            </div>
+                        </div>
+                        <div class="plugin-registry-chart__legend"></div>
+                    </div>
+                </section>
+            </div>`;
+
+        const hasTypePanel = !!chartRoot.querySelector('[data-chart-kind="type"]');
+        const hasOwnerPanel = !!chartRoot.querySelector('[data-chart-kind="owner"]');
+        if (!hasTypePanel || !hasOwnerPanel) {
+            chartRoot.innerHTML = chartPanelsMarkup;
         }
 
         if (filterRoot.nextElementSibling !== chartRoot) {
             filterRoot.insertAdjacentElement("afterend", chartRoot);
         }
 
-        const pieNode = chartRoot.querySelector(".plugin-registry-chart__pie");
-        const pieTotalNode = chartRoot.querySelector(".plugin-registry-chart__pie-total");
-        const pieLegendNode = chartRoot.querySelector(".plugin-registry-chart__legend");
+        const typePanel = chartRoot.querySelector('[data-chart-kind="type"]');
+        const ownerPanel = chartRoot.querySelector('[data-chart-kind="owner"]');
+        const typePieNode = typePanel?.querySelector(".plugin-registry-chart__pie");
+        const typePieTotalNode = typePanel?.querySelector(".plugin-registry-chart__pie-total");
+        const typePieLegendNode = typePanel?.querySelector(".plugin-registry-chart__legend");
+        const ownerPieNode = ownerPanel?.querySelector(".plugin-registry-chart__pie");
+        const ownerPieTotalNode = ownerPanel?.querySelector(".plugin-registry-chart__pie-total");
+        const ownerPieLegendNode = ownerPanel?.querySelector(".plugin-registry-chart__legend");
 
-        const optionValues = new Set(
-            Array.from(filterSelect.options).map((option) => normalize(option.value))
-        );
-        if (!optionValues.has("")) {
-            const allOption = document.createElement("option");
-            allOption.value = "";
-            allOption.textContent = "All entry point types";
-            filterSelect.appendChild(allOption);
-        }
-        for (const type of availableTypes) {
-            if (!optionValues.has(type)) {
-                const option = document.createElement("option");
-                option.value = type;
-                option.textContent = type
-                    .split(" ")
-                    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                    .join(" ");
-                filterSelect.appendChild(option);
+        function renderPieChart(pieNode, pieTotalNode, pieLegendNode, countsMap, totalValue, labelBase) {
+            if (!pieNode || !pieTotalNode || !pieLegendNode) {
+                return;
             }
+
+            const sortedCounts = Array.from(countsMap.entries()).sort((a, b) => b[1] - a[1]);
+            const totalSlices = sortedCounts.reduce((sum, [, count]) => sum + count, 0);
+
+            if (!sortedCounts.length || totalSlices <= 0) {
+                pieNode.style.background = "#e5e7eb";
+                pieLegendNode.innerHTML = '<p class="plugin-registry-chart__empty">No visible items.</p>';
+                pieTotalNode.textContent = "0";
+                pieNode.setAttribute("aria-label", `${labelBase} pie chart: no visible items`);
+                return;
+            }
+
+            let running = 0;
+            const segments = sortedCounts.map(([, count], index) => {
+                const start = (running / totalSlices) * 100;
+                running += count;
+                const end = (running / totalSlices) * 100;
+                const color = chartColors[index % chartColors.length];
+                return `${color} ${start}% ${end}%`;
+            });
+            pieNode.style.background = `conic-gradient(${segments.join(", ")})`;
+            pieTotalNode.textContent = `${totalValue}`;
+            pieNode.setAttribute(
+                "aria-label",
+                `${labelBase} pie chart for ${totalValue} visible plugins`
+            );
+
+            pieLegendNode.innerHTML = sortedCounts
+                .map(([label, count], index) => {
+                    const color = chartColors[index % chartColors.length];
+                    return `<div class="plugin-registry-chart__legend-item">
+                        <span class="plugin-registry-chart__legend-swatch" style="background:${color}"></span>
+                        <span class="plugin-registry-chart__legend-label">${formatLegendLabel(label)}</span>
+                        <span class="plugin-registry-chart__legend-value">${count}</span>
+                    </div>`;
+                })
+                .join("");
         }
+
+        filterSelect.innerHTML = "";
+        const allTypeOption = document.createElement("option");
+        allTypeOption.value = "";
+        allTypeOption.textContent = "All entry point types";
+        filterSelect.appendChild(allTypeOption);
+        for (const type of availableTypes) {
+            const option = document.createElement("option");
+            option.value = type;
+            option.textContent = titleCase(type);
+            filterSelect.appendChild(option);
+        }
+
+        const OWNER_FILTER_MIN_COUNT = 5;
+        const majorOwnerDisplayByNormalized = new Map();
+        const ownerCountsByNormalized = new Map();
+        let hasFairmatOwners = false;
+        let hasNonFairmatOwners = false;
+        groupedRows.forEach((group) => {
+            if (!group.ownerNormalized) {
+                return;
+            }
+            ownerCountsByNormalized.set(
+                group.ownerNormalized,
+                (ownerCountsByNormalized.get(group.ownerNormalized) || 0) + 1
+            );
+            if (isFairmatOwner(group.ownerNormalized)) {
+                hasFairmatOwners = true;
+            } else {
+                hasNonFairmatOwners = true;
+            }
+        });
+
+        groupedRows.forEach((group) => {
+            if (!group.ownerNormalized || isFairmatOwner(group.ownerNormalized)) {
+                return;
+            }
+            if ((ownerCountsByNormalized.get(group.ownerNormalized) || 0) < OWNER_FILTER_MIN_COUNT) {
+                return;
+            }
+            if (!majorOwnerDisplayByNormalized.has(group.ownerNormalized)) {
+                majorOwnerDisplayByNormalized.set(group.ownerNormalized, group.ownerDisplay);
+            }
+        });
+        const sortedOtherOwners = Array.from(majorOwnerDisplayByNormalized.entries())
+            .sort((a, b) => a[1].localeCompare(b[1]));
+
+        ownerSelect.innerHTML = "";
+        const allOwnerOption = document.createElement("option");
+        allOwnerOption.value = "";
+        allOwnerOption.textContent = "All owners";
+        ownerSelect.appendChild(allOwnerOption);
+        if (hasFairmatOwners) {
+            const fairmatOption = document.createElement("option");
+            fairmatOption.value = "__fairmat__";
+            fairmatOption.textContent = "FAIRmat";
+            ownerSelect.appendChild(fairmatOption);
+        }
+        if (hasNonFairmatOwners) {
+            const nonFairmatOption = document.createElement("option");
+            nonFairmatOption.value = "__non_fairmat__";
+            nonFairmatOption.textContent = "Non-FAIRmat";
+            ownerSelect.appendChild(nonFairmatOption);
+        }
+        sortedOtherOwners.forEach(([normalizedOwner, ownerDisplay]) => {
+            const option = document.createElement("option");
+            option.value = normalizedOwner;
+            option.textContent = ownerDisplay;
+            ownerSelect.appendChild(option);
+        });
+
+        sortSelect.innerHTML = "";
+        [
+            { value: "name_asc", label: "Name (A→Z)" },
+            { value: "name_desc", label: "Name (Z→A)" },
+            { value: "stars_desc", label: "Stars (high→low)" }
+        ].forEach((entry) => {
+            const option = document.createElement("option");
+            option.value = entry.value;
+            option.textContent = entry.label;
+            sortSelect.appendChild(option);
+        });
+        sortSelect.value = "name_asc";
 
         function applyFilter() {
             const selectedType = normalize(filterSelect.value);
+            const selectedOwner = normalize(ownerSelect.value);
+            const selectedSort = normalize(sortSelect.value || "name_asc");
+            const sortedGroups = [...groupedRows].sort((a, b) => {
+                if (selectedSort === "name_desc") {
+                    return b.pluginName.localeCompare(a.pluginName, undefined, { sensitivity: "base" });
+                }
+                if (selectedSort === "stars_desc") {
+                    if (b.stars !== a.stars) {
+                        return b.stars - a.stars;
+                    }
+                    return a.pluginName.localeCompare(b.pluginName, undefined, { sensitivity: "base" });
+                }
+                return a.pluginName.localeCompare(b.pluginName, undefined, { sensitivity: "base" });
+            });
             let shownCount = 0;
             const totalCount = groupedRows.length;
             const visibleTypeCounts = new Map();
+            const visibleOwnerCounts = new Map();
 
-            groupedRows.forEach((group) => {
-                const matches =
+            sortedGroups.forEach((group) => {
+                const matchesType =
                     !selectedType || group.types.some((type) => type === selectedType);
+                const matchesOwner =
+                    !selectedOwner
+                    || (selectedOwner === "__fairmat__" && isFairmatOwner(group.ownerNormalized))
+                    || (
+                        selectedOwner === "__non_fairmat__"
+                        && !isFairmatOwner(group.ownerNormalized)
+                    )
+                    || (
+                        selectedOwner !== "__fairmat__"
+                        && selectedOwner !== "__non_fairmat__"
+                        && group.ownerNormalized === selectedOwner
+                    );
+                const matches = matchesType && matchesOwner;
 
+                tbody.appendChild(group.mainRow);
+                if (group.detailRow) {
+                    tbody.appendChild(group.detailRow);
+                }
                 group.mainRow.style.display = matches ? "" : "none";
                 if (group.detailRow) {
                     group.detailRow.style.display = matches ? "" : "none";
@@ -241,53 +531,45 @@ function initPluginRegistryFilters() {
                     group.types.forEach((type) => {
                         visibleTypeCounts.set(type, (visibleTypeCounts.get(type) || 0) + 1);
                     });
+                    let ownerBucket = "other";
+                    if (isFairmatOwner(group.ownerNormalized)) {
+                        ownerBucket = "fairmat";
+                    } else if (majorOwnerDisplayByNormalized.has(group.ownerNormalized)) {
+                        ownerBucket = majorOwnerDisplayByNormalized.get(group.ownerNormalized);
+                    }
+                    visibleOwnerCounts.set(
+                        ownerBucket,
+                        (visibleOwnerCounts.get(ownerBucket) || 0) + 1
+                    );
                 }
             });
 
-            countNode.textContent = `${shownCount} of ${totalCount} plugins shown`;
-
-            const sortedCounts = Array.from(visibleTypeCounts.entries()).sort((a, b) => b[1] - a[1]);
-            const totalSlices = sortedCounts.reduce((sum, [, count]) => sum + count, 0);
-
-            if (pieNode && pieLegendNode && pieTotalNode) {
-                if (!sortedCounts.length || totalSlices <= 0) {
-                    pieNode.style.background = "#e5e7eb";
-                    pieLegendNode.innerHTML = '<p class="plugin-registry-chart__empty">No visible plugin types.</p>';
-                    pieTotalNode.textContent = "0";
-                    return;
-                }
-
-                let running = 0;
-                const segments = sortedCounts.map(([, count], index) => {
-                    const start = (running / totalSlices) * 100;
-                    running += count;
-                    const end = (running / totalSlices) * 100;
-                    const color = chartColors[index % chartColors.length];
-                    return `${color} ${start}% ${end}%`;
-                });
-                pieNode.style.background = `conic-gradient(${segments.join(", ")})`;
-                pieTotalNode.textContent = `${shownCount}`;
-                pieNode.setAttribute(
-                    "aria-label",
-                    `Plugin type distribution pie chart for ${shownCount} visible plugins`
-                );
-
-                pieLegendNode.innerHTML = sortedCounts
-                    .map(([type, count], index) => {
-                        const color = chartColors[index % chartColors.length];
-                        return `<div class="plugin-registry-chart__legend-item">
-                            <span class="plugin-registry-chart__legend-swatch" style="background:${color}"></span>
-                            <span class="plugin-registry-chart__legend-label">${titleCase(type)}</span>
-                            <span class="plugin-registry-chart__legend-value">${count}</span>
-                        </div>`;
-                    })
-                    .join("");
-            }
+            countNode.textContent = `${shownCount}/${totalCount} plugins shown`;
+            renderPieChart(
+                typePieNode,
+                typePieTotalNode,
+                typePieLegendNode,
+                visibleTypeCounts,
+                shownCount,
+                "Plugin type distribution"
+            );
+            renderPieChart(
+                ownerPieNode,
+                ownerPieTotalNode,
+                ownerPieLegendNode,
+                visibleOwnerCounts,
+                shownCount,
+                "Plugin owner distribution"
+            );
         }
 
         filterSelect.addEventListener("change", applyFilter);
+        ownerSelect.addEventListener("change", applyFilter);
+        sortSelect.addEventListener("change", applyFilter);
         clearButton.addEventListener("click", () => {
             filterSelect.value = "";
+            ownerSelect.value = "";
+            sortSelect.value = "name_asc";
             applyFilter();
         });
 
