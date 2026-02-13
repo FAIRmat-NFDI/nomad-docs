@@ -65,9 +65,9 @@ nav:
           - Write a normalizer: howto/develop/normalizing.md
           - Extend the search: howto/develop/search.md
           - Make a release: howto/develop/release.md
+  - Plugin Registry: examples/plugin_registry.md
   - Domain-specific examples: # TODO decide uniform structure for navigation to plugins/plugin-docs
       - Overview: examples/overview.md
-      - Plugin Registry: examples/plugin_registry.md
       - Computational data:
           - Basics: examples/computational_data/basics.md
           - MetaInfo: examples/computational_data/metainfo.md
