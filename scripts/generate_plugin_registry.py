@@ -329,10 +329,10 @@ def generate_markdown_table(plugins: list[dict[str, Any]]) -> str:
     )
     markdown.append('<div class="plugin-registry-filter" data-plugin-registry-filter>')
     markdown.append(
-        '<label class="plugin-registry-filter__label" for="plugin-registry-type-filter">Containing</label>'
+        '<label class="plugin-registry-filter__label">Containing</label>'
     )
     markdown.append(
-        '<select id="plugin-registry-type-filter" class="plugin-registry-filter__select">'
+        '<select class="plugin-registry-filter__select">'
     )
     markdown.append('<option value="">All entry point types</option>')
     for ep_type in all_entry_point_types:
@@ -344,6 +344,22 @@ def generate_markdown_table(plugins: list[dict[str, Any]]) -> str:
     markdown.append(
         '<span class="plugin-registry-filter__count" aria-live="polite"></span>'
     )
+    markdown.append('</div>')
+    markdown.append('')
+    markdown.append('<div class="plugin-registry-chart" data-plugin-registry-chart>')
+    markdown.append(
+        '<p class="plugin-registry-chart__title"><strong>Plugin Type Distribution (Filtered)</strong></p>'
+    )
+    markdown.append('<div class="plugin-registry-chart__content">')
+    markdown.append('<div class="plugin-registry-chart__pie-wrap">')
+    markdown.append(
+        '<div class="plugin-registry-chart__pie" role="img" aria-label="Plugin type distribution pie chart">'
+    )
+    markdown.append('<span class="plugin-registry-chart__pie-total">0</span>')
+    markdown.append('</div>')
+    markdown.append('</div>')
+    markdown.append('<div class="plugin-registry-chart__legend"></div>')
+    markdown.append('</div>')
     markdown.append('</div>')
     markdown.append('')
     markdown.append('<table class="plugin-registry-table" data-plugin-registry="true">')
@@ -564,18 +580,6 @@ def generate_registry_page(plugins: list[dict[str, Any]], output_path: Path) -> 
     """
     plugin_metadata = [extract_plugin_metadata(p) for p in plugins]
 
-    # Generate statistics
-    total_plugins = len(plugin_metadata)
-    on_pypi = sum(1 for p in plugin_metadata if p['on_pypi'])
-    on_central = sum(1 for p in plugin_metadata if p['on_central'])
-
-    entry_point_type_counts = {}
-    for plugin in plugin_metadata:
-        for ep_type in plugin['entry_point_types']:
-            entry_point_type_counts[ep_type] = (
-                entry_point_type_counts.get(ep_type, 0) + 1
-            )
-
     # Build the page
     page_content = []
     page_content.append('# NOMAD Plugin Registry')
@@ -593,47 +597,8 @@ def generate_registry_page(plugins: list[dict[str, Any]], output_path: Path) -> 
     )
     page_content.append('')
 
-    # Statistics section
-    total_stars = sum(p['stars'] for p in plugin_metadata)
-    page_content.append('## Statistics')
-    page_content.append('')
-    page_content.append('### Overview')
-    page_content.append('')
-    page_content.append(f'- **Total Plugins:** {total_plugins}')
-    page_content.append(f'- **Available on PyPI:** {on_pypi}')
-    page_content.append(f'- **Deployed on NOMAD Central:** {on_central}')
-    page_content.append(
-        f"- **Deployed on Example Oasis:** {sum(1 for p in plugin_metadata if p['on_example_oasis'])}"
-    )
-    page_content.append(f'- **Total Stars:** {total_stars}')
-    page_content.append('')
-    page_content.append('### Plugin Type Distribution')
-    page_content.append('')
-
-    if entry_point_type_counts:
-        # Generate Mermaid pie chart with increased text size
-        page_content.append(
-            '<div style="transform: scale(0.9); transform-origin: top center; margin-bottom: 40px; margin-left: auto; margin-right: auto; max-width: 100%;">'
-        )
-        page_content.append('')
-        page_content.append('```mermaid')
-        page_content.append(
-            "%%{init: {'theme':'base', 'themeVariables': { 'pie1':'#2A4CDF', 'pie2':'#008A67', 'pie3':'#FF6B6B', 'pie4':'#4ECDC4', 'pie5':'#FFE66D', 'pie6':'#A8E6CF', 'pieTitleTextSize': '22px', 'pieSectionTextSize': '22px', 'pieLegendTextSize': '22px'}, 'themeCSS': '.pieCircle { font-size: 22px; font-weight: bold; } .legend text { font-size: 22px; font-weight: bold; margin-left: 8px; } .legend rect { margin-right: 8px; } .slice text { font-size: 22px; font-weight: bold; transform: translate(-15%, -15%); } text.percent { font-size: 22px; font-weight: bold; }' }}%%"
-        )
-        page_content.append('pie showData')
-        for ep_type, count in sorted(
-            entry_point_type_counts.items(), key=lambda x: x[1], reverse=True
-        ):
-            # Escape special characters and quotes in labels
-            safe_label = ep_type.replace('"', '\\"')
-            page_content.append(f'    "{safe_label}" : {count}')
-        page_content.append('```')
-        page_content.append('')
-        page_content.append('</div>')
-        page_content.append('')
-
     # Quick reference table
-    page_content.append('## Plugin Overview')
+    page_content.append('## Available Plugins')
     page_content.append('')
     page_content.append('Quick reference table of all available plugins:')
     page_content.append('')

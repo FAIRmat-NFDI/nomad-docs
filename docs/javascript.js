@@ -102,9 +102,36 @@ function initPluginRegistryFilters() {
         const availableTypes = Array.from(
             new Set(groupedRows.flatMap((group) => group.types))
         ).sort((a, b) => a.localeCompare(b));
+        const chartColors = [
+            "#2A4CDF",
+            "#008A67",
+            "#FF6B6B",
+            "#4ECDC4",
+            "#F4A261",
+            "#E9C46A",
+            "#A855F7",
+            "#60A5FA",
+            "#22C55E",
+            "#FB7185"
+        ];
 
-        let filterRoot = table.previousElementSibling;
-        if (!filterRoot || !filterRoot.hasAttribute("data-plugin-registry-filter")) {
+        function titleCase(value) {
+            return (value || "")
+                .split(" ")
+                .map((word) => word ? word.charAt(0).toUpperCase() + word.slice(1) : "")
+                .join(" ");
+        }
+
+        function findPreviousSiblingWithAttr(startNode, attrName) {
+            let node = startNode.previousElementSibling;
+            while (node && !node.hasAttribute(attrName)) {
+                node = node.previousElementSibling;
+            }
+            return node;
+        }
+
+        let filterRoot = findPreviousSiblingWithAttr(table, "data-plugin-registry-filter");
+        if (!filterRoot) {
             filterRoot = document.createElement("div");
             filterRoot.className = "plugin-registry-filter";
             filterRoot.setAttribute("data-plugin-registry-filter", "true");
@@ -148,6 +175,32 @@ function initPluginRegistryFilters() {
         }
         filterLabel.setAttribute("for", filterSelect.id);
 
+        let chartRoot = findPreviousSiblingWithAttr(table, "data-plugin-registry-chart");
+        if (!chartRoot) {
+            chartRoot = document.createElement("div");
+            chartRoot.className = "plugin-registry-chart";
+            chartRoot.setAttribute("data-plugin-registry-chart", "true");
+            chartRoot.innerHTML = `
+                <p class="plugin-registry-chart__title"><strong>Plugin Type Distribution (Filtered)</strong></p>
+                <div class="plugin-registry-chart__content">
+                    <div class="plugin-registry-chart__pie-wrap">
+                        <div class="plugin-registry-chart__pie" role="img" aria-label="Plugin type distribution pie chart">
+                            <span class="plugin-registry-chart__pie-total">0</span>
+                        </div>
+                    </div>
+                    <div class="plugin-registry-chart__legend"></div>
+                </div>`;
+            table.parentNode.insertBefore(chartRoot, table);
+        }
+
+        if (filterRoot.nextElementSibling !== chartRoot) {
+            filterRoot.insertAdjacentElement("afterend", chartRoot);
+        }
+
+        const pieNode = chartRoot.querySelector(".plugin-registry-chart__pie");
+        const pieTotalNode = chartRoot.querySelector(".plugin-registry-chart__pie-total");
+        const pieLegendNode = chartRoot.querySelector(".plugin-registry-chart__legend");
+
         const optionValues = new Set(
             Array.from(filterSelect.options).map((option) => normalize(option.value))
         );
@@ -173,6 +226,7 @@ function initPluginRegistryFilters() {
             const selectedType = normalize(filterSelect.value);
             let shownCount = 0;
             const totalCount = groupedRows.length;
+            const visibleTypeCounts = new Map();
 
             groupedRows.forEach((group) => {
                 const matches =
@@ -184,10 +238,51 @@ function initPluginRegistryFilters() {
                 }
                 if (matches) {
                     shownCount += 1;
+                    group.types.forEach((type) => {
+                        visibleTypeCounts.set(type, (visibleTypeCounts.get(type) || 0) + 1);
+                    });
                 }
             });
 
             countNode.textContent = `${shownCount} of ${totalCount} plugins shown`;
+
+            const sortedCounts = Array.from(visibleTypeCounts.entries()).sort((a, b) => b[1] - a[1]);
+            const totalSlices = sortedCounts.reduce((sum, [, count]) => sum + count, 0);
+
+            if (pieNode && pieLegendNode && pieTotalNode) {
+                if (!sortedCounts.length || totalSlices <= 0) {
+                    pieNode.style.background = "#e5e7eb";
+                    pieLegendNode.innerHTML = '<p class="plugin-registry-chart__empty">No visible plugin types.</p>';
+                    pieTotalNode.textContent = "0";
+                    return;
+                }
+
+                let running = 0;
+                const segments = sortedCounts.map(([, count], index) => {
+                    const start = (running / totalSlices) * 100;
+                    running += count;
+                    const end = (running / totalSlices) * 100;
+                    const color = chartColors[index % chartColors.length];
+                    return `${color} ${start}% ${end}%`;
+                });
+                pieNode.style.background = `conic-gradient(${segments.join(", ")})`;
+                pieTotalNode.textContent = `${shownCount}`;
+                pieNode.setAttribute(
+                    "aria-label",
+                    `Plugin type distribution pie chart for ${shownCount} visible plugins`
+                );
+
+                pieLegendNode.innerHTML = sortedCounts
+                    .map(([type, count], index) => {
+                        const color = chartColors[index % chartColors.length];
+                        return `<div class="plugin-registry-chart__legend-item">
+                            <span class="plugin-registry-chart__legend-swatch" style="background:${color}"></span>
+                            <span class="plugin-registry-chart__legend-label">${titleCase(type)}</span>
+                            <span class="plugin-registry-chart__legend-value">${count}</span>
+                        </div>`;
+                    })
+                    .join("");
+            }
         }
 
         filterSelect.addEventListener("change", applyFilter);

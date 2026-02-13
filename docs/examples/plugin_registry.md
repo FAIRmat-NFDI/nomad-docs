@@ -1,42 +1,16 @@
 # NOMAD Plugin Registry
 
-This page contains information about all NOMAD plugins owned and maintained by  the GitHub organizations: FAIRmat-NFDI, nomad-coe.  The information is automatically updated monthly. **Last Updated:** 2026-02-13 08:18 UTC
+This page contains information about all NOMAD plugins owned and maintained by  the GitHub organizations: FAIRmat-NFDI, nomad-coe.  The information is automatically updated monthly. **Last Updated:** 2026-02-13 10:49 UTC
 
 [Browse All Plugins in the NOMAD Plugins App](https://nomad-lab.eu/prod/v1/oasis/gui/search/plugins){:.md-button .nomad-button target="_blank" rel="noopener"}
 
-## Statistics
-
-### Overview
-
-- **Total Plugins:** 65
-- **Available on PyPI:** 34
-- **Deployed on NOMAD Central:** 0
-- **Deployed on Example Oasis:** 0
-- **Total Stars:** 269
-
-### Plugin Type Distribution
-
-<div style="transform: scale(0.9); transform-origin: top center; margin-bottom: 40px; margin-left: auto; margin-right: auto; max-width: 100%;">
-
-```mermaid
-%%{init: {'theme':'base', 'themeVariables': { 'pie1':'#2A4CDF', 'pie2':'#008A67', 'pie3':'#FF6B6B', 'pie4':'#4ECDC4', 'pie5':'#FFE66D', 'pie6':'#A8E6CF', 'pieTitleTextSize': '22px', 'pieSectionTextSize': '22px', 'pieLegendTextSize': '22px'}, 'themeCSS': '.pieCircle { font-size: 22px; font-weight: bold; } .legend text { font-size: 22px; font-weight: bold; margin-left: 8px; } .legend rect { margin-right: 8px; } .slice text { font-size: 22px; font-weight: bold; transform: translate(-15%, -15%); } text.percent { font-size: 22px; font-weight: bold; }' }}%%
-pie showData
-    "Schema package" : 43
-    "Parser" : 30
-    "App" : 20
-    "Example upload" : 17
-    "Normalizer" : 10
-```
-
-</div>
-
-## Plugin Overview
+## Available Plugins
 
 Quick reference table of all available plugins:
 
 <div class="plugin-registry-filter" data-plugin-registry-filter>
-<label class="plugin-registry-filter__label" for="plugin-registry-type-filter">Containing</label>
-<select id="plugin-registry-type-filter" class="plugin-registry-filter__select">
+<label class="plugin-registry-filter__label">Containing</label>
+<select class="plugin-registry-filter__select">
 <option value="">All entry point types</option>
 <option value="App">App</option>
 <option value="Example upload">Example upload</option>
@@ -46,6 +20,18 @@ Quick reference table of all available plugins:
 </select>
 <button class="plugin-registry-filter__clear" type="button">Clear</button>
 <span class="plugin-registry-filter__count" aria-live="polite"></span>
+</div>
+
+<div class="plugin-registry-chart" data-plugin-registry-chart>
+<p class="plugin-registry-chart__title"><strong>Plugin Type Distribution (Filtered)</strong></p>
+<div class="plugin-registry-chart__content">
+<div class="plugin-registry-chart__pie-wrap">
+<div class="plugin-registry-chart__pie" role="img" aria-label="Plugin type distribution pie chart">
+<span class="plugin-registry-chart__pie-total">0</span>
+</div>
+</div>
+<div class="plugin-registry-chart__legend"></div>
+</div>
 </div>
 
 <table class="plugin-registry-table" data-plugin-registry="true">
