@@ -180,7 +180,7 @@ def define_env(env):
             if options:
                 option_list = '*options:*<br/>'
                 for name, desc in options.items():
-                    option_list += f" - `{name}{f': {desc}' if desc else ''}`<br/>"
+                    option_list += f' - `{name}{f": {desc}" if desc else ""}`<br/>'
                 result.append(option_list)
             if get_field_deprecated(field):
                 result.append('**deprecated**')
@@ -283,7 +283,7 @@ def define_env(env):
                 f"""
                 ### {parser.code_name}
 
-                {parser.description or ""}
+                {parser.description or ''}
 
                 - format homepage: [{parser.code_homepage}]({parser.code_homepage})
                 - parser name: `{parser.id}`
@@ -297,7 +297,7 @@ def define_env(env):
                 parser.metadata
                 and parser.metadata.get('tableOfFiles', '').strip(' \t\n') != ''
             ):
-                metadata += f"\n\n{strip(parser.metadata['tableOfFiles'])}"
+                metadata += f'\n\n{strip(parser.metadata["tableOfFiles"])}'
 
             return metadata
 
@@ -315,7 +315,7 @@ def define_env(env):
         return (
             ', '.join(
                 [
-                    f"[{parser.code_name}](#{slugify(parser.code_name, '-')})"
+                    f'[{parser.code_name}](#{slugify(parser.code_name, "-")})'
                     for parser in parsers
                 ]
             )
@@ -367,7 +367,7 @@ def define_env(env):
 
         return '\n\n'.join(
             [
-                f"**{category}**: {', '.join([render_plugin(plugin) for plugin in plugins])}"
+                f'**{category}**: {", ".join([render_plugin(plugin) for plugin in plugins])}'
                 for category, plugins in categories.items()
             ]
         )

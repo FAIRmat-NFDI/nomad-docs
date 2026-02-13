@@ -36,7 +36,9 @@ LINK_PATTERN = regex.compile(
 )
 
 
-def query_plugins_from_endpoint(base_url: str, owner_scope: str) -> list[dict[str, Any]]:
+def query_plugins_from_endpoint(
+    base_url: str, owner_scope: str
+) -> list[dict[str, Any]]:
     """
     Query a NOMAD API endpoint for all plugin entries.
 
@@ -150,7 +152,7 @@ def extract_plugin_metadata(plugin_entry: dict[str, Any]) -> dict[str, Any]:
     # Check for GitHub Pages documentation
     repo_url = data.get('repository', '')
     docs_url = check_github_pages_exists(repo_url)
-    
+
     return {
         'name': data.get('name', 'Unknown'),
         'description': data.get('description', ''),
@@ -176,39 +178,39 @@ def extract_plugin_metadata(plugin_entry: dict[str, Any]) -> dict[str, Any]:
 def check_github_pages_exists(repo_url: str) -> str | None:
     """
     Check if GitHub Pages documentation exists for a repository.
-    
+
     Args:
         repo_url: GitHub repository URL (e.g., https://github.com/owner/repo)
-    
+
     Returns:
         GitHub Pages URL if it exists, None otherwise
     """
     if not repo_url or 'github.com' not in repo_url:
         return None
-    
+
     try:
         # Extract owner and repo name from GitHub URL
         # Expected format: https://github.com/owner/repo
         parts = repo_url.rstrip('/').split('github.com/')[-1].split('/')
         if len(parts) < 2:
             return None
-        
+
         owner, repo = parts[0], parts[1]
-        
+
         # Construct GitHub Pages URL
         # Convert owner to lowercase for GitHub Pages URL
         gh_pages_url = f'https://{owner.lower()}.github.io/{repo}/'
-        
+
         # Make a HEAD request to check if the page exists
         response = requests.head(gh_pages_url, timeout=5, allow_redirects=True)
-        
+
         # Consider 200 and 301/302 (redirects) as success
         if response.status_code in (200, 301, 302):
             return gh_pages_url
-        
+
     except (requests.exceptions.RequestException, IndexError, ValueError):
         pass
-    
+
     return None
 
 
@@ -374,14 +376,22 @@ def generate_markdown_table(plugins: list[dict[str, Any]]) -> str:
     )
 
     markdown.append('<div class="plugin-registry-filter" data-plugin-registry-filter>')
-    markdown.append('<label class="plugin-registry-filter__label plugin-registry-filter__label--type">Containing</label>')
-    markdown.append('<select class="plugin-registry-filter__select plugin-registry-filter__type">')
+    markdown.append(
+        '<label class="plugin-registry-filter__label plugin-registry-filter__label--type">Containing</label>'
+    )
+    markdown.append(
+        '<select class="plugin-registry-filter__select plugin-registry-filter__type">'
+    )
     markdown.append('<option value="">All entry point types</option>')
     for ep_type in all_entry_point_types:
         markdown.append(f'<option value="{ep_type}">{ep_type}</option>')
     markdown.append('</select>')
-    markdown.append('<label class="plugin-registry-filter__label plugin-registry-filter__label--owner">Owner</label>')
-    markdown.append('<select class="plugin-registry-filter__select plugin-registry-filter__owner">')
+    markdown.append(
+        '<label class="plugin-registry-filter__label plugin-registry-filter__label--owner">Owner</label>'
+    )
+    markdown.append(
+        '<select class="plugin-registry-filter__select plugin-registry-filter__owner">'
+    )
     markdown.append('<option value="">All owners</option>')
     if has_fairmat_owners:
         markdown.append('<option value="__fairmat__">FAIRmat</option>')
@@ -390,8 +400,12 @@ def generate_markdown_table(plugins: list[dict[str, Any]]) -> str:
     for owner_label in other_owner_labels:
         markdown.append(f'<option value="{owner_label}">{owner_label}</option>')
     markdown.append('</select>')
-    markdown.append('<label class="plugin-registry-filter__label plugin-registry-filter__label--sort">Sort</label>')
-    markdown.append('<select class="plugin-registry-filter__select plugin-registry-filter__sort">')
+    markdown.append(
+        '<label class="plugin-registry-filter__label plugin-registry-filter__label--sort">Sort</label>'
+    )
+    markdown.append(
+        '<select class="plugin-registry-filter__select plugin-registry-filter__sort">'
+    )
     markdown.append('<option value="name_asc">Name (A→Z)</option>')
     markdown.append('<option value="name_desc">Name (Z→A)</option>')
     markdown.append('<option value="stars_desc">Stars (high→low)</option>')
@@ -409,10 +423,16 @@ def generate_markdown_table(plugins: list[dict[str, Any]]) -> str:
     )
     markdown.append('')
     markdown.append('<div class="plugin-registry-chart" data-plugin-registry-chart>')
-    markdown.append('<p class="plugin-registry-chart__title"><strong>Filtered Distributions</strong></p>')
+    markdown.append(
+        '<p class="plugin-registry-chart__title"><strong>Filtered Distributions</strong></p>'
+    )
     markdown.append('<div class="plugin-registry-chart__panels">')
-    markdown.append('<section class="plugin-registry-chart__panel" data-chart-kind="type">')
-    markdown.append('<p class="plugin-registry-chart__panel-title"><strong>Entry Point Type</strong></p>')
+    markdown.append(
+        '<section class="plugin-registry-chart__panel" data-chart-kind="type">'
+    )
+    markdown.append(
+        '<p class="plugin-registry-chart__panel-title"><strong>Entry Point Type</strong></p>'
+    )
     markdown.append('<div class="plugin-registry-chart__panel-content">')
     markdown.append('<div class="plugin-registry-chart__pie-wrap">')
     markdown.append(
@@ -424,8 +444,12 @@ def generate_markdown_table(plugins: list[dict[str, Any]]) -> str:
     markdown.append('<div class="plugin-registry-chart__legend"></div>')
     markdown.append('</div>')
     markdown.append('</section>')
-    markdown.append('<section class="plugin-registry-chart__panel" data-chart-kind="owner">')
-    markdown.append('<p class="plugin-registry-chart__panel-title"><strong>Owner</strong></p>')
+    markdown.append(
+        '<section class="plugin-registry-chart__panel" data-chart-kind="owner">'
+    )
+    markdown.append(
+        '<p class="plugin-registry-chart__panel-title"><strong>Owner</strong></p>'
+    )
     markdown.append('<div class="plugin-registry-chart__panel-content">')
     markdown.append('<div class="plugin-registry-chart__pie-wrap">')
     markdown.append(
@@ -484,9 +508,9 @@ def generate_markdown_table(plugins: list[dict[str, Any]]) -> str:
         # Strip angle brackets if present (e.g., <https://...> becomes https://...)
         if repo_url:
             repo_url = repo_url.strip('<>').strip()
-        
+
         docs_url = plugin.get('docs_url')
-        
+
         if repo_url and docs_url:
             links = f'<a href="{repo_url}" target="_blank" rel="noopener">Code</a> | <a href="{docs_url}" target="_blank" rel="noopener">Docs</a>'
         elif repo_url:
@@ -521,7 +545,7 @@ def generate_markdown_table(plugins: list[dict[str, Any]]) -> str:
         markdown.append('<p>')
 
         # Owner
-        markdown.append(f"<strong>Owner:</strong> {plugin['owner']}<br>")
+        markdown.append(f'<strong>Owner:</strong> {plugin["owner"]}<br>')
 
         # Authors
         if plugin['authors']:
@@ -585,7 +609,7 @@ def generate_detailed_list(plugins: list[dict[str, Any]]) -> str:
     markdown = []
 
     for plugin in plugins_sorted:
-        markdown.append(f"\n### {plugin['name']}")
+        markdown.append(f'\n### {plugin["name"]}')
         markdown.append('')
 
         if plugin['description']:
@@ -595,13 +619,13 @@ def generate_detailed_list(plugins: list[dict[str, Any]]) -> str:
         # Repository and metadata
         if plugin['repository']:
             markdown.append(
-                f"**Repository:** [{plugin['repository']}]({plugin['repository']})"
+                f'**Repository:** [{plugin["repository"]}]({plugin["repository"]})'
             )
 
-        markdown.append(f"**Owner:** {plugin['owner']}")
-        markdown.append(f"**Stars:** {plugin['stars']}")
-        markdown.append(f"**Created:** {format_date(plugin['created'])}")
-        markdown.append(f"**Last Updated:** {format_date(plugin['last_updated'])}")
+        markdown.append(f'**Owner:** {plugin["owner"]}')
+        markdown.append(f'**Stars:** {plugin["stars"]}')
+        markdown.append(f'**Created:** {format_date(plugin["created"])}')
+        markdown.append(f'**Last Updated:** {format_date(plugin["last_updated"])}')
         markdown.append('')
 
         # Deployment status
@@ -614,13 +638,13 @@ def generate_detailed_list(plugins: list[dict[str, Any]]) -> str:
             deployments.append('Example Oasis')
 
         if deployments:
-            markdown.append(f"**Available on:** {', '.join(deployments)}")
+            markdown.append(f'**Available on:** {", ".join(deployments)}')
             markdown.append('')
 
         # Entry points
         if plugin['entry_point_types']:
             markdown.append(
-                f"**Plugin Types:** {', '.join(plugin['entry_point_types'])}"
+                f'**Plugin Types:** {", ".join(plugin["entry_point_types"])}'
             )
             markdown.append('')
 
@@ -668,9 +692,9 @@ def generate_registry_page(plugins: list[dict[str, Any]], output_path: Path) -> 
     page_content.append('# NOMAD Plugin Registry')
     page_content.append('')
     page_content.append(
-        "This page contains information about all plugin entries currently listed in NOMAD. "
-        "The information is automatically updated monthly. "
-        f"**Last Updated:** {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}"
+        'This page contains information about all plugin entries currently listed in NOMAD. '
+        'The information is automatically updated monthly. '
+        f'**Last Updated:** {datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")}'
     )
     page_content.append('')
     page_content.append(
@@ -714,9 +738,9 @@ def main():
         print('Warning: No plugins found!')
         # Still generate the page with a message
         output_path.write_text(
-            "# NOMAD Plugin Registry\n\n"
-            "No plugins found.\n\n"
-            f"Last checked: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M UTC')}\n",
+            '# NOMAD Plugin Registry\n\n'
+            'No plugins found.\n\n'
+            f'Last checked: {datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")}\n',
             encoding='utf-8',
         )
         return

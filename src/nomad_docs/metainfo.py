@@ -32,7 +32,7 @@ def get_property_type_info(property: Property, pkg=None) -> str:
             return get_reference(type.target_section_def, pkg)
         if isinstance(type, Datatype):
             try:
-                return f"`{type.serialize_self()['type_data']}`"
+                return f'`{type.serialize_self()["type_data"]}`'
             except NotImplementedError:
                 pass
 
@@ -117,11 +117,11 @@ def section_markdown_from_section_cls(
             get_reference(base_section, pkg)
             for base_section in section_def.base_sections
         ]
-        result += f"**inherits from**: {', '.join(base_sections)}\n\n"
+        result += f'**inherits from**: {", ".join(base_sections)}\n\n'
 
     if section_def.links:
         links = [f'[{link}]({link})' for link in section_def.links]
-        result += f"**links**: {', '.join(links)}\n\n"
+        result += f'**links**: {", ".join(links)}\n\n'
 
     if len(properties) > 0:
         result += '**properties**:\n\n'
