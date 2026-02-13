@@ -320,7 +320,33 @@ def generate_markdown_table(plugins: list[dict[str, Any]]) -> str:
     plugins_sorted = sorted(plugins, key=lambda x: x['name'].lower())
 
     markdown = []
-    markdown.append('<table>')
+    all_entry_point_types = sorted(
+        {
+            ep_type
+            for plugin in plugins_sorted
+            for ep_type in plugin.get('entry_point_types', [])
+        }
+    )
+    markdown.append('<div class="plugin-registry-filter" data-plugin-registry-filter>')
+    markdown.append(
+        '<label class="plugin-registry-filter__label" for="plugin-registry-type-filter">Containing</label>'
+    )
+    markdown.append(
+        '<select id="plugin-registry-type-filter" class="plugin-registry-filter__select">'
+    )
+    markdown.append('<option value="">All entry point types</option>')
+    for ep_type in all_entry_point_types:
+        markdown.append(f'<option value="{ep_type}">{ep_type}</option>')
+    markdown.append('</select>')
+    markdown.append(
+        '<button class="plugin-registry-filter__clear" type="button">Clear</button>'
+    )
+    markdown.append(
+        '<span class="plugin-registry-filter__count" aria-live="polite"></span>'
+    )
+    markdown.append('</div>')
+    markdown.append('')
+    markdown.append('<table class="plugin-registry-table" data-plugin-registry="true">')
     markdown.append('<thead>')
     markdown.append(
         '<tr><th>Plugin</th><th>Description</th><th>Deployment</th><th>Links</th></tr>'
@@ -328,7 +354,7 @@ def generate_markdown_table(plugins: list[dict[str, Any]]) -> str:
     markdown.append('</thead>')
     markdown.append('<tbody>')
 
-    for plugin in plugins_sorted:
+    for index, plugin in enumerate(plugins_sorted):
         name = plugin['name']
         description = plugin['description'] if plugin['description'].strip() else '—'
         description = description.replace('|', '\\|').replace('\n', ' ')
@@ -339,6 +365,10 @@ def generate_markdown_table(plugins: list[dict[str, Any]]) -> str:
             if plugin['entry_point_types']
             else '—'
         )
+        normalized_types = '|'.join(
+            ep_type.strip().lower() for ep_type in plugin['entry_point_types']
+        )
+        row_id = f'plugin-registry-row-{index}'
 
         # Format deployment status
         deployments = []
@@ -368,7 +398,9 @@ def generate_markdown_table(plugins: list[dict[str, Any]]) -> str:
         stars = plugin['stars']
 
         # Main row
-        markdown.append('<tr>')
+        markdown.append(
+            f'<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="{row_id}" data-entry-point-types="{normalized_types}">'
+        )
         markdown.append(
             f'<td><strong>{name} </strong>(⭐ {stars})<br><small>{types}</small></td>'
         )
@@ -378,7 +410,9 @@ def generate_markdown_table(plugins: list[dict[str, Any]]) -> str:
         markdown.append('</tr>')
 
         # Detailed information in dropdown
-        markdown.append('<tr>')
+        markdown.append(
+            f'<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="{row_id}">'
+        )
         markdown.append('<td colspan="4" style="padding: 0; border-top: none;">')
         markdown.append('<details style="margin: 0; padding: 12px 16px; border: 0px">')
         markdown.append(

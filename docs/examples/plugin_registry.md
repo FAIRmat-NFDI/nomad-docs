@@ -1,6 +1,6 @@
 # NOMAD Plugin Registry
 
-This page contains information about all NOMAD plugins owned and maintained by  the GitHub organizations: FAIRmat-NFDI, nomad-coe.  The information is automatically updated monthly. **Last Updated:** 2026-01-22 08:18 UTC
+This page contains information about all NOMAD plugins owned and maintained by  the GitHub organizations: FAIRmat-NFDI, nomad-coe.  The information is automatically updated monthly. **Last Updated:** 2026-02-13 08:18 UTC
 
 [Browse All Plugins in the NOMAD Plugins App](https://nomad-lab.eu/prod/v1/oasis/gui/search/plugins){:.md-button .nomad-button target="_blank" rel="noopener"}
 
@@ -34,18 +34,32 @@ pie showData
 
 Quick reference table of all available plugins:
 
-<table>
+<div class="plugin-registry-filter" data-plugin-registry-filter>
+<label class="plugin-registry-filter__label" for="plugin-registry-type-filter">Containing</label>
+<select id="plugin-registry-type-filter" class="plugin-registry-filter__select">
+<option value="">All entry point types</option>
+<option value="App">App</option>
+<option value="Example upload">Example upload</option>
+<option value="Normalizer">Normalizer</option>
+<option value="Parser">Parser</option>
+<option value="Schema package">Schema package</option>
+</select>
+<button class="plugin-registry-filter__clear" type="button">Clear</button>
+<span class="plugin-registry-filter__count" aria-live="polite"></span>
+</div>
+
+<table class="plugin-registry-table" data-plugin-registry="true">
 <thead>
 <tr><th>Plugin</th><th>Description</th><th>Deployment</th><th>Links</th></tr>
 </thead>
 <tbody>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-0" data-entry-point-types="app|schema package">
 <td><strong>nomad-aitoolkit </strong>(⭐ 0)<br><small>App, Schema package</small></td>
 <td>Schema and app for AI Toolkit notebooks.</td>
 <td><small>—</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/nomad-aitoolkit" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/nomad-aitoolkit/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-0">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -61,13 +75,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-1" data-entry-point-types="schema package">
 <td><strong>nomad-analysis </strong>(⭐ 2)<br><small>Schema package</small></td>
 <td>A NOMAD plugin for analysis of FAIR data.</td>
 <td><small>PyPI</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/nomad-analysis" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/nomad-analysis/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-1">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -83,13 +97,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-2" data-entry-point-types="app|example upload|schema package">
 <td><strong>nomad-auto-xrd </strong>(⭐ 1)<br><small>App, Example upload, Schema package</small></td>
 <td>A NOMAD plugin containing schemas for automatic XRD analysis.</td>
 <td><small>—</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/nomad-auto-xrd" target="_blank" rel="noopener">Code</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-2">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -106,13 +120,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-3" data-entry-point-types="app|parser|schema package">
 <td><strong>nomad-battery-database </strong>(⭐ 1)<br><small>App, Parser, Schema package</small></td>
 <td>app for battery database</td>
 <td><small>PyPI</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/nomad-battery-database" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/nomad-battery-database/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-3">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -128,13 +142,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-4" data-entry-point-types="app|example upload|schema package">
 <td><strong>nomad-bayesian-optimization </strong>(⭐ 1)<br><small>App, Example upload, Schema package</small></td>
 <td>NOMAD plugin for driving experiments/simulations using bayesian optimization</td>
 <td><small>—</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/nomad-bayesian-optimization" target="_blank" rel="noopener">Code</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-4">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -150,13 +164,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-5" data-entry-point-types="app|parser|schema package">
 <td><strong>nomad-camels-plugin </strong>(⭐ 0)<br><small>App, Parser, Schema package</small></td>
 <td>Parser for HDF5 files coming from NOMAD CAMELS.</td>
 <td><small>—</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/nomad-camels-plugin" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/nomad-camels-plugin/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-5">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -172,13 +186,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-6" data-entry-point-types="app|example upload|parser|schema package">
 <td><strong>nomad-catalysis </strong>(⭐ 4)<br><small>App, Example upload, Parser, Schema package</small></td>
 <td>A NOMAD plugin for heterogeneous catalysis data.</td>
 <td><small>PyPI</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/nomad-catalysis-plugin" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/nomad-catalysis-plugin/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-6">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -194,13 +208,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-7" data-entry-point-types="app|parser|schema package">
 <td><strong>nomad-countries </strong>(⭐ 100)<br><small>App, Parser, Schema package</small></td>
 <td>Countries of the world plugin</td>
 <td><small>—</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/nomad" target="_blank" rel="noopener">Code</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-7">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -216,13 +230,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-8" data-entry-point-types="schema package">
 <td><strong>nomad-crystallm </strong>(⭐ 1)<br><small>Schema package</small></td>
 <td>A NOMAD plugin for running CrystaLLM inference in NOMAD installations.</td>
 <td><small>—</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/nomad-crystallm" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/nomad-crystallm/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-8">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -239,13 +253,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-9" data-entry-point-types="schema package">
 <td><strong>nomad-eos-workflows </strong>(⭐ 0)<br><small>Schema package</small></td>
 <td>A NOMAD plugin containing the section definitions of a standard Equation of State (EoS) workflow.</td>
 <td><small>—</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/nomad-schema-plugin-eos-workflows" target="_blank" rel="noopener">Code</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-9">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -261,13 +275,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-10" data-entry-point-types="example upload|parser|schema package">
 <td><strong>nomad-external-eln-integrations </strong>(⭐ 0)<br><small>Example upload, Parser, Schema package</small></td>
 <td>3rd Party Integration packages</td>
 <td><small>—</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/nomad-external-eln-integrations" target="_blank" rel="noopener">Code</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-10">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -283,13 +297,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-11" data-entry-point-types="schema package">
 <td><strong>nomad-gallery </strong>(⭐ 1)<br><small>Schema package</small></td>
 <td>A mkdocs-based GitHub Pages site for showcasing NOMAD features, examples, and use cases.</td>
 <td><small>—</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/nomad-gallery" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/nomad-gallery/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-11">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -305,13 +319,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-12" data-entry-point-types="schema package">
 <td><strong>nomad-material-processing </strong>(⭐ 11)<br><small>Schema package</small></td>
 <td>A plugin for NOMAD containing base sections for material processing.</td>
 <td><small>PyPI</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/nomad-material-processing" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/nomad-material-processing/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-12">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -327,13 +341,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-13" data-entry-point-types="app|example upload|parser|schema package">
 <td><strong>nomad-material-processing-example </strong>(⭐ 2)<br><small>App, Example upload, Parser, Schema package</small></td>
 <td>An example plugin to demonstrate the use of schemas from the nomad-material-processing plugin.</td>
 <td><small>—</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/nomad-material-processing-example" target="_blank" rel="noopener">Code</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-13">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -349,13 +363,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-14" data-entry-point-types="parser|schema package">
 <td><strong>nomad-measurements </strong>(⭐ 14)<br><small>Parser, Schema package</small></td>
 <td>A plugin for NOMAD containing base sections for measurements.</td>
 <td><small>PyPI</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/nomad-measurements" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/nomad-measurements/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-14">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -372,13 +386,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-15" data-entry-point-types="schema package">
 <td><strong>nomad-neb-workflows </strong>(⭐ 4)<br><small>Schema package</small></td>
 <td>A NOMAD plugin containing the section definitions of a standard Nudged Elastic Band (NEB) workflow.</td>
 <td><small>PyPI</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/nomad-neb-workflows" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/nomad-neb-workflows/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-15">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -395,13 +409,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-16" data-entry-point-types="schema package">
 <td><strong>nomad-nmr-schema </strong>(⭐ 0)<br><small>Schema package</small></td>
 <td>Schema plugin containing shared classes for NMR metadata</td>
 <td><small>—</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/nomad-schema-plugin-nmr" target="_blank" rel="noopener">Code</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-16">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -418,13 +432,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-17" data-entry-point-types="normalizer">
 <td><strong>nomad-normalizer-plugin-bandstructure </strong>(⭐ 1)<br><small>Normalizer</small></td>
 <td>Band structure normalizer plugin for NOMAD.</td>
 <td><small>PyPI</small></td>
 <td><a href="https://github.com/nomad-coe/nomad-normalizer-plugin-bandstructure" target="_blank" rel="noopener">Code</a> | <a href="https://nomad-coe.github.io/nomad-normalizer-plugin-bandstructure/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-17">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -440,13 +454,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-18" data-entry-point-types="normalizer">
 <td><strong>nomad-normalizer-plugin-dos </strong>(⭐ 0)<br><small>Normalizer</small></td>
 <td>DOS normalizer plugin for NOMAD.</td>
 <td><small>PyPI</small></td>
 <td><a href="https://github.com/nomad-coe/nomad-normalizer-plugin-dos" target="_blank" rel="noopener">Code</a> | <a href="https://nomad-coe.github.io/nomad-normalizer-plugin-dos/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-18">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -462,13 +476,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-19" data-entry-point-types="normalizer">
 <td><strong>nomad-normalizer-plugin-simulation-workflow </strong>(⭐ 0)<br><small>Normalizer</small></td>
 <td>Simulation workflow nomad plugin for NOMAD.</td>
 <td><small>PyPI</small></td>
 <td><a href="https://github.com/nomad-coe/nomad-normalizer-plugin-simulation-workflow" target="_blank" rel="noopener">Code</a> | <a href="https://nomad-coe.github.io/nomad-normalizer-plugin-simulation-workflow/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-19">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -484,13 +498,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-20" data-entry-point-types="normalizer">
 <td><strong>nomad-normalizer-plugin-soap </strong>(⭐ 0)<br><small>Normalizer</small></td>
 <td>SOAP nomad plugin for NOMAD.</td>
 <td><small>PyPI</small></td>
 <td><a href="https://github.com/nomad-coe/nomad-normalizer-plugin-soap" target="_blank" rel="noopener">Code</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-20">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -506,13 +520,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-21" data-entry-point-types="normalizer">
 <td><strong>nomad-normalizer-plugin-spectra </strong>(⭐ 0)<br><small>Normalizer</small></td>
 <td>Spectra normalizer plugin for NOMAD.</td>
 <td><small>PyPI</small></td>
 <td><a href="https://github.com/nomad-coe/nomad-normalizer-plugin-spectra" target="_blank" rel="noopener">Code</a> | <a href="https://nomad-coe.github.io/nomad-normalizer-plugin-spectra/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-21">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -527,13 +541,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-22" data-entry-point-types="normalizer">
 <td><strong>nomad-normalizer-plugin-system </strong>(⭐ 0)<br><small>Normalizer</small></td>
 <td>System normalizer plugin for NOMAD.</td>
 <td><small>PyPI</small></td>
 <td><a href="https://github.com/nomad-coe/nomad-normalizer-plugin-system" target="_blank" rel="noopener">Code</a> | <a href="https://nomad-coe.github.io/nomad-normalizer-plugin-system/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-22">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -549,13 +563,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-23" data-entry-point-types="parser|schema package">
 <td><strong>nomad-parser-edmft </strong>(⭐ 0)<br><small>Parser, Schema package</small></td>
 <td>nomad example template</td>
 <td><small>—</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/nomad-parser-edmft" target="_blank" rel="noopener">Code</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-23">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -572,13 +586,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-24" data-entry-point-types="parser|schema package">
 <td><strong>nomad-parser-fhiaims </strong>(⭐ 2)<br><small>Parser, Schema package</small></td>
 <td>Standalone NOMAD plugin for parsing FHI-aims calculation files</td>
 <td><small>—</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/nomad-parser-fhiaims" target="_blank" rel="noopener">Code</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-24">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -594,13 +608,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-25" data-entry-point-types="parser|schema package">
 <td><strong>nomad-parser-gsd </strong>(⭐ 1)<br><small>Parser, Schema package</small></td>
 <td>Parser for trajectory files in GSD format (<https://gsd.readthedocs.io/en/v3.3.1/).></td>
 <td><small>—</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/nomad-parser-gsd" target="_blank" rel="noopener">Code</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-25">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -617,13 +631,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-26" data-entry-point-types="parser|schema package">
 <td><strong>nomad-parser-h5md </strong>(⭐ 1)<br><small>Parser, Schema package</small></td>
 <td>NOMAD parser plugin for h5md-based simulation files.</td>
 <td><small>—</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/nomad-parser-h5md" target="_blank" rel="noopener">Code</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-26">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -640,13 +654,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-27" data-entry-point-types="parser|schema package">
 <td><strong>nomad-parser-molpro </strong>(⭐ 0)<br><small>Parser, Schema package</small></td>
 <td>nomad example template</td>
 <td><small>—</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/nomad-parser-molpro" target="_blank" rel="noopener">Code</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-27">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -662,13 +676,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-28" data-entry-point-types="parser|schema package">
 <td><strong>nomad-parser-orca </strong>(⭐ 2)<br><small>Parser, Schema package</small></td>
 <td>nomad plugin for ORCA calculations</td>
 <td><small>—</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/nomad-parser-orca" target="_blank" rel="noopener">Code</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-28">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -685,13 +699,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-29" data-entry-point-types="parser">
 <td><strong>nomad-parser-plugin-boss </strong>(⭐ 1)<br><small>Parser</small></td>
 <td>Plugin for parsing and displaying BOSS PES arftifacts</td>
 <td><small>—</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/nomad-parser-plugin-boss" target="_blank" rel="noopener">Code</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-29">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -707,13 +721,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-30" data-entry-point-types="parser">
 <td><strong>nomad-parser-plugins-atomistic </strong>(⭐ 7)<br><small>Parser</small></td>
 <td>Collection of NOMAD parsers for atomistic codes.</td>
 <td><small>PyPI</small></td>
 <td><a href="https://github.com/nomad-coe/atomistic-parsers" target="_blank" rel="noopener">Code</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-30">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -729,13 +743,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-31" data-entry-point-types="parser">
 <td><strong>nomad-parser-plugins-electronic </strong>(⭐ 23)<br><small>Parser</small></td>
 <td>Collection of NOMAD parsers for electronic structure codes.</td>
 <td><small>PyPI</small></td>
 <td><a href="https://github.com/nomad-coe/electronic-parsers" target="_blank" rel="noopener">Code</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-31">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -751,13 +765,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-32" data-entry-point-types="parser">
 <td><strong>nomad-parser-plugins-workflow </strong>(⭐ 5)<br><small>Parser</small></td>
 <td>Collection of NOMAD parsers for workflow engines.</td>
 <td><small>PyPI</small></td>
 <td><a href="https://github.com/nomad-coe/workflow-parsers" target="_blank" rel="noopener">Code</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-32">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -773,13 +787,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-33" data-entry-point-types="parser|schema package">
 <td><strong>nomad-parser-pwd </strong>(⭐ 0)<br><small>Parser, Schema package</small></td>
 <td>A parser and schema for the Python workflow definition.</td>
 <td><small>—</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/nomad-parser-python-workflow-definition" target="_blank" rel="noopener">Code</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-33">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -795,13 +809,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-34" data-entry-point-types="parser|schema package">
 <td><strong>nomad-parser-ro-crate </strong>(⭐ 0)<br><small>Parser, Schema package</small></td>
 <td>A parser for ro-crate schema plus.</td>
 <td><small>—</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/nomad-parser-ro-crate" target="_blank" rel="noopener">Code</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-34">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -817,13 +831,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-35" data-entry-point-types="parser|schema package">
 <td><strong>nomad-parser-w2dynamics </strong>(⭐ 1)<br><small>Parser, Schema package</small></td>
 <td>NOMAD parser plugin for w2dynamics input/output files.</td>
 <td><small>—</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/nomad-parser-w2dynamics" target="_blank" rel="noopener">Code</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-35">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -840,13 +854,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-36" data-entry-point-types="parser|schema package">
 <td><strong>nomad-parser-wannier90 </strong>(⭐ 2)<br><small>Parser, Schema package</small></td>
 <td>A NOMAD parser plugin for Wannier90 input/output files.</td>
 <td><small>PyPI</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/nomad-parser-wannier90" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/nomad-parser-wannier90/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-36">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -863,13 +877,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-37" data-entry-point-types="parser|schema package">
 <td><strong>nomad-parser-yambo </strong>(⭐ 1)<br><small>Parser, Schema package</small></td>
 <td>A NOMAD parser plugin for YAMBO input/outputs files.</td>
 <td><small>—</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/nomad-parser-yambo" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/nomad-parser-yambo/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-37">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -886,13 +900,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-38" data-entry-point-types="app|schema package">
 <td><strong>nomad-plugins </strong>(⭐ 1)<br><small>App, Schema package</small></td>
 <td>A plugin for discovering other plugins.</td>
 <td><small>PyPI</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/nomad-plugins" target="_blank" rel="noopener">Code</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-38">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -908,13 +922,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-39" data-entry-point-types="app|schema package">
 <td><strong>nomad-polymerization-reactions </strong>(⭐ 2)<br><small>App, Schema package</small></td>
 <td>A NOMAD plugin for polymerization reactions.</td>
 <td><small>—</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/nomad-polymerization-reactions" target="_blank" rel="noopener">Code</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-39">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -930,13 +944,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-40" data-entry-point-types="app|normalizer">
 <td><strong>nomad-porous-materials </strong>(⭐ 0)<br><small>App, Normalizer</small></td>
 <td>NOMAD plugin for porous materials</td>
 <td><small>—</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/nomad-porous-materials" target="_blank" rel="noopener">Code</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-40">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -952,13 +966,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-41" data-entry-point-types="schema package">
 <td><strong>nomad-schema-plugin-run </strong>(⭐ 1)<br><small>Schema package</small></td>
 <td>Run schema plugin for NOMAD.</td>
 <td><small>PyPI</small></td>
 <td><a href="https://github.com/nomad-coe/nomad-schema-plugin-run" target="_blank" rel="noopener">Code</a> | <a href="https://nomad-coe.github.io/nomad-schema-plugin-run/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-41">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -973,13 +987,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-42" data-entry-point-types="schema package">
 <td><strong>nomad-schema-plugin-simulation-workflow </strong>(⭐ 2)<br><small>Schema package</small></td>
 <td>Simulation workflow schema plugin for NOMAD.</td>
 <td><small>PyPI</small></td>
 <td><a href="https://github.com/nomad-coe/nomad-schema-plugin-simulation-workflow" target="_blank" rel="noopener">Code</a> | <a href="https://nomad-coe.github.io/nomad-schema-plugin-simulation-workflow/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-42">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -995,13 +1009,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-43" data-entry-point-types="app">
 <td><strong>nomad-simulation-apps </strong>(⭐ 2)<br><small>App</small></td>
 <td>A repository for housing NOMAD's collection of simulation app plugins.</td>
 <td><small>PyPI</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/nomad-app-plugins-simulation" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/nomad-app-plugins-simulation/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-43">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -1017,13 +1031,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-44" data-entry-point-types="example upload">
 <td><strong>nomad-simulation-examples </strong>(⭐ 0)<br><small>Example upload</small></td>
 <td>Example uploads for multiple simulation codes for NOMAD development.</td>
 <td><small>—</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/nomad-simulation-examples" target="_blank" rel="noopener">Code</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-44">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -1037,13 +1051,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-45" data-entry-point-types="parser|schema package">
 <td><strong>nomad-simulation-parsers </strong>(⭐ 1)<br><small>Parser, Schema package</small></td>
 <td>A repository for housing NOMAD's collection of simulation parser plugins.</td>
 <td><small>—</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/nomad-parser-plugins-simulation" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/nomad-parser-plugins-simulation/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-45">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -1060,13 +1074,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-46" data-entry-point-types="normalizer|schema package">
 <td><strong>nomad-simulation-workflow </strong>(⭐ 0)<br><small>Normalizer, Schema package</small></td>
 <td>Schema defintions and normalizer for NOMAD simulation workflows</td>
 <td><small>—</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/nomad-simulation-workflow" target="_blank" rel="noopener">Code</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-46">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -1082,13 +1096,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-47" data-entry-point-types="schema package">
 <td><strong>nomad-simulations </strong>(⭐ 7)<br><small>Schema package</small></td>
 <td>A NOMAD plugin for FAIR schemas for simulation data.</td>
 <td><small>PyPI</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/nomad-simulations" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/nomad-simulations/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-47">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -1104,13 +1118,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-48" data-entry-point-types="app|example upload|parser|schema package">
 <td><strong>nomad-tadf-molecules </strong>(⭐ 2)<br><small>App, Example upload, Parser, Schema package</small></td>
 <td>NOMAD plugin for thermally activated delayed fluorescent molecules</td>
 <td><small>—</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/nomad-tadf-molecules" target="_blank" rel="noopener">Code</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-48">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -1126,13 +1140,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-49" data-entry-point-types="app|parser|schema package">
 <td><strong>nomad-unisyscat </strong>(⭐ 1)<br><small>App, Parser, Schema package</small></td>
 <td>A example plugin for a demonstration for UniSysCat.</td>
 <td><small>—</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/nomad-unisyscat-plugin" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/nomad-unisyscat-plugin/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-49">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -1148,13 +1162,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-50" data-entry-point-types="app|example upload|normalizer|parser|schema package">
 <td><strong>nomad-utility-workflows </strong>(⭐ 4)<br><small>App, Example upload, Normalizer, Parser, Schema package</small></td>
 <td>A module with utilities for interacting with NOMAD via, e.g., a workflow manager.</td>
 <td><small>PyPI</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/nomad-utility-workflows" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/nomad-utility-workflows/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-50">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -1170,13 +1184,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-51" data-entry-point-types="normalizer|schema package">
 <td><strong>nomad_topology_normalizer </strong>(⭐ 0)<br><small>Normalizer, Schema package</small></td>
 <td>Topology Normalizer</td>
 <td><small>—</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/nomad-topology-normalizer" target="_blank" rel="noopener">Code</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-51">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -1192,13 +1206,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-52" data-entry-point-types="app|parser|schema package">
 <td><strong>perovskite-solar-cell-database </strong>(⭐ 8)<br><small>App, Parser, Schema package</small></td>
 <td>Perovskite solar cell data schema plugin for NOMAD.</td>
 <td><small>PyPI</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/nomad-perovskite-solar-cells-database" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/nomad-perovskite-solar-cells-database/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-52">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -1215,13 +1229,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-53" data-entry-point-types="app|example upload|parser|schema package">
 <td><strong>pynxtools </strong>(⭐ 19)<br><small>App, Example upload, Parser, Schema package</small></td>
 <td>Extend NeXus for experiments and characterization in Materials Science and Materials Engineering and serve as a NOMAD parser implementation for NeXus.</td>
 <td><small>PyPI</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/pynxtools" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/pynxtools/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-53">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -1237,13 +1251,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-54" data-entry-point-types="example upload">
 <td><strong>pynxtools-apm </strong>(⭐ 0)<br><small>Example upload</small></td>
 <td>A reader for transferring APM from vendor formats to NeXus and NOMAD.</td>
 <td><small>PyPI</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/pynxtools-apm" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/pynxtools-apm/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-54">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -1259,13 +1273,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-55" data-entry-point-types="example upload">
 <td><strong>pynxtools-ellips </strong>(⭐ 0)<br><small>Example upload</small></td>
 <td>A reader for transferring ellipsometry data from vendor formats to NeXus and NOMAD.</td>
 <td><small>PyPI</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/pynxtools-ellips" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/pynxtools-ellips/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-55">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -1281,13 +1295,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-56" data-entry-point-types="example upload">
 <td><strong>pynxtools-em </strong>(⭐ 3)<br><small>Example upload</small></td>
 <td>A reader for transferring EM from vendor formats to NeXus and NOMAD.</td>
 <td><small>PyPI</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/pynxtools-em" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/pynxtools-em/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-56">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -1303,13 +1317,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-57" data-entry-point-types="example upload">
 <td><strong>pynxtools-igor </strong>(⭐ 0)<br><small>Example upload</small></td>
 <td>pynxtools plugin for reading igor pro waves and packed experiments</td>
 <td><small>PyPI</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/pynxtools-igor" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/pynxtools-igor/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-57">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -1325,13 +1339,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-58" data-entry-point-types="app|example upload">
 <td><strong>pynxtools-mpes </strong>(⭐ 0)<br><small>App, Example upload</small></td>
 <td>—</td>
 <td><small>PyPI</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/pynxtools-mpes" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/pynxtools-mpes/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-58">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -1347,13 +1361,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-59" data-entry-point-types="app">
 <td><strong>pynxtools-raman </strong>(⭐ 0)<br><small>App</small></td>
 <td>A reader for transferring Raman data from vendor formats to NeXus and NOMAD.</td>
 <td><small>PyPI</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/pynxtools-raman" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/pynxtools-raman/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-59">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -1369,13 +1383,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-60" data-entry-point-types="app|example upload">
 <td><strong>pynxtools-spm </strong>(⭐ 0)<br><small>App, Example upload</small></td>
 <td>pynxtools-spm: A pynxtools plugin for SPM (Scanning Probe Microscopy) data readers</td>
 <td><small>PyPI</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/pynxtools-spm" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/pynxtools-spm/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-60">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -1391,13 +1405,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-61" data-entry-point-types="example upload">
 <td><strong>pynxtools-stm </strong>(⭐ 0)<br><small>Example upload</small></td>
 <td>A plugin for pynxtools to convert sts and stm files</td>
 <td><small>PyPI</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/pynxtools-stm" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/pynxtools-stm/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-61">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -1413,13 +1427,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-62" data-entry-point-types="example upload">
 <td><strong>pynxtools-xps </strong>(⭐ 5)<br><small>Example upload</small></td>
 <td>pynxtools-xps is a pynxtools reader plugin for X-ray photoelectron spectroscopy (XPS) data.</td>
 <td><small>PyPI</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/pynxtools-xps" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/pynxtools-xps/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-62">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -1435,13 +1449,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-63" data-entry-point-types="parser|schema package">
 <td><strong>rtg-sims </strong>(⭐ 11)<br><small>Parser, Schema package</small></td>
 <td>A plugin for RTG SIMS.</td>
 <td><small>—</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/AreaA-data_modeling_and_schemas" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/AreaA-data_modeling_and_schemas/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-63">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>
@@ -1457,13 +1471,13 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-64" data-entry-point-types="parser|schema package">
 <td><strong>transmission </strong>(⭐ 11)<br><small>Parser, Schema package</small></td>
 <td>A plugin for NOMAD containing base sections for transmission spectrophotometry.</td>
 <td><small>PyPI</small></td>
 <td><a href="https://github.com/FAIRmat-NFDI/AreaA-data_modeling_and_schemas" target="_blank" rel="noopener">Code</a> | <a href="https://fairmat-nfdi.github.io/AreaA-data_modeling_and_schemas/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
-<tr>
+<tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-64">
 <td colspan="4" style="padding: 0; border-top: none;">
 <details style="margin: 0; padding: 12px 16px; border: 0px">
 <summary style="cursor: pointer; font-weight: 600; color: #1976d2; list-style: none; user-select: none;">View Details</summary>

@@ -226,3 +226,93 @@
     cursor: zoom-out
 }
 
+.plugin-registry-filter {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0.75rem 0 1rem 0;
+    padding: 0.75rem;
+    border: 1px solid rgba(42, 76, 223, 0.2);
+    border-radius: 0.5rem;
+    background: rgba(42, 76, 223, 0.04);
+}
+
+.plugin-registry-filter__label {
+    font-weight: 600;
+    color: #2a4cdf;
+}
+
+.plugin-registry-filter__select {
+    min-width: 14rem;
+    max-width: 100%;
+    padding: 0.35rem 0.5rem;
+    border: 1px solid rgba(42, 76, 223, 0.25);
+    border-radius: 0.35rem;
+    background: #fff;
+}
+
+.plugin-registry-filter__clear {
+    padding: 0.35rem 0.7rem;
+    border: 1px solid rgba(42, 76, 223, 0.3);
+    border-radius: 0.35rem;
+    background: #fff;
+    color: #2a4cdf;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.plugin-registry-filter__count {
+    margin-left: auto;
+    color: rgba(0, 0, 0, 0.7);
+    font-size: 0.85rem;
+}
+
+.plugin-registry-table thead th {
+    text-align: center !important;
+    font-weight: 700;
+    font-size: 1rem;
+    border-bottom: 2px solid #2a4cdf;
+    padding-bottom: 0.55rem;
+}
+
+.plugin-registry-table {
+    table-layout: fixed;
+    width: 100%;
+}
+
+.plugin-registry-table th:nth-child(1),
+.plugin-registry-table td:nth-child(1) {
+    width: 24%;
+}
+
+.plugin-registry-table th:nth-child(2),
+.plugin-registry-table td:nth-child(2) {
+    width: 46%;
+}
+
+.plugin-registry-table td:nth-child(2) {
+    padding-left: 0.65rem;
+}
+
+.plugin-registry-table th:nth-child(3),
+.plugin-registry-table td:nth-child(3) {
+    width: 20%;
+    text-align: center;
+}
+
+.plugin-registry-table th:nth-child(4),
+.plugin-registry-table td:nth-child(4) {
+    width: 10%;
+}
+
+.plugin-registry-table td:nth-child(4) {
+    padding-left: 0.6rem;
+}
+
+@media (max-width: 48rem) {
+    .plugin-registry-filter__count {
+        width: 100%;
+        margin-left: 0;
+    }
+}
