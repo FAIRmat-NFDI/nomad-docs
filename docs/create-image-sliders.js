@@ -300,6 +300,15 @@ function initPluginRegistryFilters() {
         }
         sortLabel.setAttribute("for", sortSelect.id);
 
+        let noticeNode = findPreviousSiblingWithAttr(table, "data-plugin-registry-notice");
+        if (!noticeNode) {
+            noticeNode = document.createElement("div");
+            noticeNode.className = "plugin-registry-notice";
+            noticeNode.setAttribute("data-plugin-registry-notice", "true");
+            noticeNode.setAttribute("aria-live", "polite");
+            table.parentNode.insertBefore(noticeNode, table);
+        }
+
         let chartRoot = findPreviousSiblingWithAttr(table, "data-plugin-registry-chart");
         if (!chartRoot) {
             chartRoot = document.createElement("div");
@@ -312,7 +321,7 @@ function initPluginRegistryFilters() {
             <p class="plugin-registry-chart__title"><strong>Filtered Distributions</strong></p>
             <div class="plugin-registry-chart__panels">
                 <section class="plugin-registry-chart__panel" data-chart-kind="type">
-                    <p class="plugin-registry-chart__panel-title"><strong>Containing (Type)</strong></p>
+                    <p class="plugin-registry-chart__panel-title"><strong>Entry Point Type</strong></p>
                     <div class="plugin-registry-chart__panel-content">
                         <div class="plugin-registry-chart__pie-wrap">
                             <div class="plugin-registry-chart__pie" role="img" aria-label="Plugin type distribution pie chart">
@@ -343,6 +352,12 @@ function initPluginRegistryFilters() {
 
         if (filterRoot.nextElementSibling !== chartRoot) {
             filterRoot.insertAdjacentElement("afterend", chartRoot);
+        }
+        if (filterRoot.nextElementSibling !== noticeNode) {
+            filterRoot.insertAdjacentElement("afterend", noticeNode);
+        }
+        if (noticeNode.nextElementSibling !== chartRoot) {
+            noticeNode.insertAdjacentElement("afterend", chartRoot);
         }
 
         const typePanel = chartRoot.querySelector('[data-chart-kind="type"]');
@@ -500,6 +515,8 @@ function initPluginRegistryFilters() {
             const totalCount = groupedRows.length;
             const visibleTypeCounts = new Map();
             const visibleOwnerCounts = new Map();
+            let shownFairmatCount = 0;
+            let shownNonFairmatCount = 0;
 
             sortedGroups.forEach((group) => {
                 const matchesType =
@@ -533,9 +550,13 @@ function initPluginRegistryFilters() {
                     });
                     let ownerBucket = "other";
                     if (isFairmatOwner(group.ownerNormalized)) {
+                        shownFairmatCount += 1;
                         ownerBucket = "fairmat";
                     } else if (majorOwnerDisplayByNormalized.has(group.ownerNormalized)) {
+                        shownNonFairmatCount += 1;
                         ownerBucket = majorOwnerDisplayByNormalized.get(group.ownerNormalized);
+                    } else {
+                        shownNonFairmatCount += 1;
                     }
                     visibleOwnerCounts.set(
                         ownerBucket,
@@ -543,6 +564,25 @@ function initPluginRegistryFilters() {
                     );
                 }
             });
+
+            noticeNode.classList.remove(
+                "plugin-registry-notice--warning",
+                "plugin-registry-notice--success"
+            );
+            if (shownCount === 0) {
+                noticeNode.style.display = "none";
+                noticeNode.textContent = "";
+            } else if (shownNonFairmatCount > 0) {
+                noticeNode.style.display = "";
+                noticeNode.classList.add("plugin-registry-notice--warning");
+                noticeNode.textContent =
+                    "Warning: This selection includes non-FAIRmat plugins. FAIRmat has not checked these plugins for validity or compatibility with the latest NOMAD version.";
+            } else if (shownFairmatCount > 0) {
+                noticeNode.style.display = "";
+                noticeNode.classList.add("plugin-registry-notice--success");
+                noticeNode.textContent =
+                    "All currently shown plugins are developed and maintained by FAIRmat.";
+            }
 
             countNode.textContent = `${shownCount}/${totalCount} plugins shown`;
             renderPieChart(

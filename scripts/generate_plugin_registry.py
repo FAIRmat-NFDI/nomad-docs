@@ -404,11 +404,15 @@ def generate_markdown_table(plugins: list[dict[str, Any]]) -> str:
     )
     markdown.append('</div>')
     markdown.append('')
+    markdown.append(
+        '<div class="plugin-registry-notice" data-plugin-registry-notice aria-live="polite"></div>'
+    )
+    markdown.append('')
     markdown.append('<div class="plugin-registry-chart" data-plugin-registry-chart>')
     markdown.append('<p class="plugin-registry-chart__title"><strong>Filtered Distributions</strong></p>')
     markdown.append('<div class="plugin-registry-chart__panels">')
     markdown.append('<section class="plugin-registry-chart__panel" data-chart-kind="type">')
-    markdown.append('<p class="plugin-registry-chart__panel-title"><strong>Containing (Type)</strong></p>')
+    markdown.append('<p class="plugin-registry-chart__panel-title"><strong>Entry Point Type</strong></p>')
     markdown.append('<div class="plugin-registry-chart__panel-content">')
     markdown.append('<div class="plugin-registry-chart__pie-wrap">')
     markdown.append(

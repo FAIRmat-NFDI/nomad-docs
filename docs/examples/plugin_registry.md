@@ -39,11 +39,13 @@ Quick reference table of all available plugins:
 <span class="plugin-registry-filter__count" aria-live="polite"></span>
 </div>
 
+<div class="plugin-registry-notice" data-plugin-registry-notice aria-live="polite"></div>
+
 <div class="plugin-registry-chart" data-plugin-registry-chart>
 <p class="plugin-registry-chart__title"><strong>Filtered Distributions</strong></p>
 <div class="plugin-registry-chart__panels">
 <section class="plugin-registry-chart__panel" data-chart-kind="type">
-<p class="plugin-registry-chart__panel-title"><strong>Containing (Type)</strong></p>
+<p class="plugin-registry-chart__panel-title"><strong>Entry Point Type</strong></p>
 <div class="plugin-registry-chart__panel-content">
 <div class="plugin-registry-chart__pie-wrap">
 <div class="plugin-registry-chart__pie" role="img" aria-label="Plugin type distribution pie chart">

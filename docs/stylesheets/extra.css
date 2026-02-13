@@ -285,6 +285,27 @@
     font-size: 0.85rem;
 }
 
+.plugin-registry-notice {
+    margin: 0.5rem 0 0.75rem 0;
+    padding: 0.65rem 0.8rem;
+    border-radius: 0.45rem;
+    border: 1px solid transparent;
+    font-size: 0.92rem;
+    line-height: 1.4;
+}
+
+.plugin-registry-notice--warning {
+    border-color: rgba(180, 83, 9, 0.35);
+    background: rgba(245, 158, 11, 0.13);
+    color: #7c2d12;
+}
+
+.plugin-registry-notice--success {
+    border-color: rgba(5, 150, 105, 0.35);
+    background: rgba(16, 185, 129, 0.13);
+    color: #065f46;
+}
+
 .plugin-registry-chart {
     margin: 0.5rem 0 1rem 0;
     padding: 0.75rem;
@@ -320,8 +341,8 @@
 }
 
 .plugin-registry-chart__pie {
-    width: 150px;
-    height: 150px;
+    width: 136px;
+    height: 136px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -349,6 +370,7 @@
 .plugin-registry-chart__legend {
     display: grid;
     gap: 0.25rem;
+    min-width: 0;
 }
 
 .plugin-registry-chart__legend-item {
@@ -356,7 +378,14 @@
     grid-template-columns: 12px 1fr auto;
     gap: 0.5rem;
     align-items: center;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
+    min-width: 0;
+}
+
+.plugin-registry-chart__legend-label {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
 
 .plugin-registry-chart__legend-swatch {
