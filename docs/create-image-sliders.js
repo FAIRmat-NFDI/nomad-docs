@@ -214,6 +214,22 @@ function initPluginRegistryFilters() {
             return node;
         }
 
+        function enableClickToggleMultiSelect(selectNode) {
+            if (!selectNode || !selectNode.multiple || selectNode.dataset.clickToggleInit === "true") {
+                return;
+            }
+            selectNode.dataset.clickToggleInit = "true";
+            selectNode.addEventListener("mousedown", (event) => {
+                const option = event.target.closest("option");
+                if (!option) {
+                    return;
+                }
+                event.preventDefault();
+                option.selected = !option.selected;
+                selectNode.dispatchEvent(new Event("change", { bubbles: true }));
+            });
+        }
+
         let filterRoot = findPreviousSiblingWithAttr(table, "data-plugin-registry-filter");
         if (!filterRoot) {
             filterRoot = document.createElement("div");
@@ -236,6 +252,10 @@ function initPluginRegistryFilters() {
             filterSelect.className = "plugin-registry-filter__select plugin-registry-filter__type";
             filterRoot.appendChild(filterSelect);
         }
+        filterSelect.multiple = true;
+        if (!filterSelect.hasAttribute("size")) {
+            filterSelect.size = 4;
+        }
 
         let ownerLabel = filterRoot.querySelector(".plugin-registry-filter__label--owner");
         if (!ownerLabel) {
@@ -250,6 +270,10 @@ function initPluginRegistryFilters() {
             ownerSelect = document.createElement("select");
             ownerSelect.className = "plugin-registry-filter__select plugin-registry-filter__owner";
             filterRoot.appendChild(ownerSelect);
+        }
+        ownerSelect.multiple = true;
+        if (!ownerSelect.hasAttribute("size")) {
+            ownerSelect.size = 4;
         }
 
         let sortLabel = filterRoot.querySelector(".plugin-registry-filter__label--sort");
@@ -299,6 +323,8 @@ function initPluginRegistryFilters() {
             sortSelect.id = `plugin-registry-sort-${tableIndex}`;
         }
         sortLabel.setAttribute("for", sortSelect.id);
+        enableClickToggleMultiSelect(filterSelect);
+        enableClickToggleMultiSelect(ownerSelect);
 
         let noticeNode = findPreviousSiblingWithAttr(table, "data-plugin-registry-notice");
         if (!noticeNode) {
@@ -413,16 +439,13 @@ function initPluginRegistryFilters() {
         }
 
         filterSelect.innerHTML = "";
-        const allTypeOption = document.createElement("option");
-        allTypeOption.value = "";
-        allTypeOption.textContent = "All entry point types";
-        filterSelect.appendChild(allTypeOption);
         for (const type of availableTypes) {
             const option = document.createElement("option");
             option.value = type;
             option.textContent = titleCase(type);
             filterSelect.appendChild(option);
         }
+        filterSelect.selectedIndex = -1;
 
         const OWNER_FILTER_MIN_COUNT = 5;
         const majorOwnerDisplayByNormalized = new Map();
@@ -459,10 +482,6 @@ function initPluginRegistryFilters() {
             .sort((a, b) => a[1].localeCompare(b[1]));
 
         ownerSelect.innerHTML = "";
-        const allOwnerOption = document.createElement("option");
-        allOwnerOption.value = "";
-        allOwnerOption.textContent = "All owners";
-        ownerSelect.appendChild(allOwnerOption);
         if (hasFairmatOwners) {
             const fairmatOption = document.createElement("option");
             fairmatOption.value = "__fairmat__";
@@ -481,6 +500,7 @@ function initPluginRegistryFilters() {
             option.textContent = ownerDisplay;
             ownerSelect.appendChild(option);
         });
+        ownerSelect.selectedIndex = -1;
 
         sortSelect.innerHTML = "";
         [
@@ -495,9 +515,17 @@ function initPluginRegistryFilters() {
         });
         sortSelect.value = "name_asc";
 
+        function getSelectedValues(selectNode) {
+            return new Set(
+                Array.from(selectNode.selectedOptions || [])
+                    .map((option) => normalize(option.value))
+                    .filter(Boolean)
+            );
+        }
+
         function applyFilter() {
-            const selectedType = normalize(filterSelect.value);
-            const selectedOwner = normalize(ownerSelect.value);
+            const selectedTypes = getSelectedValues(filterSelect);
+            const selectedOwners = getSelectedValues(ownerSelect);
             const selectedSort = normalize(sortSelect.value || "name_asc");
             const sortedGroups = [...groupedRows].sort((a, b) => {
                 if (selectedSort === "name_desc") {
@@ -520,19 +548,19 @@ function initPluginRegistryFilters() {
 
             sortedGroups.forEach((group) => {
                 const matchesType =
-                    !selectedType || group.types.some((type) => type === selectedType);
+                    selectedTypes.size === 0
+                    || group.types.some((type) => selectedTypes.has(type));
                 const matchesOwner =
-                    !selectedOwner
-                    || (selectedOwner === "__fairmat__" && isFairmatOwner(group.ownerNormalized))
+                    selectedOwners.size === 0
                     || (
-                        selectedOwner === "__non_fairmat__"
-                        && !isFairmatOwner(group.ownerNormalized)
+                        selectedOwners.has("__fairmat__")
+                        && isFairmatOwner(group.ownerNormalized)
                     )
                     || (
-                        selectedOwner !== "__fairmat__"
-                        && selectedOwner !== "__non_fairmat__"
-                        && group.ownerNormalized === selectedOwner
-                    );
+                        selectedOwners.has("__non_fairmat__")
+                        && !isFairmatOwner(group.ownerNormalized)
+                    )
+                    || selectedOwners.has(group.ownerNormalized);
                 const matches = matchesType && matchesOwner;
 
                 tbody.appendChild(group.mainRow);
@@ -607,8 +635,12 @@ function initPluginRegistryFilters() {
         ownerSelect.addEventListener("change", applyFilter);
         sortSelect.addEventListener("change", applyFilter);
         clearButton.addEventListener("click", () => {
-            filterSelect.value = "";
-            ownerSelect.value = "";
+            Array.from(filterSelect.options).forEach((option) => {
+                option.selected = false;
+            });
+            Array.from(ownerSelect.options).forEach((option) => {
+                option.selected = false;
+            });
             sortSelect.value = "name_asc";
             applyFilter();
         });

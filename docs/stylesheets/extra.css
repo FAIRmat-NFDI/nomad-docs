@@ -253,6 +253,10 @@
     background: #fff;
 }
 
+.plugin-registry-filter__select[multiple] {
+    padding: 0.25rem 0.4rem;
+}
+
 .plugin-registry-filter__clear {
     grid-column: 5;
     grid-row: 2;

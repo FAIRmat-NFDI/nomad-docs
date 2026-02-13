@@ -10,8 +10,7 @@ Quick reference table of all available plugins:
 
 <div class="plugin-registry-filter" data-plugin-registry-filter>
 <label class="plugin-registry-filter__label plugin-registry-filter__label--type">Containing</label>
-<select class="plugin-registry-filter__select plugin-registry-filter__type">
-<option value="">All entry point types</option>
+<select class="plugin-registry-filter__select plugin-registry-filter__type" multiple size="4">
 <option value="API">API</option>
 <option value="App">App</option>
 <option value="Example upload">Example upload</option>
@@ -20,8 +19,7 @@ Quick reference table of all available plugins:
 <option value="Schema package">Schema package</option>
 </select>
 <label class="plugin-registry-filter__label plugin-registry-filter__label--owner">Owner</label>
-<select class="plugin-registry-filter__select plugin-registry-filter__owner">
-<option value="">All owners</option>
+<select class="plugin-registry-filter__select plugin-registry-filter__owner" multiple size="4">
 <option value="__fairmat__">FAIRmat</option>
 <option value="__non_fairmat__">Non-FAIRmat</option>
 <option value="AddMorePower">AddMorePower</option>

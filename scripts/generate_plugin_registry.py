@@ -380,9 +380,8 @@ def generate_markdown_table(plugins: list[dict[str, Any]]) -> str:
         '<label class="plugin-registry-filter__label plugin-registry-filter__label--type">Containing</label>'
     )
     markdown.append(
-        '<select class="plugin-registry-filter__select plugin-registry-filter__type">'
+        '<select class="plugin-registry-filter__select plugin-registry-filter__type" multiple size="4">'
     )
-    markdown.append('<option value="">All entry point types</option>')
     for ep_type in all_entry_point_types:
         markdown.append(f'<option value="{ep_type}">{ep_type}</option>')
     markdown.append('</select>')
@@ -390,9 +389,8 @@ def generate_markdown_table(plugins: list[dict[str, Any]]) -> str:
         '<label class="plugin-registry-filter__label plugin-registry-filter__label--owner">Owner</label>'
     )
     markdown.append(
-        '<select class="plugin-registry-filter__select plugin-registry-filter__owner">'
+        '<select class="plugin-registry-filter__select plugin-registry-filter__owner" multiple size="4">'
     )
-    markdown.append('<option value="">All owners</option>')
     if has_fairmat_owners:
         markdown.append('<option value="__fairmat__">FAIRmat</option>')
     if has_non_fairmat_owners:

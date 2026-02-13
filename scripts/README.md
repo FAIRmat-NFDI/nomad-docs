@@ -8,10 +8,21 @@ Automatically generates the [Plugin Registry](../docs/examples/plugin_registry.m
 
 ### Features
 
-- Queries the NOMAD Oasis API for plugin metadata
+- Queries the NOMAD API for plugin metadata
 - Retrieves all plugin entries from NOMAD (no owner restriction)
 - Creates a quick reference table with key metadata
-- Adds interactive filtering (entry-point type and owner: FAIRmat, Non-FAIRmat, and owners with 5+ plugins)
+- Adds interactive filtering:
+  - Multi-select entry point type (`Containing`)
+  - Multi-select owner (`FAIRmat`, `Non-FAIRmat`, and non-FAIRmat owners with 5+ plugins)
+- Adds interactive sorting:
+  - Name (A→Z / Z→A)
+  - Stars (high→low)
+- Adds two dynamic pie charts that update with all active filters:
+  - Entry Point Type distribution
+  - Owner distribution (with non-major non-FAIRmat owners grouped as `Other`)
+- Adds a dynamic status notice between filters and charts:
+  - Warning when any non-FAIRmat plugin is included
+  - Success message when only FAIRmat plugins are shown
 - Provides detailed information for each plugin including:
   - Description and repository links
   - Stars, creation/update dates
@@ -33,7 +44,7 @@ uv run python scripts/generate_plugin_registry.py
 The script will:
 1. Query the NOMAD API at `https://nomad-lab.eu/prod/v1/api/v1/entries/query` (and fall back to `.../oasis/...` if needed)
 2. Extract and process plugin metadata
-3. Generate the markdown file at `docs/examples/plugin_registry.md`
+3. Generate the interactive registry markup at `docs/examples/plugin_registry.md`
 
 ### Automation
 
