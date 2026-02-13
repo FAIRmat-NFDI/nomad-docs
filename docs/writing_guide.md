@@ -37,7 +37,7 @@ When contributing, identify which type of documentation your addition belongs to
 
 **Descriptive link naming.** Use descriptive link text (instead of `here/link`).
 
-**Internal links: standardized naming.** Use the path hierarchy to the referenced page or section, separated by >'s. For example: `[Tutorial > Exploring Data > Search Interface & Filters](<path-to-referenced-section>)`. Long paths can be shortend with `...`, e.g., `[Tutorial > ... > Search Interface & Filters](<path-to-referenced-section>)`, using your best judgement.
+**Internal links: standardized naming.** Use the path hierarchy to the referenced page or section, separated by >'s. For example: `[Tutorial > Exploring Data > Search Interface & Filters](<path-to-referenced-section>)`. Long paths can be shortened with `...`, e.g., `[Tutorial > ... > Search Interface & Filters](<path-to-referenced-section>)`, using your best judgement.
 
 If the referenced section belongs to the current page, drop the global path, i.e., `[Search Interface & Filters](<path-to-referenced-section>)`.
 
@@ -71,35 +71,54 @@ If the referenced section belongs to the current page, drop the global path, i.e
 
 **Add new terms to glossary.** Add new NOMAD-specific terms to the [Glossary](https://github.com/FAIRmat-NFDI/nomad-docs/blob/main/docs/reference/glossary.md){:target="_blank" rel="noopener"}. External terms/concepts should link to external definitions, when appropriate (use your best judgement).
 
-## Code, commands, and UI text
+### Code, commands, and UI text
 
 **Blocks & highlighting.** Use fenced code blocks with a language tag (e.g., \`\`\`bash, \`\`\`python).
 
-**Copy-paste ready.** Commands should run as-is. If a placeholder is required, angle-bracket it and explain once: <your_token>.
+**Copy-paste ready.** Commands should run as-is. If a placeholder is required, surround it with angle brackets and use a descriptive name with hyphens separating words. Like this: `<your-token>`.
 
 **UI copy.** Quote exact button/label text in bold or code.
 
-## Repo Organization
-
-**Keep the navigation structure.** The location of docs .md files should mirror the navigation bar, with subfolders named after the organizational subsections of the bar.
-
-**Images and data.** All assets specific to an individual markdown file should be stored within an immediate sub-directory of the file, labeled accordingly. Please use `images/` and `data/` for the image and data files, respectively. Sharing assets between .md files in different locations is currently not allowed. If there is an exceptional case, please create a GithHub issue and tag a relevant maintainer.
-
-## Admonitions
+### Admonitions
 
 > ⚠️ **Attention:** An admonition is a highlighted block in documentation used to draw attention to important information, such as notes, warnings, tips, or examples.
 
 <!-- TODO Do we want to restrict to only these? Or allow custom naming? -->
 **Do not use custom titles for admonitions.**
-Any of the standard amdonition titles are allowed. Additionally, gere is a list of "custom" titles that can be used within the docs:
+Any of the standard admonition titles are allowed. Additionally, here is a list of "custom" titles that can be used within the docs:
 
 - !!! warning "Attention"
 
 - !!! tip "Important"
 
-If you would like to propose a standard extension, create an issue with your suggestion and a example image of the new admonition.
+If you would like to propose a standard extension, create an issue with your suggestion and an example image of the new admonition.
 
-## Adding image sliders
+## Images
+
+Images should be used sparingly. Each image that is added should be seen as a costly investment: keeping images up-to-date is very hard when thinking long-term upkeep of the documentation.
+
+Images that can be represented in code should be preferred. The docs support [Mermaid](https://mermaid.js.org/){:target="_blank" rel="noopener"}, and you can add mermaid images inside markdown with:
+
+````md
+<figure markdown style="width: 100%">
+  ``` mermaid
+  %%{init:{'flowchart':{'nodeSpacing': 25}}}%%
+  graph LR
+    subgraph NOMAD Distribution
+      subgraph NOMAD Plugin A
+        ro1(Entry point: Schema)
+      end
+    end
+  ```
+  <figcaption>Relation between NOMAD distributions, plugins and entry points.</figcaption>
+</figure>
+````
+
+The second best format is SVG. SVG files scale to different resolutions, produce small file sizes, and are easy to modify later. It is recommended to use [draw.io](https://www.drawio.com/){:target="_blank" rel="noopener"} to produce any complex diagrams, and then export them in the SVG format using the "Include a copy of my diagram" option which allows for easy editing later.
+
+When other options are not suitable, the preferred raster image format is JPG.
+
+### Adding image sliders
 
 Image sliders can be added using the following syntax:
 
@@ -115,4 +134,10 @@ Image sliders can be added using the following syntax:
 
 To minimize flickering effect during transitions, make all the sliding images of the same size. <!-- we may need to fix this issue from Java or CSS at some point -->
 
-If you use more than one slider on the same page, make sure to give them different id. The same applies for the navigation arrows.
+If you use more than one slider on the same page, make sure to give them different ids. The same applies for the navigation arrows.
+
+## Repo Organization
+
+**Keep the navigation structure.** The location of docs .md files should mirror the navigation bar, with subfolders named after the organizational subsections of the bar.
+
+**Images and data.** All assets specific to an individual markdown file should be stored within an immediate sub-directory of the file, labeled accordingly. Please use `images/` and `data/` for the image and data files, respectively. Sharing assets between .md files in different locations is currently not allowed. If there is an exceptional case, please create a GitHub issue and tag a relevant maintainer.

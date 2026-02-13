@@ -1,19 +1,50 @@
-# Uploading and Publishing Data in NOMAD
+# Upload and publish data in NOMAD
 
-In this tutorial, we will explore how to upload, share, and research data in NOMAD, using examples from both computational and experimental research. We will start by introducing the key components of NOMAD that facilitate the process, from uploading raw data files to publishing datasets with a Digital Object Identifier (DOI). Step by step, we will guide you through creating and managing uploads, adding files to generate entries that NOMAD processes, and organizing these entries into datasets for publication. By the end of this tutorial, you will have a clear understanding of how to handle different types of research data efficiently within NOMAD.
+In this tutorial, we follow the entire workflow for uploading and publishing research data in NOMAD via the graphical user interface (GUI). We use computational and experimental examples to demonstrate how raw files are transformed into structured, publishable datasets. By the end of the tutorial, we will publish the data in NOMAD and assign it a Digital Object Identifier (DOI).
 
 ![From raw files to published datasets](images/upload_publish_1.png)
 
-## The Key Elements in NOMAD
+---
+
+## What you will learn
+
+In this tutorial, you will learn how to:
+
+1. Upload raw research data to NOMAD and organize it using uploads
+2. View the entries that NOMAD generates from your files and check their processing status
+3. Share uploads with collaborators and manage access permissions
+4. Publish uploads and understand the role of embargoes
+5. Group entries into datasets for curation and publication
+6. Publish datasets and assign a Digital Object Identifier (DOI)
+
+---
+
+## Before you begin
+
+This tutorial requires no prior experience with NOMAD.
+
+Before starting, make sure you have the following:
+
+1. **NOMAD user account**  
+    In order to upload data into NOMAD, a user account is required.
+    You can create an account by following the steps described in the
+    [overview page](overview.md#create-a-nomad-user-account){:target="_blank" rel="noopener"}.
+
+2. **Example files available on your local machine**  
+    This tutorial uses provided example data files for:
+    - [Miscellaneous files (PDF, images, tables)](https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_3_files/example_files_upload/miscellaneous_data/miscellaneous_data.zip){:target="_blank" rel="noopener"},
+    - [Computational data (DFT calculations)](https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_3_files/example_files_upload/computations_data/FHI-aims.zip){:target="_blank" rel="noopener"},
+    - [Experimental data (XPS measurements)](https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_3_files/example_files_upload/experiments_data/xps_nexus_data.zip){:target="_blank" rel="noopener"}.
+
+---
+
+## The key elements in NOMAD
 
 To begin the journey from uploading raw files to publishing datasets with DOIs in NOMAD, you need to understand the key elements of this process in NOMAD, which are illustrated in the figure below.
 
 ![The key elements in NOMAD](images/upload_publish_2.png)
 
-1. In order to upload data into NOMAD, a **user account** is required.
-You can create a user account by following these [steps](overview.md#create-a-nomad-user-account){:target="_blank"} on the overview page.
-
-2. All files and data created by users are organized in NOMAD as **Uploads**, which function as directories within the user’s account. You can create an upload for each project and structure it into nested folder directories for better organization.
+- All files and data created by users are organized in NOMAD as **Uploads**, which function as directories within the user’s account. You can create an upload for each project and structure it into nested folder directories for better organization.
 
     ??? info "Features of NOMAD **Uploads**"
         - **Creation:** Uploads are created and managed by users.
@@ -21,7 +52,7 @@ You can create a user account by following these [steps](overview.md#create-a-no
         - **Organization:** Each upload can contain multiple files organized into directories.
         - **Sharing & Publishing:** Entries and files can only be shared, transferred, or published as complete uploads.
 
-3. Research data in the form of raw files are added to uploads. If NOMAD has a built-in parser for the file formats, it automatically processes the files and creates **Entries**. These entries represent structured data extracted from the raw files.
+- Research data in the form of raw files are added to uploads. If NOMAD has a built-in parser for the file formats, it automatically processes the files and creates **Entries**. These entries represent structured data extracted from the raw files.
 
     ??? info "Features of NOMAD **Entries**"
         - **Creation:** Entries are automatically generated by NOMAD from uploaded raw files or instantiated schemas.
@@ -29,19 +60,19 @@ You can create a user account by following these [steps](overview.md#create-a-no
         - **Organization:** Entries belong to specific uploads and are linked to a raw file that NOMAD has recognized and parsed.
         - **Sharing & Publishing:** Entries can be shared as part of an upload, and individual entries can be added to datasets, which can be published with a DOI.
 
-4. Entries can be grouped into **Datasets**, which allow for better organization of related data. Once the dataset is complete, it can be published with a DOI, making the research data findable, accessible, interoperable, and reusable (FAIR).
+- Entries can be grouped into **Datasets**, which allow for better organization of related data. Once the dataset is complete, it can be published with a DOI, making the research data findable, accessible, interoperable, and reusable (FAIR).
 
     ??? info "Features of NOMAD **Datasets**"
         - **Creation:** Datasets are created and managed by users.
-        - **Structure:** Datasets are associated to a user account and are listed in the *Your datasets* page in the GUI. They serve as containers for curated and related data entires.
-        - **Organization:** Datasets contains several entries from various uploads. One entry can be contained in many dataset.
+        - **Structure:** Datasets are associated to a user account and are listed in the *Your datasets* page in the GUI. They serve as containers for curated and related data entries.
+        - **Organization:** Datasets contain entries from one or more uploads. An entry can belong to multiple datasets.
         - **Sharing & Publishing:** Datasets are published independent of uploads and you can get a DOI for your datasets.
 
 For more detailed explanation, you can refer to this [page](../explanation/basics.md).
 
 ---
 
-## Create New Upload
+## Create new upload
 
 The uploads exist in the *Your uploads* page. Here you can view a list of all your uploads with their relevant information. You can also create new uploads or add an example upload prepared by others.
 
@@ -61,7 +92,7 @@ The uploads exist in the *Your uploads* page. Here you can view a list of all yo
 
     - **Overview:** This view includes all the tools needed to manage your upload, along with guided steps to start uploading your files to NOMAD. It will also show all the processed files (entries) that you will upload.
     ![a screenshot of the uploads overview page](images/upload_publish_7.png)
-    - **Files:** This view shows all the files included in upload, whether they are raw files or processed files. You can also organize these files into folders as needed.
+    - **Files:** This view shows all the files included in the upload, whether they are raw files or processed files. You can also organize these files into folders as needed.
     ![A screenshot of the uploads files page](images/upload_publish_8.png)
 
 ??? info "Icons on the upload overview"
@@ -80,7 +111,7 @@ The uploads exist in the *Your uploads* page. Here you can view a list of all yo
 
     :fontawesome-solid-rotate: **Reprocess:** Triggers the uploaded data to be processed again.
 
-    :fontawesome-solid-angle-left::fontawesome-solid-angle-right: **API:** Displays a GET request url and corresponding JSON response demonstrating how to access the entries of the upload via the [NOMAD API](./access_api.md) and the expected result, respectively.
+    :fontawesome-solid-angle-left::fontawesome-solid-angle-right: **API:** Displays a GET request url and corresponding JSON response demonstrating how to access the entries of the upload via the NOMAD API and the expected result, respectively.
     <!-- See [Filtering and Querying](../filtering_and_querying/overview.md) for more information. -->
     <!-- TODO  Add API to glossary -->
 
@@ -89,7 +120,7 @@ The uploads exist in the *Your uploads* page. Here you can view a list of all yo
 ??? info "Components of the upload overview"
     The remainder of the uploads page is divided into five segments, each presenting a step in the uploading and publishing process:
 
-    `1. Prepare and upload your files:` displays the files and folder structure of the upload. You can add a `README.md` file to the root directory and its contents will be shown above this section
+    `1. Prepare and upload your files:` displays the files and folder structure of the upload. You can add a `README.md` file to the root directory and its contents will be shown above this section.
 
     `2. Process data:` shows the processed data and the generated [entries](../reference/glossary.md#entry) in NOMAD.
 
@@ -101,7 +132,7 @@ The uploads exist in the *Your uploads* page. Here you can view a list of all yo
 
 ---
 
-## Sharing and Publishing Uploads
+## Share and publish uploads
 
 Uploads in NOMAD can be shared or published. When an upload is shared or published, all entries and files contained within it are also shared or published.
 
@@ -118,21 +149,21 @@ Uploads in NOMAD can be shared or published. When an upload is shared or publish
 
 A NOMAD upload can have four states based on sharing and publishing:
 
-|Status    | Icon   | Description                         |
-|----------|--------|-------------------------------------|
-|Private   |<img src="images/icon_unpublished.png" alt="Icon of private upload" width="20"> |The upload is private and is visible to the uploader only.|
-|Shared    |<img src="images/icon_shared.png" alt="Icon of shared upload" width="20">       |The upload is accessible to selected users but not publicly available.|
-|Published |<img src="images/icon_published.png" alt="Icon of published upload" width="20"> |The upload is publicly available to everyone.|
-|Visible   |<img src="images/icon_visible.png" alt="Icon of visible upload" width="20">     |The upload is unpublished but accessible to everyone.|
+|Status    | Icon                                                                           | Description                                                           |
+|----------|--------------------------------------------------------------------------------|-----------------------------------------------------------------------|
+|Private   |<img src="images/icon_unpublished.png" alt="Icon of private upload" width="20"> |The upload is private and is visible to the uploader only.             |
+|Shared    |<img src="images/icon_shared.png" alt="Icon of shared upload" width="20">       |The upload is accessible to selected users but not publicly available. |
+|Published |<img src="images/icon_published.png" alt="Icon of published upload" width="20"> |The upload is publicly available to everyone.                          |
+|Visible   |<img src="images/icon_visible.png" alt="Icon of visible upload" width="20">     |The upload is unpublished but accessible to everyone.                  |
 
-You can manage upload sharing in the *Edit upload members* menu. To access it, click on <img src="images/edit_upload_members_icon.png" alt="Edit upload members Icon" width="20"> available on the top of the upload page. at the top of the upload page.
+You can manage upload sharing in the *Edit upload members* menu. To access it, click on <img src="images/edit_upload_members_icon.png" alt="Edit upload members Icon" width="20"> available at the top of the upload page.
 
 Alternatively, you can click the `EDIT UPLOAD MEMBERS` button below the list of entries on your upload page.
 
 ??? task "Share your upload"
     <img src="images/icon_shared.png" alt="Icon of shared upload" width="30">
 
-    **Step 1:** Open the *Edit upload members* window, but clicking on the **EDIT UPLOAD MEMBERS** button.
+    **Step 1:** Open the *Edit upload members* window, by clicking on the **EDIT UPLOAD MEMBERS** button.
 
     **Step 2:** Start typing the name of the NOMAD user you want to share the upload with. A list of matching users will appear—select the correct name from the list.
 
@@ -159,7 +190,7 @@ Alternatively, you can click the `EDIT UPLOAD MEMBERS` button below the list of 
 
     !!! warning "Once an upload is published, it cannot be deleted, and the files and entries cannot be changed"
 
-    **Step 1:** Select an embargo period (if needed) from the dropdown menu, located in the *publish* section located at the bottom of the upload page.
+    **Step 1:** Select an embargo period (if needed) from the dropdown menu, located in the *publish* section at the bottom of the upload page.
 
     If you would like to publish immediately, select *No embargo*.
 
@@ -182,7 +213,7 @@ Alternatively, you can click the `EDIT UPLOAD MEMBERS` button below the list of 
 
 ---
 
-## Add Files to an Upload
+## Add files to an upload
 
 Let's start adding files to your NOMAD upload. We will explore three different examples:
 
@@ -197,7 +228,7 @@ Files can be added to an upload individually, or you can group them into a compr
 
     **Files that are processed by NOMAD**
 
-    - These are files that are recognized by NOMAD, meaning that **a built-in parser exists** for the file you uploaded, the file will be processed according to a data schemas.
+    - These are files that are recognized by NOMAD, meaning that **a built-in parser exists** for the file you uploaded, the file will be processed according to a data schema.
 
     - It means that NOMAD reads the file, extracts data and organizes them based on the data schema which allows for generating visualizations, and analysis automations.
 
@@ -213,7 +244,7 @@ Files can be added to an upload individually, or you can group them into a compr
 
     - NOMAD allows you to preview common file formats that are not automatically parsed. This means you can view the contents of the file directly within the platform without having to download it. Examples include: `.txt`, `.csv`, `.pdf`, `.png`, `.jpg`.
 
-### Uploading Miscellaneous Files
+### Upload miscellaneous files
 
 ??? example "Download the example files for this exercise"
     <!-- TODO consider changing this admonition to a download button -->
@@ -251,9 +282,9 @@ You can add these files to your NOMAD upload. Do so by simply drag and drop the 
 
     Upload the remaining files using the file browser dialog as shown in the animation below.
 
-    ![An animatation demonstrating the open from file browser dialog in NOMAD ](images/example_3-1_file_browser_dialog.gif)
+    ![An animation demonstrating the open from file browser dialog in NOMAD ](images/example_3-1_file_browser_dialog.gif)
 
-### Uploading Computations Data
+### Upload computational data
 
 ??? example "Download the example files for this exercise"
     <!-- TODO consider changing this admonition to a download button -->
@@ -263,9 +294,9 @@ You can add these files to your NOMAD upload. Do so by simply drag and drop the 
 
     This folder contains the input and output files of a DFT calculation for Iron(III) Oxide using the *FHI-aims* code.
 
-    FHI-aims* an all-electron density-functional-theory package that employs numeric atom-centered basis functions. It is designed for accurate and efficient simulations of molecules, clusters, surfaces, and bulk materials across the periodic table. Its advanced treatment of electronic structure allows for precise calculations of material properties, including band structures, total energies, and magnetic properties. [More information in this link](https://fhi-aims.org/){:target="_blank" rel="noopener"}
+    *FHI-aims* is an all-electron density-functional-theory package that employs numeric atom-centered basis functions. It is designed for accurate and efficient simulations of molecules, clusters, surfaces, and bulk materials across the periodic table. Its advanced treatment of electronic structure allows for precise calculations of material properties, including band structures, total energies, and magnetic properties. [More information in this link](https://fhi-aims.org/){:target="_blank" rel="noopener"}
 
-The calculations in this example were preformed using a code that is supported by NOMAD, i.e. the *FHI-aims* code.
+The calculations in this example were performed using a code that is supported by NOMAD, i.e. the *FHI-aims* code.
 
 NOMAD has a parser for the *FHI-aims* code. This means it will create an **entry** for these data.
 
@@ -277,16 +308,16 @@ In other words, NOMAD will read the input and output files and provide all infor
 
     Start with uploading the file `FHI-aims.zip`. Let's use the drag and drop method as shown in the animation below.
 
-    ![Animation of darg and droping a compressed file in NOMAD](images/example_3-2_drag_drop_files.gif)
+    ![Animation of drag and drop a compressed file in NOMAD](images/example_3-2_drag_drop_files.gif)
 
     After uploading files, processing is automatically triggered. This involves identifying supported file formats in NOMAD and extracting relevant (meta)data. The exact processing steps depend on the use case.
-    For example, you can learn more about the [processing of computational data on this link](https://nomad-lab.eu/prod/v1/docs/examples/computational_data/uploading.html#processing-of-computational-data){:target="_blank" rel="noopener"}.
+    For example, you can learn more about the [processing of computational data on this link](../examples/computational_data/basics.md){:target="_blank" rel="noopener"}.
 
     Once processing is complete, NOMAD generates an entry page that presents the data in a structured, hierarchical format based on the NOMAD *metainfo* schema.
 
     **Opening and exploring your entry**
 
-    To go to the entry page, click on the <img src="images/go_to_icon.png" alt="Go to arrow Icon" width="15"> icon next to the entry. Here you can view the metadata and useful visualization of your data, check the uploaded files, and explore your entry in details.
+    To go to the entry page, click on the <img src="images/go_to_icon.png" alt="Go to arrow Icon" width="15"> icon next to the entry. Here you can view the metadata and useful visualization of your data, check the uploaded files, and explore your entry in detail.
 
     - **OVERVIEW** tab:
 
@@ -300,7 +331,7 @@ In other words, NOMAD will read the input and output files and provide all infor
 
         For *FHI-aims* files, three main cards appear in the overview page:
 
-        - *Materials* card: Shows key information and visulization of the composition and conventional cell.
+        - *Materials* card: Shows key information and visualization of the composition and conventional cell.
         <img src="images/example_3-2_materials_card.png" alt="screenshot of electronic properties card" width="250">
 
         - *Electronic properties* card: Shows the calculated band structure, density of states, and Brillouin zone.
@@ -323,7 +354,7 @@ In other words, NOMAD will read the input and output files and provide all infor
 
         ![Animation of the data tab](images/example_3-2_data_tab.gif)
 
-### Uploading Experimental Data
+### Upload experimental data
 
 ??? example "Download the example files for this exercise"
     <!-- TODO consider changing this admonition to a download button -->
@@ -333,13 +364,13 @@ In other words, NOMAD will read the input and output files and provide all infor
 
     This folder contains files related to an x-ray photoelectron spectroscopy (XPS) on the polymer PBTTT using SPECS spectrometer.
 
-    It includes the data in two formats (`.nxs` and `.xml`), in addtion to an electronic lab notebook (ELN) file (`.yaml`) documenting additional details of the experiment.
+    It includes the data in two formats (`.nxs` and `.xml`), in addition to an electronic lab notebook (ELN) file (`.yaml`) documenting additional details of the experiment.
 
     | file name             | format | description                                                      |
     |-----------------------|--------|------------------------------------------------------------------|
     | PBTTT_XPS_SPECS       | .nxs   | XPS data file in the standard NeXuS file format                  |
     | PBTTT_XPS_SPECS_raw   | .xml   | XPS data in a raw file format as produced by the spectrometer    |
-    | ELN_data_xml          | .yaml  | An ELN file used to record additional metadata of the experiment |
+    | eln_data_xml          | .yaml  | An ELN file used to record additional metadata of the experiment |
 
 NOMAD supports experimental data files in the `.nxs` format.
 
@@ -361,7 +392,7 @@ These files can be uploaded directly to NOMAD, where they are processed, and str
 
     Click on the <img src="images/go_to_icon.png" alt="Go to arrow Icon" width="15"> icon next to an entry navigates you to the respective entry page.
 
-    Here you can view the metadata and useful visualization of your data, check the uploaded files, and explore your entry in details.
+    Here you can view the metadata and useful visualization of your data, check the uploaded files, and explore your entry in detail.
 
     - **OVERVIEW Tab:**
 
@@ -401,7 +432,7 @@ Most scientific instruments generate experimental results in formats other than 
 
     A list of NeXuS application definitions developed by FAIRmat can be found [here](https://fairmat-nfdi.github.io/nexus_definitions/){:target="_blank" rel="noopener"}
 
-    NexusDataConverter uses **readers** to interpret the raw data files, and then structures them according to the outlines of the **application definitions**
+    NexusDataConverter uses **readers** to interpret the raw data files, and then structures them according to the outlines of the **application definitions**.
 
 In the following examples, you will learn how to upload a raw file from a SPECS instrument in `.xml` format by using the *NexusDataConverter*. You will do this in two ways:
 
@@ -476,9 +507,9 @@ In the following examples, you will learn how to upload a raw file from a SPECS 
 
     ![Screenshot of steps 2 - 4](images/example_3-3_NexusDataConverter.png)
 
-    - **Step 5:** From the reader drop-down menu, choose the approperiate reader for your files. For this exercise select *xps*.
+    - **Step 5:** From the reader drop-down menu, choose the appropriate reader for your files. For this exercise select *xps*.
 
-    - **Step 6:** From the nxdl drop-down menu, choose the approperiate application definition for your experiment. For this exercise select *NXxps*
+    - **Step 6:** From the nxdl drop-down menu, choose the appropriate application definition for your experiment. For this exercise select *NXxps*
 
     - **Step 7:** Upload the raw data file `PBTTT_XPS_SPECS_raw.xml` as well as the ELN data file `eln_data_xml.yaml`.
 
@@ -490,13 +521,13 @@ In the following examples, you will learn how to upload a raw file from a SPECS 
 
 ---
 
-## Create Datasets and Get a DOI
+## Create datasets and get a DOI
 
-You can organize several entries  by grouping them into common datasets, making it easier to manage related data.
+You can organize several entries by grouping them into common datasets, making it easier to manage related data.
 Datasets are for organizing and referencing curated data. They do not affect how data is processed.
 Users can get a DOI for their datasets.
 
-### Group Entries into a Dataset
+### Group entries into a dataset
 
 **Step 1:** In the uploads page, click on **EDIT AUTHOR METADATA OF ALL ENTRIES** button. This will add all the Entries in the upload to the dataset.
 
@@ -513,13 +544,13 @@ Alternatively, if you would like to add selected entries from your Upload, click
 
 **Step 3:** Once you've selected or created the appropriate dataset, click **ADD ENTRY TO NEW DATASET**
 
-**Step 4:** Click on SUBMIT to to group your entries under that dataset.
+**Step 4:** Click on SUBMIT to group your entries under that dataset.
 
 ![Screenshot of steps 2 - 4 of creating dataset](images/datasets_steps_2-4.png)
 
-### Manage a Dataset and Assign it a DOI
+### Manage a dataset and assign it a DOI
 
-User created datasets exist in the “Your datasets” page page. You can reach there by clicking on **Datasets** in the **PUBLISH** menu. Here you can view a list of all your created datasets with their relevant information and assign them a DOI.
+User-created datasets exist in the “Your datasets” page. You can reach there by clicking on **Datasets** in the **PUBLISH** menu. Here you can view a list of all your created datasets with their relevant information and assign them a DOI.
 
 !!! warning "Assigning a DOI makes the dataset permanent—it cannot be modified or deleted."
     If you want to test the process without actually publishing the data, you can do so in the [NOMAD test installation](https://nomad-lab.eu/prod/v1/test/gui/about/information){:target="_blank" rel="noopener"}.
@@ -535,6 +566,7 @@ User created datasets exist in the “Your datasets” page page. You can reach 
 </div>
 
 **Use the arrow buttons ⬅️➡️ below to see how to publish your datasets and assign them a DOI.**
+
 <div class="image-slider" id="slider3">
     <div class="nav-arrow left" id="prev3">←</div>
     <img src="images/dataset_4.png" alt="screenshot of navigating to datasets" class="active">

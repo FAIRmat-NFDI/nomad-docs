@@ -15,7 +15,7 @@ them carefully.
 
 - only one language: Python (except GUI of course)
 
-The are some *rules* or better strong *guidelines* for writing code. The following
+There are some *rules* or better strong *guidelines* for writing code. The following
 applies to all Python code (and where applicable, also to Javascript and other code):
 
 - Use an IDE (e.g. [VS Code](https://code.visualstudio.com/){:target="_blank" rel="noopener"}) or otherwise automatically

@@ -789,4 +789,4 @@ The following is a list of plugins containing schema packages developed by FAIRm
 | synthesis           | <https://github.com/FAIRmat-NFDI/AreaA-data_modeling_and_schemas.git>      |
 | material processing | <https://github.com/FAIRmat-NFDI/nomad-material-processing.git>            |
 | measurements        | <https://github.com/FAIRmat-NFDI/nomad-measurements.git>                   |
-| catalysis           | <https://github.com/FAIRmat-NFDI/nomad-catalysis-plugin.git>          |
+| catalysis           | <https://github.com/FAIRmat-NFDI/nomad-catalysis-plugin.git>               |

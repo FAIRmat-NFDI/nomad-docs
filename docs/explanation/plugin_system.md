@@ -59,10 +59,12 @@ This architecture allows plugin developers to freely choose a suitable granulari
 
 Plugin entry points represent different types of customizations that can be added to a NOMAD installation. The following plugin entry point types are currently supported:
 
+- [Actions](../howto/plugins/types/actions.md)
 - [APIs](../howto/plugins/types/apis.md)
 - [Apps](../howto/plugins/types/apps.md)
 - [Example uploads](../howto/plugins/types/example_uploads.md)
 - [Normalizers](../howto/plugins/types/normalizers.md)
+- [NORTH tools](../howto/plugins/types/north_tools.md)
 - [Parsers](../howto/plugins/types/parsers.md)
 - [Schema packages](../howto/plugins/types/schema_packages.md)
 

@@ -1,15 +1,39 @@
-# Exploring Data in NOMAD
+# Explore data in NOMAD
 
-In this tutorial, we will learn how to efficiently search and filter entries in NOMAD to find data that matches your criteria.
+In this tutorial, we explore published entries in NOMAD using the **EXPLORE** page of the GUI. We follow a step-by-step workflow to search across entries, apply and combine filters, query structured metadata, and build interactive widgets for targeted data exploration. By the end of the tutorial, we will have identified relevant entries and constructed customized searches and dashboards using filters, queries, and widgets.
 
-We will work with the **EXPLORE** page in the NOMAD GUI, starting with an overview of the search and filter options available. We will then use these tools to refine our results step by step.
-Finally, we will explore how to create interactive widgets based on selected properties, allowing for a more dynamic and customized filtering experience.
+---
 
-By the end of this tutorial, you will be able to navigate NOMAD with confidence, quickly locate relevant data, and tailor your searches using interactive filters and widgets.
+## What you will learn
 
-## Navigate to NOMAD's Explore Entries Page
+In this tutorial, you will learn how to:
 
-The **EXPLORE** menu allows you to navigate and search through a vast amount of materials-science data. It provides several options, each focuses on a specific application or method. They include different sets of filters and/or search widgets that allow users to efficiently filter and narrow down results, making it easier to find relevant entries in specific domains.
+1. Navigate the **EXPLORE** section of the NOMAD GUI
+2. Search and filter published entries across different domains
+3. Use the search bar to query structured metadata and perform range-based searches
+4. Apply and combine filters to refine search results efficiently
+5. Create and customize interactive widgets for advanced data exploration
+6. Use NOMAD’s Explore dashboards to answer concrete scientific questions using real data
+
+---
+
+## Before you begin
+
+This tutorial requires no prior experience with NOMAD.
+
+Before starting, make sure you have the following:
+
+1. **Access to the NOMAD GUI via a modern web browser**  
+   You can explore published data in NOMAD without logging in.
+
+2. **Basic familiarity with materials-science concepts**  
+   Familiarity with composition, electronic properties (for example, band gap), and common experimental or computational methods can be helpful, but it is not required.
+
+---
+
+## Navigate to NOMAD's explore entries page
+
+The **EXPLORE** menu allows you to navigate and search through a vast amount of materials-science data. It provides several options, each focusing on a specific application or method. They include different sets of filters and/or search widgets that allow users to efficiently filter and narrow down results, making it easier to find relevant entries in specific domains.
 
 In this tutorial, we will focus on searching data in NOMAD using the **Entries** option within the **EXPLORE** menu. You will see an overview of **SOLAR CELLS** search dashboard.
 
@@ -21,7 +45,7 @@ To start with exploring data across all domains in NOMAD, go to **EXPLORE** → 
 
 The **Entries** page shows all the uploaded data that are published on NOMAD. Published entries are accessible without login, while logging in grants access to your private data and those that are shared with you.
 
-??? info "Contents of NOMAD's Explore Menu"
+??? info "Contents of NOMAD's Explore menu"
 
     The following explore pages are currently available:
 
@@ -29,7 +53,7 @@ The **Entries** page shows all the uploaded data that are published on NOMAD. Pu
     - **Theory**: Focus on calculations and materials data derived from theoretical models.
     - **Experiment**: Explore data from experimental sources, such as ELNs (Electronic Lab Notebooks) or characterization techniques e.g., EELS (Electron Energy Loss Spectroscopy).
     -  **Tools**: Explore among several AI toolkit notebooks.
-    - **Use Cases**: Search data tailored to specific use cases, such Metal-Organic Frameworks (MOFs).
+    - **Use Cases**: Search data tailored to specific use cases, such as Metal-Organic Frameworks (MOFs).
 
     <div style="text-align: center;">
         <img src="images/explore_menu2.png" alt="Explore Menu" width="200">
@@ -37,7 +61,7 @@ The **Entries** page shows all the uploaded data that are published on NOMAD. Pu
 
 ---
 
-### Search Interface & Filters
+### Search interface and filters
 
 In the Entries page, you will find a list of possible filters on the left panel. NOMAD supports advanced searches based on:
 
@@ -51,7 +75,7 @@ In the Entries page, you will find a list of possible filters on the left panel.
     <img src="images/filters_sidebar.png" alt="Entries Search Interface" width="200">
 </div>
 
-Filters refine searches dynamically. You can apply the following example to experience this.
+Filters refine searches dynamically. You can apply the following examples to experience this.
 
 - **Material Filter**: Select **B** and **N** to find hexagonal boron nitride.
 - **Method Filter**: Find **BN** simulations using **VASP**.
@@ -66,7 +90,7 @@ You can pin frequently used filters using **(+)** for a customized search interf
 
 ---
 
-### Search Bar: A Quick Way to Explore Data
+### Search bar: a quick way to explore data
 <!-- Add a page in Reference, that explains all possible syntax for the searches in the search bar -->
 
 You can use the NOMAD search bar to find indexed quantities. As you begin typing, all available
@@ -84,7 +108,7 @@ Alternatively, you can directly enter the element paths in the search field:
 - *results.material.elements = N*
 
 !!! task "Does NOMAD have a bandgap filter?"
-    Can you find a filter for bandgap? Does it provide the bandgap value or indicate direct/indirect nature?
+    Can you find a filter for bandgap? Does it provide the bandgap value or indicate the direct/indirect nature?
 
     - Try typing variations like **"bandgap"**, **"band gap"**, or **"band_gap"** into the search bar.
     - Search for **"direct"** or **"indirect"** to explore bandgap characteristics.
@@ -101,7 +125,7 @@ Similarly, you can define a bounded range for the values. For example, to search
 
 ---
 
-### Custom Widgets for Advanced Searches
+### Custom widgets for advanced searches
 
 NOMAD enables searching entries using rich metadata. Some metadata is extracted automatically, while others are user-provided via schemas. Only metadata stored according to schemas is searchable.
 
@@ -120,7 +144,7 @@ Here are the main four widgets:
 
 ---
 
-## Example 1: Finding Alternative ETL Materials for Perovskite Solar Cells
+## Example 1: find alternative ETL materials for perovskite solar cells
 
 In the following, we'll walk through an example to help you better understand how to use these widgets. Imagine we are working on solar cell research and have fabricated solar cell devices using the absorber material *CsPbBr2I* (Cesium Lead Bromine Iodide), a mixed halide perovskite.
 
@@ -140,7 +164,7 @@ In the following, we'll walk through an example to help you better understand ho
 
 Now, let us answer the following question:
 
-!!! task "**What ETL materials can replace TiO2-c to improve Voc (open circuit voltage) in perovskite solar cells?**"
+!!! task "What ETL materials can replace TiO2-c to improve Voc (open-circuit voltage) in perovskite solar cells?"
 
     To gain insights into this question, we can utilize NOMAD's widgets to explore relevant data:
 
@@ -156,29 +180,29 @@ Now, let us answer the following question:
         - Repeat the process for the HTL materials.
 
     3. **Create a Scatter Plot**:
-        - Click on the **SCATTER PLOT** widget button to visualize the relationship between open circuit voltage (Voc), short circuit current density (Jsc), and efficiency.
+        - Click on the **SCATTER PLOT** widget button to visualize the relationship between open-circuit voltage (Voc), short-circuit current density (Jsc), and efficiency.
         - Set the X-axis to "Open Circuit Voltage (Voc)", the Y-axis to "Efficiency", and use the marker color to represent "Short Circuit Current Density".
         - The scatter plot will allow you to explore the data interactively.
 
-    <div style="text-align: center;">
-        <img src="images/custom_widgets_example.gif" alt="Custom Widgets Example" width="800">
-    </div>
+        <div style="text-align: center;">
+            <img src="images/custom_widgets_example.gif" alt="Custom Widgets Example" width="800">
+        </div>
 
-    4- **Interpreting Results**
+    4. **Interpreting Results**
 
-    - Interactive scatter plots reveal relationships between **ETLs, HTLs, and performance**.
-    - Hover over data points for details.
-    - Click entries for **full metadata, dataset links, and publication info**.
+        - Interactive scatter plots reveal relationships between **ETLs, HTLs, and performance**.
+        - Hover over data points for details.
+        - Click entries for **full metadata, dataset links, and publication info**.
 
-    Custom widgets provide a **powerful way** to explore NOMAD data and answer research questions efficiently.
+        Custom widgets provide a **powerful way** to explore NOMAD data and answer research questions efficiently.
 
 ---
 
-## Example 2: Exploring Sn-Based Solar Cells
+## Example 2: explore Sn-based solar cells
 
 Let’s explore how **hole transport layer (HTL) materials** affect efficiency in **Sn-based solar cells** with **C60** as the electron transport layer (ETL).
 
-In this example, we will utilize the Solar Cell Explore page, which offers filters and preset widgets that makes it easier to search for solar cell entries.
+In this example, we will utilize the Solar Cell Explore page, which offers filters and widgets that make it easier to search for solar cell entries.
 
 **Step 1: Navigate to the Solar Cell Explore Page**
 

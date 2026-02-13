@@ -1,9 +1,0 @@
-{
-  "model": {
-    "maxSessionTurns": 50
-  },
-  "telemetry": {
-    "enabled": false,
-    "target": "gcp"
-  }
-}

@@ -47,7 +47,7 @@ helm repo add nomad https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/he
 New we need a minimal `values.yaml` that configures the individual kubernetes resources created by our Helm chart:
 
 ```yaml
---8<-- "ops/kubernetes/example-values.yaml"
+--8<-- "docs/howto/oasis/ops/kubernetes/example-values.yaml"
 ```
 
 The `jupyterhub`, `mongodb`, `elasticsearch`, `rabbitmq` follow the respective official Helm charts configuration.
