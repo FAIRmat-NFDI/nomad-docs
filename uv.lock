@@ -814,7 +814,7 @@ name = "exceptiongroup"
 version = "1.3.1"
 source = { registry = "https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/simple" }
 dependencies = [
-    { name = "typing-extensions", marker = "python_full_version < '3.11'" },
+    { name = "typing-extensions", marker = "python_full_version < '3.13'" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/50/79/66800aadf48771f6b62f7eb014e352e5d06856655206165d775e675a02c9/exceptiongroup-1.3.1.tar.gz", hash = "sha256:8b412432c6055b0b7d14c310000ae93352ed6754f70fa8f7c34141f91c4e3219", size = 30371, upload-time = "2025-11-21T23:01:54.787Z" }
 wheels = [
@@ -934,15 +934,6 @@ wheels = [
 ]
 
 [[package]]
-name = "fsspec"
-version = "2026.2.0"
-source = { registry = "https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/51/7c/f60c259dcbf4f0c47cc4ddb8f7720d2dcdc8888c8e5ad84c73ea4531cc5b/fsspec-2026.2.0.tar.gz", hash = "sha256:6544e34b16869f5aacd5b90bdf1a71acb37792ea3ddf6125ee69a22a53fb8bff", size = 313441, upload-time = "2026-02-05T21:50:53.743Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/e6/ab/fb21f4c939bb440104cc2b396d3be1d9b7a9fd3c6c2a53d98c45b3d7c954/fsspec-2026.2.0-py3-none-any.whl", hash = "sha256:98de475b5cb3bd66bedd5c4679e87b4fdfe1a3bf4d707b151b3c07e58c9a2437", size = 202505, upload-time = "2026-02-05T21:50:51.819Z" },
-]
-
-[[package]]
 name = "ghp-import"
 version = "2.1.0"
 source = { registry = "https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/simple" }
@@ -1055,7 +1046,7 @@ wheels = [
 
 [[package]]
 name = "h5grove"
-version = "2.3.0"
+version = "3.0.0"
 source = { registry = "https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/simple" }
 dependencies = [
     { name = "h5py" },
@@ -1063,12 +1054,12 @@ dependencies = [
     { name = "numpy", version = "2.3.5", source = { registry = "https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "orjson" },
     { name = "tifffile", version = "2025.5.10", source = { registry = "https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/simple" }, marker = "python_full_version < '3.11'" },
-    { name = "tifffile", version = "2026.1.28", source = { registry = "https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/simple" }, marker = "python_full_version >= '3.11'" },
+    { name = "tifffile", version = "2026.2.15", source = { registry = "https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/7f/9f/1a609b9157e27302fc3038acc033b1a329805015b477d74e29416d38e2f4/h5grove-2.3.0.tar.gz", hash = "sha256:8d438f2a4616d64b176e6ff352d23b39027b9f1ab2c9169fcfd6f5f1caca8728", size = 16725, upload-time = "2024-09-09T14:28:01.559Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/ae/a0/edbd9a6648bc535223b4da893c6f4a5d111ca4c77ac58f195616f4555462/h5grove-3.0.0.tar.gz", hash = "sha256:c29e4068e8c292357e9b8b595c369921bba496aae1de2db7c04edd2e4bcde43b", size = 14418, upload-time = "2026-02-16T08:26:45.519Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/8e/33/68a9a534f0c296c509dade2a5113773702fb1ecd1a89905b341ee080acf6/h5grove-2.3.0-py3-none-any.whl", hash = "sha256:7000a5aa64a6d77997ad18296552ec4def62d4e24aa05219b59c535233017fdf", size = 16628, upload-time = "2024-09-09T14:28:00.342Z" },
+    { url = "https://files.pythonhosted.org/packages/0e/33/35f6e602e054c2a8945bc5c0dcec5a50f763f555a35d4eff43b022ed0b64/h5grove-3.0.0-py3-none-any.whl", hash = "sha256:853c5eb6b981dee3723cb979de12e439a12641532ca00a8a6d2e6fdd79027956", size = 17191, upload-time = "2026-02-16T08:26:43.934Z" },
 ]
 
 [package.optional-dependencies]
@@ -2307,7 +2298,7 @@ dev = [{ name = "pytest", specifier = ">=7.4.4" }]
 
 [[package]]
 name = "nomad-lab"
-version = "1.4.2.dev43+g143fbb92b"
+version = "1.4.1"
 source = { registry = "https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/simple" }
 dependencies = [
     { name = "ase" },
@@ -2316,7 +2307,6 @@ dependencies = [
     { name = "click" },
     { name = "docstring-parser" },
     { name = "elasticsearch-dsl" },
-    { name = "fsspec" },
     { name = "h5py" },
     { name = "httpx" },
     { name = "jmespath" },
@@ -2333,7 +2323,6 @@ dependencies = [
     { name = "orjson" },
     { name = "pandas", version = "2.3.3", source = { registry = "https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/simple" }, marker = "python_full_version < '3.11'" },
     { name = "pandas", version = "3.0.0", source = { registry = "https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/simple" }, marker = "python_full_version >= '3.11'" },
-    { name = "pathvalidate" },
     { name = "pint", version = "0.24.4", source = { registry = "https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/simple" }, marker = "python_full_version < '3.11'" },
     { name = "pint", version = "0.25.2", source = { registry = "https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "plotly" },
@@ -2351,11 +2340,11 @@ dependencies = [
     { name = "scipy", version = "1.17.0", source = { registry = "https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/simple" }, marker = "python_full_version >= '3.11'" },
     { name = "unidecode" },
     { name = "xarray", version = "2025.6.1", source = { registry = "https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/simple" }, marker = "python_full_version < '3.11'" },
-    { name = "xarray", version = "2026.1.0", source = { registry = "https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/simple" }, marker = "python_full_version >= '3.11'" },
+    { name = "xarray", version = "2026.2.0", source = { registry = "https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/simple" }, marker = "python_full_version >= '3.11'" },
 ]
-sdist = { url = "https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/files/577322cefdbbb8ba5c6357fc97d5d99cae8ce2fa84a469606ee6ef062239d1df/nomad_lab-1.4.2.dev43+g143fbb92b.tar.gz", hash = "sha256:577322cefdbbb8ba5c6357fc97d5d99cae8ce2fa84a469606ee6ef062239d1df" }
+sdist = { url = "https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/files/0349b342d54bf04e52637ddbc6944562af7050fdc3d67f1940a689dbb0259fbe/nomad_lab-1.4.1.tar.gz", hash = "sha256:0349b342d54bf04e52637ddbc6944562af7050fdc3d67f1940a689dbb0259fbe" }
 wheels = [
-    { url = "https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/files/5279bf259f131a0c398b188a5146cad786c7978930c8e272bd2af0ef5a8d6ab7/nomad_lab-1.4.2.dev43+g143fbb92b-py3-none-any.whl", hash = "sha256:5279bf259f131a0c398b188a5146cad786c7978930c8e272bd2af0ef5a8d6ab7" },
+    { url = "https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/files/24170079ea81cf92dceaf0cd36472132139b4163d35f9d1c464875315101873e/nomad_lab-1.4.1-py3-none-any.whl", hash = "sha256:24170079ea81cf92dceaf0cd36472132139b4163d35f9d1c464875315101873e" },
 ]
 
 [package.optional-dependencies]
@@ -2578,17 +2567,18 @@ wheels = [
 
 [[package]]
 name = "optimade"
-version = "1.3.1"
+version = "1.4.1"
 source = { registry = "https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/simple" }
 dependencies = [
     { name = "lark" },
     { name = "pydantic", extra = ["email"] },
     { name = "pydantic-settings" },
+    { name = "pyyaml" },
     { name = "requests" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/fb/b8/f2cf131ccbf4c994f99c9f67cd1163ca39b27215cb3ba8a1b91e5cca8e9b/optimade-1.3.1.tar.gz", hash = "sha256:dcb4e518624c49cfaff1cffc4f8899800eca91736ec19858b60627e96fdacd8d", size = 194135, upload-time = "2025-10-17T18:12:01.766Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/d3/6d/d436f5adb1bfc4e9cbf5a4afefded167b4881d51ea36ed57b5e3c9e99fa4/optimade-1.4.1.tar.gz", hash = "sha256:fb7372ac1b9cf721ffea9eaf232dd08468433d1c1f20e80b4bcdf96e7d9d18ec", size = 194551, upload-time = "2026-02-13T11:08:42.535Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/0c/bc/25e96f203a4a9167b68f59dac2fb69878d6bcde7b755cf2741c5af63af6d/optimade-1.3.1-py3-none-any.whl", hash = "sha256:ada375c59c568a3193d18458cee3e9384cc78cf3984e5be2dad0f731469edc98", size = 242280, upload-time = "2025-10-17T18:12:00.199Z" },
+    { url = "https://files.pythonhosted.org/packages/6a/9d/31120a286131edb6d61c1baec7627774b1ce2fe1205d4073f2768fcdcacb/optimade-1.4.1-py3-none-any.whl", hash = "sha256:1c63c61f697ce593e6e19f3fcbb2224c96618c3aa48e199b921e775539767ff1", size = 241311, upload-time = "2026-02-13T11:08:40.567Z" },
 ]
 
 [package.optional-dependencies]
@@ -2857,15 +2847,6 @@ wheels = [
 ]
 
 [[package]]
-name = "pathvalidate"
-version = "3.3.1"
-source = { registry = "https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/fa/2a/52a8da6fe965dea6192eb716b357558e103aea0a1e9a8352ad575a8406ca/pathvalidate-3.3.1.tar.gz", hash = "sha256:b18c07212bfead624345bb8e1d6141cdcf15a39736994ea0b94035ad2b1ba177", size = 63262, upload-time = "2025-06-15T09:07:20.736Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/9a/70/875f4a23bfc4731703a5835487d0d2fb999031bd415e7d17c0ae615c18b7/pathvalidate-3.3.1-py3-none-any.whl", hash = "sha256:5263baab691f8e1af96092fa5137ee17df5bdfbd6cff1fcac4d6ef4bc2e1735f", size = 24305, upload-time = "2025-06-15T09:07:19.117Z" },
-]
-
-[[package]]
 name = "pendulum"
 version = "3.2.0"
 source = { registry = "https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/simple" }
@@ -3076,11 +3057,11 @@ wheels = [
 
 [[package]]
 name = "platformdirs"
-version = "4.7.0"
+version = "4.9.2"
 source = { registry = "https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/71/25/ccd8e88fcd16a4eb6343a8b4b9635e6f3928a7ebcd82822a14d20e3ca29f/platformdirs-4.7.0.tar.gz", hash = "sha256:fd1a5f8599c85d49b9ac7d6e450bc2f1aaf4a23f1fe86d09952fe20ad365cf36", size = 23118, upload-time = "2026-02-12T22:21:53.764Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/1b/04/fea538adf7dbbd6d186f551d595961e564a3b6715bdf276b477460858672/platformdirs-4.9.2.tar.gz", hash = "sha256:9a33809944b9db043ad67ca0db94b14bf452cc6aeaac46a88ea55b26e2e9d291", size = 28394, upload-time = "2026-02-16T03:56:10.574Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/cb/e3/1eddccb2c39ecfbe09b3add42a04abcc3fa5b468aa4224998ffb8a7e9c8f/platformdirs-4.7.0-py3-none-any.whl", hash = "sha256:1ed8db354e344c5bb6039cd727f096af975194b508e37177719d562b2b540ee6", size = 18983, upload-time = "2026-02-12T22:21:52.237Z" },
+    { url = "https://files.pythonhosted.org/packages/48/31/05e764397056194206169869b50cf2fee4dbbbc71b344705b9c0d878d4d8/platformdirs-4.9.2-py3-none-any.whl", hash = "sha256:9170634f126f8efdae22fb58ae8a0eaa86f38365bc57897a6c4f781d1f5875bd", size = 21168, upload-time = "2026-02-16T03:56:08.891Z" },
 ]
 
 [[package]]
@@ -3337,16 +3318,16 @@ wheels = [
 
 [[package]]
 name = "pydantic-settings"
-version = "2.12.0"
+version = "2.13.0"
 source = { registry = "https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/simple" }
 dependencies = [
     { name = "pydantic" },
     { name = "python-dotenv" },
     { name = "typing-inspection" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/43/4b/ac7e0aae12027748076d72a8764ff1c9d82ca75a7a52622e67ed3f765c54/pydantic_settings-2.12.0.tar.gz", hash = "sha256:005538ef951e3c2a68e1c08b292b5f2e71490def8589d4221b95dab00dafcfd0", size = 194184, upload-time = "2025-11-10T14:25:47.013Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/96/a1/ae859ffac5a3338a66b74c5e29e244fd3a3cc483c89feaf9f56c39898d75/pydantic_settings-2.13.0.tar.gz", hash = "sha256:95d875514610e8595672800a5c40b073e99e4aae467fa7c8f9c263061ea2e1fe", size = 222450, upload-time = "2026-02-15T12:11:23.476Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/c1/60/5d4751ba3f4a40a6891f24eec885f51afd78d208498268c734e256fb13c4/pydantic_settings-2.12.0-py3-none-any.whl", hash = "sha256:fddb9fd99a5b18da837b29710391e945b1e30c135477f484084ee513adb93809", size = 51880, upload-time = "2025-11-10T14:25:45.546Z" },
+    { url = "https://files.pythonhosted.org/packages/b0/1a/dd1b9d7e627486cf8e7523d09b70010e05a4bc41414f4ae6ce184cf0afb6/pydantic_settings-2.13.0-py3-none-any.whl", hash = "sha256:d67b576fff39cd086b595441bf9c75d4193ca9c0ed643b90360694d0f1240246", size = 58429, upload-time = "2026-02-15T12:11:22.133Z" },
 ]
 
 [[package]]
@@ -3486,15 +3467,15 @@ wheels = [
 
 [[package]]
 name = "pymdown-extensions"
-version = "10.20.1"
+version = "10.21"
 source = { registry = "https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/simple" }
 dependencies = [
     { name = "markdown" },
     { name = "pyyaml" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/1e/6c/9e370934bfa30e889d12e61d0dae009991294f40055c238980066a7fbd83/pymdown_extensions-10.20.1.tar.gz", hash = "sha256:e7e39c865727338d434b55f1dd8da51febcffcaebd6e1a0b9c836243f660740a", size = 852860, upload-time = "2026-01-24T05:56:56.758Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/ba/63/06673d1eb6d8f83c0ea1f677d770e12565fb516928b4109c9e2055656a9e/pymdown_extensions-10.21.tar.gz", hash = "sha256:39f4a020f40773f6b2ff31d2cd2546c2c04d0a6498c31d9c688d2be07e1767d5", size = 853363, upload-time = "2026-02-15T20:44:06.748Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/40/6d/b6ee155462a0156b94312bdd82d2b92ea56e909740045a87ccb98bf52405/pymdown_extensions-10.20.1-py3-none-any.whl", hash = "sha256:24af7feacbca56504b313b7b418c4f5e1317bb5fea60f03d57be7fcc40912aa0", size = 268768, upload-time = "2026-01-24T05:56:54.537Z" },
+    { url = "https://files.pythonhosted.org/packages/6f/2c/5b079febdc65e1c3fb2729bf958d18b45be7113828528e8a0b5850dd819a/pymdown_extensions-10.21-py3-none-any.whl", hash = "sha256:91b879f9f864d49794c2d9534372b10150e6141096c3908a455e45ca72ad9d3f", size = 268877, upload-time = "2026-02-15T20:44:05.464Z" },
 ]
 
 [[package]]
@@ -3627,7 +3608,7 @@ wheels = [
 
 [[package]]
 name = "python-keycloak"
-version = "7.0.3"
+version = "7.1.1"
 source = { registry = "https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/simple" }
 dependencies = [
     { name = "aiofiles" },
@@ -3637,9 +3618,9 @@ dependencies = [
     { name = "requests" },
     { name = "requests-toolbelt" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/25/9e/096568fa9348d52911042924bfcb81193e2b750fc6f5aca07206e43ae74c/python_keycloak-7.0.3.tar.gz", hash = "sha256:13e5ac449acf5334d62550895bfcd2c08d60c8e22f61a6512a6ad9c844cf9f73", size = 78723, upload-time = "2026-01-28T11:29:47.648Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/67/e3/963aae33e9177b496def0ba47d2290391e9391d9f76a3f69cfde8c44c8b8/python_keycloak-7.1.1.tar.gz", hash = "sha256:38973e54694a656fe6f3f8fc2af0b89c78136863f928261f0d243445e9e486bc", size = 78907, upload-time = "2026-02-15T08:45:58.139Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/70/ed/a4e937bb0008a848be97f46cf5bb4d4af7f390a929b6e817eba7de2f4f69/python_keycloak-7.0.3-py3-none-any.whl", hash = "sha256:08de2c53f742360ed228e17f812a49964c5c52dcaf2439c3a6a1ab28e287cdd6", size = 87526, upload-time = "2026-01-28T11:29:46.534Z" },
+    { url = "https://files.pythonhosted.org/packages/bc/9f/569a8bbdb0859498d33d8b86273bc82849bd0b445ac01416ad34996ca3d8/python_keycloak-7.1.1-py3-none-any.whl", hash = "sha256:d8295bec6c4805ab7335b03bc92753c8c6258d5511b080cac061da20ae77f61c", size = 87607, upload-time = "2026-02-15T08:45:57.054Z" },
 ]
 
 [[package]]
@@ -4677,7 +4658,7 @@ wheels = [
 
 [[package]]
 name = "tifffile"
-version = "2026.1.28"
+version = "2026.2.15"
 source = { registry = "https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/simple" }
 resolution-markers = [
     "python_full_version >= '3.14' and sys_platform == 'win32'",
@@ -4690,9 +4671,9 @@ resolution-markers = [
 dependencies = [
     { name = "numpy", version = "2.3.5", source = { registry = "https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/simple" }, marker = "python_full_version >= '3.11'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/94/32/38498d2a1a5d70f33f6c3909bbad48557c9a54b0e33a9307ff06b6d416ba/tifffile-2026.1.28.tar.gz", hash = "sha256:537ae6466a8bb555c336108bb1878d8319d52c9c738041d3349454dea6956e1c", size = 374675, upload-time = "2026-01-29T05:17:24.992Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/79/e6/0d04362a57f4c6d59a3392e3c2008d3ba3254e0a9684c683755689003950/tifffile-2026.2.15.tar.gz", hash = "sha256:28fe145c615fe3d33d40c2d4c9cc848f7631fd30af852583c4186069458895b2", size = 375461, upload-time = "2026-02-15T20:16:45.991Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/09/19/529b28ca338c5a88315e71e672badc85eef89460c248c4164f6ce058f8c7/tifffile-2026.1.28-py3-none-any.whl", hash = "sha256:45b08a19cf603dd99952eff54a61519626a1912e4e2a4d355f05938fe4a6e9fd", size = 233011, upload-time = "2026-01-29T05:17:23.078Z" },
+    { url = "https://files.pythonhosted.org/packages/1e/ac/d0d24cbf1ca2a0220b2797dd9b4e528cda201259d3baa28b40aa53287d4e/tifffile-2026.2.15-py3-none-any.whl", hash = "sha256:d9b427d269a708c58400e8ce5a702b26b2502087537beb88b8e29ba7ba825a90", size = 233248, upload-time = "2026-02-15T20:16:44.256Z" },
 ]
 
 [[package]]
@@ -5156,7 +5137,7 @@ wheels = [
 
 [[package]]
 name = "xarray"
-version = "2026.1.0"
+version = "2026.2.0"
 source = { registry = "https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/simple" }
 resolution-markers = [
     "python_full_version >= '3.14' and sys_platform == 'win32'",
@@ -5171,9 +5152,9 @@ dependencies = [
     { name = "packaging", marker = "python_full_version >= '3.11'" },
     { name = "pandas", version = "3.0.0", source = { registry = "https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/simple" }, marker = "python_full_version >= '3.11'" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/f5/85/113ff1e2cde9e8a5b13c2f0ef4e9f5cd6ca3a036b6452f4dd523419289b5/xarray-2026.1.0.tar.gz", hash = "sha256:0c9814761f9d9a9545df37292d3fda89f83201f3e02ae0f09f03313d9cfdd5e2", size = 3107024, upload-time = "2026-01-28T17:49:03.822Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/0f/03/e3353b72e518574b32993989d8f696277bf878e9d508c7dd22e86c0dab5b/xarray-2026.2.0.tar.gz", hash = "sha256:978b6acb018770554f8fd964af4eb02f9bcc165d4085dbb7326190d92aa74bcf", size = 3111388, upload-time = "2026-02-13T22:20:50.18Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/7d/8e/952a351c10df395d9bab850f611f4368834ae9104d6449049f5a49e00925/xarray-2026.1.0-py3-none-any.whl", hash = "sha256:5fcc03d3ed8dfb662aa254efe6cd65efc70014182bbc2126e4b90d291d970d41", size = 1403009, upload-time = "2026-01-28T17:49:01.538Z" },
+    { url = "https://files.pythonhosted.org/packages/99/92/545eb2ca17fc0e05456728d7e4378bfee48d66433ae3b7e71948e46826fb/xarray-2026.2.0-py3-none-any.whl", hash = "sha256:e927d7d716ea71dea78a13417970850a640447d8dd2ceeb65c5687f6373837c9", size = 1405358, upload-time = "2026-02-13T22:20:47.847Z" },
 ]
 
 [[package]]
