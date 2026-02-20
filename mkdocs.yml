@@ -57,6 +57,7 @@ nav:
           - Deploy: howto/oasis/deploy.md
           - Update: howto/oasis/update.md
           - Administer: howto/oasis/administer.md
+          - Secure: howto/oasis/secure.md
           - Troubleshoot: howto/oasis/troubleshoot.md
       - Develop the core software: # TODO strip down to only nomad-lab-specific development
           - Get started: howto/develop/setup.md
