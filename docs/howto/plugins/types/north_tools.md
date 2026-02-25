@@ -325,13 +325,11 @@ For published images, you may follow [semantic versioning (SemVer)](https://semv
 - **Version tags**: `v1.0.0`, `v1.2.3`, etc. - Specific releases
 - **latest tag**: Points to the most recent stable release
 - **main/develop tags**: Track the main or development branch
-- **PR tags**: `pr-123` for testing pull requests before merging
 
 GitHub Actions automatically creates:
 
 - `ghcr.io/<username>/<repo>:v1.0.0` - When you tag a release
 - `ghcr.io/<username>/<repo>:main` - On push to main branch
-- `ghcr.io/<username>/<repo>:pr-123` - For pull request #123
 - `ghcr.io/<username>/<repo>:latest` - Points to the latest tagged release
 
 ## Testing NORTH tool
