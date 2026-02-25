@@ -202,44 +202,110 @@ Linux), you might run into problems with processing large uploads. If the NOMAD 
 and app are run on the same computer, the app might become unresponsive, when the worker
 consumes all system resources.
 
-By default, the Temporal-based worker setup uses a single process per container. The default deployment template defines **4 replicas** of the worker container, allowing multiple uploads and tasks to be processed in parallel. Depending on your machine and workload, you may want to adjust how many replicas are running and how much CPU and memory they are allowed to use.
+NOMAD is designed to efficiently process a wide variety of materials science data out of the box. For most standard deployments, **the default configurations will work perfectly fine** and provide a stable, high-throughput environment.
+
+However, depending on your specific hardware architecture or the unique shape of your data (e.g., massive bursts of tiny files, highly computationally expensive parsers, or massive memory-heavy datasets), you may want to optimize your setup.
+
+Here is a guide on how to tune NOMAD's orchestration engine (Temporal) and worker configurations for specialized workloads.
+
+---
+
+### 1. Scaling Strategy: Replicas vs. Pool Size
+
+When you need to increase your processing throughput, you have two primary choices: add more containers (Horizontal Scaling via Replicas) or increase the capacity of your existing containers (Vertical Scaling via Pool Size).
+
+#### `pool_size` (Vertical Scaling)
+
+In NOMAD, worker pools rely on Python process executors to bypass the Global Interpreter Lock (GIL). This means that increasing the `pool_size` will spawn entirely separate Python processes inside a single container.
+
+You can configure this in your `nomad.yaml` for different worker types (`internal_worker`, `cpu_worker`, `gpu_worker`):
+
+```yaml
+temporal:
+  internal_worker:
+    # Number of Python processes running in this container
+    pool_size: 4
+    # Restart the process after 100 tasks to clear memory leaks
+    max_tasks_per_child: 100
+```
+
+* **Memory impact:** Because these are distinct processes, a single container with a `pool_size` of 10 will consume roughly the same amount of memory as 10 separate containers with a `pool_size` of 1.
+
+#### Worker Replicas (Horizontal Scaling)
+
+Deploying more replicas (via Docker Compose or Kubernetes) adds completely isolated containers to your cluster. This is configured in your deployment manifests, not in `nomad.yaml`.
+
+* **The Isolation Advantage:** We generally recommend relying on replicas for scaling rather than massive `pool_size` values. If a malformed file triggers a severe crash in a Python C-extension (like a segfault), it can bring down the entire container. If you have a high `pool_size`, that single bad file just killed the processing for all other parallel tasks sharing that pod. Replicas isolate this "blast radius," ensuring only the offending container dies and is rescheduled.
+
+*Recommendation: Benchmark your specific environment. A hybrid approach often works best—a moderate `pool_size` (matching your container's allocated CPU cores) combined with enough replicas to ensure fault tolerance.*
+
+---
+
+### 2. Orchestration Concurrency & Backpressure
+
+Beyond how many workers you have, you can also control the orchestration logic that dictates how aggressively Temporal dispatches tasks.
+
+Configurations like `batch_processing_concurrency` and `entry_processing_concurrency` act as traffic lights. **Crucially, these limits apply *per upload*, not globally.**
+
+```yaml
+temporal:
+  # Max concurrent batches processed simultaneously per upload
+  batch_processing_concurrency: 5
+  # Max concurrent entries processed within a single batch per upload
+  entry_processing_concurrency: 50
+```
+
+* **Defaults are usually sufficient:** For most workloads, these limits keep workers well-saturated.
+* **Tuning for Backpressure:** Because these limits multiply by the number of active uploads, they can quickly scale. If 100 users upload data simultaneously with the default settings, Temporal could attempt to run 25,000 concurrent activities (`100 uploads * 5 batches * 50 entries`). If this massive spike causes your downstream infrastructure (like MongoDB, Elasticsearch, or your network) to timeout or crash, you should **decrease** these concurrency values. Lowering them forces tasks to wait safely in the queue, applying backpressure and keeping the overall system stable.
+
+---
+
+### 3. Resource Management & Guardrails
+
+To keep your cluster healthy, you must combine infrastructure constraints with NOMAD's application-aware guardrails.
+
+* **Hard Limits (Infrastructure):** Your Kubernetes or Docker pod resource limits (`resources.limits.memory` and `resources.limits.cpu`) are the ultimate guardrails. They protect your host node from being completely consumed by a runaway worker.
+* **Soft Limits (NOMAD `WorkerConfig`):** Settings like `target_memory_usage` and `target_cpu_usage` act as an early-warning system. They allow the worker to gracefully pause accepting new tasks from the queue *before* the container hits the hard Kubernetes limit. This prevents aggressive and disruptive Out-Of-Memory (OOM) kills.
+
+```yaml
+temporal:
+  internal_worker:
+    # Stop accepting new tasks if container CPU hits 80%
+    target_cpu_usage: 0.8
+    # Stop accepting new tasks if container RAM hits 80%
+    target_memory_usage: 0.8
+```
+
+---
+
+### 4. Tuning for Specific Workloads
+
+#### Scenario A: High Volume of Tiny Files (I/O Bound)
+
+Processing thousands of tiny files is typically very fast computationally, but tasks spend most of their time waiting on database reads/writes or network latency.
+
+* **Behavior:** Worker CPUs sit mostly idle while waiting for I/O.
+* **How to tune:** The default configurations will usually keep workers saturated. If you want to increase throughput, benchmark adding more replicas to widen your I/O pipeline. If your backend databases (Mongo/Elasticsearch) start timing out under the load of many parallel uploads, **lower** `batch_processing_concurrency` and `entry_processing_concurrency` to throttle the system.
+
+#### Scenario B: Computationally Heavy Processing (CPU Bound)
+
+Dense calculations, heavy parsers, or complex normalizers will quickly peg a CPU core to 100%.
+
+* **Behavior:** The worker machine's CPU becomes the absolute bottleneck.
+* **How to tune:** Rely on the `target_cpu_usage: 0.8` setting so the worker naturally backs off when busy. To increase overall throughput safely, ensure your `pool_size` does not exceed the physical CPU cores allocated to the container (to avoid costly context-switching overhead), and scale horizontally by adding more container replicas.
+
+#### Scenario C: Memory-Intensive Processing
+
+Workloads involving large datasets or trajectories that must be loaded entirely into RAM.
+
+* **Behavior:** High risk of sudden Out-Of-Memory (OOM) crashes.
+* **How to tune:** This scenario requires strict isolation. Favor higher replica counts with very low `pool_size` limits (even a `pool_size: 1`). This ensures that if a massive dataset causes an unavoidable OOM spike, it only kills one isolated replica rather than a pooled worker that is concurrently processing other users' data. Rely heavily on strict Kubernetes memory limits combined with NOMAD's `target_memory_usage: 0.7` to reject tasks gracefully when RAM gets tight.
 
 There are several ways to control resource usage and improve performance:
 
 - Increase or decrease the number of worker **replicas** (recommended)
 - Adjust CPU and memory limits in Docker
 - (Optionally) Increase the number of worker **processes** on the Python side
-
----
-
-### Increase the Number of Worker Replicas (Recommended)
-
-The most robust way to scale worker performance is by changing the number of replicas for the worker container. This ensures that multiple worker instances can process tasks in parallel and that they are properly managed and restarted if one fails.
-
-In your `docker-compose.yml`, you can modify the worker service like this:
-
-```yml
-services:
-  worker:
-    ...
-    deploy:
-      replicas: 4  # default value; adjust based on your system capacity
-```
-
-Each replica runs as an independent worker process. Docker will handle restarting and load balancing between them.
-
-### Adjust the Number of Worker Processes (Advanced Option)
-
-If necessary, you can also increase the number of processes within each worker container by modifying the worker command in your docker-compose.yml:
-
-```yml
-services:
-  worker:
-    ...
-    command: python -m nomad.cli admin run action-internal-worker --workers 4
-```
-
-This will run multiple worker processes within a single container. However, this approach is less robust than scaling via replicas, as process-level management (e.g., restarting if one worker crashes) is handled less effectively inside a single container.
 
 ### Limiting the use of threads
 
