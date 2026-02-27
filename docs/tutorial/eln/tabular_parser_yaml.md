@@ -382,7 +382,7 @@ You can now upload this file to NOMAD and verify that it creates an entry where 
   </div>
 
 
-## Step 7 (optional): Integrate the tabular parser section into an ELN template
+## Step 7: Integrate the tabular parser section into an ELN template
 
 So far, you have created a standalone schema section for parsing and visualizing optical absorption data.
 
