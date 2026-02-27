@@ -11,6 +11,8 @@ As you go through the tutorial pages, you will encounter embedded boxes with dif
 
 !!! example "Shares example files for you to try out, along with explanations of their contents and scientific use cases."
 
+!!! success "Marks a checkpoint to verify your result before continuing."
+
 !!! warning "Displays important warnings to consider before proceeding further in the tutorial."
 
 ## Scope of the tutorials
