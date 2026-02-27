@@ -1,6 +1,3 @@
-<!-- markdownlint-disable MD013 -->
-<!-- Disabled MD013: long lines are needed in this tutorial -->
-
 # Create a custom ELN schema in NOMAD using YAML
 
 In this tutorial, we create a custom ELN using a YAML-based schema file to structure experimental data in NOMAD. We follow a step-by-step workflow to define sections, quantities, and annotations that shape how the experiment is represented in the GUI. By the end of the tutorial, we will have a functional custom ELN schema that can be uploaded and tested in NOMAD.
@@ -19,6 +16,7 @@ In this tutorial, you will learn how to:
 6. Use a custom ELN schema package in NOMAD as a template to document experiments in NOMAD
 
 ---
+
 ## Before you begin
 
 This tutorial does not require prior experience with creating custom schemas. However, familiarity with the [NOMAD ELN functionality](built_in_templates.md){:target="_blank" rel="noopener"} is helpful.
@@ -29,7 +27,7 @@ Before starting, make sure you have:
    Creating and editing ELN entries requires a NOMAD user account.  
    You can create an account by following the steps described in the
    [overview page](../overview.md#create-a-nomad-user-account){:target="_blank" rel="noopener"}.
-   
+
 2. **Basic understanding of uploads and entries**  
    Familiarity with uploads and entries, and how they relate to each other can be helpful. These concepts are introduced in the section [key elements in NOMAD](../upload_publish.md#the-key-elements-in-nomad){:target="_blank" rel="noopener"}.
 
@@ -90,8 +88,8 @@ definitions:
 Note that `name:` and `sections:` must be indented one level (two spaces) with respect to `definitions:`.
 
 !!! info "YAML indentation matters"
-    YAML uses indentation to define hierarchical structure. Indent by **two spaces** for **each level**. 
-    
+    YAML uses indentation to define hierarchical structure. Indent by **two spaces** for **each level**.
+
     If NOMAD reports a YAML error, check that keys at the same level align.
 
 At this point, the file declares an empty schema package that can now be extended with section definitions.
@@ -114,7 +112,7 @@ Add the following content to the schema file:
 
 **Where to paste:** under `sections:` and indented one level (two spaces) with respect to it.
 
-Note that `base_sections:` must be indented one level (two spaces) with respect to `Experiment_Information:`, and will include an indented list for the base sections to inherit from. 
+Note that `base_sections:` must be indented one level (two spaces) with respect to `Experiment_Information:`, and will include an indented list for the base sections to inherit from.
 
 ??? success "Checkpoint 1"
     Your file so far (after step 3) should look like the following:
@@ -135,7 +133,7 @@ Note that `base_sections:` must be indented one level (two spaces) with respect 
 
 Quantities define the individual data fields that will be stored for each experiment entry. They are added using `quantities:`.
 
-Define the quantities `Name`, `Researcher`, `Date` and `Additional_Notes`, by adding the following content to the schema file: 
+Define the quantities `Name`, `Researcher`, `Date` and `Additional_Notes`, by adding the following content to the schema file:
 
 ```yaml
       quantities:
@@ -208,16 +206,10 @@ Start with updating the `Name` quantity as follows:
 
 - `component: StringEditQuantity` defines that the input format for this quantity is a short text field.
 
-
 Note that as `m_annotations:` is used to configure the `Name` quantity, it is indented one level (two spaces) with respect to `Name:`, i.e., it aligns with `type:` and `default:` in the `Name` block.
 
 ??? info "NOMAD's editable ELN components"
     For a list of editable components in NOMAD, see [editable quantities](https://nomad-lab.eu/prod/v1/gui/dev/editquantity){:target="_blank" rel="noopener"}.
-
-
-
-
-
 
 Now update the remaining quantities:
 
@@ -284,9 +276,9 @@ After completing this step, your schema defines both structure and GUI behavior 
 
 Subsections define nested sections within a section. They allow you to group related information,such as sample details, solution composition, and preparation steps, into separate blocks within the ELN template.
 
-In this step, you will extend your ELN schema by adding subsections under `Experiment_Information:` using the `sub_sections:` key.  
+In this step, you will extend your ELN schema by adding subsections under `Experiment_Information:` using the `sub_sections:` key.
 
-Declare the subsections `Sample`, `Solution`, and `Preparation`, by adding the following content to the schema file: 
+Declare the subsections `Sample`, `Solution`, and `Preparation`, by adding the following content to the schema file:
 
 ```yaml
       sub_sections:
@@ -351,14 +343,14 @@ Declare the subsections `Sample`, `Solution`, and `Preparation`, by adding the f
               section:
     ```
 
-Next, you will define each subsection (`Sample`, `Solution`, and `Preparation`) using the same building blocks introduced in steps 3 to 5, such as `base_sections:`, `quantities:`, and `m_annotations:`. 
+Next, you will define each subsection (`Sample`, `Solution`, and `Preparation`) using the same building blocks introduced in steps 3 to 5, such as `base_sections:`, `quantities:`, and `m_annotations:`.
 
 These elements go under `section:` and are indented one level (two spaces) with respect to it.
 
 **The sample subsection**
 
-NOMAD already provides a generic base section for samples, i.e. `nomad.datamodel.metainfo.eln.ELNSample`. 
-By inheriting from it, you reuse NOMAD’s built-in sample structure instead of defining all the quantities yourself. 
+NOMAD already provides a generic base section for samples, i.e. `nomad.datamodel.metainfo.eln.ELNSample`.
+By inheriting from it, you reuse NOMAD’s built-in sample structure instead of defining all the quantities yourself.
 You can then tailor what is shown in the ELN by annotating the subsection and hiding inherited fields you don’t need.
 
 Add the following content to the schema file:
@@ -374,7 +366,7 @@ Add the following content to the schema file:
 
 **Where to paste:** under the `Sample:`subsection and indented two levels (four spaces) with respect to it, i.e., one level with respect to the `section:` key.
 
-- `overview: true` shows the subsection in the entry’s **OVERVIEW** tab in the GUI. 
+- `overview: true` shows the subsection in the entry’s **OVERVIEW** tab in the GUI.
 
 - `hide: ['chemical_formula']` hides the `chemical_formula` field (inherited from `nomad.datamodel.metainfo.eln.ELNSample`) from your custom ELN.
 
@@ -533,6 +525,7 @@ Add the following `sub_sections:` block inside the `Solution` subsection:
                           component: NumberEditQuantity
                           defaultDisplayUnit: milliliter
 ```
+
 **Where to paste:** under the `Solution:`subsection and indented two levels (four spaces) with respect to it, i.e., one level with respect to the `section:` key and aligned with `base_sections:`, `m_annotations:`, and `quantities:` of that section.
 
 - The `Substance` quantity uses `ReferenceEditQuantity` to link to an existing `ELNSubstance` entry.
@@ -540,7 +533,6 @@ Add the following `sub_sections:` block inside the `Solution` subsection:
 - `Mass` and `Volume` are numeric quantities with physical units.
 
 - `defaultDisplayUnit` controls which unit is shown by default in the GUI.
-
 
 ??? warning "Indentation check"
     Indentation matters in YAML because it defines the structure of your schema.
@@ -651,6 +643,7 @@ Add the following `sub_sections:` block inside the `Solution` subsection:
 ---
 
 ## Step 7: Test your custom schema in NOMAD
+
 You can now upload this file to NOMAD and verify that it creates an ELN entry with the fields you defined.
 
 <p><strong>Use the arrow buttons ⬅️➡️ below to follow the steps for uploading the schema and creating a test ELN entry.</strong></p>

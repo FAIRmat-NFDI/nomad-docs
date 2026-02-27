@@ -55,5 +55,3 @@ Rules enforced (do not render):
 - No “we”, no instructional verbs
 - Only hard prerequisites (accounts, software, skills)
 -->
-
-

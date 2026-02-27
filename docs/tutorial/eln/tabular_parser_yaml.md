@@ -1,9 +1,6 @@
-<!-- markdownlint-disable MD013 -->
-<!-- Disabled MD013: long lines are needed in this tutorial -->
-
 # Parse tabular measurement data with the tabular parser
 
-In this tutorial, we transform a tabular measurement file into a structured NOMAD entry using NOMAD's tabular parser. We build and configure a YAML-based parser that extracts data from a `.csv` and `.xlsx` file, stores them as an entry, and enables visualization in NOMAD. By the end of the tutorial, we will have created a reusable parser for tabular data that can be integrated into a custom ELN schema. 
+In this tutorial, we transform a tabular measurement file into a structured NOMAD entry using NOMAD's tabular parser. We build and configure a YAML-based parser that extracts data from a `.csv` and `.xlsx` file, stores them as an entry, and enables visualization in NOMAD. By the end of the tutorial, we will have created a reusable parser for tabular data that can be integrated into a custom ELN schema.
 
 ---
 
@@ -28,7 +25,7 @@ Before starting, make sure you have:
    Creating and editing ELN entries requires a NOMAD user account.  
    You can create an account by following the steps described in the
    [overview page](../overview.md#create-a-nomad-user-account){:target="_blank" rel="noopener"}.
-  
+
 2. **Basic understanding of uploads and entries**  
    Familiarity with uploads and entries, and how they relate to each other can be helpful. These concepts are introduced in the section [key elements in NOMAD](../upload_publish.md#the-key-elements-in-nomad){:target="_blank" rel="noopener"}.
 
@@ -37,7 +34,6 @@ Before starting, make sure you have:
 
 4. **A YAML-capable editor or IDE (e.g., VS Code)**  
     You will edit a YAML file during the tutorial. Using an editor or IDE with YAML support (for example, VS Code) is recommended.
-
 
 ??? example "About the measurement data used in this tutorial"
 
@@ -75,7 +71,7 @@ definitions:
 
 - `name:` provides a human-readable identifier for the package.
 
-- `sections:` introduces a block where individual sections are defined. Here, you define a section named `Optical_absorption`, which will configure how the tabular data file is parsed and visualized. 
+- `sections:` introduces a block where individual sections are defined. Here, you define a section named `Optical_absorption`, which will configure how the tabular data file is parsed and visualized.
 
 Note that `name:` and `sections:` must be indented one level (two spaces) with respect to `definitions:`.
 
@@ -135,7 +131,7 @@ Add the following content to the schema file:
 
 **Where to paste:** under `Optical_absorption:` and indented one level (two spaces) with respect to it, i.e., `quantities` aligns with `base_sections:`.
 
-- Since `wavelength` and `absorbance` contain multiple data points, define them as arrays using `shape: ['*']`. 
+- Since `wavelength` and `absorbance` contain multiple data points, define them as arrays using `shape: ['*']`.
 - If a quantity represents a physical value, you can also provide a `unit` (here: `nm` for `wavelength`).
 
 ??? success "Checkpoint 2"
@@ -195,7 +191,7 @@ Add the following content to the schema file:
 **Where to paste:** under `data_file` and indented one level (two spaces) with respect to it, i.e., `m_annotations:` aligns with `type:`.
 
 - `component: FileEditQuantity` under the `eln` annotation enables the file upload function in NOMAD.
-- `adaptor: RawFileAdaptor` under the `browser` annotation enables file actions in the GUI, e.g., file preview and download. 
+- `adaptor: RawFileAdaptor` under the `browser` annotation enables file actions in the GUI, e.g., file preview and download.
 - `parsing_options:` under the `tabular_parser` annotation defines how the raw file is read before its contents are mapped to schema quantities.
     - `comment: '#'` ignores commented lines in the file.
     - `skiprows: [1]` skips the second row (row index `1`), which contains the units, so the remaining rows can be parsed as numeric values.
@@ -203,11 +199,10 @@ Add the following content to the schema file:
     - `mapping_mode: column` maps each column of the file to the corresponding schema quantities.
     - `file_mode: current_entry` processes the parsed data into the same NOMAD entry instead of creating a new one.
     - `sections: ['#root']` specifies that the mapped quantities are filled into the root section of the entry (here, the `Optical_absorption` section).
-    
 
 **The `wavelength` quantity**
 
-This quantity will be filled with values extracted from the column whose header is `Wavelength`. 
+This quantity will be filled with values extracted from the column whose header is `Wavelength`.
 
 Add a `tabular` annotation under `wavelength` so NOMAD knows which column to map into this quantity:
 
@@ -223,7 +218,7 @@ Add a `tabular` annotation under `wavelength` so NOMAD knows which column to map
 
 **The `absorbance` quantity**
 
-This quantity will be filled with values extracted from the column whose header is `Absorbance`. 
+This quantity will be filled with values extracted from the column whose header is `Absorbance`.
 
 Add a `tabular` annotation under `absorbance` quantity:
 
@@ -287,7 +282,7 @@ Add a `tabular` annotation under `absorbance` quantity:
 
 So far, you have defined how the tabular data are parsed and mapped to schema quantities.
 
-In this step, you will configure how these quantities are visualized in the NOMAD ELN by adding a `plotly_graph_object` annotation to the `Optical_absorption` section. 
+In this step, you will configure how these quantities are visualized in the NOMAD ELN by adding a `plotly_graph_object` annotation to the `Optical_absorption` section.
 
 Add the following content to the schema file:
 
@@ -381,7 +376,6 @@ You can now upload this file to NOMAD and verify that it creates an entry where 
       <div class="nav-arrow right" id="next_milestone_tabular_parser">→</div>
   </div>
 
-
 ## Step 7: Integrate the tabular parser section into an ELN template
 
 So far, you have created a standalone schema section for parsing and visualizing optical absorption data.
@@ -396,7 +390,6 @@ This allows you to upload an optical absorption file and visualize the spectrum 
 
     - `Optical_absorption:` appears inside the `sub_sections:` block of `Experiment_Information`.
     - Its indentation level matches that of `Sample`, `Solution`, and `Preparation`.
-
 
 ??? success "Solution"
     In your `polymer_processing.archive.yaml`, add an `Optical_absorption` subsection under `Experiment_Information` and give it the same section definition you built in this tutorial (the one that includes `TableData` and `PlotSection`).

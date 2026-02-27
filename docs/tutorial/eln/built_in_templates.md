@@ -53,8 +53,6 @@ In this tutorial, we will use an example experiment involving the preparation of
 
 ---
 
-
-
 ## Create a new ELN upload
 
 In NOMAD, an ELN is created by initiating a NOMAD upload. This process allows you to structure and document your research data efficiently. Create a new upload by following the steps in [Create new upload](../upload_publish.md#create-new-upload){:target="_blank" rel="noopener"}.
