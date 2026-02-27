@@ -60,7 +60,7 @@ Our tutorial documentation covers the basics of using Central NOMAD and NOMAD Oa
 
 An overview of the skills required to use NOMAD and NOMAD Oasis, categorized into basic use, customization, and self hosting, is presented in the figure below.
 
-<img src="../images/overview.png" alt="Competences of NOMAD" width="800">
+<img src="./images/overview.png" alt="Competences of NOMAD" width="800">
 
 ---
 
@@ -83,7 +83,7 @@ Two public versions that are relevant to the tutorials are:
 !!! info "These tutorials are based on the official version of NOMAD. All instructions are based on it unless stated otherwise."
 
 <div style="text-align: center;">
-    <img src="../images/access_NOMAD.png" alt="Access NOMAD" width="600">
+    <img src="./images/access_NOMAD.png" alt="Access NOMAD" width="600">
 </div>
 
 ---
@@ -95,10 +95,10 @@ A NOMAD user account is required if you want to upload, share, publish, or analy
 **Use the arrow buttons ⬅️➡️ below to slide through the steps and create a NOMAD account.**
 <div class="image-slider" id="slider1">
     <div class="nav-arrow left" id="prev">←</div>
-    <img src="../images/account_1.png" alt="Image 1" class="active">
-    <img src="../images/account_2.png" alt="Image 2">
-    <img src="../images/account_3.png" alt="Image 3">
-    <img src="../images/account_4.png" alt="Image 4">
+    <img src="./images/account_1.png" alt="Image 1" class="active">
+    <img src="./images/account_2.png" alt="Image 2">
+    <img src="./images/account_3.png" alt="Image 3">
+    <img src="./images/account_4.png" alt="Image 4">
     <div class="nav-arrow right" id="next">→</div>
 </div>
 ---
@@ -116,9 +116,9 @@ You will be redirected to your institution’s login page, where you can enter y
 **Use the arrow buttons ⬅️➡️ below to see how to sign in via Helmholtz AAI.**
 <div class="image-slider" id="slider2">
     <div class="nav-arrow left" id="prev2">←</div>
-    <img src="../images/account_1.png" alt="Image 1" class="active">
-    <img src="../images/account_5.png" alt="Image 5">
-    <img src="../images/account_6.png" alt="Image 6">
+    <img src="./images/account_1.png" alt="Image 1" class="active">
+    <img src="./images/account_5.png" alt="Image 5">
+    <img src="./images/account_6.png" alt="Image 6">
     <div class="nav-arrow right" id="next2">→</div>
 </div>
 ---
