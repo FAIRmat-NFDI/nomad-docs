@@ -180,6 +180,7 @@ Define the quantities `Name`, `Researcher`, `Date` and `Additional_Notes`, by ad
             Additional_Notes:
               type: str
     ```
+    
 ---
 
 ## Step 5: Turn quantities into ELN fields
