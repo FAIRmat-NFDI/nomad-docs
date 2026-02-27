@@ -58,21 +58,6 @@ Before starting, make sure you have:
 
     Download the custom polymer-processing schema file [`polymer_processing.archive.yaml`](data/polymer_processing.archive.yaml){:download}.
 
-
----
-
-## A quick map of what you are building
-
-You will build one small `.archive.yaml` schema that lets NOMAD:
-
-- accept a tabular data CSV file via a file field (here `data_file`),
-- parse specific CSV columns into array quantities (here `wavelength` and `absorbance`), and
-- display the parsed data as a plot inside the ELN entry.
-
-To do this, your section combines three base sections (`EntryData`, `TableData`, `PlotSection`) and uses `m_annotations:` to configure file upload + parsing (`tabular_parser`) and plotting (`plotly_graph_object`).
-
-As an optional final step, you will integrate this tabular-parser section into your `polymer_processing.archive.yaml` from the previous tutorial to obtain a more extended custom ELN template.
-
 ---
 
 ## Step 1: Declare the schema package and add a parser section

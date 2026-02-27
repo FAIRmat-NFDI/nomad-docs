@@ -62,21 +62,6 @@ Before starting, make sure you have:
 
 ---
 
-## Overview of the schema structure
-
-You will create a single NOMAD schema package defined in a `.archive.yaml` file. This file describes how a polymer thin-film processing experiment is structured in the NOMAD ELN. 
-
-The schema package consists of:
-
-- **`definitions`**: Declares the schema package and its metadata.
-- **`sections`**: Defines logical blocks of information (for example, the experiment itself).
-- **`quantities`**: Defines individual data fields within a section (such as name, date, or concentration).
-- **`base_sections`**: Reuses existing NOMAD data models by inheritance.
-- **`sub_sections`**: Introduces nested sections to group related information.
-- **`m_annotations`**: Controls how sections and quantities are displayed and edited in the ELN interface.
-
----
-
 ## Step 1: Create the schema file
 
 Create a new file named `polymer_processing.archive.yaml` in a local working directory. This file will contain the custom ELN schema definitions for the example experiment in this tutorial.
