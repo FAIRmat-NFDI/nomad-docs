@@ -17,7 +17,6 @@ nav:
         - Custom ELN with YAML: tutorial/eln/custom_eln_yaml.md
         - Tabular Parser for ELN: tutorial/eln/tabular_parser_yaml.md
       - Manage workflows and projects: tutorial/workflows_projects.md
-      - Create custom schemas: tutorial/custom.md
       - Develop a NOMAD plugin: tutorial/develop_plugin.md
   - How-to guides:
       - Overview: howto/overview.md
