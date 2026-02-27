@@ -1,6 +1,10 @@
 # Tutorial title
 
-In this tutorial, we <primary action> using NOMAD. Step by step, we <key steps or methods> to <concrete outcome or artifact>. By the end of the tutorial, you will have <verifiable result that can be tested or reused>.
+In this tutorial, we <primary action> using NOMAD. Step by step, we <key steps or methods> to <concrete outcome or artifact>. By the end of the tutorial, we will have <verifiable result that can be tested or reused>.
+
+In this tutorial, we <primary action> in NOMAD using <interface, tool, or feature>.
+We follow a <type of workflow or approach> to <describe key actions without listing everything>.
+By the end of the tutorial, we will have <clear, verifiable result>.
 
 <!--
 Guidelines (do not render):

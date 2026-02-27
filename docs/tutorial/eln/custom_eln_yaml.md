@@ -31,7 +31,7 @@ Before starting, make sure you have:
    [overview page](../overview.md#create-a-nomad-user-account){:target="_blank" rel="noopener"}.
    
 2. **Basic understanding of uploads and entries**  
-   Familiarity with uploads, entries, and how they relate to each other can be helpful. These concepts are introduced in the section [key elements in NOMAD](../upload_publish.md#the-key-elements-in-nomad){:target="_blank" rel="noopener"}.
+   Familiarity with uploads and entries, and how they relate to each other can be helpful. These concepts are introduced in the section [key elements in NOMAD](../upload_publish.md#the-key-elements-in-nomad){:target="_blank" rel="noopener"}.
 
 3. **Basic familiarity with YAML configuration files**  
    This tutorial uses YAML to define the structure of a custom ELN schema. Prior experience with YAML syntax and indentation is helpful, but deep knowledge of YAML is not required.
@@ -45,11 +45,9 @@ Before starting, make sure you have:
     - [Section and Subsection](../../reference/glossary.md#section-and-subsection){:target="_blank" rel="noopener"}, [Quantity](../../reference/glossary.md#quantity){:target="_blank" rel="noopener"}
     - [Annotation](../../reference/glossary.md#annotation){:target="_blank" rel="noopener"}
 
-In this tutorial, we use an example experiment focused on the processing of polymer thin-films to illustrate how experimental information can be documented in a custom NOMAD ELN schema.
-
 ??? example "About the example experiment used in this tutorial"
 
-    We will use an example experiment involving the solution processing of polymer thin films to illustrate how experimental metadata can be structured in a custom ELN schema.
+    In this tutorial, we use an example experiment involving the solution processing of polymer thin films to illustrate how experimental metadata can be structured in a custom ELN schema.
 
     The experiment is represented by general contextual metadata, including its name, the responsible researcher, the date, and free-text notes.
 
@@ -115,7 +113,7 @@ At this point, the file declares an empty schema package that can now be extende
 
 ---
 
-## Step 3: Add your main experiment section
+## Step 3: Add a main experiment section
 
 A schema must contain at least one section. Here, you will define a section called `Experiment_Information` that will represent the experiment entry and hold all related metadata.
 
@@ -391,7 +389,7 @@ Add the following content to the schema file:
 
 **Where to paste:** under the `Sample:`subsection and indented two levels (four spaces) with respect to it, i.e., one level with respect to the `section:` key.
 
-- `overview: true` shows the the subsection in the entry’s **OVERVIEW** tab in the GUI. 
+- `overview: true` shows the subsection in the entry’s **OVERVIEW** tab in the GUI. 
 
 - `hide: ['chemical_formula']` hides the `chemical_formula` field (inherited from `nomad.datamodel.metainfo.eln.ELNSample`) from your custom ELN.
 
