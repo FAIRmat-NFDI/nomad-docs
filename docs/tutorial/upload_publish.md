@@ -149,12 +149,12 @@ Uploads in NOMAD can be shared or published. When an upload is shared or publish
 
 A NOMAD upload can have four states based on sharing and publishing:
 
-|Status    | Icon   | Description                         |
-|----------|--------|-------------------------------------|
-|Private   |<img src="images/icon_unpublished.png" alt="Icon of private upload" width="20"> |The upload is private and is visible to the uploader only.|
-|Shared    |<img src="images/icon_shared.png" alt="Icon of shared upload" width="20">       |The upload is accessible to selected users but not publicly available.|
-|Published |<img src="images/icon_published.png" alt="Icon of published upload" width="20"> |The upload is publicly available to everyone.|
-|Visible   |<img src="images/icon_visible.png" alt="Icon of visible upload" width="20">     |The upload is unpublished but accessible to everyone.|
+|Status    | Icon                                                                           | Description                                                           |
+|----------|--------------------------------------------------------------------------------|-----------------------------------------------------------------------|
+|Private   |<img src="images/icon_unpublished.png" alt="Icon of private upload" width="20"> |The upload is private and is visible to the uploader only.             |
+|Shared    |<img src="images/icon_shared.png" alt="Icon of shared upload" width="20">       |The upload is accessible to selected users but not publicly available. |
+|Published |<img src="images/icon_published.png" alt="Icon of published upload" width="20"> |The upload is publicly available to everyone.                          |
+|Visible   |<img src="images/icon_visible.png" alt="Icon of visible upload" width="20">     |The upload is unpublished but accessible to everyone.                  |
 
 You can manage upload sharing in the *Edit upload members* menu. To access it, click on <img src="images/edit_upload_members_icon.png" alt="Edit upload members Icon" width="20"> available at the top of the upload page.
 
