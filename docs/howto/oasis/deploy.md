@@ -70,11 +70,11 @@ NOMAD can be deployed on Kubernetes using the official [Helm](https://helm.sh/){
 Rather than writing a values file from scratch, you can use one of the ready-made examples as a starting point:
 
 | File | Where | Best for |
-|------|-------|----------|
-| `kubernetes/values.yaml` | [`nomad-distro-template`](https://github.com/FAIRmat-NFDI/nomad-distro-template) | Single-node clusters (Minikube, Kind, k3s). No persistence, uses `hostPath`. Includes JupyterHub (NORTH). Uses the distro-template image. |
-| `custom-values/minikube.yaml` | [`nomad-helm-charts`](https://github.com/FAIRmat-NFDI/nomad-helm-charts) | Minikube specifically. Reduced resource requests, hostname set to `nomad-oasis.local`, nginx ingress enabled. |
-| `custom-values/kind.yaml` | [`nomad-helm-charts`](https://github.com/FAIRmat-NFDI/nomad-helm-charts) | Kind specifically. Similar to the Minikube file but with `localhost` as hostname and longer health-check timeouts to account for Kind's slower image pull behaviour. |
-| `custom-values/aws.yaml` | [`nomad-helm-charts`](https://github.com/FAIRmat-NFDI/nomad-helm-charts) | AWS EKS. Enables persistence with EFS (`ReadWriteMany`) for NOMAD volumes and `gp2` EBS for databases. Configures an ALB ingress controller. |
+| --- | --- | --- |
+| `kubernetes/values.yaml` | [`nomad-distro-template`](https://github.com/FAIRmat-NFDI/nomad-distro-template){:target="_blank" rel="noopener"} | Single-node clusters (Minikube, Kind, k3s). No persistence, uses `hostPath`. Includes JupyterHub (NORTH). Uses the distro-template image. |
+| `custom-values/minikube.yaml` | [`nomad-helm-charts`](https://github.com/FAIRmat-NFDI/nomad-helm-charts){:target="_blank" rel="noopener"} | Minikube specifically. Reduced resource requests, hostname set to `nomad-oasis.local`, nginx ingress enabled. |
+| `custom-values/kind.yaml` | [`nomad-helm-charts`](https://github.com/FAIRmat-NFDI/nomad-helm-charts){:target="_blank" rel="noopener"} | Kind specifically. Similar to the Minikube file but with `localhost` as hostname and longer health-check timeouts to account for Kind's slower image pull behaviour. |
+| `custom-values/aws.yaml` | [`nomad-helm-charts`](https://github.com/FAIRmat-NFDI/nomad-helm-charts){:target="_blank" rel="noopener"} | AWS EKS. Enables persistence with EFS (`ReadWriteMany`) for NOMAD volumes and `gp2` EBS for databases. Configures an ALB ingress controller. |
 
 All files can be layered — pass multiple `-f` flags to Helm to merge them, with later files taking precedence:
 
@@ -126,7 +126,7 @@ Storage is one of the most important architectural decisions when deploying NOMA
 NOMAD uses five named data volumes, each mounted by one or more pods simultaneously:
 
 | Volume | Mount path in container | Mounted by | Contents |
-|--------|------------------------|------------|----------|
+| --- | --- | --- | --- |
 | `public` | `/app/.volumes/fs/public` | `app`, `worker` | Published upload files accessible to users |
 | `staging` | `/app/.volumes/fs/staging` | `app`, `worker` | In-progress uploads being parsed and processed |
 | `nomad` | `/nomad` | `app`, `worker` | NOMAD internal data (archive files, raw metadata) |
@@ -137,7 +137,7 @@ MongoDB, Elasticsearch, and PostgreSQL each manage their own separate storage vo
 
 **Single-node: `hostPath` (default)**
 
-When `nomad.persistence.enabled` is `false` (the default in `kubernetes/values.yaml`), the chart mounts all five volumes as [`hostPath`](https://kubernetes.io/docs/concepts/storage/volumes/#hostpath) volumes — each pod reads and writes directly from a path on the underlying Kubernetes node's filesystem. No storage provisioner is needed.
+When `nomad.persistence.enabled` is `false` (the default in `kubernetes/values.yaml`), the chart mounts all five volumes as [`hostPath`](https://kubernetes.io/docs/concepts/storage/volumes/#hostpath){:target="_blank" rel="noopener"} volumes — each pod reads and writes directly from a path on the underlying Kubernetes node's filesystem. No storage provisioner is needed.
 
 This works correctly only because, on a single-node cluster, every pod always schedules on the same machine and therefore sees the same local directories. The host paths come from the `nomad.config.fs` section:
 
@@ -165,7 +165,7 @@ nomad:
 
 **Multi-node: PersistentVolumeClaims**
 
-Once workers or app replicas are scheduled across more than one node, `hostPath` breaks down: each node has its own local filesystem, so pod A on node 1 and pod B on node 2 would see completely different data. Setting `nomad.persistence.enabled: true` tells the chart to create [`PersistentVolumeClaims`](https://kubernetes.io/docs/concepts/storage/persistent-volumes/) (PVCs) instead, backed by a shared network storage provider.
+Once workers or app replicas are scheduled across more than one node, `hostPath` breaks down: each node has its own local filesystem, so pod A on node 1 and pod B on node 2 would see completely different data. Setting `nomad.persistence.enabled: true` tells the chart to create [`PersistentVolumeClaims`](https://kubernetes.io/docs/concepts/storage/persistent-volumes/){:target="_blank" rel="noopener"} (PVCs) instead, backed by a shared network storage provider.
 
 ```yaml
 nomad:
@@ -188,7 +188,7 @@ nomad:
 
 **Access modes: the critical distinction**
 
-The [`accessMode`](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes) on a PVC controls how many nodes can mount the volume at the same time:
+The [`accessMode`](https://kubernetes.io/docs/concepts/storage/persistent-volumes/#access-modes){:target="_blank" rel="noopener"} on a PVC controls how many nodes can mount the volume at the same time:
 
 - **`ReadWriteOnce` (RWO)** — the volume can only be mounted by pods on a *single node* at a time. This is the standard mode for block storage (e.g. AWS EBS `gp2`, GCE persistent disk) and is perfectly fine for databases and for NOMAD on a single-node cluster.
 
@@ -202,12 +202,12 @@ The [`accessMode`](https://kubernetes.io/docs/concepts/storage/persistent-volume
 Not all storage backends support `ReadWriteMany`. Common choices per environment:
 
 | Environment | RWX storage option |
-|-------------|-------------------|
-| AWS EKS | Amazon EFS with the [EFS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/efs-csi.html) |
-| GCP GKE | [Filestore](https://cloud.google.com/filestore) NFS volumes |
-| Azure AKS | [Azure Files](https://learn.microsoft.com/en-us/azure/storage/files/) storage class |
-| On-premises | NFS server, [Longhorn](https://longhorn.io/), [Ceph RBD/CephFS](https://rook.io/) |
-| Local dev (single-node only) | [Local Path Provisioner](https://github.com/rancher/local-path-provisioner) (RWO — not suitable for multi-node) |
+| --- | --- |
+| AWS EKS | Amazon EFS with the [EFS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/efs-csi.html){:target="_blank" rel="noopener"} |
+| GCP GKE | [Filestore](https://cloud.google.com/filestore){:target="_blank" rel="noopener"} NFS volumes |
+| Azure AKS | [Azure Files](https://learn.microsoft.com/en-us/azure/storage/files/){:target="_blank" rel="noopener"} storage class |
+| On-premises | NFS server, [Longhorn](https://longhorn.io/){:target="_blank" rel="noopener"}, [Ceph RBD/CephFS](https://rook.io/){:target="_blank" rel="noopener"} |
+| Local dev (single-node only) | [Local Path Provisioner](https://github.com/rancher/local-path-provisioner){:target="_blank" rel="noopener"} (RWO — not suitable for multi-node) |
 
 For AWS, the chart's `aws.yaml` values file uses EFS for NOMAD volumes and `gp2` (RWO block storage) for the databases, since each database runs as a single pod:
 
@@ -248,7 +248,7 @@ nomad:
       existingClaim: "my-existing-nomad-pvc"
 ```
 
-For the full list of configuration options, environment-specific values files (AWS EKS, Minikube, Kind), and advanced topics, see the [nomad-helm-charts documentation](https://github.com/FAIRmat-NFDI/nomad-helm-charts).
+For the full list of configuration options, environment-specific values files (AWS EKS, Minikube, Kind), and advanced topics, see the [nomad-helm-charts documentation](https://github.com/FAIRmat-NFDI/nomad-helm-charts){:target="_blank" rel="noopener"}.
 
 ### Base Linux (without Docker)
 
