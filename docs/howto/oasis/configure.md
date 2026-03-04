@@ -21,7 +21,7 @@ The other files are mounted into the docker containers.
 The most basic `docker-compose.yaml` to run an OASIS looks like this:
 
 ```yaml
---8<-- "ops/docker-compose/nomad-oasis/docker-compose.yaml"
+--8<-- "docs/howto/oasis/ops/docker-compose/nomad-oasis/docker-compose.yaml"
 ```
 
 Changes necessary:
@@ -50,7 +50,7 @@ A few things to notice:
 NOMAD app and worker read a `nomad.yaml` for configuration.
 
 ```yaml
---8<-- "ops/docker-compose/nomad-oasis/configs/nomad.yaml"
+--8<-- "docs/howto/oasis/ops/docker-compose/nomad-oasis/configs/nomad.yaml"
 ```
 
 You should change the following:
@@ -77,7 +77,7 @@ The GUI container serves as a proxy that forwards requests to the app container.
 proxy is an nginx server and needs a configuration similar to this:
 
 ```none
---8<-- "ops/docker-compose/nomad-oasis/configs/nginx.conf"
+--8<-- "docs/howto/oasis/ops/docker-compose/nomad-oasis/configs/nginx.conf"
 ```
 
 A few things to notice:
@@ -353,7 +353,7 @@ to create an initial keycloak realm that is configured for NOMAD automatically.
 First, the `docker-compose.yaml`:
 
 ```yaml
---8<-- "ops/docker-compose/nomad-oasis-with-keycloak/docker-compose.yaml"
+--8<-- "docs/howto/oasis/ops/docker-compose/nomad-oasis-with-keycloak/docker-compose.yaml"
 ```
 
 A few notes:
@@ -367,7 +367,7 @@ A few notes:
 Second, we add a keycloak location to the nginx config:
 
 ```nginx
---8<-- "ops/docker-compose/nomad-oasis-with-keycloak/configs/nginx.conf"
+--8<-- "docs/howto/oasis/ops/docker-compose/nomad-oasis-with-keycloak/configs/nginx.conf"
 ```
 
 A few notes:
@@ -378,7 +378,7 @@ A few notes:
 Third, we modify the keycloak configuration in the `nomad.yaml`:
 
 ```yaml
---8<-- "ops/docker-compose/nomad-oasis-with-keycloak/configs/nomad.yaml"
+--8<-- "docs/howto/oasis/ops/docker-compose/nomad-oasis-with-keycloak/configs/nomad.yaml"
 ```
 
 You should change the following:

@@ -87,18 +87,18 @@ One special quantity will be dedicated to host the tabular data file. In the fol
 
 | Tutorial ref.                      | `file_mode`            | `mapping_mode` | `sections` | How to ref.                                                                                 |
 | ---------------------------------- | ---------------------- | -------------- | ---------- | ------------------------------------------------------------------------------------------- |
-| 1                                  | `current_entry`        | `column`       | `root`     | [HowTo](../howto/manage/gui/tabular.md#1-column-mode-current-entry-parse-to-root)        |
-| 2                                  | `current_entry`        | `column`       | my path    | [HowTo](../howto/manage/gui/tabular.md#2-column-mode-current-entry-parse-to-my-path)     |
+| 1                                  | `current_entry`        | `column`       | `root`     | [HowTo](../howto/manage/gui/tabular.md#1-column-mode-current-entry-parse-to-root)           |
+| 2                                  | `current_entry`        | `column`       | my path    | [HowTo](../howto/manage/gui/tabular.md#2-column-mode-current-entry-parse-to-my-path)        |
 | <span style="color:red">np1</span> | `current_entry`        | `row`          | `root`     | <span style="color:red">Not possible</span>                                                 |
-| 3                                  | `current_entry`        | `row`          | my path    | [HowTo](../howto/manage/gui/tabular.md#3-row-mode-current-entry-parse-to-my-path)        |
+| 3                                  | `current_entry`        | `row`          | my path    | [HowTo](../howto/manage/gui/tabular.md#3-row-mode-current-entry-parse-to-my-path)           |
 | <span style="color:red">np2</span> | `single_new_entry`     | `column`       | `root`     | <span style="color:red">Not possible</span>                                                 |
-| 4                                  | `single_new_entry`     | `column`       | my path    | [HowTo](../howto/manage/gui/tabular.md#4-column-mode-single-new-entry-parse-to-my-path)  |
+| 4                                  | `single_new_entry`     | `column`       | my path    | [HowTo](../howto/manage/gui/tabular.md#4-column-mode-single-new-entry-parse-to-my-path)     |
 | <span style="color:red">np3</span> | `single_new_entry`     | `row`          | `root`     | <span style="color:red">Not possible</span>                                                 |
-| 5                                  | `single_new_entry`     | `row`          | my path    | [HowTo](../howto/manage/gui/tabular.md#5-row-mode-single-new-entry-parse-to-my-path)     |
+| 5                                  | `single_new_entry`     | `row`          | my path    | [HowTo](../howto/manage/gui/tabular.md#5-row-mode-single-new-entry-parse-to-my-path)        |
 | <span style="color:red">np4</span> | `multiple_new_entries` | `column`       | `root`     | <span style="color:red">Not possible</span>                                                 |
 | <span style="color:red">np5</span> | `multiple_new_entries` | `column`       | my path    | <span style="color:red">Not possible</span>                                                 |
-| 6                                  | `multiple_new_entries` | `row`          | `root`     | [HowTo](../howto/manage/gui/tabular.md#6-row-mode-multiple-new-entries-parse-to-root)    |
-| 7                                  | `multiple_new_entries` | `row`          | my path    | [HowTo](../howto/manage/gui/tabular.md#7-row-mode-multiple-new-entries-parse-to-my-path) |
+| 6                                  | `multiple_new_entries` | `row`          | `root`     | [HowTo](../howto/manage/gui/tabular.md#6-row-mode-multiple-new-entries-parse-to-root)       |
+| 7                                  | `multiple_new_entries` | `row`          | my path    | [HowTo](../howto/manage/gui/tabular.md#7-row-mode-multiple-new-entries-parse-to-my-path)    |
 
 ```yaml
 data_file:
