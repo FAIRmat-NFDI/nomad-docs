@@ -51,12 +51,12 @@ official (prod): updated most infrequently (no exact timeline),
 beta (staging): updated more frequently than prod (no exact timeline),
 test: linked to either prod or beta version (unclear to me),
 develop: updated nightly (link not on website https://nomad-lab.eu/prod/v1/develop/gui/about/information),
-example oasis: update nightly,
+example Oasis: update nightly,
 
 Other Info
 official, beta, and develop share a database.,
 test has its own database that is wiped occasionally, such that one can test publishing there.,
-example oasis also has its own database. it does not appear that there is a clear data-wiping strategy since it is mainly intended for testing plugins -->
+example Oasis also has its own database. it does not appear that there is a clear data-wiping strategy since it is mainly intended for testing plugins -->
 
 ## Troubleshooting
 

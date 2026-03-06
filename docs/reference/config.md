@@ -39,7 +39,7 @@ plugins:
       - "atomisticparsers:amber_parser_entry_point"
 ```
 
-If you provide an override file to run only the `systemnormalizer:system_normalizer_entry_point` for your nomad oasis:
+If you provide an override file to run only the `systemnormalizer:system_normalizer_entry_point` for your nomad Oasis:
 
 ```yaml
 # In override.yaml

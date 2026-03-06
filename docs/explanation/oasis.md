@@ -27,7 +27,7 @@ uses and hybrids are imaginable:
   This is what we do in the [FAIRmat project](https://www.fairmat-nfdi.eu/fairmat){:target="_blank" rel="noopener"}.
 
 <figure markdown>
-  ![oasis use-cases](images/oasis-use-cases.png){ width=700 }
+  ![Oasis use-cases](images/oasis-use-cases.png){ width=700 }
   <figcaption>NOMAD Oasis use-cases</figcaption>
 </figure>
 
