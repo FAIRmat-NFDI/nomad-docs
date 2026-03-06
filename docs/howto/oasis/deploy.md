@@ -88,10 +88,6 @@ helm install nomad-oasis nomad/default \
 **Secrets**
 
 ```yaml
---8<-- "docs/howto/oasis/ops/kubernetes/example-values.yaml"
-```
-
-```yaml
 nomad:
   secrets:
     api:
