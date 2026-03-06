@@ -35,6 +35,7 @@
     // NOTE: looks like some are intended as emphasis
     "MD036": false,
     // MD044 - Proper names should have the correct capitalization
+    // TODO: most lower cases are added to exempt code/URL (disable code_blocks)
     // TODO: we should probably add more NOMAD-specific rules
     "MD044": {
         "names": [
@@ -55,7 +56,8 @@
             "JupyterHub",
             "jupyterhub",
             "nomad-lab",
-            "Oasis"
+            "Oasis",
+            "oasis"
         ]
     },
     // MD046 - Code block style
