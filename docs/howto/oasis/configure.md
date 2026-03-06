@@ -18,7 +18,7 @@ The other files are mounted into the docker containers.
 
 ### docker-compose.yaml
 
-The most basic `docker-compose.yaml` to run an OASIS looks like this:
+The most basic `docker-compose.yaml` to run an Oasis looks like this:
 
 ```yaml
 --8<-- "docs/howto/oasis/ops/docker-compose/nomad-oasis/docker-compose.yaml"
@@ -171,7 +171,7 @@ docker logs nomad_oasis_app
 docker exec -ti nomad_oasis_app /bin/bash
 ```
 
-If you want to report problems with your OASIS. Please provide the logs for
+If you want to report problems with your Oasis. Please provide the logs for
 
 - nomad_oasis_app
 - nomad_oasis_worker
@@ -197,7 +197,7 @@ to learn how to add your own plugins.
 
 ## Configuring for performance
 
-If you run the OASIS on a single computer, like described here (either with docker or bare
+If you run the Oasis on a single computer, like described here (either with docker or bare
 Linux), you might run into problems with processing large uploads. If the NOMAD worker
 and app are run on the same computer, the app might become unresponsive, when the worker
 consumes all system resources.
@@ -310,15 +310,15 @@ oasis:
 Our recommendation is to use the central user management provided by nomad-lab.eu. We
 simplified its use and you can use it out-of-the-box. You can even run your system
 from `localhost` (e.g. for initial testing). The central user management system is not
-communicating with your OASIS directly. Therefore, you can run your OASIS without
+communicating with your Oasis directly. Therefore, you can run your Oasis without
 exposing it to the public internet.
 
-There are two requirements. First, your users must be able to reach the OASIS. If a user is
+There are two requirements. First, your users must be able to reach the Oasis. If a user is
 logging in, she/he is redirected to the central user management server and after login,
-she/he is redirected back to the OASIS. These redirects are executed by your user's browser
+she/he is redirected back to the Oasis. These redirects are executed by your user's browser
 and do not require direct communication.
 
-Second, your OASIS must be able to request (via HTTP) the central user management and central NOMAD
+Second, your Oasis must be able to request (via HTTP) the central user management and central NOMAD
 installation. This is necessary for non JWT-based authentication methods and to
 retrieve existing users for data-sharing features.
 

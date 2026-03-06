@@ -94,7 +94,7 @@ work for data based on NOMAD >0.8.0 and <= 0.10.x.
 The overall strategy is to create a new mongo database, copy all information, and then
 reprocess all data for the new version.
 
-First, shutdown the OASIS and remove all old containers.
+First, shutdown the Oasis and remove all old containers.
 
 ```sh
 docker compose stop
@@ -106,17 +106,17 @@ to the latest documentation (see above). Make sure to use index and database nam
 are different. The default values contain a version number in those names, if you don't
 overwrite those defaults, you should be safe.
 
-Make sure you get the latest images and start the OASIS with the new version of NOMAD:
+Make sure you get the latest images and start the Oasis with the new version of NOMAD:
 
 ```sh
 docker compose pull
 docker compose up -d
 ```
 
-If you go to the GUI of your OASIS, it should now show the new version and appear empty,
+If you go to the GUI of your Oasis, it should now show the new version and appear empty,
 because we are using a different database and search index now.
 
-To migrate the data, we created a command that you can run within your OASIS' NOMAD
+To migrate the data, we created a command that you can run within your Oasis' NOMAD
 application container. This command takes the old database name as an argument, it will copy
 all data from the old mongodb to the current one. The default v8.x database name
 was `nomad_fairdi`, but you might have changed this to `nomad_v0_8` as recommended by
@@ -127,7 +127,7 @@ docker exec -ti nomad_oasis_app bash -c 'nomad admin upgrade migrate-mongo --src
 docker exec -ti nomad_oasis_app bash -c 'nomad admin uploads reprocess'
 ```
 
-Now all your data should appear in your OASIS again. If you like, you can remove the
+Now all your data should appear in your Oasis again. If you like, you can remove the
 old index and database:
 
 ```sh
