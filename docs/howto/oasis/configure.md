@@ -275,39 +275,220 @@ See also the [docker-compose documentation](https://docs.docker.com/compose/comp
 
 ## Restricting access to your Oasis
 
-An Oasis works exactly the same way the official NOMAD works. It is open and everybody
-can access published data. Everybody with an account can upload data. This might not be
-what you want.
+By default, a NOMAD Oasis mirrors the configuration of the central NOMAD service: it is designed for open data sharing.
+While network-level access depends on your firewall and hosting setup,
+the application itself allows users to interact with the API according to a configurable scope-based authorization system.
 
-Currently there are three ways to restrict access to your Oasis. First, you do not
-expose the Oasis to the public internet, e.g. you make it only available on an intra-net or
-through a VPN.
+Access control can therefore be configured on several levels:
 
-Secondly, you can require authentication for all sensitive endpoints by enabling
-the global `require_authentication` flag in your configuration:
+1. Network level — restrict access via firewall, VPN, or private network.
+2. Authentication level — require users to log in before accessing the API.
+3. Authorization level (scopes) — control which operations users are allowed to perform after login.
+
+### Authentication
+
+Authentication determines **who is making the request**.
+
+NOMAD supports multiple authentication mechanisms:
+
+- Keycloak access tokens (browser login or API token)
+- Personal access tokens (PATs)
+- Upload tokens *(legacy, deprecated — will be removed in a future release)*
+- Simple (app/signature) tokens *(legacy, deprecated — will be removed in a future release)*
+
+By default, authentication is **not required**.
+This means anonymous users can still access the API with limited permissions.
+
+To require authentication for all API requests, enable the following option:
 
 ```yaml
-oasis:
-    require_authentication: true
+auth:
+  require_authentication: true
 ```
 
-Lastly, we offer a simple white-list mechanism. As the Oasis administrator you provide a
-list of accounts as part of your Oasis configuration. To use the Oasis, all users have to
-be logged in and be on your white list of allowed users. To enable white-listing, you
-can provide a list of NOMAD account email addresses in your `nomad.yaml` like this:
+When this option is enabled, all requests must include a valid authentication token.
+Otherwise the API will return:
+
+```text
+HTTP 401 Unauthorized
+```
+
+### Scope-based authorization
+
+After authentication, NOMAD determines **which actions the user is allowed to perform**
+using scopes.
+
+A scope defines a permission in the format:
+
+```text
+<resource>:<action>
+```
+
+Examples:
+
+```text
+uploads:read
+uploads:write
+```
+
+Wildcards are supported in configuration:
+
+```text
+*:read   # read-only access to all resources
+*:*      # full access
+```
+
+!!! note
+    Partial wildcard patterns such as `u*:read` are not supported.
+
+All available scopes are defined in the `nomad.auth.scopes.Scope` enum.
+
+When an API endpoint is called, the backend checks whether the user has the
+required scopes. If required scopes are missing, the API returns:
+
+```text
+HTTP 403 Forbidden
+Missing scopes: [...]
+```
+
+### Anonymous user permissions
+
+If authentication is not required, anonymous users receive a configurable set of scopes.
+
+By default this is read-only access:
 
 ```yaml
-oasis:
-    allowed_users:
-        - user1@gmail.com
-        - user2@gmail.com
+auth:
+  unauthenticated_user_scopes:
+    include:
+      - "*:read"
+```
+
+This allows anonymous users to browse published data but prevents modifications.
+
+Scopes support glob-style configuration:
+
+```yaml
+auth:
+  unauthenticated_user_scopes:
+    include:
+      - "*:read"
+    exclude:
+      - "uploads:read"
+```
+
+Semantics:
+
+- `include` defines the baseline scopes
+- `exclude` removes scopes from that baseline (with higher precedence than `include`)
+- wildcards are supported
+
+### Restricting access to specific users
+
+Administrators can restrict access to an explicit whitelist of authorized users.
+
+```yaml
+auth:
+  authorized_users:
+    - user1@example.com
+    - user2@example.com
+```
+
+If this option is set, only the listed users are considered fully authorized.
+
+Users who successfully authenticate but are not in the authorized list
+are handled according to the `reject_unauthorized_users` setting.
+
+When enabled (`reject_unauthorized_users: true`), unauthorized users will receive:
+
+```text
+HTTP 403 Forbidden
+```
+
+Otherwise (`reject_unauthorized_users: false`), unauthorized users can still access
+the Oasis but only with restricted scopes, configurable via:
+
+```yaml
+auth:
+  unauthorized_user_scopes:
+    include:
+      - "*:read"
+```
+
+### Token scopes
+
+Different authentication mechanisms provide different scopes.
+These scopes determine which API actions the token is allowed to perform.
+When a request is made using a token, the backend checks whether the token contains
+the scopes required by the endpoint.
+
+For example, if an endpoint requires `uploads:write` and the token only has
+`uploads:read`, the request will be rejected.
+
+#### Keycloak access tokens
+
+Keycloak access tokens authenticate a user with their full account permissions.
+At the backend level, they are treated as having the full set of user scopes.
+
+#### Personal Access Tokens (PATs)
+
+Personal Access Tokens (PATs) can be issued with specific scopes.
+PAT scopes must always be explicit scopes.
+Wildcard expressions such as `*:read` are only supported in configuration, not in tokens.
+
+#### Upload tokens
+
+Upload tokens are legacy, deprecated tokens with a fixed scope set.
+They only grant upload-related permissions: `uploads:*`.
+
+!!! warning "Deprecated"
+    Upload tokens are deprecated and will be removed in a future release.
+    They should not be used for new integrations. Use **Personal Access Tokens (PATs)** instead.
+
+#### Simple tokens
+
+Simple tokens are legacy, deprecated tokens.
+They grant a broad set of user permissions, effectively corresponding to full access
+except for token-management scopes.
+
+!!! warning "Deprecated"
+    Simple tokens are deprecated and will be removed in a future release.
+    They should not be used for new integrations. Use **Personal Access Tokens (PATs)** instead.
+
+### Example configurations
+
+Read-only public Oasis (default): Anyone can read data.
+
+```yaml
+auth:
+  require_authentication: false
+  unauthenticated_user_scopes:
+    include:
+      - "*:read"
+```
+
+Private Oasis: login required.
+
+```yaml
+auth:
+  require_authentication: true
+```
+
+Restricted Oasis: Only specific users in whitelist can access the system.
+
+```yaml
+auth:
+  require_authentication: true
+  authorized_users:
+    - alice@example.com
+    - bob@example.com
 ```
 
 ## User management
 
 ### Using the central user management
 
-Our recommendation is to use the central user management provided by nomad-lab.eu. We
+Our recommendation is to use the central user management provided by `nomad-lab.eu`. We
 simplified its use and you can use it out-of-the-box. You can even run your system
 from `localhost` (e.g. for initial testing). The central user management system is not
 communicating with your Oasis directly. Therefore, you can run your Oasis without
@@ -343,7 +524,7 @@ installation above. There are just a three changes.
 
 - The `docker-compose.yaml` has an added keycloak service.
 - The `nginx.conf` is also modified to add another location for keycloak.
-- The `nomad.yaml` has modifications to tell nomad to use your and not the official NOMAD keycloak.
+- The `nomad.yaml` has modifications to tell Oasis to use your and not the official NOMAD keycloak.
 
 You can start with the regular installation above and manually adopt the config or
 download the already updated configuration files: [nomad-oasis-with-keycloak.zip](../../assets/nomad-oasis-with-keycloak.zip).
@@ -383,7 +564,7 @@ Third, we modify the keycloak configuration in the `nomad.yaml`:
 
 You should change the following:
 
-- There are two urls to configure for keycloak. The `server_url` is used by the nomad
+- There are two urls to configure for keycloak. The `server_url` is used by the NOMAD
   services to directly communicate with keycloak within the docker network. The `public_server_url`
   is used by the UI to perform the authentication flow. You need to replace `localhost`
   in `public_server_url` with `<yourhost>`.
@@ -402,8 +583,8 @@ is imported by default. The realm comes with a test user and password `test` and
 A few notes on the realm configuration:
 
 - Realm and client settings are almost all default keycloak settings.
-- You should change the password of the admin user in the nomad realm.
-- The admin user in the nomad realm has the additional `view-users` client role for `realm-management`
+- You should change the password of the admin user in the NOMAD realm.
+- The admin user in the NOMAD realm has the additional `view-users` client role for `realm-management`
   assigned. This is important, because NOMAD will use this user to retrieve the list of possible
   users for managing co-authors and reviewers on NOMAD uploads.
 - The realm has one client `nomad_public`. This has a basic configuration. You might
@@ -440,6 +621,6 @@ We encourage you to review this notice periodically for any updates.
 This is an incomplete list of potential things to customize your NOMAD experience.
 
 - Learn [how to develop plugins](../plugins/plugins.md) that can be installed in an Oasis
-- Write .yaml based [schemas](../manage/gui/yaml.md) and [ELNs](../manage/gui/elns.md)
-- Learn how to use the [tabular parser](../manage/gui/tabular.md) to manage data from .xls or .csv
+- Write YAML based [schemas](../manage/gui/yaml.md) and [ELNs](../manage/gui/elns.md)
+- Learn how to use the [tabular parser](../manage/gui/tabular.md) to manage data from XLS or CSV
 - Add specialized [NORTH tools](../manage/gui/north.md)
