@@ -47,7 +47,7 @@ A few things to notice:
 
 ### nomad.yaml
 
-NOMAD app and worker read a `nomad.yaml` for configuration.
+NOMAD app and worker read the `nomad.yaml` for configuration.
 
 ```yaml
 --8<-- "docs/howto/oasis/ops/docker-compose/nomad-oasis/configs/nomad.yaml"
@@ -55,10 +55,10 @@ NOMAD app and worker read a `nomad.yaml` for configuration.
 
 You should change the following:
 
-- Replace `localhost` with the hostname of your server. I user-management will redirect your
-  users back to this host. Make sure this is the hostname, your users can use.
+- Replace `localhost` with the hostname of your server, and user-management will redirect your
+  users back to this host. Make sure this is the hostname that your users can access.
 - Replace `deployment`, `deployment_url`, and `maintainer_email` with representative values.
-  The `deployment_url` should be the url to the deployment's api (should end with `/api`).
+  The `deployment_url` should be the URL to the deployment's api (should end with `/api`).
 - To enable the *log transfer* set `logtransfer.enable: true` ([data privacy notice above](#sharing-data-through-log-transfer-and-data-privacy-notice)).
 - You can change `api_base_path` to run NOMAD under a different path prefix.
 - You should generate your own `north.jupyterhub_crypt_key`. You can generate one
@@ -86,12 +86,12 @@ A few things to notice:
 - You can use the server for additional content if you like.
 - `client_max_body_size` sets a limit to the possible upload size.
 
-You can add an additional reverse proxy in front or modify the nginx in the docker-compose.yaml
+You can add an additional reverse proxy in front or modify the `nginx` in the `docker-compose.yaml`
 to [support https](http://nginx.org/en/docs/http/configuring_https_servers.html){:target="_blank" rel="noopener"}.
 If you operate the GUI container behind another proxy, keep in mind that your proxy should
 not buffer requests/responses to allow streaming of large requests/responses for `api/v1/uploads` and `api/v1/.*/download`.
-An nginx reverse proxy location on an additional reverse proxy, could have these directives
-to ensure the correct http headers and allows the download and upload of large files:
+An `nginx` reverse proxy location on an additional reverse proxy, could have these directives
+to ensure the correct HTTP headers and allow the download and upload of large files:
 
 ```nginx
 client_max_body_size 35g;
@@ -138,13 +138,13 @@ docker stop nomad_oasis_app
 docker rm nomad_oasis_app
 ```
 
-You can wait for the start-up with curl using the apps `alive` "endpoint":
+You can wait for the start-up with `curl` using the apps `alive` endpoint:
 
 ```sh
 curl http://<your host>/nomad-oasis/alive
 ```
 
-If everything works, the gui should be available under:
+If everything works, the GUI should be available under:
 
 ```none
 http://<your host>/nomad-oasis/gui/
@@ -160,7 +160,7 @@ http://<your host>/nomad-oasis/alive
 http://<your host>/nomad-oasis/api/info
 ```
 
-To see logs or 'go into' a running container, you can access the individual containers
+To see logs or "go into" a running container, you can access the individual containers
 with their names and the usual docker commands:
 
 ```sh
