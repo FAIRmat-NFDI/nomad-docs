@@ -54,7 +54,8 @@
             "fair",
             "JupyterHub",
             "jupyterhub",
-            "nomad-lab"
+            "nomad-lab",
+            "Oasis"
         ]
     },
     // MD046 - Code block style
