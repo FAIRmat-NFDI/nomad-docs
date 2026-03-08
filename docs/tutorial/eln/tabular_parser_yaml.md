@@ -1,6 +1,6 @@
 # Parse tabular measurement data with the tabular parser
 
-In this tutorial, we transform a tabular measurement file into a structured NOMAD entry using NOMAD's tabular parser. We build and configure a YAML-based parser that extracts data from a `.csv` and `.xlsx` file, stores them as an entry, and enables visualization in NOMAD. By the end of the tutorial, we will have created a reusable parser for tabular data that can be integrated into a custom ELN schema.
+In this tutorial, we transform a tabular measurement file into a structured NOMAD entry using NOMAD's tabular parser. We build and configure a YAML-based parser that extracts data from tabular files such as `.csv` or `.xlsx`, stores them as an entry, and enables visualization in NOMAD. By the end of the tutorial, we will have created a reusable parser for tabular data that can be integrated into a custom ELN schema.
 
 ---
 
@@ -8,9 +8,9 @@ In this tutorial, we transform a tabular measurement file into a structured NOMA
 
 In this tutorial, you will learn how to:
 
-1. Create a tabular parser section for a `.csv` file in a `.archive.yaml` schema file.
+1. Create a tabular parser section in a `.archive.yaml` schema file to parse a `.csv` file. 
 2. Configure the tabular parser to map data from a `.csv` file to schema quantities.
-3. Create plots of the parsed data directly in the NOMAD.
+3. Create plots of the parsed data directly in NOMAD.
 4. Integrate the tabular parser into a custom NOMAD ELN schema to attach measurement data to an ELN entry.
 
 ---
@@ -37,7 +37,7 @@ Before starting, make sure you have:
 
 ??? example "About the measurement data used in this tutorial"
 
-    In this tutorial, we use an example optical absorption spectrum of P3HT to demonstrate how tabular measurement data stored in `.csv` file can be parsed, structured, and visualized in a custom NOMAD ELN schema.
+    In this tutorial, we use an example optical absorption spectrum of P3HT to demonstrate how tabular measurement data stored in a `.csv` file can be parsed, structured, and visualized in a custom NOMAD ELN schema.
 
     Download the example file [`P3HT_optical.csv`](data/P3HT_optical.csv){:download}
 
@@ -135,7 +135,7 @@ Add the following content to the schema file:
 - If a quantity represents a physical value, you can also provide a `unit` (here: `nm` for `wavelength`).
 
 ??? success "Checkpoint 2"
-    Your file so far (after step 2) should look like the following:
+    Your file so far (after step 3) should look like the following:
     ```yaml
     definitions:
       name: This is a parser for optical absorption data in the .csv format.
@@ -296,7 +296,7 @@ Add the following content to the schema file:
             title: Optical Spectrum
 ```
 
-**Where to paste:** inside your `Optical_absorption:` section definition and indented one level (two spaces) with respect to it, i.e., `m_annotations:` alignes with `base_sections:` and `quantities:`.
+**Where to paste:** inside your `Optical_absorption:` section definition and indented one level (two spaces) with respect to it, i.e., `m_annotations:` aligns with `base_sections:` and `quantities:`.
 
 - `plotly_graph_object:` annotation enables plotting for this section.
 - `data:` defines the quantities used for the axes.
@@ -357,7 +357,7 @@ Add the following content to the schema file:
                 title: Optical Spectrum
     ```
 
-    **How to read it:** this `.archive.yaml` file defines a schema package under `definitions`. The package has a `name` and defines one main section called `Optical_absorption` under `sections:` keyword. The `Optical_absorption` section uses `nomad.datamodel.data.EntryData` to make an entry, `nomad.parsing.tabular.TableData` to be able to read the tabular data files, and `nomad.datamodel.metainfo.plot.PlotSection` to prepare a plot. It defines three quantities `data_file`, `wavelength`, and `absorbance` with proper `shape` and `type`, and uses `m_annotations:` to configure file upload, parsing, and to plot `absorbance` versus `wavelength`.
+    **How to read it:** This `.archive.yaml` file defines a schema package under `definitions`. The package has a `name` and defines one main section called `Optical_absorption` under `sections:` keyword. The `Optical_absorption` section uses `nomad.datamodel.data.EntryData` to make an entry, `nomad.parsing.tabular.TableData` to be able to read the tabular data files, and `nomad.datamodel.metainfo.plot.PlotSection` to prepare a plot. It defines three quantities `data_file`, `wavelength`, and `absorbance` with proper `shape` and `type`, and uses `m_annotations:` to configure file upload, parsing, and to plot `absorbance` versus `wavelength`.
 
 ## Step 6: Test your tabular parser in NOMAD
 
@@ -398,7 +398,7 @@ This allows you to upload an optical absorption file and visualize the spectrum 
 
     ```yaml
     definitions:
-      name: Processing of polymers thin-films
+      name: Processing of polymer thin-films
       sections:
         Experiment_Information:
           base_sections:
