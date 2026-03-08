@@ -8,7 +8,7 @@ In this tutorial, we transform a tabular measurement file into a structured NOMA
 
 In this tutorial, you will learn how to:
 
-1. Create a tabular parser section in a `.archive.yaml` schema file to parse a `.csv` file. 
+1. Create a tabular parser section in a `.archive.yaml` schema file to parse a `.csv` file.
 2. Configure the tabular parser to map data from a `.csv` file to schema quantities.
 3. Create plots of the parsed data directly in NOMAD.
 4. Integrate the tabular parser into a custom NOMAD ELN schema to attach measurement data to an ELN entry.
