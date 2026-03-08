@@ -21,18 +21,18 @@ This tutorial builds on the previous tutorial [create a custom ELN schema in NOM
 
 Before starting, make sure you have:
 
-1. **NOMAD user account**  
-   Creating and editing ELN entries requires a NOMAD user account.  
+1. **NOMAD user account**
+   Creating and editing ELN entries requires a NOMAD user account.
    You can create an account by following the steps described in the
    [overview page](../overview.md#create-a-nomad-user-account){:target="_blank" rel="noopener"}.
 
-2. **Basic understanding of uploads and entries**  
+2. **Basic understanding of uploads and entries**
    Familiarity with uploads and entries, and how they relate to each other can be helpful. These concepts are introduced in the section [key elements in NOMAD](../upload_publish.md#the-key-elements-in-nomad){:target="_blank" rel="noopener"}.
 
-3. **Basic familiarity with YAML configuration files**  
+3. **Basic familiarity with YAML configuration files**
    This tutorial uses YAML to define the tabular parser. Prior experience with YAML syntax and indentation is helpful, but deep knowledge of YAML is not required.
 
-4. **A YAML-capable editor or IDE (e.g., VS Code)**  
+4. **A YAML-capable editor or IDE (e.g., VS Code)**
     You will edit a YAML file during the tutorial. Using an editor or IDE with YAML support (for example, VS Code) is recommended.
 
 ??? example "About the measurement data used in this tutorial"
@@ -46,7 +46,7 @@ Before starting, make sure you have:
     - `Wavelength` (in nanometers)
     - `Absorbance`
 
-    Each row represents one measurement point of the optical spectrum. 
+    Each row represents one measurement point of the optical spectrum.
 
     You will configure the tabular parser to read these columns into array quantities (`wavelength` and `absorbance`) and visualize the spectrum directly in the ELN.
 
