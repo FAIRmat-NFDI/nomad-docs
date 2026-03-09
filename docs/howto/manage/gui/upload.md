@@ -36,14 +36,24 @@ However, all files that are associated to a recognized *mainfile* by being in th
 same directory are displayed as **auxiliary** files next to the entry represented
 by the **mainfile**.
 
-!!! note
-    **A note for VASP users**.
+!!! warning
+    **License Compliance for VASP**.
     On the handling of **POTCAR** files: NOMAD takes care of it; you don't
     need to worry about it. We understand that POTCAR files are not supposed to be visible to
     the public according to your VASP license. Thus, in agreement with Georg Kresse, NOMAD extracts
     the most important information of POTCAR files and stores it in the files named
     `POTCAR.stripped`. These files can be accessed and downloaded by anyone, while the original
     POTCAR files are automatically removed.
+
+    The VASP license does not permit its users to freely distribute POTCAR files, which are
+    considered copyrighted material. To comply with this license, NOMAD will, upon publication,
+    remove the POTCAR files in favor of POTCAR.stripped files, which contain checksums. This
+    safety measure is a courtesy of NOMAD, which is in place for both compressed and
+    non-compressed POTCAR files, regardless of their origin. This service is a gesture of
+    goodwill from NOMAD's side, but does not relinquish the uploader from their responsibility
+    to verify overall license compliance. We also recommend against temporarily making
+    unpublished uploads that contain licensed material public, as this will not trigger the
+    automated cleaning.
 
 ## Visibility and access
 
