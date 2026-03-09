@@ -43,14 +43,15 @@ by the **mainfile**.
     files for you.
 
     Upon **publication**, NOMAD removes the original POTCAR files and replaces them with
-    `POTCAR.stripped` files. These stripped files contain checksums and the most important
-    metadata extracted from the original POTCAR files. The stripped files can be accessed
-    and downloaded by anyone, while the original POTCAR files are automatically removed.
+    `POTCAR.stripped` files. This applies regardless of extra compression.
+    The stripped files contain checksums encoding of the original POTCAR files,
+    meaning that only bit equality can be established with reference files.
+    Legally most relevant, the information cannot be reverse decrypted.
+    As such, stripped files are safe for public access.
 
-    This automated cleaning applies to both compressed and non-compressed POTCAR files,
-    regardless of their origin. **Beware** The cleaning only occurs upon publication.
-    We therefore strongly recommend **against** temporarily making unpublished uploads that contain
-    licensed material publicly visible.
+    Technical considerations:
+    - cleaning is based of the filename. For licensed POTCAR files, leave "POTCAR" somewhere in the name.
+    - cleaning only occurs upon publication. We therefore strongly recommend **against** temporarily making unpublished uploads publicly visible when they contain licensed material.
 
     While NOMAD provides this service as a courtesy, **uploaders remain responsible for
     verifying overall license compliance**.
