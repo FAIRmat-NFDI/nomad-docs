@@ -36,8 +36,8 @@ However, all files that are associated to a recognized *mainfile* by being in th
 same directory are displayed as **auxiliary** files next to the entry represented
 by the **mainfile**.
 
-!!! warning
-    **License Compliance for VASP**.
+!!! warning "License Compliance for VASP"
+
     The VASP license does **not** permit users to freely distribute **POTCAR** files, which are
     considered copyrighted material. To ensure compliance, NOMAD automatically handles POTCAR
     files for you.
