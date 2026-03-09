@@ -101,8 +101,11 @@ example Oasis also has its own database. it does not appear that there is a clea
 
 ## Preparing and Managing Raw Data
 
-??? info "What happens to the VASP POTCAR upon upload?"
-    For VASP data, NOMAD complies with the licensing of the `POTCAR` files. In agreement with [Georg Kresse](https://www.vasp.at/info/team/){:target="_blank" rel="noopener"}, NOMAD extracts the most important information of the `POTCAR` file and stores them in a stripped version called `POTCAR.stripped`. The `POTCAR` files are then automatically removed from the upload, so that you can safely publish your data.
+!!! warning "What happens to VASP POTCAR files upon upload?"
+
+    The VASP license does not permit free distribution of POTCAR files. To ensure compliance, NOMAD automatically processes POTCAR files during publication: the original files are removed and replaced with `POTCAR.stripped` files containing a checksum and metadata headers (but not the proprietary pseudopotential data).
+
+    See the detailed [License Compliance for VASP](../../howto/manage/gui/upload.md#processing-files){:target="_blank" rel="noopener"} section in the upload guide for potential pitfalls.
 
 ??? info "Can I upload large MD trajectories?"
     NOMAD has a file size limit of 30 GB per upload. We additionally advise users to further trim their trajectories for efficient use of the platform tools. In general, it is best to upload a representative set of trajectory frames (depending on the use case), to be findable and understandable to other researchers, and then link the entry to the full raw trajectory within your own (local) storage solution, so that it can be easily accessed upon request. Please see the relevant guides for more information: [`nomad-simulation-parsers` >> Guide to preparing Gromacs trajectories for upload to NOMAD](https://fairmat-nfdi.github.io/nomad-parser-plugins-simulation/parsers/gromacs/gromacs_about.html){:target="_blank" rel="noopener"}
