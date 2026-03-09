@@ -48,13 +48,11 @@ by the **mainfile**.
     the proprietary pseudopotential data. The stripped files can be accessed and downloaded
     by anyone, while the original POTCAR files are automatically removed.
 
-    **Important:** POTCAR files **must be uncompressed** for automated stripping to work.
-    Compressed POTCAR files (e.g., `POTCAR.gz`) will not be properly processed and may be
-    entirely removed without creating stripped versions.
+    **Important considerations:**
 
-    Technical considerations:
-    - Stripping is based on the filename. For licensed POTCAR files, ensure "POTCAR" appears in the filename.
-    - Stripping only occurs upon publication. We therefore strongly recommend **against** temporarily making unpublished uploads publicly visible when they contain licensed material.
+    - Stripping is filename-based. Ensure "POTCAR" appears in the filename for licensed files.
+    - POTCAR files **must be uncompressed** for automated stripping to work. Compressed files (e.g., `POTCAR.gz`) will not be properly processed and may be entirely removed without creating stripped versions.
+    - Stripping only occurs upon publication. We strongly recommend **against** temporarily making unpublished uploads publicly visible when they contain licensed material.
 
     While NOMAD provides this service as a courtesy, **uploaders remain responsible for
     verifying overall license compliance**.
