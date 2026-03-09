@@ -23,21 +23,21 @@ This tutorial does not require prior experience with creating custom schemas. Ho
 
 Before starting, make sure you have:
 
-1. **NOMAD user account**
+1. **NOMAD user account**  
    Creating and editing ELN entries requires a NOMAD user account.
    You can create an account by following the steps described in the
    [overview page](../overview.md#create-a-nomad-user-account){:target="_blank" rel="noopener"}.
 
-2. **Basic understanding of uploads and entries**
+2. **Basic understanding of uploads and entries**  
    Familiarity with uploads and entries, and with how they relate to each other can be helpful. These concepts are introduced in the section [key elements in NOMAD](../upload_publish.md#the-key-elements-in-nomad){:target="_blank" rel="noopener"}.
 
-3. **Basic familiarity with YAML configuration files**
+3. **Basic familiarity with YAML configuration files**  
    This tutorial uses YAML to define the structure of a custom ELN schema. Prior experience with YAML syntax and indentation is helpful, but deep knowledge of YAML is not required.
 
-4. **A YAML-capable editor or IDE (e.g., VS Code)**
+4. **A YAML-capable editor or IDE (e.g., VS Code)**  
     You will edit a YAML file during the tutorial. Using an editor or IDE with YAML support (for example, VS Code) is recommended.
 
-5. **Optional: familiarity with key NOMAD schema concepts**
+5. **Optional: familiarity with key NOMAD schema concepts**  
    It may be helpful to review the following concepts:
     - [Schema package](../../reference/glossary.md#schema-package){:target="_blank" rel="noopener"}, [Schema](../../reference/glossary.md#schema){:target="_blank" rel="noopener"}
     - [Section and Subsection](../../reference/glossary.md#section-and-subsection){:target="_blank" rel="noopener"}, [Quantity](../../reference/glossary.md#quantity){:target="_blank" rel="noopener"}
