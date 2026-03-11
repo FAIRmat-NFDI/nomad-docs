@@ -28,10 +28,10 @@ Before starting, make sure you have:
 1. **NOMAD user account**  
    Creating and editing ELN entries requires a NOMAD user account.
    You can create an account by following the steps described in the
-   [overview page](../overview.md#create-a-nomad-user-account){:target="_blank" rel="noopener"}.
+   [overview page](../overview.md#create-a-nomad-user-account).
 
 2. **Basic understanding of uploads and entries**  
-   Familiarity with uploads, entries, and how they relate to each other can be helpful. These concepts are introduced in the section [key elements in NOMAD](../upload_publish.md#the-key-elements-in-nomad){:target="_blank" rel="noopener"} and will be reinforced throughout the tutorial.
+   Familiarity with uploads, entries, and how they relate to each other can be helpful. These concepts are introduced in the section [key elements in NOMAD](../upload_publish.md#the-key-elements-in-nomad) and will be reinforced throughout the tutorial.
 
 3. **Basic familiarity with experimental workflows**  
    Familiarity with preparation, processing, and measurements can be helpful, but is not required.
@@ -55,7 +55,7 @@ In this tutorial, we will use an example experiment involving the preparation of
 
 ## Create a new ELN upload
 
-In NOMAD, an ELN is created by initiating a NOMAD upload. This process allows you to structure and document your research data efficiently. Create a new upload by following the steps in [Create new upload](../upload_publish.md#create-new-upload){:target="_blank" rel="noopener"}.
+In NOMAD, an ELN is created by initiating a NOMAD upload. This process allows you to structure and document your research data efficiently. Create a new upload by following the steps in [Create new upload](../upload_publish.md#create-new-upload).
 
 ## Create ELN entries
 

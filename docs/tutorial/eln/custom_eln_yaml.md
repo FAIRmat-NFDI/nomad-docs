@@ -19,17 +19,17 @@ In this tutorial, you will learn how to:
 
 ## Before you begin
 
-This tutorial does not require prior experience with creating custom schemas. However, familiarity with the [NOMAD ELN functionality](built_in_templates.md){:target="_blank" rel="noopener"} is helpful.
+This tutorial does not require prior experience with creating custom schemas. However, familiarity with the [NOMAD ELN functionality](built_in_templates.md) is helpful.
 
 Before starting, make sure you have:
 
 1. **NOMAD user account**  
    Creating and editing ELN entries requires a NOMAD user account.
    You can create an account by following the steps described in the
-   [overview page](../overview.md#create-a-nomad-user-account){:target="_blank" rel="noopener"}.
+   [overview page](../overview.md#create-a-nomad-user-account).
 
 2. **Basic understanding of uploads and entries**  
-   Familiarity with uploads and entries, and with how they relate to each other can be helpful. These concepts are introduced in the section [key elements in NOMAD](../upload_publish.md#the-key-elements-in-nomad){:target="_blank" rel="noopener"}.
+   Familiarity with uploads and entries, and with how they relate to each other can be helpful. These concepts are introduced in the section [key elements in NOMAD](../upload_publish.md#the-key-elements-in-nomad).
 
 3. **Basic familiarity with YAML configuration files**  
    This tutorial uses YAML to define the structure of a custom ELN schema. Prior experience with YAML syntax and indentation is helpful, but deep knowledge of YAML is not required.
@@ -39,9 +39,9 @@ Before starting, make sure you have:
 
 5. **Optional: familiarity with key NOMAD schema concepts**  
    It may be helpful to review the following concepts:
-    - [Schema package](../../reference/glossary.md#schema-package){:target="_blank" rel="noopener"}, [Schema](../../reference/glossary.md#schema){:target="_blank" rel="noopener"}
-    - [Section and Subsection](../../reference/glossary.md#section-and-subsection){:target="_blank" rel="noopener"}, [Quantity](../../reference/glossary.md#quantity){:target="_blank" rel="noopener"}
-    - [Annotation](../../reference/glossary.md#annotation){:target="_blank" rel="noopener"}
+    - [Schema package](../../reference/glossary.md#schema-package), [Schema](../../reference/glossary.md#schema)
+    - [Section and Subsection](../../reference/glossary.md#section-and-subsection), [Quantity](../../reference/glossary.md#quantity)
+    - [Annotation](../../reference/glossary.md#annotation)
 
 ??? example "About the example experiment used in this tutorial"
 

@@ -46,7 +46,7 @@ How-to guides provide step-by-step instructions for a wide range of tasks, with 
 - Customization
 - Development
 
-[Open the how-to guides](howto/overview.md){.md-button .nomad-button .nomad-button--card-action}
+[Open the how-to guides](howto/overview.md){:.md-button .nomad-button .nomad-button--card-action}
 
 </div>
 

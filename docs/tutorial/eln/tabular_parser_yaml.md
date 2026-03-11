@@ -17,17 +17,17 @@ In this tutorial, you will learn how to:
 
 ## Before you begin
 
-This tutorial builds on the previous tutorial [create a custom ELN schema in NOMAD using YAML](custom_eln_yaml.md){:target="_blank" rel="noopener"}. Basic familiarity with defining sections and quantities in a `.archive.yaml` file is assumed.
+This tutorial builds on the previous tutorial [create a custom ELN schema in NOMAD using YAML](custom_eln_yaml.md). Basic familiarity with defining sections and quantities in a `.archive.yaml` file is assumed.
 
 Before starting, make sure you have:
 
 1. **NOMAD user account**  
    Creating and editing ELN entries requires a NOMAD user account.
    You can create an account by following the steps described in the
-   [overview page](../overview.md#create-a-nomad-user-account){:target="_blank" rel="noopener"}.
+   [overview page](../overview.md#create-a-nomad-user-account).
 
 2. **Basic understanding of uploads and entries**  
-   Familiarity with uploads and entries, and how they relate to each other can be helpful. These concepts are introduced in the section [key elements in NOMAD](../upload_publish.md#the-key-elements-in-nomad){:target="_blank" rel="noopener"}.
+   Familiarity with uploads and entries, and how they relate to each other can be helpful. These concepts are introduced in the section [key elements in NOMAD](../upload_publish.md#the-key-elements-in-nomad).
 
 3. **Basic familiarity with YAML configuration files**  
    This tutorial uses YAML to define the tabular parser. Prior experience with YAML syntax and indentation is helpful, but deep knowledge of YAML is not required.
@@ -380,7 +380,7 @@ You can now upload this file to NOMAD and verify that it creates an entry where 
 
 So far, you have created a standalone schema section for parsing and visualizing optical absorption data.
 
-In this step, you will reuse this section inside the polymer-processing ELN schema created in the [previous tutorial](custom_eln_yaml.md){:target="_blank" rel="noopener"}.
+In this step, you will reuse this section inside the polymer-processing ELN schema created in the [previous tutorial](custom_eln_yaml.md).
 
 This allows you to upload an optical absorption file and visualize the spectrum directly within the same ELN entry.
 
