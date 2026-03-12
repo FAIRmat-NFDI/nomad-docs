@@ -285,6 +285,43 @@ Access control can therefore be configured on several levels:
 2. Authentication level — require users to log in before accessing the API.
 3. Authorization level (scopes) — control which operations users are allowed to perform after login.
 
+The following diagram summarizes how access is evaluated.  
+Administrator-configurable settings are highlighted in red.
+
+```mermaid
+flowchart TD
+    A[Request reaches Oasis] --> B{Network access allowed by deployment?}
+    B -- No --> X[Access blocked outside NOMAD]
+    B -- Yes --> C{Valid token provided?}
+
+    C -- No --> D{`auth.require_authentication`}
+    D -- true --> Y[HTTP 401 Unauthorized]
+    D -- false --> E[use `unauthenticated_user_scopes`]
+
+    C -- Yes --> F[Resolve user and token scopes]
+    F --> G{User exists and is valid?}
+    G -- No --> Z[HTTP 403 Forbidden]
+    G -- Yes --> H{`authorized_users` configured<br/>and user not in list?}
+
+    H -- No --> I[Use token scopes]
+    H -- Yes --> J{`reject_unauthorized_users`}
+    J -- true --> K[HTTP 403 Forbidden]
+    J -- false --> L[use `unauthorized_user_scopes`]
+
+    E --> M{Required endpoint scopes present?}
+    I --> M
+    L --> M
+
+    M -- Yes --> N[Request allowed]
+    M -- No --> O[HTTP 403 Forbidden<br/>Missing scopes]
+
+    class D,E,H,J,L config
+    class N success
+
+    classDef config fill:#fff5f5,stroke:#d73a49,stroke-width:2px;
+    classDef success fill:#e6ffed,stroke:#2ea44f,stroke-width:2px;
+```
+
 ### Authentication
 
 Authentication determines **who is making the request**.
