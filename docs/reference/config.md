@@ -110,11 +110,11 @@ The following is a reference of all configuration sections and attributes.
 
 ### Files, databases, external services
 
-{{ config_models(['fs', 'mongo', 'elastic', 'rabbitmq', 'keycloak', 'logstash', 'datacite', 'rfc3161_timestamp', 'mail'])}}
+{{ config_models(['fs', 'mongo', 'elastic', 'keycloak', 'logstash', 'datacite', 'rfc3161_timestamp', 'mail'])}}
 
 ### Processing
 
-{{ config_models(['process', 'reprocess', 'bundle_export', 'bundle_import', 'normalize', 'celery', 'archive'])}}
+{{ config_models(['process', 'reprocess', 'bundle_export', 'bundle_import', 'normalize', 'archive'])}}
 
 ### User Interface
 
