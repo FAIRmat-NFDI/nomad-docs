@@ -285,8 +285,7 @@ Access control can therefore be configured on several levels:
 2. Authentication level — require users to log in before accessing the API.
 3. Authorization level (scopes) — control which operations users are allowed to perform after login.
 
-The following diagram summarizes how access is evaluated.  
-Administrator-configurable settings are highlighted in red.
+The following diagram summarizes how access is evaluated. [Administrator-configurable settings](../../reference/config.md#auth) are highlighted in red.
 
 ```mermaid
 flowchart TD
