@@ -148,20 +148,30 @@ def define_env(env):
         return f"\n{indent}".join(f"{indent}{yaml_string}".split("\n"))
 
     @env.macro
-    def config_models(models=None):  # pylint: disable=unused-variable
+    def config_models(models: list[str] | None=None) -> str:  # pylint: disable=unused-variable
         from nomad.config.models.config import Config
 
-        results = ""
-        for name, field in Config.model_fields.items():
-            if models and name not in models:
-                continue
+        all_fields = Config.model_fields
 
-            if not models and name in exported_config_models:
-                continue
+        if models is None:
+            selected_names = [
+                name for name in all_fields if name not in exported_config_models
+            ]
+        else:
+            selected_names = list(models)
+            unknown_names = [name for name in selected_names if name not in all_fields]
+            if unknown_names:
+                unknown = ", ".join(sorted(unknown_names))
+                raise KeyError(
+                    f"Unknown config model name(s): {unknown}. "
+                )
 
-            results += pydantic_model_from_model(field.annotation, name)
-            results += "\n\n"
-        return results
+        results: list[str] = []
+        for name in selected_names:
+            field = all_fields[name]
+            results.append(pydantic_model_from_model(field.annotation, name))
+
+        return "\n\n".join(results)
 
     def pydantic_model_from_model(model, name=None, heading=None, hide=[]):
         if hasattr(model, "model_fields"):
