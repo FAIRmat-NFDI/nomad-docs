@@ -273,7 +273,7 @@ services:
 The number refers to the percentage use of a single CPU core.
 See also the [docker-compose documentation](https://docs.docker.com/compose/compose-file/compose-file-v3/#resources){:target="_blank" rel="noopener"}.
 
-## Restricting access to your Oasis
+## Controlling access to your Oasis
 
 By default, a NOMAD Oasis mirrors the configuration of the central NOMAD service: it is designed for open data sharing.
 While network-level access depends on your firewall and hosting setup,
@@ -291,8 +291,8 @@ We included a diagram summarizing how access is evaluated for better understandi
 
 ### Require authentication
 
-By `default, authentication is **not required**.
-This means anonymous users can still access the API with limited permissions.
+By default, authentication is **not required**.
+This means anonymous users can still access the API with [limited and configurable permissions](#configure-anonymous-user-permissions).
 To require authentication for all API requests, enable the following option:
 
 ```yaml
@@ -307,12 +307,26 @@ Otherwise the API will return:
 HTTP 401 Unauthorized
 ```
 
-### Scope-based authorization
+#### Restricting access to specific users
+
+Administrators can also restrict access to an explicit whitelist of users.
+
+```yaml
+auth:
+  authorized_users:
+    - user1@example.com
+    - user2@example.com
+```
+
+If this option is set, only the listed users are considered fully authorized.
+You could [configure how unauthorized users are handled](#configure-unauthorized-user-permissions).
+
+### Configure scope-based authorization
+
+<!-- TODO: add link to `scopes` doc -->
 
 After authentication, NOMAD determines **which actions the user is allowed to perform** using scopes.
 
-<!-- TODO: add link to scopes -->
-  
 Scopes support glob-style configuration with wildcards support:
 
 ```text
@@ -340,17 +354,17 @@ Semantics:
 
 All available scopes are defined in the `nomad.auth.scopes.Scope` enum.
 
-When an API endpoint is called, the backend checks whether the user has the
-required scopes. If required scopes are missing, the API returns:
+When an API endpoint is called, the backend checks whether the user has the required scopes.
+If required scopes are missing, the API returns:
 
 ```text
 HTTP 403 Forbidden
 Missing scopes: [...]
 ```
 
-### Anonymous user permissions
+#### Configure anonymous user permissions
 
-If authentication is not required, anonymous users receive a configurable set of scopes.
+When authentication is not required, anonymous users receive a configurable set of scopes.
 
 By default this is read-only access:
 
@@ -363,32 +377,19 @@ auth:
 
 This allows anonymous users to browse published data but prevents modifications.
 
-### Restricting access to specific users
+#### Configure unauthorized user permissions
 
-Administrators can restrict access to an explicit whitelist of authorized users.
-
-```yaml
-auth:
-  authorized_users:
-    - user1@example.com
-    - user2@example.com
-```
-
-If this option is set, only the listed users are considered fully authorized.
-
-### Unauthorized user permissions
-
-Users who successfully authenticate but are not in the `authorized_users` list
+Users who successfully authenticate but are not in the `authorized_users` whitelist
 are handled according to the `reject_unauthorized_users` setting.
 
-When enabled (`reject_unauthorized_users: true`), unauthorized users will receive:
+When enabled (`reject_unauthorized_users: true`), unauthorized users will be rejected with:
 
 ```text
 HTTP 403 Forbidden
 ```
 
-Otherwise (`reject_unauthorized_users: false`), unauthorized users can still access
-the Oasis but only with restricted scopes, configurable via:
+Otherwise (`reject_unauthorized_users: false`), non-whitelisted users can still access
+the Oasis but only with restricted access, configurable via:
 
 ```yaml
 auth:
