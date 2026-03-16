@@ -41,7 +41,7 @@ for more details on the best development practices for plugins, including lintin
 
 The entry point defines basic information about your NORTH tool and is used to
 automatically load it into a NOMAD distribution. It is an instance of a
-`NorthToolEntryPoint` or its subclass.
+`NORTHToolEntryPoint` or its subclass.
 
 The `NORTHTool` instance can be used to setup the tool configuration, including which Docker image it uses.
 You will learn more about creating these images in the [next section](#creating-north-images). The entry point should be defined
@@ -51,7 +51,7 @@ in `*/north_tools/my_tool/__init__.py` like this:
 ```py
 
 from nomad.config.models.north import NORTHTool
-from nomad.config.models.plugins import NorthToolEntryPoint
+from nomad.config.models.plugins import NORTHToolEntryPoint
 
 tool = NORTHTool(
     image='ghcr.io/FAIRMat-NFDI/nomad-example:latest',
@@ -70,7 +70,7 @@ tool = NORTHTool(
     display_name='MyTool',
 )
 
-my_north_tool = NorthToolEntryPoint(id='my-north-tool', north_tool=tool)
+my_north_tool = NORTHToolEntryPoint(id='my-north-tool', north_tool=tool)
 ```
 
 !!! tip "Important"
@@ -80,7 +80,7 @@ Here you can see that a `NORTHTool` object called `tool` was defined. We also in
 the entry point object `my_north_tool` using the tool. This is the
 final entry point instance in which you specify the default parameterization
 and other details about the NORTH tool. In the reference you can see all of the
-available configuration options for a [`NorthToolEntryPoint`](../../../reference/plugins.md#northtoolentrypoint) and a [`NORTHTool`](../../../reference/config.md#northtool).
+available configuration options for a [`NORTHToolEntryPoint`](../../../reference/plugins.md#NORTHToolEntryPoint) and a [`NORTHTool`](../../../reference/config.md#northtool).
 
 The entry point instance should then be added to the `[project.entry-points.'nomad.plugin']`
 table in `pyproject.toml` in order for it to be automatically detected:
