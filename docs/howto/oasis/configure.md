@@ -285,56 +285,14 @@ Access control can therefore be configured on several levels:
 2. Authentication level — require users to log in before accessing the API.
 3. Authorization level (scopes) — control which operations users are allowed to perform after login.
 
-The following diagram summarizes how access is evaluated. [Administrator-configurable settings](../../reference/config.md#auth) are highlighted in red.
+We included a diagram summarizing how access is evaluated for better understanding of the following configs.
 
-```mermaid
-flowchart TD
-    A[Request reaches Oasis] --> B{Network access allowed by deployment?}
-    B -- No --> X[Access blocked outside NOMAD]
-    B -- Yes --> C{Valid token provided?}
+<!-- TODO: add link to diagram -->
 
-    C -- No --> D{`auth.require_authentication`}
-    D -- true --> Y[HTTP 401 Unauthorized]
-    D -- false --> E[use `unauthenticated_user_scopes`]
+### Require authentication
 
-    C -- Yes --> F[Resolve user and token scopes]
-    F --> G{User exists and is valid?}
-    G -- No --> Z[HTTP 403 Forbidden]
-    G -- Yes --> H{`authorized_users` configured<br/>and user not in list?}
-
-    H -- No --> I[Use token scopes]
-    H -- Yes --> J{`reject_unauthorized_users`}
-    J -- true --> K[HTTP 403 Forbidden]
-    J -- false --> L[use `unauthorized_user_scopes`]
-
-    E --> M{Required endpoint scopes present?}
-    I --> M
-    L --> M
-
-    M -- Yes --> N[Request allowed]
-    M -- No --> O[HTTP 403 Forbidden<br/>Missing scopes]
-
-    class D,E,H,J,L config
-    class N success
-
-    classDef config fill:#fff5f5,stroke:#d73a49,stroke-width:2px;
-    classDef success fill:#e6ffed,stroke:#2ea44f,stroke-width:2px;
-```
-
-### Authentication
-
-Authentication determines **who is making the request**.
-
-NOMAD supports multiple authentication mechanisms:
-
-- Keycloak access tokens (browser login or API token)
-- Personal access tokens (PATs)
-- Upload tokens *(legacy, deprecated — will be removed in a future release)*
-- Simple (app/signature) tokens *(legacy, deprecated — will be removed in a future release)*
-
-By default, authentication is **not required**.
+By `default, authentication is **not required**.
 This means anonymous users can still access the API with limited permissions.
-
 To require authentication for all API requests, enable the following option:
 
 ```yaml
@@ -351,31 +309,34 @@ HTTP 401 Unauthorized
 
 ### Scope-based authorization
 
-After authentication, NOMAD determines **which actions the user is allowed to perform**
-using scopes.
+After authentication, NOMAD determines **which actions the user is allowed to perform** using scopes.
 
-A scope defines a permission in the format:
-
-```text
-<resource>:<action>
-```
-
-Examples:
+<!-- TODO: add link to scopes -->
+  
+Scopes support glob-style configuration with wildcards support:
 
 ```text
-uploads:read
-uploads:write
+*:read  # read-only access to all resources
+*:*     # full access
 ```
 
-Wildcards are supported in configuration:
-
-```text
-*:read   # read-only access to all resources
-*:*      # full access
+```yaml
+auth:
+  unauthenticated_user_scopes:
+    include:
+      - "*:read"
+    exclude:
+      - "uploads:read"
 ```
+
+Semantics:
+
+- `include` defines the baseline scopes
+- `exclude` removes scopes from that baseline (with higher precedence than `include`)
+- wildcards are supported
 
 !!! note
-    Partial wildcard patterns such as `u*:read` are not supported.
+    Partial wildcard patterns such as `u*:read` are **not** supported.
 
 All available scopes are defined in the `nomad.auth.scopes.Scope` enum.
 
@@ -402,23 +363,6 @@ auth:
 
 This allows anonymous users to browse published data but prevents modifications.
 
-Scopes support glob-style configuration:
-
-```yaml
-auth:
-  unauthenticated_user_scopes:
-    include:
-      - "*:read"
-    exclude:
-      - "uploads:read"
-```
-
-Semantics:
-
-- `include` defines the baseline scopes
-- `exclude` removes scopes from that baseline (with higher precedence than `include`)
-- wildcards are supported
-
 ### Restricting access to specific users
 
 Administrators can restrict access to an explicit whitelist of authorized users.
@@ -432,7 +376,9 @@ auth:
 
 If this option is set, only the listed users are considered fully authorized.
 
-Users who successfully authenticate but are not in the authorized list
+### Unauthorized user permissions
+
+Users who successfully authenticate but are not in the `authorized_users` list
 are handled according to the `reject_unauthorized_users` setting.
 
 When enabled (`reject_unauthorized_users: true`), unauthorized users will receive:
@@ -450,46 +396,6 @@ auth:
     include:
       - "*:read"
 ```
-
-### Token scopes
-
-Different authentication mechanisms provide different scopes.
-These scopes determine which API actions the token is allowed to perform.
-When a request is made using a token, the backend checks whether the token contains
-the scopes required by the endpoint.
-
-For example, if an endpoint requires `uploads:write` and the token only has
-`uploads:read`, the request will be rejected.
-
-#### Keycloak access tokens
-
-Keycloak access tokens authenticate a user with their full account permissions.
-At the backend level, they are treated as having the full set of user scopes.
-
-#### Personal Access Tokens (PATs)
-
-Personal Access Tokens (PATs) can be issued with specific scopes.
-PAT scopes must always be explicit scopes.
-Wildcard expressions such as `*:read` are only supported in configuration, not in tokens.
-
-#### Upload tokens
-
-Upload tokens are legacy, deprecated tokens with a fixed scope set.
-They only grant upload-related permissions: `uploads:*`.
-
-!!! warning "Deprecated"
-    Upload tokens are deprecated and will be removed in a future release.
-    They should not be used for new integrations. Use **Personal Access Tokens (PATs)** instead.
-
-#### Simple tokens
-
-Simple tokens are legacy, deprecated tokens.
-They grant a broad set of user permissions, effectively corresponding to full access
-except for token-management scopes.
-
-!!! warning "Deprecated"
-    Simple tokens are deprecated and will be removed in a future release.
-    They should not be used for new integrations. Use **Personal Access Tokens (PATs)** instead.
 
 ### Example configurations
 
