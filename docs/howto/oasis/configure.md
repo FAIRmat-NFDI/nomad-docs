@@ -410,13 +410,6 @@ auth:
       - "*:read"
 ```
 
-Private Oasis: login required.
-
-```yaml
-auth:
-  require_authentication: true
-```
-
 Restricted Oasis: Only specific users in the whitelist can access the system.
 
 ```yaml
