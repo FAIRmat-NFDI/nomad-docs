@@ -414,9 +414,9 @@ A few notes on the realm configuration:
 
 ## Sharing data through log transfer and data privacy notice
 
-NOMAD includes a *log transfer* functions. When enabled this it automatically collects
+NOMAD includes a *log transfer* functions. When enabled this automatically collects
 and transfers non-personalized logging data to us. Currently, this functionality is experimental
-and requires opt-in. However, in upcoming versions of NOMAD Oasis, we might change to out-out.
+and requires opt-in. However, in upcoming versions of NOMAD Oasis, we might change to opt-out.
 
 To enable this functionality add `logtransfer.enabled: true` to you `nomad.yaml`.
 
