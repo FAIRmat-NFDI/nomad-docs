@@ -88,20 +88,20 @@ authentication method**.
 
 ### Upload tokens
 
-Upload tokens are legacy, deprecated tokens with a fixed scope set.
-They only grant upload-related permissions: `uploads:*`.
+!!! info "Deprecated"
+    Upload tokens are legacy, deprecated tokens with a fixed scope set.
+    They only grant upload-related permissions: `uploads:*`.
 
-!!! warning "Deprecated"
     Upload tokens are deprecated and will be removed in a future release.
     They should not be used for new integrations. Use **Personal Access Tokens (PATs)** instead.
 
 ### Simple tokens
 
-Simple tokens are legacy, deprecated tokens.
-They grant a broad set of user permissions, effectively corresponding to full access
-except for token-management scopes.
-
-!!! warning "Deprecated"
+!!! info "Deprecated"
+    Simple tokens are legacy, deprecated tokens.
+    They grant a broad set of user permissions, effectively corresponding to full access
+    except for token-management scopes.
+    
     Simple tokens are deprecated and will be removed in a future release.
     They should not be used for new integrations. Use **Personal Access Tokens (PATs)** instead.
 
