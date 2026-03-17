@@ -10,6 +10,8 @@ NOMAD supports multiple authentication mechanisms for API requests using [differ
 The following diagram summarizes how access to an API endpoint is evaluated.
 [Administrator-configurable settings](../reference/config.md) are highlighted in red.
 
+<!--TODO: increase font size of flowchart-->
+
 ```mermaid
 flowchart TD
     A[Request reaches Oasis] --> B{Network access allowed by deployment?}
@@ -46,7 +48,7 @@ flowchart TD
 
 ## Access tokens
 
-NOMAD supports several types of tokens for authenticating API requests:
+NOMAD supports several types of access tokens for authenticating and authorizing API requests:
 
 - Keycloak access tokens – obtained through the login flow used by the web UI or API clients
 - Personal Access Tokens (PATs) – long-lived tokens created by users for scripts and automation
@@ -55,9 +57,15 @@ NOMAD supports several types of tokens for authenticating API requests:
 
 ### Keycloak access tokens
 
-Keycloak access tokens authenticate a user through the NOMAD identity provider `keycloak`.
+Keycloak access tokens authenticate a user through the NOMAD identity provider `keycloak`
+using OpenID Connect (OIDC).
 
-Currently, the backend treats authenticated users as having the full set of user scopes.
+- Short-lived (currently 24 hours) and may require refreshing
+- Primarily intended for interactive use (e.g. via the GUI)
+- Grant the full set of user scopes (no scope restriction possible)
+
+Due to these limitations, they are generally not suitable for long-running scripts or
+automated workflows. Use **Personal Access Tokens (PATs)** instead.
 
 ### Personal Access Tokens (PATs)
 
@@ -99,7 +107,7 @@ except for token-management scopes.
 
 ## Authorization via scopes
 
-Authorization in NOMAD is scope-based.
+Authorization to use specific **API features** is scope-based.
 After authentication, NOMAD determines the effective **scopes** that apply to the request.
 Scopes define which API operations a user or token is allowed to perform.
 
