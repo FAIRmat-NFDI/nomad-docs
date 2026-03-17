@@ -319,7 +319,7 @@ auth:
 ```
 
 If this option is set, only the listed users are considered fully authorized.
-You could [configure how non-whitelisted users are handled](#configure-non-whitelisted-user-permissions).
+You could [configure how unauthorized users are handled](#configure-unauthorized-user-permissions).
 
 ### Configure scope-based authorization
 
@@ -377,18 +377,18 @@ auth:
 
 This allows anonymous users to browse published data but prevents modifications.
 
-#### Configure non-whitelisted user permissions
+#### Configure unauthorized user permissions
 
 Users who successfully authenticate but are not in the `authorized_users` whitelist
 are handled according to the `reject_unauthorized_users` setting.
 
-When enabled (`reject_unauthorized_users: true`), non-whitelisted users will be rejected with:
+When enabled (`reject_unauthorized_users: true`), unauthorized users will be rejected with:
 
 ```text
 HTTP 403 Forbidden
 ```
 
-Otherwise (`reject_unauthorized_users: false`), non-whitelisted users can still access
+Otherwise (`reject_unauthorized_users: false`), unauthorized users can still access
 the Oasis but only with restricted access, configurable via:
 
 ```yaml
