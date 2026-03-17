@@ -10,9 +10,12 @@ NOMAD supports multiple authentication mechanisms for API requests using [differ
 The following diagram summarizes how access to an API endpoint is evaluated.
 [Administrator-configurable settings](../reference/config.md) are highlighted in red.
 
-<!--TODO: increase font size of flowchart-->
-
 ```mermaid
+%%{init:{
+  'themeVariables': {
+    'fontSize': '36px'
+  }
+}}%%
 flowchart TD
     A[Request reaches Oasis] --> B{Network access allowed by deployment?}
     B -- No --> X[Access blocked outside NOMAD]
@@ -101,7 +104,7 @@ authentication method**.
     Simple tokens are legacy, deprecated tokens.
     They grant a broad set of user permissions, effectively corresponding to full access
     except for token-management scopes.
-    
+
     Simple tokens are deprecated and will be removed in a future release.
     They should not be used for new integrations. Use **Personal Access Tokens (PATs)** instead.
 
