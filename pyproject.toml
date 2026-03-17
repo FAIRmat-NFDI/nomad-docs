@@ -14,7 +14,7 @@ dependencies = [
   "mkdocs-material",
   "mkdocs-redirects",
   "mkdocs",
-  "nomad-lab[infrastructure]>=1.4.1",
+  "nomad-lab[infrastructure]>=1.4.2.dev107",
   "pydantic>=2.0",
   "regex",
 ]
