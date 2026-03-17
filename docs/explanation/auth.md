@@ -132,3 +132,11 @@ If the required scopes are missing, the request is rejected.
 
 For example, if an endpoint requires `uploads:write` and the token only has `uploads:read`,
 the request will be rejected.
+
+The following table lists all available authorization scopes.
+
+In Python code, scopes are defined as enum members (e.g. `Scope.DATASETS_READ`),
+whose value corresponds to the string representation used in tokens and configuration
+(e.g. `datasets:read`).
+
+{{ enum_table("nomad.auth.scopes.Scope") }}

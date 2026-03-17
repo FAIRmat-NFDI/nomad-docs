@@ -20,8 +20,10 @@
 Definitions that are used in the documentation via mkdocs-macro-plugin.
 """
 
+import importlib
 import json
 import os.path
+from enum import Enum
 from inspect import isclass
 from typing import cast, get_args
 
@@ -141,7 +143,7 @@ def define_env(env):
         return f"\n{indent}".join(f"{indent}{yaml_string}".split("\n"))
 
     @env.macro
-    def config_models(models: list[str] | None=None) -> str:  # pylint: disable=unused-variable
+    def config_models(models: list[str] | None = None) -> str:  # pylint: disable=unused-variable
         from nomad.config.models.config import Config
 
         all_fields = Config.model_fields
@@ -155,9 +157,7 @@ def define_env(env):
             unknown_names = [name for name in selected_names if name not in all_fields]
             if unknown_names:
                 unknown = ", ".join(sorted(unknown_names))
-                raise KeyError(
-                    f"Unknown config model name(s): {unknown}. "
-                )
+                raise KeyError(f"Unknown config model name(s): {unknown}. ")
 
         results: list[str] = []
         for name in selected_names:
@@ -248,6 +248,58 @@ def define_env(env):
                 result += pydantic_model_from_model(required_model)  # type: ignore
 
         return result
+
+    @env.macro
+    def enum_table(
+        path,
+        headers=("Name", "Value"),
+        fields=("name", "value"),
+        heading=None,
+        sort_by_value=True,
+    ):
+        """
+        Render a markdown table for an Enum.
+
+        Arguments:
+            path: Fully qualified Python path to the Enum class.
+            headers: Column headers (tuple/list of strings).
+            fields: Attributes to render for each enum member (e.g. "name", "value").
+            heading: Optional markdown heading to prepend.
+            sort_by_value: If True, sort rows by enum value.
+        """
+
+        module_name, enum_name = path.rsplit(".", 1)
+        module = importlib.import_module(module_name)
+        enum_cls = getattr(module, enum_name)
+
+        if not isclass(enum_cls) or not issubclass(enum_cls, Enum):
+            raise TypeError(f"{path} is not an Enum class")
+
+        members = list(enum_cls)
+        if sort_by_value:
+            members.sort(key=lambda item: str(item.value))
+
+        # validate
+        if len(headers) != len(fields):
+            raise ValueError("headers and fields must have same length")
+
+        result = []
+        if heading:
+            result.append(f"{heading}\n")
+
+        # header row
+        result.append("| " + " | ".join(headers) + " |")
+        result.append("| " + " | ".join(["---"] * len(headers)) + " |")
+
+        # rows
+        for member in members:
+            row = []
+            for field in fields:
+                value = getattr(member, field)
+                row.append(f"`{value}`")
+            result.append("| " + " | ".join(row) + " |")
+
+        return "\n".join(result)
 
     @env.macro
     def pydantic_model(path, heading=None, hide=[]):  # pylint: disable=unused-variable
