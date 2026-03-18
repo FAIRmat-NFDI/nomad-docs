@@ -316,6 +316,7 @@ auth:
   authorized_users:
     - user1@example.com
     - user2@example.com
+    - username3
 ```
 
 If this option is set, only the listed users are considered fully authorized.
