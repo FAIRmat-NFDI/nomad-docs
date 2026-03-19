@@ -115,8 +115,24 @@ nav:
 theme:
   name: material
   palette:
-    primary: "#2A4CDF"
-    accent: "#008A67"
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      accent: custom
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
   font:
     text: "Titillium Web"
   logo: assets/nomad-logo.png
