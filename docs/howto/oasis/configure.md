@@ -400,7 +400,10 @@ auth:
 
 ### Example configurations
 
-Read-only public Oasis (default): Anyone can read data.
+#### Read-only public Oasis (default)
+
+Anyone can access read-only endpoints without logging in.
+Logged-in users can still use whatever scopes their token grants.
 
 ```yaml
 auth:
@@ -410,7 +413,28 @@ auth:
       - "*:read"
 ```
 
-Restricted Oasis: Only specific users in the whitelist can access the system.
+#### Public read-only Oasis with privileged whitelist
+
+Anyone can read, but only specific whitelisted users can use their full authenticated scopes.
+
+```yaml
+auth:
+  require_authentication: false
+  reject_unauthorized_users: false
+  unauthenticated_user_scopes:
+    include:
+      - "*:read"
+  unauthorized_user_scopes:
+    include:
+      - "*:read"
+  authorized_users:
+    - alice@example.com
+    - bob@example.com
+```
+
+#### Fully Restricted Oasis
+
+Only explicitly whitelisted users can access the system, and login is mandatory.
 
 ```yaml
 auth:
