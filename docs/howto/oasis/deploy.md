@@ -36,7 +36,11 @@ For the single-machine setup with `docker-compose`, the [`nomad-distro-template`
 
 NOMAD can be deployed on Kubernetes using the official [Helm](https://helm.sh/){:target="_blank" rel="noopener"} chart from [nomad-helm-charts](https://github.com/FAIRmat-NFDI/nomad-helm-charts){:target="_blank" rel="noopener"}. The [`nomad-distro-template`](https://github.com/FAIRmat-NFDI/nomad-distro-template){:target="_blank" rel="noopener"} provides a ready-to-use `kubernetes/values.yaml` as a starting point for single-node clusters (Minikube, Kind, k3s, etc.).
 
-**Prerequisites:** [Helm](https://helm.sh/docs/intro/install/){:target="_blank" rel="noopener"} >= 3.x, [kubectl](https://kubernetes.io/docs/tasks/tools/){:target="_blank" rel="noopener"}, and a running Kubernetes cluster.
+#### Prerequisites
+
+[Helm](https://helm.sh/docs/intro/install/){:target="_blank" rel="noopener"} >= 3.x, [kubectl](https://kubernetes.io/docs/tasks/tools/){:target="_blank" rel="noopener"}, and a running Kubernetes cluster.
+
+#### Installation
 
 1. Add the NOMAD Helm repository:
 
@@ -65,16 +69,20 @@ NOMAD can be deployed on Kubernetes using the official [Helm](https://helm.sh/){
 
     Then open `http://localhost/nomad-oasis` in your browser.
 
+#### Configuration
+
+All configuration lives under the `nomad` key in your values file. See the [`nomad-helm-charts` documentation](https://github.com/FAIRmat-NFDI/nomad-helm-charts#configuration){:target="_blank" rel="noopener"} for a detailed breakdown of available options.
+
 **Example values files**
 
 Rather than writing a values file from scratch, you can use one of the ready-made examples as a starting point:
 
-| File | Where | Best for |
-| --- | --- | --- |
-| `kubernetes/values.yaml` | [`nomad-distro-template`](https://github.com/FAIRmat-NFDI/nomad-distro-template){:target="_blank" rel="noopener"} | Single-node clusters (Minikube, Kind, k3s). No persistence, uses `hostPath`. Includes JupyterHub (NORTH). Uses the distro-template image. |
-| `custom-values/minikube.yaml` | [`nomad-helm-charts`](https://github.com/FAIRmat-NFDI/nomad-helm-charts){:target="_blank" rel="noopener"} | Minikube specifically. Reduced resource requests, hostname set to `nomad-oasis.local`, nginx ingress enabled. |
-| `custom-values/kind.yaml` | [`nomad-helm-charts`](https://github.com/FAIRmat-NFDI/nomad-helm-charts){:target="_blank" rel="noopener"} | Kind specifically. Similar to the Minikube file but with `localhost` as hostname and longer health-check timeouts to account for Kind's slower image pull behaviour. |
-| `custom-values/aws.yaml` | [`nomad-helm-charts`](https://github.com/FAIRmat-NFDI/nomad-helm-charts){:target="_blank" rel="noopener"} | AWS EKS. Enables persistence with EFS (`ReadWriteMany`) for NOMAD volumes and `gp2` EBS for databases. Configures an ALB ingress controller. |
+| File                          | Where                                                                                                          | Best for                                                                                                                                                             |
+| ----------------------------- | -------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `kubernetes/values.yaml`      | [`nomad-distro-template`](https://github.com/FAIRmat-NFDI/nomad-distro-template){:target="_blank" rel="noopener"} | Single-node clusters (Minikube, Kind, k3s). No persistence, uses `hostPath`. Includes JupyterHub (NORTH). Uses the distro-template image.                            |
+| `custom-values/minikube.yaml` | [`nomad-helm-charts`](https://github.com/FAIRmat-NFDI/nomad-helm-charts){:target="_blank" rel="noopener"}      | Minikube specifically. Reduced resource requests, hostname set to `nomad-oasis.local`, nginx ingress enabled.                                                        |
+| `custom-values/kind.yaml`     | [`nomad-helm-charts`](https://github.com/FAIRmat-NFDI/nomad-helm-charts){:target="_blank" rel="noopener"}      | Kind specifically. Similar to the Minikube file but with `localhost` as hostname and longer health-check timeouts to account for Kind's slower image pull behaviour. |
+| `custom-values/aws.yaml`      | [`nomad-helm-charts`](https://github.com/FAIRmat-NFDI/nomad-helm-charts){:target="_blank" rel="noopener"}      | AWS EKS. Enables persistence with EFS (`ReadWriteMany`) for NOMAD volumes and `gp2` EBS for databases. Configures an ALB ingress controller.                         |
 
 All files can be layered — pass multiple `-f` flags to Helm to merge them, with later files taking precedence:
 
@@ -85,18 +93,84 @@ helm install nomad-oasis nomad/default \
   --timeout 15m
 ```
 
-**Secrets**
+#### Secrets
+
+The chart supports multiple methods for managing secrets:
+
+**Method 1: Pre-created Kubernetes Secrets (Production)**
 
 ```yaml
 nomad:
   secrets:
     api:
-      existingSecret: "nomad-api-secret"
+      existingSecret: "my-api-secret"
       key: password
-      autoGenerate: false
 ```
 
-If JupyterHub (NORTH) is enabled, also provide the hub service API token:
+Create the secret manually:
+
+```bash
+kubectl create secret generic my-api-secret --from-literal=password=$(openssl rand -hex 32)
+```
+
+**Method 2: Values File (Development)**
+
+```yaml
+nomad:
+  secrets:
+    api:
+      value: "my-secret-value"
+```
+
+**Method 3: Auto-generate (Default)**
+
+```yaml
+nomad:
+  secrets:
+    api:
+      autoGenerate: true
+```
+
+**Method 4: Separate secrets.yaml File**
+Create a `secrets.yaml` file (keep out of git):
+
+```yaml
+nomad:
+  secrets:
+    api:
+      value: "my-api-secret-here"
+    keycloak:
+      clientSecret:
+        value: "keycloak-client-secret"
+      password:
+        value: "keycloak-password"
+```
+
+Install with both files:
+
+```bash
+helm install nomad-oasis nomad/default -f values.yaml -f secrets.yaml
+```
+
+**Method 5: Environment Variables with --set**
+
+```bash
+helm install nomad-oasis nomad/default \
+  -f values.yaml \
+  --set nomad.secrets.api.value="${NOMAD_API_SECRET}"
+```
+
+**Method 6: helm-secrets Plugin**
+
+```bash
+# Encrypt secrets with SOPS
+sops -e secrets.yaml > secrets.enc.yaml
+
+# Install with encrypted secrets
+helm secrets install nomad-oasis nomad/default -f values.yaml -f secrets://secrets.enc.yaml
+```
+
+If JupyterHub (NORTH) is enabled, also provide the hub service API token using Method 1:
 
 ```sh
 kubectl create secret generic nomad-hub-token --from-literal=token='<your-token>'
@@ -119,13 +193,13 @@ Storage is one of the most important architectural decisions when deploying NOMA
 
 NOMAD uses five named data volumes, each mounted by one or more pods simultaneously:
 
-| Volume | Mount path in container | Mounted by | Contents |
-| --- | --- | --- | --- |
-| `public` | `/app/.volumes/fs/public` | `app`, `worker` | Published upload files accessible to users |
-| `staging` | `/app/.volumes/fs/staging` | `app`, `worker` | In-progress uploads being parsed and processed |
-| `nomad` | `/nomad` | `app`, `worker` | NOMAD internal data (archive files, raw metadata) |
-| `north-home` | `/app/.volumes/fs/north/users` | `app` | JupyterHub (NORTH) per-user home directories |
-| `tmp` | *(internal)* | *(chart-managed)* | Temporary scratch space |
+| Volume       | Mount path in container        | Mounted by                                              | Contents                                       |
+| ------------ | ------------------------------ | ------------------------------------------------------- | ---------------------------------------------- |
+| `public`     | `/app/.volumes/fs/public`      | `app`, `worker`, `cpuworker`, `gpuworker`, `jupyterhub` | Published upload files                         |
+| `staging`    | `/app/.volumes/fs/staging`     | `app`, `worker`, `cpuworker`, `gpuworker`, `jupyterhub` | In-progress uploads being parsed and processed |
+| `nomad`      | `/nomad`                       | `app`, `worker`                                         | Other NOMAD internal shared data               |
+| `north-home` | `/app/.volumes/fs/north/users` | `app`, `jupyterhub`                                     | JupyterHub (NORTH) per-user home directories   |
+| `tmp`        | _(internal)_                   | `app`, `worker`, `cpuworker`, `gpuworker`               | Temporary scratch space                        |
 
 MongoDB, Elasticsearch, and PostgreSQL each manage their own separate storage volumes through their respective subcharts.
 
@@ -144,11 +218,11 @@ nomad:
       north_home_external: /app/.volumes/fs/north/users
       nomad: /nomad
   persistence:
-    enabled: false   # uses hostPath — no PVCs are created
+    enabled: false # uses hostPath — no PVCs are created
 ```
 
 !!! warning
-    The directories above must exist on the node and be writable by UID 1000 (the user the NOMAD containers run as) before the pods start. Create them manually:
+The directories above must exist on the node and be writable by UID 1000 (the user the NOMAD containers run as) before the pods start. Create them manually:
 
     ```sh
     sudo mkdir -p /app/.volumes/fs/{public,staging,north/users} /nomad
@@ -166,7 +240,7 @@ nomad:
   persistence:
     enabled: true
     storageClass: "your-storage-class"
-    accessMode: ReadWriteMany   # required for multi-node — see below
+    accessMode: ReadWriteMany # required for multi-node — see below
 
     public:
       size: 50Gi
@@ -195,13 +269,13 @@ The [`accessMode`](https://kubernetes.io/docs/concepts/storage/persistent-volume
 
 Not all storage backends support `ReadWriteMany`. Common choices per environment:
 
-| Environment | RWX storage option |
-| --- | --- |
-| AWS EKS | Amazon EFS with the [EFS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/efs-csi.html){:target="_blank" rel="noopener"} |
-| GCP GKE | [Filestore](https://cloud.google.com/filestore){:target="_blank" rel="noopener"} NFS volumes |
-| Azure AKS | [Azure Files](https://learn.microsoft.com/en-us/azure/storage/files/){:target="_blank" rel="noopener"} storage class |
-| On-premises | NFS server, [Longhorn](https://longhorn.io/){:target="_blank" rel="noopener"}, [Ceph RBD/CephFS](https://rook.io/){:target="_blank" rel="noopener"} |
-| Local dev (single-node only) | [Local Path Provisioner](https://github.com/rancher/local-path-provisioner){:target="_blank" rel="noopener"} (RWO — not suitable for multi-node) |
+| Environment                  | RWX storage option                                                                                                                                |
+| ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| AWS EKS                      | Amazon EFS with the [EFS CSI driver](https://docs.aws.amazon.com/eks/latest/userguide/efs-csi.html){:target="_blank" rel="noopener"}              |
+| GCP GKE                      | [Filestore](https://cloud.google.com/filestore){:target="_blank" rel="noopener"} NFS volumes                                                      |
+| Azure AKS                    | [Azure Files](https://learn.microsoft.com/en-us/azure/storage/files/){:target="_blank" rel="noopener"} storage class                              |
+| On-premises                  | NFS server, [Longhorn](https://longhorn.io/){:target="_blank" rel="noopener"}, [Ceph RBD/CephFS](https://rook.io/){:target="_blank" rel="noopener"} |
+| Local dev (single-node only) | [Local Path Provisioner](https://github.com/rancher/local-path-provisioner){:target="_blank" rel="noopener"} (RWO — not suitable for multi-node)  |
 
 For AWS, the chart's `aws.yaml` values file uses EFS for NOMAD volumes and `gp2` (RWO block storage) for the databases, since each database runs as a single pod:
 
@@ -209,12 +283,12 @@ For AWS, the chart's `aws.yaml` values file uses EFS for NOMAD volumes and `gp2`
 nomad:
   persistence:
     enabled: true
-    storageClass: "nomad-efs-sc"   # EFS StorageClass — supports ReadWriteMany
+    storageClass: "nomad-efs-sc" # EFS StorageClass — supports ReadWriteMany
     accessMode: "ReadWriteMany"
 
 mongodb:
   persistence:
-    storageClass: "gp2"            # EBS block storage — RWO, single pod only
+    storageClass: "gp2" # EBS block storage — RWO, single pod only
 
 elasticsearch:
   persistence:
@@ -241,8 +315,6 @@ nomad:
     nomad:
       existingClaim: "my-existing-nomad-pvc"
 ```
-
-For the full list of configuration options, environment-specific values files (AWS EKS, Minikube, Kind), and advanced topics, see the [nomad-helm-charts documentation](https://github.com/FAIRmat-NFDI/nomad-helm-charts){:target="_blank" rel="noopener"}.
 
 ### Base Linux (without Docker)
 
