@@ -283,11 +283,11 @@ Access control can therefore be configured on several levels:
 
 1. Network level — restrict access via firewall, VPN, or private network.
 2. Authentication level — require users to log in before accessing the API.
-3. Authorization level (scopes) — control which operations users are allowed to perform after login.
+3. Authorization level — control which operations users are allowed to perform after login.
 
-We included a diagram summarizing how access is evaluated for better understanding of the following configs.
+You can learn more about [authentication and authorization in our explanation-section](../../explanation/auth.md#authentication-and-authorization).
 
-<!-- TODO: add link to diagram -->
+The authentication and authorization settings for individual NOMAD deployments are configurable through the [auth configuration section](../../reference/config.md#auth)  in `nomad.yaml` and the following sections demonstrate its usage.
 
 ### Require authentication
 
@@ -309,7 +309,8 @@ HTTP 401 Unauthorized
 
 #### Restricting access to specific users
 
-Administrators can also restrict access to an explicit whitelist of users.
+The `authorized_users` is a list of usernames or user emails (case-insensitive).
+If specified, only these users are considered to be fully authorized for access.
 
 ```yaml
 auth:
@@ -323,8 +324,6 @@ If this option is set, only the listed users are considered fully authorized.
 You could [configure how unauthorized users are handled](#configure-unauthorized-user-permissions).
 
 ### Configure scope-based authorization
-
-<!-- TODO: add link to `scopes` doc -->
 
 After authentication, NOMAD determines **which actions the user is allowed to perform** using scopes.
 
