@@ -43,8 +43,8 @@ flowchart TD
     class D,E,H,J,L config
     class N success
 
-    classDef config fill:#fff5f5,stroke:#d73a49,stroke-width:2px;
-    classDef success fill:#e6ffed,stroke:#2ea44f,stroke-width:2px;
+    classDef config stroke:#d73a49,stroke-width:4px;
+    classDef success stroke:#2ea44f,stroke-width:4px;
 ```
 
 ## Access tokens
