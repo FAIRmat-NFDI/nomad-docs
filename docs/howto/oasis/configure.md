@@ -353,7 +353,7 @@ Semantics:
 !!! note
     Partial wildcard patterns such as `u*:read` are **not** supported.
 
-All available scopes are defined in the `nomad.auth.scopes.Scope` enum.
+[All available scopes](../../explanation/auth.md#authorization-via-scopes) are defined in the `nomad.auth.scopes.Scope` enum.
 
 When an API endpoint is called, the backend checks whether the user has the required scopes.
 If required scopes are missing, the API returns:
