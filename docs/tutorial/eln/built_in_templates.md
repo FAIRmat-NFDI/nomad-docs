@@ -1,6 +1,8 @@
-# Use NOMAD as an electronic lab notebook
+# Use built-in ELN templates in NOMAD
 
-In this tutorial, we use NOMAD’s Electronic Lab Notebook (ELN) functionality to document an experiment in the NOMAD GUI. We follow the experimental workflow from defining substances and instruments to recording processing steps and measurements, using built-in ELN templates to structure and interlink the resulting entries. By the end of the tutorial, we will have documented complete experiment as a coherent, navigable ELN record in NOMAD.
+In this tutorial, we use NOMAD’s Electronic Lab Notebook (ELN) functionality to document an experiment in the NOMAD GUI. We follow the experimental workflow from defining substances and instruments to recording processing steps and measurements, using built-in ELN templates to structure and interlink the resulting entries. By the end of the tutorial, we will have documented a complete experiment as a coherent, navigable ELN record in NOMAD.
+
+![From entities and activities to structure ELN](images/ELN_0.png)
 
 ---
 
@@ -24,35 +26,36 @@ This tutorial requires no prior experience with NOMAD.
 Before starting, make sure you have:
 
 1. **NOMAD user account**  
-   Creating and editing ELN entries requires a NOMAD user account.  
+   Creating and editing ELN entries requires a NOMAD user account.
    You can create an account by following the steps described in the
-   [overview page](overview.md#create-a-nomad-user-account){:target="_blank" rel="noopener"}.
+   [overview page](../overview.md#create-a-nomad-user-account).
 
 2. **Basic understanding of uploads and entries**  
-Familiarity with uploads, entries, and how they relate to each other can be helpful. These concepts are introduced in the section [key elements in NOMAD](upload_publish.md#the-key-elements-in-nomad){:target="_blank" rel="noopener"} and will be reinforced throughout the tutorial.
+   Familiarity with uploads, entries, and how they relate to each other can be helpful. These concepts are introduced in the section [key elements in NOMAD](../upload_publish.md#the-key-elements-in-nomad) and will be reinforced throughout the tutorial.
 
 3. **Basic familiarity with experimental workflows**  
-   Familiarity with preparation, processing, and measurements can be helpful, but not required.
+   Familiarity with preparation, processing, and measurements can be helpful, but is not required.
 
 In this tutorial, we will use an example experiment involving the preparation of solution-processed polymer thin films and the measurement of their optical absorption spectrum.
 
 ??? example "About the example experiment used for this exercise"
-    In this exercise, we will work with an example experiment involving the preparation and characterization of Poly(3-hexylthiophene-2,5-diyl) ("P3HT") thin films. The experiment consists of three main activities: preparing solutions, depositing thin films, and measuring optical absorption.
+    In this exercise, we will work with an example experiment involving the preparation and characterization of poly(3-hexylthiophene-2,5-diyl) ("P3HT") thin films. The experiment consists of three main activities: preparing solutions, depositing thin films, and measuring optical absorption.
 
     1. **Preparing solutions:** The polymer powder is mixed with a solvent in predefined quantities to achieve the desired concentration. A scale is used to accurately weigh the polymer powder, ensuring precise solution concentration.
 
     2. **Depositing thin films:** The prepared solution is used to create a thin film on a glass substrate through spin-coating. By carefully controlling the spin speed and duration, the desired film thickness is achieved.
 
-    3. **Measuring optical absorption:** The optical absorption spectrum of the thin film is acquired using a UV-Vis-NIR spectrometer. The measurement results are saved as a .csv file for further analysis.
+    3. **Measuring optical absorption:** The optical absorption spectrum of the thin film is acquired using a UV-Vis-NIR spectrometer. The measurement results are saved as a `.csv` file for further analysis.
 
     To effectively document this experiment, we will create and interlink electronic lab notebook (ELN) entries in NOMAD. These entries will include key entities such as substances, instruments, and samples, as well as activities like material processing and measurements. By structuring the data in this way, we ensure a comprehensive and FAIR-compliant record of the experiment.
 
     ![Overview of the example entities and activities](images/ELN_2.png)
+
 ---
 
 ## Create a new ELN upload
 
-In NOMAD, an Electronic Lab Notebook (ELN) is created by initiating a NOMAD upload. This process allows you to structure and document your research data efficiently. For a step-by-step guide on how to create an upload, please refer to [this page](upload_publish.md#create-new-upload){:target="_blank" rel="noopener"}.
+In NOMAD, an ELN is created by initiating a NOMAD upload. This process allows you to structure and document your research data efficiently. Create a new upload by following the steps in [Create new upload](../upload_publish.md#create-new-upload).
 
 ## Create ELN entries
 
@@ -83,10 +86,10 @@ Now, let's create an entry using the built-in *Substance ELN* schema for **P3HT 
 </div>
 
 ??? info "Input fields offered by the built-in schema *Substance ELN*"
-    The built-in schema *Substance ELN*  provides the following fields for input:
+    The built-in schema *Substance ELN* provides the following fields for input:
 
     - **substance name:** Automatically used as the entry name.
-    - **tags:** User selected tags to improve searchability.
+    - **tags:** User-selected tags to improve searchability.
     - **datetime:** Allows entry of a date/time stamp.
     - **substance ID:** A unique, human-readable ID for the substance.
     - **detailed substance description:** A free text field for additional information.
@@ -99,7 +102,7 @@ Now, let's create an entry using the built-in *Substance ELN* schema for **P3HT 
         - IUPAC name
         - Molecular formula
         - CAS number
-        - Inchi Key, SMILES, and more.
+        - Inchi Key, SMILES, and more
     - **substance identifier:** Add identifiers for specific substances.
 
 Once the entry is created, we can fill in the relevant fields with detailed and accurate information. Fields can also be updated as needed to keep the entry accurate and useful.
@@ -138,7 +141,7 @@ Now, let's create an entry using the built-in *Generic Sample ELN* schema for **
     The built-in schema *Generic Sample ELN* provides the following fields for input:
 
     - **name:** Automatically used as the entry name.
-    - **tags:** User selected tags to improve searchability.
+    - **tags:** User-selected tags to improve searchability.
     - **datetime:** Allows entry of a date/time stamp.
     - **ID:** A unique, human-readable ID for the sample.
     - **description:** A free text field for additional information.
@@ -168,7 +171,7 @@ Once the entry is created, we can fill in the relevant fields with detailed and 
     Create an ELN entry in NOMAD for P3HT solution in chloroform.
     Reference the sample to its components (P3HT powder and chloroform).
 
-    Use the *Generic Sample ELN* schema and include as many details as you like (e.g., Short Name, Datetime, ID, Description).
+    Use the *Generic Sample ELN* schema and include as many details as you like (e.g., name, datetime, ID, description).
 
 ---
 
@@ -184,7 +187,7 @@ Now, let's create an entry using the built-in *Instrument ELN* schema for **scal
     The built-in schema *Instrument ELN* provides the following fields for input:
 
     - **name:** Automatically used as the entry name.
-    - **tags:** User selected tags to improve searchability.
+    - **tags:** User-selected tags to improve searchability.
     - **datetime:** Allows entry of a date/time stamp.
     - **ID:** A unique, human-readable ID for the instrument.
     - **description:** A free text field for additional information.
@@ -215,7 +218,7 @@ Once the entry is created, we can fill in the relevant fields with detailed and 
 
 ### Create a process entry
 
-Now, let's create an entry using the built-in *Material Processing ELN* schema for **Preparation of P3HT solution**. Follow the steps of creating an entry described above and select *Materials Processing ELN* from the drop-down menu in step 4.
+Now, let's create an entry using the built-in *Material Processing ELN* schema for **Preparation of P3HT solution**. Follow the steps of creating an entry described above and select *Material Processing ELN* from the drop-down menu in step 4.
 
 <div style="text-align: center;">
     <img src="images/ELN_built-in_22.png" alt="Material Processing ELN entry" width="400">
@@ -226,7 +229,7 @@ Now, let's create an entry using the built-in *Material Processing ELN* schema f
 
     - **name:** Automatically used as the entry name.
     - **starting time and ending time:** Allows entry of a date/time stamp for the process duration.
-    - **tags:** User selected tags to improve searchability.
+    - **tags:** User-selected tags to improve searchability.
     - **ID:** A unique, human-readable ID for the process.
     - **location:** A text field specifying the location where the process took place.
     - **description:** A free text field for additional information about the process.
@@ -260,7 +263,7 @@ Once the entry is created, we can fill in the relevant fields with detailed and 
 
 **Defining the steps of a process**
 
-The *steps* subsection in the *Materials Processing ELN* allows us to document each stage of the process and visualize them in an interactive workflow graph.
+The *steps* subsection in the *Material Processing ELN* allows us to document each stage of the process and visualize them in an interactive workflow graph.
 
 For the example process entry **Preparation of P3HT solution**, we will define the following three steps:
 
@@ -278,7 +281,7 @@ For the example process entry **Preparation of P3HT solution**, we will define t
     <div class="nav-arrow right" id="next6">→</div>
 </div>
 
-Note that the added information in the **subsections** will be used to automatically fill in the Workflow graph as **tasks**, as well as **the References section**. You can find the Workflow Graph in the **OVERVIEW** tab of the entry.
+Note that the added information in the **subsections** will be used to automatically fill in the *Workflow Graph* as **tasks**, as well as **the References** section. You can find the Workflow Graph in the **OVERVIEW** tab of the entry.
 
 <div style="text-align: center;">
     <img src="images/ELN_built-in_33.png" alt="Process workflow graph" width="400">
@@ -299,11 +302,11 @@ The **workflow2** section of the **Preparation of P3HT solution** example can be
 </div>
 
 ??? task "Reference P3HT powder as input for the process"
-    For the Process ELN entry created above, make reference to the substance ELN entry *P3HT Powder* as an input of the process.
+    For the *Process ELN* entry created above, make reference to the *Substance ELN* entry *P3HT Powder* as an input of the process.
 
     *Tip:* Use the workflow2 section of the entry.
 
-We can now see the changes in the workflow graph based on our modifications in the workflow section.
+We can now see the changes in the workflow graph based on our modifications to the workflow section.
 
 <div style="text-align: center;">
     <img src="images/ELN_built-in_38.png" alt="Process workflow graph" width="400">
@@ -316,13 +319,13 @@ We can now see the changes in the workflow graph based on our modifications in t
 Now, let's create an entry using the built-in *Measurement ELN* schema for **Optical absorption measurement**. Follow the steps of creating an entry described above and select *Measurement ELN* from the drop-down menu in step 4.
 
 <div style="text-align: center;">
-    <img src="images/ELN_built-in_39.png" alt="Material Processing ELN entry" width="400">
+    <img src="images/ELN_built-in_39.png" alt="Measurement ELN entry" width="400">
 </div>
 
 ??? info "Input fields offered by the built-in schema *Measurement ELN*"
     - **name:** Automatically used as the entry name.
     - **starting time:** Allows entry of a date/time stamp for the measurement.
-    - **tags:** User selected tags to improve searchability.
+    - **tags:** User-selected tags to improve searchability.
     - **ID:** A unique, human-readable ID for the measurement.
     - **location:** A text field specifying the location where the measurement took place.
     - **description:** A free text field for additional information about the measurement.
@@ -366,7 +369,7 @@ Now create an entry using the built-in *Experiment ELN* schema for **Characteriz
 ??? info "Input fields offered by the built-in schema *Experiment ELN*"
     - **name:** Automatically used as the entry name.
     - **starting time:** Allows entry of a date/time stamp for the experiment.
-    - **tags:** User selected tags to improve searchability.
+    - **tags:** User-selected tags to improve searchability.
     - **ID:** A unique, human-readable ID for the experiment.
     - **location:** A text field specifying the location where the experiment took place.
     - **description:** A free text field for additional information about the experiment.
@@ -376,7 +379,7 @@ Now create an entry using the built-in *Experiment ELN* schema for **Characteriz
     - **steps:** Reference the processes and measurements that make up the experiment.
     - **experiment identifiers:** Specify the additional metadata for the experiment.
 
-The *steps* subsection allows us to reference the various processes and measurements that were part of the experiments. By organizing these elements into a structured and interactive workflow, we can provide a clearer overview of the experimental sequence, enabling better visualization and understanding of how different steps are interconnected.
+The *steps* subsection allows us to reference the various processes and measurements that are part of the experiment. By organizing these elements into a structured and interactive workflow, we can provide a clearer overview of the experimental sequence, enabling better visualization and understanding of how different steps are interconnected.
 
 <div style="text-align: center;">
     <img src="images/ELN_built-in_39.gif" alt="interactive workflow gif" width="400">
@@ -396,7 +399,7 @@ The *steps* subsection allows us to reference the various processes and measurem
 
     You can drag and drop this file into a new upload in NOMAD to view its contents.
 
-Imagine you have created multiple entries of substances, samples, instruments, processes, and measurements, and you need to quickly find a specific experiment or material. Instead of manually searching through files, NOMAD’s ELN allows you to search, filter, and organize your entries—saving you time and effort.
+Imagine you have created multiple entries for substances, samples, instruments, processes, and measurements, and you need to quickly find a specific experiment or material. Instead of manually searching through files, NOMAD’s ELN allows you to search, filter, and organize your entries—saving you time and effort.
 
 ??? info "Organizing your ELN upload"
     NOMAD is a file-based system. You can access, organize, and download your files within each upload. You can also create folders to categorize entries into materials, samples, instruments, processes, and results, as well as upload additional documents, such as relevant PDFs.
@@ -407,22 +410,22 @@ Imagine you have created multiple entries of substances, samples, instruments, p
 
     1. Navigate to the **FILES** tab in your upload. This view functions like a file explorer, allowing you to view and manage files.
     <div style="text-align: center;">
-    <img src="images/files_explorer_in_NOMAD.png" alt="interactive workflow gif" width="400">
+    <img src="images/files_explorer_in_NOMAD.png" alt="interactive workflow gif" width="600">
     </div>
 
     2. Add new folders and organize them according to your needs.
     <div style="text-align: center;">
-        <img src="images/creating_new_folders.gif" alt="interactive workflow gif" width="400">
+        <img src="images/creating_new_folders.gif" alt="interactive workflow gif" width="600">
     </div>
 
     3. Drag and drop files into the desired folder. A prompt will appear, asking if you want to copy or move the files—choose according to your needs.
     <div style="text-align: center;">
-        <img src="images/moving_files_to_a_folder.gif" alt="interactive workflow gif" width="400">
+        <img src="images/moving_files_to_a_folder.gif" alt="interactive workflow gif" width="600">
     </div>
 
-    4. Once all files are sorted, take a moment to review the structure. Here’s an example of an organized ELN
+    4. Once all files are sorted, take a moment to review the structure. Here is an example of an organized ELN:
     <div style="text-align: center;">
-        <img src="images/after_organization.png" alt="interactive workflow gif" width="400">
+        <img src="images/after_organization.png" alt="interactive workflow gif" width="600">
     </div>
 
 **Searching your ELN entries**
@@ -448,22 +451,22 @@ On the **EXPLORE** page, you can use the filter options in the sidebar to refine
 
     - Filter by built-in schema used to create the entry.
 
-        *For example, ELNInstrument, ELNSubstances, ELNSample, etc.*
+        For example: *ELNInstrument*, *ELNSubstance*, *ELNSample*, etc.
 
     - Filter by custom tags, where you assign common tags to related entries for easy grouping.
 
-        *For example, tag all solvents as "my_solvent" or all samples as "my_samples".*
+        For example: tag all solvents as "my_solvent" or all samples as "my_samples".
 
     Using these filters helps you quickly locate specific entries in your ELN.
 
 **Customize your search interface with widgets**
 
-Widgets allow you to customize your search interface to better suit your data exploration needs. By adding and rearranging widgets, you can create a personalized view that highlights the most relevant filters, metadata, or visualizations most relevant to your research.
+Widgets allow you to customize your search interface to better suit your data exploration needs. By adding and rearranging widgets, you can create a personalized view that highlights the filters, metadata, or visualizations most relevant to your research.
 
 ??? task "Create a custom widget for ELN sections and custom tags"
     To create a custom widget for filtering your ELN, follow these steps:
 
-    1. Click on the `+ TERMS` button to open the *Edit terms widget* menu.
+    1. Click on the **+ TERMS** button to open the *Edit terms widget* menu.
 
     <div style="text-align: center;">
         <img src="images/widget_step_1.png" alt="Screenshot of the Edit terms widget menu" width="800">
@@ -477,9 +480,9 @@ Widgets allow you to customize your search interface to better suit your data ex
         <img src="images/widget_step_2_3.png" alt="Screenshot of selecting results.eln.sections filter" width="400">
     </div>
 
-    4. Write a descriptive title for the custom widget in *Title field*.
+    4. Write a descriptive title for the custom widget in the *Title* field.
 
-    5. Click DONE!
+    5. Click **DONE**.
 
     <div style="text-align: center;">
         <img src="images/widget_step_4_5.png" alt="Screenshot of finalizing the custom widget" width="400">
@@ -498,7 +501,7 @@ Widgets allow you to customize your search interface to better suit your data ex
     This widget will then appear on your **EXPLORE** page, allowing you to quickly view and filter entries by their associated tags.
 
     <div style="text-align: center;">
-        <img src="images/explore_you_ELN_entries.gif" alt="Animation of filtering using widgets" width="800">
+        <img src="images/explore_your_ELN_entries.gif" alt="Animation of filtering using widgets" width="800">
     </div>
 
 ---

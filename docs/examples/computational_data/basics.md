@@ -71,7 +71,7 @@ Once the processing is finished, the uploads page will show if each mainfile pro
 
 **OVERVIEW tab**
 
-![Overview page](images/overview_page.png){.screenshot}
+![Overview page](images/overview_page.png){:.screenshot}
 
 The overview page contains a summary of the parsed metadata, e.g., tabular information about the material and methodology of the calculation (in the example, a G0W0 calculation done with the [exciting](https://www.exciting-code.org/){:target="_blank" rel="noopener"} code for bulk Si<sub>2</sub>), along with a visualization of the system and some relevant properties.
 
@@ -85,13 +85,13 @@ The files page contains a browser for the uploaded file structure, with tools fo
 
 The `DATA` page contains a browser for searching through the metadata stored for the entry, according to the NOMAD Metainfo structure. A downloadable JSON version of the archive can be accessed by clicking on the :fontawesome-solid-cloud-arrow-down: icon.
 
-![Data page](images/data_page.png){.screenshot}
+![Data page](images/data_page.png){:.screenshot}
 
 **LOGS tab**
 
 The `LOGS` page contains a list of info, warning, and error messages from the processing codes (i.e., parsers and normalizers). These provide insight into any potential issues with the upload, especially in the case that the entry displays the `FAILURE` processing status. Please help improve NOMAD by reporting any major issues that you find: [NOMAD > Support](https://nomad-lab.eu/nomad-lab/support.html){:target="_blank" rel="noopener"}.
 
-![Logs page](images/logs_page.png){.screenshot}
+![Logs page](images/logs_page.png){:.screenshot}
 
 ### Uploads
 

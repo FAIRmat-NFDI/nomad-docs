@@ -14,7 +14,7 @@ docker exec nomad_oasis_mongo mongodump -d nomad_oasis_v1 -o /backup
 
 The elasticsearch contents can be reproduced with the information in the files and the mongodb.
 
-To create a new oasis with the backup data, create the `.volumes` directory from your backup. Start the new oasis. Use mongorestore:
+To create a new Oasis with the backup data, create the `.volumes` directory from your backup. Start the new Oasis. Use mongorestore:
 
 ```sh
 docker exec nomad_oasis_mongo mongorestore /backup

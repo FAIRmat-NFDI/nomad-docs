@@ -9,29 +9,6 @@
 *.log.conf
 parser.osio.log
 docs/*.graffle
-gui/.editorconfig
-gui/.pnp.cjs
-gui/.yarn/
-gui/.yarnrc.yml
-gui/junit.xml
-
-# Ignore all user-specific configuration files
-nomad.yaml
-gui/public/env.js
-gui/public/artifacts.js
-gui/tests/env.js
-gui/tests/artifacts.js
-!gui/tests/nomad.yaml
-!ops/docker-compose/nomad-oasis/configs/nomad.yaml
-!ops/docker-compose/nomad-oasis-with-keycloak/configs/nomad.yaml
-
-# Ignore built gui and docs artifacts
-nomad/app/static/.gui_configured
-nomad/app/static/docs
-nomad/app/static/gui
-
-nomad/normalizing/data/*.db
-nomad/normalizing/data/*.msg
 
 # Ignore default output dir for the bundle CLI commands
 bundles
