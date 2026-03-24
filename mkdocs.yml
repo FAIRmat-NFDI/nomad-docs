@@ -9,13 +9,13 @@ nav:
   - Tutorial:
       - Overview: tutorial/overview.md
       - Upload and publish data:
-        - With the GUI: tutorial/upload_publish.md
-        - Programmatically: tutorial/upload_publish_api.md
+          - With the GUI: tutorial/upload_publish.md
+          - Programmatically: tutorial/upload_publish_api.md
       - Explore data: tutorial/explore.md
       - Use NOMAD as an ELN:
-        - Built-in ELN templates: tutorial/eln/built_in_templates.md
-        - Custom ELN with YAML: tutorial/eln/custom_eln_yaml.md
-        - Tabular Parser for ELN: tutorial/eln/tabular_parser_yaml.md
+          - Built-in ELN templates: tutorial/eln/built_in_templates.md
+          - Custom ELN with YAML: tutorial/eln/custom_eln_yaml.md
+          - Tabular Parser for ELN: tutorial/eln/tabular_parser_yaml.md
       - Manage workflows and projects: tutorial/workflows_projects.md
       - Develop a NOMAD plugin: tutorial/develop_plugin.md
   - How-to guides:
@@ -77,13 +77,13 @@ nav:
           - Parser plugins: examples/computational_data/parser_plugins.md
           - FAQs: examples/computational_data/faqs.md
       - Experimental data:
-            - Electron microscopy: examples/experiment_data/em.md
-            - Photoemission spectroscopy: examples/experiment_data/mpes.md
-            - X-ray photoemission spectroscopy: examples/experiment_data/xps.md
-            - Optical spectroscopy: examples/experiment_data/opt.md
-            - Atom probe tomography: examples/experiment_data/apm.md
-            - Scanning probe microscopy: examples/experiment_data/spm.md
-            - pynxtools: examples/experiment_data/pynxtools.md
+          - Electron microscopy: examples/experiment_data/em.md
+          - Photoemission spectroscopy: examples/experiment_data/mpes.md
+          - X-ray photoemission spectroscopy: examples/experiment_data/xps.md
+          - Optical spectroscopy: examples/experiment_data/opt.md
+          - Atom probe tomography: examples/experiment_data/apm.md
+          - Scanning probe microscopy: examples/experiment_data/spm.md
+          - pynxtools: examples/experiment_data/pynxtools.md
       - Use cases:
           - Catalysis APP: examples/use_cases/catalysis_app.md
           - NEB workflows: examples/use_cases/neb_workflows.md
@@ -99,6 +99,7 @@ nav:
       - Workflows: explanation/workflows.md
       - Plugins: explanation/plugin_system.md
       - Federation and Oasis: explanation/oasis.md
+      - Authentication and authorization: explanation/auth.md
       - NORTH: explanation/north.md
   - Reference:
       # - Overview: reference/overview.md # TODO
