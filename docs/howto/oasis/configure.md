@@ -292,7 +292,7 @@ We included a diagram summarizing how access is evaluated for better understandi
 ### Require authentication
 
 By default, authentication is **not required**.
-This means anonymous users can still access the API with [limited and configurable permissions](#configure-anonymous-user-permissions).
+This means anonymous users can still access the API with [limited and configurable permissions](#configure-unauthenticated-user-permissions).
 To require authentication for all API requests, enable the following option:
 
 ```yaml
@@ -363,7 +363,7 @@ HTTP 403 Forbidden
 Missing scopes: [...]
 ```
 
-#### Configure anonymous user permissions
+#### Configure unauthenticated user permissions
 
 When authentication is not required, anonymous users receive a configurable set of scopes.
 
