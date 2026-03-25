@@ -175,7 +175,7 @@ helm secrets install nomad-oasis nomad/default -f values.yaml -f secrets://secre
 The following secrets are used by the NOMAD Oasis deployment. None of the followings are, by default, generated, and we recommend explicitly setting them for a production environment to ensure stability across upgrades.
 
 - **`nomad.secrets.api`**: The fundamental API secret for cryptographic operations. **Required.** (Must be provided or `nomad.secrets.api.autoGenerate` set to `true` to avoid installation failure).
-- **`nomad.secrets.north.hubServiceApiToken`**: Required if JupyterHub (NORTH) is enabled (`nomad.config.north.enabled: true`). 
+- **`nomad.secrets.north.hubServiceApiToken`**: Required if JupyterHub (NORTH) is enabled (`nomad.config.north.enabled: true`).
 - **`nomad.secrets.keycloak.password` & `clientSecret`**: Required if using a local standalone Keycloak instance or institution SSO.
 - **`nomad.secrets.datacite`**: Required if DataCite DOI minting is enabled.
 - **`mongodb.auth.rootPassword`**: Root password for the internal MongoDB database. If left empty, the Bitnami chart auto-generates a random password on first boot, but it is highly recommended to set it manually.
