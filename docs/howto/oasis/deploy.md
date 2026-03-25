@@ -170,7 +170,17 @@ sops -e secrets.yaml > secrets.enc.yaml
 helm secrets install nomad-oasis nomad/default -f values.yaml -f secrets://secrets.enc.yaml
 ```
 
-If JupyterHub (NORTH) is enabled, also provide the hub service API token using Method 1:
+#### Required Secrets for Production
+
+The following secrets are used by the NOMAD Oasis deployment. None of the followings are, by default, generated, and we recommend explicitly setting them for a production environment to ensure stability across upgrades.
+
+- **`nomad.secrets.api`**: The fundamental API secret for cryptographic operations. **Required.** (Must be provided or `nomad.secrets.api.autoGenerate` set to `true` to avoid installation failure).
+- **`nomad.secrets.north.hubServiceApiToken`**: Required if JupyterHub (NORTH) is enabled (`nomad.config.north.enabled: true`). 
+- **`nomad.secrets.keycloak.password` & `clientSecret`**: Required if using a local standalone Keycloak instance or institution SSO.
+- **`nomad.secrets.datacite`**: Required if DataCite DOI minting is enabled.
+- **`mongodb.auth.rootPassword`**: Root password for the internal MongoDB database. If left empty, the Bitnami chart auto-generates a random password on first boot, but it is highly recommended to set it manually.
+
+*Example: Providing the NORTH hub token manually (Method 1):*
 
 ```sh
 kubectl create secret generic nomad-hub-token --from-literal=token='<your-token>'
@@ -199,7 +209,7 @@ NOMAD uses five named data volumes, each mounted by one or more pods simultaneou
 | `staging` | `/app/.volumes/fs/staging` | `app`, `worker`, `cpuworker`, `gpuworker`, `jupyterhub` | In-progress uploads being parsed and processed |
 | `nomad` | `/nomad` | `app`, `worker` | Other NOMAD internal shared data |
 | `north-home` | `/app/.volumes/fs/north/users` | `app`, `jupyterhub` | JupyterHub (NORTH) per-user home directories |
-| `tmp` | *(internal)* | `app`, `worker`, `cpuworker`, `gpuworker` | Temporary scratch space |
+| `tmp` | *(internal)* | `app`, `worker`, `cpuworker`, `gpuworker` | Temporary shared scratch space |
 
 MongoDB, Elasticsearch, and PostgreSQL each manage their own separate storage volumes through their respective subcharts.
 
@@ -222,13 +232,11 @@ nomad:
 ```
 
 !!! warning
-The directories above must exist on the node and be writable by UID 1000 (the user the NOMAD containers run as) before the pods start. Create them manually:
-
+    The directories above must exist on the node and be writable by UID 1000 (the user the NOMAD containers run as) before the pods start. Create them manually:
     ```sh
     sudo mkdir -p /app/.volumes/fs/{public,staging,north/users} /nomad
     sudo chown -R 1000:1000 /app/.volumes/fs /nomad
     ```
-
     Missing directories are a common cause of `CrashLoopBackOff` errors on fresh single-node deployments.
 
 **Multi-node: PersistentVolumeClaims**
@@ -262,7 +270,7 @@ The [`accessMode`](https://kubernetes.io/docs/concepts/storage/persistent-volume
 
 - **`ReadWriteMany` (RWX)** — the volume can be mounted simultaneously by pods on *any number of nodes*. This is required for `public`, `staging`, `nomad`, and `north-home` in a multi-node setup, because both the `app` and `worker` deployments mount these volumes concurrently and can land on different nodes.
 
-!!! danger "Using RWO for shared NOMAD volumes in a multi-node cluster will cause failures"
+!!! warning "Using RWO for shared NOMAD volumes in a multi-node cluster will cause failures"
     If you configure `ReadWriteOnce` for the shared NOMAD volumes and scale workers across multiple nodes, the scheduler will either refuse to start pods on a second node (because the block device is already bound to another node) or, in rare race conditions, allow concurrent writes without coordination, risking data corruption. Always use `ReadWriteMany` for the NOMAD application volumes in any multi-node deployment.
 
 **Choosing a storage class for `ReadWriteMany`**
