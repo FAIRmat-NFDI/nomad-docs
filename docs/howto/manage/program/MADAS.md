@@ -16,4 +16,4 @@ An example of the data transformation is shown below: For a DFT calculation of G
 
 This allows to reduce the complexity of the schema for subsequent data analytics. Furthermore, these transforming functions can perform more complex tasks, e.g., unit transformations or aggregations.
 
-`MADAS` has its own [comprehensive documentation](https://madas.readthedocs.io). It is an open-source Python package, the code can be found on [GitHub](https://github.com/kubanmar/madas).
+`MADAS` has its own [comprehensive documentation](https://madas.readthedocs.io){:target="_blank" rel="noopener"}. It is an open-source Python package, the code can be found on [GitHub](https://github.com/kubanmar/madas){:target="_blank" rel="noopener"}.
