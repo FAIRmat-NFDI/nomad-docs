@@ -224,12 +224,14 @@ You can configure this in your `nomad.yaml` for different worker types (`interna
 temporal:
   internal_worker:
     # Number of Python processes running in this container
-    pool_size: 4
+    pool_size: 1
     # Restart the process after 100 tasks to clear memory leaks
     max_tasks_per_child: 100
 ```
 
-* **Memory impact:** Because these are distinct processes, a single container with a `pool_size` of 10 will consume roughly the same amount of memory as 10 separate containers with a `pool_size` of 1.
+* **Recommended baseline:** Start with the current default (`pool_size: 1`) and scale replicas first.
+* **When to increase `pool_size`:** Increase it gradually (up to the number of CPU cores allocated to the container) only if a single process is not already saturating your available CPU and you still have memory headroom. This typically applies to workloads with idle time (I/O waits) rather than processes that already run heavily in compiled code paths (e.g., heavy NumPy workloads that already bypass the GIL).
+* **Memory impact:** Each extra process consumes additional memory. A container with `pool_size: 10` can use roughly similar memory to ten separate containers with `pool_size: 1`.
 
 #### Worker Replicas (Horizontal Scaling)
 
@@ -237,11 +239,43 @@ Deploying more replicas (via Docker Compose or Kubernetes) adds completely isola
 
 * **The Isolation Advantage:** We generally recommend relying on replicas for scaling rather than massive `pool_size` values. If a malformed file triggers a severe crash in a Python C-extension (like a segfault), it can bring down the entire container. If you have a high `pool_size`, that single bad file just killed the processing for all other parallel tasks sharing that pod. Replicas isolate this "blast radius," ensuring only the offending container dies and is rescheduled.
 
-*Recommendation: Benchmark your specific environment. A hybrid approach often works best—a moderate `pool_size` (matching your container's allocated CPU cores) combined with enough replicas to ensure fault tolerance.*
+*Recommendation: Prefer scaling replicas first for throughput and fault tolerance. If replicas still do not saturate your available CPU, then gradually increase `pool_size` while monitoring memory usage.*
 
 ---
 
-### 2. Orchestration Concurrency & Backpressure
+### 2. Resource Management & Guardrails
+
+To keep your cluster healthy, you must combine infrastructure constraints with NOMAD's application-aware guardrails.
+
+* **Hard Limits (Infrastructure):** Your Kubernetes or Docker pod resource limits (`resources.limits.memory` and `resources.limits.cpu`) are the ultimate guardrails. They protect your host node from being completely consumed by a runaway worker.
+* **Soft Limits (NOMAD `WorkerConfig`):** Settings like `target_memory_usage` and `target_cpu_usage` act as an early-warning system. They allow the worker to gracefully pause accepting new tasks from the queue *before* the container hits the hard Kubernetes limit. This prevents aggressive and disruptive Out-Of-Memory (OOM) kills.
+
+For Docker Compose deployments, you can set CPU hard limits directly in the worker service:
+
+```yml
+services:
+    worker:
+        ...
+        deploy:
+            resources:
+                limits:
+                    cpus: '0.50'
+```
+
+The value refers to the number of CPU cores the container can use (for example `0.50` means half a CPU core). See also the [docker-compose documentation](https://docs.docker.com/compose/compose-file/compose-file-v3/#resources){:target="_blank" rel="noopener"}.
+
+```yaml
+temporal:
+  internal_worker:
+    # Stop accepting new tasks if container CPU hits 80%
+    target_cpu_usage: 0.8
+    # Stop accepting new tasks if container RAM hits 80%
+    target_memory_usage: 0.8
+```
+
+---
+
+### 3. Orchestration Concurrency & Backpressure
 
 Beyond how many workers you have, you can also control the orchestration logic that dictates how aggressively Temporal dispatches tasks.
 
@@ -263,24 +297,6 @@ temporal:
 
 ---
 
-### 3. Resource Management & Guardrails
-
-To keep your cluster healthy, you must combine infrastructure constraints with NOMAD's application-aware guardrails.
-
-* **Hard Limits (Infrastructure):** Your Kubernetes or Docker pod resource limits (`resources.limits.memory` and `resources.limits.cpu`) are the ultimate guardrails. They protect your host node from being completely consumed by a runaway worker.
-* **Soft Limits (NOMAD `WorkerConfig`):** Settings like `target_memory_usage` and `target_cpu_usage` act as an early-warning system. They allow the worker to gracefully pause accepting new tasks from the queue *before* the container hits the hard Kubernetes limit. This prevents aggressive and disruptive Out-Of-Memory (OOM) kills.
-
-```yaml
-temporal:
-  internal_worker:
-    # Stop accepting new tasks if container CPU hits 80%
-    target_cpu_usage: 0.8
-    # Stop accepting new tasks if container RAM hits 80%
-    target_memory_usage: 0.8
-```
-
----
-
 ### 4. Tuning for Specific Workloads
 
 #### Scenario A: High Volume of Tiny Files (I/O Bound)
@@ -295,7 +311,7 @@ Processing thousands of tiny files is typically very fast computationally, but t
 Dense calculations, heavy parsers, or complex normalizers will quickly peg a CPU core to 100%.
 
 * **Behavior:** The worker machine's CPU becomes the absolute bottleneck.
-* **How to tune:** Rely on the `target_cpu_usage: 0.8` setting so the worker naturally backs off when busy. To increase overall throughput safely, ensure your `pool_size` does not exceed the physical CPU cores allocated to the container (to avoid costly context-switching overhead), and scale horizontally by adding more container replicas. If CPU-heavy tasks are unstable, timing out, or causing long retries, also try decreasing `entry_activity_batch_size` so each activity does less work.
+* **How to tune:** Rely on the `target_cpu_usage: 0.8` setting so the worker naturally backs off when busy. Keep `pool_size` conservative (often `1`) and scale horizontally with replicas first. Increase `pool_size` only if a single worker process is not already saturating CPU and you have enough memory headroom. If CPU-heavy tasks are unstable, timing out, or causing long retries, also try decreasing `entry_activity_batch_size` so each activity does less work.
 
 #### Scenario C: Memory-Intensive Processing
 
@@ -303,12 +319,6 @@ Workloads involving large datasets or trajectories that must be loaded entirely 
 
 * **Behavior:** High risk of sudden Out-Of-Memory (OOM) crashes.
 * **How to tune:** This scenario requires strict isolation. Favor higher replica counts with very low `pool_size` limits (even a `pool_size: 1`). This ensures that if a massive dataset causes an unavoidable OOM spike, it only kills one isolated replica rather than a pooled worker that is concurrently processing other users' data. Rely heavily on strict Kubernetes memory limits combined with NOMAD's `target_memory_usage: 0.7` to reject tasks gracefully when RAM gets tight.
-
-There are several ways to control resource usage and improve performance:
-
-- Increase or decrease the number of worker **replicas** (recommended)
-- Adjust CPU and memory limits in Docker
-- (Optionally) Increase the number of worker **processes** on the Python side
 
 ### Limiting the use of threads
 
@@ -324,23 +334,6 @@ services:
             ...
             OMP_NUM_THREADS: 1
 ```
-
-### Limit CPU with docker
-
-You can add a `deploy.resources.limits` section to the worker service in the `docker-compose.yml`:
-
-```yml
-services:
-    worker:
-        ...
-        deploy:
-            resources:
-                limits:
-                    cpus: '0.50'
-```
-
-The number refers to the percentage use of a single CPU core.
-See also the [docker-compose documentation](https://docs.docker.com/compose/compose-file/compose-file-v3/#resources){:target="_blank" rel="noopener"}.
 
 ## Controlling access to your Oasis
 
