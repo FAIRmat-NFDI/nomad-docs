@@ -36,14 +36,26 @@ However, all files that are associated to a recognized *mainfile* by being in th
 same directory are displayed as **auxiliary** files next to the entry represented
 by the **mainfile**.
 
-!!! note
-    **A note for VASP users**.
-    On the handling of **POTCAR** files: NOMAD takes care of it; you don't
-    need to worry about it. We understand that POTCAR files are not supposed to be visible to
-    the public according to your VASP license. Thus, in agreement with Georg Kresse, NOMAD extracts
-    the most important information of POTCAR files and stores it in the files named
-    `POTCAR.stripped`. These files can be accessed and downloaded by anyone, while the original
-    POTCAR files are automatically removed.
+!!! warning "License Compliance for VASP"
+
+    The VASP license does **not** permit users to freely distribute **POTCAR** files, which are
+    considered copyrighted material. To ensure compliance, NOMAD automatically handles POTCAR
+    files for you.
+
+    Upon **publication**, NOMAD removes the original POTCAR files and replaces them with
+    `POTCAR.stripped` files. The stripped files contain a checksum of the original file
+    at the top, followed by metadata headers extracted from the original POTCAR, but not
+    the proprietary pseudopotential data. The stripped files can be accessed and downloaded
+    by anyone, while the original POTCAR files are automatically removed.
+
+    **Important considerations:**
+
+    - Stripping is filename-based. Ensure "POTCAR" appears in the filename for licensed files.
+    - POTCAR files **must be uncompressed** for automated stripping to work. Compressed files (e.g., `POTCAR.gz`) will not be properly processed and may be entirely removed without creating stripped versions.
+    - Stripping only occurs upon publication. We strongly recommend **against** temporarily making unpublished uploads publicly visible when they contain licensed material.
+
+    While NOMAD provides this service as a courtesy, **uploaders remain responsible for
+    verifying overall license compliance**.
 
 ## Visibility and access
 

@@ -37,7 +37,7 @@ graph LR;
 
 The file associated with this task, `dft.xml`, is a standard DFT calculation that is supported by NOMAD's simulation parsers, i.e., upon upload it will be automatically recognized and parsed to create an entry. Actually, the parser for this file will automically create a "Single Point" workflow within the same entry, which specifies the standard input and outputs for simulation data in NOMAD:
 
-![NOMAD workflow schema](images/single-point-nomad-workflow-graph.png){.screenshot}
+![NOMAD workflow schema](images/single-point-nomad-workflow-graph.png){:.screenshot}
 
 Here, we will reproduce, and customize, this workflow graph in a separate entry, using the YAML-based approach.
 
@@ -92,7 +92,7 @@ This file is constructed according to NOMAD's schemas for [Archive Files](../../
 
 With a basic understanding in hand, you can now download the example data and upload the obtained `.zip` file to NOMAD:
 
-[Download simple_workflow.zip](data/simple_workflow.zip){ .md-button .nomad-button }
+[Download simple_workflow.zip](data/simple_workflow.zip){:.md-button .nomad-button}
 
 The download `simple_workflow.zip` should have the following structure:
 
@@ -108,7 +108,7 @@ Upon upload to NOMAD, the above zip will produce 2 entries:
 
 2. a workflow entry with mainfile `dft.workflow.archive.yaml`. The workflow entry will contain the following workflow graph on the Overview page:
 
-![NOMAD workflow schema](images/single-point-custom-nomad-workflow-graph.png){.screenshot}
+![NOMAD workflow schema](images/single-point-custom-nomad-workflow-graph.png){:.screenshot}
 
 ??? Tip "Adding more workflow metadata"
 
@@ -304,7 +304,7 @@ When uploaded with the example data, this workflow file will produce an entry wi
 
 You can reproduce this example by downloading the example data (with workflow YAML included at the root level), and uploading to NOMAD yourself:
 
-[Download nested_workflow_one-entry.zip](data/nested_workflow_one-entry.zip){ .md-button .nomad-button }
+[Download nested_workflow_one-entry.zip](data/nested_workflow_one-entry.zip){:.md-button .nomad-button}
 
 ## Workflows with custom tasks
 
@@ -483,7 +483,7 @@ Now we construct the workflow YAML, `setup_workflow.archive.yaml`, as in the exa
 
 To reproduce the workflow shown in the video above, download the example files, entry YAMLs, and workflow YAML defined above, and upload them to NOMAD:
 
-[Download Custom_ELN_Entries.zip](data/Custom_ELN_Entries.zip){ .md-button .nomad-button }
+[Download Custom_ELN_Entries.zip](data/Custom_ELN_Entries.zip){:.md-button .nomad-button}
 
 ## Referencing ELN entries created with the GUI
 
@@ -503,7 +503,7 @@ To reference ELN entries created using the NOMAD GUI, use the upload and entry i
 As we have seen above, when a workflow is defined within an entry, The Overview page will show an interactive graph of the `workflow2` section defined.
 The following video demonstrates the basic navigation functionalities of these interactive workflow graphs:
 
-![workflow visualizer](images/workflow-graph-usage.gif){.screenshot}
+![workflow visualizer](images/workflow-graph-usage.gif){:.screenshot}
 
 The nodes (inputs, tasks and outputs) are shown from left to right for the current workflow layer.
 The edges (arrows) from (to) a node denotes an input (output) to a section in the target node.

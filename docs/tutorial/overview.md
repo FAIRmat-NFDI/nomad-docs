@@ -11,6 +11,8 @@ As you go through the tutorial pages, you will encounter embedded boxes with dif
 
 !!! example "Shares example files for you to try out, along with explanations of their contents and scientific use cases."
 
+!!! success "Marks a checkpoint or an output to verify your result before continuing."
+
 !!! warning "Displays important warnings to consider before proceeding further in the tutorial."
 
 ## Scope of the tutorials
@@ -33,11 +35,11 @@ Our tutorial documentation covers the basics of using Central NOMAD and NOMAD Oa
 - Create custom widgets for a personalized search experience.
 - Use the NOMAD domain-specific apps.
 
-[**Using NOMAD as an ELN**](NOMAD_ELN.md)
+[**Using NOMAD as an ELN**](eln/built_in_templates.md)
 
-- Create an ELN using the built-in NOMAD templates.
-- Add entries for samples, instruments, processes, and more.
-- Explore and search your ELN.
+- [Use built-in ELN templates](eln/built_in_templates.md) to create an ELN in NOMAD and interlink substances, samples, instruments, processes, and measurements.
+- [Create a custom ELN schema using YAML](eln/custom_eln_yaml.md) and extend it with subsections for your experiment structure.
+- [Parse tabular measurement data](eln/tabular_parser_yaml.md) with the NOMAD's tabular parser and visualize it directly in the ELN.
 
 [**Managing workflows and projects**](workflows_projects.md)
 
@@ -58,7 +60,7 @@ Our tutorial documentation covers the basics of using Central NOMAD and NOMAD Oa
 
 An overview of the skills required to use NOMAD and NOMAD Oasis, categorized into basic use, customization, and self hosting, is presented in the figure below.
 
-<img src="images/overview.png" alt="Competences of NOMAD" width="800">
+<img src="./images/overview.png" alt="Competences of NOMAD" width="800">
 
 ---
 
@@ -81,7 +83,7 @@ Two public versions that are relevant to the tutorials are:
 !!! info "These tutorials are based on the official version of NOMAD. All instructions are based on it unless stated otherwise."
 
 <div style="text-align: center;">
-    <img src="images/access_NOMAD.png" alt="Access NOMAD" width="600">
+    <img src="./images/access_NOMAD.png" alt="Access NOMAD" width="600">
 </div>
 
 ---
@@ -93,10 +95,10 @@ A NOMAD user account is required if you want to upload, share, publish, or analy
 **Use the arrow buttons ⬅️➡️ below to slide through the steps and create a NOMAD account.**
 <div class="image-slider" id="slider1">
     <div class="nav-arrow left" id="prev">←</div>
-    <img src="images/account_1.png" alt="Image 1" class="active">
-    <img src="images/account_2.png" alt="Image 2">
-    <img src="images/account_3.png" alt="Image 3">
-    <img src="images/account_4.png" alt="Image 4">
+    <img src="./images/account_1.png" alt="Image 1" class="active">
+    <img src="./images/account_2.png" alt="Image 2">
+    <img src="./images/account_3.png" alt="Image 3">
+    <img src="./images/account_4.png" alt="Image 4">
     <div class="nav-arrow right" id="next">→</div>
 </div>
 ---
@@ -114,9 +116,9 @@ You will be redirected to your institution’s login page, where you can enter y
 **Use the arrow buttons ⬅️➡️ below to see how to sign in via Helmholtz AAI.**
 <div class="image-slider" id="slider2">
     <div class="nav-arrow left" id="prev2">←</div>
-    <img src="images/account_1.png" alt="Image 1" class="active">
-    <img src="images/account_5.png" alt="Image 5">
-    <img src="images/account_6.png" alt="Image 6">
+    <img src="./images/account_1.png" alt="Image 1" class="active">
+    <img src="./images/account_5.png" alt="Image 5">
+    <img src="./images/account_6.png" alt="Image 6">
     <div class="nav-arrow right" id="next2">→</div>
 </div>
 ---

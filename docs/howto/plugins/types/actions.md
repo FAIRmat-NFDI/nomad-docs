@@ -480,7 +480,7 @@ When defining actions that interact with external services, you often need to ha
 
 ### Institute-wide secrets
 
-For secrets that are shared across an institution, such as a subscription to a service like an OpenAPI-powered tool, it is recommended to use environment variables. You can set the environment variable in the Docker container that runs the worker. This way, the secret is not hardcoded in the action's source code and can be managed independently by the administrator of the NOMAD oasis.
+For secrets that are shared across an institution, such as a subscription to a service like an OpenAPI-powered tool, it is recommended to use environment variables. You can set the environment variable in the Docker container that runs the worker. This way, the secret is not hardcoded in the action's source code and can be managed independently by the administrator of the NOMAD Oasis.
 
 You can then access the secret in your action's code using `os.environ.get`:
 
@@ -543,9 +543,9 @@ class SimpleModelDumpable(BaseModel):
         return v.get_secret_value()
 ```
 
-## Adding to your oasis
+## Adding to your Oasis
 
-Make sure your oasis repo is up to date with the template by following the
+Make sure your Oasis repo is up to date with the template by following the
 update [guide](https://github.com/FAIRmat-NFDI/nomad-distro-template?tab=readme-ov-file#updating-the-distribution-from-the-template){:target="_blank" rel="noopener"}. This ensures
 that the necessary containers for `temporal` is setup correctly.
 

@@ -41,4 +41,4 @@ and results of such processing via an open standard and documentation.
 
 The `apmtools` container comes with a collection of getting started tutorials
 via a `Cheatsheet` jupyter notebook which you can access from the `/home/atom_probe_tools`
-sub-directory. Details dependent on the specific configuration of your NOMAD OASIS.
+sub-directory. Details dependent on the specific configuration of your NOMAD Oasis.
