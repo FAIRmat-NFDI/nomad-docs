@@ -18,7 +18,7 @@ By default, an Oasis works like the official NOMAD: published data is openly acc
 
 - Custom Keycloak: You can [host your own Keycloak instance](configure.md#provide-and-connect-your-own-user-management) which provides you full control over the allowed users, and zero-downtime modifications to user access.
 - Network-level restriction: Do not expose the Oasis to the public internet by making it only available on an intranet or through a VPN.
-- Setup Oasis-specific rules: See the section on [restricting access to your Oasis](configure.md#restricting-access-to-your-oasis).
+- Setup Oasis-specific rules: See the section on [controlling access to your Oasis](configure.md#controlling-access-to-your-oasis).
 
 ## Network security
 

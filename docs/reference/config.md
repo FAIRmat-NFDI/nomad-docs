@@ -106,7 +106,7 @@ The following is a reference of all configuration sections and attributes.
 
 ### Services
 
-{{ config_models(['services', 'meta', 'oasis', 'north']) }}
+{{ config_models(['services', 'meta', 'oasis', 'auth', 'north']) }}
 
 ### Files, databases, external services
 
