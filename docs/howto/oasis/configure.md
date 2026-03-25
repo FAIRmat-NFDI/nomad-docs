@@ -245,18 +245,21 @@ Deploying more replicas (via Docker Compose or Kubernetes) adds completely isola
 
 Beyond how many workers you have, you can also control the orchestration logic that dictates how aggressively Temporal dispatches tasks.
 
-Configurations like `batch_processing_concurrency` and `entry_processing_concurrency` act as traffic lights. **Crucially, these limits apply *per upload*, not globally.**
+Configurations like `entry_workflow_batch_concurrency` and `entry_concurrency_target` act as traffic lights. **Crucially, these limits apply *per upload*, not globally.**
 
 ```yaml
 temporal:
   # Max concurrent batches processed simultaneously per upload
-  batch_processing_concurrency: 5
+  entry_workflow_batch_concurrency: 5
   # Max concurrent entries processed within a single batch per upload
-  entry_processing_concurrency: 50
+  entry_concurrency_target: 50
+  # Entries grouped into one process-entry activity invocation
+  entry_activity_batch_size: 5
 ```
 
 * **Defaults are usually sufficient:** For most workloads, these limits keep workers well-saturated.
-* **Tuning for Backpressure:** Because these limits multiply by the number of active uploads, they can quickly scale. If 100 users upload data simultaneously with the default settings, Temporal could attempt to run 25,000 concurrent activities (`100 uploads * 5 batches * 50 entries`). If this massive spike causes your downstream infrastructure (like MongoDB, Elasticsearch, or your network) to timeout or crash, you should **decrease** these concurrency values. Lowering them forces tasks to wait safely in the queue, applying backpressure and keeping the overall system stable.
+* **Tuning for Backpressure:** Because these limits multiply by the number of active uploads, they can quickly scale. If 100 users upload data simultaneously with the default settings, Temporal could attempt to run roughly 25,000 concurrent entries (`100 uploads * 5 batch workflows * 50 entry target`). If this massive spike causes your downstream infrastructure (like MongoDB, Elasticsearch, or your network) to timeout or crash, you should **decrease** these concurrency values. Lowering them forces tasks to wait safely in the queue, applying backpressure and keeping the overall system stable.
+* **Batch size tradeoff:** `entry_activity_batch_size` controls how much work is grouped into each activity. Larger values reduce Temporal scheduling overhead, but make each activity heavier and increase retry blast radius if it fails.
 
 ---
 
@@ -285,14 +288,14 @@ temporal:
 Processing thousands of tiny files is typically very fast computationally, but tasks spend most of their time waiting on database reads/writes or network latency.
 
 * **Behavior:** Worker CPUs sit mostly idle while waiting for I/O.
-* **How to tune:** The default configurations will usually keep workers saturated. If you want to increase throughput, benchmark adding more replicas to widen your I/O pipeline. If your backend databases (Mongo/Elasticsearch) start timing out under the load of many parallel uploads, **lower** `batch_processing_concurrency` and `entry_processing_concurrency` to throttle the system.
+* **How to tune:** The default configurations will usually keep workers saturated. If you want to increase throughput, benchmark adding more replicas to widen your I/O pipeline. If your backend databases (Mongo/Elasticsearch) start timing out under the load of many parallel uploads, **lower** `entry_workflow_batch_concurrency` and `entry_concurrency_target` to throttle the system.
 
 #### Scenario B: Computationally Heavy Processing (CPU Bound)
 
 Dense calculations, heavy parsers, or complex normalizers will quickly peg a CPU core to 100%.
 
 * **Behavior:** The worker machine's CPU becomes the absolute bottleneck.
-* **How to tune:** Rely on the `target_cpu_usage: 0.8` setting so the worker naturally backs off when busy. To increase overall throughput safely, ensure your `pool_size` does not exceed the physical CPU cores allocated to the container (to avoid costly context-switching overhead), and scale horizontally by adding more container replicas.
+* **How to tune:** Rely on the `target_cpu_usage: 0.8` setting so the worker naturally backs off when busy. To increase overall throughput safely, ensure your `pool_size` does not exceed the physical CPU cores allocated to the container (to avoid costly context-switching overhead), and scale horizontally by adding more container replicas. If CPU-heavy tasks are unstable, timing out, or causing long retries, also try decreasing `entry_activity_batch_size` so each activity does less work.
 
 #### Scenario C: Memory-Intensive Processing
 
