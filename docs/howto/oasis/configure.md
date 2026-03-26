@@ -550,7 +550,7 @@ installation above. There are just a three changes.
 - The `nomad.yaml` has modifications to tell Oasis to use your and not the official NOMAD keycloak.
 
 You can start with the regular installation above and manually adopt the config or
-download the already updated configuration files: [nomad-oasis-with-keycloak.zip](../../assets/nomad-oasis-with-keycloak.zip).
+download the already updated configuration files: [nomad-oasis-with-keycloak.zip](./ops/nomad-oasis-with-keycloak.zip).
 The download also contains an additional `configs/nomad-realm.json` that allows you
 to create an initial keycloak realm that is configured for NOMAD automatically.
 
