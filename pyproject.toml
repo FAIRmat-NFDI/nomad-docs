@@ -23,6 +23,9 @@ dependencies = [
 extra-index-url = [
   "https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/simple",
 ]
+# Later version of `click` breaks livereload
+# https://github.com/mkdocs/mkdocs/issues/4032
+constraint-dependencies = ["click<=8.2.1"]
 
 [build-system]
 requires = ["uv_build>=0.7.3,<0.8.0"]
