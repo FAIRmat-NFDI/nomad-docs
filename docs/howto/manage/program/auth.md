@@ -113,14 +113,7 @@ The response has the following structure:
 
 You can **filter** PATs using the following query parameters:
 
-<!-- TODO: here could dump `PATQuery` but need to add description first -->
-
-- search: search by token name (case-insensitive)
-- revoked: filter by explicit revoked status
-- state: filter by token state, either active or inactive
-- created_after, created_before: filter by creation time
-- last_used_after, last_used_before: filter by last usage time
-- expires_after, expires_before: filter by expiration time
+{{ pydantic_fields_list("nomad.auth.tokens.PATQuery") }}
 
 You can **sort** the results with `order_by` using one of:
 

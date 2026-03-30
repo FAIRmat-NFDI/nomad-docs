@@ -302,7 +302,7 @@ def define_env(env):
         return "\n".join(result)
 
     @env.macro
-    def literal_list(path, heading=None):  # pylint: disable=unused-variable
+    def literal_list(path, heading=None):
         """
         Render a markdown unordered list for a Literal type alias.
 
@@ -324,6 +324,48 @@ def define_env(env):
 
         for value in values:
             result.append(f"- `{value}`")
+
+        return "\n".join(result)
+
+    @env.macro
+    def pydantic_fields_list(path, heading=None, hide=[]):
+        """
+        Render a markdown unordered list for a Pydantic model.
+
+        Each item contains the field name and its description.
+
+        Arguments:
+            path: Fully qualified Python path to the model class.
+            heading: Optional markdown heading to prepend.
+            hide: Optional list of field names to exclude.
+        """
+        module_name, name = path.rsplit(".", 1)
+        module = importlib.import_module(module_name)
+        model = getattr(module, name)
+
+        if not hasattr(model, "model_fields"):
+            raise TypeError(f"{path} is not a Pydantic model")
+
+        result = []
+        if heading:
+            result.append(f"{heading}\n")
+
+        for field_name, field in model.model_fields.items():
+            if field_name in hide or field_name.startswith("m_"):
+                continue
+
+            if (
+                field.json_schema_extra
+                and cast(dict, field.json_schema_extra).get("hidden", False) is True
+            ):
+                continue
+
+            description = get_field_description(field)
+
+            if description:
+                result.append(f"- `{field_name}`: {description}")
+            else:
+                result.append(f"- `{field_name}`")
 
         return "\n".join(result)
 
