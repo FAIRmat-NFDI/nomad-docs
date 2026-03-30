@@ -107,9 +107,9 @@ applied_query = result["query"]
 
 The response has the following structure:
 
-- data: the list of PATs
-- pagination: pagination metadata such as total number of results, current page, and page size
-- query: the filters applied to the request
+- `data`: the list of PATs
+- `pagination`: pagination metadata such as total number of results, current page, and page size
+- `query`: the filters applied to the request
 
 You can **filter** PATs using the following query parameters:
 
@@ -218,9 +218,9 @@ If you have the [NOMAD Python package](../../../howto/oasis/install.md#how-to-in
 installed, you can also use the `nomad.client.Auth` helper:
 
 !!! warning
-  This username/password-based flow is kept mainly for compatibility and
-  trusted first-party usage. For new programmatic integrations, prefer
-  Personal Access Tokens (PATs) instead.
+    This username/password-based flow is kept mainly for compatibility and
+    trusted first-party usage. For new programmatic integrations, prefer
+    Personal Access Tokens (PATs) instead.
 
 ```python
 import os
