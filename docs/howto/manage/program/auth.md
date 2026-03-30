@@ -113,11 +113,11 @@ The response has the following structure:
 
 You can **filter** PATs using the following query parameters:
 
-{{ pydantic_fields_list("nomad.auth.tokens.PATQuery") }}
+{{ literal_or_pydantic_list("nomad.auth.tokens.PATQuery") }}
 
 You can **sort** the results with `order_by` using one of:
 
-{{ literal_list("nomad.auth.tokens.PATSortOrder") }}
+{{ literal_or_pydantic_list("nomad.auth.tokens.PATSortOrder") }}
 
 ### Inspect a PAT
 
