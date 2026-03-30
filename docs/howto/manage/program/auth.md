@@ -124,16 +124,7 @@ You can **filter** PATs using the following query parameters:
 
 You can **sort** the results with `order_by` using one of:
 
-<!-- TODO: dump `PATSortOrder` to a UL -->
-
-- created_asc
-- created_desc
-- expires_asc
-- expires_desc
-- last_used_asc
-- last_used_desc
-- name_asc
-- name_desc
+{{ literal_list("nomad.auth.tokens.PATSortOrder") }}
 
 ### Inspect a PAT
 

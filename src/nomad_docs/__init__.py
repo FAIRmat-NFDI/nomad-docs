@@ -302,6 +302,32 @@ def define_env(env):
         return "\n".join(result)
 
     @env.macro
+    def literal_list(path, heading=None):  # pylint: disable=unused-variable
+        """
+        Render a markdown unordered list for a Literal type alias.
+
+        Arguments:
+            path: Fully qualified Python path to the Literal alias.
+            heading: Optional markdown heading to prepend.
+        """
+        module_name, literal_name = path.rsplit(".", 1)
+        module = importlib.import_module(module_name)
+        literal_obj = getattr(module, literal_name)
+
+        values = get_args(literal_obj)
+        if not values:
+            raise TypeError(f"{path} does not appear to be a Literal alias")
+
+        result = []
+        if heading:
+            result.append(f"{heading}\n")
+
+        for value in values:
+            result.append(f"- `{value}`")
+
+        return "\n".join(result)
+
+    @env.macro
     def pydantic_model(path, heading=None, hide=[]):  # pylint: disable=unused-variable
         """
         Produces markdown code for the given pydantic model.
