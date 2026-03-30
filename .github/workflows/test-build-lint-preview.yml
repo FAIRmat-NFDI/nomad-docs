@@ -16,6 +16,7 @@ on:
 env:
   UV_VERSION: 0.6
   PYTHON_VERSION: 3.12
+  DISABLE_MKDOCS_2_WARNING: "true"
 
 jobs:
   lint-markdown:
