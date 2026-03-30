@@ -76,9 +76,11 @@ uploads = response.json()["data"]
 
 ### List your PATs
 
-<!-- TODO: include filtering syntax -->
+You can list all PATs for your account, and optionally filter, sort, and paginate the results.
 
-You can list all PATs for your account:
+For example, this request searches for PATs whose name matches `"ci"`,
+filters for active tokens, sorts by most recently created first, and
+returns the first page of results:
 
 ```python
 import requests
@@ -86,11 +88,52 @@ import requests
 response = requests.get(
     "{{ nomad_url() }}/v1/pats",
     headers={"Authorization": "Bearer <keycloak-access-token>"},
+    params={
+        "search": "ci",
+        "state": "active",
+        "order_by": "created_desc",
+        "page_size": 20,
+        "page": 1,
+    },
 )
 response.raise_for_status()
 
-tokens = response.json()
+result = response.json()
+
+tokens = result["data"]
+pagination = result["pagination"]
+applied_query = result["query"]
 ```
+
+The response has the following structure:
+
+- data: the list of PATs
+- pagination: pagination metadata such as total number of results, current page, and page size
+- query: the filters applied to the request
+
+You can **filter** PATs using the following query parameters:
+
+<!-- TODO: here could dump `PATQuery` but need to add description first -->
+
+- search: search by token name (case-insensitive)
+- revoked: filter by explicit revoked status
+- state: filter by token state, either active or inactive
+- created_after, created_before: filter by creation time
+- last_used_after, last_used_before: filter by last usage time
+- expires_after, expires_before: filter by expiration time
+
+You can **sort** the results with `order_by` using one of:
+
+<!-- TODO: dump `PATSortOrder` to a UL -->
+
+- created_asc
+- created_desc
+- expires_asc
+- expires_desc
+- last_used_asc
+- last_used_desc
+- name_asc
+- name_desc
 
 ### Inspect a PAT
 
