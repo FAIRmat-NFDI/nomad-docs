@@ -136,7 +136,6 @@ theme:
         name: Switch to system preference
   font:
     text: "Titillium Web"
-  logo: assets/nomad-logo.png
   favicon: assets/favicon.png
   features:
     - navigation.path
@@ -144,7 +143,9 @@ theme:
     - navigation.top
     - content.code.copy
     - content.code.annotate
+  custom_dir: overrides
   icon:
+    logo: nomad/nomad-logo-unfilled
     repo: fontawesome/brands/github
 # repo_url: https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR/
 markdown_extensions:
@@ -162,9 +163,12 @@ markdown_extensions:
       permalink: True
   - pymdownx.arithmatex:
       generic: true
-  # - pymdownx.emoji: # TODO make sure this isn't used!!
-  #     emoji_index: !!python/name:material.extensions.emoji.twemoji
-  #     emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+      options:
+        custom_icons:
+          - overrides/.icons
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid

@@ -203,6 +203,9 @@
     --md-primary-fg-color--light: #5f79e8;
     --md-primary-fg-color--dark: #1d38ab;
     --md-accent-fg-color: #008a67;
+
+    --nomad-logo-primary: #192e86;
+    --nomad-logo-secondary: #2a4cdf;
 }
 
 [data-md-color-scheme="default"] .md-header,
@@ -254,6 +257,9 @@
     --md-primary-fg-color--light: #91a8ff;
     --md-primary-fg-color--dark: #4b6ce6;
     --md-accent-fg-color: #3bc49a;
+
+    --nomad-logo-primary: #6162a5;
+    --nomad-logo-secondary: #8b8cec;
 }
 
 [data-md-color-scheme="slate"] .md-header,
