@@ -32,7 +32,7 @@ nav:
           - Programmatically:
               # - Install nomad-lab: howto/programmatic/pythonlib.md # TODO Integrate into "Use the API"
               - API Overview: howto/manage/program/api.md # TODO separate into How-to and Explanation/Reference
-              - Auth with tokens: howto/manage/program/auth.md # TODO: better name?
+              - Programmatic authentication: howto/manage/program/auth.md
               - Download data: howto/manage/program/download.md
               - Publish data using Python: howto/manage/program/publish_python.md
               - Access processed data: howto/manage/program/archive_query.md
