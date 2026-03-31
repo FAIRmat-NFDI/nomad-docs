@@ -28,7 +28,7 @@ PATs are preferred because they are:
 
 ### Create a PAT
 
-A PAT can be created via the API. For example:
+A PAT can be created via the API with the [keycloak access token](#keycloak-access-tokens). For example:
 
 !!! warning
     Always grant the **minimum required scopes** when creating a PAT.
