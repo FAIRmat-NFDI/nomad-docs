@@ -103,7 +103,7 @@ result = response.json()
 tokens = result["data"]
 ```
 
-You can filter and sort PATs using query parameters, see the [API dashboard](https://nomad-lab.eu/prod/v1/api/v1/extensions/docs){:target="_blank" rel="noopener"} for available options and examples.
+You can filter and sort PATs using query parameters, see the API dashboard for available options and examples.
 
 ### Inspect a PAT
 
