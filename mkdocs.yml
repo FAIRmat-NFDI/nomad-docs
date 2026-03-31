@@ -116,10 +116,7 @@ nav:
 theme:
   name: material
   palette:
-    - media: "(prefers-color-scheme)"
-      toggle:
-        icon: material/brightness-auto
-        name: Switch to light mode
+    # 1. Light
     - media: "(prefers-color-scheme: light)"
       scheme: default
       primary: custom
@@ -127,6 +124,7 @@ theme:
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
+    # 2. Dark
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
       primary: custom
@@ -134,6 +132,11 @@ theme:
       toggle:
         icon: material/brightness-4
         name: Switch to system preference
+    # 3. Auto
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
   font:
     text: "Titillium Web"
   favicon: assets/favicon.png
