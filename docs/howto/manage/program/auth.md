@@ -60,14 +60,21 @@ raw_token = pat["raw_token"]
 
 ### Use a PAT in Python
 
-Once created, use the PAT in subsequent requests:
+Once created, we recommend storing it in an environment variable:
+
+```bash
+export NOMAD_PAT="<personal-access-token>"
+```
+
+Use the PAT in subsequent requests:
 
 ```python
+import os
 import requests
 
 response = requests.get(
     "{{ nomad_url() }}/v1/uploads",
-    headers={"Authorization": "Bearer <personal-access-token>"},
+    headers={"Authorization": f"Bearer {os.environ["NOMAD_PAT"]}"},
 )
 response.raise_for_status()
 
@@ -83,11 +90,12 @@ filters for active tokens, sorts by most recently created first, and
 returns the first page of results:
 
 ```python
+import os
 import requests
 
 response = requests.get(
     "{{ nomad_url() }}/v1/pats",
-    headers={"Authorization": "Bearer <keycloak-access-token>"},
+    headers={"Authorization": f"Bearer {os.environ["NOMAD_PAT"]}"},
     params={
         "search": "ci",
         "state": "active",
