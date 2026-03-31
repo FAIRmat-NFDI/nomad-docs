@@ -302,57 +302,6 @@ def define_env(env):
         return "\n".join(result)
 
     @env.macro
-    def literal_or_pydantic_list(path, heading=None, hide=[]):
-        """
-        Render a markdown unordered list for either a Pydantic model or a Literal type alias.
-
-        - For a Pydantic model, each item contains the field name and its description.
-        - For a Literal alias, each item contains one allowed literal value.
-
-        Arguments:
-            path: Fully qualified Python path to the target object.
-            heading: Optional markdown heading to prepend.
-            hide: Optional list of field names to exclude for Pydantic models.
-        """
-        module_name, name = path.rsplit(".", 1)
-        module = importlib.import_module(module_name)
-        obj = getattr(module, name)
-
-        result = []
-        if heading:
-            result.append(f"{heading}\n")
-
-        # Pydantic model
-        if hasattr(obj, "model_fields"):
-            for field_name, field in obj.model_fields.items():
-                if field_name in hide or field_name.startswith("m_"):
-                    continue
-
-                if (
-                    field.json_schema_extra
-                    and cast(dict, field.json_schema_extra).get("hidden", False) is True
-                ):
-                    continue
-
-                description = get_field_description(field)
-
-                if description:
-                    result.append(f"- `{field_name}`: {description}")
-                else:
-                    result.append(f"- `{field_name}`")
-
-            return "\n".join(result)
-
-        # Literal alias
-        values = get_args(obj)
-        if values:
-            for value in values:
-                result.append(f"- `{value}`")
-            return "\n".join(result)
-
-        raise TypeError(f"{path} is neither a Pydantic model nor a Literal alias")
-
-    @env.macro
     def pydantic_model(path, heading=None, hide=[]):  # pylint: disable=unused-variable
         """
         Produces markdown code for the given pydantic model.

@@ -109,23 +109,9 @@ response.raise_for_status()
 result = response.json()
 
 tokens = result["data"]
-pagination = result["pagination"]
-applied_query = result["query"]
 ```
 
-The response has the following structure:
-
-- `data`: the list of PATs
-- `pagination`: pagination metadata such as total number of results, current page, and page size
-- `query`: the filters applied to the request
-
-You can **filter** PATs using the following query parameters:
-
-{{ literal_or_pydantic_list("nomad.auth.tokens.PATQuery") }}
-
-You can **sort** the results with `order_by` using one of:
-
-{{ literal_or_pydantic_list("nomad.auth.tokens.PATSortOrder") }}
+You can filter and sort PATs using query parameters, see the [API dashboard](https://nomad-lab.eu/prod/v1/api/v1/extensions/docs) for available options and examples.
 
 ### Inspect a PAT
 
