@@ -232,3 +232,22 @@ response.raise_for_status()
 
 uploads = response.json()["data"]
 ```
+
+## App token
+
+!!! info "Deprecated tokens"
+    app token is deprecated and will be removed in a future release.
+    They should not be used for new integrations. Use [**Personal Access Tokens (PATs)**](#personal-access-tokens) instead.
+
+If the short-term expiration of the default *access token* does not suit your needs,
+you can request an *app token* with a user-defined expiration. For example, you can
+send the GET request `/auth/app_token?expires_in=86400` together with some way of
+authentication, e.g. header `Authorization: Bearer <access token>`. The API will return
+an app token, which is valid for 24 hours in subsequent request headers with the format
+`Authorization: Bearer <app token>`. The request will be declined if the expiration is
+larger than the maximum expiration defined by the API config.
+
+!!! warning
+    Despite the name, the app token is used to impersonate the user who requested it.
+    It does not discern between different uses and will only become invalid once it
+    expires (or when the API's secret is changed).
