@@ -12,16 +12,8 @@ NOMAD supports [multiple token types](../../../explanation/auth.md#access-tokens
 
 ## Personal Access Tokens
 
-A [Personal Access Token (PAT)](../../../explanation/auth.md#personal-access-tokens-pats)
-is tied to your user account and can be restricted to
-[specific scopes](../../../explanation/auth.md#authorization-via-scopes).
-
-PATs are preferred because they are:
-
-- **Scoped** — limit access to specific resources/actions
-- **Revocable** — can be invalidated at any time
-- **Rotatable** — can be replaced without affecting your account
-- **Time-limited** — can be configured with an explicit expiration to reduce long-term risk
+[Personal Access Tokens (PATs)](../../../explanation/auth.md#personal-access-tokens-pats) are
+the [preferred way for programmatic access](../../../explanation/auth.md#personal-access-tokens-pats) to the API.
 
 !!! note
     GUI management page for PATs is coming soon.
