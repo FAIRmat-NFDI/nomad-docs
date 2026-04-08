@@ -21,7 +21,7 @@ The other files are mounted into the docker containers.
 The most basic `docker-compose.yaml` to run an Oasis looks like this:
 
 ```yaml
---8<-- "docs/howto/oasis/ops/docker-compose/nomad-oasis/docker-compose.yaml"
+--8<-- "docs/howto/oasis/data/docker-compose/nomad-oasis/docker-compose.yaml"
 ```
 
 Changes necessary:
@@ -50,7 +50,7 @@ A few things to notice:
 NOMAD app and worker read the `nomad.yaml` for configuration.
 
 ```yaml
---8<-- "docs/howto/oasis/ops/docker-compose/nomad-oasis/configs/nomad.yaml"
+--8<-- "docs/howto/oasis/data/docker-compose/nomad-oasis/configs/nomad.yaml"
 ```
 
 You should change the following:
@@ -77,7 +77,7 @@ The GUI container serves as a proxy that forwards requests to the app container.
 proxy is an nginx server and needs a configuration similar to this:
 
 ```none
---8<-- "docs/howto/oasis/ops/docker-compose/nomad-oasis/configs/nginx.conf"
+--8<-- "docs/howto/oasis/data/docker-compose/nomad-oasis/configs/nginx.conf"
 ```
 
 A few things to notice:
@@ -202,44 +202,123 @@ Linux), you might run into problems with processing large uploads. If the NOMAD 
 and app are run on the same computer, the app might become unresponsive, when the worker
 consumes all system resources.
 
-By default, the Temporal-based worker setup uses a single process per container. The default deployment template defines **4 replicas** of the worker container, allowing multiple uploads and tasks to be processed in parallel. Depending on your machine and workload, you may want to adjust how many replicas are running and how much CPU and memory they are allowed to use.
+NOMAD is designed to efficiently process a wide variety of materials science data out of the box. For most standard deployments, **the default configurations will work perfectly fine** and provide a stable, high-throughput environment.
 
-There are several ways to control resource usage and improve performance:
+However, depending on your specific hardware architecture or the unique shape of your data (e.g., massive bursts of tiny files, highly computationally expensive parsers, or massive memory-heavy datasets), you may want to optimize your setup.
 
-- Increase or decrease the number of worker **replicas** (recommended)
-- Adjust CPU and memory limits in Docker
-- (Optionally) Increase the number of worker **processes** on the Python side
+Here is a guide on how to tune NOMAD's orchestration engine (Temporal) and worker configurations for specialized workloads.
 
 ---
 
-### Increase the Number of Worker Replicas (Recommended)
+### 1. Scaling Strategy: Replicas vs. Pool Size
 
-The most robust way to scale worker performance is by changing the number of replicas for the worker container. This ensures that multiple worker instances can process tasks in parallel and that they are properly managed and restarted if one fails.
+When you need to increase your processing throughput, you have two primary choices: add more containers (Horizontal Scaling via Replicas) or increase the capacity of your existing containers (Vertical Scaling via Pool Size).
 
-In your `docker-compose.yml`, you can modify the worker service like this:
+#### `pool_size` (Vertical Scaling)
+
+In NOMAD, worker pools rely on Python process executors to bypass the Global Interpreter Lock (GIL). This means that increasing the `pool_size` will spawn entirely separate Python processes inside a single container.
+
+You can configure this in your `nomad.yaml` for different worker types (`internal_worker`, `cpu_worker`, `gpu_worker`):
+
+```yaml
+temporal:
+  internal_worker:
+    # Number of Python processes running in this container
+    pool_size: 1
+    # Restart the process after 100 tasks to clear memory leaks
+    max_tasks_per_child: 100
+```
+
+* **Recommended baseline:** Start with the current default (`pool_size: 1`) and scale replicas first.
+* **When to increase `pool_size`:** Increase it gradually (up to the number of CPU cores allocated to the container) only if a single process is not already saturating your available CPU and you still have memory headroom. This typically applies to workloads with idle time (I/O waits) rather than processes that already run heavily in compiled code paths (e.g., heavy NumPy workloads that already bypass the GIL).
+* **Memory impact:** Each extra process consumes additional memory. A container with `pool_size: 10` can use roughly similar memory to ten separate containers with `pool_size: 1`.
+
+#### Worker Replicas (Horizontal Scaling)
+
+Deploying more replicas (via Docker Compose or Kubernetes) adds completely isolated containers to your cluster. This is configured in your deployment manifests, not in `nomad.yaml`.
+
+* **The Isolation Advantage:** We generally recommend relying on replicas for scaling rather than massive `pool_size` values. If a malformed file triggers a severe crash in a Python C-extension (like a segfault), it can bring down the entire container. If you have a high `pool_size`, that single bad file just killed the processing for all other parallel tasks sharing that pod. Replicas isolate this "blast radius," ensuring only the offending container dies and is rescheduled.
+
+*Recommendation: Prefer scaling replicas first for throughput and fault tolerance. If replicas still do not saturate your available CPU, then gradually increase `pool_size` while monitoring memory usage.*
+
+---
+
+### 2. Resource Management & Guardrails
+
+To keep your cluster healthy, you must combine infrastructure constraints with NOMAD's application-aware guardrails.
+
+* **Hard Limits (Infrastructure):** Your Kubernetes or Docker pod resource limits (`resources.limits.memory` and `resources.limits.cpu`) are the ultimate guardrails. They protect your host node from being completely consumed by a runaway worker.
+* **Soft Limits (NOMAD `WorkerConfig`):** Settings like `target_memory_usage` and `target_cpu_usage` act as an early-warning system. They allow the worker to gracefully pause accepting new tasks from the queue *before* the container hits the hard Kubernetes limit. This prevents aggressive and disruptive Out-Of-Memory (OOM) kills.
+
+For Docker Compose deployments, you can set CPU hard limits directly in the worker service:
 
 ```yml
 services:
-  worker:
-    ...
-    deploy:
-      replicas: 4  # default value; adjust based on your system capacity
+    worker:
+        ...
+        deploy:
+            resources:
+                limits:
+                    cpus: '0.50'
 ```
 
-Each replica runs as an independent worker process. Docker will handle restarting and load balancing between them.
+The value refers to the number of CPU cores the container can use (for example `0.50` means half a CPU core). See also the [docker-compose documentation](https://docs.docker.com/compose/compose-file/compose-file-v3/#resources){:target="_blank" rel="noopener"}.
 
-### Adjust the Number of Worker Processes (Advanced Option)
-
-If necessary, you can also increase the number of processes within each worker container by modifying the worker command in your docker-compose.yml:
-
-```yml
-services:
-  worker:
-    ...
-    command: python -m nomad.cli admin run action-internal-worker --workers 4
+```yaml
+temporal:
+  internal_worker:
+    # Stop accepting new tasks if container CPU hits 80%
+    target_cpu_usage: 0.8
+    # Stop accepting new tasks if container RAM hits 80%
+    target_memory_usage: 0.8
 ```
 
-This will run multiple worker processes within a single container. However, this approach is less robust than scaling via replicas, as process-level management (e.g., restarting if one worker crashes) is handled less effectively inside a single container.
+---
+
+### 3. Orchestration Concurrency & Backpressure
+
+Beyond how many workers you have, you can also control the orchestration logic that dictates how aggressively Temporal dispatches tasks.
+
+Configurations like `entry_workflow_batch_concurrency` and `entry_concurrency_target` act as traffic lights. **Crucially, these limits apply *per upload*, not globally.**
+
+```yaml
+temporal:
+  # Max concurrent batches processed simultaneously per upload
+  entry_workflow_batch_concurrency: 5
+  # Max concurrent entries processed within a single batch per upload
+  entry_concurrency_target: 50
+  # Entries grouped into one process-entry activity invocation
+  entry_activity_batch_size: 5
+```
+
+* **Defaults are usually sufficient:** For most workloads, these limits keep workers well-saturated.
+* **Tuning for Backpressure:** Because these limits multiply by the number of active uploads, they can quickly scale. If 100 users upload data simultaneously with the default settings, Temporal could attempt to run roughly 25,000 concurrent entries (`100 uploads * 5 batch workflows * 50 entry target`). If this massive spike causes your downstream infrastructure (like MongoDB, Elasticsearch, or your network) to timeout or crash, you should **decrease** these concurrency values. Lowering them forces tasks to wait safely in the queue, applying backpressure and keeping the overall system stable.
+* **Batch size tradeoff:** `entry_activity_batch_size` controls how much work is grouped into each activity. Larger values reduce Temporal scheduling overhead, but make each activity heavier and increase retry blast radius if it fails.
+
+---
+
+### 4. Tuning for Specific Workloads
+
+#### Scenario A: High Volume of Tiny Files (I/O Bound)
+
+Processing thousands of tiny files is typically very fast computationally, but tasks spend most of their time waiting on database reads/writes or network latency.
+
+* **Behavior:** Worker CPUs sit mostly idle while waiting for I/O.
+* **How to tune:** The default configurations will usually keep workers saturated. If you want to increase throughput, benchmark adding more replicas to widen your I/O pipeline. If your backend databases (Mongo/Elasticsearch) start timing out under the load of many parallel uploads, **lower** `entry_workflow_batch_concurrency` and `entry_concurrency_target` to throttle the system.
+
+#### Scenario B: Computationally Heavy Processing (CPU Bound)
+
+Dense calculations, heavy parsers, or complex normalizers will quickly peg a CPU core to 100%.
+
+* **Behavior:** The worker machine's CPU becomes the absolute bottleneck.
+* **How to tune:** Rely on the `target_cpu_usage: 0.8` setting so the worker naturally backs off when busy. Keep `pool_size` conservative (often `1`) and scale horizontally with replicas first. Increase `pool_size` only if a single worker process is not already saturating CPU and you have enough memory headroom. If CPU-heavy tasks are unstable, timing out, or causing long retries, also try decreasing `entry_activity_batch_size` so each activity does less work.
+
+#### Scenario C: Memory-Intensive Processing
+
+Workloads involving large datasets or trajectories that must be loaded entirely into RAM.
+
+* **Behavior:** High risk of sudden Out-Of-Memory (OOM) crashes.
+* **How to tune:** This scenario requires strict isolation. Favor higher replica counts with very low `pool_size` limits (even a `pool_size: 1`). This ensures that if a massive dataset causes an unavoidable OOM spike, it only kills one isolated replica rather than a pooled worker that is concurrently processing other users' data. Rely heavily on strict Kubernetes memory limits combined with NOMAD's `target_memory_usage: 0.7` to reject tasks gracefully when RAM gets tight.
 
 ### Limiting the use of threads
 
@@ -255,23 +334,6 @@ services:
             ...
             OMP_NUM_THREADS: 1
 ```
-
-### Limit CPU with docker
-
-You can add a `deploy.resources.limits` section to the worker service in the `docker-compose.yml`:
-
-```yml
-services:
-    worker:
-        ...
-        deploy:
-            resources:
-                limits:
-                    cpus: '0.50'
-```
-
-The number refers to the percentage use of a single CPU core.
-See also the [docker-compose documentation](https://docs.docker.com/compose/compose-file/compose-file-v3/#resources){:target="_blank" rel="noopener"}.
 
 ## Controlling access to your Oasis
 
@@ -488,14 +550,14 @@ installation above. There are just a three changes.
 - The `nomad.yaml` has modifications to tell Oasis to use your and not the official NOMAD keycloak.
 
 You can start with the regular installation above and manually adopt the config or
-download the already updated configuration files: [nomad-oasis-with-keycloak.zip](../../assets/nomad-oasis-with-keycloak.zip).
+download the already updated configuration files: [nomad-oasis-with-keycloak.zip](./data/nomad-oasis-with-keycloak.zip).
 The download also contains an additional `configs/nomad-realm.json` that allows you
 to create an initial keycloak realm that is configured for NOMAD automatically.
 
 First, the `docker-compose.yaml`:
 
 ```yaml
---8<-- "docs/howto/oasis/ops/docker-compose/nomad-oasis-with-keycloak/docker-compose.yaml"
+--8<-- "docs/howto/oasis/data/docker-compose/nomad-oasis-with-keycloak/docker-compose.yaml"
 ```
 
 A few notes:
@@ -509,7 +571,7 @@ A few notes:
 Second, we add a keycloak location to the nginx config:
 
 ```nginx
---8<-- "docs/howto/oasis/ops/docker-compose/nomad-oasis-with-keycloak/configs/nginx.conf"
+--8<-- "docs/howto/oasis/data/docker-compose/nomad-oasis-with-keycloak/configs/nginx.conf"
 ```
 
 A few notes:
@@ -520,7 +582,7 @@ A few notes:
 Third, we modify the keycloak configuration in the `nomad.yaml`:
 
 ```yaml
---8<-- "docs/howto/oasis/ops/docker-compose/nomad-oasis-with-keycloak/configs/nomad.yaml"
+--8<-- "docs/howto/oasis/data/docker-compose/nomad-oasis-with-keycloak/configs/nomad.yaml"
 ```
 
 You should change the following:

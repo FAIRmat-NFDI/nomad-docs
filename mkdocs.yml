@@ -32,6 +32,7 @@ nav:
           - Programmatically:
               # - Install nomad-lab: howto/programmatic/pythonlib.md # TODO Integrate into "Use the API"
               - API Overview: howto/manage/program/api.md # TODO separate into How-to and Explanation/Reference
+              - Programmatic authentication: howto/manage/program/auth.md
               - Download data: howto/manage/program/download.md
               - Publish data using Python: howto/manage/program/publish_python.md
               - Access processed data: howto/manage/program/archive_query.md
@@ -116,10 +117,7 @@ nav:
 theme:
   name: material
   palette:
-    - media: "(prefers-color-scheme)"
-      toggle:
-        icon: material/brightness-auto
-        name: Switch to light mode
+    # 1. Light
     - media: "(prefers-color-scheme: light)"
       scheme: default
       primary: custom
@@ -127,6 +125,7 @@ theme:
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
+    # 2. Dark
     - media: "(prefers-color-scheme: dark)"
       scheme: slate
       primary: custom
@@ -134,9 +133,13 @@ theme:
       toggle:
         icon: material/brightness-4
         name: Switch to system preference
+    # 3. Auto
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
   font:
     text: "Titillium Web"
-  logo: assets/nomad-logo.png
   favicon: assets/favicon.png
   features:
     - navigation.path
@@ -144,7 +147,9 @@ theme:
     - navigation.top
     - content.code.copy
     - content.code.annotate
+  custom_dir: overrides
   icon:
+    logo: nomad/nomad-logo-unfilled
     repo: fontawesome/brands/github
 # repo_url: https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR/
 markdown_extensions:
@@ -162,9 +167,12 @@ markdown_extensions:
       permalink: True
   - pymdownx.arithmatex:
       generic: true
-  # - pymdownx.emoji: # TODO make sure this isn't used!!
-  #     emoji_index: !!python/name:material.extensions.emoji.twemoji
-  #     emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+      options:
+        custom_icons:
+          - overrides/.icons
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid

@@ -122,3 +122,49 @@ curl localhost:8000/nomad-oasis/myapi/static/static_page.html
     distributed e.g. in PyPI, you will need to explicitly include them in the
     `MANIFEST.in` file of your Python package. See more information in [the setuptools
     guide](https://setuptools.pypa.io/en/latest/userguide/miscellaneous.html#controlling-files-in-the-distribution){:target="_blank" rel="noopener"}.
+
+## Protecting the API with auth
+
+If your API should only be accessible to authenticated requests that satisfy the
+configured access policy (deployment whitelist and scopes), you can attach an auth dependency
+directly to the `FastAPI` app.
+This ensures that every request:
+
+- Is made by an authenticated user (authentication)
+- Has the required permissions via [scopes](../../../explanation/auth.md#authorization-via-scopes) (authorization)
+
+The dependency `get_current_user(...)` enforces both.
+
+Use app-level dependencies when all endpoints share the same access requirements,
+and route-level dependencies when different endpoints require different scopes.
+
+For example, the following app requires the "uploads:read" scope for every request:
+
+```python hl_lines="6"
+from nomad.app.v1.routers.auth import get_current_user
+from nomad.auth.scopes import Scope
+
+app = FastAPI(
+    ...,
+    dependencies=[Depends(get_current_user([Scope.UPLOADS_READ], allow_anonymous=False))],
+)
+```
+
+If you only want to protect specific endpoints, you can add the dependency at the
+route level instead:
+
+```python hl_lines="8-11"
+from nomad.app.v1.routers.auth import get_current_user
+from nomad.auth.scopes import Scope
+
+app = FastAPI(...)
+
+@app.get("/uploads")
+async def list_uploads(
+    user: Annotated[
+        User,
+        Depends(get_current_user([Scope.UPLOADS_READ], allow_anonymous=False)),
+    ],
+):
+    return {"message": "Protected endpoint"}
+```
