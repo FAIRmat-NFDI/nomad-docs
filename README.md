@@ -40,8 +40,9 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 
 ```powershell
 powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
-Or, from PyPI:
 ```
+
+Or, from PyPI:
 
 #### (b) With pip
 
@@ -137,7 +138,7 @@ git push origin my-feature-branch
 
 - Go to your fork on GitHub.
 - Click **"Compare & pull request"**.
-- Choose the base repo (`FAIRmat-NFDI/nomad-docs`) and target branch (e.g., `main`).
+- Choose the base repo (`FAIRmat-NFDI/nomad-docs`) and target branch (e.g., `develop`).
 - Describe your changes and submit the PR.
 
 > ✅ Your PR will be reviewed by the maintainers. You don’t need write access to contribute this way.
