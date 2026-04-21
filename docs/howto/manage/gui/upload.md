@@ -126,7 +126,7 @@ This section shows how to publish your data on NOMAD and assign a DOI.
         Once published, the upload becomes immutable, meaning its contents can no longer be modified.
         However, you can still edit its metadata.
 
-4. In the *Process data* section, select the entries to include in a dataset by checking the boxes next to them.
+4. In the *Process data* section of the upload page, select the entries to include in a dataset by checking the boxes next to them.
 5. Click the <img src="images/icon-edit-metadata.png" alt="Edit metadata icon" width="20"> icon to open the `Edit upload metadata` window for the selected entries.
 6. In the *Datasets* section:
     - Create a new dataset by providing a name and clicking `ADD ENTRY TO NEW DATASET`, or
