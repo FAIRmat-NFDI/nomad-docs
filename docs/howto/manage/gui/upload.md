@@ -129,15 +129,14 @@ This section shows how to publish your data on NOMAD and assign a DOI.
 4. In the *Process data* section, select the entries to include in a dataset by checking the boxes next to them.
 5. Click the <img src="images/icon-edit-metadata.png" alt="Edit metadata icon" width="20"> icon to open the `Edit upload metadata` window for the selected entries.
 6. In the *Datasets* section:
-    - Create a new dataset by providing a name and clicking `ADD ENTRY TO NEW DATASET`, or  
-    - Select an existing dataset from the dropdown menu and click `ADD ENTRY TO EXISTING DATASET`.  
+    - Create a new dataset by providing a name and clicking `ADD ENTRY TO NEW DATASET`, or
+    - Select an existing dataset from the dropdown menu and click `ADD ENTRY TO EXISTING DATASET`.
 
     Click `SUBMIT`.
 
-7. Go to the dataset page by clicking on `Datasets` under the `PUBLISH` menu in the top panel.  
-8. Click on the <img src="images/icon-assign-doi.png" alt="Assign DOI icon" width="20"> icon next to the dataset to assign a DOI. 
+7. Go to the dataset page by clicking on `Datasets` under the `PUBLISH` menu in the top panel.
+8. Click on the <img src="images/icon-assign-doi.png" alt="Assign DOI icon" width="20"> icon next to the dataset to assign a DOI.
 9. A confirmation prompt will appear on the screen. Click on `ASSIGN DOI`.
-
 
  After assigning a DOI, the dataset becomes permanent. Entries can be added, but not removed.
 
