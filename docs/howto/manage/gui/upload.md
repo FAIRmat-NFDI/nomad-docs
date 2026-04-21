@@ -112,13 +112,34 @@ upload it first or with everything else as part of an archive file.
 
 ## Publish and get a DOI
 
-After clicking the `PUBLISH` button, the uploaded files will become immutable, but you can still
-edit the metadata.
+This section shows how to publish your data on NOMAD and assign a DOI.
 
-As part of the *edit metadata* functionality, you can create and assign *datasets*.
-Go to `PUBLISH` / `Datasets` in the menu to see all your datasets. Here you can assign
-a DOI to created *datasets*. For a *dataset* with DOI, you can only add more entries, but
-not remove entries.
+!!! Info "DOI's can only be assigned to datasets"
+    You must add entries to a dataset before assigning a DOI.
+
+1. Create an upload and add your data files (entries).
+2. Select an embargo period (if needed) from the dropdown menu in the *Publish* section at the bottom of the upload page.  
+   If you want to publish immediately, select *No embargo*.
+3. Click on the `PUBLISH` button on the upload page. A confirmation prompt will appear on the screen. Click on `PUBLISH`.
+
+    !!! warning "Warning"
+        Once published, the upload becomes immutable, meaning its contents can no longer be modified.
+        However, you can still edit its metadata.
+
+4. In the *Process data* section, select the entries to include in a dataset by checking the boxes next to them.
+5. Click the <img src="images/icon-edit-metadata.png" alt="Edit metadata icon" width="20"> icon to open the `Edit upload metadata` window for the selected entries.
+6. In the *Datasets* section:
+    - Create a new dataset by providing a name and clicking `ADD ENTRY TO NEW DATASET`, or  
+    - Select an existing dataset from the dropdown menu and click `ADD ENTRY TO EXISTING DATASET`.  
+
+    Click `SUBMIT`.
+
+7. Go to the dataset page by clicking on `Datasets` under the `PUBLISH` menu in the top panel.  
+8. Click on the <img src="images/icon-assign-doi.png" alt="Assign DOI icon" width="20"> icon next to the dataset to assign a DOI. 
+9. A confirmation prompt will appear on the screen. Click on `ASSIGN DOI`.
+
+
+ After assigning a DOI, the dataset becomes permanent. Entries can be added, but not removed.
 
 ## Upload limits
 
