@@ -6,7 +6,7 @@ See the releases for different versions of the documentation (from v1.4.0 onward
 
 ## Contributing
 
-- Typos, corrections, and missing docs can be reported by [Creating an Issue](https://github.com/FAIRmat-NFDI/nomad-docs/issues/new)
+- Typos, corrections, and missing docs can be reported by [Creating an Issue](https://gaskjdhaskhdaksjhdjahsdaksjhdithub.com/FAIRmat-NFDI/nomad-docs/issues/new)
 
 - For internal contributions (write access to the repo required), please open a pull request (PR) with your changes. **At least one review from a FAIRmat co-worker is required before merging**. If you are not sure who to assign, please ask in the PR conversation by tagging @ahm531 or @JFRudzinski.
 
