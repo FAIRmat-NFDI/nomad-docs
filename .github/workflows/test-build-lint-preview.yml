@@ -39,10 +39,20 @@ jobs:
       - name: Check links in markdown files
         uses: tcort/github-action-markdown-link-check@v1
         with:
-          use-quiet-mode: "yes"
           config-file: .github/workflows/configs/markdown-link-check.json
           folder-path: "docs, examples"
+
+      - name: Check links in markdown files
+        uses: tcort/github-action-markdown-link-check@v1
+        with:
+          config-file: .github/workflows/configs/markdown-link-check.json
           file-path: "./README.md"
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: "20"
+      - name: Probe problematic file only
+        run: npx -y markdown-link-check@3.14.2 ./README.md -c .github/workflows/configs/markdown-link-check.json -v
 
   test-docs:
     runs-on: ubuntu-latest
