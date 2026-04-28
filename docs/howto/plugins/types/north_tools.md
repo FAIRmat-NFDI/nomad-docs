@@ -124,7 +124,7 @@ and visualization.
 
 #### Dockerfile structure
 
-A Dockerfile for a Jupyter-based NORTH tool typically consists of several stages. Here, we will go through a typical Dockerfile splitting the discussion in several parts. You can find a full example of a Dockerfile for a Juypter-based NORTH tool in [nomad-north-jupyter](https://github.com/FAIRmat-NFDI/nomad-north-jupyter/blob/main/src/nomad_north_jupyter/north_tools/my_north_tool/Dockerfile){:target="_blank" rel="noopener"}
+A Dockerfile for a Jupyter-based NORTH tool typically consists of several stages. Here, we will go through a typical Dockerfile splitting the discussion in several parts. You can find a full example of a Dockerfile for a Juypter-based NORTH tool in [nomad-north-jupyter](https://github.com/FAIRmat-NFDI/nomad-north-jupyter/blob/main/src/nomad_north_jupyter/north_tools/jupyter_north_tool/Dockerfile){:target="_blank" rel="noopener"}
 
 The build arguments at the top allow customization of the image:
 
