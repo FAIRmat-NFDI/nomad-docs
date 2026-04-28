@@ -41,7 +41,7 @@ In the same upload, there might be multiple mainfiles and auxiliary files organi
 See the explanation pages [From files to data](../../explanation/basics.md), [Data structure](../../explanation/data.md) and [Processing](../../explanation/processing.md) for a more general description of NOMAD processing.
 
 <!--TODO: add our own supported parsers list with improved info-->
-See [Supported Parsers](https://nomad-lab.eu/prod/v1/staging/docs/reference/parsers.html){:target="_blank" rel="noopener"} for a full list of supported codes, mainfiles, auxiliary files, etc.
+See [Supported Parsers](https://nomad-lab.eu/prod/v1/docs/reference/parsers.html){:target="_blank" rel="noopener"} for a full list of supported codes, mainfiles, auxiliary files, etc.
 
 ## Archive sections relevant for computational data
 
