@@ -61,7 +61,7 @@ If you have issues please contact us on discord n the [oasis channel](https://di
 
 ## NOMAD behind a firewall
 
-It is also possible that your docker container is not able to talk to each other.
+It is also possible that your docker containers are not able to talk to each other.
 This could be due to restrictive settings on your server.
 The firewall shall allow both inbound and outbound HTTP and HTTPS traffic.
 The corresponding rules need to be added.
