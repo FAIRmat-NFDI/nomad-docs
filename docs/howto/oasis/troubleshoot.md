@@ -67,10 +67,7 @@ The firewall shall allow both inbound and outbound HTTP and HTTPS traffic.
 The corresponding rules need to be added.
 Furthermore, inbound traffic needs to be enabled for the port used on the `nginx` service.
 
-In this case you should make sure this test runs through:
-[https://docs.docker.com/network/network-tutorial-standalone/](https://docs.docker.com/network/network-tutorial-standalone/){:target="_blank" rel="noopener"}
-
-If not please contact your server provider for help.
+If this does not resolve the issue, please contact your server provider for help.
 
 ## Elasticsearch and open files limit
 
