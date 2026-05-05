@@ -13,5 +13,3 @@ ignorePatterns:
   # Ignore the following two which give 403 (likely because of cloudfare bot challenge)
   - pattern: "^https://(www\\.)?anaconda\\.org/?$"
   - pattern: "^https://www\\.w3\\.org/TR/vocab-dcat-2/?$"
-  # TODO: chemotion is temporarily down, remove this ignore once it's back
-  - pattern: "^https://chemotion\\.net/?$"
