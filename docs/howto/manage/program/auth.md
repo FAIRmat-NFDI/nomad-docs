@@ -34,7 +34,7 @@ A PAT can be created via the API with the [keycloak access token](#keycloak-acce
 import requests
 
 response = requests.post(
-    "{{ nomad_url() }}/v1/pats",
+    "{{ nomad_url() }}/v1/auth/pats",
     headers={"Authorization": "Bearer <keycloak-access-token>"},
     json={
         "metadata": {
@@ -86,7 +86,7 @@ import os
 import requests
 
 response = requests.get(
-    "{{ nomad_url() }}/v1/pats",
+    "{{ nomad_url() }}/v1/auth/pats",
     headers={"Authorization": f"Bearer {os.environ["NOMAD_PAT"]}"},
     params={
         "search": "ci",
@@ -115,7 +115,7 @@ import requests
 pat_id = "<pat-id>"
 
 response = requests.get(
-    f"{{ nomad_url() }}/v1/pats/{pat_id}",
+    f"{{ nomad_url() }}/v1/auth/pats/{pat_id}",
     headers={"Authorization": "Bearer <keycloak-access-token>"},
 )
 response.raise_for_status()
@@ -133,7 +133,7 @@ import requests
 pat_id = "<pat-id>"
 
 response = requests.delete(
-    f"{{ nomad_url() }}/v1/pats/{pat_id}",
+    f"{{ nomad_url() }}/v1/auth/pats/{pat_id}",
     headers={"Authorization": "Bearer <keycloak-access-token>"},
 )
 response.raise_for_status()
@@ -149,7 +149,7 @@ import requests
 pat_id = "<pat-id>"
 
 response = requests.post(
-    f"{{ nomad_url() }}/v1/pats/{pat_id}/rotate",
+    f"{{ nomad_url() }}/v1/auth/pats/{pat_id}/rotate",
     headers={"Authorization": "Bearer <keycloak-access-token>"},
 )
 response.raise_for_status()
