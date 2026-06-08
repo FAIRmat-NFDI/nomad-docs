@@ -232,7 +232,7 @@ It is in turn composed by the following quantities:
   If the `owner`, `short_name`, `ìnstitute`, and `datetime` are provided, this will
   be formed automatically by joining these components by an underscore (\_).
   Spaces in any of the individual components will be replaced with hyphens (-).
-  An example would be hzb_oah_20200602_4001-08.
+  An example would be `hzb_oah_20200602_4001-08`.
 
 If owner is not filled the field will be filled by the first two letters of
 the first name joined with the first two letters of the last name of the author.
