@@ -45,7 +45,7 @@ Theses are:
 ### `Entity`
 
 !!! info
-By "Entity" we mean:
+    By "Entity" we mean:
 
     "An object that persists, endures, or continues to exist through time while maintaining
     its identity."
@@ -120,7 +120,7 @@ Otherwise a search query is made for the filled attributes in the following orde
 ### `Activity`
 
 !!! info
-By "Activity" we mean:
+    By "Activity" we mean:
 
     "An action that has a temporal extension and for some time depends on some entity."
 
@@ -147,7 +147,7 @@ samples, the `Experiment` section can be inherited to group these together.
 #### `Process`
 
 !!! info
-By "Process" we mean:
+    By "Process" we mean:
 
     "A planned process which results in physical changes in a specified input material.
     [ obi : prs obi : mc obi : fg obi : jf obi : bp ]
@@ -169,7 +169,7 @@ The main feature of the `Process` section is that it adds `ProcessSteps` with a 
 ![process sections](images/process-sections.svg)
 
 !!! info
-By "SynthesisMethod" we mean:
+    By "SynthesisMethod" we mean:
 
     "A method used to synthesise a sample."
 
@@ -178,7 +178,7 @@ By "SynthesisMethod" we mean:
 #### `Measurement`
 
 !!! info
-By "Measurement" we mean:
+    By "Measurement" we mean:
 
     "A planned process with the objective to produce information about the material entity
     that is the evaluant, by physically examining it or its proxies. [ obi : pppb ]"
@@ -193,7 +193,7 @@ of) `CompositeSystem`.
 #### `Analysis`
 
 !!! info
-By "Analysis" we mean:
+    By "Analysis" we mean:
 
     "A planned process that produces output data from input data.
 
