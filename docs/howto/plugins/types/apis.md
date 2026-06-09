@@ -98,7 +98,11 @@ curl localhost:8000/nomad-oasis/myapi/
 For serving static content, one can use the `mount` operation of FastAPI. Here is an example of mounting a folder called `static` that is stored next  to the Python code:
 
 ```python
+import os
+
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
+
 from nomad.config import config
 
 myapi_entry_point = config.get_plugin_entry_point('nomad_example.apis:myapi')
@@ -140,7 +144,9 @@ and route-level dependencies when different endpoints require different scopes.
 
 For example, the following app requires the "uploads:read" scope for every request:
 
-```python hl_lines="6"
+```python hl_lines="8"
+from fastapi import Depends, FastAPI
+
 from nomad.app.v1.routers.auth import get_current_user
 from nomad.auth.scopes import Scope
 
@@ -153,7 +159,12 @@ app = FastAPI(
 If you only want to protect specific endpoints, you can add the dependency at the
 route level instead:
 
-```python hl_lines="8-11"
+```python hl_lines="13-16"
+from typing import Annotated
+
+from fastapi import Depends, FastAPI
+
+from nomad.app.v1.models.models import User
 from nomad.app.v1.routers.auth import get_current_user
 from nomad.auth.scopes import Scope
 
