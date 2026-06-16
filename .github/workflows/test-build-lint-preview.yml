@@ -36,16 +36,8 @@ jobs:
     steps:
       - uses: actions/checkout@v6
 
-      # TODO: workaround for https://github.com/UmbrellaDocs/action-linkspector/issues/62
-      - name: Install Chrome
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y google-chrome-stable
-          echo "PUPPETEER_SKIP_DOWNLOAD=true" >> $GITHUB_ENV
-          echo "PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome" >> $GITHUB_ENV
-
       - name: Check links in markdown files
-        uses: UmbrellaDocs/action-linkspector@v1
+        uses: UmbrellaDocs/action-linkspector@v1.5.4
         with:
           config_file: .github/workflows/configs/.linkspector.yml
           filter_mode: "nofilter" # check all files (not just added)
