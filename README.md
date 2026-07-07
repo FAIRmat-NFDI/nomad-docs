@@ -81,7 +81,9 @@ uv run mkdocs build --strict
 uv run --group dev pytest -q
 ```
 
-Temporary note for the current refactoring project: when you touch deployment-specific content, add an HTML comment near the top of the page to label scope without changing rendered output, for example `<!-- doc-scope: deployment-specific; target=oasis -->`.
+### Temporary refactoring note
+
+For the current refactoring project, when you touch deployment-specific content, add an HTML comment near the top of the page to label scope without changing rendered output, for example `<!-- doc-scope: deployment-specific; target=oasis -->`.
 
 ---
 
