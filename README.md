@@ -81,16 +81,7 @@ uv run mkdocs build --strict
 uv run --group dev pytest -q
 ```
 
-For a quick task-branch baseline check, run:
-
-```bash
-git fetch origin --prune
-git switch develop
-git pull --ff-only origin develop
-git switch -c docs/<task-name>
-uv run mkdocs build --strict
-uv run --group dev pytest -q
-```
+Temporary note for the current refactoring project: when you touch deployment-specific content, add an HTML comment near the top of the page to label scope without changing rendered output, for example `<!-- doc-scope: deployment-specific; target=oasis -->`.
 
 ---
 

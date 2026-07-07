@@ -25,45 +25,6 @@ When contributing, identify which type of documentation your addition belongs to
 - **Keep essential context in place, centralize reusable content.** Provide enough information directly on the page so the user can follow without friction. For reused, larger blocks of content, keep a single authoritative version and link to it.
 - **Check accuracy with the actual system.** Verify commands, screenshots, and examples against the current NOMAD deployment. *Only merge a docs PR after the corresponding code changes have been merged into `nomad-lab`’s `develop` branch*.
 
-## Validation Before PR
-
-Every docs PR should pass the local validation baseline before review:
-
-```bash
-uv run mkdocs build --strict
-uv run --group dev pytest -q
-```
-
-At minimum, contributors should verify:
-
-- The docs build completes without strict-mode failures.
-- The test suite passes.
-- New or moved pages are reachable from navigation when intended.
-- Internal and external links follow the rules in this guide.
-
-For task-wise work, prefer a fresh branch from `develop`:
-
-```bash
-git fetch origin --prune
-git switch develop
-git pull --ff-only origin develop
-git switch -c docs/<task-name>
-```
-
-## Documentation Scope Markers
-
-When a page is clearly deployment-specific rather than general-purpose NOMAD documentation, add an invisible source marker near the top of the file. Use HTML comments so this first-pass labeling does not affect rendering.
-
-Examples:
-
-```html
-<!-- doc-scope: deployment-specific; target=oasis -->
-<!-- doc-scope: deployment-specific; target=plugin -->
-<!-- doc-scope: deployment-specific; target=central -->
-```
-
-Use these markers consistently, but do not reorganize navigation around them unless the task explicitly includes that refactor.
-
 ## Styling & Conventions
 
 ### Headings & Structure
