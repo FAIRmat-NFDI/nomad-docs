@@ -1,16 +1,19 @@
 # NOMAD tutorials
 
-Tutorials provide guided, learning-oriented paths through NOMAD. Use them when you want to understand a workflow end to end, not just complete a single isolated task.
+Tutorials provide guided, learning-oriented paths. Use them when you want to understand a workflow end to end. See [How-to guides > Overview](../howto/overview.md) if you are trying to complete a known, isolated task.
 
 ## Before you begin
 
-- Most tutorials assume the public NOMAD installation unless stated otherwise.
-- Some tutorials require a NOMAD account, especially when they involve uploading, sharing, or publishing data.
-- If you already know the task you want to complete, the [How-to guides > Overview](../howto/overview.md) may be a better starting point.
+Unless stated otherwise, these tutorials use **NOMAD Central**, the public FAIRmat-hosted NOMAD platform. There are two relevant deployments:
 
-## Create a NOMAD user account
+- [**Production**](https://nomad-lab.eu/prod/v1/gui/search/entries){:target="_blank" rel="noopener"}: Use by default for any generic tutorial activities.
+- [**Test**](https://nomad-lab.eu/prod/v1/test/gui/search/entries){:target="_blank" rel="noopener"}: Use primarily for testing publishing capabilities. This deployment contains a dedicated *temporary* database that is routinely wiped.
 
-Some tutorials require you to sign in before you can upload, share, or publish data. Create an account from the public NOMAD login page, or sign in through Helmholtz AAI if your institution supports it.
+The majority of underlying concepts and workflows also apply to **NOMAD Oasis** deployments, although specific behavior may differ between installations depending on which plugins are installed.
+
+### Create a NOMAD user account
+
+Some tutorials require you to sign in before you can upload, share, or publish data. For step-by-step account creation and sign-in guidance, see [How-to guides > Manage and find data > With the GUI > Create an account and sign in](../howto/manage/gui/account.md).
 
 ## Tutorial paths
 
@@ -26,11 +29,11 @@ Some tutorials require you to sign in before you can upload, share, or publish d
 - [Create a custom ELN with YAML](eln/custom_eln_yaml.md)
 - [Parse tabular measurement data](eln/tabular_parser_yaml.md)
 
-### Work with more advanced workflows
+### Connect entries and work programmatically
 
 - [Manage workflows and projects](workflows_projects.md)
 
-### Extend NOMAD
+### Customize NOMAD
 
 - [Develop a NOMAD plugin](develop_plugin/plugin_structure.md)
 

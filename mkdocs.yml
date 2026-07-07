@@ -29,6 +29,7 @@ nav:
       - Overview: howto/overview.md
       - Manage and find data:
           - With the GUI:
+              - Create an account and sign in: howto/manage/gui/account.md
               - Upload and publish data: howto/manage/gui/upload.md
               - Enter data with ELNs: howto/manage/gui/eln.md
               - Analyze data in NORTH: howto/manage/gui/north.md # TODO rename depending on how-to content

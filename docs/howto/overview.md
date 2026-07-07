@@ -4,7 +4,7 @@ hide: toc
 
 # NOMAD How-to guides
 
-How-to guides are goal-oriented instructions. Use them when you need to complete a specific task in NOMAD.
+How-to guides are goal-oriented instructions. Use them when you need to complete a specific task.
 
 ## Manage and find data
 
@@ -15,6 +15,7 @@ These guides cover day-to-day NOMAD usage for managing, exploring, and analyzing
 
 ### With the GUI
 
+- [Create an account and sign in](manage/gui/account.md)
 - [Upload and publish data](manage/gui/upload.md)
 - [Enter data with ELNs](manage/gui/eln.md)
 - [Analyze data in NORTH](manage/gui/north.md)
