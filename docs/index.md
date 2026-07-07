@@ -4,80 +4,87 @@ hide: toc
 
 # NOMAD Documentation
 
-<!-- A single sentence that says what the product is, succinctly and memorably -->
-NOMAD is a free, and open-source data management platform for materials science, whose goal is to make scientific research data FAIR (findable, accessible, interoperable and reusable).
+NOMAD is an open-source research data platform for materials science. It helps researchers, labs, and developers make data FAIR: findable, accessible, interoperable, and reusable.
 
-<!-- A paragraph of one to three short sentences, that describe what the product does. -->
-NOMAD provides tools for data management, sharing, and publishing.
-The platform lets you structure, explore, and analyze your data and the data of others.
-
-<!-- A third paragraph of similar length, this time explaining what need the product meets -->
-NOMAD solves the challenge of using heterogeneous and unfindable data.
-<!-- Finally, a paragraph that describes whom the product is useful for. -->
-NOMAD is useful for scientists that work with data, for research groups that need to collaborate on data, and for communities that need to build an archive of FAIR research data.
+Use this documentation according to the kind of help you need:
 
 <div markdown="block" class="home-grid">
 <div markdown="block">
 
 ## Tutorial
 
-A series of tutorials will guide you through the main functionality of NOMAD.
+Start here if you want to learn NOMAD by working through guided examples.
 
-- [Upload and publish your own data](tutorial/upload_publish.md)
-- [Use the search interface to identify interesting data](tutorial/explore.md)
-- [Use the API to search and access processed data for analysis](tutorial/access_api.md)
-- [Create and use custom schemas in NOMAD](tutorial/custom.md)
-- [Developing a NOMAD plugin](tutorial/develop_plugin/plugin_structure.md)
+- [Tutorial overview](tutorial/overview.md)
+- [Explore data](tutorial/explore.md)
+- [Upload and publish data with the GUI](tutorial/upload_publish.md)
+- [Upload and publish data programmatically](tutorial/upload_publish_api.md)
+- [Use NOMAD as an ELN](tutorial/eln/built_in_templates.md)
 
-- [Example data and exercises](https://www.fairmat-nfdi.eu/events/fairmat-tutorial-1/tutorial-1-materials){:target="_blank" rel="noopener"}
-- [More videos and tutorials on YouTube](https://youtube.com/playlist?list=PLrRaxjvn6FDW-_DzZ4OShfMPcTtnFoynT){:target="_blank" rel="noopener"}
+[Open tutorials](tutorial/overview.md){:.md-button .nomad-button .nomad-button--card-action}
 
 </div>
 <div markdown="block">
 
 ## How-to guides
 
-How-to guides provide step-by-step instructions for a wide range of tasks, with the overarching topics:
+Use how-to guides when you already know your goal and need task-oriented instructions.
 
-- Manage and find data
-- Programmatic data access
-- NOMAD Oasis — self-hosting
-- Plugins
-- Customization
-- Development
+- [Manage and find data](howto/overview.md)
+- [Develop plugins](howto/plugins/plugins.md)
+- [Host a NOMAD Oasis](howto/oasis/install.md)
+- [Develop the core software](howto/develop/setup.md)
 
-[Open the how-to guides](howto/overview.md){:.md-button .nomad-button .nomad-button--card-action}
+[Open how-to guides](howto/overview.md){:.md-button .nomad-button .nomad-button--card-action}
 
 </div>
-
 <div markdown="block">
 
 ## Explanation
 
-The explanation section provides background knowledge on what are
-schemas and structured data, how does processing work, the NOMAD architecture, and more.
+Use the explanation section for background, concepts, and architecture.
+
+- [Explanation overview](explanation/overview.md)
+- [From files to data](explanation/basics.md)
+- [Processing](explanation/processing.md)
+- [Architecture](explanation/architecture.md)
+- [Federation and Oasis](explanation/oasis.md)
+
+[Open explanations](explanation/overview.md){:.md-button .nomad-button .nomad-button--card-action}
 
 </div>
 <div markdown="block">
 
 ## Reference
 
-The reference includes all CLI commands and arguments, all configuration options,
-the possible schema annotations and their arguments, and a glossary of used terms.
+Use the reference section for precise technical information such as configuration options, CLI commands, and schema details.
+
+- [Reference overview](reference/overview.md)
+- [Configuration](reference/config.md)
+- [CLI](reference/cli.md)
+- [Annotations](reference/annotations.md)
+- [Glossary](reference/glossary.md)
+
+[Open reference](reference/overview.md){:.md-button .nomad-button .nomad-button--card-action}
 
 </div>
 </div>
 
-<h2>Project and community</h2>
+<!-- TODO: Revisit and update the below once the nomad-lab homepage refactor is complete. -->
 
-NOMAD is an open source project that warmly welcomes community projects, contributions, suggestions, fixes and constructive feedback.
-NOMAD is developed by FAIRmat, an open NFDI consortium of over 30 partners building a shared
-data structure for materials science together.
+## Who NOMAD supports
+
+- Researchers using [NOMAD Central](https://nomad-lab.eu/prod/v1/gui/){:target="_blank" rel="noopener"} to manage, explore, and publish data.
+- Labs and institutions operating a NOMAD Oasis.
+- Plugin developers extending NOMAD for domain-specific needs.
+- Core contributors working on `nomad-lab`.
+
+## Project and community
+
+NOMAD is developed by FAIRmat, an NFDI consortium building shared data infrastructure for materials science.
 
 - [Get support](https://nomad-lab.eu/nomad-lab/support.html){:target="_blank" rel="noopener"}
-- [Join our online forum](https://matsci.org/c/nomad/32){:target="_blank" rel="noopener"}
-- [Contribute](howto/develop/contrib.md)
-- [View our roadmap](https://nomad-lab.eu/nomad-lab/features.html){:target="_blank" rel="noopener"}
-- [Code guidelines](reference/code_guidelines.md)
-
-Thinking about using NOMAD for your next project? Get in touch!
+- [Join the forum](https://matsci.org/c/nomad/32){:target="_blank" rel="noopener"}
+- [Contribute to NOMAD](howto/develop/contrib.md)
+- [View the roadmap](https://nomad-lab.eu/nomad-lab/features.html){:target="_blank" rel="noopener"}
+- [Read the code guidelines](reference/code_guidelines.md)

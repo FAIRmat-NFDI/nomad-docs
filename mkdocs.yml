@@ -25,6 +25,7 @@ nav:
               - Tutorial 1: tutorial/develop_plugin/create_parser_parser_only.md
               - Tutorial 2: tutorial/develop_plugin/create_parser_eln_only.md
               - Tutorial 3: tutorial/develop_plugin/create_parser_hybrid.md
+      - Additional training resources: tutorial/training_resources.md
   - How-to guides:
       - Overview: howto/overview.md
       - Manage and find data:
@@ -99,7 +100,7 @@ nav:
         # - NOMAD-supported plugins:
         # - Databases for specific research topics:
   - Explanation:
-      # - Overview: explanation/overview.md # TODO add guide, organization of sub-pages?
+      - Overview: explanation/overview.md
       - From files to data: explanation/basics.md
       - Data structure: explanation/data.md
       - Base sections: explanation/base_sections.md # TODO rewrite as explanation
@@ -111,7 +112,7 @@ nav:
       - Authentication and authorization: explanation/auth.md
       - NORTH: explanation/north.md
   - Reference:
-      # - Overview: reference/overview.md # TODO
+      - Overview: reference/overview.md
       # - reference/metainfo.md # TODO This file no longer exists ... was it lost somehow?
       - reference/config.md
       - reference/annotations.md
@@ -121,7 +122,6 @@ nav:
       - reference/parsers.md
       - reference/code_guidelines.md
       - reference/glossary.md
-      - reference/tutorials.md
 theme:
   name: material
   palette:
@@ -198,6 +198,7 @@ plugins:
   - redirects:
       redirect_maps:
         "develop/gitlab.md": "howto/develop/contrib.md"
+        "reference/tutorials.md": "tutorial/training_resources.md"
   - glightbox
   # - git-revision-date-localized
   # TODO Fix error in pipeline when this plugin is included
