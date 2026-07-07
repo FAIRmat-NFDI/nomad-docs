@@ -77,7 +77,19 @@ This will install all requirements in a virtual environment and start the local 
 ### How to run the tests
 
 ```bash
-uv run --extra dev pytest
+uv run mkdocs build --strict
+uv run --group dev pytest -q
+```
+
+For a quick task-branch baseline check, run:
+
+```bash
+git fetch origin --prune
+git switch develop
+git pull --ff-only origin develop
+git switch -c docs/<task-name>
+uv run mkdocs build --strict
+uv run --group dev pytest -q
 ```
 
 ---
