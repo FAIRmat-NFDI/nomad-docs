@@ -1,10 +1,6 @@
 # Create a NOMAD Central account and sign in
 
-Use this page if you need an account for NOMAD Central before following tutorials or using features such as uploading, sharing, publishing, or analyzing your own data.
-
-!!! info "Scope"
-
-    This page describes account creation and sign-in for **NOMAD Central**, the public FAIRmat-hosted platform. If you use an institution-specific **NOMAD Oasis**, authentication may differ depending on local deployment settings.
+This page describes account creation and sign-in for **NOMAD Central**, the public FAIRmat-hosted platform. If you use an institution-specific **NOMAD Oasis**, authentication may differ depending on local deployment settings.
 
 ## Create a NOMAD account
 
