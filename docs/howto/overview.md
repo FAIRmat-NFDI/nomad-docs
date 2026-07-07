@@ -70,6 +70,3 @@ These guides are for contributors working on `nomad-lab`.
 - [Extend the search](develop/search.md)
 - [Make a release](develop/release.md)
 
-## Need help?
-
-- [Get support](https://nomad-lab.eu/nomad-lab/support.html){:target="_blank" rel="noopener"}

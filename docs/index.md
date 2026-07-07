@@ -84,7 +84,6 @@ Use the reference section for precise technical information such as configuratio
 NOMAD is developed by FAIRmat, an NFDI consortium building shared data infrastructure for materials science.
 
 - [Get support](https://nomad-lab.eu/nomad-lab/support.html){:target="_blank" rel="noopener"}
-- [Join the forum](https://matsci.org/c/nomad/32){:target="_blank" rel="noopener"}
 - [Contribute to NOMAD](howto/develop/contrib.md)
 - [View the roadmap](https://nomad-lab.eu/nomad-lab/features.html){:target="_blank" rel="noopener"}
 - [Read the code guidelines](reference/code_guidelines.md)

@@ -25,7 +25,6 @@ nav:
               - Tutorial 1: tutorial/develop_plugin/create_parser_parser_only.md
               - Tutorial 2: tutorial/develop_plugin/create_parser_eln_only.md
               - Tutorial 3: tutorial/develop_plugin/create_parser_hybrid.md
-      - Additional training resources: tutorial/training_resources.md
   - How-to guides:
       - Overview: howto/overview.md
       - Manage and find data:
@@ -122,6 +121,7 @@ nav:
       - reference/parsers.md
       - reference/code_guidelines.md
       - reference/glossary.md
+      - reference/tutorials.md
 theme:
   name: material
   palette:
@@ -198,7 +198,7 @@ plugins:
   - redirects:
       redirect_maps:
         "develop/gitlab.md": "howto/develop/contrib.md"
-        "reference/tutorials.md": "tutorial/training_resources.md"
+        "tutorial/training_resources.md": "reference/tutorials.md"
   - glightbox
   # - git-revision-date-localized
   # TODO Fix error in pipeline when this plugin is included

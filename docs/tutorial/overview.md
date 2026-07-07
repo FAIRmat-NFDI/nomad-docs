@@ -36,4 +36,4 @@ Some tutorials require you to sign in before you can upload, share, or publish d
 
 ## Additional training resources
 
-For event materials and external training collections, see [Tutorial > Additional training resources](training_resources.md).
+For event materials and external training collections, see [Reference > Tutorial catalog](../reference/tutorials.md).

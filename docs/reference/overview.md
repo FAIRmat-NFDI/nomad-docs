@@ -12,9 +12,9 @@ Reference pages provide authoritative technical details. Use them when you need 
 - [Parsers](parsers.md): supported parser reference information.
 - [Code guidelines](code_guidelines.md): coding conventions used in NOMAD.
 - [Glossary](glossary.md): shared terminology used across the docs.
+- [Tutorial catalog](tutorials.md): an index of tutorial and training resources.
 
 ## Related material
 
 - For conceptual background, use [Explanation > Overview](../explanation/overview.md).
 - For hands-on learning paths, use [Tutorial > Overview](../tutorial/overview.md).
-- For archived training collections and event materials, use [Tutorial > Additional training resources](../tutorial/training_resources.md).
