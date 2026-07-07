@@ -17,7 +17,7 @@
 #
 
 from enum import Enum
-from typing import Annotated, Literal, Optional, Union  # type: ignore
+from typing import Annotated, Literal, Optional, Union
 
 import pytest
 from nomad.config.models.ui import WidgetHistogram, WidgetTerms
