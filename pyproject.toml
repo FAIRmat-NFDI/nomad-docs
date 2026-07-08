@@ -7,6 +7,7 @@ authors = [{ name = "Ahmed Ilyas", email = "ahmed.n.ilyas@gmail.com" }]
 requires-python = ">=3.10"
 dependencies = [
   "mkdocs-click",
+  "click>=8.4.0",  # fix mkdocs livereload
   "mkdocs-git-revision-date-localized-plugin",
   "mkdocs-glightbox",
   "mkdocs-macros-plugin",
@@ -23,7 +24,6 @@ dependencies = [
 extra-index-url = [
   "https://gitlab.mpcdf.mpg.de/api/v4/projects/2187/packages/pypi/simple",
 ]
-constraint-dependencies = ["click>=8.4.0"]
 
 [build-system]
 requires = ["uv_build>=0.7.3,<0.8.0"]
