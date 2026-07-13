@@ -141,3 +141,19 @@ If you use more than one slider on the same page, make sure to give them differe
 **Keep the navigation structure.** The location of docs .md files should mirror the navigation bar, with subfolders named after the organizational subsections of the bar.
 
 **Images and data.** All assets specific to an individual markdown file should be stored within an immediate sub-directory of the file, labeled accordingly. Please use `images/` and `data/` for the image and data files, respectively. Sharing assets between .md files in different locations is currently not allowed. If there is an exceptional case, please create a GitHub issue and tag a relevant maintainer.
+
+### Navigation coverage
+
+By default, user-facing Markdown pages under `docs/` appear in the
+`nav` section of `mkdocs.yml`. Note: The strict documentation build reports a warning,
+and therefore fails in CI, when a page is added under `docs/` without being added
+to the navigation.
+
+There may be special cases of independent pages that are linked but should not
+appear in the navigation. These intentional exceptions should be listed under
+`not_in_nav` in `mkdocs.yml`. Only add a page to this list when it has a documented
+reason to remain outside the navigation; do not use it merely to silence the build.
+Remove the exception when the page is added to the navigation, moved outside `docs/`, or deleted.
+
+Most authoring resources that should not be published belong outside `docs/`. For
+example, use `templates/tutorial.md` as the starting point for a new tutorial.

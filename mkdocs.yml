@@ -123,6 +123,20 @@ nav:
       - reference/code_guidelines.md
       - reference/glossary.md
       - reference/tutorials.md
+not_in_nav: |
+  # MkDocs uses this page directly when a requested page does not exist.
+  /404.md
+  # Contributor documentation is linked from README.md, not the user navigation.
+  /writing_guide.md
+  # Linked supporting page for the domain-specific examples.
+  /examples/experiment_data/nexus.md
+  # Legacy pages retained until their content is handled by later refactoring stages.
+  /tutorial/access_api.md
+  /tutorial/custom.md
+  /tutorial/nomad_repo.md
+validation:
+  nav:
+    omitted_files: warn
 theme:
   name: material
   palette:
@@ -199,6 +213,7 @@ plugins:
   - redirects:
       redirect_maps:
         "develop/gitlab.md": "howto/develop/contrib.md"
+        "howto/manage/program/graph-api/basics.md": "howto/manage/program/graph_api.md"
         "tutorial/training_resources.md": "reference/tutorials.md"
   - glightbox
   # - git-revision-date-localized
