@@ -1,6 +1,10 @@
-# NOMAD tutorials
+---
+hide: toc
+---
 
-Tutorials provide guided, learning-oriented paths. Use them when you want to understand a workflow end to end. See [How-to guides > Overview](../howto/overview.md) if you are trying to complete a known, isolated task.
+# Tutorials
+
+Tutorials provide guided, learning-oriented paths. Use them when you want to understand a workflow end to end. See {{ nav_link("howto/overview.md", breadcrumb=True) }} if you are trying to complete a known, isolated task.
 
 ## Before you begin
 
@@ -13,30 +17,64 @@ The majority of underlying concepts and workflows also apply to **NOMAD Oasis** 
 
 ### Create a NOMAD user account
 
-Some tutorials require you to sign in before you can upload, share, or publish data. For step-by-step account creation and sign-in guidance, see [How-to guides > Manage and find data > With the GUI > Create an account and sign in](../howto/manage/gui/account.md).
+Some tutorials require you to sign in before you can upload, share, or publish data. For step-by-step account creation and sign-in guidance, see {{ nav_link("howto/manage/gui/account.md", breadcrumb=True) }}.
 
 ## Tutorial paths
 
-### Get oriented in NOMAD
+<div markdown="block" class="home-grid">
+<div markdown="block">
 
-- [Explore data](explore.md)
-- [Upload and publish data with the GUI](upload_publish.md)
-- [Upload and publish data programmatically](upload_publish_api.md)
+### {{ nav_link("tutorial/explore.md") }}
+
+Learn how to search, filter, and inspect published NOMAD data.
+
+</div>
+<div markdown="block">
+
+### Upload and publish data
+
+Follow a complete upload and publication workflow using either interface.
+
+- {{ nav_link("tutorial/upload_publish.md") }}
+- {{ nav_link("tutorial/upload_publish_api.md") }}
+
+</div>
+<div markdown="block">
 
 ### Use NOMAD as an ELN
 
-- [Use built-in ELN templates](eln/built_in_templates.md)
-- [Create a custom ELN with YAML](eln/custom_eln_yaml.md)
-- [Parse tabular measurement data](eln/tabular_parser_yaml.md)
+Create structured experimental records using built-in or custom schemas.
 
-### Connect entries and work programmatically
+- {{ nav_link("tutorial/eln/built_in_templates.md") }}
+- {{ nav_link("tutorial/eln/custom_eln_yaml.md") }}
+- {{ nav_link("tutorial/eln/tabular_parser_yaml.md") }}
 
-- [Manage workflows and projects](workflows_projects.md)
+</div>
+<div markdown="block">
 
-### Customize NOMAD
+### {{ nav_link("tutorial/workflows_projects.md") }}
 
-- [Develop a NOMAD plugin](develop_plugin/plugin_structure.md)
+Connect related entries and organize them into projects and workflows.
+
+</div>
+<div markdown="block">
+
+### Develop a NOMAD plugin
+
+Build a plugin structure, schema package, and parser through guided exercises.
+
+- {{ nav_link("tutorial/develop_plugin/plugin_structure.md") }}
+- {{ nav_link("tutorial/develop_plugin/create_schema_package.md") }}
+- **Create a parser**
+    - {{ nav_link("tutorial/develop_plugin/create_parser.md") }}
+    - {{ nav_link("tutorial/develop_plugin/create_parser_parser_only.md") }}
+    - {{ nav_link("tutorial/develop_plugin/create_parser_eln_only.md") }}
+    - {{ nav_link("tutorial/develop_plugin/create_parser_hybrid.md") }}
+
+</div>
+</div>
 
 ## Additional training resources
 
-For event materials and external training collections, see [Reference > Tutorial catalog](../reference/tutorials.md).
+Find event materials and external training collections in the
+{{ nav_link("reference/tutorials.md", breadcrumb=True) }}.

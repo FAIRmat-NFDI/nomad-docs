@@ -6,7 +6,7 @@ repo_url: https://github.com/nomad-coe/nomad
 edit_uri: ""
 nav:
   - Home: index.md
-  - Tutorial:
+  - Tutorials:
       - Overview: tutorial/overview.md
       - Explore data: tutorial/explore.md
       - Upload and publish data:
@@ -114,15 +114,15 @@ nav:
   - Reference:
       - Overview: reference/overview.md
       # - reference/metainfo.md # TODO This file no longer exists ... was it lost somehow?
-      - reference/config.md
-      - reference/annotations.md
-      - reference/basesections.md
-      - reference/cli.md
-      - reference/plugins.md
-      - reference/parsers.md
-      - reference/code_guidelines.md
-      - reference/glossary.md
-      - reference/tutorials.md
+      - Configuration: reference/config.md
+      - Annotations: reference/annotations.md
+      - Base sections: reference/basesections.md
+      - CLI: reference/cli.md
+      - Plugins: reference/plugins.md
+      - Parsers: reference/parsers.md
+      - Code guidelines: reference/code_guidelines.md
+      - Glossary: reference/glossary.md
+      - Tutorial catalog: reference/tutorials.md
 not_in_nav: |
   # MkDocs uses this page directly when a requested page does not exist.
   /404.md

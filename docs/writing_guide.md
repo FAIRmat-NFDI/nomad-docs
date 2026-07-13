@@ -149,6 +149,16 @@ By default, user-facing Markdown pages under `docs/` appear in the
 and therefore fails in CI, when a page is added under `docs/` without being added
 to the navigation.
 
+On overview pages, use the `nav_link` macro for links that represent pages in the
+navigation. Pass the documentation-root-relative source path, for example
+`nav_link("reference/config.md")`, inside the Jinja expression delimiters. The
+macro uses the page title from `mkdocs.yml` and generates a relative link from the
+current page. For cross-category links in prose, pass `breadcrumb=True` to include
+the navigation hierarchy. If a page has more than one intermediate navigation
+section, the breadcrumb is abbreviated as `Section > ... > Page name`. Keep the
+link's description, grouping, and surrounding card markup in the overview
+Markdown so they can be edited independently.
+
 There may be special cases of independent pages that are linked but should not
 appear in the navigation. These intentional exceptions should be listed under
 `not_in_nav` in `mkdocs.yml`. Only add a page to this list when it has a documented

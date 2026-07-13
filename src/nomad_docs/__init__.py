@@ -39,6 +39,7 @@ from pydantic.fields import FieldInfo
 from nomad_docs.metainfo import (
     package_markdown_from_package,
 )
+from nomad_docs.navigation import register_nav_link
 from nomad_docs.pydantic import (
     exported_config_models,
     get_field_default,
@@ -63,6 +64,8 @@ class MyYamlDumper(yaml.Dumper):
 
 
 def define_env(env):
+    register_nav_link(env)
+
     @env.macro
     def nomad_url():  # pylint: disable=unused-variable
         return config.api_url()
