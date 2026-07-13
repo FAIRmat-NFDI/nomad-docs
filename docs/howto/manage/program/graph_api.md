@@ -6,7 +6,7 @@
 
 ## Recommended preparation
 
-- [Tutorial > Accessing data via API](../../../tutorial/access_api.md)
+- [Tutorials > Accessing data via API](../../../tutorial/access_api.md)
 
 - [API Overview](./api.md)
 

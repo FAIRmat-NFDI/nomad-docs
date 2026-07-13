@@ -8,16 +8,16 @@ The NOMAD Docs follow the [Diátaxis framework](https://diataxis.fr/){:target="_
 
 - **Tutorials**: learning-oriented, step-by-step introductions.
 - **How-to guides**: goal-oriented, practical instructions.
-- **Explanations**: understanding-oriented, clarifications and context.
+- **Explanation**: understanding-oriented, clarifications and context.
 - **Reference**: information-oriented, precise and authoritative.
 
 When contributing, identify which type of documentation your addition belongs to. A clear separation will help users quickly find what they need.
 
-> **Tip:** Contributions often span multiple types. For example, a new *How-to* may also require a supporting *Explanation* page. It may help you to first draft all of your material in one place, and then reorganize it according to the Diátaxis structure.
+> **Tip:** Contributions often span multiple types. For example, a new how-to guide may also require a supporting explanation page. It may help you to first draft all of your material in one place, and then reorganize it according to the Diátaxis structure.
 
 ## Best Practice
 
-- **Set the context clearly.** For Tutorials and How-tos, define prerequisite knowledge and list additional resources at the top of the page. For Explanations, provide enough background to orient the reader.
+- **Set the context clearly.** For tutorial and how-to pages, define prerequisite knowledge and list additional resources at the top of the page. For explanation pages, provide enough background to orient the reader.
 - **Think in user flows.** Imagine how a user encounters problems or tasks, not how the codebase is organized.
 - **Be as detailed as required, as concise as possible.** Include all steps or context the user needs, but avoid unnecessary narrative.
 - **Prefer clarity over cleverness.** Simple, direct wording beats jargon, metaphors, or over-complicated phrasing.
@@ -37,7 +37,7 @@ When contributing, identify which type of documentation your addition belongs to
 
 **Descriptive link naming.** Use descriptive link text (instead of `here/link`).
 
-**Internal links: standardized naming.** Use the path hierarchy to the referenced page or section, separated by >'s. For example: `[Tutorial > Exploring Data > Search Interface & Filters](<path-to-referenced-section>)`. Long paths can be shortened with `...`, e.g., `[Tutorial > ... > Search Interface & Filters](<path-to-referenced-section>)`, using your best judgement.
+**Internal links: standardized naming.** Use the path hierarchy to the referenced page or section, separated by >'s. For example: `[Tutorials > Explore data > Search interface and filters](<path-to-referenced-section>)`. Long paths can be shortened with `...`, e.g., `[Tutorials > ... > Search interface and filters](<path-to-referenced-section>)`, using your best judgement.
 
 If the referenced section belongs to the current page, drop the global path, i.e., `[Search Interface & Filters](<path-to-referenced-section>)`.
 

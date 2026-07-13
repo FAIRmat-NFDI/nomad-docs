@@ -8,7 +8,7 @@ from nomad_docs.navigation import NavigationError, NavigationIndex, register_nav
 NAV = [
     {"Home": "index.md"},
     {
-        "Tutorial": [
+        "Tutorials": [
             {"Overview": "tutorial/overview.md"},
             {
                 "Upload data": [
@@ -42,9 +42,9 @@ def test_navigation_index_extracts_titles_from_nested_navigation():
     ("target", "expected"),
     [
         ("index.md", "Home"),
-        ("tutorial/overview.md", "Tutorial > Overview"),
-        ("tutorial/upload.md", "Tutorial > Upload data > With the GUI"),
-        ("tutorial/parser.md", "Tutorial > ... > Parser tutorial"),
+        ("tutorial/overview.md", "Tutorials > Overview"),
+        ("tutorial/upload.md", "Tutorials > Upload data > With the GUI"),
+        ("tutorial/parser.md", "Tutorials > ... > Parser tutorial"),
     ],
 )
 def test_navigation_index_formats_navigation_breadcrumbs(target, expected):
@@ -78,14 +78,14 @@ def test_navigation_index_renders_relative_posix_links(target, current, expected
 @pytest.mark.parametrize(
     ("target", "expected"),
     [
-        ("tutorial/overview.md", "[Tutorial > Overview](tutorial/overview.md)"),
+        ("tutorial/overview.md", "[Tutorials > Overview](tutorial/overview.md)"),
         (
             "tutorial/upload.md",
-            "[Tutorial > Upload data > With the GUI](tutorial/upload.md)",
+            "[Tutorials > Upload data > With the GUI](tutorial/upload.md)",
         ),
         (
             "tutorial/parser.md",
-            "[Tutorial > ... > Parser tutorial](tutorial/parser.md)",
+            "[Tutorials > ... > Parser tutorial](tutorial/parser.md)",
         ),
     ],
 )
