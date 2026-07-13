@@ -36,9 +36,15 @@
 
 .home-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     grid-column-gap: 24px;
     row-gap: 24px;
+}
+
+@media screen and (max-width: 44.984375em) {
+    .home-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
 }
 
 .home-grid div {
@@ -48,6 +54,8 @@
 
 .home-grid > div {
     border: 1px solid #c7d4ff;
+    min-width: 0;
+    overflow-wrap: anywhere;
     transition:
         border-color 150ms ease,
         box-shadow 150ms ease;
