@@ -6,7 +6,7 @@ hide: toc
 
 How-to guides are goal-oriented instructions. Use them when you need to complete a specific task.
 
-## Guide areas
+## Tasks by area
 
 <div markdown="block" class="home-grid">
 <div markdown="block">

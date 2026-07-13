@@ -2,7 +2,7 @@
 
 Reference pages provide authoritative technical details. Use them when you need exact syntax, definitions, options, or generated reference material.
 
-## Reference sections
+## Topics
 
 - {{ nav_link("reference/config.md") }}: deployment and application configuration options.
 - {{ nav_link("reference/annotations.md") }}: metainfo annotations and their arguments.
