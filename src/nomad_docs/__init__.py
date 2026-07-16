@@ -20,15 +20,10 @@
 Definitions that are used in the documentation via mkdocs-macro-plugin.
 """
 
-<<<<<<< HEAD
-import json
-import os.path
-=======
 import importlib
 import json
 import os.path
 from enum import Enum
->>>>>>> origin/develop
 from inspect import isclass
 from typing import cast, get_args
 
