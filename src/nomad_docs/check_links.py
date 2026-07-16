@@ -35,33 +35,33 @@ def normalize_attrs(attrs: str | None, is_external: bool) -> str:
     if not attrs:
         if is_external:
             return '{:target="_blank" rel="noopener"}'
-        return ""
+        return ''
 
     inner: str = attrs.strip()[1:-1].strip()  # remove { }
 
     # Strip optional leading colon commonly used in MkDocs/Markdown attributes
-    if inner.startswith(":"):
+    if inner.startswith(':'):
         inner = inner[1:].strip()
 
     parts: list[str] = inner.split()
     attrs_dict: dict[str, str | None] = {}
 
     for part in parts:
-        if "=" in part:
-            k, v = part.split("=", 1)
-            attrs_dict[k] = v.strip("\"'")
+        if '=' in part:
+            k, v = part.split('=', 1)
+            attrs_dict[k] = v.strip('"\'')
         else:
             attrs_dict[part] = None
 
     if is_external:
-        attrs_dict["target"] = "_blank"
-        attrs_dict["rel"] = "noopener"
+        attrs_dict['target'] = '_blank'
+        attrs_dict['rel'] = 'noopener'
     else:
-        attrs_dict.pop("target", None)
-        attrs_dict.pop("rel", None)
+        attrs_dict.pop('target', None)
+        attrs_dict.pop('rel', None)
 
     if not attrs_dict:
-        return ""
+        return ''
 
     res_parts: list[str] = []
     for k, v in attrs_dict.items():
@@ -70,12 +70,12 @@ def normalize_attrs(attrs: str | None, is_external: bool) -> str:
         else:
             res_parts.append(k)
 
-    return "{:" + " ".join(res_parts) + "}"
+    return '{:' + ' '.join(res_parts) + '}'
 
 
 def process_file(path: Path) -> int:
     """Process one file. Return number of actual changes."""
-    text: str = path.read_text(encoding="utf-8")
+    text: str = path.read_text(encoding='utf-8')
     changes_in_file = 0
 
     def repl(match: regex.Match) -> str:
@@ -88,7 +88,7 @@ def process_file(path: Path) -> int:
         if attrs is not None:
             attrs = attrs.lstrip()
 
-        is_external = url.startswith(("http://", "https://", "ftp://"))
+        is_external = url.startswith(('http://', 'https://', 'ftp://'))
         new_attrs = normalize_attrs(attrs, is_external)
 
         replacement = full_link + new_attrs
@@ -100,13 +100,13 @@ def process_file(path: Path) -> int:
     new_text = LINK_PATTERN.sub(repl, text)
 
     if changes_in_file > 0:
-        print(f"Updated {changes_in_file} link(s) in {path}")
-        path.write_text(new_text, encoding="utf-8")
+        print(f'Updated {changes_in_file} link(s) in {path}')
+        path.write_text(new_text, encoding='utf-8')
 
     return changes_in_file
 
 
-def main(root: str = "docs") -> int:
+def main(root: str = 'docs') -> int:
     """Process all markdown files under the given root directory."""
     total_changes = 0
     for md_file in Path(root).rglob('*.md'):
@@ -120,5 +120,5 @@ if __name__ == '__main__':
         print(f'\n✗ Found and fixed {changes} issues.')
         sys.exit(1)
 
-    print("\n✓ All links are correctly annotated.")
+    print('\n✓ All links are correctly annotated.')
     sys.exit(0)
