@@ -88,16 +88,6 @@ def process_file(path: Path) -> int:
         if attrs is not None:
             attrs = attrs.lstrip()
 
-<<<<<<< HEAD
-    if count > 0 and new_text != text:
-        print(f'Updated {count} link(s) in {path}')
-        path.write_text(new_text, encoding='utf-8')
-        return count
-    return 0
-
-
-def main(root='docs') -> int:
-=======
         is_external = url.startswith(("http://", "https://", "ftp://"))
         new_attrs = normalize_attrs(attrs, is_external)
 
@@ -118,7 +108,6 @@ def main(root='docs') -> int:
 
 def main(root: str = "docs") -> int:
     """Process all markdown files under the given root directory."""
->>>>>>> origin/develop
     total_changes = 0
     for md_file in Path(root).rglob('*.md'):
         total_changes += process_file(md_file)
@@ -130,12 +119,6 @@ if __name__ == '__main__':
     if changes > 0:
         print(f'\n✗ Found and fixed {changes} issues.')
         sys.exit(1)
-<<<<<<< HEAD
-    else:
-        print('\n✓ All external links are correctly annotated.')
-        sys.exit(0)
-=======
 
     print("\n✓ All links are correctly annotated.")
     sys.exit(0)
->>>>>>> origin/develop
