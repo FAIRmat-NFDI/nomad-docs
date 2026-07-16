@@ -13,9 +13,10 @@ This is a list of the available plugin entry point configuration models.
 {{ pydantic_model('nomad.config.models.plugins.ActionEntryPoint') }}
 {{ pydantic_model('nomad.config.models.plugins.APIEntryPoint') }}
 {{ pydantic_model('nomad.config.models.plugins.AppEntryPoint') }}
+{{ pydantic_model('nomad.config.models.plugins.DashboardEntryPoint') }}
 {{ pydantic_model('nomad.config.models.plugins.ExampleUploadEntryPoint') }}
 {{ pydantic_model('nomad.config.models.plugins.NormalizerEntryPoint') }}
-{{ pydantic_model('nomad.config.models.plugins.NorthToolEntryPoint') }}
+{{ pydantic_model('nomad.config.models.plugins.NORTHToolEntryPoint') }}
 {{ pydantic_model('nomad.config.models.plugins.ParserEntryPoint') }}
 {{ pydantic_model('nomad.config.models.plugins.SchemaPackageEntryPoint') }}
 

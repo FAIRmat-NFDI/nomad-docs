@@ -10,6 +10,6 @@ There are 2 public versions available:
 2. [beta /staging](https://nomad-lab.eu/prod/v1/staging/gui/search/entries){:target="_blank" rel="noopener"}, which has the latest release and updates much more frequently, but may also harbor unstable or untested features. You can navigate to this version via two distinct links: 1. at the bottom-right corner of the landing page and 2. under "SOLUTIONS" > "NOMAD" > "Try and Test" in the top navigation menu (highlighted <span style="color:red">red</span> in images below).
 
 <div class="image-container" markdown="block">
-![NOMAD Beta at the bottom of the website](images/beta1.png){.screenshot}
-![NOMAD Beta inside solutions](images/beta2.png){.screenshot}
+![NOMAD Beta at the bottom of the website](images/beta1.png){:.screenshot}
+![NOMAD Beta inside solutions](images/beta2.png){:.screenshot}
 </div>

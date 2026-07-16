@@ -18,10 +18,10 @@ The other files are mounted into the docker containers.
 
 ### docker-compose.yaml
 
-The most basic `docker-compose.yaml` to run an OASIS looks like this:
+The most basic `docker-compose.yaml` to run an Oasis looks like this:
 
 ```yaml
---8<-- "docs/howto/oasis/ops/docker-compose/nomad-oasis/docker-compose.yaml"
+--8<-- "docs/howto/oasis/data/docker-compose/nomad-oasis/docker-compose.yaml"
 ```
 
 Changes necessary:
@@ -47,18 +47,18 @@ A few things to notice:
 
 ### nomad.yaml
 
-NOMAD app and worker read a `nomad.yaml` for configuration.
+NOMAD app and worker read the `nomad.yaml` for configuration.
 
 ```yaml
---8<-- "docs/howto/oasis/ops/docker-compose/nomad-oasis/configs/nomad.yaml"
+--8<-- "docs/howto/oasis/data/docker-compose/nomad-oasis/configs/nomad.yaml"
 ```
 
 You should change the following:
 
-- Replace `localhost` with the hostname of your server. I user-management will redirect your
-  users back to this host. Make sure this is the hostname, your users can use.
+- Replace `localhost` with the hostname of your server, and user-management will redirect your
+  users back to this host. Make sure this is the hostname that your users can access.
 - Replace `deployment`, `deployment_url`, and `maintainer_email` with representative values.
-  The `deployment_url` should be the url to the deployment's api (should end with `/api`).
+  The `deployment_url` should be the URL to the deployment's api (should end with `/api`).
 - To enable the *log transfer* set `logtransfer.enable: true` ([data privacy notice above](#sharing-data-through-log-transfer-and-data-privacy-notice)).
 - You can change `api_base_path` to run NOMAD under a different path prefix.
 - You should generate your own `north.jupyterhub_crypt_key`. You can generate one
@@ -77,7 +77,7 @@ The GUI container serves as a proxy that forwards requests to the app container.
 proxy is an nginx server and needs a configuration similar to this:
 
 ```none
---8<-- "docs/howto/oasis/ops/docker-compose/nomad-oasis/configs/nginx.conf"
+--8<-- "docs/howto/oasis/data/docker-compose/nomad-oasis/configs/nginx.conf"
 ```
 
 A few things to notice:
@@ -86,12 +86,12 @@ A few things to notice:
 - You can use the server for additional content if you like.
 - `client_max_body_size` sets a limit to the possible upload size.
 
-You can add an additional reverse proxy in front or modify the nginx in the docker-compose.yaml
+You can add an additional reverse proxy in front or modify the `nginx` in the `docker-compose.yaml`
 to [support https](http://nginx.org/en/docs/http/configuring_https_servers.html){:target="_blank" rel="noopener"}.
 If you operate the GUI container behind another proxy, keep in mind that your proxy should
 not buffer requests/responses to allow streaming of large requests/responses for `api/v1/uploads` and `api/v1/.*/download`.
-An nginx reverse proxy location on an additional reverse proxy, could have these directives
-to ensure the correct http headers and allows the download and upload of large files:
+An `nginx` reverse proxy location on an additional reverse proxy, could have these directives
+to ensure the correct HTTP headers and allow the download and upload of large files:
 
 ```nginx
 client_max_body_size 35g;
@@ -138,13 +138,13 @@ docker stop nomad_oasis_app
 docker rm nomad_oasis_app
 ```
 
-You can wait for the start-up with curl using the apps `alive` "endpoint":
+You can wait for the start-up with `curl` using the apps `alive` endpoint:
 
 ```sh
 curl http://<your host>/nomad-oasis/alive
 ```
 
-If everything works, the gui should be available under:
+If everything works, the GUI should be available under:
 
 ```none
 http://<your host>/nomad-oasis/gui/
@@ -160,7 +160,7 @@ http://<your host>/nomad-oasis/alive
 http://<your host>/nomad-oasis/api/info
 ```
 
-To see logs or 'go into' a running container, you can access the individual containers
+To see logs or "go into" a running container, you can access the individual containers
 with their names and the usual docker commands:
 
 ```sh
@@ -171,7 +171,7 @@ docker logs nomad_oasis_app
 docker exec -ti nomad_oasis_app /bin/bash
 ```
 
-If you want to report problems with your OASIS. Please provide the logs for
+If you want to report problems with your Oasis. Please provide the logs for
 
 - nomad_oasis_app
 - nomad_oasis_worker
@@ -197,49 +197,128 @@ to learn how to add your own plugins.
 
 ## Configuring for performance
 
-If you run the OASIS on a single computer, like described here (either with docker or bare
+If you run the Oasis on a single computer, like described here (either with docker or bare
 Linux), you might run into problems with processing large uploads. If the NOMAD worker
 and app are run on the same computer, the app might become unresponsive, when the worker
 consumes all system resources.
 
-By default, the Temporal-based worker setup uses a single process per container. The default deployment template defines **4 replicas** of the worker container, allowing multiple uploads and tasks to be processed in parallel. Depending on your machine and workload, you may want to adjust how many replicas are running and how much CPU and memory they are allowed to use.
+NOMAD is designed to efficiently process a wide variety of materials science data out of the box. For most standard deployments, **the default configurations will work perfectly fine** and provide a stable, high-throughput environment.
 
-There are several ways to control resource usage and improve performance:
+However, depending on your specific hardware architecture or the unique shape of your data (e.g., massive bursts of tiny files, highly computationally expensive parsers, or massive memory-heavy datasets), you may want to optimize your setup.
 
-- Increase or decrease the number of worker **replicas** (recommended)
-- Adjust CPU and memory limits in Docker
-- (Optionally) Increase the number of worker **processes** on the Python side
+Here is a guide on how to tune NOMAD's orchestration engine (Temporal) and worker configurations for specialized workloads.
 
 ---
 
-### Increase the Number of Worker Replicas (Recommended)
+### 1. Scaling Strategy: Replicas vs. Pool Size
 
-The most robust way to scale worker performance is by changing the number of replicas for the worker container. This ensures that multiple worker instances can process tasks in parallel and that they are properly managed and restarted if one fails.
+When you need to increase your processing throughput, you have two primary choices: add more containers (Horizontal Scaling via Replicas) or increase the capacity of your existing containers (Vertical Scaling via Pool Size).
 
-In your `docker-compose.yml`, you can modify the worker service like this:
+#### `pool_size` (Vertical Scaling)
+
+In NOMAD, worker pools rely on Python process executors to bypass the Global Interpreter Lock (GIL). This means that increasing the `pool_size` will spawn entirely separate Python processes inside a single container.
+
+You can configure this in your `nomad.yaml` for different worker types (`internal_worker`, `cpu_worker`, `gpu_worker`):
+
+```yaml
+temporal:
+  internal_worker:
+    # Number of Python processes running in this container
+    pool_size: 1
+    # Restart the process after 100 tasks to clear memory leaks
+    max_tasks_per_child: 100
+```
+
+* **Recommended baseline:** Start with the current default (`pool_size: 1`) and scale replicas first.
+* **When to increase `pool_size`:** Increase it gradually (up to the number of CPU cores allocated to the container) only if a single process is not already saturating your available CPU and you still have memory headroom. This typically applies to workloads with idle time (I/O waits) rather than processes that already run heavily in compiled code paths (e.g., heavy NumPy workloads that already bypass the GIL).
+* **Memory impact:** Each extra process consumes additional memory. A container with `pool_size: 10` can use roughly similar memory to ten separate containers with `pool_size: 1`.
+
+#### Worker Replicas (Horizontal Scaling)
+
+Deploying more replicas (via Docker Compose or Kubernetes) adds completely isolated containers to your cluster. This is configured in your deployment manifests, not in `nomad.yaml`.
+
+* **The Isolation Advantage:** We generally recommend relying on replicas for scaling rather than massive `pool_size` values. If a malformed file triggers a severe crash in a Python C-extension (like a segfault), it can bring down the entire container. If you have a high `pool_size`, that single bad file just killed the processing for all other parallel tasks sharing that pod. Replicas isolate this "blast radius," ensuring only the offending container dies and is rescheduled.
+
+*Recommendation: Prefer scaling replicas first for throughput and fault tolerance. If replicas still do not saturate your available CPU, then gradually increase `pool_size` while monitoring memory usage.*
+
+---
+
+### 2. Resource Management & Guardrails
+
+To keep your cluster healthy, you must combine infrastructure constraints with NOMAD's application-aware guardrails.
+
+* **Hard Limits (Infrastructure):** Your Kubernetes or Docker pod resource limits (`resources.limits.memory` and `resources.limits.cpu`) are the ultimate guardrails. They protect your host node from being completely consumed by a runaway worker.
+* **Soft Limits (NOMAD `WorkerConfig`):** Settings like `target_memory_usage` and `target_cpu_usage` act as an early-warning system. They allow the worker to gracefully pause accepting new tasks from the queue *before* the container hits the hard Kubernetes limit. This prevents aggressive and disruptive Out-Of-Memory (OOM) kills.
+
+For Docker Compose deployments, you can set CPU hard limits directly in the worker service:
 
 ```yml
 services:
-  worker:
-    ...
-    deploy:
-      replicas: 4  # default value; adjust based on your system capacity
+    worker:
+        ...
+        deploy:
+            resources:
+                limits:
+                    cpus: '0.50'
 ```
 
-Each replica runs as an independent worker process. Docker will handle restarting and load balancing between them.
+The value refers to the number of CPU cores the container can use (for example `0.50` means half a CPU core). See also the [docker-compose documentation](https://docs.docker.com/compose/compose-file/compose-file-v3/#resources){:target="_blank" rel="noopener"}.
 
-### Adjust the Number of Worker Processes (Advanced Option)
-
-If necessary, you can also increase the number of processes within each worker container by modifying the worker command in your docker-compose.yml:
-
-```yml
-services:
-  worker:
-    ...
-    command: python -m nomad.cli admin run action-internal-worker --workers 4
+```yaml
+temporal:
+  internal_worker:
+    # Stop accepting new tasks if container CPU hits 80%
+    target_cpu_usage: 0.8
+    # Stop accepting new tasks if container RAM hits 80%
+    target_memory_usage: 0.8
 ```
 
-This will run multiple worker processes within a single container. However, this approach is less robust than scaling via replicas, as process-level management (e.g., restarting if one worker crashes) is handled less effectively inside a single container.
+---
+
+### 3. Orchestration Concurrency & Backpressure
+
+Beyond how many workers you have, you can also control the orchestration logic that dictates how aggressively Temporal dispatches tasks.
+
+Configurations like `entry_workflow_batch_concurrency` and `entry_concurrency_target` act as traffic lights. **Crucially, these limits apply *per upload*, not globally.**
+
+```yaml
+temporal:
+  # Max concurrent batches processed simultaneously per upload
+  entry_workflow_batch_concurrency: 5
+  # Max concurrent entries processed within a single batch per upload
+  entry_concurrency_target: 50
+  # Entries grouped into one process-entry activity invocation
+  entry_activity_batch_size: 5
+```
+
+* **Defaults are usually sufficient:** For most workloads, these limits keep workers well-saturated.
+* **Tuning for Backpressure:** Because these limits multiply by the number of active uploads, they can quickly scale. If 100 users upload data simultaneously with the default settings, Temporal could attempt to run roughly 25,000 concurrent entries (`100 uploads * 5 batch workflows * 50 entry target`). If this massive spike causes your downstream infrastructure (like MongoDB, Elasticsearch, or your network) to timeout or crash, you should **decrease** these concurrency values. Lowering them forces tasks to wait safely in the queue, applying backpressure and keeping the overall system stable.
+* **Batch size tradeoff:** `entry_activity_batch_size` controls how much work is grouped into each activity. Larger values reduce Temporal scheduling overhead, but make each activity heavier and increase retry blast radius if it fails.
+
+---
+
+### 4. Tuning for Specific Workloads
+
+#### Scenario A: High Volume of Tiny Files (I/O Bound)
+
+Processing thousands of tiny files is typically very fast computationally, but tasks spend most of their time waiting on database reads/writes or network latency.
+
+* **Behavior:** Worker CPUs sit mostly idle while waiting for I/O.
+* **How to tune:** The default configurations will usually keep workers saturated. If you want to increase throughput, benchmark adding more replicas to widen your I/O pipeline. If your backend databases (Mongo/Elasticsearch) start timing out under the load of many parallel uploads, **lower** `entry_workflow_batch_concurrency` and `entry_concurrency_target` to throttle the system.
+
+#### Scenario B: Computationally Heavy Processing (CPU Bound)
+
+Dense calculations, heavy parsers, or complex normalizers will quickly peg a CPU core to 100%.
+
+* **Behavior:** The worker machine's CPU becomes the absolute bottleneck.
+* **How to tune:** Rely on the `target_cpu_usage: 0.8` setting so the worker naturally backs off when busy. Keep `pool_size` conservative (often `1`) and scale horizontally with replicas first. Increase `pool_size` only if a single worker process is not already saturating CPU and you have enough memory headroom. If CPU-heavy tasks are unstable, timing out, or causing long retries, also try decreasing `entry_activity_batch_size` so each activity does less work.
+
+#### Scenario C: Memory-Intensive Processing
+
+Workloads involving large datasets or trajectories that must be loaded entirely into RAM.
+
+* **Behavior:** High risk of sudden Out-Of-Memory (OOM) crashes.
+* **How to tune:** This scenario requires strict isolation. Favor higher replica counts with very low `pool_size` limits (even a `pool_size: 1`). This ensures that if a massive dataset causes an unavoidable OOM spike, it only kills one isolated replica rather than a pooled worker that is concurrently processing other users' data. Rely heavily on strict Kubernetes memory limits combined with NOMAD's `target_memory_usage: 0.7` to reject tasks gracefully when RAM gets tight.
 
 ### Limiting the use of threads
 
@@ -256,69 +335,193 @@ services:
             OMP_NUM_THREADS: 1
 ```
 
-### Limit CPU with docker
+## Controlling access to your Oasis
 
-You can add a `deploy.resources.limits` section to the worker service in the `docker-compose.yml`:
+By default, a NOMAD Oasis mirrors the configuration of the central NOMAD service: it is designed for open data sharing.
+While network-level access depends on your firewall and hosting setup,
+the application itself allows users to interact with the API according to a configurable scope-based authorization system.
 
-```yml
-services:
-    worker:
-        ...
-        deploy:
-            resources:
-                limits:
-                    cpus: '0.50'
-```
+Access control can therefore be configured on several levels:
 
-The number refers to the percentage use of a single CPU core.
-See also the [docker-compose documentation](https://docs.docker.com/compose/compose-file/compose-file-v3/#resources){:target="_blank" rel="noopener"}.
+1. Network level — restrict access via firewall, VPN, or private network.
+2. Authentication level — require users to log in before accessing the API.
+3. Authorization level — control which operations users are allowed to perform after login.
 
-## Restricting access to your Oasis
+You can learn more about [authentication and authorization in our explanation-section](../../explanation/auth.md#authentication-and-authorization).
 
-An Oasis works exactly the same way the official NOMAD works. It is open and everybody
-can access published data. Everybody with an account can upload data. This might not be
-what you want.
+The authentication and authorization settings for individual NOMAD deployments are configurable through the [auth configuration section](../../reference/config.md#auth)  in `nomad.yaml` and the following sections demonstrate its usage.
 
-Currently there are three ways to restrict access to your Oasis. First, you do not
-expose the Oasis to the public internet, e.g. you make it only available on an intra-net or
-through a VPN.
+### Require authentication
 
-Secondly, you can require authentication for all sensitive endpoints by enabling
-the global `require_authentication` flag in your configuration:
+By default, authentication is **not required**.
+This means anonymous users can still access the API with [limited and configurable permissions](#configure-unauthenticated-user-permissions).
+To require authentication for all API requests, enable the following option:
 
 ```yaml
-oasis:
-    require_authentication: true
+auth:
+  require_authentication: true
 ```
 
-Lastly, we offer a simple white-list mechanism. As the Oasis administrator you provide a
-list of accounts as part of your Oasis configuration. To use the Oasis, all users have to
-be logged in and be on your white list of allowed users. To enable white-listing, you
-can provide a list of NOMAD account email addresses in your `nomad.yaml` like this:
+When this option is enabled, all requests must include a valid authentication token.
+Otherwise the API will return:
+
+```text
+HTTP 401 Unauthorized
+```
+
+#### Restricting access to specific users
+
+The `authorized_users` is a list of usernames (case-insensitive).
+If specified, only these users are considered to be fully authorized for access.
 
 ```yaml
-oasis:
-    allowed_users:
-        - user1@gmail.com
-        - user2@gmail.com
+auth:
+  authorized_users:
+    - alice
+    - bob
+```
+
+If this option is set, only the listed users are considered fully authorized.
+You could [configure how unauthorized users are handled](#configure-unauthorized-user-permissions).
+
+### Configure scope-based authorization
+
+After authentication, NOMAD determines **which actions the user is allowed to perform** using scopes.
+
+Scopes support glob-style configuration with wildcards support:
+
+```text
+*:read  # read-only access to all resources
+*:*     # full access
+```
+
+```yaml
+auth:
+  unauthenticated_user_scopes:
+    include:
+      - "*:read"
+    exclude:
+      - "uploads:read"
+```
+
+Semantics:
+
+- `include` defines the baseline scopes
+- `exclude` removes scopes from that baseline (with higher precedence than `include`)
+- wildcards are supported
+
+!!! note
+    Partial wildcard patterns such as `u*:read` are **not** supported.
+
+[All available scopes](../../explanation/auth.md#authorization-via-scopes) are defined in the `nomad.auth.scopes.Scope` enum.
+
+When an API endpoint is called, the backend checks whether the user has the required scopes.
+If required scopes are missing, the API returns:
+
+```text
+HTTP 403 Forbidden
+Missing scopes: [...]
+```
+
+#### Configure unauthenticated user permissions
+
+When authentication is not required, anonymous users receive a configurable set of scopes.
+
+By default this is read-only access:
+
+```yaml
+auth:
+  unauthenticated_user_scopes:
+    include:
+      - "*:read"
+```
+
+This allows anonymous users to browse published data but prevents modifications.
+
+#### Configure unauthorized user permissions
+
+Users who successfully authenticate but are not in the `authorized_users` whitelist
+are handled according to the `reject_unauthorized_users` setting.
+
+When enabled (`reject_unauthorized_users: true`), unauthorized users will be rejected with:
+
+```text
+HTTP 403 Forbidden
+```
+
+Otherwise (`reject_unauthorized_users: false`), unauthorized users can still access
+the Oasis but only with restricted access, configurable via:
+
+```yaml
+auth:
+  unauthorized_user_scopes:
+    include:
+      - "*:read"
+```
+
+### Example configurations
+
+#### Read-only public Oasis (default)
+
+Anyone can access read-only endpoints without logging in.
+Logged-in users can still use whatever scopes their token grants.
+
+```yaml
+auth:
+  require_authentication: false
+  unauthenticated_user_scopes:
+    include:
+      - "*:read"
+```
+
+#### Public read-only Oasis with privileged whitelist
+
+Anyone can read, but only specific whitelisted users can use their full authenticated scopes.
+
+```yaml
+auth:
+  require_authentication: false
+  reject_unauthorized_users: false
+  unauthenticated_user_scopes:
+    include:
+      - "*:read"
+  unauthorized_user_scopes:
+    include:
+      - "*:read"
+  authorized_users:
+    - alice
+    - bob
+```
+
+#### Fully Restricted Oasis
+
+Only explicitly whitelisted users can access the system, and login is mandatory.
+
+```yaml
+auth:
+  require_authentication: true
+  reject_unauthorized_users: true
+  authorized_users:
+    - alice
+    - bob
 ```
 
 ## User management
 
 ### Using the central user management
 
-Our recommendation is to use the central user management provided by nomad-lab.eu. We
+Our recommendation is to use the central user management provided by `nomad-lab.eu`. We
 simplified its use and you can use it out-of-the-box. You can even run your system
 from `localhost` (e.g. for initial testing). The central user management system is not
-communicating with your OASIS directly. Therefore, you can run your OASIS without
+communicating with your Oasis directly. Therefore, you can run your Oasis without
 exposing it to the public internet.
 
-There are two requirements. First, your users must be able to reach the OASIS. If a user is
+There are two requirements. First, your users must be able to reach the Oasis. If a user is
 logging in, she/he is redirected to the central user management server and after login,
-she/he is redirected back to the OASIS. These redirects are executed by your user's browser
+she/he is redirected back to the Oasis. These redirects are executed by your user's browser
 and do not require direct communication.
 
-Second, your OASIS must be able to request (via HTTP) the central user management and central NOMAD
+Second, your Oasis must be able to request (via HTTP) the central user management and central NOMAD
 installation. This is necessary for non JWT-based authentication methods and to
 retrieve existing users for data-sharing features.
 
@@ -343,17 +546,17 @@ installation above. There are just a three changes.
 
 - The `docker-compose.yaml` has an added keycloak service.
 - The `nginx.conf` is also modified to add another location for keycloak.
-- The `nomad.yaml` has modifications to tell nomad to use your and not the official NOMAD keycloak.
+- The `nomad.yaml` has modifications to tell Oasis to use your and not the official NOMAD keycloak.
 
 You can start with the regular installation above and manually adopt the config or
-download the already updated configuration files: [nomad-oasis-with-keycloak.zip](../../assets/nomad-oasis-with-keycloak.zip).
+download the already updated configuration files: [nomad-oasis-with-keycloak.zip](./data/nomad-oasis-with-keycloak.zip).
 The download also contains an additional `configs/nomad-realm.json` that allows you
 to create an initial keycloak realm that is configured for NOMAD automatically.
 
 First, the `docker-compose.yaml`:
 
 ```yaml
---8<-- "docs/howto/oasis/ops/docker-compose/nomad-oasis-with-keycloak/docker-compose.yaml"
+--8<-- "docs/howto/oasis/data/docker-compose/nomad-oasis-with-keycloak/docker-compose.yaml"
 ```
 
 A few notes:
@@ -367,7 +570,7 @@ A few notes:
 Second, we add a keycloak location to the nginx config:
 
 ```nginx
---8<-- "docs/howto/oasis/ops/docker-compose/nomad-oasis-with-keycloak/configs/nginx.conf"
+--8<-- "docs/howto/oasis/data/docker-compose/nomad-oasis-with-keycloak/configs/nginx.conf"
 ```
 
 A few notes:
@@ -378,12 +581,12 @@ A few notes:
 Third, we modify the keycloak configuration in the `nomad.yaml`:
 
 ```yaml
---8<-- "docs/howto/oasis/ops/docker-compose/nomad-oasis-with-keycloak/configs/nomad.yaml"
+--8<-- "docs/howto/oasis/data/docker-compose/nomad-oasis-with-keycloak/configs/nomad.yaml"
 ```
 
 You should change the following:
 
-- There are two urls to configure for keycloak. The `server_url` is used by the nomad
+- There are two urls to configure for keycloak. The `server_url` is used by the NOMAD
   services to directly communicate with keycloak within the docker network. The `public_server_url`
   is used by the UI to perform the authentication flow. You need to replace `localhost`
   in `public_server_url` with `<yourhost>`.
@@ -402,8 +605,8 @@ is imported by default. The realm comes with a test user and password `test` and
 A few notes on the realm configuration:
 
 - Realm and client settings are almost all default keycloak settings.
-- You should change the password of the admin user in the nomad realm.
-- The admin user in the nomad realm has the additional `view-users` client role for `realm-management`
+- You should change the password of the admin user in the NOMAD realm.
+- The admin user in the NOMAD realm has the additional `view-users` client role for `realm-management`
   assigned. This is important, because NOMAD will use this user to retrieve the list of possible
   users for managing co-authors and reviewers on NOMAD uploads.
 - The realm has one client `nomad_public`. This has a basic configuration. You might
@@ -414,9 +617,9 @@ A few notes on the realm configuration:
 
 ## Sharing data through log transfer and data privacy notice
 
-NOMAD includes a *log transfer* functions. When enabled this it automatically collects
+NOMAD includes a *log transfer* functions. When enabled this automatically collects
 and transfers non-personalized logging data to us. Currently, this functionality is experimental
-and requires opt-in. However, in upcoming versions of NOMAD Oasis, we might change to out-out.
+and requires opt-in. However, in upcoming versions of NOMAD Oasis, we might change to opt-out.
 
 To enable this functionality add `logtransfer.enabled: true` to you `nomad.yaml`.
 
@@ -440,6 +643,6 @@ We encourage you to review this notice periodically for any updates.
 This is an incomplete list of potential things to customize your NOMAD experience.
 
 - Learn [how to develop plugins](../plugins/plugins.md) that can be installed in an Oasis
-- Write .yaml based [schemas](../manage/gui/yaml.md) and [ELNs](../manage/gui/elns.md)
-- Learn how to use the [tabular parser](../manage/gui/tabular.md) to manage data from .xls or .csv
+- Write YAML based [schemas](../manage/gui/yaml.md) and [ELNs](../manage/gui/elns.md)
+- Learn how to use the [tabular parser](../manage/gui/tabular.md) to manage data from XLS or CSV
 - Add specialized [NORTH tools](../manage/gui/north.md)

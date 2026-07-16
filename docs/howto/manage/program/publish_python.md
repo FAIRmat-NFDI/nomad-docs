@@ -2,7 +2,7 @@
 
 ## What you will learn
 
-- How to use the Python requests module to perform basic data management functions in NOMAD.
+- How to use the Python `requests` module to perform basic data management functions in NOMAD.
 
 ## Recommended preparation
 
@@ -13,39 +13,23 @@
 - [API Overview](./api.md)
 - [nomad-utility-workflows > How-to Guides > Perform API Calls](https://fairmat-nfdi.github.io/nomad-utility-workflows/how_to/use_api_functions.html){:target="_blank" rel="noopener"}
 
-## Uploading, changing metadata, and publishing via python API
+## Uploading, changing metadata, and publishing via Python API
 
-The [NOMAD API](https://nomad-lab.eu/prod/rae/docs/api.html){:target="_blank" rel="noopener"} allows uploading, publishing, etc. using a local python environment, as an alternative to the NOMAD GUI. An overview of all API functionalities is provided in [How to use the API](api.md)
+The [NOMAD API](api.md) allows uploading, publishing, etc. using a local Python environment, as an alternative to the NOMAD GUI. An overview of all API functionalities is provided in [How to use the API](api.md)
 
-We have prepare some simple python functions to facilitate use of this API. For use as demonstrated below, copy the following code into a file called NOMAD_API.py:
+We have prepare some simple Python functions to facilitate use of this API. For use as demonstrated below, copy the following code into a file called `nomad_api.py`:
 
 ```python
 import os
 import requests
 
-def get_authentication_token(nomad_url, username, password):
-    '''Get the token for accessing your NOMAD unpublished uploads remotely'''
-    try:
-        response = requests.get(
-            nomad_url + 'auth/token', params=dict(username=username, password=password, grant_type='password'), timeout=10)
-        token = response.json().get('access_token')
-        if token:
-            return token
 
-        print('response is missing token: ')
-        print(response.json())
-        return
-    except Exception:
-        print('something went wrong trying to get authentication token')
-        return
-
-
-def create_dataset(nomad_url, token, dataset_name):
+def create_dataset(nomad_url, dataset_name):
     '''Create a dataset to group a series of NOMAD entries'''
     try:
         response = requests.post(
             nomad_url + 'datasets/',
-            headers={'Authorization': f'Bearer {token}', 'Accept': 'application/json'},
+            headers={'Authorization': f'Bearer {os.environ["NOMAD_PAT"]}', 'Accept': 'application/json'},
             json={"dataset_name": dataset_name},
             timeout=10
             )
@@ -60,7 +44,7 @@ def create_dataset(nomad_url, token, dataset_name):
         print('something went wrong trying to create a dataset')
         return
 
-def upload_to_NOMAD(nomad_url, token, upload_file):
+def upload_to_NOMAD(nomad_url, upload_file):
     '''Upload a single file as a new NOMAD upload. Compressed zip/tar files are
     automatically decompressed.
     '''
@@ -68,7 +52,7 @@ def upload_to_NOMAD(nomad_url, token, upload_file):
         try:
             response = requests.post(
                 f'{nomad_url}uploads?file_name={os.path.basename(upload_file)}',
-                headers={'Authorization': f'Bearer {token}', 'Accept': 'application/json'},
+                headers={'Authorization': f'Bearer {os.environ["NOMAD_PAT"]}', 'Accept': 'application/json'},
                 data=f, timeout=30)
             upload_id = response.json().get('upload_id')
             if upload_id:
@@ -81,7 +65,7 @@ def upload_to_NOMAD(nomad_url, token, upload_file):
             print('something went wrong uploading to NOMAD')
             return
 
-def check_upload_status(nomad_url, token, upload_id):
+def check_upload_status(nomad_url, upload_id):
     '''
     # upload success => returns 'Process publish_upload completed successfully'
     # publish success => 'Process publish_upload completed successfully'
@@ -89,7 +73,7 @@ def check_upload_status(nomad_url, token, upload_id):
     try:
         response = requests.get(
             nomad_url + 'uploads/' + upload_id,
-            headers={'Authorization': f'Bearer {token}'}, timeout=30)
+            headers={'Authorization': f'Bearer {os.environ["NOMAD_PAT"]}'}, timeout=30)
         status_message = response.json().get('data').get('last_status_message')
         if status_message:
             return status_message
@@ -102,7 +86,7 @@ def check_upload_status(nomad_url, token, upload_id):
         # upload gets deleted from the upload staging area once published...or in this case something went wrong
         return
 
-def edit_upload_metadata(nomad_url, token, upload_id, metadata):
+def edit_upload_metadata(nomad_url, upload_id, metadata):
     '''
     Example of new metadata:
     upload_name = 'Test_Upload_Name'
@@ -121,19 +105,19 @@ def edit_upload_metadata(nomad_url, token, upload_id, metadata):
     try:
         response = requests.post(
             nomad_url+'uploads/' + upload_id + '/edit',
-            headers={'Authorization': f'Bearer {token}', 'Accept': 'application/json'},
+            headers={'Authorization': f'Bearer {os.environ["NOMAD_PAT"]}', 'Accept': 'application/json'},
             json=metadata, timeout=30)
         return response
     except Exception:
         print('something went wrong trying to add metadata to upload' + upload_id)
         return
 
-def publish_upload(nomad_url, token, upload_id):
+def publish_upload(nomad_url, upload_id):
     '''Publish an upload'''
     try:
         response = requests.post(
             nomad_url+'uploads/' + upload_id + '/action/publish',
-            headers={'Authorization': f'Bearer {token}', 'Accept': 'application/json'},
+            headers={'Authorization': f'Bearer {os.environ["NOMAD_PAT"]}', 'Accept': 'application/json'},
             timeout=30)
         return response
     except Exception:
@@ -141,17 +125,14 @@ def publish_upload(nomad_url, token, upload_id):
         return
 ```
 
-Now, we will demonstrate how to use these functions. Within a notebook or python script, import the above functions:
+[Create a personal access token (PAT)](./auth.md#create-a-pat) with at least `"datasets:write"`,
+`"uploads:read"`, `"uploads:write"` and `"uploads:publish"` permissions, for accessing your unpublished uploads.
+And [save it as environment variable `NOMAD_PAT`](./auth.md#use-a-pat).
+
+Now, we will demonstrate how to use these functions. Within a notebook or Python script, import the above functions:
 
 ```python
-from Nomad_API import *
-```
-
-Define the following user information:
-
-```python
-username = 'nomad_email@affiliation.edu'
-password = 'password'
+from nomad_api import *
 ```
 
 Define the NOMAD API endpoint:
@@ -161,28 +142,22 @@ Define the NOMAD API endpoint:
 nomad_url = 'https://nomad-lab.eu/prod/v1/test/api/v1/'  # test nomad (deleted occassionally)
 ```
 
-Get a token for accessing your unpublished uploads:
-
-```python
-token = get_authentication_token(nomad_url, username, password)
-```
-
 Create a dataset for grouping uploads that belong to, e.g., a publication:
 
 ```python
-dataset_id = create_dataset(nomad_url, token, 'Test_Dataset')
+dataset_id = create_dataset(nomad_url, 'Test_Dataset')
 ```
 
 Upload some test data to NOMAD:
 
 ```python
-upload_id = upload_to_NOMAD(nomad_url, token, 'test_data.zip')
+upload_id = upload_to_NOMAD(nomad_url, 'test_data.zip')
 ```
 
 Check the status to make sure the upload was processed correctly:
 
 ```python
-last_status_message = check_upload_status(nomad_url, token, upload_id)
+last_status_message = check_upload_status(nomad_url, upload_id)
 print(last_status_message)
 ```
 
@@ -211,13 +186,13 @@ metadata = {
     "comment": 'This is a test upload...',
 },
 }
-response = edit_upload_metadata(nomad_url, token, upload_id, metadata)
+response = edit_upload_metadata(nomad_url, upload_id, metadata)
 ```
 
 Check the upload again to make sure that the metadata was changed:
 
 ```python
-last_status_message = check_upload_status(nomad_url, token, upload_id)
+last_status_message = check_upload_status(nomad_url, upload_id)
 print(last_status_message)
 ```
 
@@ -226,13 +201,13 @@ print(last_status_message)
 Now, we are ready to publish:
 
 ```python
-response = publish_upload(nomad_url, token, upload_id)
+response = publish_upload(nomad_url, upload_id)
 ```
 
 Once again check the status:
 
 ```python
-last_status_message = check_upload_status(nomad_url, token, upload_id)
+last_status_message = check_upload_status(nomad_url, upload_id)
 print(last_status_message)
 ```
 

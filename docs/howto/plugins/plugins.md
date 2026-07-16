@@ -7,6 +7,7 @@ A single Python plugin package can contain multiple [plugin entry points](../../
 - [Actions](./types/actions.md)
 - [APIs](./types/apis.md)
 - [Apps](./types/apps.md)
+- [Dashboards](./types/dashboards.md)
 - [Example uploads](./types/example_uploads.md)
 - [Normalizers](./types/normalizers.md)
 - [NORTH tools](./types/north_tools.md)
@@ -62,6 +63,52 @@ plugins:
   entry_points:
     exclude: ["nomad_plugin.parsers:myparser"]
 ```
+
+## Accessing plugin configuration at runtime
+
+When developing plugins, you can access both the plugin's configuration (metadata and parameters) and the actual plugin implementation (the resource). NOMAD uses a [lazy-loading pattern](../../explanation/plugin_system.md#plugin-resource) where these are kept separate: `get_plugin_entry_point()` returns the entry point configuration, while `EntryPoint.load()` returns the actual plugin resource.
+
+### Configuring plugin parameters
+
+Administrators can override plugin-specific parameters using the `plugins.entry_points.options` section in `nomad.yaml`. For example:
+
+```yaml
+plugins:
+  entry_points:
+    options:
+      nomad_example.parsers:myparser:
+        parameter: "custom_value"
+        another_setting: 42
+```
+
+For comprehensive documentation on plugin configuration options, see the [Configuration reference](../../reference/config.md).
+
+### Retrieving configuration with `get_plugin_entry_point()`
+
+To access your plugin's configuration from within your plugin code, use the `get_plugin_entry_point()` function from `nomad.config`. This returns your plugin's entry point configuration with all administrator overrides applied, giving you access to custom parameters and other relevant configurations, while ensuring all settings are up-to-date.
+
+```python
+from nomad.config import config
+
+# Get your plugin's entry point configuration
+entry_point = config.get_plugin_entry_point('nomad_example.parsers:myparser')
+
+# Access configuration parameters
+print(f'Parameter value: {entry_point.parameter}')  # Output: Parameter value: custom_value
+print(f'Another setting: {entry_point.another_setting}')  # Output: Another setting: 42
+```
+
+The entry point name passed to `get_plugin_entry_point()` must match the name defined in your plugin's `pyproject.toml` under `[project.entry-points.'nomad.plugin']` (the same name used when configuring the plugin in `nomad.yaml`).
+
+### Additional resources
+
+- [Plugin entry point models reference](../../reference/plugins.md) - Documentation for all entry point types
+- [NOMAD plugin system explanation](../../explanation/plugin_system.md) - Conceptual overview of the plugin architecture
+- Plugin type-specific guides for examples:
+    - [Parsers](./types/parsers.md)
+    - [APIs](./types/apis.md)
+    - [Normalizers](./types/normalizers.md)
+    - [Schema packages](./types/schema_packages.md)
 
 ## Plugin development guidelines
 

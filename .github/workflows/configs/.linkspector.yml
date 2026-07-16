@@ -1,0 +1,21 @@
+dirs:
+  - ./docs
+  - ./examples
+files:
+  - ./README.md
+useGitIgnore: true
+timeout: 10000 # in ms (default is 30s)
+ignorePatterns:
+  # Ignore all non-http(s) links; `mkdocs --strict` would validates internal links
+  - pattern: "^(?!https?://).*"
+  - pattern: "^http://127\\.0\\.0\\.1"
+  - pattern: "^http://localhost"
+  # Ignore the following two which give 403 (likely because of cloudfare bot challenge)
+  - pattern: "^https://(www\\.)?anaconda\\.org/?$"
+  - pattern: "^https://www\\.w3\\.org/TR/vocab-dcat-2/?$"
+  # Stackoverflow might also have bot check which results in 403
+  - pattern: '^https://stackoverflow\.com/'
+  # xfce.org is consistently unreachable in CI (navigation times out)
+  - pattern: "^https://(www\\.)?xfce\\.org/?$"
+  # hifis.net is consistently unreachable in CI (navigation times out)
+  - pattern: "^https://(www\\.)?hifis\\.net/"
