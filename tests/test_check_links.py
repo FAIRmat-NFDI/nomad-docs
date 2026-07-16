@@ -65,13 +65,9 @@ def test_process_file_adds_attrs(tmp_path: Path) -> None:
         lines[3]
         == 'External full attrs: [Docs](https://example.com){:target="_blank" rel="noopener"}'
     )
-<<<<<<< HEAD
-    assert lines[5] == 'Internal link: [Overview](./overview.md)'
-=======
     assert lines[4] == "Internal link: [Overview](./overview.md)"
     assert lines[5] == "Internal link bad attrs: [Bad](./bad.md)"
     assert lines[6] == "Internal link mixed attrs: [Mixed](./mixed.md){:.my-class}"
->>>>>>> origin/develop
     assert (
         lines[7]
         == 'Link with parentheses: [Wiki](https://en.wikipedia.org/wiki/Reentrancy_(computing)){:target="_blank" rel="noopener"}'
