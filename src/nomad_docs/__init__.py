@@ -74,9 +74,9 @@ def define_env(env):
         from nomad.app.v1.routers.entries import archive_required_documentation
 
         doc_snippets = {
-            'query': query_documentation,
-            'owner': owner_documentation,
-            'archive-required': archive_required_documentation,
+            "query": query_documentation,
+            "owner": owner_documentation,
+            "archive-required": archive_required_documentation,
         }
         return doc_snippets[key]
 
@@ -107,22 +107,22 @@ def define_env(env):
                 the top-level object.
         """
 
-        if ':' not in path:
-            path = f'{path}:'
+        if ":" not in path:
+            path = f"{path}:"
 
-        file_path, json_path = path.split(':')
-        file_path = os.path.join(os.path.dirname(__file__), '../..', file_path)
+        file_path, json_path = path.split(":")
+        file_path = os.path.join(os.path.dirname(__file__), "../..", file_path)
 
         with open(file_path) as f:
-            if file_path.endswith('.yaml'):
+            if file_path.endswith(".yaml"):
                 data = yaml.load(f, Loader=yaml.SafeLoader)
-            elif file_path.endswith('.json'):
+            elif file_path.endswith(".json"):
                 data = json.load(f)
             else:
-                raise NotImplementedError('Only .yaml and .json is supported')
+                raise NotImplementedError("Only .yaml and .json is supported")
 
-        for segment in json_path.split('/'):
-            if segment == '':
+        for segment in json_path.split("/"):
+            if segment == "":
                 continue
             try:
                 segment = int(segment)
@@ -131,7 +131,7 @@ def define_env(env):
             data = data[segment]
 
         if filter is not None:
-            filter = {item.strip() for item in filter.split(',')}
+            filter = {item.strip() for item in filter.split(",")}
             to_remove = []
             for key in data.keys():
                 if key in filter:
@@ -142,7 +142,7 @@ def define_env(env):
         yaml_string = yaml.dump(
             data, sort_keys=False, default_flow_style=None, Dumper=MyYamlDumper
         )
-        return f'\n{indent}'.join(f'{indent}{yaml_string}'.split('\n'))
+        return f"\n{indent}".join(f"{indent}{yaml_string}".split("\n"))
 
     @env.macro
     def config_models(models: list[str] | None = None) -> str:  # pylint: disable=unused-variable
@@ -158,18 +158,18 @@ def define_env(env):
             selected_names = list(models)
             unknown_names = [name for name in selected_names if name not in all_fields]
             if unknown_names:
-                unknown = ', '.join(sorted(unknown_names))
-                raise KeyError(f'Unknown config model name(s): {unknown}. ')
+                unknown = ", ".join(sorted(unknown_names))
+                raise KeyError(f"Unknown config model name(s): {unknown}. ")
 
         results: list[str] = []
         for name in selected_names:
             field = all_fields[name]
             results.append(pydantic_model_from_model(field.annotation, name))
 
-        return '\n\n'.join(results)
+        return "\n\n".join(results)
 
     def pydantic_model_from_model(model, name=None, heading=None, hide=[]):
-        if hasattr(model, 'model_fields'):
+        if hasattr(model, "model_fields"):
             fields = model.model_fields
         else:
             fields = get_args(model)
@@ -187,49 +187,49 @@ def define_env(env):
                 result.append(description)
             default = get_field_default(field)
             if default:
-                result.append(f'*default:* {default}')
+                result.append(f"*default:* {default}")
             options = get_field_options(field)
             if options:
-                option_list = '*options:*<br/>'
+                option_list = "*options:*<br/>"
                 for name, desc in options.items():
-                    option_list += f' - `{name}{f": {desc}" if desc else ""}`<br/>'
+                    option_list += f" - `{name}{f': {desc}' if desc else ''}`<br/>"
                 result.append(option_list)
             if get_field_deprecated(field):
-                result.append('**deprecated**')
+                result.append("**deprecated**")
 
-            return '</br>'.join(result)
+            return "</br>".join(result)
 
         def field_row(name: str, field: FieldInfo):
             # The field is not shown in the docs if it has the 'hidden' flag set to True
             if (
                 field.json_schema_extra
-                and cast(dict, field.json_schema_extra).get('hidden', False) is True
+                and cast(dict, field.json_schema_extra).get("hidden", False) is True
             ):
-                return ''
-            if name.startswith('m_') or field is None:
-                return ''
+                return ""
+            if name.startswith("m_") or field is None:
+                return ""
             type_name, classes = get_field_type_info(field)
             nonlocal required_models
             required_models |= {
                 cls for cls in classes if isclass(cls) and issubclass(cls, BaseModel)
             }
-            return f'|{name}|`{type_name}`|{content(field)}|\n'
+            return f"|{name}|`{type_name}`|{content(field)}|\n"
 
         if heading is None:
-            result = f'#### {name}\n'
+            result = f"#### {name}\n"
         else:
-            result = heading + '\n'
+            result = heading + "\n"
 
-        if model.__doc__ and model.__doc__ != '':
-            result += utils.strip(model.__doc__) + '\n\n'
+        if model.__doc__ and model.__doc__ != "":
+            result += utils.strip(model.__doc__) + "\n\n"
 
-        result += '|name|type| |\n'
-        result += '|----|----|-|\n'
+        result += "|name|type| |\n"
+        result += "|----|----|-|\n"
         if isinstance(fields, tuple):
             # handling union types
             results: list[str] = []
             for field in fields:
-                if hasattr(field, 'model_fields'):
+                if hasattr(field, "model_fields"):
                     # if the field is a pydantic model, generate the documentation for that model
                     results.append(pydantic_model_from_model(field, name))
                 elif "<class 'NoneType'>" not in str(field):
@@ -241,12 +241,12 @@ def define_env(env):
                 for name, field in fields.items()
                 if name not in hide
             ]
-        results = sorted(results, key=lambda x: 'None' in x)
-        result += ''.join(results)
+        results = sorted(results, key=lambda x: "None" in x)
+        result += "".join(results)
 
         for required_model in required_models:
             if required_model.__name__ not in exported_config_models:
-                result += '\n\n'
+                result += "\n\n"
                 result += pydantic_model_from_model(required_model)  # type: ignore
 
         return result
@@ -254,8 +254,8 @@ def define_env(env):
     @env.macro
     def enum_table(
         path,
-        headers=('Name', 'Value'),
-        fields=('name', 'value'),
+        headers=("Name", "Value"),
+        fields=("name", "value"),
         heading=None,
         sort_by_value=True,
     ):
@@ -270,12 +270,12 @@ def define_env(env):
             sort_by_value: If True, sort rows by enum value.
         """
 
-        module_name, enum_name = path.rsplit('.', 1)
+        module_name, enum_name = path.rsplit(".", 1)
         module = importlib.import_module(module_name)
         enum_cls = getattr(module, enum_name)
 
         if not isclass(enum_cls) or not issubclass(enum_cls, Enum):
-            raise TypeError(f'{path} is not an Enum class')
+            raise TypeError(f"{path} is not an Enum class")
 
         members = list(enum_cls)
         if sort_by_value:
@@ -283,25 +283,25 @@ def define_env(env):
 
         # validate
         if len(headers) != len(fields):
-            raise ValueError('headers and fields must have same length')
+            raise ValueError("headers and fields must have same length")
 
         result = []
         if heading:
-            result.append(f'{heading}\n')
+            result.append(f"{heading}\n")
 
         # header row
-        result.append('| ' + ' | '.join(headers) + ' |')
-        result.append('| ' + ' | '.join(['---'] * len(headers)) + ' |')
+        result.append("| " + " | ".join(headers) + " |")
+        result.append("| " + " | ".join(["---"] * len(headers)) + " |")
 
         # rows
         for member in members:
             row = []
             for field in fields:
                 value = getattr(member, field)
-                row.append(f'`{value}`')
-            result.append('| ' + ' | '.join(row) + ' |')
+                row.append(f"`{value}`")
+            result.append("| " + " | ".join(row) + " |")
 
-        return '\n'.join(result)
+        return "\n".join(result)
 
     @env.macro
     def pydantic_model(path, heading=None, hide=[]):  # pylint: disable=unused-variable
@@ -313,7 +313,7 @@ def define_env(env):
         """
         import importlib
 
-        module_name, name = path.rsplit('.', 1)
+        module_name, name = path.rsplit(".", 1)
         module = importlib.import_module(module_name)
         model = getattr(module, name)
 
@@ -321,9 +321,9 @@ def define_env(env):
 
     @env.macro
     def default_apps_list():  # pylint: disable=unused-variable
-        result = ''
+        result = ""
         for key, value in config.ui.apps.filtered_items():
-            result += f' - `{key}`: {value.description}\n'
+            result += f" - `{key}`: {value.description}\n"
         return result
 
     @env.macro
@@ -331,7 +331,7 @@ def define_env(env):
         parsers = [
             plugin
             for _, plugin in config.plugins.entry_points.filtered_items()
-            if isinstance(plugin, ParserEntryPoint) and hasattr(plugin, 'code_name')
+            if isinstance(plugin, ParserEntryPoint) and hasattr(plugin, "code_name")
         ]
         packages = config.plugins.plugin_packages
 
@@ -347,7 +347,7 @@ def define_env(env):
                 f"""
                 ### {parser.code_name}
 
-                {parser.description or ''}
+                {parser.description or ""}
 
                 - format homepage: [{parser.code_homepage}]({parser.code_homepage})
                 - parser name: `{parser.id}`
@@ -359,32 +359,32 @@ def define_env(env):
 
             if (
                 parser.metadata
-                and parser.metadata.get('tableOfFiles', '').strip(' \t\n') != ''
+                and parser.metadata.get("tableOfFiles", "").strip(" \t\n") != ""
             ):
-                metadata += f'\n\n{strip(parser.metadata["tableOfFiles"])}'
+                metadata += f"\n\n{strip(parser.metadata['tableOfFiles'])}"
 
             return metadata
 
         categories: dict[str, list[ParserEntryPoint]] = {}
         for parser in parsers:
-            category_name = getattr(parser, 'code_category', None)
+            category_name = getattr(parser, "code_category", None)
             category = categories.setdefault(category_name, [])
             category.append(parser)
 
         def render_category(name: str, category: list[ParserEntryPoint]) -> str:
-            return f'## {name}s\n\n' + '\n\n'.join(
+            return f"## {name}s\n\n" + "\n\n".join(
                 [render_parser(parser) for parser in category]
             )
 
         return (
-            ', '.join(
+            ", ".join(
                 [
-                    f'[{parser.code_name}](#{slugify(parser.code_name, "-")})'
+                    f"[{parser.code_name}](#{slugify(parser.code_name, '-')})"
                     for parser in parsers
                 ]
             )
-            + '\n\n'
-            + '\n\n'.join(
+            + "\n\n"
+            + "\n\n".join(
                 [
                     render_category(name, category)
                     for name, category in categories.items()
@@ -402,19 +402,19 @@ def define_env(env):
         def render_plugin(plugin: EntryPointType) -> str:
             result = plugin.id
             docs_or_code_url = None
-            package = plugin_packages.get(getattr(plugin, 'plugin_package'))
+            package = plugin_packages.get(getattr(plugin, "plugin_package"))
             if package is not None:
                 for field in [
-                    'repository',
-                    'homepage',
-                    'documentation',
+                    "repository",
+                    "homepage",
+                    "documentation",
                 ]:
                     value = getattr(package, field, None)
                     if value:
                         docs_or_code_url = value
                         break
             if docs_or_code_url:
-                result = f'[{plugin.id}]({docs_or_code_url})'
+                result = f"[{plugin.id}]({docs_or_code_url})"
 
             return result
 
@@ -422,16 +422,16 @@ def define_env(env):
         for plugin_entry_point in plugin_entry_points:
             category = getattr(
                 plugin_entry_point,
-                'plugin_type',
-                getattr(plugin_entry_point, 'entry_point_type', None),
+                "plugin_type",
+                getattr(plugin_entry_point, "entry_point_type", None),
             )
-            if category == 'schema':
-                category = 'schema package'
+            if category == "schema":
+                category = "schema package"
             categories.setdefault(category, []).append(plugin_entry_point)
 
-        return '\n\n'.join(
+        return "\n\n".join(
             [
-                f'**{category}**: {", ".join([render_plugin(plugin) for plugin in plugins])}'
+                f"**{category}**: {', '.join([render_plugin(plugin) for plugin in plugins])}"
                 for category, plugins in categories.items()
             ]
         )
@@ -446,9 +446,9 @@ def define_env(env):
         """
         import importlib
 
-        module_name, name = path.rsplit('.', 1)
+        module_name, name = path.rsplit(".", 1)
         module = importlib.import_module(path)
-        pkg = getattr(module, 'm_package')
+        pkg = getattr(module, "m_package")
 
         return package_markdown_from_package(pkg)
 
@@ -477,38 +477,38 @@ def define_env(env):
             ```
         """
         # setup anchor tag
-        href = kwargs.get('href', '')
-        if href and href.endswith('.md'):
-            href = href.replace('.md', '.html')
-        tooltip = kwargs.get('tooltip', '')
+        href = kwargs.get("href", "")
+        if href and href.endswith(".md"):
+            href = href.replace(".md", ".html")
+        tooltip = kwargs.get("tooltip", "")
         if tooltip:
-            anchor_tag = [f'<a href="{href}" title="{tooltip}">', '</a>']
+            anchor_tag = [f'<a href="{href}" title="{tooltip}">', "</a>"]
         else:
-            anchor_tag = [f'<a href="{href}">', '</a>']
+            anchor_tag = [f'<a href="{href}">', "</a>"]
 
-        style = kwargs.get('style', '')
+        style = kwargs.get("style", "")
         if style:
             style = f' style="{style}"'
 
-        image = kwargs.get('image', '')
+        image = kwargs.get("image", "")
         if image:
             # Render an image-based category tag
             img_tag = f'<img src="{image}" alt="{name}" class="category-image"{style}>'
-            return f'<span>{anchor_tag[0]}{img_tag}{anchor_tag[1]}</span>'
+            return f"<span>{anchor_tag[0]}{img_tag}{anchor_tag[1]}</span>"
         else:
             # Render a text-based category tag
             return (
                 f'<span class="category-pill"{style}>'
-                f'{anchor_tag[0]}{name}{anchor_tag[1]}</span>'
+                f"{anchor_tag[0]}{name}{anchor_tag[1]}</span>"
             )
 
     @env.macro
     def training_resources_table(
-        json_path='src/nomad_docs/data/training_resources_youtube_playlist.json',
+        json_path="src/nomad_docs/data/training_resources_youtube_playlist.json",
         preview_chars=260,
     ):
         import os
 
-        root = os.path.join(os.path.dirname(__file__), '../..')
+        root = os.path.join(os.path.dirname(__file__), "../..")
         full_path = os.path.join(root, json_path)
         return render_training_resources_table(full_path, preview_chars=preview_chars)

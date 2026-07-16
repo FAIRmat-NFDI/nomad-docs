@@ -12,7 +12,7 @@ class Sample(ArchiveSection):
         super(Sample, self).normalize(archive, logger)
 
         if self.sample_id is None:
-            self.sample_id = f'{self.added_date}--{self.formula}'
+            self.sample_id = f"{self.added_date}--{self.formula}"
 
 
 class SampleDatabase(Schema):
