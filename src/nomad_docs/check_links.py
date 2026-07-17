@@ -47,26 +47,6 @@ def normalize_attrs(attrs: str | None, is_external: bool) -> str:
     attrs_dict: dict[str, str | None] = {}
 
     for part in parts:
-<<<<<<< HEAD
-        if '=' in part:
-            k, v = part.split('=', 1)
-            attrs_dict[k.strip(':')] = v.strip('"')
-        else:
-            attrs_dict[part.strip(':')] = None
-
-    # Always enforce target and rel
-    attrs_dict['target'] = '_blank'
-    attrs_dict['rel'] = 'noopener'
-
-    return (
-        '{:' + ' '.join(f'{k}="{v}"' if v else k for k, v in attrs_dict.items()) + '}'
-    )
-
-
-def process_file(path: Path) -> int:
-    """Process one file. Return number of changes."""
-    text: str = path.read_text(encoding='utf-8')
-=======
         if "=" in part:
             k, v = part.split("=", 1)
             attrs_dict[k] = v.strip("\"'")
@@ -97,7 +77,6 @@ def process_file(path: Path) -> int:
     """Process one file. Return number of actual changes."""
     text: str = path.read_text(encoding="utf-8")
     changes_in_file = 0
->>>>>>> develop
 
     def repl(match: regex.Match) -> str:
         nonlocal changes_in_file
@@ -140,12 +119,6 @@ if __name__ == '__main__':
     if changes > 0:
         print(f'\n✗ Found and fixed {changes} issues.')
         sys.exit(1)
-<<<<<<< HEAD
-    else:
-        print('\n✓ All external links are correctly annotated.')
-        sys.exit(0)
-=======
 
     print("\n✓ All links are correctly annotated.")
     sys.exit(0)
->>>>>>> develop

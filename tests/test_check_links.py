@@ -23,14 +23,9 @@ import nomad_docs.check_links as check_links
 from nomad_docs.check_links import main
 
 
-<<<<<<< HEAD
-def test_process_file_adds_attrs(tmp_path: Path):
-    mdfile = tmp_path / 'example.md'
-=======
 def test_process_file_adds_attrs(tmp_path: Path) -> None:
     """External links should gain target/rel, while internal links should lose them."""
     mdfile = tmp_path / "example.md"
->>>>>>> develop
     mdfile.write_text(
         textwrap.dedent(
             """
