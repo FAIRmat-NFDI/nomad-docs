@@ -43,6 +43,7 @@ nav:
               - Download data: howto/manage/program/download.md
               - Publish data using Python: howto/manage/program/publish_python.md
               - Access processed data: howto/manage/program/archive_query.md
+              - Data analysis with MADAS: howto/manage/program/MADAS.md
               - Transform data: howto/manage/program/json_transformer.md
               - Make graph-API calls: howto/manage/program/graph_api.md # TODO consolidate into a single page with supporting explanation/reference material
       - Develop plugins:
