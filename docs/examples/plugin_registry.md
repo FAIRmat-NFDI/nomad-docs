@@ -1,6 +1,6 @@
 # NOMAD Plugin Registry
 
-This page contains information about all plugin entries currently listed in NOMAD. The information is automatically updated monthly. **Last Updated:** 2026-02-13 12:00 UTC
+This page contains information about all plugin entries currently listed in NOMAD. The information is automatically updated monthly. **Last Updated:** 2026-07-16 14:23 UTC
 
 [Browse All Plugins in the NOMAD Plugins App](https://nomad-lab.eu/prod/v1/oasis/gui/search/plugins){:.md-button .nomad-button target="_blank" rel="noopener"}
 
@@ -72,7 +72,7 @@ Quick reference table of all available plugins:
 <tr><th>Plugin</th><th>Description</th><th>Deployment</th><th>Links</th></tr>
 </thead>
 <tbody>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-0" data-entry-point-types="parser|schema package" data-owner="fabianli789" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-0" data-entry-point-types="parser|schema package" data-owner="fabianli789" data-owner-group="other" data-plugin-name="apbs_parser" data-stars="0">
 <td><strong>apbs_parser </strong>(⭐ 0)<br><small>Parser, Schema package</small></td>
 <td>NOMAD parser for APBS</td>
 <td><small>—</small></td>
@@ -95,7 +95,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-1" data-entry-point-types="parser|schema package" data-owner="fabianli789" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-1" data-entry-point-types="parser|schema package" data-owner="fabianli789" data-owner-group="other" data-plugin-name="battery_parser" data-stars="0">
 <td><strong>battery_parser </strong>(⭐ 0)<br><small>Parser, Schema package</small></td>
 <td>nomad parser for Meysams Battery SEI simulations</td>
 <td><small>—</small></td>
@@ -118,7 +118,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-2" data-entry-point-types="app|example upload|schema package" data-owner="ka-sarthak" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-2" data-entry-point-types="app|example upload|schema package" data-owner="ka-sarthak" data-owner-group="other" data-plugin-name="bayesian-optimization-hpt" data-stars="0">
 <td><strong>bayesian-optimization-hpt </strong>(⭐ 0)<br><small>App, Example upload, Schema package</small></td>
 <td>A plugin to conduct BO for Hydrogen plasma treatment</td>
 <td><small>—</small></td>
@@ -141,7 +141,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-3" data-entry-point-types="app" data-owner="CCP-NC" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-3" data-entry-point-types="app" data-owner="CCP-NC" data-owner-group="other" data-plugin-name="ccpnc-oasis-app" data-stars="0">
 <td><strong>ccpnc-oasis-app </strong>(⭐ 0)<br><small>App</small></td>
 <td>NOMAD Oasis app for customising gui elements in the CCPNC NOMAD Oasis database.</td>
 <td><small>—</small></td>
@@ -163,7 +163,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-4" data-entry-point-types="parser|schema package" data-owner="fabianli789" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-4" data-entry-point-types="parser|schema package" data-owner="fabianli789" data-owner-group="other" data-plugin-name="cg_parser" data-stars="0">
 <td><strong>cg_parser </strong>(⭐ 0)<br><small>Parser, Schema package</small></td>
 <td>NOMAD parser for Ka Chun Chan's coarse-grained simulations</td>
 <td><small>—</small></td>
@@ -185,7 +185,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-5" data-entry-point-types="example upload|schema package" data-owner="sd-fbk" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-5" data-entry-point-types="example upload|schema package" data-owner="sd-fbk" data-owner-group="other" data-plugin-name="characterization_utilities" data-stars="0">
 <td><strong>characterization_utilities </strong>(⭐ 0)<br><small>Example upload, Schema package</small></td>
 <td>Plugin to treat characterization steps and standardize them from proprietary data formats to NeXuS</td>
 <td><small>—</small></td>
@@ -208,7 +208,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-6" data-entry-point-types="schema package" data-owner="MPI-CPfS-Dresden" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-6" data-entry-point-types="schema package" data-owner="MPI-CPfS-Dresden" data-owner-group="other" data-plugin-name="cpfs_synthesis" data-stars="0">
 <td><strong>cpfs_synthesis </strong>(⭐ 0)<br><small>Schema package</small></td>
 <td>Includes ELN entries for Flux Growth, Czochalski, Bridgman, Float zone, and CVT</td>
 <td><small>—</small></td>
@@ -230,11 +230,11 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-7" data-entry-point-types="schema package" data-owner="Bondoki" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-7" data-entry-point-types="schema package" data-owner="Bondoki" data-owner-group="other" data-plugin-name="crc1415plugin" data-stars="0">
 <td><strong>crc1415plugin </strong>(⭐ 0)<br><small>Schema package</small></td>
 <td>This is a schema package plugin for the CRC1415.</td>
 <td><small>—</small></td>
-<td><a href="https://github.com/Bondoki/NOMADOasisPlugin" target="_blank" rel="noopener">Code</a></td>
+<td><a href="https://github.com/Bondoki/NOMADOasisPlugin" target="_blank" rel="noopener">Code</a> | <a href="https://bondoki.github.io/NOMADOasisPlugin/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
 <tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-7">
 <td colspan="4" style="padding: 0; border-top: none;">
@@ -252,7 +252,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-8" data-entry-point-types="parser|schema package" data-owner="MaMMoS-project" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-8" data-entry-point-types="parser|schema package" data-owner="MaMMoS-project" data-owner-group="other" data-plugin-name="cube" data-stars="0">
 <td><strong>cube </strong>(⭐ 0)<br><small>Parser, Schema package</small></td>
 <td>Plugin for cube files</td>
 <td><small>PyPI</small></td>
@@ -274,7 +274,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-9" data-entry-point-types="parser|schema package" data-owner="fabianli789" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-9" data-entry-point-types="parser|schema package" data-owner="fabianli789" data-owner-group="other" data-plugin-name="electrooptics_parser" data-stars="0">
 <td><strong>electrooptics_parser </strong>(⭐ 0)<br><small>Parser, Schema package</small></td>
 <td>NOMAD parser for Ka Chun Chan's electrooptics simulations</td>
 <td><small>—</small></td>
@@ -296,7 +296,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-10" data-entry-point-types="parser|schema package" data-owner="fabianli789" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-10" data-entry-point-types="parser|schema package" data-owner="fabianli789" data-owner-group="other" data-plugin-name="electrospinning_parser" data-stars="0">
 <td><strong>electrospinning_parser </strong>(⭐ 0)<br><small>Parser, Schema package</small></td>
 <td>NOMAD parser for Ka Chun Chans electrospinning simulations</td>
 <td><small>—</small></td>
@@ -319,7 +319,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-11" data-entry-point-types="app|schema package" data-owner="Trog-404" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-11" data-entry-point-types="app|schema package" data-owner="Trog-404" data-owner-group="other" data-plugin-name="Fabrication-facilities" data-stars="0">
 <td><strong>Fabrication-facilities </strong>(⭐ 0)<br><small>App, Schema package</small></td>
 <td>Plugin for fabrication processes</td>
 <td><small>—</small></td>
@@ -341,7 +341,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-12" data-entry-point-types="app|example upload|schema package" data-owner="Trog-404" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-12" data-entry-point-types="app|example upload|schema package" data-owner="Trog-404" data-owner-group="other" data-plugin-name="Fabrication-utilities" data-stars="1">
 <td><strong>Fabrication-utilities </strong>(⭐ 1)<br><small>App, Example upload, Schema package</small></td>
 <td>Plugin for nanofabrication semiconductor cleanroom processes</td>
 <td><small>—</small></td>
@@ -363,7 +363,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-13" data-entry-point-types="" data-owner="OpenCOMPES" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-13" data-entry-point-types="" data-owner="OpenCOMPES" data-owner-group="other" data-plugin-name="fhi_sed_config" data-stars="0">
 <td><strong>fhi_sed_config </strong>(⭐ 0)<br><small>—</small></td>
 <td>—</td>
 <td><small>—</small></td>
@@ -384,7 +384,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-14" data-entry-point-types="parser|schema package" data-owner="fabianli789" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-14" data-entry-point-types="parser|schema package" data-owner="fabianli789" data-owner-group="other" data-plugin-name="graphene_parser" data-stars="0">
 <td><strong>graphene_parser </strong>(⭐ 0)<br><small>Parser, Schema package</small></td>
 <td>NOMAD parser for Meysam's graphene simulations</td>
 <td><small>—</small></td>
@@ -407,7 +407,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-15" data-entry-point-types="app|parser|schema package" data-owner="nomad-hzb" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-15" data-entry-point-types="app|parser|schema package" data-owner="nomad-hzb" data-owner-group="other" data-plugin-name="hzb-combinatorial-libraries" data-stars="0">
 <td><strong>hzb-combinatorial-libraries </strong>(⭐ 0)<br><small>App, Parser, Schema package</small></td>
 <td>A schema package plugin for HZB Library Unold lab at HZB.</td>
 <td><small>—</small></td>
@@ -430,7 +430,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-16" data-entry-point-types="app|normalizer|parser|schema package" data-owner="IKZ-Berlin" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-16" data-entry-point-types="app|normalizer|parser|schema package" data-owner="IKZ-Berlin" data-owner-group="other" data-plugin-name="ikz-trpl" data-stars="0">
 <td><strong>ikz-trpl </strong>(⭐ 0)<br><small>App, Normalizer, Parser, Schema package</small></td>
 <td>TRPL at DESY</td>
 <td><small>—</small></td>
@@ -452,7 +452,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-17" data-entry-point-types="parser|schema package" data-owner="IMEM-CNR-Parma" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-17" data-entry-point-types="parser|schema package" data-owner="IMEM-CNR-Parma" data-owner-group="other" data-plugin-name="imem-nomad-plugin" data-stars="1">
 <td><strong>imem-nomad-plugin </strong>(⭐ 1)<br><small>Parser, Schema package</small></td>
 <td>A plugin for IMEM-CNR NOMAD containing principal techniques.</td>
 <td><small>—</small></td>
@@ -475,7 +475,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-18" data-entry-point-types="parser|schema package" data-owner="IKZ-Berlin" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-18" data-entry-point-types="parser|schema package" data-owner="IKZ-Berlin" data-owner-group="other" data-plugin-name="laytec_epitt_plugin" data-stars="0">
 <td><strong>laytec_epitt_plugin </strong>(⭐ 0)<br><small>Parser, Schema package</small></td>
 <td>A plugin for NOMAD containing LayTec EpiTT data model.</td>
 <td><small>—</small></td>
@@ -496,7 +496,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-19" data-entry-point-types="parser|schema package" data-owner="fabianli789" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-19" data-entry-point-types="parser|schema package" data-owner="fabianli789" data-owner-group="other" data-plugin-name="lightforge_parser" data-stars="0">
 <td><strong>lightforge_parser </strong>(⭐ 0)<br><small>Parser, Schema package</small></td>
 <td>NOMAD parser for lightforge</td>
 <td><small>—</small></td>
@@ -518,7 +518,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-20" data-entry-point-types="app|example upload|normalizer|parser|schema package" data-owner="fabianli789" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-20" data-entry-point-types="app|example upload|normalizer|parser|schema package" data-owner="fabianli789" data-owner-group="other" data-plugin-name="Lightforge_v2" data-stars="0">
 <td><strong>Lightforge_v2 </strong>(⭐ 0)<br><small>App, Example upload, Normalizer, Parser, Schema package</small></td>
 <td>nomad parser for LightForge with new entry points</td>
 <td><small>—</small></td>
@@ -541,7 +541,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-21" data-entry-point-types="app|parser|schema package" data-owner="andreaa93" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-21" data-entry-point-types="app|parser|schema package" data-owner="andreaa93" data-owner-group="other" data-plugin-name="nomad-aa-plugin" data-stars="0">
 <td><strong>nomad-aa-plugin </strong>(⭐ 0)<br><small>App, Parser, Schema package</small></td>
 <td>small demo plugin</td>
 <td><small>—</small></td>
@@ -563,7 +563,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-22" data-entry-point-types="app|normalizer|parser|schema package" data-owner="exp4-age" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-22" data-entry-point-types="app|normalizer|parser|schema package" data-owner="exp4-age" data-owner-group="other" data-plugin-name="nomad-age" data-stars="0">
 <td><strong>nomad-age </strong>(⭐ 0)<br><small>App, Normalizer, Parser, Schema package</small></td>
 <td>A NOMAD plugin for the AGE.</td>
 <td><small>—</small></td>
@@ -585,7 +585,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-23" data-entry-point-types="parser|schema package" data-owner="mxwalbert" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-23" data-entry-point-types="parser|schema package" data-owner="mxwalbert" data-owner-group="other" data-plugin-name="nomad-ait-echt-oasis-sputtering" data-stars="0">
 <td><strong>nomad-ait-echt-oasis-sputtering </strong>(⭐ 0)<br><small>Parser, Schema package</small></td>
 <td>A NOMAD Oasis plugin including a schema package and parser for the magnetron sputtering system at AIT</td>
 <td><small>—</small></td>
@@ -607,7 +607,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-24" data-entry-point-types="app|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-24" data-entry-point-types="app|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="nomad-aitoolkit" data-stars="0">
 <td><strong>nomad-aitoolkit </strong>(⭐ 0)<br><small>App, Schema package</small></td>
 <td>Schema and app for AI Toolkit notebooks.</td>
 <td><small>—</small></td>
@@ -629,7 +629,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-25" data-entry-point-types="schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-25" data-entry-point-types="schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="nomad-analysis" data-stars="2">
 <td><strong>nomad-analysis </strong>(⭐ 2)<br><small>Schema package</small></td>
 <td>A NOMAD plugin for analysis of FAIR data.</td>
 <td><small>PyPI</small></td>
@@ -651,7 +651,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-26" data-entry-point-types="app|example upload|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-26" data-entry-point-types="app|example upload|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="nomad-auto-xrd" data-stars="1">
 <td><strong>nomad-auto-xrd </strong>(⭐ 1)<br><small>App, Example upload, Schema package</small></td>
 <td>A NOMAD plugin containing schemas for automatic XRD analysis.</td>
 <td><small>—</small></td>
@@ -674,7 +674,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-27" data-entry-point-types="" data-owner="nomad-hzb" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-27" data-entry-point-types="" data-owner="nomad-hzb" data-owner-group="other" data-plugin-name="nomad-baseclasses" data-stars="6">
 <td><strong>nomad-baseclasses </strong>(⭐ 6)<br><small>—</small></td>
 <td>A schema package plugin for chemical energy at hzb.</td>
 <td><small>—</small></td>
@@ -696,7 +696,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-28" data-entry-point-types="app|parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-28" data-entry-point-types="app|parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="nomad-battery-database" data-stars="1">
 <td><strong>nomad-battery-database </strong>(⭐ 1)<br><small>App, Parser, Schema package</small></td>
 <td>app for battery database</td>
 <td><small>PyPI</small></td>
@@ -718,7 +718,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-29" data-entry-point-types="app|example upload|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-29" data-entry-point-types="app|example upload|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="nomad-bayesian-optimization" data-stars="1">
 <td><strong>nomad-bayesian-optimization </strong>(⭐ 1)<br><small>App, Example upload, Schema package</small></td>
 <td>NOMAD plugin for driving experiments/simulations using bayesian optimization</td>
 <td><small>—</small></td>
@@ -740,7 +740,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-30" data-entry-point-types="app|parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-30" data-entry-point-types="app|parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="nomad-camels-plugin" data-stars="0">
 <td><strong>nomad-camels-plugin </strong>(⭐ 0)<br><small>App, Parser, Schema package</small></td>
 <td>Parser for HDF5 files coming from NOMAD CAMELS.</td>
 <td><small>—</small></td>
@@ -762,7 +762,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-31" data-entry-point-types="app|example upload|parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-31" data-entry-point-types="app|example upload|parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="nomad-catalysis" data-stars="4">
 <td><strong>nomad-catalysis </strong>(⭐ 4)<br><small>App, Example upload, Parser, Schema package</small></td>
 <td>A NOMAD plugin for heterogeneous catalysis data.</td>
 <td><small>PyPI</small></td>
@@ -784,7 +784,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-32" data-entry-point-types="example upload|normalizer|parser|schema package" data-owner="CAU-Kiel" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-32" data-entry-point-types="example upload|normalizer|parser|schema package" data-owner="CAU-Kiel" data-owner-group="other" data-plugin-name="nomad-cau-plugin" data-stars="0">
 <td><strong>nomad-cau-plugin </strong>(⭐ 0)<br><small>Example upload, Normalizer, Parser, Schema package</small></td>
 <td>nomad plugin for CAU Kiel</td>
 <td><small>—</small></td>
@@ -806,7 +806,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-33" data-entry-point-types="app|parser|schema package" data-owner="nomad-hzb" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-33" data-entry-point-types="app|parser|schema package" data-owner="nomad-hzb" data-owner-group="other" data-plugin-name="nomad-chemical-energy" data-stars="3">
 <td><strong>nomad-chemical-energy </strong>(⭐ 3)<br><small>App, Parser, Schema package</small></td>
 <td>A schema package plugin for chemical energy at hzb.</td>
 <td><small>—</small></td>
@@ -829,7 +829,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-34" data-entry-point-types="app|parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-34" data-entry-point-types="app|parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="nomad-countries" data-stars="100">
 <td><strong>nomad-countries </strong>(⭐ 100)<br><small>App, Parser, Schema package</small></td>
 <td>Countries of the world plugin</td>
 <td><small>—</small></td>
@@ -851,7 +851,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-35" data-entry-point-types="schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-35" data-entry-point-types="schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="nomad-crystallm" data-stars="1">
 <td><strong>nomad-crystallm </strong>(⭐ 1)<br><small>Schema package</small></td>
 <td>A NOMAD plugin for running CrystaLLM inference in NOMAD installations.</td>
 <td><small>—</small></td>
@@ -874,7 +874,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-36" data-entry-point-types="parser|schema package" data-owner="AddMorePower" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-36" data-entry-point-types="parser|schema package" data-owner="AddMorePower" data-owner-group="other" data-plugin-name="nomad-DAMASK_parser" data-stars="1">
 <td><strong>nomad-DAMASK_parser </strong>(⭐ 1)<br><small>Parser, Schema package</small></td>
 <td>A parser plugin for the DAMASK output files</td>
 <td><small>—</small></td>
@@ -896,7 +896,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-37" data-entry-point-types="normalizer|schema package" data-owner="lauri-codes" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-37" data-entry-point-types="normalizer|schema package" data-owner="lauri-codes" data-owner-group="other" data-plugin-name="nomad-demo-plugin" data-stars="0">
 <td><strong>nomad-demo-plugin </strong>(⭐ 0)<br><small>Normalizer, Schema package</small></td>
 <td>NOMAD demo plugin</td>
 <td><small>—</small></td>
@@ -918,7 +918,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-38" data-entry-point-types="app|parser|schema package" data-owner="DTU-Nanolab-materials-discovery" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-38" data-entry-point-types="app|parser|schema package" data-owner="DTU-Nanolab-materials-discovery" data-owner-group="other" data-plugin-name="nomad-dtu-nanolab-plugin" data-stars="3">
 <td><strong>nomad-dtu-nanolab-plugin </strong>(⭐ 3)<br><small>App, Parser, Schema package</small></td>
 <td>A plugin for the schemas, parsers,</td>
 <td><small>—</small></td>
@@ -941,7 +941,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-39" data-entry-point-types="parser|schema package" data-owner="AddMorePower" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-39" data-entry-point-types="parser|schema package" data-owner="AddMorePower" data-owner-group="other" data-plugin-name="nomad-ECCI_parser" data-stars="0">
 <td><strong>nomad-ECCI_parser </strong>(⭐ 0)<br><small>Parser, Schema package</small></td>
 <td>A NOMAD parser plugin for ECCI measurements in AddMorePower</td>
 <td><small>—</small></td>
@@ -963,7 +963,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-40" data-entry-point-types="schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-40" data-entry-point-types="schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="nomad-eos-workflows" data-stars="0">
 <td><strong>nomad-eos-workflows </strong>(⭐ 0)<br><small>Schema package</small></td>
 <td>A NOMAD plugin containing the section definitions of a standard Equation of State (EoS) workflow.</td>
 <td><small>—</small></td>
@@ -985,7 +985,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-41" data-entry-point-types="example upload|schema package" data-owner="ka-sarthak" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-41" data-entry-point-types="example upload|schema package" data-owner="ka-sarthak" data-owner-group="other" data-plugin-name="nomad-example" data-stars="0">
 <td><strong>nomad-example </strong>(⭐ 0)<br><small>Example upload, Schema package</small></td>
 <td>nomad example template</td>
 <td><small>—</small></td>
@@ -1007,7 +1007,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-42" data-entry-point-types="example upload|parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-42" data-entry-point-types="example upload|parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="nomad-external-eln-integrations" data-stars="0">
 <td><strong>nomad-external-eln-integrations </strong>(⭐ 0)<br><small>Example upload, Parser, Schema package</small></td>
 <td>3rd Party Integration packages</td>
 <td><small>—</small></td>
@@ -1029,7 +1029,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-43" data-entry-point-types="app|normalizer|parser|schema package" data-owner="blueraft" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-43" data-entry-point-types="app|normalizer|parser|schema package" data-owner="blueraft" data-owner-group="other" data-plugin-name="nomad-foobar" data-stars="0">
 <td><strong>nomad-foobar </strong>(⭐ 0)<br><small>App, Normalizer, Parser, Schema package</small></td>
 <td>nomad example template</td>
 <td><small>—</small></td>
@@ -1051,7 +1051,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-44" data-entry-point-types="app|example upload|normalizer|parser|schema package" data-owner="mcasademont9" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-44" data-entry-point-types="app|example upload|normalizer|parser|schema package" data-owner="mcasademont9" data-owner-group="other" data-plugin-name="nomad-forematics" data-stars="0">
 <td><strong>nomad-forematics </strong>(⭐ 0)<br><small>App, Example upload, Normalizer, Parser, Schema package</small></td>
 <td>NOMAD plugin for forematics experiments</td>
 <td><small>—</small></td>
@@ -1073,7 +1073,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-45" data-entry-point-types="schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-45" data-entry-point-types="schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="nomad-gallery" data-stars="1">
 <td><strong>nomad-gallery </strong>(⭐ 1)<br><small>Schema package</small></td>
 <td>A mkdocs-based GitHub Pages site for showcasing NOMAD features, examples, and use cases.</td>
 <td><small>—</small></td>
@@ -1095,7 +1095,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-46" data-entry-point-types="parser|schema package" data-owner="ZBT-Tools" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-46" data-entry-point-types="parser|schema package" data-owner="ZBT-Tools" data-owner-group="other" data-plugin-name="nomad-greenlight-plugin" data-stars="0">
 <td><strong>nomad-greenlight-plugin </strong>(⭐ 0)<br><small>Parser, Schema package</small></td>
 <td>NOMAD plugin for greenlight fuel cell test benches</td>
 <td><small>—</small></td>
@@ -1117,7 +1117,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-47" data-entry-point-types="schema package" data-owner="nomad-hzb" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-47" data-entry-point-types="schema package" data-owner="nomad-hzb" data-owner-group="other" data-plugin-name="nomad-hiern" data-stars="0">
 <td><strong>nomad-hiern </strong>(⭐ 0)<br><small>Schema package</small></td>
 <td>A schema package plugin for HIERN.</td>
 <td><small>—</small></td>
@@ -1139,7 +1139,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-48" data-entry-point-types="app|parser|schema package" data-owner="nomad-hzb" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-48" data-entry-point-types="app|parser|schema package" data-owner="nomad-hzb" data-owner-group="other" data-plugin-name="nomad-hysprint" data-stars="5">
 <td><strong>nomad-hysprint </strong>(⭐ 5)<br><small>App, Parser, Schema package</small></td>
 <td>A schema package plugin for hysprint lab at hzb.</td>
 <td><small>—</small></td>
@@ -1162,7 +1162,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-49" data-entry-point-types="app|normalizer|schema package" data-owner="IKZ-Berlin" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-49" data-entry-point-types="app|normalizer|schema package" data-owner="IKZ-Berlin" data-owner-group="other" data-plugin-name="nomad-ikz-fz" data-stars="0">
 <td><strong>nomad-ikz-fz </strong>(⭐ 0)<br><small>App, Normalizer, Schema package</small></td>
 <td>NOMAD plugin for Fz data used at IKZ Berlin</td>
 <td><small>—</small></td>
@@ -1185,7 +1185,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-50" data-entry-point-types="app|parser|schema package" data-owner="IKZ-Berlin" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-50" data-entry-point-types="app|parser|schema package" data-owner="IKZ-Berlin" data-owner-group="other" data-plugin-name="nomad-ikz-plugin" data-stars="2">
 <td><strong>nomad-ikz-plugin </strong>(⭐ 2)<br><small>App, Parser, Schema package</small></td>
 <td>A plugin for NOMAD containing IKZ use cases.</td>
 <td><small>—</small></td>
@@ -1207,7 +1207,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-51" data-entry-point-types="schema package" data-owner="IKZ-Berlin" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-51" data-entry-point-types="schema package" data-owner="IKZ-Berlin" data-owner-group="other" data-plugin-name="nomad-ikz-sem" data-stars="0">
 <td><strong>nomad-ikz-sem </strong>(⭐ 0)<br><small>Schema package</small></td>
 <td>SEM plugin</td>
 <td><small>—</small></td>
@@ -1229,7 +1229,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-52" data-entry-point-types="parser|schema package" data-owner="IKZ-Berlin" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-52" data-entry-point-types="parser|schema package" data-owner="IKZ-Berlin" data-owner-group="other" data-plugin-name="nomad-ikz_omega_theta_xrd" data-stars="0">
 <td><strong>nomad-ikz_omega_theta_xrd </strong>(⭐ 0)<br><small>Parser, Schema package</small></td>
 <td>NOMAD plugin for Omega Theta XRD Measurements</td>
 <td><small>—</small></td>
@@ -1251,7 +1251,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-53" data-entry-point-types="parser|schema package" data-owner="IKZ-Berlin" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-53" data-entry-point-types="parser|schema package" data-owner="IKZ-Berlin" data-owner-group="other" data-plugin-name="nomad-ikz_raman" data-stars="0">
 <td><strong>nomad-ikz_raman </strong>(⭐ 0)<br><small>Parser, Schema package</small></td>
 <td>NOMAD plugin for Raman data from a Horiba LabRAM instrument</td>
 <td><small>—</small></td>
@@ -1273,11 +1273,11 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-54" data-entry-point-types="parser|schema package" data-owner="GarzonDiegoFEUP" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-54" data-entry-point-types="parser|schema package" data-owner="GarzonDiegoFEUP" data-owner-group="other" data-plugin-name="nomad-inl-base" data-stars="0">
 <td><strong>nomad-inl-base </strong>(⭐ 0)<br><small>Parser, Schema package</small></td>
 <td>A plugin to manage the data from LaNaSC</td>
 <td><small>—</small></td>
-<td><a href="https://github.com/GarzonDiegoFEUP/nomad-inl-base" target="_blank" rel="noopener">Code</a></td>
+<td><a href="https://github.com/GarzonDiegoFEUP/nomad-inl-base" target="_blank" rel="noopener">Code</a> | <a href="https://garzondiegofeup.github.io/nomad-inl-base/" target="_blank" rel="noopener">Docs</a></td>
 </tr>
 <tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-54">
 <td colspan="4" style="padding: 0; border-top: none;">
@@ -1296,7 +1296,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-55" data-entry-point-types="schema package" data-owner="MPI-CPfS-Dresden" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-55" data-entry-point-types="schema package" data-owner="MPI-CPfS-Dresden" data-owner-group="other" data-plugin-name="nomad-labfolder-plugin" data-stars="0">
 <td><strong>nomad-labfolder-plugin </strong>(⭐ 0)<br><small>Schema package</small></td>
 <td>Can import LabFolder entries into the NOMAD ELN when provided with a mapping file</td>
 <td><small>—</small></td>
@@ -1318,7 +1318,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-56" data-entry-point-types="schema package" data-owner="FAU-LAP" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-56" data-entry-point-types="schema package" data-owner="FAU-LAP" data-owner-group="other" data-plugin-name="nomad-lap-schema" data-stars="0">
 <td><strong>nomad-lap-schema </strong>(⭐ 0)<br><small>Schema package</small></td>
 <td>Provides the schemas used at LAP</td>
 <td><small>—</small></td>
@@ -1340,7 +1340,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-57" data-entry-point-types="app|schema package" data-owner="kaikoebnick" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-57" data-entry-point-types="app|schema package" data-owner="kaikoebnick" data-owner-group="other" data-plugin-name="nomad-laserphysics" data-stars="0">
 <td><strong>nomad-laserphysics </strong>(⭐ 0)<br><small>App, Schema package</small></td>
 <td>nomad example template</td>
 <td><small>—</small></td>
@@ -1362,7 +1362,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-58" data-entry-point-types="app|example upload|parser|schema package" data-owner="Pepe-Marquez" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-58" data-entry-point-types="app|example upload|parser|schema package" data-owner="Pepe-Marquez" data-owner-group="other" data-plugin-name="nomad-luqy-plugin" data-stars="0">
 <td><strong>nomad-luqy-plugin </strong>(⭐ 0)<br><small>App, Example upload, Parser, Schema package</small></td>
 <td>A plugin to manage LuQY Pro measurement data</td>
 <td><small>—</small></td>
@@ -1385,7 +1385,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-59" data-entry-point-types="schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-59" data-entry-point-types="schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="nomad-material-processing" data-stars="11">
 <td><strong>nomad-material-processing </strong>(⭐ 11)<br><small>Schema package</small></td>
 <td>A plugin for NOMAD containing base sections for material processing.</td>
 <td><small>PyPI</small></td>
@@ -1407,7 +1407,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-60" data-entry-point-types="app|example upload|parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-60" data-entry-point-types="app|example upload|parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="nomad-material-processing-example" data-stars="2">
 <td><strong>nomad-material-processing-example </strong>(⭐ 2)<br><small>App, Example upload, Parser, Schema package</small></td>
 <td>An example plugin to demonstrate the use of schemas from the nomad-material-processing plugin.</td>
 <td><small>—</small></td>
@@ -1429,7 +1429,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-61" data-entry-point-types="parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-61" data-entry-point-types="parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="nomad-measurements" data-stars="14">
 <td><strong>nomad-measurements </strong>(⭐ 14)<br><small>Parser, Schema package</small></td>
 <td>A plugin for NOMAD containing base sections for measurements.</td>
 <td><small>PyPI</small></td>
@@ -1452,7 +1452,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-62" data-entry-point-types="example upload|parser|schema package" data-owner="hampusnasstrom" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-62" data-entry-point-types="example upload|parser|schema package" data-owner="hampusnasstrom" data-owner-group="other" data-plugin-name="nomad-migration-example" data-stars="0">
 <td><strong>nomad-migration-example </strong>(⭐ 0)<br><small>Example upload, Parser, Schema package</small></td>
 <td>An example plugin showing how a parser can be used to migrate from one version of an ELN schema to the next</td>
 <td><small>—</small></td>
@@ -1474,7 +1474,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-63" data-entry-point-types="schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-63" data-entry-point-types="schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="nomad-neb-workflows" data-stars="4">
 <td><strong>nomad-neb-workflows </strong>(⭐ 4)<br><small>Schema package</small></td>
 <td>A NOMAD plugin containing the section definitions of a standard Nudged Elastic Band (NEB) workflow.</td>
 <td><small>PyPI</small></td>
@@ -1497,7 +1497,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-64" data-entry-point-types="schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-64" data-entry-point-types="schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="nomad-nmr-schema" data-stars="0">
 <td><strong>nomad-nmr-schema </strong>(⭐ 0)<br><small>Schema package</small></td>
 <td>Schema plugin containing shared classes for NMR metadata</td>
 <td><small>—</small></td>
@@ -1520,7 +1520,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-65" data-entry-point-types="app|normalizer|schema package" data-owner="budschi" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-65" data-entry-point-types="app|normalizer|schema package" data-owner="budschi" data-owner-group="other" data-plugin-name="nomad-nomadtestapp" data-stars="0">
 <td><strong>nomad-nomadtestapp </strong>(⭐ 0)<br><small>App, Normalizer, Schema package</small></td>
 <td>nomad example template</td>
 <td><small>—</small></td>
@@ -1542,7 +1542,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-66" data-entry-point-types="normalizer" data-owner="nomad-coe" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-66" data-entry-point-types="normalizer" data-owner="nomad-coe" data-owner-group="fairmat" data-plugin-name="nomad-normalizer-plugin-bandstructure" data-stars="1">
 <td><strong>nomad-normalizer-plugin-bandstructure </strong>(⭐ 1)<br><small>Normalizer</small></td>
 <td>Band structure normalizer plugin for NOMAD.</td>
 <td><small>PyPI</small></td>
@@ -1564,7 +1564,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-67" data-entry-point-types="normalizer" data-owner="nomad-coe" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-67" data-entry-point-types="normalizer" data-owner="nomad-coe" data-owner-group="fairmat" data-plugin-name="nomad-normalizer-plugin-dos" data-stars="0">
 <td><strong>nomad-normalizer-plugin-dos </strong>(⭐ 0)<br><small>Normalizer</small></td>
 <td>DOS normalizer plugin for NOMAD.</td>
 <td><small>PyPI</small></td>
@@ -1586,7 +1586,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-68" data-entry-point-types="normalizer" data-owner="nomad-coe" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-68" data-entry-point-types="normalizer" data-owner="nomad-coe" data-owner-group="fairmat" data-plugin-name="nomad-normalizer-plugin-simulation-workflow" data-stars="0">
 <td><strong>nomad-normalizer-plugin-simulation-workflow </strong>(⭐ 0)<br><small>Normalizer</small></td>
 <td>Simulation workflow nomad plugin for NOMAD.</td>
 <td><small>PyPI</small></td>
@@ -1608,7 +1608,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-69" data-entry-point-types="normalizer" data-owner="nomad-coe" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-69" data-entry-point-types="normalizer" data-owner="nomad-coe" data-owner-group="fairmat" data-plugin-name="nomad-normalizer-plugin-soap" data-stars="0">
 <td><strong>nomad-normalizer-plugin-soap </strong>(⭐ 0)<br><small>Normalizer</small></td>
 <td>SOAP nomad plugin for NOMAD.</td>
 <td><small>PyPI</small></td>
@@ -1630,7 +1630,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-70" data-entry-point-types="normalizer" data-owner="nomad-coe" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-70" data-entry-point-types="normalizer" data-owner="nomad-coe" data-owner-group="fairmat" data-plugin-name="nomad-normalizer-plugin-spectra" data-stars="0">
 <td><strong>nomad-normalizer-plugin-spectra </strong>(⭐ 0)<br><small>Normalizer</small></td>
 <td>Spectra normalizer plugin for NOMAD.</td>
 <td><small>PyPI</small></td>
@@ -1651,7 +1651,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-71" data-entry-point-types="normalizer" data-owner="nomad-coe" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-71" data-entry-point-types="normalizer" data-owner="nomad-coe" data-owner-group="fairmat" data-plugin-name="nomad-normalizer-plugin-system" data-stars="0">
 <td><strong>nomad-normalizer-plugin-system </strong>(⭐ 0)<br><small>Normalizer</small></td>
 <td>System normalizer plugin for NOMAD.</td>
 <td><small>PyPI</small></td>
@@ -1673,7 +1673,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-72" data-entry-point-types="app|parser|schema package" data-owner="fliaght" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-72" data-entry-point-types="app|parser|schema package" data-owner="fliaght" data-owner-group="other" data-plugin-name="nomad-novelMOF" data-stars="0">
 <td><strong>nomad-novelMOF </strong>(⭐ 0)<br><small>App, Parser, Schema package</small></td>
 <td>a novel MOF database</td>
 <td><small>—</small></td>
@@ -1695,7 +1695,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-73" data-entry-point-types="schema package" data-owner="CCP-NC" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-73" data-entry-point-types="schema package" data-owner="CCP-NC" data-owner-group="other" data-plugin-name="nomad-oasis-schema-parser-plugin" data-stars="0">
 <td><strong>nomad-oasis-schema-parser-plugin </strong>(⭐ 0)<br><small>Schema package</small></td>
 <td>Specialised magres parser + custom schema package for the CCP-NC NOMAD Oasis.</td>
 <td><small>—</small></td>
@@ -1717,7 +1717,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-74" data-entry-point-types="parser|schema package" data-owner="JosePizarro3" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-74" data-entry-point-types="parser|schema package" data-owner="JosePizarro3" data-owner-group="other" data-plugin-name="nomad-parser-dmft" data-stars="1">
 <td><strong>nomad-parser-dmft </strong>(⭐ 1)<br><small>Parser, Schema package</small></td>
 <td>A compilation of NOMAD parsers for input/output files of DMFT codes.</td>
 <td><small>—</small></td>
@@ -1740,7 +1740,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-75" data-entry-point-types="parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-75" data-entry-point-types="parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="nomad-parser-edmft" data-stars="0">
 <td><strong>nomad-parser-edmft </strong>(⭐ 0)<br><small>Parser, Schema package</small></td>
 <td>nomad example template</td>
 <td><small>—</small></td>
@@ -1763,7 +1763,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-76" data-entry-point-types="parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-76" data-entry-point-types="parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="nomad-parser-fhiaims" data-stars="2">
 <td><strong>nomad-parser-fhiaims </strong>(⭐ 2)<br><small>Parser, Schema package</small></td>
 <td>Standalone NOMAD plugin for parsing FHI-aims calculation files</td>
 <td><small>—</small></td>
@@ -1785,7 +1785,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-77" data-entry-point-types="parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-77" data-entry-point-types="parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="nomad-parser-gsd" data-stars="1">
 <td><strong>nomad-parser-gsd </strong>(⭐ 1)<br><small>Parser, Schema package</small></td>
 <td>Parser for trajectory files in GSD format (<https://gsd.readthedocs.io/en/v3.3.1/).></td>
 <td><small>—</small></td>
@@ -1808,7 +1808,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-78" data-entry-point-types="parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-78" data-entry-point-types="parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="nomad-parser-h5md" data-stars="1">
 <td><strong>nomad-parser-h5md </strong>(⭐ 1)<br><small>Parser, Schema package</small></td>
 <td>NOMAD parser plugin for h5md-based simulation files.</td>
 <td><small>—</small></td>
@@ -1831,7 +1831,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-79" data-entry-point-types="parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-79" data-entry-point-types="parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="nomad-parser-molpro" data-stars="0">
 <td><strong>nomad-parser-molpro </strong>(⭐ 0)<br><small>Parser, Schema package</small></td>
 <td>nomad example template</td>
 <td><small>—</small></td>
@@ -1853,7 +1853,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-80" data-entry-point-types="parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-80" data-entry-point-types="parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="nomad-parser-orca" data-stars="2">
 <td><strong>nomad-parser-orca </strong>(⭐ 2)<br><small>Parser, Schema package</small></td>
 <td>nomad plugin for ORCA calculations</td>
 <td><small>—</small></td>
@@ -1876,7 +1876,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-81" data-entry-point-types="parser" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-81" data-entry-point-types="parser" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="nomad-parser-plugin-boss" data-stars="1">
 <td><strong>nomad-parser-plugin-boss </strong>(⭐ 1)<br><small>Parser</small></td>
 <td>Plugin for parsing and displaying BOSS PES arftifacts</td>
 <td><small>—</small></td>
@@ -1898,7 +1898,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-82" data-entry-point-types="parser" data-owner="nomad-coe" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-82" data-entry-point-types="parser" data-owner="nomad-coe" data-owner-group="fairmat" data-plugin-name="nomad-parser-plugins-atomistic" data-stars="7">
 <td><strong>nomad-parser-plugins-atomistic </strong>(⭐ 7)<br><small>Parser</small></td>
 <td>Collection of NOMAD parsers for atomistic codes.</td>
 <td><small>PyPI</small></td>
@@ -1920,7 +1920,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-83" data-entry-point-types="parser" data-owner="nomad-coe" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-83" data-entry-point-types="parser" data-owner="nomad-coe" data-owner-group="fairmat" data-plugin-name="nomad-parser-plugins-electronic" data-stars="23">
 <td><strong>nomad-parser-plugins-electronic </strong>(⭐ 23)<br><small>Parser</small></td>
 <td>Collection of NOMAD parsers for electronic structure codes.</td>
 <td><small>PyPI</small></td>
@@ -1942,7 +1942,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-84" data-entry-point-types="parser" data-owner="nomad-coe" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-84" data-entry-point-types="parser" data-owner="nomad-coe" data-owner-group="fairmat" data-plugin-name="nomad-parser-plugins-workflow" data-stars="5">
 <td><strong>nomad-parser-plugins-workflow </strong>(⭐ 5)<br><small>Parser</small></td>
 <td>Collection of NOMAD parsers for workflow engines.</td>
 <td><small>PyPI</small></td>
@@ -1964,7 +1964,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-85" data-entry-point-types="parser|schema package" data-owner="aouinaayoub" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-85" data-entry-point-types="parser|schema package" data-owner="aouinaayoub" data-owner-group="other" data-plugin-name="nomad-parser-pwafqmc" data-stars="0">
 <td><strong>nomad-parser-pwafqmc </strong>(⭐ 0)<br><small>Parser, Schema package</small></td>
 <td>A parser for PWAFQMC code</td>
 <td><small>—</small></td>
@@ -1987,7 +1987,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-86" data-entry-point-types="parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-86" data-entry-point-types="parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="nomad-parser-pwd" data-stars="0">
 <td><strong>nomad-parser-pwd </strong>(⭐ 0)<br><small>Parser, Schema package</small></td>
 <td>A parser and schema for the Python workflow definition.</td>
 <td><small>—</small></td>
@@ -2009,7 +2009,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-87" data-entry-point-types="parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-87" data-entry-point-types="parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="nomad-parser-ro-crate" data-stars="0">
 <td><strong>nomad-parser-ro-crate </strong>(⭐ 0)<br><small>Parser, Schema package</small></td>
 <td>A parser for ro-crate schema plus.</td>
 <td><small>—</small></td>
@@ -2031,7 +2031,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-88" data-entry-point-types="parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-88" data-entry-point-types="parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="nomad-parser-w2dynamics" data-stars="1">
 <td><strong>nomad-parser-w2dynamics </strong>(⭐ 1)<br><small>Parser, Schema package</small></td>
 <td>NOMAD parser plugin for w2dynamics input/output files.</td>
 <td><small>—</small></td>
@@ -2054,7 +2054,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-89" data-entry-point-types="parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-89" data-entry-point-types="parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="nomad-parser-wannier90" data-stars="2">
 <td><strong>nomad-parser-wannier90 </strong>(⭐ 2)<br><small>Parser, Schema package</small></td>
 <td>A NOMAD parser plugin for Wannier90 input/output files.</td>
 <td><small>PyPI</small></td>
@@ -2077,7 +2077,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-90" data-entry-point-types="parser|schema package" data-owner="caraortizmah" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-90" data-entry-point-types="parser|schema package" data-owner="caraortizmah" data-owner-group="other" data-plugin-name="nomad-parser-xas" data-stars="0">
 <td><strong>nomad-parser-xas </strong>(⭐ 0)<br><small>Parser, Schema package</small></td>
 <td>NOMAD parser plugin for XAS simulations output in text file.</td>
 <td><small>—</small></td>
@@ -2100,7 +2100,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-91" data-entry-point-types="parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-91" data-entry-point-types="parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="nomad-parser-yambo" data-stars="1">
 <td><strong>nomad-parser-yambo </strong>(⭐ 1)<br><small>Parser, Schema package</small></td>
 <td>A NOMAD parser plugin for YAMBO input/outputs files.</td>
 <td><small>—</small></td>
@@ -2123,7 +2123,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-92" data-entry-point-types="parser|schema package" data-owner="magr4826" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-92" data-entry-point-types="parser|schema package" data-owner="magr4826" data-owner-group="other" data-plugin-name="nomad-parser-yambospectra" data-stars="2">
 <td><strong>nomad-parser-yambospectra </strong>(⭐ 2)<br><small>Parser, Schema package</small></td>
 <td>nomad example template</td>
 <td><small>—</small></td>
@@ -2145,7 +2145,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-93" data-entry-point-types="app|example upload|parser|schema package" data-owner="AG-SEK" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-93" data-entry-point-types="app|example upload|parser|schema package" data-owner="AG-SEK" data-owner-group="other" data-plugin-name="nomad-perolab-umr" data-stars="0">
 <td><strong>nomad-perolab-umr </strong>(⭐ 0)<br><small>App, Example upload, Parser, Schema package</small></td>
 <td>Plugin for NOMAD Oasis at PeroLab Marburg</td>
 <td><small>—</small></td>
@@ -2167,7 +2167,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-94" data-entry-point-types="app|parser|schema package" data-owner="nomad-hzb" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-94" data-entry-point-types="app|parser|schema package" data-owner="nomad-hzb" data-owner-group="other" data-plugin-name="nomad-perotf" data-stars="2">
 <td><strong>nomad-perotf </strong>(⭐ 2)<br><small>App, Parser, Schema package</small></td>
 <td>A schema package plugin for perotf at KIT.</td>
 <td><small>—</small></td>
@@ -2190,7 +2190,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-95" data-entry-point-types="app|parser|schema package" data-owner="andreaa93" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-95" data-entry-point-types="app|parser|schema package" data-owner="andreaa93" data-owner-group="other" data-plugin-name="nomad-plugin-aatest" data-stars="0">
 <td><strong>nomad-plugin-aatest </strong>(⭐ 0)<br><small>App, Parser, Schema package</small></td>
 <td>nomad example template</td>
 <td><small>—</small></td>
@@ -2212,7 +2212,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-96" data-entry-point-types="api|app|example upload|schema package" data-owner="Bondoki" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-96" data-entry-point-types="api|app|example upload|schema package" data-owner="Bondoki" data-owner-group="other" data-plugin-name="nomad-plugin-gui" data-stars="0">
 <td><strong>nomad-plugin-gui </strong>(⭐ 0)<br><small>API, App, Example upload, Schema package</small></td>
 <td>The NOMAD plugin for the new NOMAD GUI.</td>
 <td><small>—</small></td>
@@ -2234,7 +2234,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-97" data-entry-point-types="app|parser|schema package" data-owner="leonardomusini" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-97" data-entry-point-types="app|parser|schema package" data-owner="leonardomusini" data-owner-group="other" data-plugin-name="nomad-plugin-mbe" data-stars="0">
 <td><strong>nomad-plugin-mbe </strong>(⭐ 0)<br><small>App, Parser, Schema package</small></td>
 <td>Plugin for MBE sample growths</td>
 <td><small>—</small></td>
@@ -2256,7 +2256,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-98" data-entry-point-types="app|parser|schema package" data-owner="mattiamare9" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-98" data-entry-point-types="app|parser|schema package" data-owner="mattiamare9" data-owner-group="other" data-plugin-name="nomad-plugin-mm" data-stars="0">
 <td><strong>nomad-plugin-mm </strong>(⭐ 0)<br><small>App, Parser, Schema package</small></td>
 <td>nomad example template</td>
 <td><small>—</small></td>
@@ -2278,7 +2278,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-99" data-entry-point-types="app|normalizer|parser|schema package" data-owner="PyMoDAQ" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-99" data-entry-point-types="app|normalizer|parser|schema package" data-owner="PyMoDAQ" data-owner-group="other" data-plugin-name="nomad-plugin-sintering" data-stars="0">
 <td><strong>nomad-plugin-sintering </strong>(⭐ 0)<br><small>App, Normalizer, Parser, Schema package</small></td>
 <td>nomad example template</td>
 <td><small>—</small></td>
@@ -2300,7 +2300,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-100" data-entry-point-types="app|example upload|normalizer|parser|schema package" data-owner="Henroc" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-100" data-entry-point-types="app|example upload|normalizer|parser|schema package" data-owner="Henroc" data-owner-group="other" data-plugin-name="nomad-plugin-test" data-stars="0">
 <td><strong>nomad-plugin-test </strong>(⭐ 0)<br><small>App, Example upload, Normalizer, Parser, Schema package</small></td>
 <td>asdf</td>
 <td><small>—</small></td>
@@ -2322,7 +2322,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-101" data-entry-point-types="app|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-101" data-entry-point-types="app|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="nomad-plugins" data-stars="1">
 <td><strong>nomad-plugins </strong>(⭐ 1)<br><small>App, Schema package</small></td>
 <td>A plugin for discovering other plugins.</td>
 <td><small>PyPI</small></td>
@@ -2344,7 +2344,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-102" data-entry-point-types="app|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-102" data-entry-point-types="app|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="nomad-polymerization-reactions" data-stars="2">
 <td><strong>nomad-polymerization-reactions </strong>(⭐ 2)<br><small>App, Schema package</small></td>
 <td>A NOMAD plugin for polymerization reactions.</td>
 <td><small>—</small></td>
@@ -2366,7 +2366,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-103" data-entry-point-types="app|normalizer" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-103" data-entry-point-types="app|normalizer" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="nomad-porous-materials" data-stars="0">
 <td><strong>nomad-porous-materials </strong>(⭐ 0)<br><small>App, Normalizer</small></td>
 <td>NOMAD plugin for porous materials</td>
 <td><small>—</small></td>
@@ -2388,7 +2388,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-104" data-entry-point-types="app|normalizer|parser|schema package" data-owner="seb5g" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-104" data-entry-point-types="app|normalizer|parser|schema package" data-owner="seb5g" data-owner-group="other" data-plugin-name="nomad-pymodaq" data-stars="0">
 <td><strong>nomad-pymodaq </strong>(⭐ 0)<br><small>App, Normalizer, Parser, Schema package</small></td>
 <td>nomad plugin for PyMoDAQ</td>
 <td><small>—</small></td>
@@ -2410,7 +2410,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-105" data-entry-point-types="schema package" data-owner="nomad-coe" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-105" data-entry-point-types="schema package" data-owner="nomad-coe" data-owner-group="fairmat" data-plugin-name="nomad-schema-plugin-run" data-stars="1">
 <td><strong>nomad-schema-plugin-run </strong>(⭐ 1)<br><small>Schema package</small></td>
 <td>Run schema plugin for NOMAD.</td>
 <td><small>PyPI</small></td>
@@ -2431,7 +2431,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-106" data-entry-point-types="schema package" data-owner="nomad-coe" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-106" data-entry-point-types="schema package" data-owner="nomad-coe" data-owner-group="fairmat" data-plugin-name="nomad-schema-plugin-simulation-workflow" data-stars="2">
 <td><strong>nomad-schema-plugin-simulation-workflow </strong>(⭐ 2)<br><small>Schema package</small></td>
 <td>Simulation workflow schema plugin for NOMAD.</td>
 <td><small>PyPI</small></td>
@@ -2453,7 +2453,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-107" data-entry-point-types="app|example upload|normalizer|parser|schema package" data-owner="edbarnard" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-107" data-entry-point-types="app|example upload|normalizer|parser|schema package" data-owner="edbarnard" data-owner-group="other" data-plugin-name="nomad-scopefoundry" data-stars="0">
 <td><strong>nomad-scopefoundry </strong>(⭐ 0)<br><small>App, Example upload, Normalizer, Parser, Schema package</small></td>
 <td>NOMAD schemas and parsers for ScopeFoundry HDF5 data files</td>
 <td><small>—</small></td>
@@ -2475,7 +2475,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-108" data-entry-point-types="app" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-108" data-entry-point-types="app" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="nomad-simulation-apps" data-stars="2">
 <td><strong>nomad-simulation-apps </strong>(⭐ 2)<br><small>App</small></td>
 <td>A repository for housing NOMAD's collection of simulation app plugins.</td>
 <td><small>PyPI</small></td>
@@ -2497,7 +2497,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-109" data-entry-point-types="example upload" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-109" data-entry-point-types="example upload" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="nomad-simulation-examples" data-stars="0">
 <td><strong>nomad-simulation-examples </strong>(⭐ 0)<br><small>Example upload</small></td>
 <td>Example uploads for multiple simulation codes for NOMAD development.</td>
 <td><small>—</small></td>
@@ -2517,7 +2517,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-110" data-entry-point-types="parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-110" data-entry-point-types="parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="nomad-simulation-parsers" data-stars="1">
 <td><strong>nomad-simulation-parsers </strong>(⭐ 1)<br><small>Parser, Schema package</small></td>
 <td>A repository for housing NOMAD's collection of simulation parser plugins.</td>
 <td><small>—</small></td>
@@ -2540,7 +2540,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-111" data-entry-point-types="normalizer|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-111" data-entry-point-types="normalizer|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="nomad-simulation-workflow" data-stars="0">
 <td><strong>nomad-simulation-workflow </strong>(⭐ 0)<br><small>Normalizer, Schema package</small></td>
 <td>Schema defintions and normalizer for NOMAD simulation workflows</td>
 <td><small>—</small></td>
@@ -2562,7 +2562,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-112" data-entry-point-types="schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-112" data-entry-point-types="schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="nomad-simulations" data-stars="7">
 <td><strong>nomad-simulations </strong>(⭐ 7)<br><small>Schema package</small></td>
 <td>A NOMAD plugin for FAIR schemas for simulation data.</td>
 <td><small>PyPI</small></td>
@@ -2584,7 +2584,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-113" data-entry-point-types="schema package" data-owner="hampusnasstrom" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-113" data-entry-point-types="schema package" data-owner="hampusnasstrom" data-owner-group="other" data-plugin-name="nomad-sintering" data-stars="0">
 <td><strong>nomad-sintering </strong>(⭐ 0)<br><small>Schema package</small></td>
 <td>This is a schema package plugin for sintering.</td>
 <td><small>—</small></td>
@@ -2606,11 +2606,11 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-114" data-entry-point-types="app|schema package" data-owner="Pepe-Marquez" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-114" data-entry-point-types="app|schema package" data-owner="Pepe-Marquez" data-owner-group="other" data-plugin-name="nomad-solar-cells-efficiency-tables" data-stars="0">
 <td><strong>nomad-solar-cells-efficiency-tables </strong>(⭐ 0)<br><small>App, Schema package</small></td>
 <td>This is a schema package to digitiz solar</td>
 <td><small>—</small></td>
-<td><a href="https://github.com/Pepe-Marquez/solar-cells-efficiecny-tables" target="_blank" rel="noopener">Code</a> | <a href="https://pepe-marquez.github.io/solar-cells-efficiecny-tables/" target="_blank" rel="noopener">Docs</a></td>
+<td><a href="https://github.com/Pepe-Marquez/solar-cells-efficiecny-tables" target="_blank" rel="noopener">Code</a></td>
 </tr>
 <tr class="plugin-registry-row plugin-registry-row--details" data-plugin-row-id="plugin-registry-row-114">
 <td colspan="4" style="padding: 0; border-top: none;">
@@ -2628,7 +2628,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-115" data-entry-point-types="normalizer" data-owner="lauri-codes" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-115" data-entry-point-types="normalizer" data-owner="lauri-codes" data-owner-group="other" data-plugin-name="nomad-summary" data-stars="0">
 <td><strong>nomad-summary </strong>(⭐ 0)<br><small>Normalizer</small></td>
 <td>nomad example template</td>
 <td><small>—</small></td>
@@ -2650,7 +2650,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-116" data-entry-point-types="parser|schema package" data-owner="AddMorePower" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-116" data-entry-point-types="parser|schema package" data-owner="AddMorePower" data-owner-group="other" data-plugin-name="nomad-SXDM_parser" data-stars="1">
 <td><strong>nomad-SXDM_parser </strong>(⭐ 1)<br><small>Parser, Schema package</small></td>
 <td>A parser plugin for SXDM processed files</td>
 <td><small>—</small></td>
@@ -2672,7 +2672,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-117" data-entry-point-types="schema package" data-owner="CAU-Kiel" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-117" data-entry-point-types="schema package" data-owner="CAU-Kiel" data-owner-group="other" data-plugin-name="nomad-synthesis-plugin" data-stars="0">
 <td><strong>nomad-synthesis-plugin </strong>(⭐ 0)<br><small>Schema package</small></td>
 <td>plugin for synthesis data for Huyana Terraschke's workgroup at CAU Kiel</td>
 <td><small>—</small></td>
@@ -2694,7 +2694,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-118" data-entry-point-types="app|example upload|parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-118" data-entry-point-types="app|example upload|parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="nomad-tadf-molecules" data-stars="2">
 <td><strong>nomad-tadf-molecules </strong>(⭐ 2)<br><small>App, Example upload, Parser, Schema package</small></td>
 <td>NOMAD plugin for thermally activated delayed fluorescent molecules</td>
 <td><small>—</small></td>
@@ -2716,7 +2716,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-119" data-entry-point-types="app|parser|schema package" data-owner="nomad-hzb" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-119" data-entry-point-types="app|parser|schema package" data-owner="nomad-hzb" data-owner-group="other" data-plugin-name="nomad-tfsc-general" data-stars="0">
 <td><strong>nomad-tfsc-general </strong>(⭐ 0)<br><small>App, Parser, Schema package</small></td>
 <td>General nomad classes for thin film solar cells</td>
 <td><small>—</small></td>
@@ -2739,7 +2739,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-120" data-entry-point-types="example upload|parser|schema package" data-owner="pozzo-research-group" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-120" data-entry-point-types="example upload|parser|schema package" data-owner="pozzo-research-group" data-owner-group="other" data-plugin-name="nomad-theia-plugin" data-stars="0">
 <td><strong>nomad-theia-plugin </strong>(⭐ 0)<br><small>Example upload, Parser, Schema package</small></td>
 <td>nomad example template</td>
 <td><small>—</small></td>
@@ -2761,7 +2761,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-121" data-entry-point-types="schema package" data-owner="budschi" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-121" data-entry-point-types="schema package" data-owner="budschi" data-owner-group="other" data-plugin-name="nomad-tutorial13following" data-stars="0">
 <td><strong>nomad-tutorial13following </strong>(⭐ 0)<br><small>Schema package</small></td>
 <td>nomad example template</td>
 <td><small>—</small></td>
@@ -2783,7 +2783,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-122" data-entry-point-types="parser|schema package" data-owner="AddMorePower" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-122" data-entry-point-types="parser|schema package" data-owner="AddMorePower" data-owner-group="other" data-plugin-name="nomad-TXRM_parser" data-stars="1">
 <td><strong>nomad-TXRM_parser </strong>(⭐ 1)<br><small>Parser, Schema package</small></td>
 <td>A NOMAD parser for TXRM files (for IKTS)</td>
 <td><small>—</small></td>
@@ -2805,7 +2805,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-123" data-entry-point-types="app|parser|schema package" data-owner="Thin-Layers-Technology-Innsbruck" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-123" data-entry-point-types="app|parser|schema package" data-owner="Thin-Layers-Technology-Innsbruck" data-owner-group="other" data-plugin-name="nomad-uibk-plugin" data-stars="1">
 <td><strong>nomad-uibk-plugin </strong>(⭐ 1)<br><small>App, Parser, Schema package</small></td>
 <td>UIBK schema and parser collection for NOMAD plattform.</td>
 <td><small>—</small></td>
@@ -2828,7 +2828,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-124" data-entry-point-types="app|parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-124" data-entry-point-types="app|parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="nomad-unisyscat" data-stars="1">
 <td><strong>nomad-unisyscat </strong>(⭐ 1)<br><small>App, Parser, Schema package</small></td>
 <td>A example plugin for a demonstration for UniSysCat.</td>
 <td><small>—</small></td>
@@ -2850,7 +2850,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-125" data-entry-point-types="parser|schema package" data-owner="fabianschoeppach" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-125" data-entry-point-types="parser|schema package" data-owner="fabianschoeppach" data-owner-group="other" data-plugin-name="nomad-UNITOV-plugin" data-stars="1">
 <td><strong>nomad-UNITOV-plugin </strong>(⭐ 1)<br><small>Parser, Schema package</small></td>
 <td>UNITOV schema and parser collection for the NOMAD platform.</td>
 <td><small>—</small></td>
@@ -2873,7 +2873,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-126" data-entry-point-types="app|example upload|normalizer|parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-126" data-entry-point-types="app|example upload|normalizer|parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="nomad-utility-workflows" data-stars="4">
 <td><strong>nomad-utility-workflows </strong>(⭐ 4)<br><small>App, Example upload, Normalizer, Parser, Schema package</small></td>
 <td>A module with utilities for interacting with NOMAD via, e.g., a workflow manager.</td>
 <td><small>PyPI</small></td>
@@ -2895,7 +2895,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-127" data-entry-point-types="parser|schema package" data-owner="mdforti" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-127" data-entry-point-types="parser|schema package" data-owner="mdforti" data-owner-group="other" data-plugin-name="nomad-workflow-parser" data-stars="0">
 <td><strong>nomad-workflow-parser </strong>(⭐ 0)<br><small>Parser, Schema package</small></td>
 <td>Workflow partser for amstools</td>
 <td><small>—</small></td>
@@ -2917,7 +2917,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-128" data-entry-point-types="parser|schema package" data-owner="AddMorePower" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-128" data-entry-point-types="parser|schema package" data-owner="AddMorePower" data-owner-group="other" data-plugin-name="nomad_ebsd_parser" data-stars="0">
 <td><strong>nomad_ebsd_parser </strong>(⭐ 0)<br><small>Parser, Schema package</small></td>
 <td>NOMAD plugin for EBSD measurements within AddMorePower</td>
 <td><small>—</small></td>
@@ -2939,7 +2939,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-129" data-entry-point-types="app|normalizer|parser|schema package" data-owner="lauri-codes" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-129" data-entry-point-types="app|normalizer|parser|schema package" data-owner="lauri-codes" data-owner-group="other" data-plugin-name="nomad_example" data-stars="0">
 <td><strong>nomad_example </strong>(⭐ 0)<br><small>App, Normalizer, Parser, Schema package</small></td>
 <td>An example of a plugin repository for NOMAD.</td>
 <td><small>—</small></td>
@@ -2960,7 +2960,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-130" data-entry-point-types="parser|schema package" data-owner="ZBT-Tools" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-130" data-entry-point-types="parser|schema package" data-owner="ZBT-Tools" data-owner-group="other" data-plugin-name="nomad_plugin_parser_example" data-stars="0">
 <td><strong>nomad_plugin_parser_example </strong>(⭐ 0)<br><small>Parser, Schema package</small></td>
 <td>NOMAD parser example</td>
 <td><small>—</small></td>
@@ -2982,7 +2982,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-131" data-entry-point-types="parser|schema package" data-owner="MPI-CPfS-Dresden" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-131" data-entry-point-types="parser|schema package" data-owner="MPI-CPfS-Dresden" data-owner-group="other" data-plugin-name="nomad_ppms_plugin" data-stars="0">
 <td><strong>nomad_ppms_plugin </strong>(⭐ 0)<br><small>Parser, Schema package</small></td>
 <td>Can read and analyze PPMS files</td>
 <td><small>—</small></td>
@@ -3004,7 +3004,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-132" data-entry-point-types="normalizer|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-132" data-entry-point-types="normalizer|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="nomad_topology_normalizer" data-stars="0">
 <td><strong>nomad_topology_normalizer </strong>(⭐ 0)<br><small>Normalizer, Schema package</small></td>
 <td>Topology Normalizer</td>
 <td><small>—</small></td>
@@ -3026,7 +3026,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-133" data-entry-point-types="api" data-owner="rettigl" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-133" data-entry-point-types="api" data-owner="rettigl" data-owner-group="other" data-plugin-name="oasis_optimal_footer_pages" data-stars="0">
 <td><strong>oasis_optimal_footer_pages </strong>(⭐ 0)<br><small>API</small></td>
 <td>OPTIMAL Oasis footer pages</td>
 <td><small>—</small></td>
@@ -3048,7 +3048,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-134" data-entry-point-types="app|example upload|normalizer" data-owner="Tanmay2028" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-134" data-entry-point-types="app|example upload|normalizer" data-owner="Tanmay2028" data-owner-group="other" data-plugin-name="ontology-service-plugin" data-stars="0">
 <td><strong>ontology-service-plugin </strong>(⭐ 0)<br><small>App, Example upload, Normalizer</small></td>
 <td>A normalizer plugin to populate NOMAD with semantic knowledge</td>
 <td><small>—</small></td>
@@ -3070,7 +3070,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-135" data-entry-point-types="app|normalizer|parser|schema package" data-owner="PauloGitHB" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-135" data-entry-point-types="app|normalizer|parser|schema package" data-owner="PauloGitHB" data-owner-group="other" data-plugin-name="oscilloscope_plugin" data-stars="0">
 <td><strong>oscilloscope_plugin </strong>(⭐ 0)<br><small>App, Normalizer, Parser, Schema package</small></td>
 <td>nomad example template</td>
 <td><small>—</small></td>
@@ -3092,7 +3092,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-136" data-entry-point-types="app|parser|schema package" data-owner="PDI-Berlin" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-136" data-entry-point-types="app|parser|schema package" data-owner="PDI-Berlin" data-owner-group="other" data-plugin-name="pdi-nomad-plugin" data-stars="0">
 <td><strong>pdi-nomad-plugin </strong>(⭐ 0)<br><small>App, Parser, Schema package</small></td>
 <td>A plugin for PDI NOMAD containing principal techniques.</td>
 <td><small>—</small></td>
@@ -3115,7 +3115,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-137" data-entry-point-types="app|parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-137" data-entry-point-types="app|parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="perovskite-solar-cell-database" data-stars="8">
 <td><strong>perovskite-solar-cell-database </strong>(⭐ 8)<br><small>App, Parser, Schema package</small></td>
 <td>Perovskite solar cell data schema plugin for NOMAD.</td>
 <td><small>PyPI</small></td>
@@ -3138,7 +3138,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-138" data-entry-point-types="schema package" data-owner="Bondoki" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-138" data-entry-point-types="schema package" data-owner="Bondoki" data-owner-group="other" data-plugin-name="plotsectiontest" data-stars="0">
 <td><strong>plotsectiontest </strong>(⭐ 0)<br><small>Schema package</small></td>
 <td>Testing the schema based on the discussion on discord.</td>
 <td><small>—</small></td>
@@ -3160,7 +3160,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-139" data-entry-point-types="app|normalizer|parser|schema package" data-owner="PauloGitHB" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-139" data-entry-point-types="app|normalizer|parser|schema package" data-owner="PauloGitHB" data-owner-group="other" data-plugin-name="plugin_test" data-stars="0">
 <td><strong>plugin_test </strong>(⭐ 0)<br><small>App, Normalizer, Parser, Schema package</small></td>
 <td>nomad example template</td>
 <td><small>—</small></td>
@@ -3182,7 +3182,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-140" data-entry-point-types="app|example upload|normalizer|parser|schema package" data-owner="paolog8" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-140" data-entry-point-types="app|example upload|normalizer|parser|schema package" data-owner="paolog8" data-owner-group="other" data-plugin-name="pv-workshop" data-stars="0">
 <td><strong>pv-workshop </strong>(⭐ 0)<br><small>App, Example upload, Normalizer, Parser, Schema package</small></td>
 <td>nomad example template</td>
 <td><small>—</small></td>
@@ -3205,7 +3205,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-141" data-entry-point-types="app|example upload|normalizer|parser|schema package" data-owner="Nikolai-KRAUS" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-141" data-entry-point-types="app|example upload|normalizer|parser|schema package" data-owner="Nikolai-KRAUS" data-owner-group="other" data-plugin-name="pvworkshop" data-stars="0">
 <td><strong>pvworkshop </strong>(⭐ 0)<br><small>App, Example upload, Normalizer, Parser, Schema package</small></td>
 <td>foobar</td>
 <td><small>—</small></td>
@@ -3228,7 +3228,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-142" data-entry-point-types="app|normalizer|parser|schema package" data-owner="PauloGitHB" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-142" data-entry-point-types="app|normalizer|parser|schema package" data-owner="PauloGitHB" data-owner-group="other" data-plugin-name="PyMoDAQ" data-stars="0">
 <td><strong>PyMoDAQ </strong>(⭐ 0)<br><small>App, Normalizer, Parser, Schema package</small></td>
 <td>nomad example template</td>
 <td><small>PyPI</small></td>
@@ -3250,7 +3250,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-143" data-entry-point-types="app|example upload|parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-143" data-entry-point-types="app|example upload|parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="pynxtools" data-stars="19">
 <td><strong>pynxtools </strong>(⭐ 19)<br><small>App, Example upload, Parser, Schema package</small></td>
 <td>Extend NeXus for experiments and characterization in Materials Science and Materials Engineering and serve as a NOMAD parser implementation for NeXus.</td>
 <td><small>PyPI</small></td>
@@ -3272,7 +3272,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-144" data-entry-point-types="example upload" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-144" data-entry-point-types="example upload" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="pynxtools-apm" data-stars="0">
 <td><strong>pynxtools-apm </strong>(⭐ 0)<br><small>Example upload</small></td>
 <td>A reader for transferring APM from vendor formats to NeXus and NOMAD.</td>
 <td><small>PyPI</small></td>
@@ -3294,7 +3294,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-145" data-entry-point-types="example upload" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-145" data-entry-point-types="example upload" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="pynxtools-ellips" data-stars="0">
 <td><strong>pynxtools-ellips </strong>(⭐ 0)<br><small>Example upload</small></td>
 <td>A reader for transferring ellipsometry data from vendor formats to NeXus and NOMAD.</td>
 <td><small>PyPI</small></td>
@@ -3316,7 +3316,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-146" data-entry-point-types="example upload" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-146" data-entry-point-types="example upload" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="pynxtools-em" data-stars="3">
 <td><strong>pynxtools-em </strong>(⭐ 3)<br><small>Example upload</small></td>
 <td>A reader for transferring EM from vendor formats to NeXus and NOMAD.</td>
 <td><small>PyPI</small></td>
@@ -3338,7 +3338,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-147" data-entry-point-types="example upload" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-147" data-entry-point-types="example upload" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="pynxtools-igor" data-stars="0">
 <td><strong>pynxtools-igor </strong>(⭐ 0)<br><small>Example upload</small></td>
 <td>pynxtools plugin for reading igor pro waves and packed experiments</td>
 <td><small>PyPI</small></td>
@@ -3360,7 +3360,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-148" data-entry-point-types="app|example upload" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-148" data-entry-point-types="app|example upload" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="pynxtools-mpes" data-stars="0">
 <td><strong>pynxtools-mpes </strong>(⭐ 0)<br><small>App, Example upload</small></td>
 <td>—</td>
 <td><small>PyPI</small></td>
@@ -3382,7 +3382,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-149" data-entry-point-types="app" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-149" data-entry-point-types="app" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="pynxtools-raman" data-stars="0">
 <td><strong>pynxtools-raman </strong>(⭐ 0)<br><small>App</small></td>
 <td>A reader for transferring Raman data from vendor formats to NeXus and NOMAD.</td>
 <td><small>PyPI</small></td>
@@ -3404,7 +3404,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-150" data-entry-point-types="app|example upload" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-150" data-entry-point-types="app|example upload" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="pynxtools-spm" data-stars="0">
 <td><strong>pynxtools-spm </strong>(⭐ 0)<br><small>App, Example upload</small></td>
 <td>pynxtools-spm: A pynxtools plugin for SPM (Scanning Probe Microscopy) data readers</td>
 <td><small>PyPI</small></td>
@@ -3426,7 +3426,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-151" data-entry-point-types="example upload" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-151" data-entry-point-types="example upload" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="pynxtools-stm" data-stars="0">
 <td><strong>pynxtools-stm </strong>(⭐ 0)<br><small>Example upload</small></td>
 <td>A plugin for pynxtools to convert sts and stm files</td>
 <td><small>PyPI</small></td>
@@ -3448,7 +3448,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-152" data-entry-point-types="example upload" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-152" data-entry-point-types="example upload" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="pynxtools-xps" data-stars="5">
 <td><strong>pynxtools-xps </strong>(⭐ 5)<br><small>Example upload</small></td>
 <td>pynxtools-xps is a pynxtools reader plugin for X-ray photoelectron spectroscopy (XPS) data.</td>
 <td><small>PyPI</small></td>
@@ -3470,7 +3470,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-153" data-entry-point-types="parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-153" data-entry-point-types="parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="rtg-sims" data-stars="11">
 <td><strong>rtg-sims </strong>(⭐ 11)<br><small>Parser, Schema package</small></td>
 <td>A plugin for RTG SIMS.</td>
 <td><small>—</small></td>
@@ -3492,7 +3492,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-154" data-entry-point-types="schema package" data-owner="Ved-Mahajan" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-154" data-entry-point-types="schema package" data-owner="Ved-Mahajan" data-owner-group="other" data-plugin-name="sintering" data-stars="0">
 <td><strong>sintering </strong>(⭐ 0)<br><small>Schema package</small></td>
 <td>tutorial to set up plugin</td>
 <td><small>—</small></td>
@@ -3514,7 +3514,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-155" data-entry-point-types="schema package" data-owner="AG-SEK" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-155" data-entry-point-types="schema package" data-owner="AG-SEK" data-owner-group="other" data-plugin-name="solar-repo-perolab" data-stars="0">
 <td><strong>solar-repo-perolab </strong>(⭐ 0)<br><small>Schema package</small></td>
 <td>This plugin contains plot and analysis functions.</td>
 <td><small>—</small></td>
@@ -3536,7 +3536,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-156" data-entry-point-types="parser" data-owner="lokik" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-156" data-entry-point-types="parser" data-owner="lokik" data-owner-group="other" data-plugin-name="sprkkr2nomad" data-stars="1">
 <td><strong>sprkkr2nomad </strong>(⭐ 1)<br><small>Parser</small></td>
 <td>—</td>
 <td><small>—</small></td>
@@ -3557,7 +3557,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-157" data-entry-point-types="app|example upload|normalizer|parser|schema package" data-owner="RubelMozumder" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-157" data-entry-point-types="app|example upload|normalizer|parser|schema package" data-owner="RubelMozumder" data-owner-group="other" data-plugin-name="test-north" data-stars="0">
 <td><strong>test-north </strong>(⭐ 0)<br><small>App, Example upload, Normalizer, Parser, Schema package</small></td>
 <td>nomad example template</td>
 <td><small>—</small></td>
@@ -3580,7 +3580,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-158" data-entry-point-types="app|example upload|normalizer|parser|schema package" data-owner="GarzonDiegoFEUP" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-158" data-entry-point-types="app|example upload|normalizer|parser|schema package" data-owner="GarzonDiegoFEUP" data-owner-group="other" data-plugin-name="test-plugin-pv" data-stars="0">
 <td><strong>test-plugin-pv </strong>(⭐ 0)<br><small>App, Example upload, Normalizer, Parser, Schema package</small></td>
 <td>Example PV template</td>
 <td><small>—</small></td>
@@ -3603,7 +3603,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-159" data-entry-point-types="app|parser|schema package" data-owner="Oliver24-hub" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-159" data-entry-point-types="app|parser|schema package" data-owner="Oliver24-hub" data-owner-group="other" data-plugin-name="test-plugin-workshop" data-stars="0">
 <td><strong>test-plugin-workshop </strong>(⭐ 0)<br><small>App, Parser, Schema package</small></td>
 <td>wqe</td>
 <td><small>—</small></td>
@@ -3626,7 +3626,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-160" data-entry-point-types="app|example upload|normalizer|parser|schema package" data-owner="blueraft" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-160" data-entry-point-types="app|example upload|normalizer|parser|schema package" data-owner="blueraft" data-owner-group="other" data-plugin-name="test-pv-plugin" data-stars="0">
 <td><strong>test-pv-plugin </strong>(⭐ 0)<br><small>App, Example upload, Normalizer, Parser, Schema package</small></td>
 <td>nomad example template</td>
 <td><small>—</small></td>
@@ -3649,7 +3649,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-161" data-entry-point-types="app|example upload|normalizer|parser|schema package" data-owner="paolog8" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-161" data-entry-point-types="app|example upload|normalizer|parser|schema package" data-owner="paolog8" data-owner-group="other" data-plugin-name="test_nomad" data-stars="0">
 <td><strong>test_nomad </strong>(⭐ 0)<br><small>App, Example upload, Normalizer, Parser, Schema package</small></td>
 <td>nomad example template</td>
 <td><small>—</small></td>
@@ -3671,7 +3671,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-162" data-entry-point-types="parser|schema package" data-owner="ccc3001" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-162" data-entry-point-types="parser|schema package" data-owner="ccc3001" data-owner-group="other" data-plugin-name="test_plugin" data-stars="0">
 <td><strong>test_plugin </strong>(⭐ 0)<br><small>Parser, Schema package</small></td>
 <td>nomad example template</td>
 <td><small>—</small></td>
@@ -3693,7 +3693,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-163" data-entry-point-types="app|example upload|parser|schema package" data-owner="RoteKekse" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-163" data-entry-point-types="app|example upload|parser|schema package" data-owner="RoteKekse" data-owner-group="other" data-plugin-name="test_pv_nomad" data-stars="0">
 <td><strong>test_pv_nomad </strong>(⭐ 0)<br><small>App, Example upload, Parser, Schema package</small></td>
 <td>nomad example template</td>
 <td><small>—</small></td>
@@ -3716,7 +3716,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-164" data-entry-point-types="parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-164" data-entry-point-types="parser|schema package" data-owner="FAIRmat-NFDI" data-owner-group="fairmat" data-plugin-name="transmission" data-stars="11">
 <td><strong>transmission </strong>(⭐ 11)<br><small>Parser, Schema package</small></td>
 <td>A plugin for NOMAD containing base sections for transmission spectrophotometry.</td>
 <td><small>PyPI</small></td>
@@ -3737,7 +3737,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-165" data-entry-point-types="app|example upload|schema package" data-owner="budschi" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-165" data-entry-point-types="app|example upload|schema package" data-owner="budschi" data-owner-group="other" data-plugin-name="unicornone-rheed" data-stars="0">
 <td><strong>unicornone-rheed </strong>(⭐ 0)<br><small>App, Example upload, Schema package</small></td>
 <td>RHEED data from UnicornOne</td>
 <td><small>—</small></td>
@@ -3759,7 +3759,7 @@ Quick reference table of all available plugins:
 </details>
 </td>
 </tr>
-<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-166" data-entry-point-types="example upload|normalizer|parser|schema package" data-owner="16-vikrant" data-owner-group="other">
+<tr class="plugin-registry-row plugin-registry-row--main" data-plugin-row-id="plugin-registry-row-166" data-entry-point-types="example upload|normalizer|parser|schema package" data-owner="16-vikrant" data-owner-group="other" data-plugin-name="wannierberri" data-stars="0">
 <td><strong>wannierberri </strong>(⭐ 0)<br><small>Example upload, Normalizer, Parser, Schema package</small></td>
 <td>Wannier Berri parser</td>
 <td><small>PyPI</small></td>
