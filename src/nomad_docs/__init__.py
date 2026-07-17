@@ -50,6 +50,7 @@ from nomad_docs.pydantic import (
 
 from nomad_docs.training_resources import render_training_resources_table
 
+
 class MyYamlDumper(yaml.Dumper):
     """
     A custom dumper that always shows objects in yaml and not json syntax
@@ -157,15 +158,15 @@ def define_env(env):
             selected_names = list(models)
             unknown_names = [name for name in selected_names if name not in all_fields]
             if unknown_names:
-                unknown = ", ".join(sorted(unknown_names))
-                raise KeyError(f"Unknown config model name(s): {unknown}. ")
+                unknown = ', '.join(sorted(unknown_names))
+                raise KeyError(f'Unknown config model name(s): {unknown}. ')
 
         results: list[str] = []
         for name in selected_names:
             field = all_fields[name]
             results.append(pydantic_model_from_model(field.annotation, name))
 
-        return "\n\n".join(results)
+        return '\n\n'.join(results)
 
     def pydantic_model_from_model(model, name=None, heading=None, hide=[]):
         if hasattr(model, 'model_fields'):
@@ -253,8 +254,8 @@ def define_env(env):
     @env.macro
     def enum_table(
         path,
-        headers=("Name", "Value"),
-        fields=("name", "value"),
+        headers=('Name', 'Value'),
+        fields=('name', 'value'),
         heading=None,
         sort_by_value=True,
     ):
@@ -269,12 +270,12 @@ def define_env(env):
             sort_by_value: If True, sort rows by enum value.
         """
 
-        module_name, enum_name = path.rsplit(".", 1)
+        module_name, enum_name = path.rsplit('.', 1)
         module = importlib.import_module(module_name)
         enum_cls = getattr(module, enum_name)
 
         if not isclass(enum_cls) or not issubclass(enum_cls, Enum):
-            raise TypeError(f"{path} is not an Enum class")
+            raise TypeError(f'{path} is not an Enum class')
 
         members = list(enum_cls)
         if sort_by_value:
@@ -282,25 +283,25 @@ def define_env(env):
 
         # validate
         if len(headers) != len(fields):
-            raise ValueError("headers and fields must have same length")
+            raise ValueError('headers and fields must have same length')
 
         result = []
         if heading:
-            result.append(f"{heading}\n")
+            result.append(f'{heading}\n')
 
         # header row
-        result.append("| " + " | ".join(headers) + " |")
-        result.append("| " + " | ".join(["---"] * len(headers)) + " |")
+        result.append('| ' + ' | '.join(headers) + ' |')
+        result.append('| ' + ' | '.join(['---'] * len(headers)) + ' |')
 
         # rows
         for member in members:
             row = []
             for field in fields:
                 value = getattr(member, field)
-                row.append(f"`{value}`")
-            result.append("| " + " | ".join(row) + " |")
+                row.append(f'`{value}`')
+            result.append('| ' + ' | '.join(row) + ' |')
 
-        return "\n".join(result)
+        return '\n'.join(result)
 
     @env.macro
     def pydantic_model(path, heading=None, hide=[]):  # pylint: disable=unused-variable
@@ -503,11 +504,11 @@ def define_env(env):
 
     @env.macro
     def training_resources_table(
-            json_path="src/nomad_docs/data/training_resources_youtube_playlist.json",
-            preview_chars=260,
+        json_path='src/nomad_docs/data/training_resources_youtube_playlist.json',
+        preview_chars=260,
     ):
         import os
 
-        root = os.path.join(os.path.dirname(__file__), "../..")
+        root = os.path.join(os.path.dirname(__file__), '../..')
         full_path = os.path.join(root, json_path)
         return render_training_resources_table(full_path, preview_chars=preview_chars)
