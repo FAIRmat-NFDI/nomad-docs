@@ -46,6 +46,22 @@
     padding: 24px;
 }
 
+.home-grid > div {
+    border: 1px solid #c7d4ff;
+    transition:
+        border-color 150ms ease,
+        box-shadow 150ms ease;
+}
+
+.home-grid > div:hover {
+    border-color: #93aaff;
+}
+
+.home-grid > div:has(:focus-visible) {
+    border-color: #2a4cdf;
+    box-shadow: 0 0 0 3px rgba(42, 76, 223, 0.15);
+}
+
 .home-grid h3 {
     margin-top: 0;
     font-weight: 700;
@@ -228,7 +244,7 @@
 }
 
 [data-md-color-scheme="default"] .home-grid div {
-    background-color: #f3e9d9;
+    background-color: #fdfeff;
 }
 
 [data-md-color-scheme="default"] .nomad-button {
@@ -324,7 +340,7 @@
 }
 
 [data-md-color-scheme="default"] .home-grid div {
-    background-color: #f3e9d9;
+    background-color: #fdfeff;
 }
 
 [data-md-color-scheme="default"] .nomad-button {
