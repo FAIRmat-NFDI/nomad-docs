@@ -404,7 +404,7 @@ function initPluginRegistryFilters() {
             const totalSlices = sortedCounts.reduce((sum, [, count]) => sum + count, 0);
 
             if (!sortedCounts.length || totalSlices <= 0) {
-                pieNode.style.background = "#e5e7eb";
+                pieNode.style.background = "var(--plugin-registry-pie-empty-bg)";
                 pieLegendNode.innerHTML = '<p class="plugin-registry-chart__empty">No visible items.</p>';
                 pieTotalNode.textContent = "0";
                 pieNode.setAttribute("aria-label", `${labelBase} pie chart: no visible items`);

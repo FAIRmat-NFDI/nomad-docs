@@ -195,20 +195,34 @@
 }
 
 .plugin-registry-filter {
+    --plugin-registry-accent: var(--md-primary-fg-color);
+    --plugin-registry-border-color: rgba(42, 76, 223, 0.2);
+    --plugin-registry-surface-color: rgba(42, 76, 223, 0.04);
+    --plugin-registry-control-bg: var(--md-default-bg-color);
+    --plugin-registry-control-fg: var(--md-default-fg-color);
+    --plugin-registry-control-border: rgba(42, 76, 223, 0.25);
+    --plugin-registry-control-hover-border: rgba(42, 76, 223, 0.45);
+    --plugin-registry-focus-shadow: rgba(42, 76, 223, 0.16);
+    --plugin-registry-selected-bg: var(--md-primary-fg-color);
+    --plugin-registry-selected-fg: #ffffff;
+    --plugin-registry-muted-fg: var(--md-default-fg-color--light);
+    --plugin-registry-button-hover-bg: rgba(42, 76, 223, 0.08);
+
     display: grid;
     grid-template-columns: auto minmax(10rem, 15rem) auto minmax(10rem, 15rem) auto minmax(10rem, 14rem) auto 1fr;
     align-items: center;
     gap: 0.75rem;
     margin: 0.75rem 0 1rem 0;
     padding: 0.75rem;
-    border: 1px solid rgba(42, 76, 223, 0.2);
+    border: 1px solid var(--plugin-registry-border-color);
     border-radius: 0.5rem;
-    background: rgba(42, 76, 223, 0.04);
+    background: var(--plugin-registry-surface-color);
+    color-scheme: light;
 }
 
 .plugin-registry-filter__label {
     font-weight: 600;
-    color: #2a4cdf;
+    color: var(--plugin-registry-accent);
     white-space: nowrap;
 }
 
@@ -216,9 +230,30 @@
     min-width: 0;
     width: 100%;
     padding: 0.35rem 0.5rem;
-    border: 1px solid rgba(42, 76, 223, 0.25);
+    border: 1px solid var(--plugin-registry-control-border);
     border-radius: 0.35rem;
-    background: #fff;
+    background: var(--plugin-registry-control-bg);
+    color: var(--plugin-registry-control-fg);
+}
+
+.plugin-registry-filter__select:hover {
+    border-color: var(--plugin-registry-control-hover-border);
+}
+
+.plugin-registry-filter__select:focus {
+    border-color: var(--plugin-registry-accent);
+    box-shadow: 0 0 0 0.15rem var(--plugin-registry-focus-shadow);
+    outline: none;
+}
+
+.plugin-registry-filter__select option {
+    background: var(--plugin-registry-control-bg);
+    color: var(--plugin-registry-control-fg);
+}
+
+.plugin-registry-filter__select option:checked {
+    background: linear-gradient(var(--plugin-registry-selected-bg), var(--plugin-registry-selected-bg));
+    color: var(--plugin-registry-selected-fg);
 }
 
 .plugin-registry-filter__select[multiple] {
@@ -230,12 +265,23 @@
     grid-row: 2;
     justify-self: start;
     padding: 0.35rem 0.7rem;
-    border: 1px solid rgba(42, 76, 223, 0.3);
+    border: 1px solid var(--plugin-registry-control-border);
     border-radius: 0.35rem;
-    background: #fff;
-    color: #2a4cdf;
+    background: var(--plugin-registry-control-bg);
+    color: var(--plugin-registry-accent);
     cursor: pointer;
     font-weight: 600;
+}
+
+.plugin-registry-filter__clear:hover {
+    background: var(--plugin-registry-button-hover-bg);
+    border-color: var(--plugin-registry-control-hover-border);
+}
+
+.plugin-registry-filter__clear:focus {
+    border-color: var(--plugin-registry-accent);
+    box-shadow: 0 0 0 0.15rem var(--plugin-registry-focus-shadow);
+    outline: none;
 }
 
 .plugin-registry-filter__label--sort {
@@ -253,7 +299,7 @@
     grid-row: 3;
     display: block;
     margin-top: 0.15rem;
-    color: rgba(0, 0, 0, 0.7);
+    color: var(--plugin-registry-muted-fg);
     font-size: 0.85rem;
 }
 
@@ -279,11 +325,18 @@
 }
 
 .plugin-registry-chart {
+    --plugin-registry-accent: var(--md-primary-fg-color);
+    --plugin-registry-border-color: rgba(42, 76, 223, 0.2);
+    --plugin-registry-surface-color: rgba(42, 76, 223, 0.03);
+    --plugin-registry-pie-empty-bg: #e5e7eb;
+    --plugin-registry-pie-center-bg: var(--md-default-bg-color);
+    --plugin-registry-muted-fg: var(--md-default-fg-color--light);
+
     margin: 0.5rem 0 1rem 0;
     padding: 0.75rem;
-    border: 1px solid rgba(42, 76, 223, 0.2);
+    border: 1px solid var(--plugin-registry-border-color);
     border-radius: 0.5rem;
-    background: rgba(42, 76, 223, 0.03);
+    background: var(--plugin-registry-surface-color);
 }
 
 .plugin-registry-chart__title {
@@ -320,7 +373,7 @@
     align-items: center;
     justify-content: center;
     position: relative;
-    background: #e5e7eb;
+    background: var(--plugin-registry-pie-empty-bg);
 }
 
 .plugin-registry-chart__pie::after {
@@ -328,7 +381,7 @@
     width: 62%;
     height: 62%;
     border-radius: 50%;
-    background: #fff;
+    background: var(--plugin-registry-pie-center-bg);
     position: absolute;
 }
 
@@ -336,7 +389,7 @@
     position: relative;
     z-index: 1;
     font-weight: 700;
-    color: #2a4cdf;
+    color: var(--plugin-registry-accent);
 }
 
 .plugin-registry-chart__legend {
@@ -372,7 +425,7 @@
 
 .plugin-registry-chart__empty {
     margin: 0;
-    color: rgba(0, 0, 0, 0.7);
+    color: var(--plugin-registry-muted-fg);
 }
 
 .plugin-registry-table thead th {
@@ -653,6 +706,42 @@
 
 [data-md-color-scheme="slate"] .nav-arrow:hover {
     background-color: rgba(255, 255, 255, 0.28);
+}
+
+[data-md-color-scheme="slate"] .plugin-registry-filter {
+    --plugin-registry-border-color: rgba(108, 140, 255, 0.35);
+    --plugin-registry-surface-color: rgba(108, 140, 255, 0.09);
+    --plugin-registry-control-bg: #1d2430;
+    --plugin-registry-control-fg: #e6edf3;
+    --plugin-registry-control-border: rgba(145, 168, 255, 0.35);
+    --plugin-registry-control-hover-border: rgba(145, 168, 255, 0.6);
+    --plugin-registry-focus-shadow: rgba(108, 140, 255, 0.28);
+    --plugin-registry-selected-bg: #6c8cff;
+    --plugin-registry-selected-fg: #08111f;
+    --plugin-registry-muted-fg: rgba(230, 237, 243, 0.72);
+    --plugin-registry-button-hover-bg: rgba(108, 140, 255, 0.16);
+
+    color-scheme: dark;
+}
+
+[data-md-color-scheme="slate"] .plugin-registry-chart {
+    --plugin-registry-border-color: rgba(108, 140, 255, 0.28);
+    --plugin-registry-surface-color: rgba(108, 140, 255, 0.07);
+    --plugin-registry-pie-empty-bg: #303846;
+    --plugin-registry-pie-center-bg: #1d2430;
+    --plugin-registry-muted-fg: rgba(230, 237, 243, 0.72);
+}
+
+[data-md-color-scheme="slate"] .plugin-registry-notice--warning {
+    border-color: rgba(251, 191, 36, 0.45);
+    background: rgba(251, 191, 36, 0.13);
+    color: #fde68a;
+}
+
+[data-md-color-scheme="slate"] .plugin-registry-notice--success {
+    border-color: rgba(52, 211, 153, 0.42);
+    background: rgba(52, 211, 153, 0.12);
+    color: #a7f3d0;
 }
 
 .training-resources-list {
