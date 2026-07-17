@@ -20,8 +20,10 @@
 Definitions that are used in the documentation via mkdocs-macro-plugin.
 """
 
+import importlib
 import json
 import os.path
+from enum import Enum
 from inspect import isclass
 from typing import cast, get_args
 
@@ -46,6 +48,7 @@ from nomad_docs.pydantic import (
     get_field_type_info,
 )
 
+from nomad_docs.training_resources import render_training_resources_table
 
 class MyYamlDumper(yaml.Dumper):
     """
@@ -141,20 +144,28 @@ def define_env(env):
         return f'\n{indent}'.join(f'{indent}{yaml_string}'.split('\n'))
 
     @env.macro
-    def config_models(models=None):  # pylint: disable=unused-variable
+    def config_models(models: list[str] | None = None) -> str:  # pylint: disable=unused-variable
         from nomad.config.models.config import Config
 
-        results = ''
-        for name, field in Config.model_fields.items():
-            if models and name not in models:
-                continue
+        all_fields = Config.model_fields
 
-            if not models and name in exported_config_models:
-                continue
+        if models is None:
+            selected_names = [
+                name for name in all_fields if name not in exported_config_models
+            ]
+        else:
+            selected_names = list(models)
+            unknown_names = [name for name in selected_names if name not in all_fields]
+            if unknown_names:
+                unknown = ", ".join(sorted(unknown_names))
+                raise KeyError(f"Unknown config model name(s): {unknown}. ")
 
-            results += pydantic_model_from_model(field.annotation, name)
-            results += '\n\n'
-        return results
+        results: list[str] = []
+        for name in selected_names:
+            field = all_fields[name]
+            results.append(pydantic_model_from_model(field.annotation, name))
+
+        return "\n\n".join(results)
 
     def pydantic_model_from_model(model, name=None, heading=None, hide=[]):
         if hasattr(model, 'model_fields'):
@@ -238,6 +249,58 @@ def define_env(env):
                 result += pydantic_model_from_model(required_model)  # type: ignore
 
         return result
+
+    @env.macro
+    def enum_table(
+        path,
+        headers=("Name", "Value"),
+        fields=("name", "value"),
+        heading=None,
+        sort_by_value=True,
+    ):
+        """
+        Render a markdown table for an Enum.
+
+        Arguments:
+            path: Fully qualified Python path to the Enum class.
+            headers: Column headers (tuple/list of strings).
+            fields: Attributes to render for each enum member (e.g. "name", "value").
+            heading: Optional markdown heading to prepend.
+            sort_by_value: If True, sort rows by enum value.
+        """
+
+        module_name, enum_name = path.rsplit(".", 1)
+        module = importlib.import_module(module_name)
+        enum_cls = getattr(module, enum_name)
+
+        if not isclass(enum_cls) or not issubclass(enum_cls, Enum):
+            raise TypeError(f"{path} is not an Enum class")
+
+        members = list(enum_cls)
+        if sort_by_value:
+            members.sort(key=lambda item: str(item.value))
+
+        # validate
+        if len(headers) != len(fields):
+            raise ValueError("headers and fields must have same length")
+
+        result = []
+        if heading:
+            result.append(f"{heading}\n")
+
+        # header row
+        result.append("| " + " | ".join(headers) + " |")
+        result.append("| " + " | ".join(["---"] * len(headers)) + " |")
+
+        # rows
+        for member in members:
+            row = []
+            for field in fields:
+                value = getattr(member, field)
+                row.append(f"`{value}`")
+            result.append("| " + " | ".join(row) + " |")
+
+        return "\n".join(result)
 
     @env.macro
     def pydantic_model(path, heading=None, hide=[]):  # pylint: disable=unused-variable
@@ -437,3 +500,14 @@ def define_env(env):
                 f'<span class="category-pill"{style}>'
                 f'{anchor_tag[0]}{name}{anchor_tag[1]}</span>'
             )
+
+    @env.macro
+    def training_resources_table(
+            json_path="src/nomad_docs/data/training_resources_youtube_playlist.json",
+            preview_chars=260,
+    ):
+        import os
+
+        root = os.path.join(os.path.dirname(__file__), "../..")
+        full_path = os.path.join(root, json_path)
+        return render_training_resources_table(full_path, preview_chars=preview_chars)

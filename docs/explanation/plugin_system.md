@@ -130,14 +130,7 @@ class MyParserEntryPoint(ParserEntryPoint):
         return MyParser(**self.dict())
 ```
 
-Often when loading the resource, you will need access to the final entry point configuration defined in `nomad.yaml`. This way also any overrides to the plugin configuration are correctly taken into account. You can get the final configuration using the `get_plugin_entry_point` function and the plugin name as defined in `pyproject.toml` as an argument:
-
-```python
-from nomad.config import config
-
-configuration = config.get_plugin_entry_point('nomad_example.parsers:myparser')
-print(f'The parser parameter is: {configuration.parameter}')
-```
+Often when loading the resource, you will need access to the final entry point configuration defined in `nomad.yaml`, including any overrides. For details on how to retrieve plugin configuration at runtime using `get_plugin_entry_point()`, see [Accessing plugin configuration at runtime](../howto/plugins/plugins.md#accessing-plugin-configuration-at-runtime).
 
 ## Entry point discovery
 

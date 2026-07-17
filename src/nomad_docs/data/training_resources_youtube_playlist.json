@@ -1,0 +1,536 @@
+{
+  "generated_at": "2026-04-07T14:59:55.524956Z",
+  "api_base": "http://141.20.184.181/nomad-oasis/api/v1",
+  "tag": "YouTube Playlist",
+  "count": 16,
+  "items": [
+    {
+      "entry_id": "CsdWdcwu16qzegTKOJKh484q7nCt",
+      "upload_id": "tmdecD35TJupuFl8Eugjdg",
+      "title": "FAIRmat Tutorial 16: Getting started with NOMAD for materials-science research data management",
+      "identifier": "https://www.youtube.com/playlist?list=PLrRaxjvn6FDVxKMHqsksxSRAnQCVq-iPI",
+      "date_created": "2025-02-25T23:00:00+00:00",
+      "description": "In FAIRmat tutorial 16, you'll learn how to use&nbsp;NOMAD to manage and organize your materials-science research data. Whether you are working with computational or experimental data, NOMAD's graphical user interface makes it easy to upload, share, explore, and analyze your data.&nbsp;We will also focus on using NOMAD to improve collaboration on your research projects and to ensure that your data align with the FAIR data principles.",
+      "tags": [
+        "YouTube Playlist"
+      ],
+      "keyword": [
+        "login",
+        "Introduction",
+        "Upload Data",
+        "Create Dataset",
+        "Get DOI",
+        "Manage Members",
+        "Supported Files",
+        "Filter Menu",
+        "Widgets",
+        "Dashboard",
+        "Built-in Schema",
+        "Custom YAML Schema",
+        "Tabular Parser YAML",
+        "NeXus Data Converter"
+      ],
+      "subject": [
+        "General NOMAD",
+        "Publish",
+        "Explore",
+        "ELN"
+      ],
+      "educational_level": [
+        "Intermediate"
+      ],
+      "instructional_method": [
+        "Tutorial"
+      ],
+      "learning_resource_type": [
+        "FAIRmat Tutorial"
+      ]
+    },
+    {
+      "entry_id": "v3DUpcZQp6RXwTAad85zjzPi1isR",
+      "upload_id": "tmdecD35TJupuFl8Eugjdg",
+      "title": "FAIRmat Tutorial 15: Use of pynxtools with Examples from Optical Spectroscopy",
+      "identifier": "https://www.youtube.com/playlist?list=PLrRaxjvn6FDWascr_J2W54SmNE6wrLxR5",
+      "date_created": "2024-10-15T22:00:00+00:00",
+      "description": "Demonstrates how to use the pynxtools package along with NOMAD to faciliate FAIR research data management for experimental data in materials science. Ellipsometry and Raman spectroscopy data are used as representative examples.",
+      "tags": [
+        "YouTube Playlist"
+      ],
+      "keyword": [
+        "Supported Files",
+        "NORTH",
+        "NeXus Data Converter",
+        "NeXus data modeling",
+        "NeXus Ontology",
+        "pynxtools"
+      ],
+      "subject": [
+        "General NOMAD",
+        "NeXus"
+      ],
+      "educational_level": [
+        "Intermediate"
+      ],
+      "instructional_method": [
+        "Tutorial"
+      ],
+      "learning_resource_type": [
+        "FAIRmat Tutorial"
+      ]
+    },
+    {
+      "entry_id": "jzpD-mH7OAkggedmKuY9LLwoR81I",
+      "upload_id": "tmdecD35TJupuFl8Eugjdg",
+      "title": "FAIRmat Tutorial 14: Developing schemas and parsers for FAIR computational data storage using NOMAD-Simulations",
+      "identifier": "https://www.youtube.com/playlist?list=PLrRaxjvn6FDXiHpOKpRN_Phv14Qdqg7lp",
+      "date_created": "2024-07-09T22:00:00+00:00",
+      "description": "Provides foundational knowledge for customizing NOMAD to fit the specific needs of your computational research project using the&nbsp;nomad-simulations&nbsp;schema plugin.",
+      "tags": [
+        "YouTube Playlist"
+      ],
+      "keyword": [
+        "Introduction",
+        "Write Normalizer",
+        "Write Parser",
+        "Write Schema Package",
+        "Develop Plugin",
+        "Install Plugin",
+        "Simulation",
+        "Workflows"
+      ],
+      "subject": [
+        "General NOMAD",
+        "NOMAD Plugins",
+        "Oasis Customization"
+      ],
+      "educational_level": [
+        "Intermediate",
+        "Beginner",
+        "Advanced"
+      ],
+      "instructional_method": [
+        "Tutorial"
+      ],
+      "learning_resource_type": [
+        "FAIRmat Tutorial"
+      ]
+    },
+    {
+      "entry_id": "gk7GWyhGmnqxAt9fCU-ev2XD2UFi",
+      "upload_id": "tmdecD35TJupuFl8Eugjdg",
+      "title": "FAIRmat Tutorial 13: NOMAD for Experimental Data Management in Synthesis",
+      "identifier": "https://www.youtube.com/playlist?list=PLrRaxjvn6FDVhfYbSU537bxdKI7oIbIT3",
+      "date_created": "2024-05-14T22:00:00+00:00",
+      "description": "Introduces NOMAD and NOMAD Oasis as essential tools for research data management (RDM), and demonstrates how to utilize these tools for managing experimental materials science data, with a particular focus on synthesis data.",
+      "tags": [
+        "YouTube Playlist"
+      ],
+      "keyword": [
+        "Introduction",
+        "Built-in Schema",
+        "Custom YAML Schema",
+        "Base Section",
+        "Develop Plugin",
+        "Install Plugin",
+        "Install Oasis"
+      ],
+      "subject": [
+        "General NOMAD",
+        "ELN",
+        "Oasis Customization",
+        "Oasis Installation",
+        "NOMAD Plugins"
+      ],
+      "educational_level": [
+        "Intermediate",
+        "Beginner"
+      ],
+      "instructional_method": [
+        "Tutorial"
+      ],
+      "learning_resource_type": [
+        "FAIRmat Tutorial"
+      ]
+    },
+    {
+      "entry_id": "fF3PXuaZFWp48ZvAByRxGkQ8bwoW",
+      "upload_id": "tmdecD35TJupuFl8Eugjdg",
+      "title": "FAIRmat Tutorial 12: Getting started with NOMAD and NOMAD Oasis for research data management (RDM)",
+      "identifier": "https://www.youtube.com/playlist?list=PLrRaxjvn6FDVuK5OcnPdToza2Ur_ki-It",
+      "date_created": "2024-02-13T23:00:00+00:00",
+      "description": "A practical session to go through a Jupyter notebook that demonstrates how to use NOMAD for managing custom data and file types. Based on a simple given dataset, we show how to model the data in a schema, do parsing and normalization, process data, access existing data with NOMAD's API for analysis, and how to add visualization to your data.",
+      "tags": [
+        "YouTube Playlist"
+      ],
+      "keyword": [
+        "Introduction",
+        "NORTH",
+        "Base Section",
+        "Write Normalizer",
+        "Write Parser",
+        "Write Schema Package",
+        "Develop Plugin",
+        "Install Plugin",
+        "Configure Oasis"
+      ],
+      "subject": [
+        "General NOMAD",
+        "Oasis Customization",
+        "Analyze",
+        "NOMAD Plugins"
+      ],
+      "educational_level": [
+        "Intermediate",
+        "Beginner"
+      ],
+      "instructional_method": [
+        "Tutorial"
+      ],
+      "learning_resource_type": [
+        "FAIRmat Tutorial"
+      ]
+    },
+    {
+      "entry_id": "e0Mo7Bei0QB8GPmDpRm65m02xM03",
+      "upload_id": "tmdecD35TJupuFl8Eugjdg",
+      "title": "FAIRmat Tutorial 11: Research data management, from fundamentals to implementation",
+      "identifier": "https://www.youtube.com/playlist?list=PLrRaxjvn6FDWdPumEXea7xNbx1I4FaPtW",
+      "date_created": "2023-10-24T22:00:00+00:00",
+      "description": "Basic NOMAD usage with molecular dynamics simulations, custom workflows, python API",
+      "tags": [
+        "YouTube Playlist"
+      ],
+      "keyword": [
+        "FAIR principles",
+        "DMP",
+        "General RDM"
+      ],
+      "subject": [
+        "General RDM"
+      ],
+      "educational_level": [
+        "Beginner"
+      ],
+      "instructional_method": [
+        "Tutorial"
+      ],
+      "learning_resource_type": [
+        "FAIRmat Tutorial"
+      ]
+    },
+    {
+      "entry_id": "zVQ3XfKu2yLosyIh2iAR8oFlCFcy",
+      "upload_id": "tmdecD35TJupuFl8Eugjdg",
+      "title": "FAIRmat Tutorial 10: FAIR electronic-structure data in NOMAD",
+      "identifier": "https://www.youtube.com/playlist?list=PLrRaxjvn6FDUsgbVpSBaqsdTI77PYEPPM",
+      "date_created": "2023-06-13T22:00:00+00:00",
+      "description": "Basic NOMAD usage for computational data, numerical precision filtering, custom workflows, knowledge-based XC functionals exploration",
+      "tags": [
+        "YouTube Playlist"
+      ],
+      "keyword": [
+        "Upload Data",
+        "NORTH",
+        "Workflows",
+        "Simulation"
+      ],
+      "subject": [
+        "Explore",
+        "Scientific Use Cases"
+      ],
+      "educational_level": [
+        "Intermediate"
+      ],
+      "instructional_method": [
+        "Tutorial"
+      ],
+      "learning_resource_type": [
+        "FAIRmat Tutorial"
+      ]
+    },
+    {
+      "entry_id": "ODVcFDfk9Y8XFf9IQYGaUjsSE5lF",
+      "upload_id": "tmdecD35TJupuFl8Eugjdg",
+      "title": "FAIRmat Tutorial 9: Plugins: Python schemas and parsers",
+      "identifier": "https://www.youtube.com/playlist?list=PLrRaxjvn6FDW-_DzZ4OShfMPcTtnFoynT",
+      "date_created": "2023-04-25T22:00:00+00:00",
+      "description": "Introduction the new plugin mechanism in NOMAD: how to develop and integrate their own Python schemas and parsers to a NOMAD Oasis.",
+      "tags": [
+        "YouTube Playlist"
+      ],
+      "keyword": [
+        "Introduction",
+        "Tabular Parser YAML",
+        "Write Normalizer",
+        "Write Parser",
+        "Develop Plugin",
+        "Install Plugin",
+        "Tabular Parser"
+      ],
+      "subject": [
+        "General NOMAD",
+        "NOMAD Plugins",
+        "Oasis Customization"
+      ],
+      "educational_level": [
+        "Intermediate"
+      ],
+      "instructional_method": [
+        "Tutorial"
+      ],
+      "learning_resource_type": [
+        "FAIRmat Tutorial"
+      ]
+    },
+    {
+      "entry_id": "cslc0u3gMeEf7zc2-3fwDhxIMqrT",
+      "upload_id": "tmdecD35TJupuFl8Eugjdg",
+      "title": "FAIRmat Tutorial 8: Using NOMAD as an Electronic lab notebook (ELN) for FAIR data",
+      "identifier": "https://www.youtube.com/playlist?list=PLrRaxjvn6FDWJHeIwvmnmy7frNyO6QDX4",
+      "date_created": "2023-03-14T23:00:00+00:00",
+      "description": "Using NOMAD as an ELN which enables the users to generate data following the FAIR principles.",
+      "tags": [
+        "YouTube Playlist"
+      ],
+      "keyword": [
+        "Built-in Schema",
+        "Custom YAML Schema",
+        "Tabular Parser YAML",
+        "Base Section",
+        "Tabular Parser"
+      ],
+      "subject": [
+        "ELN"
+      ],
+      "educational_level": [
+        "Intermediate"
+      ],
+      "instructional_method": [
+        "Tutorial"
+      ],
+      "learning_resource_type": [
+        "FAIRmat Tutorial"
+      ]
+    },
+    {
+      "entry_id": "jCHYKbR5vs16GgxOoMsQ2F3mT-3R",
+      "upload_id": "tmdecD35TJupuFl8Eugjdg",
+      "title": "FAIRmat Tutorial 7: Molecular Dynamics Trajectories and Workflows in NOMAD",
+      "identifier": "https://www.youtube.com/playlist?list=PLrRaxjvn6FDXxq37e6zp83q3XK32Sj6ES",
+      "date_created": "2023-02-14T23:00:00+00:00",
+      "description": "Uploading MD data, examining metadata, overview page, workflow visualizer, extracting MD data for trajectory analysis",
+      "tags": [
+        "YouTube Playlist"
+      ],
+      "keyword": [
+        "Workflows",
+        "Simulation",
+        "NORTH",
+        "Introduction"
+      ],
+      "subject": [
+        "Scientific Use Cases",
+        "General NOMAD"
+      ],
+      "educational_level": [
+        "Intermediate"
+      ],
+      "instructional_method": [
+        "Tutorial"
+      ],
+      "learning_resource_type": [
+        "FAIRmat Tutorial"
+      ]
+    },
+    {
+      "entry_id": "_J7kzfr2DPaE7hVHce4yN7JU5tR8",
+      "upload_id": "tmdecD35TJupuFl8Eugjdg",
+      "title": "FAIRmat Tutorial 6: Experimental data management in NOMAD",
+      "identifier": "https://www.youtube.com/playlist?list=PLrRaxjvn6FDU3HeV6byx_kUlU6UXkfhil",
+      "date_created": "2022-11-22T23:00:00+00:00",
+      "description": "Follow research data lifecycle from planning and running an experiment to collecting and annotating data according to international community standards for searchability, and reuse.",
+      "tags": [
+        "YouTube Playlist"
+      ],
+      "keyword": [
+        "CAMELS",
+        "NeXus Ontology",
+        "NeXus data modeling"
+      ],
+      "subject": [
+        "General NOMAD",
+        "NOMAD CAMELS",
+        "Scientific Use Cases",
+        "NeXus"
+      ],
+      "educational_level": [
+        "Beginner"
+      ],
+      "instructional_method": [
+        "Tutorial"
+      ],
+      "learning_resource_type": [
+        "FAIRmat Tutorial"
+      ]
+    },
+    {
+      "entry_id": "57ryi93F760B5yfSNI_EXHItFHOF",
+      "upload_id": "tmdecD35TJupuFl8Eugjdg",
+      "title": "FAIRmat Tutorial 5: NOMAD Encyclopedia",
+      "identifier": "https://www.youtube.com/playlist?list=PLrRaxjvn6FDWoJZwXpW28YyXnA0vdpYej",
+      "date_created": "2022-10-04T22:00:00+00:00",
+      "description": "Navigate the materials space using the Encyclopedia GUI, and using the Encyclopedia API.",
+      "tags": [
+        "YouTube Playlist"
+      ],
+      "keyword": [
+        "General RDM"
+      ],
+      "subject": [
+        "NOMAD Encyclopedia"
+      ],
+      "educational_level": [
+        "Beginner",
+        "Intermediate",
+        "Advanced"
+      ],
+      "instructional_method": [
+        "Tutorial"
+      ],
+      "learning_resource_type": [
+        "FAIRmat Tutorial"
+      ]
+    },
+    {
+      "entry_id": "xeysPswVJOaccqD9ZGI_ttXilzcv",
+      "upload_id": "tmdecD35TJupuFl8Eugjdg",
+      "title": "FAIRmat Tutorial 4: NOMAD Oasis and FAIR Data Collaboration and Sharing",
+      "identifier": "https://www.youtube.com/playlist?list=PLrRaxjvn6FDXqfEz1rDWvbGkzMBm7afsl",
+      "date_created": "2022-05-10T22:00:00+00:00",
+      "description": "How to get started with NOMAD Oasis and adapt it to your research.",
+      "tags": [
+        "YouTube Playlist"
+      ],
+      "keyword": [
+        "Install Oasis",
+        "Configure Oasis"
+      ],
+      "subject": [
+        "General NOMAD",
+        "ELN",
+        "Oasis Customization",
+        "Oasis Installation",
+        "Oasis Configuration",
+        "Develop NOMAD"
+      ],
+      "educational_level": [
+        "Intermediate",
+        "Advanced",
+        "Beginner"
+      ],
+      "instructional_method": [
+        "Tutorial"
+      ],
+      "learning_resource_type": [
+        "FAIRmat Tutorial"
+      ]
+    },
+    {
+      "entry_id": "egbTsAvDcJNZ0A87iY_ArXeRpGq6",
+      "upload_id": "tmdecD35TJupuFl8Eugjdg",
+      "title": "FAIRmat Tutorial 3: Introduction to the Artificial-Intelligence Toolkit",
+      "identifier": "https://www.youtube.com/playlist?list=PLrRaxjvn6FDWZS2Gacn92Jyl8NA-FY1z2",
+      "date_created": "2022-04-05T22:00:00+00:00",
+      "description": "NOMAD AI-toolkit: query over the NOMAD Archive via the NOMAD API and basic notebooks for learning AI methods.",
+      "tags": [
+        "YouTube Playlist"
+      ],
+      "keyword": [
+        "AI Toolkit",
+        "Simulation"
+      ],
+      "subject": [
+        "API",
+        "AI"
+      ],
+      "educational_level": [
+        "Beginner",
+        "Intermediate",
+        "Advanced"
+      ],
+      "instructional_method": [
+        "Tutorial"
+      ],
+      "learning_resource_type": [
+        "FAIRmat Tutorial"
+      ]
+    },
+    {
+      "entry_id": "650ImaS7pRIecLDGbejrJc_QtFFj",
+      "upload_id": "tmdecD35TJupuFl8Eugjdg",
+      "title": "FAIRmat Tutorial 2: Electronic Lab Notebooks and FAIR Data Management",
+      "identifier": "https://www.youtube.com/playlist?list=PLrRaxjvn6FDVZvROmQW_zmIyhDMMJfwZL",
+      "date_created": "2022-03-08T23:00:00+00:00",
+      "description": "ELN in FAIR data management, NOMAD ELN, and integrating other ELN tools with NOMAD.",
+      "tags": [
+        "YouTube Playlist"
+      ],
+      "keyword": [
+        "Introduction"
+      ],
+      "subject": [
+        "ELN"
+      ],
+      "educational_level": [
+        "Beginner"
+      ],
+      "instructional_method": [
+        "Tutorial"
+      ],
+      "learning_resource_type": [
+        "FAIRmat Tutorial"
+      ]
+    },
+    {
+      "entry_id": "FogcTgmCLKacsP-3uPGCTQTi5oNC",
+      "upload_id": "tmdecD35TJupuFl8Eugjdg",
+      "title": "FAIRmat Tutorial 1: Publish and Explore Data with NOMAD",
+      "identifier": "https://www.youtube.com/playlist?list=PLrRaxjvn6FDU5Hy3ohE4OH4b3GdH0S3zO",
+      "date_created": "2022-02-08T23:00:00+00:00",
+      "description": "Basic NOMAD guide to prepare, upload, publish data, and reference them with a DOI.",
+      "tags": [
+        "YouTube Playlist"
+      ],
+      "keyword": [
+        "login",
+        "register",
+        "Introduction",
+        "Upload Data",
+        "Create Dataset",
+        "Get DOI",
+        "Supported Files",
+        "Filter Menu",
+        "Dashboard"
+      ],
+      "subject": [
+        "General NOMAD",
+        "Publish",
+        "Explore",
+        "Analyze",
+        "ELN",
+        "API"
+      ],
+      "educational_level": [
+        "Beginner",
+        "Intermediate",
+        "Advanced"
+      ],
+      "instructional_method": [
+        "Tutorial"
+      ],
+      "learning_resource_type": [
+        "FAIRmat Tutorial"
+      ]
+    }
+  ]
+}

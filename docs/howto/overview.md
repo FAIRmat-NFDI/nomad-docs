@@ -31,7 +31,7 @@ Use NOMAD to manage, explore, and analyze data.
 
 Use NOMAD's functionalities programmatically.
 
-[API Overview](manage/program/api.md){ .md-button .nomad-button .center}
+[API Overview](manage/program/api.md){:.md-button .nomad-button .center}
 
 - [Download data](manage/program/download.md)
 - [Publish data using Python](manage/program/publish_python.md)
@@ -47,7 +47,7 @@ Use NOMAD's functionalities programmatically.
 These how-to guides direct advanced users, data stewards, and NOMAD application administrators to
 build robust and powerful customized NOMAD support with Python-based plugin software.
 
-[Plugins Overview](plugins/plugins.md){ .md-button .nomad-button .center}
+[Plugins Overview](plugins/plugins.md){:.md-button .nomad-button .center}
 
 <div markdown="block" class="home-grid">
 <div markdown="block">

@@ -16,14 +16,15 @@ on:
 env:
   UV_VERSION: 0.6
   PYTHON_VERSION: 3.12
+  DISABLE_MKDOCS_2_WARNING: "true"
 
 jobs:
   lint-markdown:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
-      - uses: DavidAnson/markdownlint-cli2-action@v22
+      - uses: DavidAnson/markdownlint-cli2-action@v24
         with:
           config: .github/workflows/configs/nomad.markdownlint.jsonc
           globs: |
@@ -33,20 +34,18 @@ jobs:
   check-links:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Check links in markdown files
-        uses: tcort/github-action-markdown-link-check@v1
+        uses: UmbrellaDocs/action-linkspector@v1.5.4
         with:
-          use-quiet-mode: "yes"
-          config-file: .github/workflows/configs/markdown-link-check.json
-          folder-path: "docs, examples"
-          file-path: "./README.md"
+          config_file: .github/workflows/configs/.linkspector.yml
+          filter_mode: "nofilter" # check all files (not just added)
 
   test-docs:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
 
       - name: Install uv
         uses: astral-sh/setup-uv@v7

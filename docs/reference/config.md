@@ -39,7 +39,7 @@ plugins:
       - "atomisticparsers:amber_parser_entry_point"
 ```
 
-If you provide an override file to run only the `systemnormalizer:system_normalizer_entry_point` for your nomad oasis:
+If you provide an override file to run only the `systemnormalizer:system_normalizer_entry_point` for your nomad Oasis:
 
 ```yaml
 # In override.yaml
@@ -106,15 +106,15 @@ The following is a reference of all configuration sections and attributes.
 
 ### Services
 
-{{ config_models(['services', 'meta', 'oasis', 'north']) }}
+{{ config_models(['services', 'meta', 'oasis', 'auth', 'north']) }}
 
 ### Files, databases, external services
 
-{{ config_models(['fs', 'mongo', 'elastic', 'rabbitmq', 'keycloak', 'logstash', 'datacite', 'rfc3161_timestamp', 'mail'])}}
+{{ config_models(['fs', 'mongo', 'elastic', 'keycloak', 'logstash', 'datacite', 'rfc3161_timestamp', 'mail'])}}
 
 ### Processing
 
-{{ config_models(['process', 'reprocess', 'bundle_export', 'bundle_import', 'normalize', 'celery', 'archive'])}}
+{{ config_models(['process', 'reprocess', 'bundle_export', 'bundle_import', 'normalize', 'archive'])}}
 
 ### User Interface
 

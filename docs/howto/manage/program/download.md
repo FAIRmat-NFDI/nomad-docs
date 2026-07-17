@@ -1,7 +1,7 @@
 # How to download data
 
 A common use-case for the NOMAD API is to download large amounts of NOMAD data.
-In this how-to guide, we use curl and API endpoints
+In this how-to guide, we use `curl` and API endpoints
 that stream .zip files to download many resources with a single request directly from
 the command line.
 
@@ -9,14 +9,17 @@ the command line.
 
 Here is some background information to understand the examples better.
 
-### curl
+### `curl`
 
-To download resources from a REST API using curl, you can utilize the powerful command-line tool
-to send HTTP requests and retrieve the desired data. Curl provides a simple and efficient
-way to interact with RESTful APIs, allowing you to specify the necessary headers, parameters,
-and authentication details. Whether you need to download files, retrieve JSON data, or access
-other resources, curl offers a flexible and widely supported solution for programmatically
+To download resources from a REST API using [`curl`](https://curl.se/){:target="_blank" rel="noopener"},
+you can utilize the powerful command-line tool to send HTTP requests and retrieve the desired data.
+`curl` provides a simple and efficient way to interact with RESTful APIs,
+allowing you to specify the necessary headers, parameters, and authentication details.
+Whether you need to download files, retrieve JSON data, or access other resources,
+`curl` offers a flexible and widely supported solution for programmatically
 fetching data from REST APIs.
+
+Refer to our guide for [auth with `curl`](./auth.md#with-curl).
 
 ### Raw files vs processed data
 

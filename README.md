@@ -30,7 +30,7 @@ If you *do not* have an up-to-date Python installation (3.11 or 3.12), see [Help
 
 #### (a) Standalone
 
-##### On macOS and Linux`
+##### On macOS and Linux
 
 ```bash
 curl -LsSf https://astral.sh/uv/install.sh | sh
@@ -40,8 +40,15 @@ curl -LsSf https://astral.sh/uv/install.sh | sh
 
 ```powershell
 powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
-Or, from PyPI:
 ```
+
+If installed via the standalone installer, `uv` can update itself to the latest version:
+
+```bash
+uv self update
+```
+
+Or, from PyPI:
 
 #### (b) With pip
 
@@ -53,12 +60,6 @@ pip install uv
 
 ```bash
 pipx install uv
-```
-
-If installed via the standalone installer, uv can update itself to the latest version:
-
-```bash
-uv self update
 ```
 
 ### 2. Run the Local Docs Server
@@ -137,7 +138,7 @@ git push origin my-feature-branch
 
 - Go to your fork on GitHub.
 - Click **"Compare & pull request"**.
-- Choose the base repo (`FAIRmat-NFDI/nomad-docs`) and target branch (e.g., `main`).
+- Choose the base repo (`FAIRmat-NFDI/nomad-docs`) and target branch (e.g., `develop`).
 - Describe your changes and submit the PR.
 
 > ✅ Your PR will be reviewed by the maintainers. You don’t need write access to contribute this way.

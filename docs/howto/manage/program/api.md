@@ -54,6 +54,17 @@ Install the [NOMAD Python client library](../../../howto/oasis/install.md#how-to
 functionality for a more convenient query based access of archive data following the
 [How-to access the processed data](archive_query.md) guide.
 
+## Authentication and authorization
+
+Most API operations that access public data do not require authentication.
+However, to upload data, modify data, or access non-public resources, the API
+must authenticate you and verify that you have the required permissions.
+
+For **programmatic API usage**, such as scripts, notebooks, CLI workflows, or CI jobs,
+the recommended authentication mechanism is via **tokens**.
+
+Read more about [acquiring and managing tokens here](./auth.md).
+
 ## Using `requests`
 
 If you are comfortable with REST APIs and using Pythons `requests` library, this example
@@ -295,7 +306,7 @@ included. Second, the response will contain the results under the key `data`.
 
 All functions that allow a query will also allow to specify the `owner`. Depending on the
 API function, its default value will be mostly `visible`. Some values are only available
-if you are [logged in](#authentication).
+if you are [logged in](#authentication-and-authorization).
 
 {{ doc_snippet('owner')}}
 
@@ -307,7 +318,7 @@ if you are [logged in](#authentication).
 
 When you issue a query, usually not all results can be returned. Instead, an API returns
 only one *page*. This behavior is controlled through pagination parameters, like
-`page_site`, `page`, `page_offset`, or `page_after_value`.
+`page_size`, `page`, `page_offset`, or `page_after_value`.
 
 Let's consider a search for entries as an example.
 
@@ -369,70 +380,6 @@ certain query by paginating.
 ```python
 --8<-- "examples/docs/api/pagination.py"
 ```
-
-### Authentication
-
-Most of the API operations do not require any authorization and can be freely used
-without a user or credentials. However, to upload, edit, or view your own and potentially
-unpublished data, the API needs to authenticate you.
-
-The NOMAD API uses OAuth2 and tokens to authenticate users. We provide simple operations
-that allow you to acquire an *access token* via username and password:
-
-```py
-import os
-
-import requests
-
-response = requests.post(
-    '{{ nomad_url() }}/v1/auth/token',
-    data={
-        'username': os.getenv('NOMAD_USERNAME'),
-        'password': os.getenv('NOMAD_PASSWORD'),
-        'grant_type': 'password',
-    },
-)
-token = response.json()['access_token']
-
-response = requests.get(
-    '{{ nomad_url() }}/v1/uploads',
-    headers={'Authorization': f'Bearer {token}'})
-uploads = response.json()['data']
-```
-
-If you have the [NOMAD Python package](../../../howto/oasis/install.md#how-to-install-the-nomad-python-library) installed. You can use its `Auth`
-implementation:
-
-```py
-import os
-
-import requests
-from nomad.client import Auth
-
-response = requests.get(
-    '{{ nomad_url() }}/v1/uploads',
-    auth=Auth(user=os.getenv('NOMAD_USERNAME'), password=os.getenv('NOMAD_PASSWORD')))
-uploads = response.json()['data']
-```
-
-To use authentication in the dashboard, simply use the Authorize button. The
-dashboard GUI will manage the access token and use it while you try out the various
-operations.
-
-#### App token
-
-If the short-term expiration of the default *access token* does not suit your needs,
-you can request an *app token* with a user-defined expiration. For example, you can
-send the GET request `/auth/app_token?expires_in=86400` together with some way of
-authentication, e.g. header `Authorization: Bearer <access token>`. The API will return
-an app token, which is valid for 24 hours in subsequent request headers with the format
-`Authorization: Bearer <app token>`. The request will be declined if the expiration is
-larger than the maximum expiration defined by the API config.
-
-!!! warning
-    Despite the name, the app token is used to impersonate the user who requested it.
-    It does not discern between different uses and will only become invalid once it
-    expires (or when the API's secret is changed).
 
 ## Search for entries
 

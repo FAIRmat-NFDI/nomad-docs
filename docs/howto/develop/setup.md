@@ -372,7 +372,7 @@ installed with:
 npm install -g configurable-http-proxy
 ```
 
-JupyterHub is a separate application. You can run JuypterHub similar to the other part:
+JupyterHub is a separate application. You can run JupyterHub similar to the other part:
 
 ```shell
 nomad admin run hub

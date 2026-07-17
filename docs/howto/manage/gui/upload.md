@@ -6,7 +6,7 @@ This guide describes how to upload data in NOMAD [supported file formats](../../
 
 You can upload files one by one, but you can also provider larger `.zip` or `.tar.gz`
 archive files, if this is easier to you. Also the file upload via frp or command line with
-curl or with wget generates an archive files. The specific layout of these files is up to you.
+`curl` or with `wget` generates an archive files. The specific layout of these files is up to you.
 NOMAD will simply extract them and consider the whole directory structure within.
 
 ## Create an upload and add files
@@ -36,14 +36,26 @@ However, all files that are associated to a recognized *mainfile* by being in th
 same directory are displayed as **auxiliary** files next to the entry represented
 by the **mainfile**.
 
-!!! note
-    **A note for VASP users**.
-    On the handling of **POTCAR** files: NOMAD takes care of it; you don't
-    need to worry about it. We understand that POTCAR files are not supposed to be visible to
-    the public according to your VASP license. Thus, in agreement with Georg Kresse, NOMAD extracts
-    the most important information of POTCAR files and stores it in the files named
-    `POTCAR.stripped`. These files can be accessed and downloaded by anyone, while the original
-    POTCAR files are automatically removed.
+!!! warning "License Compliance for VASP"
+
+    The VASP license does **not** permit users to freely distribute **POTCAR** files, which are
+    considered copyrighted material. To ensure compliance, NOMAD automatically handles POTCAR
+    files for you.
+
+    Upon **publication**, NOMAD removes the original POTCAR files and replaces them with
+    `POTCAR.stripped` files. The stripped files contain a checksum of the original file
+    at the top, followed by metadata headers extracted from the original POTCAR, but not
+    the proprietary pseudopotential data. The stripped files can be accessed and downloaded
+    by anyone, while the original POTCAR files are automatically removed.
+
+    **Important considerations:**
+
+    - Stripping is filename-based. Ensure "POTCAR" appears in the filename for licensed files.
+    - POTCAR files **must be uncompressed** for automated stripping to work. Compressed files (e.g., `POTCAR.gz`) will not be properly processed and may be entirely removed without creating stripped versions.
+    - Stripping only occurs upon publication. We strongly recommend **against** temporarily making unpublished uploads publicly visible when they contain licensed material.
+
+    While NOMAD provides this service as a courtesy, **uploaders remain responsible for
+    verifying overall license compliance**.
 
 ## Visibility and access
 
@@ -100,13 +112,33 @@ upload it first or with everything else as part of an archive file.
 
 ## Publish and get a DOI
 
-After clicking the `PUBLISH` button, the uploaded files will become immutable, but you can still
-edit the metadata.
+This section shows how to publish your data on NOMAD and assign a DOI.
 
-As part of the *edit metadata* functionality, you can create and assign *datasets*.
-Go to `PUBLISH` / `Datasets` in the menu to see all your datasets. Here you can assign
-a DOI to created *datasets*. For a *dataset* with DOI, you can only add more entries, but
-not remove entries.
+!!! Info "DOI's can only be assigned to datasets"
+    You must add entries to a dataset before assigning a DOI.
+
+1. Create an upload and add your data files (entries).
+2. Select an embargo period (if needed) from the dropdown menu in the *Publish* section at the bottom of the upload page.  
+   If you want to publish immediately, select *No embargo*.
+3. Click on the `PUBLISH` button on the upload page. A confirmation prompt will appear on the screen. Click on `PUBLISH`.
+
+    !!! warning "Warning"
+        Once published, the upload becomes immutable, meaning its contents can no longer be modified.
+        However, you can still edit its metadata.
+
+4. In the *Process data* section of the upload page, select the entries to include in a dataset by checking the boxes next to them.
+5. Click the <img src="images/icon-edit-metadata.png" alt="Edit metadata icon" width="20"> icon to open the `Edit upload metadata` window for the selected entries.
+6. In the *Datasets* section:
+    - Create a new dataset by providing a name and clicking `ADD ENTRY TO NEW DATASET`, or
+    - Select an existing dataset from the dropdown menu and click `ADD ENTRY TO EXISTING DATASET`.
+
+    Click `SUBMIT`.
+
+7. Go to the dataset page by clicking on `Datasets` under the `PUBLISH` menu in the top panel.
+8. Click on the <img src="images/icon-assign-doi.png" alt="Assign DOI icon" width="20"> icon next to the dataset to assign a DOI.
+9. A confirmation prompt will appear on the screen. Click on `ASSIGN DOI`.
+
+ After assigning a DOI, the dataset becomes permanent. Entries can be added, but not removed.
 
 ## Upload limits
 
@@ -140,18 +172,22 @@ to provide *user metadata* via file. See [user metadata](#add-user-metadata) abo
 To further automate, you can also upload and directly publish data. After performing some
 smaller test uploads, you should consider skipping our staging and publish the upload
 right away. This can save you some time and additional API calls. The upload endpoint
-has a parameter `publish_directly`. You can modify the upload command you get on the upload page as follows:
+has a parameter `publish_directly` and requires [getting and setting up a token](../program/auth.md#create-a-pat)
+with at least `"uploads:write"` permission. You can modify the upload command you get on the upload page as follows:
 
 ```shell
-curl "http://nomad-lab.eu/prod/v1/uploads/?token=<your-token>&publish_directly=true" -T <local_file>
+curl "http://nomad-lab.eu/prod/v1/uploads/?publish_directly=true" \
+  -H "Authorization: Bearer ${NOMAD_PAT}" \
+  -T <local_file>
 ```
 
-HTTP makes it easy for you to upload files via browser and curl, but it is not an
+HTTP makes it easy for you to upload files via browser and `curl`, but it is not an
 ideal protocol for the stable transfer of large and many files. Alternatively, we can organize
 a separate manual file transfer to our servers. We will put your prepared upload
 files (.zip or .tag.gz) on a predefined path on the NOMAD servers. NOMAD allows to *"upload"*
 files directly from its servers via an additional `local_path` parameter:
 
 ```shell
-curl -X PUT "http://nomad-lab.eu/prod/v1/api/uploads/?token=<your-token>&local_path=<path-to-upload-file>"
+curl -X PUT "http://nomad-lab.eu/prod/v1/api/uploads/?local_path=<path-to-upload-file>" \
+  -H "Authorization: Bearer ${NOMAD_PAT}"
 ```

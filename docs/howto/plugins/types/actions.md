@@ -474,6 +474,268 @@ curated set of functions in `nomad.actions.manager` module to perform these task
 !!! note "Note"
     This part of the documentation is under development.
 
+## Handling file, audio, and image inputs with action assets
+
+Temporal workflow payloads should stay serializable and reasonably small.
+For binary browser inputs (file upload, audio recording, image capture), use
+the action-asset flow: upload bytes first, then pass references in workflow
+or signal payloads.
+
+Action assets are private, action-scoped attachments. They do not become NOMAD
+upload raw files, are not processed or indexed as upload data, and are not
+user-manageable upload contents after the action form or signal is submitted.
+
+### Plugin model design
+
+Define your workflow/signal models with `ActionAssetRef` instead of raw bytes:
+
+```py
+from pydantic import BaseModel, Field
+
+from nomad.actions.assets.models import ActionAssetRef
+
+
+class MyActionInput(BaseModel):
+    upload_id: str
+    user_id: str
+    # Browser uploads file first, then sends this reference in start payload.
+    measurement_file: ActionAssetRef = Field(
+        description='Input file reference uploaded via /actions/assets/upload.'
+    )
+```
+
+### UI widget hints with `json_schema_extra`
+
+You can add `json_schema_extra` hints so the UI renders appropriate upload
+controls for each asset type:
+
+```py
+from pydantic import BaseModel, Field
+
+from nomad.actions.assets.models import ActionAssetRef
+
+
+class AssetInputs(BaseModel):
+    audio_file: ActionAssetRef = Field(
+        json_schema_extra={
+            'x-nomad-widget': 'audio-upload',
+            'accept': ['audio/*'],
+        }
+    )
+    image_file: ActionAssetRef = Field(
+        json_schema_extra={
+            'x-nomad-widget': 'image-upload',
+            'accept': ['image/*'],
+        }
+    )
+    pdf_file: ActionAssetRef = Field(
+        json_schema_extra={
+            'x-nomad-widget': 'file-upload',
+            'accept': ['application/pdf'],
+        }
+    )
+    text_file: ActionAssetRef = Field(
+        json_schema_extra={
+            'x-nomad-widget': 'file-upload',
+            'accept': ['text/plain'],
+        }
+    )
+```
+
+For user experience:
+
+- Audio widgets can support recording directly in the browser (browser/device dependent).
+- Image widgets can support taking a photo from device camera or choosing an existing file.
+
+### What plugin developers need to do (and not do)
+
+As a plugin author, you do **not** need to implement upload endpoints, asset
+staging, scope binding, or file move logic. NOMAD handles the asset lifecycle.
+
+Your responsibility is:
+
+1. Use `ActionAssetRef` in workflow/signal input models for binary inputs.
+2. Optionally add UI hints in schema metadata (for example, accepted media types).
+3. In activities, consume the referenced file/path via NOMAD-provided action
+   asset helpers/patterns.
+
+Everything else (browser upload, backend validation, binding to action
+instance/signal scope, and storage transitions) is handled by NOMAD runtime.
+
+Asset inputs are supported for actions started through the GUI action form and
+for signal submissions. ELN-triggered `start_action(...)` calls should continue
+to pass serializable metadata and NOMAD upload references instead of
+`ActionAssetRef` values.
+
+### Activity example: use asset helper functions
+
+Plugin code should use the two helper functions directly and avoid filesystem
+path assumptions:
+
+```py
+from temporalio import activity
+
+from nomad.actions.assets import open_action_asset, resolve_action_asset_path
+from nomad_example.actions.myaction.models import MyActionInput
+
+
+@activity.defn
+def process_uploaded_file(data: MyActionInput) -> dict:
+    action_instance_id = activity.info().workflow_id
+
+    # 1) If you need a concrete filesystem path:
+    file_path = resolve_action_asset_path(data.measurement_file, action_instance_id)
+
+    # 2) If you only need to read bytes/stream content:
+    with open_action_asset(data.measurement_file, action_instance_id, mode='rb') as f:
+        content = f.read()
+
+    # ... process file_path/content ...
+    return {'path': str(file_path), 'size': len(content)}
+```
+
+This is the recommended plugin-facing contract. Upload, staging, binding, and
+lifecycle details are handled by NOMAD runtime.
+
+### Best practices for asset-based inputs
+
+- Keep asset references in workflow history, not file bytes.
+- Validate media types and expected checksums on upload if possible.
+- Treat input assets as immutable read-only data.
+- Persist derived outputs to artifact folders (see next section), not into input paths.
+- Upload constraints (for example file-size limits, allowed media types, and per-user quota) are enforced by NOMAD and are configurable per Oasis via `nomad.yaml`.
+
+## Storage layout for actions
+
+NOMAD provides one global storage target and two per-instance folders for plugin-facing code.
+
+### 1) Global action artifacts (`action_artifacts_dir`)
+
+Use `action_artifacts_dir()` for reusable data shared across multiple runs or
+even multiple actions, for example:
+
+- ML model weights/cache
+- shared lookup tables
+- downloaded reference datasets
+- expensive precomputed resources
+
+Recommended structure inside this directory:
+
+```txt
+artifacts/
+  <plugin_or_action_name>/
+    <resource_name>/
+      v1/
+      v2/
+```
+
+### 2) Per-instance uploaded assets (`action_instance_assets_dir`)
+
+`action_instance_assets_dir(action_instance_id)` points to user-uploaded input
+files for a specific workflow run.
+
+- This is where uploaded `ActionAssetRef` files are materialized for the run.
+- Treat this folder as input data owned by the runtime.
+- Prefer `open_action_asset(...)` / `resolve_action_asset_path(...)` helpers in
+  plugin code instead of hard-coding filesystem paths.
+
+### 3) Per-instance output artifacts (`action_instance_artifacts_dir`)
+
+Use `action_instance_artifacts_dir(action_instance_id)` for outputs and
+intermediate files tied to one workflow execution:
+
+- generated reports
+- transformed files for this run
+- per-run debug bundles
+- temporary intermediates needed only for the current instance
+
+This folder should be treated as run-scoped state; do not place global caches here.
+
+### Quick decision rule
+
+- NOMAD dataset/raw data -> upload files.
+- Reusable across runs/users/actions -> global `action_artifacts_dir()`.
+- User-uploaded run input files -> `action_instance_assets_dir(action_instance_id)`.
+- Plugin-generated run outputs/intermediates -> `action_instance_artifacts_dir(action_instance_id)`.
+
+## Human-in-the-loop actions with Temporal signals
+
+For workflows that need user confirmation, extra parameters, or follow-up file
+uploads during execution, use Temporal signals plus `workflow.wait_condition`.
+
+### Workflow pattern (with NOMAD `request_signal_input` activity)
+
+```py
+from datetime import timedelta
+
+from temporalio import workflow
+
+with workflow.unsafe.imports_passed_through():
+    from nomad.actions.manager import (
+        RequestSignalInputActivityInput,
+        request_signal_input_activity,
+    )
+
+    from my_plugin.actions.models import UserDecision, WorkflowInput
+
+
+@workflow.defn
+class ApprovalWorkflow:
+    def __init__(self):
+        self._decision: UserDecision | None = None
+
+    @workflow.signal
+    def provide_input(self, decision: UserDecision) -> None:
+        self._decision = decision
+
+    @workflow.run
+    async def run(self, data: WorkflowInput) -> dict:
+        # ... do initial processing, prepare preview/results ...
+
+        # Ask NOMAD backend to create a user-input request.
+        # signal_fn_name must match the workflow signal method name.
+        await workflow.execute_activity(
+            request_signal_input_activity,
+            RequestSignalInputActivityInput(
+                action_instance_id=workflow.info().workflow_id,
+                user_id=data.user_id,
+                signal_fn_name='provide_input',
+                title='Review Required',
+                description='Please review and approve or reject.',
+            ),
+            start_to_close_timeout=timedelta(seconds=10),
+        )
+
+        await workflow.wait_condition(
+            lambda: self._decision is not None,
+            timeout=timedelta(hours=24),
+        )
+
+        if self._decision.decision.lower() != 'approve':
+            return {'status': 'rejected', 'comment': self._decision.notes}
+
+        # ... continue execution after human approval ...
+        return {'status': 'approved'}
+```
+
+### How UI/backend should signal user input
+
+Send user input to the running workflow using the user-input endpoint with:
+
+- `action_instance_id`: target workflow instance
+- `signal_fn_name`: signal method name (for example `provide_input`)
+- `data`: signal payload (serializable model; can include `ActionAssetRef` for new uploads)
+
+Important: `signal_fn_name` provided to `request_signal_input_activity` and
+`signal_fn_name` used by the `submit_signal_input` call must be exactly the same
+as the workflow signal method name.
+
+### Human-in-the-loop design recommendations
+
+- Prefer explicit typed signal payload models over free-form dicts.
+- Add timeouts/fallback paths (`wait_condition(..., timeout=...)`) to avoid stuck runs.
+- Keep workflow logic deterministic; do external I/O in activities, not inside workflow code.
+
 ## Handling secrets
 
 When defining actions that interact with external services, you often need to handle sensitive information like API keys or authentication tokens. It is crucial to manage these secrets securely to protect your data and credentials. There are two main approaches to handling secrets in NOMAD actions, depending on whether the secret is shared across an institution or is specific to an individual user.
@@ -543,9 +805,9 @@ class SimpleModelDumpable(BaseModel):
         return v.get_secret_value()
 ```
 
-## Adding to your oasis
+## Adding to your Oasis
 
-Make sure your oasis repo is up to date with the template by following the
+Make sure your Oasis repo is up to date with the template by following the
 update [guide](https://github.com/FAIRmat-NFDI/nomad-distro-template?tab=readme-ov-file#updating-the-distribution-from-the-template){:target="_blank" rel="noopener"}. This ensures
 that the necessary containers for `temporal` is setup correctly.
 

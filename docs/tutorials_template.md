@@ -1,6 +1,10 @@
 # Tutorial title
 
-In this tutorial, we <primary action> using NOMAD. Step by step, we <key steps or methods> to <concrete outcome or artifact>. By the end of the tutorial, you will have <verifiable result that can be tested or reused>.
+In this tutorial, we <primary action> using NOMAD. Step by step, we <key steps or methods> to <concrete outcome or artifact>. By the end of the tutorial, we will have <verifiable result that can be tested or reused>.
+
+In this tutorial, we <primary action> in NOMAD using <interface, tool, or feature>.
+We follow a <type of workflow or approach> to <describe key actions without listing everything>.
+By the end of the tutorial, we will have <clear, verifiable result>.
 
 <!--
 Guidelines (do not render):
@@ -9,6 +13,24 @@ Guidelines (do not render):
 - Limit to 2–3 sentences.
 - Describe what is built, not background theory.
 - Do not repeat the “What you will learn” list.
+-->
+
+## What you will learn
+
+In this tutorial, you will learn how to:
+
+1. <Action + object + context>
+2. <Action + object + context>
+3. <Action + object + context>
+4. <Action + object + context>
+
+<!--
+Rules enforced (do not render):
+
+- Use “you will”
+- Each item must be actionable and testable
+- Avoid vague verbs (e.g. understand, become familiar with)
+- Maximum 6 items
 -->
 
 ## Before you begin
@@ -32,22 +54,4 @@ Rules enforced (do not render):
 - Neutral, factual tone
 - No “we”, no instructional verbs
 - Only hard prerequisites (accounts, software, skills)
--->
-
-## What you will learn
-
-In this tutorial, you will learn how to:
-
-1. <Action + object + context>
-2. <Action + object + context>
-3. <Action + object + context>
-4. <Action + object + context>
-
-<!--
-Rules enforced (do not render):
-
-- Use “you will”
-- Each item must be actionable and testable
-- Avoid vague verbs (e.g. understand, become familiar with)
-- Maximum 6 items
 -->
