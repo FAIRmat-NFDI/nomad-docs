@@ -67,7 +67,14 @@ Find detailed technical information such as configuration options, CLI commands,
 </div>
 
 <!-- TODO: Revisit and update the below once the nomad-lab homepage refactor is complete. -->
+## Using NOMAD
 
+Most examples in the documentation use **NOMAD Central**, the public FAIRmat-hosted NOMAD platform. There are two relevant deployments:
+
+- [**Production**](https://nomad-lab.eu/prod/v1/gui/search/entries){:target="_blank" rel="noopener"}: The primary deployment for day-to-day use and most documentation examples.
+- [**Test**](https://nomad-lab.eu/prod/v1/test/gui/search/entries){:target="_blank" rel="noopener"}: A separate deployment intended for testing features such as data publication. The underlying database is temporary and is periodically reset.
+
+The majority of underlying concepts and workflows also apply to **NOMAD Oasis** deployments, although specific behavior may differ between installations depending on which plugins are installed.
 ## Who NOMAD supports
 
 - Researchers using [NOMAD Central](https://nomad-lab.eu/prod/v1/gui/){:target="_blank" rel="noopener"} to manage, explore, and publish data.
