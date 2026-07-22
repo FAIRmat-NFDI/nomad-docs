@@ -1,4 +1,10 @@
-"""Navigation helpers for documentation macros."""
+"""Navigation helpers for documentation macros.
+
+This module provides the ``nav_link`` macro used on overview pages. It resolves
+links through ``mkdocs.yml`` instead of duplicating titles in Markdown, rejects
+navigation entries without explicit titles, detects duplicate page paths, and
+can render breadcrumb labels for cross-section links.
+"""
 
 from __future__ import annotations
 
@@ -13,7 +19,7 @@ class NavigationError(ValueError):
 
 
 class NavigationIndex:
-    """Map documentation source paths to their titles in ``mkdocs.yml``."""
+    """Index page titles and breadcrumbs from ``mkdocs.yml`` navigation."""
 
     def __init__(self, nav: object):
         self._titles: dict[str, str] = {}
