@@ -54,7 +54,7 @@ Understand NOMAD's key concepts, architecture, and underlying mechanisms.
 
 ## Reference
 
-Use the reference section for precise technical information such as configuration options, CLI commands, and schema details.
+Find detailed technical information such as configuration options, CLI commands, and schema details.
 
 - {{ nav_link("reference/config.md") }}
 - {{ nav_link("reference/cli.md") }}
