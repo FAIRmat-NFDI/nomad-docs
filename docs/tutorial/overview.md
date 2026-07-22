@@ -4,7 +4,7 @@ hide: toc
 
 # Tutorials
 
-Tutorials provide guided, learning-oriented paths. Use them when you want to understand a workflow end to end. See {{ nav_link("howto/overview.md", breadcrumb=True) }} if you are trying to complete a known, isolated task.
+Tutorials provide guided, learning-oriented paths. Follow them to learn NOMAD and understand new concepts by working through practical examples. See {{ nav_link("howto/overview.md", breadcrumb=True) }} if you already know your goal and need instructions to accomplish it.
 
 ## Before you begin
 
