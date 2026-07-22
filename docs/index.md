@@ -13,7 +13,7 @@ This documentation is organized into four sections. Use the section that best ma
 
 ## Tutorials
 
-Start here if you want to learn NOMAD by working through guided examples.
+Learn NOMAD step by step through guided, hands-on examples.
 
 - {{ nav_link("tutorial/overview.md") }}
 - {{ nav_link("tutorial/explore.md") }}
