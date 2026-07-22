@@ -2,7 +2,7 @@
 hide: toc
 ---
 
-# Documentation
+# Home
 
 NOMAD is an open-source research data platform for materials science. It helps researchers, labs, and developers make data FAIR: findable, accessible, interoperable, and reusable.
 
