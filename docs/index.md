@@ -40,7 +40,7 @@ Accomplish specific tasks by following practical instructions.
 
 ## Explanation
 
-Use the explanation section for background, concepts, and architecture.
+Understand NOMAD's key concepts, architecture, and underlying mechanisms.
 
 - {{ nav_link("explanation/basics.md") }}
 - {{ nav_link("explanation/processing.md") }}
