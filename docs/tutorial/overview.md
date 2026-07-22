@@ -9,7 +9,6 @@ Tutorials provide guided, learning-oriented paths. Follow them to learn NOMAD an
 
 
 
-The majority of underlying concepts and workflows also apply to **NOMAD Oasis** deployments, although specific behavior may differ between installations depending on which plugins are installed.
 
 ### Create a NOMAD user account
 
