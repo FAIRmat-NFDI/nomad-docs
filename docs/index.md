@@ -15,7 +15,6 @@ This documentation is organized into four sections. Use the section that best ma
 
 Learn NOMAD step by step through guided, hands-on examples.
 
-- {{ nav_link("tutorial/overview.md") }}
 - {{ nav_link("tutorial/explore.md") }}
 - {{ nav_link("tutorial/upload_publish.md") }}
 - {{ nav_link("tutorial/upload_publish_api.md") }}
@@ -30,7 +29,6 @@ Learn NOMAD step by step through guided, hands-on examples.
 
 Accomplish specific tasks by following practical instructions.
 
-- {{ nav_link("howto/overview.md") }}
 - {{ nav_link("howto/plugins/plugins.md") }}
 - {{ nav_link("howto/oasis/install.md") }}
 - {{ nav_link("howto/develop/setup.md") }}
@@ -44,7 +42,6 @@ Accomplish specific tasks by following practical instructions.
 
 Use the explanation section for background, concepts, and architecture.
 
-- {{ nav_link("explanation/overview.md") }}
 - {{ nav_link("explanation/basics.md") }}
 - {{ nav_link("explanation/processing.md") }}
 - {{ nav_link("explanation/architecture.md") }}
@@ -59,7 +56,6 @@ Use the explanation section for background, concepts, and architecture.
 
 Use the reference section for precise technical information such as configuration options, CLI commands, and schema details.
 
-- {{ nav_link("reference/overview.md") }}
 - {{ nav_link("reference/config.md") }}
 - {{ nav_link("reference/cli.md") }}
 - {{ nav_link("reference/annotations.md") }}
