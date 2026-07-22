@@ -10,8 +10,8 @@ nav:
       - Overview: tutorial/overview.md
       - Explore data: tutorial/explore.md
       - Upload and publish data:
-          - With the GUI: tutorial/upload_publish.md
-          - Programmatically: tutorial/upload_publish_api.md
+          - Upload and publish with the GUI: tutorial/upload_publish.md
+          - Upload and publish using the API: tutorial/upload_publish_api.md
       - Use NOMAD as an ELN:
           - Built-in ELN templates: tutorial/eln/built_in_templates.md
           - Custom ELN with YAML: tutorial/eln/custom_eln_yaml.md
@@ -39,26 +39,26 @@ nav:
               - Parse tabular data: howto/manage/gui/tabular.md
           - Programmatically:
               # - Install nomad-lab: howto/programmatic/pythonlib.md # TODO Integrate into "Use the API"
-              - API Overview: howto/manage/program/api.md # TODO separate into How-to and Explanation/Reference
-              - Programmatic authentication: howto/manage/program/auth.md
+              - Use the API: howto/manage/program/api.md # TODO separate into How-to and Explanation/Reference
+              - Authenticate programmatically: howto/manage/program/auth.md
               - Download data: howto/manage/program/download.md
               - Publish data using Python: howto/manage/program/publish_python.md
               - Access processed data: howto/manage/program/archive_query.md
-              - Transform data: howto/manage/program/json_transformer.md
-              - Make graph-API calls: howto/manage/program/graph_api.md # TODO consolidate into a single page with supporting explanation/reference material
+              - Transform JSON data structures: howto/manage/program/json_transformer.md
+              - Make Graph API calls: howto/manage/program/graph_api.md # TODO consolidate into a single page with supporting explanation/reference material
       - Develop plugins:
-          - Plugins Overview: howto/plugins/plugins.md # TODO split former Introduction to plugins into short guiding overview + explanation page
+          - Plugin development overview: howto/plugins/plugins.md # TODO split former Introduction to plugins into short guiding overview + explanation page
           # - Set up a development environment: howto/plugins/setup.md # TODO distro-dev setup + best practices
           - Entry point types:
-              - Actions: howto/plugins/types/actions.md
-              - APIs: howto/plugins/types/apis.md
-              - Apps: howto/plugins/types/apps.md
-              - Dashboards: howto/plugins/types/dashboards.md
-              - Example uploads: howto/plugins/types/example_uploads.md
-              - Normalizers: howto/plugins/types/normalizers.md
-              - NORTH tools: howto/plugins/types/north_tools.md
-              - Parsers: howto/plugins/types/parsers.md
-              - Schemas: howto/plugins/types/schema_packages.md
+              - Define an action: howto/plugins/types/actions.md
+              - Write an API: howto/plugins/types/apis.md
+              - Write an app: howto/plugins/types/apps.md
+              - Write a dashboard: howto/plugins/types/dashboards.md
+              - Write an example upload: howto/plugins/types/example_uploads.md
+              - Write a normalizer: howto/plugins/types/normalizers.md
+              - Create a NORTH tool: howto/plugins/types/north_tools.md
+              - Write a parser: howto/plugins/types/parsers.md
+              - Write a schema package: howto/plugins/types/schema_packages.md
           - Built-in tools:
               - Work with units: howto/plugins/tools/units.md
               - Handle large data: howto/plugins/tools/hdf5.md

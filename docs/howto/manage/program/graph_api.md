@@ -8,7 +8,7 @@
 
 - [Tutorials > Accessing data via API](../../../tutorial/access_api.md)
 
-- [API Overview](./api.md)
+- [Use the API](./api.md)
 
 ## Further resources
 

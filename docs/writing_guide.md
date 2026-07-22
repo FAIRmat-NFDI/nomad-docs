@@ -31,6 +31,14 @@ When contributing, identify which type of documentation your addition belongs to
 
 **Auto-TOC awareness:** Headings populate the Table of Contents; admonition titles do not. Use real headings for navigable sections.
 
+**Navigation titles and page headings:** Page titles in `mkdocs.yml` are the
+concise labels shown in the sidebar and on overview-page links generated with
+`nav_link`. Keep them short enough for the sidebar, but grammatical enough to
+stand alone in a card or breadcrumb. The first heading of the page may be more
+descriptive, for example by adding "How to", NOMAD-specific context, or the
+intended outcome. The navigation title and page heading should clearly refer to
+the same task or concept, even when they are not identical.
+
 ### Links
 
 **Link checks.** Broken internal or external links will cause CI/CD to fail. Try to fix them when possible. If you cannot resolve a broken link, create an issue and tag a maintainer.
@@ -152,12 +160,14 @@ to the navigation.
 On overview pages, use the `nav_link` macro for links that represent pages in the
 navigation. Pass the documentation-root-relative source path, for example
 `nav_link("reference/config.md")`, inside the Jinja expression delimiters. The
-macro uses the page title from `mkdocs.yml` and generates a relative link from the
-current page. For cross-category links in prose, pass `breadcrumb=True` to include
-the navigation hierarchy. If a page has more than one intermediate navigation
-section, the breadcrumb is abbreviated as `Section > ... > Page name`. Keep the
-link's description, grouping, and surrounding card markup in the overview
-Markdown so they can be edited independently.
+macro uses the navigation title from `mkdocs.yml` and generates a relative link
+from the current page. This keeps overview-page links consistent with the sidebar
+without duplicating labels in Markdown. For cross-category links in prose, pass
+`breadcrumb=True` to include the navigation hierarchy. If a page has more than
+one intermediate navigation section, the breadcrumb is abbreviated as
+`Section > ... > Page name`. Keep the link's description, grouping, and
+surrounding card markup in the overview Markdown so they can be edited
+independently.
 
 There may be special cases of independent pages that are linked but should not
 appear in the navigation. These intentional exceptions should be listed under
