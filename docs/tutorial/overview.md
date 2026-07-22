@@ -7,7 +7,6 @@ hide: toc
 Tutorials provide guided, learning-oriented paths. Follow them to learn NOMAD and understand new concepts by working through practical examples. See {{ nav_link("howto/overview.md", breadcrumb=True) }} if you already know your goal and need instructions to accomplish it.
 
 
-Unless stated otherwise, these tutorials use **NOMAD Central**, the public FAIRmat-hosted NOMAD platform. There are two relevant deployments:
 
 - [**Production**](https://nomad-lab.eu/prod/v1/gui/search/entries){:target="_blank" rel="noopener"}: Use by default for any generic tutorial activities.
 - [**Test**](https://nomad-lab.eu/prod/v1/test/gui/search/entries){:target="_blank" rel="noopener"}: Use primarily for testing publishing capabilities. This deployment contains a dedicated *temporary* database that is routinely wiped.
