@@ -8,7 +8,6 @@ Tutorials provide guided, learning-oriented paths. Follow them to learn NOMAD an
 
 
 
-- [**Test**](https://nomad-lab.eu/prod/v1/test/gui/search/entries){:target="_blank" rel="noopener"}: Use primarily for testing publishing capabilities. This deployment contains a dedicated *temporary* database that is routinely wiped.
 
 The majority of underlying concepts and workflows also apply to **NOMAD Oasis** deployments, although specific behavior may differ between installations depending on which plugins are installed.
 
