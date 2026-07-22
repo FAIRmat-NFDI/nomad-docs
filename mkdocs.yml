@@ -21,10 +21,10 @@ nav:
           - Create a plugin structure and set up the development environment: tutorial/develop_plugin/plugin_structure.md
           - Create a schema package: tutorial/develop_plugin/create_schema_package.md
           - Create a parser:
-              - Three parsing approaches and tutorial setup: tutorial/develop_plugin/create_parser.md
-              - Tutorial 1: tutorial/develop_plugin/create_parser_parser_only.md
-              - Tutorial 2: tutorial/develop_plugin/create_parser_eln_only.md
-              - Tutorial 3: tutorial/develop_plugin/create_parser_hybrid.md
+              - NOMAD parsing approaches: tutorial/develop_plugin/create_parser.md
+              - Automatic file parsing: tutorial/develop_plugin/create_parser_parser_only.md
+              - ELN-triggered parsing: tutorial/develop_plugin/create_parser_eln_only.md
+              - Hybrid parsing approach: tutorial/develop_plugin/create_parser_hybrid.md
   - How-to guides:
       - Overview: howto/overview.md
       - Manage and find data:

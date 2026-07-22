@@ -1,3 +1,7 @@
+---
+hide: toc
+---
+
 # Explanation
 
 Explanation pages provide context and background. Use them when you want to understand how NOMAD works, why it is structured the way it is, or how different parts of the system relate to each other.
@@ -15,8 +19,8 @@ Explanation pages provide context and background. Use them when you want to unde
 - {{ nav_link("explanation/auth.md") }}: identity, access, and permissions.
 - {{ nav_link("explanation/north.md") }}: what NORTH is and how it fits into the platform.
 
-## When not to use this section
+## Related material
 
-- If you want guided learning, start with {{ nav_link("tutorial/overview.md", breadcrumb=True) }}.
-- If you want task-oriented instructions, use {{ nav_link("howto/overview.md", breadcrumb=True) }}.
-- If you want exact options, commands, or field-level details, use {{ nav_link("reference/overview.md", breadcrumb=True) }}.
+- For guided learning experiences, see {{ nav_link("tutorial/overview.md", breadcrumb=True) }}.
+- For task-oriented instructions, see {{ nav_link("howto/overview.md", breadcrumb=True) }}.
+- For authoritative technical details, see {{ nav_link("reference/overview.md", breadcrumb=True) }}.

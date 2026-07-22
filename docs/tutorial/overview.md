@@ -10,25 +10,25 @@ Tutorials provide guided, learning-oriented paths. Follow them to learn NOMAD an
 
 
 
-### Create a NOMAD user account
 
-Some tutorials require you to sign in before you can upload, share, or publish data. For step-by-step account creation and sign-in guidance, see {{ nav_link("howto/manage/gui/account.md", breadcrumb=True) }}.
 
 ## Tutorial paths
 
 <div markdown="block" class="home-grid">
 <div markdown="block">
 
-### {{ nav_link("tutorial/explore.md") }}
+### Explore published data
 
 Learn how to search, filter, and inspect published NOMAD data.
+
+- {{ nav_link("tutorial/explore.md") }}
 
 </div>
 <div markdown="block">
 
 ### Upload and publish data
 
-Follow a complete upload and publication workflow using either interface.
+Upload, manage, and publish data using the NOMAD GUI or API.
 
 - {{ nav_link("tutorial/upload_publish.md") }}
 - {{ nav_link("tutorial/upload_publish_api.md") }}
@@ -38,7 +38,7 @@ Follow a complete upload and publication workflow using either interface.
 
 ### Use NOMAD as an ELN
 
-Create structured experimental records using built-in or custom schemas.
+Create and managed structured experimental records using built-in or custom ELN schemas.
 
 - {{ nav_link("tutorial/eln/built_in_templates.md") }}
 - {{ nav_link("tutorial/eln/custom_eln_yaml.md") }}
@@ -47,9 +47,11 @@ Create structured experimental records using built-in or custom schemas.
 </div>
 <div markdown="block">
 
-### {{ nav_link("tutorial/workflows_projects.md") }}
+### Manage workflows and projects
 
 Connect related entries and organize them into projects and workflows.
+
+- {{ nav_link("tutorial/workflows_projects.md") }}
 
 </div>
 <div markdown="block">
@@ -60,8 +62,7 @@ Build a plugin structure, schema package, and parser through guided exercises.
 
 - {{ nav_link("tutorial/develop_plugin/plugin_structure.md") }}
 - {{ nav_link("tutorial/develop_plugin/create_schema_package.md") }}
-- **Create a parser**
-    - {{ nav_link("tutorial/develop_plugin/create_parser.md") }}
+- {{ nav_link("tutorial/develop_plugin/create_parser.md") }}
     - {{ nav_link("tutorial/develop_plugin/create_parser_parser_only.md") }}
     - {{ nav_link("tutorial/develop_plugin/create_parser_eln_only.md") }}
     - {{ nav_link("tutorial/develop_plugin/create_parser_hybrid.md") }}
@@ -69,7 +70,11 @@ Build a plugin structure, schema package, and parser through guided exercises.
 </div>
 </div>
 
-## Additional training resources
+## Related material
 
 Find event materials and external training collections in the
-{{ nav_link("reference/tutorials.md", breadcrumb=True) }}.
+- Find event materials and external training collections in {{ nav_link("reference/tutorials.md", breadcrumb=True) }}.
+- For task-oriented instructions, see {{ nav_link("howto/overview.md", breadcrumb=True) }}.
+- For conceptual background, see {{ nav_link("explanation/overview.md", breadcrumb=True) }}.
+- For authoritative technical details, see {{ nav_link("reference/overview.md", breadcrumb=True) }}.
+

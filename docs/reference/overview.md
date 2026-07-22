@@ -1,3 +1,7 @@
+---
+hide: toc
+---
+
 # Reference
 
 Reference pages provide authoritative technical details. Use them when you need exact syntax, definitions, options, or generated reference material.
@@ -16,5 +20,6 @@ Reference pages provide authoritative technical details. Use them when you need 
 
 ## Related material
 
+- For guided learning experiences, see {{ nav_link("tutorial/overview.md", breadcrumb=True) }}.
+- For task-oriented instructions, see {{ nav_link("howto/overview.md", breadcrumb=True) }}.
 - For conceptual background, use {{ nav_link("explanation/overview.md", breadcrumb=True) }}.
-- For hands-on learning paths, use {{ nav_link("tutorial/overview.md", breadcrumb=True) }}.

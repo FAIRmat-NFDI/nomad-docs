@@ -47,7 +47,34 @@ Before starting, make sure you have the following:
 
 3. **<Prerequisite 3 (optional)>**  
    <Why it is helpful but not required>.
+## Admonition guidelines
 
+Use admonitions consistently throughout tutorials to distinguish between
+information, actions, examples, checkpoints, and warnings.
+
+!!! info
+    Additional information that provides context or clarifies a concept. Avoid introducing essential steps or requirements.
+
+!!! task
+    Hands-on activities or questions that the reader is expected to complete. Use for actions that contribute directly to the tutorial outcome.
+
+!!! example
+    Example files, sample data, or illustrative use cases. Include a brief explanation of their contents and relevance.
+
+!!! success
+    A checkpoint used to verify that the reader has achieved the expected result before proceeding. Prefer concrete and testable outcomes.
+
+!!! warning
+    Important information that may affect the outcome of the tutorial or lead to unintended consequences if ignored.
+
+General rules:
+
+- Use admonitions only when they improve readability.
+- Avoid consecutive admonitions of the same type.
+- Do not use `info` for mandatory instructions.
+- Use `success` admonitions to mark significant milestones, not every step.
+- Keep admonition titles concise and action-oriented.
+-->
 <!--
 Rules enforced (do not render):
 
