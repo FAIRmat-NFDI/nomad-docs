@@ -56,6 +56,12 @@
     border: 1px solid #c7d4ff;
     min-width: 0;
     overflow-wrap: anywhere;
+        display: flex;
+    flex-direction: column;
+}
+
+.home-grid > div > p:last-child {
+    margin-top: auto;
     transition:
         border-color 150ms ease,
         box-shadow 150ms ease;
