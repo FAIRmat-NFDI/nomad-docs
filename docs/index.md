@@ -28,7 +28,7 @@ Learn NOMAD step by step through guided, hands-on examples.
 
 ## How-to guides
 
-Use how-to guides when you already know your goal and need task-oriented instructions.
+Accomplish specific tasks by following practical instructions.
 
 - {{ nav_link("howto/overview.md") }}
 - {{ nav_link("howto/plugins/plugins.md") }}
