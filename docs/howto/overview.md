@@ -15,23 +15,7 @@ How-to guides are goal-oriented instructions. Use them when you need to complete
 
 Complete day-to-day tasks for managing, exploring, and analyzing data.
 
-- **With the GUI**
-    - {{ nav_link("howto/manage/gui/account.md") }}
-    - {{ nav_link("howto/manage/gui/upload.md") }}
-    - {{ nav_link("howto/manage/gui/eln.md") }}
-    - {{ nav_link("howto/manage/gui/north.md") }}
-    - {{ nav_link("howto/manage/gui/workflows.md") }}
-    - {{ nav_link("howto/manage/gui/yaml.md") }}
-    - {{ nav_link("howto/manage/gui/elns.md") }}
-    - {{ nav_link("howto/manage/gui/tabular.md") }}
-- **Programmatically**
-    - {{ nav_link("howto/manage/program/api.md") }}
-    - {{ nav_link("howto/manage/program/auth.md") }}
-    - {{ nav_link("howto/manage/program/download.md") }}
-    - {{ nav_link("howto/manage/program/publish_python.md") }}
-    - {{ nav_link("howto/manage/program/archive_query.md") }}
-    - {{ nav_link("howto/manage/program/json_transformer.md") }}
-    - {{ nav_link("howto/manage/program/graph_api.md") }}
+{{ nav_list("Manage and find data") }}
 
 </div>
 <div markdown="block">
@@ -40,21 +24,7 @@ Complete day-to-day tasks for managing, exploring, and analyzing data.
 
 Extend NOMAD with Python-based plugins and their entry points.
 
-- {{ nav_link("howto/plugins/plugins.md") }}
-- **Create entry points**
-    - {{ nav_link("howto/plugins/types/actions.md") }}
-    - {{ nav_link("howto/plugins/types/apis.md") }}
-    - {{ nav_link("howto/plugins/types/apps.md") }}
-    - {{ nav_link("howto/plugins/types/dashboards.md") }}
-    - {{ nav_link("howto/plugins/types/example_uploads.md") }}
-    - {{ nav_link("howto/plugins/types/normalizers.md") }}
-    - {{ nav_link("howto/plugins/types/north_tools.md") }}
-    - {{ nav_link("howto/plugins/types/parsers.md") }}
-    - {{ nav_link("howto/plugins/types/schema_packages.md") }}
-- **Use built-in tools**
-    - {{ nav_link("howto/plugins/tools/units.md") }}
-    - {{ nav_link("howto/plugins/tools/hdf5.md") }}
-    - {{ nav_link("howto/plugins/tools/mapping_parser.md") }}
+{{ nav_list("Develop plugins") }}
 
 </div>
 <div markdown="block">
@@ -63,13 +33,7 @@ Extend NOMAD with Python-based plugins and their entry points.
 
 Install and operate a NOMAD deployment for a lab or institution.
 
-- {{ nav_link("howto/oasis/install.md") }}
-- {{ nav_link("howto/oasis/configure.md") }}
-- {{ nav_link("howto/oasis/deploy.md") }}
-- {{ nav_link("howto/oasis/update.md") }}
-- {{ nav_link("howto/oasis/administer.md") }}
-- {{ nav_link("howto/oasis/secure.md") }}
-- {{ nav_link("howto/oasis/troubleshoot.md") }}
+{{ nav_list("Host a NOMAD Oasis") }}
 
 </div>
 <div markdown="block">
@@ -78,12 +42,7 @@ Install and operate a NOMAD deployment for a lab or institution.
 
 Work on the `nomad-lab` codebase and contribute changes upstream.
 
-- {{ nav_link("howto/develop/setup.md") }}
-- {{ nav_link("howto/develop/code.md") }}
-- {{ nav_link("howto/develop/contrib.md") }}
-- {{ nav_link("howto/develop/normalizing.md") }}
-- {{ nav_link("howto/develop/search.md") }}
-- {{ nav_link("howto/develop/release.md") }}
+{{ nav_list("Develop the core software") }}
 
 </div>
 </div>

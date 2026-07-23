@@ -95,6 +95,63 @@ def test_navigation_index_renders_breadcrumb_links(target, expected):
     assert navigation.link(target, "index.md", breadcrumb=True) == expected
 
 
+def test_navigation_index_renders_current_section_list_without_current_page():
+    navigation = NavigationIndex(NAV)
+
+    assert navigation.list(None, "tutorial/overview.md") == "\n".join(
+        [
+            "- **Upload data**",
+            "    - [With the GUI](upload.md)",
+            "- **Develop plugins**",
+            "    - **Create a parser**",
+            "        - [Parser tutorial](parser.md)",
+        ]
+    )
+
+
+def test_navigation_index_renders_selected_child_section_list():
+    navigation = NavigationIndex(NAV)
+
+    assert navigation.list("Upload data", "tutorial/overview.md") == (
+        "- [With the GUI](upload.md)"
+    )
+
+
+def test_navigation_index_renders_page_list_with_description():
+    navigation = NavigationIndex(NAV)
+
+    assert navigation.list(
+        "reference/index.md",
+        "tutorial/overview.md",
+        descriptions={"reference/index.md": "technical details."},
+    ) == r"- [Array \[data\]](../reference/index.md): technical details."
+
+
+def test_navigation_index_rejects_descriptions_outside_rendered_list():
+    navigation = NavigationIndex(NAV)
+
+    with pytest.raises(NavigationError, match="outside the rendered list"):
+        navigation.list(
+            "Upload data",
+            "tutorial/overview.md",
+            descriptions={"tutorial/parser.md": "not rendered"},
+        )
+
+
+def test_navigation_index_rejects_unknown_child_section():
+    navigation = NavigationIndex(NAV)
+
+    with pytest.raises(NavigationError, match="is not a child"):
+        navigation.list("Missing section", "tutorial/overview.md")
+
+
+def test_navigation_index_rejects_invalid_list_target():
+    navigation = NavigationIndex(NAV)
+
+    with pytest.raises(NavigationError, match="section title or Markdown path"):
+        navigation.list(42, "tutorial/overview.md")
+
+
 def test_navigation_index_wraps_markdown_targets_containing_spaces():
     navigation = NavigationIndex([{"Page": "topic/page name.md"}])
 
@@ -154,6 +211,7 @@ def test_register_nav_link_uses_the_current_page_source_uri():
     assert env.macros["nav_link"]("reference/index.md", breadcrumb=True) == (
         r"[Reference > Array \[data\]](../reference/index.md)"
     )
+    assert env.macros["nav_list"]("Upload data") == "- [With the GUI](upload.md)"
 
 
 def test_register_nav_link_requires_the_current_page_source_uri():
@@ -163,3 +221,6 @@ def test_register_nav_link_requires_the_current_page_source_uri():
 
     with pytest.raises(NavigationError, match="requires the current page"):
         env.macros["nav_link"]("index.md")
+
+    with pytest.raises(NavigationError, match="requires the current page"):
+        env.macros["nav_list"]()

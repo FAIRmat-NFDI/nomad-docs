@@ -8,16 +8,18 @@ Explanation pages provide context and background. Use them when you want to unde
 
 ## Topics
 
-- {{ nav_link("explanation/basics.md") }}: how NOMAD turns heterogeneous research files into structured data.
-- {{ nav_link("explanation/data.md") }}: the concepts behind NOMAD's archive and schema organization.
-- {{ nav_link("explanation/base_sections.md") }}: the shared structural building blocks used across NOMAD data.
-- {{ nav_link("explanation/processing.md") }}: how parsing, normalization, and derived data generation fit together.
-- {{ nav_link("explanation/architecture.md") }}: the main system components and how they interact.
-- {{ nav_link("explanation/workflows.md") }}: how NOMAD models workflows and connects their steps.
-- {{ nav_link("explanation/plugin_system.md") }}: how plugin-based extensions integrate with NOMAD.
-- {{ nav_link("explanation/oasis.md") }}: how NOMAD Central and Oasis deployments relate.
-- {{ nav_link("explanation/auth.md") }}: identity, access, and permissions.
-- {{ nav_link("explanation/north.md") }}: what NORTH is and how it fits into the platform.
+{{ nav_list(descriptions={
+    "explanation/basics.md": "how NOMAD turns heterogeneous research files into structured data.",
+    "explanation/data.md": "the concepts behind NOMAD's archive and schema organization.",
+    "explanation/base_sections.md": "the shared structural building blocks used across NOMAD data.",
+    "explanation/processing.md": "how parsing, normalization, and derived data generation fit together.",
+    "explanation/architecture.md": "the main system components and how they interact.",
+    "explanation/workflows.md": "how NOMAD models workflows and connects their steps.",
+    "explanation/plugin_system.md": "how plugin-based extensions integrate with NOMAD.",
+    "explanation/oasis.md": "how NOMAD Central and Oasis deployments relate.",
+    "explanation/auth.md": "identity, access, and permissions.",
+    "explanation/north.md": "what NORTH is and how it fits into the platform.",
+}) }}
 
 ## Related material
 

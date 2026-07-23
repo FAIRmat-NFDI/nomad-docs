@@ -4,15 +4,7 @@ The main way to customize a NOMAD installation is through the use of **plugins**
 
 A single Python plugin package can contain multiple [plugin entry points](../../explanation/plugin_system.md#plugin-entry-points). These entry points represent different types of customizations including:
 
-- {{ nav_link("howto/plugins/types/actions.md") }}
-- {{ nav_link("howto/plugins/types/apis.md") }}
-- {{ nav_link("howto/plugins/types/apps.md") }}
-- {{ nav_link("howto/plugins/types/dashboards.md") }}
-- {{ nav_link("howto/plugins/types/example_uploads.md") }}
-- {{ nav_link("howto/plugins/types/normalizers.md") }}
-- {{ nav_link("howto/plugins/types/north_tools.md") }}
-- {{ nav_link("howto/plugins/types/parsers.md") }}
-- {{ nav_link("howto/plugins/types/schema_packages.md") }}
+{{ nav_list("Create entry points") }}
 
 See the [FAIRmat-NFDI GitHub organization page](https://github.com/FAIRmat-NFDI){:target="_blank" rel="noopener"} for a list of plugins developed by FAIRmat. You can also see the list of activated plugins and plugin entry points at the bottom of the *Information page* (`about/information`) of any NOMAD installation, for example check out the [central NOMAD installation](https://nomad-lab.eu/prod/v1/gui/about/information){:target="_blank" rel="noopener"}.
 

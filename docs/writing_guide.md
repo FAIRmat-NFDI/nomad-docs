@@ -161,17 +161,35 @@ By default, user-facing Markdown pages under `docs/` appear in the
 and therefore fails in CI, when a page is added under `docs/` without being added
 to the navigation.
 
-On overview pages, use the `nav_link` macro for links that represent pages in the
-navigation. Pass the documentation-root-relative source path, for example
-`nav_link("reference/config.md")`, inside the Jinja expression delimiters. The
-macro uses the navigation title from `mkdocs.yml` and generates a relative link
-from the current page. This keeps overview-page links consistent with the sidebar
-without duplicating labels in Markdown. For cross-category links in prose, pass
-`breadcrumb=True` to include the navigation hierarchy. If a page has more than
-one intermediate navigation section, the breadcrumb is abbreviated as
-`Section > ... > Page name`. Keep the link's description, grouping, and
-surrounding card markup in the overview Markdown so they can be edited
-independently.
+On overview pages, use navigation macros for links that represent pages in the
+navigation. The macros use titles and order from `mkdocs.yml` and generate
+relative links from the current page. This keeps overview-page links consistent
+with the sidebar without duplicating labels in Markdown.
+
+Use `nav_list` for overview-page lists that should follow a section of the
+navigation. Pass a direct child section title, for example
+`nav_list("Develop plugins")`, to render that section and its descendants in nav
+order. Pass a documentation-root-relative page path, for example
+`nav_list("tutorial/explore.md")`, to render a single page. Call `nav_list()`
+without a target to render the current page's section, excluding the current page
+itself. If a flat overview list needs short supporting text, pass a
+`descriptions` mapping keyed by source path. Use this for the main lists on
+section overview pages so their membership, grouping, and order stay aligned
+with `mkdocs.yml`.
+
+Use `nav_link` for curated links and prose links that should point to one known
+page. Pass the documentation-root-relative source path, for example
+`nav_link("reference/config.md")`, inside the Jinja expression delimiters. Use
+short labels for curated link lists, including the home page cards, because the
+surrounding card or section already provides context. For cross-category links
+in prose, pass `breadcrumb=True` to include the navigation hierarchy. If a page
+has more than one intermediate navigation section, the breadcrumb is abbreviated
+as `Section > ... > Page name`. Keep the overview card headings, descriptions,
+and surrounding markup in Markdown so they can be edited independently.
+
+The domain-specific examples overview currently keeps manually placed
+`nav_link` calls because its links are interleaved with category tags and the
+section is expected to be deprecated.
 
 There may be special cases of independent pages that are linked but should not
 appear in the navigation. These intentional exceptions should be listed under
