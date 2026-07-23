@@ -29,7 +29,7 @@ Learn NOMAD step by step through guided, hands-on examples.
 
 Accomplish specific tasks by following practical instructions.
 
-- {{ nav_link("howto/plugins/plugins.md") }}
+- {{ nav_link("howto/plugins/plugins.md", breadcrumb=True) }}
 - {{ nav_link("howto/oasis/install.md") }}
 - {{ nav_link("howto/develop/setup.md") }}
 

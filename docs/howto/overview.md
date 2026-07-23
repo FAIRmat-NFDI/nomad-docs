@@ -41,7 +41,7 @@ Complete day-to-day tasks for managing, exploring, and analyzing data.
 Extend NOMAD with Python-based plugins and their entry points.
 
 - {{ nav_link("howto/plugins/plugins.md") }}
-- **Entry point types**
+- **Create entry points**
     - {{ nav_link("howto/plugins/types/actions.md") }}
     - {{ nav_link("howto/plugins/types/apis.md") }}
     - {{ nav_link("howto/plugins/types/apps.md") }}
@@ -51,7 +51,7 @@ Extend NOMAD with Python-based plugins and their entry points.
     - {{ nav_link("howto/plugins/types/north_tools.md") }}
     - {{ nav_link("howto/plugins/types/parsers.md") }}
     - {{ nav_link("howto/plugins/types/schema_packages.md") }}
-- **Built-in tools**
+- **Use built-in tools**
     - {{ nav_link("howto/plugins/tools/units.md") }}
     - {{ nav_link("howto/plugins/tools/hdf5.md") }}
     - {{ nav_link("howto/plugins/tools/mapping_parser.md") }}
@@ -93,4 +93,3 @@ Work on the `nomad-lab` codebase and contribute changes upstream.
 - For guided learning experiences, see {{ nav_link("tutorial/overview.md", breadcrumb=True) }}.
 - For conceptual background, see {{ nav_link("explanation/overview.md", breadcrumb=True) }}.
 - For authoritative technical details, see {{ nav_link("reference/overview.md", breadcrumb=True) }}.
-

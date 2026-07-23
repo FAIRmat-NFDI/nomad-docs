@@ -38,6 +38,10 @@ stand alone in a card or breadcrumb. The first heading of the page may be more
 descriptive, for example by adding "How to", NOMAD-specific context, or the
 intended outcome. The navigation title and page heading should clearly refer to
 the same task or concept, even when they are not identical.
+Within deeper navigation sections, a child title may rely on its parent title
+for context, for example "With the GUI" under "Upload and publish data". Avoid
+using such inherited labels outside their parent group unless the surrounding
+text, grouping, or breadcrumb supplies the missing context.
 
 ### Links
 

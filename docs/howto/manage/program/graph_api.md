@@ -1,4 +1,4 @@
-# How to make Graph-Style API Calls
+# How to make Graph API calls
 
 ## What you will learn
 

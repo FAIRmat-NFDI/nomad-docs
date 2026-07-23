@@ -6,7 +6,7 @@
 
 ## Recommended preparation
 
-- [Tutorials > Uploading and publishing data](../../../tutorial/upload_publish.md)
+- {{ nav_link("tutorial/upload_publish.md", breadcrumb=True) }}
 
 ## Further resources
 

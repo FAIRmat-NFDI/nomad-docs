@@ -10,12 +10,12 @@ nav:
       - Overview: tutorial/overview.md
       - Explore data: tutorial/explore.md
       - Upload and publish data:
-          - Upload and publish with the GUI: tutorial/upload_publish.md
-          - Upload and publish using the API: tutorial/upload_publish_api.md
+          - With the GUI: tutorial/upload_publish.md
+          - Programmatically: tutorial/upload_publish_api.md
       - Use NOMAD as an ELN:
           - Built-in ELN templates: tutorial/eln/built_in_templates.md
           - Custom ELN with YAML: tutorial/eln/custom_eln_yaml.md
-          - Tabular Parser for ELN: tutorial/eln/tabular_parser_yaml.md
+          - Tabular parser for ELN: tutorial/eln/tabular_parser_yaml.md
       - Manage workflows and projects: tutorial/workflows_projects.md
       - Develop a NOMAD plugin:
           - Create a plugin structure and set up the development environment: tutorial/develop_plugin/plugin_structure.md
@@ -47,19 +47,19 @@ nav:
               - Transform JSON data structures: howto/manage/program/json_transformer.md
               - Make Graph API calls: howto/manage/program/graph_api.md # TODO consolidate into a single page with supporting explanation/reference material
       - Develop plugins:
-          - Plugin development overview: howto/plugins/plugins.md # TODO split former Introduction to plugins into short guiding overview + explanation page
+          - Overview: howto/plugins/plugins.md # TODO split former Introduction to plugins into short guiding overview + explanation page
           # - Set up a development environment: howto/plugins/setup.md # TODO distro-dev setup + best practices
-          - Entry point types:
-              - Define an action: howto/plugins/types/actions.md
-              - Write an API: howto/plugins/types/apis.md
-              - Write an app: howto/plugins/types/apps.md
-              - Write a dashboard: howto/plugins/types/dashboards.md
-              - Write an example upload: howto/plugins/types/example_uploads.md
-              - Write a normalizer: howto/plugins/types/normalizers.md
-              - Create a NORTH tool: howto/plugins/types/north_tools.md
-              - Write a parser: howto/plugins/types/parsers.md
-              - Write a schema package: howto/plugins/types/schema_packages.md
-          - Built-in tools:
+          - Create entry points:
+              - Actions: howto/plugins/types/actions.md
+              - APIs: howto/plugins/types/apis.md
+              - Apps: howto/plugins/types/apps.md
+              - Dashboards: howto/plugins/types/dashboards.md
+              - Example uploads: howto/plugins/types/example_uploads.md
+              - Normalizers: howto/plugins/types/normalizers.md
+              - NORTH tools: howto/plugins/types/north_tools.md
+              - Parsers: howto/plugins/types/parsers.md
+              - Schema packages: howto/plugins/types/schema_packages.md
+          - Use built-in tools:
               - Work with units: howto/plugins/tools/units.md
               - Handle large data: howto/plugins/tools/hdf5.md
               - Parse efficiently: howto/plugins/tools/mapping_parser.md # TODO Add clearly scope at the top of this page
@@ -93,10 +93,10 @@ nav:
           - Optical spectroscopy: examples/experiment_data/opt.md
           - Atom probe tomography: examples/experiment_data/apm.md
           - Scanning probe microscopy: examples/experiment_data/spm.md
-          - pynxtools: examples/experiment_data/pynxtools.md
+          - Parse data with pynxtools: examples/experiment_data/pynxtools.md
       - Use cases:
-          - Catalysis APP: examples/use_cases/catalysis_app.md
-          - NEB workflows: examples/use_cases/neb_workflows.md
+          - nomad-catalysis: examples/use_cases/catalysis_app.md
+          - nomad-neb-workflows: examples/use_cases/neb_workflows.md
         # - NOMAD-supported plugins:
         # - Databases for specific research topics:
   - Explanation:

@@ -7,7 +7,7 @@
 ## Recommended preparation
 
 - [Tutorial > Navigating to NOMAD](../../tutorial/nomad_repo.md)
-- [Tutorial > Uploading and publishing data](../../tutorial/upload_publish.md)
+- {{ nav_link("tutorial/upload_publish.md", breadcrumb=True) }}
 - [Tutorial > Exploring data](../../tutorial/explore.md)
 
 ## Further resources

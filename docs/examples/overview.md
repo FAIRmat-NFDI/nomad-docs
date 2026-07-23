@@ -1,4 +1,4 @@
-# NOMAD Domain-specific Examples
+# Domain-specific examples
 
 Build upon your understanding of NOMAD's features with domain-specific examples and explanations.
 
@@ -9,11 +9,11 @@ Build upon your understanding of NOMAD's features with domain-specific examples 
 
 Historically a repository for Density Functional Theory calculations, NOMAD now supports a wide range of computational methodologies including advanced many-body calculations and classical molecular dynamics simulations, as well as complex simulation workflows.
 
-- [NOMAD Basics: A Computational Perspective](./computational_data/basics.md)
-- [Guide to computational MetaInfo](./computational_data/metainfo.md)
-- [Guide to computational schema plugins](./computational_data/schema_plugins.md)
-- [Guide to computational parser plugins](./computational_data/parser_plugins.md)
-- [Frequently Asked Questions](./computational_data/faqs.md)
+- {{ nav_link("examples/computational_data/basics.md") }}
+- {{ nav_link("examples/computational_data/metainfo.md") }}
+- {{ nav_link("examples/computational_data/schema_plugins.md") }}
+- {{ nav_link("examples/computational_data/parser_plugins.md") }}
+- {{ nav_link("examples/computational_data/faqs.md") }}
 
 <!--
 #### subcategory 1
@@ -28,19 +28,19 @@ Historically a repository for Density Functional Theory calculations, NOMAD now 
 
 Thanks to key activities of the FAIRmat project, NOMAD also supports a set of parsing capabilities for standardizing data from materials characterization experiments.
 
-- [Electron microscopy](./experiment_data/em.md)
+- {{ nav_link("examples/experiment_data/em.md") }}
 {{ category_tag(name='NX', href='./experiment_data/nexus.md', tooltip='Uses NeXus definitions', image='./images/nexus-logo.ico', style='border-radius: 50%;')}}
-- [Photoemission spectroscopy](./experiment_data/mpes.md)
+- {{ nav_link("examples/experiment_data/mpes.md") }}
 {{ category_tag(name='NX', href='./experiment_data/nexus.md', tooltip='Uses NeXus definitions', image='./images/nexus-logo.ico', style='border-radius: 50%;')}}
-- [X-ray photoemission spectroscopy](./experiment_data/xps.md)
+- {{ nav_link("examples/experiment_data/xps.md") }}
 {{ category_tag(name='NX', href='./experiment_data/nexus.md', tooltip='Uses NeXus definitions', image='./images/nexus-logo.ico', style='border-radius: 50%;')}}
-- [Optical spectroscopy](./experiment_data/opt.md)
+- {{ nav_link("examples/experiment_data/opt.md") }}
 {{ category_tag(name='NX', href='./experiment_data/nexus.md', tooltip='Uses NeXus definitions', image='./images/nexus-logo.ico', style='border-radius: 50%;')}}
-- [Atom probe tomography](./experiment_data/apm.md)
+- {{ nav_link("examples/experiment_data/apm.md") }}
 {{ category_tag(name='NX', href='./experiment_data/nexus.md', tooltip='Uses NeXus definitions', image='./images/nexus-logo.ico', style='border-radius: 50%;')}}
-- [Scanning probe microscopy](./experiment_data/spm.md)
+- {{ nav_link("examples/experiment_data/spm.md") }}
 {{ category_tag(name='NX', href='./experiment_data/nexus.md', tooltip='Uses NeXus definitions', image='./images/nexus-logo.ico', style='border-radius: 50%;')}}
-- [pynxtools](./experiment_data/pynxtools.md)
+- {{ nav_link("examples/experiment_data/pynxtools.md") }}
 {{ category_tag(name='NX', href='./experiment_data/nexus.md', tooltip='Uses NeXus definitions', image='./images/nexus-logo.ico', style='border-radius: 50%;')}}
 {{ category_tag(name='plugin', href='../explanation/plugin_system.md', tooltip='Uses NOMAD plugin mechanism', image='../assets/nomad-plugin-logo.svg')}}
 
@@ -52,9 +52,9 @@ Thanks to key activities of the FAIRmat project, NOMAD also supports a set of pa
 
 NOMAD's plugin system has enabled a growing community of NOMAD users customizing the software to support specific use-case data and pipelines. This section highlights some of the bigger use-case projects.
 
-- [nomad-catalysis](./use_cases/catalysis_app.md)
+- {{ nav_link("examples/use_cases/catalysis_app.md") }}
 {{ category_tag(name='plugin', href='../explanation/plugin_system.md', tooltip='Uses NOMAD plugin mechanism', image='../assets/nomad-plugin-logo.svg')}}
-- [nomad-neb-workflows](./use_cases/neb_workflows.md)
+- {{ nav_link("examples/use_cases/neb_workflows.md") }}
 {{ category_tag(name='plugin', href='../explanation/plugin_system.md', tooltip='Uses NOMAD plugin mechanism', image='../assets/nomad-plugin-logo.svg')}}
 
 </div>

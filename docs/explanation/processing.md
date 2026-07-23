@@ -115,7 +115,7 @@ uses certain criteria, for example:
 - regular expressions on mimetypes
 - regular expressions on header content
 
-See [How to write a parser](../howto/plugins/types/parsers.md) for more details.
+See [How to create a parser](../howto/plugins/types/parsers.md) for more details.
 
 The matching step of an upload's processing, will call this function for every file
 and on all parsers. There are some hidden optimizations and additional parameters, but

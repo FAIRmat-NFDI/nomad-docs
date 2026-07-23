@@ -1,4 +1,4 @@
-# Base Sections
+# Base sections
 
 The `nomad.datamodel.metainfo.basesections` Metainfo package contains a set of
 *base sections*. They provides shared definitions across materials science domains and schemas. Some functionality, e.g. the workflow visualisation, depend on these definitions. Inherit from these base sections when you create your own schemas to

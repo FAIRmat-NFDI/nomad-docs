@@ -1,4 +1,4 @@
-# Authentication and authorization
+# How to authenticate programmatically
 
 NOMAD uses tokens to authenticate requests and enforce access control.
 
