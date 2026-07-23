@@ -20,7 +20,7 @@ Reference pages provide authoritative technical details. Use them when you need 
     "reference/tutorials.md": "an index of tutorial and training resources.",
 }) }}
 
-## Related material
+## Related materials
 
 - For guided learning experiences, see {{ nav_link("tutorial/overview.md", breadcrumb=True) }}.
 - For task-oriented instructions, see {{ nav_link("howto/overview.md", breadcrumb=True) }}.

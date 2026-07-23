@@ -61,6 +61,9 @@ NOMAD's plugin system has enabled a growing community of NOMAD users customizing
 
 </div>
 
-<h2>One last thing</h2>
+## Related materials
 
-If you can't find what you're looking for in our guides, [contact our friendly team](mailto:support@nomad-lab.eu) for personalized help and assistance. Don't worry, we're here to help and learn what we're doing wrong!
+- For guided learning experiences, see {{ nav_link("tutorial/overview.md", breadcrumb=True) }}.
+- For task-oriented instructions, see {{ nav_link("howto/overview.md", breadcrumb=True) }}.
+- For conceptual background, see {{ nav_link("explanation/overview.md", breadcrumb=True) }}.
+- For authoritative technical details, see {{ nav_link("reference/overview.md", breadcrumb=True) }}.

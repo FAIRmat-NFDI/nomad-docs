@@ -13,7 +13,7 @@ Tutorials provide guided, learning-oriented paths. Follow them to learn NOMAD an
 
 ### Explore published data
 
-Learn how to search, filter, and inspect published NOMAD data.
+Search, filter, and explore data published in NOMAD, and create dashboards using custom widgets.
 
 {{ nav_list("tutorial/explore.md") }}
 
@@ -56,7 +56,7 @@ Build a plugin structure, schema package, and parser through guided exercises.
 </div>
 </div>
 
-## Related material
+## Related materials
 
 - Find event materials and external training collections in {{ nav_link("reference/tutorials.md", breadcrumb=True) }}.
 - For task-oriented instructions, see {{ nav_link("howto/overview.md", breadcrumb=True) }}.

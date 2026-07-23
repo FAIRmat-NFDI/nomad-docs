@@ -21,7 +21,7 @@ Explanation pages provide context and background. Use them when you want to unde
     "explanation/north.md": "what NORTH is and how it fits into the platform.",
 }) }}
 
-## Related material
+## Related materials
 
 - For guided learning experiences, see {{ nav_link("tutorial/overview.md", breadcrumb=True) }}.
 - For task-oriented instructions, see {{ nav_link("howto/overview.md", breadcrumb=True) }}.

@@ -47,7 +47,7 @@ Work on the `nomad-lab` codebase and contribute changes upstream.
 </div>
 </div>
 
-## Related material
+## Related materials
 
 - For guided learning experiences, see {{ nav_link("tutorial/overview.md", breadcrumb=True) }}.
 - For conceptual background, see {{ nav_link("explanation/overview.md", breadcrumb=True) }}.
