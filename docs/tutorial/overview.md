@@ -31,7 +31,7 @@ Upload, manage, and publish data using the NOMAD GUI or API.
 
 ### Use NOMAD as an ELN
 
-Create and managed structured experimental records using built-in or custom ELN schemas.
+Create and manage structured experimental records using built-in or custom ELN schemas.
 
 {{ nav_list("Use NOMAD as an ELN") }}
 
