@@ -20,11 +20,11 @@ Search, filter, and explore data published in NOMAD, and create dashboards using
 </div>
 <div markdown="block">
 
-### Upload and publish data
+### Publish data
 
-Upload, manage, and publish data using the NOMAD GUI or API.
+Upload, manage, and share data using the NOMAD GUI or API.
 
-{{ nav_list("Upload and publish data") }}
+{{ nav_list("Publish data") }}
 
 </div>
 <div markdown="block">
