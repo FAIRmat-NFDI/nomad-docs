@@ -1,8 +1,8 @@
 import json
+
 import numpy as np
 from nomad.metainfo.data_frames import DataFrameTemplate, ValuesTemplate
 from nomad.metainfo.metainfo import MSection, Package, Quantity, SubSection
-
 
 m_package = Package()
 

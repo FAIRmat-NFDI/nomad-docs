@@ -18,6 +18,7 @@ dependencies = [
   "nomad-lab[infrastructure]==1.4.3",
   "pydantic>=2.0",
   "regex",
+  "requests"
 ]
 
 [tool.uv]
@@ -34,3 +35,17 @@ source-exclude = ["docs/**"]
 
 [dependency-groups]
 dev = ["pytest>=7.4.4"]
+
+[tool.ruff.format]
+# use single quotes for strings.
+quote-style = "single"
+
+# indent with spaces, rather than tabs.
+indent-style = "space"
+
+# Like Black, respect magic trailing commas.
+skip-magic-trailing-comma = false
+
+# Like Black, automatically detect the appropriate line ending.
+line-ending = "auto"
+

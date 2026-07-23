@@ -1,5 +1,5 @@
-from nomad.datamodel import Schema, ArchiveSection
-from nomad.metainfo.metainfo import Quantity, Datetime, SubSection
+from nomad.datamodel import ArchiveSection, Schema
+from nomad.metainfo.metainfo import Datetime, Quantity, SubSection
 
 
 class Sample(ArchiveSection):

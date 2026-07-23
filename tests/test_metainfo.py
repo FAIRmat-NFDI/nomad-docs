@@ -37,15 +37,15 @@ m_package.__init_metainfo__()
 
 
 @pytest.mark.parametrize(
-    "type_, name",
+    'type_, name',
     [
-        pytest.param(str, "`str`", id="str"),
-        pytest.param(int, "`int`", id="int"),
-        pytest.param(float, "`float`", id="float"),
-        pytest.param(Datetime, "`nomad.metainfo.data_type.Datetime`", id="Datetime"),
-        pytest.param(Reference(Test), "[`Test`](#test)", id="internal-ref"),
+        pytest.param(str, '`str`', id='str'),
+        pytest.param(int, '`int`', id='int'),
+        pytest.param(float, '`float`', id='float'),
+        pytest.param(Datetime, '`nomad.metainfo.data_type.Datetime`', id='Datetime'),
+        pytest.param(Reference(Test), '[`Test`](#test)', id='internal-ref'),
         pytest.param(
-            Reference(Quantity), "`nomad.metainfo.metainfo.Quantity`", id="external-ref"
+            Reference(Quantity), '`nomad.metainfo.metainfo.Quantity`', id='external-ref'
         ),
     ],
 )
@@ -53,35 +53,35 @@ def test_property_type_info(type_, name):
     class Test(MSection):
         a = Quantity(type=type_)
 
-    name_found = get_property_type_info(Test.m_def.all_properties["a"], pkg=m_package)
+    name_found = get_property_type_info(Test.m_def.all_properties['a'], pkg=m_package)
     assert name_found == name
 
 
 @pytest.mark.parametrize(
-    "description",
+    'description',
     [
-        pytest.param(None, id="no-description"),
-        pytest.param("This is a test description.", id="string-description"),
+        pytest.param(None, id='no-description'),
+        pytest.param('This is a test description.', id='string-description'),
     ],
 )
 def test_property_description(description):
     class Test(MSection):
         a: str = Quantity(description=description)
 
-    description_found = get_property_description(Test.m_def.all_properties["a"])
+    description_found = get_property_description(Test.m_def.all_properties['a'])
     assert description_found == description
 
 
 @pytest.mark.parametrize(
-    "default, default_str",
+    'default, default_str',
     [
-        pytest.param(None, "", id="no-default"),
-        pytest.param("test", "`test`", id="str-default"),
-        pytest.param(1, "`1`", id="int-default"),
+        pytest.param(None, '', id='no-default'),
+        pytest.param('test', '`test`', id='str-default'),
+        pytest.param(1, '`1`', id='int-default'),
         pytest.param(
-            {"test": "test"},
-            "Complex object, default value not displayed.",
-            id="complex-default",
+            {'test': 'test'},
+            'Complex object, default value not displayed.',
+            id='complex-default',
         ),
     ],
 )
@@ -89,5 +89,5 @@ def test_property_default(default, default_str):
     class Test(MSection):
         a = Quantity(default=default)
 
-    default_found = get_quantity_default(Test.m_def.all_properties["a"])
+    default_found = get_quantity_default(Test.m_def.all_properties['a'])
     assert default_found == default_str

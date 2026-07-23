@@ -24,10 +24,9 @@ from inspect import isclass
 from types import UnionType
 from typing import Annotated, Any, Literal, Union, get_args, get_origin
 
+from nomad import utils
 from pydantic import BaseModel
 from pydantic.fields import FieldInfo
-
-from nomad import utils
 
 exported_config_models = set()  # type: ignore
 
@@ -47,12 +46,12 @@ def get_field_type_info(field: FieldInfo) -> tuple[str, set[Any]]:
     annotation = field.annotation
 
     def get_class_name(ann: Any) -> str:
-        if hasattr(ann, "__name__"):
+        if hasattr(ann, '__name__'):
             name = ann.__name__
-            return "None" if name == "NoneType" else name
+            return 'None' if name == 'NoneType' else name
         return str(ann)
 
-    def _recursive_extract(ann: Any, type_str: str = "") -> str:
+    def _recursive_extract(ann: Any, type_str: str = '') -> str:
         nonlocal classes
 
         origin = get_origin(ann)
@@ -73,26 +72,26 @@ def get_field_type_info(field: FieldInfo) -> tuple[str, set[Any]]:
         if origin is list:
             classes.add(origin)
             if type_str:
-                type_str += "[" + _recursive_extract(args[0]) + "]"
+                type_str += '[' + _recursive_extract(args[0]) + ']'
             else:
-                type_str = "list[" + _recursive_extract(args[0]) + "]"
+                type_str = 'list[' + _recursive_extract(args[0]) + ']'
         elif origin is dict:
             classes.add(origin)
             if type_str:
                 type_str += (
-                    "["
+                    '['
                     + _recursive_extract(args[0])
-                    + ", "
+                    + ', '
                     + _recursive_extract(args[1])
-                    + "]"
+                    + ']'
                 )
             else:
                 type_str = (
-                    "dict["
+                    'dict['
                     + _recursive_extract(args[0])
-                    + ", "
+                    + ', '
                     + _recursive_extract(args[1])
-                    + "]"
+                    + ']'
                 )
 
         elif origin is UnionType or origin is Union:
@@ -100,7 +99,7 @@ def get_field_type_info(field: FieldInfo) -> tuple[str, set[Any]]:
             union_types = []
             for arg in args:
                 union_types.append(_recursive_extract(arg))
-            type_str = " | ".join(union_types)
+            type_str = ' | '.join(union_types)
         elif origin is Literal:
             classes.add(origin)
             return get_class_name(
@@ -132,7 +131,7 @@ def get_field_description(field: FieldInfo) -> str | None:
     value = field.description
     if value:
         value = utils.strip(value)
-        value = value.replace("\n\n", "<br/>").replace("\n", " ")
+        value = value.replace('\n\n', '<br/>').replace('\n', ' ')
 
     return value
 
@@ -149,11 +148,11 @@ def get_field_default(field: FieldInfo) -> str | None:
     default_value = field.default
     if default_value is not None:
         if isinstance(default_value, dict | BaseModel):
-            default_value = "Complex object, default value not displayed."
-        elif default_value == "":
+            default_value = 'Complex object, default value not displayed.'
+        elif default_value == '':
             default_value = '""'
         else:
-            default_value = f"`{default_value}`"
+            default_value = f'`{default_value}`'
     return default_value
 
 

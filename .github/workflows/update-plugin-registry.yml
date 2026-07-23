@@ -1,0 +1,59 @@
+name: Update Plugin Registry
+
+on:
+  schedule:
+    # Run every Monday at 00:00 UTC
+    - cron: '0 0 * * 1'
+  workflow_dispatch:
+    # Allow manual triggering of the workflow
+
+env:
+  UV_VERSION: 0.6
+  PYTHON_VERSION: 3.12
+
+jobs:
+  update-registry:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          version: ${{ env.UV_VERSION }}
+
+      - name: Generate Plugin Registry
+        run: |
+          uv run python scripts/generate_plugin_registry.py
+
+      - name: Check for changes
+        id: check_changes
+        run: |
+          if git diff --quiet docs/examples/plugin_registry.md; then
+            echo "changed=false" >> $GITHUB_OUTPUT
+          else
+            echo "changed=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create Pull Request
+        if: steps.check_changes.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "docs: update plugin registry [automated]"
+          title: "Update Plugin Registry"
+          body: |
+            Automated update of the plugin registry page.
+
+            This PR was automatically created by the workflow.
+
+            Please review the changes and merge if everything looks correct.
+          branch: automated-plugin-registry-update
+          delete-branch: true
+          add-paths: |
+            docs/examples/plugin_registry.md
