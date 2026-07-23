@@ -1,4 +1,4 @@
-# How to use base sections
+# Base sections
 
 As previously mentioned in [How to write a schema](../howto/manage/gui/yaml.md#base-sections-and-inheritance),
 base sections can be used when writing custom schemas to inherit properties and *functionality*

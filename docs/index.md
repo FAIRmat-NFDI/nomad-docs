@@ -2,82 +2,94 @@
 hide: toc
 ---
 
-# NOMAD Documentation
+# Home
 
-<!-- A single sentence that says what the product is, succinctly and memorably -->
-NOMAD is a free, and open-source data management platform for materials science, whose goal is to make scientific research data FAIR (findable, accessible, interoperable and reusable).
+NOMAD is an open-source research data platform for materials science. It helps researchers, labs, and developers make data FAIR: findable, accessible, interoperable, and reusable.
 
-<!-- A paragraph of one to three short sentences, that describe what the product does. -->
-NOMAD provides tools for data management, sharing, and publishing.
-The platform lets you structure, explore, and analyze your data and the data of others.
-
-<!-- A third paragraph of similar length, this time explaining what need the product meets -->
-NOMAD solves the challenge of using heterogeneous and unfindable data.
-<!-- Finally, a paragraph that describes whom the product is useful for. -->
-NOMAD is useful for scientists that work with data, for research groups that need to collaborate on data, and for communities that need to build an archive of FAIR research data.
+This documentation is organized into four sections. Use the section that best matches your need: learning, completing a task, understanding a concept, or finding technical information.
 
 <div markdown="block" class="home-grid">
 <div markdown="block">
 
-## Tutorial
+## Tutorials
 
-A series of tutorials will guide you through the main functionality of NOMAD.
+Learn NOMAD step by step through guided, hands-on examples.
 
-- [Upload and publish your own data](tutorial/upload_publish.md)
-- [Use the search interface to identify interesting data](tutorial/explore.md)
-- [Use the API to search and access processed data for analysis](tutorial/access_api.md)
-- [Create and use custom schemas in NOMAD](tutorial/custom.md)
-- [Developing a NOMAD plugin](tutorial/develop_plugin/plugin_structure.md)
+- {{ nav_link("tutorial/explore.md") }}: start with published data and the search interface.
+- {{ nav_link("tutorial/upload_publish.md") }}: learn the basic data submission workflow.
+- {{ nav_link("tutorial/eln/built_in_templates.md") }}: create structured experimental records.
+- {{ nav_link("tutorial/develop_plugin/plugin_structure.md") }}: begin the plugin development tutorial path.
 
-- [Example data and exercises](https://www.fairmat-nfdi.eu/events/fairmat-tutorial-1/tutorial-1-materials){:target="_blank" rel="noopener"}
-- [More videos and tutorials on YouTube](https://youtube.com/playlist?list=PLrRaxjvn6FDW-_DzZ4OShfMPcTtnFoynT){:target="_blank" rel="noopener"}
+[Open all tutorials](tutorial/overview.md){:.md-button .nomad-button .nomad-button--card-action}
 
 </div>
 <div markdown="block">
 
 ## How-to guides
 
-How-to guides provide step-by-step instructions for a wide range of tasks, with the overarching topics:
+Accomplish specific tasks by following practical instructions.
 
-- Manage and find data
-- Programmatic data access
-- NOMAD Oasis — self-hosting
-- Plugins
-- Customization
-- Development
+- {{ nav_link("howto/manage/gui/upload.md") }}: publish data through the graphical interface.
+- {{ nav_link("howto/manage/program/api.md") }}: automate data access and management.
+- {{ nav_link("howto/plugins/plugins.md") }}: develop extensions for NOMAD.
+- {{ nav_link("howto/oasis/install.md") }}: install a self-hosted NOMAD deployment.
 
-[Open the how-to guides](howto/overview.md){:.md-button .nomad-button .nomad-button--card-action}
+[Open all how-to guides](howto/overview.md){:.md-button .nomad-button .nomad-button--card-action}
 
 </div>
-
 <div markdown="block">
 
 ## Explanation
 
-The explanation section provides background knowledge on what are
-schemas and structured data, how does processing work, the NOMAD architecture, and more.
+Understand NOMAD's key concepts, architecture, and underlying mechanisms.
+
+- {{ nav_link("explanation/basics.md") }}
+- {{ nav_link("explanation/data.md") }}
+- {{ nav_link("explanation/plugin_system.md") }}
+- {{ nav_link("explanation/oasis.md") }}
+
+[Open all explanations](explanation/overview.md){:.md-button .nomad-button .nomad-button--card-action}
 
 </div>
 <div markdown="block">
 
 ## Reference
 
-The reference includes all CLI commands and arguments, all configuration options,
-the possible schema annotations and their arguments, and a glossary of used terms.
+Find detailed technical information such as configuration options, CLI commands, and schema details.
+
+- {{ nav_link("reference/config.md") }}
+- {{ nav_link("reference/cli.md") }}
+- {{ nav_link("reference/basesections.md") }}
+- {{ nav_link("reference/glossary.md") }}
+
+[Open all reference](reference/overview.md){:.md-button .nomad-button .nomad-button--card-action}
 
 </div>
 </div>
 
-<h2>Project and community</h2>
+<!-- TODO: Revisit and update the below once the nomad-lab homepage refactor is complete. -->
 
-NOMAD is an open source project that warmly welcomes community projects, contributions, suggestions, fixes and constructive feedback.
-NOMAD is developed by FAIRmat, an open NFDI consortium of over 30 partners building a shared
-data structure for materials science together.
+## Using NOMAD
+
+Most examples in the documentation use **NOMAD Central**, the public FAIRmat-hosted NOMAD platform. There are two relevant deployments:
+
+- [**Production**](https://nomad-lab.eu/prod/v1/gui/search/entries){:target="_blank" rel="noopener"}: The primary deployment for day-to-day use and most documentation examples.
+- [**Test**](https://nomad-lab.eu/prod/v1/test/gui/search/entries){:target="_blank" rel="noopener"}: A separate deployment intended for testing features such as data publication. The underlying database is temporary and is periodically reset.
+
+The majority of underlying concepts and workflows also apply to **NOMAD Oasis** deployments, although specific behavior may differ between installations depending on which plugins are installed.
+
+## Who NOMAD supports
+
+- Researchers using [NOMAD Central](https://nomad-lab.eu/prod/v1/gui/){:target="_blank" rel="noopener"} to manage, explore, and publish data.
+- Labs and institutions operating a NOMAD Oasis.
+- Plugin developers extending NOMAD for domain-specific needs.
+- Core contributors working on `nomad-lab`.
+
+## Project and community
+
+NOMAD is developed by FAIRmat, an NFDI consortium building shared data infrastructure for materials science.
 
 - [Get support](https://nomad-lab.eu/nomad-lab/support.html){:target="_blank" rel="noopener"}
-- [Join our online forum](https://matsci.org/c/nomad/32){:target="_blank" rel="noopener"}
-- [Contribute](howto/develop/contrib.md)
-- [View our roadmap](https://nomad-lab.eu/nomad-lab/features.html){:target="_blank" rel="noopener"}
-- [Code guidelines](reference/code_guidelines.md)
-
-Thinking about using NOMAD for your next project? Get in touch!
+- [Contribute to NOMAD](howto/develop/contrib.md)
+- [View the roadmap](https://nomad-lab.eu/nomad-lab/features.html){:target="_blank" rel="noopener"}
+- [Read the code guidelines](reference/code_guidelines.md)

@@ -14,7 +14,7 @@
 
 ## Further resources
 
-- [Tutorial > Managing workflows and projects](../../../tutorial/workflows_projects.md)
+- [Tutorials > Managing workflows and projects](../../../tutorial/workflows_projects.md)
 
 ## Overview
 

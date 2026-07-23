@@ -5,7 +5,7 @@ all sources, set up a *Python* and *Node.js* environment, install all necessary 
 run the infrastructure in development mode, learn to run the test suites, and set up
 *Visual Studio Code* for NOMAD development.
 
-For installing and using the NOMAD Python package `nomad-lab` directly, see [Manage and find data > Programmatically > API Overview](../manage/program/api.md).
+For installing and using the NOMAD Python package `nomad-lab` directly, see [Manage and find data > Programmatically > Use the API](../manage/program/api.md).
 
 ## Clone the sources
 

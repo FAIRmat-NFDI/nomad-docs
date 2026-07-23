@@ -4,7 +4,7 @@ NORTH (NOMAD Remote Tools Hub) is NOMAD's hub for running data analysis tools in
 containerized environments. It enables tools to be executed reproducibly and securely while
 being tightly integrated with the NOMAD data infrastructure.
 
-This documentation shows you how to write a plugin entry point for a NORTH tool and prepare its contents.
+This documentation shows you how to create a plugin entry point for a NORTH tool and prepare its contents.
 You should read the [introduction to plugins](../plugins.md)
 to have a basic understanding of how plugins and plugin entry points work in the NOMAD ecosystem.
 

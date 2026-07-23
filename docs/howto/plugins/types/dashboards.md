@@ -1,4 +1,4 @@
-# How to write a dashboard
+# How to create a dashboard
 
 ## What is a dashboard?
 

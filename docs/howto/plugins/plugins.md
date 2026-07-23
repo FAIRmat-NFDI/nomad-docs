@@ -1,18 +1,10 @@
-# Overview for plugin development
+# Start plugin development
 
 The main way to customize a NOMAD installation is through the use of **plugins**. A NOMAD plugin is a Python package that an administrator can install into a NOMAD distribution to add custom features. This page helps you develop and publish a NOMAD plugin. For a high-level overview of the plugin mechanism, see the [NOMAD plugin system](../../explanation/plugin_system.md) -page.
 
 A single Python plugin package can contain multiple [plugin entry points](../../explanation/plugin_system.md#plugin-entry-points). These entry points represent different types of customizations including:
 
-- [Actions](./types/actions.md)
-- [APIs](./types/apis.md)
-- [Apps](./types/apps.md)
-- [Dashboards](./types/dashboards.md)
-- [Example uploads](./types/example_uploads.md)
-- [Normalizers](./types/normalizers.md)
-- [NORTH tools](./types/north_tools.md)
-- [Parsers](./types/parsers.md)
-- [Schema packages](./types/schema_packages.md)
+{{ nav_list("Create entry points") }}
 
 See the [FAIRmat-NFDI GitHub organization page](https://github.com/FAIRmat-NFDI){:target="_blank" rel="noopener"} for a list of plugins developed by FAIRmat. You can also see the list of activated plugins and plugin entry points at the bottom of the *Information page* (`about/information`) of any NOMAD installation, for example check out the [central NOMAD installation](https://nomad-lab.eu/prod/v1/gui/about/information){:target="_blank" rel="noopener"}.
 
@@ -105,10 +97,10 @@ The entry point name passed to `get_plugin_entry_point()` must match the name de
 - [Plugin entry point models reference](../../reference/plugins.md) - Documentation for all entry point types
 - [NOMAD plugin system explanation](../../explanation/plugin_system.md) - Conceptual overview of the plugin architecture
 - Plugin type-specific guides for examples:
-    - [Parsers](./types/parsers.md)
-    - [APIs](./types/apis.md)
-    - [Normalizers](./types/normalizers.md)
-    - [Schema packages](./types/schema_packages.md)
+    - {{ nav_link("howto/plugins/types/parsers.md") }}
+    - {{ nav_link("howto/plugins/types/apis.md") }}
+    - {{ nav_link("howto/plugins/types/normalizers.md") }}
+    - {{ nav_link("howto/plugins/types/schema_packages.md") }}
 
 ## Plugin development guidelines
 

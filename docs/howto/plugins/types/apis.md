@@ -1,10 +1,10 @@
-# How to write an API
+# How to create an API
 
 APIs allow you to add more APIs to the NOMAD app. More specifically you can create
 a [FastAPI](https://fastapi.tiangolo.com){:target="_blank" rel="noopener"} app that can be mounted into the main NOMAD app alongside other apis
 such as `/api/v1`, `/optimade`, etc.
 
-This documentation shows you how to write a plugin entry point for an API.
+This documentation shows you how to create a plugin entry point for an API.
 You should read the [introduction to plugins](../plugins.md)
 to have a basic understanding of how plugins and plugin entry points work in the NOMAD ecosystem.
 

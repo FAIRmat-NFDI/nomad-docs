@@ -6,29 +6,30 @@ repo_url: https://github.com/nomad-coe/nomad
 edit_uri: ""
 nav:
   - Home: index.md
-  - Tutorial:
+  - Tutorials:
       - Overview: tutorial/overview.md
       - Explore data: tutorial/explore.md
-      - Upload and publish data:
-          - With the GUI: tutorial/upload_publish.md
-          - Programmatically: tutorial/upload_publish_api.md
+      - Publish data:
+          - Upload and share with the GUI: tutorial/upload_publish.md
+          - Upload and share with the API: tutorial/upload_publish_api.md
       - Use NOMAD as an ELN:
-          - Built-in ELN templates: tutorial/eln/built_in_templates.md
-          - Custom ELN with YAML: tutorial/eln/custom_eln_yaml.md
-          - Tabular Parser for ELN: tutorial/eln/tabular_parser_yaml.md
+          - Use built-in ELN templates: tutorial/eln/built_in_templates.md
+          - Create a custom ELN schema: tutorial/eln/custom_eln_yaml.md
+          - Parse tabular measurement data: tutorial/eln/tabular_parser_yaml.md
       - Manage workflows and projects: tutorial/workflows_projects.md
       - Develop a NOMAD plugin:
-          - Create a plugin structure and set up the development environment: tutorial/develop_plugin/plugin_structure.md
+          - Set up a plugin project: tutorial/develop_plugin/plugin_structure.md
           - Create a schema package: tutorial/develop_plugin/create_schema_package.md
           - Create a parser:
-              - Three parsing approaches and tutorial setup: tutorial/develop_plugin/create_parser.md
-              - Tutorial 1: tutorial/develop_plugin/create_parser_parser_only.md
-              - Tutorial 2: tutorial/develop_plugin/create_parser_eln_only.md
-              - Tutorial 3: tutorial/develop_plugin/create_parser_hybrid.md
+              - NOMAD parsing approaches: tutorial/develop_plugin/create_parser.md
+              - Automatic file parsing: tutorial/develop_plugin/create_parser_parser_only.md
+              - ELN-triggered parsing: tutorial/develop_plugin/create_parser_eln_only.md
+              - Hybrid parsing approach: tutorial/develop_plugin/create_parser_hybrid.md
   - How-to guides:
       - Overview: howto/overview.md
       - Manage and find data:
-          - With the GUI:
+          - Use the GUI:
+              - Create an account and sign in: howto/manage/gui/account.md
               - Upload and publish data: howto/manage/gui/upload.md
               - Enter data with ELNs: howto/manage/gui/eln.md
               - Analyze data in NORTH: howto/manage/gui/north.md # TODO rename depending on how-to content
@@ -36,19 +37,19 @@ nav:
               - Write a YAML schema package: howto/manage/gui/yaml.md # TODO consolidate with parts of the next 2 pages
               - Create custom ELNs: howto/manage/gui/elns.md
               - Parse tabular data: howto/manage/gui/tabular.md
-          - Programmatically:
+          - Work programmatically:
               # - Install nomad-lab: howto/programmatic/pythonlib.md # TODO Integrate into "Use the API"
-              - API Overview: howto/manage/program/api.md # TODO separate into How-to and Explanation/Reference
-              - Programmatic authentication: howto/manage/program/auth.md
+              - Use the API: howto/manage/program/api.md # TODO separate into How-to and Explanation/Reference
+              - Authenticate programmatically: howto/manage/program/auth.md
               - Download data: howto/manage/program/download.md
               - Publish data using Python: howto/manage/program/publish_python.md
               - Access processed data: howto/manage/program/archive_query.md
-              - Transform data: howto/manage/program/json_transformer.md
-              - Make graph-API calls: howto/manage/program/graph_api.md # TODO consolidate into a single page with supporting explanation/reference material
+              - Transform JSON data structures: howto/manage/program/json_transformer.md
+              - Make Graph API calls: howto/manage/program/graph_api.md # TODO consolidate into a single page with supporting explanation/reference material
       - Develop plugins:
-          - Plugins Overview: howto/plugins/plugins.md # TODO split former Introduction to plugins into short guiding overview + explanation page
+          - Start plugin development: howto/plugins/plugins.md # TODO split former Introduction to plugins into short guiding overview + explanation page
           # - Set up a development environment: howto/plugins/setup.md # TODO distro-dev setup + best practices
-          - Entry point types:
+          - Create entry points:
               - Actions: howto/plugins/types/actions.md
               - APIs: howto/plugins/types/apis.md
               - Apps: howto/plugins/types/apps.md
@@ -57,8 +58,8 @@ nav:
               - Normalizers: howto/plugins/types/normalizers.md
               - NORTH tools: howto/plugins/types/north_tools.md
               - Parsers: howto/plugins/types/parsers.md
-              - Schemas: howto/plugins/types/schema_packages.md
-          - Built-in tools:
+              - Schema packages: howto/plugins/types/schema_packages.md
+          - Use built-in tools:
               - Work with units: howto/plugins/tools/units.md
               - Handle large data: howto/plugins/tools/hdf5.md
               - Parse efficiently: howto/plugins/tools/mapping_parser.md # TODO Add clearly scope at the top of this page
@@ -92,14 +93,14 @@ nav:
           - Optical spectroscopy: examples/experiment_data/opt.md
           - Atom probe tomography: examples/experiment_data/apm.md
           - Scanning probe microscopy: examples/experiment_data/spm.md
-          - pynxtools: examples/experiment_data/pynxtools.md
+          - Parse data with pynxtools: examples/experiment_data/pynxtools.md
       - Use cases:
-          - Catalysis APP: examples/use_cases/catalysis_app.md
-          - NEB workflows: examples/use_cases/neb_workflows.md
+          - nomad-catalysis: examples/use_cases/catalysis_app.md
+          - nomad-neb-workflows: examples/use_cases/neb_workflows.md
         # - NOMAD-supported plugins:
         # - Databases for specific research topics:
   - Explanation:
-      # - Overview: explanation/overview.md # TODO add guide, organization of sub-pages?
+      - Overview: explanation/overview.md
       - From files to data: explanation/basics.md
       - Data structure: explanation/data.md
       - Base sections: explanation/base_sections.md # TODO rewrite as explanation
@@ -111,17 +112,31 @@ nav:
       - Authentication and authorization: explanation/auth.md
       - NORTH: explanation/north.md
   - Reference:
-      # - Overview: reference/overview.md # TODO
+      - Overview: reference/overview.md
       # - reference/metainfo.md # TODO This file no longer exists ... was it lost somehow?
-      - reference/config.md
-      - reference/annotations.md
-      - reference/basesections.md
-      - reference/cli.md
-      - reference/plugins.md
-      - reference/parsers.md
-      - reference/code_guidelines.md
-      - reference/glossary.md
-      - reference/tutorials.md
+      - Configuration: reference/config.md
+      - Annotations: reference/annotations.md
+      - Base sections: reference/basesections.md
+      - CLI: reference/cli.md
+      - Plugins: reference/plugins.md
+      - Parsers: reference/parsers.md
+      - Code guidelines: reference/code_guidelines.md
+      - Glossary: reference/glossary.md
+      - Tutorial catalog: reference/tutorials.md
+not_in_nav: |
+  # MkDocs uses this page directly when a requested page does not exist.
+  /404.md
+  # Contributor documentation is linked from README.md, not the user navigation.
+  /writing_guide.md
+  # Linked supporting page for the domain-specific examples.
+  /examples/experiment_data/nexus.md
+  # Legacy pages retained until their content is handled by later refactoring stages.
+  /tutorial/access_api.md
+  /tutorial/custom.md
+  /tutorial/nomad_repo.md
+validation:
+  nav:
+    omitted_files: warn
 theme:
   name: material
   palette:
@@ -198,6 +213,8 @@ plugins:
   - redirects:
       redirect_maps:
         "develop/gitlab.md": "howto/develop/contrib.md"
+        "howto/manage/program/graph-api/basics.md": "howto/manage/program/graph_api.md"
+        "tutorial/training_resources.md": "reference/tutorials.md"
   - glightbox
   # - git-revision-date-localized
   # TODO Fix error in pipeline when this plugin is included

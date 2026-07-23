@@ -1,4 +1,4 @@
-# Matching and creating a static entry
+# Automatic file parsing with a static entry
 
 In this tutorial, we will build a parser that reads a raw instrument data file
 and populates a NOMAD archive entry with a custom schema. The result is a

@@ -1,4 +1,4 @@
-# Create a Schema Package
+# Create a schema package
 
 This tutorial guides you through creating a NOMAD plugin with a custom schema package. While schemas can be added to NOMAD using YAML, this tutorial focuses on Python-based schema packages. These packages can be version-controlled using Git, integrate seamlessly at the system level with your NOMAD instance, and allow you to implement custom normalization logic.
 

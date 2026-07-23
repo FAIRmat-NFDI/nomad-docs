@@ -8,16 +8,16 @@ The NOMAD Docs follow the [Diátaxis framework](https://diataxis.fr/){:target="_
 
 - **Tutorials**: learning-oriented, step-by-step introductions.
 - **How-to guides**: goal-oriented, practical instructions.
-- **Explanations**: understanding-oriented, clarifications and context.
+- **Explanation**: understanding-oriented, clarifications and context.
 - **Reference**: information-oriented, precise and authoritative.
 
 When contributing, identify which type of documentation your addition belongs to. A clear separation will help users quickly find what they need.
 
-> **Tip:** Contributions often span multiple types. For example, a new *How-to* may also require a supporting *Explanation* page. It may help you to first draft all of your material in one place, and then reorganize it according to the Diátaxis structure.
+> **Tip:** Contributions often span multiple types. For example, a new how-to guide may also require a supporting explanation page. It may help you to first draft all of your material in one place, and then reorganize it according to the Diátaxis structure.
 
 ## Best Practice
 
-- **Set the context clearly.** For Tutorials and How-tos, define prerequisite knowledge and list additional resources at the top of the page. For Explanations, provide enough background to orient the reader.
+- **Set the context clearly.** For tutorial and how-to pages, define prerequisite knowledge and list additional resources at the top of the page. For explanation pages, provide enough background to orient the reader.
 - **Think in user flows.** Imagine how a user encounters problems or tasks, not how the codebase is organized.
 - **Be as detailed as required, as concise as possible.** Include all steps or context the user needs, but avoid unnecessary narrative.
 - **Prefer clarity over cleverness.** Simple, direct wording beats jargon, metaphors, or over-complicated phrasing.
@@ -31,13 +31,25 @@ When contributing, identify which type of documentation your addition belongs to
 
 **Auto-TOC awareness:** Headings populate the Table of Contents; admonition titles do not. Use real headings for navigable sections.
 
+**Navigation titles and page headings:** Page titles in `mkdocs.yml` are the
+concise labels shown in the sidebar and on overview-page links generated with
+`nav_link`. Keep them short enough for the sidebar, but grammatical enough to
+stand alone in a card or breadcrumb. The first heading of the page may be more
+descriptive, for example by adding "How to", NOMAD-specific context, or the
+intended outcome. The navigation title and page heading should clearly refer to
+the same task or concept, even when they are not identical.
+Within deeper navigation sections, a child title may rely on its parent title
+for context, for example "With the GUI" under "Upload and publish data". Avoid
+using such inherited labels outside their parent group unless the surrounding
+text, grouping, or breadcrumb supplies the missing context.
+
 ### Links
 
 **Link checks.** Broken internal or external links will cause CI/CD to fail. Try to fix them when possible. If you cannot resolve a broken link, create an issue and tag a maintainer.
 
 **Descriptive link naming.** Use descriptive link text (instead of `here/link`).
 
-**Internal links: standardized naming.** Use the path hierarchy to the referenced page or section, separated by >'s. For example: `[Tutorial > Exploring Data > Search Interface & Filters](<path-to-referenced-section>)`. Long paths can be shortened with `...`, e.g., `[Tutorial > ... > Search Interface & Filters](<path-to-referenced-section>)`, using your best judgement.
+**Internal links: standardized naming.** Use the path hierarchy to the referenced page or section, separated by >'s. For example: `[Tutorials > Explore data > Search interface and filters](<path-to-referenced-section>)`. Long paths can be shortened with `...`, e.g., `[Tutorials > ... > Search interface and filters](<path-to-referenced-section>)`, using your best judgement.
 
 If the referenced section belongs to the current page, drop the global path, i.e., `[Search Interface & Filters](<path-to-referenced-section>)`.
 
@@ -141,3 +153,49 @@ If you use more than one slider on the same page, make sure to give them differe
 **Keep the navigation structure.** The location of docs .md files should mirror the navigation bar, with subfolders named after the organizational subsections of the bar.
 
 **Images and data.** All assets specific to an individual markdown file should be stored within an immediate sub-directory of the file, labeled accordingly. Please use `images/` and `data/` for the image and data files, respectively. Sharing assets between .md files in different locations is currently not allowed. If there is an exceptional case, please create a GitHub issue and tag a relevant maintainer.
+
+### Navigation coverage
+
+By default, user-facing Markdown pages under `docs/` appear in the
+`nav` section of `mkdocs.yml`. Note: The strict documentation build reports a warning,
+and therefore fails in CI, when a page is added under `docs/` without being added
+to the navigation.
+
+On overview pages, use navigation macros for links that represent pages in the
+navigation. The macros use titles and order from `mkdocs.yml` and generate
+relative links from the current page. This keeps overview-page links consistent
+with the sidebar without duplicating labels in Markdown.
+
+Use `nav_list` for overview-page lists that should follow a section of the
+navigation. Pass a direct child section title, for example
+`nav_list("Develop plugins")`, to render that section and its descendants in nav
+order. Pass a documentation-root-relative page path, for example
+`nav_list("tutorial/explore.md")`, to render a single page. Call `nav_list()`
+without a target to render the current page's section, excluding the current page
+itself. If a flat overview list needs short supporting text, pass a
+`descriptions` mapping keyed by source path. Use this for the main lists on
+section overview pages so their membership, grouping, and order stay aligned
+with `mkdocs.yml`.
+
+Use `nav_link` for curated links and prose links that should point to one known
+page. Pass the documentation-root-relative source path, for example
+`nav_link("reference/config.md")`, inside the Jinja expression delimiters. Use
+short labels for curated link lists, including the home page cards, because the
+surrounding card or section already provides context. For cross-category links
+in prose, pass `breadcrumb=True` to include the navigation hierarchy. If a page
+has more than one intermediate navigation section, the breadcrumb is abbreviated
+as `Section > ... > Page name`. Keep the overview card headings, descriptions,
+and surrounding markup in Markdown so they can be edited independently.
+
+The domain-specific examples overview currently keeps manually placed
+`nav_link` calls because its links are interleaved with category tags and the
+section is expected to be deprecated.
+
+There may be special cases of independent pages that are linked but should not
+appear in the navigation. These intentional exceptions should be listed under
+`not_in_nav` in `mkdocs.yml`. Only add a page to this list when it has a documented
+reason to remain outside the navigation; do not use it merely to silence the build.
+Remove the exception when the page is added to the navigation, moved outside `docs/`, or deleted.
+
+Most authoring resources that should not be published belong outside `docs/`. For
+example, use `templates/tutorial.md` as the starting point for a new tutorial.

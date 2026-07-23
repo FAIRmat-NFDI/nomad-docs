@@ -1,4 +1,4 @@
-# How to define an action
+# How to create an action
 
 Actions allow to define executable workflows in NOMAD. They are an
 alternative to [normalizers](../../../tutorial/custom.md#custom-normalizers) and can
@@ -15,7 +15,7 @@ It allows for better resource allocation like GPUs for specific actions.
     workflow requires robust interaction with an external API, longer
     processing time (for example, days), or special resource allocation, use actions.
 
-This documentation shows you how to write a plugin entry point for an action.
+This documentation shows you how to create a plugin entry point for an action.
 You should read the [introduction to plugins](../plugins.md)
 to have a basic understanding of how plugins and plugin entry points work in the NOMAD ecosystem.
 
