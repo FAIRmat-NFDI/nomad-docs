@@ -28,7 +28,7 @@ Before starting, make sure you have the following:
 1. **NOMAD user account**  
     In order to upload data into NOMAD, a user account is required.
     You can create an account by following the steps described in the
-    [overview page](overview.md#create-a-nomad-user-account).
+    [account creation guide](../howto/manage/gui/account.md#create-a-nomad-account).
 
 2. **Example files available on your local machine**  
     This tutorial uses provided example data files for:
