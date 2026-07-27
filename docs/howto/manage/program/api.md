@@ -359,9 +359,11 @@ You will get the next 10 results.
 Here is a full example that collects the first 100 formulas from entries that match a
 certain query by paginating.
 
+<!-- fmt: off -->
 ```python
---8 < --'examples/docs/api/pagination.py'
+--8<-- "examples/docs/api/pagination.py"
 ```
+<!-- fmt: on -->
 
 ## Search for entries
 

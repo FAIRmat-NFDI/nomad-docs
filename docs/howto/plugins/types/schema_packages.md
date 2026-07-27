@@ -148,9 +148,11 @@ There is a 1-1 translation between the structure in Python schema packages (writ
 
 `normalize`-functions are attached to sections and are are called when instances of these sections are processed. All files are processed when they are uploaded or changed. To add a `normalize` function, your section has to inherit from `Schema` or `ArchiveSection` which provides the base for this functionality. Here is an example:
 
+<!-- fmt: off -->
 ```python
---8 < --'examples/archive/custom_schema.py'
+--8<-- "examples/archive/custom_schema.py"
 ```
+<!-- fmt: on -->
 
 Make sure to call the `super` implementation properly to support multiple inheritance. In order to control the order by which the `normalize` calls are executed, one can define `normalizer_level` which is set to 0 by default. The normalize functions are always called for any sub section before the parent section. However, the order for any sections on the same level will be from low values of `normalizer_level` to high.
 
@@ -363,14 +365,16 @@ describing material properties at different variables like density of states or 
 
 ### Illustrating example
 
+<!-- fmt: off -->
 ```py
---8 < --'examples/metainfo/data_frames.py:9:31'
+--8<-- "examples/metainfo/data_frames.py:9:31"
 
---8 < --'examples/metainfo/data_frames.py:41:44'
+--8<-- "examples/metainfo/data_frames.py:41:44"
 
 
---8 < --'examples/metainfo/data_frames.py:55:63'
+--8<-- "examples/metainfo/data_frames.py:55:63"
 ```
+<!-- fmt: on -->
 
 ### Fields vs variables (and dimensions)
 
@@ -390,18 +394,22 @@ In the heatmap scenario, we vary `Temperature` and `Pressure` independently and 
 `Energy` value (i.e. heatmap color/intensity) for each `Temperature` reading at every `Pressure` reading.
 For two values on each *variable*, we respectively we have 4 (2x2) *field* values:
 
+<!-- fmt: off -->
 ```py
---8 < --'examples/metainfo/data_frames.py:89:97'
+--8<-- "examples/metainfo/data_frames.py:89:97"
 ```
+<!-- fmt: on -->
 
 In the scatter plot scenario, we vary `Temperature` and `Pressure` together.
 We only have one *field* value (y-axis) for each pair of temperature and pressure (two x-axes)
 values.
 With two combined temperature and pressure readings, we respectively only have two field values:
 
+<!-- fmt: off -->
 ```py
---8 < --'examples/metainfo/data_frames.py:100:106'
+--8<-- "examples/metainfo/data_frames.py:100:106"
 ```
+<!-- fmt: on -->
 
 We can use the `ValueTemplate` kwarg `spanned_dimenions` to define how `Temperature` and
 `Pressure` are related. The given indices refer to the indices of the field values and
@@ -410,9 +418,11 @@ represent the logical dimension of the data space.
 The first example without the `spanned_dimensions` is equivalent to this example
 with `spanned_dimensions`. Here we span two independent dimensions:
 
+<!-- fmt: off -->
 ```py
---8 < --'examples/metainfo/data_frames.py:109:117'
+--8<-- "examples/metainfo/data_frames.py:109:117"
 ```
+<!-- fmt: on -->
 
 ### Field and variables in the schema vs parsing
 
