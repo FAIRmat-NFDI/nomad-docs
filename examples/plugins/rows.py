@@ -8,7 +8,7 @@ rows = Rows(
                 icon='launch',
                 filepath='data.filepath',
                 tool_name='jupyter',
-                description="Open file in Jupyter"
+                description='Open file in Jupyter',
             )
         ]
     )
