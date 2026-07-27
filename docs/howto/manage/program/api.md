@@ -361,7 +361,7 @@ certain query by paginating.
 
 <!-- fmt: off -->
 ```python
---8<-- 'examples/docs/api/pagination.py'
+--8<-- "examples/docs/api/pagination.py"
 ```
 <!-- fmt: on -->
 

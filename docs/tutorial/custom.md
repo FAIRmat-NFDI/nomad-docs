@@ -190,7 +190,7 @@ Here is an example:
 
 <!-- fmt: off -->
 ```python
---8<-- 'examples/archive/custom_schema.py'
+--8<-- "examples/archive/custom_schema.py"
 ```
 <!-- fmt: on -->
 

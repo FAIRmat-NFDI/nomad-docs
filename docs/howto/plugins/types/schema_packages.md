@@ -150,7 +150,7 @@ There is a 1-1 translation between the structure in Python schema packages (writ
 
 <!-- fmt: off -->
 ```python
---8<-- 'examples/archive/custom_schema.py'
+--8<-- "examples/archive/custom_schema.py"
 ```
 <!-- fmt: on -->
 
@@ -367,12 +367,12 @@ describing material properties at different variables like density of states or 
 
 <!-- fmt: off -->
 ```py
---8<-- 'examples/metainfo/data_frames.py:9:31'
+--8<-- "examples/metainfo/data_frames.py:9:31"
 
---8<-- 'examples/metainfo/data_frames.py:41:44'
+--8<-- "examples/metainfo/data_frames.py:41:44"
 
 
---8<-- 'examples/metainfo/data_frames.py:55:63'
+--8<-- "examples/metainfo/data_frames.py:55:63"
 ```
 <!-- fmt: on -->
 
@@ -396,7 +396,7 @@ For two values on each *variable*, we respectively we have 4 (2x2) *field* value
 
 <!-- fmt: off -->
 ```py
---8<-- 'examples/metainfo/data_frames.py:89:97'
+--8<-- "examples/metainfo/data_frames.py:89:97"
 ```
 <!-- fmt: on -->
 
@@ -407,7 +407,7 @@ With two combined temperature and pressure readings, we respectively only have t
 
 <!-- fmt: off -->
 ```py
---8<-- 'examples/metainfo/data_frames.py:100:106'
+--8<-- "examples/metainfo/data_frames.py:100:106"
 ```
 <!-- fmt: on -->
 
@@ -420,7 +420,7 @@ with `spanned_dimensions`. Here we span two independent dimensions:
 
 <!-- fmt: off -->
 ```py
---8<-- 'examples/metainfo/data_frames.py:109:117'
+--8<-- "examples/metainfo/data_frames.py:109:117"
 ```
 <!-- fmt: on -->
 
