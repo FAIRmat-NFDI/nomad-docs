@@ -29,13 +29,13 @@ myapp = AppEntryPoint(
         readme='Here is a much longer description of this app.',
         # Controls which columns are shown in the results table
         columns=[
-            Column(quantity='entry_id', selected=True),
-            Column(quantity=f'data.section.myquantity#{schema}', selected=True),
+            Column(search_quantity='entry_id', selected=True),
+            Column(search_quantity=f'data.section.myquantity#{schema}', selected=True),
             Column(
-                quantity=f'data.my_repeated_section[*].myquantity#{schema}',
+                search_quantity=f'data.my_repeated_section[*].myquantity#{schema}',
                 selected=True,
             ),
-            Column(quantity='upload_create_time'),
+            Column(search_quantity='upload_create_time'),
         ],
         # Dictionary of search filters that are always enabled for queries made
         # within this app. This is especially important to narrow down the
@@ -51,15 +51,15 @@ myapp = AppEntryPoint(
                     title='elements',
                     items=[
                         MenuItemPeriodicTable(
-                            quantity='results.material.elements',
+                            search_quantity='results.material.elements',
                         ),
                         MenuItemTerms(
-                            quantity='results.material.chemical_formula_hill',
+                            search_quantity='results.material.chemical_formula_hill',
                             width=6,
                             options=0,
                         ),
                         MenuItemTerms(
-                            quantity='results.material.chemical_formula_iupac',
+                            search_quantity='results.material.chemical_formula_iupac',
                             width=6,
                             options=0,
                         ),
@@ -80,7 +80,7 @@ myapp = AppEntryPoint(
                     nbins=30,
                     scale='linear',
                     x=Axis(search_quantity=f'data.mysection.myquantity#{schema}'),
-                    layout={'lg': Layout(minH=3, minW=3, h=4, w=12, y=0, x=0)},
+                    layout={'lg': Layout(w=12, h=4, x=0, y=0)},
                 )
             ]
         ),
