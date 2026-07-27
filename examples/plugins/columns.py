@@ -6,7 +6,7 @@ columns = [
         label='My Quantity Name',
         unit='eV',
         align='left',
-        format=Format(decimals= 2, mode='standard'),
+        format=Format(decimals=2, mode='standard'),
         selected=True,
     ),
     Column(

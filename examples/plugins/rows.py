@@ -9,7 +9,7 @@ rows = Rows(
                 filepath='data.filepath',
                 tool_name='jupyter',
                 description='Open file in Jupyter',
-            )
+            ),
         ]
     )
 )
