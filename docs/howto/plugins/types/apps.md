@@ -47,9 +47,11 @@ myapp = "nomad_example.apps:myapp"
 
 The definition fo the actual app is given as an instance of the `App` class specified as part of the entry point. A full breakdown of the model is given below in the [app reference](#app-reference), but here is a small example:
 
+<!-- fmt: off -->
 ```python
---8 < --'examples/plugins/app.py'
+--8<-- "examples/plugins/app.py"
 ```
+<!-- fmt: on -->
 
 !!! tip
     If you want to load an app definition from a YAML file, this can be easily done with the pydantic `parse_obj` function:
@@ -113,9 +115,11 @@ the path without the need for specifying a schema, e.g. `results.material.symmet
 
 For example, one could configure the results table to show a new column using one of the search quantities with:
 
+<!-- fmt: off -->
 ```python
---8 < --'examples/plugins/columns.py'
+--8<-- "examples/plugins/columns.py"
 ```
+<!-- fmt: on -->
 
 ### Narrowing down search results in the app
 
@@ -135,9 +139,11 @@ filters_locked = {'quantities': ['results.properties.catalytic']}
 
 The `menu` field controls the structure of the menu shown on the left side of the search interface. Menus have a controllable width, and they contain items that are displayed on a 12-based grid. You can also nest menus within each other. For example, this defines a menu with two levels:
 
+<!-- fmt: off -->
 ```python
---8 < --'examples/plugins/menu.py'
+--8<-- "examples/plugins/menu.py"
 ```
+<!-- fmt: on -->
 
 The following items are supported in menus, and you can read more about them in the App reference:
 
@@ -160,9 +166,11 @@ The following items are supported in menus, and you can read more about them in 
 - `WidgetScatterplot`
 - `WidgetPeriodicTable`
 
+<!-- fmt: off -->
 ```python
---8 < --'examples/plugins/dashboard.py:13:'
+--8<-- "examples/plugins/dashboard.py:13:"
 ```
+<!-- fmt: on -->
 
 ## App reference
 

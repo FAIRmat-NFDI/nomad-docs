@@ -269,6 +269,8 @@ The following arguments are acceptable for `ArchiveQuery`.
     This examples uses the new `workflow2` workflow system. This is still under development
     and this example might not yet produce results on the public nomad data.
 
+<!-- fmt: off -->
 ```python
---8 < --'examples/archive/archive_query.py'
+--8<-- "examples/archive/archive_query.py"
 ```
+<!-- fmt: on -->
