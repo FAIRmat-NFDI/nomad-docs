@@ -32,7 +32,6 @@ from nomad.config.models.plugins import ParserEntryPoint
 
 
 class MyParserEntryPoint(ParserEntryPoint):
-
     def load(self):
         from nomad_example.parsers.myparser import MyParser
 
@@ -40,9 +39,9 @@ class MyParserEntryPoint(ParserEntryPoint):
 
 
 myparser = MyParserEntryPoint(
-    name = 'MyParser',
-    description = 'My custom parser.',
-    mainfile_name_re = '.*\.myparser',
+    name='MyParser',
+    description='My custom parser.',
+    mainfile_name_re='.*\.myparser',
 )
 ```
 
@@ -102,10 +101,10 @@ If you are using the `MatchingParser` interface you can configure which files ar
 
 ```python
 myparser = MyParserEntryPoint(
-    name = 'MyParser',
-    description = 'My custom parser.',
-    mainfile_name_re = '.*\.myparser',
-    mainfile_contents_re = '\s*\n\s*HELLO WORLD',
+    name='MyParser',
+    description='My custom parser.',
+    mainfile_name_re='.*\.myparser',
+    mainfile_contents_re='\s*\n\s*HELLO WORLD',
 )
 ```
 
@@ -330,6 +329,7 @@ class Model(ArchiveSection):
         shape=[3, 3],
         description="""Lattice vectors of the model system.""",
     )
+
 
 class Output(ArchiveSection):
     m_def = Section()

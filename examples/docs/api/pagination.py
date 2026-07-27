@@ -2,17 +2,9 @@ import requests
 
 base_url = 'http://nomad-lab.eu/prod/v1/api/v1'
 json_body = {
-    'query': {
-        'results.material.elements': {
-            'all': ['Ti', 'O']
-        }
-    },
-    'pagination': {
-        'page_size': 10
-    },
-    'required': {
-        'include': ['results.material.chemical_formula_hill']
-    }
+    'query': {'results.material.elements': {'all': ['Ti', 'O']}},
+    'pagination': {'page_size': 10},
+    'required': {'include': ['results.material.chemical_formula_hill']},
 }
 
 formulas = set()

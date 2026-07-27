@@ -66,12 +66,15 @@ The entry point class overrides `load()` to instantiate and return the parser. C
 ```py
 from nomad.config.models.plugins import ParserEntryPoint
 
+
 class MicroscopyParserEntryPoint(ParserEntryPoint):
     def load(self):
         from nomad_plugin_tutorials.parsers.tutorial_1.parsers.parser import (
             OpticalMicroscopyParser,
         )
+
         return OpticalMicroscopyParser(**self.model_dump())
+
 
 microscopy = MicroscopyParserEntryPoint(
     name='Parser Tutorial 1: Microscopy Parser',

@@ -34,10 +34,7 @@ choice is controlled by the `unit` attribute of a
 ```python
 from nomad.metainfo import Quantity
 
-my_energies = Quantity(
-  dtype=float,
-  unit='eV'
-)
+my_energies = Quantity(dtype=float, unit='eV')
 ```
 
 The data will always be stored in this unit and will be returned in this unit
@@ -62,11 +59,7 @@ from nomad.metainfo import MSection, Quantity
 
 # Here is a section with a quantity definition
 class MySection(MSection):
-    my_energies = Quantity(
-        type=np.float64,
-        shape=[2],
-        unit='eV'
-    )
+    my_energies = Quantity(type=np.float64, shape=[2], unit='eV')
 
 
 my_section = MySection()
@@ -110,8 +103,6 @@ Currently the display unit is controlled through the [ELN annotation](../../../r
 
 ```python
 distance = Quantity(
-  dtype=float,
-  unit='meter',
-  a_eln=dict(defaultDisplayUnit='millimeter')
+    dtype=float, unit='meter', a_eln=dict(defaultDisplayUnit='millimeter')
 )
 ```

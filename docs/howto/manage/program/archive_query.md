@@ -104,7 +104,9 @@ Some applications, such as Jupyter Notebook, may run a global/top level event lo
 one can use the asynchronous interface.
 
 ```python
-number_of_entries = await query.async_fetch()  # indicative number n applies: async_fetch(n)
+number_of_entries = (
+    await query.async_fetch()
+)  # indicative number n applies: async_fetch(n)
 results = await query.async_download()  # indicative number n applies: async_download(n)
 ```
 
@@ -133,16 +135,14 @@ required = {
     'workflow': {
         'calculation_result_ref': {
             'energy': '*',
-            'system_ref': {
-                'chemical_composition_reduced': '*'
-            }
+            'system_ref': {'chemical_composition_reduced': '*'},
         }
     }
 }
 
 query = {
     'results.method.simulation.program_name': 'VASP',
-    'results.material.elements': ['Ti']
+    'results.material.elements': ['Ti'],
 }
 
 query = ArchiveQuery(query=query, required=required, page_size=10, results_max=10000)
@@ -203,7 +203,9 @@ Downloading 5 entries...  [####################################]  100%
 Now that we have downloaded a few entries, we can convert them into pandas dataframe.
 
 ```python
-dataframes = query.entries_to_dataframe(keys_to_filter=['workflow2.results.calculation_result_ref'])
+dataframes = query.entries_to_dataframe(
+    keys_to_filter=['workflow2.results.calculation_result_ref']
+)
 print(dataframes)
 ```
 
@@ -268,5 +270,5 @@ The following arguments are acceptable for `ArchiveQuery`.
     and this example might not yet produce results on the public nomad data.
 
 ```python
---8 < -- "examples/archive/archive_query.py"
+--8 < --'examples/archive/archive_query.py'
 ```

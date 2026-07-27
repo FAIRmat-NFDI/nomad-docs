@@ -189,7 +189,7 @@ allows you to add functions that are called when your data is normalized.
 Here is an example:
 
 ```python
---8<-- "examples/archive/custom_schema.py"
+--8 < --'examples/archive/custom_schema.py'
 ```
 
 To add a `normalize` function, your section has to inherit from `ArchiveSection` which

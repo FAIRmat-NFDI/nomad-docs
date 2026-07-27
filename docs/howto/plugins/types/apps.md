@@ -31,11 +31,7 @@ The entry point defines basic information about your app and is used to automati
 from nomad.config.models.plugins import AppEntryPoint
 from nomad.config.models.ui import App
 
-myapp = AppEntryPoint(
-    name = 'MyApp',
-    description = 'My custom app.',
-    app = App(...)
-)
+myapp = AppEntryPoint(name='MyApp', description='My custom app.', app=App(...))
 ```
 
 Here we have instantiated an object `myapp` in which you specify the default parameterization and other details about the app. In the reference you can see all of the available [configuration options for an `AppEntryPoint`](../../../reference/plugins.md#appentrypoint).
@@ -52,29 +48,27 @@ myapp = "nomad_example.apps:myapp"
 The definition fo the actual app is given as an instance of the `App` class specified as part of the entry point. A full breakdown of the model is given below in the [app reference](#app-reference), but here is a small example:
 
 ```python
---8<-- "examples/plugins/app.py"
+--8 < --'examples/plugins/app.py'
 ```
 
 !!! tip
     If you want to load an app definition from a YAML file, this can be easily done with the pydantic `parse_obj` function:
 
     ```python
-        import yaml
-        from nomad.config.models.plugins import AppEntryPoint
-        from nomad.config.models.ui import App
+    import yaml
+    from nomad.config.models.plugins import AppEntryPoint
+    from nomad.config.models.ui import App
 
-        yaml_data = """
-            label: My App
-            path: myapp
-            category: Theory
-        """
-        myapp = AppEntryPoint(
-            name='MyApp',
-            description='App defined using the new plugin mechanism.',
-            app=App.parse_obj(
-                yaml.safe_load(yaml_data)
-            ),
-        )
+    yaml_data = """
+        label: My App
+        path: myapp
+        category: Theory
+    """
+    myapp = AppEntryPoint(
+        name='MyApp',
+        description='App defined using the new plugin mechanism.',
+        app=App.parse_obj(yaml.safe_load(yaml_data)),
+    )
     ```
 
 ### Loading quantity definitions into an app
@@ -93,7 +87,7 @@ Each schema has a unique name within the NOMAD ecosystem, which is needed to tar
 The quantities from schemas may be included or excluded by using the [`SearchQuantities`](#app-reference) field in the app config. This option supports a wildcard/glob syntax for including/excluding certain search quantities. For example, to include all search quantities from the Python schema defined in the class `nomad_example.schema_packages.mypackage.MySchema`, you could use:
 
 ```python
-search_quantities=SearchQuantities(
+search_quantities = SearchQuantities(
     include=['*#nomad_example.schema_packages.mypackage.MySchema']
 )
 ```
@@ -101,9 +95,7 @@ search_quantities=SearchQuantities(
 The same thing for a YAML schema could be achieved with:
 
 ```python
-search_quantities=SearchQuantities(
-    include=['*#entry_id:<entry_id>.MySchema']
-)
+search_quantities = SearchQuantities(include=['*#entry_id:<entry_id>.MySchema'])
 ```
 
 ### Using loaded search quantity definitions
@@ -122,7 +114,7 @@ the path without the need for specifying a schema, e.g. `results.material.symmet
 For example, one could configure the results table to show a new column using one of the search quantities with:
 
 ```python
---8<-- "examples/plugins/columns.py"
+--8 < --'examples/plugins/columns.py'
 ```
 
 ### Narrowing down search results in the app
@@ -130,17 +122,13 @@ For example, one could configure the results table to show a new column using on
 The search results that will show up in the app can be narrowed down by passing a dictionary to the `filters_locked` option. In the example app, only entries that use `MySchema` are included.
 
 ```python
-filters_locked={
-    "section_defs.definition_qualified_name": [schema]
-}
+filters_locked = {'section_defs.definition_qualified_name': [schema]}
 ```
 
 It is also possible to filter by quantities defined in the [`results`](../../../reference/glossary.md#results-section-results) section. For example, if you want to limit your app to entries that have the property `catalytic` filled in the `results` section:
 
 ```python
-filters_locked={
-    "quantities": ["results.properties.catalytic"]
-}
+filters_locked = {'quantities': ['results.properties.catalytic']}
 ```
 
 ### Menu
@@ -148,7 +136,7 @@ filters_locked={
 The `menu` field controls the structure of the menu shown on the left side of the search interface. Menus have a controllable width, and they contain items that are displayed on a 12-based grid. You can also nest menus within each other. For example, this defines a menu with two levels:
 
 ```python
---8<-- "examples/plugins/menu.py"
+--8 < --'examples/plugins/menu.py'
 ```
 
 The following items are supported in menus, and you can read more about them in the App reference:
@@ -173,7 +161,7 @@ The following items are supported in menus, and you can read more about them in 
 - `WidgetPeriodicTable`
 
 ```python
---8<-- "examples/plugins/dashboard.py:13:"
+--8 < --'examples/plugins/dashboard.py:13:'
 ```
 
 ## App reference

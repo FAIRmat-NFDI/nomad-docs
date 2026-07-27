@@ -255,9 +255,10 @@ sample section:
 
     ```python
     class MySample(CompositeSystem, EntryData):
-        '''
+        """
         A custom sample section.
-        '''
+        """
+
         m_def = Section(
             a_template=dict(
                 sample_identifiers=dict(),
