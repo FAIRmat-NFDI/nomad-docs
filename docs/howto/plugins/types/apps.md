@@ -49,7 +49,7 @@ The definition fo the actual app is given as an instance of the `App` class spec
 
 <!-- fmt: off -->
 ```python
---8<-- "examples/plugins/app.py"
+--8<-- 'examples/plugins/app.py'
 ```
 <!-- fmt: on -->
 
@@ -81,7 +81,7 @@ Quantities that are indexed and can thus be searched are in this document referr
 
 <!-- fmt: off -->
 ```python
---8<-- "examples/plugins/column.py"
+--8<-- 'examples/plugins/column.py'
 ```
 <!-- fmt: on -->
 
@@ -112,7 +112,7 @@ The `menu` field controls the structure of the menu shown on the left side of th
 
 <!-- fmt: off -->
 ```python
---8<-- "examples/plugins/menu.py"
+--8<-- 'examples/plugins/menu.py'
 ```
 <!-- fmt: on -->
 
@@ -131,7 +131,7 @@ The app may display widgets which contain terms or numerical information and can
 
 <!-- fmt: off -->
 ```python
---8<-- "examples/plugins/widgets.py"
+--8<-- 'examples/plugins/widgets.py'
 ```
 <!-- fmt: on -->
 
@@ -149,7 +149,7 @@ Controls columns show in the table of search results. Here you can control the o
 
 <!-- fmt: off -->
 ```python
---8<-- "examples/plugins/columns.py"
+--8<-- 'examples/plugins/columns.py'
 ```
 <!-- fmt: on -->
 
@@ -161,7 +161,7 @@ You may add specific, always-visible actions for each result table row. Here is 
 
 <!-- fmt: off -->
 ```python
---8<-- "examples/plugins/rows.py"
+--8<-- 'examples/plugins/rows.py'
 ```
 <!-- fmt: on -->
 

@@ -190,7 +190,7 @@ Here is an example:
 
 <!-- fmt: off -->
 ```python
---8<-- "examples/archive/custom_schema.py"
+--8<-- 'examples/archive/custom_schema.py'
 ```
 <!-- fmt: on -->
 
@@ -202,7 +202,7 @@ support schemas with multiple inheritance.
 If we parse an archive like this:
 
 ```yaml
---8<-- "examples/archive/custom_data.archive.yaml"
+--8<-- 'examples/archive/custom_data.archive.yaml'
 ```
 
 we will get a final normalized archive that contains our data like this:

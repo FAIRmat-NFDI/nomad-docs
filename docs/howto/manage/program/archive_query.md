@@ -271,6 +271,6 @@ The following arguments are acceptable for `ArchiveQuery`.
 
 <!-- fmt: off -->
 ```python
---8<-- "examples/archive/archive_query.py"
+--8<-- 'examples/archive/archive_query.py'
 ```
 <!-- fmt: on -->
