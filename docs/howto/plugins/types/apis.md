@@ -41,7 +41,6 @@ from nomad.config.models.plugins import APIEntryPoint
 
 
 class MyAPIEntryPoint(APIEntryPoint):
-
     def load(self):
         from nomad_example.apis.myapi import app
 
@@ -49,9 +48,9 @@ class MyAPIEntryPoint(APIEntryPoint):
 
 
 myapi = MyAPIEntryPoint(
-    prefix = 'myapi',
-    name = 'MyAPI',
-    description = 'My custom API.',
+    prefix='myapi',
+    name='MyAPI',
+    description='My custom API.',
 )
 ```
 
@@ -76,13 +75,12 @@ from nomad.config import config
 
 myapi_entry_point = config.get_plugin_entry_point('nomad_example.apis:myapi')
 
-app = FastAPI(
-    root_path=f'{config.services.api_base_path}/{myapi_entry_point.prefix}'
-)
+app = FastAPI(root_path=f'{config.services.api_base_path}/{myapi_entry_point.prefix}')
+
 
 @app.get('/')
 async def root():
-    return {"message": "Hello World"}
+    return {'message': 'Hello World'}
 ```
 
 Read the official [FastAPI documentation](https://fastapi.tiangolo.com/tutorial/){:target="_blank" rel="noopener"} to learn how to build apps and APIs with FastAPI.
@@ -107,12 +105,10 @@ from nomad.config import config
 
 myapi_entry_point = config.get_plugin_entry_point('nomad_example.apis:myapi')
 
-app = FastAPI(
-    root_path=f'{config.services.api_base_path}/{myapi_entry_point.prefix}'
-)
+app = FastAPI(root_path=f'{config.services.api_base_path}/{myapi_entry_point.prefix}')
 
 static_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), 'static'))
-app.mount("/static", StaticFiles(directory=static_folder), name="static")
+app.mount('/static', StaticFiles(directory=static_folder), name='static')
 ```
 
 Then e.g. the file `static/static_page.html` will be available at:
@@ -152,7 +148,9 @@ from nomad.auth.scopes import Scope
 
 app = FastAPI(
     ...,
-    dependencies=[Depends(get_current_user([Scope.UPLOADS_READ], allow_anonymous=False))],
+    dependencies=[
+        Depends(get_current_user([Scope.UPLOADS_READ], allow_anonymous=False))
+    ],
 )
 ```
 
@@ -170,12 +168,13 @@ from nomad.auth.scopes import Scope
 
 app = FastAPI(...)
 
-@app.get("/uploads")
+
+@app.get('/uploads')
 async def list_uploads(
     user: Annotated[
         User,
         Depends(get_current_user([Scope.UPLOADS_READ], allow_anonymous=False)),
     ],
 ):
-    return {"message": "Protected endpoint"}
+    return {'message': 'Protected endpoint'}
 ```

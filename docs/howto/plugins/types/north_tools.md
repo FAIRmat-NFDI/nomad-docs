@@ -49,7 +49,6 @@ in `*/north_tools/my_tool/__init__.py` like this:
 
 <!-- markdownlint-disable MD044 -->
 ```py
-
 from nomad.config.models.north import NORTHTool
 from nomad.config.models.plugins import NORTHToolEntryPoint
 
@@ -61,9 +60,7 @@ tool = NORTHTool(
     icon='logo/jupyter.svg',
     image_pull_policy='Always',
     default_url='/lab',
-    maintainer=[
-        {'email': 'fairmat@physik.hu-berlin.de', 'name': 'John Doe'}
-    ],
+    maintainer=[{'email': 'fairmat@physik.hu-berlin.de', 'name': 'John Doe'}],
     mount_path='/home/jovyan',
     privileged=False,
     with_path=True,

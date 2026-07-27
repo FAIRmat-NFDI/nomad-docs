@@ -98,10 +98,11 @@ from nomad.config.models.plugins import ParserEntryPoint
 class MyParserEntryPoint(ParserEntryPoint):
     parameter: int = Field(0, description='Config parameter for this parser.')
 
+
 myparser = MyParserEntryPoint(
-    name = 'MyParser',
-    description = 'My custom parser.',
-    mainfile_name_re = '.*\.myparser',
+    name='MyParser',
+    description='My custom parser.',
+    mainfile_name_re='.*\.myparser',
 )
 ```
 
@@ -123,7 +124,6 @@ The configuration class has a `load` method that returns the entry point resourc
 
 ```python
 class MyParserEntryPoint(ParserEntryPoint):
-
     def load(self):
         from nomad_example.parsers.myparser import MyParser
 

@@ -75,7 +75,6 @@ from nomad.config.models.plugins import DashboardEntryPoint
 
 
 class HelloDashboardEntryPoint(DashboardEntryPoint):
-
     def load(self):
         from nomad_example.dashboards.hello import app
 
@@ -200,6 +199,7 @@ _DIST = Path(__file__).parent / 'dist'
 app = FastAPI()
 app.mount('/assets', StaticFiles(directory=_DIST / 'assets'), name='assets')
 
+
 @app.get('/{_full_path:path}')
 async def spa_fallback(_full_path: str):
     return FileResponse(_DIST / 'index.html')
@@ -265,13 +265,13 @@ hides the other action button entirely.
 
 ```python
 # Embedded is the primary action; clicking the row opens the iframe view.
-launch_modes=['embedded', 'tab']
+launch_modes = ['embedded', 'tab']
 
 # Tab is the primary action; the iframe option is still offered.
-launch_modes=['tab', 'embedded']
+launch_modes = ['tab', 'embedded']
 
 # Embedded only — no "open in new tab" action will be shown.
-launch_modes=['embedded']
+launch_modes = ['embedded']
 ```
 
 ## Authentication

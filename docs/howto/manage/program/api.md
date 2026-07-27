@@ -84,18 +84,11 @@ base_url = 'http://nomad-lab.eu/prod/v1/api/v1'
 response = requests.post(
     f'{base_url}/entries/query',
     json={
-        'query': {
-            'results.material.elements': {
-                'all': ['Ti', 'O']
-            }
-        },
-        'pagination': {
-            'page_size': 1
-        },
-        'required': {
-            'include': ['entry_id']
-        }
-    })
+        'query': {'results.material.elements': {'all': ['Ti', 'O']}},
+        'pagination': {'page_size': 1},
+        'required': {'include': ['entry_id']},
+    },
+)
 response_json = response.json()
 print(json.dumps(response.json(), indent=2))
 ```
@@ -148,13 +141,12 @@ response = requests.post(
             'workflow': {
                 'calculation_result_ref': {
                     'energy': '*',
-                    'system_ref': {
-                        'chemical_composition': '*'
-                    }
+                    'system_ref': {'chemical_composition': '*'},
                 }
             }
         }
-    })
+    },
+)
 response_json = response.json()
 print(json.dumps(response_json, indent=2))
 ```
@@ -326,15 +318,9 @@ Let's consider a search for entries as an example.
 response = requests.post(
     f'{base_url}/entries/query',
     json={
-        'query': {
-            'results.material.elements': {
-                'all': ['Ti', 'O']
-            }
-        },
-        'pagination': {
-            'page_size': 10
-        }
-    }
+        'query': {'results.material.elements': {'all': ['Ti', 'O']}},
+        'pagination': {'page_size': 10},
+    },
 )
 ```
 
@@ -359,16 +345,12 @@ be continued with a follow up request at a certain point characterized by the
 response = requests.post(
     f'{base_url}/entries/query',
     json={
-        'query': {
-            'results.material.elements': {
-                'all': ['Ti', 'O']
-            }
-        },
+        'query': {'results.material.elements': {'all': ['Ti', 'O']}},
         'pagination': {
             'page_size': 10,
-            'page_after_value': '--SZVYOxA2jTu_L-mSxefSQFmeyF'
-        }
-    }
+            'page_after_value': '--SZVYOxA2jTu_L-mSxefSQFmeyF',
+        },
+    },
 )
 ```
 
@@ -378,7 +360,7 @@ Here is a full example that collects the first 100 formulas from entries that ma
 certain query by paginating.
 
 ```python
---8<-- "examples/docs/api/pagination.py"
+--8 < --'examples/docs/api/pagination.py'
 ```
 
 ## Search for entries
@@ -416,13 +398,12 @@ response = requests.post(
             'workflow': {
                 'calculation_result_ref': {
                     'energy': '*',
-                    'system_ref': {
-                        'chemical_composition': '*'
-                    }
+                    'system_ref': {'chemical_composition': '*'},
                 }
             }
-        }
-    })
+        },
+    },
+)
 ```
 
 {{ doc_snippet('archive-required') }}

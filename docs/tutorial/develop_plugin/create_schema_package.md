@@ -66,6 +66,7 @@ Let's start by defining the results section:
 ```py
 from nomad.datamodel.data import ArchiveSection
 
+
 class BlackbodyResults(ArchiveSection):
     """
     Results of the Planck spectral radiance calculation.
@@ -84,10 +85,12 @@ For example, we can define scalar `temperature` and 1D-array `wavelength` quanti
 from nomad.datamodel.data import ArchiveSection
 from nomad.metainfo import Quantity
 
+
 class BlackbodyResults(ArchiveSection):
     """
     Results of the Planck spectral radiance calculation.
     """
+
     temperature = Quantity(
         type=float,
         unit='K',
@@ -112,6 +115,7 @@ class BlackbodyResults(ArchiveSection):
         """
         Results of the Planck spectral radiance calculation.
         """
+
         temperature = Quantity(
             type=float,
             unit='K',
@@ -152,6 +156,7 @@ Let's define a new class `BlackbodyResultsPlot` that inherits from both `Blackbo
 
 ```py
 from nomad.datamodel.metainfo.plot import PlotSection
+
 
 class BlackbodyResultsPlot(BlackbodyResults, PlotSection):
     """
@@ -274,6 +279,7 @@ results = SubSection(section_def=BlackbodyResultsPlot)
         """
         ELN schema for a Planck blackbody radiation calculation.
         """
+
         m_def = Section(label="Blackbody Radiation (Planck's Law)")
 
         name = Quantity(
@@ -375,14 +381,15 @@ from nomad.metainfo import SchemaPackage
 
 m_package = SchemaPackage()  # instantiate SchemaPackage
 
-class BlackbodyResults(...):
-    ...
 
-class BlackbodyResultsPlot(...):
-    ...
+class BlackbodyResults(...): ...
 
-class BlackbodyRadiation(...):
-    ...
+
+class BlackbodyResultsPlot(...): ...
+
+
+class BlackbodyRadiation(...): ...
+
 
 m_package.__init_metainfo__()  # initialize the metainfo from section classes
 ```
@@ -399,6 +406,7 @@ We inherit from `SchemaPackageEntryPoint` and override its `load()` method to re
 ```py
 from nomad.config.models.plugins import SchemaPackageEntryPoint
 
+
 class BlackbodyRadiationSchemaEntryPoint(SchemaPackageEntryPoint):
     def load(self):
         from nomad_plugin_tutorials.schema.schema_package import (
@@ -406,6 +414,7 @@ class BlackbodyRadiationSchemaEntryPoint(SchemaPackageEntryPoint):
         )
 
         return m_package
+
 
 blackbody_radiation = BlackbodyRadiationSchemaEntryPoint(
     name='Blackbody Radiation Schema',

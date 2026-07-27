@@ -34,20 +34,20 @@ A PAT can be created via the API with the [keycloak access token](#keycloak-acce
 import requests
 
 response = requests.post(
-    "{{ nomad_url() }}/v1/auth/pats",
-    headers={"Authorization": "Bearer <keycloak-access-token>"},
+    '{{ nomad_url() }}/v1/auth/pats',
+    headers={'Authorization': 'Bearer <keycloak-access-token>'},
     json={
-        "metadata": {
-            "name": "My script token",
-            "scopes": ["uploads:read", "uploads:write"]
+        'metadata': {
+            'name': 'My script token',
+            'scopes': ['uploads:read', 'uploads:write'],
         },
-        "expires_in_days": 30
+        'expires_in_days': 30,
     },
 )
 response.raise_for_status()
 
 pat = response.json()
-raw_token = pat["raw_token"]
+raw_token = pat['raw_token']
 ```
 
 ### Use a PAT
@@ -70,8 +70,8 @@ import os
 import requests
 
 response = requests.get(
-    "{{ nomad_url() }}/v1/uploads",
-    headers={"Authorization": f"Bearer {os.environ['NOMAD_PAT']}"},
+    '{{ nomad_url() }}/v1/uploads',
+    headers={'Authorization': f'Bearer {os.environ["NOMAD_PAT"]}'},
 )
 response.raise_for_status()
 ```
@@ -118,21 +118,21 @@ import os
 import requests
 
 response = requests.get(
-    "{{ nomad_url() }}/v1/auth/pats",
-    headers={"Authorization": f"Bearer {os.environ['NOMAD_PAT']}"},
+    '{{ nomad_url() }}/v1/auth/pats',
+    headers={'Authorization': f'Bearer {os.environ["NOMAD_PAT"]}'},
     params={
-        "search": "ci",
-        "state": "active",
-        "order_by": "created_desc",
-        "page_size": 20,
-        "page": 1,
+        'search': 'ci',
+        'state': 'active',
+        'order_by': 'created_desc',
+        'page_size': 20,
+        'page': 1,
     },
 )
 response.raise_for_status()
 
 result = response.json()
 
-tokens = result["data"]
+tokens = result['data']
 ```
 
 You can filter and sort PATs using query parameters, see the API dashboard for available options and examples.
@@ -144,11 +144,11 @@ You can retrieve metadata for a specific PAT with its ID:
 ```python
 import requests
 
-pat_id = "<pat-id>"
+pat_id = '<pat-id>'
 
 response = requests.get(
-    f"{{ nomad_url() }}/v1/auth/pats/{pat_id}",
-    headers={"Authorization": "Bearer <keycloak-access-token>"},
+    f'{{ nomad_url() }}/v1/auth/pats/{pat_id}',
+    headers={'Authorization': 'Bearer <keycloak-access-token>'},
 )
 response.raise_for_status()
 
@@ -162,11 +162,11 @@ To revoke a PAT:
 ```python
 import requests
 
-pat_id = "<pat-id>"
+pat_id = '<pat-id>'
 
 response = requests.delete(
-    f"{{ nomad_url() }}/v1/auth/pats/{pat_id}",
-    headers={"Authorization": "Bearer <keycloak-access-token>"},
+    f'{{ nomad_url() }}/v1/auth/pats/{pat_id}',
+    headers={'Authorization': 'Bearer <keycloak-access-token>'},
 )
 response.raise_for_status()
 ```
@@ -178,16 +178,16 @@ To replace an existing PAT with a new one:
 ```python
 import requests
 
-pat_id = "<pat-id>"
+pat_id = '<pat-id>'
 
 response = requests.post(
-    f"{{ nomad_url() }}/v1/auth/pats/{pat_id}/rotate",
-    headers={"Authorization": "Bearer <keycloak-access-token>"},
+    f'{{ nomad_url() }}/v1/auth/pats/{pat_id}/rotate',
+    headers={'Authorization': 'Bearer <keycloak-access-token>'},
 )
 response.raise_for_status()
 
 new_pat = response.json()
-new_raw_token = new_pat["raw_token"]
+new_raw_token = new_pat['raw_token']
 ```
 
 !!! warning
@@ -212,24 +212,24 @@ import os
 import requests
 
 response = requests.post(
-    "{{ nomad_url() }}/v1/auth/token",
+    '{{ nomad_url() }}/v1/auth/token',
     data={
-        "username": os.getenv("NOMAD_USERNAME"),
-        "password": os.getenv("NOMAD_PASSWORD"),
-        "grant_type": "password",
+        'username': os.getenv('NOMAD_USERNAME'),
+        'password': os.getenv('NOMAD_PASSWORD'),
+        'grant_type': 'password',
     },
 )
 response.raise_for_status()
 
-token = response.json()["access_token"]
+token = response.json()['access_token']
 
 response = requests.get(
-    "{{ nomad_url() }}/v1/uploads",
-    headers={"Authorization": f"Bearer {token}"},
+    '{{ nomad_url() }}/v1/uploads',
+    headers={'Authorization': f'Bearer {token}'},
 )
 response.raise_for_status()
 
-uploads = response.json()["data"]
+uploads = response.json()['data']
 ```
 
 If you have the [NOMAD Python package](../../../howto/oasis/install.md#how-to-install-the-nomad-python-library)
@@ -246,15 +246,15 @@ import requests
 from nomad.client import Auth
 
 response = requests.get(
-    "{{ nomad_url() }}/v1/uploads",
+    '{{ nomad_url() }}/v1/uploads',
     auth=Auth(
-        user=os.getenv("NOMAD_USERNAME"),
-        password=os.getenv("NOMAD_PASSWORD"),
+        user=os.getenv('NOMAD_USERNAME'),
+        password=os.getenv('NOMAD_PASSWORD'),
     ),
 )
 response.raise_for_status()
 
-uploads = response.json()["data"]
+uploads = response.json()['data']
 ```
 
 ## App token

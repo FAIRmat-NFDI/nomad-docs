@@ -25,6 +25,7 @@ implemented. The following example illustrates how to use these.
 from nomad.datamodel import ArchiveSection
 from nomad.datamodel.hdf5 import HDF5Reference
 
+
 class LargeData(ArchiveSection):
     value = Quantity(type=HDF5Reference)
 ```
@@ -57,9 +58,7 @@ path = 'external.h5#path/to/data'
 HDF5Reference.write_dataset(archive, data, path)
 archive.data.value = path
 HDF5Reference.read_dataset(archive, path)
-array([[1., 0., 0.],
-       [0., 1., 0.],
-       [0., 0., 1.]])
+array([[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]])
 ```
 
 We use `write_dataset` to write our data into a raw HDF5 file in `test_upload` with the
@@ -82,6 +81,7 @@ To use HDF5 storage for archive quantities, one should use `HDF5Dataset`.
 
 ```python
 from nomad.datamodel.hdf5 import HDF5Dataset
+
 
 class LargeData(ArchiveSection):
     value = Quantity(type=HDF5Dataset)
@@ -110,6 +110,7 @@ In the second case, the dataset created in the HDF5 file will contain a link and
 
 ```python
 from nomad.datamodel.hdf5 import HDF5Dataset
+
 
 class LargeData(ArchiveSection):
     value_1 = Quantity(type=HDF5Dataset)
@@ -175,23 +176,17 @@ all sub sections and `**` to recursively search sub sections.
 
 ```python
 class MySubSection(ArchiveSection):
-
     m_def = Section(a_h5web=H5WebAnnotation(axes='x', signal='y'))
 
-    x = Quantity(
-        type=HDF5Reference
-    )
+    x = Quantity(type=HDF5Reference)
 
-    y = Quantity(
-        type=HDF5Reference
-    )
+    y = Quantity(type=HDF5Reference)
+
 
 class MySection(ArchiveSection):
-
     m_def = Section(a_h5web=H5WebAnnotation(paths=['my_sub/0']))
 
     my_sub = SubSection(sub_section=MySubSection, repeats=True)
-
 ```
 
 ## Metadata for large quantities

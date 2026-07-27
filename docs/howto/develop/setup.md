@@ -550,21 +550,18 @@ from nomad import infrastructure
 from nomad.utils import create_uuid
 from nomad.utils.exampledata import ExampleData
 
+
 def search():
     infrastructure.setup()
-    main_author = infrastructure.user_management.get_user(username="test")
+    main_author = infrastructure.user_management.get_user(username='test')
     data = ExampleData(main_author=main_author)
     upload_id = create_uuid()
     data.create_upload(upload_id=upload_id, published=True, embargo_length=0)
     data.create_entry(
         upload_id=upload_id,
         entry_id=create_uuid(),
-        mainfile="test_content/test_entry/mainfile.json",
-        results={
-            "material": {"elements": ["C", "H"]},
-            "method": {},
-            "properties": {}
-        }
+        mainfile='test_content/test_entry/mainfile.json',
+        results={'material': {'elements': ['C', 'H']}, 'method': {}, 'properties': {}},
     )
     data.save()
 ```

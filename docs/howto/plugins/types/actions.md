@@ -780,6 +780,7 @@ When a user triggers the action, they will be prompted to enter their API key. T
 from temporalio import activity
 from nomad_example.actions.myaction.models import MyActionInput
 
+
 @activity.defn
 async def my_activity(data: MyActionInput):
     # Get the secret value
@@ -795,6 +796,7 @@ Since NOMAD uses `model_dump_json` to serialize the input models, you must provi
 
 ```python
 from pydantic import BaseModel, Field, SecretStr, SecretBytes, field_serializer
+
 
 class SimpleModelDumpable(BaseModel):
     password: SecretStr

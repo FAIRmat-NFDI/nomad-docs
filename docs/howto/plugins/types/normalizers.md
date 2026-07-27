@@ -31,7 +31,6 @@ from nomad.config.models.plugins import NormalizerEntryPoint
 
 
 class MyNormalizerEntryPoint(NormalizerEntryPoint):
-
     def load(self):
         from nomad_example.normalizers.mynormalizer import MyNormalizer
 
@@ -39,8 +38,8 @@ class MyNormalizerEntryPoint(NormalizerEntryPoint):
 
 
 mynormalizer = MyNormalizerEntryPoint(
-    name = 'MyNormalizer',
-    description = 'My custom normalizer.',
+    name='MyNormalizer',
+    description='My custom normalizer.',
 )
 ```
 
@@ -90,6 +89,7 @@ The minimal requirement is that your class has a `normalize` function, which as 
 from nomad.atomutils import get_volume
 from nomad.normalizing import SystemBasedNormalizer
 
+
 class UnitCellVolumeNormalizer(SystemBasedNormalizer):
     def _normalize_system(self, system, is_representative):
         system.unit_cell_volume = get_volume(system.lattice_vectors.magnitude)
@@ -103,6 +103,7 @@ Of course, if you add new information to the archive, this also needs to be defi
 import numpy as np
 from nomad.datamodel.metainfo import runschema
 from nomad.metainfo import Section, Quantity
+
 
 class UnitCellVolumeSystem(runschema.system.System):
     m_def = Section(extends_base_section=True)

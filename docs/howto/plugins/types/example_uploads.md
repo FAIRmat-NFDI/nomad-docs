@@ -31,10 +31,10 @@ The entry point is an instance of an `ExampleUploadEntryPoint` or its subclass. 
 from nomad.config.models.plugins import ExampleUploadEntryPoint
 
 myexampleupload = ExampleUploadEntryPoint(
-    title = 'My Example Upload',
-    category = 'Examples',
-    description = 'Description of this example upload.',
-    resources=['example_uploads/getting_started/*']
+    title='My Example Upload',
+    category='Examples',
+    description='Description of this example upload.',
+    resources=['example_uploads/getting_started/*'],
 )
 ```
 
@@ -67,14 +67,13 @@ There are three main ways to include data in an example upload, and you can also
 
     # Include a file/folder into a specific location within the upload
     resources = UploadResource(
-        path='example_uploads/getting_started',
-        target='upload_subfolder'
+        path='example_uploads/getting_started', target='upload_subfolder'
     )
 
     # Include multiple files/folders. The resources will be added in the given order.
     resources = [
         'example_uploads/getting_started/README.md',
-        'example_uploads/getting_started/data.txt'
+        'example_uploads/getting_started/data.txt',
     ]
     ```
 
@@ -94,8 +93,7 @@ There are three main ways to include data in an example upload, and you can also
 
     # Include a file into a specific location within the upload
     resources = UploadResource(
-        path='http://my_large_file_address.zip',
-        target='upload_subfolder'
+        path='http://my_large_file_address.zip', target='upload_subfolder'
     )
 
     # Include multiple online files
@@ -114,7 +112,6 @@ There are three main ways to include data in an example upload, and you can also
 
 
     class MyExampleUploadEntryPoint(ExampleUploadEntryPoint):
-
         def load(self, upload_path: str):
             """Custom load function that generates a data file on the fly."""
             filepath = os.path.join(upload_path, 'my_large_data.npy')

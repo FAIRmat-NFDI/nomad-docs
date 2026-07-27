@@ -19,13 +19,13 @@ class Material(MSection):
     ...
     elements = Quantity(
         type=MEnum(chemical_symbols),
-        shape=["0..*"],
+        shape=['0..*'],
         default=[],
         description='Names of the different elements present in the structure.',
         a_elasticsearch=[
             Elasticsearch(material_type, many_all=True),
-            Elasticsearch(suggestion="simple")
-        ]
+            Elasticsearch(suggestion='simple'),
+        ],
     )
 ```
 
@@ -40,14 +40,17 @@ is a version of the `metadata.mainfile` definition as another example:
 
 ```python
 mainfile = metainfo.Quantity(
-    type=str, categories=[MongoEntryMetadata, MongoSystemMetadata],
+    type=str,
+    categories=[MongoEntryMetadata, MongoSystemMetadata],
     description='The path to the mainfile from the root directory of the uploaded files',
     a_elasticsearch=[
         Elasticsearch(_es_field='keyword'),
         Elasticsearch(
             mapping=dict(type='text', analyzer=path_analyzer.to_dict()),
-            field='path', _es_field='')
-    ]
+            field='path',
+            _es_field='',
+        ),
+    ],
 )
 ```
 

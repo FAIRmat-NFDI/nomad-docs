@@ -210,6 +210,7 @@ from nomad.datamodel.metainfo.plot import PlotSection
 from nomad.metainfo import Quantity, Section
 from nomad.datamodel.data import EntryData
 
+
 class CustomSection(PlotSection, EntryData):
     m_def = Section(
         a_plotly_graph_object=[
@@ -217,24 +218,15 @@ class CustomSection(PlotSection, EntryData):
                 'label': 'graph object 1',
                 'data': {'x': '#time', 'y': '#chamber_pressure'},
                 'layout': {
-                    'title': {
-                        'text': 'Plot in section level'
-                    },
-                    'xaxis': {
-                        'title': {
-                            'text': 'x data'
-                        }
-                    },
-                    'yaxis': {
-                        'title': {
-                            'text': 'y data'
-                        }
-                    }
-                }
-            }, {
+                    'title': {'text': 'Plot in section level'},
+                    'xaxis': {'title': {'text': 'x data'}},
+                    'yaxis': {'title': {'text': 'y data'}},
+                },
+            },
+            {
                 'label': 'graph object 2',
-                'data': {'x': '#time', 'y': '#substrate_temperature'}
-            }
+                'data': {'x': '#time', 'y': '#substrate_temperature'},
+            },
         ],
         a_plotly_express={
             'label': 'fig 2',
@@ -242,48 +234,50 @@ class CustomSection(PlotSection, EntryData):
             'method': 'scatter',
             'x': '#substrate_temperature',
             'y': '#chamber_pressure',
-            'color': '#chamber_pressure'
+            'color': '#chamber_pressure',
         },
         a_plotly_subplots={
             'label': 'fig 1',
             'index': 1,
             'parameters': {'rows': 2, 'cols': 2},
-            'layout': {
-                'title': {
-                    'text': 'All plots'
-                }
-            },
+            'layout': {'title': {'text': 'All plots'}},
             'plotly_express': [
                 {
                     'method': 'scatter',
                     'x': '#time',
                     'y': '#chamber_pressure',
-                    'color': '#chamber_pressure'
+                    'color': '#chamber_pressure',
                 },
                 {
                     'method': 'scatter',
                     'x': '#time',
                     'y': '#substrate_temperature',
-                    'color': '#substrate_temperature'
+                    'color': '#substrate_temperature',
                 },
                 {
                     'method': 'scatter',
                     'x': '#substrate_temperature',
                     'y': '#chamber_pressure',
-                    'color': '#chamber_pressure'
+                    'color': '#chamber_pressure',
                 },
                 {
                     'method': 'scatter',
                     'x': '#substrate_temperature',
                     'y': '#chamber_pressure',
-                    'color': '#substrate_temperature'
-                }
-            ]
-        }
+                    'color': '#substrate_temperature',
+                },
+            ],
+        },
     )
-    time = Quantity(type=float, shape=['*'], unit='s', a_eln=dict(component='NumberEditQuantity'))
-    substrate_temperature = Quantity(type=float, shape=['*'], unit='K', a_eln=dict(component='NumberEditQuantity'))
-    chamber_pressure = Quantity(type=float, shape=['*'], unit='Pa', a_eln=dict(component='NumberEditQuantity'))
+    time = Quantity(
+        type=float, shape=['*'], unit='s', a_eln=dict(component='NumberEditQuantity')
+    )
+    substrate_temperature = Quantity(
+        type=float, shape=['*'], unit='K', a_eln=dict(component='NumberEditQuantity')
+    )
+    chamber_pressure = Quantity(
+        type=float, shape=['*'], unit='Pa', a_eln=dict(component='NumberEditQuantity')
+    )
 ```
 
 {{ pydantic_model('nomad.datamodel.metainfo.annotations.PlotAnnotation', heading='### PlotAnnotation (Deprecated)') }}

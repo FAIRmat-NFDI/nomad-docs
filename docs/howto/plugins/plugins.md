@@ -86,7 +86,9 @@ from nomad.config import config
 entry_point = config.get_plugin_entry_point('nomad_example.parsers:myparser')
 
 # Access configuration parameters
-print(f'Parameter value: {entry_point.parameter}')  # Output: Parameter value: custom_value
+print(
+    f'Parameter value: {entry_point.parameter}'
+)  # Output: Parameter value: custom_value
 print(f'Another setting: {entry_point.another_setting}')  # Output: Another setting: 42
 ```
 
