@@ -5,16 +5,16 @@ columns = [
         search_quantity='data.mysection.myquantity#nomad_example.schema_packages.mypackage.MySchema',
         label='My Quantity Name',
         unit='eV',
-        align="left",
+        align='left',
         format=Format(
             decimals= 2,
-            mode="standard"
+            mode='standard'
         ),
         selected=True,
     ),
     Column(
         search_quantity='data.mysection.my_other_quantity#nomad_example.schema_packages.mypackage.MySchema',
-        align="middle",
+        align='middle',
         selected=False,
     ),
 ]

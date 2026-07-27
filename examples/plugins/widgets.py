@@ -30,7 +30,7 @@ dashboard = Dashboard(
             title='Widget Box Plot Title',
             y=Axis(
                 search_quantity=f'data.mysection.mynumericalquantity#{schema}',
-                title='quantity y'
+                title='quantity y',
             ),
             autorange=True,
             subgroup_by_size=5,
