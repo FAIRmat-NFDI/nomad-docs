@@ -6,10 +6,9 @@ from nomad.config.models.ui import (
     Dashboard,
     Layout,
     Menu,
-    MenuItemPeriodicTable,
     MenuItemHistogram,
+    MenuItemPeriodicTable,
     MenuItemTerms,
-    SearchQuantities,
     WidgetHistogram,
 )
 
@@ -28,13 +27,6 @@ myapp = AppEntryPoint(
         description='An app customized for me.',
         # Longer description that can also use markdown
         readme='Here is a much longer description of this app.',
-        # If you want to use quantities from a custom schema, you need to load
-        # the search quantities from it first here. Note that you can use a glob
-        # syntax to load the entire package, or just a single schema from a
-        # package.
-        search_quantities=SearchQuantities(
-            include=['*#nomad_example.schema_packages.mypackage.MySchema'],
-        ),
         # Controls which columns are shown in the results table
         columns=[
             Column(quantity='entry_id', selected=True),
