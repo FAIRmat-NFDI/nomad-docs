@@ -82,7 +82,7 @@ The definition fo the actual app is given as an instance of the `App` class spec
 
 Apps can only display and work on values that are indexed in the NOMAD search index. Not all values can/should be meaningfully indexed, as they would otherwise overcrowd and slow down the search functionality. By default, **apps can work on scalar quantities that are present in the schemas**, as they are automatically indexed. This means that, for example, values from lists or multidimensional arrays are not available for search.
 
-Quantities that are indexed and can thus be searched are in this document referred to as **search quantities**, and the app configuration often refers to them. E.g. to display a specific search quantity as an app column, one would define it like this:
+Quantities that are indexed and can thus be searched are in this document referred to as **search quantities**, and the app configuration often refers to them. E.g. to display a specific search quantity as an [app column](#columns), one would define it like this:
 
 <!-- fmt: off -->
 ```python
@@ -111,6 +111,18 @@ It is also possible to filter by quantities defined in the [`results`](../../../
 filters_locked = {'quantities': ['results.properties.catalytic']}
 ```
 
+### Columns
+
+Controls columns show in the table of search results. Here you can control the order, units, labelling, and the data source for the colums. Here is an example:
+
+<!-- fmt: off -->
+```python
+--8<-- "examples/plugins/columns.py"
+```
+<!-- fmt: on -->
+
+See the [`Column`](#column) and [`Format`](#format) options for more details.
+
 ### Menu
 
 The `menu` field controls the structure of the menu shown on the left side of the search interface. Menus have a controllable width, and they contain items that are displayed on a 12-based grid. You can also nest menus within each other. For example, this defines a menu with two levels:
@@ -133,7 +145,7 @@ The following items are supported in menus, and you can read more about them in 
 
 ### Widgets
 
-The app may display widgets which contain terms or numerical information and can be controlled in size and position. Here is an example of a widget configuration:
+The app may display widgets which contain interactive visualizations about the data and statistics, and can be controlled in size and position. Here is an example of a widget configuration:
 
 <!-- fmt: off -->
 ```python
@@ -149,21 +161,9 @@ These are the available widgets:
 - [`WidgetBoxPlot`](#widgetboxplot): Displays a box plot for a numerical search quantity, optionally grouped and subgrouped by a categorical search quantity.
 - [`WidgetPeriodicTable`](#widgetperiodictable): Displays a periodic table with occurrence of each element using a search quantity that contains chemical element names.
 
-### Columns
-
-Controls columns show in the table of search results. Here you can control the order, units, labelling, and the data source for the colums. Here is an example:
-
-<!-- fmt: off -->
-```python
---8<-- "examples/plugins/columns.py"
-```
-<!-- fmt: on -->
-
-See the [`Column`](#column) and [`Format`](#format) options for more details.
-
 ### Row actions
 
-You may add specific, always-visible actions for each result table row. Here is an example of two actions, one opening up a NORTH tool, and the other for opening up a link.
+You may add specific, always-visible row actions for each result table row. These actions are shown as buttons at the end of the table rows, and can open new pages for different resources linked to the entry. Here is an example of two actions, one opening up a NORTH tool, and the other for opening up a link.
 
 <!-- fmt: off -->
 ```python

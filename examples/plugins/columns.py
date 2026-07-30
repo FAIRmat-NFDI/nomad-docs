@@ -1,8 +1,9 @@
 from nomad.config.models.ui import Column, Format
 
+schema = 'nomad_example.schema_packages.mypackage.MySchema'
 columns = [
     Column(
-        search_quantity='data.mysection.myquantity#nomad_example.schema_packages.mypackage.MySchema',
+        search_quantity=f'data.mysection.myquantity#{schema}',
         label='My Quantity Name',
         unit='eV',
         align='left',
@@ -10,7 +11,7 @@ columns = [
         selected=True,
     ),
     Column(
-        search_quantity='data.mysection.my_other_quantity#nomad_example.schema_packages.mypackage.MySchema',
+        search_quantity=f'data.my_repeated_section[*].myquantity#{schema}',
         align='middle',
         selected=False,
     ),

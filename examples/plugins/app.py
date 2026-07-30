@@ -4,6 +4,7 @@ from nomad.config.models.ui import (
     Axis,
     Column,
     Dashboard,
+    Format,
     Layout,
     Menu,
     MenuItemHistogram,
@@ -30,10 +31,18 @@ myapp = AppEntryPoint(
         # Controls which columns are shown in the results table
         columns=[
             Column(search_quantity='entry_id', selected=True),
-            Column(search_quantity=f'data.section.myquantity#{schema}', selected=True),
+            Column(
+                search_quantity=f'data.mysection.myquantity#{schema}',
+                label='My Quantity Name',
+                unit='eV',
+                align='left',
+                format=Format(decimals=2, mode='standard'),
+                selected=True,
+            ),
             Column(
                 search_quantity=f'data.my_repeated_section[*].myquantity#{schema}',
-                selected=True,
+                align='middle',
+                selected=False,
             ),
             Column(search_quantity='upload_create_time'),
         ],
