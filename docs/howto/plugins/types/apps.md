@@ -80,7 +80,7 @@ The definition fo the actual app is given as an instance of the `App` class spec
 
 ### Search quantities
 
-Apps can only display and work on values that are indexed in the NOMAD search index. Not all values can/should be meaningfully indexed, as they would otherwise overcrowd and slow down the search functionality. By default, **apps can work on scalar quantities that are present in the schemas**, as they are automatically indexed. This means that e.g. values from lists or multidimensional arrays are not available for search.
+Apps can only display and work on values that are indexed in the NOMAD search index. Not all values can/should be meaningfully indexed, as they would otherwise overcrowd and slow down the search functionality. By default, **apps can work on scalar quantities that are present in the schemas**, as they are automatically indexed. This means that, for example, values from lists or multidimensional arrays are not available for search.
 
 Quantities that are indexed and can thus be searched are in this document referred to as **search quantities**, and the app configuration often refers to them. E.g. to display a specific search quantity as an app column, one would define it like this:
 
