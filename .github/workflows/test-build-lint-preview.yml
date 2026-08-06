@@ -46,7 +46,7 @@ jobs:
       - uses: actions/checkout@v7
 
       - name: Check links in markdown files
-        uses: UmbrellaDocs/action-linkspector@v1.5.4
+        uses: UmbrellaDocs/action-linkspector@v1.5.5
         with:
           config_file: .github/workflows/configs/.linkspector.yml
           filter_mode: "nofilter" # check all files (not just added)
