@@ -4,12 +4,12 @@ from nomad.config.models.ui import (
     Axis,
     Column,
     Dashboard,
+    Format,
     Layout,
     Menu,
-    MenuItemPeriodicTable,
     MenuItemHistogram,
+    MenuItemPeriodicTable,
     MenuItemTerms,
-    SearchQuantities,
     WidgetHistogram,
 )
 
@@ -28,22 +28,23 @@ myapp = AppEntryPoint(
         description='An app customized for me.',
         # Longer description that can also use markdown
         readme='Here is a much longer description of this app.',
-        # If you want to use quantities from a custom schema, you need to load
-        # the search quantities from it first here. Note that you can use a glob
-        # syntax to load the entire package, or just a single schema from a
-        # package.
-        search_quantities=SearchQuantities(
-            include=['*#nomad_example.schema_packages.mypackage.MySchema'],
-        ),
         # Controls which columns are shown in the results table
         columns=[
-            Column(quantity='entry_id', selected=True),
-            Column(quantity=f'data.section.myquantity#{schema}', selected=True),
+            Column(search_quantity='entry_id', selected=True),
             Column(
-                quantity=f'data.my_repeated_section[*].myquantity#{schema}',
+                search_quantity=f'data.mysection.myquantity#{schema}',
+                label='My Quantity Name',
+                unit='eV',
+                align='left',
+                format=Format(decimals=2, mode='standard'),
                 selected=True,
             ),
-            Column(quantity='upload_create_time'),
+            Column(
+                search_quantity=f'data.my_repeated_section[*].myquantity#{schema}',
+                align='middle',
+                selected=False,
+            ),
+            Column(search_quantity='upload_create_time'),
         ],
         # Dictionary of search filters that are always enabled for queries made
         # within this app. This is especially important to narrow down the
@@ -59,15 +60,15 @@ myapp = AppEntryPoint(
                     title='elements',
                     items=[
                         MenuItemPeriodicTable(
-                            quantity='results.material.elements',
+                            search_quantity='results.material.elements',
                         ),
                         MenuItemTerms(
-                            quantity='results.material.chemical_formula_hill',
+                            search_quantity='results.material.chemical_formula_hill',
                             width=6,
                             options=0,
                         ),
                         MenuItemTerms(
-                            quantity='results.material.chemical_formula_iupac',
+                            search_quantity='results.material.chemical_formula_iupac',
                             width=6,
                             options=0,
                         ),
@@ -88,7 +89,7 @@ myapp = AppEntryPoint(
                     nbins=30,
                     scale='linear',
                     x=Axis(search_quantity=f'data.mysection.myquantity#{schema}'),
-                    layout={'lg': Layout(minH=3, minW=3, h=4, w=12, y=0, x=0)},
+                    layout={'lg': Layout(w=12, h=4, x=0, y=0)},
                 )
             ]
         ),

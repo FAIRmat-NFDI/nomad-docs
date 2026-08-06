@@ -4,7 +4,7 @@ NORTH (NOMAD Remote Tools Hub) is NOMAD's hub for running data analysis tools in
 containerized environments. It enables tools to be executed reproducibly and securely while
 being tightly integrated with the NOMAD data infrastructure.
 
-This documentation shows you how to write a plugin entry point for a NORTH tool and prepare its contents.
+This documentation shows you how to create a plugin entry point for a NORTH tool and prepare its contents.
 You should read the [introduction to plugins](../plugins.md)
 to have a basic understanding of how plugins and plugin entry points work in the NOMAD ecosystem.
 
@@ -49,7 +49,6 @@ in `*/north_tools/my_tool/__init__.py` like this:
 
 <!-- markdownlint-disable MD044 -->
 ```py
-
 from nomad.config.models.north import NORTHTool
 from nomad.config.models.plugins import NORTHToolEntryPoint
 
@@ -61,9 +60,7 @@ tool = NORTHTool(
     icon='logo/jupyter.svg',
     image_pull_policy='Always',
     default_url='/lab',
-    maintainer=[
-        {'email': 'fairmat@physik.hu-berlin.de', 'name': 'John Doe'}
-    ],
+    maintainer=[{'email': 'fairmat@physik.hu-berlin.de', 'name': 'John Doe'}],
     mount_path='/home/jovyan',
     privileged=False,
     with_path=True,

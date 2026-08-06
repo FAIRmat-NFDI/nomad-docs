@@ -69,7 +69,7 @@ previously called [base-desktop](https://gitlab.mpcdf.mpg.de/nomad-lab/north/bas
 Using the base image within the [nomad-plugin-template](https://github.com/FAIRmat-NFDI/nomad-plugin-template){:target="_blank" rel="noopener"} repository is the recommended best practice to build a NORTH tool from if it does not demand a graphical user interface. Note that this repository is the template for building
 NOMAD plugins.
 
-A how-to for building from these images is available [How-tos > ... > How to create a NORTH tool](../howto/plugins/types/north_tools.md).
+A how-to for building from these images is available [How-to guides > ... > How to create a NORTH tool](../howto/plugins/types/north_tools.md).
 
 <!--TODO: REMOVE WHEN REFACTORING COMPLETED
 <!--[Jupyter Notebook] is the one as of 2026/01/19 shipped with nomad-FAIR. -->
@@ -141,7 +141,7 @@ TODO: EITHER REPLACED by generic Jupyter-based image provided by pynxtools-plugi
 [`xps`](https://gitlab.mpcdf.mpg.de/nomad-lab/north/xps){:target="_blank" rel="noopener"} is a Jupyter-based NORTH tool offering software for research on core-level photoemission spectroscopy. The tool implemented an example for converting data from an XPS measurement to NeXus/HDF5 and perform data analyses. **Like mentioned for ellips, the container performs only the conversion, all content should be moved to the pynxtools-xps plugin, the container functionality should be extended or the container deprecated and instead generic conversion achieved with another container e.g. Jupyter container. if renamed `nomad-north-xps`**
 -->
 
-Learn more about running existing NOMAD tools in the how-tos: [How-tos > ... > How to analyze data in NORTH](../howto/manage/gui/north.md).
+Learn more about running existing NOMAD tools in the how-to guides: [How-to guides > ... > How to analyze data in NORTH](../howto/manage/gui/north.md).
 
 ## Custom user-provided tools
 

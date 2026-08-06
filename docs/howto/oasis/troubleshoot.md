@@ -1,4 +1,4 @@
-# Troubleshoot your Oasis
+# How to troubleshoot a NOMAD Oasis
 
 ## Time offset between Oasis and the Authentication server
 

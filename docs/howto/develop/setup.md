@@ -5,7 +5,7 @@ all sources, set up a *Python* and *Node.js* environment, install all necessary 
 run the infrastructure in development mode, learn to run the test suites, and set up
 *Visual Studio Code* for NOMAD development.
 
-For installing and using the NOMAD Python package `nomad-lab` directly, see [Manage and find data > Programmatically > API Overview](../manage/program/api.md).
+For installing and using the NOMAD Python package `nomad-lab` directly, see [Manage and find data > Programmatically > Use the API](../manage/program/api.md).
 
 ## Clone the sources
 
@@ -550,21 +550,18 @@ from nomad import infrastructure
 from nomad.utils import create_uuid
 from nomad.utils.exampledata import ExampleData
 
+
 def search():
     infrastructure.setup()
-    main_author = infrastructure.user_management.get_user(username="test")
+    main_author = infrastructure.user_management.get_user(username='test')
     data = ExampleData(main_author=main_author)
     upload_id = create_uuid()
     data.create_upload(upload_id=upload_id, published=True, embargo_length=0)
     data.create_entry(
         upload_id=upload_id,
         entry_id=create_uuid(),
-        mainfile="test_content/test_entry/mainfile.json",
-        results={
-            "material": {"elements": ["C", "H"]},
-            "method": {},
-            "properties": {}
-        }
+        mainfile='test_content/test_entry/mainfile.json',
+        results={'material': {'elements': ['C', 'H']}, 'method': {}, 'properties': {}},
     )
     data.save()
 ```

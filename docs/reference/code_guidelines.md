@@ -79,12 +79,13 @@ Here are a few examples:
 
 ```python
 def generate_uuid() -> str:
-    '''Generates a base64 encoded Version 4 unique identifier. '''
+    """Generates a base64 encoded Version 4 unique identifier."""
 
     return base64.encode(uuid4())
 
+
 def add(a: float, b: float) -> float:
-    '''
+    """
     Adds two numbers.
 
     Args:
@@ -93,7 +94,7 @@ def add(a: float, b: float) -> float:
 
     Returns:
       float: The sum of a and b.
-    '''
+    """
 
     return a + b
 ```

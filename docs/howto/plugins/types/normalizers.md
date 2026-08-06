@@ -1,8 +1,8 @@
-# How to write a normalizer
+# How to create a normalizer
 
 A normalizer takes the archive of an entry as input and manipulates (usually expands) the given archive. This way, a normalizer can add additional sections and quantities based on the information already available in the archive. All normalizers are executed in the order [determined by their `level`](#control-normalizer-execution-order) after parsing, but the normalizer may decide to not do anything based on the entry contents.
 
-This documentation shows you how to write a plugin entry point for a normaliser. You should read the [introduction to plugins](../plugins.md) to have a basic understanding of how plugins and plugin entry points work in the NOMAD ecosystem.
+This documentation shows you how to create a plugin entry point for a normalizer. You should read the [introduction to plugins](../plugins.md) to have a basic understanding of how plugins and plugin entry points work in the NOMAD ecosystem.
 
 ## Getting started
 
@@ -31,7 +31,6 @@ from nomad.config.models.plugins import NormalizerEntryPoint
 
 
 class MyNormalizerEntryPoint(NormalizerEntryPoint):
-
     def load(self):
         from nomad_example.normalizers.mynormalizer import MyNormalizer
 
@@ -39,8 +38,8 @@ class MyNormalizerEntryPoint(NormalizerEntryPoint):
 
 
 mynormalizer = MyNormalizerEntryPoint(
-    name = 'MyNormalizer',
-    description = 'My custom normalizer.',
+    name='MyNormalizer',
+    description='My custom normalizer.',
 )
 ```
 
@@ -90,6 +89,7 @@ The minimal requirement is that your class has a `normalize` function, which as 
 from nomad.atomutils import get_volume
 from nomad.normalizing import SystemBasedNormalizer
 
+
 class UnitCellVolumeNormalizer(SystemBasedNormalizer):
     def _normalize_system(self, system, is_representative):
         system.unit_cell_volume = get_volume(system.lattice_vectors.magnitude)
@@ -103,6 +103,7 @@ Of course, if you add new information to the archive, this also needs to be defi
 import numpy as np
 from nomad.datamodel.metainfo import runschema
 from nomad.metainfo import Section, Quantity
+
 
 class UnitCellVolumeSystem(runschema.system.System):
     m_def = Section(extends_base_section=True)

@@ -6,11 +6,11 @@
 
 ## Recommended preparation
 
-- [Tutorial > Uploading and publishing data](../../../tutorial/upload_publish.md)
+- {{ nav_link("tutorial/upload_publish.md", breadcrumb=True) }}
 
 ## Further resources
 
-- [API Overview](./api.md)
+- [Use the API](./api.md)
 - [nomad-utility-workflows > How-to Guides > Perform API Calls](https://fairmat-nfdi.github.io/nomad-utility-workflows/how_to/use_api_functions.html){:target="_blank" rel="noopener"}
 
 ## Uploading, changing metadata, and publishing via Python API
@@ -25,14 +25,17 @@ import requests
 
 
 def create_dataset(nomad_url, dataset_name):
-    '''Create a dataset to group a series of NOMAD entries'''
+    """Create a dataset to group a series of NOMAD entries"""
     try:
         response = requests.post(
             nomad_url + 'datasets/',
-            headers={'Authorization': f'Bearer {os.environ["NOMAD_PAT"]}', 'Accept': 'application/json'},
-            json={"dataset_name": dataset_name},
-            timeout=10
-            )
+            headers={
+                'Authorization': f'Bearer {os.environ["NOMAD_PAT"]}',
+                'Accept': 'application/json',
+            },
+            json={'dataset_name': dataset_name},
+            timeout=10,
+        )
         dataset_id = response.json().get('dataset_id')
         if dataset_id:
             return dataset_id
@@ -44,16 +47,22 @@ def create_dataset(nomad_url, dataset_name):
         print('something went wrong trying to create a dataset')
         return
 
+
 def upload_to_NOMAD(nomad_url, upload_file):
-    '''Upload a single file as a new NOMAD upload. Compressed zip/tar files are
+    """Upload a single file as a new NOMAD upload. Compressed zip/tar files are
     automatically decompressed.
-    '''
+    """
     with open(upload_file, 'rb') as f:
         try:
             response = requests.post(
                 f'{nomad_url}uploads?file_name={os.path.basename(upload_file)}',
-                headers={'Authorization': f'Bearer {os.environ["NOMAD_PAT"]}', 'Accept': 'application/json'},
-                data=f, timeout=30)
+                headers={
+                    'Authorization': f'Bearer {os.environ["NOMAD_PAT"]}',
+                    'Accept': 'application/json',
+                },
+                data=f,
+                timeout=30,
+            )
             upload_id = response.json().get('upload_id')
             if upload_id:
                 return upload_id
@@ -65,15 +74,18 @@ def upload_to_NOMAD(nomad_url, upload_file):
             print('something went wrong uploading to NOMAD')
             return
 
+
 def check_upload_status(nomad_url, upload_id):
-    '''
+    """
     # upload success => returns 'Process publish_upload completed successfully'
     # publish success => 'Process publish_upload completed successfully'
-    '''
+    """
     try:
         response = requests.get(
             nomad_url + 'uploads/' + upload_id,
-            headers={'Authorization': f'Bearer {os.environ["NOMAD_PAT"]}'}, timeout=30)
+            headers={'Authorization': f'Bearer {os.environ["NOMAD_PAT"]}'},
+            timeout=30,
+        )
         status_message = response.json().get('data').get('last_status_message')
         if status_message:
             return status_message
@@ -86,8 +98,9 @@ def check_upload_status(nomad_url, upload_id):
         # upload gets deleted from the upload staging area once published...or in this case something went wrong
         return
 
+
 def edit_upload_metadata(nomad_url, upload_id, metadata):
-    '''
+    """
     Example of new metadata:
     upload_name = 'Test_Upload_Name'
     metadata = {
@@ -100,25 +113,35 @@ def edit_upload_metadata(nomad_url, upload_id, metadata):
         "comment": 'This is a test upload...'
         },
     }
-    '''
+    """
 
     try:
         response = requests.post(
-            nomad_url+'uploads/' + upload_id + '/edit',
-            headers={'Authorization': f'Bearer {os.environ["NOMAD_PAT"]}', 'Accept': 'application/json'},
-            json=metadata, timeout=30)
+            nomad_url + 'uploads/' + upload_id + '/edit',
+            headers={
+                'Authorization': f'Bearer {os.environ["NOMAD_PAT"]}',
+                'Accept': 'application/json',
+            },
+            json=metadata,
+            timeout=30,
+        )
         return response
     except Exception:
         print('something went wrong trying to add metadata to upload' + upload_id)
         return
 
+
 def publish_upload(nomad_url, upload_id):
-    '''Publish an upload'''
+    """Publish an upload"""
     try:
         response = requests.post(
-            nomad_url+'uploads/' + upload_id + '/action/publish',
-            headers={'Authorization': f'Bearer {os.environ["NOMAD_PAT"]}', 'Accept': 'application/json'},
-            timeout=30)
+            nomad_url + 'uploads/' + upload_id + '/action/publish',
+            headers={
+                'Authorization': f'Bearer {os.environ["NOMAD_PAT"]}',
+                'Accept': 'application/json',
+            },
+            timeout=30,
+        )
         return response
     except Exception:
         print('something went wrong trying to publish upload: ' + upload_id)
@@ -139,7 +162,9 @@ Define the NOMAD API endpoint:
 
 ```python
 # nomad_url = 'https://nomad-lab.eu/prod/v1/api/v1/'  # production nomad
-nomad_url = 'https://nomad-lab.eu/prod/v1/test/api/v1/'  # test nomad (deleted occassionally)
+nomad_url = (
+    'https://nomad-lab.eu/prod/v1/test/api/v1/'  # test nomad (deleted occassionally)
+)
 ```
 
 Create a dataset for grouping uploads that belong to, e.g., a publication:
@@ -177,14 +202,14 @@ Now that the upload processing is complete, we can add coauthors, references, an
 
 ```python
 metadata = {
-    "metadata": {
-    "upload_name": 'Test_Upload',
-    "references": ["https://doi.org/xx.xxxx/x.xxxx"],
-    "datasets": dataset_id,
-    "embargo_length": 0,
-    "coauthors": ["coauthor@affiliation.de"],
-    "comment": 'This is a test upload...',
-},
+    'metadata': {
+        'upload_name': 'Test_Upload',
+        'references': ['https://doi.org/xx.xxxx/x.xxxx'],
+        'datasets': dataset_id,
+        'embargo_length': 0,
+        'coauthors': ['coauthor@affiliation.de'],
+        'comment': 'This is a test upload...',
+    },
 }
 response = edit_upload_metadata(nomad_url, upload_id, metadata)
 ```

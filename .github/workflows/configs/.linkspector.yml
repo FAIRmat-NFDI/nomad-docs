@@ -19,3 +19,5 @@ ignorePatterns:
   - pattern: "^https://(www\\.)?xfce\\.org/?$"
   # hifis.net is consistently unreachable in CI (navigation times out)
   - pattern: "^https://(www\\.)?hifis\\.net/"
+  # GitHub signup is protected against automated requests and returns 403
+  - pattern: "^https://github\\.com/signup/?$"

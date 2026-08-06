@@ -1,4 +1,4 @@
-# Parsing from an ELN: user-editable entries
+# ELN-triggered parsing with user-editable entries
 
 In this part, you will create a parser using the ELN approach. On the one hand, more manual steps will need to be performed by the user for file processing; on the other hand, the resulting entry will be user-editable, allowing users to overwrite or modify information provided by the source file.
 

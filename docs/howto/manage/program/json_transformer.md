@@ -40,11 +40,7 @@ Use this script to load the rules:
 ```python
 from nomad.datamodel.metainfo.annotations import Rules
 
-rules = {
-    "example_transformation": Rules(
-        json_example['schema']
-    )
-}
+rules = {'example_transformation': Rules(json_example['schema'])}
 ```
 
 ### 2. Initialize the Transformer
@@ -71,7 +67,7 @@ source_json = json_example['data']
 Use the `transform` method of your transformer instance to apply the transformation rules to your source JSON.
 
 ```python
-transformed_json = transformer.transform(source_json, "example_transformation")
+transformed_json = transformer.transform(source_json, 'example_transformation')
 print(transformed_json)
 ```
 
@@ -114,7 +110,7 @@ filter or format data before placing it in the target JSON.
 ```python
 transformer = Transformer(mapping_dict=rules)
 
-transformed_json = transformer.transform(source_json, "conditional_transformation_met")
+transformed_json = transformer.transform(source_json, 'conditional_transformation_met')
 print(transformed_json)
 ```
 
@@ -141,32 +137,31 @@ mind that this path should be started with `#` sign).
 
 ```python
 source_json = {
-    "users": [
-        {"name": "user_1", "role": "manager", "manager_id": "101"},
-        {"name": "user_2", "role": "employee", "manager_id": "102"},
-        {"name": "user_3", "role": "manager", "manager_id": "103"}
+    'users': [
+        {'name': 'user_1', 'role': 'manager', 'manager_id': '101'},
+        {'name': 'user_2', 'role': 'employee', 'manager_id': '102'},
+        {'name': 'user_3', 'role': 'manager', 'manager_id': '103'},
     ],
-    "details": [
-        {"id": "101", "name": "user_4", "department": "A"},
-        {"id": "102", "name": "user_5", "department": "B"},
-        {"id": "103", "name": "user_6", "department": "C"}
-    ]
+    'details': [
+        {'id': '101', 'name': 'user_4', 'department': 'A'},
+        {'id': '102', 'name': 'user_5', 'department': 'B'},
+        {'id': '103', 'name': 'user_6', 'department': 'C'},
+    ],
 }
 
 rules = {
-    "employee_info": Rules(
-        name="Employee Info Mapping",
+    'employee_info': Rules(
+        name='Employee Info Mapping',
         rules={
-            "rule_manager": Rule(
+            'rule_manager': Rule(
                 source="users[?role=='manager'].manager_id | [0]",
-                target="manager_details",
-                use_rule="#employee_info.details"
+                target='manager_details',
+                use_rule='#employee_info.details',
             ),
-            "details": Rule(
-                source="details[?id=='101'] | [0]",
-                target="specific_manager"
-            )
-        }
+            'details': Rule(
+                source="details[?id=='101'] | [0]", target='specific_manager'
+            ),
+        },
     )
 }
 ```

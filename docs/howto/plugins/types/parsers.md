@@ -1,8 +1,8 @@
-# How to write a parser
+# How to create a parser
 
 NOMAD uses parsers to automatically extract information from raw files and output that information into structured [archives](../../../reference/glossary.md#archive). Parsers can decide which files act upon based on the filename, mime type or file contents and can also decide into which schema the information should be populated into.
 
-This documentation shows you how to write a plugin entry point for a parser. You should read the [introduction to plugins](../plugins.md) to have a basic understanding of how plugins and plugin entry points work in the NOMAD ecosystem.
+This documentation shows you how to create a plugin entry point for a parser. You should read the [introduction to plugins](../plugins.md) to have a basic understanding of how plugins and plugin entry points work in the NOMAD ecosystem.
 
 ## Getting started
 
@@ -32,7 +32,6 @@ from nomad.config.models.plugins import ParserEntryPoint
 
 
 class MyParserEntryPoint(ParserEntryPoint):
-
     def load(self):
         from nomad_example.parsers.myparser import MyParser
 
@@ -40,9 +39,9 @@ class MyParserEntryPoint(ParserEntryPoint):
 
 
 myparser = MyParserEntryPoint(
-    name = 'MyParser',
-    description = 'My custom parser.',
-    mainfile_name_re = '.*\.myparser',
+    name='MyParser',
+    description='My custom parser.',
+    mainfile_name_re='.*\.myparser',
 )
 ```
 
@@ -102,10 +101,10 @@ If you are using the `MatchingParser` interface you can configure which files ar
 
 ```python
 myparser = MyParserEntryPoint(
-    name = 'MyParser',
-    description = 'My custom parser.',
-    mainfile_name_re = '.*\.myparser',
-    mainfile_contents_re = '\s*\n\s*HELLO WORLD',
+    name='MyParser',
+    description='My custom parser.',
+    mainfile_name_re='.*\.myparser',
+    mainfile_contents_re='\s*\n\s*HELLO WORLD',
 )
 ```
 
@@ -307,7 +306,7 @@ mainfile_parser.calculation
 
 The next step is to write the parsed data into the NOMAD archive. We can use one of the
 [predefined plugins containing schema packages](schema_packages.md#schema-packages-developed-by-fairmat) in NOMAD.
-However, to better illustrate the connection between a parser and a schema we will define our own schema in this example (See [How to write a schema in python](./schema_packages.md#how-to-write-a-schema-package) for additional information on this topic). We define a root section called `Simulation` containing two subsections, `Model` and `Output`. The definitions are found in `exampleparser/metainfo/example.py`:
+However, to better illustrate the connection between a parser and a schema we will define our own schema in this example (See [How to create a schema package](./schema_packages.md#how-to-create-a-schema-package) for additional information on this topic). We define a root section called `Simulation` containing two subsections, `Model` and `Output`. The definitions are found in `exampleparser/metainfo/example.py`:
 
 ```python
 class Model(ArchiveSection):
@@ -330,6 +329,7 @@ class Model(ArchiveSection):
         shape=[3, 3],
         description="""Lattice vectors of the model system.""",
     )
+
 
 class Output(ArchiveSection):
     m_def = Section()

@@ -1,4 +1,4 @@
-# Matching and creating a static entry
+# Automatic file parsing with a static entry
 
 In this tutorial, we will build a parser that reads a raw instrument data file
 and populates a NOMAD archive entry with a custom schema. The result is a
@@ -51,6 +51,7 @@ and results are composed as sub-sections providing clean data nesting.
         """
         An example schema for optical microscopy measurements.
         """
+
         data_file = Quantity(
             type=str,
             description='Data file coming from the microscope.',
@@ -71,11 +72,11 @@ To build our parser, we subclass `MatchingParser` and override its `parse` metho
 ```py
 from nomad.parsing.parser import MatchingParser
 
+
 class OpticalMicroscopyParser(MatchingParser):
     def parse(
         self, mainfile: str, archive: 'EntryArchive', logger=None, child_archives=None
-    ) -> None:
-        ...
+    ) -> None: ...
 ```
 
 The `parse` method receives three key arguments:

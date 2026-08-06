@@ -188,9 +188,11 @@ allows you to add functions that are called when your data is normalized.
 
 Here is an example:
 
+<!-- fmt: off -->
 ```python
 --8<-- "examples/archive/custom_schema.py"
 ```
+<!-- fmt: on -->
 
 To add a `normalize` function, your section has to inherit from `ArchiveSection` which
 provides the base for this functionality. Now you can overwrite the `normalize` function

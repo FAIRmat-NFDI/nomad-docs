@@ -1,4 +1,4 @@
-# How to make Graph-Style API Calls
+# How to make Graph API calls
 
 ## What you will learn
 
@@ -6,9 +6,9 @@
 
 ## Recommended preparation
 
-- [Tutorial > Accessing data via API](../../../tutorial/access_api.md)
+- [Tutorials > Accessing data via API](../../../tutorial/access_api.md)
 
-- [API Overview](./api.md)
+- [Use the API](./api.md)
 
 ## Further resources
 

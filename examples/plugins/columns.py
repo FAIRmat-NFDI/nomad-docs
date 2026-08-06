@@ -1,11 +1,18 @@
-from nomad.config.models.ui import Column
+from nomad.config.models.ui import Column, Format
 
+schema = 'nomad_example.schema_packages.mypackage.MySchema'
 columns = [
-    Column(quantity='entry_id', selected=True),
     Column(
-        quantity='data.mysection.myquantity#nomad_example.schema_packages.mypackage.MySchema',
+        search_quantity=f'data.mysection.myquantity#{schema}',
         label='My Quantity Name',
+        unit='eV',
+        align='left',
+        format=Format(decimals=2, mode='standard'),
         selected=True,
     ),
-    Column(quantity='upload_create_time'),
+    Column(
+        search_quantity=f'data.my_repeated_section[*].myquantity#{schema}',
+        align='middle',
+        selected=False,
+    ),
 ]

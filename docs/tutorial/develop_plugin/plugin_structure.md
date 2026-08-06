@@ -1,4 +1,4 @@
-# Develop a NOMAD plugin
+# Set up a plugin project
 
 In this tutorial series, you will develop a custom NOMAD plugin that extends NOMAD with a domain-specific schema package and a parser. To follow the full development workflow, we chose several possible applications as an example, including simplified optical microscopy measurements and black-body radiation calculations. The tutorial utilizes a set of exercises leading to the development of a working plugin that can be tested locally and integrated into a NOMAD Oasis deployment. The exercises cover everything from creating a plugin repository and defining schemas to implementing parsing and testing.
 

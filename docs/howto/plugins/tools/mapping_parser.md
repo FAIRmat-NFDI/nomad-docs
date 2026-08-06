@@ -180,14 +180,14 @@ are prefixed by `attribute_prefix` ('@' by default). The following XML:
 will be converted to:
 
 ```python
-    data = {
-      'a' : {
+data = {
+    'a': {
         'b': [
-          {'@name': 'item1', '__value': 'name'},
-          {'@name': 'item2', '__value': 'name2'}
+            {'@name': 'item1', '__value': 'name'},
+            {'@name': 'item2', '__value': 'name2'},
         ]
-      }
     }
+}
 ```
 
 The conversion can be reversed using the `from_dict` method.
@@ -220,6 +220,7 @@ Other attributes are currently accessible.
 ```python
 from nomad.datamodel.metainfo.annotations import Mapper as MappingAnnotation
 
+
 class BSection(ArchiveSection):
     v = Quantity(type=np.float64, shape=[2, 2])
     v.m_annotations['mapping'] = dict(
@@ -233,11 +234,13 @@ class BSection(ArchiveSection):
         hdf5=MappingAnnotation(mapper='g.v[-2]'),
     )
 
+
 class ExampleSection(ArchiveSection):
     b = SubSection(sub_section=BSection, repeats=True)
     b.m_annotations['mapping'] = dict(
         xml=MappingAnnotation(mapper='a.b1'), hdf5=MappingAnnotation(mapper='.g1')
     )
+
 
 ExampleSection.m_def.m_annotations['mapping'] = dict(
     xml=MappingAnnotation(mapper='a'), hdf5=MappingAnnotation(mapper='g')
@@ -267,43 +270,44 @@ instead generate it from a dictionary by using the `from_dict` method. By invoki
 HDF5 data.
 
 ```python
-    class ExampleHDF5Parser(HDF5Parser):
-        @staticmethod
-        def get_v(value):
-            return np.array(value)[1:, :2]
+class ExampleHDF5Parser(HDF5Parser):
+    @staticmethod
+    def get_v(value):
+        return np.array(value)[1:, :2]
 
-    archive_parser = MetainfoParser()
-    archive_parser.annotation_key = 'hdf5'
-    archive_parser.data_object = ExampleSection(b=[BSection(v=np.eye(2))])
 
-    hdf5_parser = ExampleHDF5Parser()
-    d = dict(
+archive_parser = MetainfoParser()
+archive_parser.annotation_key = 'hdf5'
+archive_parser.data_object = ExampleSection(b=[BSection(v=np.eye(2))])
+
+hdf5_parser = ExampleHDF5Parser()
+d = dict(
+    g=dict(
+        g1=dict(v=[dict(d=np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))]),
+        v=['x', 'y', 'z'],
         g=dict(
-            g1=dict(v=[dict(d=np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))]),
-            v=['x', 'y', 'z'],
-            g=dict(
-                c1=dict(
-                    i=[4, 6],
-                    f=[
-                        {'@index': 0, '__value': 1},
-                        {'@index': 2, '__value': 2},
-                        {'@index': 1, '__value': 1},
-                    ],
-                    d=[dict(e=[3, 0, 4, 8, 1, 6]), dict(e=[1, 7, 8, 3, 9, 1])],
-                ),
-                c=dict(v=[dict(d=np.eye(3), e=np.zeros(3)), dict(d=np.ones((3, 3)))]),
+            c1=dict(
+                i=[4, 6],
+                f=[
+                    {'@index': 0, '__value': 1},
+                    {'@index': 2, '__value': 2},
+                    {'@index': 1, '__value': 1},
+                ],
+                d=[dict(e=[3, 0, 4, 8, 1, 6]), dict(e=[1, 7, 8, 3, 9, 1])],
             ),
-        )
+            c=dict(v=[dict(d=np.eye(3), e=np.zeros(3)), dict(d=np.ones((3, 3)))]),
+        ),
     )
-    hdf5_parser.from_dict(d)
+)
+hdf5_parser.from_dict(d)
 
-    hdf5_parser.convert(archive_parser)
+hdf5_parser.convert(archive_parser)
 
-    # >>> archive_parser.data_object
-    # ExampleSection(b, b2)
-    # >>> archive_parser.data_object.b[1].v
-    # array([[4., 5.],
-    #   [7., 8.]])
+# >>> archive_parser.data_object
+# ExampleSection(b, b2)
+# >>> archive_parser.data_object.b[1].v
+# array([[4., 5.],
+#   [7., 8.]])
 ```
 
 ## Mapper

@@ -1,4 +1,4 @@
-# How to update Oasis versions
+# How to update a NOMAD Oasis
 
 ## Software versions
 

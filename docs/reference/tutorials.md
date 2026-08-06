@@ -1,9 +1,5 @@
-# List of tutorials
+# Tutorial catalog
 
-<!--
-Please follow the format:
-- Date(dd.mm.yyy) Event: Tutorial Title
-    + short list of topics covered
- -->
+This page provides an index of NOMAD tutorial and training resources, including archived event materials and external collections.
 
 {{ training_resources_table() }}

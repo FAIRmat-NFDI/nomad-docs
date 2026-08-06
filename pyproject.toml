@@ -34,3 +34,8 @@ source-exclude = ["docs/**"]
 
 [dependency-groups]
 dev = ["pytest>=7.4.4"]
+
+[tool.ruff.format]
+# use single quotes for strings.
+quote-style = "single"
+

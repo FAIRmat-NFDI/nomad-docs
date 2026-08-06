@@ -1,8 +1,8 @@
-# How to write a schema package
+# How to create a schema package
 
 Schema packages are used to define and distribute custom data definitions that can be used within NOMAD. These schema packages typically contain [schemas](../../../reference/glossary.md#schema) that users can select to instantiate manually filled entries using our ELN functionality, or that parsers select when organizing data they extract from files. Schema packages may also contain more abstract base classes that other schema packages use.
 
-This documentation shows you how to write a plugin entry point for a schema package. You should read the [introduction to plugins](../plugins.md) to have a basic understanding of how plugins and plugin entry points work in the NOMAD ecosystem.
+This documentation shows you how to create a plugin entry point for a schema package. You should read the [introduction to plugins](../plugins.md) to have a basic understanding of how plugins and plugin entry points work in the NOMAD ecosystem.
 
 ## Getting started
 
@@ -32,7 +32,6 @@ from nomad.config.models.plugins import SchemaPackageEntryPoint
 
 
 class MySchemaPackageEntryPoint(SchemaPackageEntryPoint):
-
     def load(self):
         from nomad_example.schema_packages.mypackage import m_package
 
@@ -40,8 +39,8 @@ class MySchemaPackageEntryPoint(SchemaPackageEntryPoint):
 
 
 mypackage = MySchemaPackageEntryPoint(
-    name = 'MyPackage',
-    description = 'My custom schema package.',
+    name='MyPackage',
+    description='My custom schema package.',
 )
 ```
 
@@ -70,18 +69,19 @@ m_package = SchemaPackage()
 
 
 class System(MSection):
-    '''
+    """
     A system section includes all quantities that describe a single simulated
     system (a.k.a. geometry).
-    '''
+    """
 
     n_atoms = Quantity(
-        type=int, description='''
+        type=int,
+        description="""
         Defines the number of atoms in the system.
-        ''')
+        """,
+    )
 
-    atom_labels = Quantity(
-        type=MEnum(ase.data.chemical_symbols), shape=['n_atoms'])
+    atom_labels = Quantity(type=MEnum(ase.data.chemical_symbols), shape=['n_atoms'])
     atom_positions = Quantity(type=float, shape=['n_atoms', 3], unit='angstrom')
     simulation_cell = Quantity(type=float, shape=[3, 3], unit='angstrom')
     pbc = Quantity(type=bool, shape=[3])
@@ -89,6 +89,7 @@ class System(MSection):
 
 class Simulation(Schema):
     system = SubSection(sub_section=System, repeats=True)
+
 
 m_package.__init_metainfo__()
 ```
@@ -147,9 +148,11 @@ There is a 1-1 translation between the structure in Python schema packages (writ
 
 `normalize`-functions are attached to sections and are are called when instances of these sections are processed. All files are processed when they are uploaded or changed. To add a `normalize` function, your section has to inherit from `Schema` or `ArchiveSection` which provides the base for this functionality. Here is an example:
 
+<!-- fmt: off -->
 ```python
 --8<-- "examples/archive/custom_schema.py"
 ```
+<!-- fmt: on -->
 
 Make sure to call the `super` implementation properly to support multiple inheritance. In order to control the order by which the `normalize` calls are executed, one can define `normalizer_level` which is set to 0 by default. The normalize functions are always called for any sub section before the parent section. However, the order for any sections on the same level will be from low values of `normalizer_level` to high.
 
@@ -267,6 +270,7 @@ class Calculation(MSection):
     system = Quantity(type=System.m_def)
     atom_labels = Quantity(type=System.atom_labels)
 
+
 calc = Calculation()
 calc.system = run.systems[-1]
 calc.atom_labels = run.systems[-1]
@@ -333,8 +337,11 @@ category looks like this:
 
 ```python
 class CategoryName(MCategory):
-    ''' Category description '''
-    m_def = Category(links=['http://further.explanation.eu'], categories=[ParentCategory])
+    """Category description"""
+
+    m_def = Category(
+        links=['http://further.explanation.eu'], categories=[ParentCategory]
+    )
 ```
 
 ## Data frames
@@ -358,6 +365,7 @@ describing material properties at different variables like density of states or 
 
 ### Illustrating example
 
+<!-- fmt: off -->
 ```py
 --8<-- "examples/metainfo/data_frames.py:9:31"
 
@@ -365,8 +373,8 @@ describing material properties at different variables like density of states or 
 
 
 --8<-- "examples/metainfo/data_frames.py:55:63"
-
 ```
+<!-- fmt: on -->
 
 ### Fields vs variables (and dimensions)
 
@@ -386,18 +394,22 @@ In the heatmap scenario, we vary `Temperature` and `Pressure` independently and 
 `Energy` value (i.e. heatmap color/intensity) for each `Temperature` reading at every `Pressure` reading.
 For two values on each *variable*, we respectively we have 4 (2x2) *field* values:
 
+<!-- fmt: off -->
 ```py
 --8<-- "examples/metainfo/data_frames.py:89:97"
 ```
+<!-- fmt: on -->
 
 In the scatter plot scenario, we vary `Temperature` and `Pressure` together.
 We only have one *field* value (y-axis) for each pair of temperature and pressure (two x-axes)
 values.
 With two combined temperature and pressure readings, we respectively only have two field values:
 
+<!-- fmt: off -->
 ```py
 --8<-- "examples/metainfo/data_frames.py:100:106"
 ```
+<!-- fmt: on -->
 
 We can use the `ValueTemplate` kwarg `spanned_dimenions` to define how `Temperature` and
 `Pressure` are related. The given indices refer to the indices of the field values and
@@ -406,9 +418,11 @@ represent the logical dimension of the data space.
 The first example without the `spanned_dimensions` is equivalent to this example
 with `spanned_dimensions`. Here we span two independent dimensions:
 
+<!-- fmt: off -->
 ```py
 --8<-- "examples/metainfo/data_frames.py:109:117"
 ```
+<!-- fmt: on -->
 
 ### Field and variables in the schema vs parsing
 
@@ -753,18 +767,18 @@ normalize function
 Here is some pseudo code:
 
 ```py
-
 from ..v2 import MyData as MyDataV2
 
+
 def normalize(self, archive, logger):
-  transformed = MyDataV2()
+    transformed = MyDataV2()
 
-  # code that fills transformed from self
+    # code that fills transformed from self
 
-  with archive.context.raw_file(archive.metadata.mainfile, 'wt') as f:
-    f.write(json.dumps(dict(data=transformed.m_to_dict())))
+    with archive.context.raw_file(archive.metadata.mainfile, 'wt') as f:
+        f.write(json.dumps(dict(data=transformed.m_to_dict())))
 
-  archive.data = transformed
+    archive.data = transformed
 ```
 
 With such a `normalize` function in place, you can apply the re-processing strategy

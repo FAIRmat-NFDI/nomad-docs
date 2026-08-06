@@ -1,4 +1,4 @@
-# How to configure an Oasis
+# How to configure a NOMAD Oasis
 
 ## Configuration files
 
