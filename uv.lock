@@ -3234,7 +3234,7 @@ dev = [
 requires-dist = [
     { name = "click", specifier = ">=8.4.0" },
     { name = "mike" },
-    { name = "mkdocs", specifier = "<2" },
+    { name = "mkdocs", specifier = ">=1.6.0,<2" },
     { name = "mkdocs-click" },
     { name = "mkdocs-git-revision-date-localized-plugin" },
     { name = "mkdocs-glightbox" },
