@@ -18,6 +18,7 @@ dependencies = [
   "nomad-lab[infrastructure]==1.4.3",
   "pydantic>=2.0",
   "regex",
+  "mike>=2.2.0",
 ]
 
 [tool.uv]
