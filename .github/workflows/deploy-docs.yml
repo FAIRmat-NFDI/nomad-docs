@@ -2,7 +2,16 @@ name: Deploy MkDocs Site
 
 on:
   push:
-    branches: ["main", "develop"]
+    branches: [develop]
+  release:
+    types: [published]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gh-pages-deployment
+  cancel-in-progress: false
 
 env:
   UV_VERSION: 0.6
@@ -15,14 +24,38 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v7
+        with:
+          # mike reads and commits the existing gh-pages branch.
+          fetch-depth: 0
+          # Release documentation must be built from the release tag.
+          ref: ${{ github.event_name == 'release' && github.event.release.tag_name || github.sha }}
 
       - name: Install uv
         uses: astral-sh/setup-uv@v7
         with:
           version: ${{ env.UV_VERSION }}
 
-      - name: Build and Deploy
+      - name: Configure Git author
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+
+      - name: Deploy development documentation
+        if: github.event_name == 'push'
         run: |
           uv run \
             --with 'nomad-lab[dev,infrastructure] @ https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR.git' \
-            mkdocs gh-deploy --force --remote-branch gh-pages
+            mike deploy --push develop
+
+      - name: Deploy release documentation
+        if: github.event_name == 'release'
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: |
+          VERSION="${RELEASE_TAG#v}"
+          uv run \
+            --with 'nomad-lab[dev,infrastructure] @ https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR.git' \
+            mike deploy --push --update-aliases "$VERSION" latest
+          uv run \
+            --with 'nomad-lab[dev,infrastructure] @ https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR.git' \
+            mike set-default --push latest

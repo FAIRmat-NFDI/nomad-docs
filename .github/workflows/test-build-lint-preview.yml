@@ -52,6 +52,10 @@ jobs:
           filter_mode: "nofilter" # check all files (not just added)
 
   test-docs:
+    # PR previews and mike deployments both write to gh-pages.
+    concurrency:
+      group: gh-pages-deployment
+      cancel-in-progress: false
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
