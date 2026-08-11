@@ -66,18 +66,14 @@ jobs:
           python-version: ${{ env.PYTHON_VERSION }}
 
       - name: Check mkdocs build
-        run: |
-          uv run \
-            --with 'nomad-lab[infrastructure] @ https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR.git' \
-            mkdocs build --strict
-
-      - name: Check production build has no localhost URLs
         # The `nomad_url()` macro renders relative to the configured instance.
-        # The production deploy sets these env vars so docs point at
-        # https://nomad-lab.eu/prod/v1/api/... (see deploy-docs.yml). Build with
-        # the same config and fail if the Oasis default (localhost/nomad-oasis)
-        # leaks into the published output. `.linkspector` intentionally ignores
-        # localhost, so it cannot catch this class of regression.
+        # Set the same env vars as the production deploy (see deploy-docs.yml) so
+        # `site/` points at https://nomad-lab.eu/prod/v1/api/... — this is the
+        # directory that is copied into the nomad package and published as the PR
+        # preview below, so it must be built with the production config. Then fail
+        # if the Oasis default (localhost/nomad-oasis) leaks into the output.
+        # `.linkspector` intentionally ignores localhost, so it cannot catch this
+        # class of regression.
         env:
           NOMAD_SERVICES_API_HOST: nomad-lab.eu
           NOMAD_SERVICES_API_PORT: "443"
@@ -86,15 +82,14 @@ jobs:
         run: |
           uv run \
             --with 'nomad-lab[infrastructure] @ https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR.git' \
-            mkdocs build --strict --site-dir site-prod
+            mkdocs build --strict
           # Match the exact string the misconfigured macro emits. A bare
           # "localhost"/"nomad-oasis" grep would flag legitimate Oasis docs
           # (nginx/docker-compose configs, Oasis curl examples).
-          if grep -rniE 'localhost:8000/nomad-oasis/api' site-prod; then
+          if grep -rniE 'localhost:8000/nomad-oasis/api' site; then
             echo "::error::Oasis default URL leaked from nomad_url() into the production docs build (expected https://nomad-lab.eu/prod/v1/api/...)."
             exit 1
           fi
-          rm -rf site-prod
 
       - name: Copy built docs
         run: |
