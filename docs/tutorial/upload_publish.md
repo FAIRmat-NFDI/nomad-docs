@@ -274,7 +274,9 @@ You can add these files to your NOMAD upload. Do so by simply drag and drop the 
 
     Start with uploading the file `FAIRmat_graphics.zip`. Let's use the drag and drop method as shown in the animation below.
 
-    ![An animation demonstrating the drag and drop files in NOMAD ](images/example_3-1_drag_drop_files.gif)
+    <video controls autoplay loop muted playsinline width="100%">
+        <source src="images/example_3-1_drag_drop_files.webm" type="video/webm">
+    </video>
 
     When a compressed file is uploaded to NOMAD, it will be extracted automatically and the included files will be added to your upload.
 
@@ -282,7 +284,9 @@ You can add these files to your NOMAD upload. Do so by simply drag and drop the 
 
     Upload the remaining files using the file browser dialog as shown in the animation below.
 
-    ![An animation demonstrating the open from file browser dialog in NOMAD ](images/example_3-1_file_browser_dialog.gif)
+    <video controls autoplay loop muted playsinline width="100%">
+        <source src="images/example_3-1_file_browser_dialog.webm" type="video/webm">
+    </video>
 
 ### Upload computational data
 
@@ -308,7 +312,9 @@ In other words, NOMAD will read the input and output files and provide all infor
 
     Start with uploading the file `FHI-aims.zip`. Let's use the drag and drop method as shown in the animation below.
 
-    ![Animation of drag and drop a compressed file in NOMAD](images/example_3-2_drag_drop_files.gif)
+    <video controls autoplay loop muted playsinline width="100%">
+        <source src="images/example_3-2_drag_drop_files.webm" type="video/webm">
+    </video>
 
     After uploading files, processing is automatically triggered. This involves identifying supported file formats in NOMAD and extracting relevant (meta)data. The exact processing steps depend on the use case.
     For example, you can learn more about the [processing of computational data on this link](../examples/computational_data/basics.md).
@@ -352,7 +358,9 @@ In other words, NOMAD will read the input and output files and provide all infor
 
         NOMAD puts all the data in a unified, hierarchical, and machine-processable format, following the NOMAD metainfo.
 
-        ![Animation of the data tab](images/example_3-2_data_tab.gif)
+        <video controls autoplay loop muted playsinline width="100%">
+            <source src="images/example_3-2_data_tab.webm" type="video/webm">
+        </video>
 
 ### Upload experimental data
 
@@ -382,7 +390,9 @@ These files can be uploaded directly to NOMAD, where they are processed, and str
 
     Start with uploading the file `PBTTT_XPS_SPECS.nxs`. Let's use the drag and drop method as shown in the animation below.
 
-    ![An animation demonstrating the drag and drop of NeXuS files in NOMAD](images/example_3-3_drag_drop_files_nexus.gif)
+    <video controls autoplay loop muted playsinline width="100%">
+        <source src="images/example_3-3_drag_drop_files_nexus.webm" type="video/webm">
+    </video>
 
     After uploading files, processing is automatically triggered. This involves identifying supported file formats in NOMAD and extracting relevant (meta)data. The exact processing steps depend on the use case.
 
@@ -416,7 +426,9 @@ These files can be uploaded directly to NOMAD, where they are processed, and str
 
         NOMAD puts all the data in a unified, hierarchical, and machine-processable format, following the NOMAD metainfo.
 
-        ![Animation of the DATA Tab in NeXuS entry page](images/example_3-3_data_tab_entry_page_nexus.gif)
+        <video controls autoplay loop muted playsinline width="100%">
+            <source src="images/example_3-3_data_tab_entry_page_nexus.webm" type="video/webm">
+        </video>
 
 Most scientific instruments generate experimental results in formats other than `.nxs`. NOMAD still supports these files by providing a conversion process using the *NexusDataConverter* built-in schema, which transforms raw data into the `.nxs` format.
 
@@ -491,7 +503,9 @@ In the following examples, you will learn how to upload a raw file from a SPECS 
     - Explore the other fields available in the ELN file.
     - Save the file.
 
-    ![Alt text](images/example_3-3_modifying_ELN.gif)
+    <video controls autoplay loop muted playsinline width="100%">
+        <source src="images/example_3-3_modifying_ELN.webm" type="video/webm">
+    </video>
 
     **Upload your data file `.xml` and your ELN data `.yaml` using NexusDataConverter**
 

@@ -85,7 +85,9 @@ You can pin frequently used filters using **(+)** for a customized search interf
 
 <!-- update the gif with screenshots with sliding images stack once this is figured out in the docs -->
 <div style="text-align: center;">
-    <img src="images/add_filters_to_search_interface.gif" alt="Add Filters to the Search Interface" width="800">
+    <video controls autoplay loop muted playsinline width="800">
+        <source src="images/add_filters_to_search_interface.webm" type="video/webm">
+    </video>
 </div>
 
 ---
@@ -185,7 +187,9 @@ Now, let us answer the following question:
         - The scatter plot will allow you to explore the data interactively.
 
         <div style="text-align: center;">
-            <img src="images/custom_widgets_example.gif" alt="Custom Widgets Example" width="800">
+            <video controls autoplay loop muted playsinline width="800">
+                <source src="images/custom_widgets_example.webm" type="video/webm">
+            </video>
         </div>
 
     4. **Interpreting Results**
@@ -238,7 +242,9 @@ Click the *pen icon* on any widget to modify its plotted quantities, color mappi
 - Click entries for full metadata, dataset links, and further analysis.
 
 <div style="text-align: center;">
-    <img src="images/sn_based_solar_cells_example.gif" alt="Sn-based Solar Cell example" width="800">
+    <video controls autoplay loop muted playsinline width="800">
+        <source src="images/sn_based_solar_cells_example.webm" type="video/webm">
+    </video>
 </div>
 
 ---

@@ -24,7 +24,7 @@ Click on the schema selection box, which will open up a menu with a list of buil
 Scroll down, find and select `Basic ELN`, add a name for the entry (e.g., "test-ELN:), and click the `CREATE` button in the bottom right of the pop-up dialog box. The full process is illustrated in the following video:
 
 <video width="100%" controls>
-  <source src="./images/eln-entry-from-gui.webm" alt="" type="video/mp4">
+  <source src="./images/eln-entry-from-gui.webm" alt="" type="video/webm">
 </video>
 
 Upon entry creation, you will be taken to the `DATA` tab, where you can fill in or edit the predefined ELN quantities in the user-editable ELN interface. Type a dummy description for this entry and then press the :fontawesome-solid-floppy-disk: icon in the upper right. Now, navigate to the `Overview` page to see your changes there.
@@ -32,7 +32,7 @@ Upon entry creation, you will be taken to the `DATA` tab, where you can fill in 
 The editable quantities that you found in your ELN entry (e.g., `short name`, `tags`, `datetime`, `ID`, `description`) appear because they are defined within the `Basic ELN` schema that you selected. NOMAD provides a tool for browsing all such schemas. Go to `ANALYZE > The NOMAD MetaInfo`, then select `nomad > Basic ELN` to view all the quantity definitions and descriptions within this entry class:
 
 <video width="100%" controls>
-  <source src="./images/metainfo-browser-basic-eln.webm" alt="" type="video/mp4">
+  <source src="./images/metainfo-browser-basic-eln.webm" alt="" type="video/webm">
 </video>
 
 All the metadata that you enter in your ELN is stored in the structured JSON format according to the corresponding schema.

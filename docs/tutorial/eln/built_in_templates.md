@@ -382,7 +382,9 @@ Now create an entry using the built-in *Experiment ELN* schema for **Characteriz
 The *steps* subsection allows us to reference the various processes and measurements that are part of the experiment. By organizing these elements into a structured and interactive workflow, we can provide a clearer overview of the experimental sequence, enabling better visualization and understanding of how different steps are interconnected.
 
 <div style="text-align: center;">
-    <img src="images/ELN_built-in_39.gif" alt="interactive workflow gif" width="400">
+    <video controls autoplay loop muted playsinline width="400">
+        <source src="images/ELN_built-in_39.webm" type="video/webm">
+    </video>
 </div>
 
 ---
@@ -415,12 +417,16 @@ Imagine you have created multiple entries for substances, samples, instruments, 
 
     2. Add new folders and organize them according to your needs.
     <div style="text-align: center;">
-        <img src="images/creating_new_folders.gif" alt="interactive workflow gif" width="600">
+        <video controls autoplay loop muted playsinline width="600">
+            <source src="images/creating_new_folders.webm" type="video/webm">
+        </video>
     </div>
 
     3. Drag and drop files into the desired folder. A prompt will appear, asking if you want to copy or move the files—choose according to your needs.
     <div style="text-align: center;">
-        <img src="images/moving_files_to_a_folder.gif" alt="interactive workflow gif" width="600">
+        <video controls autoplay loop muted playsinline width="600">
+            <source src="images/moving_files_to_a_folder.webm" type="video/webm">
+        </video>
     </div>
 
     4. Once all files are sorted, take a moment to review the structure. Here is an example of an organized ELN:
@@ -501,7 +507,9 @@ Widgets allow you to customize your search interface to better suit your data ex
     This widget will then appear on your **EXPLORE** page, allowing you to quickly view and filter entries by their associated tags.
 
     <div style="text-align: center;">
-        <img src="images/explore_your_ELN_entries.gif" alt="Animation of filtering using widgets" width="800">
+        <video controls autoplay loop muted playsinline width="800">
+            <source src="images/explore_your_ELN_entries.webm" type="video/webm">
+        </video>
     </div>
 
 ---
