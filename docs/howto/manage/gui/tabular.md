@@ -200,7 +200,7 @@ A further comment is needed to explain the combination of this feature with `roo
 ### 7. Row mode, multiple new entries, parse to my path
 
 <p align="center" width="100%">
-    <img width="100%" src="./images/tabular-7.png" alt="Parse row-wise to multiple new entries to custom path">
+    <img width="100%" src="./images/tabular-7.webp" alt="Parse row-wise to multiple new entries to custom path">
 </p>
 
 As anticipated in the previous example, `row` mode in connection to `multiple_new_entries` will produce a manyfold of instances of a specific class, each of them being a new Entry. In the present case, each instance will also automatically be placed in a `ReferenceEditQuantity` quantity lying in a subsection defined within the parent Entry, coloured in plum in the following example image.
@@ -221,7 +221,7 @@ As anticipated in the previous example, `row` mode in connection to `multiple_ne
 ### 8. The Sub-Subsection nesting schema
 
 <p align="center" width="100%">
-    <img width="100%" src="./images/tabular-8.png" alt="Parse columns with the same name to nested subsection">
+    <img width="100%" src="./images/tabular-8.webp" alt="Parse columns with the same name to nested subsection">
 </p>
 
 If the tabular data file contains multiple columns with exact same name, there is a way to parse them using `row` mode. As explained in previous examples, this mode creates an instance of a subsection of the schema for each row of the file. Whenever column with same name are found they are interpreted as multiple instances of a sub-subsection nested inside the subsection. To build a schema with such a feature it is enough to have two nested classes, each of them bearing a `repeats: true` annotation. This structure can be applied to each and every of the cases above with `row` mode parsing.

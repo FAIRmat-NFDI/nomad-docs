@@ -46,7 +46,7 @@ The mapping parser will search for the first available annotation in the followi
 1. *definition level*: used for generic paths.
 1. *child sections' definitions* (i.e. all inheriting sections): used to bypass any abstract sections, which should not be instantiated themselves. (note)
 
-![Path annotation in NOMAD datamodel](images/mapping_parser_path.png)
+![Path annotation in NOMAD datamodel](images/mapping_parser_path.webp)
 
 In the case of quantities, there is no practical distinction between options 1 and 2.
 By convention, we use the shorter *attribute-level* annotation.

@@ -152,7 +152,7 @@ In the following, we'll walk through an example to help you better understand ho
 
 **Device Structure**:
 <div style="text-align: center;">
-    <img src="images/solar_cell_device.png" alt="Solar Cell Device" width="500">
+    <img src="images/solar_cell_device.webp" alt="Solar Cell Device" width="500">
 </div>
 
 |Component                         | Material                         |
@@ -214,7 +214,7 @@ In this example, we will utilize the Solar Cell Explore page, which offers filte
 - This dashboard provides predefined filters and plots optimized for solar cell research.
 
 <div style="text-align: center;">
-    <img src="images/solar_cells_dashboard.png" alt="Solar Cells Dashboard" width="800">
+    <img src="images/solar_cells_dashboard.webp" alt="Solar Cells Dashboard" width="800">
 </div>
 
 The dashboard includes the following preset widgets:
