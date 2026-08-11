@@ -83,7 +83,9 @@ jobs:
           uv run pytest tests
 
       - name: Deploy PR Preview
-        if: github.event_name == 'pull_request'
+        # pr-preview-action does not support fork PRs: GITHUB_TOKEN is read-only
+        # there, so the gh-pages push fails. Fork PRs still run build and tests.
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
         uses: rossjrw/pr-preview-action@v1
         with:
           source-dir: site
