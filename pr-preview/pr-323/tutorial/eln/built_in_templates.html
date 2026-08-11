@@ -1,0 +1,5054 @@
+<!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="The documentation for NOMAD v1.
+">
+      
+      
+        <meta name="author" content="The NOMAD Authors">
+      
+      
+      
+        <link rel="prev" href="../upload_publish_api.html">
+      
+      
+        <link rel="next" href="custom_eln_yaml.html">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Use built-in ELN templates - Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Titillium Web";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#use-built-in-eln-templates-in-nomad" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="https://nomad-lab.eu" title="Documentation" class="md-header__button md-logo" aria-label="Documentation" data-md-component="logo">
+      
+  
+  <!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
+<svg width="100%" height="100%" viewBox="0 0 620 111" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-miterlimit:10;">
+    <g id="Artboard1" transform="matrix(0.982657,0,0,0.96472,-60.9085,-314.626)">
+        <rect x="61.983" y="326.132" width="630.85" height="114.85" style="fill:none;"></rect>
+        <clipPath id="_clip1">
+            <rect x="61.983" y="326.132" width="630.85" height="114.85"></rect>
+        </clipPath>
+        <g clip-path="url(#_clip1)">
+            <g transform="matrix(1.01765,0,0,1.03657,-8.65725,-14.6498)">
+                <g>
+                    <g>
+                        <g>
+                            <g>
+                                <g>
+                                    <circle class="logo-primary" cx="153.3" cy="355.2" r="20.2" style="fill:var(--nomad-logo-primary);stroke:var(--nomad-logo-primary);stroke-width:10px;"></circle>
+                                    <path class="logo-secondary" d="M167.6,398.5C159.7,390.6 146.9,390.6 139,398.5C131.6,405.9 119.9,406.4 111.9,399.9C111.4,399.3 110.9,398.7 110.4,398.2C102.5,390.3 102.5,377.5 110.4,369.6C118.3,361.7 118.3,348.9 110.4,341C102.5,333.1 89.7,333.1 81.8,341C73.9,348.9 73.9,361.7 81.8,369.6C89.7,377.5 89.7,390.3 81.8,398.2C77.1,402.9 75.2,409.4 76.1,415.5C76.6,419.8 78.6,423.9 81.9,427.2C89.8,435.1 102.6,435.1 110.5,427.2C118.4,419.3 131.2,419.3 139.1,427.2C147,435.1 159.8,435.1 167.7,427.2C175.5,419.2 175.5,406.4 167.6,398.5Z" style="fill:var(--nomad-logo-secondary);fill-rule:nonzero;stroke:var(--nomad-logo-secondary);stroke-width:10px;"></path>
+                                </g>
+                            </g>
+                        </g>
+                        <g>
+                            <g>
+                                <path d="M194.4,433.9L194.4,337.3L219.4,337.3C224.4,346.3 229.5,355.4 234.7,364.6C239.9,373.8 244.9,382.9 250,391.9L250,337.3L274.4,337.3L274.4,433.9L249.4,433.9C244.4,424.9 239.3,415.8 234.1,406.6C228.9,397.4 223.9,388.3 218.8,379.3L218.8,433.9L194.4,433.9Z" style="fill:var(--nomad-logo-secondary);fill-rule:nonzero;"></path>
+                                <path d="M331.3,436.2C324.4,436.2 318,434.9 312.1,432.4C306.2,429.9 301.2,426.4 296.9,421.8C292.6,417.3 289.3,411.9 287,405.7C284.6,399.5 283.4,392.8 283.4,385.5C283.4,378.2 284.6,371.5 287,365.3C289.4,359.1 292.7,353.8 296.9,349.3C301.2,344.8 306.2,341.3 312.1,338.8C318,336.3 324.4,335 331.3,335C338.2,335 344.6,336.3 350.4,338.8C356.2,341.3 361.3,344.8 365.6,349.3C369.9,353.8 373.2,359.1 375.6,365.3C378,371.5 379.1,378.2 379.1,385.5C379.1,392.8 377.9,399.5 375.6,405.7C373.2,411.9 369.9,417.3 365.6,421.8C361.3,426.3 356.2,429.9 350.4,432.4C344.6,434.9 338.2,436.2 331.3,436.2ZM331.3,413.2C335.9,413.2 339.9,412 343.2,409.7C346.5,407.4 349.1,404.1 350.9,400C352.7,395.8 353.7,391 353.7,385.5C353.7,380 352.8,375.2 350.9,371.2C349.1,367.1 346.5,363.9 343.2,361.6C339.9,359.3 335.9,358.1 331.3,358.1C326.8,358.1 322.8,359.2 319.4,361.5C316,363.8 313.4,367 311.6,371.1C309.8,375.2 308.8,380 308.8,385.5C308.8,391 309.7,395.8 311.6,400C313.4,404.2 316,407.4 319.4,409.7C322.8,412 326.8,413.2 331.3,413.2Z" style="fill:var(--nomad-logo-secondary);fill-rule:nonzero;"></path>
+                                <path d="M388.2,433.9L388.2,337.3L423.8,337.3C426.5,347 429.3,356.7 432,366.6C434.7,376.5 437.4,386.3 440,395.9C442.6,386.2 445.3,376.5 448,366.6C450.7,356.7 453.4,346.9 456,337.3L491.1,337.3C491.2,353.2 491.3,369.3 491.4,385.6C491.5,401.9 491.6,418 491.7,433.9L467.7,433.9L467.7,368.5C464.9,379.3 462,390.2 459,401.2C456.1,412.2 453.2,423.1 450.3,433.9L428.7,433.9C425.9,423.3 423,412.6 420.2,401.7C417.4,390.9 414.5,380.1 411.7,369.5L411.7,433.9L388.2,433.9Z" style="fill:var(--nomad-logo-secondary);fill-rule:nonzero;"></path>
+                                <path d="M500.8,433.9C505.7,418 510.7,401.9 515.6,385.6C520.6,369.3 525.5,353.2 530.4,337.3L564.4,337.3C569.3,353.2 574.3,369.3 579.2,385.6C584.2,401.9 589.1,418 594,433.9L569,433.9C568.1,430.9 567.2,427.8 566.3,424.7C565.4,421.6 564.5,418.6 563.6,415.5L531,415.5C530.1,418.5 529.2,421.6 528.3,424.7C527.4,427.8 526.5,430.8 525.6,433.9L500.8,433.9ZM537.5,394.4L557.5,394.4C555.9,388.8 554.2,383.2 552.5,377.5C550.8,371.8 549.1,366.2 547.5,360.6C545.9,366.2 544.2,371.8 542.5,377.5C540.8,383.2 539.1,388.9 537.5,394.4Z" style="fill:var(--nomad-logo-secondary);fill-rule:nonzero;"></path>
+                                <path d="M604.8,433.9L604.8,337.3L639.2,337.3C646.2,337.3 652.6,338.5 658.5,340.9C664.4,343.3 669.5,346.7 673.8,351.1C678.2,355.5 681.5,360.5 684,366.4C686.4,372.2 687.6,378.6 687.6,385.5C687.6,392.4 686.4,398.8 684,404.7C681.6,410.6 678.2,415.7 673.8,420.1C669.4,424.5 664.3,427.9 658.5,430.3C652.6,432.7 646.2,433.9 639.2,433.9L604.8,433.9ZM639.2,359.8L629.7,359.8L629.7,411.4L639.2,411.4C643.9,411.4 648.1,410.3 651.6,408C655.1,405.7 657.8,402.6 659.7,398.7C661.6,394.8 662.5,390.3 662.5,385.4C662.5,380.5 661.6,376.1 659.7,372.2C657.8,368.3 655.1,365.3 651.6,363C648,360.9 643.9,359.8 639.2,359.8Z" style="fill:var(--nomad-logo-secondary);fill-rule:nonzero;"></path>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Use built-in ELN templates
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom" aria-label="Switch to system preference" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_2" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required="">
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix="">
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/nomad-coe/nomad" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://nomad-lab.eu" title="Documentation" class="md-nav__button md-logo" aria-label="Documentation" data-md-component="logo">
+      
+  
+  <!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
+<svg width="100%" height="100%" viewBox="0 0 620 111" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-miterlimit:10;">
+    <g id="Artboard1" transform="matrix(0.982657,0,0,0.96472,-60.9085,-314.626)">
+        <rect x="61.983" y="326.132" width="630.85" height="114.85" style="fill:none;"></rect>
+        <clipPath id="_clip1">
+            <rect x="61.983" y="326.132" width="630.85" height="114.85"></rect>
+        </clipPath>
+        <g clip-path="url(#_clip1)">
+            <g transform="matrix(1.01765,0,0,1.03657,-8.65725,-14.6498)">
+                <g>
+                    <g>
+                        <g>
+                            <g>
+                                <g>
+                                    <circle class="logo-primary" cx="153.3" cy="355.2" r="20.2" style="fill:var(--nomad-logo-primary);stroke:var(--nomad-logo-primary);stroke-width:10px;"></circle>
+                                    <path class="logo-secondary" d="M167.6,398.5C159.7,390.6 146.9,390.6 139,398.5C131.6,405.9 119.9,406.4 111.9,399.9C111.4,399.3 110.9,398.7 110.4,398.2C102.5,390.3 102.5,377.5 110.4,369.6C118.3,361.7 118.3,348.9 110.4,341C102.5,333.1 89.7,333.1 81.8,341C73.9,348.9 73.9,361.7 81.8,369.6C89.7,377.5 89.7,390.3 81.8,398.2C77.1,402.9 75.2,409.4 76.1,415.5C76.6,419.8 78.6,423.9 81.9,427.2C89.8,435.1 102.6,435.1 110.5,427.2C118.4,419.3 131.2,419.3 139.1,427.2C147,435.1 159.8,435.1 167.7,427.2C175.5,419.2 175.5,406.4 167.6,398.5Z" style="fill:var(--nomad-logo-secondary);fill-rule:nonzero;stroke:var(--nomad-logo-secondary);stroke-width:10px;"></path>
+                                </g>
+                            </g>
+                        </g>
+                        <g>
+                            <g>
+                                <path d="M194.4,433.9L194.4,337.3L219.4,337.3C224.4,346.3 229.5,355.4 234.7,364.6C239.9,373.8 244.9,382.9 250,391.9L250,337.3L274.4,337.3L274.4,433.9L249.4,433.9C244.4,424.9 239.3,415.8 234.1,406.6C228.9,397.4 223.9,388.3 218.8,379.3L218.8,433.9L194.4,433.9Z" style="fill:var(--nomad-logo-secondary);fill-rule:nonzero;"></path>
+                                <path d="M331.3,436.2C324.4,436.2 318,434.9 312.1,432.4C306.2,429.9 301.2,426.4 296.9,421.8C292.6,417.3 289.3,411.9 287,405.7C284.6,399.5 283.4,392.8 283.4,385.5C283.4,378.2 284.6,371.5 287,365.3C289.4,359.1 292.7,353.8 296.9,349.3C301.2,344.8 306.2,341.3 312.1,338.8C318,336.3 324.4,335 331.3,335C338.2,335 344.6,336.3 350.4,338.8C356.2,341.3 361.3,344.8 365.6,349.3C369.9,353.8 373.2,359.1 375.6,365.3C378,371.5 379.1,378.2 379.1,385.5C379.1,392.8 377.9,399.5 375.6,405.7C373.2,411.9 369.9,417.3 365.6,421.8C361.3,426.3 356.2,429.9 350.4,432.4C344.6,434.9 338.2,436.2 331.3,436.2ZM331.3,413.2C335.9,413.2 339.9,412 343.2,409.7C346.5,407.4 349.1,404.1 350.9,400C352.7,395.8 353.7,391 353.7,385.5C353.7,380 352.8,375.2 350.9,371.2C349.1,367.1 346.5,363.9 343.2,361.6C339.9,359.3 335.9,358.1 331.3,358.1C326.8,358.1 322.8,359.2 319.4,361.5C316,363.8 313.4,367 311.6,371.1C309.8,375.2 308.8,380 308.8,385.5C308.8,391 309.7,395.8 311.6,400C313.4,404.2 316,407.4 319.4,409.7C322.8,412 326.8,413.2 331.3,413.2Z" style="fill:var(--nomad-logo-secondary);fill-rule:nonzero;"></path>
+                                <path d="M388.2,433.9L388.2,337.3L423.8,337.3C426.5,347 429.3,356.7 432,366.6C434.7,376.5 437.4,386.3 440,395.9C442.6,386.2 445.3,376.5 448,366.6C450.7,356.7 453.4,346.9 456,337.3L491.1,337.3C491.2,353.2 491.3,369.3 491.4,385.6C491.5,401.9 491.6,418 491.7,433.9L467.7,433.9L467.7,368.5C464.9,379.3 462,390.2 459,401.2C456.1,412.2 453.2,423.1 450.3,433.9L428.7,433.9C425.9,423.3 423,412.6 420.2,401.7C417.4,390.9 414.5,380.1 411.7,369.5L411.7,433.9L388.2,433.9Z" style="fill:var(--nomad-logo-secondary);fill-rule:nonzero;"></path>
+                                <path d="M500.8,433.9C505.7,418 510.7,401.9 515.6,385.6C520.6,369.3 525.5,353.2 530.4,337.3L564.4,337.3C569.3,353.2 574.3,369.3 579.2,385.6C584.2,401.9 589.1,418 594,433.9L569,433.9C568.1,430.9 567.2,427.8 566.3,424.7C565.4,421.6 564.5,418.6 563.6,415.5L531,415.5C530.1,418.5 529.2,421.6 528.3,424.7C527.4,427.8 526.5,430.8 525.6,433.9L500.8,433.9ZM537.5,394.4L557.5,394.4C555.9,388.8 554.2,383.2 552.5,377.5C550.8,371.8 549.1,366.2 547.5,360.6C545.9,366.2 544.2,371.8 542.5,377.5C540.8,383.2 539.1,388.9 537.5,394.4Z" style="fill:var(--nomad-logo-secondary);fill-rule:nonzero;"></path>
+                                <path d="M604.8,433.9L604.8,337.3L639.2,337.3C646.2,337.3 652.6,338.5 658.5,340.9C664.4,343.3 669.5,346.7 673.8,351.1C678.2,355.5 681.5,360.5 684,366.4C686.4,372.2 687.6,378.6 687.6,385.5C687.6,392.4 686.4,398.8 684,404.7C681.6,410.6 678.2,415.7 673.8,420.1C669.4,424.5 664.3,427.9 658.5,430.3C652.6,432.7 646.2,433.9 639.2,433.9L604.8,433.9ZM639.2,359.8L629.7,359.8L629.7,411.4L639.2,411.4C643.9,411.4 648.1,410.3 651.6,408C655.1,405.7 657.8,402.6 659.7,398.7C661.6,394.8 662.5,390.3 662.5,385.4C662.5,380.5 661.6,376.1 659.7,372.2C657.8,368.3 655.1,365.3 651.6,363C648,360.9 643.9,359.8 639.2,359.8Z" style="fill:var(--nomad-logo-secondary);fill-rule:nonzero;"></path>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
+
+    </a>
+    Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/nomad-coe/nomad" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked="">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorials
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tutorials
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../overview.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../explore.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Explore data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3">
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Publish data
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Publish data
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../upload_publish.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upload and share with the GUI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../upload_publish_api.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upload and share with the API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" checked="">
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Use NOMAD as an ELN
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Use NOMAD as an ELN
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Use built-in ELN templates
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="built_in_templates.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Use built-in ELN templates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#what-you-will-learn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What you will learn
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#before-you-begin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Before you begin
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-new-eln-upload" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create a new ELN upload
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-eln-entries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create ELN entries
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Create ELN entries">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-a-substance-entry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create a substance entry
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-a-sample-entry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create a sample entry
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-an-instrument-entry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create an instrument entry
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-a-process-entry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create a process entry
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-a-measurement-entry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create a measurement entry
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integrate-your-experiment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integrate your experiment
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#explore-and-search-your-eln" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Explore and search your ELN
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="custom_eln_yaml.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Create a custom ELN schema
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="tabular_parser_yaml.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parse tabular measurement data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../workflows_projects.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Manage workflows and projects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6">
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Develop a NOMAD plugin
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Develop a NOMAD plugin
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../develop_plugin/plugin_structure.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Set up a plugin project
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../develop_plugin/create_schema_package.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Create a schema package
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6_3">
+        
+          
+          <label class="md-nav__link" for="__nav_2_6_3" id="__nav_2_6_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Create a parser
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_6_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Create a parser
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../develop_plugin/create_parser.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NOMAD parsing approaches
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../develop_plugin/create_parser_parser_only.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automatic file parsing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../develop_plugin/create_parser_eln_only.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ELN-triggered parsing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../develop_plugin/create_parser_hybrid.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hybrid parsing approach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How-to guides
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    How-to guides
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../howto/overview.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2">
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Manage and find data
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Manage and find data
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_1">
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_1" id="__nav_3_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Use the GUI
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Use the GUI
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../howto/manage/gui/account.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Create an account and sign in
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../howto/manage/gui/upload.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upload and publish data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../howto/manage/gui/eln.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enter data with ELNs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../howto/manage/gui/north.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Analyze data in NORTH
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../howto/manage/gui/workflows.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Create custom workflows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../howto/manage/gui/yaml.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Write a YAML schema package
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../howto/manage/gui/elns.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Create custom ELNs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../howto/manage/gui/tabular.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parse tabular data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_2">
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_2" id="__nav_3_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Work programmatically
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Work programmatically
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../howto/manage/program/api.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Use the API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../howto/manage/program/auth.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Authenticate programmatically
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../howto/manage/program/download.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Download data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../howto/manage/program/publish_python.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Publish data using Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../howto/manage/program/archive_query.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Access processed data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../howto/manage/program/json_transformer.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Transform JSON data structures
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../howto/manage/program/graph_api.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Make Graph API calls
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Develop plugins
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Develop plugins
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../howto/plugins/plugins.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Start plugin development
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_2">
+        
+          
+          <label class="md-nav__link" for="__nav_3_3_2" id="__nav_3_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Create entry points
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Create entry points
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../howto/plugins/types/actions.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../howto/plugins/types/apis.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../howto/plugins/types/apps.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../howto/plugins/types/dashboards.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dashboards
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../howto/plugins/types/example_uploads.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Example uploads
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../howto/plugins/types/normalizers.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Normalizers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../howto/plugins/types/north_tools.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NORTH tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../howto/plugins/types/parsers.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parsers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../howto/plugins/types/schema_packages.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Schema packages
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3_3_3" id="__nav_3_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Use built-in tools
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Use built-in tools
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../howto/plugins/tools/units.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Work with units
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../howto/plugins/tools/hdf5.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Handle large data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../howto/plugins/tools/mapping_parser.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parse efficiently
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4">
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Host a NOMAD Oasis
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Host a NOMAD Oasis
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../howto/oasis/install.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../howto/oasis/configure.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../howto/oasis/deploy.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deploy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../howto/oasis/update.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Update
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../howto/oasis/administer.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Administer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../howto/oasis/secure.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Secure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../howto/oasis/troubleshoot.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshoot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5">
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Develop the core software
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Develop the core software
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../howto/develop/setup.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../howto/develop/code.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Navigate the code
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../howto/develop/contrib.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contribute
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../howto/develop/normalizing.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Write a normalizer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../howto/develop/search.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Extend the search
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../howto/develop/release.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Make a release
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Domain-specific examples
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Domain-specific examples
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/overview.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2">
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Computational data
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Computational data
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/computational_data/basics.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Basics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/computational_data/metainfo.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MetaInfo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/computational_data/schema_plugins.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Schema plugins
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/computational_data/parser_plugins.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parser plugins
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/computational_data/faqs.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3">
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Experimental data
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Experimental data
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/experiment_data/em.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Electron microscopy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/experiment_data/mpes.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Photoemission spectroscopy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/experiment_data/xps.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    X-ray photoemission spectroscopy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/experiment_data/opt.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optical spectroscopy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/experiment_data/apm.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Atom probe tomography
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/experiment_data/spm.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scanning probe microscopy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/experiment_data/pynxtools.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parse data with pynxtools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Use cases
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Use cases
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/use_cases/catalysis_app.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    nomad-catalysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/use_cases/neb_workflows.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    nomad-neb-workflows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Explanation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Explanation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../explanation/overview.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../explanation/basics.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    From files to data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../explanation/data.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data structure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../explanation/base_sections.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Base sections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../explanation/processing.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Processing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../explanation/architecture.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../explanation/workflows.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../explanation/plugin_system.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plugins
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../explanation/oasis.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Federation and Oasis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../explanation/auth.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Authentication and authorization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../explanation/north.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NORTH
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/overview.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/config.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/annotations.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Annotations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/basesections.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Base sections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/cli.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/plugins.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plugins
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/parsers.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parsers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/code_guidelines.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Code guidelines
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/glossary.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/tutorials.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial catalog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#what-you-will-learn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What you will learn
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#before-you-begin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Before you begin
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-new-eln-upload" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create a new ELN upload
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-eln-entries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create ELN entries
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Create ELN entries">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#create-a-substance-entry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create a substance entry
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-a-sample-entry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create a sample entry
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-an-instrument-entry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create an instrument entry
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-a-process-entry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create a process entry
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#create-a-measurement-entry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create a measurement entry
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integrate-your-experiment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Integrate your experiment
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#explore-and-search-your-eln" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Explore and search your ELN
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation">
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../../index.html" class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../overview.html" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Tutorials
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="built_in_templates.html" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Use NOMAD as an ELN
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="use-built-in-eln-templates-in-nomad">Use built-in ELN templates in NOMAD<a class="headerlink" href="#use-built-in-eln-templates-in-nomad" title="Permanent link">¶</a></h1>
+<p>In this tutorial, we use NOMAD’s Electronic Lab Notebook (ELN) functionality to document an experiment in the NOMAD GUI. We follow the experimental workflow from defining substances and instruments to recording processing steps and measurements, using built-in ELN templates to structure and interlink the resulting entries. By the end of the tutorial, we will have documented a complete experiment as a coherent, navigable ELN record in NOMAD.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_0.png" data-desc-position="bottom"><img alt="From entities and activities to structure ELN" src="images/ELN_0.png"></a></p>
+<hr>
+<h2 id="what-you-will-learn">What you will learn<a class="headerlink" href="#what-you-will-learn" title="Permanent link">¶</a></h2>
+<p>In this tutorial, you will learn how to:</p>
+<ol>
+<li>Create and manage an ELN upload in NOMAD</li>
+<li>Create ELN entries for substances, samples, instruments, processes, and measurements using built-in schemas</li>
+<li>Reference and interlink ELN entries to represent complete experimental workflows</li>
+<li>Document material processing steps and visualize them using workflow graphs</li>
+<li>Combine processes and measurements into a single experiment entry</li>
+<li>Search, filter, and explore your ELN entries using the NOMAD GUI and custom widgets</li>
+</ol>
+<hr>
+<h2 id="before-you-begin">Before you begin<a class="headerlink" href="#before-you-begin" title="Permanent link">¶</a></h2>
+<p>This tutorial requires no prior experience with NOMAD.</p>
+<p>Before starting, make sure you have:</p>
+<ol>
+<li>
+<p><strong>NOMAD user account</strong><br>
+   Creating and editing ELN entries requires a NOMAD user account.
+   You can create an account by following the steps described in the
+   <a href="../overview.html#create-a-nomad-user-account">overview page</a>.</p>
+</li>
+<li>
+<p><strong>Basic understanding of uploads and entries</strong><br>
+   Familiarity with uploads, entries, and how they relate to each other can be helpful. These concepts are introduced in the section <a href="../upload_publish.html#the-key-elements-in-nomad">key elements in NOMAD</a> and will be reinforced throughout the tutorial.</p>
+</li>
+<li>
+<p><strong>Basic familiarity with experimental workflows</strong><br>
+   Familiarity with preparation, processing, and measurements can be helpful, but is not required.</p>
+</li>
+</ol>
+<p>In this tutorial, we will use an example experiment involving the preparation of solution-processed polymer thin films and the measurement of their optical absorption spectrum.</p>
+<details class="example">
+<summary>About the example experiment used for this exercise</summary>
+<p>In this exercise, we will work with an example experiment involving the preparation and characterization of poly(3-hexylthiophene-2,5-diyl) ("P3HT") thin films. The experiment consists of three main activities: preparing solutions, depositing thin films, and measuring optical absorption.</p>
+<ol>
+<li>
+<p><strong>Preparing solutions:</strong> The polymer powder is mixed with a solvent in predefined quantities to achieve the desired concentration. A scale is used to accurately weigh the polymer powder, ensuring precise solution concentration.</p>
+</li>
+<li>
+<p><strong>Depositing thin films:</strong> The prepared solution is used to create a thin film on a glass substrate through spin-coating. By carefully controlling the spin speed and duration, the desired film thickness is achieved.</p>
+</li>
+<li>
+<p><strong>Measuring optical absorption:</strong> The optical absorption spectrum of the thin film is acquired using a UV-Vis-NIR spectrometer. The measurement results are saved as a <code>.csv</code> file for further analysis.</p>
+</li>
+</ol>
+<p>To effectively document this experiment, we will create and interlink electronic lab notebook (ELN) entries in NOMAD. These entries will include key entities such as substances, instruments, and samples, as well as activities like material processing and measurements. By structuring the data in this way, we ensure a comprehensive and FAIR-compliant record of the experiment.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_2.webp" data-desc-position="bottom"><img alt="Overview of the example entities and activities" src="images/ELN_2.webp"></a></p>
+</details>
+<hr>
+<h2 id="create-a-new-eln-upload">Create a new ELN upload<a class="headerlink" href="#create-a-new-eln-upload" title="Permanent link">¶</a></h2>
+<p>In NOMAD, an ELN is created by initiating a NOMAD upload. This process allows you to structure and document your research data efficiently. Create a new upload by following the steps in <a href="../upload_publish.html#create-new-upload">Create new upload</a>.</p>
+<h2 id="create-eln-entries">Create ELN entries<a class="headerlink" href="#create-eln-entries" title="Permanent link">¶</a></h2>
+<p>The next step is to create entries for your substances, instruments, processes, and measurements. In NOMAD, each ELN entry is structured using templates called <em>built-in schemas</em>. These templates are specifically designed to capture relevant information for different types of entries, ensuring consistency and completeness in documentation.</p>
+<p>They include general fields tailored to the type of entry you are creating. The currently available ELN built-in schemas in NOMAD are illustrated in the figure below.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_1.png" data-desc-position="bottom"><img alt="ELN built-in base schema" src="images/ELN_1.png"></a></p>
+<p>To create ELN entries using the templates provided by NOMAD, we will generate instances from the built-in schemas. This will automatically create entries with predefined fields, allowing us to efficiently fill in the relevant information of our experiment.</p>
+<p><strong>Use the arrow buttons ⬅️➡️ below to follow the steps for creating ELN entries using the built-in schema.</strong></p>
+<div class="image-slider" id="slider1">
+    <div class="nav-arrow left" id="prev1">←</div>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_built-in_1.webp" data-desc-position="bottom"><img src="images/ELN_built-in_1.webp" alt="Step 1" class="active"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_built-in_2.webp" data-desc-position="bottom"><img src="images/ELN_built-in_2.webp" alt="Step 2"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_built-in_3.webp" data-desc-position="bottom"><img src="images/ELN_built-in_3.webp" alt="Step 3"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_built-in_4.webp" data-desc-position="bottom"><img src="images/ELN_built-in_4.webp" alt="Step 4"></a>
+    <div class="nav-arrow right" id="next1">→</div>
+</div>
+
+<h3 id="create-a-substance-entry">Create a substance entry<a class="headerlink" href="#create-a-substance-entry" title="Permanent link">¶</a></h3>
+<p>Now, let's create an entry using the built-in <em>Substance ELN</em> schema for <strong>P3HT powder</strong>. Follow the steps of creating an entry described above and select <em>Substance ELN</em> from the drop-down menu in step 4.</p>
+<div style="text-align: center;">
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_built-in_5.png" data-desc-position="bottom"><img src="images/ELN_built-in_5.png" alt="P3HT powder ELN substance entry" width="400"></a>
+</div>
+
+<details class="info">
+<summary>Input fields offered by the built-in schema <em>Substance ELN</em></summary>
+<p>The built-in schema <em>Substance ELN</em> provides the following fields for input:</p>
+<ul>
+<li><strong>substance name:</strong> Automatically used as the entry name.</li>
+<li><strong>tags:</strong> User-selected tags to improve searchability.</li>
+<li><strong>datetime:</strong> Allows entry of a date/time stamp.</li>
+<li><strong>substance ID:</strong> A unique, human-readable ID for the substance.</li>
+<li><strong>detailed substance description:</strong> A free text field for additional information.</li>
+</ul>
+<p>Additional subsections available in the <em>data</em> subsection include:</p>
+<ul>
+<li><strong>elemental composition:</strong> Define the chemical composition with atomic and mass fractions.</li>
+<li><strong>pure substance:</strong> Specify if the material is a pure substance purchased from an external vendor, with fields like:<ul>
+<li>Substance name</li>
+<li>IUPAC name</li>
+<li>Molecular formula</li>
+<li>CAS number</li>
+<li>Inchi Key, SMILES, and more</li>
+</ul>
+</li>
+<li><strong>substance identifier:</strong> Add identifiers for specific substances.</li>
+</ul>
+</details>
+<p>Once the entry is created, we can fill in the relevant fields with detailed and accurate information. Fields can also be updated as needed to keep the entry accurate and useful.</p>
+<p><strong>Use the arrow buttons ⬅️➡️ below to follow the steps for filling in a substance entry.</strong></p>
+<div class="image-slider" id="slider2">
+    <div class="nav-arrow left" id="prev2">←</div>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_built-in_6.png" data-desc-position="bottom"><img src="images/ELN_built-in_6.png" alt="Step 1" class="active"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_built-in_7.png" data-desc-position="bottom"><img src="images/ELN_built-in_7.png" alt="Step 2"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_built-in_8.png" data-desc-position="bottom"><img src="images/ELN_built-in_8.png" alt="Step 3"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_built-in_9.webp" data-desc-position="bottom"><img src="images/ELN_built-in_9.webp" alt="Step 4"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_built-in_10.webp" data-desc-position="bottom"><img src="images/ELN_built-in_10.webp" alt="Step 5"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_built-in_11.png" data-desc-position="bottom"><img src="images/ELN_built-in_11.png" alt="Step 6"></a>
+    <div class="nav-arrow right" id="next2">→</div>
+</div>
+
+<details class="task">
+<summary>Create an ELN entry for substances</summary>
+<p>Create an ELN entry in NOMAD for the following substances:</p>
+<ul>
+<li>Chloroform</li>
+<li>Glass substrate</li>
+</ul>
+<p>Use the <em>Substance ELN</em> schema and include as many details as you like (e.g., Substance Name, Datetime, Substance ID, Description).</p>
+</details>
+<hr>
+<h3 id="create-a-sample-entry">Create a sample entry<a class="headerlink" href="#create-a-sample-entry" title="Permanent link">¶</a></h3>
+<p>Now, let's create an entry using the built-in <em>Generic Sample ELN</em> schema for <strong>P3HT thin film</strong>. Follow the steps of creating an entry described above and select <em>Generic Sample ELN</em> from the drop-down menu in step 4.</p>
+<div style="text-align: center;">
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_built-in_12.png" data-desc-position="bottom"><img src="images/ELN_built-in_12.png" alt="P3HT thin film sample ELN substance entry" width="400"></a>
+</div>
+
+<details class="info">
+<summary>Input fields offered by the built-in schema <em>Generic Sample ELN</em></summary>
+<p>The built-in schema <em>Generic Sample ELN</em> provides the following fields for input:</p>
+<ul>
+<li><strong>name:</strong> Automatically used as the entry name.</li>
+<li><strong>tags:</strong> User-selected tags to improve searchability.</li>
+<li><strong>datetime:</strong> Allows entry of a date/time stamp.</li>
+<li><strong>ID:</strong> A unique, human-readable ID for the sample.</li>
+<li><strong>description:</strong> A free text field for additional information.</li>
+</ul>
+<p>Additional subsections available in the <em>data</em> subsection include:</p>
+<ul>
+<li><strong>elemental composition:</strong> Define the chemical composition with atomic and mass fractions.</li>
+<li><strong>components:</strong> Specify the components used to create the sample, including raw materials or system components.</li>
+<li><strong>sample identifier:</strong> Add unique identifiers for the sample.</li>
+</ul>
+</details>
+<p>Once the entry is created, we can fill in the relevant fields with detailed and accurate information. Fields can also be updated as needed to keep the entry accurate and useful.</p>
+<p><strong>Use the arrow buttons ⬅️➡️ below to follow the steps for filling in a sample entry.</strong></p>
+<div class="image-slider" id="slider3">
+    <div class="nav-arrow left" id="prev3">←</div>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_built-in_13.png" data-desc-position="bottom"><img src="images/ELN_built-in_13.png" alt="Step 1" class="active"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_built-in_14.png" data-desc-position="bottom"><img src="images/ELN_built-in_14.png" alt="Step 2"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_built-in_15.png" data-desc-position="bottom"><img src="images/ELN_built-in_15.png" alt="Step 3"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_built-in_16.webp" data-desc-position="bottom"><img src="images/ELN_built-in_16.webp" alt="Step 4"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_built-in_17.png" data-desc-position="bottom"><img src="images/ELN_built-in_17.png" alt="Step 5"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_built-in_18.png" data-desc-position="bottom"><img src="images/ELN_built-in_18.png" alt="Step 6"></a>
+    <div class="nav-arrow right" id="next3">→</div>
+</div>
+
+<details class="task">
+<summary>Create an ELN entry for a sample</summary>
+<p>Create an ELN entry in NOMAD for P3HT solution in chloroform.
+Reference the sample to its components (P3HT powder and chloroform).</p>
+<p>Use the <em>Generic Sample ELN</em> schema and include as many details as you like (e.g., name, datetime, ID, description).</p>
+</details>
+<hr>
+<h3 id="create-an-instrument-entry">Create an instrument entry<a class="headerlink" href="#create-an-instrument-entry" title="Permanent link">¶</a></h3>
+<p>Now, let's create an entry using the built-in <em>Instrument ELN</em> schema for <strong>scale</strong>. Follow the steps of creating an entry described above and select <em>Instrument ELN</em> from the drop-down menu in step 4.</p>
+<div style="text-align: center;">
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_built-in_19.png" data-desc-position="bottom"><img src="images/ELN_built-in_19.png" alt="Scale ELN instrument entry" width="400"></a>
+</div>
+
+<details class="info">
+<summary>Input fields offered by the built-in schema <em>Instrument ELN</em></summary>
+<p>The built-in schema <em>Instrument ELN</em> provides the following fields for input:</p>
+<ul>
+<li><strong>name:</strong> Automatically used as the entry name.</li>
+<li><strong>tags:</strong> User-selected tags to improve searchability.</li>
+<li><strong>datetime:</strong> Allows entry of a date/time stamp.</li>
+<li><strong>ID:</strong> A unique, human-readable ID for the instrument.</li>
+<li><strong>description:</strong> A free text field for additional information.</li>
+</ul>
+<p>Additional subsections available in the <em>data</em> subsection include:</p>
+<ul>
+<li><strong>instrument identifiers:</strong> Specify the type of instrument and additional metadata, if applicable.</li>
+</ul>
+</details>
+<p>Once the entry is created, we can fill in the relevant fields with detailed and accurate information. Fields can also be updated as needed to keep the entry accurate and useful.</p>
+<p><strong>Use the arrow buttons ⬅️➡️ below to follow the steps for filling in an instrument entry.</strong></p>
+<div class="image-slider" id="slider4">
+    <div class="nav-arrow left" id="prev4">←</div>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_built-in_20.png" data-desc-position="bottom"><img src="images/ELN_built-in_20.png" alt="Step 1" class="active"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_built-in_21.webp" data-desc-position="bottom"><img src="images/ELN_built-in_21.webp" alt="Step 2"></a>
+    <div class="nav-arrow right" id="next4">→</div>
+</div>
+
+<details class="task">
+<summary>Create an ELN entry for an instrument</summary>
+<p>Create an ELN entry in NOMAD for one of the following instruments:</p>
+<ul>
+<li>Optical Spectrometer</li>
+<li>Spin Coater</li>
+</ul>
+<p>Use the <em>Instrument ELN</em> schema and include as many details as you like (e.g., name, datetime, ID, description).</p>
+</details>
+<hr>
+<h3 id="create-a-process-entry">Create a process entry<a class="headerlink" href="#create-a-process-entry" title="Permanent link">¶</a></h3>
+<p>Now, let's create an entry using the built-in <em>Material Processing ELN</em> schema for <strong>Preparation of P3HT solution</strong>. Follow the steps of creating an entry described above and select <em>Material Processing ELN</em> from the drop-down menu in step 4.</p>
+<div style="text-align: center;">
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_built-in_22.png" data-desc-position="bottom"><img src="images/ELN_built-in_22.png" alt="Material Processing ELN entry" width="400"></a>
+</div>
+
+<details class="info">
+<summary>Input fields offered by the built-in schema <em>Material Processing ELN</em></summary>
+<p>The <em>Material Processing ELN</em> schema provides the following fields for input:</p>
+<ul>
+<li><strong>name:</strong> Automatically used as the entry name.</li>
+<li><strong>starting time and ending time:</strong> Allows entry of a date/time stamp for the process duration.</li>
+<li><strong>tags:</strong> User-selected tags to improve searchability.</li>
+<li><strong>ID:</strong> A unique, human-readable ID for the process.</li>
+<li><strong>location:</strong> A text field specifying the location where the process took place.</li>
+<li><strong>description:</strong> A free text field for additional information about the process.</li>
+</ul>
+<p>Additional subsections available in the <em>data</em> subsection include:</p>
+<ul>
+<li><strong>steps:</strong> Define the step-by-step procedure for the material processing.</li>
+<li><strong>process identifier:</strong> Add unique identifiers for the process.</li>
+<li><strong>instruments:</strong> List the instruments used in the process.</li>
+<li><strong>samples:</strong> Specify the samples that are created or used in the process.</li>
+</ul>
+</details>
+<p>Once the entry is created, we can fill in the relevant fields with detailed and accurate information. Fields can also be updated as needed to keep the entry accurate and useful.</p>
+<p><strong>Use the arrow buttons ⬅️➡️ below to follow the steps for filling in a material processing entry.</strong></p>
+<div class="image-slider" id="slider5">
+    <div class="nav-arrow left" id="prev5">←</div>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_built-in_23.png" data-desc-position="bottom"><img src="images/ELN_built-in_23.png" alt="step 1" class="active"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_built-in_24.png" data-desc-position="bottom"><img src="images/ELN_built-in_24.png" alt="step 2"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_built-in_25.png" data-desc-position="bottom"><img src="images/ELN_built-in_25.png" alt="step 3"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_built-in_26.webp" data-desc-position="bottom"><img src="images/ELN_built-in_26.webp" alt="step 4"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_built-in_27.png" data-desc-position="bottom"><img src="images/ELN_built-in_27.png" alt="step 5"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_built-in_28.png" data-desc-position="bottom"><img src="images/ELN_built-in_28.png" alt="step 6"></a>
+    <div class="nav-arrow right" id="next5">→</div>
+</div>
+
+<details class="task">
+<summary>Reference a sample to your process ELN</summary>
+<p>For the Process ELN entry created above, make a reference to a sample entry called <em>P3HT_solution_in_CF</em>.</p>
+<ul>
+<li>If the P3HT_solution_in_CF sample entry already exists, simply link to it within the samples subsection of your Process ELN entry.</li>
+<li>If the sample entry does not exist, first create a Sample ELN entry named P3HT_solution_in_CF, then add the reference in the Process ELN entry.</li>
+</ul>
+</details>
+<p><strong>Defining the steps of a process</strong></p>
+<p>The <em>steps</em> subsection in the <em>Material Processing ELN</em> allows us to document each stage of the process and visualize them in an interactive workflow graph.</p>
+<p>For the example process entry <strong>Preparation of P3HT solution</strong>, we will define the following three steps:</p>
+<ol>
+<li>Weighing the powder</li>
+<li>Filling the solvent</li>
+<li>Mixing the solution</li>
+</ol>
+<p><strong>Use the arrow buttons ⬅️➡️ below to follow the steps for defining the process stages in your material processing entry.</strong></p>
+<div class="image-slider" id="slider6">
+    <div class="nav-arrow left" id="prev6">←</div>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_built-in_29.png" data-desc-position="bottom"><img src="images/ELN_built-in_29.png" alt="step 1" class="active"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_built-in_30.webp" data-desc-position="bottom"><img src="images/ELN_built-in_30.webp" alt="step 2"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_built-in_31.webp" data-desc-position="bottom"><img src="images/ELN_built-in_31.webp" alt="step 3"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_built-in_32.webp" data-desc-position="bottom"><img src="images/ELN_built-in_32.webp" alt="step 4"></a>
+    <div class="nav-arrow right" id="next6">→</div>
+</div>
+
+<p>Note that the added information in the <strong>subsections</strong> will be used to automatically fill in the <em>Workflow Graph</em> as <strong>tasks</strong>, as well as <strong>the References</strong> section. You can find the Workflow Graph in the <strong>OVERVIEW</strong> tab of the entry.</p>
+<div style="text-align: center;">
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_built-in_33.png" data-desc-position="bottom"><img src="images/ELN_built-in_33.png" alt="Process workflow graph" width="400"></a>
+</div>
+
+<p>The workflow graph can be modified and enriched by adding additional information such as <strong>inputs</strong>, <strong>additional tasks</strong>, and <strong>outputs</strong> for each step. You can do this in the <strong>workflow2</strong> section.</p>
+<p>The <strong>workflow2</strong> section of the <strong>Preparation of P3HT solution</strong> example can be found under the <strong>DATA</strong> tab, in the left panel under <strong>workflow2</strong>. We can now add inputs by referencing existing substance entries.</p>
+<p><strong>Use the arrow buttons ⬅️➡️ below to follow the steps for editing the workflow graph.</strong></p>
+<div class="image-slider" id="slider7">
+    <div class="nav-arrow left" id="prev7">←</div>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_built-in_34.png" data-desc-position="bottom"><img src="images/ELN_built-in_34.png" alt="step 1" class="active"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_built-in_35.png" data-desc-position="bottom"><img src="images/ELN_built-in_35.png" alt="step 2"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_built-in_36.png" data-desc-position="bottom"><img src="images/ELN_built-in_36.png" alt="step 3"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_built-in_37.png" data-desc-position="bottom"><img src="images/ELN_built-in_37.png" alt="step 4"></a>
+    <div class="nav-arrow right" id="next7">→</div>
+</div>
+
+<details class="task">
+<summary>Reference P3HT powder as input for the process</summary>
+<p>For the <em>Process ELN</em> entry created above, make reference to the <em>Substance ELN</em> entry <em>P3HT Powder</em> as an input of the process.</p>
+<p><em>Tip:</em> Use the workflow2 section of the entry.</p>
+</details>
+<p>We can now see the changes in the workflow graph based on our modifications to the workflow section.</p>
+<div style="text-align: center;">
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_built-in_38.png" data-desc-position="bottom"><img src="images/ELN_built-in_38.png" alt="Process workflow graph" width="400"></a>
+</div>
+
+<hr>
+<h3 id="create-a-measurement-entry">Create a measurement entry<a class="headerlink" href="#create-a-measurement-entry" title="Permanent link">¶</a></h3>
+<p>Now, let's create an entry using the built-in <em>Measurement ELN</em> schema for <strong>Optical absorption measurement</strong>. Follow the steps of creating an entry described above and select <em>Measurement ELN</em> from the drop-down menu in step 4.</p>
+<div style="text-align: center;">
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_built-in_39.png" data-desc-position="bottom"><img src="images/ELN_built-in_39.png" alt="Measurement ELN entry" width="400"></a>
+</div>
+
+<details class="info">
+<summary>Input fields offered by the built-in schema <em>Measurement ELN</em></summary>
+<ul>
+<li><strong>name:</strong> Automatically used as the entry name.</li>
+<li><strong>starting time:</strong> Allows entry of a date/time stamp for the measurement.</li>
+<li><strong>tags:</strong> User-selected tags to improve searchability.</li>
+<li><strong>ID:</strong> A unique, human-readable ID for the measurement.</li>
+<li><strong>location:</strong> A text field specifying the location where the measurement took place.</li>
+<li><strong>description:</strong> A free text field for additional information about the measurement.</li>
+</ul>
+<p>Additional subsections available in the <em>data</em> subsection include:</p>
+<ul>
+<li><strong>steps:</strong> Define the step-by-step procedure for the measurement.</li>
+<li><strong>samples:</strong> Specify the samples that are being measured.</li>
+<li><strong>measurement identifier:</strong> Add unique identifiers for the measurement.</li>
+<li><strong>instruments:</strong> List the instruments used in the measurement.</li>
+<li><strong>results:</strong> Provide information about the results of the measurements (text and images).</li>
+</ul>
+</details>
+<p>Once the entry is created, we can fill in the relevant fields with detailed and accurate information. Fields can also be updated as needed to keep the entry accurate and useful.</p>
+<p><strong>Use the arrow buttons ⬅️➡️ below to follow the steps for filling in a measurement entry.</strong></p>
+<div class="image-slider" id="slider8">
+    <div class="nav-arrow left" id="prev8">←</div>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_built-in_40.png" data-desc-position="bottom"><img src="images/ELN_built-in_40.png" alt="Step 1" class="active"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_built-in_41.png" data-desc-position="bottom"><img src="images/ELN_built-in_41.png" alt="Step 2"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_built-in_42.png" data-desc-position="bottom"><img src="images/ELN_built-in_42.png" alt="Step 3"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_built-in_43.png" data-desc-position="bottom"><img src="images/ELN_built-in_43.png" alt="Step 4"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_built-in_44.png" data-desc-position="bottom"><img src="images/ELN_built-in_44.png" alt="Step 5"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_built-in_45.png" data-desc-position="bottom"><img src="images/ELN_built-in_45.png" alt="Step 6"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_built-in_46.png" data-desc-position="bottom"><img src="images/ELN_built-in_46.png" alt="Step 7"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_built-in_47.webp" data-desc-position="bottom"><img src="images/ELN_built-in_47.webp" alt="Step 8"></a>
+    <div class="nav-arrow right" id="next8">→</div>
+</div>
+
+<hr>
+<h3 id="integrate-your-experiment">Integrate your experiment<a class="headerlink" href="#integrate-your-experiment" title="Permanent link">¶</a></h3>
+<p>Once all substances, samples, processes, and measurements are defined, you can integrate them into a structured workflow using the <em>Experiment ELN</em> schema. The <em>Experiment ELN</em> schema allows linking <em>processes</em> and <em>measurements</em> into a single entry for a comprehensive overview of your experimental workflow.</p>
+<p>Now create an entry using the built-in <em>Experiment ELN</em> schema for <strong>Characterization of P3HT</strong>. Follow the steps of creating an entry described above and select <em>Experiment ELN</em> from the drop-down menu in step 4.</p>
+<div style="text-align: center;">
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_built-in_48.png" data-desc-position="bottom"><img src="images/ELN_built-in_48.png" alt="Experiment ELN entry" width="400"></a>
+</div>
+
+<details class="info">
+<summary>Input fields offered by the built-in schema <em>Experiment ELN</em></summary>
+<ul>
+<li><strong>name:</strong> Automatically used as the entry name.</li>
+<li><strong>starting time:</strong> Allows entry of a date/time stamp for the experiment.</li>
+<li><strong>tags:</strong> User-selected tags to improve searchability.</li>
+<li><strong>ID:</strong> A unique, human-readable ID for the experiment.</li>
+<li><strong>location:</strong> A text field specifying the location where the experiment took place.</li>
+<li><strong>description:</strong> A free text field for additional information about the experiment.</li>
+</ul>
+<p>Additional subsections available in the <em>data</em> subsection include:</p>
+<ul>
+<li><strong>steps:</strong> Reference the processes and measurements that make up the experiment.</li>
+<li><strong>experiment identifiers:</strong> Specify the additional metadata for the experiment.</li>
+</ul>
+</details>
+<p>The <em>steps</em> subsection allows us to reference the various processes and measurements that are part of the experiment. By organizing these elements into a structured and interactive workflow, we can provide a clearer overview of the experimental sequence, enabling better visualization and understanding of how different steps are interconnected.</p>
+<div style="text-align: center;">
+    <video controls="" autoplay="" loop="" muted="" playsinline="" width="400">
+        <source src="images/ELN_built-in_39.webm" type="video/webm">
+    </video>
+</div>
+
+<hr>
+<h2 id="explore-and-search-your-eln">Explore and search your ELN<a class="headerlink" href="#explore-and-search-your-eln" title="Permanent link">¶</a></h2>
+<!-- TODO consider changing this admonition to a download button -->
+<details class="example">
+<summary>Download the example file for this exercise</summary>
+<p><a href="https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_4_files/example_NOMAD_ELN.zip" rel="noopener" target="_blank">Download example data ZIP</a>.</p>
+<p>The file contains multiple NOMAD ELN entries in <code>.json</code> format.</p>
+<p>These entries have been created using the NOMAD ELN built-in schema, organized into folders, and categorized with custom tags.</p>
+<p>You can drag and drop this file into a new upload in NOMAD to view its contents.</p>
+</details>
+<p>Imagine you have created multiple entries for substances, samples, instruments, processes, and measurements, and you need to quickly find a specific experiment or material. Instead of manually searching through files, NOMAD’s ELN allows you to search, filter, and organize your entries—saving you time and effort.</p>
+<details class="info">
+<summary>Organizing your ELN upload</summary>
+<p>NOMAD is a file-based system. You can access, organize, and download your files within each upload. You can also create folders to categorize entries into materials, samples, instruments, processes, and results, as well as upload additional documents, such as relevant PDFs.</p>
+<div class="admonition warning">
+<p class="admonition-title">If you plan to organize your entries into separate folders, do so before you reference them to each other. Moving them afterward may break the reference links.</p>
+</div>
+<p>You can follow these steps to organize your ELN entries:</p>
+<ol>
+<li>
+<p>Navigate to the <strong>FILES</strong> tab in your upload. This view functions like a file explorer, allowing you to view and manage files.
+</p><div style="text-align: center;">
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/files_explorer_in_NOMAD.png" data-desc-position="bottom"><img src="images/files_explorer_in_NOMAD.png" alt="interactive workflow gif" width="600"></a>
+</div><p></p>
+</li>
+<li>
+<p>Add new folders and organize them according to your needs.
+</p><div style="text-align: center;">
+    <video controls="" autoplay="" loop="" muted="" playsinline="" width="600">
+        <source src="images/creating_new_folders.webm" type="video/webm">
+    </video>
+</div><p></p>
+</li>
+<li>
+<p>Drag and drop files into the desired folder. A prompt will appear, asking if you want to copy or move the files—choose according to your needs.
+</p><div style="text-align: center;">
+    <video controls="" autoplay="" loop="" muted="" playsinline="" width="600">
+        <source src="images/moving_files_to_a_folder.webm" type="video/webm">
+    </video>
+</div><p></p>
+</li>
+<li>
+<p>Once all files are sorted, take a moment to review the structure. Here is an example of an organized ELN:
+</p><div style="text-align: center;">
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/after_organization.png" data-desc-position="bottom"><img src="images/after_organization.png" alt="interactive workflow gif" width="600"></a>
+</div><p></p>
+</li>
+</ol>
+</details>
+<p><strong>Searching your ELN entries</strong></p>
+<p>To search for entries in your ELN, follow these steps:</p>
+<ol>
+<li>
+<p>At the top of the ELN upload page, click on the <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/icon_search_upload.png" data-desc-position="bottom"><img src="images/icon_search_upload.png" alt="Search ELN icon" width="20"></a> icon.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/explore_ELN_step_1.png" data-desc-position="bottom"><img alt="screenshot of step 1" src="images/explore_ELN_step_1.png"></a></p>
+</li>
+<li>
+<p>From the drop-down menu, select <em>Entries</em>.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/explore_ELN_step_2.png" data-desc-position="bottom"><img alt="screenshot of step 2" src="images/explore_ELN_step_2.png"></a></p>
+<p>This will open NOMAD's <strong>EXPLORE</strong> page with a filter applied to display only the entries from your upload.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/explore_ELN_step_2r.png" data-desc-position="bottom"><img alt="screenshot of NOMAD EXPLORE page with the filter applied" src="images/explore_ELN_step_2r.png"></a></p>
+</li>
+</ol>
+<p>On the <strong>EXPLORE</strong> page, you can use the filter options in the sidebar to refine your search, enter specific keywords in the search bar to find relevant entries, or create custom widgets to visualize your ELN data.</p>
+<details class="info">
+<summary>Filtering entries in NOMAD</summary>
+<p>NOMAD provides various filters that can be used to efficiently find your ELN entries, but the following two filters are particularly effective:</p>
+<ul>
+<li>
+<p>Filter by built-in schema used to create the entry.</p>
+<p>For example: <em>ELNInstrument</em>, <em>ELNSubstance</em>, <em>ELNSample</em>, etc.</p>
+</li>
+<li>
+<p>Filter by custom tags, where you assign common tags to related entries for easy grouping.</p>
+<p>For example: tag all solvents as "my_solvent" or all samples as "my_samples".</p>
+</li>
+</ul>
+<p>Using these filters helps you quickly locate specific entries in your ELN.</p>
+</details>
+<p><strong>Customize your search interface with widgets</strong></p>
+<p>Widgets allow you to customize your search interface to better suit your data exploration needs. By adding and rearranging widgets, you can create a personalized view that highlights the filters, metadata, or visualizations most relevant to your research.</p>
+<details class="task">
+<summary>Create a custom widget for ELN sections and custom tags</summary>
+<p>To create a custom widget for filtering your ELN, follow these steps:</p>
+<ol>
+<li>Click on the <strong>+ TERMS</strong> button to open the <em>Edit terms widget</em> menu.</li>
+</ol>
+<p></p><div style="text-align: center;">
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/widget_step_1.png" data-desc-position="bottom"><img src="images/widget_step_1.png" alt="Screenshot of the Edit terms widget menu" width="800"></a>
+</div><p></p>
+<ol>
+<li>
+<p>In the <em>Search quantity</em> field, type <em>eln</em>. A list of available filters will appear.</p>
+</li>
+<li>
+<p>Select <code>results.eln.sections</code> from the list. This will enable filtering based on the built-in ELN sections available in your ELN upload.</p>
+</li>
+</ol>
+<p></p><div style="text-align: center;">
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/widget_step_2_3.png" data-desc-position="bottom"><img src="images/widget_step_2_3.png" alt="Screenshot of selecting results.eln.sections filter" width="400"></a>
+</div><p></p>
+<ol>
+<li>
+<p>Write a descriptive title for the custom widget in the <em>Title</em> field.</p>
+</li>
+<li>
+<p>Click <strong>DONE</strong>.</p>
+</li>
+</ol>
+<p></p><div style="text-align: center;">
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/widget_step_4_5.png" data-desc-position="bottom"><img src="images/widget_step_4_5.png" alt="Screenshot of finalizing the custom widget" width="400"></a>
+</div><p></p>
+<p>The new ELN sections widget now appears at the top of your <strong>EXPLORE</strong> page and displays ELN entry types along with their corresponding counts.</p>
+<p></p><div style="text-align: center;">
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/widget_step_5r.png" data-desc-position="bottom"><img src="images/widget_step_5r.png" alt="Screenshot of the newly created ELN sections widget" width="400"></a>
+</div><p></p>
+<p>You can now follow the same steps to create a custom widget for filtering by custom tags.</p>
+<p>In Step 3, instead of selecting <code>results.eln.sections</code>, choose <code>results.eln.tags</code>. This will create a widget that filters your ELN entries based on the custom tags you have assigned.</p>
+<p>This widget will then appear on your <strong>EXPLORE</strong> page, allowing you to quickly view and filter entries by their associated tags.</p>
+<p></p><div style="text-align: center;">
+    <video controls="" autoplay="" loop="" muted="" playsinline="" width="800">
+        <source src="images/explore_your_ELN_entries.webm" type="video/webm">
+    </video>
+</div><p></p>
+</details>
+<hr>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden="">
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer">
+        
+          
+          <a href="../upload_publish_api.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Upload and share with the API">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Upload and share with the API
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="custom_eln_yaml.html" class="md-footer__link md-footer__link--next" aria-label="Next: Create a custom ELN schema">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Create a custom ELN schema
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.path", "navigation.footer", "navigation.top", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../../create-image-sliders.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>

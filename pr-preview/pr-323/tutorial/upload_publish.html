@@ -1,0 +1,5178 @@
+<!DOCTYPE html><html lang="en" class="no-js"><head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="The documentation for NOMAD v1.
+">
+      
+      
+        <meta name="author" content="The NOMAD Authors">
+      
+      
+      
+        <link rel="prev" href="explore.html">
+      
+      
+        <link rel="next" href="upload_publish_api.html">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Upload and share with the GUI - Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback">
+        <style>:root{--md-text-font:"Titillium Web";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <link href="../assets/stylesheets/glightbox.min.css" rel="stylesheet"><script src="../assets/javascripts/glightbox.min.js"></script><style id="glightbox-style">
+            html.glightbox-open { overflow: initial; height: 100%; }
+            .gslide-title { margin-top: 0px; user-select: text; }
+            .gslide-desc { color: #666; user-select: text; }
+            .gslide-image img { background: white; }
+            .gscrollbar-fixer { padding-right: 15px; }
+            .gdesc-inner { font-size: 0.75rem; }
+            body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color); }
+            body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color); }
+            body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color); }
+        </style></head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#upload-and-publish-data-in-nomad" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="https://nomad-lab.eu" title="Documentation" class="md-header__button md-logo" aria-label="Documentation" data-md-component="logo">
+      
+  
+  <!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
+<svg width="100%" height="100%" viewBox="0 0 620 111" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-miterlimit:10;">
+    <g id="Artboard1" transform="matrix(0.982657,0,0,0.96472,-60.9085,-314.626)">
+        <rect x="61.983" y="326.132" width="630.85" height="114.85" style="fill:none;"></rect>
+        <clipPath id="_clip1">
+            <rect x="61.983" y="326.132" width="630.85" height="114.85"></rect>
+        </clipPath>
+        <g clip-path="url(#_clip1)">
+            <g transform="matrix(1.01765,0,0,1.03657,-8.65725,-14.6498)">
+                <g>
+                    <g>
+                        <g>
+                            <g>
+                                <g>
+                                    <circle class="logo-primary" cx="153.3" cy="355.2" r="20.2" style="fill:var(--nomad-logo-primary);stroke:var(--nomad-logo-primary);stroke-width:10px;"></circle>
+                                    <path class="logo-secondary" d="M167.6,398.5C159.7,390.6 146.9,390.6 139,398.5C131.6,405.9 119.9,406.4 111.9,399.9C111.4,399.3 110.9,398.7 110.4,398.2C102.5,390.3 102.5,377.5 110.4,369.6C118.3,361.7 118.3,348.9 110.4,341C102.5,333.1 89.7,333.1 81.8,341C73.9,348.9 73.9,361.7 81.8,369.6C89.7,377.5 89.7,390.3 81.8,398.2C77.1,402.9 75.2,409.4 76.1,415.5C76.6,419.8 78.6,423.9 81.9,427.2C89.8,435.1 102.6,435.1 110.5,427.2C118.4,419.3 131.2,419.3 139.1,427.2C147,435.1 159.8,435.1 167.7,427.2C175.5,419.2 175.5,406.4 167.6,398.5Z" style="fill:var(--nomad-logo-secondary);fill-rule:nonzero;stroke:var(--nomad-logo-secondary);stroke-width:10px;"></path>
+                                </g>
+                            </g>
+                        </g>
+                        <g>
+                            <g>
+                                <path d="M194.4,433.9L194.4,337.3L219.4,337.3C224.4,346.3 229.5,355.4 234.7,364.6C239.9,373.8 244.9,382.9 250,391.9L250,337.3L274.4,337.3L274.4,433.9L249.4,433.9C244.4,424.9 239.3,415.8 234.1,406.6C228.9,397.4 223.9,388.3 218.8,379.3L218.8,433.9L194.4,433.9Z" style="fill:var(--nomad-logo-secondary);fill-rule:nonzero;"></path>
+                                <path d="M331.3,436.2C324.4,436.2 318,434.9 312.1,432.4C306.2,429.9 301.2,426.4 296.9,421.8C292.6,417.3 289.3,411.9 287,405.7C284.6,399.5 283.4,392.8 283.4,385.5C283.4,378.2 284.6,371.5 287,365.3C289.4,359.1 292.7,353.8 296.9,349.3C301.2,344.8 306.2,341.3 312.1,338.8C318,336.3 324.4,335 331.3,335C338.2,335 344.6,336.3 350.4,338.8C356.2,341.3 361.3,344.8 365.6,349.3C369.9,353.8 373.2,359.1 375.6,365.3C378,371.5 379.1,378.2 379.1,385.5C379.1,392.8 377.9,399.5 375.6,405.7C373.2,411.9 369.9,417.3 365.6,421.8C361.3,426.3 356.2,429.9 350.4,432.4C344.6,434.9 338.2,436.2 331.3,436.2ZM331.3,413.2C335.9,413.2 339.9,412 343.2,409.7C346.5,407.4 349.1,404.1 350.9,400C352.7,395.8 353.7,391 353.7,385.5C353.7,380 352.8,375.2 350.9,371.2C349.1,367.1 346.5,363.9 343.2,361.6C339.9,359.3 335.9,358.1 331.3,358.1C326.8,358.1 322.8,359.2 319.4,361.5C316,363.8 313.4,367 311.6,371.1C309.8,375.2 308.8,380 308.8,385.5C308.8,391 309.7,395.8 311.6,400C313.4,404.2 316,407.4 319.4,409.7C322.8,412 326.8,413.2 331.3,413.2Z" style="fill:var(--nomad-logo-secondary);fill-rule:nonzero;"></path>
+                                <path d="M388.2,433.9L388.2,337.3L423.8,337.3C426.5,347 429.3,356.7 432,366.6C434.7,376.5 437.4,386.3 440,395.9C442.6,386.2 445.3,376.5 448,366.6C450.7,356.7 453.4,346.9 456,337.3L491.1,337.3C491.2,353.2 491.3,369.3 491.4,385.6C491.5,401.9 491.6,418 491.7,433.9L467.7,433.9L467.7,368.5C464.9,379.3 462,390.2 459,401.2C456.1,412.2 453.2,423.1 450.3,433.9L428.7,433.9C425.9,423.3 423,412.6 420.2,401.7C417.4,390.9 414.5,380.1 411.7,369.5L411.7,433.9L388.2,433.9Z" style="fill:var(--nomad-logo-secondary);fill-rule:nonzero;"></path>
+                                <path d="M500.8,433.9C505.7,418 510.7,401.9 515.6,385.6C520.6,369.3 525.5,353.2 530.4,337.3L564.4,337.3C569.3,353.2 574.3,369.3 579.2,385.6C584.2,401.9 589.1,418 594,433.9L569,433.9C568.1,430.9 567.2,427.8 566.3,424.7C565.4,421.6 564.5,418.6 563.6,415.5L531,415.5C530.1,418.5 529.2,421.6 528.3,424.7C527.4,427.8 526.5,430.8 525.6,433.9L500.8,433.9ZM537.5,394.4L557.5,394.4C555.9,388.8 554.2,383.2 552.5,377.5C550.8,371.8 549.1,366.2 547.5,360.6C545.9,366.2 544.2,371.8 542.5,377.5C540.8,383.2 539.1,388.9 537.5,394.4Z" style="fill:var(--nomad-logo-secondary);fill-rule:nonzero;"></path>
+                                <path d="M604.8,433.9L604.8,337.3L639.2,337.3C646.2,337.3 652.6,338.5 658.5,340.9C664.4,343.3 669.5,346.7 673.8,351.1C678.2,355.5 681.5,360.5 684,366.4C686.4,372.2 687.6,378.6 687.6,385.5C687.6,392.4 686.4,398.8 684,404.7C681.6,410.6 678.2,415.7 673.8,420.1C669.4,424.5 664.3,427.9 658.5,430.3C652.6,432.7 646.2,433.9 639.2,433.9L604.8,433.9ZM639.2,359.8L629.7,359.8L629.7,411.4L639.2,411.4C643.9,411.4 648.1,410.3 651.6,408C655.1,405.7 657.8,402.6 659.7,398.7C661.6,394.8 662.5,390.3 662.5,385.4C662.5,380.5 661.6,376.1 659.7,372.2C657.8,368.3 655.1,365.3 651.6,363C648,360.9 643.9,359.8 639.2,359.8Z" style="fill:var(--nomad-logo-secondary);fill-rule:nonzero;"></path>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Upload and share with the GUI
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="custom" data-md-color-accent="custom" aria-label="Switch to dark mode" type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="custom" data-md-color-accent="custom" aria-label="Switch to system preference" type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_2" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"></path></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo" aria-label="Switch to light mode" type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden="">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"></path></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required="">
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix="">
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/nomad-coe/nomad" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://nomad-lab.eu" title="Documentation" class="md-nav__button md-logo" aria-label="Documentation" data-md-component="logo">
+      
+  
+  <!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
+
+<svg width="100%" height="100%" viewBox="0 0 620 111" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-miterlimit:10;">
+    <g id="Artboard1" transform="matrix(0.982657,0,0,0.96472,-60.9085,-314.626)">
+        <rect x="61.983" y="326.132" width="630.85" height="114.85" style="fill:none;"></rect>
+        <clipPath id="_clip1">
+            <rect x="61.983" y="326.132" width="630.85" height="114.85"></rect>
+        </clipPath>
+        <g clip-path="url(#_clip1)">
+            <g transform="matrix(1.01765,0,0,1.03657,-8.65725,-14.6498)">
+                <g>
+                    <g>
+                        <g>
+                            <g>
+                                <g>
+                                    <circle class="logo-primary" cx="153.3" cy="355.2" r="20.2" style="fill:var(--nomad-logo-primary);stroke:var(--nomad-logo-primary);stroke-width:10px;"></circle>
+                                    <path class="logo-secondary" d="M167.6,398.5C159.7,390.6 146.9,390.6 139,398.5C131.6,405.9 119.9,406.4 111.9,399.9C111.4,399.3 110.9,398.7 110.4,398.2C102.5,390.3 102.5,377.5 110.4,369.6C118.3,361.7 118.3,348.9 110.4,341C102.5,333.1 89.7,333.1 81.8,341C73.9,348.9 73.9,361.7 81.8,369.6C89.7,377.5 89.7,390.3 81.8,398.2C77.1,402.9 75.2,409.4 76.1,415.5C76.6,419.8 78.6,423.9 81.9,427.2C89.8,435.1 102.6,435.1 110.5,427.2C118.4,419.3 131.2,419.3 139.1,427.2C147,435.1 159.8,435.1 167.7,427.2C175.5,419.2 175.5,406.4 167.6,398.5Z" style="fill:var(--nomad-logo-secondary);fill-rule:nonzero;stroke:var(--nomad-logo-secondary);stroke-width:10px;"></path>
+                                </g>
+                            </g>
+                        </g>
+                        <g>
+                            <g>
+                                <path d="M194.4,433.9L194.4,337.3L219.4,337.3C224.4,346.3 229.5,355.4 234.7,364.6C239.9,373.8 244.9,382.9 250,391.9L250,337.3L274.4,337.3L274.4,433.9L249.4,433.9C244.4,424.9 239.3,415.8 234.1,406.6C228.9,397.4 223.9,388.3 218.8,379.3L218.8,433.9L194.4,433.9Z" style="fill:var(--nomad-logo-secondary);fill-rule:nonzero;"></path>
+                                <path d="M331.3,436.2C324.4,436.2 318,434.9 312.1,432.4C306.2,429.9 301.2,426.4 296.9,421.8C292.6,417.3 289.3,411.9 287,405.7C284.6,399.5 283.4,392.8 283.4,385.5C283.4,378.2 284.6,371.5 287,365.3C289.4,359.1 292.7,353.8 296.9,349.3C301.2,344.8 306.2,341.3 312.1,338.8C318,336.3 324.4,335 331.3,335C338.2,335 344.6,336.3 350.4,338.8C356.2,341.3 361.3,344.8 365.6,349.3C369.9,353.8 373.2,359.1 375.6,365.3C378,371.5 379.1,378.2 379.1,385.5C379.1,392.8 377.9,399.5 375.6,405.7C373.2,411.9 369.9,417.3 365.6,421.8C361.3,426.3 356.2,429.9 350.4,432.4C344.6,434.9 338.2,436.2 331.3,436.2ZM331.3,413.2C335.9,413.2 339.9,412 343.2,409.7C346.5,407.4 349.1,404.1 350.9,400C352.7,395.8 353.7,391 353.7,385.5C353.7,380 352.8,375.2 350.9,371.2C349.1,367.1 346.5,363.9 343.2,361.6C339.9,359.3 335.9,358.1 331.3,358.1C326.8,358.1 322.8,359.2 319.4,361.5C316,363.8 313.4,367 311.6,371.1C309.8,375.2 308.8,380 308.8,385.5C308.8,391 309.7,395.8 311.6,400C313.4,404.2 316,407.4 319.4,409.7C322.8,412 326.8,413.2 331.3,413.2Z" style="fill:var(--nomad-logo-secondary);fill-rule:nonzero;"></path>
+                                <path d="M388.2,433.9L388.2,337.3L423.8,337.3C426.5,347 429.3,356.7 432,366.6C434.7,376.5 437.4,386.3 440,395.9C442.6,386.2 445.3,376.5 448,366.6C450.7,356.7 453.4,346.9 456,337.3L491.1,337.3C491.2,353.2 491.3,369.3 491.4,385.6C491.5,401.9 491.6,418 491.7,433.9L467.7,433.9L467.7,368.5C464.9,379.3 462,390.2 459,401.2C456.1,412.2 453.2,423.1 450.3,433.9L428.7,433.9C425.9,423.3 423,412.6 420.2,401.7C417.4,390.9 414.5,380.1 411.7,369.5L411.7,433.9L388.2,433.9Z" style="fill:var(--nomad-logo-secondary);fill-rule:nonzero;"></path>
+                                <path d="M500.8,433.9C505.7,418 510.7,401.9 515.6,385.6C520.6,369.3 525.5,353.2 530.4,337.3L564.4,337.3C569.3,353.2 574.3,369.3 579.2,385.6C584.2,401.9 589.1,418 594,433.9L569,433.9C568.1,430.9 567.2,427.8 566.3,424.7C565.4,421.6 564.5,418.6 563.6,415.5L531,415.5C530.1,418.5 529.2,421.6 528.3,424.7C527.4,427.8 526.5,430.8 525.6,433.9L500.8,433.9ZM537.5,394.4L557.5,394.4C555.9,388.8 554.2,383.2 552.5,377.5C550.8,371.8 549.1,366.2 547.5,360.6C545.9,366.2 544.2,371.8 542.5,377.5C540.8,383.2 539.1,388.9 537.5,394.4Z" style="fill:var(--nomad-logo-secondary);fill-rule:nonzero;"></path>
+                                <path d="M604.8,433.9L604.8,337.3L639.2,337.3C646.2,337.3 652.6,338.5 658.5,340.9C664.4,343.3 669.5,346.7 673.8,351.1C678.2,355.5 681.5,360.5 684,366.4C686.4,372.2 687.6,378.6 687.6,385.5C687.6,392.4 686.4,398.8 684,404.7C681.6,410.6 678.2,415.7 673.8,420.1C669.4,424.5 664.3,427.9 658.5,430.3C652.6,432.7 646.2,433.9 639.2,433.9L604.8,433.9ZM639.2,359.8L629.7,359.8L629.7,411.4L639.2,411.4C643.9,411.4 648.1,410.3 651.6,408C655.1,405.7 657.8,402.6 659.7,398.7C661.6,394.8 662.5,390.3 662.5,385.4C662.5,380.5 661.6,376.1 659.7,372.2C657.8,368.3 655.1,365.3 651.6,363C648,360.9 643.9,359.8 639.2,359.8Z" style="fill:var(--nomad-logo-secondary);fill-rule:nonzero;"></path>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
+
+    </a>
+    Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/nomad-coe/nomad" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M173.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M252.8 8C114.1 8 8 113.3 8 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C436.2 457.8 504 362.9 504 252 504 113.3 391.5 8 252.8 8M105.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"></path></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix="">
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked="">
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorials
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tutorials
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="overview.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="explore.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Explore data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" checked="">
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Publish data
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Publish data
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upload and share with the GUI
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="upload_publish.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upload and share with the GUI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#what-you-will-learn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What you will learn
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#before-you-begin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Before you begin
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-key-elements-in-nomad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The key elements in NOMAD
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-new-upload" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create new upload
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#share-and-publish-uploads" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Share and publish uploads
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#add-files-to-an-upload" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Add files to an upload
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Add files to an upload">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#upload-miscellaneous-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Upload miscellaneous files
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upload-computational-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Upload computational data
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upload-experimental-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Upload experimental data
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-datasets-and-get-a-doi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create datasets and get a DOI
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Create datasets and get a DOI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#group-entries-into-a-dataset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group entries into a dataset
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manage-a-dataset-and-assign-it-a-doi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Manage a dataset and assign it a DOI
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="upload_publish_api.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upload and share with the API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4">
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Use NOMAD as an ELN
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Use NOMAD as an ELN
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="eln/built_in_templates.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Use built-in ELN templates
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="eln/custom_eln_yaml.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Create a custom ELN schema
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="eln/tabular_parser_yaml.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parse tabular measurement data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="workflows_projects.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Manage workflows and projects
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6">
+        
+          
+          <label class="md-nav__link" for="__nav_2_6" id="__nav_2_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Develop a NOMAD plugin
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Develop a NOMAD plugin
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="develop_plugin/plugin_structure.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Set up a plugin project
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="develop_plugin/create_schema_package.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Create a schema package
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6_3">
+        
+          
+          <label class="md-nav__link" for="__nav_2_6_3" id="__nav_2_6_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Create a parser
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_6_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Create a parser
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="develop_plugin/create_parser.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NOMAD parsing approaches
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="develop_plugin/create_parser_parser_only.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Automatic file parsing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="develop_plugin/create_parser_eln_only.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ELN-triggered parsing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="develop_plugin/create_parser_hybrid.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hybrid parsing approach
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How-to guides
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    How-to guides
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/overview.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2">
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Manage and find data
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Manage and find data
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_1">
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_1" id="__nav_3_2_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Use the GUI
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Use the GUI
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/manage/gui/account.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Create an account and sign in
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/manage/gui/upload.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Upload and publish data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/manage/gui/eln.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Enter data with ELNs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/manage/gui/north.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Analyze data in NORTH
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/manage/gui/workflows.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Create custom workflows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/manage/gui/yaml.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Write a YAML schema package
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/manage/gui/elns.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Create custom ELNs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/manage/gui/tabular.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parse tabular data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2_2">
+        
+          
+          <label class="md-nav__link" for="__nav_3_2_2" id="__nav_3_2_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Work programmatically
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_2_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Work programmatically
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/manage/program/api.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Use the API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/manage/program/auth.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Authenticate programmatically
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/manage/program/download.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Download data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/manage/program/publish_python.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Publish data using Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/manage/program/archive_query.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Access processed data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/manage/program/json_transformer.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Transform JSON data structures
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/manage/program/graph_api.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Make Graph API calls
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Develop plugins
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Develop plugins
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/plugins/plugins.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Start plugin development
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_2">
+        
+          
+          <label class="md-nav__link" for="__nav_3_3_2" id="__nav_3_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Create entry points
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Create entry points
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/plugins/types/actions.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Actions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/plugins/types/apis.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/plugins/types/apps.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Apps
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/plugins/types/dashboards.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dashboards
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/plugins/types/example_uploads.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Example uploads
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/plugins/types/normalizers.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Normalizers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/plugins/types/north_tools.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NORTH tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/plugins/types/parsers.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parsers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/plugins/types/schema_packages.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Schema packages
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3_3">
+        
+          
+          <label class="md-nav__link" for="__nav_3_3_3" id="__nav_3_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Use built-in tools
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Use built-in tools
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/plugins/tools/units.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Work with units
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/plugins/tools/hdf5.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Handle large data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/plugins/tools/mapping_parser.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parse efficiently
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4">
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Host a NOMAD Oasis
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Host a NOMAD Oasis
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/oasis/install.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/oasis/configure.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/oasis/deploy.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Deploy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/oasis/update.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Update
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/oasis/administer.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Administer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/oasis/secure.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Secure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/oasis/troubleshoot.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Troubleshoot
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5">
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Develop the core software
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Develop the core software
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/develop/setup.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Get started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/develop/code.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Navigate the code
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/develop/contrib.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Contribute
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/develop/normalizing.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Write a normalizer
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/develop/search.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Extend the search
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../howto/develop/release.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Make a release
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Domain-specific examples
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Domain-specific examples
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/overview.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_2">
+        
+          
+          <label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Computational data
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Computational data
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/computational_data/basics.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Basics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/computational_data/metainfo.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    MetaInfo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/computational_data/schema_plugins.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Schema plugins
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/computational_data/parser_plugins.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parser plugins
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/computational_data/faqs.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_3">
+        
+          
+          <label class="md-nav__link" for="__nav_4_3" id="__nav_4_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Experimental data
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Experimental data
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/experiment_data/em.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Electron microscopy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/experiment_data/mpes.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Photoemission spectroscopy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/experiment_data/xps.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    X-ray photoemission spectroscopy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/experiment_data/opt.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Optical spectroscopy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/experiment_data/apm.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Atom probe tomography
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/experiment_data/spm.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Scanning probe microscopy
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/experiment_data/pynxtools.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parse data with pynxtools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4_4">
+        
+          
+          <label class="md-nav__link" for="__nav_4_4" id="__nav_4_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Use cases
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_4_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Use cases
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/use_cases/catalysis_app.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    nomad-catalysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/use_cases/neb_workflows.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    nomad-neb-workflows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5">
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Explanation
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Explanation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../explanation/overview.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../explanation/basics.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    From files to data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../explanation/data.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Data structure
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../explanation/base_sections.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Base sections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../explanation/processing.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Processing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../explanation/architecture.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../explanation/workflows.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflows
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../explanation/plugin_system.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plugins
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../explanation/oasis.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Federation and Oasis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../explanation/auth.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Authentication and authorization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../explanation/north.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NORTH
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6">
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix="">
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/overview.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/config.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/annotations.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Annotations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/basesections.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Base sections
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/cli.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CLI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/plugins.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Plugins
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/parsers.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parsers
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/code_guidelines.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Code guidelines
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/glossary.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Glossary
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/tutorials.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial catalog
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#what-you-will-learn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What you will learn
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#before-you-begin" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Before you begin
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-key-elements-in-nomad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The key elements in NOMAD
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-new-upload" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create new upload
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#share-and-publish-uploads" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Share and publish uploads
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#add-files-to-an-upload" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Add files to an upload
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Add files to an upload">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#upload-miscellaneous-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Upload miscellaneous files
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upload-computational-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Upload computational data
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#upload-experimental-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Upload experimental data
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-datasets-and-get-a-doi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create datasets and get a DOI
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Create datasets and get a DOI">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#group-entries-into-a-dataset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Group entries into a dataset
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manage-a-dataset-and-assign-it-a-doi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Manage a dataset and assign it a DOI
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigation">
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../index.html" class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Home
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="overview.html" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Tutorials
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="upload_publish.html" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Publish data
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="upload-and-publish-data-in-nomad">Upload and publish data in NOMAD<a class="headerlink" href="#upload-and-publish-data-in-nomad" title="Permanent link">¶</a></h1>
+<p>In this tutorial, we follow the entire workflow for uploading and publishing research data in NOMAD via the graphical user interface (GUI). We use computational and experimental examples to demonstrate how raw files are transformed into structured, publishable datasets. By the end of the tutorial, we will publish the data in NOMAD and assign it a Digital Object Identifier (DOI).</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/upload_publish_1.png" data-desc-position="bottom"><img alt="From raw files to published datasets" src="images/upload_publish_1.png"></a></p>
+<hr>
+<h2 id="what-you-will-learn">What you will learn<a class="headerlink" href="#what-you-will-learn" title="Permanent link">¶</a></h2>
+<p>In this tutorial, you will learn how to:</p>
+<ol>
+<li>Upload raw research data to NOMAD and organize it using uploads</li>
+<li>View the entries that NOMAD generates from your files and check their processing status</li>
+<li>Share uploads with collaborators and manage access permissions</li>
+<li>Publish uploads and understand the role of embargoes</li>
+<li>Group entries into datasets for curation and publication</li>
+<li>Publish datasets and assign a Digital Object Identifier (DOI)</li>
+</ol>
+<hr>
+<h2 id="before-you-begin">Before you begin<a class="headerlink" href="#before-you-begin" title="Permanent link">¶</a></h2>
+<p>This tutorial requires no prior experience with NOMAD.</p>
+<p>Before starting, make sure you have the following:</p>
+<ol>
+<li>
+<p><strong>NOMAD user account</strong><br>
+    In order to upload data into NOMAD, a user account is required.
+    You can create an account by following the steps described in the
+    <a href="overview.html#create-a-nomad-user-account">overview page</a>.</p>
+</li>
+<li>
+<p><strong>Example files available on your local machine</strong><br>
+    This tutorial uses provided example data files for:</p>
+<ul>
+<li><a href="https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_3_files/example_files_upload/miscellaneous_data/miscellaneous_data.zip" rel="noopener" target="_blank">Miscellaneous files (PDF, images, tables)</a>,</li>
+<li><a href="https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_3_files/example_files_upload/computations_data/FHI-aims.zip" rel="noopener" target="_blank">Computational data (DFT calculations)</a>,</li>
+<li><a href="https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_3_files/example_files_upload/experiments_data/xps_nexus_data.zip" rel="noopener" target="_blank">Experimental data (XPS measurements)</a>.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="the-key-elements-in-nomad">The key elements in NOMAD<a class="headerlink" href="#the-key-elements-in-nomad" title="Permanent link">¶</a></h2>
+<p>To begin the journey from uploading raw files to publishing datasets with DOIs in NOMAD, you need to understand the key elements of this process in NOMAD, which are illustrated in the figure below.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/upload_publish_2.png" data-desc-position="bottom"><img alt="The key elements in NOMAD" src="images/upload_publish_2.png"></a></p>
+<ul>
+<li>
+<p>All files and data created by users are organized in NOMAD as <strong>Uploads</strong>, which function as directories within the user’s account. You can create an upload for each project and structure it into nested folder directories for better organization.</p>
+<details class="info">
+<summary>Features of NOMAD <strong>Uploads</strong></summary>
+<ul>
+<li><strong>Creation:</strong> Uploads are created and managed by users.</li>
+<li><strong>Structure:</strong> Uploads are associated to a user account and are listed in the <em>my uploads</em> page in the GUI. They serve as containers for multiple files and entries, preserving their directory structure and metadata.</li>
+<li><strong>Organization:</strong> Each upload can contain multiple files organized into directories.</li>
+<li><strong>Sharing &amp; Publishing:</strong> Entries and files can only be shared, transferred, or published as complete uploads.</li>
+</ul>
+</details>
+</li>
+<li>
+<p>Research data in the form of raw files are added to uploads. If NOMAD has a built-in parser for the file formats, it automatically processes the files and creates <strong>Entries</strong>. These entries represent structured data extracted from the raw files.</p>
+<details class="info">
+<summary>Features of NOMAD <strong>Entries</strong></summary>
+<ul>
+<li><strong>Creation:</strong> Entries are automatically generated by NOMAD from uploaded raw files or instantiated schemas.</li>
+<li><strong>Structure:</strong> Entries are distinct data entities that can be searched and viewed through dedicated pages in the NOMAD GUI.</li>
+<li><strong>Organization:</strong> Entries belong to specific uploads and are linked to a raw file that NOMAD has recognized and parsed.</li>
+<li><strong>Sharing &amp; Publishing:</strong> Entries can be shared as part of an upload, and individual entries can be added to datasets, which can be published with a DOI.</li>
+</ul>
+</details>
+</li>
+<li>
+<p>Entries can be grouped into <strong>Datasets</strong>, which allow for better organization of related data. Once the dataset is complete, it can be published with a DOI, making the research data findable, accessible, interoperable, and reusable (FAIR).</p>
+<details class="info">
+<summary>Features of NOMAD <strong>Datasets</strong></summary>
+<ul>
+<li><strong>Creation:</strong> Datasets are created and managed by users.</li>
+<li><strong>Structure:</strong> Datasets are associated to a user account and are listed in the <em>Your datasets</em> page in the GUI. They serve as containers for curated and related data entries.</li>
+<li><strong>Organization:</strong> Datasets contain entries from one or more uploads. An entry can belong to multiple datasets.</li>
+<li><strong>Sharing &amp; Publishing:</strong> Datasets are published independent of uploads and you can get a DOI for your datasets.</li>
+</ul>
+</details>
+</li>
+</ul>
+<p>For more detailed explanation, you can refer to this <a href="../explanation/basics.html">page</a>.</p>
+<hr>
+<h2 id="create-new-upload">Create new upload<a class="headerlink" href="#create-new-upload" title="Permanent link">¶</a></h2>
+<p>The uploads exist in the <em>Your uploads</em> page. Here you can view a list of all your uploads with their relevant information. You can also create new uploads or add an example upload prepared by others.</p>
+<p><strong>Use the arrow buttons ⬅️➡️ below to follow the steps for creating your first upload.</strong></p>
+<div class="image-slider" id="slider1">
+    <div class="nav-arrow left" id="prev1">←</div>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/upload_publish_3.png" data-desc-position="bottom"><img src="images/upload_publish_3.png" alt="Navigate to `Your uploads` page by hovering over the Publish menu, then clicking on uploads" class="active"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/upload_publish_4.png" data-desc-position="bottom"><img src="images/upload_publish_4.png" alt="Create a new upload by clicking on the blue button"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/upload_publish_5.png" data-desc-position="bottom"><img src="images/upload_publish_5.png" alt="Edit the name of your upload 1"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/upload_publish_6.png" data-desc-position="bottom"><img src="images/upload_publish_6.png" alt="Edit the name of your upload 2"></a>
+    <div class="nav-arrow right" id="next1">→</div>
+</div>
+
+<details class="info">
+<summary>Two different views of the <strong>upload</strong> page</summary>
+<p>At the very top of the upload page, you can toggle between two different views for this page:</p>
+<ul>
+<li><strong>Overview:</strong> This view includes all the tools needed to manage your upload, along with guided steps to start uploading your files to NOMAD. It will also show all the processed files (entries) that you will upload.
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/upload_publish_7.png" data-desc-position="bottom"><img alt="a screenshot of the uploads overview page" src="images/upload_publish_7.png"></a></li>
+<li><strong>Files:</strong> This view shows all the files included in the upload, whether they are raw files or processed files. You can also organize these files into folders as needed.
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/upload_publish_8.png" data-desc-position="bottom"><img alt="A screenshot of the uploads files page" src="images/upload_publish_8.png"></a></li>
+</ul>
+</details>
+<details class="info">
+<summary>Icons on the upload overview</summary>
+<p>At the top of the <code>OVERVIEW</code> tab, you will find several icons that help you to manage your upload:</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/top_fields_uploads.png" data-desc-position="bottom"><img alt="Top fields in uploads page" class="screenshot" src="images/top_fields_uploads.png"></a></p>
+<p>The name of the upload can be modified by clicking on the pen icon <span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M352.9 21.2 308 66.1 445.9 204l44.9-44.9c13.6-13.5 21.2-31.9 21.2-51.1s-7.6-37.6-21.2-51.1l-35.7-35.7C441.6 7.6 423.2 0 404 0s-37.6 7.6-51.1 21.2M274.1 100 58.9 315.1c-10.7 10.7-18.5 24.1-22.6 38.7L.9 481.6c-2.3 8.3 0 17.3 6.2 23.4s15.1 8.5 23.4 6.2l127.8-35.5c14.6-4.1 27.9-11.8 38.7-22.6l215-215.2z"></path></svg></span>. The other icons are used as follows:</p>
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M64 128a112 112 0 1 1 224 0 112 112 0 1 1-224 0M0 464c0-97.2 78.8-176 176-176s176 78.8 176 176v6c0 23.2-18.8 42-42 42H42c-23.2 0-42-18.8-42-42zM432 64a96 96 0 1 1 0 192 96 96 0 1 1 0-192m0 240c79.5 0 144 64.5 144 144v22.4c0 23-18.6 41.6-41.6 41.6H389.6c6.6-12.5 10.4-26.8 10.4-42v-6c0-51.5-17.4-98.9-46.5-136.7 22.6-14.7 49.6-23.3 78.5-23.3"></path></svg></span> <strong>Manage members:</strong> Allows users to invite collaborators by assigning co-authors and reviewers roles.</p>
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M144 480C64.5 480 0 415.5 0 336c0-63.4 41-117.2 97.9-136.5C96.6 191.8 96 184 96 176c0-79.5 64.5-144 144-144 55.4 0 103.5 31.3 127.6 77.1C381.8 100.8 398.4 96 416 96c53 0 96 43 96 96 0 15.7-3.8 30.6-10.5 43.7C545.5 256 576 300.4 576 352c0 70.7-57.3 128-128 128zm233-167c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-31 31V208c0-13.3-10.7-24-24-24s-24 10.7-24 24v102.1l-31-31c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l72 72c9.4 9.4 24.6 9.4 33.9 0l72-72z"></path></svg></span> <strong>Download files:</strong> Downloads all files present in the upload.</p>
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M24 192h144c9.7 0 18.5-5.8 22.2-14.8s1.7-19.3-5.2-26.2l-46.7-46.7c75.3-58.6 184.3-53.3 253.5 15.9 75 75 75 196.5 0 271.5s-196.5 75-271.5 0c-10.2-10.2-19-21.3-26.4-33-9.5-14.9-29.3-19.3-44.2-9.8s-19.3 29.3-9.8 44.2c9.8 15.6 21.5 30.4 35.1 43.9 100 100 262 100 362 0s100-262 0-362C342.8-19.3 193.3-24.7 92.7 58.8L41 7C34.1.2 23.8-1.9 14.8 1.8S0 14.3 0 24v144c0 13.3 10.7 24 24 24"></path></svg></span> <strong>Reload:</strong> Reloads the uploads page.</p>
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M480.1 192h7.9c13.3 0 24-10.7 24-24V24c0-9.7-5.8-18.5-14.8-22.2S477.9.2 471 7l-51.7 51.8C375 22.1 318 0 256 0 127 0 20.3 95.4 2.6 219.5c-2.5 17.5 9.6 33.7 27.1 36.2s33.7-9.7 36.2-27.1C79.2 135.5 159.3 64 256 64c44.4 0 85.2 15 117.7 40.3L327 151c-6.9 6.9-8.9 17.2-5.2 26.2S334.3 192 344 192zm29.4 100.5c2.5-17.5-9.7-33.7-27.1-36.2s-33.7 9.7-36.2 27.1c-13.3 93-93.4 164.5-190.1 164.5-44.4 0-85.2-15-117.7-40.3L185 361c6.9-6.9 8.9-17.2 5.2-26.2S177.7 320 168 320H24c-13.3 0-24 10.7-24 24v144c0 9.7 5.8 18.5 14.8 22.2s19.3 1.6 26.2-5.2l51.8-51.8C137 489.9 194 512 256 512c129 0 235.7-95.4 253.4-219.5z"></path></svg></span> <strong>Reprocess:</strong> Triggers the uploaded data to be processed again.</p>
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L77.3 256l137.3-137.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"></path></svg></span><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M247.1 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L179.2 256 41.9 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path></svg></span> <strong>API:</strong> Displays a GET request url and corresponding JSON response demonstrating how to access the entries of the upload via the NOMAD API and the expected result, respectively.
+<!-- See <a href="../filtering_and_querying/overview.md">Filtering and Querying</a> for more information. -->
+<!-- TODO  Add API to glossary --></p>
+<p><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M136.7 5.9 128 32H32C14.3 32 0 46.3 0 64s14.3 32 32 32h384c17.7 0 32-14.3 32-32s-14.3-32-32-32h-96l-8.7-26.1C306.9-7.2 294.7-16 280.9-16H167.1c-13.8 0-26 8.8-30.4 21.9M416 144H32l21.1 323.1C54.7 492.4 75.7 512 101 512h246c25.3 0 46.3-19.6 47.9-44.9z"></path></svg></span> <strong>Delete the upload:</strong> Deletes the upload permanently.</p>
+</details>
+<details class="info">
+<summary>Components of the upload overview</summary>
+<p>The remainder of the uploads page is divided into five segments, each presenting a step in the uploading and publishing process:</p>
+<p><code>1. Prepare and upload your files:</code> displays the files and folder structure of the upload. You can add a <code>README.md</code> file to the root directory and its contents will be shown above this section.</p>
+<p><code>2. Process data:</code> shows the processed data and the generated <a href="../reference/glossary.html#entry">entries</a> in NOMAD.</p>
+<p><code>3. Edit visibility and access:</code> allows users to make the upload public or share it with specific users before publishing.</p>
+<p><code>4. Edit author metadata:</code> allows users to edit certain metadata fields from all entries recognized in the upload. This includes <em>comments</em>, where you can add as much extra information as you want, <em>references</em>, where you can add a URL to your upload (e.g., an article DOI), and <em>datasets</em>, where you can link the uploaded data to other uploads to define a larger-scale organizational structure (see <a href="#group-entries-into-a-dataset">Group entries into a dataset</a> below.)</p>
+<p><code>5. Publish:</code> lets users publish data with or without an embargo (i.e., a waiting period before the data are publicly visible).</p>
+</details>
+<hr>
+<h2 id="share-and-publish-uploads">Share and publish uploads<a class="headerlink" href="#share-and-publish-uploads" title="Permanent link">¶</a></h2>
+<p>Uploads in NOMAD can be shared or published. When an upload is shared or published, all entries and files contained within it are also shared or published.</p>
+<details class="info">
+<summary>What is the difference between sharing and publishing an Upload?</summary>
+<p><strong>Sharing an upload</strong> allows you to grant access to colleagues or collaborators while working on it.</p>
+<ul>
+<li>This facilitates collaboration on projects or enables progress reviews during the project.</li>
+<li>You can invite individuals with either read/write access (coauthors) or read-only access (reviewers).</li>
+</ul>
+<p><strong>Publishing an upload</strong> makes it searchable, findable, and accessible on NOMAD for everyone.</p>
+<ul>
+<li>Once published, the upload becomes immutable, meaning its contents can no longer be modified.</li>
+<li>You also have the option to publish with an embargo period, temporarily restricting public access until the embargo expires.</li>
+</ul>
+</details>
+<p>A NOMAD upload can have four states based on sharing and publishing:</p>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Icon</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Private</td>
+<td><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/icon_unpublished.png" data-desc-position="bottom"><img src="images/icon_unpublished.png" alt="Icon of private upload" width="20"></a></td>
+<td>The upload is private and is visible to the uploader only.</td>
+</tr>
+<tr>
+<td>Shared</td>
+<td><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/icon_shared.png" data-desc-position="bottom"><img src="images/icon_shared.png" alt="Icon of shared upload" width="20"></a></td>
+<td>The upload is accessible to selected users but not publicly available.</td>
+</tr>
+<tr>
+<td>Published</td>
+<td><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/icon_published.png" data-desc-position="bottom"><img src="images/icon_published.png" alt="Icon of published upload" width="20"></a></td>
+<td>The upload is publicly available to everyone.</td>
+</tr>
+<tr>
+<td>Visible</td>
+<td><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/icon_visible.png" data-desc-position="bottom"><img src="images/icon_visible.png" alt="Icon of visible upload" width="20"></a></td>
+<td>The upload is unpublished but accessible to everyone.</td>
+</tr>
+</tbody>
+</table>
+<p>You can manage upload sharing in the <em>Edit upload members</em> menu. To access it, click on <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/edit_upload_members_icon.png" data-desc-position="bottom"><img src="images/edit_upload_members_icon.png" alt="Edit upload members Icon" width="20"></a> available at the top of the upload page.</p>
+<p>Alternatively, you can click the <code>EDIT UPLOAD MEMBERS</code> button below the list of entries on your upload page.</p>
+<details class="task">
+<summary>Share your upload</summary>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/icon_shared.png" data-desc-position="bottom"><img src="images/icon_shared.png" alt="Icon of shared upload" width="30"></a></p>
+<p><strong>Step 1:</strong> Open the <em>Edit upload members</em> window, by clicking on the <strong>EDIT UPLOAD MEMBERS</strong> button.</p>
+<p><strong>Step 2:</strong> Start typing the name of the NOMAD user you want to share the upload with. A list of matching users will appear—select the correct name from the list.</p>
+<p><strong>Step 3:</strong> Assign a role to the user by selecting either Coauthor or Reviewer from the dropdown menu.
+    - Coauthors can edit and add files to the upload.
+    - Reviewers can only view the contents of the upload (no editing rights).</p>
+<p><strong>Step 4:</strong> Click on <em>submit</em>.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/sharing_an_upload.png" data-desc-position="bottom"><img alt="screenshots of the steps of sharing your upload" src="images/sharing_an_upload.png"></a></p>
+</details>
+<details class="task">
+<summary>Make your upload visible to everyone</summary>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/icon_visible.png" data-desc-position="bottom"><img src="images/icon_visible.png" alt="Icon of shared upload" width="30"></a></p>
+<p>To make your upload visible to everyone on NOMAD, simply check the box in the <em>Edit visibility and access</em> section, located under the list of your entries.</p>
+<p>This setting allows all users, including guests without an account, to view the upload even before it is published.</p>
+<p>You can still modify the upload’s access settings and edit its contents while it remains visible.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/making_an_upload_visible.png" data-desc-position="bottom"><img alt="screenshot of the steps of making an upload visible" src="images/making_an_upload_visible.png"></a></p>
+</details>
+<details class="task">
+<summary>Publish your upload</summary>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/icon_published.png" data-desc-position="bottom"><img src="images/icon_published.png" alt="Icon of shared upload" width="30"></a></p>
+<div class="admonition warning">
+<p class="admonition-title">Once an upload is published, it cannot be deleted, and the files and entries cannot be changed</p>
+</div>
+<p><strong>Step 1:</strong> Select an embargo period (if needed) from the dropdown menu, located in the <em>publish</em> section at the bottom of the upload page.</p>
+<p>If you would like to publish immediately, select <em>No embargo</em>.</p>
+<p><strong>Step 2:</strong> Click on the <strong>PUBLISH</strong> button.</p>
+<p><strong>Step 3:</strong> A prompt for confirmation appears on the screen. Click on PUBLISH.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/publishing_an_upload.png" data-desc-position="bottom"><img alt="screenshots of the steps to publish an upload" src="images/publishing_an_upload.png"></a></p>
+<p>Having an embargo on your data means:</p>
+<ul>
+<li>Raw files and entries remain hidden, except to you and users you share the data with.</li>
+<li>Some metadata (e.g., chemical formula, system type, spacegroup) will be public.</li>
+<li>Embargoed entries can be added to datasets and be assigned DOIs.</li>
+<li>The embargo can be lifted earlier than the assigned duration by the user.</li>
+</ul>
+<p>The following image shows an example of an embargoed upload and the option to lift the embargo by clicking the <strong>LIFT EMBARGO</strong> button.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/embargoed_upload.png" data-desc-position="bottom"><img alt="screenshot of an embargoed upload" src="images/embargoed_upload.png"></a></p>
+</details>
+<hr>
+<h2 id="add-files-to-an-upload">Add files to an upload<a class="headerlink" href="#add-files-to-an-upload" title="Permanent link">¶</a></h2>
+<p>Let's start adding files to your NOMAD upload. We will explore three different examples:</p>
+<ol>
+<li>Miscellaneous Files.</li>
+<li>Files of DFT calculation on Iron(III) Oxide.</li>
+<li>Files of x-ray photoelectron spectroscopy (XPS) measurement on polymers.</li>
+</ol>
+<p>Files can be added to an upload individually, or you can group them into a compressed file in <code>.zip</code> or <code>.tar</code> formats.</p>
+<details class="info">
+<summary>Different ways and scenarios to upload files to NOMAD</summary>
+<p>In NOMAD, files can be uploaded in different ways, but whether they are processed into Entries or not depends on their format and NOMAD’s built-in parsers. Here’s how it works:</p>
+<p><strong>Files that are processed by NOMAD</strong></p>
+<ul>
+<li>
+<p>These are files that are recognized by NOMAD, meaning that <strong>a built-in parser exists</strong> for the file you uploaded, the file will be processed according to a data schema.</p>
+</li>
+<li>
+<p>It means that NOMAD reads the file, extracts data and organizes them based on the data schema which allows for generating visualizations, and analysis automations.</p>
+</li>
+<li>
+<p>Raw files that are processed in NOMAD become <strong>Entries</strong></p>
+</li>
+<li>
+<p>This is common for simulation files since they follow standardized structures. Also a variety of experimental data organized in NeXus format <code>.nxs</code> are recognized by NOMAD.</p>
+</li>
+</ul>
+<p><strong>Files that are not processed by NOMAD</strong></p>
+<ul>
+<li>
+<p>These are files that <strong>do not have a built-in parser</strong>, meaning NOMAD cannot automatically extract and structure their data.</p>
+</li>
+<li>
+<p>They are still stored in NOMAD as part of your upload, and can be downloaded or shared, but they do not become entries in the database.</p>
+</li>
+<li>
+<p>NOMAD allows you to preview common file formats that are not automatically parsed. This means you can view the contents of the file directly within the platform without having to download it. Examples include: <code>.txt</code>, <code>.csv</code>, <code>.pdf</code>, <code>.png</code>, <code>.jpg</code>.</p>
+</li>
+</ul>
+</details>
+<h3 id="upload-miscellaneous-files">Upload miscellaneous files<a class="headerlink" href="#upload-miscellaneous-files" title="Permanent link">¶</a></h3>
+<details class="example">
+<summary>Download the example files for this exercise</summary>
+<p><!-- TODO consider changing this admonition to a download button -->
+<a href="https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_3_files/example_files_upload/miscellaneous_data/miscellaneous_data.zip" rel="noopener" target="_blank">Download example data ZIP</a>.</p>
+<p>Download the folder, then uncompress it on your local machine at you preferred directory.</p>
+<p>The folder contains files of the following formats: <code>.zip</code>, <code>.pdf</code>, <code>.jpg</code>, <code>.txt</code>, and <code>.csv</code>.</p>
+<table>
+<thead>
+<tr>
+<th>file name</th>
+<th>format</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>FAIRmat_graphics</td>
+<td>.zip</td>
+<td>Compressed file that contains several FAIRmat logos in <code>.png</code> format</td>
+</tr>
+<tr>
+<td>JOSS_2023</td>
+<td>.pdf</td>
+<td>A publication of NOMAD in the Journal of Open Source Software</td>
+</tr>
+<tr>
+<td>Nature_2022</td>
+<td>.pdf</td>
+<td>A publication of FAIRmat in Nature journal</td>
+</tr>
+<tr>
+<td>P3HT_optical_absorption</td>
+<td>.csv</td>
+<td>Results of absorption measurement on P3HT from PerkinElmer spectrometer</td>
+</tr>
+<tr>
+<td>note_properties_of_good_dopants</td>
+<td>.txt</td>
+<td>Notes recorded during a conference talk</td>
+</tr>
+<tr>
+<td>experiment_polymer_doping</td>
+<td>.jpg</td>
+<td>A photograph of an experiment of preparing doped polymer solutions</td>
+</tr>
+</tbody>
+</table>
+</details>
+<p>Note that these files will not create entries in NOMAD, because a built-in parser for them doesn't exist.</p>
+<p>They will be stored in your upload and can be accessed and shared with your colleagues, however, they will not be searchable within NOMAD. In this case, NOMAD functions as a storage system, similar to a cloud drive.</p>
+<p>You can add these files to your NOMAD upload. Do so by simply drag and drop the file or by opening the dialog to browse the files in your device.</p>
+<details class="task">
+<summary>Uploading images, pdf files, text files, and tabular data</summary>
+<p><strong>Drag and drop</strong></p>
+<p>Start with uploading the file <code>FAIRmat_graphics.zip</code>. Let's use the drag and drop method as shown in the animation below.</p>
+<p><video controls="" autoplay="" loop="" muted="" playsinline="" width="100%">
+    <source src="images/example_3-1_drag_drop_files.webm" type="video/webm">
+</video></p>
+<p>When a compressed file is uploaded to NOMAD, it will be extracted automatically and the included files will be added to your upload.</p>
+<p><strong>Open the file browser dialog</strong></p>
+<p>Upload the remaining files using the file browser dialog as shown in the animation below.</p>
+<p><video controls="" autoplay="" loop="" muted="" playsinline="" width="100%">
+    <source src="images/example_3-1_file_browser_dialog.webm" type="video/webm">
+</video></p>
+</details>
+<h3 id="upload-computational-data">Upload computational data<a class="headerlink" href="#upload-computational-data" title="Permanent link">¶</a></h3>
+<details class="example">
+<summary>Download the example files for this exercise</summary>
+<p><!-- TODO consider changing this admonition to a download button -->
+<a href="https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_3_files/example_files_upload/computations_data/FHI-aims.zip" rel="noopener" target="_blank">Download example data ZIP</a>.</p>
+<p>Download the folder to your local machine at you preferred directory.</p>
+<p>This folder contains the input and output files of a DFT calculation for Iron(III) Oxide using the <em>FHI-aims</em> code.</p>
+<p><em>FHI-aims</em> is an all-electron density-functional-theory package that employs numeric atom-centered basis functions. It is designed for accurate and efficient simulations of molecules, clusters, surfaces, and bulk materials across the periodic table. Its advanced treatment of electronic structure allows for precise calculations of material properties, including band structures, total energies, and magnetic properties. <a href="https://fhi-aims.org/" rel="noopener" target="_blank">More information in this link</a></p>
+</details>
+<p>The calculations in this example were performed using a code that is supported by NOMAD, i.e. the <em>FHI-aims</em> code.</p>
+<p>NOMAD has a parser for the <em>FHI-aims</em> code. This means it will create an <strong>entry</strong> for these data.</p>
+<p>In other words, NOMAD will read the input and output files and provide all information in NOMAD's unified <em>metainfo</em> data schema.</p>
+<details class="task">
+<summary>Uploading input and output files <code>.zip</code> of a DFT calculation</summary>
+<p><strong>Uploading the files</strong></p>
+<p>Start with uploading the file <code>FHI-aims.zip</code>. Let's use the drag and drop method as shown in the animation below.</p>
+<p><video controls="" autoplay="" loop="" muted="" playsinline="" width="100%">
+    <source src="images/example_3-2_drag_drop_files.webm" type="video/webm">
+</video></p>
+<p>After uploading files, processing is automatically triggered. This involves identifying supported file formats in NOMAD and extracting relevant (meta)data. The exact processing steps depend on the use case.
+For example, you can learn more about the <a href="../examples/computational_data/basics.html">processing of computational data on this link</a>.</p>
+<p>Once processing is complete, NOMAD generates an entry page that presents the data in a structured, hierarchical format based on the NOMAD <em>metainfo</em> schema.</p>
+<p><strong>Opening and exploring your entry</strong></p>
+<p>To go to the entry page, click on the <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/go_to_icon.png" data-desc-position="bottom"><img src="images/go_to_icon.png" alt="Go to arrow Icon" width="15"></a> icon next to the entry. Here you can view the metadata and useful visualization of your data, check the uploaded files, and explore your entry in detail.</p>
+<ul>
+<li>
+<p><strong>OVERVIEW</strong> tab:</p>
+<p>1- On the left, core metadata are displayed.</p>
+<p>2- On the right, various cards present the available information.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/example_3-2_overview.png" data-desc-position="bottom"><img src="images/example_3-2_overview.png" alt="screenshot of the overview page" width="800"></a></p>
+<p>The cards you see depend on the properties or data available for that entry.</p>
+<p>For <em>FHI-aims</em> files, three main cards appear in the overview page:</p>
+<ul>
+<li>
+<p><em>Materials</em> card: Shows key information and visualization of the composition and conventional cell.
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/example_3-2_materials_card.png" data-desc-position="bottom"><img src="images/example_3-2_materials_card.png" alt="screenshot of electronic properties card" width="250"></a></p>
+</li>
+<li>
+<p><em>Electronic properties</em> card: Shows the calculated band structure, density of states, and Brillouin zone.
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/example_3-2_electronic_properties_card.png" data-desc-position="bottom"><img src="images/example_3-2_electronic_properties_card.png" alt="screenshot of materials card" width="250"></a></p>
+</li>
+<li>
+<p><em>Workflow Graph</em> card: Illustrates the various steps in the calculation, including their inputs and outputs.
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/example_3-2_workflow_card.png" data-desc-position="bottom"><img src="images/example_3-2_workflow_card.png" alt="screenshot of workflow card" width="250"></a></p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>FILES</strong> tab:</p>
+<p>This tab shows the uploaded files. NOMAD lists all files in the same directory, as they usually belong together.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/example_3-2_files_tab.png" data-desc-position="bottom"><img alt="screenshot of the files tab" src="images/example_3-2_files_tab.png"></a></p>
+</li>
+<li>
+<p><strong>DATA</strong> tab:</p>
+<p>Also known as the "processed data" tab, this shows the results of the parsing and normalization process done by NOMAD.</p>
+<p>NOMAD puts all the data in a unified, hierarchical, and machine-processable format, following the NOMAD metainfo.</p>
+<p><video controls="" autoplay="" loop="" muted="" playsinline="" width="100%">
+    <source src="images/example_3-2_data_tab.webm" type="video/webm">
+</video></p>
+</li>
+</ul>
+</details>
+<h3 id="upload-experimental-data">Upload experimental data<a class="headerlink" href="#upload-experimental-data" title="Permanent link">¶</a></h3>
+<details class="example">
+<summary>Download the example files for this exercise</summary>
+<p><!-- TODO consider changing this admonition to a download button -->
+<a href="https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_3_files/example_files_upload/experiments_data/xps_nexus_data.zip" rel="noopener" target="_blank">Download example data ZIP</a>.</p>
+<p>Download the folder, then uncompress it to your local machine at you preferred directory.</p>
+<p>This folder contains files related to an x-ray photoelectron spectroscopy (XPS) on the polymer PBTTT using SPECS spectrometer.</p>
+<p>It includes the data in two formats (<code>.nxs</code> and <code>.xml</code>), in addition to an electronic lab notebook (ELN) file (<code>.yaml</code>) documenting additional details of the experiment.</p>
+<table>
+<thead>
+<tr>
+<th>file name</th>
+<th>format</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>PBTTT_XPS_SPECS</td>
+<td>.nxs</td>
+<td>XPS data file in the standard NeXuS file format</td>
+</tr>
+<tr>
+<td>PBTTT_XPS_SPECS_raw</td>
+<td>.xml</td>
+<td>XPS data in a raw file format as produced by the spectrometer</td>
+</tr>
+<tr>
+<td>eln_data_xml</td>
+<td>.yaml</td>
+<td>An ELN file used to record additional metadata of the experiment</td>
+</tr>
+</tbody>
+</table>
+</details>
+<p>NOMAD supports experimental data files in the <code>.nxs</code> format.</p>
+<p>These files can be uploaded directly to NOMAD, where they are processed, and structured <strong>Entries</strong> are created.</p>
+<details class="task">
+<summary>Uploading experimental data in the <code>.nxs</code> format</summary>
+<p><strong>Uploading the file</strong></p>
+<p>Start with uploading the file <code>PBTTT_XPS_SPECS.nxs</code>. Let's use the drag and drop method as shown in the animation below.</p>
+<p><video controls="" autoplay="" loop="" muted="" playsinline="" width="100%">
+    <source src="images/example_3-3_drag_drop_files_nexus.webm" type="video/webm">
+</video></p>
+<p>After uploading files, processing is automatically triggered. This involves identifying supported file formats in NOMAD and extracting relevant (meta)data. The exact processing steps depend on the use case.</p>
+<p>Once processing is complete, NOMAD generates an entry page that presents the data in a structured, hierarchical format based on the NOMAD <em>metainfo</em> schema.</p>
+<p><strong>Opening and exploring the entry</strong></p>
+<p>Click on the <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/go_to_icon.png" data-desc-position="bottom"><img src="images/go_to_icon.png" alt="Go to arrow Icon" width="15"></a> icon next to an entry navigates you to the respective entry page.</p>
+<p>Here you can view the metadata and useful visualization of your data, check the uploaded files, and explore your entry in detail.</p>
+<ul>
+<li>
+<p><strong>OVERVIEW Tab:</strong></p>
+<p>1- On the left, core metadata are displayed.</p>
+<p>2- On the right, various cards present the available information.</p>
+<p>The cards you see depend on the properties or data available for that entry.</p>
+<p>For <code>.nxs</code> files, two main cards appear in the overview page: the data viewer and the materials card.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/example_3-3_overview_entry_nexus.png" data-desc-position="bottom"><img alt="screenshot of the NeXuS entry overview page" src="images/example_3-3_overview_entry_nexus.png"></a></p>
+</li>
+<li>
+<p><strong>FILES Tab:</strong></p>
+<p>This tab shows the uploaded files. NOMAD lists all files in the same directory, as they usually belong together.</p>
+</li>
+<li>
+<p><strong>DATA Tab:</strong></p>
+<p>Also known as the "processed data" tab, this shows the results of the parsing and normalization process done by NOMAD.</p>
+<p>NOMAD puts all the data in a unified, hierarchical, and machine-processable format, following the NOMAD metainfo.</p>
+<p><video controls="" autoplay="" loop="" muted="" playsinline="" width="100%">
+    <source src="images/example_3-3_data_tab_entry_page_nexus.webm" type="video/webm">
+</video></p>
+</li>
+</ul>
+</details>
+<p>Most scientific instruments generate experimental results in formats other than <code>.nxs</code>. NOMAD still supports these files by providing a conversion process using the <em>NexusDataConverter</em> built-in schema, which transforms raw data into the <code>.nxs</code> format.</p>
+<details class="info">
+<summary>NexusDataConverter readers and the NeXuS application definitions</summary>
+<p><strong>A Reader</strong> is a program designed to interpret and extract data from a specific experimental technique or file format.</p>
+<p>The reader understands the structure and encoding of the particular data format and provides methods for accessing its contents in a programmatically friendly way.
+It acts as a bridge between raw experimental data and NOMAD by converting the data into the structured file format according to domain-specific application definitions.</p>
+<p>A list of available readers can be found <a href="https://fairmat-nfdi.github.io/pynxtools/reference/plugins.html" rel="noopener" target="_blank">here</a></p>
+<p><strong>A NeXus application definition</strong> provides a structured specification of the terms and metadata required in an <code>.nxs</code> data file for a particular scientific application. These definitions outline the minimum set of terms that must be included in the data file for it to be considered valid according to the NeXus format.</p>
+<p>A list of NeXuS application definitions developed by FAIRmat can be found <a href="https://fairmat-nfdi.github.io/nexus_definitions/" rel="noopener" target="_blank">here</a></p>
+<p>NexusDataConverter uses <strong>readers</strong> to interpret the raw data files, and then structures them according to the outlines of the <strong>application definitions</strong>.</p>
+</details>
+<p>In the following examples, you will learn how to upload a raw file from a SPECS instrument in <code>.xml</code> format by using the <em>NexusDataConverter</em>. You will do this in two ways:</p>
+<ol>
+<li>Uploading only the raw file.</li>
+<li>Uploading both the raw file and an ELN file, enriching your data with metadata and ensuring compliance with community standards.</li>
+</ol>
+<details class="task">
+<summary>Uploading experimental data in the <code>.xml</code> format</summary>
+<p><strong>Step 1:</strong> Click on the <strong>CREATE FROM SCHEMA</strong> button in your upload page.
+<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/example_3-3_create_from_schema.png" data-desc-position="bottom"><img alt="Screenshot of step 1" src="images/example_3-3_create_from_schema.png"></a></p>
+<p><strong>Step 2:</strong> In the <em>create new entry from schema</em> window, click on the drop-down menu of the built-in schema, and select <em>NexusDataConverter</em></p>
+<p><strong>Step 3:</strong> Give a descriptive name for the entry.</p>
+<p><strong>Step 4:</strong> Click on CREATE. This will take you the NexusDataConverter entry page.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/example_3-3_NexusDataConverter.png" data-desc-position="bottom"><img alt="Screenshot of steps 2 - 4" src="images/example_3-3_NexusDataConverter.png"></a></p>
+<p><strong>Step 5:</strong> From the reader drop-down menu, choose the appropriate reader for your files. For this exercise select <em>xps</em>.</p>
+<p><strong>Step 6:</strong> From the nxdl drop-down menu, choose the appropriate application definition for your experiment. For this exercise select <em>NXxps</em></p>
+<p><strong>Step 7:</strong> Upload the raw data file <code>PBTTT_XPS_SPECS_raw.xml</code>.</p>
+<p><strong>Step 8:</strong> Give a descriptive name for the generated <code>.nxs</code> file.</p>
+<p><strong>Step 9:</strong> Click on the save icon to start the conversion process.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/example_3-3_NexusDataConverter_2.png" data-desc-position="bottom"><img alt="Screenshots of steps 5 - 9" src="images/example_3-3_NexusDataConverter_2.png"></a></p>
+<p>Check the overview page of your upload. There you will find two newly created entries; one for the NexusDataConverter and one for the generated <code>.nxs</code> file from your raw file.</p>
+<p>NOMAD still stores your <code>.xml</code> raw file in the upload directory.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/example_3-3_NexusDataConverter_3.png" data-desc-position="bottom"><img alt="Screenshot of the upload page after nexus conversion." src="images/example_3-3_NexusDataConverter_3.png"></a></p>
+</details>
+<details class="task">
+<summary>Uploading experimental data in the <code>.xml</code> format with additional ELN data</summary>
+<p>Often, raw files generated by instruments from various vendors lack complete metadata and essential details about the experiment.</p>
+<p>To address this, scientists document all experimental details in an Electronic Lab Notebook (ELN). Combining data from raw files with information from ELNs ensures that experiments are comprehensively described with rich metadata and conform to community standards.</p>
+<p>NOMAD’s <em>NexusDataConverter</em> allows you to merge experimental raw data files with ELN entries in <code>.yaml</code> format, producing <code>.nxs</code> files that meet community standards and ensure your data are richly-described.</p>
+<p>The ELN <code>.yaml</code> file can be generated by various ELN software tools or created manually using a text editor.</p>
+<p>For each supported experimental raw file format, FAIRmat provides a template ELN <code>.yaml</code> file containing all necessary attributes and parameters to complement the raw file’s data. These templates can be found <a href="https://github.com/FAIRmat-NFDI/pynxtools-xps/tree/a2e9524ae8479ffa9cde79daf2010161d8ae75c3/examples" rel="noopener" target="_blank">here</a></p>
+<p>While these files can be edited with any text editor, we recommend using <strong>VS Code</strong> for an optimized editing experience.</p>
+<p><strong>Open the <code>eln_data_xml.yaml</code> file and edit its contents</strong></p>
+<ul>
+<li>Modify the start_time and end_time of your experiment.</li>
+<li>Write your information in the <code>users</code> section.</li>
+<li>Explore the other fields available in the ELN file.</li>
+<li>Save the file.</li>
+</ul>
+<p><video controls="" autoplay="" loop="" muted="" playsinline="" width="100%">
+    <source src="images/example_3-3_modifying_ELN.webm" type="video/webm">
+</video></p>
+<p><strong>Upload your data file <code>.xml</code> and your ELN data <code>.yaml</code> using NexusDataConverter</strong></p>
+<ul>
+<li><strong>Step 1:</strong> Click on the <strong>CREATE FROM SCHEMA</strong> button in your upload page.</li>
+</ul>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/example_3-3_create_from_schema.png" data-desc-position="bottom"><img alt="Screenshot of step 1" src="images/example_3-3_create_from_schema.png"></a></p>
+<ul>
+<li>
+<p><strong>Step 2:</strong> In the <em>create new entry from schema</em> window, click on the drop-down menu of the built-in schema, and select <em>NexusDataConverter</em></p>
+</li>
+<li>
+<p><strong>Step 3:</strong> Give a descriptive name for the entry.</p>
+</li>
+<li>
+<p><strong>Step 4:</strong> Click on CREATE. This will take you the NexusDataConverter entry page.</p>
+</li>
+</ul>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/example_3-3_NexusDataConverter.png" data-desc-position="bottom"><img alt="Screenshot of steps 2 - 4" src="images/example_3-3_NexusDataConverter.png"></a></p>
+<ul>
+<li>
+<p><strong>Step 5:</strong> From the reader drop-down menu, choose the appropriate reader for your files. For this exercise select <em>xps</em>.</p>
+</li>
+<li>
+<p><strong>Step 6:</strong> From the nxdl drop-down menu, choose the appropriate application definition for your experiment. For this exercise select <em>NXxps</em></p>
+</li>
+<li>
+<p><strong>Step 7:</strong> Upload the raw data file <code>PBTTT_XPS_SPECS_raw.xml</code> as well as the ELN data file <code>eln_data_xml.yaml</code>.</p>
+</li>
+<li>
+<p><strong>Step 8:</strong> Give a descriptive name for the generated <code>.nxs</code> file.</p>
+</li>
+<li>
+<p><strong>Step 9:</strong> Click on the save icon to start the conversion process.</p>
+</li>
+</ul>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/example_3-3_NexusDataConverter_2%28with_ELN%29.png" data-desc-position="bottom"><img alt="Screenshots of steps 5 - 9" src="images/example_3-3_NexusDataConverter_2%28with_ELN%29.png"></a></p>
+</details>
+<hr>
+<h2 id="create-datasets-and-get-a-doi">Create datasets and get a DOI<a class="headerlink" href="#create-datasets-and-get-a-doi" title="Permanent link">¶</a></h2>
+<p>You can organize several entries by grouping them into common datasets, making it easier to manage related data.
+Datasets are for organizing and referencing curated data. They do not affect how data is processed.
+Users can get a DOI for their datasets.</p>
+<h3 id="group-entries-into-a-dataset">Group entries into a dataset<a class="headerlink" href="#group-entries-into-a-dataset" title="Permanent link">¶</a></h3>
+<p><strong>Step 1:</strong> In the uploads page, click on <strong>EDIT AUTHOR METADATA OF ALL ENTRIES</strong> button. This will add all the Entries in the upload to the dataset.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/datasets_step1.png" data-desc-position="bottom"><img alt="Screenshot of step 1 of creating dataset" src="images/datasets_step1.png"></a></p>
+<p>Alternatively, if you would like to add selected entries from your Upload, click on the check box next to the entries you would like to add, then click on <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/change_name_icon.png" data-desc-position="bottom"><img src="images/change_name_icon.png" alt="Change Name Icon" width="20"></a> to open the EDIT AUTHOR METADATA window for the selected entries only.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/datasets_step1_alt.png" data-desc-position="bottom"><img alt="Screenshot of step 1 of creating dataset" src="images/datasets_step1_alt.png"></a></p>
+<p><strong>Step 2:</strong> In the Datasets section, you have two options:</p>
+<ul>
+<li>Create a new dataset: If the dataset you want to group your entries under doesn't exist yet, you can create one here.</li>
+<li>Search for an existing dataset: If the dataset already exists, you can search for it by name or other attributes.</li>
+</ul>
+<p><strong>Step 3:</strong> Once you've selected or created the appropriate dataset, click <strong>ADD ENTRY TO NEW DATASET</strong></p>
+<p><strong>Step 4:</strong> Click on SUBMIT to group your entries under that dataset.</p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/datasets_steps_2-4.png" data-desc-position="bottom"><img alt="Screenshot of steps 2 - 4 of creating dataset" src="images/datasets_steps_2-4.png"></a></p>
+<h3 id="manage-a-dataset-and-assign-it-a-doi">Manage a dataset and assign it a DOI<a class="headerlink" href="#manage-a-dataset-and-assign-it-a-doi" title="Permanent link">¶</a></h3>
+<p>User-created datasets exist in the “Your datasets” page. You can reach there by clicking on <strong>Datasets</strong> in the <strong>PUBLISH</strong> menu. Here you can view a list of all your created datasets with their relevant information and assign them a DOI.</p>
+<div class="admonition warning">
+<p class="admonition-title">Assigning a DOI makes the dataset permanent—it cannot be modified or deleted.</p>
+<p>If you want to test the process without actually publishing the data, you can do so in the <a href="https://nomad-lab.eu/prod/v1/test/gui/about/information" rel="noopener" target="_blank">NOMAD test installation</a>.</p>
+</div>
+<p><strong>Use the arrow buttons ⬅️➡️ below to follow the steps of exploring and managing your datasets.</strong></p>
+<div class="image-slider" id="slider2">
+    <div class="nav-arrow left" id="prev2">←</div>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/dataset_1.png" data-desc-position="bottom"><img src="images/dataset_1.png" alt="screenshot of navigating to datasets" class="active"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/dataset_2.png" data-desc-position="bottom"><img src="images/dataset_2.png" alt="screenshot of the dataset page"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/dataset_3.png" data-desc-position="bottom"><img src="images/dataset_3.png" alt="Go to dataset page and review entries "></a>
+    <div class="nav-arrow right" id="next2">→</div>
+</div>
+
+<p><strong>Use the arrow buttons ⬅️➡️ below to see how to publish your datasets and assign them a DOI.</strong></p>
+<div class="image-slider" id="slider3">
+    <div class="nav-arrow left" id="prev3">←</div>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/dataset_4.png" data-desc-position="bottom"><img src="images/dataset_4.png" alt="screenshot of navigating to datasets" class="active"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/dataset_5.png" data-desc-position="bottom"><img src="images/dataset_5.png" alt="screenshot of the dataset page"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/dataset_6.png" data-desc-position="bottom"><img src="images/dataset_6.png" alt="Go to dataset page and review entries "></a>
+    <div class="nav-arrow right" id="next3">→</div>
+</div>
+
+<hr>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden="">
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer">
+        
+          
+          <a href="explore.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Explore data">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Explore data
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="upload_publish_api.html" class="md-footer__link md-footer__link--next" aria-label="Next: Upload and share with the API">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Upload and share with the API
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.path", "navigation.footer", "navigation.top", "content.code.copy", "content.code.annotate"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="../create-image-sliders.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  
+<script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(()=>{ lightbox.reload(); });
+</script></body></html>
