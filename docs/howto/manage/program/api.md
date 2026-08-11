@@ -16,7 +16,7 @@ accessed, downloaded, searched for, etc. via
 [HTTP requests](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol){:target="_blank" rel="noopener"}.
 
 You can get an overview on all NOMAD APIs on the
-[API page]({{ nomad_url() }}../../gui/analyze/apis). We will focus here on NOMAD's main
+[API page]({{ nomad_url() }}/../gui/analyze/apis). We will focus here on NOMAD's main
 API (v1). In fact, this API is also used by the web interface and should provide
 everything you need.
 

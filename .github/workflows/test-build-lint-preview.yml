@@ -66,10 +66,30 @@ jobs:
           python-version: ${{ env.PYTHON_VERSION }}
 
       - name: Check mkdocs build
+        # The `nomad_url()` macro renders relative to the configured instance.
+        # Set the same env vars as the production deploy (see deploy-docs.yml) so
+        # `site/` points at https://nomad-lab.eu/prod/v1/api/... — this is the
+        # directory that is copied into the nomad package and published as the PR
+        # preview below, so it must be built with the production config. Then fail
+        # if the Oasis default (localhost/nomad-oasis) leaks into the output.
+        # `.linkspector` intentionally ignores localhost, so it cannot catch this
+        # class of regression.
+        env:
+          NOMAD_SERVICES_API_HOST: nomad-lab.eu
+          NOMAD_SERVICES_API_PORT: "443"
+          NOMAD_SERVICES_API_BASE_PATH: /prod/v1
+          NOMAD_SERVICES_HTTPS: "true"
         run: |
           uv run \
             --with 'nomad-lab[infrastructure] @ https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR.git' \
             mkdocs build --strict
+          # Match the exact string the misconfigured macro emits. A bare
+          # "localhost"/"nomad-oasis" grep would flag legitimate Oasis docs
+          # (nginx/docker-compose configs, Oasis curl examples).
+          if grep -rniE 'localhost:8000/nomad-oasis/api' site; then
+            echo "::error::Oasis default URL leaked from nomad_url() into the production docs build (expected https://nomad-lab.eu/prod/v1/api/...)."
+            exit 1
+          fi
 
       - name: Copy built docs
         run: |

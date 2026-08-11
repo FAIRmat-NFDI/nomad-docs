@@ -22,6 +22,16 @@ jobs:
           version: ${{ env.UV_VERSION }}
 
       - name: Build and Deploy
+        # Point the `nomad_url()` macro at the central production instance so the
+        # published docs render real URLs (https://nomad-lab.eu/prod/v1/api/...).
+        # Without these, the macro falls back to the Oasis default
+        # (http://localhost:8000/nomad-oasis/...). Local and Oasis builds that
+        # do not set these keep the default behaviour.
+        env:
+          NOMAD_SERVICES_API_HOST: nomad-lab.eu
+          NOMAD_SERVICES_API_PORT: "443"
+          NOMAD_SERVICES_API_BASE_PATH: /prod/v1
+          NOMAD_SERVICES_HTTPS: "true"
         run: |
           uv run \
             --with 'nomad-lab[dev,infrastructure] @ https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR.git' \
