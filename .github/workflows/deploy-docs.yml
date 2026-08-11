@@ -2,27 +2,105 @@ name: Deploy MkDocs Site
 
 on:
   push:
-    branches: ["main", "develop"]
+    branches: ["develop"]
+    tags: ["v*"]
 
 env:
   UV_VERSION: 0.6
-  PYTHON_VERSION: 3.12
+
+# develop/tag pushes all write to the gh-pages branch, so serialize them.
+concurrency:
+  group: deploy-docs
+  cancel-in-progress: false
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write  # required to push the built site to the gh-pages branch
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v7
+
+      # mike deploys into the gh-pages branch; make it available even in a shallow clone.
+      # (|| true: on a very first deploy the branch may not exist yet, mike will create it.)
+      - name: Fetch gh-pages branch
+        run: git fetch origin gh-pages --depth=1 || true
+
+      # mike commits to gh-pages, so it needs a git identity.
+      - name: Configure git for mike
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
       - name: Install uv
         uses: astral-sh/setup-uv@v7
         with:
           version: ${{ env.UV_VERSION }}
 
-      - name: Build and Deploy
+      # Development docs from the develop branch. mike treats non-numeric
+      # versions as "development versions" and sorts them above releases.
+      - name: Deploy develop
+        if: github.ref == 'refs/heads/develop'
         run: |
           uv run \
             --with 'nomad-lab[dev,infrastructure] @ https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR.git' \
-            mkdocs gh-deploy --force --remote-branch gh-pages
+            mike deploy develop --push
+
+      # Tagged releases (v1.4.3) become selectable versions (1.4.3). The
+      # newest v* tag is labelled "(stable)" and becomes the default page.
+      - name: Deploy release tag
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: |
+          run_mike() {
+            uv run \
+              --with 'nomad-lab[dev,infrastructure] @ https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR.git' \
+              mike "$@"
+          }
+
+          VERSION=${GITHUB_REF_NAME#v}
+          echo "Deploying release docs as version: ${VERSION}"
+          run_mike deploy "${VERSION}"
+
+          LATEST_TAG=$(git ls-remote --tags origin \
+            | sed 's|.*refs/tags/||' \
+            | grep -v '\^{}' \
+            | grep -E '^v[0-9]+(\.[0-9]+)*$' \
+            | sort -V \
+            | tail -1)
+          if [ "${LATEST_TAG}" = "${GITHUB_REF_NAME}" ]; then
+            echo "Tag ${GITHUB_REF_NAME} is the newest release; marking ${VERSION} as stable"
+            # Remove the "(stable)" label from any previous stable version.
+            while IFS= read -r v; do
+              if [ "${v}" != "${VERSION}" ]; then
+                run_mike retitle "${v}" "${v}"
+              fi
+            done < <(run_mike list --json \
+              | python3 -c '[print(i["version"]) for i in __import__("json").load(__import__("sys").stdin) if "(stable)" in i.get("title", "")]')
+            run_mike retitle "${VERSION}" "${VERSION} (stable)"
+            run_mike set-default "${VERSION}"
+          else
+            echo "Tag ${GITHUB_REF_NAME} is not the newest release (${LATEST_TAG}); deploying without the stable label"
+          fi
+
+          # Push all mike commits after the version metadata is ready.
+          git push origin gh-pages
+
+      # mike manages version directories, not root files such as CNAME.
+      - name: Preserve custom domain
+        run: |
+          if [ ! -f docs/CNAME ]; then
+            echo "No docs/CNAME found; skipping custom-domain setup"
+            exit 0
+          fi
+
+          git worktree add /tmp/gh-pages gh-pages
+          cp docs/CNAME /tmp/gh-pages/CNAME
+          git -C /tmp/gh-pages add CNAME
+          if git -C /tmp/gh-pages diff --cached --quiet; then
+            echo "CNAME is already up to date"
+          else
+            git -C /tmp/gh-pages commit -m "Update CNAME"
+            git -C /tmp/gh-pages push origin gh-pages
+          fi
