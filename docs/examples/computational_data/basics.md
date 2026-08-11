@@ -32,7 +32,7 @@ The extracted (meta)data are stored within a structured schema&mdash;the NOMAD [
 <div class="click-zoom">
     <label>
         <input type="checkbox">
-        <img src="./images/nomad_metainfo.png" alt="" width="100%" title="Click to zoom in">
+        <img src="./images/nomad_metainfo.webp" alt="" width="100%" title="Click to zoom in">
     </label>
 </div>
 
@@ -71,7 +71,7 @@ Once the processing is finished, the uploads page will show if each mainfile pro
 
 **OVERVIEW tab**
 
-![Overview page](images/overview_page.png){:.screenshot}
+![Overview page](images/overview_page.webp){:.screenshot}
 
 The overview page contains a summary of the parsed metadata, e.g., tabular information about the material and methodology of the calculation (in the example, a G0W0 calculation done with the [exciting](https://www.exciting-code.org/){:target="_blank" rel="noopener"} code for bulk Si<sub>2</sub>), along with a visualization of the system and some relevant properties.
 
@@ -91,7 +91,7 @@ The `DATA` page contains a browser for searching through the metadata stored for
 
 The `LOGS` page contains a list of info, warning, and error messages from the processing codes (i.e., parsers and normalizers). These provide insight into any potential issues with the upload, especially in the case that the entry displays the `FAILURE` processing status. Please help improve NOMAD by reporting any major issues that you find: [NOMAD > Support](https://nomad-lab.eu/nomad-lab/support.html){:target="_blank" rel="noopener"}.
 
-![Logs page](images/logs_page.png){:.screenshot}
+![Logs page](images/logs_page.webp){:.screenshot}
 
 ### Uploads
 

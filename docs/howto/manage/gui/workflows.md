@@ -299,7 +299,7 @@ Most importantly for this example: In contrast to [Nested workflows > In multipl
 When uploaded with the example data, this workflow file will produce an entry with the following nested workflow graph on the Overview page:
 
 <video width="100%" controls>
-  <source src="./images/nested_workflow_one-entry.webm" alt="" type="video/mp4">
+  <source src="./images/nested_workflow_one-entry.webm" alt="" type="video/webm">
 </video>
 
 You can reproduce this example by downloading the example data (with workflow YAML included at the root level), and uploading to NOMAD yourself:
@@ -356,7 +356,7 @@ data:
 Uploading to NOMAD with an empty dummy file called `water.top` should result in the following entry display:
 
 <video width="100%" controls>
-  <source src="./images/ELNFileManager.webm" alt="" type="video/mp4">
+  <source src="./images/ELNFileManager.webm" alt="" type="video/webm">
 </video>
 
 ### Example workflow with ELN tasks
@@ -364,7 +364,7 @@ Uploading to NOMAD with an empty dummy file called `water.top` should result in 
 For a concrete example, consider the following workflow consisting of 3 tasks for setting up a molecular dynamics simulation. Each task has as input some parameters and an execution script, and outputs some file:
 
 <video width="100%" controls>
-  <source src="./images/md-setup-workflow.webm" alt="MD Setup Workflow" type="video/mp4">
+  <source src="./images/md-setup-workflow.webm" alt="MD Setup Workflow" type="video/webm">
 </video>
 
 Use the `ELNFileManager` class to create entries for each task, as well as for the workflow parameters and execution scripts:
@@ -503,7 +503,9 @@ To reference ELN entries created using the NOMAD GUI, use the upload and entry i
 As we have seen above, when a workflow is defined within an entry, The Overview page will show an interactive graph of the `workflow2` section defined.
 The following video demonstrates the basic navigation functionalities of these interactive workflow graphs:
 
-![workflow visualizer](images/workflow-graph-usage.gif){:.screenshot}
+<video controls autoplay loop muted playsinline class="screenshot">
+  <source src="images/workflow-graph-usage.webm" type="video/webm">
+</video>
 
 The nodes (inputs, tasks and outputs) are shown from left to right for the current workflow layer.
 The edges (arrows) from (to) a node denotes an input (output) to a section in the target node.
@@ -523,7 +525,7 @@ enable to toggle the legend, go back to a previous view and reset the view.
 You can also use the graph to navigate to the referenced data, by clicking the labels above any task node or input/output, as shown in the following video:
 
 <video width="100%" controls>
-  <source src="./images/ELNFileManager.webm" alt="" type="video/mp4">
+  <source src="./images/ELNFileManager.webm" alt="" type="video/webm">
 </video>
 
 Once you leave the workflow entry, you can use either the browser back button or, more generally, the "Entry References" section of the Overview page to navigate back to the workflow entry:

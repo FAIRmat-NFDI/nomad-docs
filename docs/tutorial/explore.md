@@ -85,7 +85,9 @@ You can pin frequently used filters using **(+)** for a customized search interf
 
 <!-- update the gif with screenshots with sliding images stack once this is figured out in the docs -->
 <div style="text-align: center;">
-    <img src="images/add_filters_to_search_interface.gif" alt="Add Filters to the Search Interface" width="800">
+    <video controls autoplay loop muted playsinline width="800">
+        <source src="images/add_filters_to_search_interface.webm" type="video/webm">
+    </video>
 </div>
 
 ---
@@ -150,7 +152,7 @@ In the following, we'll walk through an example to help you better understand ho
 
 **Device Structure**:
 <div style="text-align: center;">
-    <img src="images/solar_cell_device.png" alt="Solar Cell Device" width="500">
+    <img src="images/solar_cell_device.webp" alt="Solar Cell Device" width="500">
 </div>
 
 |Component                         | Material                         |
@@ -185,7 +187,9 @@ Now, let us answer the following question:
         - The scatter plot will allow you to explore the data interactively.
 
         <div style="text-align: center;">
-            <img src="images/custom_widgets_example.gif" alt="Custom Widgets Example" width="800">
+            <video controls autoplay loop muted playsinline width="800">
+                <source src="images/custom_widgets_example.webm" type="video/webm">
+            </video>
         </div>
 
     4. **Interpreting Results**
@@ -210,7 +214,7 @@ In this example, we will utilize the Solar Cell Explore page, which offers filte
 - This dashboard provides predefined filters and plots optimized for solar cell research.
 
 <div style="text-align: center;">
-    <img src="images/solar_cells_dashboard.png" alt="Solar Cells Dashboard" width="800">
+    <img src="images/solar_cells_dashboard.webp" alt="Solar Cells Dashboard" width="800">
 </div>
 
 The dashboard includes the following preset widgets:
@@ -238,7 +242,9 @@ Click the *pen icon* on any widget to modify its plotted quantities, color mappi
 - Click entries for full metadata, dataset links, and further analysis.
 
 <div style="text-align: center;">
-    <img src="images/sn_based_solar_cells_example.gif" alt="Sn-based Solar Cell example" width="800">
+    <video controls autoplay loop muted playsinline width="800">
+        <source src="images/sn_based_solar_cells_example.webm" type="video/webm">
+    </video>
 </div>
 
 ---

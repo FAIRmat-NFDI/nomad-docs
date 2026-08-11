@@ -49,7 +49,7 @@ In this tutorial, we will use an example experiment involving the preparation of
 
     To effectively document this experiment, we will create and interlink electronic lab notebook (ELN) entries in NOMAD. These entries will include key entities such as substances, instruments, and samples, as well as activities like material processing and measurements. By structuring the data in this way, we ensure a comprehensive and FAIR-compliant record of the experiment.
 
-    ![Overview of the example entities and activities](images/ELN_2.png)
+    ![Overview of the example entities and activities](images/ELN_2.webp)
 
 ---
 
@@ -70,10 +70,10 @@ To create ELN entries using the templates provided by NOMAD, we will generate in
 **Use the arrow buttons ⬅️➡️ below to follow the steps for creating ELN entries using the built-in schema.**
 <div class="image-slider" id="slider1">
     <div class="nav-arrow left" id="prev1">←</div>
-    <img src="images/ELN_built-in_1.png" alt="Step 1" class="active">
-    <img src="images/ELN_built-in_2.png" alt="Step 2">
-    <img src="images/ELN_built-in_3.png" alt="Step 3">
-    <img src="images/ELN_built-in_4.png" alt="Step 4">
+    <img src="images/ELN_built-in_1.webp" alt="Step 1" class="active">
+    <img src="images/ELN_built-in_2.webp" alt="Step 2">
+    <img src="images/ELN_built-in_3.webp" alt="Step 3">
+    <img src="images/ELN_built-in_4.webp" alt="Step 4">
     <div class="nav-arrow right" id="next1">→</div>
 </div>
 
@@ -113,8 +113,8 @@ Once the entry is created, we can fill in the relevant fields with detailed and 
     <img src="images/ELN_built-in_6.png" alt="Step 1" class="active">
     <img src="images/ELN_built-in_7.png" alt="Step 2">
     <img src="images/ELN_built-in_8.png" alt="Step 3">
-    <img src="images/ELN_built-in_9.png" alt="Step 4">
-    <img src="images/ELN_built-in_10.png" alt="Step 5">
+    <img src="images/ELN_built-in_9.webp" alt="Step 4">
+    <img src="images/ELN_built-in_10.webp" alt="Step 5">
     <img src="images/ELN_built-in_11.png" alt="Step 6">
     <div class="nav-arrow right" id="next2">→</div>
 </div>
@@ -160,7 +160,7 @@ Once the entry is created, we can fill in the relevant fields with detailed and 
     <img src="images/ELN_built-in_13.png" alt="Step 1" class="active">
     <img src="images/ELN_built-in_14.png" alt="Step 2">
     <img src="images/ELN_built-in_15.png" alt="Step 3">
-    <img src="images/ELN_built-in_16.png" alt="Step 4">
+    <img src="images/ELN_built-in_16.webp" alt="Step 4">
     <img src="images/ELN_built-in_17.png" alt="Step 5">
     <img src="images/ELN_built-in_18.png" alt="Step 6">
     <div class="nav-arrow right" id="next3">→</div>
@@ -202,7 +202,7 @@ Once the entry is created, we can fill in the relevant fields with detailed and 
 <div class="image-slider" id="slider4">
     <div class="nav-arrow left" id="prev4">←</div>
     <img src="images/ELN_built-in_20.png" alt="Step 1" class="active">
-    <img src="images/ELN_built-in_21.png" alt="Step 2">
+    <img src="images/ELN_built-in_21.webp" alt="Step 2">
     <div class="nav-arrow right" id="next4">→</div>
 </div>
 
@@ -249,7 +249,7 @@ Once the entry is created, we can fill in the relevant fields with detailed and 
     <img src="images/ELN_built-in_23.png" alt="step 1" class="active">
     <img src="images/ELN_built-in_24.png" alt="step 2">
     <img src="images/ELN_built-in_25.png" alt="step 3">
-    <img src="images/ELN_built-in_26.png" alt="step 4">
+    <img src="images/ELN_built-in_26.webp" alt="step 4">
     <img src="images/ELN_built-in_27.png" alt="step 5">
     <img src="images/ELN_built-in_28.png" alt="step 6">
     <div class="nav-arrow right" id="next5">→</div>
@@ -275,9 +275,9 @@ For the example process entry **Preparation of P3HT solution**, we will define t
 <div class="image-slider" id="slider6">
     <div class="nav-arrow left" id="prev6">←</div>
     <img src="images/ELN_built-in_29.png" alt="step 1" class="active">
-    <img src="images/ELN_built-in_30.png" alt="step 2">
-    <img src="images/ELN_built-in_31.png" alt="step 3">
-    <img src="images/ELN_built-in_32.png" alt="step 4">
+    <img src="images/ELN_built-in_30.webp" alt="step 2">
+    <img src="images/ELN_built-in_31.webp" alt="step 3">
+    <img src="images/ELN_built-in_32.webp" alt="step 4">
     <div class="nav-arrow right" id="next6">→</div>
 </div>
 
@@ -350,7 +350,7 @@ Once the entry is created, we can fill in the relevant fields with detailed and 
     <img src="images/ELN_built-in_44.png" alt="Step 5">
     <img src="images/ELN_built-in_45.png" alt="Step 6">
     <img src="images/ELN_built-in_46.png" alt="Step 7">
-    <img src="images/ELN_built-in_47.png" alt="Step 8">
+    <img src="images/ELN_built-in_47.webp" alt="Step 8">
     <div class="nav-arrow right" id="next8">→</div>
 </div>
 
@@ -382,7 +382,9 @@ Now create an entry using the built-in *Experiment ELN* schema for **Characteriz
 The *steps* subsection allows us to reference the various processes and measurements that are part of the experiment. By organizing these elements into a structured and interactive workflow, we can provide a clearer overview of the experimental sequence, enabling better visualization and understanding of how different steps are interconnected.
 
 <div style="text-align: center;">
-    <img src="images/ELN_built-in_39.gif" alt="interactive workflow gif" width="400">
+    <video controls autoplay loop muted playsinline width="400">
+        <source src="images/ELN_built-in_39.webm" type="video/webm">
+    </video>
 </div>
 
 ---
@@ -415,12 +417,16 @@ Imagine you have created multiple entries for substances, samples, instruments, 
 
     2. Add new folders and organize them according to your needs.
     <div style="text-align: center;">
-        <img src="images/creating_new_folders.gif" alt="interactive workflow gif" width="600">
+        <video controls autoplay loop muted playsinline width="600">
+            <source src="images/creating_new_folders.webm" type="video/webm">
+        </video>
     </div>
 
     3. Drag and drop files into the desired folder. A prompt will appear, asking if you want to copy or move the files—choose according to your needs.
     <div style="text-align: center;">
-        <img src="images/moving_files_to_a_folder.gif" alt="interactive workflow gif" width="600">
+        <video controls autoplay loop muted playsinline width="600">
+            <source src="images/moving_files_to_a_folder.webm" type="video/webm">
+        </video>
     </div>
 
     4. Once all files are sorted, take a moment to review the structure. Here is an example of an organized ELN:
@@ -501,7 +507,9 @@ Widgets allow you to customize your search interface to better suit your data ex
     This widget will then appear on your **EXPLORE** page, allowing you to quickly view and filter entries by their associated tags.
 
     <div style="text-align: center;">
-        <img src="images/explore_your_ELN_entries.gif" alt="Animation of filtering using widgets" width="800">
+        <video controls autoplay loop muted playsinline width="800">
+            <source src="images/explore_your_ELN_entries.webm" type="video/webm">
+        </video>
     </div>
 
 ---
