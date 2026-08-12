@@ -14,9 +14,32 @@ Configuration items get their value based on a hierarchy of sources. The sources
     nomad admin run appworker -f nomad.yaml -f nomad-dev.yaml
     ```
 
-3. **Default `nomad.yaml`:** A file named `nomad.yaml` in the current working directory, or a file pointed to by the `NOMAD_CONFIG` environment variable. This serves as the base configuration. This file is only automatically read if no file(s) have been specified using the command flag above.
+    The flag may be given before or after the sub-command, so the following is equivalent:
 
-4. **Built-in Defaults:** The default values hard-coded in the NOMAD source code. These have the lowest priority. These default values can be found from the `nomad/config/defaults.yaml` file in the source code.
+    ```bash
+    nomad -f nomad.yaml -f nomad-dev.yaml admin run appworker
+    ```
+
+3. **Configuration Files from `NOMAD_CONFIG_FILES`:** The same list of files, given through the environment instead of on the command line, separated by `:` (`;` on Windows) and merged in the same order. This is meant for services that are not started through the NOMAD CLI, or for deployments where you can set environment variables but not the command, such as a Helm chart or a `docker-compose.yaml`:
+
+    ```yaml
+    services:
+      app:
+        environment:
+          NOMAD_CONFIG_FILES: /app/nomad.yaml:/app/nomad-dev.yaml
+    ```
+
+4. **Default `nomad.yaml`:** A file named `nomad.yaml` in the current working directory, or a file pointed to by the `NOMAD_CONFIG` environment variable, which names a single file. This serves as the base configuration. This file is only automatically read if no files have been specified through the flag or the environment variable above. If the file that `NOMAD_CONFIG` points to does not exist, a warning is logged.
+
+5. **Built-in Defaults:** The default values hard-coded in the NOMAD source code. These have the lowest priority. These default values can be found from the `nomad/config/defaults.yaml` file in the source code.
+
+!!! note "Sources 2, 3 and 4 select the files, they do not stack"
+
+    These three sources are alternative ways of saying *which* configuration files to read, and only one of them is ever used: the `-f` flags override `NOMAD_CONFIG_FILES`, which overrides `NOMAD_CONFIG` and the default `nomad.yaml`. The files that lose are not read at all, they are not merged underneath the ones that win.
+
+    This follows the same design as `docker compose`, where `-f` overrides the `COMPOSE_FILE` environment variable and no implicit `docker-compose.yml` is read. If you want to build on top of the default configuration, name it explicitly, as in the `-f nomad.yaml -f nomad-dev.yaml` example above.
+
+    The merging described below therefore applies *within* whichever of the three is used, when it names several files, and between that source, the environment variables and the built-in defaults — never between sources 2, 3 and 4 themselves.
 
 ## Merging Rules
 
@@ -52,6 +75,33 @@ plugins:
 The final list of normalizers for that run will be `["atomisticparsers:amber_parser_entry_point"]`. The `systemnormalizer` will be removed for that run because the entire `include` list was replaced.
 
 If you intend to *add* an item to a list, you must repeat all the original items in your override file and add the new one.
+
+## Inspecting the effective configuration
+
+To see the configuration that NOMAD actually ends up using, i.e. the result of merging all of the sources above, use:
+
+```bash
+nomad dev config
+```
+
+Pass a section to narrow the output down:
+
+```bash
+nomad dev config services
+nomad dev config auth.authorized_users
+```
+
+The command takes the same `-f` flag, which makes it a quick way to check what a set of files will produce before starting a service:
+
+```bash
+nomad dev config -f nomad.yaml -f nomad-dev.yaml services
+```
+
+The list of configuration files that were read is written to stderr, so the configuration itself can be redirected to a file:
+
+```bash
+nomad dev config > effective-config.yaml
+```
 
 ## Configuration examples
 
