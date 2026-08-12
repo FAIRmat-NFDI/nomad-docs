@@ -190,6 +190,9 @@ markdown_extensions:
 extra:
   generator: false
   homepage: https://nomad-lab.eu
+  # mike version selector: reads versions.json generated on the gh-pages branch
+  version:
+    provider: mike
 use_directory_urls: false
 plugins:
   - search
