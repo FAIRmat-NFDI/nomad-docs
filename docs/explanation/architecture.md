@@ -69,7 +69,7 @@ Elasticsearch enables flexible, scalable search and analytics.
 
 ### MongoDB
 
-[Mongodb](https://docs.mongodb.com/){:target="_blank" rel="noopener"} is used to store and track the state of the
+[Mongodb](https://www.mongodb.com/docs/){:target="_blank" rel="noopener"} is used to store and track the state of the
 processing of uploaded files and the generated entries. We use
 [mongoengine](http://docs.mongoengine.org/){:target="_blank" rel="noopener"} to program with mongodb.
 
