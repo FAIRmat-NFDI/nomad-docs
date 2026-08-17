@@ -2177,78 +2177,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#tools-requiring-a-desktop-environment" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Tools requiring a Desktop environment
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Tools requiring a Desktop environment">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#dockerfile-structure_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Dockerfile structure
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#installing-the-application" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Installing the application
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#desktop-integration" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Desktop integration
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#example-adding-vs-code" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Example: adding VS Code
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#more-complex-cases" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        More complex cases
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -4517,78 +4445,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#tools-requiring-a-desktop-environment" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Tools requiring a Desktop environment
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Tools requiring a Desktop environment">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#dockerfile-structure_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Dockerfile structure
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#installing-the-application" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Installing the application
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#desktop-integration" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Desktop integration
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#example-adding-vs-code" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Example: adding VS Code
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#more-complex-cases" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        More complex cases
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -5034,147 +4890,22 @@ and visualization.</p>
 <a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">    </span><span class="c1"># Add your specific dependencies here</span>
 <a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="p">]</span>
 </code></pre></div>
-<h3 id="tools-requiring-a-desktop-environment">Tools requiring a Desktop environment<a class="headerlink" href="#tools-requiring-a-desktop-environment" title="Permanent link">¶</a></h3>
-<div class="admonition tip">
-<p class="admonition-title">Important</p>
-<p>While defining Jupyter-based NORTH tools can be straightforward, desktop-based
-tools can be more complicated. This section shows the base setup that every
-desktop-based NORTH tool shares, the different ways existing tools install their
-application, and more complicated cases (build tools, special local licensing,
-non-Linux software).</p>
-</div>
-<h4 id="dockerfile-structure_1">Dockerfile structure<a class="headerlink" href="#dockerfile-structure_1" title="Permanent link">¶</a></h4>
-<p>Desktop-based NORTH tools typically build <code>FROM</code> the shared
-<a href="https://github.com/FAIRmat-NFDI/nomad-north-desktop-base" rel="noopener" target="_blank"><code>nomad-north-desktop-base</code></a>
-image (see <a href="../../../explanation/north.html#official-base-images">Official base images</a>),
-rather than assembling xfce/VNC from scratch. Every existing desktop-based tool follows the
-same skeleton:</p>
-<!-- markdownlint-disable MD044 -->
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">ARG</span><span class="w"> </span><span class="nv">IMAGE_TAG</span><span class="o">=</span>main
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="k">ARG</span><span class="w"> </span><span class="nv">BASE_IMAGE</span><span class="o">=</span>ghcr.io/fairmat-nfdi/nomad-north-desktop-base
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="k">FROM</span><span class="w"> </span><span class="s">${BASE_IMAGE}:${IMAGE_TAG}</span><span class="w"> </span><span class="k">AS</span><span class="w"> </span><span class="s">base</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>
-<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="k">SHELL</span><span class="w"> </span><span class="p">[</span><span class="s2">"/bin/bash"</span><span class="p">,</span><span class="w"> </span><span class="s2">"-o"</span><span class="p">,</span><span class="w"> </span><span class="s2">"pipefail"</span><span class="p">,</span><span class="w"> </span><span class="s2">"-c"</span><span class="p">]</span>
-<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>
-<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="k">USER</span><span class="w"> </span><span class="s">root</span>
-<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>
-<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="c"># ... install the application here (see below) ...</span>
-<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>
-<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="c"># Switch back to jovyan to avoid accidental container runs as root</span>
-<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="k">USER</span><span class="w"> </span><span class="s">${NB_UID}</span>
-<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="k">WORKDIR</span><span class="w"> </span><span class="s">"${HOME}"</span>
-<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>
-<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a><span class="c"># ... copy desktop-integration files here (see below) ...</span>
-</code></pre></div>
-<p>Installs that need root (apt packages, writing outside <code>${HOME}</code>) happen as <code>USER root</code>;
-everything that touches <code>${HOME}</code> (desktop shortcuts, extensions, application data) happens
-after switching back to <code>USER ${NB_UID}</code>.</p>
-<h4 id="installing-the-application">Installing the application<a class="headerlink" href="#installing-the-application" title="Permanent link">¶</a></h4>
-<p>Which approach to use depends entirely on how the application that you want to install in your NORTH container is distributed. Four patterns are in active use:</p>
-<ol>
-<li><strong>apt package</strong>, when the tool is already packaged for Ubuntu — e.g. in
-   <a href="https://github.com/FAIRmat-NFDI/nomad-north-gwyddion/blob/main/src/nomad_north_gwyddion/north_tools/gwyddion/Dockerfile" rel="noopener" target="_blank"><code>nomad-north-gwyddion</code></a>:
-   <code>apt-get install gwyddion</code>.</li>
-<li><strong>Downloaded archive extraction</strong>, for tools distributed as a prebuilt tarball with no
-   package — e.g. in
-   <a href="https://github.com/FAIRmat-NFDI/nomad-north-vesta/blob/main/src/nomad_north_vesta/north_tools/vesta/Dockerfile" rel="noopener" target="_blank"><code>nomad-north-vesta</code></a>
-   (<code>wget</code> a <code>.tar.bz2</code>, <code>tar -xvf</code>) or in
-   <a href="https://github.com/FAIRmat-NFDI/nomad-north-fiji/blob/main/src/nomad_north_fiji/north_tools/fiji/Dockerfile" rel="noopener" target="_blank"><code>nomad-north-fiji</code></a>
-   (<code>wget</code> a <code>.zip</code>, <code>unzip</code>).</li>
-<li><strong>AppImage extraction</strong>, for tools only shipped as an AppImage — e.g. in
-   <a href="https://github.com/FAIRmat-NFDI/nomad-north-nionswift/blob/main/src/nomad_north_nionswift/north_tools/nionswift/Dockerfile" rel="noopener" target="_blank"><code>nomad-north-nionswift</code></a>:
-   <code>wget</code> the <code>.AppImage</code>, <code>--appimage-extract</code>, symlink <code>AppRun</code>.</li>
-<li><strong>A full mamba/conda environment</strong>, for Python/Qt-GUI-heavy toolkits with their own complex
-   dependency graph rather than a single binary — e.g. in
-   <a href="https://github.com/FAIRmat-NFDI/nomad-north-apmtools/blob/main/src/nomad_north_apmtools/north_tools/apmtools/Dockerfile" rel="noopener" target="_blank"><code>nomad-north-apmtools</code></a>:
-   <code>mamba env create -f environment.yml</code>, registered as a Jupyter kernel, auto-activated via
-   <code>.bashrc</code>.</li>
-</ol>
-<p>A native desktop application installed from a vendor's own apt repository (rather than Ubuntu's)
-is a variant of pattern 1 — see the VS Code example below.</p>
-<h4 id="desktop-integration">Desktop integration<a class="headerlink" href="#desktop-integration" title="Permanent link">¶</a></h4>
-<p>A <code>.desktop</code> file placed in different locations means different things, and existing tools use
-different combinations depending on the intended user experience:</p>
-<ul>
-<li><code>~/.local/share/applications/*.desktop</code> — adds a menu entry; the user launches the tool
-  manually. Use this for a secondary tool that users may only open occasionally.</li>
-<li><code>~/.config/autostart/*.desktop</code> — launches automatically every session
-  (<code>nomad-north-vesta</code>, <code>nomad-north-fiji</code>). Use this for the main tool that the container was built for.</li>
-<li><code>~/Desktop/*.desktop</code> — places an icon on the desktop itself (e.g. <code>nomad-north-fiji</code>, in addition to its autostart entry).</li>
-</ul>
-<p>It is also possible to copy the <em>same</em> file into both the applications and autostart
-directories: the tool auto-launches, but there's still a way to relaunch it if the user closes
-it. Using autostart alone means there is no way to reopen the tool afterwards without restarting the whole container.</p>
-<h4 id="example-adding-vs-code">Example: adding VS Code<a class="headerlink" href="#example-adding-vs-code" title="Permanent link">¶</a></h4>
-<p><code>pynxtools-mpes</code>'s NORTH tool
-(<a href="https://github.com/FAIRmat-NFDI/pynxtools-mpes/blob/main/src/pynxtools_mpes/nomad/north_tools/mpes/Dockerfile" rel="noopener" target="_blank">Dockerfile</a>)
-adds the native desktop VS Code (not a browser-based <code>code-server</code>) on top of the desktop base:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c"># ---- VS Code (native desktop app, not code-server) ----</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="k">RUN</span><span class="w"> </span>curl<span class="w"> </span>https://packages.microsoft.com/keys/microsoft.asc<span class="w"> </span><span class="p">|</span><span class="w"> </span>gpg<span class="w"> </span>--dearmor<span class="w"> </span>&gt;<span class="w"> </span>/etc/apt/trusted.gpg.d/microsoft.gpg<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s1">'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" &gt; /etc/apt/sources.list.d/vscode.list'</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span>-y<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>code<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>clean<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/apt/lists/*
-<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>
-<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="c"># after switching to USER ${NB_UID}:</span>
-<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="c"># DONT_PROMPT_WSL_INSTALL suppresses the `code` CLI's interactive "install inside WSL</span>
-<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="c"># anyway?" prompt, which appears when the build host's kernel identifies as WSL (e.g.</span>
-<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="c"># Docker Desktop on WSL2) — a no-op on a real Linux build host, where no prompt appears.</span>
-<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="k">ENV</span><span class="w"> </span><span class="nv">DONT_PROMPT_WSL_INSTALL</span><span class="o">=</span><span class="m">1</span>
-<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="k">RUN</span><span class="w"> </span>/usr/bin/code<span class="w"> </span>--install-extension<span class="w"> </span>eamodio.gitlens<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>/usr/bin/code<span class="w"> </span>--install-extension<span class="w"> </span>h5web.vscode-h5web<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>/usr/bin/code<span class="w"> </span>--install-extension<span class="w"> </span>ms-toolsai.jupyter<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a><span class="w"> </span>#<span class="w"> </span>...<span class="w"> </span>etc,<span class="w"> </span>pick<span class="w"> </span>the<span class="w"> </span>extensions<span class="w"> </span>relevant<span class="w"> </span>to<span class="w"> </span>your<span class="w"> </span>tool
-</code></pre></div>
-<p>The desktop icon (<code>code.desktop</code>, the file VS Code itself ships) is copied to <code>~/Desktop/</code>, and
-an autostart script marks that icon's checksum as trusted so double-clicking it doesn't trigger
-xfce's "untrusted launcher" prompt:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># ~/.config/autostart/autostart, run once per session via a matching autostart.desktop entry</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="nv">f</span><span class="o">=</span>/home/jovyan/Desktop/code.desktop
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>gio<span class="w"> </span><span class="nb">set</span><span class="w"> </span>-t<span class="w"> </span>string<span class="w"> </span><span class="s2">"</span><span class="nv">$f</span><span class="s2">"</span><span class="w"> </span>metadata::xfce-exe-checksum<span class="w"> </span><span class="s2">"</span><span class="k">$(</span>sha256sum<span class="w"> </span><span class="s2">"</span><span class="nv">$f</span><span class="s2">"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">'{print $1}'</span><span class="k">)</span><span class="s2">"</span>
-</code></pre></div>
-<h4 id="more-complex-cases">More complex cases<a class="headerlink" href="#more-complex-cases" title="Permanent link">¶</a></h4>
-<ol>
-<li>
-<p><strong>Dependencies that need build tools.</strong> Some Python dependencies ship no prebuilt wheel for
-   the image's Python version and have to compile from source. The failure mode is a clear message from the installer (e.g. <code>error: [Errno 2] No such file or directory: 'gcc'</code>), not something cryptic — if you see that, the fix is almost always adding the missing apt package directly in the Dockerfile.</p>
-</li>
-<li>
-<p><strong>Special (local) licensing.</strong> Proprietary tools can't be committed to a public repository at
-   all. The pattern: the Dockerfile and desktop-integration steps stay in an open repository, but the actual licensed installer or data is supplied as a local build input that is never checked in. This should be documented in that package's own README or documenation (e.g. "place your licensed installer at <code>./vendor-tool</code> before running <code>docker build</code>") and typically listed in <code>.gitignore</code>. A package built this way also <strong>can not</strong> have automatic CI build/publish workflow, as the the image needs to be built and distributed manually by whoever holds a license.</p>
-</li>
-<li>
-<p><strong>Software built for non-Linux environments.</strong> Windows-only tools can run via
-   <a href="https://www.winehq.org/" rel="noopener" target="_blank">Wine</a> on top of the same
-   desktop-base image — add the WineHQ apt repository and install it, as <code>USER root</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c"># ---- Wine (for Windows-only applications) ----</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="k">RUN</span><span class="w"> </span>dpkg<span class="w"> </span>--add-architecture<span class="w"> </span>i386<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>mkdir<span class="w"> </span>-pm755<span class="w"> </span>/etc/apt/keyrings<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>wget<span class="w"> </span>-O<span class="w"> </span>/etc/apt/keyrings/winehq-archive.key<span class="w"> </span>https://dl.winehq.org/wine-builds/winehq.key<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>wget<span class="w"> </span>-nc<span class="w"> </span>-P<span class="w"> </span>/etc/apt/sources.list.d/<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">      </span>https://dl.winehq.org/wine-builds/ubuntu/dists/<span class="k">$(</span>lsb_release<span class="w"> </span>-sc<span class="k">)</span>/winehq-<span class="k">$(</span>lsb_release<span class="w"> </span>-sc<span class="k">)</span>.sources<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span>-y<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>--install-recommends<span class="w"> </span>winehq-staging<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>clean<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>-rf<span class="w"> </span>/var/lib/apt/lists/*
-</code></pre></div>
-</li>
-</ol>
-<p>From there, treat the actual Windows application the same as the licensing case above if
-   it's proprietary: <code>COPY</code> a locally-supplied Wine prefix (never committed) into
-   <code>${HOME}/.wine</code>, plus a <code>.desktop</code> shortcut for it, as <code>USER ${NB_UID}</code>:</p>
-<div class="highlight"><pre><span></span><code>```Dockerfile
-USER ${NB_UID}
-COPY --chown=${NB_UID}:${NB_GID} vendor-tool-wine "${HOME}/.wine"
-COPY --chown=${NB_UID}:${NB_GID} config/VendorTool.desktop "${HOME}/Desktop/VendorTool.desktop"
-```
-</code></pre></div>
+<!-- ### Tools requiring a Desktop environment
+
+!!! tip "Important"
+
+    While defining jupyter-based NORTH tools can be straightforward, desktop-based
+    tools can be  more complicated. We will show a basic example here that will give
+    the reader an idea on how the basic setup should look like. For more complicated cases
+    (including those that need build tools, have special (local) licensing, or those that run
+    software created for non-Linux environments), we refer to the existing example tools. -->
+
 <h2 id="versioning-and-tagging-north-images">Versioning and tagging NORTH images<a class="headerlink" href="#versioning-and-tagging-north-images" title="Permanent link">¶</a></h2>
 <p>When creating container images for NORTH tools, it is important to follow a consistent versioning
 and tagging scheme.</p>
 <h3 id="tagging-strategy">Tagging strategy<a class="headerlink" href="#tagging-strategy" title="Permanent link">¶</a></h3>
 <p>For local builds, you can use any tag during development:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>docker<span class="w"> </span>build<span class="w"> </span>...<span class="w"> </span>-t<span class="w"> </span>my-tool:dev
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>docker<span class="w"> </span>build<span class="w"> </span>...<span class="w"> </span>-t<span class="w"> </span>my-tool:dev
 </code></pre></div>
 <p>For published images, you may follow <a href="https://semver.org/" rel="noopener" target="_blank">semantic versioning (SemVer)</a>:</p>
 <ul>
@@ -5193,9 +4924,9 @@ and tagging scheme.</p>
 <h3 id="local-testing">Local testing<a class="headerlink" href="#local-testing" title="Permanent link">¶</a></h3>
 <h4 id="interactive-testing">Interactive testing<a class="headerlink" href="#interactive-testing" title="Permanent link">¶</a></h4>
 <p>Run the container interactively with a local data mount:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-p<span class="w"> </span><span class="m">8888</span>:8888<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">  </span>--mount<span class="w"> </span><span class="nv">type</span><span class="o">=</span>bind,src<span class="o">=</span><span class="s2">"/local/path/to/test/data"</span>,dst<span class="o">=</span><span class="s2">"/home/jovyan/test"</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">  </span>&lt;image_name&gt;:&lt;tag&gt;
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-p<span class="w"> </span><span class="m">8888</span>:8888<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span>--mount<span class="w"> </span><span class="nv">type</span><span class="o">=</span>bind,src<span class="o">=</span><span class="s2">"/local/path/to/test/data"</span>,dst<span class="o">=</span><span class="s2">"/home/jovyan/test"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">  </span>&lt;image_name&gt;:&lt;tag&gt;
 </code></pre></div>
 <p>Then,</p>
 <ol>
@@ -5206,10 +4937,10 @@ and tagging scheme.</p>
 </ol>
 <h4 id="automated-notebook-execution">Automated notebook execution<a class="headerlink" href="#automated-notebook-execution" title="Permanent link">¶</a></h4>
 <p>You can also test the container non-interactively, i.e., run the container and execute a Jupyter notebook inside it. Once the test is done, the container will exit and be removed.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-p<span class="w"> </span><span class="m">8888</span>:8888<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">  </span>--mount<span class="w"> </span><span class="nv">type</span><span class="o">=</span>bind,src<span class="o">=</span><span class="s2">"/local/path/to/test/data"</span>,dst<span class="o">=</span><span class="s2">"/home/jovyan/test"</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">  </span>&lt;image_name&gt;:&lt;tag&gt;<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="w">  </span>/bin/bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">"jupyter execute /home/jovyan/test/&lt;path/to/notebook&gt;.ipynb"</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-p<span class="w"> </span><span class="m">8888</span>:8888<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span>--mount<span class="w"> </span><span class="nv">type</span><span class="o">=</span>bind,src<span class="o">=</span><span class="s2">"/local/path/to/test/data"</span>,dst<span class="o">=</span><span class="s2">"/home/jovyan/test"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">  </span>&lt;image_name&gt;:&lt;tag&gt;<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">  </span>/bin/bash<span class="w"> </span>-c<span class="w"> </span><span class="s2">"jupyter execute /home/jovyan/test/&lt;path/to/notebook&gt;.ipynb"</span>
 </code></pre></div>
 <p>This validates that,</p>
 <ul>
