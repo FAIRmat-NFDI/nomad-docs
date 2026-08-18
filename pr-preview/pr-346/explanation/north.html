@@ -4444,7 +4444,7 @@ Users should consult the [NOMAD plugin registry](<add-link>>) which details whic
 <h2 id="custom-user-provided-tools">Custom user-provided tools<a class="headerlink" href="#custom-user-provided-tools" title="Permanent link">¶</a></h2>
 <p>In addition to centrally provided tools, users can package their own tools as Docker containers
 and run these via NORTH on NOMAD data. This is especially relevant for organizations and users
-who run their own <a href="oasis.html">NOMAD Oasis</a> deployment. In this context, institution- or project-specific analysis software may call for connecting proprietary or tools whose license does not allow exposing services outside the local infrastructure. Given that the requirements of NORTH can be decouple from those of the NOMAD core system is a clear user benefit.</p>
+who run their own <a href="oasis.html">NOMAD Oasis</a> deployment. In this context, institution- or project-specific analysis software may call for connecting proprietary or tools whose license does not allow exposing services outside the local infrastructure. Given that the requirements of NORTH can be decoupled from those of the NOMAD core system is a clear user benefit.</p>
 <p>Developing a custom NORTH tool typically involves defining the tool logic and dependencies,
 packaging the tool as a Docker container, and registering the container so that it can be
 invoked via NOMAD. Once registered, custom tools follow the same execution and provenance model
