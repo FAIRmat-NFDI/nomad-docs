@@ -2190,10 +2190,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#dockerfile-structure_1" class="md-nav__link">
+  <a href="#dockerfile-contents" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Dockerfile structure
+        Dockerfile contents
       
     </span>
   </a>
@@ -4530,10 +4530,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#dockerfile-structure_1" class="md-nav__link">
+  <a href="#dockerfile-contents" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Dockerfile structure
+        Dockerfile contents
       
     </span>
   </a>
@@ -5043,7 +5043,7 @@ desktop-based NORTH tool shares, the different ways existing tools install their
 application, and more complicated cases (build tools, special local licensing,
 non-Linux software).</p>
 </div>
-<h4 id="dockerfile-structure_1">Dockerfile structure<a class="headerlink" href="#dockerfile-structure_1" title="Permanent link">¶</a></h4>
+<h4 id="dockerfile-contents">Dockerfile contents<a class="headerlink" href="#dockerfile-contents" title="Permanent link">¶</a></h4>
 <p>Desktop-based NORTH tools typically build <code>FROM</code> the shared
 <a href="https://github.com/FAIRmat-NFDI/nomad-north-desktop-base" rel="noopener" target="_blank"><code>nomad-north-desktop-base</code></a>
 image (see <a href="../../../explanation/north.html#official-base-images">Explanation &gt; NORTH &gt; Official base images</a>), rather than assembling xfce/VNC from scratch. Every existing desktop-based tool follows the same skeleton:</p>
@@ -5174,7 +5174,7 @@ xfce's "untrusted launcher" prompt:</p>
    the image's Python version and have to compile from source. The failure mode is a clear message from the installer (e.g. <code>error: [Errno 2] No such file or directory: 'gcc'</code>), not something cryptic. If you see that, the fix is almost always adding the missing apt package directly in the Dockerfile.</p>
 </li>
 <li>
-<p><strong>Special (local) licensing.</strong> 
+<p><strong>Special (local) licensing.</strong>
 NOMAD Oasis admins may sometimes want to install proprietary tools for which only a particular research group has a licence. Such propietary tools cannot be committed to a public repository at all. These tools cannot be committed to a public repository. The usual approach is to keep the Dockerfile and desktop integration in the open repository, while providing the licensed installer or other required files separately as a local build input. It should be clearly documented in that package's own README or documenation. what needs to be provided, for example: “Place your licensed installer at <code>./vendor-tool</code> before running <code>docker build</code>.” The local files should also typically be added to <code>.gitignore</code>. A package built this way also <strong>cannot</strong> use an automatic build/publish workflow on GitHub Actions, as the the image needs to be built and distributed manually by whoever holds a license.</p>
 </li>
 <li>
