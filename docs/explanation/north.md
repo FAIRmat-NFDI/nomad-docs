@@ -105,3 +105,5 @@ analysis, if the tool wrote data using a schema version different from the one u
 NOMAD deployment. This can lead to partial or complete incompatibilities. By providing
 individual NORTH tools as optional extensions of a NOMAD plugin, the responsibility
 for minimizing schema incompatibilities is shifted to the plugin developers.
+
+All FAIRmat NORTH tools use the NOMAD plugin mechanism to provide the tools *via* a `NORTHToolEntryPoint`. It is recommended for NOMAD Oasis admins to use these plugins in their deployments (rather than older NORTH tool description using other mechanims). Developers of existing or new external tools are also encouraged to use the plugin entry point mechanism.
