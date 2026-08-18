@@ -304,7 +304,7 @@ north = [
     application, and more complicated cases (build tools, special local licensing,
     non-Linux software).
 
-#### Dockerfile structure
+#### Dockerfile contents
 
 Desktop-based NORTH tools typically build `FROM` the shared
 [`nomad-north-desktop-base`](https://github.com/FAIRmat-NFDI/nomad-north-desktop-base){:target="_blank" rel="noopener"}
@@ -339,7 +339,7 @@ after switching back to `USER ${NB_UID}`.
 Which approach to use depends entirely on how the application that you want to install in your NORTH container is distributed. Four patterns are actively used by existing NORTH tools:
 
 | Pattern | Use when | Example in a Dockerfile | Key steps |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | **apt package** | the tool is already packaged for Ubuntu | [`nomad-north-gwyddion`](https://github.com/FAIRmat-NFDI/nomad-north-gwyddion/blob/main/src/nomad_north_gwyddion/north_tools/gwyddion/Dockerfile){:target="_blank" rel="noopener"} | `apt-get install gwyddion` |
 | **Downloaded archive extraction** | the tool ships as a prebuilt tarball with no package | [`nomad-north-vesta`](https://github.com/FAIRmat-NFDI/nomad-north-vesta/blob/main/src/nomad_north_vesta/north_tools/vesta/Dockerfile){:target="_blank" rel="noopener"}, [`nomad-north-fiji`](https://github.com/FAIRmat-NFDI/nomad-north-fiji/blob/main/src/nomad_north_fiji/north_tools/fiji/Dockerfile){:target="_blank" rel="noopener"} | `wget` a `.tar.bz2` + `tar -xvf` (vesta), or a `.zip` + `unzip` (fiji) |
 | **AppImage extraction** | the tool is only shipped as an AppImage | [`nomad-north-nionswift`](https://github.com/FAIRmat-NFDI/nomad-north-nionswift/blob/main/src/nomad_north_nionswift/north_tools/nionswift/Dockerfile){:target="_blank" rel="noopener"} | `wget` the `.AppImage`, `--appimage-extract`, symlink `AppRun` |
@@ -353,7 +353,7 @@ is a variant of pattern 1 (see the VS Code example below).
 A `.desktop` file placed in different locations means different things, and existing NORTH tools use different combinations depending on the intended user experience:
 
 | Location | Effect | Use for |
-|---|---|---|
+| --- | --- | --- |
 | `~/.local/share/applications/*.desktop` | Adds a menu entry; the user launches the tool manually | A secondary tool that users may only open occasionally |
 | `~/.config/autostart/*.desktop` | Launches automatically every session | The main tool that the container was built for |
 | `~/Desktop/*.desktop` | Places an icon on the desktop itself | Can be in addition to its autostart entry |
@@ -364,9 +364,7 @@ it. Using autostart alone means there is no way to reopen the tool afterwards wi
 
 #### Example: adding VS Code
 
-`pynxtools-mpes`'s NORTH tool
-([Dockerfile](https://github.com/FAIRmat-NFDI/pynxtools-mpes/blob/main/src/pynxtools_mpes/nomad/north_tools/mpes/Dockerfile){:target="_blank" rel="noopener"})
-adds the native desktop VS Code (not a browser-based `code-server`) on top of the desktop base:
+In order to provide a native desktop version of VS Code on top of the desktop base image, the following should be added to the Dockerfile:
 
 ```Dockerfile
 # ---- VS Code (native desktop app, not code-server) ----
@@ -402,7 +400,7 @@ gio set -t string "$f" metadata::xfce-exe-checksum "$(sha256sum "$f" | awk '{pri
 1. **Dependencies that need build tools.** Some Python dependencies ship no prebuilt wheel for
    the image's Python version and have to compile from source. The failure mode is a clear message from the installer (e.g. `error: [Errno 2] No such file or directory: 'gcc'`), not something cryptic. If you see that, the fix is almost always adding the missing apt package directly in the Dockerfile.
 
-2. **Special (local) licensing.** 
+2. **Special (local) licensing.**
 NOMAD Oasis admins may sometimes want to install proprietary tools for which only a particular research group has a licence. Such propietary tools cannot be committed to a public repository at all. These tools cannot be committed to a public repository. The usual approach is to keep the Dockerfile and desktop integration in the open repository, while providing the licensed installer or other required files separately as a local build input. It should be clearly documented in that package's own README or documenation. what needs to be provided, for example: “Place your licensed installer at `./vendor-tool` before running `docker build`.” The local files should also typically be added to `.gitignore`. A package built this way also **cannot** use an automatic build/publish workflow on GitHub Actions, as the the image needs to be built and distributed manually by whoever holds a license.
 
 3. **Software built for non-Linux environments.** Windows-only tools can run via
@@ -420,7 +418,7 @@ NOMAD Oasis admins may sometimes want to install proprietary tools for which onl
      && apt-get install -y --install-recommends winehq-staging \
      && apt-get clean && rm -rf /var/lib/apt/lists/*
     ```
-    
+
     Treat the actual Windows application the same as the licensing case above if
     it's proprietary: `COPY` a locally-supplied Wine prefix (never committed) into
     `${HOME}/.wine`, plus a `.desktop` shortcut for it, as `USER ${NB_UID}`:
