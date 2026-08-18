@@ -299,11 +299,7 @@ north = [
 !!! tip "Important"
 
     While defining Jupyter-based NORTH tools can be straightforward, desktop-based
-<<<<<<< Updated upstream
-    tools can be more complicated. This section shows the base setup that every
-=======
     tools are often more complicated to build. This section shows the base setup that every
->>>>>>> Stashed changes
     desktop-based NORTH tool shares, the different ways existing tools install their
     application, and more complicated cases (build tools, special local licensing,
     non-Linux software).
@@ -312,13 +308,7 @@ north = [
 
 Desktop-based NORTH tools typically build `FROM` the shared
 [`nomad-north-desktop-base`](https://github.com/FAIRmat-NFDI/nomad-north-desktop-base){:target="_blank" rel="noopener"}
-<<<<<<< Updated upstream
-image (see [Official base images](../../../explanation/north.md#official-base-images)),
-rather than assembling xfce/VNC from scratch. Every existing desktop-based tool follows the
-same skeleton:
-=======
 image (see [Explanation > NORTH > Official base images](../../../explanation/north.md#official-base-images)), rather than assembling xfce/VNC from scratch. Every existing desktop-based tool follows the same skeleton:
->>>>>>> Stashed changes
 
 <!-- markdownlint-disable MD044 -->
 ```Dockerfile
@@ -346,41 +336,6 @@ after switching back to `USER ${NB_UID}`.
 
 #### Installing the application
 
-<<<<<<< Updated upstream
-Which approach to use depends entirely on how the application that you want to install in your NORTH container is distributed. Four patterns are in active use:
-
-1. **apt package**, when the tool is already packaged for Ubuntu — e.g. in
-   [`nomad-north-gwyddion`](https://github.com/FAIRmat-NFDI/nomad-north-gwyddion/blob/main/src/nomad_north_gwyddion/north_tools/gwyddion/Dockerfile){:target="_blank" rel="noopener"}:
-   `apt-get install gwyddion`.
-2. **Downloaded archive extraction**, for tools distributed as a prebuilt tarball with no
-   package — e.g. in
-   [`nomad-north-vesta`](https://github.com/FAIRmat-NFDI/nomad-north-vesta/blob/main/src/nomad_north_vesta/north_tools/vesta/Dockerfile){:target="_blank" rel="noopener"}
-   (`wget` a `.tar.bz2`, `tar -xvf`) or in
-   [`nomad-north-fiji`](https://github.com/FAIRmat-NFDI/nomad-north-fiji/blob/main/src/nomad_north_fiji/north_tools/fiji/Dockerfile){:target="_blank" rel="noopener"}
-   (`wget` a `.zip`, `unzip`).
-3. **AppImage extraction**, for tools only shipped as an AppImage — e.g. in
-   [`nomad-north-nionswift`](https://github.com/FAIRmat-NFDI/nomad-north-nionswift/blob/main/src/nomad_north_nionswift/north_tools/nionswift/Dockerfile){:target="_blank" rel="noopener"}:
-   `wget` the `.AppImage`, `--appimage-extract`, symlink `AppRun`.
-4. **A full mamba/conda environment**, for Python/Qt-GUI-heavy toolkits with their own complex
-   dependency graph rather than a single binary — e.g. in
-   [`nomad-north-apmtools`](https://github.com/FAIRmat-NFDI/nomad-north-apmtools/blob/main/src/nomad_north_apmtools/north_tools/apmtools/Dockerfile){:target="_blank" rel="noopener"}:
-   `mamba env create -f environment.yml`, registered as a Jupyter kernel, auto-activated via
-   `.bashrc`.
-
-A native desktop application installed from a vendor's own apt repository (rather than Ubuntu's)
-is a variant of pattern 1 — see the VS Code example below.
-
-#### Desktop integration
-
-A `.desktop` file placed in different locations means different things, and existing tools use
-different combinations depending on the intended user experience:
-
-- `~/.local/share/applications/*.desktop` — adds a menu entry; the user launches the tool
-  manually. Use this for a secondary tool that users may only open occasionally.
-- `~/.config/autostart/*.desktop` — launches automatically every session
-  (`nomad-north-vesta`, `nomad-north-fiji`). Use this for the main tool that the container was built for.
-- `~/Desktop/*.desktop` — places an icon on the desktop itself (e.g. `nomad-north-fiji`, in addition to its autostart entry).
-=======
 Which approach to use depends entirely on how the application that you want to install in your NORTH container is distributed. Four patterns are actively used by existing NORTH tools:
 
 | Pattern | Use when | Example in a Dockerfile | Key steps |
@@ -402,7 +357,6 @@ A `.desktop` file placed in different locations means different things, and exis
 | `~/.local/share/applications/*.desktop` | Adds a menu entry; the user launches the tool manually | A secondary tool that users may only open occasionally |
 | `~/.config/autostart/*.desktop` | Launches automatically every session | The main tool that the container was built for |
 | `~/Desktop/*.desktop` | Places an icon on the desktop itself | Can be in addition to its autostart entry |
->>>>>>> Stashed changes
 
 It is also possible to copy the *same* file into both the applications and autostart
 directories: the tool auto-launches, but there's still a way to relaunch it if the user closes
@@ -425,11 +379,7 @@ RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /et
 # after switching to USER ${NB_UID}:
 # DONT_PROMPT_WSL_INSTALL suppresses the `code` CLI's interactive "install inside WSL
 # anyway?" prompt, which appears when the build host's kernel identifies as WSL (e.g.
-<<<<<<< Updated upstream
-# Docker Desktop on WSL2) — a no-op on a real Linux build host, where no prompt appears.
-=======
 # Docker Desktop on WSL2).
->>>>>>> Stashed changes
 ENV DONT_PROMPT_WSL_INSTALL=1
 RUN /usr/bin/code --install-extension eamodio.gitlens \
  && /usr/bin/code --install-extension h5web.vscode-h5web \
@@ -450,16 +400,6 @@ gio set -t string "$f" metadata::xfce-exe-checksum "$(sha256sum "$f" | awk '{pri
 #### More complex cases
 
 1. **Dependencies that need build tools.** Some Python dependencies ship no prebuilt wheel for
-<<<<<<< Updated upstream
-   the image's Python version and have to compile from source. The failure mode is a clear message from the installer (e.g. `error: [Errno 2] No such file or directory: 'gcc'`), not something cryptic — if you see that, the fix is almost always adding the missing apt package directly in the Dockerfile.
-
-2. **Special (local) licensing.** Proprietary tools can't be committed to a public repository at
-   all. The pattern: the Dockerfile and desktop-integration steps stay in an open repository, but the actual licensed installer or data is supplied as a local build input that is never checked in. This should be documented in that package's own README or documenation (e.g. "place your licensed installer at `./vendor-tool` before running `docker build`") and typically listed in `.gitignore`. A package built this way also **can not** have automatic CI build/publish workflow, as the the image needs to be built and distributed manually by whoever holds a license.
-
-3. **Software built for non-Linux environments.** Windows-only tools can run via
-   [Wine](https://www.winehq.org/){:target="_blank" rel="noopener"} on top of the same
-   desktop-base image — add the WineHQ apt repository and install it, as `USER root`:
-=======
    the image's Python version and have to compile from source. The failure mode is a clear message from the installer (e.g. `error: [Errno 2] No such file or directory: 'gcc'`), not something cryptic. If you see that, the fix is almost always adding the missing apt package directly in the Dockerfile.
 
 2. **Special (local) licensing.** 
@@ -468,7 +408,6 @@ NOMAD Oasis admins may sometimes want to install proprietary tools for which onl
 3. **Software built for non-Linux environments.** Windows-only tools can run via
    [Wine](https://www.winehq.org/){:target="_blank" rel="noopener"} on top of the same
    desktop-base image. Add the WineHQ apt repository and install it, as `USER root`:
->>>>>>> Stashed changes
 
     ```Dockerfile
     # ---- Wine (for Windows-only applications) ----
@@ -481,17 +420,10 @@ NOMAD Oasis admins may sometimes want to install proprietary tools for which onl
      && apt-get install -y --install-recommends winehq-staging \
      && apt-get clean && rm -rf /var/lib/apt/lists/*
     ```
-<<<<<<< Updated upstream
-
-   From there, treat the actual Windows application the same as the licensing case above if
-   it's proprietary: `COPY` a locally-supplied Wine prefix (never committed) into
-   `${HOME}/.wine`, plus a `.desktop` shortcut for it, as `USER ${NB_UID}`:
-=======
     
     Treat the actual Windows application the same as the licensing case above if
     it's proprietary: `COPY` a locally-supplied Wine prefix (never committed) into
     `${HOME}/.wine`, plus a `.desktop` shortcut for it, as `USER ${NB_UID}`:
->>>>>>> Stashed changes
 
     ```Dockerfile
     USER ${NB_UID}
