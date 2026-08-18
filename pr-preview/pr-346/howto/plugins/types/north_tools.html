@@ -5140,9 +5140,7 @@ is a variant of pattern 1 (see the VS Code example below).</p>
 directories: the tool auto-launches, but there's still a way to relaunch it if the user closes
 it. Using autostart alone means there is no way to reopen the tool afterwards without restarting the whole container.</p>
 <h4 id="example-adding-vs-code">Example: adding VS Code<a class="headerlink" href="#example-adding-vs-code" title="Permanent link">¶</a></h4>
-<p><code>pynxtools-mpes</code>'s NORTH tool
-(<a href="https://github.com/FAIRmat-NFDI/pynxtools-mpes/blob/main/src/pynxtools_mpes/nomad/north_tools/mpes/Dockerfile" rel="noopener" target="_blank">Dockerfile</a>)
-adds the native desktop VS Code (not a browser-based <code>code-server</code>) on top of the desktop base:</p>
+<p>In order to provide a native desktop version of VS Code on top of the desktop base image, the following should be added to the Dockerfile:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c"># ---- VS Code (native desktop app, not code-server) ----</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="k">RUN</span><span class="w"> </span>curl<span class="w"> </span>https://packages.microsoft.com/keys/microsoft.asc<span class="w"> </span><span class="p">|</span><span class="w"> </span>gpg<span class="w"> </span>--dearmor<span class="w"> </span>&gt;<span class="w"> </span>/etc/apt/trusted.gpg.d/microsoft.gpg<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s1">'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" &gt; /etc/apt/sources.list.d/vscode.list'</span><span class="w"> </span><span class="se">\</span>
