@@ -84,7 +84,7 @@ Learn more about running existing NOMAD tools in the how-to guides: [How-to guid
 
 In addition to centrally provided tools, users can package their own tools as Docker containers
 and run these via NORTH on NOMAD data. This is especially relevant for organizations and users
-who run their own [NOMAD Oasis](./oasis.md) deployment. In this context, institution- or project-specific analysis software may call for connecting proprietary or tools whose license does not allow exposing services outside the local infrastructure. Given that the requirements of NORTH can be decouple from those of the NOMAD core system is a clear user benefit.
+who run their own [NOMAD Oasis](./oasis.md) deployment. In this context, institution- or project-specific analysis software may call for connecting proprietary or tools whose license does not allow exposing services outside the local infrastructure. Given that the requirements of NORTH can be decoupled from those of the NOMAD core system is a clear user benefit.
 
 Developing a custom NORTH tool typically involves defining the tool logic and dependencies,
 packaging the tool as a Docker container, and registering the container so that it can be
