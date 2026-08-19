@@ -5,8 +5,7 @@ containerized environments. It enables tools to be executed reproducibly and sec
 being tightly integrated with the NOMAD data infrastructure.
 
 This documentation shows you how to create a plugin entry point for a NORTH tool and prepare its contents.
-You should read the [introduction to plugins](../plugins.md)
-to have a basic understanding of how plugins and plugin entry points work in the NOMAD ecosystem.
+You should read [How-to guides > ... > Start plugin development](../plugins.md) to have a basic understanding of how plugins and plugin entry points work in the NOMAD ecosystem.
 
 ## Getting started
 
@@ -34,8 +33,7 @@ nomad-example
    └── pyproject.toml
 ```
 
-See the documentation on [plugin development guidelines](../plugins.md#plugin-development-guidelines)
-for more details on the best development practices for plugins, including linting, testing, and documenting.
+See [How-to guides > Start plugin development > Plugin development guidelines](../plugins.md#plugin-development-guidelines) for more details on the best development practices for plugins, including linting, testing, and documenting.
 
 ## NORTH tool entry point
 
@@ -294,15 +292,140 @@ north = [
 ]
 ```
 
-<!-- ### Tools requiring a Desktop environment
+### Tools requiring a Desktop environment
 
 !!! tip "Important"
 
-    While defining jupyter-based NORTH tools can be straightforward, desktop-based
-    tools can be  more complicated. We will show a basic example here that will give
-    the reader an idea on how the basic setup should look like. For more complicated cases
-    (including those that need build tools, have special (local) licensing, or those that run
-    software created for non-Linux environments), we refer to the existing example tools. -->
+    While defining Jupyter-based NORTH tools can be straightforward, desktop-based
+    tools are often more complicated to build. This section shows the base setup that every
+    desktop-based NORTH tool shares, the different ways existing tools install their
+    application, and more complicated cases (build tools, special local licensing,
+    non-Linux software).
+
+#### Dockerfile contents
+
+Desktop-based NORTH tools typically build `FROM` the shared
+[`nomad-north-desktop-base`](https://github.com/FAIRmat-NFDI/nomad-north-desktop-base){:target="_blank" rel="noopener"}
+image (see [Explanation > NORTH > Official base images](../../../explanation/north.md#official-base-images)), rather than assembling xfce/VNC from scratch. Every existing desktop-based tool follows the same skeleton:
+
+<!-- markdownlint-disable MD044 -->
+```Dockerfile
+ARG IMAGE_TAG=main
+ARG BASE_IMAGE=ghcr.io/fairmat-nfdi/nomad-north-desktop-base
+
+FROM ${BASE_IMAGE}:${IMAGE_TAG} AS base
+
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
+USER root
+
+# ... install the application here (see below) ...
+
+# Switch back to jovyan to avoid accidental container runs as root
+USER ${NB_UID}
+WORKDIR "${HOME}"
+
+# ... copy desktop-integration files here (see below) ...
+```
+
+Installs that need root (apt packages, writing outside `${HOME}`) happen as `USER root`;
+everything that touches `${HOME}` (desktop shortcuts, extensions, application data) happens
+after switching back to `USER ${NB_UID}`.
+
+#### Installing the application
+
+Which approach to use depends entirely on how the application that you want to install in your NORTH container is distributed. Four patterns are actively used by existing NORTH tools:
+
+| Pattern | Use when | Example in a Dockerfile | Key steps |
+| --- | --- | --- | --- |
+| **apt package** | the tool is already packaged for Ubuntu | [`nomad-north-gwyddion`](https://github.com/FAIRmat-NFDI/nomad-north-gwyddion/blob/main/src/nomad_north_gwyddion/north_tools/gwyddion/Dockerfile){:target="_blank" rel="noopener"} | `apt-get install gwyddion` |
+| **Downloaded archive extraction** | the tool ships as a prebuilt tarball with no package | [`nomad-north-vesta`](https://github.com/FAIRmat-NFDI/nomad-north-vesta/blob/main/src/nomad_north_vesta/north_tools/vesta/Dockerfile){:target="_blank" rel="noopener"}, [`nomad-north-fiji`](https://github.com/FAIRmat-NFDI/nomad-north-fiji/blob/main/src/nomad_north_fiji/north_tools/fiji/Dockerfile){:target="_blank" rel="noopener"} | `wget` a `.tar.bz2` + `tar -xvf` (vesta), or a `.zip` + `unzip` (fiji) |
+| **AppImage extraction** | the tool is only shipped as an AppImage | [`nomad-north-nionswift`](https://github.com/FAIRmat-NFDI/nomad-north-nionswift/blob/main/src/nomad_north_nionswift/north_tools/nionswift/Dockerfile){:target="_blank" rel="noopener"} | `wget` the `.AppImage`, `--appimage-extract`, symlink `AppRun` |
+| **Full mamba/conda environment** | a Python/Qt-GUI-heavy toolkit with its own complex dependency graph, not a single binary | [`nomad-north-apmtools`](https://github.com/FAIRmat-NFDI/nomad-north-apmtools/blob/main/src/nomad_north_apmtools/north_tools/apmtools/Dockerfile){:target="_blank" rel="noopener"} | `mamba env create -f environment.yml`, registered as a Jupyter kernel, auto-activated via `.bashrc` |
+
+A native desktop application installed from a vendor's own apt repository (rather than Ubuntu's)
+is a variant of pattern 1 (see the VS Code example below).
+
+#### Desktop integration
+
+A `.desktop` file placed in different locations means different things, and existing NORTH tools use different combinations depending on the intended user experience:
+
+| Location | Effect | Use for |
+| --- | --- | --- |
+| `~/.local/share/applications/*.desktop` | Adds a menu entry; the user launches the tool manually | A secondary tool that users may only open occasionally |
+| `~/.config/autostart/*.desktop` | Launches automatically every session | The main tool that the container was built for |
+| `~/Desktop/*.desktop` | Places an icon on the desktop itself | Can be in addition to its autostart entry |
+
+It is also possible to copy the *same* file into both the applications and autostart
+directories: the tool auto-launches, but there's still a way to relaunch it if the user closes
+it. Using autostart alone means there is no way to reopen the tool afterwards without restarting the whole container.
+
+#### Example: adding VS Code
+
+In order to provide a native desktop version of VS Code on top of the desktop base image, the following should be added to the Dockerfile:
+
+```Dockerfile
+# ---- VS Code (native desktop app, not code-server) ----
+RUN curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > /etc/apt/trusted.gpg.d/microsoft.gpg \
+ && sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list' \
+ && apt-get update -y \
+ && apt-get install -y code \
+ && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# after switching to USER ${NB_UID}:
+# DONT_PROMPT_WSL_INSTALL suppresses the `code` CLI's interactive "install inside WSL
+# anyway?" prompt, which appears when the build host's kernel identifies as WSL (e.g.
+# Docker Desktop on WSL2).
+ENV DONT_PROMPT_WSL_INSTALL=1
+RUN /usr/bin/code --install-extension eamodio.gitlens \
+ && /usr/bin/code --install-extension h5web.vscode-h5web \
+ && /usr/bin/code --install-extension ms-toolsai.jupyter \
+ # ... etc, pick the extensions relevant to your tool
+```
+
+The desktop icon (`code.desktop`, the file VS Code itself ships) is copied to `~/Desktop/`, and
+an autostart script marks that icon's checksum as trusted so double-clicking it doesn't trigger
+xfce's "untrusted launcher" prompt:
+
+```bash
+# ~/.config/autostart/autostart, run once per session via a matching autostart.desktop entry
+f=/home/jovyan/Desktop/code.desktop
+gio set -t string "$f" metadata::xfce-exe-checksum "$(sha256sum "$f" | awk '{print $1}')"
+```
+
+#### More complex cases
+
+1. **Dependencies that need build tools.** Some Python dependencies ship no prebuilt wheel for
+   the image's Python version and have to compile from source. The failure mode is a clear message from the installer (e.g. `error: [Errno 2] No such file or directory: 'gcc'`), not something cryptic. If you see that, the fix is almost always adding the missing apt package directly in the Dockerfile.
+
+2. **Special (local) licensing.**
+NOMAD Oasis admins may sometimes want to install proprietary tools for which only a particular research group has a licence. These tools cannot be committed to a public repository. The usual approach is to keep the Dockerfile and desktop integration in the open repository, while providing the licensed installer or other required files separately as a local build input. It should be clearly documented in that package's own `README.md` or documentation what needs to be provided, for example: “Place your licensed installer at `./vendor-tool` before running `docker build`.” The local files should also typically be added to `.gitignore`. A package built this way also **cannot** use an automatic build/publish workflow on GitHub Actions, as the the image needs to be built and distributed manually by whoever holds a license.
+
+3. **Software built for non-Linux environments.** Windows-only tools can run via
+   [Wine](https://www.winehq.org/){:target="_blank" rel="noopener"} on top of the same
+   desktop-base image. Add the WineHQ apt repository and install it, as `USER root`:
+
+    ```Dockerfile
+    # ---- Wine (for Windows-only applications) ----
+    RUN dpkg --add-architecture i386 \
+     && mkdir -pm755 /etc/apt/keyrings \
+     && wget -O /etc/apt/keyrings/winehq-archive.key https://dl.winehq.org/wine-builds/winehq.key \
+     && wget -nc -P /etc/apt/sources.list.d/ \
+          https://dl.winehq.org/wine-builds/ubuntu/dists/$(lsb_release -sc)/winehq-$(lsb_release -sc).sources \
+     && apt-get update -y \
+     && apt-get install -y --install-recommends winehq-staging \
+     && apt-get clean && rm -rf /var/lib/apt/lists/*
+    ```
+
+    Treat the actual Windows application the same as the licensing case above if
+    it's proprietary: `COPY` a locally-supplied Wine prefix (never committed) into
+    `${HOME}/.wine`, plus a `.desktop` shortcut for it, as `USER ${NB_UID}`:
+
+    ```Dockerfile
+    USER ${NB_UID}
+    COPY --chown=${NB_UID}:${NB_GID} vendor-tool-wine "${HOME}/.wine"
+    COPY --chown=${NB_UID}:${NB_GID} config/VendorTool.desktop "${HOME}/Desktop/VendorTool.desktop"
+    ```
 
 ## Versioning and tagging NORTH images
 
