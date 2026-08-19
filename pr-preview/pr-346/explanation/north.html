@@ -4434,13 +4434,13 @@ dependency (e.g. in <code>pyproject.toml</code>). NOMAD automatically discovers 
 <h2 id="official-base-images">Official base images<a class="headerlink" href="#official-base-images" title="Permanent link">¶</a></h2>
 <p>Using the base image within the <a href="https://github.com/FAIRmat-NFDI/nomad-north-desktop-base" rel="noopener" target="_blank"><code>nomad-north-desktop-base</code></a> repository is the recommended best practice to build a NORTH tool if that demands a graphical user interface. Its desktop-base image builds on the <a href="https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html" rel="noopener" target="_blank">Jupyter Docker Stacks project</a>, offering a <a href="https://anaconda.org" rel="noopener" target="_blank">conda</a> environment with a Jupyter Notebook and graphical user interface via a light-weight <a href="https://www.xfce.org/" rel="noopener" target="_blank"><code>xfce</code></a> desktop environment. Ubuntu Linux is the base layer of this docker image, connecting the container to the operation system of the host computer.</p>
 <p>Using the base image within the <a href="https://github.com/FAIRmat-NFDI/nomad-plugin-template" rel="noopener" target="_blank">nomad-plugin-template</a> repository is the recommended best practice to build a NORTH tool from if it does not demand a graphical user interface. Note that this repository is the template for building NOMAD plugins.</p>
-<p>A how-to for building from these images is available at <a href="../howto/plugins/types/north_tools.html">How-to guides &gt; ... &gt; How to create a NORTH tool</a>.</p>
+<p><a href="../howto/plugins/types/north_tools.html">How-to guides &gt; ... &gt; How to create a NORTH tool</a> provides instructions for building from these images.</p>
 <h2 id="specific-north-tools">Specific NORTH tools<a class="headerlink" href="#specific-north-tools" title="Permanent link">¶</a></h2>
 <p>Consult the reference section of the documentation to find details about individual NOMAD plugins and the eventual NORTH tools these provide.</p>
 <!-- TODO: once there is a nomad-registry on the homepage (https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-lab-homepage/-/work_items/12), change the sentence above to
 Users should consult the [NOMAD plugin registry](<add-link>>) which details which plugins offer NORTH tool entry points.-->
 
-<p>Learn more about running existing NOMAD tools in the how-to guides: <a href="../howto/manage/gui/north.html">How-to guides &gt; ... &gt; How to analyze data in NORTH</a>.</p>
+<p>Learn more about running existing NOMAD tools in <a href="../howto/manage/gui/north.html">How-to guides &gt; ... &gt; How to analyze data in NORTH</a>.</p>
 <h2 id="custom-user-provided-tools">Custom user-provided tools<a class="headerlink" href="#custom-user-provided-tools" title="Permanent link">¶</a></h2>
 <p>In addition to centrally provided tools, users can package their own tools as Docker containers
 and run these via NORTH on NOMAD data. This is especially relevant for organizations and users
@@ -4449,7 +4449,7 @@ who run their own <a href="oasis.html">NOMAD Oasis</a> deployment. In this conte
 packaging the tool as a Docker container, and registering the container so that it can be
 invoked via NOMAD. Once registered, custom tools follow the same execution and provenance model
 as built-in tools.</p>
-<p>Guidance on developing and registering custom NORTH tools is available in the how-tos:
+<p>Guidance on developing and registering custom NORTH tools is available in
 <a href="../howto/plugins/types/north_tools.html">How to &gt; Plugins &gt; Develop a NORTH tool</a>.</p>
 <h2 id="data-schema-interoperability">Data schema interoperability<a class="headerlink" href="#data-schema-interoperability" title="Permanent link">¶</a></h2>
 <p>Beyond its importance for managing the expectations as to how NOMAD reacts to and what
