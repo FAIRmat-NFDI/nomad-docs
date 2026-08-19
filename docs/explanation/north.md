@@ -69,7 +69,7 @@ Using the base image within the [`nomad-north-desktop-base`](https://github.com/
 
 Using the base image within the [nomad-plugin-template](https://github.com/FAIRmat-NFDI/nomad-plugin-template){:target="_blank" rel="noopener"} repository is the recommended best practice to build a NORTH tool from if it does not demand a graphical user interface. Note that this repository is the template for building NOMAD plugins.
 
-A how-to for building from these images is available at [How-to guides > ... > How to create a NORTH tool](../howto/plugins/types/north_tools.md).
+[How-to guides > ... > How to create a NORTH tool](../howto/plugins/types/north_tools.md) provides instructions for building from these images.
 
 ## Specific NORTH tools
 
@@ -78,7 +78,7 @@ Consult the reference section of the documentation to find details about individ
 <!-- TODO: once there is a nomad-registry on the homepage (https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-lab-homepage/-/work_items/12), change the sentence above to
 Users should consult the [NOMAD plugin registry](<add-link>>) which details which plugins offer NORTH tool entry points.-->
 
-Learn more about running existing NOMAD tools in the how-to guides: [How-to guides > ... > How to analyze data in NORTH](../howto/manage/gui/north.md).
+Learn more about running existing NOMAD tools in [How-to guides > ... > How to analyze data in NORTH](../howto/manage/gui/north.md).
 
 ## Custom user-provided tools
 
@@ -91,7 +91,7 @@ packaging the tool as a Docker container, and registering the container so that 
 invoked via NOMAD. Once registered, custom tools follow the same execution and provenance model
 as built-in tools.
 
-Guidance on developing and registering custom NORTH tools is available in the how-tos:
+Guidance on developing and registering custom NORTH tools is available in
 [How to > Plugins > Develop a NORTH tool](../howto/plugins/types/north_tools.md).
 
 ## Data schema interoperability

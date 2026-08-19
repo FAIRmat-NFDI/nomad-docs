@@ -5,8 +5,7 @@ containerized environments. It enables tools to be executed reproducibly and sec
 being tightly integrated with the NOMAD data infrastructure.
 
 This documentation shows you how to create a plugin entry point for a NORTH tool and prepare its contents.
-You should read the [introduction to plugins](../plugins.md)
-to have a basic understanding of how plugins and plugin entry points work in the NOMAD ecosystem.
+You should read [How-to guides > ... > Start plugin development](../plugins.md) to have a basic understanding of how plugins and plugin entry points work in the NOMAD ecosystem.
 
 ## Getting started
 
@@ -34,8 +33,7 @@ nomad-example
    └── pyproject.toml
 ```
 
-See the documentation on [plugin development guidelines](../plugins.md#plugin-development-guidelines)
-for more details on the best development practices for plugins, including linting, testing, and documenting.
+See [How-to guides > Start plugin development > Plugin development guidelines](../plugins.md#plugin-development-guidelines) for more details on the best development practices for plugins, including linting, testing, and documenting.
 
 ## NORTH tool entry point
 
