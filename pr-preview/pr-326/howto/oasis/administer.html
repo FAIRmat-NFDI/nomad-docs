@@ -97,6 +97,10 @@
       
     </div>
     
+      <div data-md-color-scheme="default" data-md-component="outdated" hidden="">
+        
+      </div>
+    
     
       
 
@@ -4326,7 +4330,7 @@
 <p>To backup your Oasis at least the file data and mongodb data needs to be saved. You determined the path to your file data (your uploads) during the installation. By
 default all data is stored in a directory called <code>.volumes</code> that is created in the
 current working directory of your installation/docker-compose. This directory can be backed up like any other file backup (e.g. rsync).</p>
-<p>To backup the mongodb, please refer to the official <a href="https://docs.mongodb.com/manual/core/backups/" rel="noopener" target="_blank">mongodb documentation</a>. We suggest a simple mongodump export that is backed up alongside your files. The default configuration mounts <code>.volumes/mongo</code> into the mongodb container (as <code>/backup</code>) for this purpose. You can use this to export the NOMAD mongo database. Combine this with rsync on the <code>.volumes</code> directory and everything should be set. To create a new mongodump run:</p>
+<p>To backup the mongodb, please refer to the official <a href="https://www.mongodb.com/docs/manual/core/backups/" rel="noopener" target="_blank">mongodb documentation</a>. We suggest a simple mongodump export that is backed up alongside your files. The default configuration mounts <code>.volumes/mongo</code> into the mongodb container (as <code>/backup</code>) for this purpose. You can use this to export the NOMAD mongo database. Combine this with rsync on the <code>.volumes</code> directory and everything should be set. To create a new mongodump run:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>nomad_oasis_mongo<span class="w"> </span>mongodump<span class="w"> </span>-d<span class="w"> </span>nomad_oasis_v1<span class="w"> </span>-o<span class="w"> </span>/backup
 </code></pre></div>
 <p>The elasticsearch contents can be reproduced with the information in the files and the mongodb.</p>
@@ -4475,7 +4479,7 @@ you re-index all uploads.</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.path", "navigation.footer", "navigation.top", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.path", "navigation.footer", "navigation.top", "content.code.copy", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
       <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
