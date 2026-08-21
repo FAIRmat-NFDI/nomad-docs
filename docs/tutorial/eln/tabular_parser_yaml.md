@@ -24,7 +24,7 @@ Before starting, make sure you have:
 1. **NOMAD user account**  
    Creating and editing ELN entries requires a NOMAD user account.
    You can create an account by following the steps described in the
-   [overview page](../overview.md#create-a-nomad-user-account).
+   [How-to guides > ... > Create a NOMAD account](../../howto/manage/gui/account.md#create-a-nomad-account).
 
 1. **Basic understanding of uploads and entries**  
    Familiarity with uploads and entries, and how they relate to each other can be helpful. These concepts are introduced in the section [key elements in NOMAD](../upload_publish.md#the-key-elements-in-nomad).
