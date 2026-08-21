@@ -169,11 +169,11 @@ data from your Openbis instance/database to NOMAD's schema. The necessary inform
 To get your data transferred to NOMAD, follow these steps:
 
 1. Go to NOMAD's upload page and create a new upload.
-2. Click on the `CREATE ENTRY` button.
-3. Select a name for your entry and pick `Openbis Project Import` from the `Built-in schema` dropdown menu.
-4. Click on `CREATE`. This creates an entry where you can insert your user information.
-5. Fill in the `project url`, `username`, and `password` fields.
-6. Once completed, click on the save icon in the top-right corner of the screen. This triggers NOMAD's parser to
+1. Click on the `CREATE ENTRY` button.
+1. Select a name for your entry and pick `Openbis Project Import` from the `Built-in schema` dropdown menu.
+1. Click on `CREATE`. This creates an entry where you can insert your user information.
+1. Fill in the `project url`, `username`, and `password` fields.
+1. Once completed, click on the save icon in the top-right corner of the screen. This triggers NOMAD's parser to
    populate the schema of the current ELN. Now, the metadata and all files of your Openbis project should be populated
    in this entry.
 

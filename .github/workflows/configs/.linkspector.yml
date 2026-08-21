@@ -13,6 +13,8 @@ ignorePatterns:
   # Ignore the following two which give 403 (likely because of cloudfare bot challenge)
   - pattern: "^https://(www\\.)?anaconda\\.org/?$"
   - pattern: "^https://www\\.w3\\.org/TR/vocab-dcat-2/?$"
+  # winehq.org also gives 403 to the CI bot (reachable from a normal browser)
+  - pattern: "^https://(www\\.)?winehq\\.org/?$"
   # Stackoverflow might also have bot check which results in 403
   - pattern: '^https://stackoverflow\.com/'
   # xfce.org is consistently unreachable in CI (navigation times out)

@@ -74,8 +74,8 @@ The following caveats must be acknowledged when using this method:
 
 1. The specific logic of creating/updating the file must be re-entrant safe, see [details](https://en.wikipedia.org/wiki/Reentrancy_(computing)){:target="_blank" rel="noopener"}.
    To put simply, the first call and subsequent calls must yield the same result regardless of what is already stored in the file.
-2. A child entry must **not** be accessed by multiple parent entries.
+1. A child entry must **not** be accessed by multiple parent entries.
    Because the parent entries are processed in parallel (by multiple `celery` workers), there is a risk of racing conditions if the child entry is accessed by multiple parent entries.
-3. The child entry shall not modify the parent entry (and any other entries).
+1. The child entry shall not modify the parent entry (and any other entries).
    Otherwise, there is a risk of infinite loops and data corruption.
-4. A child entry shall **not** depend on other child entries.
+1. A child entry shall **not** depend on other child entries.

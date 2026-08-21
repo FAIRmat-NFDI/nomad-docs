@@ -8,15 +8,31 @@ Configuration items get their value based on a hierarchy of sources. The sources
 
 1. **Environment Variables:** A variable like `NOMAD_SERVICES_API_HOST`. These have the highest priority and will override all other settings. NOMAD services will inspect the environment for any variables starting with `NOMAD_`. The rest of the name is interpreted as a configuration item, where sections and attributes are concatenated with a `_`. For example, the environment variable `NOMAD_SERVICES_API_HOST` will set the value for the `api_host` attribute in the `services` section.
 
-2. **Command-Line Configuration Files:** Files passed via the `-f` or `--config-file` flag to the NOMAD CLI. If multiple files are given, they are merged in order, with later files overriding earlier ones. For example, to load an additional configuration file on top of a default configuration, you could do the following:
+1. **Command-Line Configuration Files:** The configuration files to read are selected in one of the following three ways, listed from highest to lowest precedence. Only the first one that applies is used: the files named by the others are not read at all, and they are not merged underneath. This follows the same design as `docker compose`, where `-f` overrides the `COMPOSE_FILE` environment variable and no implicit `docker-compose.yml` is read.
 
-    ```bash
-    nomad admin run appworker -f nomad.yaml -f nomad-dev.yaml
-    ```
+    - **The `-f` or `--config-file` flag** passed to the NOMAD CLI. It can be repeated, and it can be given before or after the sub-command, so the following two are equivalent:
 
-3. **Default `nomad.yaml`:** A file named `nomad.yaml` in the current working directory, or a file pointed to by the `NOMAD_CONFIG` environment variable. This serves as the base configuration. This file is only automatically read if no file(s) have been specified using the command flag above.
+        ```bash
+        nomad admin run appworker -f nomad.yaml -f nomad-dev.yaml
+        nomad -f nomad.yaml -f nomad-dev.yaml admin run appworker
+        ```
 
-4. **Built-in Defaults:** The default values hard-coded in the NOMAD source code. These have the lowest priority. These default values can be found from the `nomad/config/defaults.yaml` file in the source code.
+        If the flag is given, it entirely replaces whatever `NOMAD_CONFIG` named. To build on top of another configuration file, name it explicitly, as in the examples above.
+
+    - **The `NOMAD_CONFIG` environment variable**, which can name several files, separated by `:` (`;` on Windows). This is how to select configuration files for services that are not started through the NOMAD CLI, and for deployments where you can set environment variables but not the command, such as a Helm chart or a `docker-compose.yaml`:
+
+        ```yaml
+        services:
+          app:
+            environment:
+              NOMAD_CONFIG: /app/nomad.yaml:/app/nomad-dev.yaml
+        ```
+
+    - **The default `nomad.yaml`**, a file of that name in the current working directory, used when neither of the above is given. **This is what most NOMAD installations use**: without the flag and without the environment variable, this single file is the whole configuration. In the official NOMAD Docker image the working directory is `/app`, so mounting your configuration at `/app/nomad.yaml` is all that is needed.
+
+    Whichever of the three applies, if it names several files they are merged in order, with later files overriding earlier ones. A file that is named but does not exist produces a warning and is skipped; a missing default `nomad.yaml` is not reported, since running without one is normal.
+
+1. **Built-in Defaults:** The default values hard-coded in the NOMAD source code. These have the lowest priority. These default values can be found from the `nomad/config/defaults.yaml` file in the source code.
 
 ## Merging Rules
 
@@ -52,6 +68,33 @@ plugins:
 The final list of normalizers for that run will be `["atomisticparsers:amber_parser_entry_point"]`. The `systemnormalizer` will be removed for that run because the entire `include` list was replaced.
 
 If you intend to *add* an item to a list, you must repeat all the original items in your override file and add the new one.
+
+## Inspecting the effective configuration
+
+To see the configuration that NOMAD actually ends up using, i.e. the result of merging all of the sources above, use:
+
+```bash
+nomad dev config
+```
+
+Pass a section to narrow the output down:
+
+```bash
+nomad dev config services
+nomad dev config auth.authorized_users
+```
+
+The command takes the same `-f` flag, which makes it a quick way to check what a set of files will produce before starting a service:
+
+```bash
+nomad dev config -f nomad.yaml -f nomad-dev.yaml services
+```
+
+The list of configuration files that were read is written to stderr, so the configuration itself can be redirected to a file:
+
+```bash
+nomad dev config > effective-config.yaml
+```
 
 ## Configuration examples
 

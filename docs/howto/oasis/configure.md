@@ -344,8 +344,8 @@ the application itself allows users to interact with the API according to a conf
 Access control can therefore be configured on several levels:
 
 1. Network level — restrict access via firewall, VPN, or private network.
-2. Authentication level — require users to log in before accessing the API.
-3. Authorization level — control which operations users are allowed to perform after login.
+1. Authentication level — require users to log in before accessing the API.
+1. Authorization level — control which operations users are allowed to perform after login.
 
 You can learn more about [authentication and authorization in our explanation-section](../../explanation/auth.md#authentication-and-authorization).
 

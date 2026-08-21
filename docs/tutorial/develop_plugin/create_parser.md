@@ -11,8 +11,8 @@ This tutorial guides you through creating NOMAD parsers that transform raw files
 By the end of this tutorial, you will be able to:
 
 1. Build a `MatchingParser` that automatically processes uploaded raw files.
-2. Implement three different parser–entry interaction patterns in NOMAD.
-3. Use ELN entries for parsing data from raw files.
+1. Implement three different parser–entry interaction patterns in NOMAD.
+1. Use ELN entries for parsing data from raw files.
 
 ## Before you begin
 

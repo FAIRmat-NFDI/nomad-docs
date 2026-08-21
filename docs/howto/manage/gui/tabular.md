@@ -22,7 +22,7 @@ The data sheets can be stored in one or more files depending on the user needs. 
         <img width="30%" src="images/columns.png" alt="Each column for an array of data to parse">
     </p>
 
-2. Rows:
+1. Rows:
 
     Each row contains a set of cells that we want to parse into a section, i. e. a set of quantities. Example: an inventory tabular data file (for substrates, precursors, or more) where each column represents a property and each row corresponds to one unit stored in the inventory.
 
@@ -30,7 +30,7 @@ The data sheets can be stored in one or more files depending on the user needs. 
         <img width="30%" src="images/rows.png" alt="Each row for a section">
     </p>
 
-3. Rows with repeated columns:
+1. Rows with repeated columns:
 
     In addition to the mode 2), whenever the parser detects the presence of multiple columns (or multiple sets of columns) with same headers, these are taken as multiple instances of a subsection. More explanations will be delivered when showing the schema for such a structure. Example: a crystal growth process where each row is a step of the crystal growth and the repeated columns describe the "precursor materials", that can be more than one during such processes and they are described by the same "precursor material" section.
 

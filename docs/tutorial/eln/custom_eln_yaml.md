@@ -9,11 +9,11 @@ In this tutorial, we create a custom ELN using a YAML-based schema file to struc
 In this tutorial, you will learn how to:
 
 1. Create a custom ELN schema package using a `.archive.yaml` file
-2. Define sections and quantities in a NOMAD schema
-3. Reuse existing data models by inheriting from NOMAD base sections
-4. Configure ELN input fields using annotations
-5. Structure an ELN template using nested subsections
-6. Use a custom ELN schema package in NOMAD as a template to document experiments
+1. Define sections and quantities in a NOMAD schema
+1. Reuse existing data models by inheriting from NOMAD base sections
+1. Configure ELN input fields using annotations
+1. Structure an ELN template using nested subsections
+1. Use a custom ELN schema package in NOMAD as a template to document experiments
 
 ---
 
@@ -28,16 +28,16 @@ Before starting, make sure you have:
    You can create an account by following the steps described in the
    [How-to guides > ... > Create a NOMAD account](../../howto/manage/gui/account.md#create-a-nomad-account).
 
-2. **Basic understanding of uploads and entries**  
+1. **Basic understanding of uploads and entries**  
    Familiarity with uploads and entries, and with how they relate to each other can be helpful. These concepts are introduced in the section [key elements in NOMAD](../upload_publish.md#the-key-elements-in-nomad).
 
-3. **Basic familiarity with YAML configuration files**  
+1. **Basic familiarity with YAML configuration files**  
    This tutorial uses YAML to define the structure of a custom ELN schema. Prior experience with YAML syntax and indentation is helpful, but deep knowledge of YAML is not required.
 
-4. **A YAML-capable editor or IDE (e.g., VS Code)**  
+1. **A YAML-capable editor or IDE (e.g., VS Code)**  
     You will edit a YAML file during the tutorial. Using an editor or IDE with YAML support (for example, VS Code) is recommended.
 
-5. **Optional: familiarity with key NOMAD schema concepts**  
+1. **Optional: familiarity with key NOMAD schema concepts**  
    It may be helpful to review the following concepts:
     - [Schema package](../../reference/glossary.md#schema-package), [Schema](../../reference/glossary.md#schema)
     - [Section and Subsection](../../reference/glossary.md#section-and-subsection), [Quantity](../../reference/glossary.md#quantity)
