@@ -49,19 +49,19 @@ NOMAD can be deployed on Kubernetes using the official [Helm](https://helm.sh/){
     helm repo update
     ```
 
-2. Install using the values file provided in the distro template:
+1. Install using the values file provided in the distro template:
 
     ```sh
     helm install nomad-oasis nomad/default -f kubernetes/values.yaml --timeout 15m
     ```
 
-3. Watch the pods come up and wait until all are ready:
+1. Watch the pods come up and wait until all are ready:
 
     ```sh
     kubectl get pods -w
     ```
 
-4. Access the Oasis via port-forward:
+1. Access the Oasis via port-forward:
 
     ```sh
     kubectl port-forward svc/nomad-oasis-proxy 80:80
@@ -339,13 +339,13 @@ Regardless of the cloud provider, the deployment typically follows these steps:
 
 1. Choose the cloud provider and and set up an account
 
-2. Provision compute instances
+1. Provision compute instances
 
-3. Configure network and security
+1. Configure network and security
 
-4. Deploy NOMAD
+1. Deploy NOMAD
 
-5. Access and test deployment
+1. Access and test deployment
 
 ### Single node deployment with `docker-compose`
 
@@ -356,7 +356,7 @@ Regardless of the cloud provider, the deployment typically follows these steps:
     Go to [AWS](https://aws.amazon.com/){:target="_blank" rel="noopener"}. You will need a credit card
     for creating an account.
 
-2. Create an EC2 instance
+1. Create an EC2 instance
 
     EC2 (Elastic Compute Cloud) is Amazon's platform for creating and running virtual machines. To create a new EC2 instance, you need to login to the AWS console and start the process of creating a new EC2 instance. In the EC2 instance settings, pay attention to the following settings:
 
@@ -368,7 +368,7 @@ Regardless of the cloud provider, the deployment typically follows these steps:
     - In the storage settings, add persistent storage for databases and files stored by NOMAD. The default [EBS (Elastic Block Store)](https://docs.aws.amazon.com/ebs/latest/userguide/what-is-ebs.html){:target="_blank" rel="noopener"} is a recommended option, as it provides durable and scalable storage. Learn more in the [AWS Storage Guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Storage.html){:target="_blank" rel="noopener"}. We recommend starting with at least 30 GiB of storage to have space for the docker images and databases.
     - Launch the instance
 
-3. Configure Network & Security
+1. Configure Network & Security
 
     - Check that inbound traffic is allowed in the [*Network & Security/Security Groups*](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html){:target="_blank" rel="noopener"} settings. Inbound traffic should be allowed for:
         - HTTP: Protocol TCP, port 80, source 0.0.0.0/0
@@ -383,7 +383,7 @@ Regardless of the cloud provider, the deployment typically follows these steps:
 
     - To enable secure communication with the server, read the guide on [setting up secured connection using HTTPS](#secured-connections-using-https). For testing you can skip this step, but HTTPS communication must be enforced in the final production setup.
 
-4. Deploy NOMAD
+1. Deploy NOMAD
     - Connect to the EC2 instance. The easiest way is to use the browser based connection directly from the AWS console. You can alternatively also connect through SSH if you have generated a key pair and have SSH access enabled in the instance settings.
 
     - Install docker and docker compose on the virtual machine: you can [read more about the installation here](#installing-docker).
@@ -394,7 +394,7 @@ Regardless of the cloud provider, the deployment typically follows these steps:
 
     - Follow the deployment instructions in the `README.md` file under *Deploying the distribution/For a new Oasis*. This typically consists of cloning the repository, setting up file priviledges and then running `docker compose pull` + `docker compose up -d`.
 
-5. Access and test deployment
+1. Access and test deployment
 
     You should now be able to access the Oasis installation from anywhere using the static IP address or domain name you have configured: `http://<IP-or-domain>/nomad-oasis`. If you have not yet set up secure connections with HTTPS, [read about it here](#secured-connections-using-https).
 
@@ -421,7 +421,7 @@ Note that you may need to reboot to get the docker daemon running and the user p
 Before entering production, you must set up secure connections through HTTPS. Without it any communication with the server is compromised and e.g. credentials and other sensitive data can be stolen. To set up secure connections, follow these steps (the steps focus on the single-node `docker-compose` setup):
 
 1. Ensure that you have a static IP address.
-2. Get a TLS certificate
+1. Get a TLS certificate
 
     HTTPS connections require a TLS certificate which also needs to be
     renewed periodically. Depending on your setup, you have several alternatives
@@ -431,15 +431,15 @@ Before entering production, you must set up secure connections through HTTPS. Wi
 
         In this case you just need the certificate and key files.
 
-    2. Self-signed certificate
+    1. Self-signed certificate
 
         For testing, you can create a [self-signed certificate](https://en.wikipedia.org/wiki/Self-signed_certificate){:target="_blank" rel="noopener"}. These are not viable for a production setup, as they are not trusted e.g. by browsers.
 
         For detailed instructions, see the "Deploy Oasis with HTTPS" section in the [`nomad-distro-template` documentation](https://github.com/FAIRmat-NFDI/nomad-distro-template?tab=readme-ov-file#for-a-new-oasis){:target="_blank" rel="noopener"}
 
-    3. Free certificate from Let's Encrypt
+    1. Free certificate from Let's Encrypt
 
         [Let's Encrypt](https://letsencrypt.org/){:target="_blank" rel="noopener"} is a non-profit organization that provides free TLS certificats. To create a free certificate you must have a domain name. You can follow their tutorials on creating free certificates.
 
-3. Setup your server to accept HTTPS traffic.
+1. Setup your server to accept HTTPS traffic.
     To enable HTTPS, you need to mount your TLS certificate and ensure that port 443 is open. A template nginx configuration file is available, see the "Deploy Oasis with HTTPS" section of [`nomad-distro-template` documentation](https://github.com/FAIRmat-NFDI/nomad-distro-template?tab=readme-ov-file#for-a-new-oasis){:target="_blank" rel="noopener"}.

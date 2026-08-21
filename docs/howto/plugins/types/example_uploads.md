@@ -83,7 +83,7 @@ There are three main ways to include data in an example upload, and you can also
     graft src/<package-name>/<path>
     ```
 
-2. Data retrieved online:
+1. Data retrieved online:
 
     If your example uploads are very large (>100MB), storing them in Git may become unpractical. In order to deal with larger uploads, they can be stored in a separate online service. For example, [Zenodo](https://zenodo.org/){:target="_blank" rel="noopener"} is an open and free platform for hosting scientific data. To load such external resources, you can specify one or multiple URLs as resources:
 
@@ -102,7 +102,7 @@ There are three main ways to include data in an example upload, and you can also
 
     Note that by default online files are downloaded only when the user requests the creation of an example upload, and that the downloaded files are not cached.
 
-3. Data retrieved with a custom method:
+1. Data retrieved with a custom method:
 
     If the above options do not suite your use case, you can also override the `load`-method of `ExampleUploadEntryPoint` to perform completely custom data loading logic. Note that the `load` function receives the root upload folder as an argument, and you should store all files in this location. Below is an example of a custom `load` function that generates a data file on the fly:
 

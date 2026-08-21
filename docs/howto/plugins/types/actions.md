@@ -555,8 +555,8 @@ staging, scope binding, or file move logic. NOMAD handles the asset lifecycle.
 Your responsibility is:
 
 1. Use `ActionAssetRef` in workflow/signal input models for binary inputs.
-2. Optionally add UI hints in schema metadata (for example, accepted media types).
-3. In activities, consume the referenced file/path via NOMAD-provided action
+1. Optionally add UI hints in schema metadata (for example, accepted media types).
+1. In activities, consume the referenced file/path via NOMAD-provided action
    asset helpers/patterns.
 
 Everything else (browser upload, backend validation, binding to action

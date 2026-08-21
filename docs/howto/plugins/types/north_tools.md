@@ -187,15 +187,15 @@ RUN apt-get install nodejs -y \
 The key steps in this stage are:
 
 1. **Shell configuration**: Use bash with pipefail for safer script execution
-2. **Copy `uv` binary**: Copies the [`uv` package manager](https://docs.astral.sh/uv/){:target="_blank" rel="noopener"} from the `uv_stage` for fast Python package installation
-3. **Switch to root**: Installing system packages require root privileges
-4. **Environment variables**: Define `HOME` and `CONDA_DIR` for consistent paths
-5. **System dependencies**: Install essential build tools, libraries, and utilities:
+1. **Copy `uv` binary**: Copies the [`uv` package manager](https://docs.astral.sh/uv/){:target="_blank" rel="noopener"} from the `uv_stage` for fast Python package installation
+1. **Switch to root**: Installing system packages require root privileges
+1. **Environment variables**: Define `HOME` and `CONDA_DIR` for consistent paths
+1. **System dependencies**: Install essential build tools, libraries, and utilities:
     - Build tools: `build-essential` (includes `gcc`, `g++`, `make`, and related tools)
     - Libraries: `libmagic1`
     - Utilities: `curl`, `git`, `zip`, `unzip`, `file`
-6. **Node.js upgrade**: Install `Node.js` 24+ (required for `JupyterLab >= 4.4.10`, as the scipy-notebook base image typically includes `Node.js` 18)
-7. **Cleanup**: Remove package manager cache to reduce image size
+1. **Node.js upgrade**: Install `Node.js` 24+ (required for `JupyterLab >= 4.4.10`, as the scipy-notebook base image typically includes `Node.js` 18)
+1. **Cleanup**: Remove package manager cache to reduce image size
 
 #### Python dependencies and final setup
 
@@ -236,17 +236,17 @@ RUN touch ${HOME}/.hushlogin
 The key steps in this section are:
 
 1. **Switch to non-root user**: Security best practice - run the application as `${NB_USER}` (typically `jovyan`)
-2. **Configure uv**: Set environment variables for `uv` to work with the conda environment:
+1. **Configure uv**: Set environment variables for `uv` to work with the conda environment:
     - `UV_PROJECT_ENVIRONMENT`: Points to conda directory
     - `UV_SYSTEM_PYTHON`: Use system Python (conda's Python) instead of creating a new virtual environment
     - `UV_LINK_MODE=copy`: Copy packages instead of linking
     - `UV_NO_CACHE=1`: Disable caching to reduce image size
-3. **Copy plugin code**: Copy your plugin source code into the container
-4. **Install dependencies**: Use `uv pip install` ( or `uv pip install .`, to install the NOMAD plugin as well) to install dependencies from the `north` dependency group in `pyproject.toml`
-5. **Cleanup plugin code**: Remove the plugin source code (unless you want to keep it)
-6. **Build JupyterLab**: Compile JupyterLab extensions and assets
-7. **Fix permissions**: Ensure proper file permissions for the user
-8. **Configure startup**: Create `.hushlogin` to suppress login messages
+1. **Copy plugin code**: Copy your plugin source code into the container
+1. **Install dependencies**: Use `uv pip install` ( or `uv pip install .`, to install the NOMAD plugin as well) to install dependencies from the `north` dependency group in `pyproject.toml`
+1. **Cleanup plugin code**: Remove the plugin source code (unless you want to keep it)
+1. **Build JupyterLab**: Compile JupyterLab extensions and assets
+1. **Fix permissions**: Ensure proper file permissions for the user
+1. **Configure startup**: Create `.hushlogin` to suppress login messages
 
 The structure described above provides a solid foundation for Jupyter-based NORTH tools but does not necessarily represent the exact Dockerfile you need. However, these building blocks will help you to customize the [Dockerfile in cookiecutter-nomad-plugin](https://github.com/FAIRmat-NFDI/cookiecutter-nomad-plugin/blob/main/%7B%7Bcookiecutter.plugin_name%7D%7D/py_sources/src/north_tools/%7B%7Bcookiecutter.north_tool_name%7D%7D/Dockerfile){:target="_blank" rel="noopener"} based on your specific requirements.
 
@@ -398,10 +398,10 @@ gio set -t string "$f" metadata::xfce-exe-checksum "$(sha256sum "$f" | awk '{pri
 1. **Dependencies that need build tools.** Some Python dependencies ship no prebuilt wheel for
    the image's Python version and have to compile from source. The failure mode is a clear message from the installer (e.g. `error: [Errno 2] No such file or directory: 'gcc'`), not something cryptic. If you see that, the fix is almost always adding the missing apt package directly in the Dockerfile.
 
-2. **Special (local) licensing.**
+1. **Special (local) licensing.**
 NOMAD Oasis admins may sometimes want to install proprietary tools for which only a particular research group has a licence. These tools cannot be committed to a public repository. The usual approach is to keep the Dockerfile and desktop integration in the open repository, while providing the licensed installer or other required files separately as a local build input. It should be clearly documented in that package's own `README.md` or documentation what needs to be provided, for example: “Place your licensed installer at `./vendor-tool` before running `docker build`.” The local files should also typically be added to `.gitignore`. A package built this way also **cannot** use an automatic build/publish workflow on GitHub Actions, as the the image needs to be built and distributed manually by whoever holds a license.
 
-3. **Software built for non-Linux environments.** Windows-only tools can run via
+1. **Software built for non-Linux environments.** Windows-only tools can run via
    [Wine](https://www.winehq.org/){:target="_blank" rel="noopener"} on top of the same
    desktop-base image. Add the WineHQ apt repository and install it, as `USER root`:
 
@@ -471,9 +471,9 @@ docker run --rm -p 8888:8888 \
 Then,
 
 1. Open your browser to `http://localhost:8888`
-2. Navigate to the mounted test data
-3. Test your analysis workflows
-4. Verify all dependencies are working
+1. Navigate to the mounted test data
+1. Test your analysis workflows
+1. Verify all dependencies are working
 
 #### Automated notebook execution
 

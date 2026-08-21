@@ -45,11 +45,11 @@ In this tutorial we will focus on most common modes of the tabular parser. A com
 We will make use of the tabular parser in a custom yaml schema. To obtain some structured data in NOMAD with this parser:<br />
 
 1) the schema files should follow the NOMAD [archive files](../explanation/data.md#archive-files-a-shared-entry-structure) naming convention (i.e. `.archive.json` or `.archive.yaml` extension)<br />
-2) a data file must be instantiated from the schema file<br />
+1) a data file must be instantiated from the schema file<br />
 
     <!-- TODO: a link to the part upload etc should be inserted -->
 
-3) a tabular data file must be dragged in the annotated [quantity](../howto/manage/gui/yaml.md#quantities) in order for NOMAD to parse it (the quantity is called `data_file` in the following examples)
+1) a tabular data file must be dragged in the annotated [quantity](../howto/manage/gui/yaml.md#quantities) in order for NOMAD to parse it (the quantity is called `data_file` in the following examples)
 
 #### To be an Entry or not to be an Entry
 

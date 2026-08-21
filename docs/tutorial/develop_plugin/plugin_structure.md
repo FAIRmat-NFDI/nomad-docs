@@ -9,8 +9,8 @@ In this tutorial series, you will develop a custom NOMAD plugin that extends NOM
 In this tutorial, you will learn how to:
 
 1. Create and version-control a NOMAD plugin repository using Git and GitHub
-2. Generate a plugin project using the official NOMAD cookiecutter template
-3. Set up a development and testing environment for the plugin
+1. Generate a plugin project using the official NOMAD cookiecutter template
+1. Set up a development and testing environment for the plugin
 
 In the following tutorials, you will create a custom schema package and a parser.
 
@@ -25,14 +25,14 @@ Before starting this tutorial, make sure you have the following:
 1. **GitHub account**
    Required to create and manage the plugin repository. You can create a free account at [github.com/signup](https://github.com/signup){:target="_blank" rel="noopener"}.
 
-2. **Basic understanding of Python**
+1. **Basic understanding of Python**
    You should be comfortable reading and writing basic Python code, including modules, functions,
    and classes.
 
-3. **Basic understanding of NOMAD metainfo**
+1. **Basic understanding of NOMAD metainfo**
    Familiarity with NOMAD’s metainfo system is helpful. If needed, review [FAIRmat Tutorial 8](https://www.fairmat-nfdi.eu/events/fairmat-tutorial-8/tutorial-8-materials){:target="_blank" rel="noopener"}.
 
-4. **Local or cloud-based development environment**
+1. **Local or cloud-based development environment**
    You need either:
 
     - A local machine with Python ≥ 3.12, git, and any Integrated Development Environment (IDE), or
@@ -78,7 +78,7 @@ Next, you will generate the initial structure of the plugin by applying the offi
 In this step, you can proceed in one of the two following ways:
 
 1. Use GitHub Codespaces (cloud-based development), or
-2. Develop locally.
+1. Develop locally.
 
 #### Option 1: Using GitHub Codespaces (Recommended)
 

@@ -8,7 +8,7 @@ The entire setup for a running a NOMAD Oasis is contained in a Git repository, a
 
     For installing a production-ready, self-hosted NOMAD Oasis for research groups or institutions.
 
-2. **<a href="https://github.com/FAIRmat-NFDI/nomad-distro-dev/" target="_blank" rel="noopener">NOMAD distribution for development</a>**
+1. **<a href="https://github.com/FAIRmat-NFDI/nomad-distro-dev/" target="_blank" rel="noopener">NOMAD distribution for development</a>**
 
     Specialized template that allows for a much faster development cycle. This is targeted for plugin developers, Oasis administrators and for developing the `nomad-lab` package. Should not be used in production.
 

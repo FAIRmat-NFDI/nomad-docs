@@ -607,13 +607,13 @@ configuration. To do this, follow these steps:
 
 1. Have the docker infrastructure running: `docker compose up -d`
 
-2. Have the `nomad appworker` running with the config found in `gui/tests/nomad.yaml`:
+1. Have the `nomad appworker` running with the config found in `gui/tests/nomad.yaml`:
 `export NOMAD_CONFIG=gui/tests/nomad.yaml && nomad admin run appworker`
 
-3. Activate the correct Python virtual environment before running the tests
+1. Activate the correct Python virtual environment before running the tests
 with Yarn (Yarn will run the Python functions that prepare the state).
 
-4. Run the tests with `yarn test-record [<filename>]` if you wish to record a
+1. Run the tests with `yarn test-record [<filename>]` if you wish to record a
 snapshot file, or `yarn test-integration [<filename>]` if you want the
 perform the test without any recording.
 
@@ -661,7 +661,7 @@ When developing `nomad` alongside multiple plugins, managing different repositor
 Quick Setup
 
 1. Fork the [nomad-distro-dev](https://github.com/FAIRmat-NFDI/nomad-distro-dev){:target="_blank" rel="noopener"} repository on GitHub.
-2. Follow the setup steps listed in the README of the fork.
-3. Once configured, you'll be able to use a single VSCode window to work on nomad and all your plugins.
+1. Follow the setup steps listed in the README of the fork.
+1. Once configured, you'll be able to use a single VSCode window to work on nomad and all your plugins.
 
 The setup should generally work without any issues, but there are some troubleshooting tips on this page that you can come back to if needed.

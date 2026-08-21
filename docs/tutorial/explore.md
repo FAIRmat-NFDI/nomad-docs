@@ -9,11 +9,11 @@ In this tutorial, we explore published entries in NOMAD using the **EXPLORE** pa
 In this tutorial, you will learn how to:
 
 1. Navigate the **EXPLORE** section of the NOMAD GUI
-2. Search and filter published entries across different domains
-3. Use the search bar to query structured metadata and perform range-based searches
-4. Apply and combine filters to refine search results efficiently
-5. Create and customize interactive widgets for advanced data exploration
-6. Use NOMAD’s Explore dashboards to answer concrete scientific questions using real data
+1. Search and filter published entries across different domains
+1. Use the search bar to query structured metadata and perform range-based searches
+1. Apply and combine filters to refine search results efficiently
+1. Create and customize interactive widgets for advanced data exploration
+1. Use NOMAD’s Explore dashboards to answer concrete scientific questions using real data
 
 ---
 
@@ -26,7 +26,7 @@ Before starting, make sure you have the following:
 1. **Access to the NOMAD GUI via a modern web browser**  
    You can explore published data in NOMAD without logging in.
 
-2. **Basic familiarity with materials-science concepts**  
+1. **Basic familiarity with materials-science concepts**  
    Familiarity with composition, electronic properties (for example, band gap), and common experimental or computational methods can be helpful, but it is not required.
 
 ---
@@ -175,13 +175,13 @@ Now, let us answer the following question:
         - Select the elements of the absorber from the periodic table: Cs, Pb, Br, and I.
         - After selecting these elements, you should see approximately 7,500 entries matching your search filters.
 
-    2. **Use the TERMS Widget**:
+    1. **Use the TERMS Widget**:
         - To find out what ETL and HTL materials are used in the available data, click on the **TERMS** widget button.
         - For the X-axis, type 'electron transport layer'. As you type, suggestions will appear. Choose `results.properties.optoelectronic.solar_cell.electron_transport_layer`.
         - Set the statistics scaling to linear, give the widget a descriptive title like "ETL", and pin it to the dashboard.
         - Repeat the process for the HTL materials.
 
-    3. **Create a Scatter Plot**:
+    1. **Create a Scatter Plot**:
         - Click on the **SCATTER PLOT** widget button to visualize the relationship between open-circuit voltage (Voc), short-circuit current density (Jsc), and efficiency.
         - Set the X-axis to "Open Circuit Voltage (Voc)", the Y-axis to "Efficiency", and use the marker color to represent "Short Circuit Current Density".
         - The scatter plot will allow you to explore the data interactively.
@@ -192,7 +192,7 @@ Now, let us answer the following question:
             </video>
         </div>
 
-    4. **Interpreting Results**
+    1. **Interpreting Results**
 
         - Interactive scatter plots reveal relationships between **ETLs, HTLs, and performance**.
         - Hover over data points for details.
