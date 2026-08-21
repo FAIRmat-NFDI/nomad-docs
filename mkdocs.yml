@@ -137,6 +137,10 @@ not_in_nav: |
 validation:
   nav:
     omitted_files: warn
+  links:
+    # MkDocs reports missing anchors as info by default; promote them so
+    # `mkdocs build --strict` fails the build.
+    anchors: warn
 theme:
   name: material
   palette:
