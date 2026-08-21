@@ -172,5 +172,5 @@ brew install python@3.11
 #### Windows PowerShell
 
 1. Download the installer from the [official Python website](https://www.python.org/downloads/release/python-3110/).
-2. Run the installer.
-3. Make sure to check the box **"Add Python 3.11 to PATH"** during installation.
+1. Run the installer.
+1. Make sure to check the box **"Add Python 3.11 to PATH"** during installation.

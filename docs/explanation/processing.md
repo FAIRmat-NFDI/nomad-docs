@@ -12,8 +12,8 @@ Processing comprises three steps.
 1. **Matching** files to parsers that can process
 them. This step also creates empty entries for matched files.
 Those matched files are now [*mainfiles*](../reference/glossary.md#mainfile) and forever paired with the created entries.
-2. **Parsing** and **normalizing** to produce [*entry archives*](../reference/glossary.md#archive) for matched mainfile/entry-pairs.
-3. **Persisting** (including indexing of) the extracted data.
+1. **Parsing** and **normalizing** to produce [*entry archives*](../reference/glossary.md#archive) for matched mainfile/entry-pairs.
+1. **Persisting** (including indexing of) the extracted data.
 
 <figure markdown>
   ![processing](images/processing.png)

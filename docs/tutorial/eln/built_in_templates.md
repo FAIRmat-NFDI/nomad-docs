@@ -11,11 +11,11 @@ In this tutorial, we use NOMAD’s Electronic Lab Notebook (ELN) functionality t
 In this tutorial, you will learn how to:
 
 1. Create and manage an ELN upload in NOMAD
-2. Create ELN entries for substances, samples, instruments, processes, and measurements using built-in schemas
-3. Reference and interlink ELN entries to represent complete experimental workflows
-4. Document material processing steps and visualize them using workflow graphs
-5. Combine processes and measurements into a single experiment entry
-6. Search, filter, and explore your ELN entries using the NOMAD GUI and custom widgets
+1. Create ELN entries for substances, samples, instruments, processes, and measurements using built-in schemas
+1. Reference and interlink ELN entries to represent complete experimental workflows
+1. Document material processing steps and visualize them using workflow graphs
+1. Combine processes and measurements into a single experiment entry
+1. Search, filter, and explore your ELN entries using the NOMAD GUI and custom widgets
 
 ---
 
@@ -30,10 +30,10 @@ Before starting, make sure you have:
    You can create an account by following the steps described in the
    [overview page](../overview.md#create-a-nomad-user-account).
 
-2. **Basic understanding of uploads and entries**  
+1. **Basic understanding of uploads and entries**  
    Familiarity with uploads, entries, and how they relate to each other can be helpful. These concepts are introduced in the section [key elements in NOMAD](../upload_publish.md#the-key-elements-in-nomad) and will be reinforced throughout the tutorial.
 
-3. **Basic familiarity with experimental workflows**  
+1. **Basic familiarity with experimental workflows**  
    Familiarity with preparation, processing, and measurements can be helpful, but is not required.
 
 In this tutorial, we will use an example experiment involving the preparation of solution-processed polymer thin films and the measurement of their optical absorption spectrum.
@@ -43,9 +43,9 @@ In this tutorial, we will use an example experiment involving the preparation of
 
     1. **Preparing solutions:** The polymer powder is mixed with a solvent in predefined quantities to achieve the desired concentration. A scale is used to accurately weigh the polymer powder, ensuring precise solution concentration.
 
-    2. **Depositing thin films:** The prepared solution is used to create a thin film on a glass substrate through spin-coating. By carefully controlling the spin speed and duration, the desired film thickness is achieved.
+    1. **Depositing thin films:** The prepared solution is used to create a thin film on a glass substrate through spin-coating. By carefully controlling the spin speed and duration, the desired film thickness is achieved.
 
-    3. **Measuring optical absorption:** The optical absorption spectrum of the thin film is acquired using a UV-Vis-NIR spectrometer. The measurement results are saved as a `.csv` file for further analysis.
+    1. **Measuring optical absorption:** The optical absorption spectrum of the thin film is acquired using a UV-Vis-NIR spectrometer. The measurement results are saved as a `.csv` file for further analysis.
 
     To effectively document this experiment, we will create and interlink electronic lab notebook (ELN) entries in NOMAD. These entries will include key entities such as substances, instruments, and samples, as well as activities like material processing and measurements. By structuring the data in this way, we ensure a comprehensive and FAIR-compliant record of the experiment.
 
@@ -268,8 +268,8 @@ The *steps* subsection in the *Material Processing ELN* allows us to document ea
 For the example process entry **Preparation of P3HT solution**, we will define the following three steps:
 
 1. Weighing the powder
-2. Filling the solvent
-3. Mixing the solution
+1. Filling the solvent
+1. Mixing the solution
 
 **Use the arrow buttons ⬅️➡️ below to follow the steps for defining the process stages in your material processing entry.**
 <div class="image-slider" id="slider6">
@@ -415,21 +415,21 @@ Imagine you have created multiple entries for substances, samples, instruments, 
     <img src="images/files_explorer_in_NOMAD.png" alt="interactive workflow gif" width="600">
     </div>
 
-    2. Add new folders and organize them according to your needs.
+    1. Add new folders and organize them according to your needs.
     <div style="text-align: center;">
         <video controls autoplay loop muted playsinline width="600">
             <source src="images/creating_new_folders.webm" type="video/webm">
         </video>
     </div>
 
-    3. Drag and drop files into the desired folder. A prompt will appear, asking if you want to copy or move the files—choose according to your needs.
+    1. Drag and drop files into the desired folder. A prompt will appear, asking if you want to copy or move the files—choose according to your needs.
     <div style="text-align: center;">
         <video controls autoplay loop muted playsinline width="600">
             <source src="images/moving_files_to_a_folder.webm" type="video/webm">
         </video>
     </div>
 
-    4. Once all files are sorted, take a moment to review the structure. Here is an example of an organized ELN:
+    1. Once all files are sorted, take a moment to review the structure. Here is an example of an organized ELN:
     <div style="text-align: center;">
         <img src="images/after_organization.png" alt="interactive workflow gif" width="600">
     </div>
@@ -442,7 +442,7 @@ To search for entries in your ELN, follow these steps:
 
     ![screenshot of step 1](images/explore_ELN_step_1.png)
 
-2. From the drop-down menu, select *Entries*.
+1. From the drop-down menu, select *Entries*.
 
     ![screenshot of step 2](images/explore_ELN_step_2.png)
 
@@ -478,17 +478,17 @@ Widgets allow you to customize your search interface to better suit your data ex
         <img src="images/widget_step_1.png" alt="Screenshot of the Edit terms widget menu" width="800">
     </div>
 
-    2. In the *Search quantity* field, type *eln*. A list of available filters will appear.
+    1. In the *Search quantity* field, type *eln*. A list of available filters will appear.
 
-    3. Select `results.eln.sections` from the list. This will enable filtering based on the built-in ELN sections available in your ELN upload.
+    1. Select `results.eln.sections` from the list. This will enable filtering based on the built-in ELN sections available in your ELN upload.
 
     <div style="text-align: center;">
         <img src="images/widget_step_2_3.png" alt="Screenshot of selecting results.eln.sections filter" width="400">
     </div>
 
-    4. Write a descriptive title for the custom widget in the *Title* field.
+    1. Write a descriptive title for the custom widget in the *Title* field.
 
-    5. Click **DONE**.
+    1. Click **DONE**.
 
     <div style="text-align: center;">
         <img src="images/widget_step_4_5.png" alt="Screenshot of finalizing the custom widget" width="400">

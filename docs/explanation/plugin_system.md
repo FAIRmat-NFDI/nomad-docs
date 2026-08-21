@@ -159,11 +159,11 @@ Entry points are like pre-defined connectors or hooks that allow the main system
 </figure>
 
 1. When NOMAD starts, it scans for plugin entry points defined under the `nomad.plugin` group in all of the Python packages that have been installed.
-2. The plugin returns all entry points that it has registered in `pyproject.toml` under the `nomad.plugin` group. This only loads the configuration, but does not yet load the resource, i.e. main Python implementation.
-3. When NOMAD needs to load the actual resource for an entry point (e.g. a parser), loads it by using the configuration instance.
-4. When the resource is being loaded, the entry point may ask for any configuration overrides that may have been set in `nomad.yaml`.
-5. NOMAD will return the final validated configuration that contains the default values and possible overrides.
-6. The plugin loads and returns the resource using the final configuration. This typically involves creating an instance of a specific class, e.g. `Parser` in the case of parser entry points.
+1. The plugin returns all entry points that it has registered in `pyproject.toml` under the `nomad.plugin` group. This only loads the configuration, but does not yet load the resource, i.e. main Python implementation.
+1. When NOMAD needs to load the actual resource for an entry point (e.g. a parser), loads it by using the configuration instance.
+1. When the resource is being loaded, the entry point may ask for any configuration overrides that may have been set in `nomad.yaml`.
+1. NOMAD will return the final validated configuration that contains the default values and possible overrides.
+1. The plugin loads and returns the resource using the final configuration. This typically involves creating an instance of a specific class, e.g. `Parser` in the case of parser entry points.
 
 ## Learn how to write plugins
 

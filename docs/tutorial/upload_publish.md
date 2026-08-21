@@ -11,11 +11,11 @@ In this tutorial, we follow the entire workflow for uploading and publishing res
 In this tutorial, you will learn how to:
 
 1. Upload raw research data to NOMAD and organize it using uploads
-2. View the entries that NOMAD generates from your files and check their processing status
-3. Share uploads with collaborators and manage access permissions
-4. Publish uploads and understand the role of embargoes
-5. Group entries into datasets for curation and publication
-6. Publish datasets and assign a Digital Object Identifier (DOI)
+1. View the entries that NOMAD generates from your files and check their processing status
+1. Share uploads with collaborators and manage access permissions
+1. Publish uploads and understand the role of embargoes
+1. Group entries into datasets for curation and publication
+1. Publish datasets and assign a Digital Object Identifier (DOI)
 
 ---
 
@@ -30,7 +30,7 @@ Before starting, make sure you have the following:
     You can create an account by following the steps described in the
     [overview page](overview.md#create-a-nomad-user-account).
 
-2. **Example files available on your local machine**  
+1. **Example files available on your local machine**  
     This tutorial uses provided example data files for:
     - [Miscellaneous files (PDF, images, tables)](https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_3_files/example_files_upload/miscellaneous_data/miscellaneous_data.zip){:target="_blank" rel="noopener"},
     - [Computational data (DFT calculations)](https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_3_files/example_files_upload/computations_data/FHI-aims.zip){:target="_blank" rel="noopener"},
@@ -218,8 +218,8 @@ Alternatively, you can click the `EDIT UPLOAD MEMBERS` button below the list of 
 Let's start adding files to your NOMAD upload. We will explore three different examples:
 
 1. Miscellaneous Files.
-2. Files of DFT calculation on Iron(III) Oxide.
-3. Files of x-ray photoelectron spectroscopy (XPS) measurement on polymers.
+1. Files of DFT calculation on Iron(III) Oxide.
+1. Files of x-ray photoelectron spectroscopy (XPS) measurement on polymers.
 
 Files can be added to an upload individually, or you can group them into a compressed file in `.zip` or `.tar` formats.
 
@@ -449,7 +449,7 @@ Most scientific instruments generate experimental results in formats other than 
 In the following examples, you will learn how to upload a raw file from a SPECS instrument in `.xml` format by using the *NexusDataConverter*. You will do this in two ways:
 
 1. Uploading only the raw file.
-2. Uploading both the raw file and an ELN file, enriching your data with metadata and ensuring compliance with community standards.
+1. Uploading both the raw file and an ELN file, enriching your data with metadata and ensuring compliance with community standards.
 
 ??? task "Uploading experimental data in the `.xml` format"
 

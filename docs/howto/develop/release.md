@@ -38,7 +38,7 @@ two opposing scenarios:
 the released functionality. In this case, a new release with an increased patch version
 is the right call.
 
-2. The `develop` branch adds major refactorings and commits that likely effect the
+1. The `develop` branch adds major refactorings and commits that likely effect the
 released functionality. In this case, a `v1.3.0-hotfix` branch should be created.
 After adding commits with the hotfix, the release process can be applied to the
 hotfix branch in order to create a `v1.3.1` release that only contains the hotfixes and

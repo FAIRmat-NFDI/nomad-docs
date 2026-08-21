@@ -128,9 +128,9 @@ For example, if one wants to fetch the `upload_name` and `upload_create_time`, t
 There are a few existing data resources (called documents) stored in MongoDB (see [NOMAD API Dashboard](https://nomad-lab.eu/prod/v1/api/v1/extensions/docs){:target="_blank" rel="noopener"} for more details):
 
 1. `uploads`: The metadata of an upload, including, `upload_id`, `upload_name`, `main_author`, etc.
-2. `entries`: The metadata of an entry, including, `entry_id`, `entry_create_time`, `mainfile`, etc.
-3. `datasets`: The metadata of a dataset, including, `dataset_id`, `dataset_name`, `user_id`, etc.
-4. `groups`: The metadata of a user group, including, `owner`, `members`, etc.
+1. `entries`: The metadata of an entry, including, `entry_id`, `entry_create_time`, `mainfile`, etc.
+1. `datasets`: The metadata of a dataset, including, `dataset_id`, `dataset_name`, `user_id`, etc.
+1. `groups`: The metadata of a user group, including, `owner`, `members`, etc.
 
 One can apply the same logic to fetch data from these structures.
 For example, to fetch the `entry_id` and `entry_create_time` of an entry with ID `<example_entry_id>`, the request would look like this:
@@ -1532,7 +1532,7 @@ As each entry corresponds to a main file, and each upload corresponds to a folde
 There are two ways to access the file system.
 
 1. Inside an upload, using the token `files`.
-2. Inside an entry, using the token `mainfile`.
+1. Inside an entry, using the token `mainfile`.
 
 For example, the following query uses the `mainfile` token to fetch the file information:
 

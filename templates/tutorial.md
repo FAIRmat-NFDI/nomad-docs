@@ -20,9 +20,9 @@ Guidelines (do not render):
 In this tutorial, you will learn how to:
 
 1. <Action + object + context>
-2. <Action + object + context>
-3. <Action + object + context>
-4. <Action + object + context>
+1. <Action + object + context>
+1. <Action + object + context>
+1. <Action + object + context>
 
 <!--
 Rules enforced (do not render):
@@ -42,10 +42,10 @@ Before starting, make sure you have the following:
 1. **<Prerequisite 1>**  
    <Why it is required>.
 
-2. **<Prerequisite 2>**  
+1. **<Prerequisite 2>**  
    <Why it is required>.
 
-3. **<Prerequisite 3 (optional)>**  
+1. **<Prerequisite 3 (optional)>**  
    <Why it is helpful but not required>.
 ## Admonition guidelines
 

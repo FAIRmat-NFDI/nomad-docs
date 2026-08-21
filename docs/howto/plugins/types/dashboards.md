@@ -505,6 +505,6 @@ NOMAD infrastructure. There are two routes for this:
    launched through the [NORTH tools plugin](./north_tools.md). Best when the
    application needs its own runtime environment (for example a full Jupyter
    or desktop environment running in a container).
-2. **A dashboard plus actions** — serve the code as a dashboard and implement
+1. **A dashboard plus actions** — serve the code as a dashboard and implement
    its server-side behaviour with the [actions plugin](./actions.md). Best
    when a lightweight web UI backed by NOMAD's API is enough.

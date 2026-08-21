@@ -8,7 +8,7 @@ Configuration items get their value based on a hierarchy of sources. The sources
 
 1. **Environment Variables:** A variable like `NOMAD_SERVICES_API_HOST`. These have the highest priority and will override all other settings. NOMAD services will inspect the environment for any variables starting with `NOMAD_`. The rest of the name is interpreted as a configuration item, where sections and attributes are concatenated with a `_`. For example, the environment variable `NOMAD_SERVICES_API_HOST` will set the value for the `api_host` attribute in the `services` section.
 
-2. **Command-Line Configuration Files:** The configuration files to read are selected in one of the following three ways, listed from highest to lowest precedence. Only the first one that applies is used: the files named by the others are not read at all, and they are not merged underneath. This follows the same design as `docker compose`, where `-f` overrides the `COMPOSE_FILE` environment variable and no implicit `docker-compose.yml` is read.
+1. **Command-Line Configuration Files:** The configuration files to read are selected in one of the following three ways, listed from highest to lowest precedence. Only the first one that applies is used: the files named by the others are not read at all, and they are not merged underneath. This follows the same design as `docker compose`, where `-f` overrides the `COMPOSE_FILE` environment variable and no implicit `docker-compose.yml` is read.
 
     - **The `-f` or `--config-file` flag** passed to the NOMAD CLI. It can be repeated, and it can be given before or after the sub-command, so the following two are equivalent:
 
@@ -32,7 +32,7 @@ Configuration items get their value based on a hierarchy of sources. The sources
 
     Whichever of the three applies, if it names several files they are merged in order, with later files overriding earlier ones. A file that is named but does not exist produces a warning and is skipped; a missing default `nomad.yaml` is not reported, since running without one is normal.
 
-3. **Built-in Defaults:** The default values hard-coded in the NOMAD source code. These have the lowest priority. These default values can be found from the `nomad/config/defaults.yaml` file in the source code.
+1. **Built-in Defaults:** The default values hard-coded in the NOMAD source code. These have the lowest priority. These default values can be found from the `nomad/config/defaults.yaml` file in the source code.
 
 ## Merging Rules
 

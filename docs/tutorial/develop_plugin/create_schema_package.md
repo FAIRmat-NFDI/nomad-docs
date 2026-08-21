@@ -7,9 +7,9 @@ This tutorial guides you through creating a NOMAD plugin with a custom schema pa
 By the end of this tutorial, you will be able to:
 
 1. Create a NOMAD plugin containing a custom schema package.
-2. Use NOMAD's Python API to define and register data schemas.
-3. Add user-interaction capabilities to a schema using ELN annotations.
-4. Implement data processing functionality using NOMAD's normalization framework.
+1. Use NOMAD's Python API to define and register data schemas.
+1. Add user-interaction capabilities to a schema using ELN annotations.
+1. Implement data processing functionality using NOMAD's normalization framework.
 
 ## Before you begin
 
@@ -148,7 +148,7 @@ class BlackbodyResults(ArchiveSection):
 To visualize calculated data directly in the NOMAD GUI, you can define custom plots. This capability is added by:
 
 1. Inheriting from the `PlotSection` base class, which automatically adds a repeatable `figures` sub-section to your section.
-2. Implementing the `normalize` method of the section to generate the Plotly figure and populate the `figures` sub-section.
+1. Implementing the `normalize` method of the section to generate the Plotly figure and populate the `figures` sub-section.
 
 NOMAD uses Plotly to render the interactive plots from JSON-serialized data. Each entry in the `figures` list is a `PlotlyFigure` object, which requires a JSON-serialized Plotly figure (produced using the Plotly figure's `.to_plotly_json()` method).
 
@@ -175,9 +175,9 @@ class BlackbodyResultsPlot(BlackbodyResults, PlotSection):
 Within the `normalize` method of `BlackbodyResultsPlot`, we want to:
 
 1. Call `super().normalize(archive, logger)` to execute any normalizer logic from parent classes.
-2. Verify that our input quantities (`wavelength` and `spectral_radiance`) are present before attempting to plot.
-3. Import the helper plotting function `plot_blackbody_spectrum` from the visualization module: `nomad_plugin_tutorials.schema.visualize`.
-4. Set `self.figures` to a list containing a `PlotlyFigure` populated with the JSON-serialized Plotly figure.
+1. Verify that our input quantities (`wavelength` and `spectral_radiance`) are present before attempting to plot.
+1. Import the helper plotting function `plot_blackbody_spectrum` from the visualization module: `nomad_plugin_tutorials.schema.visualize`.
+1. Set `self.figures` to a list containing a `PlotlyFigure` populated with the JSON-serialized Plotly figure.
 
 !!! question "Tutorial 1.2"
     Implement the `normalize` method in `BlackbodyResultsPlot` to generate the Plotly plot.
@@ -450,10 +450,10 @@ Run the cells in `src / nomad_plugin_tutorials / schema / tutorial.ipynb`.
 The notebook walks through these steps:
 
 1. Create an empty `EntryArchive`.
-2. Instantiate `BlackbodyRadiation` and attach it to `archive.data`.
-3. Run normalization with `normalize_all`.
-4. Inspect the normalized archive and derived results.
-5. Render the generated Plotly figure.
+1. Instantiate `BlackbodyRadiation` and attach it to `archive.data`.
+1. Run normalization with `normalize_all`.
+1. Inspect the normalized archive and derived results.
+1. Render the generated Plotly figure.
 
 ### Using the GUI
 

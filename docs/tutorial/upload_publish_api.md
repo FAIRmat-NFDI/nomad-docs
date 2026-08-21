@@ -12,11 +12,11 @@ In this tutorial, we interact with the NOMAD API using Python and the [`nomad-ut
 In this tutorial, you will learn how to:
 
 1. Authenticate with the NOMAD API using Python
-2. Upload raw research data to NOMAD and create uploads programmatically
-3. Retrieve uploads and entries and inspect or edit their metadata
-4. Group entries into datasets for curation and organization
-5. Share uploads with collaborators and manage access permissions
-6. Publish uploads on the NOMAD test deployment
+1. Upload raw research data to NOMAD and create uploads programmatically
+1. Retrieve uploads and entries and inspect or edit their metadata
+1. Group entries into datasets for curation and organization
+1. Share uploads with collaborators and manage access permissions
+1. Publish uploads on the NOMAD test deployment
 
 ---
 
@@ -30,14 +30,14 @@ Before starting, make sure you have the following:
    In order to interact with the NOMAD API, a user account is required.
    You can create an account by following the steps described in the [overview page](overview.md#create-a-nomad-user-account).
 
-2. **Python environment**  
+1. **Python environment**  
    A Python 3.11 or newer environment with permission to install external packages.  
    The examples in this tutorial are designed to be run in a Jupyter notebook.
 
-3. **Basic Python knowledge**  
+1. **Basic Python knowledge**  
    You should be comfortable running Python code, installing packages, and working with notebooks.
 
-4. **Example files available on your local machine**  
+1. **Example files available on your local machine**  
    This tutorial uses provided example data files for:
     - [Miscellaneous files (PDF, images, tables)](https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_3_files/example_files_upload/miscellaneous_data/miscellaneous_data.zip){:target="_blank" rel="noopener"},
     - [Computational data (DFT calculations)](https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_3_files/example_files_upload/computations_data/FHI-aims.zip){:target="_blank" rel="noopener"},

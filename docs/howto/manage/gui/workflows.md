@@ -106,7 +106,7 @@ Upon upload to NOMAD, the above zip will produce 2 entries:
 
 1. A single point entry with mainfile `dft.xml`
 
-2. a workflow entry with mainfile `dft.workflow.archive.yaml`. The workflow entry will contain the following workflow graph on the Overview page:
+1. a workflow entry with mainfile `dft.workflow.archive.yaml`. The workflow entry will contain the following workflow graph on the Overview page:
 
 ![NOMAD workflow schema](images/single-point-custom-nomad-workflow-graph.png){:.screenshot}
 
