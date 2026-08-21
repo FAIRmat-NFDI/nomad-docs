@@ -4228,10 +4228,10 @@
 In this tutorial we will focus on most common modes of the tabular parser. A complete description of all modes is given in the <a href="../reference/annotations.html#tabular_parser">Reference</a> section. You can also follow the dedicated <a href="../howto/manage/gui/tabular.html">How To</a> to see practical examples of the NOMAD tabular parser, in each section you can find a commented sample schema with a step-by-step guide on how to set it to obtain the desired final structure of your parsed data.
 We will make use of the tabular parser in a custom yaml schema. To obtain some structured data in NOMAD with this parser:<br></p>
 <p>1) the schema files should follow the NOMAD <a href="../explanation/data.html#archive-files-a-shared-entry-structure">archive files</a> naming convention (i.e. <code>.archive.json</code> or <code>.archive.yaml</code> extension)<br>
-2) a data file must be instantiated from the schema file<br></p>
+1) a data file must be instantiated from the schema file<br></p>
 <div class="highlight"><pre><span></span><code>&lt;!-- TODO: a link to the part upload etc should be inserted --&gt;
 </code></pre></div>
-<p>3) a tabular data file must be dragged in the annotated <a href="../howto/manage/gui/yaml.html#quantities">quantity</a> in order for NOMAD to parse it (the quantity is called <code>data_file</code> in the following examples)</p>
+<p>1) a tabular data file must be dragged in the annotated <a href="../howto/manage/gui/yaml.html#quantities">quantity</a> in order for NOMAD to parse it (the quantity is called <code>data_file</code> in the following examples)</p>
 <h4 id="to-be-an-entry-or-not-to-be-an-entry">To be an Entry or not to be an Entry<a class="headerlink" href="#to-be-an-entry-or-not-to-be-an-entry" title="Permanent link">¶</a></h4>
 <p>To use this parser, three kinds of annotation must be included in the schema: <code>tabular</code>, <code>tabular_parser</code>, <code>label_quantity</code>. Refer to the dedicated <a href="../reference/annotations.html#tabular-data">Reference</a> section for the full list of options.</p>
 <div class="admonition tip">
