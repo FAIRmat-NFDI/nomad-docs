@@ -103,6 +103,16 @@ def _copy_version_into_root(root: Path, version: str) -> list[str]:
     return copied_files
 
 
+def _put_stable_version_first(root: Path, version: str) -> None:
+    """Make the root mirror fall back to the stable version in its selector."""
+
+    versions_file = root / "versions.json"
+    versions = json.loads(versions_file.read_text())
+    stable = next(item for item in versions if item["version"] == version)
+    versions = [stable, *[item for item in versions if item is not stable]]
+    versions_file.write_text(json.dumps(versions, indent=2) + "\n")
+
+
 def sync(root: Path) -> int:
     root = root.resolve()
     version = _stable_version(root)
@@ -112,6 +122,7 @@ def sync(root: Path) -> int:
 
     _remove_previous_root_files(root)
     copied_files = _copy_version_into_root(root, version)
+    _put_stable_version_first(root, version)
 
     (root / MANIFEST).write_text(
         json.dumps({"version": version, "files": sorted(copied_files)}, indent=2) + "\n"
