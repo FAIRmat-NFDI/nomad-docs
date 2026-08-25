@@ -4503,6 +4503,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#nomad-dev-config" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        config
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#nomad-dev-example-data" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5466,6 +5477,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#nomad-dev-config" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        config
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#nomad-dev-example-data" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5668,10 +5690,12 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>nomad [OPTIONS] COMMAND [ARGS]...
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>  -v, --verbose     sets log level to info
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  --debug           sets log level to debug
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  --log-label TEXT  Label applied to logg entries.
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  --help            Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>  -v, --verbose           sets log level to info
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  --debug                 sets log level to debug
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  --log-label TEXT        Label applied to logg entries.
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  -f, --config-file FILE  Specify one or more NOMAD config yaml files. Can be
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>                          repeated, later files overwrite earlier ones.
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>  --help                  Show this message and exit.
 </code></pre></div>
 <p><strong>Subcommands</strong></p>
 <ul>
@@ -5899,7 +5923,7 @@ This is useful, if the URL layout has changed.</p>
 </code></pre></div>
 <p><strong>Options:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>  -f, --config-file FILE  Specify one or more NOMAD config yaml files. Can be
-<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>                          repeated. Later files overwrite earlier ones.
+<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>                          repeated, later files overwrite earlier ones.
 <a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a>  --help                  Show this message and exit.
 </code></pre></div>
 <p><strong>Subcommands</strong></p>
@@ -5919,7 +5943,10 @@ This is useful, if the URL layout has changed.</p>
 </code></pre></div>
 <p><strong>Options:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>  --pool-size, --workers INTEGER  Number of workers.
-<a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>  --help                          Show this message and exit.
+<a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>  -f, --config-file FILE          Specify one or more NOMAD config yaml files.
+<a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a>                                  Can be repeated, later files overwrite
+<a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a>                                  earlier ones.
+<a id="__codelineno-37-5" name="__codelineno-37-5" href="#__codelineno-37-5"></a>  --help                          Show this message and exit.
 </code></pre></div>
 <h5 id="nomad-admin-run-action-gpu-worker">nomad admin run action-gpu-worker<a class="headerlink" href="#nomad-admin-run-action-gpu-worker" title="Permanent link">¶</a></h5>
 <p>Run the action gpu worker.</p>
@@ -5928,7 +5955,10 @@ This is useful, if the URL layout has changed.</p>
 </code></pre></div>
 <p><strong>Options:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>  --pool-size, --workers INTEGER  Number of workers.
-<a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a>  --help                          Show this message and exit.
+<a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a>  -f, --config-file FILE          Specify one or more NOMAD config yaml files.
+<a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a>                                  Can be repeated, later files overwrite
+<a id="__codelineno-39-4" name="__codelineno-39-4" href="#__codelineno-39-4"></a>                                  earlier ones.
+<a id="__codelineno-39-5" name="__codelineno-39-5" href="#__codelineno-39-5"></a>  --help                          Show this message and exit.
 </code></pre></div>
 <h5 id="nomad-admin-run-action-internal-worker">nomad admin run action-internal-worker<a class="headerlink" href="#nomad-admin-run-action-internal-worker" title="Permanent link">¶</a></h5>
 <p>Run the action internal worker.</p>
@@ -5941,7 +5971,10 @@ This is useful, if the URL layout has changed.</p>
 <a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a>  --max-concurrent-activities INTEGER
 <a id="__codelineno-41-4" name="__codelineno-41-4" href="#__codelineno-41-4"></a>                                  Maximum number of concurrent activities for
 <a id="__codelineno-41-5" name="__codelineno-41-5" href="#__codelineno-41-5"></a>                                  the internal worker.
-<a id="__codelineno-41-6" name="__codelineno-41-6" href="#__codelineno-41-6"></a>  --help                          Show this message and exit.
+<a id="__codelineno-41-6" name="__codelineno-41-6" href="#__codelineno-41-6"></a>  -f, --config-file FILE          Specify one or more NOMAD config yaml files.
+<a id="__codelineno-41-7" name="__codelineno-41-7" href="#__codelineno-41-7"></a>                                  Can be repeated, later files overwrite
+<a id="__codelineno-41-8" name="__codelineno-41-8" href="#__codelineno-41-8"></a>                                  earlier ones.
+<a id="__codelineno-41-9" name="__codelineno-41-9" href="#__codelineno-41-9"></a>  --help                          Show this message and exit.
 </code></pre></div>
 <h5 id="nomad-admin-run-app">nomad admin run app<a class="headerlink" href="#nomad-admin-run-app" title="Permanent link">¶</a></h5>
 <p>Run the nomad development app with all apis.</p>
@@ -5949,14 +5982,16 @@ This is useful, if the URL layout has changed.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>nomad admin run app [OPTIONS]
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>  --with-gui         The app will configure the gui for production and service
-<a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a>                     it.
-<a id="__codelineno-43-3" name="__codelineno-43-3" href="#__codelineno-43-3"></a>  --host TEXT        Passed as host parameter.
-<a id="__codelineno-43-4" name="__codelineno-43-4" href="#__codelineno-43-4"></a>  --port INTEGER     Passed as port parameter.
-<a id="__codelineno-43-5" name="__codelineno-43-5" href="#__codelineno-43-5"></a>  --log-config TEXT  Passed as log-config parameter.
-<a id="__codelineno-43-6" name="__codelineno-43-6" href="#__codelineno-43-6"></a>  --gunicorn         Run app with gunicorn instead of uvicorn.
-<a id="__codelineno-43-7" name="__codelineno-43-7" href="#__codelineno-43-7"></a>  --workers INTEGER  Passed to uvicorn workers parameter.
-<a id="__codelineno-43-8" name="__codelineno-43-8" href="#__codelineno-43-8"></a>  --help             Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>  --with-gui              The app will configure the gui for production and
+<a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a>                          service it.
+<a id="__codelineno-43-3" name="__codelineno-43-3" href="#__codelineno-43-3"></a>  --host TEXT             Passed as host parameter.
+<a id="__codelineno-43-4" name="__codelineno-43-4" href="#__codelineno-43-4"></a>  --port INTEGER          Passed as port parameter.
+<a id="__codelineno-43-5" name="__codelineno-43-5" href="#__codelineno-43-5"></a>  --log-config TEXT       Passed as log-config parameter.
+<a id="__codelineno-43-6" name="__codelineno-43-6" href="#__codelineno-43-6"></a>  --gunicorn              Run app with gunicorn instead of uvicorn.
+<a id="__codelineno-43-7" name="__codelineno-43-7" href="#__codelineno-43-7"></a>  --workers INTEGER       Passed to uvicorn workers parameter.
+<a id="__codelineno-43-8" name="__codelineno-43-8" href="#__codelineno-43-8"></a>  -f, --config-file FILE  Specify one or more NOMAD config yaml files. Can be
+<a id="__codelineno-43-9" name="__codelineno-43-9" href="#__codelineno-43-9"></a>                          repeated, later files overwrite earlier ones.
+<a id="__codelineno-43-10" name="__codelineno-43-10" href="#__codelineno-43-10"></a>  --help                  Show this message and exit.
 </code></pre></div>
 <h5 id="nomad-admin-run-appworker">nomad admin run appworker<a class="headerlink" href="#nomad-admin-run-appworker" title="Permanent link">¶</a></h5>
 <p>Run both app and worker.</p>
@@ -5970,7 +6005,10 @@ This is useful, if the URL layout has changed.</p>
 <a id="__codelineno-45-4" name="__codelineno-45-4" href="#__codelineno-45-4"></a>  --temporal-pool-size, --temporal-workers INTEGER
 <a id="__codelineno-45-5" name="__codelineno-45-5" href="#__codelineno-45-5"></a>                                  Number of temporal workers.
 <a id="__codelineno-45-6" name="__codelineno-45-6" href="#__codelineno-45-6"></a>  --dev                           Use one worker (for dev. env.).
-<a id="__codelineno-45-7" name="__codelineno-45-7" href="#__codelineno-45-7"></a>  --help                          Show this message and exit.
+<a id="__codelineno-45-7" name="__codelineno-45-7" href="#__codelineno-45-7"></a>  -f, --config-file FILE          Specify one or more NOMAD config yaml files.
+<a id="__codelineno-45-8" name="__codelineno-45-8" href="#__codelineno-45-8"></a>                                  Can be repeated, later files overwrite
+<a id="__codelineno-45-9" name="__codelineno-45-9" href="#__codelineno-45-9"></a>                                  earlier ones.
+<a id="__codelineno-45-10" name="__codelineno-45-10" href="#__codelineno-45-10"></a>  --help                          Show this message and exit.
 </code></pre></div>
 <h5 id="nomad-admin-run-hub">nomad admin run hub<a class="headerlink" href="#nomad-admin-run-hub" title="Permanent link">¶</a></h5>
 <p>Run the jupyter hub.</p>
@@ -5978,7 +6016,9 @@ This is useful, if the URL layout has changed.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a>nomad admin run hub [OPTIONS]
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a>  --help  Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a>  -f, --config-file FILE  Specify one or more NOMAD config yaml files. Can be
+<a id="__codelineno-47-2" name="__codelineno-47-2" href="#__codelineno-47-2"></a>                          repeated, later files overwrite earlier ones.
+<a id="__codelineno-47-3" name="__codelineno-47-3" href="#__codelineno-47-3"></a>  --help                  Show this message and exit.
 </code></pre></div>
 <h5 id="nomad-admin-run-worker">nomad admin run worker<a class="headerlink" href="#nomad-admin-run-worker" title="Permanent link">¶</a></h5>
 <p>Run the action internal worker.</p>
@@ -5991,7 +6031,10 @@ This is useful, if the URL layout has changed.</p>
 <a id="__codelineno-49-3" name="__codelineno-49-3" href="#__codelineno-49-3"></a>  --max-concurrent-activities INTEGER
 <a id="__codelineno-49-4" name="__codelineno-49-4" href="#__codelineno-49-4"></a>                                  Maximum number of concurrent activities for
 <a id="__codelineno-49-5" name="__codelineno-49-5" href="#__codelineno-49-5"></a>                                  the internal worker.
-<a id="__codelineno-49-6" name="__codelineno-49-6" href="#__codelineno-49-6"></a>  --help                          Show this message and exit.
+<a id="__codelineno-49-6" name="__codelineno-49-6" href="#__codelineno-49-6"></a>  -f, --config-file FILE          Specify one or more NOMAD config yaml files.
+<a id="__codelineno-49-7" name="__codelineno-49-7" href="#__codelineno-49-7"></a>                                  Can be repeated, later files overwrite
+<a id="__codelineno-49-8" name="__codelineno-49-8" href="#__codelineno-49-8"></a>                                  earlier ones.
+<a id="__codelineno-49-9" name="__codelineno-49-9" href="#__codelineno-49-9"></a>  --help                          Show this message and exit.
 </code></pre></div>
 <h4 id="nomad-admin-upgrade">nomad admin upgrade<a class="headerlink" href="#nomad-admin-upgrade" title="Permanent link">¶</a></h4>
 <p>Commands for upgrading to a newer NOMAD version</p>
@@ -6466,11 +6509,14 @@ This may break existing dependencies and should only be used with caution.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-104-1" name="__codelineno-104-1" href="#__codelineno-104-1"></a>nomad dev [OPTIONS] COMMAND [ARGS]...
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-105-1" name="__codelineno-105-1" href="#__codelineno-105-1"></a>  --help  Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-105-1" name="__codelineno-105-1" href="#__codelineno-105-1"></a>  -f, --config-file FILE  Specify one or more NOMAD config yaml files. Can be
+<a id="__codelineno-105-2" name="__codelineno-105-2" href="#__codelineno-105-2"></a>                          repeated, later files overwrite earlier ones.
+<a id="__codelineno-105-3" name="__codelineno-105-3" href="#__codelineno-105-3"></a>  --help                  Show this message and exit.
 </code></pre></div>
 <p><strong>Subcommands</strong></p>
 <ul>
 <li><em><a href="#nomad-dev-api-model">api-model</a></em>: Export an API model in JSON schema.</li>
+<li><em><a href="#nomad-dev-config">config</a></em>: Prints the effective NOMAD configuration, i.e. the result of merging the built-in defaults, the config files and the NOMAD_* environment variables. Optionally limited to a section, e.g. <code>nomad dev config auth</code>.</li>
 <li><em><a href="#nomad-dev-example-data">example-data</a></em>: Adds a few pieces of data to NOMAD.</li>
 <li><em><a href="#nomad-dev-gui-artifacts">gui-artifacts</a></em>: Generates all python-based GUI artifacts into javascript code.</li>
 <li><em><a href="#nomad-dev-gui-config">gui-config</a></em>: Generates the GUI development config JS file based on NOMAD config.</li>
@@ -6490,116 +6536,126 @@ This may break existing dependencies and should only be used with caution.</p>
 <p><strong>Options:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-107-1" name="__codelineno-107-1" href="#__codelineno-107-1"></a>  --help  Show this message and exit.
 </code></pre></div>
+<h4 id="nomad-dev-config">nomad dev config<a class="headerlink" href="#nomad-dev-config" title="Permanent link">¶</a></h4>
+<p>Prints the effective NOMAD configuration, i.e. the result of merging the built-in defaults, the config files and the NOMAD_* environment variables. Optionally limited to a section, e.g. <code>nomad dev config auth</code>.</p>
+<p><strong>Usage:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-108-1" name="__codelineno-108-1" href="#__codelineno-108-1"></a>nomad dev config [OPTIONS] [SECTION]
+</code></pre></div>
+<p><strong>Options:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-109-1" name="__codelineno-109-1" href="#__codelineno-109-1"></a>  -f, --config-file FILE  Specify one or more NOMAD config yaml files. Can be
+<a id="__codelineno-109-2" name="__codelineno-109-2" href="#__codelineno-109-2"></a>                          repeated, later files overwrite earlier ones.
+<a id="__codelineno-109-3" name="__codelineno-109-3" href="#__codelineno-109-3"></a>  --help                  Show this message and exit.
+</code></pre></div>
 <h4 id="nomad-dev-example-data">nomad dev example-data<a class="headerlink" href="#nomad-dev-example-data" title="Permanent link">¶</a></h4>
 <p>Adds a few pieces of data to NOMAD.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-108-1" name="__codelineno-108-1" href="#__codelineno-108-1"></a>nomad dev example-data [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-110-1" name="__codelineno-110-1" href="#__codelineno-110-1"></a>nomad dev example-data [OPTIONS]
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-109-1" name="__codelineno-109-1" href="#__codelineno-109-1"></a>  -u, --username TEXT  The main author username.
-<a id="__codelineno-109-2" name="__codelineno-109-2" href="#__codelineno-109-2"></a>  --help               Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-111-1" name="__codelineno-111-1" href="#__codelineno-111-1"></a>  -u, --username TEXT  The main author username.
+<a id="__codelineno-111-2" name="__codelineno-111-2" href="#__codelineno-111-2"></a>  --help               Show this message and exit.
 </code></pre></div>
 <h4 id="nomad-dev-gui-artifacts">nomad dev gui-artifacts<a class="headerlink" href="#nomad-dev-gui-artifacts" title="Permanent link">¶</a></h4>
 <p>Generates all python-based GUI artifacts into javascript code.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-110-1" name="__codelineno-110-1" href="#__codelineno-110-1"></a>nomad dev gui-artifacts [OPTIONS]
-</code></pre></div>
-<p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-111-1" name="__codelineno-111-1" href="#__codelineno-111-1"></a>  --help  Show this message and exit.
-</code></pre></div>
-<h4 id="nomad-dev-gui-config">nomad dev gui-config<a class="headerlink" href="#nomad-dev-gui-config" title="Permanent link">¶</a></h4>
-<p>Generates the GUI development config JS file based on NOMAD config.</p>
-<p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-112-1" name="__codelineno-112-1" href="#__codelineno-112-1"></a>nomad dev gui-config [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-112-1" name="__codelineno-112-1" href="#__codelineno-112-1"></a>nomad dev gui-artifacts [OPTIONS]
 </code></pre></div>
 <p><strong>Options:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-113-1" name="__codelineno-113-1" href="#__codelineno-113-1"></a>  --help  Show this message and exit.
 </code></pre></div>
-<h4 id="nomad-dev-gui-env">nomad dev gui-env<a class="headerlink" href="#nomad-dev-gui-env" title="Permanent link">¶</a></h4>
-<p>Generates the GUI development .env file based on NOMAD config.</p>
+<h4 id="nomad-dev-gui-config">nomad dev gui-config<a class="headerlink" href="#nomad-dev-gui-config" title="Permanent link">¶</a></h4>
+<p>Generates the GUI development config JS file based on NOMAD config.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-114-1" name="__codelineno-114-1" href="#__codelineno-114-1"></a>nomad dev gui-env [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-114-1" name="__codelineno-114-1" href="#__codelineno-114-1"></a>nomad dev gui-config [OPTIONS]
 </code></pre></div>
 <p><strong>Options:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-115-1" name="__codelineno-115-1" href="#__codelineno-115-1"></a>  --help  Show this message and exit.
 </code></pre></div>
+<h4 id="nomad-dev-gui-env">nomad dev gui-env<a class="headerlink" href="#nomad-dev-gui-env" title="Permanent link">¶</a></h4>
+<p>Generates the GUI development .env file based on NOMAD config.</p>
+<p><strong>Usage:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-116-1" name="__codelineno-116-1" href="#__codelineno-116-1"></a>nomad dev gui-env [OPTIONS]
+</code></pre></div>
+<p><strong>Options:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-117-1" name="__codelineno-117-1" href="#__codelineno-117-1"></a>  --help  Show this message and exit.
+</code></pre></div>
 <h4 id="nomad-dev-gui-qa">nomad dev gui-qa<a class="headerlink" href="#nomad-dev-gui-qa" title="Permanent link">¶</a></h4>
 <p>Runs tests and linting of the nomad gui source code. Useful before committing code.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-116-1" name="__codelineno-116-1" href="#__codelineno-116-1"></a>nomad dev gui-qa [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-118-1" name="__codelineno-118-1" href="#__codelineno-118-1"></a>nomad dev gui-qa [OPTIONS]
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-117-1" name="__codelineno-117-1" href="#__codelineno-117-1"></a>  --skip-tests  Do no tests, just do code checks.
-<a id="__codelineno-117-2" name="__codelineno-117-2" href="#__codelineno-117-2"></a>  --help        Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-119-1" name="__codelineno-119-1" href="#__codelineno-119-1"></a>  --skip-tests  Do no tests, just do code checks.
+<a id="__codelineno-119-2" name="__codelineno-119-2" href="#__codelineno-119-2"></a>  --help        Show this message and exit.
 </code></pre></div>
 <h4 id="nomad-dev-metainfo">nomad dev metainfo<a class="headerlink" href="#nomad-dev-metainfo" title="Permanent link">¶</a></h4>
 <p>Generates a JSON with all metainfo.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-118-1" name="__codelineno-118-1" href="#__codelineno-118-1"></a>nomad dev metainfo [OPTIONS]
-</code></pre></div>
-<p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-119-1" name="__codelineno-119-1" href="#__codelineno-119-1"></a>  --help  Show this message and exit.
-</code></pre></div>
-<h4 id="nomad-dev-parser-metadata">nomad dev parser-metadata<a class="headerlink" href="#nomad-dev-parser-metadata" title="Permanent link">¶</a></h4>
-<p>Generates a JSON file that compiles all the parser metadata from each parser project.</p>
-<p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-120-1" name="__codelineno-120-1" href="#__codelineno-120-1"></a>nomad dev parser-metadata [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-120-1" name="__codelineno-120-1" href="#__codelineno-120-1"></a>nomad dev metainfo [OPTIONS]
 </code></pre></div>
 <p><strong>Options:</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-121-1" name="__codelineno-121-1" href="#__codelineno-121-1"></a>  --help  Show this message and exit.
 </code></pre></div>
+<h4 id="nomad-dev-parser-metadata">nomad dev parser-metadata<a class="headerlink" href="#nomad-dev-parser-metadata" title="Permanent link">¶</a></h4>
+<p>Generates a JSON file that compiles all the parser metadata from each parser project.</p>
+<p><strong>Usage:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-122-1" name="__codelineno-122-1" href="#__codelineno-122-1"></a>nomad dev parser-metadata [OPTIONS]
+</code></pre></div>
+<p><strong>Options:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-123-1" name="__codelineno-123-1" href="#__codelineno-123-1"></a>  --help  Show this message and exit.
+</code></pre></div>
 <h4 id="nomad-dev-qa">nomad dev qa<a class="headerlink" href="#nomad-dev-qa" title="Permanent link">¶</a></h4>
 <p>Runs tests and linting of the nomad python source code. Useful before committing code.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-122-1" name="__codelineno-122-1" href="#__codelineno-122-1"></a>nomad dev qa [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-124-1" name="__codelineno-124-1" href="#__codelineno-124-1"></a>nomad dev qa [OPTIONS]
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-123-1" name="__codelineno-123-1" href="#__codelineno-123-1"></a>  --skip-tests     Do no tests, just do code checks.
-<a id="__codelineno-123-2" name="__codelineno-123-2" href="#__codelineno-123-2"></a>  -x, --exitfirst  Stop testing after first failed test case.
-<a id="__codelineno-123-3" name="__codelineno-123-3" href="#__codelineno-123-3"></a>  --help           Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-125-1" name="__codelineno-125-1" href="#__codelineno-125-1"></a>  --skip-tests     Do no tests, just do code checks.
+<a id="__codelineno-125-2" name="__codelineno-125-2" href="#__codelineno-125-2"></a>  -x, --exitfirst  Stop testing after first failed test case.
+<a id="__codelineno-125-3" name="__codelineno-125-3" href="#__codelineno-125-3"></a>  --help           Show this message and exit.
 </code></pre></div>
 <h4 id="nomad-dev-search-quantities">nomad dev search-quantities<a class="headerlink" href="#nomad-dev-search-quantities" title="Permanent link">¶</a></h4>
 <p>Generates a JSON with all search quantities.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-124-1" name="__codelineno-124-1" href="#__codelineno-124-1"></a>nomad dev search-quantities [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-126-1" name="__codelineno-126-1" href="#__codelineno-126-1"></a>nomad dev search-quantities [OPTIONS]
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-125-1" name="__codelineno-125-1" href="#__codelineno-125-1"></a>  --help  Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-127-1" name="__codelineno-127-1" href="#__codelineno-127-1"></a>  --help  Show this message and exit.
 </code></pre></div>
 <h4 id="nomad-dev-update-parser-readmes">nomad dev update-parser-readmes<a class="headerlink" href="#nomad-dev-update-parser-readmes" title="Permanent link">¶</a></h4>
 <p>Updates parser<code>s README files by combining a general template with  a parser</code>s metadata YAML file.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-126-1" name="__codelineno-126-1" href="#__codelineno-126-1"></a>nomad dev update-parser-readmes [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-128-1" name="__codelineno-128-1" href="#__codelineno-128-1"></a>nomad dev update-parser-readmes [OPTIONS]
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-127-1" name="__codelineno-127-1" href="#__codelineno-127-1"></a>  --parser TEXT  Only updated the README of the given parsers subdirctory.
-<a id="__codelineno-127-2" name="__codelineno-127-2" href="#__codelineno-127-2"></a>  --help         Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-129-1" name="__codelineno-129-1" href="#__codelineno-129-1"></a>  --parser TEXT  Only updated the README of the given parsers subdirctory.
+<a id="__codelineno-129-2" name="__codelineno-129-2" href="#__codelineno-129-2"></a>  --help         Show this message and exit.
 </code></pre></div>
 <h3 id="nomad-parse">nomad parse<a class="headerlink" href="#nomad-parse" title="Permanent link">¶</a></h3>
 <p>Run parsing and normalizing locally.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-128-1" name="__codelineno-128-1" href="#__codelineno-128-1"></a>nomad parse [OPTIONS] MAINFILE
+<div class="highlight"><pre><span></span><code><a id="__codelineno-130-1" name="__codelineno-130-1" href="#__codelineno-130-1"></a>nomad parse [OPTIONS] MAINFILE
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-129-1" name="__codelineno-129-1" href="#__codelineno-129-1"></a>  --show-archive / --no-archive  Whether to print out the archive data into
-<a id="__codelineno-129-2" name="__codelineno-129-2" href="#__codelineno-129-2"></a>                                 stdout.
-<a id="__codelineno-129-3" name="__codelineno-129-3" href="#__codelineno-129-3"></a>  --archive-with-meta            If the archvie is printed, it would include
-<a id="__codelineno-129-4" name="__codelineno-129-4" href="#__codelineno-129-4"></a>                                 metadata like m_def and m_annotations.
-<a id="__codelineno-129-5" name="__codelineno-129-5" href="#__codelineno-129-5"></a>  --show-metadata                Print the extracted repo metadata.
-<a id="__codelineno-129-6" name="__codelineno-129-6" href="#__codelineno-129-6"></a>  --preview-plots                Preview generated plots
-<a id="__codelineno-129-7" name="__codelineno-129-7" href="#__codelineno-129-7"></a>  --skip-normalizers             Do not run the normalizer.
-<a id="__codelineno-129-8" name="__codelineno-129-8" href="#__codelineno-129-8"></a>  --not-strict                   Do also match artificial parsers.
-<a id="__codelineno-129-9" name="__codelineno-129-9" href="#__codelineno-129-9"></a>  --parser TEXT                  Skip matching and use the provided parser
-<a id="__codelineno-129-10" name="__codelineno-129-10" href="#__codelineno-129-10"></a>                                 (format: `parsers/&lt;name&gt;`). Additional
-<a id="__codelineno-129-11" name="__codelineno-129-11" href="#__codelineno-129-11"></a>                                 selection rules still apply for parsers with
-<a id="__codelineno-129-12" name="__codelineno-129-12" href="#__codelineno-129-12"></a>                                 multiple main files.
-<a id="__codelineno-129-13" name="__codelineno-129-13" href="#__codelineno-129-13"></a>  --server-context               Whether to use server context.
-<a id="__codelineno-129-14" name="__codelineno-129-14" href="#__codelineno-129-14"></a>  --username TEXT                Username for authentication.
-<a id="__codelineno-129-15" name="__codelineno-129-15" href="#__codelineno-129-15"></a>  --password TEXT                Password for authentication.
-<a id="__codelineno-129-16" name="__codelineno-129-16" href="#__codelineno-129-16"></a>  --save-plot-dir DIRECTORY      Directory to save the plot
-<a id="__codelineno-129-17" name="__codelineno-129-17" href="#__codelineno-129-17"></a>  --theme [light|dark]           Color theme to use (light, dark). only
-<a id="__codelineno-129-18" name="__codelineno-129-18" href="#__codelineno-129-18"></a>                                 applies when previewing or saving plots.
-<a id="__codelineno-129-19" name="__codelineno-129-19" href="#__codelineno-129-19"></a>  --help                         Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-131-1" name="__codelineno-131-1" href="#__codelineno-131-1"></a>  --show-archive / --no-archive  Whether to print out the archive data into
+<a id="__codelineno-131-2" name="__codelineno-131-2" href="#__codelineno-131-2"></a>                                 stdout.
+<a id="__codelineno-131-3" name="__codelineno-131-3" href="#__codelineno-131-3"></a>  --archive-with-meta            If the archvie is printed, it would include
+<a id="__codelineno-131-4" name="__codelineno-131-4" href="#__codelineno-131-4"></a>                                 metadata like m_def and m_annotations.
+<a id="__codelineno-131-5" name="__codelineno-131-5" href="#__codelineno-131-5"></a>  --show-metadata                Print the extracted repo metadata.
+<a id="__codelineno-131-6" name="__codelineno-131-6" href="#__codelineno-131-6"></a>  --preview-plots                Preview generated plots
+<a id="__codelineno-131-7" name="__codelineno-131-7" href="#__codelineno-131-7"></a>  --skip-normalizers             Do not run the normalizer.
+<a id="__codelineno-131-8" name="__codelineno-131-8" href="#__codelineno-131-8"></a>  --not-strict                   Do also match artificial parsers.
+<a id="__codelineno-131-9" name="__codelineno-131-9" href="#__codelineno-131-9"></a>  --parser TEXT                  Skip matching and use the provided parser
+<a id="__codelineno-131-10" name="__codelineno-131-10" href="#__codelineno-131-10"></a>                                 (format: `parsers/&lt;name&gt;`). Additional
+<a id="__codelineno-131-11" name="__codelineno-131-11" href="#__codelineno-131-11"></a>                                 selection rules still apply for parsers with
+<a id="__codelineno-131-12" name="__codelineno-131-12" href="#__codelineno-131-12"></a>                                 multiple main files.
+<a id="__codelineno-131-13" name="__codelineno-131-13" href="#__codelineno-131-13"></a>  --server-context               Whether to use server context.
+<a id="__codelineno-131-14" name="__codelineno-131-14" href="#__codelineno-131-14"></a>  --username TEXT                Username for authentication.
+<a id="__codelineno-131-15" name="__codelineno-131-15" href="#__codelineno-131-15"></a>  --password TEXT                Password for authentication.
+<a id="__codelineno-131-16" name="__codelineno-131-16" href="#__codelineno-131-16"></a>  --save-plot-dir DIRECTORY      Directory to save the plot
+<a id="__codelineno-131-17" name="__codelineno-131-17" href="#__codelineno-131-17"></a>  --theme [light|dark]           Color theme to use (light, dark). only
+<a id="__codelineno-131-18" name="__codelineno-131-18" href="#__codelineno-131-18"></a>                                 applies when previewing or saving plots.
+<a id="__codelineno-131-19" name="__codelineno-131-19" href="#__codelineno-131-19"></a>  --help                         Show this message and exit.
 </code></pre></div>
 
 
