@@ -87,20 +87,24 @@ jobs:
           # Push all mike commits after the version metadata is ready.
           git push origin gh-pages
 
-      # mike manages version directories, not root files such as CNAME.
-      - name: Preserve custom domain
+      # GitHub Pages cannot rewrite old unversioned URLs to the current stable
+      # version. Mirror the stable build into the root, and preserve root files
+      # such as CNAME that mike does not manage.
+      - name: Preserve custom domain and unversioned docs
         run: |
-          if [ ! -f docs/CNAME ]; then
+          git worktree add /tmp/gh-pages gh-pages
+          uv run python scripts/sync_legacy_urls.py /tmp/gh-pages
+
+          if [ -f docs/CNAME ]; then
+            cp docs/CNAME /tmp/gh-pages/CNAME
+          else
             echo "No docs/CNAME found; skipping custom-domain setup"
-            exit 0
           fi
 
-          git worktree add /tmp/gh-pages gh-pages
-          cp docs/CNAME /tmp/gh-pages/CNAME
-          git -C /tmp/gh-pages add CNAME
+          git -C /tmp/gh-pages add -A
           if git -C /tmp/gh-pages diff --cached --quiet; then
-            echo "CNAME is already up to date"
+            echo "Root compatibility files are already up to date"
           else
-            git -C /tmp/gh-pages commit -m "Update CNAME"
+            git -C /tmp/gh-pages commit -m "Preserve unversioned documentation URLs"
             git -C /tmp/gh-pages push origin gh-pages
           fi
