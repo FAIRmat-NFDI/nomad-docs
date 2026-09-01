@@ -14,7 +14,7 @@
         <link rel="prev" href="release.html">
       
       
-        <link rel="next" href="../../examples/overview.html">
+        <link rel="next" href="schema_definition.html">
       
       
         
@@ -2944,6 +2944,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="schema_definition.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NOMAD Schema System
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -4592,30 +4620,24 @@ Please note that the tree layout does not necessarily imply inheritance.</p>
 <h3 id="the-abstract-base-class-datatype">The Abstract Base Class: <code>Datatype</code><a class="headerlink" href="#the-abstract-base-class-datatype" title="Permanent link">¶</a></h3>
 <p><code>Datatype</code> defines the common interface and state flags for all types in the system:</p>
 <ul>
-<li><strong>Key Attributes / Slots</strong>:<ul>
+<li><strong>Key Attributes / Slots</strong>:</li>
 <li><code>_definition</code>: The associated <code>Quantity</code> or <code>SubSection</code> definition object.</li>
 <li><code>_support_array</code>: Boolean indicating if array values are supported (default: <code>True</code>).</li>
 <li><code>_disable_shape_check</code>: Flag to bypass array/scalar shape validation.</li>
 <li><code>_disable_type_check</code>: Flag to bypass strict type check enforcement.</li>
 <li><code>_disable_auto_conversion</code>: Flag to disable automatic type casting.</li>
-</ul>
-</li>
-<li><strong>Derived Properties</strong>:<ul>
+<li><strong>Derived Properties</strong>:</li>
 <li><code>shape</code>: Retrieved from <code>_definition.shape</code> that specifies dimensions.</li>
 <li><code>is_scalar</code>: Returns <code>True</code> if shape is None or empty.</li>
 <li><code>unit</code>: Attached physical unit from definition.</li>
 </ul>
-</li>
-</ul>
 <h3 id="primitive-types"><code>Primitive</code> Types<a class="headerlink" href="#primitive-types" title="Permanent link">¶</a></h3>
 <p><code>Primitive</code> inherits from <code>Datatype</code> and encapsulates data types natively supported by Python and NumPy (<code>int</code>, <code>float</code>, <code>complex</code>, <code>str</code>, <code>bool</code>).</p>
 <ul>
-<li><strong>Internal Mechanics</strong>:<ul>
+<li><strong>Internal Mechanics</strong>:</li>
 <li><code>_dtype</code>: Stores the underlying concrete Python or NumPy dtype (e.g., <code>np.int32</code>, <code>np.float64</code>, <code>bool</code>, <code>str</code>).</li>
 <li><code>_np_base</code>: Base type class (<code>np.integer</code>, <code>np.inexact</code>, <code>np.bool_</code>, <code>np.str_</code>) used to decide whether normalized array outputs should remain NumPy arrays or convert to Python lists.</li>
-</ul>
-</li>
-<li><strong>Hierarchy of Primitives</strong>:<ul>
+<li><strong>Hierarchy of Primitives</strong>:</li>
 <li><strong><code>Number</code></strong> <em>(Abstract)</em>: Base for numeric types.<ul>
 <li><strong><code>ExactNumber</code></strong>: Integer types (<code>np.integer</code>). Implemented by <code>m_int</code> and concrete subclasses: <code>m_int8</code>, <code>m_int16</code>, <code>m_int32</code>, <code>m_int64</code>.</li>
 <li><strong><code>InexactNumber</code></strong>: Floating-point and complex types (<code>np.inexact</code>). Implemented by <code>m_float</code> (<code>m_float16</code>, <code>m_float32</code>, <code>m_float64</code>) and <code>m_complex</code> (<code>m_complex128</code>).</li>
@@ -4623,8 +4645,6 @@ Please note that the tree layout does not necessarily imply inheritance.</p>
 </li>
 <li><strong><code>m_bool</code></strong>: Boolean values (<code>bool</code> or <code>np.bool_</code>).</li>
 <li><strong><code>m_str</code></strong>: String values (<code>str</code> or <code>np.str_</code>).</li>
-</ul>
-</li>
 </ul>
 <h3 id="nonprimitive-types"><code>NonPrimitive</code> Types<a class="headerlink" href="#nonprimitive-types" title="Permanent link">¶</a></h3>
 <p><code>NonPrimitive</code> is the base class for rich domain-specific types.
@@ -4651,28 +4671,24 @@ Unlike primitives, <code>NonPrimitive</code> classes execute element-wise operat
 <p>The <code>normalize()</code> method is the workhorse of the type system.
 It takes raw, unstructured, or parsed input data and converts it into a valid, strongly-typed internal representation.
 All the normalization, validation, etc. shall happen in this method.</p>
-<p><strong><em>It is important to ensure the value returned is valid and complies with the definition as no additional checks will performed and other parts of the system expect only valid data.</em></strong></p>
+<p><em><strong>It is important to ensure the value returned is valid and complies with the definition as no additional checks will performed and other parts of the system expect only valid data.</strong></em></p>
 <p>The parent section that contains the destination data is available via <code>kwargs</code>, for example, <code>section=kwargs.get('section')</code>.
 This may be useful when interactions with the parent container is necessary.</p>
 <h4 id="normalization-pipeline-for-primitives">Normalization Pipeline for Primitives<a class="headerlink" href="#normalization-pipeline-for-primitives" title="Permanent link">¶</a></h4>
 <ol>
 <li><strong>Unit &amp; Magnitude Extraction</strong>: If <code>value</code> is a <code>pint.Quantity</code>, <code>normalize()</code> extracts its numerical magnitude (<code>extract_magnitude</code>). If a target unit is configured on the definition, it converts the quantity to the definition's unit before extracting the magnitude.</li>
-<li><strong>Scalar Normalization</strong>:<ul>
+<li><strong>Scalar Normalization</strong>:</li>
 <li>Checks if input type matches <code>_dtype</code>.</li>
 <li>If auto-conversion is disabled (<code>_disable_auto_conversion</code>) and types differ, raises <code>ValueError</code>.</li>
 <li>Checks explicit convertibility via <code>convertible_from()</code>.</li>
 <li>Attempts safe type conversion or close numeric comparison (<code>np.isclose</code>).</li>
-</ul>
-</li>
-<li><strong>Array Normalization</strong>:<ul>
+<li><strong>Array Normalization</strong>:</li>
 <li>Converts input (<code>pd.DataFrame</code>, <code>pd.Series</code>, <code>list</code>, <code>tuple</code>, <code>np.ndarray</code>) to a NumPy array.</li>
 <li>Performs dtype casting safely (<code>array.astype(self._dtype, casting='safe')</code>).</li>
 <li>Converts back to Python lists if <code>_dtype</code> is a pure Python type rather than a NumPy base type.</li>
 <li>Applies <code>_check_shape()</code> to enforce array dimensions against <code>self.shape</code>.</li>
-</ul>
-</li>
 </ol>
-<p><strong><em>Although at the current stage it makes little to no difference as eventually all data is stored in a JSON-compatible format, the validation also considers strong safe type conversion in such a way that no data loss could potentially occur.</em></strong></p>
+<p><em><strong>Although at the current stage it makes little to no difference as eventually all data is stored in a JSON-compatible format, the validation also considers strong safe type conversion in such a way that no data loss could potentially occur.</strong></em></p>
 <h4 id="normalization-pipeline-for-nonprimitives">Normalization Pipeline for NonPrimitives<a class="headerlink" href="#normalization-pipeline-for-nonprimitives" title="Permanent link">¶</a></h4>
 <ul>
 <li>Enforces 1D/scalar shape constraints via <code>_check_shape()</code>.</li>
@@ -4858,13 +4874,13 @@ It supports:</p>
         
         
           
-          <a href="../../examples/overview.html" class="md-footer__link md-footer__link--next" aria-label="Next: Overview">
+          <a href="schema_definition.html" class="md-footer__link md-footer__link--next" aria-label="Next: NOMAD Schema System">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Overview
+                NOMAD Schema System
               </div>
             </div>
             <div class="md-footer__button md-icon">
