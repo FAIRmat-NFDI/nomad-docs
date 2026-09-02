@@ -78,6 +78,8 @@ nav:
           - Write a normalizer: howto/develop/normalizing.md
           - Extend the search: howto/develop/search.md
           - Make a release: howto/develop/release.md
+          - NOMAD Type System: howto/develop/schema_type_system.md
+          - NOMAD Schema System: howto/develop/schema_definition.md
   - Domain-specific examples: # TODO decide uniform structure for navigation to plugins/plugin-docs
       - Overview: examples/overview.md
       - Computational data:
