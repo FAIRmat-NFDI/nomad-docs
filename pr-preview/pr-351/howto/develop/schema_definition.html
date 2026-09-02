@@ -4770,7 +4770,7 @@ Developers can dynamically modify or inspect these schemas at runtime to build f
 <p>The <code>MSection</code> is an abstract class that serves as the base class and class factory for all derived classes.
 The design is based on <a href="https://en.wikipedia.org/wiki/Reflective_programming" rel="noopener" target="_blank">reflection</a>, which can sometimes be quite difficult to comprehend.</p>
 <p>Every <code>MSection</code> instanced automatically generates a corresponding schema definition object, accessible via the <code>m_def</code> attribute.
-This applies to not only the data instances, in which <code>m_def</code> points to the schema object, but also schema objects themselves, in which case <code>m_def</code> points to <em><strong>the schema of the schema</strong></em>.</p>
+This applies to not only the data instances, in which <code>m_def</code> points to the schema object, but also schema objects themselves, in which case <code>m_def</code> points to <strong><em>the schema of the schema</em></strong>.</p>
 <p>As an abstract class, normal development typically do not need to touch it.</p>
 <h3 id="sections-section">Sections (<code>Section</code>)<a class="headerlink" href="#sections-section" title="Permanent link">¶</a></h3>
 <p>Sections are the primary structural nodes.
@@ -4979,10 +4979,10 @@ If you assign a standard Python list to an array quantity, it is seamlessly coer
 If you assign a Pint <code>Quantity</code> object, the system automatically extracts the magnitude and converts it to the declared target unit.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-</div>
 <p>The rule used by the system is simple.
 If the <code>type</code> of a quantity is a <code>numpy</code> type, for example, <code>numpy.int32</code>, the array quantity will be converted into a NumPy array.
 If the <code>type</code> of a quantity is a Python type, for example, <code>float</code>, <code>int</code>, the array quantity will be converted into a Python (nested) list.</p>
+</div>
 <h2 id="data-manipulation-validation-and-normalization">Data Manipulation, Validation, and Normalization<a class="headerlink" href="#data-manipulation-validation-and-normalization" title="Permanent link">¶</a></h2>
 <h3 id="the-normalization-lifecycle">The Normalization Lifecycle<a class="headerlink" href="#the-normalization-lifecycle" title="Permanent link">¶</a></h3>
 <p>Data within the schema system is not static; it often undergoes a normalization lifecycle.
@@ -5009,8 +5009,8 @@ In practice, often it is very difficult, if not impossible, to achieve.
 It is possible to access the external via <code>self.m_parent</code> to access the parent section and/or <code>self.m_root</code> to access to the root section.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-</div>
 <p>It is strongly discouraged to change data external to the current section during normalization process.</p>
+</div>
 <h2 id="serializing-and-deserializing-data">Serializing and Deserializing Data<a class="headerlink" href="#serializing-and-deserializing-data" title="Permanent link">¶</a></h2>
 <h3 id="serializing-to-dictionaries-json">Serializing to Dictionaries (JSON)<a class="headerlink" href="#serializing-to-dictionaries-json" title="Permanent link">¶</a></h3>
 <p>To interface with external systems, APIs, or databases, sections must be converted into standard data formats.
