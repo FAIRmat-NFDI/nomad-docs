@@ -66,34 +66,31 @@ Here is a comprehensive example demonstrating a basic schema definition.
 ```python
 from nomad.metainfo import Quantity, Section, SubSection
 
+
 class Atom(Section):
     """Represents a single atom within a system."""
 
-    element = Quantity(
-        type=str,
-        description="The chemical symbol of the atom."
-    )
+    element = Quantity(type=str, description='The chemical symbol of the atom.')
 
     position = Quantity(
         type=float,
         shape=['*'],
         unit='angstrom',
-        description="The 3D coordinates of the atom."
+        description='The 3D coordinates of the atom.',
     )
+
 
 class System(Section):
     """Represents a physical system composed of atoms."""
 
     system_type = Quantity(
-        type=str,
-        default="molecule",
-        description="The type of the physical system."
+        type=str, default='molecule', description='The type of the physical system.'
     )
 
     atoms = SubSection(
         sub_section=Atom,
         repeats=True,
-        description="The list of atoms comprising this system."
+        description='The list of atoms comprising this system.',
     )
 ```
 
@@ -114,17 +111,15 @@ class BaseCalculation(Section):
     """An abstract base class for all calculation types."""
 
     energy = Quantity(
-        type=np.float64,
-        unit='joule',
-        description="The total energy calculated."
+        type=np.float64, unit='joule', description='The total energy calculated.'
     )
+
 
 class DFTCalculation(BaseCalculation):
     """A concrete implementation for Density Functional Theory calculations."""
 
     xc_functional = Quantity(
-        type=str,
-        description="The exchange-correlation functional used."
+        type=str, description='The exchange-correlation functional used.'
     )
 ```
 
@@ -157,7 +152,7 @@ For a repeating subsection, the attribute acts as a list, and you must use the `
 
 ```python
 # Create the parent system.
-my_molecule = System(system_type="molecule")
+my_molecule = System(system_type='molecule')
 
 # Append child sections to the repeated subsection list.
 my_molecule.atoms.append(carbon_atom)
@@ -466,13 +461,13 @@ This makes it incredibly easy to write generic, schema-agnostic traversal algori
 
 ```python
 # Inspecting the System schema definition.
-print(System.m_def.name) # Outputs: "System"
+print(System.m_def.name)  # Outputs: "System"
 
 # Iterate over all defined quantities in the System schema.
 for quantity_def in System.m_def.quantities:
-    print(f"Quantity Name: {quantity_def.name}")
-    print(f"Data Type: {quantity_def.type}")
-    print(f"Description: {quantity_def.description}")
+    print(f'Quantity Name: {quantity_def.name}')
+    print(f'Data Type: {quantity_def.type}')
+    print(f'Description: {quantity_def.description}')
 ```
 
 There is a wide range of different collections of useful information that can be accessed: `all_base_sections`, `all_inheriting_sections`, `all_properties`, `all_quantities`, `all_sub_sections`, etc.

@@ -149,11 +149,7 @@ This is mainly used in serializing the schema.
 Example output for `m_int32`:
 
 ```python
-{
-    'type_kind': 'numpy',
-    'type_data': 'int32',
-    'disable_shape_check': False
-}
+{'type_kind': 'numpy', 'type_data': 'int32', 'disable_shape_check': False}
 ```
 
 ### Type Resolver: `normalize_type(value)`
