@@ -4801,11 +4801,7 @@ This may be useful when interactions with the parent container is necessary.</p>
 <p>Serializes the metadata of the <code>Datatype</code> object itself into a dictionary containing <code>type_kind</code>, <code>type_data</code>, and active flags.
 This is mainly used in serializing the schema.</p>
 <p>Example output for <code>m_int32</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="s1">'type_kind'</span><span class="p">:</span> <span class="s1">'numpy'</span><span class="p">,</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="s1">'type_data'</span><span class="p">:</span> <span class="s1">'int32'</span><span class="p">,</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="s1">'disable_shape_check'</span><span class="p">:</span> <span class="kc">False</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span><span class="s1">'type_kind'</span><span class="p">:</span> <span class="s1">'numpy'</span><span class="p">,</span> <span class="s1">'type_data'</span><span class="p">:</span> <span class="s1">'int32'</span><span class="p">,</span> <span class="s1">'disable_shape_check'</span><span class="p">:</span> <span class="kc">False</span><span class="p">}</span>
 </code></pre></div>
 <h3 id="type-resolver-normalize_typevalue">Type Resolver: <code>normalize_type(value)</code><a class="headerlink" href="#type-resolver-normalize_typevalue" title="Permanent link">¶</a></h3>
 <p><code>normalize_type()</code> serves as a central factory function that parses flexible shorthand type declarations into concrete <code>Datatype</code> instances.
