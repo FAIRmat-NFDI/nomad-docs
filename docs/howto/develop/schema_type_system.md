@@ -114,13 +114,13 @@ This may be useful when interactions with the parent container is necessary.
 
 #### Normalization Pipeline for Primitives
 
-1. **Unit & Magnitude Extraction**: If `value` is a `pint.Quantity`, `normalize()` extracts its numerical magnitude (`extract_magnitude`). If a target unit is configured on the definition, it converts the quantity to the definition's unit before extracting the magnitude.
-2. **Scalar Normalization**:
+* **Unit & Magnitude Extraction**: If `value` is a `pint.Quantity`, `normalize()` extracts its numerical magnitude (`extract_magnitude`). If a target unit is configured on the definition, it converts the quantity to the definition's unit before extracting the magnitude.
+* **Scalar Normalization**:
     - Checks if input type matches `_dtype`.
     - If auto-conversion is disabled (`_disable_auto_conversion`) and types differ, raises `ValueError`.
     - Checks explicit convertibility via `convertible_from()`.
     - Attempts safe type conversion or close numeric comparison (`np.isclose`).
-3. **Array Normalization**:
+* **Array Normalization**:
     - Converts input (`pd.DataFrame`, `pd.Series`, `list`, `tuple`, `np.ndarray`) to a NumPy array.
     - Performs dtype casting safely (`array.astype(self._dtype, casting='safe')`).
     - Converts back to Python lists if `_dtype` is a pure Python type rather than a NumPy base type.
