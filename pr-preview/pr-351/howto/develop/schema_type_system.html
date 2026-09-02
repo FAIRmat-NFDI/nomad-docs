@@ -4767,7 +4767,7 @@ All the normalization, validation, etc. shall happen in this method.</p>
 <p>The parent section that contains the destination data is available via <code>kwargs</code>, for example, <code>section=kwargs.get('section')</code>.
 This may be useful when interactions with the parent container is necessary.</p>
 <h4 id="normalization-pipeline-for-primitives">Normalization Pipeline for Primitives<a class="headerlink" href="#normalization-pipeline-for-primitives" title="Permanent link">¶</a></h4>
-<ol>
+<ul>
 <li><strong>Unit &amp; Magnitude Extraction</strong>: If <code>value</code> is a <code>pint.Quantity</code>, <code>normalize()</code> extracts its numerical magnitude (<code>extract_magnitude</code>). If a target unit is configured on the definition, it converts the quantity to the definition's unit before extracting the magnitude.</li>
 <li><strong>Scalar Normalization</strong>:<ul>
 <li>Checks if input type matches <code>_dtype</code>.</li>
@@ -4783,7 +4783,7 @@ This may be useful when interactions with the parent container is necessary.</p>
 <li>Applies <code>_check_shape()</code> to enforce array dimensions against <code>self.shape</code>.</li>
 </ul>
 </li>
-</ol>
+</ul>
 <p><strong><em>Although at the current stage it makes little to no difference as eventually all data is stored in a JSON-compatible format, the validation also considers strong safe type conversion in such a way that no data loss could potentially occur.</em></strong></p>
 <h4 id="normalization-pipeline-for-nonprimitives">Normalization Pipeline for NonPrimitives<a class="headerlink" href="#normalization-pipeline-for-nonprimitives" title="Permanent link">¶</a></h4>
 <ul>
