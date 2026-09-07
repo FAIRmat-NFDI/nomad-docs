@@ -2826,10 +2826,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#sections-section" class="md-nav__link">
+  <a href="#definition" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Sections (Section)
+        Definition
       
     </span>
   </a>
@@ -2837,10 +2837,38 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#quantities-quantity" class="md-nav__link">
+  <a href="#property" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Quantities (Quantity)
+        Property
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Property">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#subsection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SubSection
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quantity-incl-dimensions-incl-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quantity (incl. dimensions, incl. references)
       
     </span>
   </a>
@@ -2848,10 +2876,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#subsections-subsection" class="md-nav__link">
+  <a href="#section-incl-references" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Subsections (SubSection)
+        Section (incl. references)
       
     </span>
   </a>
@@ -3077,6 +3105,17 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#yaml-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        YAML Schema
+      
+    </span>
+  </a>
   
 </li>
       
@@ -4500,10 +4539,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#sections-section" class="md-nav__link">
+  <a href="#definition" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Sections (Section)
+        Definition
       
     </span>
   </a>
@@ -4511,10 +4550,38 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#quantities-quantity" class="md-nav__link">
+  <a href="#property" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Quantities (Quantity)
+        Property
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Property">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#subsection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SubSection
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quantity-incl-dimensions-incl-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quantity (incl. dimensions, incl. references)
       
     </span>
   </a>
@@ -4522,10 +4589,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#subsections-subsection" class="md-nav__link">
+  <a href="#section-incl-references" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Subsections (SubSection)
+        Section (incl. references)
       
     </span>
   </a>
@@ -4754,6 +4821,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#yaml-schema" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        YAML Schema
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -4850,19 +4928,66 @@ Every schema element is meticulously tracked, ensuring that data provenance and 
 It provides built-in mechanisms for physical unit management, array shape validation, and automated conversions.
 Developers can dynamically modify or inspect these schemas at runtime to build flexible data ingestion pipelines.</p>
 <h2 id="core-components">Core Components<a class="headerlink" href="#core-components" title="Permanent link">¶</a></h2>
+<p>The following figure explains the concepts in an inheritance tree.</p>
+<figure>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/schema_language.png" data-desc-position="bottom"><img alt="schema language" src="images/schema_language.png"></a>
+  </p>
+<figcaption>The NOMAD Metainfo schema language for structured data definitions</figcaption>
+</figure>
 <h3 id="abstract-section-msection">Abstract Section (<code>MSection</code>)<a class="headerlink" href="#abstract-section-msection" title="Permanent link">¶</a></h3>
 <p>The <code>MSection</code> is an abstract class that serves as the base class and class factory for all derived classes.
 The design is based on <a href="https://en.wikipedia.org/wiki/Reflective_programming" rel="noopener" target="_blank">reflection</a>, which can sometimes be quite difficult to comprehend.</p>
 <p>Every <code>MSection</code> instanced automatically generates a corresponding schema definition object, accessible via the <code>m_def</code> attribute.
 This applies to not only the data instances, in which <code>m_def</code> points to the schema object, but also schema objects themselves, in which case <code>m_def</code> points to <strong><em>the schema of the schema</em></strong>.</p>
 <p>As an abstract class, normal development typically do not need to touch it.</p>
-<h3 id="sections-section">Sections (<code>Section</code>)<a class="headerlink" href="#sections-section" title="Permanent link">¶</a></h3>
-<p>Sections are the primary structural nodes.
-They are defined by subclassing the <code>Definition</code> base class provided by the <code>nomad.metainfo</code> module.
-A <code>Section</code> acts as a container that groups related data and nested structures into a cohesive logical unit.
-It can contain arbitrary number of quantities and subsections.
-Sections support multiple inheritance, allowing you to compose complex data models from reusable, modular base classes.</p>
-<h3 id="quantities-quantity">Quantities (<code>Quantity</code>)<a class="headerlink" href="#quantities-quantity" title="Permanent link">¶</a></h3>
+<h3 id="definition">Definition<a class="headerlink" href="#definition" title="Permanent link">¶</a></h3>
+<p>We call all kinds of definitions and their parts definitions.
+Definition is an abstract concept, in the sense that you cannot define definitions directly.
+The abstract definition for elements barely defines a set of properties that is then shared by other elements.</p>
+<p>These properties include:</p>
+<ul>
+<li>the element's <em>name</em> in the sense of a Python-compatible identifier (only a-bA-Z0-9_ and conventionally in camel case)</li>
+<li>a human-readable description, potentially in markdown format</li>
+<li>a list of categories</li>
+<li>annotations that attach possible extensions (db, search support, etc.) to the definition</li>
+</ul>
+<p><code>Definition</code> is the abstract base for all definitions in the schema system.</p>
+<ul>
+<li><code>name</code>, a string</li>
+<li><code>description</code>, a string</li>
+<li><code>links</code>, a list of URLs</li>
+<li><code>categories</code>, a list of references to category definitions</li>
+<li>
+<p><code>annotations</code>, a list of <code>Annotations</code></p>
+</li>
+<li>
+<p><em>derived</em>: <code>qualified_name</code></p>
+</li>
+</ul>
+<h3 id="property">Property<a class="headerlink" href="#property" title="Permanent link">¶</a></h3>
+<p><code>Property</code> is a special <code>Definition</code> and an abstract base for section properties.
+Properties define what data a section instance can hold.
+Properties are mapped to Python <em>descriptors</em>.</p>
+<ul>
+<li><code>section</code> specialized <code>parent</code> relation with the containing <code>Section</code></li>
+</ul>
+<h4 id="subsection">SubSection<a class="headerlink" href="#subsection" title="Permanent link">¶</a></h4>
+<p>Subsections establish the hierarchical relationships between different sections.
+They are defined as class attributes using the <code>SubSection</code> descriptor, pointing from a parent section to a child section definition.
+This relationship forms a directed acyclic graph, organizing data into a strict tree structure.
+Subsections can be defined as single instances or lists of instances using the <code>repeats</code> boolean flag.
+When a subsection is set to repeat, the parent section can hold an unbounded number of child section instances under the same key/name.
+This mechanism is essential for representing lists of entities, such as multiple atoms within a molecular system or iterative calculation steps.</p>
+<ul>
+<li><code>sub_section</code> reference to the <code>Section</code> definition for the children</li>
+<li>
+<p><code>repeats</code> is a boolean that determines if this subsection can be contained only once or multiple times</p>
+</li>
+<li>
+<p><em>constraint</em>: subsections are not circular</p>
+</li>
+</ul>
+<h3 id="quantity-incl-dimensions-incl-references">Quantity (incl. dimensions, incl. references)<a class="headerlink" href="#quantity-incl-dimensions-incl-references" title="Permanent link">¶</a></h3>
 <p>Quantities define the actual data fields that reside within a section.
 They are defined as class attributes on an <code>Section</code> subclass using the <code>Quantity</code> descriptor.
 Each Quantity must specify a data type, which dictates how values are parsed, validated, and serialized.
@@ -4870,13 +4995,58 @@ These types can range from simple primitives like integers and strings to comple
 Quantities enforce strict validation rules through parameters like <code>shape</code>, which defines the expected dimensions of an array.
 Physical properties are handled seamlessly by specifying a <code>unit</code> parameter, allowing the system to automatically extract and convert magnitudes.
 You can attach extensive metadata to quantities, including descriptions, default values, and other attributes for UI rendering.</p>
-<h3 id="subsections-subsection">Subsections (<code>SubSection</code>)<a class="headerlink" href="#subsections-subsection" title="Permanent link">¶</a></h3>
-<p>Subsections establish the hierarchical relationships between different sections.
-They are defined as class attributes using the <code>SubSection</code> descriptor, pointing from a parent section to a child section definition.
-This relationship forms a directed acyclic graph, organizing data into a strict tree structure.
-Subsections can be defined as single instances or lists of instances using the <code>repeats</code> boolean flag.
-When a subsection is set to repeat, the parent section can hold an unbounded number of child section instances under the same key/name.
-This mechanism is essential for representing lists of entities, such as multiple atoms within a molecular system or iterative calculation steps.</p>
+<p>A quantity definition has all definition quantities (name, description, ...) and has the following properties</p>
+<ul>
+<li><em>type</em> the data type that determines the possible values that the various dimensions can contain</li>
+<li>a <em>shape</em> that determines how many primitive values each dimension of the quantity value can contain. This can be a fixed integer, a <em>wildcard</em> like 1..n or 0..n, or a reference to another property with one dimension with a single int.</li>
+<li><em>units</em> is a list of strings that determines the physical unit of the various dimensions.</li>
+</ul>
+<p>A <code>Quantity</code> definition is a special and concrete <code>Property</code> definition:</p>
+<ul>
+<li><code>shape</code>, a list of either <code>int</code>, references to a dimension (quantity definition), or limits definitions (e.g. <code>'1..n'</code>, <code>'0..n'</code>.)</li>
+<li><code>type</code>, a primitive or MEnum type</li>
+<li><code>unit</code>, a (computed) unit, e.g. <code>units.F * units.m</code></li>
+<li><code>derived_from</code>, a list of references to other quantity definitions</li>
+<li><code>synonym</code>, a reference to another quantity definition</li>
+</ul>
+<p><em>Dimensions</em> are quantity definitions with empty shape and int type.</p>
+<ul>
+<li><em>constraint</em>: <code>synonym</code>, <code>derived_from</code>, and dimensions come from the same section</li>
+</ul>
+<h3 id="section-incl-references">Section (incl. references)<a class="headerlink" href="#section-incl-references" title="Permanent link">¶</a></h3>
+<p>A section definition is a special definition.
+Sections are the primary structural nodes.
+They are defined by subclassing the <code>Definition</code> base class provided by the <code>nomad.metainfo</code> module.
+A <code>Section</code> acts as a container that groups related data and nested structures into a cohesive logical unit.
+It can contain arbitrary number of quantities and subsections.
+Sections support multiple inheritance, allowing you to compose complex data models from reusable, modular base classes.</p>
+<p>A section definition has the following properties: name, description, (parent) section (as all element definitions have), plus</p>
+<ul>
+<li>a boolean <em>abstract</em> that determines if this section definition can be instantiated</li>
+<li>a boolean <em>repeats</em> that determines if instances of this section can appear multiple times in their respective parent section</li>
+<li>a reference to another section definition called <em>extends</em> that denotes that instances of this definition can contain instances of all the element definitions that state the extended section definition as their (parent) section.</li>
+</ul>
+<p>A <code>Section</code> is a special and concrete <code>Definition</code>.</p>
+<ul>
+<li><code>adds_to</code>, a reference to another section definition. All quantities of this <em>pseudo</em> section are added to the given section. (Might not be necessary)</li>
+<li><code>repeats</code>, a boolean</li>
+<li>
+<p><code>extends</code>, list of references to other section definitions. This section automatically inherits all quantities of the other sections. (Might not be necessary)</p>
+</li>
+<li>
+<p><em>derived</em>: <code>all_sub_sections</code>, all subsections, including added and inherited ones, by name</p>
+</li>
+<li><em>derived</em>: <code>all_quantities</code>, all quantities, including added and inherited ones, by name</li>
+<li>
+<p><em>derived</em>: <code>all_properties</code>, all properties, including added and inherited ones, by name</p>
+</li>
+<li>
+<p><em>constraint</em>: <code>extends</code> is not circular</p>
+</li>
+<li><em>constraint</em>: <code>adds_to</code> is not circular</li>
+<li><em>constraint</em>: all quantities that have <em>this</em> (or an <code>extends</code>) section as <code>section</code> have unique names</li>
+</ul>
+<p><code>Section</code>s are mapped to Python classes/objects. <code>extends</code> is mapped to Python inheritance.</p>
 <h2 id="defining-schemas-and-organizing-data">Defining Schemas and Organizing Data<a class="headerlink" href="#defining-schemas-and-organizing-data" title="Permanent link">¶</a></h2>
 <h3 id="basic-schema-definition">Basic Schema Definition<a class="headerlink" href="#basic-schema-definition" title="Permanent link">¶</a></h3>
 <p>Defining a schema involves creating Python classes that inherit from <code>Section</code>.
@@ -5230,6 +5400,13 @@ The NOMAD schema system allows you to instantiate <code>Section</code>, <code>Qu
 You can use standard Python metaprogramming (like the <code>type</code> function) to create new <code>MSection</code> classes dynamically.
 Alternatively, the <code>Section</code> definition object itself acts as a factory that can construct completely generic schema structures.
 This dynamic generation is heavily utilized by NOMAD's custom schema plugin system, where users define schemas in YAML files that are translated at runtime.</p>
+<h2 id="yaml-schema">YAML Schema<a class="headerlink" href="#yaml-schema" title="Permanent link">¶</a></h2>
+<p>The above discusses the basic concepts to define and use NOMAD schemas in native Python scripts.
+Since it is feasible to serialize and deserialize schemas, it is also supported to define a custom schema using YAML format.
+One shall check <a href="../manage/gui/yaml.html">this page</a>.</p>
+<p>Doing so, however, gives up the ability to define custom normalizations.
+It is a convenient way o define simple data structures that do not require heavy normalization process.
+Otherwise, one shall define a Python package using native Python scripts.</p>
 
 
 
