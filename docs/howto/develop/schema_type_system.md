@@ -97,7 +97,7 @@ Supported `NonPrimitive` types:
 
 ### Reference Types
 
-- **`Reference` / `MSectionReference` / `QuantityReference`**: Handle typed cross-references to other sections or quantities across archives. Users typically do not need to handle those types manually.
+- **`Reference` / `QuantityReference`**: Handle typed cross-references to other sections or quantities across archives. Users typically do not need to handle those types manually.
 
 ## Core Methods and Mechanics
 
