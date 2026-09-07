@@ -17,6 +17,13 @@ Developers can dynamically modify or inspect these schemas at runtime to build f
 
 ## Core Components
 
+The following figure explains the concepts in an inheritance tree.
+
+<figure markdown>
+  ![schema language](images/schema_language.png)
+  <figcaption>The NOMAD Metainfo schema language for structured data definitions</figcaption>
+</figure>
+
 ### Abstract Section (`MSection`)
 
 The `MSection` is an abstract class that serves as the base class and class factory for all derived classes.
@@ -480,3 +487,13 @@ The NOMAD schema system allows you to instantiate `Section`, `Quantity`, and `Su
 You can use standard Python metaprogramming (like the `type` function) to create new `MSection` classes dynamically.
 Alternatively, the `Section` definition object itself acts as a factory that can construct completely generic schema structures.
 This dynamic generation is heavily utilized by NOMAD's custom schema plugin system, where users define schemas in YAML files that are translated at runtime.
+
+## YAML Schema
+
+The above discusses the basic concepts to define and use NOMAD schemas in native Python scripts.
+Since it is feasible to serialize and deserialize schemas, it is also supported to define a custom schema using YAML format.
+One shall check [this page](../manage/gui/yaml.md).
+
+Doing so, however, gives up the ability to define custom normalizations.
+It is a convenient way o define simple data structures that do not require heavy normalization process.
+Otherwise, one shall define a Python package using native Python scripts.
