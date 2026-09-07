@@ -34,15 +34,52 @@ This applies to not only the data instances, in which `m_def` points to the sche
 
 As an abstract class, normal development typically do not need to touch it.
 
-### Sections (`Section`)
+### Definition
 
-Sections are the primary structural nodes.
-They are defined by subclassing the `Definition` base class provided by the `nomad.metainfo` module.
-A `Section` acts as a container that groups related data and nested structures into a cohesive logical unit.
-It can contain arbitrary number of quantities and subsections.
-Sections support multiple inheritance, allowing you to compose complex data models from reusable, modular base classes.
+We call all kinds of definitions and their parts definitions.
+Definition is an abstract concept, in the sense that you cannot define definitions directly.
+The abstract definition for elements barely defines a set of properties that is then shared by other elements.
 
-### Quantities (`Quantity`)
+These properties include:
+
+- the element's *name* in the sense of a Python-compatible identifier (only a-bA-Z0-9_ and conventionally in camel case)
+- a human-readable description, potentially in markdown format
+- a list of categories
+- annotations that attach possible extensions (db, search support, etc.) to the definition
+
+`Definition` is the abstract base for all definitions in the schema system.
+
+- `name`, a string
+- `description`, a string
+- `links`, a list of URLs
+- `categories`, a list of references to category definitions
+- `annotations`, a list of `Annotations`
+
+- *derived*: `qualified_name`
+
+### Property
+
+`Property` is a special `Definition` and an abstract base for section properties.
+Properties define what data a section instance can hold.
+Properties are mapped to Python *descriptors*.
+
+- `section` specialized `parent` relation with the containing `Section`
+
+#### SubSection
+
+Subsections establish the hierarchical relationships between different sections.
+They are defined as class attributes using the `SubSection` descriptor, pointing from a parent section to a child section definition.
+This relationship forms a directed acyclic graph, organizing data into a strict tree structure.
+Subsections can be defined as single instances or lists of instances using the `repeats` boolean flag.
+When a subsection is set to repeat, the parent section can hold an unbounded number of child section instances under the same key/name.
+This mechanism is essential for representing lists of entities, such as multiple atoms within a molecular system or iterative calculation steps.
+
+- `sub_section` reference to the `Section` definition for the children
+- `repeats` is a boolean that determines if this subsection can be contained only once or multiple times
+
+- *constraint*: subsections are not circular
+
+### Quantity (incl. dimensions, incl. references)
 
 Quantities define the actual data fields that reside within a section.
 They are defined as class attributes on an `Section` subclass using the `Quantity` descriptor.
@@ -52,14 +89,54 @@ Quantities enforce strict validation rules through parameters like `shape`, whic
 Physical properties are handled seamlessly by specifying a `unit` parameter, allowing the system to automatically extract and convert magnitudes.
 You can attach extensive metadata to quantities, including descriptions, default values, and other attributes for UI rendering.
 
-### Subsections (`SubSection`)
+A quantity definition has all definition quantities (name, description, ...) and has the following properties
 
-Subsections establish the hierarchical relationships between different sections.
-They are defined as class attributes using the `SubSection` descriptor, pointing from a parent section to a child section definition.
-This relationship forms a directed acyclic graph, organizing data into a strict tree structure.
-Subsections can be defined as single instances or lists of instances using the `repeats` boolean flag.
-When a subsection is set to repeat, the parent section can hold an unbounded number of child section instances under the same key/name.
-This mechanism is essential for representing lists of entities, such as multiple atoms within a molecular system or iterative calculation steps.
+- *type* the data type that determines the possible values that the various dimensions can contain
+- a *shape* that determines how many primitive values each dimension of the quantity value can contain. This can be a fixed integer, a *wildcard* like 1..n or 0..n, or a reference to another property with one dimension with a single int.
+- *units* is a list of strings that determines the physical unit of the various dimensions.
+
+A `Quantity` definition is a special and concrete `Property` definition:
+
+- `shape`, a list of either `int`, references to a dimension (quantity definition), or limits definitions (e.g. `'1..n'`, `'0..n'`.)
+- `type`, a primitive or MEnum type
+- `unit`, a (computed) unit, e.g. `units.F * units.m`
+- `derived_from`, a list of references to other quantity definitions
+- `synonym`, a reference to another quantity definition
+
+*Dimensions* are quantity definitions with empty shape and int type.
+
+- *constraint*: `synonym`, `derived_from`, and dimensions come from the same section
+
+### Section (incl. references)
+
+A section definition is a special definition.
+Sections are the primary structural nodes.
+They are defined by subclassing the `Definition` base class provided by the `nomad.metainfo` module.
+A `Section` acts as a container that groups related data and nested structures into a cohesive logical unit.
+It can contain arbitrary number of quantities and subsections.
+Sections support multiple inheritance, allowing you to compose complex data models from reusable, modular base classes.
+
+A section definition has the following properties: name, description, (parent) section (as all element definitions have), plus
+
+- a boolean *abstract* that determines if this section definition can be instantiated
+- a boolean *repeats* that determines if instances of this section can appear multiple times in their respective parent section
+- a reference to another section definition called *extends* that denotes that instances of this definition can contain instances of all the element definitions that state the extended section definition as their (parent) section.
+
+A `Section` is a special and concrete `Definition`.
+
+- `adds_to`, a reference to another section definition. All quantities of this *pseudo* section are added to the given section. (Might not be necessary)
+- `repeats`, a boolean
+- `extends`, list of references to other section definitions. This section automatically inherits all quantities of the other sections. (Might not be necessary)
+
+- *derived*: `all_sub_sections`, all subsections, including added and inherited ones, by name
+- *derived*: `all_quantities`, all quantities, including added and inherited ones, by name
+- *derived*: `all_properties`, all properties, including added and inherited ones, by name
+
+- *constraint*: `extends` is not circular
+- *constraint*: `adds_to` is not circular
+- *constraint*: all quantities that have *this* (or an `extends`) section as `section` have unique names
+
+`Section`s are mapped to Python classes/objects. `extends` is mapped to Python inheritance.
 
 ## Defining Schemas and Organizing Data
 
