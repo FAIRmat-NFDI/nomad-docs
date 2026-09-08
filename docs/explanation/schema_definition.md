@@ -1,4 +1,4 @@
-# The NOMAD Schema --- Definition and Data
+# NOMAD Schema - Definition and Data
 
 ## Introduction
 
@@ -182,7 +182,7 @@ In this example, the `System` class acts as the root node.
 It contains a repeated Subsection pointing to the `Atom` class.
 The `Atom` class defines specific quantities with explicit types and shapes, ensuring that positions are always arrays of floats.
 
-The type of quantities is further explained in [this page](./schema_type_system.md).
+The type of quantities is further explained in [this page](./schema_type.md).
 
 ### Inheritance and Polymorphism
 
@@ -569,7 +569,7 @@ This dynamic generation is heavily utilized by NOMAD's custom schema plugin syst
 
 The above discusses the basic concepts to define and use NOMAD schemas in native Python scripts.
 Since it is feasible to serialize and deserialize schemas, it is also supported to define a custom schema using YAML format.
-One shall check [this page](../manage/gui/yaml.md).
+One shall check [this page](../howto/manage/gui/yaml.md).
 
 Doing so, however, gives up the ability to define custom normalizations.
 It is a convenient way o define simple data structures that do not require heavy normalization process.
