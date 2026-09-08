@@ -78,9 +78,7 @@ nav:
           - Write a normalizer: howto/develop/normalizing.md
           - Extend the search: howto/develop/search.md
           - Make a release: howto/develop/release.md
-          - NOMAD Type System: howto/develop/schema_type_system.md
-          - NOMAD Schema System: howto/develop/schema_definition.md
-          - NOMAD Schema Package: howto/develop/schema_packages.md
+          - Add a new type: howto/develop/new_type.md
   - Domain-specific examples: # TODO decide uniform structure for navigation to plugins/plugin-docs
       - Overview: examples/overview.md
       - Computational data:
@@ -106,6 +104,9 @@ nav:
       - Overview: explanation/overview.md
       - From files to data: explanation/basics.md
       - Data structure: explanation/data.md
+      - NOMAD Schema - Type: explanation/schema_type.md
+      - NOMAD Schema - Definition and Data: explanation/schema_definition.md
+      - NOMAD Schema - Custom Package: explanation/schema_packages.md
       - Base sections: explanation/base_sections.md # TODO rewrite as explanation
       - Processing: explanation/processing.md
       - Architecture: explanation/architecture.md
