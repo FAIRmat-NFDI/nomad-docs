@@ -5000,6 +5000,10 @@ The abstract definition for elements barely defines a set of properties that is 
 <p><em>derived</em>: <code>qualified_name</code></p>
 </li>
 </ul>
+<p>Each definition includes a <code>.definition_id</code> that uniquely identifies it and accounts for differences between definitions.
+The ID acts as a hash and is updated automatically.
+Any change to a definition that affects the data it targets will produce a new definition ID.
+In some applications, the definition ID is also used to distinguish between different versions of the same schema package.</p>
 <h3 id="property">Property<a class="headerlink" href="#property" title="Permanent link">¶</a></h3>
 <p><code>Property</code> is a special <code>Definition</code> and an abstract base for section properties.
 Properties define what data a section instance can hold.
