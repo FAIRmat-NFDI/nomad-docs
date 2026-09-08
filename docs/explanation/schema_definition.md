@@ -57,6 +57,11 @@ These properties include:
 
 - *derived*: `qualified_name`
 
+Each definition includes a `.definition_id` that uniquely identifies it and accounts for differences between definitions.
+The ID acts as a hash and is updated automatically.
+Any change to a definition that affects the data it targets will produce a new definition ID.
+In some applications, the definition ID is also used to distinguish between different versions of the same schema package.
+
 ### Property
 
 `Property` is a special `Definition` and an abstract base for section properties.
