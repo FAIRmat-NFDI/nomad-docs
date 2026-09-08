@@ -14,7 +14,7 @@
         <link rel="prev" href="release.html">
       
       
-        <link rel="next" href="schema_definition.html">
+        <link rel="next" href="../../examples/overview.html">
       
       
         
@@ -25,7 +25,7 @@
     
     
       
-        <title>NOMAD Type System - Documentation</title>
+        <title>Add a new type - Documentation</title>
       
     
     
@@ -88,7 +88,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#the-nomad-schema-type-system" class="md-skip">
+        <a href="#how-to-add-a-new-type" class="md-skip">
           Skip to content
         </a>
       
@@ -162,7 +162,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              NOMAD Type System
+              Add a new type
             
           </span>
         </div>
@@ -2713,32 +2713,14 @@
         
       
       
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    NOMAD Type System
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="schema_type_system.html" class="md-nav__link md-nav__link--active">
+      <a href="new_type.html" class="md-nav__link md-nav__link--active">
         
   
   
   <span class="md-ellipsis">
     
   
-    NOMAD Type System
+    Add a new type
   
 
     
@@ -2748,281 +2730,6 @@
 
       </a>
       
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
-      
-        <li class="md-nav__item">
-  <a href="#overview" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Overview
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Overview">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#core-goals-of-the-type-system" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Core Goals of the Type System
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#architecture-and-class-hierarchy" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Architecture and Class Hierarchy
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Architecture and Class Hierarchy">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#the-abstract-base-class-datatype" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The Abstract Base Class: Datatype
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#primitive-types" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Primitive Types
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#nonprimitive-types" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        NonPrimitive Types
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#reference-types" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Reference Types
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#core-methods-and-mechanics" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Core Methods and Mechanics
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Core Methods and Mechanics">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#normalizevalue-kwargs" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        normalize(value, **kwargs)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="normalize(value, **kwargs)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#normalization-pipeline-for-primitives" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Normalization Pipeline for Primitives
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#normalization-pipeline-for-nonprimitives" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Normalization Pipeline for NonPrimitives
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#serializevalue-kwargs" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        serialize(value, **kwargs)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#serialize_self" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        serialize_self()
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#type-resolver-normalize_typevalue" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Type Resolver: normalize_type(value)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#how-to-add-a-new-type-to-the-system" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        How to Add a New Type to the System
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#summary-matrix-of-built-in-data-types" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Summary Matrix of Built-in Data Types
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="schema_definition.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    NOMAD Schema System
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="schema_packages.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    NOMAD Schema Package
-  
-
-    
-  </span>
-  
-  
-
-      </a>
     </li>
   
 
@@ -3820,6 +3527,90 @@
   
   
     <li class="md-nav__item">
+      <a href="../../explanation/schema_type.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NOMAD Schema - Type
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../explanation/schema_definition.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NOMAD Schema - Definition and Data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../explanation/schema_packages.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NOMAD Schema - Custom Package
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../explanation/base_sections.html" class="md-nav__link">
         
   
@@ -4398,214 +4189,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
-      
-        <li class="md-nav__item">
-  <a href="#overview" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Overview
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Overview">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#core-goals-of-the-type-system" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Core Goals of the Type System
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#architecture-and-class-hierarchy" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Architecture and Class Hierarchy
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Architecture and Class Hierarchy">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#the-abstract-base-class-datatype" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        The Abstract Base Class: Datatype
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#primitive-types" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Primitive Types
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#nonprimitive-types" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        NonPrimitive Types
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#reference-types" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Reference Types
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#core-methods-and-mechanics" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Core Methods and Mechanics
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Core Methods and Mechanics">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#normalizevalue-kwargs" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        normalize(value, **kwargs)
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="normalize(value, **kwargs)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#normalization-pipeline-for-primitives" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Normalization Pipeline for Primitives
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#normalization-pipeline-for-nonprimitives" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Normalization Pipeline for NonPrimitives
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#serializevalue-kwargs" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        serialize(value, **kwargs)
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#serialize_self" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        serialize_self()
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#type-resolver-normalize_typevalue" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Type Resolver: normalize_type(value)
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#how-to-add-a-new-type-to-the-system" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        How to Add a New Type to the System
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#summary-matrix-of-built-in-data-types" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Summary Matrix of Built-in Data Types
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -4687,160 +4270,7 @@
 
 
 
-<h1 id="the-nomad-schema-type-system">The NOMAD Schema --- Type System<a class="headerlink" href="#the-nomad-schema-type-system" title="Permanent link">¶</a></h1>
-<h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">¶</a></h2>
-<p>The NOMAD type system (<code>nomad.metainfo.data_type</code>) is a core foundational component of the NOMAD platform.</p>
-<p>In NOMAD, data is modelled using schemas consisting of <em>Sections</em> and <em>Quantities</em>.
-The type system is responsible for defining how primitive values, complex domain-specific objects, multidimensional arrays, and references are validated, converted, normalized, serialized, and mapped across multiple downstream storage and search engines (such as MongoDB, Elasticsearch, Pydantic models, JSON Schema, and OPTIMADE API specifications).</p>
-<h3 id="core-goals-of-the-type-system">Core Goals of the Type System<a class="headerlink" href="#core-goals-of-the-type-system" title="Permanent link">¶</a></h3>
-<ul>
-<li><strong>Robust Normalization &amp; Validation</strong>: Accept inputs from diverse sources (manual user input, raw parser outputs, serialized archive JSON files, Pandas DataFrames, NumPy arrays, Pint units) and coerce them into predictable Python/NumPy objects.</li>
-<li><strong>Unit and Dimensionality Awareness</strong>: Seamlessly extract magnitudes from physical quantities (<code>pint.Quantity</code>) and validate unit dimensionalities against quantity definitions.</li>
-<li><strong>Bi-directional Serialization</strong>: Convert standard runtime Python objects into JSON-compliant primitives for storage and transmission, while preserving schema metadata.</li>
-<li><strong>Multidimensional Array Support</strong>: Handle both scalar values and multi-dimensional NumPy arrays or nested lists with strict shape checking.</li>
-<li><strong>Interoperability</strong>: Seamlessly map to/from various database schemas including Elasticsearch, MongoDB (MongoEngine), Pydantic, JSON Schema, and OPTIMADE.</li>
-</ul>
-<h2 id="architecture-and-class-hierarchy">Architecture and Class Hierarchy<a class="headerlink" href="#architecture-and-class-hierarchy" title="Permanent link">¶</a></h2>
-<p>The type system is built on an object-oriented class hierarchy headed by the abstract base class <code>Datatype</code>.
-An incomplete overview looks like this.
-Please note that the tree layout does not necessarily imply inheritance.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>                        +-------------------+
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>                        |     Datatype      |
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>                        +---------+---------+
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>                                  |
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>            +---------------------+-----------------+
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>            |                                       |
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>  +---------+---------+                   +---------+---------+
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>  |     Primitive     |                   |   NonPrimitive    |
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>  +---------+---------+                   +---------+---------+
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>            |                                       |
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>  +---------+---------+               +-------------+---------------+
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>  |      Number       |               |             |               |
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>  +---------+---------+           +---+---+     +---+---+     +-----+-----+
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>            |                     |  URL  |     | File  |     | Datetime  |
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>   +--------+--------+            +-------+     +-------+     +-----------+
-<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>   |                 |                |             |             |
-<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>+--+----------+  +---+-------+    +---+---+     +---+---+     +-----+-----+
-<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>| ExactNumber |  | Inexact   |    | Bytes |     | JSON  |     |   Unit    |
-<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>+--+----------+  | Number    |    +-------+     +-------+     +-----------+
-<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>   |             +---+-------+        |             |             |
-<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a> +-+-----+           |            +---+---+     +---+---+     +-----+-----+
-<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a> | m_int |        +--+----+       | Enum  |     | Any   |     | Callable  |
-<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a> +-------+        |m_float|       +-------+     +-------+     +-----------+
-<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>                  +-------+
-</code></pre></div>
-<h3 id="the-abstract-base-class-datatype">The Abstract Base Class: <code>Datatype</code><a class="headerlink" href="#the-abstract-base-class-datatype" title="Permanent link">¶</a></h3>
-<p><code>Datatype</code> defines the common interface and state flags for all types in the system:</p>
-<ul>
-<li><strong>Key Attributes / Slots</strong>:<ul>
-<li><code>_definition</code>: The associated <code>Quantity</code> or <code>SubSection</code> definition object.</li>
-<li><code>_support_array</code>: Boolean indicating if array values are supported (default: <code>True</code>).</li>
-<li><code>_disable_shape_check</code>: Flag to bypass array/scalar shape validation.</li>
-<li><code>_disable_type_check</code>: Flag to bypass strict type check enforcement.</li>
-<li><code>_disable_auto_conversion</code>: Flag to disable automatic type casting.</li>
-</ul>
-</li>
-<li><strong>Derived Properties</strong>:<ul>
-<li><code>shape</code>: Retrieved from <code>_definition.shape</code> that specifies dimensions.</li>
-<li><code>is_scalar</code>: Returns <code>True</code> if shape is None or empty.</li>
-<li><code>unit</code>: Attached physical unit from definition.</li>
-</ul>
-</li>
-</ul>
-<h3 id="primitive-types"><code>Primitive</code> Types<a class="headerlink" href="#primitive-types" title="Permanent link">¶</a></h3>
-<p><code>Primitive</code> inherits from <code>Datatype</code> and encapsulates data types natively supported by Python and NumPy (<code>int</code>, <code>float</code>, <code>complex</code>, <code>str</code>, <code>bool</code>).</p>
-<ul>
-<li><strong>Internal Mechanics</strong>:<ul>
-<li><code>_dtype</code>: Stores the underlying concrete Python or NumPy dtype (e.g., <code>np.int32</code>, <code>np.float64</code>, <code>bool</code>, <code>str</code>).</li>
-<li><code>_np_base</code>: Base type class (<code>np.integer</code>, <code>np.inexact</code>, <code>np.bool_</code>, <code>np.str_</code>) used to decide whether normalized array outputs should remain NumPy arrays or convert to Python lists.</li>
-</ul>
-</li>
-<li><strong>Hierarchy of Primitives</strong>:<ul>
-<li><strong><code>Number</code></strong> <em>(Abstract)</em>: Base for numeric types.<ul>
-<li><strong><code>ExactNumber</code></strong>: Integer types (<code>np.integer</code>). Implemented by <code>m_int</code> and concrete subclasses: <code>m_int8</code>, <code>m_int16</code>, <code>m_int32</code>, <code>m_int64</code>.</li>
-<li><strong><code>InexactNumber</code></strong>: Floating-point and complex types (<code>np.inexact</code>). Implemented by <code>m_float</code> (<code>m_float16</code>, <code>m_float32</code>, <code>m_float64</code>) and <code>m_complex</code> (<code>m_complex128</code>).</li>
-</ul>
-</li>
-<li><strong><code>m_bool</code></strong>: Boolean values (<code>bool</code> or <code>np.bool_</code>).</li>
-<li><strong><code>m_str</code></strong>: String values (<code>str</code> or <code>np.str_</code>).</li>
-</ul>
-</li>
-</ul>
-<h3 id="nonprimitive-types"><code>NonPrimitive</code> Types<a class="headerlink" href="#nonprimitive-types" title="Permanent link">¶</a></h3>
-<p><code>NonPrimitive</code> is the base class for rich domain-specific types.
-Unlike primitives, <code>NonPrimitive</code> classes execute element-wise operations via template methods <code>_normalize_impl()</code> and <code>_serialize_impl()</code>.</p>
-<p>Supported <code>NonPrimitive</code> types:</p>
-<ul>
-<li><strong><code>Datetime</code></strong>: Converts strings (via <code>dateutil</code>), Unix timestamps, <code>date</code>, <code>pd.Timestamp</code>, or <code>np.datetime64</code> into UTC-aware <code>datetime.datetime</code> objects. Serializes to ISO-8601 strings.</li>
-<li><strong><code>Unit</code></strong>: Converts string unit declarations or <code>pint.Quantity</code> objects to <code>pint.Unit</code> instances while validating physical dimensionality using <code>check_dimensionality</code>.</li>
-<li><strong><code>Enum</code></strong>: String enumerations configured with a fixed set of allowed string values and optional description mappings (<code>m_descriptions</code>).</li>
-<li><strong><code>JSON</code></strong>: Validates dictionary inputs and standardizes key-value structures using <code>orjson</code>.</li>
-<li><strong><code>Bytes</code></strong>: Handles raw byte strings or base64-encoded ASCII strings.</li>
-<li><strong><code>URL</code> / <code>File</code></strong>: Validates uniform resource locators and file relative path references within NOMAD archives.</li>
-<li><strong><code>Capitalized</code></strong>: Coerces input strings to capitalized format (<code>value.capitalize()</code>).</li>
-<li><strong><code>Dimension</code></strong>: Represents matrix/tensor dimension bounds (integers or dimension symbols).</li>
-<li><strong><code>Callable</code></strong>: Validates callable Python objects and optional argument counts (<code>nargs</code>).</li>
-<li><strong><code>Any</code></strong>: Transparent pass-through type.</li>
-</ul>
-<h3 id="reference-types">Reference Types<a class="headerlink" href="#reference-types" title="Permanent link">¶</a></h3>
-<ul>
-<li><strong><code>Reference</code> / <code>QuantityReference</code></strong>: Handle typed cross-references to other sections or quantities across archives. Users typically do not need to handle those types manually.</li>
-</ul>
-<h2 id="core-methods-and-mechanics">Core Methods and Mechanics<a class="headerlink" href="#core-methods-and-mechanics" title="Permanent link">¶</a></h2>
-<h3 id="normalizevalue-kwargs"><code>normalize(value, **kwargs)</code><a class="headerlink" href="#normalizevalue-kwargs" title="Permanent link">¶</a></h3>
-<p>The <code>normalize()</code> method is the workhorse of the type system.
-It takes raw, unstructured, or parsed input data and converts it into a valid, strongly-typed internal representation.
-All the normalization, validation, etc. shall happen in this method.</p>
-<p><strong><em>It is important to ensure the value returned is valid and complies with the definition as no additional checks will performed and other parts of the system expect only valid data.</em></strong></p>
-<p>The parent section that contains the destination data is available via <code>kwargs</code>, for example, <code>section=kwargs.get('section')</code>.
-This may be useful when interactions with the parent container is necessary.</p>
-<h4 id="normalization-pipeline-for-primitives">Normalization Pipeline for Primitives<a class="headerlink" href="#normalization-pipeline-for-primitives" title="Permanent link">¶</a></h4>
-<ul>
-<li><strong>Unit &amp; Magnitude Extraction</strong>: If <code>value</code> is a <code>pint.Quantity</code>, <code>normalize()</code> extracts its numerical magnitude (<code>extract_magnitude</code>). If a target unit is configured on the definition, it converts the quantity to the definition's unit before extracting the magnitude.</li>
-<li><strong>Scalar Normalization</strong>:<ul>
-<li>Checks if input type matches <code>_dtype</code>.</li>
-<li>If auto-conversion is disabled (<code>_disable_auto_conversion</code>) and types differ, raises <code>ValueError</code>.</li>
-<li>Checks explicit convertibility via <code>convertible_from()</code>.</li>
-<li>Attempts safe type conversion or close numeric comparison (<code>np.isclose</code>).</li>
-</ul>
-</li>
-<li><strong>Array Normalization</strong>:<ul>
-<li>Converts input (<code>pd.DataFrame</code>, <code>pd.Series</code>, <code>list</code>, <code>tuple</code>, <code>np.ndarray</code>) to a NumPy array.</li>
-<li>Performs dtype casting safely (<code>array.astype(self._dtype, casting='safe')</code>).</li>
-<li>Converts back to Python lists if <code>_dtype</code> is a pure Python type rather than a NumPy base type.</li>
-<li>Applies <code>_check_shape()</code> to enforce array dimensions against <code>self.shape</code>.</li>
-</ul>
-</li>
-</ul>
-<p><strong><em>Although at the current stage it makes little to no difference as eventually all data is stored in a JSON-compatible format, the validation also considers strong safe type conversion in such a way that no data loss could potentially occur.</em></strong></p>
-<h4 id="normalization-pipeline-for-nonprimitives">Normalization Pipeline for NonPrimitives<a class="headerlink" href="#normalization-pipeline-for-nonprimitives" title="Permanent link">¶</a></h4>
-<ul>
-<li>Enforces 1D/scalar shape constraints via <code>_check_shape()</code>.</li>
-<li>Iterates over elements (for lists) or directly invokes <code>_normalize_impl(value, **kwargs)</code> for scalars.</li>
-</ul>
-<h3 id="serializevalue-kwargs"><code>serialize(value, **kwargs)</code><a class="headerlink" href="#serializevalue-kwargs" title="Permanent link">¶</a></h3>
-<p><code>serialize()</code> converts valid internal runtime values (e.g., NumPy arrays, <code>datetime</code> objects, <code>pint.Unit</code> objects) into standard JSON-serializable structures (dicts, primitives, lists).</p>
-<ul>
-<li><strong>Transform Hooks</strong>: Accepts an optional <code>transform(val, path)</code> callback, enabling recursive transformation of array elements or scalar fields during serialization.</li>
-<li><strong>Primitive Serialization</strong>: Converts NumPy arrays (<code>tolist()</code>) and scalar generics (<code>item()</code>) into standard Python lists and primitives.</li>
-<li><strong>NonPrimitive Serialization</strong>: Delegates element-wise conversion to <code>_serialize_impl()</code>. For instance, <code>Datetime</code> calls <code>isoformat()</code>, <code>Unit</code> returns <code>str(value)</code>, and <code>Bytes</code> encodes bytes to base64 ASCII strings.</li>
-</ul>
-<h3 id="serialize_self"><code>serialize_self()</code><a class="headerlink" href="#serialize_self" title="Permanent link">¶</a></h3>
-<p>Serializes the metadata of the <code>Datatype</code> object itself into a dictionary containing <code>type_kind</code>, <code>type_data</code>, and active flags.
-This is mainly used in serializing the schema.</p>
-<p>Example output for <code>m_int32</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">{</span><span class="s1">'type_kind'</span><span class="p">:</span> <span class="s1">'numpy'</span><span class="p">,</span> <span class="s1">'type_data'</span><span class="p">:</span> <span class="s1">'int32'</span><span class="p">,</span> <span class="s1">'disable_shape_check'</span><span class="p">:</span> <span class="kc">False</span><span class="p">}</span>
-</code></pre></div>
-<h3 id="type-resolver-normalize_typevalue">Type Resolver: <code>normalize_type(value)</code><a class="headerlink" href="#type-resolver-normalize_typevalue" title="Permanent link">¶</a></h3>
-<p><code>normalize_type()</code> serves as a central factory function that parses flexible shorthand type declarations into concrete <code>Datatype</code> instances.
-It supports:</p>
-<ul>
-<li><strong>Strings</strong>: <code>'string'</code> -&gt; <code>m_str()</code>, <code>'boolean'</code> -&gt; <code>m_bool()</code>, <code>'np.float64'</code> -&gt; <code>m_float64()</code>, <code>'datetime'</code> -&gt; <code>Datetime()</code>, <code>'json'</code> -&gt; <code>JSON()</code>, etc.</li>
-<li><strong>Python Types</strong>: <code>int</code> -&gt; <code>m_int32()</code>, <code>float</code> -&gt; <code>m_float64()</code>, <code>str</code> -&gt; <code>m_str()</code>, <code>bool</code> -&gt; <code>m_bool()</code>, <code>datetime</code> -&gt; <code>Datetime()</code>.</li>
-<li><strong>NumPy Types</strong>: <code>np.int16</code>, <code>np.float32</code>, <code>np.complex128</code>, <code>np.bool_</code>.</li>
-<li><strong>Dictionaries</strong>: Reconstructs types from <code>serialize_self()</code> output dictionaries.</li>
-</ul>
-<h2 id="how-to-add-a-new-type-to-the-system">How to Add a New Type to the System<a class="headerlink" href="#how-to-add-a-new-type-to-the-system" title="Permanent link">¶</a></h2>
+<h1 id="how-to-add-a-new-type">How to add a new type<a class="headerlink" href="#how-to-add-a-new-type" title="Permanent link">¶</a></h1>
 <p>Adding a custom type involves subclassing either <code>NonPrimitive</code> (for custom objects/strings) or <code>Primitive</code> (for scalar/array types), implementing required serialization and normalization methods, and registering the type in <code>normalize_type()</code>.</p>
 <p>The following checklist can be used.</p>
 <ul>
@@ -4850,98 +4280,6 @@ It supports:</p>
 <li>Step 4: Implement <code>standard_type(self)</code> and <code>serialize_self()</code>: Specify the generic Python type name (used by schema mappers) and self-serialization metadata dictionary.</li>
 <li>Step 5: Register in <code>normalize_type()</code>: Add string lookup aliases for your new type inside <code>normalize_type()</code>.</li>
 </ul>
-<h2 id="summary-matrix-of-built-in-data-types">Summary Matrix of Built-in Data Types<a class="headerlink" href="#summary-matrix-of-built-in-data-types" title="Permanent link">¶</a></h2>
-<p>The following are common types that can be used.</p>
-<table>
-<thead>
-<tr>
-<th>Type Class</th>
-<th>Python / Runtime Type</th>
-<th>Example Normalized Input</th>
-<th>Serialized Output</th>
-<th>Target Mongo / Elastic / Schema</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>m_int32</code></td>
-<td><code>int</code> or <code>np.int32</code></td>
-<td><code>42</code>, <code>"42"</code></td>
-<td><code>42</code></td>
-<td><code>IntField</code> / <code>integer</code></td>
-</tr>
-<tr>
-<td><code>m_float64</code></td>
-<td><code>float</code> or <code>np.float64</code></td>
-<td><code>3.14</code>, <code>100 cm</code> (mag)</td>
-<td><code>3.14</code></td>
-<td><code>FloatField</code> / <code>double</code></td>
-</tr>
-<tr>
-<td><code>m_complex128</code></td>
-<td><code>complex</code> / <code>np.complex128</code></td>
-<td><code>1+2j</code>, <code>{'re':1,'im':2}</code></td>
-<td><code>{'re': 1.0, 'im': 2.0}</code></td>
-<td>Custom object / string</td>
-</tr>
-<tr>
-<td><code>m_bool</code></td>
-<td><code>bool</code> / <code>np.bool_</code></td>
-<td><code>True</code>, <code>"True"</code></td>
-<td><code>True</code></td>
-<td><code>BooleanField</code> / <code>boolean</code></td>
-</tr>
-<tr>
-<td><code>m_str</code></td>
-<td><code>str</code> / <code>np.str_</code></td>
-<td><code>"NOMAD"</code></td>
-<td><code>"NOMAD"</code></td>
-<td><code>StringField</code> / <code>keyword</code></td>
-</tr>
-<tr>
-<td><code>Datetime</code></td>
-<td><code>datetime.datetime</code> (UTC)</td>
-<td><code>"2026-08-25"</code></td>
-<td><code>"2026-08-25T00:00:00+00:00"</code></td>
-<td><code>DateTimeField</code> / <code>date</code></td>
-</tr>
-<tr>
-<td><code>Unit</code></td>
-<td><code>pint.Unit</code></td>
-<td><code>"joule"</code>, <code>"J"</code></td>
-<td><code>"joule"</code></td>
-<td><code>StringField</code> / <code>keyword</code></td>
-</tr>
-<tr>
-<td><code>Enum</code></td>
-<td><code>str</code></td>
-<td><code>"running"</code></td>
-<td><code>"running"</code></td>
-<td><code>StringField</code> / <code>keyword</code></td>
-</tr>
-<tr>
-<td><code>JSON</code></td>
-<td><code>dict</code></td>
-<td><code>{'a': 1}</code></td>
-<td><code>{'a': 1}</code></td>
-<td><code>DictField</code> / <code>object</code></td>
-</tr>
-<tr>
-<td><code>Bytes</code></td>
-<td><code>bytes</code></td>
-<td><code>b"data"</code>, <code>"ZGF0YQ=="</code></td>
-<td><code>"ZGF0YQ=="</code></td>
-<td>String / Binary</td>
-</tr>
-<tr>
-<td><code>URL</code></td>
-<td><code>str</code></td>
-<td><code>"https://nomad-lab.eu"</code></td>
-<td><code>"https://nomad-lab.eu"</code></td>
-<td><code>StringField</code> / <code>keyword</code></td>
-</tr>
-</tbody>
-</table>
 
 
 
@@ -4994,13 +4332,13 @@ It supports:</p>
         
         
           
-          <a href="schema_definition.html" class="md-footer__link md-footer__link--next" aria-label="Next: NOMAD Schema System">
+          <a href="../../examples/overview.html" class="md-footer__link md-footer__link--next" aria-label="Next: Overview">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                NOMAD Schema System
+                Overview
               </div>
             </div>
             <div class="md-footer__button md-icon">
