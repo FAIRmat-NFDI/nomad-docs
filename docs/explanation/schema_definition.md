@@ -52,7 +52,6 @@ These properties include:
 - `name`, a string
 - `description`, a string
 - `links`, a list of URLs
-- `categories`, a list of references to category definitions
 - `annotations`, a list of `Annotations`
 
 - *derived*: `qualified_name`
@@ -70,7 +69,7 @@ Properties are mapped to Python *descriptors*.
 
 - `section` specialized `parent` relation with the containing `Section`
 
-#### SubSection
+### SubSection
 
 Subsections establish the hierarchical relationships between different sections.
 They are defined as class attributes using the `SubSection` descriptor, pointing from a parent section to a child section definition.
@@ -84,7 +83,7 @@ This mechanism is essential for representing lists of entities, such as multiple
 
 - *constraint*: subsections are not circular
 
-### Quantity (incl. dimensions, incl. references)
+### Quantity
 
 Quantities define the actual data fields that reside within a section.
 They are defined as class attributes on an `Section` subclass using the `Quantity` descriptor.
@@ -106,13 +105,12 @@ A `Quantity` definition is a special and concrete `Property` definition:
 - `type`, a primitive or MEnum type
 - `unit`, a (computed) unit, e.g. `units.F * units.m`
 - `derived_from`, a list of references to other quantity definitions
-- `synonym`, a reference to another quantity definition
 
 *Dimensions* are quantity definitions with empty shape and int type.
 
 - *constraint*: `synonym`, `derived_from`, and dimensions come from the same section
 
-### Section (incl. references)
+### Section
 
 A section definition is a special definition.
 Sections are the primary structural nodes.
@@ -188,6 +186,9 @@ It contains a repeated Subsection pointing to the `Atom` class.
 The `Atom` class defines specific quantities with explicit types and shapes, ensuring that positions are always arrays of floats.
 
 The type of quantities is further explained in [this page](./schema_type.md).
+
+A more complex schema may additionally include advanced settings such as attributes that may control how the underlying data would be presented in multiple places.
+The usage of which is not covered here for brevity.
 
 ### Inheritance and Polymorphism
 
