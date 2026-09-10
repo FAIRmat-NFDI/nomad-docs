@@ -3656,8 +3656,7 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Property">
-      <ul class="md-nav__list">
+</li>
         
           <li class="md-nav__item">
   <a href="#subsection" class="md-nav__link">
@@ -3670,16 +3669,11 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-        
           <li class="md-nav__item">
-  <a href="#quantity-incl-dimensions-incl-references" class="md-nav__link">
+  <a href="#quantity" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Quantity (incl. dimensions, incl. references)
+        Quantity
       
     </span>
   </a>
@@ -3687,10 +3681,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#section-incl-references" class="md-nav__link">
+  <a href="#section" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Section (incl. references)
+        Section
       
     </span>
   </a>
@@ -4612,8 +4606,7 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Property">
-      <ul class="md-nav__list">
+</li>
         
           <li class="md-nav__item">
   <a href="#subsection" class="md-nav__link">
@@ -4626,16 +4619,11 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-        
           <li class="md-nav__item">
-  <a href="#quantity-incl-dimensions-incl-references" class="md-nav__link">
+  <a href="#quantity" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Quantity (incl. dimensions, incl. references)
+        Quantity
       
     </span>
   </a>
@@ -4643,10 +4631,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#section-incl-references" class="md-nav__link">
+  <a href="#section" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Section (incl. references)
+        Section
       
     </span>
   </a>
@@ -4992,7 +4980,6 @@ The abstract definition for elements barely defines a set of properties that is 
 <li><code>name</code>, a string</li>
 <li><code>description</code>, a string</li>
 <li><code>links</code>, a list of URLs</li>
-<li><code>categories</code>, a list of references to category definitions</li>
 <li>
 <p><code>annotations</code>, a list of <code>Annotations</code></p>
 </li>
@@ -5011,7 +4998,7 @@ Properties are mapped to Python <em>descriptors</em>.</p>
 <ul>
 <li><code>section</code> specialized <code>parent</code> relation with the containing <code>Section</code></li>
 </ul>
-<h4 id="subsection">SubSection<a class="headerlink" href="#subsection" title="Permanent link">¶</a></h4>
+<h3 id="subsection">SubSection<a class="headerlink" href="#subsection" title="Permanent link">¶</a></h3>
 <p>Subsections establish the hierarchical relationships between different sections.
 They are defined as class attributes using the <code>SubSection</code> descriptor, pointing from a parent section to a child section definition.
 This relationship forms a directed acyclic graph, organizing data into a strict tree structure.
@@ -5027,7 +5014,7 @@ This mechanism is essential for representing lists of entities, such as multiple
 <p><em>constraint</em>: subsections are not circular</p>
 </li>
 </ul>
-<h3 id="quantity-incl-dimensions-incl-references">Quantity (incl. dimensions, incl. references)<a class="headerlink" href="#quantity-incl-dimensions-incl-references" title="Permanent link">¶</a></h3>
+<h3 id="quantity">Quantity<a class="headerlink" href="#quantity" title="Permanent link">¶</a></h3>
 <p>Quantities define the actual data fields that reside within a section.
 They are defined as class attributes on an <code>Section</code> subclass using the <code>Quantity</code> descriptor.
 Each Quantity must specify a data type, which dictates how values are parsed, validated, and serialized.
@@ -5047,13 +5034,12 @@ You can attach extensive metadata to quantities, including descriptions, default
 <li><code>type</code>, a primitive or MEnum type</li>
 <li><code>unit</code>, a (computed) unit, e.g. <code>units.F * units.m</code></li>
 <li><code>derived_from</code>, a list of references to other quantity definitions</li>
-<li><code>synonym</code>, a reference to another quantity definition</li>
 </ul>
 <p><em>Dimensions</em> are quantity definitions with empty shape and int type.</p>
 <ul>
 <li><em>constraint</em>: <code>synonym</code>, <code>derived_from</code>, and dimensions come from the same section</li>
 </ul>
-<h3 id="section-incl-references">Section (incl. references)<a class="headerlink" href="#section-incl-references" title="Permanent link">¶</a></h3>
+<h3 id="section">Section<a class="headerlink" href="#section" title="Permanent link">¶</a></h3>
 <p>A section definition is a special definition.
 Sections are the primary structural nodes.
 They are defined by subclassing the <code>Definition</code> base class provided by the <code>nomad.metainfo</code> module.
@@ -5126,6 +5112,8 @@ Here is a comprehensive example demonstrating a basic schema definition.</p>
 It contains a repeated Subsection pointing to the <code>Atom</code> class.
 The <code>Atom</code> class defines specific quantities with explicit types and shapes, ensuring that positions are always arrays of floats.</p>
 <p>The type of quantities is further explained in <a href="schema_type.html">this page</a>.</p>
+<p>A more complex schema may additionally include advanced settings such as attributes that may control how the underlying data would be presented in multiple places.
+The usage of which is not covered here for brevity.</p>
 <h3 id="inheritance-and-polymorphism">Inheritance and Polymorphism<a class="headerlink" href="#inheritance-and-polymorphism" title="Permanent link">¶</a></h3>
 <p>The object-oriented inheritance principles is fully supported.
 You can create abstract base sections to define common properties shared across multiple concrete implementations.
