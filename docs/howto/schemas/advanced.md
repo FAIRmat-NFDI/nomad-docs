@@ -5,6 +5,9 @@ but which become useful as schemas grow: modelling tabular scientific data as da
 and reading sections by name at runtime, inspecting schemas programmatically, and building
 definitions dynamically.
 
+It continues the `Sample` / `Process` / `Instrument` example from
+{{ nav_link("howto/schemas/define.md", breadcrumb=True) }}.
+
 ## Model data frames
 
 On top of sections, quantities and subsections, the Metainfo provides a mechanism for modelling
@@ -115,16 +118,16 @@ When the property you want to set is only known at runtime, use `m_set` and `m_g
 attribute access. Both accept property names and their aliases:
 
 ```python
-system.m_set('n_atoms', 3)
-value = system.m_get('n_atoms')
+sample.m_set('name', 'S1')
+value = sample.m_get('name')
 ```
 
 For repeating subsections, `m_get` takes an `index`, which may be an integer, a slice or a string,
 and `as_list=True` forces a list result even for a single match:
 
 ```python
-second = my_molecule.m_get('atoms', index=1)
-just_one = my_molecule.m_get('atoms', index=1, as_list=True)
+second = sample.m_get('processes', index=1)
+just_one = sample.m_get('processes', index=1, as_list=True)
 ```
 
 !!! warning "Attention"
@@ -138,9 +141,9 @@ Every section class carries an `m_def` attribute holding its definition, which m
 schema-agnostic traversal straightforward:
 
 ```python
-print(System.m_def.name)  # Outputs: "System"
+print(Sample.m_def.name)  # Outputs: "Sample"
 
-for quantity_def in System.m_def.quantities:
+for quantity_def in Sample.m_def.quantities:
     print(f'Quantity Name: {quantity_def.name}')
     print(f'Data Type: {quantity_def.type}')
     print(f'Description: {quantity_def.description}')
@@ -157,7 +160,7 @@ one, validating the data against the schema as it goes. This pair is the backbon
 API:
 
 ```python
-system = System.m_from_dict(serialized_data)
+sample = Sample.m_from_dict(serialized_data)
 ```
 
 The available serialization options are listed in
@@ -172,6 +175,58 @@ object itself acts as a factory for completely generic structures.
 
 This is how NOMAD realizes YAML schemas: user definitions in `.archive.yaml` files are translated
 into Metainfo definitions at runtime.
+
+## Extend an existing section
+
+Sometimes you need to add properties to a section you do not own — typically a parser adding
+code-specific quantities to a shared definition. Use `extends_base_section` together with an
+`x_<name>_` prefix on every added property:
+
+```python
+from nomad.datamodel.metainfo.workflow import Workflow
+from nomad.metainfo import MEnum, Quantity, Section
+
+
+class MyCodeRun(Workflow):
+    m_def = Section(extends_base_section=True)
+    x_mycode_execution_mode = Quantity(
+        type=MEnum('hpc', 'parallel', 'single'), description='...'
+    )
+```
+
+Unlike normal inheritance, this modifies the base section itself, so every entry using `Workflow`
+gains the new property. Use it sparingly and only for parser-specific additions; prefer a subsection
+or a normal specialization where you can.
+
+!!! note "Python only"
+    There is no YAML equivalent. A YAML schema can inherit from an existing section, but it cannot
+    add properties to one that already exists.
+
+## Resolve references lazily with proxies
+
+References are serialized automatically by `m_to_dict`. On deserialization with `m_from_dict` they
+are **not** resolved immediately, because the target section may not be loaded yet. Instead they are
+stored as `MProxy` instances, which are transparently replaced by the real section the first time the
+quantity is accessed. This is what makes references between entries — and even between NOMAD
+installations — possible.
+
+When the target is not yet defined at the point where you need it — a circular dependency, or simply
+Python import order — use `SectionProxy` with the name of the definition:
+
+```python
+from nomad.metainfo import Quantity, SectionProxy
+
+
+class Process(ArchiveSection):
+    instrument = Quantity(type=SectionProxy('Instrument'))
+```
+
+The string is a path within the available definitions, so this works as long as `Instrument` is
+eventually defined in the same package.
+
+!!! note
+    YAML schemas hit the same problem from the other side: two schema packages in two entries cannot
+    reference each other, because each package must be fully loaded before another can use it.
 
 ## Categories
 

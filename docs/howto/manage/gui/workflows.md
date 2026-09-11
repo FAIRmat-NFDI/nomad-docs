@@ -82,7 +82,7 @@ This file is constructed according to NOMAD's schemas for [Archive Files](../../
 <a id="path-specification"></a>
 **Considerations for archive path specification:**
 
-- In general, the archive path can be represented as `<prefix>/<entry identifier>/<relative archive path>` (see also [How-to guides > Work with schemas > Link data with references](../../schemas/references.md#different-forms-of-references)).
+- In general, the archive path can be represented as `<prefix>/<entry identifier>/<relative archive path>` (see also [How-to guides > Work with schemas > Link data with references](../../../reference/metainfo.md#reference-forms)).
 
 - The prefix for the archive path is given by: 1. `../upload/archive/mainfile` for entries that are contained within the same upload as the workflow YAML, or 2. `../uploads/<upload_id>/archive/` for entries contained in distinct uploads as the workflow YAML, where `<upload_id>` is a placeholders for the upload id, which can be obtained from the Overview page of any entry.
 

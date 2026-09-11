@@ -61,9 +61,9 @@ The `load` method returns a `nomad.metainfo.SchemaPackage` instance holding your
 definitions. Writing those definitions has its own section of the documentation:
 
 - {{ nav_link("howto/schemas/schemas.md", breadcrumb=True) }} — choose between Python and YAML.
-- {{ nav_link("howto/schemas/python.md", breadcrumb=True) }} — define sections, quantities and
+- {{ nav_link("howto/schemas/define.md", breadcrumb=True) }} — define sections, quantities and
   normalize functions in Python.
-- {{ nav_link("howto/schemas/base_sections.md", breadcrumb=True) }} — reuse and extend existing definitions.
+- {{ nav_link("howto/schemas/advanced.md", breadcrumb=True) }} — reuse and extend existing definitions.
 - {{ nav_link("howto/schemas/evolution.md", breadcrumb=True) }} — version and migrate a schema package.
 - {{ nav_link("reference/metainfo.md", breadcrumb=True) }} — the schema language reference.
 

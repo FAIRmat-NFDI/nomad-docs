@@ -49,7 +49,7 @@ We will make use of the tabular parser in a custom yaml schema. To obtain some s
 
     <!-- TODO: a link to the part upload etc should be inserted -->
 
-1) a tabular data file must be dragged in the annotated [quantity](../howto/schemas/yaml.md#quantities) in order for NOMAD to parse it (the quantity is called `data_file` in the following examples)
+1) a tabular data file must be dragged in the annotated [quantity](../howto/schemas/define.md#add-quantities) in order for NOMAD to parse it (the quantity is called `data_file` in the following examples)
 
 #### To be an Entry or not to be an Entry
 
@@ -63,7 +63,7 @@ To use this parser, three kinds of annotation must be included in the schema: `t
 In the following sections, two examples will be illustrated. A [tabular data file](../howto/schemas/tabular.md#preparing-the-tabular-data-file) is parsed into one or more [data archive files](../explanation/data.md#data), their structure is based on a [schema archive file](../explanation/data.md#schema). NOMAD archive files are denoted as Entries.
 
 !!! note
-    From the NOMAD point of view, a schema file and a data file are the same kind of file where different sections have been filled (see [archive files description](../explanation/data.md#archive-files-a-shared-entry-structure)). Specifically, a schema file has its `definitions` section filled while a data file will have its `data` section filled. See [How to write a schema](../howto/schemas/yaml.md#uploading-schema-packages) for a more complete description of an archive file.
+    From the NOMAD point of view, a schema file and a data file are the same kind of file where different sections have been filled (see [archive files description](../explanation/data.md#archive-files-a-shared-entry-structure)). Specifically, a schema file has its `definitions` section filled while a data file will have its `data` section filled. See [How to write a schema](../howto/schemas/schemas.md#get-your-schema-into-nomad) for a more complete description of an archive file.
 
 #### Example 1
 

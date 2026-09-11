@@ -45,11 +45,7 @@ nav:
               - Make Graph API calls: howto/manage/program/graph_api.md # TODO consolidate into a single page with supporting explanation/reference material
       - Work with schemas:
           - Start working with schemas: howto/schemas/schemas.md
-          - Write Python schemas: howto/schemas/python.md
-          - Write YAML schemas: howto/schemas/yaml.md
-          - Use base sections: howto/schemas/base_sections.md
-          - Link data with references: howto/schemas/references.md
-          - Annotate schemas for the GUI: howto/schemas/annotations.md
+          - Define a schema: howto/schemas/define.md
           - Parse tabular data: howto/schemas/tabular.md
           - Handle schema evolution: howto/schemas/evolution.md
           - Advanced schema concepts: howto/schemas/advanced.md
@@ -182,6 +178,9 @@ theme:
     - navigation.top
     - content.code.copy
     - content.code.annotate
+    # Selecting a language in one content tab switches every tab with the same
+    # label on the page, so a reader picks Python or YAML once.
+    - content.tabs.link
   custom_dir: overrides
   icon:
     logo: nomad/nomad-logo-unfilled
@@ -196,6 +195,11 @@ markdown_extensions:
       anchor_linenums: true
   - pymdownx.inlinehilite
   - pymdownx.snippets
+  # Content tabs, used to switch code examples between Python and YAML.
+  # Do not add `slugify`: its tree processor runs after MkDocs collects anchors,
+  # so slugged tab ids would fail `mkdocs build --strict`.
+  - pymdownx.tabbed:
+      alternate_style: true
   - mkdocs-click
   - pymdownx.extra
   - toc:
@@ -230,8 +234,8 @@ plugins:
         "develop/gitlab.md": "howto/develop/contrib.md"
         "howto/manage/program/graph-api/basics.md": "howto/manage/program/graph_api.md"
         "tutorial/training_resources.md": "reference/tutorials.md"
-        "howto/manage/gui/yaml.md": "howto/schemas/yaml.md"
-        "howto/manage/gui/elns.md": "howto/schemas/annotations.md"
+        "howto/manage/gui/yaml.md": "howto/schemas/define.md"
+        "howto/manage/gui/elns.md": "howto/schemas/define.md"
         "howto/manage/gui/tabular.md": "howto/schemas/tabular.md"
   - glightbox
   # - git-revision-date-localized

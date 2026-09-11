@@ -79,7 +79,7 @@ element-wise operations through the template methods `_normalize_impl()` and `_s
 
 `Reference` and `QuantityReference` handle typed cross-references between sections and quantities.
 You will rarely need to touch them directly — see
-{{ nav_link("howto/schemas/references.md", breadcrumb=True) }}.
+{{ nav_link("howto/schemas/define.md", breadcrumb=True) }}.
 
 ## `normalize(value, **kwargs)`
 
