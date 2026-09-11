@@ -17,7 +17,7 @@ out the application and this documentation.
 
 *Annotations* are part of data [schemas](#schema) and they describe aspects that are not
 directly defining the type or shape of data. They often allow to alter how certain data is
-managed, represented, or edited. See [annotations in the schema documentation](../howto/manage/gui/elns.md#annotations).
+managed, represented, or edited. See [Reference > Annotations](./annotations.md).
 
 ## App
 
@@ -185,7 +185,7 @@ definitions. Schemas are organized in [schema packages](#schema-package), i.e. c
 
 ## Schema package
 
-*Schema packages* contain a collection of [schema](#schema) definitions. Schema packages may be defined as [YAML files](../howto/manage/gui/yaml.md) or in Python as [plugin entry points](../howto/plugins/types/schema_packages.md).
+*Schema packages* contain a collection of [schema](#schema) definitions. Schema packages may be defined as [YAML files](../howto/schemas/yaml.md) or in Python as [plugin entry points](../howto/schemas/python.md).
 
 ## Section and Subsection
 

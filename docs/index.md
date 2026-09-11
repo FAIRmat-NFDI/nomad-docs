@@ -31,6 +31,7 @@ Accomplish specific tasks by following practical instructions.
 
 - {{ nav_link("howto/manage/gui/upload.md") }}: publish data through the graphical interface.
 - {{ nav_link("howto/manage/program/api.md") }}: automate data access and management.
+- {{ nav_link("howto/schemas/schemas.md") }}: define how your data is structured.
 - {{ nav_link("howto/plugins/plugins.md") }}: develop extensions for NOMAD.
 - {{ nav_link("howto/oasis/install.md") }}: install a self-hosted NOMAD deployment.
 

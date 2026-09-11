@@ -107,10 +107,10 @@ on all entries and the normalizer might decide to do something or not, depending
 it sees in the processed data.
 
 Normalize functions are special functions implemented as part of section definitions
-in [Python schemas](../howto/plugins/types/schema_packages.md#schema-packages-python-vs-yaml).
+in [Python schemas](../howto/schemas/schemas.md#choose-python-or-yaml).
 There is a special normalizer that will go through all processed data and execute these
 function if they are defined. Normalize functions get the respective section instance as
-input. This allows [schema plugin](../howto/plugins/types/schema_packages.md) developers to add normalizing to their sections.
+input. This allows [schema plugin](../howto/schemas/python.md) developers to add normalizing to their sections.
 Read about our [structured data](./data.md) to learn more about the different sections.
 
 ### Storing and indexing

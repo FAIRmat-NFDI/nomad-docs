@@ -34,9 +34,6 @@ nav:
               - Enter data with ELNs: howto/manage/gui/eln.md
               - Analyze data in NORTH: howto/manage/gui/north.md # TODO rename depending on how-to content
               - Create custom workflows: howto/manage/gui/workflows.md
-              - Write a YAML schema package: howto/manage/gui/yaml.md # TODO consolidate with parts of the next 2 pages
-              - Create custom ELNs: howto/manage/gui/elns.md
-              - Parse tabular data: howto/manage/gui/tabular.md
           - Work programmatically:
               # - Install nomad-lab: howto/programmatic/pythonlib.md # TODO Integrate into "Use the API"
               - Use the API: howto/manage/program/api.md # TODO separate into How-to and Explanation/Reference
@@ -46,6 +43,16 @@ nav:
               - Access processed data: howto/manage/program/archive_query.md
               - Transform JSON data structures: howto/manage/program/json_transformer.md
               - Make Graph API calls: howto/manage/program/graph_api.md # TODO consolidate into a single page with supporting explanation/reference material
+      - Work with schemas:
+          - Start working with schemas: howto/schemas/schemas.md
+          - Write Python schemas: howto/schemas/python.md
+          - Write YAML schemas: howto/schemas/yaml.md
+          - Use base sections: howto/schemas/base_sections.md
+          - Link data with references: howto/schemas/references.md
+          - Annotate schemas for the GUI: howto/schemas/annotations.md
+          - Parse tabular data: howto/schemas/tabular.md
+          - Handle schema evolution: howto/schemas/evolution.md
+          - Advanced schema concepts: howto/schemas/advanced.md
       - Develop plugins:
           - Start plugin development: howto/plugins/plugins.md # TODO split former Introduction to plugins into short guiding overview + explanation page
           # - Set up a development environment: howto/plugins/setup.md # TODO distro-dev setup + best practices
@@ -104,10 +111,7 @@ nav:
       - Overview: explanation/overview.md
       - From files to data: explanation/basics.md
       - Data structure: explanation/data.md
-      - NOMAD Schema - Type: explanation/schema_type.md
-      - NOMAD Schema - Definition and Data: explanation/schema_definition.md
-      - NOMAD Schema - Custom Package: explanation/schema_packages.md
-      - Base sections: explanation/base_sections.md # TODO rewrite as explanation
+      - The entity-activity model: explanation/base_sections.md
       - Processing: explanation/processing.md
       - Architecture: explanation/architecture.md
       - Workflows: explanation/workflows.md
@@ -117,7 +121,7 @@ nav:
       - NORTH: explanation/north.md
   - Reference:
       - Overview: reference/overview.md
-      # - reference/metainfo.md # TODO This file no longer exists ... was it lost somehow?
+      - Schema language: reference/metainfo.md
       - Configuration: reference/config.md
       - Annotations: reference/annotations.md
       - Base sections: reference/basesections.md
@@ -226,6 +230,9 @@ plugins:
         "develop/gitlab.md": "howto/develop/contrib.md"
         "howto/manage/program/graph-api/basics.md": "howto/manage/program/graph_api.md"
         "tutorial/training_resources.md": "reference/tutorials.md"
+        "howto/manage/gui/yaml.md": "howto/schemas/yaml.md"
+        "howto/manage/gui/elns.md": "howto/schemas/annotations.md"
+        "howto/manage/gui/tabular.md": "howto/schemas/tabular.md"
   - glightbox
   # - git-revision-date-localized
   # TODO Fix error in pipeline when this plugin is included

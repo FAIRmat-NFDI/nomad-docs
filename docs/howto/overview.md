@@ -20,6 +20,15 @@ Complete day-to-day tasks for managing, exploring, and analyzing data.
 </div>
 <div markdown="block">
 
+### Work with schemas
+
+Define how your data is structured, in YAML or in Python, and keep those definitions maintainable.
+
+{{ nav_list("Work with schemas") }}
+
+</div>
+<div markdown="block">
+
 ### Develop plugins
 
 Extend NOMAD with Python-based plugins and their entry points.

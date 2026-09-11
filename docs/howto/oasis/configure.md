@@ -643,6 +643,6 @@ We encourage you to review this notice periodically for any updates.
 This is an incomplete list of potential things to customize your NOMAD experience.
 
 - Learn [how to develop plugins](../plugins/plugins.md) that can be installed in an Oasis
-- Write YAML based [schemas](../manage/gui/yaml.md) and [ELNs](../manage/gui/elns.md)
-- Learn how to use the [tabular parser](../manage/gui/tabular.md) to manage data from XLS or CSV
+- Write YAML based [schemas](../schemas/yaml.md) and [ELNs](../schemas/annotations.md)
+- Learn how to use the [tabular parser](../schemas/tabular.md) to manage data from XLS or CSV
 - Add specialized [NORTH tools](../manage/gui/north.md)
