@@ -107,7 +107,7 @@ nav:
       - Overview: explanation/overview.md
       - From files to data: explanation/basics.md
       - Data structure: explanation/data.md
-      - The entity-activity model: explanation/base_sections.md
+      - Base sections: explanation/base_sections.md
       - Processing: explanation/processing.md
       - Architecture: explanation/architecture.md
       - Workflows: explanation/workflows.md

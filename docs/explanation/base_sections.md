@@ -1,4 +1,4 @@
-# The entity-activity model
+# Base sections
 
 A *base section* is a section definition that other definitions inherit from, so that custom schemas
 pick up both the properties and the *functionality* of definitions that already exist. This page
