@@ -97,7 +97,7 @@ class UnitCellVolumeNormalizer(SystemBasedNormalizer):
 
 For `SystemBasedNormalizer`, we implement the `_normalize_system` method. The parameter `is_representative` will be true for the `representative` systems. The representative system refers to the system that corresponds to the calculation result. It is determined by scanning the archive sections starting with `workflow2` until the system fitting the criterion is found. For example, it refers to the final step in a geometry optimization or other workflow.
 
-Of course, if you add new information to the archive, this also needs to be defined in the schema (see [How-to extend the schema](schema_packages.md#extending-existing-sections)). For example you could extend the section system with a special system definition that extends the existing section system definition:
+Of course, if you add new information to the archive, this also needs to be defined in the schema (see [How-to guides > Work with schemas > Use base sections](../../schemas/base_sections.md#extend-an-existing-section)). For example you could extend the section system with a special system definition that extends the existing section system definition:
 
 ```python
 import numpy as np

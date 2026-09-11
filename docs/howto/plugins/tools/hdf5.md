@@ -12,7 +12,7 @@ data is implemented. In the following we discuss two quantity types to enable th
 of large datasets to HDF5: `HDF5Reference` and `HDF5Dataset`. These are defined in
 `nomad.datamodel.hdf5`. Another class called `HDF5Normalizer` defined in
 `nomad.datamodel.metainfo.basesections` can be inherited
-[and used directly in a yaml schema](../../manage/gui/yaml.md#hdf5normalizer).
+[and used directly in a YAML schema](#hdf5normalizer).
 
 ## HDF5Reference
 
@@ -65,7 +65,7 @@ We use `write_dataset` to write our data into a raw HDF5 file in `test_upload` w
 filename and dataset location in `path`. Additionally, archive is required to resolve the
 upload metadata. We then assign the reference to the dataset to `value`. To reference a
 file in another upload, follow the same form for
-[reference values](../../manage/gui/yaml.md#different-forms-of-references) e.g.
+[reference values](../../schemas/references.md#different-forms-of-references) e.g.
 `/uploads/<upload_id>/raw/large_data.hdf5#group/large_field`.
 
 !!! important
@@ -187,6 +187,47 @@ class MySection(ArchiveSection):
     m_def = Section(a_h5web=H5WebAnnotation(paths=['my_sub/0']))
 
     my_sub = SubSection(sub_section=MySubSection, repeats=True)
+```
+
+## HDF5Normalizer
+
+A different flavor of ***reading*** HDF5 files into NOMAD quantities is through defining a
+[YAML schema](../../schemas/yaml.md) and inheriting `HDF5Normalizer` into base-sections. Two essential components
+of using `HDF5Normalizer` class is to first define a quantity that is annotated with `FileEditQuantity` field
+to enable one to drop/upload the `*.h5` file, and to define relevant quantities annotated with `path`
+attribute under `hdf5`. These quantities are then picked up by the normalizer to extract the values to be found
+denoted by the `path`. The supported `Hierarchical Data Format` file extensions are:
+
+- ```.h5```
+- ```.hdf5```
+- ```.he5```
+- ```.h5part```
+- ```.nxs```
+- ```.mat```
+- ```.nc4```
+
+A minimum example to import your hdf5 and map it to NOMAD quantities is by using the following custom schema:
+
+```yaml
+definitions:
+  name: 'hdf5'
+  sections:
+    Test_HDF5:
+      base_sections:
+        - 'nomad.datamodel.data.EntryData'
+        - 'nomad.datamodel.metainfo.basesections.HDF5Normalizer'
+      quantities:
+        datafile:
+          type: str
+          m_annotations:
+            eln:
+              component: FileEditQuantity
+        charge_density:
+          type: np.float32
+          shape: [ '*', '*', '*' ]
+          m_annotations:
+            hdf5:
+              path: '/path/to/charge_density'
 ```
 
 ## Metadata for large quantities

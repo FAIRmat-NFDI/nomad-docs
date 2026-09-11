@@ -2,12 +2,47 @@
 
 The `ArchiveQuery` allows you to search for entries and access their parsed and processed *archive* data
 at the same time. Furthermore, all data is accessible through a convenient Python interface
-based on the schema rather than plain JSON. See also this guide on using
-[NOMAD's Python schemas](../../plugins/types/schema_packages.md#use-python-schemas-to-work-with-data)
-to work with processed data.
+based on the schema rather than plain JSON.
 
 As a requirement, you have to install the `nomad-lab` Python package. Follow the
 [How to install NOMAD Python library](../../../howto/oasis/install.md#how-to-install-the-nomad-python-library) guide.
+
+## Wrap data with Python schema classes
+
+In Python, JSON data is typically represented as nested combinations of dictionaries
+and lists. Of course, you could work with this right away. To make it easier for Python
+programmers, the [NOMAD Python package](../../../howto/oasis/install.md#how-to-install-the-nomad-python-library) allows you to use this
+JSON data with a higher level interface, which provides the following advantages:
+
+- code completion in dynamic coding environments like Jupyter notebooks
+- a cleaner syntax that uses attributes instead of dictionary access
+- all higher dimensional numerical data is represented as numpy arrays
+- allows to navigate through references
+- numerical data has a Pint unit attached to it
+
+For each section the Python package contains a Python class that corresponds to its
+definition in the metainfo. You can use these classes to access `json_data` downloaded
+via API:
+
+```python
+from nomad.datamodel import EntryArchive
+
+archive = EntryArchive.m_from_dict(json_data)
+calc = archive.run[0].calculation[-1]
+total_energy_in_ev = calc.energy.total.value.to(units.eV).m
+formula = calc.system_ref.chemical_formula_reduced
+```
+
+Archive data can also be serialized into JSON again:
+
+```python
+import json
+
+print(json.dumps(calc.m_to_dict(), indent=2))
+```
+
+To define the schemas these classes come from, see
+{{ nav_link("howto/schemas/python.md", breadcrumb=True) }}.
 
 ## Getting started
 

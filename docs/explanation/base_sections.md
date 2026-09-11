@@ -1,9 +1,14 @@
-# Base sections
+# The entity-activity model
 
-As previously mentioned in [How to write a schema](../howto/manage/gui/yaml.md#base-sections-and-inheritance),
-base sections can be used when writing custom schemas to inherit properties and *functionality*
-from already defined sections. Here we explain the properties
-and functionality of specific base sections and how they can be used.
+A *base section* is a section definition that other definitions inherit from, so that custom schemas
+pick up both the properties and the *functionality* of definitions that already exist. This page
+explains the model NOMAD's built-in base sections are organized around, and what the most important
+ones mean.
+
+For instructions on inheriting from them, see
+[How-to guides > Work with schemas > Use base sections](../howto/schemas/base_sections.md). For the
+generated per-class listing of every quantity, see
+[Reference > Base sections](../reference/basesections.md).
 
 ## `datamodel.metainfo.basesections`
 
