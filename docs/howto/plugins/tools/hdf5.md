@@ -65,7 +65,7 @@ We use `write_dataset` to write our data into a raw HDF5 file in `test_upload` w
 filename and dataset location in `path`. Additionally, archive is required to resolve the
 upload metadata. We then assign the reference to the dataset to `value`. To reference a
 file in another upload, follow the same form for
-[reference values](../../schemas/references.md#different-forms-of-references) e.g.
+[reference values](../../../reference/metainfo.md#reference-forms) e.g.
 `/uploads/<upload_id>/raw/large_data.hdf5#group/large_field`.
 
 !!! important
@@ -192,7 +192,7 @@ class MySection(ArchiveSection):
 ## HDF5Normalizer
 
 A different flavor of ***reading*** HDF5 files into NOMAD quantities is through defining a
-[YAML schema](../../schemas/yaml.md) and inheriting `HDF5Normalizer` into base-sections. Two essential components
+[YAML schema](../../schemas/define.md) and inheriting `HDF5Normalizer` into base-sections. Two essential components
 of using `HDF5Normalizer` class is to first define a quantity that is annotated with `FileEditQuantity` field
 to enable one to drop/upload the `*.h5` file, and to define relevant quantities annotated with `path`
 attribute under `hdf5`. These quantities are then picked up by the normalizer to extract the values to be found

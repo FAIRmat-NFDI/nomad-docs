@@ -343,7 +343,7 @@ print(workflow_status.name)  # example output: RUNNING
 ```
 
 You can add these functionalities in the `normalize` of an
-[ELN schema](../../schemas/annotations.md) and trigger actions from the ELN
+[ELN schema](../../schemas/define.md#annotate-for-the-gui) and trigger actions from the ELN
 entries. A schema that uses ELN quantities to trigger actions can look like this:
 
 ```py

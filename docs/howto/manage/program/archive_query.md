@@ -42,7 +42,7 @@ print(json.dumps(calc.m_to_dict(), indent=2))
 ```
 
 To define the schemas these classes come from, see
-{{ nav_link("howto/schemas/python.md", breadcrumb=True) }}.
+{{ nav_link("howto/schemas/define.md", breadcrumb=True) }}.
 
 ## Getting started
 

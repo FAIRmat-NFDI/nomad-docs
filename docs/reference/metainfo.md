@@ -32,7 +32,7 @@ and how they are serialized. Type names are **case insensitive**.
 | `Any` | `Any` | any | as-is | No validation. |
 | `User` | `User` | NOMAD user | user id string | |
 | `Author` | `Author` | `Author` | JSON object | |
-| `*<section name>*` | `MySection` | section instance or `MProxy` | reference URL | See [Work with schemas > Link data with references](../howto/schemas/references.md). |
+| `*<section name>*` | `MySection` | section instance or `MProxy` | reference URL | See [Work with schemas > Link data with references](../howto/schemas/define.md#link-sections-with-references). |
 
 ### What you can write in `type`
 
@@ -78,6 +78,32 @@ The rule for array quantities is:
 Units are given as strings parsed by Pint — simple units or expressions, e.g. `m`, `meter`, `mm`,
 `m/s`, `m/s**2`. Uploaded schemas may use any unit; the built-in NOMAD schema uses SI units only.
 See [Work with schemas > Work with units](../howto/plugins/tools/units.md).
+
+## Reference forms
+
+A reference quantity is serialized as a URL. An inter-entry reference has two parts,
+`<entry>#<section>`: a path or URL denoting the target entry, and a path within that entry's
+subsection hierarchy. The host and path parts correspond to the
+[NOMAD API](../howto/manage/program/api.md).
+
+| Example reference | Meaning |
+| --- | --- |
+| `#/data/processes/0` | A section within the same archive. |
+| `/run/0/calculation/1` | A section within the same archive (legacy form). |
+| `Instrument` | A *section definition* in the same archive. Targets section definitions only. |
+| `nomad.datamodel.metainfo.workflow` | A *section definition* written in Python as part of the NOMAD code. Targets section definitions only. |
+| `../upload/raw/data.archive.yaml#/data` | A section in a different `.archive.yaml` file of the same upload. |
+| `../upload/archive/mainfile/data.archive.yaml#/data` | A section in a processed archive, given by the entry *mainfile*. |
+| `../upload/archive/zxhS43h2kqHsVDqMboiP9cULrS_v#/data` | A section in a processed archive, given by entry id. |
+| `../uploads/zxhS43h2kqHsVDqMboiP9cULrS_v/raw/data.archive.yaml#/data` | A section in an entry of a different upload. |
+| `/entries/{entry_id}/archive#/data/processes/0` | A section in a different entry on the same NOMAD installation. |
+| `/uploads/{upload_id}/archive/{entry_id}#/data/processes/0` | The same, addressed by upload. |
+| `https://mylab.eu/oasis/api/v1/uploads/{upload_id}/raw/data.archive.yaml#/data` | A section in a different NOMAD installation. |
+
+Writing `type: Instrument` or `section: Instrument` in a schema is itself a reference — a convenience
+form standing in for the otherwise cryptic `#/definitions/sections/0`. This is also what `m_def` is
+for: whenever the section definition cannot be worked out from the subsection that contains it,
+`m_def` names it explicitly.
 
 ## Naming conventions
 

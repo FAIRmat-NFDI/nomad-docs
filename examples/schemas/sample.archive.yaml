@@ -1,0 +1,97 @@
+# The same schema as examples/schemas/sample_schema.py, written in YAML.
+# All definitions live under the top-level "definitions" key, which NOMAD
+# interprets as a schema package. The "data" key below instantiates them.
+definitions:
+  name: 'Sample management example schema'
+  sections:
+    Instrument:
+      description: A piece of equipment used to carry out a process.
+      base_sections:
+        - nomad.datamodel.data.EntryData
+      quantities:
+        name:
+          type: str
+          description: The name this instrument is known by in the lab.
+          m_annotations:
+            eln:
+              component: StringEditQuantity
+    Process:
+      description: A single step carried out on a sample.
+      quantities:
+        start_time:
+          type: Datetime
+          description: When the process was started.
+          m_annotations:
+            eln:
+              component: DateTimeEditQuantity
+        instrument:
+          type: Instrument
+          description: The instrument used for this process.
+          m_annotations:
+            eln:
+              component: ReferenceEditQuantity
+    Evaporation:
+      description: Depositing a material onto the sample from the vapour phase.
+      base_section: Process
+      quantities:
+        chamber_pressure:
+          type: float
+          unit: pascal
+          description: The pressure in the chamber during evaporation.
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+    Annealing:
+      description: Heating the sample to change its structure.
+      base_section: Process
+      quantities:
+        temperature:
+          type: float
+          unit: kelvin
+          description: The temperature the sample was held at.
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+    Sample:
+      description: A specimen that a sequence of processes is carried out on.
+      base_sections:
+        - nomad.datamodel.data.EntryData
+      quantities:
+        name:
+          type: str
+          description: A short name for this sample.
+          m_annotations:
+            eln:
+              component: StringEditQuantity
+        substrate_type:
+          type:
+            type_kind: Enum
+            type_data:
+              - silicon
+              - glass
+              - sapphire
+          description: The material the sample was grown on.
+          m_annotations:
+            eln:
+              component: EnumEditQuantity
+        tags:
+          type: str
+          shape: ['*']
+          description: Free-form labels used to group samples.
+      sub_sections:
+        processes:
+          section: Process
+          repeats: true
+data:
+  m_def: Sample
+  name: S1
+  substrate_type: glass
+  tags: [internal]
+  processes:
+    # "m_def" picks which specialization of Process this entry in the list is.
+    - m_def: Evaporation
+      start_time: '2024-05-06 10:00:00'
+      chamber_pressure: 1.0e-05
+    - m_def: Annealing
+      start_time: '2024-05-06 12:30:00'
+      temperature: 600

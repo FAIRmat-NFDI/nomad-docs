@@ -37,7 +37,7 @@ Quantities are related to *properties*, *attributes*, *slots*, *columns*.
 subsections might be called *containment* or *composition*. subsections and quantities
 with a section type also define *relationships*, *links*, or *references*.
 
-Our guide on [how to write a schema](../howto/schemas/yaml.md) explains these concepts with an example.
+Our guide on [how to write a schema](../howto/schemas/define.md) explains these concepts with an example.
 
 ## Schema
 
@@ -73,7 +73,7 @@ use them.
 
 For the model behind NOMAD's built-in base sections, see [Base sections](./base_sections.md). For
 instructions on inheriting from them, see
-[How-to guides > Work with schemas > Use base sections](../howto/schemas/base_sections.md), and for
+[How-to guides > Work with schemas > Define a schema](../howto/schemas/define.md#inherit-from-a-base-section), and for
 the generated per-class listing, [Reference > Base sections](../reference/basesections.md).
 
 One example for re-usable base section is the [workflow package](../howto/manage/gui/workflows.md).
@@ -124,7 +124,7 @@ and browse based on subsections, or explore the Metainfo through packages.
 
 To see all user provided uploaded schemas, you can use a [search for the subsection `definition`](https://nomad-lab.eu/prod/v1/gui/search/entries?quantities=definitions){:target="_blank" rel="noopener"}.
 The subsection `definition` is a top-level `EntryArchive` subsection. See also our
-[how-to on writing and uploading schemas](../howto/schemas/yaml.md#uploading-schema-packages).
+[how-to on writing and uploading schemas](../howto/schemas/schemas.md#get-your-schema-into-nomad).
 
 ### Contributing to the Metainfo
 
@@ -134,7 +134,7 @@ Contributions here are only possible through merge requests.
 
 Base sections can be contributed via plugins. Here they can be explored in the Metainfo
 browser, your plugin can provide more tools, and you can make use of normalize functions.
-See also our [how-to on writing Python schemas](../howto/schemas/python.md). You could
+See also our [how-to on writing Python schemas](../howto/schemas/define.md). You could
 also provide base sections via uploaded schemas, but those are harder to explore and
 distribute to other NOMAD installations.
 
@@ -143,7 +143,7 @@ schemas, you most likely also upload data in archive files (or use ELNs to edit 
 Here you can also provide schemas and data in the same file. In many case
 specific schemas will be small and only re-combine existing base sections.
 See also our
-[how-to on writing YAML schemas](../howto/schemas/yaml.md).
+[how-to on writing YAML schemas](../howto/schemas/define.md).
 
 ## Data
 
@@ -156,7 +156,7 @@ The Metainfo has many serialized forms. You can write `.archive.json` or `.archi
 files yourself. NOMAD internally stores all processed data in [message pack](https://msgpack.org/){:target="_blank" rel="noopener"}. Some
 of the data is stored in mongodb or elasticsearch. When you request processed data via
 API, you receive it in JSON. When you use the [ArchiveQuery](../howto/manage/program/archive_query.md), all data is represented
-as Python objects (see also [example in the Python schema documentation](../howto/schemas/python.md#create-and-populate-instances)).
+as Python objects (see also [example in the Python schema documentation](../howto/schemas/define.md#populate-data)).
 
 No matter what the representation is, you can rely on the structure, names, types, shapes, and units
 defined in the schema to interpret the data.
@@ -186,7 +186,7 @@ will use concrete definitions that inherit from `EntryData`. There are also spec
 sections, like `run` for simulation data and `nexus` for nexus data.
 
 !!! note
-    As shown in [Uploading schemas](../howto/schemas/yaml.md#uploading-schema-packages), one can, in principle, create an archive file with both `definitions` and one of the *data* sections filled, although this is not always desired because it will stick together a schema and a particular instance of that schema. They should be kept separate so that it is still possible to generate new data files from the same schema file.
+    As shown in [Uploading schemas](../howto/schemas/schemas.md#get-your-schema-into-nomad), one can, in principle, create an archive file with both `definitions` and one of the *data* sections filled, although this is not always desired because it will stick together a schema and a particular instance of that schema. They should be kept separate so that it is still possible to generate new data files from the same schema file.
 
 !!! warning "Attention"
     The results, originally only designed for computational data, will soon be revised

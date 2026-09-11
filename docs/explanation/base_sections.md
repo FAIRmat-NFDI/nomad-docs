@@ -6,7 +6,7 @@ explains the model NOMAD's built-in base sections are organized around, and what
 ones mean.
 
 For instructions on inheriting from them, see
-[How-to guides > Work with schemas > Use base sections](../howto/schemas/base_sections.md). For the
+[How-to guides > Work with schemas > Define a schema](../howto/schemas/define.md#inherit-from-a-base-section). For the
 generated per-class listing of every quantity, see
 [Reference > Base sections](../reference/basesections.md).
 

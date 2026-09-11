@@ -15,7 +15,7 @@ button. This will bring you to the upload page.
 
 Click the `CREATE FROM SCHEMA` button. This will bring-up a dialog for *naming your entry*
 and *selecting a schema* for your ELN.
-You can use one of NOMAD's built-in schemas or add your own custom schema (see [How-to guides > Work with schemas > Annotate schemas for the GUI](../../schemas/annotations.md)).
+You can use one of NOMAD's built-in schemas or add your own custom schema (see [How-to guides > Work with schemas > Define a schema](../../schemas/define.md#annotate-for-the-gui)).
 
 Here we will select the simplest built-in ELN schema, `Basic ELN`.
 The `Basic ELN` offers you simple fields for a *name*, *tags*, a *date/time*, and a rich text
@@ -48,7 +48,7 @@ click the `ADD EXAMPLE UPLOADS` button. The `Electronic Lab Notebook` example, w
 contain a schema and entries that instantiate different parts of the schema.
 The *ELN example sample (`sample.archive.json`) demonstrates what you can do.
 
-Follow [How-to guides > Work with schemas > Write YAML schemas](../../schemas/yaml.md) and [How-to guides > Work with schemas > Annotate schemas for the GUI](../../schemas/annotations.md)
+Follow [How-to guides > Work with schemas > Define a schema](../../schemas/define.md) and [How-to guides > Work with schemas > Define a schema](../../schemas/define.md#annotate-for-the-gui)
 guides to create you own customized of ELNs.
 
 ## Integration of third-party ELNs

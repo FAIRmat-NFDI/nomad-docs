@@ -424,7 +424,7 @@ class ExampleWorkflow(Workflow):
     )
 ```
 <!-- TODO remove x_ notation in the future -->
-This is the approach for domain-specific schemas such as for [simulation workflows](https://github.com/nomad-coe/nomad-schema-plugin-simulation-workflow.git){:target="_blank" rel="noopener"}. Refer to [How-to guides > Work with schemas > Use base sections](../../schemas/base_sections.md#extend-an-existing-section).
+This is the approach for domain-specific schemas such as for [simulation workflows](https://github.com/nomad-coe/nomad-schema-plugin-simulation-workflow.git){:target="_blank" rel="noopener"}. Refer to [How-to guides > Work with schemas > Use base sections](../../schemas/advanced.md#extend-an-existing-section).
 
 ## Other FileParser classes
 
