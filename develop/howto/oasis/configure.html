@@ -2757,17 +2757,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#sharing-data-through-log-transfer-and-data-privacy-notice" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Sharing data through log transfer and data privacy notice
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#further-steps" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4911,17 +4900,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#sharing-data-through-log-transfer-and-data-privacy-notice" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Sharing data through log transfer and data privacy notice
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#further-steps" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5242,15 +5220,12 @@ The other files are mounted into the docker containers.</p>
 <a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">  </span><span class="nt">deployment_url</span><span class="p">:</span><span class="w"> </span><span class="s">"https://my-oasis.org/api"</span>
 <a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="w">  </span><span class="nt">maintainer_email</span><span class="p">:</span><span class="w"> </span><span class="s">"me@my-oasis.org"</span>
 <a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>
-<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="nt">logtransfer</span><span class="p">:</span>
-<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="nt">mongo</span><span class="p">:</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="w">  </span><span class="nt">db_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nomad_oasis_v1</span>
 <a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>
-<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="nt">mongo</span><span class="p">:</span>
-<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="w">  </span><span class="nt">db_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nomad_oasis_v1</span>
-<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>
-<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="nt">elastic</span><span class="p">:</span>
-<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="w">  </span><span class="nt">entries_index</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nomad_oasis_entries_v1</span>
-<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="w">  </span><span class="nt">materials_index</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nomad_oasis_materials_v1</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="nt">elastic</span><span class="p">:</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="w">  </span><span class="nt">entries_index</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nomad_oasis_entries_v1</span>
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="w">  </span><span class="nt">materials_index</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nomad_oasis_materials_v1</span>
 </code></pre></div>
 <p>You should change the following:</p>
 <ul>
@@ -5258,7 +5233,6 @@ The other files are mounted into the docker containers.</p>
   users back to this host. Make sure this is the hostname that your users can access.</li>
 <li>Replace <code>deployment</code>, <code>deployment_url</code>, and <code>maintainer_email</code> with representative values.
   The <code>deployment_url</code> should be the URL to the deployment's api (should end with <code>/api</code>).</li>
-<li>To enable the <em>log transfer</em> set <code>logtransfer.enable: true</code> (<a href="#sharing-data-through-log-transfer-and-data-privacy-notice">data privacy notice above</a>).</li>
 <li>You can change <code>api_base_path</code> to run NOMAD under a different path prefix.</li>
 <li>You should generate your own <code>north.jupyterhub_crypt_key</code>. You can generate one
   with <code>openssl rand -hex 32</code>.</li>
@@ -6008,15 +5982,12 @@ to create an initial keycloak realm that is configured for NOMAD automatically.<
 <a id="__codelineno-32-21" name="__codelineno-32-21" href="#__codelineno-32-21"></a><span class="w">  </span><span class="nt">deployment_url</span><span class="p">:</span><span class="w"> </span><span class="s">"https://my-oasis.org/api"</span>
 <a id="__codelineno-32-22" name="__codelineno-32-22" href="#__codelineno-32-22"></a><span class="w">  </span><span class="nt">maintainer_email</span><span class="p">:</span><span class="w"> </span><span class="s">"me@my-oasis.org"</span>
 <a id="__codelineno-32-23" name="__codelineno-32-23" href="#__codelineno-32-23"></a>
-<a id="__codelineno-32-24" name="__codelineno-32-24" href="#__codelineno-32-24"></a><span class="nt">logtransfer</span><span class="p">:</span>
-<a id="__codelineno-32-25" name="__codelineno-32-25" href="#__codelineno-32-25"></a><span class="w">  </span><span class="nt">enabled</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+<a id="__codelineno-32-24" name="__codelineno-32-24" href="#__codelineno-32-24"></a><span class="nt">mongo</span><span class="p">:</span>
+<a id="__codelineno-32-25" name="__codelineno-32-25" href="#__codelineno-32-25"></a><span class="w">  </span><span class="nt">db_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nomad_oasis_v1</span>
 <a id="__codelineno-32-26" name="__codelineno-32-26" href="#__codelineno-32-26"></a>
-<a id="__codelineno-32-27" name="__codelineno-32-27" href="#__codelineno-32-27"></a><span class="nt">mongo</span><span class="p">:</span>
-<a id="__codelineno-32-28" name="__codelineno-32-28" href="#__codelineno-32-28"></a><span class="w">  </span><span class="nt">db_name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nomad_oasis_v1</span>
-<a id="__codelineno-32-29" name="__codelineno-32-29" href="#__codelineno-32-29"></a>
-<a id="__codelineno-32-30" name="__codelineno-32-30" href="#__codelineno-32-30"></a><span class="nt">elastic</span><span class="p">:</span>
-<a id="__codelineno-32-31" name="__codelineno-32-31" href="#__codelineno-32-31"></a><span class="w">  </span><span class="nt">entries_index</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nomad_oasis_entries_v1</span>
-<a id="__codelineno-32-32" name="__codelineno-32-32" href="#__codelineno-32-32"></a><span class="w">  </span><span class="nt">materials_index</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nomad_oasis_materials_v1</span>
+<a id="__codelineno-32-27" name="__codelineno-32-27" href="#__codelineno-32-27"></a><span class="nt">elastic</span><span class="p">:</span>
+<a id="__codelineno-32-28" name="__codelineno-32-28" href="#__codelineno-32-28"></a><span class="w">  </span><span class="nt">entries_index</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nomad_oasis_entries_v1</span>
+<a id="__codelineno-32-29" name="__codelineno-32-29" href="#__codelineno-32-29"></a><span class="w">  </span><span class="nt">materials_index</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nomad_oasis_materials_v1</span>
 </code></pre></div>
 <p>You should change the following:</p>
 <ul>
@@ -6047,23 +6018,6 @@ is imported by default. The realm comes with a test user and password <code>test
 <li>We disabled the https requirement on the default realm for simplicity. You should change
   this for a production system.</li>
 </ul>
-<h2 id="sharing-data-through-log-transfer-and-data-privacy-notice">Sharing data through log transfer and data privacy notice<a class="headerlink" href="#sharing-data-through-log-transfer-and-data-privacy-notice" title="Permanent link">¶</a></h2>
-<p>NOMAD includes a <em>log transfer</em> functions. When enabled this automatically collects
-and transfers non-personalized logging data to us. Currently, this functionality is experimental
-and requires opt-in. However, in upcoming versions of NOMAD Oasis, we might change to opt-out.</p>
-<p>To enable this functionality add <code>logtransfer.enabled: true</code> to you <code>nomad.yaml</code>.</p>
-<p>The service collects log-data and aggregated statistics, such as the number of users or the
-number of uploaded datasets. In any case this data does not personally identify any users or
-contains any uploaded data. All data is in an aggregated and anonymized form.</p>
-<p>The data is solely used by the NOMAD developers and FAIRmat, including but not limited to:</p>
-<ul>
-<li>Analyzing and monitoring system performance to identify and resolve issues.</li>
-<li>Improving our NOMAD software based on usage patterns.</li>
-<li>Generating aggregated and anonymized reports.</li>
-</ul>
-<p>We do not share any collected data with any third parties.</p>
-<p>We may update this data privacy notice from time to time to reflect changes in our data practices.
-We encourage you to review this notice periodically for any updates.</p>
 <h2 id="further-steps">Further steps<a class="headerlink" href="#further-steps" title="Permanent link">¶</a></h2>
 <p>This is an incomplete list of potential things to customize your NOMAD experience.</p>
 <ul>
