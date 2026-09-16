@@ -59,7 +59,6 @@ You should change the following:
   users back to this host. Make sure this is the hostname that your users can access.
 - Replace `deployment`, `deployment_url`, and `maintainer_email` with representative values.
   The `deployment_url` should be the URL to the deployment's api (should end with `/api`).
-- To enable the *log transfer* set `logtransfer.enable: true` ([data privacy notice above](#sharing-data-through-log-transfer-and-data-privacy-notice)).
 - You can change `api_base_path` to run NOMAD under a different path prefix.
 - You should generate your own `north.jupyterhub_crypt_key`. You can generate one
   with `openssl rand -hex 32`.
@@ -614,29 +613,6 @@ A few notes on the realm configuration:
   your own host.
 - We disabled the https requirement on the default realm for simplicity. You should change
   this for a production system.
-
-## Sharing data through log transfer and data privacy notice
-
-NOMAD includes a *log transfer* functions. When enabled this automatically collects
-and transfers non-personalized logging data to us. Currently, this functionality is experimental
-and requires opt-in. However, in upcoming versions of NOMAD Oasis, we might change to opt-out.
-
-To enable this functionality add `logtransfer.enabled: true` to you `nomad.yaml`.
-
-The service collects log-data and aggregated statistics, such as the number of users or the
-number of uploaded datasets. In any case this data does not personally identify any users or
-contains any uploaded data. All data is in an aggregated and anonymized form.
-
-The data is solely used by the NOMAD developers and FAIRmat, including but not limited to:
-
-- Analyzing and monitoring system performance to identify and resolve issues.
-- Improving our NOMAD software based on usage patterns.
-- Generating aggregated and anonymized reports.
-
-We do not share any collected data with any third parties.
-
-We may update this data privacy notice from time to time to reflect changes in our data practices.
-We encourage you to review this notice periodically for any updates.
 
 ## Further steps
 
