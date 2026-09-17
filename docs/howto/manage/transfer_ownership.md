@@ -17,6 +17,8 @@ request/accept flow, pending-state access, and notifications — see
 
 ## Using the GUI
 
+In the GUI an upload is shown as a *project*; the steps below use that label.
+
 **As the current owner — offer ownership:**
 
 1. Open the project you own.
