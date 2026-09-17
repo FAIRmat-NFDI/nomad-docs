@@ -78,27 +78,6 @@ nav:
           - Write a normalizer: howto/develop/normalizing.md
           - Extend the search: howto/develop/search.md
           - Make a release: howto/develop/release.md
-  - Domain-specific examples: # TODO decide uniform structure for navigation to plugins/plugin-docs
-      - Overview: examples/overview.md
-      - Computational data:
-          - Basics: examples/computational_data/basics.md
-          - MetaInfo: examples/computational_data/metainfo.md
-          - Schema plugins: examples/computational_data/schema_plugins.md
-          - Parser plugins: examples/computational_data/parser_plugins.md
-          - FAQs: examples/computational_data/faqs.md
-      - Experimental data:
-          - Electron microscopy: examples/experiment_data/em.md
-          - Photoemission spectroscopy: examples/experiment_data/mpes.md
-          - X-ray photoemission spectroscopy: examples/experiment_data/xps.md
-          - Optical spectroscopy: examples/experiment_data/opt.md
-          - Atom probe tomography: examples/experiment_data/apm.md
-          - Scanning probe microscopy: examples/experiment_data/spm.md
-          - Parse data with pynxtools: examples/experiment_data/pynxtools.md
-      - Use cases:
-          - nomad-catalysis: examples/use_cases/catalysis_app.md
-          - nomad-neb-workflows: examples/use_cases/neb_workflows.md
-        # - NOMAD-supported plugins:
-        # - Databases for specific research topics:
   - Explanation:
       - Overview: explanation/overview.md
       - From files to data: explanation/basics.md
@@ -119,7 +98,6 @@ nav:
       - Base sections: reference/basesections.md
       - CLI: reference/cli.md
       - Plugins: reference/plugins.md
-      - Parsers: reference/parsers.md
       - Code guidelines: reference/code_guidelines.md
       - Glossary: reference/glossary.md
       - Tutorial catalog: reference/tutorials.md
@@ -128,8 +106,6 @@ not_in_nav: |
   /404.md
   # Contributor documentation is linked from README.md, not the user navigation.
   /writing_guide.md
-  # Linked supporting page for the domain-specific examples.
-  /examples/experiment_data/nexus.md
   # Legacy pages retained until their content is handled by later refactoring stages.
   /tutorial/access_api.md
   /tutorial/custom.md
