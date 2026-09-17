@@ -14,7 +14,6 @@ Reference pages provide authoritative technical details. Use them when you need 
     "reference/basesections.md": "generated reference for NOMAD base sections.",
     "reference/cli.md": "command-line interface reference.",
     "reference/plugins.md": "plugin reference material.",
-    "reference/parsers.md": "supported parser reference information.",
     "reference/code_guidelines.md": "coding conventions used in NOMAD.",
     "reference/glossary.md": "shared terminology used across the documentation.",
     "reference/tutorials.md": "an index of tutorial and training resources.",

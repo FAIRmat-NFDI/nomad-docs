@@ -317,7 +317,7 @@ In other words, NOMAD will read the input and output files and provide all infor
     </video>
 
     After uploading files, processing is automatically triggered. This involves identifying supported file formats in NOMAD and extracting relevant (meta)data. The exact processing steps depend on the use case.
-    For example, you can learn more about the [processing of computational data on this link](../examples/computational_data/basics.md).
+    See {{ nav_link("explanation/processing.md", breadcrumb=True) }}.
 
     Once processing is complete, NOMAD generates an entry page that presents the data in a structured, hierarchical format based on the NOMAD *metainfo* schema.
 

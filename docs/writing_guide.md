@@ -187,10 +187,6 @@ has more than one intermediate navigation section, the breadcrumb is abbreviated
 as `Section > ... > Page name`. Keep the overview card headings, descriptions,
 and surrounding markup in Markdown so they can be edited independently.
 
-The domain-specific examples overview currently keeps manually placed
-`nav_link` calls because its links are interleaved with category tags and the
-section is expected to be deprecated.
-
 There may be special cases of independent pages that are linked but should not
 appear in the navigation. These intentional exceptions should be listed under
 `not_in_nav` in `mkdocs.yml`. Only add a page to this list when it has a documented
