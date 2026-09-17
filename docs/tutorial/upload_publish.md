@@ -212,7 +212,7 @@ NOMAD recognizes the *FHI-aims* files, extracts information from them, and organ
     After the files are uploaded, NOMAD automatically begins processing them. It identifies supported file formats and uses the corresponding parsers to extract and structure relevant data and metadata. The specific processing steps depend on the type of data.
 
     Once processing is complete, NOMAD creates entries from the recognized mainfiles. The corresponding entry page includes the processed data in a structured, hierarchical format.
-    See [Explanation > Processing](../explanation/processing.md) for more detail.
+    See {{ nav_link("explanation/processing.md", breadcrumb=True) }}.
 
     **Opening and exploring an entry**
 
