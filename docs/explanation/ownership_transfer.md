@@ -12,7 +12,7 @@ A transfer moves through two steps:
 
 1. **Request.** The current owner initiates a transfer, naming the target user. The upload is
    not reassigned yet; a pending request is recorded.
-2. **Response.** The target user accepts or refuses. On acceptance, the `main_author` is
+1. **Response.** The target user accepts or refuses. On acceptance, the `main_author` is
    reassigned to the target. On refusal, nothing changes. While the request is still pending,
    the original owner can cancel it.
 

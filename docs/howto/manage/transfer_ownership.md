@@ -22,16 +22,16 @@ In the GUI an upload is shown as a *project*; the steps below use that label.
 **As the current owner — offer ownership:**
 
 1. Open the project you own.
-2. Open its ownership actions and choose **Transfer ownership**.
-3. In the dialog, search for and select the target user.
-4. Confirm. A pending request is created and the recipient is notified; the project now shows
+1. Open its ownership actions and choose **Transfer ownership**.
+1. In the dialog, search for and select the target user.
+1. Confirm. A pending request is created and the recipient is notified; the project now shows
    a pending transfer, which you can **cancel** from the same place until it is accepted.
 
 **As the recipient — accept or refuse:**
 
 1. You receive an in-app notification that you have been offered ownership of the project (you
    also gain read access to it while the request is pending).
-2. Open the project and choose **Accept** to take ownership, or **Refuse** to decline.
+1. Open the project and choose **Accept** to take ownership, or **Refuse** to decline.
 
 On acceptance, you become the project's owner. On refusal, ownership stays with the original
 owner and the temporary access is removed.
