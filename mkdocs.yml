@@ -46,6 +46,7 @@ nav:
               - Access processed data: howto/manage/program/archive_query.md
               - Transform JSON data structures: howto/manage/program/json_transformer.md
               - Make Graph API calls: howto/manage/program/graph_api.md # TODO consolidate into a single page with supporting explanation/reference material
+          - Transfer ownership: howto/manage/transfer_ownership.md
       - Develop plugins:
           - Start plugin development: howto/plugins/plugins.md # TODO split former Introduction to plugins into short guiding overview + explanation page
           # - Set up a development environment: howto/plugins/setup.md # TODO distro-dev setup + best practices
@@ -110,6 +111,7 @@ nav:
       - Plugins: explanation/plugin_system.md
       - Federation and Oasis: explanation/oasis.md
       - Authentication and authorization: explanation/auth.md
+      - Ownership transfer: explanation/ownership_transfer.md
       - NORTH: explanation/north.md
   - Reference:
       - Overview: reference/overview.md
