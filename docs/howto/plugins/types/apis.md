@@ -33,7 +33,7 @@ for more details on the best development practices for plugins, including lintin
 
 The entry point defines basic information about your API and is used to automatically
 load it into a NOMAD distribution. It is an instance of a `APIEntryPoint` or its subclass and it contains a `load` method which returns a `fastapi.FastAPI` app instance.
-Furthermore, it allows you to define a path prefix for your API.
+NOMAD mounts the API under `{api_base_path}/apis/{id_url_safe}/`.
 The entry point should be defined in `*/apis/__init__.py` like this:
 
 ```python
@@ -48,14 +48,28 @@ class MyAPIEntryPoint(APIEntryPoint):
 
 
 myapi = MyAPIEntryPoint(
-    prefix='myapi',
     name='MyAPI',
     description='My custom API.',
+    id_url_safe='myapi',
 )
 ```
 
 Here you can see that a new subclass of `APIEntryPoint` was defined. In this new class you have to override the `load` method to determine the FastAPI app that makes your API.
 In the reference you can see all of the available [configuration options for a `APIEntryPoint`](../../../reference/plugins.md#apientrypoint).
+
+The `id_url_safe` determines the URL of the API. If not set, it is derived from the
+entry point id (e.g. `nomad_example.apis-myapi`); here we set it explicitly to get the
+shorter `{api_base_path}/apis/myapi/`. The resolved mount path is available as the
+`prefix` attribute of the loaded entry point.
+
+!!! warning
+    You can also set `prefix` explicitly to mount the API at an arbitrary path below
+    `{api_base_path}`. Do not do this unless you know what you are doing: custom
+    prefixes are not checked for collisions with other routes served by NOMAD.
+
+To register an API that is served by a separate service, set `external_url` (an
+absolute `http(s)://` URL) instead of overriding `load()`. NOMAD will then not mount
+anything and only lists the API.
 
 The entry point instance should then be added to the `[project.entry-points.'nomad.plugin']` table in `pyproject.toml` in order for it to be automatically detected:
 
@@ -88,7 +102,7 @@ Read the official [FastAPI documentation](https://fastapi.tiangolo.com/tutorial/
 If you run NOMAD with this plugin following our [Oasis configuration documentation](../../oasis/configure.md) with the default configuration, you can curl this API and should receive the message:
 
 ```sh
-curl localhost:8000/nomad-oasis/myapi/
+curl localhost:8000/nomad-oasis/apis/myapi/
 ```
 
 ### Static files
@@ -114,7 +128,7 @@ app.mount('/static', StaticFiles(directory=static_folder), name='static')
 Then e.g. the file `static/static_page.html` will be available at:
 
 ```sh
-curl localhost:8000/nomad-oasis/myapi/static/static_page.html
+curl localhost:8000/nomad-oasis/apis/myapi/static/static_page.html
 ```
 
 !!! note
