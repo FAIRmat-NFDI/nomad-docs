@@ -91,10 +91,10 @@ Use the decision framework from
 [Explanation > Statistics on NOMAD data](../../../explanation/statistics.md): pick the
 coarsest level that answers your question.
 
-- "How many entries have a band gap?" → filters + entry count.
-- "How many entries per simulation code?" → terms aggregation.
-- "How many force vectors does NOMAD hold?" → occurrence counts (below).
-- "How many atoms do those forces span?" → needs shapes/dimensions, which are
+- "How many entries have a band gap?" &rarr; filters + entry count.
+- "How many entries per simulation code?" &rarr; terms aggregation.
+- "How many force vectors does NOMAD hold?" &rarr; occurrence counts (below).
+- "How many atoms do those forces span?" &rarr; needs shapes/dimensions, which are
   **deferred (under construction, may not happen)** — this question currently cannot
   be answered from stored statistics.
 
