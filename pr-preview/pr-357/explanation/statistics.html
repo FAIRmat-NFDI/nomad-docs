@@ -4379,8 +4379,9 @@ levels form a decision framework: pick the coarsest level that answers your ques
    across all entries — for example, the total number of stored force vectors or
    energy values — without recording their dimensions.<ul>
 <li><em>Provides</em>: honest volume numbers that also capture multiple registrations of
-  the same quantity within one entry (different force types, several
-  snapshots or outputs). The mechanism is cheap and generic: it requires no
+  the same quantity within one entry — different systems, force types, or
+  snapshots constituting separate calculations, or the subtasks of a workflow.
+  The mechanism is cheap and generic: it requires no
   schema change. Global totals are the primary use case (dashboards, homepage
   numbers, workshop figures); per-entry detail remains available through
   aggregation queries (for example, "give me the total per entry").</li>
@@ -4390,7 +4391,8 @@ levels form a decision framework: pick the coarsest level that answers your ques
 </li>
 <li><strong>Shapes and dimensions.</strong> Additionally record the dimensions of each stored
    quantity.<ul>
-<li><em>Provides</em>: in principle, exact data-volume accounting.</li>
+<li><em>Provides</em>: in principle, exact data-volume accounting — for example, the
+  number of atoms stored, or any other statistics at atomic resolution.</li>
 <li><em>Misses</em>: nothing conceptually — but see the status below; this level is not
   available.</li>
 </ul>
@@ -4431,8 +4433,9 @@ it does not commit anyone to implementing it.</p>
 <h2 id="optional-extension-dimension-annotations">Optional extension: dimension annotations<a class="headerlink" href="#optional-extension-dimension-annotations" title="Permanent link">¶</a></h2>
 <p>An open option exists to declare in a schema that a section should be registered with
 specific dimensions. The current registration tracks presence; annotations would add
-positive integer counts for the annotated dimensions. This is available as an opt-in
-extension, with caveats:</p>
+positive integer counts for the annotated dimensions — for example, a specific
+dimension of a quantity's shape, or several of its slices. This is available as an
+opt-in extension, with caveats:</p>
 <ul>
 <li>It is a schema tweak, and schema changes carry breakage risk.</li>
 <li>It should not be overused on huge databases, where the added indexing cost matters.</li>
