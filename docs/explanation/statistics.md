@@ -30,8 +30,9 @@ levels form a decision framework: pick the coarsest level that answers your ques
    across all entries — for example, the total number of stored force vectors or
    energy values — without recording their dimensions.
     - *Provides*: honest volume numbers that also capture multiple registrations of
-      the same quantity within one entry (different force types, several
-      snapshots or outputs). The mechanism is cheap and generic: it requires no
+      the same quantity within one entry — different systems, force types, or
+      snapshots constituting separate calculations, or the subtasks of a workflow.
+      The mechanism is cheap and generic: it requires no
       schema change. Global totals are the primary use case (dashboards, homepage
       numbers, workshop figures); per-entry detail remains available through
       aggregation queries (for example, "give me the total per entry").
@@ -39,7 +40,8 @@ levels form a decision framework: pick the coarsest level that answers your ques
       many atoms or time steps they span.
 1. **Shapes and dimensions.** Additionally record the dimensions of each stored
    quantity.
-    - *Provides*: in principle, exact data-volume accounting.
+    - *Provides*: in principle, exact data-volume accounting — for example, the
+      number of atoms stored, or any other statistics at atomic resolution.
     - *Misses*: nothing conceptually — but see the status below; this level is not
       available.
 
@@ -80,8 +82,9 @@ These use cases motivated the chosen scope; they are illustrations, not requirem
 
 An open option exists to declare in a schema that a section should be registered with
 specific dimensions. The current registration tracks presence; annotations would add
-positive integer counts for the annotated dimensions. This is available as an opt-in
-extension, with caveats:
+positive integer counts for the annotated dimensions — for example, a specific
+dimension of a quantity's shape, or several of its slices. This is available as an
+opt-in extension, with caveats:
 
 - It is a schema tweak, and schema changes carry breakage risk.
 - It should not be overused on huge databases, where the added indexing cost matters.

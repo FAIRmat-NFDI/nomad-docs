@@ -2,7 +2,8 @@
 
 This guide shows how to collect statistics on NOMAD data — entry counts, aggregations,
 and occurrence counts — and combine them into a stats dashboard such as a data-overview
-page or homepage counters. For the underlying model — the three levels of statistics
+page or homepage counters. It is mostly geared towards NOMAD Oasis operators, and
+anybody else interested in building a statistics dashboard. For the underlying model — the three levels of statistics
 granularity and what is (not) supported — see
 [Explanation > Statistics on NOMAD data](../../../explanation/statistics.md).
 
@@ -102,8 +103,9 @@ coarsest level that answers your question.
 
 Occurrence counts record every registration of a quantity across all entries — for
 example, the total number of stored force vectors — including multiple registrations
-within a single entry (different force types, several snapshots or outputs). They are
-the right source for global dashboard totals such as "N structures, N forces".
+within a single entry (different systems, force types, or snapshots constituting
+separate calculations, or several subtasks). They are the right source for global
+dashboard totals such as "N structures, N forces".
 
 The concrete API for querying occurrence counts is still being finalized **[TBC]**:
 endpoint and field names are not yet documented here. Per-entry detail is available
