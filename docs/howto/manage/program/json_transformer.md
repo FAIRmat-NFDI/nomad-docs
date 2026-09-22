@@ -36,17 +36,14 @@ Use the `Transformer.map(...)` classmethod to apply a mapping in a single line:
 ```python
 from nomad.utils.json_transformer import Transformer
 
-data = {
-    "user": {"first_name": "Alice", "last_name": "Smith"},
-    "age": 30
-}
+data = {'user': {'first_name': 'Alice', 'last_name': 'Smith'}, 'age': 30}
 
 # Map a single field
-result = Transformer.map(data, source="user.first_name", target="profile.name")
+result = Transformer.map(data, source='user.first_name', target='profile.name')
 # Output: {"profile": {"name": "Alice"}}
 
 # Set a default value directly
-result = Transformer.map(data, target="version", default_value="1.0")
+result = Transformer.map(data, target='version', default_value='1.0')
 # Output: {"version": "1.0"}
 ```
 
@@ -54,7 +51,7 @@ You can also pass `inplace=True` to modify the input dictionary directly, or pas
 
 ```python
 # Modifies data in-place
-Transformer.map(data, source="user.last_name", target="surname", inplace=True)
+Transformer.map(data, source='user.last_name', target='surname', inplace=True)
 ```
 
 ### 2. Shorthand Initializations
@@ -64,14 +61,14 @@ Transformer.map(data, source="user.last_name", target="surname", inplace=True)
 === "Keyword arguments"
 
     ```python
-    transformer = Transformer(source="a.b", target="c.d")
+    transformer = Transformer(source='a.b', target='c.d')
     result = transformer.transform(data)
     ```
 
 === "Single Rule Dictionary"
 
     ```python
-    transformer = Transformer({"source": "a.b", "target": "c.d", "default_value": 0})
+    transformer = Transformer({'source': 'a.b', 'target': 'c.d', 'default_value': 0})
     result = transformer.transform(data)
     ```
 
@@ -79,8 +76,8 @@ Transformer.map(data, source="user.last_name", target="surname", inplace=True)
 
     ```python
     transformer = Transformer([
-        {"source": "input.x", "target": "output.x"},
-        {"source": "input.y", "target": "output.y"},
+        {'source': 'input.x', 'target': 'output.x'},
+        {'source': 'input.y', 'target': 'output.y'},
     ])
     result = transformer.transform(data)
     ```
@@ -107,7 +104,7 @@ Load the rules:
 from nomad.datamodel.metainfo.annotations import Rules
 from nomad.utils.json_transformer import Transformer
 
-rules = {"example_transformation": Rules(json_example["schema"])}
+rules = {'example_transformation': Rules(json_example['schema'])}
 transformer = Transformer(rules)
 ```
 
@@ -116,8 +113,8 @@ transformer = Transformer(rules)
 Pass your source JSON and the rule group name to `transform()`:
 
 ```python
-source_json = json_example["data"]
-transformed_json = transformer.transform(source_json, "example_transformation")
+source_json = json_example['data']
+transformed_json = transformer.transform(source_json, 'example_transformation')
 print(transformed_json)
 ```
 
@@ -148,11 +145,11 @@ Use placeholders such as `[n]`, `[n1]`, or `[n2]` to indicate repeating array el
 from nomad.datamodel.metainfo.annotations import Rules
 from nomad.utils.json_transformer import Transformer
 
-rules = {"subsystem_migration": Rules(json_example["schema"])}
+rules = {'subsystem_migration': Rules(json_example['schema'])}
 transformer = Transformer(rules)
 
-source_json = json_example["data"]
-result = transformer.transform(source_json, "subsystem_migration")
+source_json = json_example['data']
+result = transformer.transform(source_json, 'subsystem_migration')
 print(result)
 ```
 
@@ -187,8 +184,8 @@ A common migration requirement is adding a missing field (such as a Metainfo def
 
 ```python
 rule = {
-    "target": "sub_systems[n1].nested_system.m_def",
-    "default_value": "nomad.datamodel.metainfo.basesections.v2.Element",
+    'target': 'sub_systems[n1].nested_system.m_def',
+    'default_value': 'nomad.datamodel.metainfo.basesections.v2.Element',
 }
 
 # Apply to all items in sub_systems
@@ -196,6 +193,7 @@ Transformer.map(archive_dict, rule=rule, inplace=True)
 ```
 
 Notice that:
+
 - The rule does not require a `source` path.
 - The `Transformer` iterates through each existing item in `sub_systems`, creating any intermediate dictionaries (such as `nested_system` if missing), and writes the `default_value`.
 - If a `source` is provided but does not exist in some elements, the `default_value` is safely used as the fallback for those elements.
@@ -205,12 +203,12 @@ Notice that:
 When the target path in your destination data structure is already a list, you can use the wildcard `[*]` notation to fill every element with a default value:
 
 ```python
-target_data = {"items": [{}, {}, {}]}
+target_data = {'items': [{}, {}, {}]}
 
 Transformer.map(
     target_data,
-    target="items[*].status",
-    default_value="pending",
+    target='items[*].status',
+    default_value='pending',
     inplace=True,
 )
 # Result: {"items": [{"status": "pending"}, {"status": "pending"}, {"status": "pending"}]}
@@ -224,13 +222,13 @@ When applying conditions to repeating elements, you can use the array placeholde
 from nomad.datamodel.metainfo.annotations import Condition, RegexCondition, Rule
 
 rule = Rule(
-    target="elements[n1].category",
-    default_value="Transition Metal",
+    target='elements[n1].category',
+    default_value='Transition Metal',
     conditions=[
         Condition(
             regex_condition=RegexCondition(
-                regex_path="elements[n1].symbol",
-                regex_pattern="^(Fe|Co|Ni|Cu)$",
+                regex_path='elements[n1].symbol',
+                regex_pattern='^(Fe|Co|Ni|Cu)$',
             )
         )
     ],
@@ -253,7 +251,7 @@ You can use regular expressions to evaluate input values before copying.
 
 ```python
 transformer = Transformer(mapping_dict=rules)
-transformed_json = transformer.transform(source_json, "conditional_transformation_met")
+transformed_json = transformer.transform(source_json, 'conditional_transformation_met')
 print(transformed_json)
 ```
 
@@ -267,17 +265,17 @@ When mapping related entities, a rule can inherit or reference another rule by s
 from nomad.datamodel.metainfo.annotations import Rule, Rules
 
 rules = {
-    "employee_info": Rules(
-        name="Employee Info Mapping",
+    'employee_info': Rules(
+        name='Employee Info Mapping',
         rules={
-            "rule_manager": Rule(
+            'rule_manager': Rule(
                 source="users[?role=='manager'].manager_id | [0]",
-                target="manager_details",
-                use_rule="#employee_info.details",
+                target='manager_details',
+                use_rule='#employee_info.details',
             ),
-            "details": Rule(
+            'details': Rule(
                 source="details[?id=='101'] | [0]",
-                target="specific_manager",
+                target='specific_manager',
             ),
         },
     )
@@ -298,7 +296,7 @@ rules = {
 
 ```python
 # Deeply nested extraction
-Transformer.map(data, source="f.nested.key", target="flattened_key")
+Transformer.map(data, source='f.nested.key', target='flattened_key')
 ```
 
 ### 4. Deleting Source Keys
@@ -306,5 +304,7 @@ Transformer.map(data, source="f.nested.key", target="flattened_key")
 To remove source fields from the original structure after copying (useful during dictionary cleanup or migration):
 
 ```python
-Transformer.map(data, source="old_field", target="new_field", delete_sources=True, inplace=True)
+Transformer.map(
+    data, source='old_field', target='new_field', delete_sources=True, inplace=True
+)
 ```
