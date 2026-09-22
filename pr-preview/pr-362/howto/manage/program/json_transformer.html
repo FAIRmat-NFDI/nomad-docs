@@ -4723,42 +4723,39 @@
 <p>Use the <code>Transformer.map(...)</code> classmethod to apply a mapping in a single line:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.utils.json_transformer</span><span class="w"> </span><span class="kn">import</span> <span class="n">Transformer</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="s2">"user"</span><span class="p">:</span> <span class="p">{</span><span class="s2">"first_name"</span><span class="p">:</span> <span class="s2">"Alice"</span><span class="p">,</span> <span class="s2">"last_name"</span><span class="p">:</span> <span class="s2">"Smith"</span><span class="p">},</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="s2">"age"</span><span class="p">:</span> <span class="mi">30</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">}</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="c1"># Map a single field</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="n">result</span> <span class="o">=</span> <span class="n">Transformer</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="s2">"user.first_name"</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s2">"profile.name"</span><span class="p">)</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="c1"># Output: {"profile": {"name": "Alice"}}</span>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="c1"># Set a default value directly</span>
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="n">result</span> <span class="o">=</span> <span class="n">Transformer</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s2">"version"</span><span class="p">,</span> <span class="n">default_value</span><span class="o">=</span><span class="s2">"1.0"</span><span class="p">)</span>
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="c1"># Output: {"version": "1.0"}</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'user'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'first_name'</span><span class="p">:</span> <span class="s1">'Alice'</span><span class="p">,</span> <span class="s1">'last_name'</span><span class="p">:</span> <span class="s1">'Smith'</span><span class="p">},</span> <span class="s1">'age'</span><span class="p">:</span> <span class="mi">30</span><span class="p">}</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1"># Map a single field</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="n">result</span> <span class="o">=</span> <span class="n">Transformer</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="s1">'user.first_name'</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s1">'profile.name'</span><span class="p">)</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1"># Output: {"profile": {"name": "Alice"}}</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="c1"># Set a default value directly</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="n">result</span> <span class="o">=</span> <span class="n">Transformer</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s1">'version'</span><span class="p">,</span> <span class="n">default_value</span><span class="o">=</span><span class="s1">'1.0'</span><span class="p">)</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="c1"># Output: {"version": "1.0"}</span>
 </code></pre></div>
 <p>You can also pass <code>inplace=True</code> to modify the input dictionary directly, or pass an existing <code>target_data</code> dictionary:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Modifies data in-place</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">Transformer</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="s2">"user.last_name"</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s2">"surname"</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">Transformer</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="s1">'user.last_name'</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s1">'surname'</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="2-shorthand-initializations">2. Shorthand Initializations<a class="headerlink" href="#2-shorthand-initializations" title="Permanent link">¶</a></h3>
 <p><code>Transformer</code> accepts multiple input formats to fit your preferred style:</p>
 <p>=== "Keyword arguments"</p>
 <div class="highlight"><pre><span></span><code>```python
-transformer = Transformer(source="a.b", target="c.d")
+transformer = Transformer(source='a.b', target='c.d')
 result = transformer.transform(data)
 ```
 </code></pre></div>
 <p>=== "Single Rule Dictionary"</p>
 <div class="highlight"><pre><span></span><code>```python
-transformer = Transformer({"source": "a.b", "target": "c.d", "default_value": 0})
+transformer = Transformer({'source': 'a.b', 'target': 'c.d', 'default_value': 0})
 result = transformer.transform(data)
 ```
 </code></pre></div>
 <p>=== "List of Rules"</p>
 <div class="highlight"><pre><span></span><code>```python
 transformer = Transformer([
-    {"source": "input.x", "target": "output.x"},
-    {"source": "input.y", "target": "output.y"},
+    {'source': 'input.x', 'target': 'output.x'},
+    {'source': 'input.y', 'target': 'output.y'},
 ])
 result = transformer.transform(data)
 ```
@@ -4792,13 +4789,13 @@ result = transformer.transform(data)
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.datamodel.metainfo.annotations</span><span class="w"> </span><span class="kn">import</span> <span class="n">Rules</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.utils.json_transformer</span><span class="w"> </span><span class="kn">import</span> <span class="n">Transformer</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="n">rules</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"example_transformation"</span><span class="p">:</span> <span class="n">Rules</span><span class="p">(</span><span class="n">json_example</span><span class="p">[</span><span class="s2">"schema"</span><span class="p">])}</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="n">rules</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'example_transformation'</span><span class="p">:</span> <span class="n">Rules</span><span class="p">(</span><span class="n">json_example</span><span class="p">[</span><span class="s1">'schema'</span><span class="p">])}</span>
 <a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="n">transformer</span> <span class="o">=</span> <span class="n">Transformer</span><span class="p">(</span><span class="n">rules</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="2-transform-the-data">2. Transform the Data<a class="headerlink" href="#2-transform-the-data" title="Permanent link">¶</a></h3>
 <p>Pass your source JSON and the rule group name to <code>transform()</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">source_json</span> <span class="o">=</span> <span class="n">json_example</span><span class="p">[</span><span class="s2">"data"</span><span class="p">]</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">transformed_json</span> <span class="o">=</span> <span class="n">transformer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">source_json</span><span class="p">,</span> <span class="s2">"example_transformation"</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">source_json</span> <span class="o">=</span> <span class="n">json_example</span><span class="p">[</span><span class="s1">'data'</span><span class="p">]</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">transformed_json</span> <span class="o">=</span> <span class="n">transformer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">source_json</span><span class="p">,</span> <span class="s1">'example_transformation'</span><span class="p">)</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">transformed_json</span><span class="p">)</span>
 </code></pre></div>
 <p>Output:</p>
@@ -4846,11 +4843,11 @@ result = transformer.transform(data)
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.datamodel.metainfo.annotations</span><span class="w"> </span><span class="kn">import</span> <span class="n">Rules</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.utils.json_transformer</span><span class="w"> </span><span class="kn">import</span> <span class="n">Transformer</span>
 <a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="n">rules</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"subsystem_migration"</span><span class="p">:</span> <span class="n">Rules</span><span class="p">(</span><span class="n">json_example</span><span class="p">[</span><span class="s2">"schema"</span><span class="p">])}</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="n">rules</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'subsystem_migration'</span><span class="p">:</span> <span class="n">Rules</span><span class="p">(</span><span class="n">json_example</span><span class="p">[</span><span class="s1">'schema'</span><span class="p">])}</span>
 <a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="n">transformer</span> <span class="o">=</span> <span class="n">Transformer</span><span class="p">(</span><span class="n">rules</span><span class="p">)</span>
 <a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>
-<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="n">source_json</span> <span class="o">=</span> <span class="n">json_example</span><span class="p">[</span><span class="s2">"data"</span><span class="p">]</span>
-<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="n">result</span> <span class="o">=</span> <span class="n">transformer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">source_json</span><span class="p">,</span> <span class="s2">"subsystem_migration"</span><span class="p">)</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="n">source_json</span> <span class="o">=</span> <span class="n">json_example</span><span class="p">[</span><span class="s1">'data'</span><span class="p">]</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="n">result</span> <span class="o">=</span> <span class="n">transformer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">source_json</span><span class="p">,</span> <span class="s1">'subsystem_migration'</span><span class="p">)</span>
 <a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 </code></pre></div>
 <p>Output:</p>
@@ -4878,25 +4875,27 @@ result = transformer.transform(data)
 <h3 id="2-populating-default_value-across-repeating-items">2. Populating <code>default_value</code> Across Repeating Items<a class="headerlink" href="#2-populating-default_value-across-repeating-items" title="Permanent link">¶</a></h3>
 <p>A common migration requirement is adding a missing field (such as a Metainfo definition <code>m_def</code>) to all items in an array:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">rule</span> <span class="o">=</span> <span class="p">{</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>    <span class="s2">"target"</span><span class="p">:</span> <span class="s2">"sub_systems[n1].nested_system.m_def"</span><span class="p">,</span>
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>    <span class="s2">"default_value"</span><span class="p">:</span> <span class="s2">"nomad.datamodel.metainfo.basesections.v2.Element"</span><span class="p">,</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>    <span class="s1">'target'</span><span class="p">:</span> <span class="s1">'sub_systems[n1].nested_system.m_def'</span><span class="p">,</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>    <span class="s1">'default_value'</span><span class="p">:</span> <span class="s1">'nomad.datamodel.metainfo.basesections.v2.Element'</span><span class="p">,</span>
 <a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="p">}</span>
 <a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>
 <a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="c1"># Apply to all items in sub_systems</span>
 <a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="n">Transformer</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">archive_dict</span><span class="p">,</span> <span class="n">rule</span><span class="o">=</span><span class="n">rule</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </code></pre></div>
-<p>Notice that:
-- The rule does not require a <code>source</code> path.
-- The <code>Transformer</code> iterates through each existing item in <code>sub_systems</code>, creating any intermediate dictionaries (such as <code>nested_system</code> if missing), and writes the <code>default_value</code>.
-- If a <code>source</code> is provided but does not exist in some elements, the <code>default_value</code> is safely used as the fallback for those elements.</p>
+<p>Notice that:</p>
+<ul>
+<li>The rule does not require a <code>source</code> path.</li>
+<li>The <code>Transformer</code> iterates through each existing item in <code>sub_systems</code>, creating any intermediate dictionaries (such as <code>nested_system</code> if missing), and writes the <code>default_value</code>.</li>
+<li>If a <code>source</code> is provided but does not exist in some elements, the <code>default_value</code> is safely used as the fallback for those elements.</li>
+</ul>
 <h3 id="3-wildcard-target-notation">3. Wildcard Target Notation (<code>[*]</code>)<a class="headerlink" href="#3-wildcard-target-notation" title="Permanent link">¶</a></h3>
 <p>When the target path in your destination data structure is already a list, you can use the wildcard <code>[*]</code> notation to fill every element with a default value:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">target_data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"items"</span><span class="p">:</span> <span class="p">[{},</span> <span class="p">{},</span> <span class="p">{}]}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">target_data</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'items'</span><span class="p">:</span> <span class="p">[{},</span> <span class="p">{},</span> <span class="p">{}]}</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
 <a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="n">Transformer</span><span class="o">.</span><span class="n">map</span><span class="p">(</span>
 <a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>    <span class="n">target_data</span><span class="p">,</span>
-<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>    <span class="n">target</span><span class="o">=</span><span class="s2">"items[*].status"</span><span class="p">,</span>
-<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>    <span class="n">default_value</span><span class="o">=</span><span class="s2">"pending"</span><span class="p">,</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>    <span class="n">target</span><span class="o">=</span><span class="s1">'items[*].status'</span><span class="p">,</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>    <span class="n">default_value</span><span class="o">=</span><span class="s1">'pending'</span><span class="p">,</span>
 <a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>    <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="p">)</span>
 <a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="c1"># Result: {"items": [{"status": "pending"}, {"status": "pending"}, {"status": "pending"}]}</span>
@@ -4906,13 +4905,13 @@ result = transformer.transform(data)
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.datamodel.metainfo.annotations</span><span class="w"> </span><span class="kn">import</span> <span class="n">Condition</span><span class="p">,</span> <span class="n">RegexCondition</span><span class="p">,</span> <span class="n">Rule</span>
 <a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
 <a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="n">rule</span> <span class="o">=</span> <span class="n">Rule</span><span class="p">(</span>
-<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>    <span class="n">target</span><span class="o">=</span><span class="s2">"elements[n1].category"</span><span class="p">,</span>
-<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>    <span class="n">default_value</span><span class="o">=</span><span class="s2">"Transition Metal"</span><span class="p">,</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>    <span class="n">target</span><span class="o">=</span><span class="s1">'elements[n1].category'</span><span class="p">,</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>    <span class="n">default_value</span><span class="o">=</span><span class="s1">'Transition Metal'</span><span class="p">,</span>
 <a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>    <span class="n">conditions</span><span class="o">=</span><span class="p">[</span>
 <a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>        <span class="n">Condition</span><span class="p">(</span>
 <a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>            <span class="n">regex_condition</span><span class="o">=</span><span class="n">RegexCondition</span><span class="p">(</span>
-<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>                <span class="n">regex_path</span><span class="o">=</span><span class="s2">"elements[n1].symbol"</span><span class="p">,</span>
-<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>                <span class="n">regex_pattern</span><span class="o">=</span><span class="s2">"^(Fe|Co|Ni|Cu)$"</span><span class="p">,</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>                <span class="n">regex_path</span><span class="o">=</span><span class="s1">'elements[n1].symbol'</span><span class="p">,</span>
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>                <span class="n">regex_pattern</span><span class="o">=</span><span class="s1">'^(Fe|Co|Ni|Cu)$'</span><span class="p">,</span>
 <a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>            <span class="p">)</span>
 <a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a>        <span class="p">)</span>
 <a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a>    <span class="p">],</span>
@@ -4947,7 +4946,7 @@ result = transformer.transform(data)
 <a id="__codelineno-15-22" name="__codelineno-15-22" href="#__codelineno-15-22"></a><span class="p">}</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="n">transformer</span> <span class="o">=</span> <span class="n">Transformer</span><span class="p">(</span><span class="n">mapping_dict</span><span class="o">=</span><span class="n">rules</span><span class="p">)</span>
-<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="n">transformed_json</span> <span class="o">=</span> <span class="n">transformer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">source_json</span><span class="p">,</span> <span class="s2">"conditional_transformation_met"</span><span class="p">)</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="n">transformed_json</span> <span class="o">=</span> <span class="n">transformer</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">source_json</span><span class="p">,</span> <span class="s1">'conditional_transformation_met'</span><span class="p">)</span>
 <a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">transformed_json</span><span class="p">)</span>
 </code></pre></div>
 <p>The rule checks if the value at path <code>"a"</code> matches <code>"^3\\d$"</code>. If the condition is met, the value is copied to <code>"age"</code>. If not met, <code>"default_value"</code> is applied.</p>
@@ -4956,17 +4955,17 @@ result = transformer.transform(data)
 <div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.datamodel.metainfo.annotations</span><span class="w"> </span><span class="kn">import</span> <span class="n">Rule</span><span class="p">,</span> <span class="n">Rules</span>
 <a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
 <a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="n">rules</span> <span class="o">=</span> <span class="p">{</span>
-<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>    <span class="s2">"employee_info"</span><span class="p">:</span> <span class="n">Rules</span><span class="p">(</span>
-<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>        <span class="n">name</span><span class="o">=</span><span class="s2">"Employee Info Mapping"</span><span class="p">,</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>    <span class="s1">'employee_info'</span><span class="p">:</span> <span class="n">Rules</span><span class="p">(</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>        <span class="n">name</span><span class="o">=</span><span class="s1">'Employee Info Mapping'</span><span class="p">,</span>
 <a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>        <span class="n">rules</span><span class="o">=</span><span class="p">{</span>
-<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>            <span class="s2">"rule_manager"</span><span class="p">:</span> <span class="n">Rule</span><span class="p">(</span>
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>            <span class="s1">'rule_manager'</span><span class="p">:</span> <span class="n">Rule</span><span class="p">(</span>
 <a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>                <span class="n">source</span><span class="o">=</span><span class="s2">"users[?role=='manager'].manager_id | [0]"</span><span class="p">,</span>
-<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>                <span class="n">target</span><span class="o">=</span><span class="s2">"manager_details"</span><span class="p">,</span>
-<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a>                <span class="n">use_rule</span><span class="o">=</span><span class="s2">"#employee_info.details"</span><span class="p">,</span>
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>                <span class="n">target</span><span class="o">=</span><span class="s1">'manager_details'</span><span class="p">,</span>
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a>                <span class="n">use_rule</span><span class="o">=</span><span class="s1">'#employee_info.details'</span><span class="p">,</span>
 <a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a>            <span class="p">),</span>
-<a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a>            <span class="s2">"details"</span><span class="p">:</span> <span class="n">Rule</span><span class="p">(</span>
+<a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a>            <span class="s1">'details'</span><span class="p">:</span> <span class="n">Rule</span><span class="p">(</span>
 <a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a>                <span class="n">source</span><span class="o">=</span><span class="s2">"details[?id=='101'] | [0]"</span><span class="p">,</span>
-<a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a>                <span class="n">target</span><span class="o">=</span><span class="s2">"specific_manager"</span><span class="p">,</span>
+<a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a>                <span class="n">target</span><span class="o">=</span><span class="s1">'specific_manager'</span><span class="p">,</span>
 <a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a>            <span class="p">),</span>
 <a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a>        <span class="p">},</span>
 <a id="__codelineno-17-17" name="__codelineno-17-17" href="#__codelineno-17-17"></a>    <span class="p">)</span>
@@ -4997,11 +4996,13 @@ result = transformer.transform(data)
 <a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a><span class="p">}</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="c1"># Deeply nested extraction</span>
-<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="n">Transformer</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="s2">"f.nested.key"</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s2">"flattened_key"</span><span class="p">)</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="n">Transformer</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="s1">'f.nested.key'</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s1">'flattened_key'</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="4-deleting-source-keys">4. Deleting Source Keys<a class="headerlink" href="#4-deleting-source-keys" title="Permanent link">¶</a></h3>
 <p>To remove source fields from the original structure after copying (useful during dictionary cleanup or migration):</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="n">Transformer</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="s2">"old_field"</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s2">"new_field"</span><span class="p">,</span> <span class="n">delete_sources</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="n">Transformer</span><span class="o">.</span><span class="n">map</span><span class="p">(</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>    <span class="n">data</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="s1">'old_field'</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="s1">'new_field'</span><span class="p">,</span> <span class="n">delete_sources</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="p">)</span>
 </code></pre></div>
 
 
