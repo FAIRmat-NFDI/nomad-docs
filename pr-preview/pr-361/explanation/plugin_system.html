@@ -4446,7 +4446,7 @@ graph LR
 <div class="admonition warning">
 <p class="admonition-title">Sensitive configuration</p>
 <p>Plugin configuration may be serialized and exposed to clients. Define confidential
-fields, such as passwords, tokens, and API keys, using Pydantic's <code>SecretStr</code> and
+fields, such as passwords, tokens, and API keys, using <a href="https://pydantic.dev/docs/validation/latest/api/pydantic/types/#pydantic.types.SecretStr" rel="noopener" target="_blank">Pydantic's <code>SecretStr</code></a> and
 exclude them from serialization:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">Field</span><span class="p">,</span> <span class="n">SecretStr</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
