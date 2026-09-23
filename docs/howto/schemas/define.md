@@ -187,9 +187,7 @@ means, can convert it, and can display it in whatever unit the reader prefers.
     ```
 
 Units are parsed by [Pint](https://pint.readthedocs.io/en/stable/){:target="_blank" rel="noopener"},
-so both names and expressions work: `m`, `meter`, `mm`, `m/s`, `m/s**2`. Uploaded schemas may use any
-unit; the built-in NOMAD Metainfo uses SI units only. See
-{{ nav_link("howto/plugins/tools/units.md", breadcrumb=True) }}.
+so both names and expressions work: `m`, `meter`, `mm`, `m/s`, `m/s**2`. See {{ nav_link("howto/plugins/tools/units.md", breadcrumb=True) }}.
 
 ## Add subsections
 

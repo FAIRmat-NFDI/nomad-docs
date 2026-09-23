@@ -19,24 +19,41 @@ classDiagram
     class EntryData {
         <<abstract>>
     }
-    EntryArchive *-- EntryMetadata : metadata
     EntryArchive *-- EntryData : data
+    EntryArchive *-- EntryMetadata : metadata
     EntryArchive *-- Results : results
     EntryArchive *-- Workflow : workflow2
     EntryArchive *-- Package : definitions
+    EntryData <|-- YourSchema
 ```
 
-<figcaption>The top-level subsections that every entry archive shares</figcaption>
+<figcaption>The top-level subsections that every entry archive shares, and the one where custom schemas attach</figcaption>
 </figure>
 
+Of these subsections, `data` carries the entry's actual content, while the others describe, summarize, or relate it:
+
+- `data` (`EntryData`) holds the entry-specific content and is where custom schemas plug in. See [The data section](#the-data-section).
 - `metadata` (`EntryMetadata`) is added by NOMAD during processing. It contains ids, timestamps, authors, datasets, references, and an index of all the sections and quantities used in the entry, which search relies on. Users and plugins cannot extend it.
-- `data` (`EntryData`) contains the entry-specific data. `EntryData` is an empty base section, and the concrete definition comes from the parser, plugin schema, or ELN schema that produced the entry. These definitions should re-use [base sections](#base-sections) as much as possible.
 - `results` (`Results`) is a summary of the entry that follows a fixed structure, independent of the data type, with the subsections `material`, `method`, `properties`, and `eln`. Parsers or uploaded archive files can populate it directly, but it is usually populated during normalization. Its structure is controlled by NOMAD, and some of the search is built on it.
 - `workflow2` (`Workflow`) describes the entry as a [workflow](./workflows.md) of tasks with inputs and outputs.
 - `definitions` (`Package`) is only filled for schema entries and contains the definitions they provide.
 
 !!! note
     There are currently two versions of the workflow schema, stored in two top-level `EntryArchive` subsections, `workflow` and `workflow2`. New schemas should use `workflow2`.
+
+### The data section
+
+`data` is the subsection that carries the entry's actual content. The others describe the entry around it: `metadata` identifies it, `results` summarizes it, and `workflow2` relates it to other entries. For most entries, `data` is where the interesting information lives.
+
+It is also the only part of the shared entry structure that is meant to be extended. `EntryData`, the type of the `data` subsection, defines no quantities of its own. It is a marker: any section that inherits it declares that it can be the root of an entry, and because the subsection is typed by that marker, NOMAD accepts any such section as the content of `data`. Every entry has exactly one `data` section, but the definition behind it differs from entry to entry, and comes from the parser, the plugin schema, or the ELN schema that produced the entry. These definitions should re-use [base sections](#base-sections) as much as possible.
+
+Inheriting `EntryData` does more than place a section in the archive:
+
+- NOMAD offers the section in the dialog for creating a new entry in the GUI.
+- The entry type used in search is taken from the name of the section.
+- Because `EntryData` builds on `ArchiveSection`, the section can define a `normalize` function that NOMAD runs during processing.
+
+For how to write such a section, see [How-to guides > ... > Define a schema](../howto/schemas/define.md#choose-the-right-base-section). For how to deliver it, either as a plugin or as an uploaded file, see [How-to guides > ... > Start working with schemas](../howto/schemas/schemas.md#get-your-schema-into-nomad).
 
 ### Serialized forms
 
@@ -75,7 +92,7 @@ The [workflow package](./workflows.md) is one example of a re-usable base sectio
 
 ### Specific schemas
 
-Specific schemas allow users and plugin developers to describe their data in all detail. However, users and machines that are not familiar with the specifics will struggle to interpret this kind of data. It is therefore important to also translate at least some of the data into a more generic and standardized form.
+Specific schemas are the definitions that go under an entry's [`data`](#the-data-section) section. They allow users and plugin developers to describe their data in all detail. However, users and machines that are not familiar with the specifics will struggle to interpret this kind of data. It is therefore important to also translate at least some of the data into a more generic and standardized form.
 
 <figure markdown>
   ![schema language](images/data.png)
