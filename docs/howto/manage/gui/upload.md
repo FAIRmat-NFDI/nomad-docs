@@ -76,7 +76,7 @@ choose **Upload via API**. The dialog provides an example command for uploading
 to the current Project folder.
 
 ??? info "Uploading VASP files"
-    VASP `POTCAR` files contain licensed pseudopotential data. Processing on NOMAD Central using `nomad-parser-plugin-simulations` 
+   VASP `POTCAR` files contain licensed pseudopotential data. Processing on NOMAD Central using `nomad-parser-plugin-simulations`
     creates a stripped representation and, by default, removes the
     original file during processing. The behavior is filename-based and the
     staging policy can be configured by deployments using this parser plugin.
