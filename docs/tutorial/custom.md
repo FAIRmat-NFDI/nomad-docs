@@ -40,11 +40,11 @@ definitions:
 
 ### The built-in tabular parser
 
-NOMAD provides a standard parser to import your data from a spreadsheet file (`Excel` file with .xlsx extension) or from a CSV file (a Comma-Separated Values file with .csv extension). There are several ways to parse a tabular data file into a structured [data file](../explanation/data.md#data), depending on which structure we want to give our data. Therefore, the tabular parser can be set very flexibly, directly from the [schema file](../explanation/data.md#schema) through [annotations](../reference/annotations.md).
+NOMAD provides a standard parser to import your data from a spreadsheet file (`Excel` file with .xlsx extension) or from a CSV file (a Comma-Separated Values file with .csv extension). There are several ways to parse a tabular data file into a structured [data file](../explanation/data.md#archives), depending on which structure we want to give our data. Therefore, the tabular parser can be set very flexibly, directly from the [schema file](../explanation/data.md#schemas) through [annotations](../reference/annotations.md).
 In this tutorial we will focus on most common modes of the tabular parser. A complete description of all modes is given in the [Reference](../reference/annotations.md#tabular_parser) section. You can also follow the dedicated [How To](../howto/schemas/tabular.md) to see practical examples of the NOMAD tabular parser, in each section you can find a commented sample schema with a step-by-step guide on how to set it to obtain the desired final structure of your parsed data.
 We will make use of the tabular parser in a custom yaml schema. To obtain some structured data in NOMAD with this parser:<br />
 
-1) the schema files should follow the NOMAD [archive files](../explanation/data.md#archive-files-a-shared-entry-structure) naming convention (i.e. `.archive.json` or `.archive.yaml` extension)<br />
+1) the schema files should follow the NOMAD [archive files](../explanation/data.md#archives) naming convention (i.e. `.archive.json` or `.archive.yaml` extension)<br />
 1) a data file must be instantiated from the schema file<br />
 
     <!-- TODO: a link to the part upload etc should be inserted -->
@@ -60,10 +60,10 @@ To use this parser, three kinds of annotation must be included in the schema: `t
     Some of them give rise to "not possible" data structures but are still listed for completeness, a brief explanation of why it is not possible to implement them is also provided.
     The main bring-home message is that a tabular data file can be parsed in one or more entries in NOMAD, giving rise to diverse and arbitrarily complex structures.
 
-In the following sections, two examples will be illustrated. A [tabular data file](../howto/schemas/tabular.md#preparing-the-tabular-data-file) is parsed into one or more [data archive files](../explanation/data.md#data), their structure is based on a [schema archive file](../explanation/data.md#schema). NOMAD archive files are denoted as Entries.
+In the following sections, two examples will be illustrated. A [tabular data file](../howto/schemas/tabular.md#preparing-the-tabular-data-file) is parsed into one or more [data archive files](../explanation/data.md#archives), their structure is based on a [schema archive file](../explanation/data.md#schemas). NOMAD archive files are denoted as Entries.
 
 !!! note
-    From the NOMAD point of view, a schema file and a data file are the same kind of file where different sections have been filled (see [archive files description](../explanation/data.md#archive-files-a-shared-entry-structure)). Specifically, a schema file has its `definitions` section filled while a data file will have its `data` section filled. See [How to write a schema](../howto/schemas/schemas.md#get-your-schema-into-nomad) for a more complete description of an archive file.
+    From the NOMAD point of view, a schema file and a data file are the same kind of file where different sections have been filled (see [archive files description](../explanation/data.md#archives)). Specifically, a schema file has its `definitions` section filled while a data file will have its `data` section filled. See [How to write a schema](../howto/schemas/schemas.md#get-your-schema-into-nomad) for a more complete description of an archive file.
 
 #### Example 1
 
