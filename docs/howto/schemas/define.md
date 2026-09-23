@@ -607,16 +607,14 @@ With the schema defined, you create instances of it and fill them in.
 
 ## Add normalize functions
 
-A *normalize function* runs every time an entry is processed, which happens whenever a file is
-uploaded or changed. Use it to derive values, fill in defaults, or copy data into a more
-interoperable part of the archive.
+A *normalize function* runs every time an entry is processed, which happens whenever a file is uploaded or changed. Use it to derive values, fill in defaults, or copy data into a more interoperable part of the archive.
 
 !!! note "Python only"
     Normalize functions are the one capability YAML schemas do not have, because they are code rather
     than data. If you need derived values, write the schema in Python. This is the most common reason
     to move a working YAML schema into a plugin.
 
-The section must inherit `ArchiveSection` — `EntryData` already does:
+In order for the `normalize` function to tbe triggered, the section must inherit `ArchiveSection` (`EntryData` already does):
 
 ```python
 class Sample(EntryData):
@@ -632,13 +630,11 @@ class Sample(EntryData):
             self.sample_id = f'{self.name}--{len(self.processes)}'
 ```
 
-Always call `super().normalize(...)` so multiple inheritance keeps working.
+You usually want to call `super().normalize(...)` so multiple inheritance keeps working.
 
-Normalize functions run for every subsection before their parent. To control the order among sections
-at the same level, set `normalizer_level`; it defaults to `0` and sections run from low to high.
+Normalize functions run for every subsection before their parent. To control the order among sections at the same level, set `normalizer_level`; it defaults to `0` and sections run from low to high.
 
-Design a normalize function so it only needs data from its own section. Use `m_parent` and `m_root` to
-*read* from the surrounding archive when you must, but avoid writing outside your own section.
+Usually it is good to design a normalize function so it only needs data from its own section. Use `m_parent` and `m_root` to *read* from the surrounding archive when you must, but avoid writing outside your own section.
 
 !!! note
     A `normalize` function is not the same thing as a *normalizer*. A normalizer is a separate plugin
@@ -648,8 +644,7 @@ Design a normalize function so it only needs data from its own section. Use `m_p
 
 ## The complete example
 
-The running example, as one working schema. The two files define exactly the same sections and
-quantities; only the normalize function is Python-only.
+The running example, as one working schema. The two files define exactly the same sections and quantities; only the normalize function is Python-only.
 
 === "Python"
 

@@ -2,7 +2,7 @@
 
 NOMAD organizes data into *sections* and *quantities*. Quantities hold the actual values, while sections group quantities together and can contain other sections, called *subsections*. This hierarchy lets you browse complex data much like files and directories on your computer. Beyond the hierarchy, every section and quantity has a defined name and description, and quantities also have a type and, where applicable, a shape and unit.
 
-Together, these definitions form a *schema* that all data follows. A schema helps people explore the data, and it also makes the data machine-readable, keeps it consistent and interoperable, and enables search, APIs, visualization, and analysis.
+Together, these definitions form the *schemas* that all data follows. A schema helps people explore the data, and it also makes the data machine-readable, keeps it consistent and interoperable, and enables search, APIs, visualization, and analysis.
 
 Three concepts build on this foundation: the **archive** that holds the concrete data of an entry, the **schemas** that this data follows, and the **schema language** in which those schemas are written. This page introduces them in that order.
 
@@ -45,7 +45,7 @@ Of these subsections, `data` carries the entry's actual content, while the other
 
 `data` is the subsection that carries the entry's actual content. The others describe the entry around it: `metadata` identifies it, `results` summarizes it, and `workflow2` relates it to other entries. For most entries, `data` is where the interesting information lives.
 
-It is also the only part of the shared entry structure that is meant to be extended. `EntryData`, the type of the `data` subsection, defines no quantities of its own. It is a marker: any section that inherits it declares that it can be the root of an entry, and because the subsection is typed by that marker, NOMAD accepts any such section as the content of `data`. Every entry has exactly one `data` section, but the definition behind it differs from entry to entry, and comes from the parser, the plugin schema, or the ELN schema that produced the entry. These definitions should re-use [base sections](#base-sections) as much as possible.
+It is also the only part of the shared entry structure that is meant to be extended. `EntryData`, the type of the `data` subsection, defines no quantities of its own. It is a marker: any section that inherits it declares that it can be the root of an entry, and because the subsection is typed by that marker, NOMAD accepts any such section as the content of `data`. Every entry has exactly one `data` section, but the definition behind it differs from entry to entry, and comes from the parser, the plugin schema, or the ELN schema that produced the entry. These definitions should re-use [base sections](./base_sections.md) as much as possible.
 
 Inheriting `EntryData` does more than place a section in the archive:
 
@@ -69,31 +69,41 @@ Whatever the representation, you can rely on the structure, names, types, shapes
 
 ## Schemas
 
-NOMAD represents many different types of data, so we cannot speak of just *the one* schema. Instead, NOMAD's definitions fall into three categories:
+The previous section described the shape of an archive. A schema is what gives that shape meaning. A *schema* is a set of section and quantity definitions: each definition fixes a name, a description, a type and, where applicable, a shape and a unit, and each section definition also fixes which subsections and quantities it may contain. Definitions are not written one by one, they are grouped into a *package*, and the package is the unit in which a schema is written, delivered, and referred to. In Python a package is a `SchemaPackage`; in an archive file it is the content of the `definitions` section, which is why a schema and the data following it are the same kind of file.
 
-- A **shared entry structure**, independent of the type of data and of the processed file type. It makes the generic parts of an entry findable without any deeper understanding of the specific data. This is the `EntryArchive` structure described under [Archives](#archives).
-- **Re-usable base sections** for shared common concepts and their properties. Specific schemas can use and extend them, and because they define a fixed interface, tools such as search, visualizations, and analysis can be built around them.
-- **Specific schemas**, which re-use base sections and complement the shared entry structure to represent one particular type of data.
+There is no single NOMAD schema. The sections around `data` — `metadata`, `results`, and `workflow2` — are defined by NOMAD and are the same in every archive, but [`data`](#the-data-section) follows a different schema in every kind of entry. When you read an entry, the definition behind its `data` section is what tells you what the entry actually contains. When you have data of your own, writing a schema is how you tell NOMAD what it contains.
 
-### Base sections
+### Where schemas come from
 
-Base section is a very loose category: in principle, every section definition can be inherited from or re-used in a different context. There are some dedicated, and even abstract, base section definitions, mostly in the `nomad.datamodel.metainfo` package and its sub-packages, but schema authors should not strictly limit themselves to these. The goal is to re-use as much as possible instead of re-inventing the same sections over and over again, and the tools built around a base section are what makes re-using it worthwhile.
+A schema reaches NOMAD in one of three ways, and which one you use decides who can see it and what it can do.
 
-For the model behind NOMAD's built-in base sections, see [Base sections](./base_sections.md), which also points to instructions on inheriting from them and to the generated per-class listing.
+- **Built into NOMAD.** The definitions that ship with the `nomad-lab` package itself: the root `EntryArchive` and `metadata` in `nomad.datamodel`, and the shared, domain-independent definitions in `nomad.datamodel.metainfo`, including the built-in base sections. They are present in every installation.
+- **A Python schema package in a plugin.** A plugin declares a schema package entry point whose definitions are loaded at startup. Once the plugin is installed, the schema is available to every user of that installation, and it can carry `normalize` functions that NOMAD runs during processing.
+- **An uploaded archive file.** Any user can upload a `.archive.yaml` or `.archive.json` file that fills the `definitions` section. NOMAD stores the package and makes it available within the upload it was uploaded to. No installation and no plugin development is needed, but the schema does not leave that upload, and it cannot carry `normalize` functions.
 
-The [workflow package](./workflows.md) is one example of a re-usable base section. It gives every entry a common way to describe workflows, places them in the shared entry structure, and lets the UI provide [a card with workflow visualization and navigation](../howto/manage/gui/workflows.md) for all entries that have a workflow inside.
+The two syntaxes describe the same thing, and there is a one-to-one translation between them. For the trade-off between them and for the mechanics of each route, see [How-to guides > ... > Start working with schemas](../howto/schemas/schemas.md#choose-python-or-yaml).
 
-### Specific schemas
+### Re-use and inheritance
 
-Specific schemas are the definitions that go under an entry's [`data`](#the-data-section) section. They allow users and plugin developers to describe their data in all detail. However, users and machines that are not familiar with the specifics will struggle to interpret this kind of data. It is therefore important to also translate at least some of the data into a more generic and standardized form.
+Schemas are rarely written from scratch. A section definition can inherit from another one, and inheriting brings over not only its quantities and subsections but also the functionality attached to them. The goal is to re-use as much as possible instead of re-inventing the same sections over and over again, and the tools built around a definition are what makes re-using it worthwhile: because a shared definition presents a fixed interface, search, visualizations, ELN forms, and analysis code can be written once and then work for every schema that inherits it.
 
-The [`results`](#archives) section provides such a shared structure, designed around base section definitions. It lets you put at least some of your data where it is easy to find, and in a form that is easy to interpret. In other words, your highly detailed but non-interoperable data is transformed into an interoperable, but potentially limited, form.
+The [workflow schema](./workflows.md) is one example. It gives every entry a common way to describe tasks with their inputs and outputs, and because all entries use the same definitions, the UI can offer [a card with workflow visualization and navigation](../howto/manage/gui/workflows.md) for every entry that has a workflow inside.
 
-Typically, a parser populates the specific schema, while the interoperable parts such as `results` are populated during [normalization](./processing.md#normalizing). Separating the two conversions in this way also makes normalization routines easier to re-use. How much normalization is needed depends on how far the specific schema deviates from the base sections:
+The definitions that schemas inherit from most often are NOMAD's built-in *base sections*. They are the subject of the next page: [Base sections](./base_sections.md).
 
-- The parser, or an uploaded archive file, populates `results` directly.
-- The specific schema re-uses the base sections that `results` is built on, and normalization can be automated.
-- The specific schema represents the same information differently, and a translating normalization algorithm needs to be implemented.
+### Interoperability
+
+A schema of your own can describe your data in all the detail you want, and that is the point of it. But detail is not the same as interoperability: users and machines that are not familiar with the specifics will struggle to interpret this kind of data. It is therefore important to also translate at least some of the data into a more generic and standardized form.
+
+The [`results`](#archives) section is where that translation lands. Its structure is fixed and the same in every entry, whatever the entry contains. It lets you put at least some of your data where it is easy to find, and in a form that is easy to interpret. In other words, your highly detailed but non-interoperable data is transformed into an interoperable, but potentially limited, form. The two live side by side in the same archive: `data` keeps the detail, `results` carries the part that search, comparison, and analysis across entries can rely on.
+
+Typically, a parser populates the entry's own schema, while the interoperable parts such as `results` are populated during [normalization](./processing.md#normalizing). Separating the two conversions in this way also makes normalization routines easier to re-use. How much normalization is needed depends on how close the entry's schema is to definitions NOMAD already knows:
+
+- The parser, or an uploaded archive file, populates `results` directly, and no translation is needed.
+- The schema inherits base sections that fill `results` in their own `normalize` functions, and the translation happens automatically.
+- The schema represents the same information differently, and a translating normalization algorithm needs to be implemented.
+
+Built-in, plugin, and uploaded schemas differ in where they live and who can use them, but not in what they are made of. That common vocabulary — sections, quantities, subsections, and packages — is fixed by the schema language.
 
 ## Schema language
 
@@ -109,3 +119,5 @@ Packages contain section definitions, and section definitions contain definition
 If you are familiar with other schema languages and means of defining structured data (JSON schema, XML schema, pydantic, database schemas, ORM, etc.), you might recognize these concepts under different names. Sections are similar to *classes*, *concepts*, *entities*, or *tables*. Quantities are related to *properties*, *attributes*, *slots*, or *columns*. Subsections might be called *containment* or *composition*. Subsections and quantities with a section type also define *relationships*, *links*, or *references*.
 
 Our guide on [how to define a schema](../howto/schemas/define.md) explains these concepts with an example.
+
+For the language itself — every attribute a definition can carry, the available quantity types, and the naming conventions — see [Reference > Schema language](../reference/metainfo.md).

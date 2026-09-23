@@ -117,26 +117,18 @@ for: whenever the section definition cannot be worked out from the subsection th
 
 - **Section definitions** use `UpperCamelCase`, e.g. `MySection`, `PvdEvaporation`.
 - **Quantities and subsections** use `lower_snake_case`, e.g. `chamber_pressure`, `data_file`.
-- Use a `_ref` suffix for quantities that hold references, e.g. `sample_ref`.
-- Prefer subsections over inheritance when adding specific quantities to a general section. For
-  example, the `workflow` section contains a `geometry_optimization` subsection for the quantities
-  that only apply to geometry optimizations.
-- Prefix parser-specific and user-defined definitions with `x_<name>_`, where `<name>` is the short
-  handle of a code or method, e.g. `x_vasp_incar`.
+- Prefer subsections over inheritance when adding specific quantities to a general section. For example, the `workflow` section contains a `geometry_optimization` subsection for the quantities that only apply to geometry optimizations.
 
-These conventions apply equally to YAML and Python schemas. In Python they are not optional: a
-definition takes its name from the Python class or attribute name, so it must be a valid identifier.
+These conventions apply equally to YAML and Python schemas. In Python they are not optional: a definition takes its name from the Python class or attribute name, so it must be a valid identifier.
 
 ## Where definitions live
 
 The `nomad-lab` package defines the Metainfo in three modules:
 
-- `nomad.metainfo` — the schema language itself, including its self-referencing schema. This is the
-  package rendered below.
+- `nomad.metainfo` — the schema language itself, including its self-referencing schema. This is the package rendered below.
 - `nomad.datamodel` — the root section `EntryArchive` and the `metadata` section holding
   administrative metadata.
-- `nomad.datamodel.metainfo` — the central, method-specific (but not parser-specific) definitions
-  that are shared across parsers.
+- `nomad.datamodel.metainfo` — the central, method-specific (but not parser-specific) definitions that are shared across parsers.
 
 ## Serialization options
 
