@@ -111,6 +111,69 @@ myparser = MyParserEntryPoint(
 
 You can find all of the available matching criteria in the [`ParserEntryPoint` reference](../../../reference/plugins.md#parserentrypoint)
 
+## Creating multiple entries from a single file
+
+Normally, one matched mainfile results in exactly one entry. Some raw files, however, logically contain several entries: a table where each row should become its own entry, a simulation output holding multiple configurations, or an ELN export bundling several experiments. For these cases a parser can create one *main* entry plus any number of *child* entries from the same mainfile.
+
+Three ingredients work together:
+
+1. The parser class sets `creates_children = True`.
+2. Its `is_mainfile` method returns an iterable of non-empty strings — the *mainfile keys* — instead of `True`. NOMAD then creates the main entry plus one child entry per key.
+3. The `parse` method receives the additional `child_archives` argument: a dictionary mapping each mainfile key to the [`EntryArchive`](../../../reference/glossary.md#archive) of the corresponding child entry. The parser populates these alongside the main entry's `archive`.
+
+Each key is stored in the `mainfile_key` metadata field of its child entry (main entries have no mainfile key), and the combination of upload id, mainfile and mainfile key uniquely identifies an entry. Keys thus define entry identity: derive them deterministically from the file contents, so that reprocessing the same file yields the same entries.
+
+A minimal parser creating child entries looks like this. Note how `is_mainfile` delegates the file matching itself to `MatchingParser`, which checks the criteria configured in the entry point, and only adds the key generation on top:
+
+```python
+from nomad.datamodel import EntryArchive
+from nomad.parsing import MatchingParser
+
+
+class MyParser(MatchingParser):
+    creates_children = True
+
+    def is_mainfile(
+        self,
+        filename: str,
+        mime: str,
+        buffer: bytes,
+        decoded_buffer: str,
+        compression: str = None,
+    ):
+        # Let MatchingParser check the criteria configured in the entry point
+        # (mainfile_name_re, mainfile_contents_re, ...)
+        if not super().is_mainfile(filename, mime, buffer, decoded_buffer, compression):
+            return False
+
+        # Return one mainfile key per child entry to create, e.g. one per
+        # data block found in the file
+        with open(filename) as file:
+            return [
+                f'block_{index}'
+                for index, line in enumerate(file)
+                if line.startswith('BEGIN BLOCK')
+            ]
+
+    def parse(
+        self,
+        mainfile: str,
+        archive: EntryArchive,
+        logger=None,
+        child_archives: dict[str, EntryArchive] = None,
+    ) -> None:
+        # Populate the main entry
+        archive.metadata.comment = 'overview entry'
+
+        # Populate one child entry per key returned by is_mainfile
+        for mainfile_key, child_archive in child_archives.items():
+            child_archive.metadata.comment = f'child entry {mainfile_key}'
+```
+
+During processing, [normalizers](../../../explanation/processing.md#normalizing) run individually for the main entry and for every child entry. NOMAD's built-in [tabular parser](../../manage/gui/tabular.md) uses this mechanism to create one entry per row of a spreadsheet.
+
+For the conceptual background, see [Explanation > Processing > Single file, multiple entries](../../../explanation/processing.md#single-file-multiple-entries).
+
 ## Running a parser
 
 Parsers automatically run for the matched files within a NOMAD distribution, but it is also possible to run the manually for specific files. This can be useful for testing and for connecting them into external software.

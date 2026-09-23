@@ -102,9 +102,9 @@ def is_mainfile(self, filename: str, ...) -> Union[bool, Iterable[str]]
 
 If this function does not return `False`, the parser matches with the file and entries
 are created. If the return is `True`, exactly one entry will be created. If the
-result is an iterable of strings, the same entry is sill created, but now also additional
+result is an iterable of strings, the same entry is still created, but now also additional
 entries are created for each string. These strings are called *entry keys* and the additional
-entries are *child* entries. See the also [single file, multiple entries scenario](#single-file-single-entry).
+entries are *child* entries. See also the [single file, multiple entries scenario](#single-file-multiple-entries).
 
 In principle, the `is_mainfile` implementation can do whatever it wants: consider the filename, open the file,
 reading it partially, reading it whole, etc. However, most NOMAD parsers extend a specialized parser
@@ -221,6 +221,8 @@ all child entries.
 Normally the IDs of entries are computed from the upload ID and the mainfile path. For
 entries created from a mainfile and a key, the key is also included in the ID. Also here
 the entry identity is internally locked to the mainfile (and the respective key).
+
+See [How to create a parser > Creating multiple entries from a single file](../howto/plugins/types/parsers.md#creating-multiple-entries-from-a-single-file) for implementation details.
 
 ### Creating files, spawning entries
 
