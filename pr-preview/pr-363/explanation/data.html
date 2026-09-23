@@ -3709,10 +3709,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#base-sections" class="md-nav__link">
+  <a href="#where-schemas-come-from" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Base sections
+        Where schemas come from
       
     </span>
   </a>
@@ -3720,10 +3720,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#specific-schemas" class="md-nav__link">
+  <a href="#re-use-and-inheritance" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Specific schemas
+        Re-use and inheritance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interoperability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interoperability
       
     </span>
   </a>
@@ -4426,10 +4437,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#base-sections" class="md-nav__link">
+  <a href="#where-schemas-come-from" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Base sections
+        Where schemas come from
       
     </span>
   </a>
@@ -4437,10 +4448,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#specific-schemas" class="md-nav__link">
+  <a href="#re-use-and-inheritance" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Specific schemas
+        Re-use and inheritance
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interoperability" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interoperability
       
     </span>
   </a>
@@ -4530,7 +4552,7 @@
 
 <h1 id="data-structure">Data structure<a class="headerlink" href="#data-structure" title="Permanent link">¶</a></h1>
 <p>NOMAD organizes data into <em>sections</em> and <em>quantities</em>. Quantities hold the actual values, while sections group quantities together and can contain other sections, called <em>subsections</em>. This hierarchy lets you browse complex data much like files and directories on your computer. Beyond the hierarchy, every section and quantity has a defined name and description, and quantities also have a type and, where applicable, a shape and unit.</p>
-<p>Together, these definitions form a <em>schema</em> that all data follows. A schema helps people explore the data, and it also makes the data machine-readable, keeps it consistent and interoperable, and enables search, APIs, visualization, and analysis.</p>
+<p>Together, these definitions form the <em>schemas</em> that all data follows. A schema helps people explore the data, and it also makes the data machine-readable, keeps it consistent and interoperable, and enables search, APIs, visualization, and analysis.</p>
 <p>Three concepts build on this foundation: the <strong>archive</strong> that holds the concrete data of an entry, the <strong>schemas</strong> that this data follows, and the <strong>schema language</strong> in which those schemas are written. This page introduces them in that order.</p>
 <h2 id="archives">Archives<a class="headerlink" href="#archives" title="Permanent link">¶</a></h2>
 <p>Each entry in NOMAD has an <em>archive</em> which stores its final concrete data. Every archive is an instance of the root section <code>EntryArchive</code>, so all entries share the same top-level structure, no matter what kind of data they contain. Both <a href="#schemas">schemas</a> and processed data are stored as the same kind of <em>archive file</em>, either <code>.archive.json</code> or <code>.archive.yaml</code>.</p>
@@ -4563,7 +4585,7 @@ classDiagram
 </div>
 <h3 id="the-data-section">The data section<a class="headerlink" href="#the-data-section" title="Permanent link">¶</a></h3>
 <p><code>data</code> is the subsection that carries the entry's actual content. The others describe the entry around it: <code>metadata</code> identifies it, <code>results</code> summarizes it, and <code>workflow2</code> relates it to other entries. For most entries, <code>data</code> is where the interesting information lives.</p>
-<p>It is also the only part of the shared entry structure that is meant to be extended. <code>EntryData</code>, the type of the <code>data</code> subsection, defines no quantities of its own. It is a marker: any section that inherits it declares that it can be the root of an entry, and because the subsection is typed by that marker, NOMAD accepts any such section as the content of <code>data</code>. Every entry has exactly one <code>data</code> section, but the definition behind it differs from entry to entry, and comes from the parser, the plugin schema, or the ELN schema that produced the entry. These definitions should re-use <a href="#base-sections">base sections</a> as much as possible.</p>
+<p>It is also the only part of the shared entry structure that is meant to be extended. <code>EntryData</code>, the type of the <code>data</code> subsection, defines no quantities of its own. It is a marker: any section that inherits it declares that it can be the root of an entry, and because the subsection is typed by that marker, NOMAD accepts any such section as the content of <code>data</code>. Every entry has exactly one <code>data</code> section, but the definition behind it differs from entry to entry, and comes from the parser, the plugin schema, or the ELN schema that produced the entry. These definitions should re-use <a href="base_sections.html">base sections</a> as much as possible.</p>
 <p>Inheriting <code>EntryData</code> does more than place a section in the archive:</p>
 <ul>
 <li>NOMAD offers the section in the dialog for creating a new entry in the GUI.</li>
@@ -4582,39 +4604,30 @@ classDiagram
 </ul>
 <p>Whatever the representation, you can rely on the structure, names, types, shapes, and units defined in the schema to interpret the data.</p>
 <h2 id="schemas">Schemas<a class="headerlink" href="#schemas" title="Permanent link">¶</a></h2>
-<p>NOMAD represents many different types of data, so we cannot speak of just <em>the one</em> schema. Instead, NOMAD's definitions fall into three categories:</p>
+<p>The previous section described the shape of an archive. A schema is what gives that shape meaning. A <em>schema</em> is a set of section and quantity definitions: each definition fixes a name, a description, a type and, where applicable, a shape and a unit, and each section definition also fixes which subsections and quantities it may contain. Definitions are not written one by one, they are grouped into a <em>package</em>, and the package is the unit in which a schema is written, delivered, and referred to. In Python a package is a <code>SchemaPackage</code>; in an archive file it is the content of the <code>definitions</code> section, which is why a schema and the data following it are the same kind of file.</p>
+<p>There is no single NOMAD schema. The sections around <code>data</code> — <code>metadata</code>, <code>results</code>, and <code>workflow2</code> — are defined by NOMAD and are the same in every archive, but <a href="#the-data-section"><code>data</code></a> follows a different schema in every kind of entry. When you read an entry, the definition behind its <code>data</code> section is what tells you what the entry actually contains. When you have data of your own, writing a schema is how you tell NOMAD what it contains.</p>
+<h3 id="where-schemas-come-from">Where schemas come from<a class="headerlink" href="#where-schemas-come-from" title="Permanent link">¶</a></h3>
+<p>A schema reaches NOMAD in one of three ways, and which one you use decides who can see it and what it can do.</p>
 <ul>
-<li>A <strong>shared entry structure</strong>, independent of the type of data and of the processed file type. It makes the generic parts of an entry findable without any deeper understanding of the specific data. This is the <code>EntryArchive</code> structure described under <a href="#archives">Archives</a>.</li>
-<li><strong>Re-usable base sections</strong> for shared common concepts and their properties. Specific schemas can use and extend them, and because they define a fixed interface, tools such as search, visualizations, and analysis can be built around them.</li>
-<li><strong>Specific schemas</strong>, which re-use base sections and complement the shared entry structure to represent one particular type of data.</li>
+<li><strong>Built into NOMAD.</strong> The definitions that ship with the <code>nomad-lab</code> package itself: the root <code>EntryArchive</code> and <code>metadata</code> in <code>nomad.datamodel</code>, and the shared, domain-independent definitions in <code>nomad.datamodel.metainfo</code>, including the built-in base sections. They are present in every installation.</li>
+<li><strong>A Python schema package in a plugin.</strong> A plugin declares a schema package entry point whose definitions are loaded at startup. Once the plugin is installed, the schema is available to every user of that installation, and it can carry <code>normalize</code> functions that NOMAD runs during processing.</li>
+<li><strong>An uploaded archive file.</strong> Any user can upload a <code>.archive.yaml</code> or <code>.archive.json</code> file that fills the <code>definitions</code> section. NOMAD stores the package and makes it available within the upload it was uploaded to. No installation and no plugin development is needed, but the schema does not leave that upload, and it cannot carry <code>normalize</code> functions.</li>
 </ul>
-<figure>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/schema.png" data-desc-position="bottom"><img alt="schema language" src="images/schema.png"></a>
-  </p>
-<figcaption>
-    The three different categories of NOMAD schema definitions
-  </figcaption>
-</figure>
-<h3 id="base-sections">Base sections<a class="headerlink" href="#base-sections" title="Permanent link">¶</a></h3>
-<p>Base section is a very loose category: in principle, every section definition can be inherited from or re-used in a different context. There are some dedicated, and even abstract, base section definitions, mostly in the <code>nomad.datamodel.metainfo</code> package and its sub-packages, but schema authors should not strictly limit themselves to these. The goal is to re-use as much as possible instead of re-inventing the same sections over and over again, and the tools built around a base section are what makes re-using it worthwhile.</p>
-<p>For the model behind NOMAD's built-in base sections, see <a href="base_sections.html">Base sections</a>, which also points to instructions on inheriting from them and to the generated per-class listing.</p>
-<p>The <a href="workflows.html">workflow package</a> is one example of a re-usable base section. It gives every entry a common way to describe workflows, places them in the shared entry structure, and lets the UI provide <a href="../howto/manage/gui/workflows.html">a card with workflow visualization and navigation</a> for all entries that have a workflow inside.</p>
-<h3 id="specific-schemas">Specific schemas<a class="headerlink" href="#specific-schemas" title="Permanent link">¶</a></h3>
-<p>Specific schemas are the definitions that go under an entry's <a href="#the-data-section"><code>data</code></a> section. They allow users and plugin developers to describe their data in all detail. However, users and machines that are not familiar with the specifics will struggle to interpret this kind of data. It is therefore important to also translate at least some of the data into a more generic and standardized form.</p>
-<figure>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/data.png" data-desc-position="bottom"><img alt="schema language" src="images/data.png"></a>
-  </p>
-<figcaption>
-    From specific data to more general interoperable data.
-  </figcaption>
-</figure>
-<p>The <a href="#archives"><code>results</code></a> section provides such a shared structure, designed around base section definitions. It lets you put at least some of your data where it is easy to find, and in a form that is easy to interpret. In other words, your highly detailed but non-interoperable data is transformed into an interoperable, but potentially limited, form.</p>
-<p>Typically, a parser populates the specific schema, while the interoperable parts such as <code>results</code> are populated during <a href="processing.html#normalizing">normalization</a>. Separating the two conversions in this way also makes normalization routines easier to re-use. How much normalization is needed depends on how far the specific schema deviates from the base sections:</p>
+<p>The two syntaxes describe the same thing, and there is a one-to-one translation between them. For the trade-off between them and for the mechanics of each route, see <a href="../howto/schemas/schemas.html#choose-python-or-yaml">How-to guides &gt; ... &gt; Start working with schemas</a>.</p>
+<h3 id="re-use-and-inheritance">Re-use and inheritance<a class="headerlink" href="#re-use-and-inheritance" title="Permanent link">¶</a></h3>
+<p>Schemas are rarely written from scratch. A section definition can inherit from another one, and inheriting brings over not only its quantities and subsections but also the functionality attached to them. The goal is to re-use as much as possible instead of re-inventing the same sections over and over again, and the tools built around a definition are what makes re-using it worthwhile: because a shared definition presents a fixed interface, search, visualizations, ELN forms, and analysis code can be written once and then work for every schema that inherits it.</p>
+<p>The <a href="workflows.html">workflow schema</a> is one example. It gives every entry a common way to describe tasks with their inputs and outputs, and because all entries use the same definitions, the UI can offer <a href="../howto/manage/gui/workflows.html">a card with workflow visualization and navigation</a> for every entry that has a workflow inside.</p>
+<p>The definitions that schemas inherit from most often are NOMAD's built-in <em>base sections</em>. They are the subject of the next page: <a href="base_sections.html">Base sections</a>.</p>
+<h3 id="interoperability">Interoperability<a class="headerlink" href="#interoperability" title="Permanent link">¶</a></h3>
+<p>A schema of your own can describe your data in all the detail you want, and that is the point of it. But detail is not the same as interoperability: users and machines that are not familiar with the specifics will struggle to interpret this kind of data. It is therefore important to also translate at least some of the data into a more generic and standardized form.</p>
+<p>The <a href="#archives"><code>results</code></a> section is where that translation lands. Its structure is fixed and the same in every entry, whatever the entry contains. It lets you put at least some of your data where it is easy to find, and in a form that is easy to interpret. In other words, your highly detailed but non-interoperable data is transformed into an interoperable, but potentially limited, form. The two live side by side in the same archive: <code>data</code> keeps the detail, <code>results</code> carries the part that search, comparison, and analysis across entries can rely on.</p>
+<p>Typically, a parser populates the entry's own schema, while the interoperable parts such as <code>results</code> are populated during <a href="processing.html#normalizing">normalization</a>. Separating the two conversions in this way also makes normalization routines easier to re-use. How much normalization is needed depends on how close the entry's schema is to definitions NOMAD already knows:</p>
 <ul>
-<li>The parser, or an uploaded archive file, populates <code>results</code> directly.</li>
-<li>The specific schema re-uses the base sections that <code>results</code> is built on, and normalization can be automated.</li>
-<li>The specific schema represents the same information differently, and a translating normalization algorithm needs to be implemented.</li>
+<li>The parser, or an uploaded archive file, populates <code>results</code> directly, and no translation is needed.</li>
+<li>The schema inherits base sections that fill <code>results</code> in their own <code>normalize</code> functions, and the translation happens automatically.</li>
+<li>The schema represents the same information differently, and a translating normalization algorithm needs to be implemented.</li>
 </ul>
+<p>Built-in, plugin, and uploaded schemas differ in where they live and who can use them, but not in what they are made of. That common vocabulary — sections, quantities, subsections, and packages — is fixed by the schema language.</p>
 <h2 id="schema-language">Schema language<a class="headerlink" href="#schema-language" title="Permanent link">¶</a></h2>
 <p>Schemas are written in a <strong>schema language</strong>. Ours is called the <strong>NOMAD Metainfo</strong> language, a name that is evocative of the rich <strong>metadata information</strong> that should be associated with research data and made available in a machine-readable format. It provides the means to define sections, to organize definitions into <strong>packages</strong>, and to define section properties, namely <strong>subsections</strong> and <strong>quantities</strong>. The entirety of NOMAD's schema definitions is called the <em>NOMAD Metainfo</em>.</p>
 <figure>
@@ -4625,6 +4638,7 @@ classDiagram
 <p>Packages contain section definitions, and section definitions contain definitions for subsections and quantities. Sections can inherit the properties of other sections. Subsections define containment hierarchies for sections, while quantities can use section definitions, or other quantity definitions, as a type to define references.</p>
 <p>If you are familiar with other schema languages and means of defining structured data (JSON schema, XML schema, pydantic, database schemas, ORM, etc.), you might recognize these concepts under different names. Sections are similar to <em>classes</em>, <em>concepts</em>, <em>entities</em>, or <em>tables</em>. Quantities are related to <em>properties</em>, <em>attributes</em>, <em>slots</em>, or <em>columns</em>. Subsections might be called <em>containment</em> or <em>composition</em>. Subsections and quantities with a section type also define <em>relationships</em>, <em>links</em>, or <em>references</em>.</p>
 <p>Our guide on <a href="../howto/schemas/define.html">how to define a schema</a> explains these concepts with an example.</p>
+<p>For the language itself — every attribute a definition can carry, the available quantity types, and the naming conventions — see <a href="../reference/metainfo.html">Reference &gt; Schema language</a>.</p>
 
 
 

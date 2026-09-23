@@ -4899,7 +4899,14 @@ and how they are serialized. Type names are <strong>case insensitive</strong>.</
 <td><code>MySection</code></td>
 <td>section instance or <code>MProxy</code></td>
 <td>reference URL</td>
-<td>See <a href="../howto/schemas/define.html#link-sections-with-references">Work with schemas &gt; Link data with references</a>.</td>
+<td>See <a href="../howto/schemas/define.html#link-data-with-references">Work with schemas &gt; Link data with references</a>.</td>
+</tr>
+<tr>
+<td><code>{type_kind: quantity_reference, type_data: &lt;Section&gt;/&lt;quantity&gt;}</code></td>
+<td><code>MySection.my_quantity</code></td>
+<td>the target quantity's value</td>
+<td>reference URL ending in the quantity name</td>
+<td>Assign the section that holds the quantity, not the value.</td>
 </tr>
 </tbody>
 </table>
@@ -4912,8 +4919,13 @@ and how they are serialized. Type names are <strong>case insensitive</strong>.</
 <li><strong>Python types</strong> — <code>str</code>, <code>bool</code>, <code>int</code>, <code>float</code>, <code>complex</code>, <code>datetime.datetime</code>. Note that the
   Python <code>bytes</code> type is not accepted, only the string <code>'bytes'</code>.</li>
 <li><strong>NumPy types</strong> — <code>np.int16</code>, <code>np.float32</code>, <code>np.complex128</code>, <code>np.bool_</code>, and <code>np.dtype(...)</code> instances.</li>
+<li><strong>Section definitions</strong> — a section class or its <code>m_def</code>, making a section reference.</li>
+<li><strong>Quantity definitions</strong> — <code>MySection.my_quantity</code>, making a quantity reference.</li>
 <li><strong>Dictionaries</strong> — the <code>{'type_kind': ..., 'type_data': ...}</code> form produced when a definition is
-  serialized. This is how <code>MEnum</code> and custom types round-trip.</li>
+  serialized. This is how <code>MEnum</code> and custom types round-trip, and also how references are spelled:
+  <code>{'type_kind': 'reference'}</code> for a section and <code>{'type_kind': 'quantity_reference'}</code> for a quantity.
+  The dictionary is the only way to write a quantity reference outside Python, because a bare string
+  is always resolved as a <em>section</em> reference.</li>
 </ul>
 <p>To add a type that is not in this list, see
 <a href="../howto/develop/new_type.html">How-to guides &gt; Develop the core software &gt; Add a new type</a>.</p>
@@ -4945,8 +4957,9 @@ quantity extracts the magnitude and converts it to the declared unit.</p>
 See <a href="../howto/plugins/tools/units.html">Work with schemas &gt; Work with units</a>.</p>
 <h2 id="reference-forms">Reference forms<a class="headerlink" href="#reference-forms" title="Permanent link">¶</a></h2>
 <p>A reference quantity is serialized as a URL. An inter-entry reference has two parts,
-<code>&lt;entry&gt;#&lt;section&gt;</code>: a path or URL denoting the target entry, and a path within that entry's
-subsection hierarchy. The host and path parts correspond to the
+<code>&lt;entry&gt;#&lt;path&gt;</code>: a path or URL denoting the target entry, and a path within that entry's subsection
+hierarchy. The path usually ends at a section; for a quantity reference it ends at the target
+quantity's name. The host and path parts correspond to the
 <a href="../howto/manage/program/api.html">NOMAD API</a>.</p>
 <table>
 <thead>
@@ -4959,6 +4972,10 @@ subsection hierarchy. The host and path parts correspond to the
 <tr>
 <td><code>#/data/processes/0</code></td>
 <td>A section within the same archive.</td>
+</tr>
+<tr>
+<td><code>#/data/instruments/0/name</code></td>
+<td>A quantity within the same archive, i.e. a quantity reference.</td>
 </tr>
 <tr>
 <td><code>/run/0/calculation/1</code></td>
@@ -5010,24 +5027,16 @@ for: whenever the section definition cannot be worked out from the subsection th
 <ul>
 <li><strong>Section definitions</strong> use <code>UpperCamelCase</code>, e.g. <code>MySection</code>, <code>PvdEvaporation</code>.</li>
 <li><strong>Quantities and subsections</strong> use <code>lower_snake_case</code>, e.g. <code>chamber_pressure</code>, <code>data_file</code>.</li>
-<li>Use a <code>_ref</code> suffix for quantities that hold references, e.g. <code>sample_ref</code>.</li>
-<li>Prefer subsections over inheritance when adding specific quantities to a general section. For
-  example, the <code>workflow</code> section contains a <code>geometry_optimization</code> subsection for the quantities
-  that only apply to geometry optimizations.</li>
-<li>Prefix parser-specific and user-defined definitions with <code>x_&lt;name&gt;_</code>, where <code>&lt;name&gt;</code> is the short
-  handle of a code or method, e.g. <code>x_vasp_incar</code>.</li>
+<li>Prefer subsections over inheritance when adding specific quantities to a general section. For example, the <code>workflow</code> section contains a <code>geometry_optimization</code> subsection for the quantities that only apply to geometry optimizations.</li>
 </ul>
-<p>These conventions apply equally to YAML and Python schemas. In Python they are not optional: a
-definition takes its name from the Python class or attribute name, so it must be a valid identifier.</p>
+<p>These conventions apply equally to YAML and Python schemas. In Python they are not optional: a definition takes its name from the Python class or attribute name, so it must be a valid identifier.</p>
 <h2 id="where-definitions-live">Where definitions live<a class="headerlink" href="#where-definitions-live" title="Permanent link">¶</a></h2>
 <p>The <code>nomad-lab</code> package defines the Metainfo in three modules:</p>
 <ul>
-<li><code>nomad.metainfo</code> — the schema language itself, including its self-referencing schema. This is the
-  package rendered below.</li>
+<li><code>nomad.metainfo</code> — the schema language itself, including its self-referencing schema. This is the package rendered below.</li>
 <li><code>nomad.datamodel</code> — the root section <code>EntryArchive</code> and the <code>metadata</code> section holding
   administrative metadata.</li>
-<li><code>nomad.datamodel.metainfo</code> — the central, method-specific (but not parser-specific) definitions
-  that are shared across parsers.</li>
+<li><code>nomad.datamodel.metainfo</code> — the central, method-specific (but not parser-specific) definitions that are shared across parsers.</li>
 </ul>
 <h2 id="serialization-options">Serialization options<a class="headerlink" href="#serialization-options" title="Permanent link">¶</a></h2>
 <p><code>m_to_dict()</code> converts a section instance to a plain dictionary. The options you are most likely to
@@ -5058,7 +5067,7 @@ need:</p>
 </tr>
 <tr>
 <td><code>resolve_references</code></td>
-<td>Replace references with the sections they point to, instead of reference URLs.</td>
+<td>Replace references with what they point to — the target section, or the target value for a quantity reference — instead of reference URLs.</td>
 </tr>
 <tr>
 <td><code>categories</code></td>
