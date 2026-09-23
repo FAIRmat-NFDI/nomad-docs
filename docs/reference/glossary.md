@@ -41,6 +41,13 @@ An *author* is typically a natural person that has uploaded a piece of data into
 has authorship over it. Often *authors* are [users](#user), but not always.
 Therefore, we have to distinguish between authors and users.
 
+## Child entry
+
+A [mainfile](#mainfile) usually produces one [entry](#entry), but a [parser](#parser) can
+additionally create *child entries* from the same mainfile, for example one per row of a
+table. Each child entry is identified by a [mainfile key](#mainfile-key). See
+[How to create a parser](../howto/plugins/types/parsers.md#creating-multiple-entries-from-a-single-file).
+
 ## Dataset
 
 Users can organize [entries](#entry) into *datasets*. Datasets are not created automatically,
@@ -81,6 +88,12 @@ for an entry.
 Each [entry](#entry) has one [raw file](#raw-file) that defines it. This is called the
 *mainfile* of that entry. Typically most, if not all, [processed data](#processed-data)
 of an entry is retrieved from that mainfile.
+
+## Mainfile key
+
+A string key that distinguishes a [child entry](#child-entry) among the entries created
+from the same [mainfile](#mainfile). The combination of upload id, mainfile and mainfile
+key uniquely identifies an [entry](#entry); for main entries the mainfile key is unset.
 
 ## Metadata
 
