@@ -7,19 +7,20 @@ settings, and an optional DOI.
 
 1. Open the [NOMAD GUI](https://nomad-lab.eu/prod/v1/gui/v2/){:target="_blank" rel="noopener"}
    and sign in. If you do not have a NOMAD Central account, follow the
-   [account creation instructions](../../../tutorial/overview.md#create-a-nomad-user-account).
-2. Open **Projects** and select **NEW PROJECT**. A prompt appears where you can
+   [Tutorial > Overview > Create a NOMAD user account](../../../tutorial/overview.md#create-a-nomad-user-account).
+2. Open **PROJECTS** and select **NEW PROJECT**. A prompt appears where you can
    add:
 
-       - a **Project name** (mandatory)
-       - a description
-       - initial files by drag-and-drop or by browsing your file system with **ADD FILES**
-       - users or groups to your Project as **Reviewer** or **Coauthor**
+   - a **Project name** (mandatory)
+   - a description
+   - initial files by drag-and-drop or by browsing your file system with
+     **ADD FILES**
+   - users or groups to your Project as **Reviewer** or **Coauthor**
 
 3. When you have finished filling in the prompt, select **CREATE**. NOMAD
    creates the Project and opens its **Overview** page.
 
-The name and description can be edited under **Settings** > **General**.
+The Project name can be edited under **SETTINGS** > **General**.
 
 ### Add a Project README
 
@@ -50,18 +51,18 @@ that defines an entry, that file becomes the entry's
 [**mainfile**](../../../reference/glossary.md#mainfile). NOMAD then creates and
 processes the corresponding entry. Which file formats are supported therefore
 depends on the parsers and plugins installed in the deployment. See
-[Processing](../../../explanation/processing.md) for a detailed explanation of
-file matching and processing.
+[Explanation > Processing](../../../explanation/processing.md) for a detailed
+explanation of file matching and processing.
 
-All Project files remain available under **Files**, but only recognized
-mainfiles produce entries that appear under **Entries** and can be found in
+All Project files remain available under **FILES**, but only recognized
+mainfiles produce entries that appear under **ENTRIES** and can be found in
 search. Parsers can also associate other files with a mainfile as **auxiliary
 files** for the resulting entry. A Project must contain at least one
 successfully processed entry before it can be published.
 
 If you added supported files in the **New Project** prompt, the corresponding
 entries are created automatically during Project creation. To create further
-entries from files, open **Files** and select **UPLOAD FILES**, then choose one
+entries from files, open **FILES** and select **UPLOAD FILES**, then choose one
 or more files. Alternatively, drag files into the file-list area below
 **All Files**.
 
@@ -74,13 +75,14 @@ For scripted transfers, select the drop-down arrow next to **UPLOAD FILES** and
 choose **Upload via API**. The dialog provides an example command for uploading
 to the current Project folder.
 
-!!! warning "VASP POTCAR files"
-    VASP `POTCAR` files contain licensed pseudopotential data. Standard NOMAD
-    processing creates a stripped representation and, by default, removes the
+??? info "Uploading VASP files"
+    VASP `POTCAR` files contain licensed pseudopotential data. Processing on NOMAD Central using `nomad-parser-plugin-simulations` 
+    creates a stripped representation and, by default, removes the
     original file during processing. The behavior is filename-based and the
-    staging policy can be configured by the deployment.
+    staging policy can be configured by deployments using this parser plugin.
 
-    See the [VASP parser documentation](https://fairmat-nfdi.github.io/nomad-parser-plugins-simulation/parsers/vasp/vasp_about.html#potcar-files-and-license-compliance){:target="_blank" rel="noopener"}
+    See
+    [NOMAD Parser Plugins Simulation > VASP > POTCAR files and license compliance](https://fairmat-nfdi.github.io/nomad-parser-plugins-simulation/parsers/vasp/vasp_about.html#potcar-files-and-license-compliance){:target="_blank" rel="noopener"}
     for the supported filenames, compressed formats, publication behavior,
     and uploader responsibilities.
 
@@ -90,35 +92,35 @@ An [Electronic Lab Notebook (ELN)](../../../reference/glossary.md#eln) entry is
 a schema-based entry that you can edit directly in NOMAD. To create an ELN entry:
 
 1. On the Project **Overview** page, select **NEW ENTRY**. To create the entry
-   in a specific folder instead, open **Files**, navigate to that folder, and
+   in a specific folder instead, open **FILES**, navigate to that folder, and
    select **NEW ENTRY** there.
-2. Choose a schema under **BUILT-IN SCHEMAS** or **CUSTOM SCHEMAS**. The custom
-   schemas available to you depend on the schema packages you can access.
-3. Enter a filename and select **CREATE**. NOMAD adds the `.archive.json`
-   extension, creates and processes the file, and opens the resulting entry in
-   the data editor.
+2. Choose a schema under **BUILT-IN SCHEMAS** or **CUSTOM SCHEMAS**. Custom
+   schemas come from schema packages uploaded to the current NOMAD deployment.
+   Depending on your access, these can include schemas from this Project, your
+   other Projects, or Projects shared or published by other users.
+3. Enter a filename and select **CREATE**. NOMAD creates the ELN entry and opens
+   it in the data editor.
 
-Creating an entry from a schema is separate from uploading files. When an
-uploaded file is recognized as a mainfile, NOMAD creates its entry
-automatically; **NEW ENTRY** is not required.
-
-This section introduces how to start a schema-based entry as part of the
-Project workflow. See [Enter data with ELNs](eln.md) for the detailed data-entry
-flow and [Write a YAML schema package](yaml.md) for defining custom schemas.
+**Related pages:** [Enter data with ELNs](eln.md);
+[Write a YAML schema package](yaml.md).
 
 ## Visibility and access
 
-The Project owner can manage access under **Settings**.
+On the Project **Overview** page, the Project owner can select **SETTINGS** to
+manage access.
 
 Under **Collaborators**, use **ADD USER** to add a collaborator and assign one
 of these roles:
 
-- **Reviewer** can view the unpublished Project.
-- **Coauthor** can also edit it.
+- **Reviewer** can view the files and entries in an unpublished Project but
+  cannot change them.
+- **Coauthor** can view and modify the files and entries while the Project is
+  unpublished.
 
 Select **SAVE** after changing the collaborator list or a role. If group
 collaboration is enabled in the deployment, **ADD GROUP** provides the same
-role choices for a user group. See the [user-groups API guide](../program/api.md#user-groups)
+role choices for a user group. See
+[How-to guides > ... > API Overview > User Groups](../program/api.md#user-groups)
 for information about creating and editing groups.
 
 Under **Visibility**, select **Private** or **Public**, then select **SAVE**.
@@ -129,7 +131,7 @@ you intend to publish it under embargo.
 ## Provide entry metadata
 
 Project information and entry metadata are managed separately. Edit the
-Project name under **Settings** > **General**. Additional entry metadata, such
+Project name under **SETTINGS** > **General**. Additional entry metadata, such
 as comments and references, can be supplied in a file named `nomad.json` or
 `nomad.yaml`.
 
@@ -155,29 +157,46 @@ or in the same file transfer as, the mainfiles to which it applies.
 
 Only the Project owner can publish a Project or assign its DOI.
 
-1. Confirm under **Entries** that the Project contains at least one
-   successfully processed entry.
-2. Open **Settings** > **General**.
-3. In **Publish**, select **No embargo** or an embargo period. If the Project
+1. Open **ENTRIES** and review every entry. Confirm that all expected entries
+   are present and that their extracted or entered data are complete and
+   correct.
+2. In the Project header, select the status button with the drop-down arrow.
+   Depending on the current state, it is labelled **Completed**, **Failed**,
+   **Processing**, or **Idle**. In the **Processing status** panel, confirm that
+   **Matching** found the expected number of entries, **Parsing** completed
+   successfully for every entry, and **Cleanup** reports no unresolved warnings
+   or errors.
+3. For an entry with failed processing, unexpected data, or a concerning
+   warning, open the entry and select **LOGS**. Review the processing messages,
+   correct the source data or entry as needed, and reprocess before publishing.
+4. Open **SETTINGS** > **General**.
+5. In **Publish**, select **No embargo** or an embargo period. If the Project
    is already publicly visible, the embargo control is disabled; change its
    visibility to **Private** first if you need an embargo.
-4. Select **PUBLISH** or **PUBLISH WITH EMBARGO**, then confirm the action.
+6. Select **PUBLISH** or **PUBLISH WITH EMBARGO**, then confirm the action.
+
+If processing errors persist or the impact of a warning is unclear, contact
+the administrator of your NOMAD deployment before publishing. NOMAD Central
+users and NOMAD Oasis administrators who need further assistance can contact
+[NOMAD > Support](https://nomad-lab.eu/nomad-lab/support.html){:target="_blank" rel="noopener"}.
+Include the Project ID, the affected entries, and the relevant processing logs
+in your request.
 
 Publication is permanent. The Project's files and entries become read-only
 and cannot be edited or deleted. Without an embargo, the data become public
 immediately. With an embargo, the entry metadata are public while access to
 the files remains restricted until the embargo ends.
 
-If the deployment has DataCite integration enabled, **Settings** > **General**
-also contains **Digital Object Identifier (DOI)**. After publishing, select
-**ASSIGN DOI** and confirm the action. The DOI is assigned directly to the
-Project; creating a dataset is not required.
+On NOMAD Central, or on a NOMAD Oasis deployment with DataCite integration
+enabled, **SETTINGS** > **General** also contains **Digital Object Identifier
+(DOI)**. After publishing, select **ASSIGN DOI** and confirm the action. The DOI
+is assigned directly to the Project; creating a dataset is not required.
 
 !!! warning
     DOI assignment is irreversible. The DOI remains permanently associated
     with the Project.
 
-!!! note "DOI availability"
+!!! note
     DOI controls are only shown on deployments with DataCite integration.
     They may therefore be absent from a NOMAD Oasis.
 
@@ -186,13 +205,10 @@ Project; creating a dataset is not required.
 ## Project limits
 
 Project limits are configurable and can differ between deployments. The
-default NOMAD configuration allows:
+default NOMAD configuration and NOMAD Central allow:
 
 - a maximum Project size of **32 GiB**;
 - at most **10 unpublished Projects** per user.
-
-A Project must also contain at least one recognized entry before it can be
-published. Check your deployment's guidance if its configured limits differ.
 
 ## Strategies for large amounts of data
 
@@ -208,13 +224,13 @@ the data are organized.
 For repeatable transfers, choose **Upload via API** from the **UPLOAD FILES**
 drop-down menu or automate the backend upload endpoints. These APIs retain
 *upload* in their paths and require a
-[personal access token](../program/auth.md#create-a-pat) with at least the
-`uploads:write` permission. The upload endpoint also supports direct
-publication through `publish_directly`; use it only after testing the
+[How-to guides > ... > Programmatic authentication > Create a PAT](../program/auth.md#create-a-pat)
+with at least the `uploads:write` permission. The upload endpoint also supports
+direct publication through `publish_directly`; use it only after testing the
 processing and publication workflow with representative data.
 
-!!! info "Large transfers to NOMAD Central"
-    Contact [NOMAD support](https://nomad-lab.eu/about/support){:target="_blank" rel="noopener"}
+!!! info
+    Contact [NOMAD > Support](https://nomad-lab.eu/nomad-lab/support.html){:target="_blank" rel="noopener"}
     before transferring hundreds of gigabytes or requesting an exceptional
     transfer arrangement. Allow time to agree on an appropriate transfer and
     Project layout. Server-side transfers require coordination with NOMAD

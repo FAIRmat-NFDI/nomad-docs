@@ -17,7 +17,7 @@ When contributing, identify which type of documentation your addition belongs to
 
 ## Best Practice
 
-- **Set the context clearly.** For tutorial and how-to pages, define prerequisite knowledge and list additional resources at the top of the page. For explanation pages, provide enough background to orient the reader.
+- **Set the context clearly.** For Tutorials and How-tos, define prerequisite knowledge and list page-wide additional resources at the top of the page. Keep subsection-specific related pages with the relevant subsection. For Explanations, provide enough background to orient the reader.
 - **Think in user flows.** Imagine how a user encounters problems or tasks, not how the codebase is organized.
 - **Be as detailed as required, as concise as possible.** Include all steps or context the user needs, but avoid unnecessary narrative.
 - **Prefer clarity over cleverness.** Simple, direct wording beats jargon, metaphors, or over-complicated phrasing.
@@ -52,6 +52,31 @@ text, grouping, or breadcrumb supplies the missing context.
 **Internal links: standardized naming.** Use the path hierarchy to the referenced page or section, separated by >'s. For example: `[Tutorials > Explore data > Search interface and filters](<path-to-referenced-section>)`. Long paths can be shortened with `...`, e.g., `[Tutorials > ... > Search interface and filters](<path-to-referenced-section>)`, using your best judgement.
 
 If the referenced section belongs to the current page, drop the global path, i.e., `[Search Interface & Filters](<path-to-referenced-section>)`.
+
+**Related pages.** Use a `## Related pages` section near the top of a page for
+cross-links that apply to the page as a whole. List each page separately and
+use the standardized path-style link names described above. For example:
+
+```md
+## Related pages
+
+- [Tutorial > ... > Use built-in ELN templates](<path-to-page>)
+- [Explanation > Processing](<path-to-page>)
+```
+
+When a related page applies only to one subsection, keep the link with that
+subsection instead of placing it in the page-level list. Use a compact line at
+the end of the subsection:
+
+```md
+**Related pages:** [Enter data with ELNs](<path-to-page>);
+[Write a YAML schema package](<path-to-page>).
+```
+
+For this compact, section-specific form, the page titles are sufficient as
+link text unless the surrounding context leaves their location or purpose
+ambiguous. Avoid a narrative “see also” sentence when the links are optional
+follow-up material rather than part of the procedure.
 
 **External links to NOMAD-related documentation.** External links to, e.g., NOMAD plugin documentation should follow the same syntax as internal link names, with the name of the plugin as the root. For example, `[NOMAD Utility Workflows > How-to Guides > Create Custom Workflows](https://fairmat-nfdi.github.io/nomad-utility-workflows/how_to/create_custom_workflows.html){:target="_blank" rel="noopener"}`.
 
