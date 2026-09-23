@@ -27,8 +27,6 @@ Start with YAML if you are describing your own data and want to see results imme
 Python when you need custom normalization, want to share the schema across installations, or want
 the schema to be version controlled and tested alongside code.
 
-All built-in NOMAD schemas are written in Python and live in `nomad.datamodel.metainfo.*`.
-
 ## Get your schema into NOMAD
 
 Writing the definitions is the same job in both syntaxes; getting them in front of NOMAD is not.
