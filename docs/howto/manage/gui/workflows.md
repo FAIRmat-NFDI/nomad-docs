@@ -67,7 +67,7 @@ workflow2:
 !!! Warning "Important"
     For the creation of workflow entries using YAMLs, the file must have the extension `archive.yaml`.
 
-This file is constructed according to NOMAD's schemas for [Archive Files](../../../explanation/data.md#archive-files-a-shared-entry-structure) and [General Workflows](../../../explanation/workflows.md#the-built-in-abstract-workflow-schema). The `workflow2` section of the archive has 3 possible subsections: `inputs`, `outputs`, and `tasks`:
+This file is constructed according to NOMAD's schemas for [Archive Files](../../../explanation/data.md#archives) and [General Workflows](../../../explanation/workflows.md#the-built-in-abstract-workflow-schema). The `workflow2` section of the archive has 3 possible subsections: `inputs`, `outputs`, and `tasks`:
 
 **`inputs`**: a list of references to the global inputs of the workflow, with `name` and `section` attributes. `section` corresponds to a path for linking to the relevant archive section. In this case, the relative section path is `run[0].system[-1]`, linked to the entry defined by the mainfile `dft.xml`. The prefix is discussed under [Considerations for archive path specification](#path-specification).
 
