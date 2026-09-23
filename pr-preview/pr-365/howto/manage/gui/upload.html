@@ -1331,10 +1331,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-entries-from-built-in-or-custom-schemas" class="md-nav__link">
+  <a href="#create-eln-entries-from-built-in-or-custom-schemas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Create entries from built-in or custom schemas
+        Create ELN entries from built-in or custom schemas
       
     </span>
   </a>
@@ -4212,10 +4212,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-entries-from-built-in-or-custom-schemas" class="md-nav__link">
+  <a href="#create-eln-entries-from-built-in-or-custom-schemas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Create entries from built-in or custom schemas
+        Create ELN entries from built-in or custom schemas
       
     </span>
   </a>
@@ -4398,23 +4398,26 @@ settings, and an optional DOI.</p>
 <ol>
 <li>Open the <a href="https://nomad-lab.eu/prod/v1/gui/v2/" rel="noopener" target="_blank">NOMAD GUI</a>
    and sign in. If you do not have a NOMAD Central account, follow the
-   <a href="../../../tutorial/overview.html#create-a-nomad-user-account">account creation instructions</a>.</li>
+   <a href="../../../tutorial/overview.html#create-a-nomad-user-account">Tutorial &gt; Overview &gt; Create a NOMAD user account</a>.</li>
 <li>
-<p>Open <strong>Projects</strong> and select <strong>New Project</strong>. A prompt appears where you can
+<p>Open <strong>PROJECTS</strong> and select <strong>NEW PROJECT</strong>. A prompt appears where you can
    add:</p>
-<ul>
-<li>a <strong>Project name</strong> (mandatory)</li>
-<li>a description</li>
-<li>initial files by drag-and-drop or by browsing your file system with <strong>ADD FILES</strong></li>
-<li>users or groups to your Project as <strong>Reviewer</strong> or <strong>Coauthor</strong></li>
-</ul>
 </li>
 <li>
-<p>When you have finished filling in the prompt, select <strong>Create</strong>. NOMAD
+<p>a <strong>Project name</strong> (mandatory)</p>
+</li>
+<li>a description</li>
+<li>initial files by drag-and-drop or by browsing your file system with
+     <strong>ADD FILES</strong></li>
+<li>
+<p>users or groups to your Project as <strong>Reviewer</strong> or <strong>Coauthor</strong></p>
+</li>
+<li>
+<p>When you have finished filling in the prompt, select <strong>CREATE</strong>. NOMAD
    creates the Project and opens its <strong>Overview</strong> page.</p>
 </li>
 </ol>
-<p>The name and description can be edited under <strong>Settings</strong> &gt; <strong>General</strong>.</p>
+<p>The Project name can be edited under <strong>SETTINGS</strong> &gt; <strong>General</strong>.</p>
 <h3 id="add-a-project-readme">Add a Project README<a class="headerlink" href="#add-a-project-readme" title="Permanent link">¶</a></h3>
 <p>To provide a longer, formatted description of the Project, add a file named
 <code>README.md</code> to the Project root. NOMAD renders its Markdown content below
@@ -4425,9 +4428,10 @@ settings, and an optional DOI.</p>
 <ol>
 <li><strong>From supported files:</strong> Add files in a format recognized by an installed
    parser. NOMAD processes the files and creates entries automatically.</li>
-<li><strong>From a schema:</strong> On the Project <strong>Overview</strong> page, select <strong>New entry</strong>,
-   then choose a built-in or custom schema. NOMAD creates an editable entry
-   that you can complete in the data editor.</li>
+<li><strong>From a schema:</strong> On the Project <strong>Overview</strong> page, select <strong>NEW ENTRY</strong>,
+   then choose a built-in or custom schema. NOMAD creates an editable
+   Electronic Lab Notebook (ELN) entry that you can complete in the data
+   editor.</li>
 </ol>
 <h3 id="create-entries-from-supported-files">Create entries from supported files<a class="headerlink" href="#create-entries-from-supported-files" title="Permanent link">¶</a></h3>
 <p><a id="processing-files"></a></p>
@@ -4437,16 +4441,16 @@ that defines an entry, that file becomes the entry's
 <a href="../../../reference/glossary.html#mainfile"><strong>mainfile</strong></a>. NOMAD then creates and
 processes the corresponding entry. Which file formats are supported therefore
 depends on the parsers and plugins installed in the deployment. See
-<a href="../../../explanation/processing.html">Processing</a> for a detailed explanation of
-file matching and processing.</p>
-<p>All Project files remain available under <strong>Files</strong>, but only recognized
-mainfiles produce entries that appear under <strong>Entries</strong> and can be found in
+<a href="../../../explanation/processing.html">Explanation &gt; Processing</a> for a detailed
+explanation of file matching and processing.</p>
+<p>All Project files remain available under <strong>FILES</strong>, but only recognized
+mainfiles produce entries that appear under <strong>ENTRIES</strong> and can be found in
 search. Parsers can also associate other files with a mainfile as <strong>auxiliary
 files</strong> for the resulting entry. A Project must contain at least one
 successfully processed entry before it can be published.</p>
 <p>If you added supported files in the <strong>New Project</strong> prompt, the corresponding
 entries are created automatically during Project creation. To create further
-entries from files, open <strong>Files</strong> and select <strong>UPLOAD FILES</strong>, then choose one
+entries from files, open <strong>FILES</strong> and select <strong>UPLOAD FILES</strong>, then choose one
 or more files. Alternatively, drag files into the file-list area below
 <strong>All Files</strong>.</p>
 <p>You can add individual files or package them in a <code>.zip</code> or <code>.tar.gz</code> file.
@@ -4456,53 +4460,56 @@ same Project so that the parser can associate them with the same entry.</p>
 <p>For scripted transfers, select the drop-down arrow next to <strong>UPLOAD FILES</strong> and
 choose <strong>Upload via API</strong>. The dialog provides an example command for uploading
 to the current Project folder.</p>
-<div class="admonition warning">
-<p class="admonition-title">VASP POTCAR files</p>
-<p>VASP <code>POTCAR</code> files contain licensed pseudopotential data. Standard NOMAD
-processing creates a stripped representation and, by default, removes the
+<details class="info">
+<summary>Uploading VASP files</summary>
+<p>VASP <code>POTCAR</code> files contain licensed pseudopotential data. Processing on NOMAD Central using <code>nomad-parser-plugin-simulations</code> 
+creates a stripped representation and, by default, removes the
 original file during processing. The behavior is filename-based and the
-staging policy can be configured by the deployment.</p>
-<p>See the <a href="https://fairmat-nfdi.github.io/nomad-parser-plugins-simulation/parsers/vasp/vasp_about.html#potcar-files-and-license-compliance" rel="noopener" target="_blank">VASP parser documentation</a>
+staging policy can be configured by deployments using this parser plugin.</p>
+<p>See
+<a href="https://fairmat-nfdi.github.io/nomad-parser-plugins-simulation/parsers/vasp/vasp_about.html#potcar-files-and-license-compliance" rel="noopener" target="_blank">NOMAD Parser Plugins Simulation &gt; VASP &gt; POTCAR files and license compliance</a>
 for the supported filenames, compressed formats, publication behavior,
 and uploader responsibilities.</p>
-</div>
-<h3 id="create-entries-from-built-in-or-custom-schemas">Create entries from built-in or custom schemas<a class="headerlink" href="#create-entries-from-built-in-or-custom-schemas" title="Permanent link">¶</a></h3>
-<p>To create an editable entry without uploading a parser-supported mainfile:</p>
+</details>
+<h3 id="create-eln-entries-from-built-in-or-custom-schemas">Create ELN entries from built-in or custom schemas<a class="headerlink" href="#create-eln-entries-from-built-in-or-custom-schemas" title="Permanent link">¶</a></h3>
+<p>An <a href="../../../reference/glossary.html#eln">Electronic Lab Notebook (ELN)</a> entry is
+a schema-based entry that you can edit directly in NOMAD. To create an ELN entry:</p>
 <ol>
-<li>On the Project <strong>Overview</strong> page, select <strong>New entry</strong>. To create the entry
-   in a specific folder instead, open <strong>Files</strong>, navigate to that folder, and
-   select <strong>New entry</strong> there.</li>
-<li>Choose a schema under <strong>Built-in schemas</strong> or <strong>Custom schemas</strong>. The custom
-   schemas available to you depend on the schema packages you can access.</li>
-<li>Enter a filename and select <strong>Create</strong>. NOMAD adds the <code>.archive.json</code>
-   extension, creates and processes the file, and opens the resulting entry in
-   the data editor.</li>
+<li>On the Project <strong>Overview</strong> page, select <strong>NEW ENTRY</strong>. To create the entry
+   in a specific folder instead, open <strong>FILES</strong>, navigate to that folder, and
+   select <strong>NEW ENTRY</strong> there.</li>
+<li>Choose a schema under <strong>BUILT-IN SCHEMAS</strong> or <strong>CUSTOM SCHEMAS</strong>. Custom
+   schemas come from schema packages uploaded to the current NOMAD deployment.
+   Depending on your access, these can include schemas from this Project, your
+   other Projects, or Projects shared or published by other users.</li>
+<li>Enter a filename and select <strong>CREATE</strong>. NOMAD creates the ELN entry and opens
+   it in the data editor.</li>
 </ol>
-<p>Creating an entry from a schema is separate from uploading files. When an
-uploaded file is recognized as a mainfile, NOMAD creates its entry
-automatically; <strong>New entry</strong> is not required.</p>
-<p>This section introduces how to start a schema-based entry as part of the
-Project workflow. See <a href="eln.html">Enter data with ELNs</a> for the detailed data-entry
-flow and <a href="yaml.html">Write a YAML schema package</a> for defining custom schemas.</p>
+<p><strong>Related pages:</strong> <a href="eln.html">Enter data with ELNs</a>;
+<a href="yaml.html">Write a YAML schema package</a>.</p>
 <h2 id="visibility-and-access">Visibility and access<a class="headerlink" href="#visibility-and-access" title="Permanent link">¶</a></h2>
-<p>The Project owner can manage access under <strong>Settings</strong>.</p>
-<p>Under <strong>Collaborators</strong>, use <strong>Add User</strong> to add a collaborator and assign one
+<p>On the Project <strong>Overview</strong> page, the Project owner can select <strong>SETTINGS</strong> to
+manage access.</p>
+<p>Under <strong>Collaborators</strong>, use <strong>ADD USER</strong> to add a collaborator and assign one
 of these roles:</p>
 <ul>
-<li><strong>Reviewer</strong> can view the unpublished Project.</li>
-<li><strong>Coauthor</strong> can also edit it.</li>
+<li><strong>Reviewer</strong> can view the files and entries in an unpublished Project but
+  cannot change them.</li>
+<li><strong>Coauthor</strong> can view and modify the files and entries while the Project is
+  unpublished.</li>
 </ul>
-<p>Select <strong>Save</strong> after changing the collaborator list or a role. If group
-collaboration is enabled in the deployment, <strong>Add Group</strong> provides the same
-role choices for a user group. See the <a href="../program/api.html#user-groups">user-groups API guide</a>
+<p>Select <strong>SAVE</strong> after changing the collaborator list or a role. If group
+collaboration is enabled in the deployment, <strong>ADD GROUP</strong> provides the same
+role choices for a user group. See
+<a href="../program/api.html#user-groups">How-to guides &gt; ... &gt; API Overview &gt; User Groups</a>
 for information about creating and editing groups.</p>
-<p>Under <strong>Visibility</strong>, select <strong>Private</strong> or <strong>Public</strong>, then select <strong>Save</strong>.
+<p>Under <strong>Visibility</strong>, select <strong>Private</strong> or <strong>Public</strong>, then select <strong>SAVE</strong>.
 A public, unpublished Project is visible to everyone. Public visibility and a
 publication embargo cannot be used together, so keep the Project private if
 you intend to publish it under embargo.</p>
 <h2 id="provide-entry-metadata">Provide entry metadata<a class="headerlink" href="#provide-entry-metadata" title="Permanent link">¶</a></h2>
 <p>Project information and entry metadata are managed separately. Edit the
-Project name under <strong>Settings</strong> &gt; <strong>General</strong>. Additional entry metadata, such
+Project name under <strong>SETTINGS</strong> &gt; <strong>General</strong>. Additional entry metadata, such
 as comments and references, can be supplied in a file named <code>nomad.json</code> or
 <code>nomad.yaml</code>.</p>
 <p>For example, a <code>nomad.json</code> file can provide defaults and mainfile-specific
@@ -4522,42 +4529,56 @@ or in the same file transfer as, the mainfiles to which it applies.</p>
 <h2 id="publish-and-assign-a-doi">Publish and assign a DOI<a class="headerlink" href="#publish-and-assign-a-doi" title="Permanent link">¶</a></h2>
 <p>Only the Project owner can publish a Project or assign its DOI.</p>
 <ol>
-<li>Confirm under <strong>Entries</strong> that the Project contains at least one
-   successfully processed entry.</li>
-<li>Open <strong>Settings</strong> &gt; <strong>General</strong>.</li>
+<li>Open <strong>ENTRIES</strong> and review every entry. Confirm that all expected entries
+   are present and that their extracted or entered data are complete and
+   correct.</li>
+<li>In the Project header, select the status button with the drop-down arrow.
+   Depending on the current state, it is labelled <strong>Completed</strong>, <strong>Failed</strong>,
+   <strong>Processing</strong>, or <strong>Idle</strong>. In the <strong>Processing status</strong> panel, confirm that
+   <strong>Matching</strong> found the expected number of entries, <strong>Parsing</strong> completed
+   successfully for every entry, and <strong>Cleanup</strong> reports no unresolved warnings
+   or errors.</li>
+<li>For an entry with failed processing, unexpected data, or a concerning
+   warning, open the entry and select <strong>LOGS</strong>. Review the processing messages,
+   correct the source data or entry as needed, and reprocess before publishing.</li>
+<li>Open <strong>SETTINGS</strong> &gt; <strong>General</strong>.</li>
 <li>In <strong>Publish</strong>, select <strong>No embargo</strong> or an embargo period. If the Project
    is already publicly visible, the embargo control is disabled; change its
    visibility to <strong>Private</strong> first if you need an embargo.</li>
-<li>Select <strong>Publish</strong> or <strong>Publish with embargo</strong>, then confirm the action.</li>
+<li>Select <strong>PUBLISH</strong> or <strong>PUBLISH WITH EMBARGO</strong>, then confirm the action.</li>
 </ol>
+<p>If processing errors persist or the impact of a warning is unclear, contact
+the administrator of your NOMAD deployment before publishing. NOMAD Central
+users and NOMAD Oasis administrators who need further assistance can contact
+<a href="https://nomad-lab.eu/nomad-lab/support.html" rel="noopener" target="_blank">NOMAD &gt; Support</a>.
+Include the Project ID, the affected entries, and the relevant processing logs
+in your request.</p>
 <p>Publication is permanent. The Project's files and entries become read-only
 and cannot be edited or deleted. Without an embargo, the data become public
 immediately. With an embargo, the entry metadata are public while access to
 the files remains restricted until the embargo ends.</p>
-<p>If the deployment has DataCite integration enabled, <strong>Settings</strong> &gt; <strong>General</strong>
-also contains <strong>Digital Object Identifier (DOI)</strong>. After publishing, select
-<strong>Assign DOI</strong> and confirm the action. The DOI is assigned directly to the
-Project; creating a dataset is not required.</p>
+<p>On NOMAD Central, or on a NOMAD Oasis deployment with DataCite integration
+enabled, <strong>SETTINGS</strong> &gt; <strong>General</strong> also contains <strong>Digital Object Identifier
+(DOI)</strong>. After publishing, select <strong>ASSIGN DOI</strong> and confirm the action. The DOI
+is assigned directly to the Project; creating a dataset is not required.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>DOI assignment is irreversible. The DOI remains permanently associated
 with the Project.</p>
 </div>
 <div class="admonition note">
-<p class="admonition-title">DOI availability</p>
+<p class="admonition-title">Note</p>
 <p>DOI controls are only shown on deployments with DataCite integration.
 They may therefore be absent from a NOMAD Oasis.</p>
 </div>
 <p><a id="upload-limits"></a></p>
 <h2 id="project-limits">Project limits<a class="headerlink" href="#project-limits" title="Permanent link">¶</a></h2>
 <p>Project limits are configurable and can differ between deployments. The
-default NOMAD configuration allows:</p>
+default NOMAD configuration and NOMAD Central allow:</p>
 <ul>
 <li>a maximum Project size of <strong>32 GiB</strong>;</li>
 <li>at most <strong>10 unpublished Projects</strong> per user.</li>
 </ul>
-<p>A Project must also contain at least one recognized entry before it can be
-published. Check your deployment's guidance if its configured limits differ.</p>
 <h2 id="strategies-for-large-amounts-of-data">Strategies for large amounts of data<a class="headerlink" href="#strategies-for-large-amounts-of-data" title="Permanent link">¶</a></h2>
 <p>Test the workflow first with a small, representative subset of the data.
 Review the resulting files and entries, then delete the test Project if it is
@@ -4569,13 +4590,13 @@ the data are organized.</p>
 <p>For repeatable transfers, choose <strong>Upload via API</strong> from the <strong>UPLOAD FILES</strong>
 drop-down menu or automate the backend upload endpoints. These APIs retain
 <em>upload</em> in their paths and require a
-<a href="../program/auth.html#create-a-pat">personal access token</a> with at least the
-<code>uploads:write</code> permission. The upload endpoint also supports direct
-publication through <code>publish_directly</code>; use it only after testing the
+<a href="../program/auth.html#create-a-pat">How-to guides &gt; ... &gt; Programmatic authentication &gt; Create a PAT</a>
+with at least the <code>uploads:write</code> permission. The upload endpoint also supports
+direct publication through <code>publish_directly</code>; use it only after testing the
 processing and publication workflow with representative data.</p>
 <div class="admonition info">
-<p class="admonition-title">Large transfers to NOMAD Central</p>
-<p>Contact <a href="https://nomad-lab.eu/about/support" rel="noopener" target="_blank">NOMAD support</a>
+<p class="admonition-title">Info</p>
+<p>Contact <a href="https://nomad-lab.eu/nomad-lab/support.html" rel="noopener" target="_blank">NOMAD &gt; Support</a>
 before transferring hundreds of gigabytes or requesting an exceptional
 transfer arrangement. Allow time to agree on an appropriate transfer and
 Project layout. Server-side transfers require coordination with NOMAD

@@ -4155,7 +4155,7 @@
 </blockquote>
 <h2 id="best-practice">Best Practice<a class="headerlink" href="#best-practice" title="Permanent link">¶</a></h2>
 <ul>
-<li><strong>Set the context clearly.</strong> For Tutorials and How-tos, define prerequisite knowledge and list additional resources at the top of the page. For Explanations, provide enough background to orient the reader.</li>
+<li><strong>Set the context clearly.</strong> For Tutorials and How-tos, define prerequisite knowledge and list page-wide additional resources at the top of the page. Keep subsection-specific related pages with the relevant subsection. For Explanations, provide enough background to orient the reader.</li>
 <li><strong>Think in user flows.</strong> Imagine how a user encounters problems or tasks, not how the codebase is organized.</li>
 <li><strong>Be as detailed as required, as concise as possible.</strong> Include all steps or context the user needs, but avoid unnecessary narrative.</li>
 <li><strong>Prefer clarity over cleverness.</strong> Simple, direct wording beats jargon, metaphors, or over-complicated phrasing.</li>
@@ -4171,6 +4171,24 @@
 <p><strong>Descriptive link naming.</strong> Use descriptive link text (instead of <code>here/link</code>).</p>
 <p><strong>Internal links: standardized naming.</strong> Use the path hierarchy to the referenced page or section, separated by &gt;'s. For example: <code>[Tutorial &gt; Exploring Data &gt; Search Interface &amp; Filters](&lt;path-to-referenced-section&gt;)</code>. Long paths can be shortened with <code>...</code>, e.g., <code>[Tutorial &gt; ... &gt; Search Interface &amp; Filters](&lt;path-to-referenced-section&gt;)</code>, using your best judgement.</p>
 <p>If the referenced section belongs to the current page, drop the global path, i.e., <code>[Search Interface &amp; Filters](&lt;path-to-referenced-section&gt;)</code>.</p>
+<p><strong>Related pages.</strong> Use a <code>## Related pages</code> section near the top of a page for
+cross-links that apply to the page as a whole. List each page separately and
+use the standardized path-style link names described above. For example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="gu">## Related pages</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">-</span><span class="w"> </span>[<span class="nt">Tutorial &gt; ... &gt; Use built-in ELN templates</span>](<span class="na">&lt;path-to-page&gt;</span>)
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="k">-</span><span class="w"> </span>[<span class="nt">Explanation &gt; Processing</span>](<span class="na">&lt;path-to-page&gt;</span>)
+</code></pre></div>
+<p>When a related page applies only to one subsection, keep the link with that
+subsection instead of placing it in the page-level list. Use a compact line at
+the end of the subsection:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="gs">**Related pages:**</span> [<span class="nt">Enter data with ELNs</span>](<span class="na">&lt;path-to-page&gt;</span>);
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>[<span class="nt">Write a YAML schema package</span>](<span class="na">&lt;path-to-page&gt;</span>).
+</code></pre></div>
+<p>For this compact, section-specific form, the page titles are sufficient as
+link text unless the surrounding context leaves their location or purpose
+ambiguous. Avoid a narrative “see also” sentence when the links are optional
+follow-up material rather than part of the procedure.</p>
 <p><strong>External links to NOMAD-related documentation.</strong> External links to, e.g., NOMAD plugin documentation should follow the same syntax as internal link names, with the name of the plugin as the root. For example, <code>[NOMAD Utility Workflows &gt; How-to Guides &gt; Create Custom Workflows](https://fairmat-nfdi.github.io/nomad-utility-workflows/how_to/create_custom_workflows.html){:target="_blank" rel="noopener"}</code>.</p>
 <p><strong>Other external links: descriptive text + new tab.</strong> For other external links, use descriptive names, not raw URLs.</p>
 <p><strong>New window for external links.</strong> All external links should use <code>[](){:target="_blank" rel="noopener"}</code> to open a new browser window.</p>
@@ -4235,30 +4253,30 @@ Any of the standard admonition titles are allowed. Additionally, here is a list 
 <h2 id="images">Images<a class="headerlink" href="#images" title="Permanent link">¶</a></h2>
 <p>Images should be used sparingly. Each image that is added should be seen as a costly investment: keeping images up-to-date is very hard when thinking long-term upkeep of the documentation.</p>
 <p>Images that can be represented in code should be preferred. The docs support <a href="https://mermaid.js.org/" rel="noopener" target="_blank">Mermaid</a>, and you can add mermaid images inside markdown with:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>&lt;figure markdown style="width: 100%"&gt;
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>  ``` mermaid
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>  %%{init:{'flowchart':{'nodeSpacing': 25}}}%%
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>  graph LR
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    subgraph NOMAD Distribution
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>      subgraph NOMAD Plugin A
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        ro1(Entry point: Schema)
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>      end
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>    end
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>  ```
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>  &lt;figcaption&gt;Relation between NOMAD distributions, plugins and entry points.&lt;/figcaption&gt;
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>&lt;/figure&gt;
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>&lt;figure markdown style="width: 100%"&gt;
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>  ``` mermaid
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>  %%{init:{'flowchart':{'nodeSpacing': 25}}}%%
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>  graph LR
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    subgraph NOMAD Distribution
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>      subgraph NOMAD Plugin A
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>        ro1(Entry point: Schema)
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>      end
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    end
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>  ```
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>  &lt;figcaption&gt;Relation between NOMAD distributions, plugins and entry points.&lt;/figcaption&gt;
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>&lt;/figure&gt;
 </code></pre></div>
 <p>The second best format is SVG. SVG files scale to different resolutions, produce small file sizes, and are easy to modify later. It is recommended to use <a href="https://www.drawio.com/" rel="noopener" target="_blank">draw.io</a> to produce any complex diagrams, and then export them in the SVG format using the "Include a copy of my diagram" option which allows for easy editing later.</p>
 <p>When other options are not suitable, the preferred raster image format is JPG.</p>
 <h3 id="adding-image-sliders">Adding image sliders<a class="headerlink" href="#adding-image-sliders" title="Permanent link">¶</a></h3>
 <p>Image sliders can be added using the following syntax:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"image-slider"</span> <span class="na">id</span><span class="o">=</span><span class="s">"slider#*"</span><span class="p">&gt;</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"nav-arrow left"</span> <span class="na">id</span><span class="o">=</span><span class="s">"prev#"</span><span class="p">&gt;</span>←<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">""</span> <span class="na">alt</span><span class="o">=</span><span class="s">""</span> <span class="na">class</span><span class="o">=</span><span class="s">"active"</span><span class="p">&gt;</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">""</span> <span class="na">alt</span><span class="o">=</span><span class="s">""</span><span class="p">&gt;</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">""</span> <span class="na">alt</span><span class="o">=</span><span class="s">""</span><span class="p">&gt;</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"nav-arrow right"</span> <span class="na">id</span><span class="o">=</span><span class="s">"next#"</span><span class="p">&gt;</span>→<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"image-slider"</span> <span class="na">id</span><span class="o">=</span><span class="s">"slider#*"</span><span class="p">&gt;</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"nav-arrow left"</span> <span class="na">id</span><span class="o">=</span><span class="s">"prev#"</span><span class="p">&gt;</span>←<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">""</span> <span class="na">alt</span><span class="o">=</span><span class="s">""</span> <span class="na">class</span><span class="o">=</span><span class="s">"active"</span><span class="p">&gt;</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">""</span> <span class="na">alt</span><span class="o">=</span><span class="s">""</span><span class="p">&gt;</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    <span class="p">&lt;</span><span class="nt">img</span> <span class="na">src</span><span class="o">=</span><span class="s">""</span> <span class="na">alt</span><span class="o">=</span><span class="s">""</span><span class="p">&gt;</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">"nav-arrow right"</span> <span class="na">id</span><span class="o">=</span><span class="s">"next#"</span><span class="p">&gt;</span>→<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
 </code></pre></div>
 <p>To minimize flickering effect during transitions, make all the sliding images of the same size. <!-- we may need to fix this issue from Java or CSS at some point --></p>
 <p>If you use more than one slider on the same page, make sure to give them different ids. The same applies for the navigation arrows.</p>
