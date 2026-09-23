@@ -88,7 +88,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#how-to-transfer-upload-ownership" class="md-skip">
+        <a href="#how-to-transfer-project-ownership" class="md-skip">
           Skip to content
         </a>
       
@@ -4389,9 +4389,9 @@
 
 
 
-<h1 id="how-to-transfer-upload-ownership">How to transfer upload ownership<a class="headerlink" href="#how-to-transfer-upload-ownership" title="Permanent link">¶</a></h1>
-<p>This guide shows how to transfer ownership of an upload (a <em>project</em> in the GUI) to another
-user, both through the GUI and through the API. For the underlying model — the two-phase
+<h1 id="how-to-transfer-project-ownership">How to transfer project ownership<a class="headerlink" href="#how-to-transfer-project-ownership" title="Permanent link">¶</a></h1>
+<p>This guide shows how to transfer ownership of a <strong>project</strong> (an <em>upload</em> at the API level) to
+another user, both through the GUI and through the API. For the underlying model — the two-phase
 request/accept flow, pending-state access, and notifications — see
 <a href="../../explanation/ownership_transfer.html">Explanation &gt; Ownership transfer</a>.</p>
 <h2 id="what-you-will-learn">What you will learn<a class="headerlink" href="#what-you-will-learn" title="Permanent link">¶</a></h2>
@@ -4405,7 +4405,6 @@ request/accept flow, pending-state access, and notifications — see
 <li><a href="program/auth.html">How-to &gt; Authenticate programmatically</a> (for the API workflow)</li>
 </ul>
 <h2 id="using-the-gui">Using the GUI<a class="headerlink" href="#using-the-gui" title="Permanent link">¶</a></h2>
-<p>In the GUI an upload is shown as a <em>project</em>; the steps below use that label.</p>
 <p><strong>As the current owner — offer ownership:</strong></p>
 <ol>
 <li>Open the project you own.</li>
@@ -4423,9 +4422,10 @@ request/accept flow, pending-state access, and notifications — see
 <p>On acceptance, you become the project's owner. On refusal, ownership stays with the original
 owner and the temporary access is removed.</p>
 <h2 id="using-the-api">Using the API<a class="headerlink" href="#using-the-api" title="Permanent link">¶</a></h2>
-<p>The same flow is available through the <code>ownership-transfers</code> endpoints. The state-changing
-calls require a token with <code>uploads:write</code>; see
-<a href="program/auth.html">Authenticate programmatically</a>.</p>
+<p>The API and data model refer to a project as an <em>upload</em>, which is why the endpoints,
+<code>resource_type</code>, and scopes below use that term. The same flow is available through the
+<code>ownership-transfers</code> endpoints; the state-changing calls require a token with <code>uploads:write</code>
+(see <a href="program/auth.html">Authenticate programmatically</a>).</p>
 <p><strong>Request the transfer (current owner).</strong> Identify the target by <code>user_id</code>, <code>username</code>, or
 <code>email</code> via <code>target_user_type</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">"http://localhost:8000/nomad-oasis/api/v1/ownership-transfers"</span><span class="w"> </span><span class="se">\</span>

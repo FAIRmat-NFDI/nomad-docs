@@ -4372,7 +4372,8 @@
 
 
 <h1 id="ownership-transfer">Ownership transfer<a class="headerlink" href="#ownership-transfer" title="Permanent link">¶</a></h1>
-<p>Every upload (shown as a <em>project</em> in the GUI) has a single <strong>main author</strong> — its owner.
+<p>Every <strong>project</strong> (an <em>upload</em> at the API and data-model level) has a single <strong>main author</strong>
+— its owner.
 Ownership transfer reassigns that role from the current owner to another user. Because it
 changes who controls the data, it is deliberately a <strong>two-phase, request-based</strong> operation
 rather than an immediate reassignment: the current owner <em>offers</em> ownership, and the
@@ -4380,7 +4381,7 @@ prospective owner must <em>accept</em> before anything changes.</p>
 <h2 id="the-two-phase-model">The two-phase model<a class="headerlink" href="#the-two-phase-model" title="Permanent link">¶</a></h2>
 <p>A transfer moves through two steps:</p>
 <ol>
-<li><strong>Request.</strong> The current owner initiates a transfer, naming the target user. The upload is
+<li><strong>Request.</strong> The current owner initiates a transfer, naming the target user. The project is
    not reassigned yet; a pending request is recorded.</li>
 <li><strong>Response.</strong> The target user accepts or refuses. On acceptance, the <code>main_author</code> is
    reassigned to the target. On refusal, nothing changes. While the request is still pending,
@@ -4390,14 +4391,14 @@ prospective owner must <em>accept</em> before anything changes.</p>
 Either party can inspect the pending request, and only the source can cancel it.</p>
 <h2 id="access-while-a-request-is-pending">Access while a request is pending<a class="headerlink" href="#access-while-a-request-is-pending" title="Permanent link">¶</a></h2>
 <p>When a request is created, the target is immediately granted <strong>reviewer (read) access</strong> to
-the upload, before deciding whether to accept. This lets the prospective owner inspect the
+the project, before deciding whether to accept. This lets the prospective owner inspect the
 data before taking responsibility for it. Cancelling the request revokes that temporary
 access; accepting it completes the reassignment and clears the temporary reviewer grant.</p>
 <h2 id="notifications">Notifications<a class="headerlink" href="#notifications" title="Permanent link">¶</a></h2>
 <p>Transfers are surfaced through <strong>in-app notifications</strong> in the GUI: the target is notified
 when they are offered ownership, and the source is notified if the target refuses. <strong>No email
 is sent</strong> for any step. A user who does not see the in-app notification can still discover a
-pending transfer by listing their transfers through the API, or by noticing that the upload
+pending transfer by listing their transfers through the API, or by noticing that the project
 has appeared among the data shared with them.</p>
 <h2 id="identifying-the-target">Identifying the target<a class="headerlink" href="#identifying-the-target" title="Permanent link">¶</a></h2>
 <p>The target user can be identified by <code>user_id</code>, <code>username</code>, or <code>email</code>. The GUI resolves the
@@ -4405,13 +4406,13 @@ user you pick to their <code>user_id</code>; when using the API directly you cho
 supply.</p>
 <h2 id="permissions">Permissions<a class="headerlink" href="#permissions" title="Permanent link">¶</a></h2>
 <p>The read-only steps (listing and inspecting transfers) require only read access, while the
-three state-changing steps — requesting, responding, and cancelling — require write access to
-uploads. A token without write scope can inspect transfers but cannot create, accept, or
-cancel one.</p>
+three state-changing steps — requesting, responding, and cancelling — require write access via
+the <code>uploads:write</code> scope. A token without that scope can inspect transfers but cannot create,
+accept, or cancel one.</p>
 <h2 id="groups">Groups<a class="headerlink" href="#groups" title="Permanent link">¶</a></h2>
 <p>The same request-and-accept model applies to transferring ownership of a <strong>group</strong>, with the
 group owner (or an administrator) initiating and the target member accepting.</p>
-<p>See <a href="../howto/manage/transfer_ownership.html">How to transfer upload ownership</a> for the
+<p>See <a href="../howto/manage/transfer_ownership.html">How to transfer project ownership</a> for the
 concrete steps in the GUI and through the API.</p>
 
 
