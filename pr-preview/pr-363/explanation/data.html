@@ -3720,21 +3720,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#re-use-and-inheritance" class="md-nav__link">
+  <a href="#re-use-and-interoperability" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Re-use and inheritance
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#interoperability" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Interoperability
+        Re-use and interoperability
       
     </span>
   </a>
@@ -4448,21 +4437,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#re-use-and-inheritance" class="md-nav__link">
+  <a href="#re-use-and-interoperability" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Re-use and inheritance
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#interoperability" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Interoperability
+        Re-use and interoperability
       
     </span>
   </a>
@@ -4614,19 +4592,16 @@ classDiagram
 <li><strong>An uploaded archive file.</strong> Any user can upload a <code>.archive.yaml</code> or <code>.archive.json</code> file that fills the <code>definitions</code> section. NOMAD stores the package and makes it available within the upload it was uploaded to. No installation and no plugin development is needed, but the schema does not leave that upload, and it cannot carry <code>normalize</code> functions.</li>
 </ul>
 <p>The two syntaxes describe the same thing, and there is a one-to-one translation between them. For the trade-off between them and for the mechanics of each route, see <a href="../howto/schemas/schemas.html#choose-python-or-yaml">How-to guides &gt; ... &gt; Start working with schemas</a>.</p>
-<h3 id="re-use-and-inheritance">Re-use and inheritance<a class="headerlink" href="#re-use-and-inheritance" title="Permanent link">¶</a></h3>
-<p>Schemas are rarely written from scratch. A section definition can inherit from another one, and inheriting brings over not only its quantities and subsections but also the functionality attached to them. The goal is to re-use as much as possible instead of re-inventing the same sections over and over again, and the tools built around a definition are what makes re-using it worthwhile: because a shared definition presents a fixed interface, search, visualizations, ELN forms, and analysis code can be written once and then work for every schema that inherits it.</p>
+<h3 id="re-use-and-interoperability">Re-use and interoperability<a class="headerlink" href="#re-use-and-interoperability" title="Permanent link">¶</a></h3>
+<p>Schemas are rarely written from scratch. A section definition can inherit from another one, and inheriting brings over not only its quantities and subsections but also the functionality attached to them.</p>
+<p>Re-use is also where interoperability comes from. A schema of your own can describe your data in all the detail you want, and that is the point of it — but detail is not the same as interoperability, and users and machines that are not familiar with the specifics will struggle to interpret it. What makes data interpretable beyond the context it was created in is that different schemas describe the same concepts with the same definitions. Because a shared definition presents a fixed interface, search, visualizations, ELN forms, and analysis code can be written once and then work for every schema that inherits it. The goal is to re-use as much as possible instead of re-inventing the same sections over and over again, and the tools built around a definition are what makes re-using it worthwhile.</p>
+<p>No central structure can do this work for you. NOMAD cannot anticipate what every method and every lab needs to record, so the definitions that describe your data well are ones you and your community share and maintain. Interoperability is built from the bottom up, by agreeing on definitions, rather than handed down from a common format.</p>
 <p>The <a href="workflows.html">workflow schema</a> is one example. It gives every entry a common way to describe tasks with their inputs and outputs, and because all entries use the same definitions, the UI can offer <a href="../howto/manage/gui/workflows.html">a card with workflow visualization and navigation</a> for every entry that has a workflow inside.</p>
 <p>The definitions that schemas inherit from most often are NOMAD's built-in <em>base sections</em>. They are the subject of the next page: <a href="base_sections.html">Base sections</a>.</p>
-<h3 id="interoperability">Interoperability<a class="headerlink" href="#interoperability" title="Permanent link">¶</a></h3>
-<p>A schema of your own can describe your data in all the detail you want, and that is the point of it. But detail is not the same as interoperability: users and machines that are not familiar with the specifics will struggle to interpret this kind of data. It is therefore important to also translate at least some of the data into a more generic and standardized form.</p>
-<p>The <a href="#archives"><code>results</code></a> section is where that translation lands. Its structure is fixed and the same in every entry, whatever the entry contains. It lets you put at least some of your data where it is easy to find, and in a form that is easy to interpret. In other words, your highly detailed but non-interoperable data is transformed into an interoperable, but potentially limited, form. The two live side by side in the same archive: <code>data</code> keeps the detail, <code>results</code> carries the part that search, comparison, and analysis across entries can rely on.</p>
-<p>Typically, a parser populates the entry's own schema, while the interoperable parts such as <code>results</code> are populated during <a href="processing.html#normalizing">normalization</a>. Separating the two conversions in this way also makes normalization routines easier to re-use. How much normalization is needed depends on how close the entry's schema is to definitions NOMAD already knows:</p>
-<ul>
-<li>The parser, or an uploaded archive file, populates <code>results</code> directly, and no translation is needed.</li>
-<li>The schema inherits base sections that fill <code>results</code> in their own <code>normalize</code> functions, and the translation happens automatically.</li>
-<li>The schema represents the same information differently, and a translating normalization algorithm needs to be implemented.</li>
-</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A second and much thinner layer of interoperability is the <a href="#archives"><code>results</code></a> section, which FAIRmat maintains as part of NOMAD itself. Its structure is fixed and the same in every entry, whatever the entry contains, which is exactly what limits it: because it has to fit all of NOMAD at once, it can only ever capture a shallow common denominator, and it is not a substitute for schemas your data actually fits. Typically a parser populates the entry's own schema, while <code>results</code> is filled during <a href="processing.html#normalizing">normalization</a> — automatically when the schema inherits base sections that fill it in their own <code>normalize</code> functions, and otherwise by a translating normalization algorithm.</p>
+</div>
 <p>Built-in, plugin, and uploaded schemas differ in where they live and who can use them, but not in what they are made of. That common vocabulary — sections, quantities, subsections, and packages — is fixed by the schema language.</p>
 <h2 id="schema-language">Schema language<a class="headerlink" href="#schema-language" title="Permanent link">¶</a></h2>
 <p>Schemas are written in a <strong>schema language</strong>. Ours is called the <strong>NOMAD Metainfo</strong> language, a name that is evocative of the rich <strong>metadata information</strong> that should be associated with research data and made available in a machine-readable format. It provides the means to define sections, to organize definitions into <strong>packages</strong>, and to define section properties, namely <strong>subsections</strong> and <strong>quantities</strong>. The entirety of NOMAD's schema definitions is called the <em>NOMAD Metainfo</em>.</p>
