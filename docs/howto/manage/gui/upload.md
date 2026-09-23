@@ -8,7 +8,7 @@ settings, and an optional DOI.
 1. Open the [NOMAD GUI](https://nomad-lab.eu/prod/v1/gui/v2/){:target="_blank" rel="noopener"}
    and sign in. If you do not have a NOMAD Central account, follow the
    [account creation instructions](../../../tutorial/overview.md#create-a-nomad-user-account).
-2. Open **Projects** and select **New Project**. A prompt appears where you can
+2. Open **Projects** and select **NEW PROJECT**. A prompt appears where you can
    add:
 
        - a **Project name** (mandatory)
@@ -16,7 +16,7 @@ settings, and an optional DOI.
        - initial files by drag-and-drop or by browsing your file system with **ADD FILES**
        - users or groups to your Project as **Reviewer** or **Coauthor**
 
-3. When you have finished filling in the prompt, select **Create**. NOMAD
+3. When you have finished filling in the prompt, select **CREATE**. NOMAD
    creates the Project and opens its **Overview** page.
 
 The name and description can be edited under **Settings** > **General**.
@@ -34,9 +34,10 @@ You can create entries in a Project in two ways:
 
 1. **From supported files:** Add files in a format recognized by an installed
    parser. NOMAD processes the files and creates entries automatically.
-2. **From a schema:** On the Project **Overview** page, select **New entry**,
-   then choose a built-in or custom schema. NOMAD creates an editable entry
-   that you can complete in the data editor.
+2. **From a schema:** On the Project **Overview** page, select **NEW ENTRY**,
+   then choose a built-in or custom schema. NOMAD creates an editable
+   Electronic Lab Notebook (ELN) entry that you can complete in the data
+   editor.
 
 ### Create entries from supported files
 
@@ -83,22 +84,23 @@ to the current Project folder.
     for the supported filenames, compressed formats, publication behavior,
     and uploader responsibilities.
 
-### Create entries from built-in or custom schemas
+### Create ELN entries from built-in or custom schemas
 
-To create an editable entry without uploading a parser-supported mainfile:
+An [Electronic Lab Notebook (ELN)](../../../reference/glossary.md#eln) entry is
+a schema-based entry that you can edit directly in NOMAD. To create an ELN entry:
 
-1. On the Project **Overview** page, select **New entry**. To create the entry
+1. On the Project **Overview** page, select **NEW ENTRY**. To create the entry
    in a specific folder instead, open **Files**, navigate to that folder, and
-   select **New entry** there.
-2. Choose a schema under **Built-in schemas** or **Custom schemas**. The custom
+   select **NEW ENTRY** there.
+2. Choose a schema under **BUILT-IN SCHEMAS** or **CUSTOM SCHEMAS**. The custom
    schemas available to you depend on the schema packages you can access.
-3. Enter a filename and select **Create**. NOMAD adds the `.archive.json`
+3. Enter a filename and select **CREATE**. NOMAD adds the `.archive.json`
    extension, creates and processes the file, and opens the resulting entry in
    the data editor.
 
 Creating an entry from a schema is separate from uploading files. When an
 uploaded file is recognized as a mainfile, NOMAD creates its entry
-automatically; **New entry** is not required.
+automatically; **NEW ENTRY** is not required.
 
 This section introduces how to start a schema-based entry as part of the
 Project workflow. See [Enter data with ELNs](eln.md) for the detailed data-entry
@@ -108,18 +110,18 @@ flow and [Write a YAML schema package](yaml.md) for defining custom schemas.
 
 The Project owner can manage access under **Settings**.
 
-Under **Collaborators**, use **Add User** to add a collaborator and assign one
+Under **Collaborators**, use **ADD USER** to add a collaborator and assign one
 of these roles:
 
 - **Reviewer** can view the unpublished Project.
 - **Coauthor** can also edit it.
 
-Select **Save** after changing the collaborator list or a role. If group
-collaboration is enabled in the deployment, **Add Group** provides the same
+Select **SAVE** after changing the collaborator list or a role. If group
+collaboration is enabled in the deployment, **ADD GROUP** provides the same
 role choices for a user group. See the [user-groups API guide](../program/api.md#user-groups)
 for information about creating and editing groups.
 
-Under **Visibility**, select **Private** or **Public**, then select **Save**.
+Under **Visibility**, select **Private** or **Public**, then select **SAVE**.
 A public, unpublished Project is visible to everyone. Public visibility and a
 publication embargo cannot be used together, so keep the Project private if
 you intend to publish it under embargo.
@@ -159,7 +161,7 @@ Only the Project owner can publish a Project or assign its DOI.
 3. In **Publish**, select **No embargo** or an embargo period. If the Project
    is already publicly visible, the embargo control is disabled; change its
    visibility to **Private** first if you need an embargo.
-4. Select **Publish** or **Publish with embargo**, then confirm the action.
+4. Select **PUBLISH** or **PUBLISH WITH EMBARGO**, then confirm the action.
 
 Publication is permanent. The Project's files and entries become read-only
 and cannot be edited or deleted. Without an embargo, the data become public
@@ -168,7 +170,7 @@ the files remains restricted until the embargo ends.
 
 If the deployment has DataCite integration enabled, **Settings** > **General**
 also contains **Digital Object Identifier (DOI)**. After publishing, select
-**Assign DOI** and confirm the action. The DOI is assigned directly to the
+**ASSIGN DOI** and confirm the action. The DOI is assigned directly to the
 Project; creating a dataset is not required.
 
 !!! warning
