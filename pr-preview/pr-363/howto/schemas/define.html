@@ -5243,7 +5243,7 @@ which. The two kinds differ in what you assign and what you get back:</p>
 <p>In memory the quantity holds the target section. When the archive is saved, it is serialized as a
 URL — a path from the archive root such as <code>#/data/processes/0</code>, or a longer form that crosses into
 another entry or another NOMAD installation. The full list of reference forms is in
-<a href="../../reference/metainfo.html">Reference &gt; Schema language</a>.</p>
+<a href="../../reference/metainfo.html#reference-forms">Reference &gt; Schema language &gt; Reference forms</a>.</p>
 <h3 id="reference-a-quantity">Reference a quantity<a class="headerlink" href="#reference-a-quantity" title="Permanent link">¶</a></h3>
 <p>Use a single quantity as the <code>type</code> when the source needs one <em>value</em> from elsewhere in the archive
 rather than the whole section. Reading the quantity gives you that value, so the data is exposed
@@ -5554,7 +5554,7 @@ entry point that operates on a whole entry. See
 <a id="__codelineno-25-84" name="__codelineno-25-84" href="#__codelineno-25-84"></a>    <span class="p">)</span>
 <a id="__codelineno-25-85" name="__codelineno-25-85" href="#__codelineno-25-85"></a>    <span class="n">sample_id</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
 <a id="__codelineno-25-86" name="__codelineno-25-86" href="#__codelineno-25-86"></a>        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
-<a id="__codelineno-25-87" name="__codelineno-25-87" href="#__codelineno-25-87"></a>        <span class="n">description</span><span class="o">=</span><span class="s1">'An identifier derived from the name and the first process.'</span><span class="p">,</span>
+<a id="__codelineno-25-87" name="__codelineno-25-87" href="#__codelineno-25-87"></a>        <span class="n">description</span><span class="o">=</span><span class="s1">'An identifier derived from the name and the number of processes.'</span><span class="p">,</span>
 <a id="__codelineno-25-88" name="__codelineno-25-88" href="#__codelineno-25-88"></a>    <span class="p">)</span>
 <a id="__codelineno-25-89" name="__codelineno-25-89" href="#__codelineno-25-89"></a>
 <a id="__codelineno-25-90" name="__codelineno-25-90" href="#__codelineno-25-90"></a>    <span class="n">processes</span> <span class="o">=</span> <span class="n">SubSection</span><span class="p">(</span><span class="n">section</span><span class="o">=</span><span class="n">Process</span><span class="p">,</span> <span class="n">repeats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -5573,7 +5573,7 @@ entry point that operates on a whole entry. See
 <div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="c1"># The same schema as examples/schemas/sample_schema.py, written in YAML.</span>
 <a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="c1"># All definitions live under the top-level "definitions" key, which NOMAD</span>
-<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="c1"># interprets as a schema package. The "data" key below instantiates them.</span>
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="c1"># interprets as a schema package.</span>
 <a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="nt">definitions</span><span class="p">:</span>
 <a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">'Sample</span><span class="nv"> </span><span class="s">management</span><span class="nv"> </span><span class="s">example</span><span class="nv"> </span><span class="s">schema'</span>
 <a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a><span class="w">  </span><span class="nt">sections</span><span class="p">:</span>
@@ -5658,23 +5658,13 @@ entry point that operates on a whole entry. See
 <a id="__codelineno-26-85" name="__codelineno-26-85" href="#__codelineno-26-85"></a><span class="w">          </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str</span>
 <a id="__codelineno-26-86" name="__codelineno-26-86" href="#__codelineno-26-86"></a><span class="w">          </span><span class="nt">shape</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">'*'</span><span class="p p-Indicator">]</span>
 <a id="__codelineno-26-87" name="__codelineno-26-87" href="#__codelineno-26-87"></a><span class="w">          </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Free-form labels used to group samples.</span>
-<a id="__codelineno-26-88" name="__codelineno-26-88" href="#__codelineno-26-88"></a><span class="w">      </span><span class="nt">sub_sections</span><span class="p">:</span>
-<a id="__codelineno-26-89" name="__codelineno-26-89" href="#__codelineno-26-89"></a><span class="w">        </span><span class="nt">processes</span><span class="p">:</span>
-<a id="__codelineno-26-90" name="__codelineno-26-90" href="#__codelineno-26-90"></a><span class="w">          </span><span class="nt">section</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Process</span>
-<a id="__codelineno-26-91" name="__codelineno-26-91" href="#__codelineno-26-91"></a><span class="w">          </span><span class="nt">repeats</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-<a id="__codelineno-26-92" name="__codelineno-26-92" href="#__codelineno-26-92"></a><span class="nt">data</span><span class="p">:</span>
-<a id="__codelineno-26-93" name="__codelineno-26-93" href="#__codelineno-26-93"></a><span class="w">  </span><span class="nt">m_def</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Sample</span>
-<a id="__codelineno-26-94" name="__codelineno-26-94" href="#__codelineno-26-94"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">S1</span>
-<a id="__codelineno-26-95" name="__codelineno-26-95" href="#__codelineno-26-95"></a><span class="w">  </span><span class="nt">substrate_type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">glass</span>
-<a id="__codelineno-26-96" name="__codelineno-26-96" href="#__codelineno-26-96"></a><span class="w">  </span><span class="nt">tags</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">internal</span><span class="p p-Indicator">]</span>
-<a id="__codelineno-26-97" name="__codelineno-26-97" href="#__codelineno-26-97"></a><span class="w">  </span><span class="nt">processes</span><span class="p">:</span>
-<a id="__codelineno-26-98" name="__codelineno-26-98" href="#__codelineno-26-98"></a><span class="w">    </span><span class="c1"># "m_def" picks which specialization of Process this entry in the list is.</span>
-<a id="__codelineno-26-99" name="__codelineno-26-99" href="#__codelineno-26-99"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">m_def</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Evaporation</span>
-<a id="__codelineno-26-100" name="__codelineno-26-100" href="#__codelineno-26-100"></a><span class="w">      </span><span class="nt">start_time</span><span class="p">:</span><span class="w"> </span><span class="s">'2024-05-06</span><span class="nv"> </span><span class="s">10:00:00'</span>
-<a id="__codelineno-26-101" name="__codelineno-26-101" href="#__codelineno-26-101"></a><span class="w">      </span><span class="nt">chamber_pressure</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1.0e-05</span>
-<a id="__codelineno-26-102" name="__codelineno-26-102" href="#__codelineno-26-102"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">m_def</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Annealing</span>
-<a id="__codelineno-26-103" name="__codelineno-26-103" href="#__codelineno-26-103"></a><span class="w">      </span><span class="nt">start_time</span><span class="p">:</span><span class="w"> </span><span class="s">'2024-05-06</span><span class="nv"> </span><span class="s">12:30:00'</span>
-<a id="__codelineno-26-104" name="__codelineno-26-104" href="#__codelineno-26-104"></a><span class="w">      </span><span class="nt">temperature</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">600</span>
+<a id="__codelineno-26-88" name="__codelineno-26-88" href="#__codelineno-26-88"></a><span class="w">        </span><span class="nt">sample_id</span><span class="p">:</span>
+<a id="__codelineno-26-89" name="__codelineno-26-89" href="#__codelineno-26-89"></a><span class="w">          </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str</span>
+<a id="__codelineno-26-90" name="__codelineno-26-90" href="#__codelineno-26-90"></a><span class="w">          </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">An identifier derived from the name and the number of processes.</span>
+<a id="__codelineno-26-91" name="__codelineno-26-91" href="#__codelineno-26-91"></a><span class="w">      </span><span class="nt">sub_sections</span><span class="p">:</span>
+<a id="__codelineno-26-92" name="__codelineno-26-92" href="#__codelineno-26-92"></a><span class="w">        </span><span class="nt">processes</span><span class="p">:</span>
+<a id="__codelineno-26-93" name="__codelineno-26-93" href="#__codelineno-26-93"></a><span class="w">          </span><span class="nt">section</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Process</span>
+<a id="__codelineno-26-94" name="__codelineno-26-94" href="#__codelineno-26-94"></a><span class="w">          </span><span class="nt">repeats</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </code></pre></div>
 </div>
 </div>

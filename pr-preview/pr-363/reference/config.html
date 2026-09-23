@@ -4816,10 +4816,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#schemapackageentrypoint" class="md-nav__link">
+  <a href="#apientrypoint" class="md-nav__link">
     <span class="md-ellipsis">
       
-        SchemaPackageEntryPoint
+        APIEntryPoint
       
     </span>
   </a>
@@ -4827,10 +4827,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#apientrypoint" class="md-nav__link">
+  <a href="#schemapackageentrypoint" class="md-nav__link">
     <span class="md-ellipsis">
       
-        APIEntryPoint
+        SchemaPackageEntryPoint
       
     </span>
   </a>
@@ -5998,10 +5998,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#schemapackageentrypoint" class="md-nav__link">
+  <a href="#apientrypoint" class="md-nav__link">
     <span class="md-ellipsis">
       
-        SchemaPackageEntryPoint
+        APIEntryPoint
       
     </span>
   </a>
@@ -6009,10 +6009,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#apientrypoint" class="md-nav__link">
+  <a href="#schemapackageentrypoint" class="md-nav__link">
     <span class="md-ellipsis">
       
-        APIEntryPoint
+        SchemaPackageEntryPoint
       
     </span>
   </a>
@@ -9011,34 +9011,6 @@ level (level) are considered. The files will be stored in fs.tmp.</p>
 </tr>
 </tbody>
 </table>
-<h4 id="schemapackageentrypoint">SchemaPackageEntryPoint<a class="headerlink" href="#schemapackageentrypoint" title="Permanent link">¶</a></h4>
-<p>Base model for schema package plugin entry points.</p>
-<table>
-<thead>
-<tr>
-<th>name</th>
-<th>type</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>id_url_safe</td>
-<td><code>str | None</code></td>
-<td>URL-safe identifier for the plugin entry point. If no custom name is provided, one is automatically generated from the entry point id. Any custom identifier is checked for URL-safety and for collisions with other entry points with the same type within the same NOMAD deployment.</td>
-</tr>
-<tr>
-<td>name</td>
-<td><code>str | None</code></td>
-<td>Name of the plugin entry point.</td>
-</tr>
-<tr>
-<td>description</td>
-<td><code>str | None</code></td>
-<td>A human readable description of the plugin entry point.</td>
-</tr>
-</tbody>
-</table>
 <h4 id="apientrypoint">APIEntryPoint<a class="headerlink" href="#apientrypoint" title="Permanent link">¶</a></h4>
 <p>Base model for API plugin entry points.</p>
 <table>
@@ -9069,6 +9041,34 @@ level (level) are considered. The files will be stored in fs.tmp.</p>
 <td>prefix</td>
 <td><code>str | None</code></td>
 <td>The prefix for the API. The URL for the API will be the base URL of the NOMAD installation followed by this prefix. The prefix must not collide with any other API prefixes. There is no default, this field must be set.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="schemapackageentrypoint">SchemaPackageEntryPoint<a class="headerlink" href="#schemapackageentrypoint" title="Permanent link">¶</a></h4>
+<p>Base model for schema package plugin entry points.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id_url_safe</td>
+<td><code>str | None</code></td>
+<td>URL-safe identifier for the plugin entry point. If no custom name is provided, one is automatically generated from the entry point id. Any custom identifier is checked for URL-safety and for collisions with other entry points with the same type within the same NOMAD deployment.</td>
+</tr>
+<tr>
+<td>name</td>
+<td><code>str | None</code></td>
+<td>Name of the plugin entry point.</td>
+</tr>
+<tr>
+<td>description</td>
+<td><code>str | None</code></td>
+<td>A human readable description of the plugin entry point.</td>
 </tr>
 </tbody>
 </table>
