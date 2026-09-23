@@ -83,25 +83,20 @@ A schema reaches NOMAD in one of three ways, and which one you use decides who c
 
 The two syntaxes describe the same thing, and there is a one-to-one translation between them. For the trade-off between them and for the mechanics of each route, see [How-to guides > ... > Start working with schemas](../howto/schemas/schemas.md#choose-python-or-yaml).
 
-### Re-use and inheritance
+### Re-use and interoperability
 
-Schemas are rarely written from scratch. A section definition can inherit from another one, and inheriting brings over not only its quantities and subsections but also the functionality attached to them. The goal is to re-use as much as possible instead of re-inventing the same sections over and over again, and the tools built around a definition are what makes re-using it worthwhile: because a shared definition presents a fixed interface, search, visualizations, ELN forms, and analysis code can be written once and then work for every schema that inherits it.
+Schemas are rarely written from scratch. A section definition can inherit from another one, and inheriting brings over not only its quantities and subsections but also the functionality attached to them.
+
+Re-use is also where interoperability comes from. A schema of your own can describe your data in all the detail you want, and that is the point of it — but detail is not the same as interoperability, and users and machines that are not familiar with the specifics will struggle to interpret it. What makes data interpretable beyond the context it was created in is that different schemas describe the same concepts with the same definitions. Because a shared definition presents a fixed interface, search, visualizations, ELN forms, and analysis code can be written once and then work for every schema that inherits it. The goal is to re-use as much as possible instead of re-inventing the same sections over and over again, and the tools built around a definition are what makes re-using it worthwhile.
+
+No central structure can do this work for you. NOMAD cannot anticipate what every method and every lab needs to record, so the definitions that describe your data well are ones you and your community share and maintain. Interoperability is built from the bottom up, by agreeing on definitions, rather than handed down from a common format.
 
 The [workflow schema](./workflows.md) is one example. It gives every entry a common way to describe tasks with their inputs and outputs, and because all entries use the same definitions, the UI can offer [a card with workflow visualization and navigation](../howto/manage/gui/workflows.md) for every entry that has a workflow inside.
 
 The definitions that schemas inherit from most often are NOMAD's built-in *base sections*. They are the subject of the next page: [Base sections](./base_sections.md).
 
-### Interoperability
-
-A schema of your own can describe your data in all the detail you want, and that is the point of it. But detail is not the same as interoperability: users and machines that are not familiar with the specifics will struggle to interpret this kind of data. It is therefore important to also translate at least some of the data into a more generic and standardized form.
-
-The [`results`](#archives) section is where that translation lands. Its structure is fixed and the same in every entry, whatever the entry contains. It lets you put at least some of your data where it is easy to find, and in a form that is easy to interpret. In other words, your highly detailed but non-interoperable data is transformed into an interoperable, but potentially limited, form. The two live side by side in the same archive: `data` keeps the detail, `results` carries the part that search, comparison, and analysis across entries can rely on.
-
-Typically, a parser populates the entry's own schema, while the interoperable parts such as `results` are populated during [normalization](./processing.md#normalizing). Separating the two conversions in this way also makes normalization routines easier to re-use. How much normalization is needed depends on how close the entry's schema is to definitions NOMAD already knows:
-
-- The parser, or an uploaded archive file, populates `results` directly, and no translation is needed.
-- The schema inherits base sections that fill `results` in their own `normalize` functions, and the translation happens automatically.
-- The schema represents the same information differently, and a translating normalization algorithm needs to be implemented.
+!!! note
+    A second and much thinner layer of interoperability is the [`results`](#archives) section, which FAIRmat maintains as part of NOMAD itself. Its structure is fixed and the same in every entry, whatever the entry contains, which is exactly what limits it: because it has to fit all of NOMAD at once, it can only ever capture a shallow common denominator, and it is not a substitute for schemas your data actually fits. Typically a parser populates the entry's own schema, while `results` is filled during [normalization](./processing.md#normalizing) — automatically when the schema inherits base sections that fill it in their own `normalize` functions, and otherwise by a translating normalization algorithm.
 
 Built-in, plugin, and uploaded schemas differ in where they live and who can use them, but not in what they are made of. That common vocabulary — sections, quantities, subsections, and packages — is fixed by the schema language.
 
