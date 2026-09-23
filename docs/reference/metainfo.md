@@ -32,7 +32,8 @@ and how they are serialized. Type names are **case insensitive**.
 | `Any` | `Any` | any | as-is | No validation. |
 | `User` | `User` | NOMAD user | user id string | |
 | `Author` | `Author` | `Author` | JSON object | |
-| `*<section name>*` | `MySection` | section instance or `MProxy` | reference URL | See [Work with schemas > Link data with references](../howto/schemas/define.md#link-sections-with-references). |
+| `*<section name>*` | `MySection` | section instance or `MProxy` | reference URL | See [Work with schemas > Link data with references](../howto/schemas/define.md#link-data-with-references). |
+| `{type_kind: quantity_reference, type_data: <Section>/<quantity>}` | `MySection.my_quantity` | the target quantity's value | reference URL ending in the quantity name | Assign the section that holds the quantity, not the value. |
 
 ### What you can write in `type`
 
@@ -44,8 +45,13 @@ Types are resolved by `nomad.metainfo.data_type.normalize_type()`, which accepts
 - **Python types** — `str`, `bool`, `int`, `float`, `complex`, `datetime.datetime`. Note that the
   Python `bytes` type is not accepted, only the string `'bytes'`.
 - **NumPy types** — `np.int16`, `np.float32`, `np.complex128`, `np.bool_`, and `np.dtype(...)` instances.
+- **Section definitions** — a section class or its `m_def`, making a section reference.
+- **Quantity definitions** — `MySection.my_quantity`, making a quantity reference.
 - **Dictionaries** — the `{'type_kind': ..., 'type_data': ...}` form produced when a definition is
-  serialized. This is how `MEnum` and custom types round-trip.
+  serialized. This is how `MEnum` and custom types round-trip, and also how references are spelled:
+  `{'type_kind': 'reference'}` for a section and `{'type_kind': 'quantity_reference'}` for a quantity.
+  The dictionary is the only way to write a quantity reference outside Python, because a bare string
+  is always resolved as a *section* reference.
 
 To add a type that is not in this list, see
 [How-to guides > Develop the core software > Add a new type](../howto/develop/new_type.md).
@@ -82,13 +88,15 @@ See [Work with schemas > Work with units](../howto/plugins/tools/units.md).
 ## Reference forms
 
 A reference quantity is serialized as a URL. An inter-entry reference has two parts,
-`<entry>#<section>`: a path or URL denoting the target entry, and a path within that entry's
-subsection hierarchy. The host and path parts correspond to the
+`<entry>#<path>`: a path or URL denoting the target entry, and a path within that entry's subsection
+hierarchy. The path usually ends at a section; for a quantity reference it ends at the target
+quantity's name. The host and path parts correspond to the
 [NOMAD API](../howto/manage/program/api.md).
 
 | Example reference | Meaning |
 | --- | --- |
 | `#/data/processes/0` | A section within the same archive. |
+| `#/data/instruments/0/name` | A quantity within the same archive, i.e. a quantity reference. |
 | `/run/0/calculation/1` | A section within the same archive (legacy form). |
 | `Instrument` | A *section definition* in the same archive. Targets section definitions only. |
 | `nomad.datamodel.metainfo.workflow` | A *section definition* written in Python as part of the NOMAD code. Targets section definitions only. |
@@ -141,7 +149,7 @@ need:
 | `with_def_id` | Include the [definition id](../howto/schemas/evolution.md) of each definition. |
 | `include_defaults` | Include quantities that still hold their default value. |
 | `include_derived` | Include derived quantities. |
-| `resolve_references` | Replace references with the sections they point to, instead of reference URLs. |
+| `resolve_references` | Replace references with what they point to — the target section, or the target value for a quantity reference — instead of reference URLs. |
 | `categories` | Only include definitions in the given categories. |
 | `include`, `exclude` | Filter properties by a predicate. |
 | `transform` | Apply a function to every serialized value. |

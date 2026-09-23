@@ -147,8 +147,8 @@ measurements actually live.
 Four attributes carry most of the meaning:
 
 - **`type`** — what values are allowed. Python types (`str`, `int`, `float`, `bool`), NumPy types
-  (`np.float64`), `Datetime`, an enumeration, or another section to make a
-  [reference](#link-sections-with-references).
+  (`np.float64`), `Datetime`, an enumeration, or another section or quantity to make a
+  [reference](#link-data-with-references).
 - **`shape`** — the dimensionality. Omit it for a single value, `['*']` for a list, `[3, 3]` for a
   3-by-3 matrix, `['n_atoms', 3]` to tie a dimension to another quantity.
 - **`unit`** — a physical unit such as `pascal` or `m/s**2`. Values are converted to it on assignment.
@@ -218,7 +218,7 @@ Set `repeats` when the parent can hold many of them.
     ```
 
 If the nested data has a life of its own — an instrument used by many processes — use a
-[reference](#link-sections-with-references) instead of a subsection.
+[reference](#link-data-with-references) instead of a subsection.
 
 ## Inherit from a base section
 
@@ -347,14 +347,27 @@ This is what lets one schema define a relationship and another schema extend wha
     `m_def` is only needed when the section definition cannot be worked out from context. A
     subsection that accepts exactly one type does not need it; a polymorphic one does.
 
-## Link sections with references
+## Link data with references
 
 Subsections express a *part-of* relationship. When data is linked rather than contained — a process
 pointing at the instrument it ran on, where that instrument is shared by many processes — use a
 *reference*.
 
-A reference is a uni-directional link from a *source* section to a *target* section. You define it as
-a quantity whose `type` is the target's section definition.
+A reference is a uni-directional link from a *source* quantity to a *target*. The target can be a
+whole section, or a single quantity inside another section, and what you put in `type` decides
+which. The two kinds differ in what you assign and what you get back:
+
+| Reference kind | `type` is | You assign | You read back |
+| --- | --- | --- | --- |
+| Section reference | a section definition | the target section | the target section |
+| Quantity reference | a quantity definition | the section holding the quantity | that quantity's value |
+
+Either kind can hold many targets: give it a `shape` of `['*']`. The shape describes the number of
+*references*, not the shape of the data they point at.
+
+### Reference a section
+
+Use the target's section definition as the `type`:
 
 === "Python"
 
@@ -376,13 +389,58 @@ a quantity whose `type` is the target's section definition.
           description: The instrument used for this process.
     ```
 
-A reference quantity can hold many targets: give it a `shape` of `['*']`. The shape describes the
-number of *references*, not the shape of the data they point at.
-
-In memory a reference simply holds the target section. When the archive is saved, it is serialized as
-a URL — a path from the archive root such as `#/data/processes/0`, or a longer form that crosses into
+In memory the quantity holds the target section. When the archive is saved, it is serialized as a
+URL — a path from the archive root such as `#/data/processes/0`, or a longer form that crosses into
 another entry or another NOMAD installation. The full list of reference forms is in
 {{ nav_link("reference/metainfo.md", breadcrumb=True) }}.
+
+### Reference a quantity
+
+Use a single quantity as the `type` when the source needs one *value* from elsewhere in the archive
+rather than the whole section. Reading the quantity gives you that value, so the data is exposed
+without being copied — and unlike a section reference, the referenced value can be indexed for
+search. This is how NOMAD's own `results` section surfaces parser output, with declarations such as
+`energies = Quantity(type=runschema.calculation.Dos.energies)`.
+
+=== "Python"
+
+    ```python
+    class Process(ArchiveSection):
+        instrument_name = Quantity(
+            type=Instrument.name,
+            description='The name of the instrument used for this process.',
+        )
+    ```
+
+=== "YAML"
+
+    ```yaml
+    Process:
+      quantities:
+        instrument_name:
+          type:
+            type_kind: quantity_reference
+            type_data: Instrument/name
+          description: The name of the instrument used for this process.
+    ```
+
+    !!! note
+        Writing the target as a plain string, `type: Instrument/name`, does **not** work: a bare
+        string is always read as a section reference. The `type_kind` form is the only one that
+        makes a quantity reference, and it can only name a quantity defined in the same file.
+
+!!! note
+    A quantity reference stores a link to the *section* that holds the target quantity, never a copy
+    of the value. So you assign the section and read the value:
+
+    ```python
+    process.instrument_name = instrument  # assign the section
+    process.instrument_name  # 'Evaporator A' — read the value
+    ```
+
+    It is serialized as that section's URL with the quantity name appended, for example
+    `#/data/instruments/0/name`. If the target quantity is not set on the section you assigned, the
+    reference counts as unset and is left out of the archive.
 
 ### Reference across entries
 
@@ -398,8 +456,8 @@ data:
       instrument: ../upload/raw/evaporator.archive.yaml#/data
 ```
 
-The schema declaration is identical in both languages — only the serialized value differs, and NOMAD
-resolves it for you when the archive is read.
+The declaration of `instrument` is identical in both languages — only the serialized value differs,
+and NOMAD resolves it for you when the archive is read.
 
 !!! note
     References are resolved lazily. On loading, a reference becomes a placeholder that is replaced by
@@ -543,7 +601,7 @@ Design a normalize function so it only needs data from its own section. Use `m_p
 
 ## The complete example
 
-Everything above, as one working schema. The two files define exactly the same sections and
+The running example, as one working schema. The two files define exactly the same sections and
 quantities; only the normalize function is Python-only.
 
 === "Python"
