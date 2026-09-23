@@ -1,51 +1,48 @@
 # Data structure
 
-NOMAD organizes data into *sections* and *quantities*. Quantities hold the actual values, while sections group quantities together and can contain other sections, called *subsections*. This hierarchy lets you browse complex data much like files and directories on your computer. Beyond the hierarchy, every section and quantity has a defined name and description, and quantities also have a type and, where applicable, a shape and unit.
+This page explains how data is structured in NOMAD. It is background reading: it describes the ideas that the rest of the documentation builds on, rather than the steps to follow. If you are looking for those steps, the how-to guides on [schemas](../howto/schemas/schemas.md) are the place to start.
 
-Together, these definitions form the *schemas* that all data follows. A schema helps people explore the data, and it also makes the data machine-readable, keeps it consistent and interoperable, and enables search, APIs, visualization, and analysis.
+Three concepts carry the structure, and this page introduces them in this order:
 
-Three concepts build on this foundation: the **archive** that holds the concrete data of an entry, the **schemas** that this data follows, and the **schema language** in which those schemas are written. This page introduces them in that order.
+- The **archive**, the concrete data of a single entry.
+- The **schemas**, the definitions that this data follows.
+- The **schema language**, in which those schemas are written.
 
 ## Archives
 
-Each entry in NOMAD has an *archive* which stores its final concrete data. Every archive is an instance of the root section `EntryArchive`, so all entries share the same top-level structure, no matter what kind of data they contain. Both [schemas](#schemas) and processed data are stored as the same kind of *archive file*, either `.archive.json` or `.archive.yaml`.
+Each entry in NOMAD has an *archive* associated with it which stores all of the data related to that entry. Every archive is an instance of an `EntryArchive` which has the following structure:
 
 <figure markdown style="width: 100%">
 
 ```mermaid
-%%{init: {'flowchart': {'curve': 'stepBefore'}, 'class': {'hideEmptyMembersBox': true}}}%%
-classDiagram
-    direction LR
-    class EntryData {
-        <<abstract>>
-    }
-    EntryArchive *-- EntryData : data
-    EntryArchive *-- EntryMetadata : metadata
-    EntryArchive *-- Results : results
-    EntryArchive *-- Workflow : workflow2
-    EntryArchive *-- Package : definitions
-    EntryData <|-- YourSchema
+%%{init: {'flowchart': {'curve': 'stepBefore', 'nodeSpacing': 12}}}%%
+flowchart LR
+    archive["archive (EntryArchive)"] --- data["<div style='width:11em;text-align:left'>data (EntryData)</div>"]
+    archive --- metadata["<div style='width:11em;text-align:left'>metadata (EntryMetadata)</div>"]
+    archive --- results["<div style='width:11em;text-align:left'>results (Results)</div>"]
+    archive --- workflow2["<div style='width:11em;text-align:left'>workflow2 (Workflow)</div>"]
+    archive --- definitions["<div style='width:11em;text-align:left'>definitions (Package)</div>"]
 ```
 
-<figcaption>The top-level subsections that every entry archive shares, and the one where custom schemas attach</figcaption>
+<figcaption>The top-level subsections that every entry archive shares</figcaption>
 </figure>
 
 Of these subsections, `data` carries the entry's actual content, while the others describe, summarize, or relate it:
 
-- `data` (`EntryData`) holds the entry-specific content and is where custom schemas plug in. See [The data section](#the-data-section).
-- `metadata` (`EntryMetadata`) is added by NOMAD during processing. It contains ids, timestamps, authors, datasets, references, and an index of all the sections and quantities used in the entry, which search relies on. Users and plugins cannot extend it.
-- `results` (`Results`) is a summary of the entry that follows a fixed structure, independent of the data type, with the subsections `material`, `method`, `properties`, and `eln`. Parsers or uploaded archive files can populate it directly, but it is usually populated during normalization. Its structure is controlled by NOMAD, and some of the search is built on it.
-- `workflow2` (`Workflow`) describes the entry as a [workflow](./workflows.md) of tasks with inputs and outputs.
-- `definitions` (`Package`) is only filled for schema entries and contains the definitions they provide.
+- `data`: Holds the entry-specific content and is where custom schemas plug in. A subclass of `EntryData`. See [The data section](#the-data-section).
+- `metadata`: Added by NOMAD during processing. It contains ids, timestamps, authors, datasets, references, and an index of all the sections and quantities used in the entry, which search relies on. Users and plugins cannot extend it. Instance of `EntryMetadata`.
+- `results`: A summary of the entry that follows a fixed structure, independent of the data type, with the subsections `material`, `method`, `properties`, and `eln`. Parsers or uploaded archive files can populate it directly, but it is usually populated during normalization. Its structure is controlled by NOMAD, and some of the search is built on it. Instance of `Results`.
+- `workflow2`: Describes the entry as a [workflow](./workflows.md) of tasks with inputs and outputs. Instance of `Workflow`.
+- `definitions`: is only filled for schema entries and contains the definitions they provide. Instance of `Package`.
 
 !!! note
     There are currently two versions of the workflow schema, stored in two top-level `EntryArchive` subsections, `workflow` and `workflow2`. New schemas should use `workflow2`.
 
 ### The data section
 
-`data` is the subsection that carries the entry's actual content. The others describe the entry around it: `metadata` identifies it, `results` summarizes it, and `workflow2` relates it to other entries. For most entries, `data` is where the interesting information lives.
+`data` is the subsection that carries the entry's actual content. The others describe the entry around it: `metadata` identifies it, `results` summarizes it, and `workflow2` describes the logical steps on how the data was produced. For most entries, `data` is where the interesting information lives.
 
-It is also the only part of the shared entry structure that is meant to be extended. `EntryData`, the type of the `data` subsection, defines no quantities of its own. It is a marker: any section that inherits it declares that it can be the root of an entry, and because the subsection is typed by that marker, NOMAD accepts any such section as the content of `data`. Every entry has exactly one `data` section, but the definition behind it differs from entry to entry, and comes from the parser, the plugin schema, or the ELN schema that produced the entry. These definitions should re-use [base sections](./base_sections.md) as much as possible.
+It is also the only part of the shared entry structure that is meant to be extended. `EntryData` itself defines no quantities of its own, but NOMAD accepts any section that inherits from it as the content of `data`. Every entry has exactly one `data` section, but the definition behind it differs from entry to entry, and comes from the parser, the plugin schema, or the ELN schema that produced the entry. These definitions should re-use [base sections](./base_sections.md) as much as possible.
 
 Inheriting `EntryData` does more than place a section in the archive:
 
@@ -102,7 +99,7 @@ Built-in, plugin, and uploaded schemas differ in where they live and who can use
 
 ## Schema language
 
-Schemas are written in a **schema language**. Ours is called the **NOMAD Metainfo** language, a name that is evocative of the rich **metadata information** that should be associated with research data and made available in a machine-readable format. It provides the means to define sections, to organize definitions into **packages**, and to define section properties, namely **subsections** and **quantities**. The entirety of NOMAD's schema definitions is called the *NOMAD Metainfo*.
+Schemas are written in a **schema language**. Ours is called the **NOMAD Metainfo**, a name that is evocative of the rich **metadata information** that should be associated with research data and made available in a machine-readable format. It provides the means to define sections, to organize definitions into **packages**, and to define section properties, namely **subsections** and **quantities**.
 
 <figure markdown>
   ![schema language](images/schema_language.png)
