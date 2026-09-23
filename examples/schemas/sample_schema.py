@@ -84,7 +84,7 @@ class Sample(EntryData):
     )
     sample_id = Quantity(
         type=str,
-        description='An identifier derived from the name and the first process.',
+        description='An identifier derived from the name and the number of processes.',
     )
 
     processes = SubSection(section=Process, repeats=True)
