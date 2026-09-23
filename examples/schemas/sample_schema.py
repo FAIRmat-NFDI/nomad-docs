@@ -1,6 +1,10 @@
 from nomad.datamodel.data import ArchiveSection, EntryData
-from nomad.datamodel.metainfo.annotations import ELNAnnotation
-from nomad.metainfo import Datetime, MEnum, Quantity, SchemaPackage, SubSection
+from nomad.datamodel.metainfo.annotations import (
+    ELNAnnotation,
+    Filter,
+    SectionDisplayAnnotation,
+)
+from nomad.metainfo import Datetime, MEnum, Quantity, SchemaPackage, Section, SubSection
 
 m_package = SchemaPackage()
 
@@ -44,6 +48,14 @@ class Evaporation(Process):
 class Annealing(Process):
     """Heating the sample to change its structure."""
 
+    # This section is always carried out in the same furnace, so the inherited
+    # "instrument" quantity is hidden and "temperature" is shown first.
+    m_def = Section(
+        a_display=SectionDisplayAnnotation(
+            visible=Filter(exclude=['instrument']),
+            order=['temperature', 'start_time'],
+        ),
+    )
     temperature = Quantity(
         type=float,
         unit='kelvin',

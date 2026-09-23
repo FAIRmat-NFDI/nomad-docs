@@ -44,6 +44,13 @@ definitions:
     Annealing:
       description: Heating the sample to change its structure.
       base_section: Process
+      # This section is always carried out in the same furnace, so the inherited
+      # "instrument" quantity is hidden and "temperature" is shown first.
+      m_annotations:
+        display:
+          visible:
+            exclude: [instrument]
+          order: [temperature, start_time]
       quantities:
         temperature:
           type: float
