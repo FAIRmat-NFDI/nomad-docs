@@ -75,13 +75,6 @@ NOMAD represents many different types of data, so we cannot speak of just *the o
 - **Re-usable base sections** for shared common concepts and their properties. Specific schemas can use and extend them, and because they define a fixed interface, tools such as search, visualizations, and analysis can be built around them.
 - **Specific schemas**, which re-use base sections and complement the shared entry structure to represent one particular type of data.
 
-<figure markdown>
-  ![schema language](images/schema.png)
-  <figcaption>
-    The three different categories of NOMAD schema definitions
-  </figcaption>
-</figure>
-
 ### Base sections
 
 Base section is a very loose category: in principle, every section definition can be inherited from or re-used in a different context. There are some dedicated, and even abstract, base section definitions, mostly in the `nomad.datamodel.metainfo` package and its sub-packages, but schema authors should not strictly limit themselves to these. The goal is to re-use as much as possible instead of re-inventing the same sections over and over again, and the tools built around a base section are what makes re-using it worthwhile.
@@ -93,13 +86,6 @@ The [workflow package](./workflows.md) is one example of a re-usable base sectio
 ### Specific schemas
 
 Specific schemas are the definitions that go under an entry's [`data`](#the-data-section) section. They allow users and plugin developers to describe their data in all detail. However, users and machines that are not familiar with the specifics will struggle to interpret this kind of data. It is therefore important to also translate at least some of the data into a more generic and standardized form.
-
-<figure markdown>
-  ![schema language](images/data.png)
-  <figcaption>
-    From specific data to more general interoperable data.
-  </figcaption>
-</figure>
 
 The [`results`](#archives) section provides such a shared structure, designed around base section definitions. It lets you put at least some of your data where it is easy to find, and in a form that is easy to interpret. In other words, your highly detailed but non-interoperable data is transformed into an interoperable, but potentially limited, form.
 

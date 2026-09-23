@@ -514,10 +514,57 @@ a date picker, an enumeration gets a dropdown, a reference gets a search-and-sel
               component: EnumEditQuantity
     ```
 
-Annotating the *section* as well makes it selectable when a user creates a new entry from the GUI.
+### Annotate a section
 
-Beyond `eln`, annotations control plotting, display units and HDF5 visualization. Every annotation
-and its arguments is listed in {{ nav_link("reference/annotations.md", breadcrumb=True) }}.
+Annotations on the *section* describe the section as a whole rather than one of its properties. The
+`display` annotation is the one to reach for first: it decides which properties the GUI shows, and in
+which order.
+
+`Annealing` inherits `start_time` and `instrument` from `Process`. A lab that always anneals in the
+same furnace has no use for the `instrument` field, so `visible` drops it and `order` puts the
+quantity that matters first.
+
+=== "Python"
+
+    Section annotations go on a `m_def = Section(...)` assignment inside the class.
+
+    ```python
+    from nomad.datamodel.metainfo.annotations import Filter, SectionDisplayAnnotation
+    from nomad.metainfo import Section
+
+
+    class Annealing(Process):
+        m_def = Section(
+            a_display=SectionDisplayAnnotation(
+                visible=Filter(exclude=['instrument']),
+                order=['temperature', 'start_time'],
+            ),
+        )
+        temperature = Quantity(type=float, unit='kelvin')
+    ```
+
+=== "YAML"
+
+    Section annotations go in an `m_annotations` block directly under the section, beside
+    `quantities`.
+
+    ```yaml
+    Annealing:
+      base_section: Process
+      m_annotations:
+        display:
+          visible:
+            exclude: [instrument]
+          order: [temperature, start_time]
+      quantities:
+        temperature:
+          type: float
+          unit: kelvin
+    ```
+
+`visible` takes an `include` list, an `exclude` list, or both: without `include` every property of the section starts out visible, and `exclude` is subtracted afterwards, so a name given in both is excluded. `editable` is a filter of the same kind, but it renders properties read-only instead of hiding them — useful when a quantity inherited from a base section should be shown but not changed. `order` lists the properties that come first; everything else follows in declaration order.
+
+Beyond `eln`, annotations control plotting, display units and HDF5 visualization. Every annotation and its arguments is listed in {{ nav_link("reference/annotations.md", breadcrumb=True) }}.
 
 ## Populate data
 
