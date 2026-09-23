@@ -392,7 +392,7 @@ Use the target's section definition as the `type`:
 In memory the quantity holds the target section. When the archive is saved, it is serialized as a
 URL — a path from the archive root such as `#/data/processes/0`, or a longer form that crosses into
 another entry or another NOMAD installation. The full list of reference forms is in
-{{ nav_link("reference/metainfo.md", breadcrumb=True) }}.
+[Reference > Schema language > Reference forms](../../reference/metainfo.md#reference-forms).
 
 ### Reference a quantity
 
@@ -657,7 +657,7 @@ The running example, as one working schema. The two files define exactly the sam
 === "YAML"
 
     ```yaml
-    --8<-- "examples/schemas/sample.archive.yaml"
+    --8<-- "examples/schemas/sample_schema.archive.yaml"
     ```
 
 ## Related materials
