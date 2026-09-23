@@ -1,7 +1,7 @@
-# How to transfer upload ownership
+# How to transfer project ownership
 
-This guide shows how to transfer ownership of an upload (a *project* in the GUI) to another
-user, both through the GUI and through the API. For the underlying model — the two-phase
+This guide shows how to transfer ownership of a **project** (an *upload* at the API level) to
+another user, both through the GUI and through the API. For the underlying model — the two-phase
 request/accept flow, pending-state access, and notifications — see
 [Explanation > Ownership transfer](../../explanation/ownership_transfer.md).
 
@@ -16,8 +16,6 @@ request/accept flow, pending-state access, and notifications — see
 - [How-to > Authenticate programmatically](./program/auth.md) (for the API workflow)
 
 ## Using the GUI
-
-In the GUI an upload is shown as a *project*; the steps below use that label.
 
 **As the current owner — offer ownership:**
 
@@ -38,9 +36,10 @@ owner and the temporary access is removed.
 
 ## Using the API
 
-The same flow is available through the `ownership-transfers` endpoints. The state-changing
-calls require a token with `uploads:write`; see
-[Authenticate programmatically](./program/auth.md).
+The API and data model refer to a project as an *upload*, which is why the endpoints,
+`resource_type`, and scopes below use that term. The same flow is available through the
+`ownership-transfers` endpoints; the state-changing calls require a token with `uploads:write`
+(see [Authenticate programmatically](./program/auth.md)).
 
 **Request the transfer (current owner).** Identify the target by `user_id`, `username`, or
 `email` via `target_user_type`:
