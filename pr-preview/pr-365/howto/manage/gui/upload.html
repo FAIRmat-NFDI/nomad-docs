@@ -88,7 +88,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#create-and-publish-projects" class="md-skip">
+        <a href="#how-to-create-and-publish-projects" class="md-skip">
           Skip to content
         </a>
       
@@ -1288,18 +1288,35 @@
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#add-data-to-a-project" class="md-nav__link">
+    <nav class="md-nav" aria-label="Create a Project">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-a-project-readme" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Add data to a Project
+        Add a Project README
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Add data to a Project">
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-entries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create entries
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Create entries">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1310,23 +1327,6 @@
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Create entries from supported files">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#how-uploaded-files-become-entries" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        How uploaded files become entries
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -4169,18 +4169,35 @@
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#add-data-to-a-project" class="md-nav__link">
+    <nav class="md-nav" aria-label="Create a Project">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-a-project-readme" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Add data to a Project
+        Add a Project README
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Add data to a Project">
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-entries" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create entries
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Create entries">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -4191,23 +4208,6 @@
       
     </span>
   </a>
-  
-    <nav class="md-nav" aria-label="Create entries from supported files">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#how-uploaded-files-become-entries" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        How uploaded files become entries
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -4391,61 +4391,71 @@
 
 
 
-<h1 id="create-and-publish-projects">Create and publish Projects<a class="headerlink" href="#create-and-publish-projects" title="Permanent link">¶</a></h1>
+<h1 id="how-to-create-and-publish-projects">How to create and publish Projects<a class="headerlink" href="#how-to-create-and-publish-projects" title="Permanent link">¶</a></h1>
 <p>A <strong>Project</strong> is the container for files, entries, collaborators, publication
-settings, and an optional DOI. The backend APIs still use the term <em>upload</em>,
-so API endpoints, upload IDs, and related technical documentation retain that
-terminology.</p>
+settings, and an optional DOI.</p>
 <h2 id="create-a-project">Create a Project<a class="headerlink" href="#create-a-project" title="Permanent link">¶</a></h2>
 <ol>
 <li>Open the <a href="https://nomad-lab.eu/prod/v1/gui/v2/" rel="noopener" target="_blank">NOMAD GUI</a>
    and sign in. If you do not have a NOMAD Central account, follow the
    <a href="../../../tutorial/overview.html#create-a-nomad-user-account">account creation instructions</a>.</li>
-<li>Open <strong>Projects</strong> and select <strong>New Project</strong>.</li>
-<li>Enter a <strong>Project name</strong> and, optionally, a description.</li>
-<li>Optionally, add initial files by dragging them into the dialog or selecting
-   <strong>Add files</strong>. You can also add files after creating the Project.</li>
-<li>Optionally, use <strong>Add User</strong> or <strong>Add Group</strong> to invite collaborators and
-   assign each one the <strong>Reviewer</strong> or <strong>Coauthor</strong> role.</li>
-<li>Select <strong>Create</strong>. NOMAD creates the Project and opens its <strong>Overview</strong> page.</li>
+<li>
+<p>Open <strong>Projects</strong> and select <strong>New Project</strong>. A prompt appears where you can
+   add:</p>
+<ul>
+<li>a <strong>Project name</strong> (mandatory)</li>
+<li>a description</li>
+<li>initial files by drag-and-drop or by browsing your file system with <strong>ADD FILES</strong></li>
+<li>users or groups to your Project as <strong>Reviewer</strong> or <strong>Coauthor</strong></li>
+</ul>
+</li>
+<li>
+<p>When you have finished filling in the prompt, select <strong>Create</strong>. NOMAD
+   creates the Project and opens its <strong>Overview</strong> page.</p>
+</li>
 </ol>
-<p>Only the Project name is required. You can therefore create an empty Project
-and add data and collaborators later. The name and description can be edited
-under <strong>Settings</strong> &gt; <strong>General</strong>.</p>
-<h2 id="add-data-to-a-project">Add data to a Project<a class="headerlink" href="#add-data-to-a-project" title="Permanent link">¶</a></h2>
-<p>After creating a Project, you can create entries in two ways:</p>
+<p>The name and description can be edited under <strong>Settings</strong> &gt; <strong>General</strong>.</p>
+<h3 id="add-a-project-readme">Add a Project README<a class="headerlink" href="#add-a-project-readme" title="Permanent link">¶</a></h3>
+<p>To provide a longer, formatted description of the Project, add a file named
+<code>README.md</code> to the Project root. NOMAD renders its Markdown content below
+<strong>All Files</strong> on the Project <strong>Overview</strong> page. You can add the README in the
+<strong>New Project</strong> prompt or upload it later.</p>
+<h2 id="create-entries">Create entries<a class="headerlink" href="#create-entries" title="Permanent link">¶</a></h2>
+<p>You can create entries in a Project in two ways:</p>
 <ol>
 <li><strong>From supported files:</strong> Add files in a format recognized by an installed
    parser. NOMAD processes the files and creates entries automatically.</li>
-<li><strong>From a schema:</strong> Select <strong>New entry</strong>, then choose a built-in or custom
-   schema. NOMAD creates an editable entry that you can complete in the data
-   editor.</li>
+<li><strong>From a schema:</strong> On the Project <strong>Overview</strong> page, select <strong>New entry</strong>,
+   then choose a built-in or custom schema. NOMAD creates an editable entry
+   that you can complete in the data editor.</li>
 </ol>
 <h3 id="create-entries-from-supported-files">Create entries from supported files<a class="headerlink" href="#create-entries-from-supported-files" title="Permanent link">¶</a></h3>
-<p>Which file formats are supported depends on the parsers and plugins installed
-in the deployment. You can add individual files or a <code>.zip</code> or <code>.tar.gz</code>
-archive. NOMAD extracts archives and preserves their internal directory
-structure.</p>
-<p>Keep the files for one calculation or experiment together in the same Project
-so that the parser can associate them with the same entry.</p>
-<p>You can add initial files while creating the Project. To add files later, open
-<strong>Files</strong> and select <strong>Upload files</strong>, then choose one or more files or
-archives. You can also drag files onto the Files page. NOMAD processes added
-files automatically; files recognized by an installed parser produce entries.</p>
-<p>For scripted transfers, select <strong>Upload via API</strong> on the Files page to get a
-command for the current Project.</p>
 <p><a id="processing-files"></a></p>
-<h4 id="how-uploaded-files-become-entries">How uploaded files become entries<a class="headerlink" href="#how-uploaded-files-become-entries" title="Permanent link">¶</a></h4>
 <p>NOMAD checks the files using the parsers and plugins installed in the current
 deployment. When a parser recognizes a file as the primary raw-data source
 that defines an entry, that file becomes the entry's
 <a href="../../../reference/glossary.html#mainfile"><strong>mainfile</strong></a>. NOMAD then creates and
-processes the corresponding entry.</p>
+processes the corresponding entry. Which file formats are supported therefore
+depends on the parsers and plugins installed in the deployment. See
+<a href="../../../explanation/processing.html">Processing</a> for a detailed explanation of
+file matching and processing.</p>
 <p>All Project files remain available under <strong>Files</strong>, but only recognized
 mainfiles produce entries that appear under <strong>Entries</strong> and can be found in
 search. Parsers can also associate other files with a mainfile as <strong>auxiliary
 files</strong> for the resulting entry. A Project must contain at least one
 successfully processed entry before it can be published.</p>
+<p>If you added supported files in the <strong>New Project</strong> prompt, the corresponding
+entries are created automatically during Project creation. To create further
+entries from files, open <strong>Files</strong> and select <strong>UPLOAD FILES</strong>, then choose one
+or more files. Alternatively, drag files into the file-list area below
+<strong>All Files</strong>.</p>
+<p>You can add individual files or package them in a <code>.zip</code> or <code>.tar.gz</code> file.
+NOMAD extracts these compressed bundles and preserves their internal directory
+structure. Keep the files for one calculation or experiment together in the
+same Project so that the parser can associate them with the same entry.</p>
+<p>For scripted transfers, select the drop-down arrow next to <strong>UPLOAD FILES</strong> and
+choose <strong>Upload via API</strong>. The dialog provides an example command for uploading
+to the current Project folder.</p>
 <div class="admonition warning">
 <p class="admonition-title">VASP POTCAR files</p>
 <p>VASP <code>POTCAR</code> files contain licensed pseudopotential data. Standard NOMAD
@@ -4459,9 +4469,9 @@ and uploader responsibilities.</p>
 <h3 id="create-entries-from-built-in-or-custom-schemas">Create entries from built-in or custom schemas<a class="headerlink" href="#create-entries-from-built-in-or-custom-schemas" title="Permanent link">¶</a></h3>
 <p>To create an editable entry without uploading a parser-supported mainfile:</p>
 <ol>
-<li>Open <strong>Files</strong> in the Project and navigate to the folder where you want to
-   create the entry.</li>
-<li>Select <strong>New entry</strong>.</li>
+<li>On the Project <strong>Overview</strong> page, select <strong>New entry</strong>. To create the entry
+   in a specific folder instead, open <strong>Files</strong>, navigate to that folder, and
+   select <strong>New entry</strong> there.</li>
 <li>Choose a schema under <strong>Built-in schemas</strong> or <strong>Custom schemas</strong>. The custom
    schemas available to you depend on the schema packages you can access.</li>
 <li>Enter a filename and select <strong>Create</strong>. NOMAD adds the <code>.archive.json</code>
@@ -4556,11 +4566,12 @@ no longer needed.</p>
 multiple Projects. Do not split the mainfile and auxiliary files belonging to
 one entry between Projects. The appropriate split therefore depends on how
 the data are organized.</p>
-<p>For repeatable transfers, use <strong>Upload via API</strong> on the Project's <strong>Files</strong>
-page or automate the backend upload endpoints. These APIs retain <em>upload</em> in
-their paths and require a <a href="../program/auth.html#create-a-pat">personal access token</a>
-with at least the <code>uploads:write</code> permission. The upload endpoint also supports
-direct publication through <code>publish_directly</code>; use it only after testing the
+<p>For repeatable transfers, choose <strong>Upload via API</strong> from the <strong>UPLOAD FILES</strong>
+drop-down menu or automate the backend upload endpoints. These APIs retain
+<em>upload</em> in their paths and require a
+<a href="../program/auth.html#create-a-pat">personal access token</a> with at least the
+<code>uploads:write</code> permission. The upload endpoint also supports direct
+publication through <code>publish_directly</code>; use it only after testing the
 processing and publication workflow with representative data.</p>
 <div class="admonition info">
 <p class="admonition-title">Large transfers to NOMAD Central</p>
