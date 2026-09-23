@@ -25,7 +25,7 @@
     
     
       
-        <title>Upload and publish data - Documentation</title>
+        <title>Create and publish Projects - Documentation</title>
       
     
     
@@ -88,7 +88,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#how-to-create-and-publish-a-project" class="md-skip">
+        <a href="#create-and-publish-projects" class="md-skip">
           Skip to content
         </a>
       
@@ -162,7 +162,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Upload and publish data
+              Create and publish Projects
             
           </span>
         </div>
@@ -1236,7 +1236,7 @@
   <span class="md-ellipsis">
     
   
-    Upload and publish data
+    Create and publish Projects
   
 
     
@@ -1254,7 +1254,7 @@
   <span class="md-ellipsis">
     
   
-    Upload and publish data
+    Create and publish Projects
   
 
     
@@ -1303,15 +1303,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#upload-files-in-a-supported-format" class="md-nav__link">
+  <a href="#create-entries-from-supported-files" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Upload files in a supported format
+        Create entries from supported files
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Upload files in a supported format">
+    <nav class="md-nav" aria-label="Create entries from supported files">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1331,10 +1331,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-an-entry-from-a-schema" class="md-nav__link">
+  <a href="#create-entries-from-built-in-or-custom-schemas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Create an entry from a schema
+        Create entries from built-in or custom schemas
       
     </span>
   </a>
@@ -4184,15 +4184,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#upload-files-in-a-supported-format" class="md-nav__link">
+  <a href="#create-entries-from-supported-files" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Upload files in a supported format
+        Create entries from supported files
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Upload files in a supported format">
+    <nav class="md-nav" aria-label="Create entries from supported files">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -4212,10 +4212,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#create-an-entry-from-a-schema" class="md-nav__link">
+  <a href="#create-entries-from-built-in-or-custom-schemas" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Create an entry from a schema
+        Create entries from built-in or custom schemas
       
     </span>
   </a>
@@ -4391,7 +4391,7 @@
 
 
 
-<h1 id="how-to-create-and-publish-a-project">How to create and publish a Project<a class="headerlink" href="#how-to-create-and-publish-a-project" title="Permanent link">¶</a></h1>
+<h1 id="create-and-publish-projects">Create and publish Projects<a class="headerlink" href="#create-and-publish-projects" title="Permanent link">¶</a></h1>
 <p>A <strong>Project</strong> is the container for files, entries, collaborators, publication
 settings, and an optional DOI. The backend APIs still use the term <em>upload</em>,
 so API endpoints, upload IDs, and related technical documentation retain that
@@ -4401,24 +4401,37 @@ terminology.</p>
 <li>Open the <a href="https://nomad-lab.eu/prod/v1/gui/v2/" rel="noopener" target="_blank">NOMAD GUI</a>
    and sign in. If you do not have a NOMAD Central account, follow the
    <a href="../../../tutorial/overview.html#create-a-nomad-user-account">account creation instructions</a>.</li>
-<li>Open <strong>Projects</strong> and select <strong>New Project</strong>. NOMAD creates the Project and
-   opens its <strong>Overview</strong> page.</li>
-<li>Give the Project a descriptive name. You can edit the name from the Project
-   header or under <strong>Settings</strong> &gt; <strong>General</strong>.</li>
+<li>Open <strong>Projects</strong> and select <strong>New Project</strong>.</li>
+<li>Enter a <strong>Project name</strong> and, optionally, a description.</li>
+<li>Optionally, add initial files by dragging them into the dialog or selecting
+   <strong>Add files</strong>. You can also add files after creating the Project.</li>
+<li>Optionally, use <strong>Add User</strong> or <strong>Add Group</strong> to invite collaborators and
+   assign each one the <strong>Reviewer</strong> or <strong>Coauthor</strong> role.</li>
+<li>Select <strong>Create</strong>. NOMAD creates the Project and opens its <strong>Overview</strong> page.</li>
 </ol>
+<p>Only the Project name is required. You can therefore create an empty Project
+and add data and collaborators later. The name and description can be edited
+under <strong>Settings</strong> &gt; <strong>General</strong>.</p>
 <h2 id="add-data-to-a-project">Add data to a Project<a class="headerlink" href="#add-data-to-a-project" title="Permanent link">¶</a></h2>
-<p>You can create entries by uploading files in a format recognized by an
-installed parser or by creating an editable entry from a schema.</p>
-<h3 id="upload-files-in-a-supported-format">Upload files in a supported format<a class="headerlink" href="#upload-files-in-a-supported-format" title="Permanent link">¶</a></h3>
+<p>After creating a Project, you can create entries in two ways:</p>
+<ol>
+<li><strong>From supported files:</strong> Add files in a format recognized by an installed
+   parser. NOMAD processes the files and creates entries automatically.</li>
+<li><strong>From a schema:</strong> Select <strong>New entry</strong>, then choose a built-in or custom
+   schema. NOMAD creates an editable entry that you can complete in the data
+   editor.</li>
+</ol>
+<h3 id="create-entries-from-supported-files">Create entries from supported files<a class="headerlink" href="#create-entries-from-supported-files" title="Permanent link">¶</a></h3>
 <p>Which file formats are supported depends on the parsers and plugins installed
 in the deployment. You can add individual files or a <code>.zip</code> or <code>.tar.gz</code>
 archive. NOMAD extracts archives and preserves their internal directory
 structure.</p>
 <p>Keep the files for one calculation or experiment together in the same Project
 so that the parser can associate them with the same entry.</p>
-<p>Open <strong>Files</strong> and select <strong>Upload files</strong>, then choose one or more files or
-archives. You can also drag files onto the Files page. Processing starts
-automatically after files are added.</p>
+<p>You can add initial files while creating the Project. To add files later, open
+<strong>Files</strong> and select <strong>Upload files</strong>, then choose one or more files or
+archives. You can also drag files onto the Files page. NOMAD processes added
+files automatically; files recognized by an installed parser produce entries.</p>
 <p>For scripted transfers, select <strong>Upload via API</strong> on the Files page to get a
 command for the current Project.</p>
 <p><a id="processing-files"></a></p>
@@ -4443,14 +4456,24 @@ staging policy can be configured by the deployment.</p>
 for the supported filenames, compressed formats, publication behavior,
 and uploader responsibilities.</p>
 </div>
-<h3 id="create-an-entry-from-a-schema">Create an entry from a schema<a class="headerlink" href="#create-an-entry-from-a-schema" title="Permanent link">¶</a></h3>
-<p>To create an editable, schema-based entry, open <strong>Files</strong> and select
-<strong>New entry</strong>. Select a schema, proceed to the next step, enter a filename, and
-select <strong>Create</strong>. NOMAD creates an <code>.archive.json</code> mainfile and opens the new
-entry in the data editor.</p>
-<p>See <a href="eln.html">Enter data with ELNs</a> for schema-based data entry and
-<a href="yaml.html">Write a YAML schema package</a> for defining custom schemas. These
-topics are maintained separately from the file-upload workflow.</p>
+<h3 id="create-entries-from-built-in-or-custom-schemas">Create entries from built-in or custom schemas<a class="headerlink" href="#create-entries-from-built-in-or-custom-schemas" title="Permanent link">¶</a></h3>
+<p>To create an editable entry without uploading a parser-supported mainfile:</p>
+<ol>
+<li>Open <strong>Files</strong> in the Project and navigate to the folder where you want to
+   create the entry.</li>
+<li>Select <strong>New entry</strong>.</li>
+<li>Choose a schema under <strong>Built-in schemas</strong> or <strong>Custom schemas</strong>. The custom
+   schemas available to you depend on the schema packages you can access.</li>
+<li>Enter a filename and select <strong>Create</strong>. NOMAD adds the <code>.archive.json</code>
+   extension, creates and processes the file, and opens the resulting entry in
+   the data editor.</li>
+</ol>
+<p>Creating an entry from a schema is separate from uploading files. When an
+uploaded file is recognized as a mainfile, NOMAD creates its entry
+automatically; <strong>New entry</strong> is not required.</p>
+<p>This section introduces how to start a schema-based entry as part of the
+Project workflow. See <a href="eln.html">Enter data with ELNs</a> for the detailed data-entry
+flow and <a href="yaml.html">Write a YAML schema package</a> for defining custom schemas.</p>
 <h2 id="visibility-and-access">Visibility and access<a class="headerlink" href="#visibility-and-access" title="Permanent link">¶</a></h2>
 <p>The Project owner can manage access under <strong>Settings</strong>.</p>
 <p>Under <strong>Collaborators</strong>, use <strong>Add User</strong> to add a collaborator and assign one
