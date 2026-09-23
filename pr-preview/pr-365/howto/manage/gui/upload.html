@@ -4462,15 +4462,16 @@ choose <strong>Upload via API</strong>. The dialog provides an example command f
 to the current Project folder.</p>
 <details class="info">
 <summary>Uploading VASP files</summary>
-<p>VASP <code>POTCAR</code> files contain licensed pseudopotential data. Processing on NOMAD Central using <code>nomad-parser-plugin-simulations</code> 
-creates a stripped representation and, by default, removes the
-original file during processing. The behavior is filename-based and the
-staging policy can be configured by deployments using this parser plugin.</p>
-<p>See
-<a href="https://fairmat-nfdi.github.io/nomad-parser-plugins-simulation/parsers/vasp/vasp_about.html#potcar-files-and-license-compliance" rel="noopener" target="_blank">NOMAD Parser Plugins Simulation &gt; VASP &gt; POTCAR files and license compliance</a>
-for the supported filenames, compressed formats, publication behavior,
-and uploader responsibilities.</p>
 </details>
+<p>VASP <code>POTCAR</code> files contain licensed pseudopotential data. Processing on NOMAD Central using <code>nomad-parser-plugin-simulations</code>
+    creates a stripped representation and, by default, removes the
+    original file during processing. The behavior is filename-based and the
+    staging policy can be configured by deployments using this parser plugin.</p>
+<div class="highlight"><pre><span></span><code>See
+[NOMAD Parser Plugins Simulation &gt; VASP &gt; POTCAR files and license compliance](https://fairmat-nfdi.github.io/nomad-parser-plugins-simulation/parsers/vasp/vasp_about.html#potcar-files-and-license-compliance){:target="_blank" rel="noopener"}
+for the supported filenames, compressed formats, publication behavior,
+and uploader responsibilities.
+</code></pre></div>
 <h3 id="create-eln-entries-from-built-in-or-custom-schemas">Create ELN entries from built-in or custom schemas<a class="headerlink" href="#create-eln-entries-from-built-in-or-custom-schemas" title="Permanent link">¶</a></h3>
 <p>An <a href="../../../reference/glossary.html#eln">Electronic Lab Notebook (ELN)</a> entry is
 a schema-based entry that you can edit directly in NOMAD. To create an ELN entry:</p>
