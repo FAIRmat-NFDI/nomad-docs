@@ -71,6 +71,10 @@ nav:
           - Administer: howto/oasis/administer.md
           - Secure: howto/oasis/secure.md
           - Troubleshoot: howto/oasis/troubleshoot.md
+          - Migrate:
+              - Overview: howto/oasis/migrations.md
+              - MongoDB (5.x to 8.x): howto/oasis/migrations/mongo.md
+              - Elasticsearch (7.x to 9.x): howto/oasis/migrations/elastic.md
       - Develop the core software: # TODO strip down to only nomad-lab-specific development
           - Get started: howto/develop/setup.md
           - Navigate the code: howto/develop/code.md
