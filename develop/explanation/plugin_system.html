@@ -4443,21 +4443,32 @@ graph LR
 <a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>    <span class="n">mainfile_name_re</span><span class="o">=</span><span class="s1">'.*\.myparser'</span><span class="p">,</span>
 <a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="p">)</span>
 </code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Sensitive configuration</p>
+<p>Plugin configuration may be serialized and exposed to clients. Define confidential
+fields, such as passwords, tokens, and API keys, using Pydantic's <a href="https://pydantic.dev/docs/validation/latest/api/pydantic/types/#pydantic.types.SecretStr" rel="noopener" target="_blank"><code>SecretStr</code></a> and
+exclude them from serialization:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">Field</span><span class="p">,</span> <span class="n">SecretStr</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">credential</span><span class="p">:</span> <span class="n">SecretStr</span> <span class="o">=</span> <span class="n">Field</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="n">exclude</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+<p>Access the value only where it is needed by calling <code>credential.get_secret_value()</code>.</p>
+</div>
 <p>The plugin entry point behaviour can be controlled in <code>nomad.yaml</code> using <code>plugins.entry_points.options</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">plugins</span><span class="p">:</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">entry_points</span><span class="p">:</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">options</span><span class="p">:</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">      </span><span class="s">"nomad_example.parsers:myparser"</span><span class="p p-Indicator">:</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">        </span><span class="nt">parameter</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">47</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">plugins</span><span class="p">:</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="nt">entry_points</span><span class="p">:</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">options</span><span class="p">:</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">      </span><span class="s">"nomad_example.parsers:myparser"</span><span class="p p-Indicator">:</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">        </span><span class="nt">parameter</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">47</span>
 </code></pre></div>
 <p>Note that the model will also validate the values coming from <code>nomad.yaml</code>, and you should utilize the validation mechanisms of <code>pydantic</code> to provide users with helpful messages about invalid configuration.</p>
 <h3 id="plugin-resource">Plugin resource<a class="headerlink" href="#plugin-resource" title="Permanent link">¶</a></h3>
 <p>The configuration class has a <code>load</code> method that returns the entry point resource. This is typically an instance of a class, e.g. <code>Parser</code> instance in the case of a parser entry point. Here is an example of a <code>load</code> method for a parser:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">MyParserEntryPoint</span><span class="p">(</span><span class="n">ParserEntryPoint</span><span class="p">):</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="kn">from</span><span class="w"> </span><span class="nn">nomad_example.parsers.myparser</span><span class="w"> </span><span class="kn">import</span> <span class="n">MyParser</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>        <span class="k">return</span> <span class="n">MyParser</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">dict</span><span class="p">())</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">MyParserEntryPoint</span><span class="p">(</span><span class="n">ParserEntryPoint</span><span class="p">):</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>        <span class="kn">from</span><span class="w"> </span><span class="nn">nomad_example.parsers.myparser</span><span class="w"> </span><span class="kn">import</span> <span class="n">MyParser</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>        <span class="k">return</span> <span class="n">MyParser</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">dict</span><span class="p">())</span>
 </code></pre></div>
 <p>Often when loading the resource, you will need access to the final entry point configuration defined in <code>nomad.yaml</code>, including any overrides. For details on how to retrieve plugin configuration at runtime using <code>get_plugin_entry_point()</code>, see <a href="../howto/plugins/plugins.html#accessing-plugin-configuration-at-runtime">Accessing plugin configuration at runtime</a>.</p>
 <h2 id="entry-point-discovery">Entry point discovery<a class="headerlink" href="#entry-point-discovery" title="Permanent link">¶</a></h2>
