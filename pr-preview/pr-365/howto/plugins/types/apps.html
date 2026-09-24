@@ -2247,6 +2247,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#widgethistogram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WidgetHistogram
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#widgetscatterplotdeprecated" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2262,17 +2273,6 @@
     <span class="md-ellipsis">
       
         AxisLimitedScale
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#widgethistogram" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        WidgetHistogram
       
     </span>
   </a>
@@ -4916,6 +4916,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#widgethistogram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WidgetHistogram
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#widgetscatterplotdeprecated" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4931,17 +4942,6 @@
     <span class="md-ellipsis">
       
         AxisLimitedScale
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#widgethistogram" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        WidgetHistogram
       
     </span>
   </a>
@@ -6400,6 +6400,79 @@ Will only show quantities that have been populated in the data.</p>
 </tr>
 </tbody>
 </table>
+<h4 id="widgethistogram">WidgetHistogram<a class="headerlink" href="#widgethistogram" title="Permanent link">¶</a></h4>
+<p>Histogram widget configuration.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>show_input</td>
+<td><code>bool</code></td>
+<td>Whether to show text input field.<br><em>default:</em> <code>True</code></td>
+</tr>
+<tr>
+<td>x</td>
+<td><code>Axis | str</code></td>
+<td>Configures the information source and display options for the x-axis.<br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>y</td>
+<td><code>AxisScale | str</code></td>
+<td>Configures the information source and display options for the y-axis.<br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>autorange</td>
+<td><code>bool</code></td>
+<td>Whether to automatically set the range according to the data limits.<br><em>default:</em> <code>False</code></td>
+</tr>
+<tr>
+<td>layout</td>
+<td><code>dict[str, Layout]</code></td>
+<td>Defines widget size and grid positioning for different breakpoints. The following breakpoints are supported: <code>sm</code>, <code>md</code>, <code>lg</code>, <code>xl</code> and <code>xxl</code>.<br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>quantity</td>
+<td><code>str | None</code></td>
+<td><strong>deprecated</strong></td>
+</tr>
+<tr>
+<td>scale</td>
+<td><code>str | None</code></td>
+<td><strong>deprecated</strong></td>
+</tr>
+<tr>
+<td>showinput</td>
+<td><code>bool | None</code></td>
+<td><strong>deprecated</strong></td>
+</tr>
+<tr>
+<td>n_bins</td>
+<td><code>int | None</code></td>
+<td>Maximum number of histogram bins to request. Notice that the returned number of bins may be smaller if there are fewer data items available.</td>
+</tr>
+<tr>
+<td>nbins</td>
+<td><code>int | None</code></td>
+<td><strong>deprecated</strong></td>
+</tr>
+<tr>
+<td>title</td>
+<td><code>str | None</code></td>
+<td>Custom widget title. If not specified, a widget-specific default title is used.</td>
+</tr>
+<tr>
+<td>description</td>
+<td><code>str | None</code></td>
+<td>Optional description of the widget and the data it is showing. Can contain markdown notation. If populated, an icon is shown next to the title that can be clicked to show the description.</td>
+</tr>
+</tbody>
+</table>
 <h4 id="widgetscatterplotdeprecated">WidgetScatterPlotDeprecated<a class="headerlink" href="#widgetscatterplotdeprecated" title="Permanent link">¶</a></h4>
 <p>Deprecated copy of WidgetScatterPlot with a misspelled type.</p>
 <table>
@@ -6503,79 +6576,6 @@ Will only show quantities that have been populated in the data.</p>
 <td>scale</td>
 <td><code>str | None</code></td>
 <td>Defines the axis scaling. Defaults to linear scaling.<br><em>default:</em> <code>ScaleEnumPlot.LINEAR</code></td>
-</tr>
-</tbody>
-</table>
-<h4 id="widgethistogram">WidgetHistogram<a class="headerlink" href="#widgethistogram" title="Permanent link">¶</a></h4>
-<p>Histogram widget configuration.</p>
-<table>
-<thead>
-<tr>
-<th>name</th>
-<th>type</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>show_input</td>
-<td><code>bool</code></td>
-<td>Whether to show text input field.<br><em>default:</em> <code>True</code></td>
-</tr>
-<tr>
-<td>x</td>
-<td><code>Axis | str</code></td>
-<td>Configures the information source and display options for the x-axis.<br><em>default:</em> <code>PydanticUndefined</code></td>
-</tr>
-<tr>
-<td>y</td>
-<td><code>AxisScale | str</code></td>
-<td>Configures the information source and display options for the y-axis.<br><em>default:</em> <code>PydanticUndefined</code></td>
-</tr>
-<tr>
-<td>autorange</td>
-<td><code>bool</code></td>
-<td>Whether to automatically set the range according to the data limits.<br><em>default:</em> <code>False</code></td>
-</tr>
-<tr>
-<td>layout</td>
-<td><code>dict[str, Layout]</code></td>
-<td>Defines widget size and grid positioning for different breakpoints. The following breakpoints are supported: <code>sm</code>, <code>md</code>, <code>lg</code>, <code>xl</code> and <code>xxl</code>.<br><em>default:</em> <code>PydanticUndefined</code></td>
-</tr>
-<tr>
-<td>quantity</td>
-<td><code>str | None</code></td>
-<td><strong>deprecated</strong></td>
-</tr>
-<tr>
-<td>scale</td>
-<td><code>str | None</code></td>
-<td><strong>deprecated</strong></td>
-</tr>
-<tr>
-<td>showinput</td>
-<td><code>bool | None</code></td>
-<td><strong>deprecated</strong></td>
-</tr>
-<tr>
-<td>n_bins</td>
-<td><code>int | None</code></td>
-<td>Maximum number of histogram bins to request. Notice that the returned number of bins may be smaller if there are fewer data items available.</td>
-</tr>
-<tr>
-<td>nbins</td>
-<td><code>int | None</code></td>
-<td><strong>deprecated</strong></td>
-</tr>
-<tr>
-<td>title</td>
-<td><code>str | None</code></td>
-<td>Custom widget title. If not specified, a widget-specific default title is used.</td>
-</tr>
-<tr>
-<td>description</td>
-<td><code>str | None</code></td>
-<td>Optional description of the widget and the data it is showing. Can contain markdown notation. If populated, an icon is shown next to the title that can be clicked to show the description.</td>
 </tr>
 </tbody>
 </table>

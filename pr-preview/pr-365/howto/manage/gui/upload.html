@@ -4460,18 +4460,25 @@ same Project so that the parser can associate them with the same entry.</p>
 <p>For scripted transfers, select the drop-down arrow next to <strong>UPLOAD FILES</strong> and
 choose <strong>Upload via API</strong>. The dialog provides an example command for uploading
 to the current Project folder.</p>
-<details class="info">
-<summary>Uploading VASP files</summary>
+<details class="warning">
+<summary>License Compliance for VASP POTCAR Files</summary>
+<p>The VASP license does <strong>not</strong> permit users to freely distribute <strong>POTCAR</strong> files, which are
+considered copyrighted material. To ensure compliance, NOMAD automatically handles POTCAR
+files for you.</p>
+<p>Upon <strong>publication</strong>, NOMAD removes the original POTCAR files and replaces them with
+<code>POTCAR.stripped</code> files. The stripped files contain a checksum of the original file
+at the top, followed by metadata headers extracted from the original POTCAR, but not
+the proprietary pseudopotential data. The stripped files can be accessed and downloaded
+by anyone, while the original POTCAR files are automatically removed.</p>
+<p><strong>Important considerations:</strong></p>
+<ul>
+<li>Stripping is filename-based. Ensure "POTCAR" appears in the filename for licensed files.</li>
+<li>POTCAR files <strong>must be uncompressed</strong> for automated stripping to work. Compressed files (e.g., <code>POTCAR.gz</code>) will not be properly processed and may be entirely removed without creating stripped versions.</li>
+<li>Stripping only occurs upon publication. We strongly recommend <strong>against</strong> temporarily making unpublished uploads publicly visible when they contain licensed material.</li>
+</ul>
+<p>While NOMAD provides this service as a courtesy, <strong>uploaders remain responsible for
+verifying overall license compliance</strong>.</p>
 </details>
-<p>VASP <code>POTCAR</code> files contain licensed pseudopotential data. Processing on NOMAD Central using <code>nomad-parser-plugin-simulations</code>
-    creates a stripped representation and, by default, removes the
-    original file during processing. The behavior is filename-based and the
-    staging policy can be configured by deployments using this parser plugin.</p>
-<div class="highlight"><pre><span></span><code>See
-[NOMAD Parser Plugins Simulation &gt; VASP &gt; POTCAR files and license compliance](https://fairmat-nfdi.github.io/nomad-parser-plugins-simulation/parsers/vasp/vasp_about.html#potcar-files-and-license-compliance){:target="_blank" rel="noopener"}
-for the supported filenames, compressed formats, publication behavior,
-and uploader responsibilities.
-</code></pre></div>
 <h3 id="create-eln-entries-from-built-in-or-custom-schemas">Create ELN entries from built-in or custom schemas<a class="headerlink" href="#create-eln-entries-from-built-in-or-custom-schemas" title="Permanent link">¶</a></h3>
 <p>An <a href="../../../reference/glossary.html#eln">Electronic Lab Notebook (ELN)</a> entry is
 a schema-based entry that you can edit directly in NOMAD. To create an ELN entry:</p>
