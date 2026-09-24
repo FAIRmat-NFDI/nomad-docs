@@ -109,6 +109,7 @@ nav:
       - Data structure: explanation/data.md
       - Base sections: explanation/base_sections.md # TODO rewrite as explanation
       - Processing: explanation/processing.md
+      - Actions: explanation/actions.md
       - Architecture: explanation/architecture.md
       - Workflows: explanation/workflows.md
       - Plugins: explanation/plugin_system.md
