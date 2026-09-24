@@ -46,6 +46,7 @@ nav:
               - Access processed data: howto/manage/program/archive_query.md
               - Transform JSON data structures: howto/manage/program/json_transformer.md
               - Make Graph API calls: howto/manage/program/graph_api.md # TODO consolidate into a single page with supporting explanation/reference material
+              - Build a stats dashboard: howto/manage/program/stats_dashboard.md
       - Develop plugins:
           - Start plugin development: howto/plugins/plugins.md # TODO split former Introduction to plugins into short guiding overview + explanation page
           # - Set up a development environment: howto/plugins/setup.md # TODO distro-dev setup + best practices
@@ -109,6 +110,7 @@ nav:
       - Data structure: explanation/data.md
       - Base sections: explanation/base_sections.md # TODO rewrite as explanation
       - Processing: explanation/processing.md
+      - Statistics: explanation/statistics.md
       - Architecture: explanation/architecture.md
       - Workflows: explanation/workflows.md
       - Plugins: explanation/plugin_system.md
