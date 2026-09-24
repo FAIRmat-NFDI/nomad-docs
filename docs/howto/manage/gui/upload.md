@@ -1,7 +1,5 @@
 # How to upload and publish data for supported formats
 
-This guide describes how to upload data in NOMAD [supported file formats](../../../reference/parsers.md). You find a list of supported formats on top of each upload page, see below.
-
 ## Preparing files
 
 You can upload files one by one, but you can also provider larger `.zip` or `.tar.gz`
@@ -144,7 +142,7 @@ This section shows how to publish your data on NOMAD and assign a DOI.
 
 - One upload cannot exceed **32 GB** in size.
 - Only **10 non published uploads** are allowed per user.
-- Only uploads with at least one recognized entry can be published. See also [supported codes/formats](../../../reference/parsers.md) below.
+- Only uploads with at least one recognized entry can be published.
 
 ## Strategies for large amounts of data
 
