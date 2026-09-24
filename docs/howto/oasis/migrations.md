@@ -1,6 +1,6 @@
 # How to migrate a NOMAD Oasis
 
-When updating a NOMAD Oasis across major releases, backend database and search engine services may require data migrations to ensure compatibility with new software versions. 
+When updating a NOMAD Oasis across major releases, backend database and search engine services may require data migrations to ensure compatibility with new software versions.
 
 This section collects guides for major service migrations that have been introduced across NOMAD Oasis releases.
 
@@ -25,7 +25,7 @@ Starting with **NOMAD 2.0**, NOMAD Oasis has migrated its search backend from **
 Elasticsearch 9 cannot read index files created with Elasticsearch 7 due to major Lucene version changes. Two migration options are supported:
 
 1. **Option 1: Reindex data from ES7 to ES9 (Running two containers)** — Migrates index data directly via Elasticsearch's `_reindex` API without reprocessing archive files.
-2. **Option 2: Start from a fresh ES9 container and reindex uploads** — Starts with a clean ES9 container and rebuilds the search index from MongoDB and raw archives stored in `.volumes/fs`.
+1. **Option 2: Start from a fresh ES9 container and reindex uploads** — Starts with a clean ES9 container and rebuilds the search index from MongoDB and raw archives stored in `.volumes/fs`.
 
 - [Read the Elasticsearch Migration Guide](migrations/elastic.md)
 
@@ -36,5 +36,5 @@ Elasticsearch 9 cannot read index files created with Elasticsearch 7 due to majo
 Before performing any data or database migrations on your Oasis:
 
 1. **Always back up your data**: Ensure you have an up-to-date dump of your MongoDB database (`scripts/backup-mongo.sh`) and that your uploaded file storage in `.volumes/fs` is securely backed up.
-2. **Review release notes**: Check the [NOMAD distribution template releases](https://github.com/FAIRmat-NFDI/nomad-distro-template/releases) for any version-specific considerations or changes to configuration files (`docker-compose.yaml`, `nomad.yaml`, etc.).
-3. **Verify container health**: After running a migration, always verify that your services start cleanly and report healthy status (`docker compose ps` and `docker compose logs`).
+1. **Review release notes**: Check the [NOMAD distribution template releases](https://github.com/FAIRmat-NFDI/nomad-distro-template/releases){:target="_blank" rel="noopener"} for any version-specific considerations or changes to configuration files (`docker-compose.yaml`, `nomad.yaml`, etc.).
+1. **Verify container health**: After running a migration, always verify that your services start cleanly and report healthy status (`docker compose ps` and `docker compose logs`).

@@ -48,14 +48,19 @@ python3 upgrade_mongo.py -c nomad_oasis_mongo -f docker-compose.yaml --from-vers
 ### 3. Verify the Upgrade
 
 1. Check that the MongoDB container is running version 8.x:
+
    ```bash
    docker compose exec mongo mongosh --eval 'db.version()'
    ```
-2. Verify that the feature compatibility version is set to 8.0:
+
+1. Verify that the feature compatibility version is set to 8.0:
+
    ```bash
    docker compose exec mongo mongosh --eval 'db.adminCommand({getParameter: 1, featureCompatibilityVersion: 1})'
    ```
-3. Check the NOMAD Oasis logs to ensure services connect successfully:
+
+1. Check the NOMAD Oasis logs to ensure services connect successfully:
+
    ```bash
    docker compose logs -f app worker
    ```

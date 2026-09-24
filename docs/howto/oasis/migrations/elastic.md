@@ -5,8 +5,9 @@ Starting with **NOMAD 2.0**, NOMAD Oasis has migrated its search backend from **
 Because Elasticsearch 9 cannot read indices created with Elasticsearch 7 due to major Lucene version changes, existing data cannot be read directly from an old Elasticsearch 7 volume.
 
 There are two migration options available:
+
 1. **Option 1: Reindex data from ES7 to ES9 (Running two containers)** — Runs an ES9 container alongside ES7 and migrates index data directly via Elasticsearch's `_reindex` API without reprocessing archive files.
-2. **Option 2: Start from a fresh ES9 container and reindex uploads** — In NOMAD, MongoDB and the archive files (`.volumes/fs`) are the single source of truth. This option starts with a clean ES9 container and rebuilds the search index by reindexing uploads.
+1. **Option 2: Start from a fresh ES9 container and reindex uploads** — In NOMAD, MongoDB and the archive files (`.volumes/fs`) are the single source of truth. This option starts with a clean ES9 container and rebuilds the search index by reindexing uploads.
 
 !!! note
     Previously, NOMAD maintained a separate materials index (`nomad_materials_v1` / `nomad_oasis_materials_v1`). This index is deprecated and dropped in NOMAD 2.0. **Only the entries index (`nomad_oasis_entries_v1` or `nomad_entries_v1`) needs to be migrated.**
@@ -137,22 +138,25 @@ curl -fsS "http://localhost:9201/${INDEX}/_mapping" | \
 Once verified:
 
 1. Stop the running containers:
+
    ```bash
    docker compose down
    ```
 
-2. Update `docker-compose.yaml`:
+1. Update `docker-compose.yaml`:
    - Set the main `elastic` service image to `docker.elastic.co/elasticsearch/elasticsearch:9.5.0`.
    - Change the volume mount for `elastic` to use the migrated volume `nomad_oasis_elastic_9` (or replace the old volume).
-   - Ensure `NOMAD_ELASTIC_VERSION: 9` is present in your Nomad services (`app`, `worker`, etc.).
+   - Ensure `NOMAD_ELASTIC_VERSION: 9` is present in your NOMAD services (`app`, `worker`, etc.).
    - Remove the temporary `nomad_oasis_elastic_9` service definition from `docker-compose.yaml`.
 
-3. Start your upgraded NOMAD Oasis:
+1. Start your upgraded NOMAD Oasis:
+
    ```bash
    docker compose up -d
    ```
 
-4. Remove the old ES7 volume if no longer needed:
+1. Remove the old ES7 volume if no longer needed:
+
    ```bash
    docker volume rm nomad_oasis_elastic
    ```
@@ -176,8 +180,9 @@ Ensure `.volumes/fs` is intact.
 ### 2. Update Compose File
 
 In `docker-compose.yaml`:
+
 - Set `image: docker.elastic.co/elasticsearch/elasticsearch:9.5.0` under the `elastic` service.
-- Ensure `NOMAD_ELASTIC_VERSION: 9` is set under the Nomad container environment (`app`, `worker`, etc.).
+- Ensure `NOMAD_ELASTIC_VERSION: 9` is set under the NOMAD container environment (`app`, `worker`, etc.).
 
 ### 3. Clear Old Elasticsearch Volume and Start Services
 
