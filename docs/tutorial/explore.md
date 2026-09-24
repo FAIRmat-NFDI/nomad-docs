@@ -1,6 +1,6 @@
 # Explore data in NOMAD
 
-In this tutorial, we explore published entries in NOMAD using the **EXPLORE** page of the GUI. We follow a step-by-step workflow to search across entries, apply and combine filters, query structured metadata, and build interactive widgets for targeted data exploration. By the end of the tutorial, we will have identified relevant entries and constructed customized searches and dashboards using filters, queries, and widgets.
+In this tutorial, we explore published entries in NOMAD using the search apps available from the **APPS** page. We use the **Entries** app, which supports searching across all data, and introduce domain-specific apps tailored to particular research fields. Following a step-by-step workflow, we search for entries, apply and combine filters, query structured metadata, and create interactive widgets. By the end of the tutorial, we will have identified relevant entries and constructed customized searches and dashboards using filters, queries, and widgets.
 
 ---
 
@@ -8,7 +8,7 @@ In this tutorial, we explore published entries in NOMAD using the **EXPLORE** pa
 
 In this tutorial, you will learn how to:
 
-1. Navigate the **EXPLORE** section of the NOMAD GUI
+1. Navigate through the **APPS** page of the NOMAD GUI
 1. Search and filter published entries across different domains
 1. Use the search bar to query structured metadata and perform range-based searches
 1. Apply and combine filters to refine search results efficiently
@@ -31,73 +31,61 @@ Before starting, make sure you have the following:
 
 ---
 
-## Navigate to NOMAD's explore entries page
+## Navigate to NOMAD's APPs
 
-The **EXPLORE** menu allows you to navigate and search through a vast amount of materials-science data. It provides several options, each focusing on a specific application or method. They include different sets of filters and/or search widgets that allow users to efficiently filter and narrow down results, making it easier to find relevant entries in specific domains.
+Select **APPS** from the menu on the left to access NOMAD’s search applications. Each app provides filters and widgets tailored to a particular domain or data type.
 
-In this tutorial, we will focus on searching data in NOMAD using the **Entries** option within the **EXPLORE** menu. You will see an overview of **SOLAR CELLS** search dashboard.
+In this tutorial, we use the **Entries** app to search across all data published on NOMAD and briefly introduce the **Solar Cells** app as an example of a domain-specific search interface. 
 
-To start with exploring data across all domains in NOMAD, go to **EXPLORE** → **Entries**.
+To begin, open **APPS** and select **Entries**
 
-<div style="text-align: center;">
-<img src="images/explore_1.png" alt="screenshot of the navigation steps to the explore entries page" width="500">
-</div>
+![screenshot of the navigation steps to the entries app](images/explore_1.png)
 
-The **Entries** page shows all the uploaded data that are published on NOMAD. Published entries are accessible without login, while logging in grants access to your private data and those that are shared with you.
+??? info "Search applications available in NOMAD"
+    The **APPS** page provides search interfaces for different domains and data types. The available apps include:
 
-??? info "Contents of NOMAD's Explore menu"
+    - **Entries:** Search entries across all domains.
+    - **Experiment:** Search experimental data through apps such as **ELN** and **NeXus**.
+    - **Solar cells:** Explore general solar-cell data and specialized perovskite databases.
+    - **Theory:** Search computational data through apps such as **Calculations** and **Alexandria**.
+    - **Tools:** Find resources such as **AI Toolkit Notebooks**.
+    - **Use cases:** Explore specialized data for catalysis, metal-organic frameworks, polymerization reactions, and other applications.
 
-    The following explore pages are currently available:
-
-    - **Entries**: Search entries across all domains.
-    - **Theory**: Focus on calculations and materials data derived from theoretical models.
-    - **Experiment**: Explore data from experimental sources, such as ELNs (Electronic Lab Notebooks) or characterization techniques e.g., EELS (Electron Energy Loss Spectroscopy).
-    -  **Tools**: Explore among several AI toolkit notebooks.
-    - **Use Cases**: Search data tailored to specific use cases, such as Metal-Organic Frameworks (MOFs).
-
-    <div style="text-align: center;">
-        <img src="images/explore_menu2.png" alt="Explore Menu" width="200">
-    </div>
+    Each app provides filters and widgets tailored to its data and intended use.
 
 ---
 
 ### Search interface and filters
 
-In the Entries page, you will find a list of possible filters on the left panel. NOMAD supports advanced searches based on:
+In the **Entries** app, the filter panel on the left allows you to narrow the search results using structured metadata. Filters are grouped into categories such as:
 
-- **Material** – Elements, formula, or structure.
-- **Method** – Scientific techniques (e.g., DFT).
-- **Properties** – Band structure, conductivity, etc.
-- **Use Cases** – Application-specific searches (e.g., Solar Cells).
-- **Origin** – Filter by uploader, date, dataset, or tags.
+- **Material:** Elements, chemical formulas, and structural information.
+- **Method:** Computational and experimental methods.
+- **Properties:** Available physical and electronic properties.
+- **Use Cases:** Application-specific classifications, such as solar cells.
+- **Origin:** Information about the data’s authorship, project, and publication.
 
-<div style="text-align: center;">
-    <img src="images/filters_sidebar.png" alt="Entries Search Interface" width="200">
-</div>
+![Filter panel in the NOMAD Entries app](images/explore_2.png)
 
-Filters refine searches dynamically. You can apply the following examples to experience this.
+NOMAD enables you to search entries using structured metadata. Some metadata are extracted automatically during processing, while other metadata are provided by users through schemas. Only metadata represented in NOMAD’s data schemas can be queried through the search interface.
 
-- **Material Filter**: Select **B** and **N** to find hexagonal boron nitride.
-- **Method Filter**: Find **BN** simulations using **VASP**.
-- **Properties Filter**: Search for entries with **band structure** data.
+Search results update automatically as you apply filters. Try combining the following filters:
 
-You can pin frequently used filters using **(+)** for a customized search interface.
+- **Elements/Formula**: Click on **B** and **N** in the periodic table to find entires including these elements.
+- **Structure/Symmetry**: Select **hexagonal** from the *Crystal system* section to limit the search for hexagonal Boron Nitride. 
+- **Method**: Select **VASP** from the *Program name* section to show calculations performed with VASP.
+- **Electronic**: select **Band structure** in the *Electronic propoertis* section to show entries containing band-structure data
 
-<!-- update the gif with screenshots with sliding images stack once this is figured out in the docs -->
-<div style="text-align: center;">
-    <video controls autoplay loop muted playsinline width="800">
-        <source src="images/add_filters_to_search_interface.webm" type="video/webm">
-    </video>
-</div>
+Together, these filters help identify VASP calculations of hexagonal boron nitride that contain band-structure data.
+
+Use the **(+)** button to pin frequently used filters to the search interface.
 
 ---
 
 ### Search bar: a quick way to explore data
 <!-- Add a page in Reference, that explains all possible syntax for the searches in the search bar -->
 
-You can use the NOMAD search bar to find indexed quantities. As you begin typing, all available
-and searchable sets (with their paths in the NOMAD metainfo) appear in the advanced menu below the
-search bar. Continue typing to refine the results and select the desired set.
+You can use the NOMAD search bar to find indexed quantities. As you begin typing, all available and searchable sets (with their paths in the NOMAD metainfo) appear in the advanced menu below the search bar. Continue typing to refine the results and select the desired set.
 
 For the example presented above (searching for Boron Nitride):
 
@@ -129,20 +117,17 @@ Similarly, you can define a bounded range for the values. For example, to search
 
 ### Custom widgets for advanced searches
 
-NOMAD enables searching entries using rich metadata. Some metadata is extracted automatically, while others are user-provided via schemas. Only metadata stored according to schemas is searchable.
+NOMAD provides configurable widgets for building interactive search dashboards. You can add widgets using the buttons below the search bar in any search app.
 
-NOMAD also offers **custom widgets** to create advanced dashboards. These widgets are accessible below the search bar on any **EXPLORE** page.
+![Widget controls in the NOMAD Entries app](images/explore_3.png)
 
-<div style="text-align: center;">
-    <img src="images/customizable_widgets.png" alt="Customizable Widgets" width="800">
-</div>
+Five widget types are available:
 
-Here are the main four widgets:
-
-- **TERMS:** Visualize and explore categorical data based on user-defined terms and keywords.
-- **HISTOGRAM:** Display the distribution of a specific numerical quantity within data.
-- **SCATTER PLOT:** Generate scatter plots to visualize relationships between different quantities.
-- **PERIODIC TABLE:** Filter data by selecting elements directly from an interactive periodic table.
+- **TERMS:** Groups entries by the values of a selected categorical quantity.
+- **HISTOGRAM:** Displays the distribution of a selected numerical quantity.
+- **SCATTER PLOT:** Visualizes the relationship between two numerical quantities.
+- **BOX PLOT:** Summarizes and compares the distributions of numerical quantities.
+- **PERIODIC TABLE:** Displays the occurrence of chemical elements and allows you to filter entries by element.
 
 ---
 
@@ -213,9 +198,7 @@ In this example, we will utilize the Solar Cell Explore page, which offers filte
 - Navigate to **EXPLORE** → **Solar Cells**.
 - This dashboard provides predefined filters and plots optimized for solar cell research.
 
-<div style="text-align: center;">
-    <img src="images/solar_cells_dashboard.webp" alt="Solar Cells Dashboard" width="800">
-</div>
+![The Solar Cells App](images/explore_4.png)
 
 The dashboard includes the following preset widgets:
 
