@@ -13,6 +13,7 @@ Explanation pages provide context and background. Use them when you want to unde
     "explanation/data.md": "the concepts behind NOMAD's archive and schema organization.",
     "explanation/base_sections.md": "the shared structural building blocks used across NOMAD data.",
     "explanation/processing.md": "how parsing, normalization, and derived data generation fit together.",
+    "explanation/actions.md": "asynchronous processing workflows that run on dedicated workers.",
     "explanation/architecture.md": "the main system components and how they interact.",
     "explanation/workflows.md": "how NOMAD models workflows and connects their steps.",
     "explanation/plugin_system.md": "how plugin-based extensions integrate with NOMAD.",
