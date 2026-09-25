@@ -67,14 +67,16 @@ nav:
           - Install: howto/oasis/install.md # TODO Would explain what a NOMAD installation means, contains links to `nomad-distro-template`+`nomad-distro-dev`, also contains a small section on the Python library
           - Configure: howto/oasis/configure.md
           - Deploy: howto/oasis/deploy.md
-          - Update: howto/oasis/update.md
           - Administer: howto/oasis/administer.md
           - Secure: howto/oasis/secure.md
           - Troubleshoot: howto/oasis/troubleshoot.md
           - Migrate:
-              - Overview: howto/oasis/migrations.md
-              - MongoDB (5.x to 8.x): howto/oasis/migrations/mongo.md
-              - Elasticsearch (7.x to 9.x): howto/oasis/migrations/elastic.md
+              - Overview: howto/oasis/migrate.md
+              - NOMAD 2.0: howto/oasis/migrate/v2.0.md
+              - NOMAD 1.4.2: howto/oasis/migrate/v1.4.2.md
+              - NOMAD 1.2.2: howto/oasis/migrate/v1.2.2.md
+              - NOMAD 1.2.0: howto/oasis/migrate/v1.2.0.md
+              - NOMAD 0.8.x to 1.x: howto/oasis/migrate/v0.8-to-v1.md
       - Develop the core software: # TODO strip down to only nomad-lab-specific development
           - Get started: howto/develop/setup.md
           - Navigate the code: howto/develop/code.md
@@ -226,6 +228,7 @@ plugins:
         "develop/gitlab.md": "howto/develop/contrib.md"
         "howto/manage/program/graph-api/basics.md": "howto/manage/program/graph_api.md"
         "tutorial/training_resources.md": "reference/tutorials.md"
+        "howto/oasis/update.md": "howto/oasis/migrate.md"
   - glightbox
   # - git-revision-date-localized
   # TODO Fix error in pipeline when this plugin is included
