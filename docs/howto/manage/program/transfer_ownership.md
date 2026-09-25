@@ -1,48 +1,42 @@
-# How to transfer project ownership
+# How to transfer project ownership via the API
 
-This guide shows how to transfer ownership of a **project** (an *upload* at the API level) to
-another user, both through the GUI and through the API. For the underlying model — the two-phase
-request/accept flow, pending-state access, and notifications — see
-[Explanation > Ownership transfer](../../explanation/ownership_transfer.md).
+Transfer ownership of a project (an *upload* at the API and data-model level) to another user
+through the `ownership-transfers` endpoints. For the point-and-click equivalent, see
+[Transfer project ownership in the GUI](../gui/transfer_ownership.md).
 
 ## What you will learn
 
-- How the current owner offers ownership and the recipient accepts or refuses.
-- How to do this in the GUI and, equivalently, through the API.
+- How ownership transfer works and who is allowed to do what.
+- How to request, review, accept or refuse, and cancel a transfer through the API.
 
 ## Recommended preparation
 
-- [Explanation > Ownership transfer](../../explanation/ownership_transfer.md)
-- [How-to > Authenticate programmatically](./program/auth.md) (for the API workflow)
+- [Authenticate programmatically](./auth.md)
 
-## Using the GUI
+## How ownership transfer works
 
-**As the current owner — offer ownership:**
+Every project has a single **main author** — its owner. Transfer is a **two-phase,
+request-based** operation: the current owner *requests* a transfer naming a target user, and the
+target must *accept* before ownership changes.
 
-1. Open the project you own.
-1. Open its ownership actions and choose **Transfer ownership**.
-1. In the dialog, search for and select the target user.
-1. Confirm. A pending request is created and the recipient is notified; the project now shows
-   a pending transfer, which you can **cancel** from the same place until it is accepted.
+- **Request, then response.** The owner creates a request; the target accepts or refuses. On
+  acceptance, `main_author` is reassigned to the target. While the request is pending, the owner
+  can cancel it.
+- **Access while pending.** Creating the request immediately grants the target reviewer (read)
+  access so they can inspect the project before deciding; cancelling revokes it.
+- **Notifications.** The GUI shows an in-app notification (to the target on request, to the source
+  on refusal); no email is sent.
+- **Permissions.** Only the `main_author` can initiate a transfer. A coauthor can manage the
+  project's collaborators (see [When the project was shared with you](#when-the-project-was-shared-with-you))
+  but cannot transfer ownership.
+- **Groups.** Group ownership can be transferred with the same request-and-accept model, using
+  `resource_type: group`.
 
-**As the recipient — accept or refuse:**
+The state-changing calls (request, respond, cancel) require a token with `uploads:write`.
 
-1. You receive an in-app notification that you have been offered ownership of the project (you
-   also gain read access to it while the request is pending).
-1. Open the project and choose **Accept** to take ownership, or **Refuse** to decline.
+## Request the transfer (current owner)
 
-On acceptance, you become the project's owner. On refusal, ownership stays with the original
-owner and the temporary access is removed.
-
-## Using the API
-
-The API and data model refer to a project as an *upload*, which is why the endpoints,
-`resource_type`, and scopes below use that term. The same flow is available through the
-`ownership-transfers` endpoints; the state-changing calls require a token with `uploads:write`
-(see [Authenticate programmatically](./program/auth.md)).
-
-**Request the transfer (current owner).** Identify the target by `user_id`, `username`, or
-`email` via `target_user_type`:
+Identify the target by `user_id`, `username`, or `email` via `target_user_type`:
 
 ```bash
 curl -X POST "{{ nomad_url() }}/v1/ownership-transfers" \
@@ -58,7 +52,7 @@ curl -X POST "{{ nomad_url() }}/v1/ownership-transfers" \
 
 The response returns the `transfer_id` and the resolved source and target user IDs.
 
-**Review the pending request (either party).**
+## Review the pending request (either party)
 
 ```bash
 # List transfers involving you
@@ -70,7 +64,9 @@ curl "{{ nomad_url() }}/v1/ownership-transfers/<transfer-id>" \
   -H "Authorization: Bearer ${NOMAD_PAT}"
 ```
 
-**Accept or refuse (target).** On `accept`, `main_author` is reassigned to the target:
+## Accept or refuse (target)
+
+On `accept`, `main_author` is reassigned to the target:
 
 ```bash
 curl -X POST "{{ nomad_url() }}/v1/ownership-transfers/<transfer-id>/respond?resource_type=upload" \
@@ -81,23 +77,27 @@ curl -X POST "{{ nomad_url() }}/v1/ownership-transfers/<transfer-id>/respond?res
 
 Use `{"action": "refuse"}` to decline.
 
-**Cancel a pending request (source).** Before the target responds, the source can cancel,
-which revokes the target's temporary reviewer access:
+## Cancel a pending request (source)
+
+Before the target responds, the source can cancel, which revokes the target's temporary reviewer
+access:
 
 ```bash
 curl -X POST "{{ nomad_url() }}/v1/ownership-transfers/<transfer-id>/cancel?resource_type=upload" \
   -H "Authorization: Bearer ${NOMAD_PAT}"
 ```
 
-**Verify the result.** Reassigning ownership runs as a background process on the upload.
-Confirm that `main_author` is the new owner and that `process_status` completed successfully:
+## Verify the result
+
+Reassigning ownership runs as a background process on the upload. Confirm that `main_author` is
+the new owner and that `process_status` completed successfully:
 
 ```bash
 curl "{{ nomad_url() }}/v1/uploads/<upload-id>" \
   -H "Authorization: Bearer ${NOMAD_PAT}"
 ```
 
-### Endpoint reference
+## Endpoint reference
 
 | Method & path | Purpose | Required scopes |
 | --- | --- | --- |
