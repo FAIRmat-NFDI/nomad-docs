@@ -5,7 +5,12 @@ settings, and an optional DOI.
 
 <a id="upload-limits"></a>
 
-## Project limits
+## Project requirements and limitations
+
+A Project can be created and stored without files or an Entry. To publish the
+Project, it must contain at least one successfully processed Entry. This
+ensures that every published Project contains structured data that NOMAD can
+index and make searchable.
 
 Project limits are configurable and can differ between deployments. The
 default NOMAD configuration and NOMAD Central allow:
