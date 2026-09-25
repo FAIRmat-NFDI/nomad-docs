@@ -83,7 +83,7 @@ A NOMAD project can have one of four states, depending on its sharing and public
 
 Share your project with other NOMAD users by adding them as coauthors or reviewers. Coauthors receive read/write access, while reviewers receive read-only access. You can manage collaborators from the *SETTINGS* tab on the project page.
 
-**Use the arrow buttons ⬅️➡️ below to follow the steps follow the steps for sharing your project.**
+**Use the arrow buttons ⬅️➡️ below to follow the steps for sharing your project.**
 
 <div class="image-slider" id="slider2">
     <div class="nav-arrow left" id="prev2">←</div>
