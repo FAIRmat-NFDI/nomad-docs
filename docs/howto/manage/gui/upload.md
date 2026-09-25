@@ -3,6 +3,18 @@
 A **Project** is the container for files, Entries, collaborators, publication
 settings, and an optional DOI.
 
+<a id="upload-limits"></a>
+
+## Project limits
+
+Project limits are configurable and can differ between deployments. The
+default NOMAD configuration and NOMAD Central allow:
+
+- a maximum Project size of **32 GiB**, controlled by
+  [`process.max_upload_size`](../../../reference/config.md#process); and
+- at most **10 unpublished Projects** per user, controlled by
+  [`services.upload_limit`](../../../reference/config.md#services).
+
 ## Create a Project
 
 1. Open the [NOMAD GUI](https://nomad-lab.eu/prod/v1/gui/v2/){:target="_blank" rel="noopener"}
@@ -203,18 +215,6 @@ is assigned directly to the Project; creating a dataset is not required.
 !!! note
     DOI controls are only shown on deployments with DataCite integration.
     They may therefore be absent from a NOMAD Oasis.
-
-<a id="upload-limits"></a>
-
-## Project limits
-
-Project limits are configurable and can differ between deployments. The
-default NOMAD configuration and NOMAD Central allow:
-
-- a maximum Project size of **32 GiB**, controlled by
-  [`process.max_upload_size`](../../../reference/config.md#process); and
-- at most **10 unpublished Projects** per user, controlled by
-  [`services.upload_limit`](../../../reference/config.md#services).
 
 ## Strategies for large amounts of data
 
