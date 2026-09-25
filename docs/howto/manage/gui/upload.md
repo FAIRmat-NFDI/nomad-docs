@@ -11,11 +11,11 @@ settings, and an optional DOI.
 2. Open **PROJECTS** and select **NEW PROJECT**. A prompt appears where you can
    add:
 
-   - a **Project name** (mandatory)
-   - a description
-   - initial files by drag-and-drop or by browsing your file system with
+     - a **Project name** (mandatory)
+     - a description
+     - initial files by drag-and-drop or by browsing your file system with
      **ADD FILES**
-   - users or groups to your Project as **Reviewer** or **Coauthor**
+     - users or groups to your Project as **Reviewer** or **Coauthor**
 
 3. When you have finished filling in the prompt, select **CREATE**. NOMAD
    creates the Project and opens its **Overview** page.
