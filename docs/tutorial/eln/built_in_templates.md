@@ -31,7 +31,7 @@ Before starting, make sure you have:
    [How-to guides > ... > Create a NOMAD account](../../howto/manage/gui/account.md#create-a-nomad-account).
 
 1. **Basic understanding of uploads and entries**  
-   Familiarity with uploads, entries, and how they relate to each other can be helpful. These concepts are introduced in the section [key elements in NOMAD](../upload_publish.md#the-key-elements-in-nomad) and will be reinforced throughout the tutorial.
+   Familiarity with uploads, entries, and how they relate to each other can be helpful. <!--These concepts are introduced in the section [key elements in NOMAD](../upload_publish.md#the-key-elements-in-nomad) and will be reinforced throughout the tutorial.-->
 
 1. **Basic familiarity with experimental workflows**  
    Familiarity with preparation, processing, and measurements can be helpful, but is not required.
@@ -53,9 +53,9 @@ In this tutorial, we will use an example experiment involving the preparation of
 
 ---
 
-## Create a new ELN upload
+## Create a new ELN project
 
-In NOMAD, an ELN is created by initiating a NOMAD upload. This process allows you to structure and document your research data efficiently. Create a new upload by following the steps in [Create new upload](../upload_publish.md#create-new-upload).
+In NOMAD, an ELN is created by initiating a NOMAD upload. This process allows you to structure and document your research data efficiently. Create a new upload by following the steps in [Create a new project](../upload_publish.md#create-a-new-project).
 
 ## Create ELN entries
 

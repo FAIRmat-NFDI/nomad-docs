@@ -72,12 +72,12 @@ NOMAD projects can be shared with selected users or published for wider access. 
     
 A NOMAD project can have one of four states, depending on its sharing and visibility settings:
 
-|Status    | Icon                                                                            | Description                                                                                              |
-|----------|---------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|
-|Private   |<img src="images/icon_unpublished.png" alt="Icon of private project" width="60"> |The project is unpublished, accessible only to you, and can still be edited by you.                                     |
-|Shared    |<img src="images/icon_shared.png" alt="Icon of shared project" width="60">       |The project is unpublished, accessible to you and selected collaborators, and can still be edited by you and coauthors. |
-|Published |<img src="images/icon_published.png" alt="Icon of published project" width="60"> |The project is published, accessible to everyone, and can no longer be edited.                                          |
-|Visible   |<img src="images/icon_visible.png" alt="Icon of visible project" width="60">     |The project is unpublished, accessible to everyone, and can still be edited by you and coauthors.                       |
+| Status    | Icon                                                                              | Description                                                                                                                |
+|-----------|-----------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------|
+| Private   | <img src="images/icon_unpublished.png" alt="Icon of private project" width="60"> | The project is unpublished, accessible only to you, and can still be edited by you.                                        |
+| Shared    | <img src="images/icon_shared.png" alt="Icon of shared project" width="60">       | The project is unpublished, accessible to you and selected collaborators, and can still be edited by you and coauthors.     |
+| Published | <img src="images/icon_published.png" alt="Icon of published project" width="60"> | The project is published, accessible to everyone, and can no longer be edited.                                              |
+| Visible   | <img src="images/icon_visible.png" alt="Icon of visible project" width="60">     | The project is unpublished, accessible to everyone, and can still be edited by you and coauthors.                           |
 
 ### Share your project
 
