@@ -1,8 +1,8 @@
 # Upload and publish data in NOMAD
 
-In this tutorial, we walk through the complete workflow for uploading and publishing research data in NOMAD via the graphical user interface (GUI). Using example files from computational and experimental research, we demonstrate how raw files are transformed into structured data and organized into projects that can be shared and published. By the end of the tutorial, we will publish the data in NOMAD and assign them a Digital Object Identifier (DOI).
+In this tutorial, we walk through the complete workflow for uploading and publishing research data in NOMAD via the graphical user interface (GUI). Using example files from computational and experimental research, we demonstrate how raw files are transformed into structured data and organized into projects that can be shared and published. By the end of the tutorial, we will publish the data in NOMAD and assign the project a Digital Object Identifier (DOI).
 
-![From raw files to published datasets](images/upload_publish_1.png)
+![From raw files to published projects](images/upload_publish_1.png)
 
 ---
 
@@ -14,7 +14,7 @@ In this tutorial, you will learn how to:
 1. View the entries that NOMAD generates from your files and check their processing status
 1. Share projects with collaborators and manage access permissions
 1. Publish projects and understand the role of embargoes
-1. Assign a Digital Object Identifier (DOI) to your projects
+1. Assign a Digital Object Identifier (DOI) to your published project
 
 ---
 
@@ -37,51 +37,51 @@ Before starting, make sure you have the following:
 
 ---
 
-## Create new project
+## Create a new project
 
-Select *Projects* from the menu on the left to view your projects and their details. From this page, you can also create a new project or add an example project prepared by others.
+Select **Projects** from the menu on the left to view your projects and their details. From this page, you can also create a new project or add an example project prepared by others.
 
 **Use the arrow buttons ⬅️➡️ below to follow the steps for creating your first project.**
 
 <div class="image-slider" id="slider1">
     <div class="nav-arrow left" id="prev1">←</div>
-    <img src="images/upload_publish_3.png" alt="Navigate to the `projects` page by Go to the projects page, by clicking on Projects in the menu panel" class="active">
-    <img src="images/upload_publish_4.png" alt="Create a new project by clicking on the blue button">
-    <img src="images/upload_publish_5.png" alt="Fill in the information on the prompt, then click create.">
+    <img src="images/upload_publish_3.png" alt="Open the projects page from the menu" class="active">
+    <img src="images/upload_publish_4.png" alt="Click NEW PROJECT to create a project">
+    <img src="images/upload_publish_5.png" alt="Enter the project information, then click CREATE.">
     <div class="nav-arrow right" id="next1">→</div>
 </div>
 
-NOMAD will then open the project page, where you can upload files, add collaborators, change the project’s visibility settings, and eventually publish it and request a DOI. You can also modify the project’s name and description and upload a Markdown (README.md) file to provide additional information about the project.
+NOMAD will then open the project page, where you can upload files, add collaborators, change the project’s visibility settings, and eventually publish it and assign a DOI. You can also modify the project’s name and description and upload a Markdown (README.md) file to provide additional information about the project.
 
 ---
 
 ## Share and publish projects
 
-NOMAD projects can be shared with selected users or published for wider access. In both cases, the selected access settings applies to all entries and files within the project.
+NOMAD projects can be shared with selected users or published for wider access. In both cases, the selected access settings apply to all entries and files within the project.
 
 ??? info "What is the difference between sharing and publishing a project?"
     **Sharing a project** gives selected colleagues and collaborators access to the project.
 
-    - Sharing supports collaboration and progress reviews, while allowing its contents to be modified
+    - Sharing supports collaboration and progress reviews, while allowing its contents to be modified.
     - Users can be granted read/write access as coauthors or read-only access as reviewers.
 
-    **Publishing a project** makes it publicly findable and accessible on through NOMAD.
+    **Publishing a project** makes it publicly findable and accessible through NOMAD.
 
     - Once published, the project becomes immutable, i.e. its entries and files can no longer be modified.
     - An embargo can be applied to restrict access to the files until a specified date.
     
-A NOMAD project can have one of four states, depending on its sharing and publication settings::
+A NOMAD project can have one of four states, depending on its sharing and visibility settings:
 
 |Status    | Icon                                                                           | Description                                                           |
 |----------|--------------------------------------------------------------------------------|-----------------------------------------------------------------------|
 |Private   |<img src="images/icon_unpublished.png" alt="Icon of private project" width="60"> |The project is unpublished, accessible only to you, and can still be edited by you.            |
 |Shared    |<img src="images/icon_shared.png" alt="Icon of shared project" width="60">       |The project is unpublished, accessible to you and selected collaborators, and can still be edited by you and coauthors. |
-|Published |<img src="images/icon_published.png" alt="Icon of published upload" width="60"> |The project is published, accessible to everyone, and can no longer be edited.                          |
+|Published |<img src="images/icon_published.png" alt="Icon of published project" width="60"> |The project is published, accessible to everyone, and can no longer be edited.                          |
 |Visible   |<img src="images/icon_visible.png" alt="Icon of visible project" width="60">     |The project is unpublished, accessible to everyone, and can still be edited by you and coauthors.                  |
 
 ### Share your project
 
-Share your project with other NOMAD users by adding them as coauthors or reviewers. Coauthors receive read/write access, while reviewers receive read-only access. You can manage collaborators from the *SETTINGS* tab on the project page.
+Share your project with other NOMAD users by adding them as coauthors or reviewers. Coauthors receive read/write access, while reviewers receive read-only access. You can manage collaborators from the **SETTINGS** tab on the project page.
 
 **Use the arrow buttons ⬅️➡️ below to follow the steps for sharing your project.**
 
@@ -99,9 +99,9 @@ The project remains unpublished and editable, and you can change or remove colla
 
 ### Make your project public
 
-Make your unpublished project visible to all users, including guests without a NOMAD account. You can manage public access from the *SETTINGS* tab on the project page.
+Make your unpublished project visible to all users, including guests without a NOMAD account. You can manage public access from the **SETTINGS** tab on the project page.
 
-**Use the arrow buttons ⬅️➡️ below to follow the steps follow the steps for making your project visible to everyone.**
+**Use the arrow buttons ⬅️➡️ below to follow the steps for making your project visible to everyone.**
 
 <div class="image-slider" id="slider3">
     <div class="nav-arrow left" id="prev3">←</div>
@@ -122,7 +122,7 @@ The project remains editable, and you can change its access settings at any time
 Now, let’s add files to the project using three different examples:
 
 1. Miscellaneous files (documents, images, or spreadsheets).
-1. DFT calculation on Iron(III) Oxide.
+1. DFT calculation of iron(III) oxide.
 1. X-ray photoelectron spectroscopy (XPS) measurement on polymers.
 
 Files can be added to a project individually, or you can group them into a compressed file in `.zip` or `.tar` formats.
@@ -154,7 +154,7 @@ Files can be added to a project individually, or you can group them into a compr
     <!-- TODO consider changing this admonition to a download button -->
     [Download example data ZIP](https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_3_files/example_files_upload/miscellaneous_data/miscellaneous_data.zip){:target="_blank" rel="noopener"}.
 
-    Download the folder, then uncompress it on your local machine at you preferred directory.
+    Download the folder, then uncompress it on your local machine in your preferred directory.
 
     The folder contains files of the following formats: `.zip`, `.pdf`, `.jpg`, `.txt`, and `.csv`.
 
@@ -162,24 +162,24 @@ Files can be added to a project individually, or you can group them into a compr
     |--------------------------------|--------|-----------------------------------------------------------------------------|
     | FAIRmat_graphics               | .zip   | Compressed file that contains several FAIRmat logos in `.png` format        |
     | JOSS_2023                      | .pdf   | A publication of NOMAD in the Journal of Open Source Software               |
-    | Nature_2022                    | .pdf   | A publication of FAIRmat in Nature journal                                  |
-    | P3HT_optical_absorption        | .csv   | Results of absorption measurement on P3HT from PerkinElmer spectrometer     |
+    | Nature_2022                    | .pdf   | A FAIRmat publication in Nature                                             |
+    | P3HT_optical_absorption        | .csv   | An absorption measurement of P3HT using a PerkinElmer spectrometer          |
     | note_properties_of_good_dopants| .txt   | Notes recorded during a conference talk                                     |
-    | experiment_polymer_doping      | .jpg   | A photograph of an experiment of preparing doped polymer solutions          |
+    | experiment_polymer_doping      | .jpg   | A photograph of an experiment preparing doped polymer solutions             |
 
-Files such as images, pdf files, text files, and tabular data do not generate entries because NOMAD does not have a compatible parser for their formats.
+Files such as images, PDF files, text files, and tabular data do not generate entries because NOMAD does not have a compatible parser for their formats.
 
-They remain part of your project and can still be accessed, shared, downloaded, and published, but their contents are not searchable as structured data in NOMAD. In this case, NOMAD functions primarily as a file repository, similar to a cloud drive.
+They remain part of your project and can still be accessed, shared, downloaded, and published, but their contents are not searchable as structured data in NOMAD. In this case, NOMAD stores the files without extracting their contents into structured, searchable entries.
 
 Add the files to your project by dragging and dropping them into the upload area or by opening the file-selection dialog and selecting them from your device.
 
 **Drag and drop**
 
-Start with uploading the file `FAIRmat_graphics.zip`. Drag and drop files into the project upload area as shown in the image below.
+Start by uploading the file `FAIRmat_graphics.zip`. Drag and drop files into the project upload area as shown in the image below.
 
 ![Drag and drop files into the project upload area](images/upload_publish_9.png)
 
-When a compressed file is uploaded to NOMAD, it will be extracted automatically and the included files will be added to your upload.
+When a compressed file is uploaded to NOMAD, it will be extracted automatically and the included files will be added to your project.
 
 **Use the file-selection dialog**
 
@@ -195,17 +195,17 @@ Upload the remaining files using the file-selection dialog. On the project page,
     <!-- TODO consider changing this admonition to a download button -->
     [Download example data ZIP](https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_3_files/example_files_upload/computations_data/FHI-aims.zip){:target="_blank" rel="noopener"}.
 
-    Download the folder to your local machine at you preferred directory.
+    Download the folder to your preferred directory on your local machine.
 
-    This folder contains the input and output files of a DFT calculation for Iron(III) Oxide using the *FHI-aims* code.
+    This folder contains the input and output files of a DFT calculation for iron(III) oxide using the *FHI-aims* code.
 
-    *FHI-aims* is an all-electron density-functional-theory package that employs numeric atom-centered basis functions. It is designed for accurate and efficient simulations of molecules, clusters, surfaces, and bulk materials across the periodic table. Its advanced treatment of electronic structure allows for precise calculations of material properties, including band structures, total energies, and magnetic properties. [More information in this link](https://fhi-aims.org/){:target="_blank" rel="noopener"}
+    *FHI-aims* is an all-electron density-functional-theory package that employs numeric atom-centered basis functions. [For more information, see the FHI-aims documentation.](https://fhi-aims.org/){:target="_blank" rel="noopener"}
 
 The calculation in this example was performed with *FHI-aims*, an electronic-structure code supported by a NOMAD parser.
 
-NOMAD recognizes the *FHI-aims* files, extracts information from them, and organizes the resulting data according to NOMAD’s unified *metainfo* schema. Each recognized file generates an **entry**.
+NOMAD recognizes the *FHI-aims* files, extracts information from them, and organizes the resulting data according to NOMAD’s unified *metainfo* schema. NOMAD identifies the mainfile and uses the corresponding parser to generate an **entry**.
 
-??? task "Uploading input and output files `.zip` of a DFT calculation"
+??? task "Uploading input and output files from a DFT calculation"
 
     **Uploading the files**
 
@@ -213,7 +213,7 @@ NOMAD recognizes the *FHI-aims* files, extracts information from them, and organ
 
     After the files are uploaded, NOMAD automatically begins processing them. It identifies supported file formats and uses the corresponding parsers to extract and structure relevant data and metadata. The specific processing steps depend on the type of data.
 
-    Once processing is complete, NOMAD creates an entry for each recognized file. The corresponding entry page includes the processed data in a structured, hierarchical format.
+    Once processing is complete, NOMAD creates entries from the recognized mainfiles. The corresponding entry page includes the processed data in a structured, hierarchical format.
 
     **Opening and exploring an entry**
 
@@ -227,7 +227,7 @@ NOMAD recognizes the *FHI-aims* files, extracts information from them, and organ
 
         ![Overview of a processed FHI-aims entry](images/upload_publish_12.png)
 
-    - **ARCHIVE:** Presents all extracted data and metadata in a structured, hierarchical, and machine-processable format based on the NOMAD *Metainfo* schema. Expand the sections to inspect individual quantities and their values.
+    - **ARCHIVE:** Presents all extracted data and metadata in a structured, hierarchical, and machine-processable format based on the NOMAD *metainfo* schema. Expand the sections to inspect individual quantities and their values.
 
         ![Archive of a processed FHI-aims entry](images/upload_publish_13.png)
 
@@ -242,15 +242,15 @@ NOMAD recognizes the *FHI-aims* files, extracts information from them, and organ
     <!-- TODO consider changing this admonition to a download button -->
     [Download example data ZIP](https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_3_files/example_files_upload/experiments_data/xps_nexus_data.zip){:target="_blank" rel="noopener"}.
 
-    Download the folder, then uncompress it to your local machine at you preferred directory.
+    Download the folder, then uncompress it in your preferred directory on your local machine.
 
-    This folder contains files related to an x-ray photoelectron spectroscopy (XPS) on the polymer PBTTT using SPECS spectrometer.
+    This folder contains files related to an X-ray photoelectron spectroscopy (XPS) measurement of the polymer PBTTT using a SPECS spectrometer.
 
     It includes the data in two formats (`.nxs` and `.xml`), in addition to an electronic lab notebook (ELN) file (`.yaml`) documenting additional details of the experiment.
 
     | file name             | format | description                                                      |
     |-----------------------|--------|------------------------------------------------------------------|
-    | PBTTT_XPS_SPECS       | .nxs   | XPS data file in the standard NeXuS file format                  |
+    | PBTTT_XPS_SPECS       | .nxs   | XPS data file in the standard NeXus file format                  |
     | PBTTT_XPS_SPECS_raw   | .xml   | XPS data in a raw file format as produced by the spectrometer    |
     | eln_data_xml          | .yaml  | An ELN file used to record additional metadata of the experiment |
 
@@ -274,7 +274,7 @@ When you upload `PBTTT_XPS_SPECS.nxs`, NOMAD parses its contents and generates a
 
     The entry page provides several views for exploring the processed data:
 
-    - **OVERVIEW:** Summarizes the processed experiment in three sections:
+    - **OVERVIEW:** Summarizes the processed experiment in three cards:
 
         - **Material** presents available information about the sample, such as its elements and chemical formula.
         - **NeXus Entry** displays general experiment metadata, including the application definition, title, and start and end times.
@@ -282,10 +282,10 @@ When you upload `PBTTT_XPS_SPECS.nxs`, NOMAD parses its contents and generates a
 
         ![Overview of the processed NeXus XPS entry](images/upload_publish_15.png)
 
-    - **ARCHIVE:** Presents the extracted data and metadata in a structured hierarchy based on the NOMAD *Metainfo* schema. At the root level, it displays general information such as the experiment name, method, file details, and NeXus version. Expand subsections such as **Steps**, **Samples**, **Instruments**, and **Results** to inspect the experiment in greater detail.
+    - **ARCHIVE:** Presents the extracted data and metadata in a structured hierarchy based on the NOMAD *metainfo* schema. At the root level, it displays general information such as the experiment name, method, file details, and NeXus version. Expand subsections such as **Steps**, **Samples**, **Instruments**, and **Results** to inspect the experiment in greater detail.
 
         ![Archive of the processed NeXus XPS entry](images/upload_publish_16.png)
-<!-- TODO: This section needs to be updates based on GUI2 and potentially moved to a separated tutorial page -->
+<!-- TODO: This section needs to be updated based on GUI2 and potentially moved to a separated tutorial page -->
 <!-- Most scientific instruments produce data in formats other than NeXus `.nxs`. For supported raw formats, NOMAD provide the built-in *NexusDataConverter*, which converts the data into as standardize NeXus file.
 
 ??? info "NexusDataConverter readers and the NeXuS application definitions"
@@ -336,7 +336,7 @@ In the following examples, you will learn how to upload a raw file from a SPECS 
 
     NOMAD still stores your `.xml` raw file in the upload directory.
 
-    ![Screenshot of the upload page after nexus conversion.](images/example_3-3_NexusDataConverter_3.png)
+    ![Screenshot of the project page after nexus conversion.](images/example_3-3_NexusDataConverter_3.png)
 
 ??? task "Uploading experimental data in the `.xml` format with additional ELN data"
 
@@ -365,7 +365,7 @@ In the following examples, you will learn how to upload a raw file from a SPECS 
 
     **Upload your data file `.xml` and your ELN data `.yaml` using NexusDataConverter**
 
-    - **Step 1:** Click on the **CREATE FROM SCHEMA** button in your upload page.
+    - **Step 1:** Click on the **CREATE FROM SCHEMA** button in your project page.
 
     ![Screenshot of step 1](images/example_3-3_create_from_schema.png)
 
@@ -395,9 +395,10 @@ In the following examples, you will learn how to upload a raw file from a SPECS 
 
 When your project is ready, you can publish it with immediate public access or apply an embargo to restrict access to its files for a specified period. 
 
-Publishing makes the project permanent and allows you to request a DOI.
+Publishing makes the project permanent and allows you to assign a DOI.
 
-!!! warning "Once a project is published, it cannot be deleted, and its files and entries cannot be changed"
+!!! warning "Project publication is irreversible"
+    Once published, the project cannot be deleted, and its files and entries can no longer be changed.
 
 **Use the arrow buttons ⬅️➡️ to follow the steps for publishing your project.**
 
@@ -412,13 +413,26 @@ Publishing makes the project permanent and allows you to request a DOI.
 If you publish the project with an embargo, its files and entries remain accessible only to you and the users with whom you shared it. Selected metadata remain publicly visible. You can lift the embargo before its scheduled end date by selecting **LIFT EMBARGO**.
 
 
-## Assign a DOI to your published project
+## Assign a DOI to your project
 
-You can organize several entries by grouping them into common datasets, making it easier to manage related data.
-Datasets are for organizing and referencing curated data. They do not affect how data is processed.
-Users can get a DOI for their datasets.
+After publishing your project, you can assign it a Digital Object Identifier (DOI). The DOI provides a persistent identifier for citing and referencing the project.
 
-<!-- TODO: Create the contents for the following two sctions
+!!! warning "DOI assignment is irreversible"
+    Once assigned, the DOI is permanently associated with the project.
+
+**Use the arrow buttons ⬅️➡️ below to follow the steps for assigning a DOI to your project.**
+
+<div class="image-slider" id="slider5">
+    <div class="nav-arrow left" id="prev5">←</div>
+    <img src="images/upload_publish_20.png" alt="In the project settings, click ASSIGN DOI." class="active">
+    <img src="images/upload_publish_21.png" alt="Confirm the DOI assignment by clicking ASSIGN DOI in the confirmation dialog.">
+    <img src="images/upload_publish_22.png" alt="The assigned DOI is displayed in the project settings.">
+    <div class="nav-arrow right" id="next5">→</div>
+</div>
+
+The DOI is now permanently associated with your project and is displayed under **Digital Object Identifier (DOI)** in the project settings.
+
+<!-- TODO: Create the contents for the following two sections
 ### Group entries into a dataset
 
 ### Manage a dataset and assign it a DOI
