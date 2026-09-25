@@ -7,7 +7,7 @@ settings, and an optional DOI.
 
 1. Open the [NOMAD GUI](https://nomad-lab.eu/prod/v1/gui/v2/){:target="_blank" rel="noopener"}
    and sign in. If you do not have a NOMAD Central account, follow the
-   [Tutorial > Overview > Create a NOMAD user account](../../../tutorial/overview.md#create-a-nomad-user-account).
+   [Create a NOMAD user account](account.md#create-a-nomad-account).
 2. Open **PROJECTS** and select **NEW PROJECT**. A prompt appears where you can
    add:
 
