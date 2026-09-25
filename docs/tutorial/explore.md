@@ -35,7 +35,7 @@ Before starting, make sure you have the following:
 
 Select **APPS** from the menu on the left to access NOMAD’s search applications. Each app provides filters and widgets tailored to a particular domain or data type.
 
-In this tutorial, we use the **Entries** app to search across all data published on NOMAD and briefly introduce the **Solar Cells** app as an example of a domain-specific search interface. 
+In this tutorial, we use the **Entries** app to search across all data published on NOMAD and briefly introduce the **Solar Cells** app as an example of a domain-specific search interface.
 
 To begin, open the **APPS** page and select **Entries**.
 
@@ -72,7 +72,7 @@ Search results update automatically as you apply filters. Let's narrow the resul
 - Under **Elements/Formula**, select *B* and *N* in the periodic table and check the box *only compositions that exclusively contain these atoms*. The search results now contain entries with only boron and nitrogen.
 - Under **Structure/Symmetry**, select *hexagonal* from the **Crystal system** section. Notice that the results are now limited to hexagonal structures containing boron and nitrogen.
 - Under **Method**, select *VASP* from the **Program name** section. The results now show entries from calculations performed with VASP.
-- Under **Electronic**, select *Band structure* from the **Electronic properties** section. 
+- Under **Electronic**, select *Band structure* from the **Electronic properties** section.
 
 You have now narrowed the search to VASP calculations of hexagonal boron nitride that contain band-structure data.
 

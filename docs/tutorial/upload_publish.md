@@ -72,12 +72,12 @@ NOMAD projects can be shared with selected users or published for wider access. 
     
 A NOMAD project can have one of four states, depending on its sharing and visibility settings:
 
-|Status    | Icon                                                                           | Description                                                           |
-|----------|--------------------------------------------------------------------------------|-----------------------------------------------------------------------|
-|Private   |<img src="images/icon_unpublished.png" alt="Icon of private project" width="60"> |The project is unpublished, accessible only to you, and can still be edited by you.            |
+|Status    | Icon                                                                            | Description                                                                                              |
+|----------|---------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------|
+|Private   |<img src="images/icon_unpublished.png" alt="Icon of private project" width="60"> |The project is unpublished, accessible only to you, and can still be edited by you.                                     |
 |Shared    |<img src="images/icon_shared.png" alt="Icon of shared project" width="60">       |The project is unpublished, accessible to you and selected collaborators, and can still be edited by you and coauthors. |
-|Published |<img src="images/icon_published.png" alt="Icon of published project" width="60"> |The project is published, accessible to everyone, and can no longer be edited.                          |
-|Visible   |<img src="images/icon_visible.png" alt="Icon of visible project" width="60">     |The project is unpublished, accessible to everyone, and can still be edited by you and coauthors.                  |
+|Published |<img src="images/icon_published.png" alt="Icon of published project" width="60"> |The project is published, accessible to everyone, and can no longer be edited.                                          |
+|Visible   |<img src="images/icon_visible.png" alt="Icon of visible project" width="60">     |The project is unpublished, accessible to everyone, and can still be edited by you and coauthors.                       |
 
 ### Share your project
 
@@ -96,7 +96,6 @@ Share your project with other NOMAD users by adding them as coauthors or reviewe
 
 The project remains unpublished and editable, and you can change or remove collaborators at any time.
 
-
 ### Make your project public
 
 Make your unpublished project visible to all users, including guests without a NOMAD account. You can manage public access from the **SETTINGS** tab on the project page.
@@ -111,9 +110,7 @@ Make your unpublished project visible to all users, including guests without a N
     <div class="nav-arrow right" id="next3">→</div>
 </div>
 
-
 The project remains editable, and you can change its access settings at any time.
-
 
 ---
 
@@ -187,8 +184,6 @@ Upload the remaining files using the file-selection dialog. On the project page,
 
 ![Drag and drop files into the project upload area](images/upload_publish_10.png)
 
-
-
 ### Upload computational data
 
 ??? example "Download the example files for this exercise"
@@ -235,7 +230,6 @@ NOMAD recognizes the *FHI-aims* files, extracts information from them, and organ
 
         ![Connectivity view of a processed FHI-aims entry](images/upload_publish_14.png)
 
-
 ### Upload experimental data
 
 ??? example "Download the example files for this exercise"
@@ -254,7 +248,7 @@ NOMAD recognizes the *FHI-aims* files, extracts information from them, and organ
     | PBTTT_XPS_SPECS_raw   | .xml   | XPS data in a raw file format as produced by the spectrometer    |
     | eln_data_xml          | .yaml  | An ELN file used to record additional metadata of the experiment |
 
-NOMAD can process experimental data stored in supported NeXus formats. 
+NOMAD can process experimental data stored in supported NeXus formats.
 
 When you upload `PBTTT_XPS_SPECS.nxs`, NOMAD parses its contents and generates a structured entry.
 
@@ -393,7 +387,7 @@ In the following examples, you will learn how to upload a raw file from a SPECS 
 
 ## Publish your project
 
-When your project is ready, you can publish it with immediate public access or apply an embargo to restrict access to its files for a specified period. 
+When your project is ready, you can publish it with immediate public access or apply an embargo to restrict access to its files for a specified period.
 
 Publishing makes the project permanent and allows you to assign a DOI.
 
@@ -411,7 +405,6 @@ Publishing makes the project permanent and allows you to assign a DOI.
 </div>
 
 If you publish the project with an embargo, its files and entries remain accessible only to you and the users with whom you shared it. Selected metadata remain publicly visible. You can lift the embargo before its scheduled end date by selecting **LIFT EMBARGO**.
-
 
 ## Assign a DOI to your project
 
@@ -437,6 +430,5 @@ The DOI is now permanently associated with your project and is displayed under *
 
 ### Manage a dataset and assign it a DOI
 -->
-
 
 ---
