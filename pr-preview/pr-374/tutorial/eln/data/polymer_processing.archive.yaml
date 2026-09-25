@@ -1,0 +1,91 @@
+definitions:
+  name: Processing of polymers thin-films
+  sections:
+    Experiment_Information:
+      base_sections:
+        - nomad.datamodel.data.EntryData
+      quantities:
+        Name:
+          type: str
+          default: Experiment title
+          m_annotations:
+            eln:
+              component: StringEditQuantity
+        Researcher:
+          type: str
+          default: Name of the researcher who performed the experiment
+          m_annotations:
+            eln:
+              component: StringEditQuantity
+        Date:
+          type: Datetime
+          m_annotations:
+            eln:
+              component: DateTimeEditQuantity
+        Additional_Notes:
+          type: str
+          m_annotations:
+            eln:
+              component: RichTextEditQuantity
+      sub_sections:
+        Sample:
+          section:
+            base_sections:
+              - nomad.datamodel.metainfo.eln.ELNSample
+            m_annotations:
+              eln:
+                overview: true
+                hide: ['chemical_formula']
+        Solution:
+          section:
+            base_sections:
+              - nomad.datamodel.metainfo.eln.ELNSample
+            m_annotations:
+              eln:
+                overview: true
+                hide: ['chemical_formula', 'description']
+            quantities:
+              Concentration:
+                type: np.float64
+                unit: mg/ml
+                m_annotations:
+                  eln:
+                    component: NumberEditQuantity
+            sub_sections:
+              Solute:
+                section:
+                  quantities:
+                    Substance:
+                      type: nomad.datamodel.metainfo.eln.ELNSubstance
+                      m_annotations:
+                        eln:
+                          component: ReferenceEditQuantity
+                    Mass:
+                      type: np.float64
+                      unit: kilogram
+                      m_annotations:
+                        eln:
+                          component: NumberEditQuantity
+                          defaultDisplayUnit: milligram
+              Solvent:
+                section:
+                  quantities:
+                    Substance:
+                      type: nomad.datamodel.metainfo.eln.ELNSubstance
+                      m_annotations:
+                        eln:
+                          component: ReferenceEditQuantity
+                    Volume:
+                      type: np.float64
+                      unit: meter ** 3
+                      m_annotations:
+                        eln:
+                          component: NumberEditQuantity
+                          defaultDisplayUnit: milliliter
+        Preparation:
+          section:
+            base_sections:
+              - nomad.datamodel.metainfo.eln.Process
+            m_annotations:
+              eln:
+                overview: true
