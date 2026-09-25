@@ -27,7 +27,7 @@ Before starting, make sure you have:
    [How-to guides > ... > Create a NOMAD account](../../howto/manage/gui/account.md#create-a-nomad-account).
 
 1. **Basic understanding of uploads and entries**  
-   Familiarity with uploads and entries, and how they relate to each other can be helpful. These concepts are introduced in the section [key elements in NOMAD](../upload_publish.md#the-key-elements-in-nomad).
+   Familiarity with uploads and entries, and how they relate to each other can be helpful. <!-- These concepts are introduced in the section [key elements in NOMAD](../upload_publish.md#the-key-elements-in-nomad).-->
 
 1. **Basic familiarity with YAML configuration files**  
    This tutorial uses YAML to define the tabular parser. Prior experience with YAML syntax and indentation is helpful, but deep knowledge of YAML is not required.

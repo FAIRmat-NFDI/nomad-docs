@@ -1,6 +1,6 @@
 # Explore data in NOMAD
 
-In this tutorial, we explore published entries in NOMAD using the **EXPLORE** page of the GUI. We follow a step-by-step workflow to search across entries, apply and combine filters, query structured metadata, and build interactive widgets for targeted data exploration. By the end of the tutorial, we will have identified relevant entries and constructed customized searches and dashboards using filters, queries, and widgets.
+In this tutorial, we explore published entries in NOMAD using the search apps available from the **APPS** page. We use the **Entries** app, which supports searching across all data, and introduce domain-specific apps tailored to particular research fields. Following a step-by-step workflow, we search for entries, apply and combine filters, query structured metadata, and create interactive widgets. By the end of the tutorial, we will have identified relevant entries and constructed customized searches and dashboards using filters, queries, and widgets.
 
 ---
 
@@ -8,12 +8,12 @@ In this tutorial, we explore published entries in NOMAD using the **EXPLORE** pa
 
 In this tutorial, you will learn how to:
 
-1. Navigate the **EXPLORE** section of the NOMAD GUI
+1. Navigate through the **APPS** page of the NOMAD GUI
 1. Search and filter published entries across different domains
 1. Use the search bar to query structured metadata and perform range-based searches
 1. Apply and combine filters to refine search results efficiently
 1. Create and customize interactive widgets for advanced data exploration
-1. Use NOMAD’s Explore dashboards to answer concrete scientific questions using real data
+1. Use NOMAD’s search applications to answer concrete scientific questions using real data
 
 ---
 
@@ -23,7 +23,7 @@ This tutorial requires no prior experience with NOMAD.
 
 Before starting, make sure you have the following:
 
-1. **Access to the NOMAD GUI via a modern web browser**  
+1. **Access to the public NOMAD platform via a modern web browser**  
    You can explore published data in NOMAD without logging in.
 
 1. **Basic familiarity with materials-science concepts**  
@@ -31,220 +31,194 @@ Before starting, make sure you have the following:
 
 ---
 
-## Navigate to NOMAD's explore entries page
+## Navigate to NOMAD search apps
 
-The **EXPLORE** menu allows you to navigate and search through a vast amount of materials-science data. It provides several options, each focusing on a specific application or method. They include different sets of filters and/or search widgets that allow users to efficiently filter and narrow down results, making it easier to find relevant entries in specific domains.
+Select **APPS** from the menu on the left to access NOMAD’s search applications. Each app provides filters and widgets tailored to a particular domain or data type.
 
-In this tutorial, we will focus on searching data in NOMAD using the **Entries** option within the **EXPLORE** menu. You will see an overview of **SOLAR CELLS** search dashboard.
+In this tutorial, we use the **Entries** app to search across all data published on NOMAD and briefly introduce the **Solar Cells** app as an example of a domain-specific search interface.
 
-To start with exploring data across all domains in NOMAD, go to **EXPLORE** → **Entries**.
+To begin, open the **APPS** page and select **Entries**.
 
-<div style="text-align: center;">
-<img src="images/explore_1.png" alt="screenshot of the navigation steps to the explore entries page" width="500">
-</div>
+![screenshot of the navigation steps to the entries app](images/explore_1.png)
 
-The **Entries** page shows all the uploaded data that are published on NOMAD. Published entries are accessible without login, while logging in grants access to your private data and those that are shared with you.
+??? info "Search applications available in NOMAD"
+    The **APPS** page provides search interfaces for different domains and data types. The available apps include:
 
-??? info "Contents of NOMAD's Explore menu"
+    - **Entries:** Search entries across all domains.
+    - **Experiment:** Search experimental data through apps such as **ELN** and **NeXus**.
+    - **Solar cells:** Explore general solar-cell data and specialized perovskite databases.
+    - **Theory:** Search computational data through apps such as **Calculations** and **Alexandria**.
+    - **Tools:** Find resources such as **AI Toolkit Notebooks**.
+    - **Use cases:** Explore specialized data for catalysis, metal-organic frameworks, polymerization reactions, and other applications.
 
-    The following explore pages are currently available:
-
-    - **Entries**: Search entries across all domains.
-    - **Theory**: Focus on calculations and materials data derived from theoretical models.
-    - **Experiment**: Explore data from experimental sources, such as ELNs (Electronic Lab Notebooks) or characterization techniques e.g., EELS (Electron Energy Loss Spectroscopy).
-    -  **Tools**: Explore among several AI toolkit notebooks.
-    - **Use Cases**: Search data tailored to specific use cases, such as Metal-Organic Frameworks (MOFs).
-
-    <div style="text-align: center;">
-        <img src="images/explore_menu2.png" alt="Explore Menu" width="200">
-    </div>
+    Each app provides filters and widgets tailored to its data and intended use.
 
 ---
 
 ### Search interface and filters
 
-In the Entries page, you will find a list of possible filters on the left panel. NOMAD supports advanced searches based on:
+In the **Entries** app, the filter panel on the left allows you to narrow the search results using structured metadata. Filters are grouped into categories such as:
 
-- **Material** – Elements, formula, or structure.
-- **Method** – Scientific techniques (e.g., DFT).
-- **Properties** – Band structure, conductivity, etc.
-- **Use Cases** – Application-specific searches (e.g., Solar Cells).
-- **Origin** – Filter by uploader, date, dataset, or tags.
+- **Material:** Elements, chemical formulas, and structural information.
+- **Method:** Computational and experimental methods.
+- **Properties:** Available physical and electronic properties.
+- **Use Cases:** Application-specific classifications, such as solar cells.
+- **Origin:** Information about the data’s authorship, project, and publication.
 
-<div style="text-align: center;">
-    <img src="images/filters_sidebar.png" alt="Entries Search Interface" width="200">
-</div>
+![Filter panel in the NOMAD Entries app](images/explore_2.png)
 
-Filters refine searches dynamically. You can apply the following examples to experience this.
+Search results update automatically as you apply filters. Let's narrow the results to VASP calculations of hexagonal boron nitride that contain band-structure data.
 
-- **Material Filter**: Select **B** and **N** to find hexagonal boron nitride.
-- **Method Filter**: Find **BN** simulations using **VASP**.
-- **Properties Filter**: Search for entries with **band structure** data.
+- Under **Elements/Formula**, select *B* and *N* in the periodic table and check the box *only compositions that exclusively contain these atoms*. The search results now contain entries with only boron and nitrogen.
+- Under **Structure/Symmetry**, select *hexagonal* from the **Crystal system** section. Notice that the results are now limited to hexagonal structures containing boron and nitrogen.
+- Under **Method**, select *VASP* from the **Program name** section. The results now show entries from calculations performed with VASP.
+- Under **Electronic**, select *Band structure* from the **Electronic properties** section.
 
-You can pin frequently used filters using **(+)** for a customized search interface.
+You have now narrowed the search to VASP calculations of hexagonal boron nitride that contain band-structure data.
 
-<!-- update the gif with screenshots with sliding images stack once this is figured out in the docs -->
-<div style="text-align: center;">
-    <video controls autoplay loop muted playsinline width="800">
-        <source src="images/add_filters_to_search_interface.webm" type="video/webm">
-    </video>
-</div>
+You can pin filters that you want to keep readily accessible. Click the **(+)** button next to each of the filters you just used. The pinned filters are added to the search interface, where you can access and modify them without navigating through the filter menu.
 
 ---
 
-### Search bar: a quick way to explore data
+### Search bar for data exploration
 <!-- Add a page in Reference, that explains all possible syntax for the searches in the search bar -->
 
-You can use the NOMAD search bar to find indexed quantities. As you begin typing, all available
-and searchable sets (with their paths in the NOMAD metainfo) appear in the advanced menu below the
-search bar. Continue typing to refine the results and select the desired set.
+You can also search for specific quantities and values directly from the search bar. As you type, NOMAD suggests searchable quantities and shows their paths in the NOMAD metainfo.
 
-For the example presented above (searching for Boron Nitride):
+Start by searching for the elements from the previous example:
 
-- Type "Boron" and select *results.material.material_name = Boron*.
-- Type "Nitrogen" and select *results.material.material_name = Nitrogen*.
+- Type "boron" and select *results.material.material_name = Boron* from the suggested quantities.
+- Type "nitrogen" and select *results.material.material_name = Nitrogen* from the suggested quantities.
 
-Alternatively, you can directly enter the element paths in the search field:
+Notice that the search results update as you add each condition.
 
-- *results.material.elements = B*
-- *results.material.elements = N*
+!!! task "Can you find a filter for the band gap?"
+    Use the search bar to find a quantity related to the band gap.
 
-!!! task "Does NOMAD have a bandgap filter?"
-    Can you find a filter for bandgap? Does it provide the bandgap value or indicate the direct/indirect nature?
+    - Try searching for *"bandgap"*, *"band gap"*, or *"band_gap"*.
+    - Look at the suggested quantities and their metainfo paths.
+    - Can you find a quantity containing the band gap value?
+    - Can you find information indicating whether the band gap is **direct** or **indirect**?
 
-    - Try typing variations like **"bandgap"**, **"band gap"**, or **"band_gap"** into the search bar.
-    - Search for **"direct"** or **"indirect"** to explore bandgap characteristics.
+You can also use numerical conditions in the search bar. For example, to find materials with a band gap of at least 2 eV, type `results.properties.electronic.band_gap.value >= 2 eV` into the search bar.
 
-In addition, you can also perform range-based searches for values using the search bar. This allows you to find materials with specific properties that fall within a defined numerical range.
-
-For example, if you want to find materials with a band gap of 2 eV or larger, enter the following in the search bar:
-
-- *results.properties.electronic.band_gap.value >= 2 eV*
-
-Similarly, you can define a bounded range for the values. For example, to search for materials with a band gap between 2 eV and 4 eV, enter the following line in the search bar:
-
-- *2 <= results.properties.electronic.band_gap.value <= 4 eV*
+Similarly, you can define a bounded range for the values. For example, to find materials with a band gap between 2 eV and 4 eV, type `2 <= results.properties.electronic.band_gap.value <= 4 eV` into the search bar.
 
 ---
 
-### Custom widgets for advanced searches
+### Custom widgets for data exploration
 
-NOMAD enables searching entries using rich metadata. Some metadata is extracted automatically, while others are user-provided via schemas. Only metadata stored according to schemas is searchable.
+NOMAD provides configurable widgets for building interactive search dashboards. You can add widgets using the buttons below the search bar in any search app.
 
-NOMAD also offers **custom widgets** to create advanced dashboards. These widgets are accessible below the search bar on any **EXPLORE** page.
+![Widget controls in the NOMAD Entries app](images/explore_3.png)
 
-<div style="text-align: center;">
-    <img src="images/customizable_widgets.png" alt="Customizable Widgets" width="800">
+Five widget types are available:
+
+- **TERMS** groups entries by the values of a selected categorical quantity.
+- **HISTOGRAM** displays the distribution of a selected numerical quantity.
+- **SCATTER PLOT** visualizes the relationship between two numerical quantities.
+- **BOX PLOT** summarizes and compares the distributions of numerical quantities.
+- **PERIODIC TABLE** displays the occurrence of chemical elements and allows you to filter entries by element.
+
+Let's add a **HISTOGRAM** widget to explore the distribution of band gap values in the current search results.
+
+**Use the arrow buttons ⬅️➡️ below to follow the steps for adding and configuring the histogram widget.**
+
+<div class="image-slider" id="slider1">
+    <div class="nav-arrow left" id="prev1">←</div>
+    <img src="images/explore_4.png" alt="Click HISTOGRAM to add a histogram widget." class="active">
+    <img src="images/explore_5.png" alt="Set the histogram quantity to results.properties.electronic.band_gap.value and configure the widget.">
+    <img src="images/explore_6.png" alt="The configured histogram shows the distribution of band gap values in the search results.">
+    <div class="nav-arrow right" id="next1">→</div>
 </div>
 
-Here are the main four widgets:
-
-- **TERMS:** Visualize and explore categorical data based on user-defined terms and keywords.
-- **HISTOGRAM:** Display the distribution of a specific numerical quantity within data.
-- **SCATTER PLOT:** Generate scatter plots to visualize relationships between different quantities.
-- **PERIODIC TABLE:** Filter data by selecting elements directly from an interactive periodic table.
+Notice that the histogram shows the distribution of band gap values for the current search results. You can use the range controls below the histogram to further filter the results.
 
 ---
 
-## Example 1: find alternative ETL materials for perovskite solar cells
+## Example: compare ETL materials for perovskite solar cells
 
-In the following, we'll walk through an example to help you better understand how to use these widgets. Imagine we are working on solar cell research and have fabricated solar cell devices using the absorber material *CsPbBr2I* (Cesium Lead Bromine Iodide), a mixed halide perovskite.
+Let's apply the filters and widgets introduced above to a solar-cell research question.
+Imagine that we have fabricated a solar-cell device using *CsPbBr2I*, a mixed-halide perovskite, as the absorber material and compact TiO2 (TiO2-c) as the electron transport layer (ETL).
 
-**Device Structure**:
+**Device structure:**
 <div style="text-align: center;">
     <img src="images/solar_cell_device.webp" alt="Solar Cell Device" width="500">
 </div>
 
 |Component                         | Material                         |
 |----------------------------------|----------------------------------|
-|**Top Contact**                   | Au                               |
-|**HTL (Hole Transport Layer)**    | Spiro-OMeTAD (C81​H68​N4​O8​)        |
-|**Perovskite Absorber**           | CsPbBr2I                         |
-|**ETL (Electron Transport Layer)**| TiO2-c (compact Titanium Dioxide)|
-|**Bottom Contact**                | FTO (Fluorine-doped Tin Oxide)   |
-|**Substrate**                     | SLG (Soda Lime Glass)            |
+|**Top contact**                   | Au                               |
+|**HTL (hole transport layer)**    | Spiro-OMeTAD (C81​H68​N4​O8​)        |
+|**Perovskite absorber**           | CsPbBr2I                         |
+|**ETL (electron transport layer)**| TiO2-c (compact titanium dioxide)|
+|**Bottom contact**                | FTO (fluorine-doped tin oxide)   |
+|**Substrate**                     | SLG (soda-lime glass)            |
 
-Now, let us answer the following question:
+Let's explore the available solar-cell data to investigate the following question:
 
-!!! task "What ETL materials can replace TiO2-c to improve Voc (open-circuit voltage) in perovskite solar cells?"
+!!! task "Which ETL materials are associated with higher open-circuit voltages?"
 
-    To gain insights into this question, we can utilize NOMAD's widgets to explore relevant data:
+    Explore entries with a Cs-Pb-Br-I absorber and compare the ETL materials represented in the available data.
 
-    1. **Start with the Periodic Table**:
-        - Click on the **PERIODIC TABLE** widget button and use the **(+)** button to pin it to the dashboard.
-        - Select the elements of the absorber from the periodic table: Cs, Pb, Br, and I.
-        - After selecting these elements, you should see approximately 7,500 entries matching your search filters.
+### Filter by absorber composition
 
-    1. **Use the TERMS Widget**:
-        - To find out what ETL and HTL materials are used in the available data, click on the **TERMS** widget button.
-        - For the X-axis, type 'electron transport layer'. As you type, suggestions will appear. Choose `results.properties.optoelectronic.solar_cell.electron_transport_layer`.
-        - Set the statistics scaling to linear, give the widget a descriptive title like "ETL", and pin it to the dashboard.
-        - Repeat the process for the HTL materials.
+- Under **Elements/Formula** in the filter menu, click the **(+)** button next to the periodic table to pin the widget to the dashboard.
+- Select *Cs*, *Pb*, *Br*, and *I* to find entries containing the elements of the absorber.
 
-    1. **Create a Scatter Plot**:
-        - Click on the **SCATTER PLOT** widget button to visualize the relationship between open-circuit voltage (Voc), short-circuit current density (Jsc), and efficiency.
-        - Set the X-axis to "Open Circuit Voltage (Voc)", the Y-axis to "Efficiency", and use the marker color to represent "Short Circuit Current Density".
-        - The scatter plot will allow you to explore the data interactively.
+The results are now limited to entries containing Cs, Pb, Br, and I.
 
-        <div style="text-align: center;">
-            <video controls autoplay loop muted playsinline width="800">
-                <source src="images/custom_widgets_example.webm" type="video/webm">
-            </video>
-        </div>
+### Compare ETL materials
 
-    1. **Interpreting Results**
+- Click the **TERMS** button to add a widget that filters by ETL materials.
+- For the quantity, type `electron_transport_layer` and select `results.properties.optoelectronic.solar_cell.electron_transport_layer`.
+- Set the statistics scaling to *linear* and enter `ETL` as the widget title.
+- Click *DONE*.
 
-        - Interactive scatter plots reveal relationships between **ETLs, HTLs, and performance**.
-        - Hover over data points for details.
-        - Click entries for **full metadata, dataset links, and publication info**.
+### Explore device performance
 
-        Custom widgets provide a **powerful way** to explore NOMAD data and answer research questions efficiently.
+- Click the **SCATTER PLOT** button to add a widget that compares device-performance quantities:
+- In the x-axis quantity field, type `open_circuit_voltage` and select `results.properties.optoelectronic.solar_cell.open_circuit_voltage`.
+- In the y-axis quantity field, type `efficiency` and select `results.properties.optoelectronic.solar_cell.efficiency`.
+- In the marker color field, type `short_circuit_current` and select `results.properties.optoelectronic.solar_cell.short_circuit_current_density`.
+
+Hover over individual data points to inspect their values. Use the *ETL* widget to select different ETL materials and observe how the distribution of points changes.
+
+Notice which ETL materials occur among entries with higher open-circuit voltages. The plot shows relationships in the available data; it does not by itself establish that the ETL material causes a change in device performance.
+
+Click an entry to inspect its full metadata, associated datasets, and publication information.
 
 ---
 
-## Example 2: explore Sn-based solar cells
+## Example: explore HTL materials in Sn-based solar cells
 
-Let’s explore how **hole transport layer (HTL) materials** affect efficiency in **Sn-based solar cells** with **C60** as the electron transport layer (ETL).
+Let's now use the domain-specific Solar Cells app to investigate HTL materials in Sn-based solar cells that use C60 as the electron transport layer (ETL).
 
-In this example, we will utilize the Solar Cell Explore page, which offers filters and widgets that make it easier to search for solar cell entries.
+!!! task "Which HTL materials are associated with higher efficiencies in Sn-based solar cells?"
 
-**Step 1: Navigate to the Solar Cell Explore Page**
+    Explore Sn-based solar-cell entries with C60 as the ETL and compare the HTL materials represented in the available data.
 
-- Navigate to **EXPLORE** → **Solar Cells**.
-- This dashboard provides predefined filters and plots optimized for solar cell research.
+### Open the Solar Cells app
 
-<div style="text-align: center;">
-    <img src="images/solar_cells_dashboard.webp" alt="Solar Cells Dashboard" width="800">
-</div>
+Open the **APPS** page and select **Solar Cells**.
 
-The dashboard includes the following preset widgets:
+The Solar Cells app provides predefined filters and widgets for exploring solar-cell data.
 
-- **Periodic Table:** Filter materials by elements.
-- **Scatter Plots:** Explore efficiency vs. Voc, Jsc, and device architecture.
-- **Histograms:** Analyze bandgap and illumination intensity.
-- **TERMS Plots:** Categorize fabrication method, device stack, ETL, and HTL materials.
+### Filter by absorber and ETL
 
-**Step 2: Apply Filters**
+- Select *Sn* in the periodic table to find entries containing tin.
+- In the ETL **TERMS** widget, select *C60*.
 
-- Select Sn in the **Periodic Table** to filter Sn-based absorbers.
-- Set ETL = C60 in the **TERMS** plot. (~400 entries remain)
-- Narrow results further using:
-    - Bandgap slider (e.g., >1.3 eV).
-    - Device architecture scatter plot (e.g., pin).
+The results are now limited to Sn-based solar-cell entries that use C60 as the ETL.
 
-**Step 3: Customize Widgets**
+### Compare HTL materials
 
-Click the *pen icon* on any widget to modify its plotted quantities, color mapping, or units. Each widget offers a customizable set of filters or visualizations, depending on the data type.
+Use the HTL **TERMS** widget to identify the hole transport materials represented in the filtered results.
 
-**Step 4: Inspect the Results Matching the Criteria**
+- Select an HTL material to further narrow the search results.
+- Compare the efficiency values for entries using different HTL materials.
+- Hover over data points in the performance plots to inspect individual values.
 
-- Hover over scatter plots to inspect data points.
-- Click entries for full metadata, dataset links, and further analysis.
-
-<div style="text-align: center;">
-    <video controls autoplay loop muted playsinline width="800">
-        <source src="images/sn_based_solar_cells_example.webm" type="video/webm">
-    </video>
-</div>
+Notice which HTL materials occur among entries with higher reported efficiencies. As in the previous example, relationships in the available data do not by themselves establish that the HTL material causes a change in device performance.
 
 ---
