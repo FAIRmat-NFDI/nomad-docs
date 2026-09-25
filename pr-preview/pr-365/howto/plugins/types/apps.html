@@ -2143,10 +2143,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#widgetboxplot" class="md-nav__link">
+  <a href="#widgetscatterplotdeprecated" class="md-nav__link">
     <span class="md-ellipsis">
       
-        WidgetBoxPlot
+        WidgetScatterPlotDeprecated
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#axislimitedscale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AxisLimitedScale
       
     </span>
   </a>
@@ -2165,21 +2176,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#widgetscatterplotdeprecated" class="md-nav__link">
+  <a href="#widgetscatterplot" class="md-nav__link">
     <span class="md-ellipsis">
       
-        WidgetScatterPlotDeprecated
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#axislimitedscale" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        AxisLimitedScale
+        WidgetScatterPlot
       
     </span>
   </a>
@@ -2209,10 +2209,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#widgetscatterplot" class="md-nav__link">
+  <a href="#widgetboxplot" class="md-nav__link">
     <span class="md-ellipsis">
       
-        WidgetScatterPlot
+        WidgetBoxPlot
       
     </span>
   </a>
@@ -2451,6 +2451,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#rowselection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RowSelection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#rowactions" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2477,17 +2488,6 @@
     <span class="md-ellipsis">
       
         RowActionURL
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#rowselection" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        RowSelection
       
     </span>
   </a>
@@ -5018,10 +5018,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#widgetboxplot" class="md-nav__link">
+  <a href="#widgetscatterplotdeprecated" class="md-nav__link">
     <span class="md-ellipsis">
       
-        WidgetBoxPlot
+        WidgetScatterPlotDeprecated
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#axislimitedscale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AxisLimitedScale
       
     </span>
   </a>
@@ -5040,21 +5051,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#widgetscatterplotdeprecated" class="md-nav__link">
+  <a href="#widgetscatterplot" class="md-nav__link">
     <span class="md-ellipsis">
       
-        WidgetScatterPlotDeprecated
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#axislimitedscale" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        AxisLimitedScale
+        WidgetScatterPlot
       
     </span>
   </a>
@@ -5084,10 +5084,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#widgetscatterplot" class="md-nav__link">
+  <a href="#widgetboxplot" class="md-nav__link">
     <span class="md-ellipsis">
       
-        WidgetScatterPlot
+        WidgetBoxPlot
       
     </span>
   </a>
@@ -5326,6 +5326,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#rowselection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RowSelection
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#rowactions" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5352,17 +5363,6 @@
     <span class="md-ellipsis">
       
         RowActionURL
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#rowselection" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        RowSelection
       
     </span>
   </a>
@@ -6166,97 +6166,6 @@ included:</p>
 </tr>
 </tbody>
 </table>
-<h4 id="widgetboxplot">WidgetBoxPlot<a class="headerlink" href="#widgetboxplot" title="Permanent link">¶</a></h4>
-<p>Box plot widget configuration.</p>
-<table>
-<thead>
-<tr>
-<th>name</th>
-<th>type</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>sample_size</td>
-<td><code>int</code></td>
-<td>Maximum number of samples to fetch. Notice that the actual number of data points may be more or less, depending on how many entries exist and how many of the requested values each entry contains.<br><em>default:</em> <code>1000</code></td>
-</tr>
-<tr>
-<td>show_points</td>
-<td><code>bool</code></td>
-<td>Whether to show individual data points.<br><em>default:</em> <code>True</code></td>
-</tr>
-<tr>
-<td>y</td>
-<td><code>Axis</code></td>
-<td>Configures the information source and display options for the y-axis.<br><em>default:</em> <code>PydanticUndefined</code></td>
-</tr>
-<tr>
-<td>group_by_size</td>
-<td><code>int</code></td>
-<td>Maximum number of groups to request when <code>group_by</code> is set. Note that the returned number of groups may be smaller because any group which does not contain the y-value still count in this limit, but are not returned to avoid visualization of empty groups.<br><em>default:</em> <code>10</code></td>
-</tr>
-<tr>
-<td>autorange</td>
-<td><code>bool</code></td>
-<td>Whether to automatically set the range according to the data limits.<br><em>default:</em> <code>True</code></td>
-</tr>
-<tr>
-<td>layout</td>
-<td><code>dict[str, Layout]</code></td>
-<td>Defines widget size and grid positioning for different breakpoints. The following breakpoints are supported: <code>sm</code>, <code>md</code>, <code>lg</code>, <code>xl</code> and <code>xxl</code>.<br><em>default:</em> <code>PydanticUndefined</code></td>
-</tr>
-<tr>
-<td>group_by</td>
-<td><code>str | None</code></td>
-<td>Optional quantity used to group data into separate boxes along the x-axis. The groups will be ordered by the number of points matching each group in a descending order.</td>
-</tr>
-<tr>
-<td>subgroup_by</td>
-<td><code>str | None</code></td>
-<td>Optional quantity used to subgroup the groups into separate boxes along the x-axis. The subgroups will be ordered by the number of points matching each group in a descending order.</td>
-</tr>
-<tr>
-<td>subgroup_by_size</td>
-<td><code>str | None</code></td>
-<td>Maximum number of subgroups to request when <code>subgroup_by</code> is set. Note that the returned number of subgroups may be smaller because any subgroup which does not contain the y-value still count in this limit, but are not returned to avoid visualization of empty groups.</td>
-</tr>
-<tr>
-<td>markers</td>
-<td><code>Markers | None</code></td>
-<td>Configures the information source and display options for the markers.</td>
-</tr>
-<tr>
-<td>title</td>
-<td><code>str | None</code></td>
-<td>Custom widget title. If not specified, a widget-specific default title is used.</td>
-</tr>
-<tr>
-<td>description</td>
-<td><code>str | None</code></td>
-<td>Optional description of the widget and the data it is showing. Can contain markdown notation. If populated, an icon is shown next to the title that can be clicked to show the description.</td>
-</tr>
-</tbody>
-</table>
-<h4 id="markers">Markers<a class="headerlink" href="#markers" title="Permanent link">¶</a></h4>
-<p>Configuration for plot markers.</p>
-<table>
-<thead>
-<tr>
-<th>name</th>
-<th>type</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>color</td>
-<td><code>Axis | None</code></td>
-<td>Configures the information source and display options for the marker colors.</td>
-</tr>
-</tbody>
-</table>
 <h4 id="widgetscatterplotdeprecated">WidgetScatterPlotDeprecated<a class="headerlink" href="#widgetscatterplotdeprecated" title="Permanent link">¶</a></h4>
 <p>Deprecated copy of WidgetScatterPlot with a misspelled type.</p>
 <table>
@@ -6363,6 +6272,92 @@ included:</p>
 </tr>
 </tbody>
 </table>
+<h4 id="markers">Markers<a class="headerlink" href="#markers" title="Permanent link">¶</a></h4>
+<p>Configuration for plot markers.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>color</td>
+<td><code>Axis | None</code></td>
+<td>Configures the information source and display options for the marker colors.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="widgetscatterplot">WidgetScatterPlot<a class="headerlink" href="#widgetscatterplot" title="Permanent link">¶</a></h4>
+<p>Scatter plot widget configuration.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>layout</td>
+<td><code>dict[str, Layout]</code></td>
+<td>Defines widget size and grid positioning for different breakpoints. The following breakpoints are supported: <code>sm</code>, <code>md</code>, <code>lg</code>, <code>xl</code> and <code>xxl</code>.<br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>x</td>
+<td><code>AxisLimitedScale | str</code></td>
+<td>Configures the information source and display options for the x-axis.<br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>y</td>
+<td><code>AxisLimitedScale | str</code></td>
+<td>Configures the information source and display options for the y-axis.<br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>size</td>
+<td><code>int</code></td>
+<td>Maximum number of entries to fetch. Notice that the actual number may be more or less, depending on how many entries exist and how many of the requested values each entry contains.<br><em>default:</em> <code>1000</code><br><strong>deprecated</strong></td>
+</tr>
+<tr>
+<td>sample_size</td>
+<td><code>int</code></td>
+<td>Maximum number of samples to fetch. Notice that the actual number of data points may be more or less, depending on how many entries exist and how many of the requested values each entry contains.<br><em>default:</em> <code>1000</code></td>
+</tr>
+<tr>
+<td>drag_mode</td>
+<td><code>str</code></td>
+<td>Action to perform on mouse drag.<br><em>default:</em> <code>DragModeEnum.ZOOM</code></td>
+</tr>
+<tr>
+<td>autorange</td>
+<td><code>bool</code></td>
+<td>Whether to automatically set the range according to the data limits.<br><em>default:</em> <code>True</code></td>
+</tr>
+<tr>
+<td>title</td>
+<td><code>str | None</code></td>
+<td>Custom widget title. If not specified, a widget-specific default title is used.</td>
+</tr>
+<tr>
+<td>description</td>
+<td><code>str | None</code></td>
+<td>Optional description of the widget and the data it is showing. Can contain markdown notation. If populated, an icon is shown next to the title that can be clicked to show the description.</td>
+</tr>
+<tr>
+<td>markers</td>
+<td><code>Markers | None</code></td>
+<td>Configures the information source and display options for the markers.</td>
+</tr>
+<tr>
+<td>color</td>
+<td><code>str | None</code></td>
+<td>Quantity used for coloring points. Note that this field is deprecated and <code>markers</code> should be used instead.</td>
+</tr>
+</tbody>
+</table>
 <h4 id="widgetperiodictabledeprecated">WidgetPeriodicTableDeprecated<a class="headerlink" href="#widgetperiodictabledeprecated" title="Permanent link">¶</a></h4>
 <p>Deprecated copy of WidgetPeriodicTable with a misspelled type.</p>
 <table>
@@ -6449,8 +6444,8 @@ included:</p>
 </tr>
 </tbody>
 </table>
-<h4 id="widgetscatterplot">WidgetScatterPlot<a class="headerlink" href="#widgetscatterplot" title="Permanent link">¶</a></h4>
-<p>Scatter plot widget configuration.</p>
+<h4 id="widgetboxplot">WidgetBoxPlot<a class="headerlink" href="#widgetboxplot" title="Permanent link">¶</a></h4>
+<p>Box plot widget configuration.</p>
 <table>
 <thead>
 <tr>
@@ -6461,39 +6456,54 @@ included:</p>
 </thead>
 <tbody>
 <tr>
-<td>layout</td>
-<td><code>dict[str, Layout]</code></td>
-<td>Defines widget size and grid positioning for different breakpoints. The following breakpoints are supported: <code>sm</code>, <code>md</code>, <code>lg</code>, <code>xl</code> and <code>xxl</code>.<br><em>default:</em> <code>PydanticUndefined</code></td>
-</tr>
-<tr>
-<td>x</td>
-<td><code>AxisLimitedScale | str</code></td>
-<td>Configures the information source and display options for the x-axis.<br><em>default:</em> <code>PydanticUndefined</code></td>
-</tr>
-<tr>
-<td>y</td>
-<td><code>AxisLimitedScale | str</code></td>
-<td>Configures the information source and display options for the y-axis.<br><em>default:</em> <code>PydanticUndefined</code></td>
-</tr>
-<tr>
-<td>size</td>
-<td><code>int</code></td>
-<td>Maximum number of entries to fetch. Notice that the actual number may be more or less, depending on how many entries exist and how many of the requested values each entry contains.<br><em>default:</em> <code>1000</code><br><strong>deprecated</strong></td>
-</tr>
-<tr>
 <td>sample_size</td>
 <td><code>int</code></td>
 <td>Maximum number of samples to fetch. Notice that the actual number of data points may be more or less, depending on how many entries exist and how many of the requested values each entry contains.<br><em>default:</em> <code>1000</code></td>
 </tr>
 <tr>
-<td>drag_mode</td>
-<td><code>str</code></td>
-<td>Action to perform on mouse drag.<br><em>default:</em> <code>DragModeEnum.ZOOM</code></td>
+<td>show_points</td>
+<td><code>bool</code></td>
+<td>Whether to show individual data points.<br><em>default:</em> <code>True</code></td>
+</tr>
+<tr>
+<td>y</td>
+<td><code>Axis</code></td>
+<td>Configures the information source and display options for the y-axis.<br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>group_by_size</td>
+<td><code>int</code></td>
+<td>Maximum number of groups to request when <code>group_by</code> is set. Note that the returned number of groups may be smaller because any group which does not contain the y-value still count in this limit, but are not returned to avoid visualization of empty groups.<br><em>default:</em> <code>10</code></td>
 </tr>
 <tr>
 <td>autorange</td>
 <td><code>bool</code></td>
 <td>Whether to automatically set the range according to the data limits.<br><em>default:</em> <code>True</code></td>
+</tr>
+<tr>
+<td>layout</td>
+<td><code>dict[str, Layout]</code></td>
+<td>Defines widget size and grid positioning for different breakpoints. The following breakpoints are supported: <code>sm</code>, <code>md</code>, <code>lg</code>, <code>xl</code> and <code>xxl</code>.<br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>group_by</td>
+<td><code>str | None</code></td>
+<td>Optional quantity used to group data into separate boxes along the x-axis. The groups will be ordered by the number of points matching each group in a descending order.</td>
+</tr>
+<tr>
+<td>subgroup_by</td>
+<td><code>str | None</code></td>
+<td>Optional quantity used to subgroup the groups into separate boxes along the x-axis. The subgroups will be ordered by the number of points matching each group in a descending order.</td>
+</tr>
+<tr>
+<td>subgroup_by_size</td>
+<td><code>str | None</code></td>
+<td>Maximum number of subgroups to request when <code>subgroup_by</code> is set. Note that the returned number of subgroups may be smaller because any subgroup which does not contain the y-value still count in this limit, but are not returned to avoid visualization of empty groups.</td>
+</tr>
+<tr>
+<td>markers</td>
+<td><code>Markers | None</code></td>
+<td>Configures the information source and display options for the markers.</td>
 </tr>
 <tr>
 <td>title</td>
@@ -6504,16 +6514,6 @@ included:</p>
 <td>description</td>
 <td><code>str | None</code></td>
 <td>Optional description of the widget and the data it is showing. Can contain markdown notation. If populated, an icon is shown next to the title that can be clicked to show the description.</td>
-</tr>
-<tr>
-<td>markers</td>
-<td><code>Markers | None</code></td>
-<td>Configures the information source and display options for the markers.</td>
-</tr>
-<tr>
-<td>color</td>
-<td><code>str | None</code></td>
-<td>Quantity used for coloring points. Note that this field is deprecated and <code>markers</code> should be used instead.</td>
 </tr>
 </tbody>
 </table>
@@ -7317,6 +7317,25 @@ Will only show quantities that have been populated in the data.</p>
 </tr>
 </tbody>
 </table>
+<h4 id="rowselection">RowSelection<a class="headerlink" href="#rowselection" title="Permanent link">¶</a></h4>
+<p>Controls the selection of rows. If enabled, rows can be selected and additional
+actions performed on them.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>enabled</td>
+<td><code>bool</code></td>
+<td>Whether to show the row selection.<br><em>default:</em> <code>True</code></td>
+</tr>
+</tbody>
+</table>
 <h4 id="rowactions">RowActions<a class="headerlink" href="#rowactions" title="Permanent link">¶</a></h4>
 <p>Controls the visualization of row actions that are shown at the end of each row.</p>
 <table>
@@ -7413,25 +7432,6 @@ Will only show quantities that have been populated in the data.</p>
 <td>description</td>
 <td><code>str | None</code></td>
 <td>Description of the action shown to the user.</td>
-</tr>
-</tbody>
-</table>
-<h4 id="rowselection">RowSelection<a class="headerlink" href="#rowselection" title="Permanent link">¶</a></h4>
-<p>Controls the selection of rows. If enabled, rows can be selected and additional
-actions performed on them.</p>
-<table>
-<thead>
-<tr>
-<th>name</th>
-<th>type</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>enabled</td>
-<td><code>bool</code></td>
-<td>Whether to show the row selection.<br><em>default:</em> <code>True</code></td>
 </tr>
 </tbody>
 </table>
