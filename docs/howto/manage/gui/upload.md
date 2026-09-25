@@ -35,10 +35,8 @@ You can create Entries in a Project in two ways:
 
 1. **From supported files:** Add files in a format recognized by an installed
    parser. NOMAD processes the files and creates Entries automatically.
-1. **From a schema:** On the Project **Overview** page, select **NEW ENTRY**,
-   then choose a built-in or custom schema. NOMAD creates an editable
-   Electronic Lab Notebook (ELN) Entry that you can complete in the data
-   editor.
+1. **From a schema:** On the Project **Overview** page or in any folder under
+   **FILES**, select **NEW ENTRY**, then choose a built-in or custom schema. NOMAD creates an editable Electronic Lab Notebook (ELN) Entry that you can complete in the data editor.
 
 ??? info "Additional Project and Entry metadata"
       Beyond the Project name and description, additional comments and references
@@ -124,9 +122,9 @@ to the current Project folder.
 An [Electronic Lab Notebook (ELN)](../../../reference/glossary.md#eln) Entry is
 a schema-based Entry that you can edit directly in NOMAD. To create an ELN Entry:
 
-1. On the Project **Overview** page, select **NEW ENTRY**. To create the Entry
-   in a specific folder instead, open **FILES**, navigate to that folder, and
-   select **NEW ENTRY** there.
+
+1. On the Project **Overview** page or in any folder under
+   **FILES**, select **NEW ENTRY**. You can create new folders using the `+` button under **FILES**.
 1. Choose a schema under **BUILT-IN SCHEMAS** or **CUSTOM SCHEMAS**. Custom
    schemas come from schema packages uploaded to the current NOMAD deployment.
    Depending on your access, these can include schemas from this Project, your
