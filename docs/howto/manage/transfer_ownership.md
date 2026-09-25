@@ -106,3 +106,61 @@ curl "{{ nomad_url() }}/v1/uploads/<upload-id>" \
 | `GET /ownership-transfers/{id}` | Inspect one transfer | `uploads:read` |
 | `POST /ownership-transfers/{id}/respond` | Accept or refuse (target) | `uploads:read`, `uploads:write` |
 | `POST /ownership-transfers/{id}/cancel` | Cancel a pending request (source) | `uploads:read`, `uploads:write` |
+
+## When the project was shared with you
+
+If a project was shared with you — you are a coauthor or reviewer, not the `main_author` — you
+cannot transfer its ownership. Only the owner can initiate a transfer. A transfer request is
+rejected:
+
+```bash
+curl -X POST "{{ nomad_url() }}/v1/ownership-transfers" \
+  -H "Authorization: Bearer ${NOMAD_PAT}" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "resource_type": "upload",
+    "resource_id": "<upload-id>",
+    "target_user": "<target-user-id>",
+    "target_user_type": "user_id"
+  }'
+```
+
+```json
+{ "detail": "Only main author has permissions for this operation." }
+```
+
+To move such a project to another account, the owner has to initiate the transfer to you.
+
+What you *can* do with coauthor access is manage the project's collaborators. Adding a coauthor:
+
+```bash
+curl -X POST "{{ nomad_url() }}/v1/uploads/<upload-id>/edit" \
+  -H "Authorization: Bearer ${NOMAD_PAT}" \
+  -H "Content-Type: application/json" \
+  -d '{"metadata": {"coauthors": {"add": ["<user-id-or-email>"]}}}'
+```
+
+The edit runs as a short background process and returns the updated project (abbreviated):
+
+```json
+{
+  "upload_id": "<upload-id>",
+  "data": {
+    "process_status": "SUCCESS",
+    "main_author": "<owner-user-id>",
+    "coauthors": ["<your-user-id>", "<new-coauthor-user-id>"]
+  }
+}
+```
+
+The new coauthor gains access immediately. Removing a coauthor (including yourself) uses the
+`remove` operation:
+
+```bash
+curl -X POST "{{ nomad_url() }}/v1/uploads/<upload-id>/edit" \
+  -H "Authorization: Bearer ${NOMAD_PAT}" \
+  -H "Content-Type: application/json" \
+  -d '{"metadata": {"coauthors": {"remove": ["<user-id>"]}}}'
+```
+
+Removing yourself immediately revokes your own access to the project.
