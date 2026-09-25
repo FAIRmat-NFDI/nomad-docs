@@ -198,8 +198,7 @@ enabled, **SETTINGS** > **General** also contains **Digital Object Identifier
 is assigned directly to the Project; creating a dataset is not required.
 
 !!! warning
-    DOI assignment is irreversible. The DOI remains permanently associated
-    with the Project.
+    Publication and DOI assignment is irreversible: the DOI remains permanently associated with the Project.
 
 !!! note
     DOI controls are only shown on deployments with DataCite integration.
