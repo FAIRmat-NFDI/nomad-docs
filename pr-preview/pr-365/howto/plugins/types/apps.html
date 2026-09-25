@@ -2231,6 +2231,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#searchquantities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SearchQuantities
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#filtermenus" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2268,17 +2279,6 @@
     <span class="md-ellipsis">
       
         FilterMenuActionCheckbox
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#searchquantities" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        SearchQuantities
       
     </span>
   </a>
@@ -2374,6 +2374,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#menuitemnestedobject" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MenuItemNestedObject
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#menuitemterms" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2389,17 +2400,6 @@
     <span class="md-ellipsis">
       
         MenuItemOption
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#menuitemnestedobject" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        MenuItemNestedObject
       
     </span>
   </a>
@@ -2451,17 +2451,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#rowselection" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        RowSelection
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#rowactions" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2488,6 +2477,17 @@
     <span class="md-ellipsis">
       
         RowActionURL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rowselection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RowSelection
       
     </span>
   </a>
@@ -5106,6 +5106,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#searchquantities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SearchQuantities
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#filtermenus" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5143,17 +5154,6 @@
     <span class="md-ellipsis">
       
         FilterMenuActionCheckbox
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#searchquantities" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        SearchQuantities
       
     </span>
   </a>
@@ -5249,6 +5249,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#menuitemnestedobject" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MenuItemNestedObject
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#menuitemterms" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5264,17 +5275,6 @@
     <span class="md-ellipsis">
       
         MenuItemOption
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#menuitemnestedobject" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        MenuItemNestedObject
       
     </span>
   </a>
@@ -5326,17 +5326,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#rowselection" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        RowSelection
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#rowactions" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5363,6 +5352,17 @@
     <span class="md-ellipsis">
       
         RowActionURL
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rowselection" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        RowSelection
       
     </span>
   </a>
@@ -6575,6 +6575,36 @@ included:</p>
 </tr>
 </tbody>
 </table>
+<h4 id="searchquantities">SearchQuantities<a class="headerlink" href="#searchquantities" title="Permanent link">¶</a></h4>
+<p>Controls the quantities that are available in the search interface.
+Search quantities correspond to pieces of information that can be queried in
+the search interface of the app, but also targeted in the rest of the app
+configuration. You can load quantities from custom schemas as search
+quantities, but note that not all quantities will be loaded: only scalar
+values are supported at the moment. The <code>include</code> and <code>exlude</code> attributes
+can use glob syntax to target metainfo, e.g. <code>results.*</code> or
+<code>*.#myschema.schema.MySchema</code>.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>include</td>
+<td><code>list[str] | None</code></td>
+<td>List of included options. Supports glob/wildcard syntax.</td>
+</tr>
+<tr>
+<td>exclude</td>
+<td><code>list[str] | None</code></td>
+<td>List of excluded options. Supports glob/wildcard syntax. Has higher precedence than include.</td>
+</tr>
+</tbody>
+</table>
 <h4 id="filtermenus">FilterMenus<a class="headerlink" href="#filtermenus" title="Permanent link">¶</a></h4>
 <p>Contains filter menu definitions and controls their availability.</p>
 <table>
@@ -6689,36 +6719,6 @@ included:</p>
 <td>quantity</td>
 <td><code>str</code></td>
 <td>Targeted quantity<br><em>default:</em> <code>PydanticUndefined</code></td>
-</tr>
-</tbody>
-</table>
-<h4 id="searchquantities">SearchQuantities<a class="headerlink" href="#searchquantities" title="Permanent link">¶</a></h4>
-<p>Controls the quantities that are available in the search interface.
-Search quantities correspond to pieces of information that can be queried in
-the search interface of the app, but also targeted in the rest of the app
-configuration. You can load quantities from custom schemas as search
-quantities, but note that not all quantities will be loaded: only scalar
-values are supported at the moment. The <code>include</code> and <code>exlude</code> attributes
-can use glob syntax to target metainfo, e.g. <code>results.*</code> or
-<code>*.#myschema.schema.MySchema</code>.</p>
-<table>
-<thead>
-<tr>
-<th>name</th>
-<th>type</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>include</td>
-<td><code>list[str] | None</code></td>
-<td>List of included options. Supports glob/wildcard syntax.</td>
-</tr>
-<tr>
-<td>exclude</td>
-<td><code>list[str] | None</code></td>
-<td>List of excluded options. Supports glob/wildcard syntax. Has higher precedence than include.</td>
 </tr>
 </tbody>
 </table>
@@ -7063,6 +7063,49 @@ text quantity.</p>
 </tr>
 </tbody>
 </table>
+<h4 id="menuitemnestedobject">MenuItemNestedObject<a class="headerlink" href="#menuitemnestedobject" title="Permanent link">¶</a></h4>
+<p>Menu item that can be used to wrap several subitems into a nested object.
+By wrapping items with this class the query for them is performed as an
+Elasticsearch nested query:
+https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-nested-query.html.
+Note that you cannot yet use nested queries for search quantities
+originating from custom schemas.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>width</td>
+<td><code>int</code></td>
+<td>Width of the item, 12 means maximum width. Note that the menu size can be changed.<br><em>default:</em> <code>12</code></td>
+</tr>
+<tr>
+<td>show_header</td>
+<td><code>bool</code></td>
+<td>Whether to show the header.<br><em>default:</em> <code>True</code></td>
+</tr>
+<tr>
+<td>path</td>
+<td><code>str</code></td>
+<td>Path of the nested object. Typically a section name.<br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>title</td>
+<td><code>str | None</code></td>
+<td>Custom item title.</td>
+</tr>
+<tr>
+<td>items</td>
+<td><code>list[MenuItemTerms | MenuItemHistogram | MenuItemPeriodicTable | MenuItemVisibility | MenuItemDefinitions | MenuItemOptimade | MenuItemCustomQuantities] | None</code></td>
+<td>Items that are grouped by this nested object.</td>
+</tr>
+</tbody>
+</table>
 <h4 id="menuitemterms">MenuItemTerms<a class="headerlink" href="#menuitemterms" title="Permanent link">¶</a></h4>
 <p>Menu item that shows a list of text values from e.g. <code>str</code> or <code>MEnum</code>
 quantities.</p>
@@ -7162,49 +7205,6 @@ quantities.</p>
 <td>description</td>
 <td><code>str | None</code></td>
 <td>Detailed description for this option.</td>
-</tr>
-</tbody>
-</table>
-<h4 id="menuitemnestedobject">MenuItemNestedObject<a class="headerlink" href="#menuitemnestedobject" title="Permanent link">¶</a></h4>
-<p>Menu item that can be used to wrap several subitems into a nested object.
-By wrapping items with this class the query for them is performed as an
-Elasticsearch nested query:
-https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-nested-query.html.
-Note that you cannot yet use nested queries for search quantities
-originating from custom schemas.</p>
-<table>
-<thead>
-<tr>
-<th>name</th>
-<th>type</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>width</td>
-<td><code>int</code></td>
-<td>Width of the item, 12 means maximum width. Note that the menu size can be changed.<br><em>default:</em> <code>12</code></td>
-</tr>
-<tr>
-<td>show_header</td>
-<td><code>bool</code></td>
-<td>Whether to show the header.<br><em>default:</em> <code>True</code></td>
-</tr>
-<tr>
-<td>path</td>
-<td><code>str</code></td>
-<td>Path of the nested object. Typically a section name.<br><em>default:</em> <code>PydanticUndefined</code></td>
-</tr>
-<tr>
-<td>title</td>
-<td><code>str | None</code></td>
-<td>Custom item title.</td>
-</tr>
-<tr>
-<td>items</td>
-<td><code>list[MenuItemTerms | MenuItemHistogram | MenuItemPeriodicTable | MenuItemVisibility | MenuItemDefinitions | MenuItemOptimade | MenuItemCustomQuantities] | None</code></td>
-<td>Items that are grouped by this nested object.</td>
 </tr>
 </tbody>
 </table>
@@ -7317,25 +7317,6 @@ Will only show quantities that have been populated in the data.</p>
 </tr>
 </tbody>
 </table>
-<h4 id="rowselection">RowSelection<a class="headerlink" href="#rowselection" title="Permanent link">¶</a></h4>
-<p>Controls the selection of rows. If enabled, rows can be selected and additional
-actions performed on them.</p>
-<table>
-<thead>
-<tr>
-<th>name</th>
-<th>type</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>enabled</td>
-<td><code>bool</code></td>
-<td>Whether to show the row selection.<br><em>default:</em> <code>True</code></td>
-</tr>
-</tbody>
-</table>
 <h4 id="rowactions">RowActions<a class="headerlink" href="#rowactions" title="Permanent link">¶</a></h4>
 <p>Controls the visualization of row actions that are shown at the end of each row.</p>
 <table>
@@ -7432,6 +7413,25 @@ actions performed on them.</p>
 <td>description</td>
 <td><code>str | None</code></td>
 <td>Description of the action shown to the user.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="rowselection">RowSelection<a class="headerlink" href="#rowselection" title="Permanent link">¶</a></h4>
+<p>Controls the selection of rows. If enabled, rows can be selected and additional
+actions performed on them.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>enabled</td>
+<td><code>bool</code></td>
+<td>Whether to show the row selection.<br><em>default:</em> <code>True</code></td>
 </tr>
 </tbody>
 </table>
