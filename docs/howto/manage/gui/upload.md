@@ -122,7 +122,6 @@ to the current Project folder.
 An [Electronic Lab Notebook (ELN)](../../../reference/glossary.md#eln) Entry is
 a schema-based Entry that you can edit directly in NOMAD. To create an ELN Entry:
 
-
 1. On the Project **Overview** page or in any folder under
    **FILES**, select **NEW ENTRY**. You can create new folders using the `+` button under **FILES**.
 1. Choose a schema under **BUILT-IN SCHEMAS** or **CUSTOM SCHEMAS**. Custom
@@ -137,8 +136,8 @@ a schema-based Entry that you can edit directly in NOMAD. To create an ELN Entry
 
 ## Visibility and access
 
-On the Project **Overview** page, the Project owner can select **SETTINGS** to
-manage access.
+On the Project page, the Project owner can select **SETTINGS** to manage
+access.
 
 Under **Collaborators**, use **ADD USER** to add a collaborator and assign one
 of these roles:
