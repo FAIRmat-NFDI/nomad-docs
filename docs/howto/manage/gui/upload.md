@@ -1,6 +1,6 @@
 # How to create and publish Projects
 
-A **Project** is the container for files, entries, collaborators, publication
+A **Project** is the container for files, Entries, collaborators, publication
 settings, and an optional DOI.
 
 ## Create a Project
@@ -29,48 +29,70 @@ To provide a longer, formatted description of the Project, add a file named
 **All Files** on the Project **Overview** page. You can add the README in the
 **New Project** prompt or upload it later.
 
-## Create entries
+## Create Entries
 
-You can create entries in a Project in two ways:
+You can create Entries in a Project in two ways:
 
 1. **From supported files:** Add files in a format recognized by an installed
-   parser. NOMAD processes the files and creates entries automatically.
+   parser. NOMAD processes the files and creates Entries automatically.
 1. **From a schema:** On the Project **Overview** page, select **NEW ENTRY**,
    then choose a built-in or custom schema. NOMAD creates an editable
-   Electronic Lab Notebook (ELN) entry that you can complete in the data
+   Electronic Lab Notebook (ELN) Entry that you can complete in the data
    editor.
 
-### Create entries from supported files
+??? info "Additional Project and Entry metadata"
+      Beyond the Project name and description, additional comments and references
+      can be added as Project metadata in a file named `nomad.json` or
+      `nomad.yaml`. The file can also contain Entry-specific comments. For
+      example, a `nomad.json` file can have the following format:
+
+      ```json
+      {
+         "comment": "Data from a research project",
+         "references": ["https://example.org/article"],
+         "entries": {
+            "path/to/mainfile": {
+               "comment": "Metadata for this entry"
+            }
+         }
+      }
+      ```
+
+      NOMAD reads this file when processing the Project. Add it before, or in
+      the same file transfer as, the mainfiles to which it applies. If you add
+      it later, reprocess the Project to apply the metadata to its Entries.
+
+### Create Entries from supported files
 
 <a id="processing-files"></a>
 
-#### How uploaded files become entries
+#### How uploaded files become Entries
 
 NOMAD checks the files using the parsers and plugins installed in the current
 deployment. When a parser recognizes a file as the primary raw-data source
-that defines an entry, that file becomes the entry's
+that defines an Entry, that file becomes the Entry's
 [**mainfile**](../../../reference/glossary.md#mainfile). NOMAD then creates and
-processes the corresponding entry. Which file formats are supported therefore
+processes the corresponding Entry. Which file formats are supported therefore
 depends on the parsers and plugins installed in the deployment. See
 [Explanation > Processing](../../../explanation/processing.md) for a detailed
 explanation of file matching and processing.
 
 All Project files remain available under **FILES**, but only recognized
-mainfiles produce entries that appear under **ENTRIES** and can be found in
+mainfiles produce Entries that appear under **ENTRIES** and can be found in
 search. Parsers can also associate other files with a mainfile as **auxiliary
-files** for the resulting entry. A Project must contain at least one
-successfully processed entry before it can be published.
+files** for the resulting Entry. A Project must contain at least one
+successfully processed Entry before it can be published.
 
 If you added supported files in the **New Project** prompt, the corresponding
-entries are created automatically during Project creation. To create further
-entries from files, open **FILES** and select **UPLOAD FILES**, then choose one
+Entries are created automatically during Project creation. To create further
+Entries from files, open **FILES** and select **UPLOAD FILES**, then choose one
 or more files. Alternatively, drag files into the file-list area below
 **All Files**.
 
 You can add individual files or package them in a `.zip` or `.tar.gz` file.
 NOMAD extracts these compressed bundles and preserves their internal directory
 structure. Keep the files for one calculation or experiment together in the
-same Project so that the parser can associate them with the same entry.
+same Project so that the parser can associate them with the same Entry.
 
 For scripted transfers, select the drop-down arrow next to **UPLOAD FILES** and
 choose **Upload via API**. The dialog provides an example command for uploading
@@ -97,19 +119,19 @@ to the current Project folder.
     While NOMAD provides this service as a courtesy, **uploaders remain responsible for
     verifying overall license compliance**.
 
-### Create ELN entries from built-in or custom schemas
+### Create ELN Entries from built-in or custom schemas
 
-An [Electronic Lab Notebook (ELN)](../../../reference/glossary.md#eln) entry is
-a schema-based entry that you can edit directly in NOMAD. To create an ELN entry:
+An [Electronic Lab Notebook (ELN)](../../../reference/glossary.md#eln) Entry is
+a schema-based Entry that you can edit directly in NOMAD. To create an ELN Entry:
 
-1. On the Project **Overview** page, select **NEW ENTRY**. To create the entry
+1. On the Project **Overview** page, select **NEW ENTRY**. To create the Entry
    in a specific folder instead, open **FILES**, navigate to that folder, and
    select **NEW ENTRY** there.
 1. Choose a schema under **BUILT-IN SCHEMAS** or **CUSTOM SCHEMAS**. Custom
    schemas come from schema packages uploaded to the current NOMAD deployment.
    Depending on your access, these can include schemas from this Project, your
    other Projects, or Projects shared or published by other users.
-1. Enter a filename and select **CREATE**. NOMAD creates the ELN entry and opens
+1. Enter a filename and select **CREATE**. NOMAD creates the ELN and opens
    it in the data editor.
 
 **Related pages:** [Enter data with ELNs](eln.md);
@@ -123,9 +145,9 @@ manage access.
 Under **Collaborators**, use **ADD USER** to add a collaborator and assign one
 of these roles:
 
-- **Reviewer** can view the files and entries in an unpublished Project but
+- **Reviewer** can view the files and Entries in an unpublished Project but
   cannot change them.
-- **Coauthor** can view and modify the files and entries while the Project is
+- **Coauthor** can view and modify the files and Entries while the Project is
   unpublished.
 
 Select **SAVE** after changing the collaborator list or a role. If group
@@ -139,47 +161,22 @@ A public, unpublished Project is visible to everyone. Public visibility and a
 publication embargo cannot be used together, so keep the Project private if
 you intend to publish it under embargo.
 
-## Provide entry metadata
-
-Project information and entry metadata are managed separately. Edit the
-Project name under **SETTINGS** > **General**. Additional entry metadata, such
-as comments and references, can be supplied in a file named `nomad.json` or
-`nomad.yaml`.
-
-For example, a `nomad.json` file can provide defaults and mainfile-specific
-values:
-
-```json
-{
-  "comment": "Data from a research project",
-  "references": ["https://example.org/article"],
-  "entries": {
-    "path/to/mainfile": {
-      "comment": "Metadata for this entry"
-    }
-  }
-}
-```
-
-The metadata file is applied when an entry is first processed. Add it before,
-or in the same file transfer as, the mainfiles to which it applies.
-
 ## Publish and assign a DOI
 
 Only the Project owner can publish a Project or assign its DOI.
 
-1. Open **ENTRIES** and review every entry. Confirm that all expected entries
+1. Open **ENTRIES** and review every Entry. Confirm that all expected Entries
    are present and that their extracted or entered data are complete and
    correct.
 1. In the Project header, select the status button with the drop-down arrow.
    Depending on the current state, it is labelled **Completed**, **Failed**,
    **Processing**, or **Idle**. In the **Processing status** panel, confirm that
-   **Matching** found the expected number of entries, **Parsing** completed
-   successfully for every entry, and **Cleanup** reports no unresolved warnings
+   **Matching** found the expected number of Entries, **Parsing** completed
+   successfully for every Entry, and **Cleanup** reports no unresolved warnings
    or errors.
-1. For an entry with failed processing, unexpected data, or a concerning
-   warning, open the entry and select **LOGS**. Review the processing messages,
-   correct the source data or entry as needed, and reprocess before publishing.
+1. For an Entry with failed processing, unexpected data, or a concerning
+   warning, open the Entry and select **LOGS**. Review the processing messages,
+   correct the source data or Entry as needed, and reprocess before publishing.
 1. Open **SETTINGS** > **General**.
 1. In **Publish**, select **No embargo** or an embargo period. If the Project
    is already publicly visible, the embargo control is disabled; change its
@@ -190,12 +187,12 @@ If processing errors persist or the impact of a warning is unclear, contact
 the administrator of your NOMAD deployment before publishing. NOMAD Central
 users and NOMAD Oasis administrators who need further assistance can contact
 [NOMAD > Support](https://nomad-lab.eu/nomad-lab/support.html){:target="_blank" rel="noopener"}.
-Include the Project ID, the affected entries, and the relevant processing logs
+Include the Project ID, the affected Entries, and the relevant processing logs
 in your request.
 
-Publication is permanent. The Project's files and entries become read-only
+Publication is permanent. The Project's files and Entries become read-only
 and cannot be edited or deleted. Without an embargo, the data become public
-immediately. With an embargo, the entry metadata are public while access to
+immediately. With an embargo, the Entry metadata are public while access to
 the files remains restricted until the embargo ends.
 
 On NOMAD Central, or on a NOMAD Oasis deployment with DataCite integration
@@ -224,12 +221,12 @@ default NOMAD configuration and NOMAD Central allow:
 ## Strategies for large amounts of data
 
 Test the workflow first with a small, representative subset of the data.
-Review the resulting files and entries, then delete the test Project if it is
+Review the resulting files and Entries, then delete the test Project if it is
 no longer needed.
 
 When data exceed the deployment's Project-size limit, split them across
 multiple Projects. Do not split the mainfile and auxiliary files belonging to
-one entry between Projects. The appropriate split therefore depends on how
+one Entry between Projects. The appropriate split therefore depends on how
 the data are organized.
 
 For repeatable transfers, choose **Upload via API** from the **UPLOAD FILES**
