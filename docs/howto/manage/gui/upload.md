@@ -211,8 +211,10 @@ is assigned directly to the Project; creating a dataset is not required.
 Project limits are configurable and can differ between deployments. The
 default NOMAD configuration and NOMAD Central allow:
 
-- a maximum Project size of **32 GiB**;
-- at most **10 unpublished Projects** per user.
+- a maximum Project size of **32 GiB**, controlled by
+  [`process.max_upload_size`](../../../reference/config.md#process); and
+- at most **10 unpublished Projects** per user, controlled by
+  [`services.upload_limit`](../../../reference/config.md#services).
 
 ## Strategies for large amounts of data
 
