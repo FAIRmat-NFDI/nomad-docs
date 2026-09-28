@@ -176,32 +176,6 @@ object itself acts as a factory for completely generic structures.
 This is how NOMAD realizes YAML schemas: user definitions in `.archive.yaml` files are translated
 into Metainfo definitions at runtime.
 
-## Extend an existing section
-
-Sometimes you need to add properties to a section you do not own — typically a parser adding
-code-specific quantities to a shared definition. Use `extends_base_section` together with an
-`x_<name>_` prefix on every added property:
-
-```python
-from nomad.datamodel.metainfo.workflow import Workflow
-from nomad.metainfo import MEnum, Quantity, Section
-
-
-class MyCodeRun(Workflow):
-    m_def = Section(extends_base_section=True)
-    x_mycode_execution_mode = Quantity(
-        type=MEnum('hpc', 'parallel', 'single'), description='...'
-    )
-```
-
-Unlike normal inheritance, this modifies the base section itself, so every entry using `Workflow`
-gains the new property. Use it sparingly and only for parser-specific additions; prefer a subsection
-or a normal specialization where you can.
-
-!!! note "Python only"
-    There is no YAML equivalent. A YAML schema can inherit from an existing section, but it cannot
-    add properties to one that already exists.
-
 ## Resolve references lazily with proxies
 
 References are serialized automatically by `m_to_dict`. On deserialization with `m_from_dict` they

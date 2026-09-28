@@ -1,12 +1,16 @@
 # Data structure
 
-This page explains how data is structured in NOMAD. It is background reading: it describes the ideas that the rest of the documentation builds on, rather than the steps to follow. If you are looking for those steps, the how-to guides on [schemas](../howto/schemas/schemas.md) are the place to start.
+The basic unit of data in NOMAD is the [*entry*](../reference/glossary.md#entry). An entry typically corresponds to one file in an [upload](../reference/glossary.md#upload) that NOMAD recognizes and processes, such as the main output file of a simulation code, a measurement file, or an [ELN](../reference/glossary.md#eln) form. Each entry has its own id and is found, viewed, and accessed independently of the others. Everything NOMAD knows about an entry is kept in one structured document, the entry's [archive](../reference/glossary.md#archive).
 
-Three concepts carry the structure, and this page introduces them in this order:
+To understand how the data in an entry is organized, you need three concepts, which this page covers in turn:
 
-- The **archive**, the concrete data of a single entry.
-- The **schemas**, the definitions that this data follows.
-- The **schema language**, in which those schemas are written.
+- The **archive**: concrete data of a single entry.
+- The **schemas**: definitions that this data follows.
+- The **schema language**: language in which those schemas are written.
+
+Together, they are what makes data in NOMAD more than a collection of files. Because every archive follows a schema, NOMAD knows what each value means, what type and unit it has, and how it relates to the rest of the entry. This allows data from different sources to be searched, compared, and processed in the same way.
+
+This page is background reading: it describes the ideas that the rest of the documentation builds on, rather than the steps to follow. If you are looking for those steps, the how-to guides on [schemas](../howto/schemas/schemas.md) are the place to start.
 
 ## Archives
 
@@ -66,7 +70,7 @@ Whatever the representation, you can rely on the structure, names, types, shapes
 
 ## Schemas
 
-The previous section described the shape of an archive. A schema is what gives that shape meaning. A *schema* is a set of section and quantity definitions: each definition fixes a name, a description, a type and, where applicable, a shape and a unit, and each section definition also fixes which subsections and quantities it may contain. Definitions are not written one by one, they are grouped into a *package*, and the package is the unit in which a schema is written, delivered, and referred to. In Python a package is a `SchemaPackage`; in an archive file it is the content of the `definitions` section, which is why a schema and the data following it are the same kind of file.
+The previous section described the shape of an archive. A schema tells you how to interpret the data in that shape: what each value means, how values relate to each other, and, optionally, which type, dimensions, or physical unit a value must have. Schemas are grouped into a schema package, which is how they are delivered to NOMAD.
 
 There is no single NOMAD schema. The sections around `data` — `metadata`, `results`, and `workflow2` — are defined by NOMAD and are the same in every archive, but [`data`](#the-data-section) follows a different schema in every kind of entry. When you read an entry, the definition behind its `data` section is what tells you what the entry actually contains. When you have data of your own, writing a schema is how you tell NOMAD what it contains.
 

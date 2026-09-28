@@ -6,8 +6,8 @@ Every piece of data in NOMAD follows a *schema*. A schema is a collection of
 shapes and units, so that it can be browsed, searched, compared and analyzed. Schemas are written in
 the NOMAD Metainfo schema language.
 
-This section collects everything you need to write and maintain them. If you are new to the concepts
-behind schemas, read [Explanation > Data structure](../../explanation/data.md) first.
+This section collects everything you need to write and maintain them. For a more in-depth look at
+how NOMAD structures data, see [Explanation > Data structure](../../explanation/data.md).
 
 ## Choose Python or YAML
 
