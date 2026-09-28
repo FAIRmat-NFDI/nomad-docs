@@ -417,6 +417,7 @@ class ExampleWorkflow(Workflow):
         type=int, description='The magic value from a magic source.'
     )
 ```
+
 This is the approach for domain-specific schemas such as for [simulation workflows](https://github.com/nomad-coe/nomad-schema-plugin-simulation-workflow.git){:target="_blank" rel="noopener"}.
 
 ## Other FileParser classes
