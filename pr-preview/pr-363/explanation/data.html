@@ -4668,13 +4668,15 @@
 
 
 <h1 id="data-structure">Data structure<a class="headerlink" href="#data-structure" title="Permanent link">¶</a></h1>
-<p>This page explains how data is structured in NOMAD. It is background reading: it describes the ideas that the rest of the documentation builds on, rather than the steps to follow. If you are looking for those steps, the how-to guides on <a href="../howto/schemas/schemas.html">schemas</a> are the place to start.</p>
-<p>Three concepts carry the structure, and this page introduces them in this order:</p>
+<p>The basic unit of data in NOMAD is the <a href="../reference/glossary.html#entry"><em>entry</em></a>. An entry typically corresponds to one file in an <a href="../reference/glossary.html#upload">upload</a> that NOMAD recognizes and processes, such as the main output file of a simulation code, a measurement file, or an <a href="../reference/glossary.html#eln">ELN</a> form. Each entry has its own id and is found, viewed, and accessed independently of the others. Everything NOMAD knows about an entry is kept in one structured document, the entry's <a href="../reference/glossary.html#archive">archive</a>.</p>
+<p>To understand how the data in an entry is organized, you need three concepts, which this page covers in turn:</p>
 <ul>
-<li>The <strong>archive</strong>, the concrete data of a single entry.</li>
-<li>The <strong>schemas</strong>, the definitions that this data follows.</li>
-<li>The <strong>schema language</strong>, in which those schemas are written.</li>
+<li>The <strong>archive</strong>: concrete data of a single entry.</li>
+<li>The <strong>schemas</strong>: definitions that this data follows.</li>
+<li>The <strong>schema language</strong>: language in which those schemas are written.</li>
 </ul>
+<p>Together, they are what makes data in NOMAD more than a collection of files. Because every archive follows a schema, NOMAD knows what each value means, what type and unit it has, and how it relates to the rest of the entry. This allows data from different sources to be searched, compared, and processed in the same way.</p>
+<p>This page is background reading: it describes the ideas that the rest of the documentation builds on, rather than the steps to follow. If you are looking for those steps, the how-to guides on <a href="../howto/schemas/schemas.html">schemas</a> are the place to start.</p>
 <h2 id="archives">Archives<a class="headerlink" href="#archives" title="Permanent link">¶</a></h2>
 <p>Each entry in NOMAD has an <em>archive</em> associated with it which stores all of the data related to that entry. Every archive is an instance of an <code>EntryArchive</code> which has the following structure:</p>
 <figure style="width: 100%">
@@ -4720,7 +4722,7 @@ flowchart LR
 </ul>
 <p>Whatever the representation, you can rely on the structure, names, types, shapes, and units defined in the schema to interpret the data.</p>
 <h2 id="schemas">Schemas<a class="headerlink" href="#schemas" title="Permanent link">¶</a></h2>
-<p>The previous section described the shape of an archive. A schema is what gives that shape meaning. A <em>schema</em> is a set of section and quantity definitions: each definition fixes a name, a description, a type and, where applicable, a shape and a unit, and each section definition also fixes which subsections and quantities it may contain. Definitions are not written one by one, they are grouped into a <em>package</em>, and the package is the unit in which a schema is written, delivered, and referred to. In Python a package is a <code>SchemaPackage</code>; in an archive file it is the content of the <code>definitions</code> section, which is why a schema and the data following it are the same kind of file.</p>
+<p>The previous section described the shape of an archive. A schema tells you how to interpret the data in that shape: what each value means, how values relate to each other, and, optionally, which type, dimensions, or physical unit a value must have. Schemas are grouped into a schema package, which is how they are delivered to NOMAD.</p>
 <p>There is no single NOMAD schema. The sections around <code>data</code> — <code>metadata</code>, <code>results</code>, and <code>workflow2</code> — are defined by NOMAD and are the same in every archive, but <a href="#the-data-section"><code>data</code></a> follows a different schema in every kind of entry. When you read an entry, the definition behind its <code>data</code> section is what tells you what the entry actually contains. When you have data of your own, writing a schema is how you tell NOMAD what it contains.</p>
 <h3 id="where-schemas-come-from">Where schemas come from<a class="headerlink" href="#where-schemas-come-from" title="Permanent link">¶</a></h3>
 <p>A schema reaches NOMAD in one of three ways, and which one you use decides who can see it and what it can do.</p>

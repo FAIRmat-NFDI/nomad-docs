@@ -1938,17 +1938,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#extend-an-existing-section" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Extend an existing section
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#resolve-references-lazily-with-proxies" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4659,17 +4648,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#extend-an-existing-section" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Extend an existing section
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#resolve-references-lazily-with-proxies" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4973,28 +4951,6 @@ standard Python metaprogramming such as the <code>type</code> function; alternat
 object itself acts as a factory for completely generic structures.</p>
 <p>This is how NOMAD realizes YAML schemas: user definitions in <code>.archive.yaml</code> files are translated
 into Metainfo definitions at runtime.</p>
-<h2 id="extend-an-existing-section">Extend an existing section<a class="headerlink" href="#extend-an-existing-section" title="Permanent link">¶</a></h2>
-<p>Sometimes you need to add properties to a section you do not own — typically a parser adding
-code-specific quantities to a shared definition. Use <code>extends_base_section</code> together with an
-<code>x_&lt;name&gt;_</code> prefix on every added property:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.datamodel.metainfo.workflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">Workflow</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.metainfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">MEnum</span><span class="p">,</span> <span class="n">Quantity</span><span class="p">,</span> <span class="n">Section</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="k">class</span><span class="w"> </span><span class="nc">MyCodeRun</span><span class="p">(</span><span class="n">Workflow</span><span class="p">):</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>    <span class="n">m_def</span> <span class="o">=</span> <span class="n">Section</span><span class="p">(</span><span class="n">extends_base_section</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>    <span class="n">x_mycode_execution_mode</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
-<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>        <span class="nb">type</span><span class="o">=</span><span class="n">MEnum</span><span class="p">(</span><span class="s1">'hpc'</span><span class="p">,</span> <span class="s1">'parallel'</span><span class="p">,</span> <span class="s1">'single'</span><span class="p">),</span> <span class="n">description</span><span class="o">=</span><span class="s1">'...'</span>
-<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>    <span class="p">)</span>
-</code></pre></div>
-<p>Unlike normal inheritance, this modifies the base section itself, so every entry using <code>Workflow</code>
-gains the new property. Use it sparingly and only for parser-specific additions; prefer a subsection
-or a normal specialization where you can.</p>
-<div class="admonition note">
-<p class="admonition-title">Python only</p>
-<p>There is no YAML equivalent. A YAML schema can inherit from an existing section, but it cannot
-add properties to one that already exists.</p>
-</div>
 <h2 id="resolve-references-lazily-with-proxies">Resolve references lazily with proxies<a class="headerlink" href="#resolve-references-lazily-with-proxies" title="Permanent link">¶</a></h2>
 <p>References are serialized automatically by <code>m_to_dict</code>. On deserialization with <code>m_from_dict</code> they
 are <strong>not</strong> resolved immediately, because the target section may not be loaded yet. Instead they are
@@ -5003,11 +4959,11 @@ quantity is accessed. This is what makes references between entries — and even
 installations — possible.</p>
 <p>When the target is not yet defined at the point where you need it — a circular dependency, or simply
 Python import order — use <code>SectionProxy</code> with the name of the definition:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.metainfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">Quantity</span><span class="p">,</span> <span class="n">SectionProxy</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="k">class</span><span class="w"> </span><span class="nc">Process</span><span class="p">(</span><span class="n">ArchiveSection</span><span class="p">):</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>    <span class="n">instrument</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">SectionProxy</span><span class="p">(</span><span class="s1">'Instrument'</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.metainfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">Quantity</span><span class="p">,</span> <span class="n">SectionProxy</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="k">class</span><span class="w"> </span><span class="nc">Process</span><span class="p">(</span><span class="n">ArchiveSection</span><span class="p">):</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>    <span class="n">instrument</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">SectionProxy</span><span class="p">(</span><span class="s1">'Instrument'</span><span class="p">))</span>
 </code></pre></div>
 <p>The string is a path within the available definitions, so this works as long as <code>Instrument</code> is
 eventually defined in the same package.</p>

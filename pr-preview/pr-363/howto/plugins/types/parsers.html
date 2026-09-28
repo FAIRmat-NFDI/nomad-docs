@@ -5095,21 +5095,14 @@ argument <code>skip-normalizers</code>.</p>
 <p>There are several built-in schemas NOMAD (<code>nomad.datamodel.metainfo</code>).</p>
 <!-- ? What about restructuring this part into the idea of "NOMAD has some predefined section and quantities ... please, check HERE... and HERE... for more information and details"? -->
 <p>In the example below, we have made use of the base section for workflow and extended
-it to include a code-specific quantity <code>x_example_magic_value</code>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1"># We extend the existing common definition of section Workflow</span>
+it to include a code-specific quantity <code>example_magic_value</code>.</p>
+<p></p><div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1"># We extend the existing common definition of section Workflow</span>
 <a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="k">class</span><span class="w"> </span><span class="nc">ExampleWorkflow</span><span class="p">(</span><span class="n">Workflow</span><span class="p">):</span>
-<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>    <span class="c1"># We alter the default base class behavior to add all definitions to the existing</span>
-<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>    <span class="c1"># base class instead of inheriting from the base class</span>
-<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>    <span class="n">m_def</span> <span class="o">=</span> <span class="n">Section</span><span class="p">(</span><span class="n">extends_base_section</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>
-<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>    <span class="c1"># We define an additional example quantity. Use the prefix x_&lt;parsername&gt;_ to denote</span>
-<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>    <span class="c1"># non common quantities.</span>
-<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>    <span class="n">x_example_magic_value</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
-<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a>        <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">'The magic value from a magic source.'</span>
-<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a>    <span class="p">)</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>    <span class="n">example_magic_value</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>        <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">'The magic value from a magic source.'</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>    <span class="p">)</span>
 </code></pre></div>
-<!-- TODO remove x_ notation in the future -->
-<p>This is the approach for domain-specific schemas such as for <a href="https://github.com/nomad-coe/nomad-schema-plugin-simulation-workflow.git" rel="noopener" target="_blank">simulation workflows</a>. Refer to <a href="../../schemas/advanced.html#extend-an-existing-section">How-to guides &gt; Work with schemas &gt; Use base sections</a>.</p>
+This is the approach for domain-specific schemas such as for <a href="https://github.com/nomad-coe/nomad-schema-plugin-simulation-workflow.git" rel="noopener" target="_blank">simulation workflows</a>.<p></p>
 <h2 id="other-fileparser-classes">Other FileParser classes<a class="headerlink" href="#other-fileparser-classes" title="Permanent link">¶</a></h2>
 <p>Aside from <code>TextParser</code>, other <code>FileParser</code> classes are also defined. These include:</p>
 <ul>
