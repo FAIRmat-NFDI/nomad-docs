@@ -1,29 +1,37 @@
 # How to create custom workflows
 
-## What you will learn
+This guide shows you how to create a custom workflow Entry that connects
+existing NOMAD Entries and archive sections as inputs, tasks, and outputs. It
+covers Entries created from supported files or schemas, references within and
+across Projects, and nested workflows. The resulting Entry contains an
+interactive workflow graph for inspecting the connections and navigating to
+the referenced data.
 
-- Connect NOMAD entries into a directed graph structure
-- Create hierarchical workflow graphs
-- Link task nodes to supported and custom entries (e.g., ELN entries)
-- Link inputs and outputs to annotated files
-- Navigate workflows using NOMAD's interactive workflow graphs
+To begin, you need a Project to which you can add files. The Entries and data that the
+workflow connects can already exist, or you can add their files together with
+the workflow file, as in the downloadable examples in this guide.
 
 ## Recommended preparation
 
-- Basic knowledge of NOMAD Organization + MetaInfo: [Explanation > From files to data](../../../explanation/basics.md), [Explanation > Data structure](../../../explanation/data.md)
+- [How-to guides > ... > Upload and publish data](upload.md)
+- [Explanation > From files to data](../../../explanation/basics.md)
+- [Explanation > Data structure](../../../explanation/data.md)
 
 ## Further resources
 
+- [Explanation > Workflows](../../../explanation/workflows.md)
 - [Tutorials > Managing workflows and projects](../../../tutorial/workflows_projects.md)
 
 ## Overview
 
-In NOMAD, [Workflows](../../../explanation/workflows.md) are directed graphs with nodes (tasks) that connect multiple [Entries](../../../reference/glossary.md#entry) together in a structured way, while specifying information passed between the nodes via inputs/outputs that link to particular sections of the relevant [Archive](../../../reference/glossary.md#archive).
+NOMAD workflows connect archive sections through inputs, tasks, and outputs.
+For supported data, NOMAD may create a workflow automatically during
+[Processing](../../../explanation/processing.md). A custom workflow Entry lets
+you define these connections when the workflow is not created automatically.
 
-Workflows are sometimes created automatically by NOMAD during [Processing](../../../explanation/processing.md), for certain supported uploads. Users can also create their own workflow entries by uploading an appropriately formatted workflow YAML. This how-to guide will cover the specifics of this process.
-
-!!! Note
-    In the following, various supported raw data files will be used to form concrete examples that can be reproduced. The nature of these files or their underlying methods of production is irrelevant for the purpose of this how-to.
+The examples in this guide use supported simulation files to provide reproducible task
+Entries. Their scientific methods are not relevant to the workflow patterns
+demonstrated here.
 
 ## Simple workflows with supported tasks
 
