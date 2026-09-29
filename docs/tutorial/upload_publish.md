@@ -158,14 +158,14 @@ Files can be added to a project individually, or you can group them into a compr
 
     The folder contains files of the following formats: `.zip`, `.pdf`, `.jpg`, `.txt`, and `.csv`.
 
-    | file name                      | format | description                                                                 |
-    |--------------------------------|--------|-----------------------------------------------------------------------------|
-    | FAIRmat_graphics               | .zip   | Compressed file that contains several FAIRmat logos in `.png` format        |
-    | JOSS_2023                      | .pdf   | A publication of NOMAD in the Journal of Open Source Software               |
-    | Nature_2022                    | .pdf   | A FAIRmat publication in Nature                                             |
-    | P3HT_optical_absorption        | .csv   | An absorption measurement of P3HT using a PerkinElmer spectrometer          |
-    | note_properties_of_good_dopants| .txt   | Notes recorded during a conference talk                                     |
-    | experiment_polymer_doping      | .jpg   | A photograph of an experiment preparing doped polymer solutions             |
+    | file name                      | format | description                                                         |
+    |--------------------------------|--------|---------------------------------------------------------------------|
+    | FAIRmat_graphics               | .zip   | Compressed file that contains several FAIRmat logos in `.png` format|
+    | JOSS_2023                      | .pdf   | A publication of NOMAD in the Journal of Open Source Software       |
+    | Nature_2022                    | .pdf   | A FAIRmat publication in Nature                                     |
+    | P3HT_optical_absorption        | .csv   | An absorption measurement of P3HT using a PerkinElmer spectrometer  |
+    | note_properties_of_good_dopants| .txt   | Notes recorded during a conference talk                             |
+    | experiment_polymer_doping      | .jpg   | A photograph of an experiment preparing doped polymer solutions     |
 
 The files in this example are not recognized as mainfiles because no compatible parser is available for them. Therefore, NOMAD does not create entries from these files.
 
