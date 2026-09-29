@@ -9,11 +9,11 @@ In this tutorial, we explore published entries in NOMAD using the search apps av
 In this tutorial, you will learn how to:
 
 1. Navigate through the **Apps** page of the NOMAD GUI
-1. Search and filter published entries across different domains
-1. Use the search bar to query structured metadata and perform range-based searches
-1. Apply and combine filters to refine search results efficiently
-1. Create and customize interactive widgets for advanced data exploration
-1. Use NOMAD’s search applications to answer concrete scientific questions using real data
+2. Search and filter published entries across different domains
+3. Use the search bar to query structured metadata and perform range-based searches
+4. Apply and combine filters to refine search results efficiently
+5. Create and customize interactive widgets for advanced data exploration
+6. Use NOMAD’s search applications to answer concrete scientific questions using real data
 
 ---
 
@@ -26,7 +26,7 @@ Before starting, make sure you have the following:
 1. **Access to the public NOMAD platform via a modern web browser**  
    You can explore published data in NOMAD without logging in.
 
-1. **Basic familiarity with materials-science concepts**  
+2. **Basic familiarity with materials-science concepts**  
    Familiarity with composition, electronic properties (for example, band gap), and common experimental or computational methods can be helpful, but it is not required.
 
 ---
