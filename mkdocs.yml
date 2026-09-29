@@ -37,6 +37,7 @@ nav:
               - Write a YAML schema package: howto/manage/gui/yaml.md # TODO consolidate with parts of the next 2 pages
               - Create custom ELNs: howto/manage/gui/elns.md
               - Parse tabular data: howto/manage/gui/tabular.md
+              - Transfer project ownership: howto/manage/gui/transfer_ownership.md
           - Work programmatically:
               # - Install nomad-lab: howto/programmatic/pythonlib.md # TODO Integrate into "Use the API"
               - Use the API: howto/manage/program/api.md # TODO separate into How-to and Explanation/Reference
@@ -46,6 +47,7 @@ nav:
               - Access processed data: howto/manage/program/archive_query.md
               - Transform JSON data structures: howto/manage/program/json_transformer.md
               - Make Graph API calls: howto/manage/program/graph_api.md # TODO consolidate into a single page with supporting explanation/reference material
+              - Transfer project ownership: howto/manage/program/transfer_ownership.md
       - Develop plugins:
           - Start plugin development: howto/plugins/plugins.md # TODO split former Introduction to plugins into short guiding overview + explanation page
           # - Set up a development environment: howto/plugins/setup.md # TODO distro-dev setup + best practices
