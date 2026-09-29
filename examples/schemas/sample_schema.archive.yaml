@@ -81,6 +81,15 @@ definitions:
           m_annotations:
             eln:
               component: EnumEditQuantity
+        thickness:
+          type: float
+          unit: meter
+          description: The thickness of the sample.
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+            display:
+              unit: nm
         tags:
           type: str
           shape: ['*']

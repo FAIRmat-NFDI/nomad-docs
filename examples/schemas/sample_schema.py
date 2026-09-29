@@ -2,6 +2,7 @@ from nomad.datamodel.data import ArchiveSection, EntryData
 from nomad.datamodel.metainfo.annotations import (
     ELNAnnotation,
     Filter,
+    QuantityDisplayAnnotation,
     SectionDisplayAnnotation,
 )
 from nomad.metainfo import Datetime, MEnum, Quantity, SchemaPackage, Section, SubSection
@@ -76,6 +77,13 @@ class Sample(EntryData):
         type=MEnum('silicon', 'glass', 'sapphire'),
         description='The material the sample was grown on.',
         a_eln=ELNAnnotation(component='EnumEditQuantity'),
+    )
+    thickness = Quantity(
+        type=float,
+        unit='meter',
+        description='The thickness of the sample.',
+        a_eln=ELNAnnotation(component='NumberEditQuantity'),
+        a_display=QuantityDisplayAnnotation(unit='nm'),
     )
     tags = Quantity(
         type=str,

@@ -343,9 +343,9 @@ This is what lets one schema define a relationship and another schema extend wha
           temperature: 600
     ```
 
-!!! note
-    `m_def` is only needed when the section definition cannot be worked out from context. A
-    subsection that accepts exactly one type does not need it; a polymorphic one does.
+    !!! note
+        `m_def` is only needed when the section definition cannot be worked out from context. A
+        subsection that accepts exactly one type does not need it; a polymorphic one does.
 
 ## Link data with references
 
@@ -468,7 +468,7 @@ and NOMAD resolves it for you when the archive is read.
 ## Annotate for the GUI
 
 A schema says what data *is*. *Annotations* say what NOMAD should *do* with it — which editor to
-show, how to plot it, which unit to display. Adding ELN annotations is what turns a schema into an
+show, how to plot it, which unit to display. Adding ELN annotations is also what turns a schema into an
 electronic lab notebook that users can fill in through the browser.
 
 The component you choose has to suit the quantity's type: a string gets a text field, a datetime gets
@@ -479,7 +479,10 @@ a date picker, an enumeration gets a dropdown, a reference gets a search-and-sel
     Annotations are keyword arguments beginning with `a_`.
 
     ```python
-    from nomad.datamodel.metainfo.annotations import ELNAnnotation
+    from nomad.datamodel.metainfo.annotations import (
+        ELNAnnotation,
+        QuantityDisplayAnnotation,
+    )
 
 
     class Sample(EntryData):
@@ -490,6 +493,12 @@ a date picker, an enumeration gets a dropdown, a reference gets a search-and-sel
         substrate_type = Quantity(
             type=MEnum('silicon', 'glass', 'sapphire'),
             a_eln=ELNAnnotation(component='EnumEditQuantity'),
+        )
+        thickness = Quantity(
+            type=float,
+            unit='meter',
+            a_eln=ELNAnnotation(component='NumberEditQuantity'),
+            a_display=QuantityDisplayAnnotation(unit='nm'),
         )
     ```
 
@@ -512,7 +521,19 @@ a date picker, an enumeration gets a dropdown, a reference gets a search-and-sel
           m_annotations:
             eln:
               component: EnumEditQuantity
+        thickness:
+          type: float
+          unit: meter
+          m_annotations:
+            eln:
+              component: NumberEditQuantity
+            display:
+              unit: nm
     ```
+
+The `display` annotation on `thickness` sets the unit the GUI shows the value in. It does not change
+how the value is stored: that is always the declared `unit`, and a thickness entered in nanometres is
+converted to metres when saved. The display unit has to be compatible with the declared one.
 
 ### Annotate a section
 
@@ -564,7 +585,7 @@ quantity that matters first.
 
 `visible` takes an `include` list, an `exclude` list, or both: without `include` every property of the section starts out visible, and `exclude` is subtracted afterwards, so a name given in both is excluded. `editable` is a filter of the same kind, but it renders properties read-only instead of hiding them — useful when a quantity inherited from a base section should be shown but not changed. `order` lists the properties that come first; everything else follows in declaration order.
 
-Beyond `eln`, annotations control plotting, display units and HDF5 visualization. Every annotation and its arguments is listed in {{ nav_link("reference/annotations.md", breadcrumb=True) }}.
+Beyond `eln` and `display`, annotations control plotting and HDF5 visualization. Every annotation and its arguments is listed in {{ nav_link("reference/annotations.md", breadcrumb=True) }}.
 
 ## Populate data
 
