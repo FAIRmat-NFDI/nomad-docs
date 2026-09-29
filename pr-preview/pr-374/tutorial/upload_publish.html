@@ -4655,6 +4655,10 @@
     <a href="../howto/manage/gui/account.html#create-a-nomad-account">How-to guides &gt; ... &gt; Create a NOMAD account</a>.</p>
 </li>
 <li>
+<p><strong>Basic understanding of projects and entries</strong>
+    Familiarity with projects, entries, and how they relate to each other can be helpful.</p>
+</li>
+<li>
 <p><strong>Example files available on your local machine</strong><br>
     This tutorial uses the following example data files:</p>
 <ul>
@@ -4765,13 +4769,13 @@
 <p><strong>Files recognized by NOMAD</strong></p>
 <ul>
 <li>
-<p>If NOMAD recognizes a mainfile, i.e. a compatible parser exists, it uses the corresponding parser to extract and organize the data according to a data schema.</p>
+<p>If NOMAD recognizes an uploaded file as a <strong>mainfile</strong>, it uses a compatible parser to extract and organize the data according to a data schema. A mainfile is the file that triggers the parser and from which NOMAD creates an entry. </p>
 </li>
 <li>
 <p>The structured data become an <strong>entry</strong> that can be searched, analyzed, and displayed through visualizations.</p>
 </li>
 <li>
-<p>Other uploaded files may be associated with the entry as supporting files.</p>
+<p>Other files may be used by the parser as supporting files but do not create separate entries.</p>
 </li>
 </ul>
 <!-- See <a href="...">supported file formats</a> for a list of formats that NOMAD can parse. -->
@@ -4837,7 +4841,7 @@
 </tbody>
 </table>
 </details>
-<p>Files such as images, PDF files, text files, and tabular data do not generate entries because NOMAD does not have a compatible parser for their formats.</p>
+<p>The files in this example are not recognized as mainfiles because no compatible parser is available for them. Therefore, NOMAD does not create entries from these files.</p>
 <p>They remain part of your project and can still be accessed, shared, downloaded, and published, but their contents are not searchable as structured data in NOMAD. In this case, NOMAD stores the files without extracting their contents into structured, searchable entries.</p>
 <p>Add the files to your project by dragging and dropping them into the upload area or by opening the file-selection dialog and selecting them from your device.</p>
 <p><strong>Drag and drop</strong></p>
