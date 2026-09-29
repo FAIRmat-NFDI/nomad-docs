@@ -1,6 +1,6 @@
 # Explore data in NOMAD
 
-In this tutorial, we explore published entries in NOMAD using the search apps available from the **APPS** page. We use the **Entries** app, which supports searching across all data, and introduce domain-specific apps tailored to particular research fields. Following a step-by-step workflow, we search for entries, apply and combine filters, query structured metadata, and create interactive widgets. By the end of the tutorial, we will have identified relevant entries and constructed customized searches and dashboards using filters, queries, and widgets.
+In this tutorial, we explore published entries in NOMAD using the search apps available from the **Apps** page. We use the **Entries** app, which supports searching across all data, and introduce domain-specific apps tailored to particular research fields. Following a step-by-step workflow, we search for entries, apply and combine filters, query structured metadata, and create interactive widgets. By the end of the tutorial, we will have identified relevant entries and constructed customized searches and dashboards using filters, queries, and widgets.
 
 ---
 
@@ -8,7 +8,7 @@ In this tutorial, we explore published entries in NOMAD using the search apps av
 
 In this tutorial, you will learn how to:
 
-1. Navigate through the **APPS** page of the NOMAD GUI
+1. Navigate through the **Apps** page of the NOMAD GUI
 1. Search and filter published entries across different domains
 1. Use the search bar to query structured metadata and perform range-based searches
 1. Apply and combine filters to refine search results efficiently
@@ -33,16 +33,16 @@ Before starting, make sure you have the following:
 
 ## Navigate to NOMAD search apps
 
-Select **APPS** from the menu on the left to access NOMAD’s search applications. Each app provides filters and widgets tailored to a particular domain or data type.
+Select **Apps** from the menu on the left to access NOMAD’s search applications. Each app provides filters and widgets tailored to a particular domain or data type.
 
 In this tutorial, we use the **Entries** app to search across all data published on NOMAD and briefly introduce the **Solar Cells** app as an example of a domain-specific search interface.
 
-To begin, open the **APPS** page and select **Entries**.
+To begin, open the **Apps** page and select **Entries**.
 
 ![screenshot of the navigation steps to the entries app](images/explore_1.png)
 
-??? info "Search applications available in NOMAD"
-    The **APPS** page provides search interfaces for different domains and data types. The available apps include:
+??? info "Search applications available on the public NOMAD platform"
+    The **Apps** page provides search interfaces for different domains and data types. The available apps include:
 
     - **Entries:** Search entries across all domains.
     - **Experiment:** Search experimental data through apps such as **ELN** and **NeXus**.
@@ -93,7 +93,13 @@ Start by searching for the elements from the previous example:
 Notice that the search results update as you add each condition.
 
 !!! task "Can you find a filter for the band gap?"
-    Use the search bar to find a quantity related to the band gap.
+    Explore the filter menu on the left side panel and try to find a filter for the band gap.
+    Can you find filters for:
+
+    - the band gap value?
+    - whether the band gap is **direct** or **indirect**?
+
+    Now use the search bar to find a quantity related to the band gap.
 
     - Try searching for *"bandgap"*, *"band gap"*, or *"band_gap"*.
     - Look at the suggested quantities and their metainfo paths.
@@ -200,7 +206,7 @@ Let's now use the domain-specific Solar Cells app to investigate HTL materials i
 
 ### Open the Solar Cells app
 
-Open the **APPS** page and select **Solar Cells**.
+Open the **Apps** page and select **Solar Cells**.
 
 The Solar Cells app provides predefined filters and widgets for exploring solar-cell data.
 

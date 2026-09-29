@@ -29,6 +29,9 @@ Before starting, make sure you have the following:
     You can create an account by following the steps described in the
     [How-to guides > ... > Create a NOMAD account](../howto/manage/gui/account.md#create-a-nomad-account).
 
+1. **Basic understanding of projects and entries**
+    Familiarity with projects, entries, and how they relate to each other can be helpful.
+
 1. **Example files available on your local machine**  
     This tutorial uses the following example data files:
     - [Miscellaneous files (PDF, images, tables)](https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_3_files/example_files_upload/miscellaneous_data/miscellaneous_data.zip){:target="_blank" rel="noopener"},
@@ -129,11 +132,11 @@ Files can be added to a project individually, or you can group them into a compr
 
     **Files recognized by NOMAD**
 
-    - If NOMAD recognizes a mainfile, i.e. a compatible parser exists, it uses the corresponding parser to extract and organize the data according to a data schema.
+    - If NOMAD recognizes an uploaded file as a **mainfile**, it uses a compatible parser to extract and organize the data according to a data schema. A mainfile is the file that triggers the parser and from which NOMAD creates an entry. 
 
     - The structured data become an **entry** that can be searched, analyzed, and displayed through visualizations.
 
-    - Other uploaded files may be associated with the entry as supporting files.
+    - Other files may be used by the parser as supporting files but do not create separate entries.
 
     <!-- See [supported file formats](...) for a list of formats that NOMAD can parse. -->
 
@@ -164,7 +167,7 @@ Files can be added to a project individually, or you can group them into a compr
     | note_properties_of_good_dopants| .txt   | Notes recorded during a conference talk                                     |
     | experiment_polymer_doping      | .jpg   | A photograph of an experiment preparing doped polymer solutions             |
 
-Files such as images, PDF files, text files, and tabular data do not generate entries because NOMAD does not have a compatible parser for their formats.
+The files in this example are not recognized as mainfiles because no compatible parser is available for them. Therefore, NOMAD does not create entries from these files.
 
 They remain part of your project and can still be accessed, shared, downloaded, and published, but their contents are not searchable as structured data in NOMAD. In this case, NOMAD stores the files without extracting their contents into structured, searchable entries.
 
