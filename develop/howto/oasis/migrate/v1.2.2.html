@@ -11,10 +11,10 @@
       
       
       
-        <link rel="prev" href="../migrations.html">
+        <link rel="prev" href="v1.4.2.html">
       
       
-        <link rel="next" href="elastic.html">
+        <link rel="next" href="v1.2.0.html">
       
       
         
@@ -25,7 +25,7 @@
     
     
       
-        <title>MongoDB (5.x to 8.x) - Documentation</title>
+        <title>NOMAD 1.2.2 - Documentation</title>
       
     
     
@@ -88,7 +88,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#mongodb-migration-v506-to-v8x" class="md-skip">
+        <a href="#migrate-to-nomad-122" class="md-skip">
           Skip to content
         </a>
       
@@ -162,7 +162,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              MongoDB (5.x to 8.x)
+              NOMAD 1.2.2
             
           </span>
         </div>
@@ -2369,34 +2369,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../update.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Update
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../administer.html" class="md-nav__link">
         
   
@@ -2491,10 +2463,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4_8" checked="">
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4_7" checked="">
         
           
-          <label class="md-nav__link" for="__nav_3_4_8" id="__nav_3_4_8_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3_4_7" id="__nav_3_4_7_label" tabindex="0">
             
   
   
@@ -2512,8 +2484,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_4_8_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_3_4_8">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_4_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_4_7">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -2530,7 +2502,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../migrations.html" class="md-nav__link">
+      <a href="../migrate.html" class="md-nav__link">
         
   
   
@@ -2538,6 +2510,62 @@
     
   
     Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="v2.0.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NOMAD 2.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="v1.4.2.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NOMAD 1.4.2
   
 
     
@@ -2567,32 +2595,14 @@
         
       
       
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    MongoDB (5.x to 8.x)
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="mongo.html" class="md-nav__link md-nav__link--active">
+      <a href="v1.2.2.html" class="md-nav__link md-nav__link--active">
         
   
   
   <span class="md-ellipsis">
     
   
-    MongoDB (5.x to 8.x)
+    NOMAD 1.2.2
   
 
     
@@ -2601,86 +2611,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
-      
-        <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Prerequisites
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#migration-steps" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Migration Steps
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Migration Steps">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-back-up-your-existing-mongodb-data" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Back up your existing MongoDB data
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-run-the-sequential-upgrade-script" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Run the Sequential Upgrade Script
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-verify-the-upgrade" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Verify the Upgrade
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
       
     </li>
   
@@ -2694,14 +2624,42 @@
   
   
     <li class="md-nav__item">
-      <a href="elastic.html" class="md-nav__link">
+      <a href="v1.2.0.html" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Elasticsearch (7.x to 9.x)
+    NOMAD 1.2.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="v0.8-to-v1.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NOMAD 0.8.x to 1.x
   
 
     
@@ -4316,75 +4274,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
-      
-        <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Prerequisites
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#migration-steps" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Migration Steps
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Migration Steps">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-back-up-your-existing-mongodb-data" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Back up your existing MongoDB data
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-run-the-sequential-upgrade-script" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Run the Sequential Upgrade Script
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-verify-the-upgrade" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Verify the Upgrade
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -4462,7 +4351,7 @@
     
     
       <li class="md-path__item">
-        <a href="../migrations.html" class="md-path__link">
+        <a href="../migrate.html" class="md-path__link">
           
   <span class="md-ellipsis">
     Migrate
@@ -4484,51 +4373,22 @@
 
 
 
-<h1 id="mongodb-migration-v506-to-v8x">MongoDB Migration (v5.0.6 to v8.x)<a class="headerlink" href="#mongodb-migration-v506-to-v8x" title="Permanent link">¶</a></h1>
-<p>Starting with NOMAD Oasis template <strong>v1.4.2</strong>, the MongoDB image was upgraded from version <code>5.0.6</code> to version <code>8.x</code> (<code>docker.io/mongo:8.0</code>).</p>
-<p>MongoDB requires sequential upgrades through major versions (<code>5.0</code> → <code>6.0</code> → <code>7.0</code> → <code>8.0</code>), updating the <code>featureCompatibilityVersion</code> at each step. You cannot directly mount a MongoDB 5.x data directory into a MongoDB 8.x container.</p>
-<hr>
-<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">¶</a></h2>
-<ul>
-<li>Python &gt;= 3.8 installed on the Docker host machine.</li>
-<li>Sufficient disk space for database backups.</li>
-<li>Ensure your existing NOMAD Oasis MongoDB container is running and healthy before starting.</li>
-</ul>
-<hr>
-<h2 id="migration-steps">Migration Steps<a class="headerlink" href="#migration-steps" title="Permanent link">¶</a></h2>
-<h3 id="1-back-up-your-existing-mongodb-data">1. Back up your existing MongoDB data<a class="headerlink" href="#1-back-up-your-existing-mongodb-data" title="Permanent link">¶</a></h3>
-<p>Before running any migration, create and verify a backup of your MongoDB database.</p>
-<p>If you are using the <code>nomad-distro-template</code>, run the included helper backup script:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>bash<span class="w"> </span>scripts/backup-mongo.sh
+<h1 id="migrate-to-nomad-122">Migrate to NOMAD 1.2.2<a class="headerlink" href="#migrate-to-nomad-122" title="Permanent link">¶</a></h1>
+<p>We upgraded the JupyterHub version used for NORTH from 1.0.2 to 4.0.2. By default the
+JupyterHub database is persisted in the <code>nomad_oasis_north</code> container. If you want to
+keep the database (e.g. to not loose any open tools), you will have to upgrade the database.
+Update the NOMAD docker image version and restart the Oasis like this:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>down
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>docker<span class="w"> </span>compose<span class="w"> </span>pull
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>north<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>jupyterhub<span class="w"> </span>upgrade-db
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
 </code></pre></div>
-<p>Confirm that the backup dump was created in <code>.volumes/mongo</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>ls<span class="w"> </span>-lh<span class="w"> </span>.volumes/mongo
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>cat<span class="w"> </span>.volumes/mongo/backup.log
-</code></pre></div>
-<div class="admonition important">
-<p class="admonition-title">Important</p>
-<p>Always ensure your MongoDB backup files exist and are verified before proceeding with the upgrade.</p>
-</div>
-<h3 id="2-run-the-sequential-upgrade-script">2. Run the Sequential Upgrade Script<a class="headerlink" href="#2-run-the-sequential-upgrade-script" title="Permanent link">¶</a></h3>
-<p>FAIRmat provides an automated helper script that upgrades MongoDB through intermediate versions (5 → 6 → 7 → 8) and sets the appropriate <code>featureCompatibilityVersion</code> at each stage:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>curl<span class="w"> </span>-O<span class="w"> </span>https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR/-/snippets/188/raw/main/upgrade_mongo.py
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>python3<span class="w"> </span>upgrade_mongo.py<span class="w"> </span>-c<span class="w"> </span>nomad_oasis_mongo<span class="w"> </span>-f<span class="w"> </span>docker-compose.yaml<span class="w"> </span>--from-version<span class="w"> </span><span class="m">5</span>.0.6
-</code></pre></div>
-<h3 id="3-verify-the-upgrade">3. Verify the Upgrade<a class="headerlink" href="#3-verify-the-upgrade" title="Permanent link">¶</a></h3>
-<ol>
-<li>Check that the MongoDB container is running version 8.x:</li>
-</ol>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>mongo<span class="w"> </span>mongosh<span class="w"> </span>--eval<span class="w"> </span><span class="s1">'db.version()'</span>
-</code></pre></div>
-<ol>
-<li>Verify that the feature compatibility version is set to 8.0:</li>
-</ol>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>mongo<span class="w"> </span>mongosh<span class="w"> </span>--eval<span class="w"> </span><span class="s1">'db.adminCommand({getParameter: 1, featureCompatibilityVersion: 1})'</span>
-</code></pre></div>
-<ol>
-<li>Check the NOMAD Oasis logs to ensure services connect successfully:</li>
-</ol>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>-f<span class="w"> </span>app<span class="w"> </span>worker
+<p>Alternatively, you can delete the <code>nomad_oasis_north</code> container and start with a fresh
+database. Make sure that all north tools are stopped and removed.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>down
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>docker<span class="w"> </span>rm<span class="w"> </span>nomad_oasis_north
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>docker<span class="w"> </span>compose<span class="w"> </span>pull
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
 </code></pre></div>
 
 
@@ -4565,7 +4425,7 @@
       <nav class="md-footer__inner md-grid" aria-label="Footer">
         
           
-          <a href="../migrations.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Overview">
+          <a href="v1.4.2.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: NOMAD 1.4.2">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
@@ -4575,20 +4435,20 @@
                 Previous
               </span>
               <div class="md-ellipsis">
-                Overview
+                NOMAD 1.4.2
               </div>
             </div>
           </a>
         
         
           
-          <a href="elastic.html" class="md-footer__link md-footer__link--next" aria-label="Next: Elasticsearch (7.x to 9.x)">
+          <a href="v1.2.0.html" class="md-footer__link md-footer__link--next" aria-label="Next: NOMAD 1.2.0">
             <div class="md-footer__title">
               <span class="md-footer__direction">
                 Next
               </span>
               <div class="md-ellipsis">
-                Elasticsearch (7.x to 9.x)
+                NOMAD 1.2.0
               </div>
             </div>
             <div class="md-footer__button md-icon">
