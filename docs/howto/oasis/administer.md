@@ -98,7 +98,7 @@ nomad admin uploads process
 
 Each NOMAD entry is represented in NOMAD's search index. Only if an entry is in this
 index, you can find it via the search interface. Some changes between NOMAD versions
-(see also our [update guide](migrate.md#migration-steps)), might require that
+(see also our [migration guide](migrate.md)), might require that
 you re-index all uploads.
 
 ```sh
