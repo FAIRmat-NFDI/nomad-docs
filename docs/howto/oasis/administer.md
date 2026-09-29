@@ -87,7 +87,7 @@ cat file_with_ids.txt | xargs nomad admin uploads ls --
 
 Processing includes the conversion of raw files into NOMAD entries. Files are parsed,
 normalizers are called, the processing results are stored, and the search index
-is updated. In certain scenarios (failed processing, [migration](migrate.md#migration-steps),
+is updated. In certain scenarios (failed processing, [migration](migrate.md),
 changed plugins) might require that admins process certain uploads again.
 
 ```sh
