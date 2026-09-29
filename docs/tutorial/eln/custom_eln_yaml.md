@@ -28,9 +28,6 @@ Before starting, make sure you have:
    You can create an account by following the steps described in the
    [How-to guides > ... > Create a NOMAD account](../../howto/manage/gui/account.md#create-a-nomad-account).
 
-1. **Basic understanding of uploads and entries**  
-   Familiarity with uploads and entries, and with how they relate to each other can be helpful. <!-- These concepts are introduced in the section [key elements in NOMAD](../upload_publish.md#the-key-elements-in-nomad).-->
-
 1. **Basic familiarity with YAML configuration files**  
    This tutorial uses YAML to define the structure of a custom ELN schema. Prior experience with YAML syntax and indentation is helpful, but deep knowledge of YAML is not required.
 

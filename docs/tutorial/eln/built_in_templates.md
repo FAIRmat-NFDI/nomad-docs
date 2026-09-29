@@ -30,9 +30,6 @@ Before starting, make sure you have:
    You can create an account by following the steps described in the
    [How-to guides > ... > Create a NOMAD account](../../howto/manage/gui/account.md#create-a-nomad-account).
 
-1. **Basic understanding of uploads and entries**  
-   Familiarity with uploads, entries, and how they relate to each other can be helpful. <!--These concepts are introduced in the section [key elements in NOMAD](../upload_publish.md#the-key-elements-in-nomad) and will be reinforced throughout the tutorial.-->
-
 1. **Basic familiarity with experimental workflows**  
    Familiarity with preparation, processing, and measurements can be helpful, but is not required.
 
