@@ -25,9 +25,8 @@
         "punctuation": ".,;:。，；："
     },
     // MD029 - Ordered list item prefix
-    // Use 1 for every item so inserting or reordering steps does not renumber later lines.
     "MD029": {
-        "style": "one"
+        "style": "ordered"
     },
     // MD033 - Inline HTML
     // NOTE: some inline HTML might be needed?
