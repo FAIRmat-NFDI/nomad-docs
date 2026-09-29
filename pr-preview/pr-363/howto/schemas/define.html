@@ -5316,13 +5316,13 @@ an <code>Evaporation</code> and an <code>Annealing</code> in the same list, and 
 <a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">m_def</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Annealing</span>
 <a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">      </span><span class="nt">temperature</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">600</span>
 </code></pre></div>
-</div>
-</div>
-</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p><code>m_def</code> is only needed when the section definition cannot be worked out from context. A
 subsection that accepts exactly one type does not need it; a polymorphic one does.</p>
+</div>
+</div>
+</div>
 </div>
 <h2 id="link-data-with-references">Link data with references<a class="headerlink" href="#link-data-with-references" title="Permanent link">¶</a></h2>
 <p>Subsections express a <em>part-of</em> relationship. When data is linked rather than contained — a process
@@ -5449,7 +5449,7 @@ even between NOMAD installations, possible. See
 </div>
 <h2 id="annotate-for-the-gui">Annotate for the GUI<a class="headerlink" href="#annotate-for-the-gui" title="Permanent link">¶</a></h2>
 <p>A schema says what data <em>is</em>. <em>Annotations</em> say what NOMAD should <em>do</em> with it — which editor to
-show, how to plot it, which unit to display. Adding ELN annotations is what turns a schema into an
+show, how to plot it, which unit to display. Adding ELN annotations is also what turns a schema into an
 electronic lab notebook that users can fill in through the browser.</p>
 <p>The component you choose has to suit the quantity's type: a string gets a text field, a datetime gets
 a date picker, an enumeration gets a dropdown, a reference gets a search-and-select field.</p>
@@ -5457,18 +5457,27 @@ a date picker, an enumeration gets a dropdown, a reference gets a search-and-sel
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p>Annotations are keyword arguments beginning with <code>a_</code>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.datamodel.metainfo.annotations</span><span class="w"> </span><span class="kn">import</span> <span class="n">ELNAnnotation</span>
-<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>
-<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>
-<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="k">class</span><span class="w"> </span><span class="nc">Sample</span><span class="p">(</span><span class="n">EntryData</span><span class="p">):</span>
-<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>    <span class="n">name</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
-<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
-<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>        <span class="n">a_eln</span><span class="o">=</span><span class="n">ELNAnnotation</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="s1">'StringEditQuantity'</span><span class="p">),</span>
-<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>    <span class="p">)</span>
-<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>    <span class="n">substrate_type</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
-<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>        <span class="nb">type</span><span class="o">=</span><span class="n">MEnum</span><span class="p">(</span><span class="s1">'silicon'</span><span class="p">,</span> <span class="s1">'glass'</span><span class="p">,</span> <span class="s1">'sapphire'</span><span class="p">),</span>
-<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>        <span class="n">a_eln</span><span class="o">=</span><span class="n">ELNAnnotation</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="s1">'EnumEditQuantity'</span><span class="p">),</span>
-<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>    <span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.datamodel.metainfo.annotations</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>    <span class="n">ELNAnnotation</span><span class="p">,</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>    <span class="n">QuantityDisplayAnnotation</span><span class="p">,</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="p">)</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="k">class</span><span class="w"> </span><span class="nc">Sample</span><span class="p">(</span><span class="n">EntryData</span><span class="p">):</span>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>    <span class="n">name</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>        <span class="n">a_eln</span><span class="o">=</span><span class="n">ELNAnnotation</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="s1">'StringEditQuantity'</span><span class="p">),</span>
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>    <span class="p">)</span>
+<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>    <span class="n">substrate_type</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
+<a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a>        <span class="nb">type</span><span class="o">=</span><span class="n">MEnum</span><span class="p">(</span><span class="s1">'silicon'</span><span class="p">,</span> <span class="s1">'glass'</span><span class="p">,</span> <span class="s1">'sapphire'</span><span class="p">),</span>
+<a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a>        <span class="n">a_eln</span><span class="o">=</span><span class="n">ELNAnnotation</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="s1">'EnumEditQuantity'</span><span class="p">),</span>
+<a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a>    <span class="p">)</span>
+<a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a>    <span class="n">thickness</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
+<a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a>        <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
+<a id="__codelineno-18-18" name="__codelineno-18-18" href="#__codelineno-18-18"></a>        <span class="n">unit</span><span class="o">=</span><span class="s1">'meter'</span><span class="p">,</span>
+<a id="__codelineno-18-19" name="__codelineno-18-19" href="#__codelineno-18-19"></a>        <span class="n">a_eln</span><span class="o">=</span><span class="n">ELNAnnotation</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="s1">'NumberEditQuantity'</span><span class="p">),</span>
+<a id="__codelineno-18-20" name="__codelineno-18-20" href="#__codelineno-18-20"></a>        <span class="n">a_display</span><span class="o">=</span><span class="n">QuantityDisplayAnnotation</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="s1">'nm'</span><span class="p">),</span>
+<a id="__codelineno-18-21" name="__codelineno-18-21" href="#__codelineno-18-21"></a>    <span class="p">)</span>
 </code></pre></div>
 </div>
 <div class="tabbed-block">
@@ -5487,10 +5496,21 @@ a date picker, an enumeration gets a dropdown, a reference gets a search-and-sel
 <a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a><span class="w">      </span><span class="nt">m_annotations</span><span class="p">:</span>
 <a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a><span class="w">        </span><span class="nt">eln</span><span class="p">:</span>
 <a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a><span class="w">          </span><span class="nt">component</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EnumEditQuantity</span>
+<a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a><span class="w">    </span><span class="nt">thickness</span><span class="p">:</span>
+<a id="__codelineno-19-16" name="__codelineno-19-16" href="#__codelineno-19-16"></a><span class="w">      </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">float</span>
+<a id="__codelineno-19-17" name="__codelineno-19-17" href="#__codelineno-19-17"></a><span class="w">      </span><span class="nt">unit</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
+<a id="__codelineno-19-18" name="__codelineno-19-18" href="#__codelineno-19-18"></a><span class="w">      </span><span class="nt">m_annotations</span><span class="p">:</span>
+<a id="__codelineno-19-19" name="__codelineno-19-19" href="#__codelineno-19-19"></a><span class="w">        </span><span class="nt">eln</span><span class="p">:</span>
+<a id="__codelineno-19-20" name="__codelineno-19-20" href="#__codelineno-19-20"></a><span class="w">          </span><span class="nt">component</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NumberEditQuantity</span>
+<a id="__codelineno-19-21" name="__codelineno-19-21" href="#__codelineno-19-21"></a><span class="w">        </span><span class="nt">display</span><span class="p">:</span>
+<a id="__codelineno-19-22" name="__codelineno-19-22" href="#__codelineno-19-22"></a><span class="w">          </span><span class="nt">unit</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nm</span>
 </code></pre></div>
 </div>
 </div>
 </div>
+<p>The <code>display</code> annotation on <code>thickness</code> sets the unit the GUI shows the value in. It does not change
+how the value is stored: that is always the declared <code>unit</code>, and a thickness entered in nanometres is
+converted to metres when saved. The display unit has to be compatible with the declared one.</p>
 <h3 id="annotate-a-section">Annotate a section<a class="headerlink" href="#annotate-a-section" title="Permanent link">¶</a></h3>
 <p>Annotations on the <em>section</em> describe the section as a whole rather than one of its properties. The
 <code>display</code> annotation is the one to reach for first: it decides which properties the GUI shows, and in
@@ -5535,7 +5555,7 @@ quantity that matters first.</p>
 </div>
 </div>
 <p><code>visible</code> takes an <code>include</code> list, an <code>exclude</code> list, or both: without <code>include</code> every property of the section starts out visible, and <code>exclude</code> is subtracted afterwards, so a name given in both is excluded. <code>editable</code> is a filter of the same kind, but it renders properties read-only instead of hiding them — useful when a quantity inherited from a base section should be shown but not changed. <code>order</code> lists the properties that come first; everything else follows in declaration order.</p>
-<p>Beyond <code>eln</code>, annotations control plotting, display units and HDF5 visualization. Every annotation and its arguments is listed in <a href="../../reference/annotations.html">Reference &gt; Annotations</a>.</p>
+<p>Beyond <code>eln</code> and <code>display</code>, annotations control plotting and HDF5 visualization. Every annotation and its arguments is listed in <a href="../../reference/annotations.html">Reference &gt; Annotations</a>.</p>
 <h2 id="populate-data">Populate data<a class="headerlink" href="#populate-data" title="Permanent link">¶</a></h2>
 <p>With the schema defined, you create instances of it and fill them in.</p>
 <div class="tabbed-set tabbed-alternate" data-tabs="11:2"><input checked="checked" id="__tabbed_11_1" name="__tabbed_11" type="radio"><input id="__tabbed_11_2" name="__tabbed_11" type="radio"><div class="tabbed-labels"><label for="__tabbed_11_1">Python</label><label for="__tabbed_11_2">YAML</label></div>
@@ -5611,101 +5631,109 @@ entry point that operates on a whole entry. See
 <a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.datamodel.metainfo.annotations</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
 <a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>    <span class="n">ELNAnnotation</span><span class="p">,</span>
 <a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a>    <span class="n">Filter</span><span class="p">,</span>
-<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a>    <span class="n">SectionDisplayAnnotation</span><span class="p">,</span>
-<a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a><span class="p">)</span>
-<a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.metainfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">Datetime</span><span class="p">,</span> <span class="n">MEnum</span><span class="p">,</span> <span class="n">Quantity</span><span class="p">,</span> <span class="n">SchemaPackage</span><span class="p">,</span> <span class="n">Section</span><span class="p">,</span> <span class="n">SubSection</span>
-<a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a>
-<a id="__codelineno-25-9" name="__codelineno-25-9" href="#__codelineno-25-9"></a><span class="n">m_package</span> <span class="o">=</span> <span class="n">SchemaPackage</span><span class="p">()</span>
-<a id="__codelineno-25-10" name="__codelineno-25-10" href="#__codelineno-25-10"></a>
+<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a>    <span class="n">QuantityDisplayAnnotation</span><span class="p">,</span>
+<a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a>    <span class="n">SectionDisplayAnnotation</span><span class="p">,</span>
+<a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a><span class="p">)</span>
+<a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.metainfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">Datetime</span><span class="p">,</span> <span class="n">MEnum</span><span class="p">,</span> <span class="n">Quantity</span><span class="p">,</span> <span class="n">SchemaPackage</span><span class="p">,</span> <span class="n">Section</span><span class="p">,</span> <span class="n">SubSection</span>
+<a id="__codelineno-25-9" name="__codelineno-25-9" href="#__codelineno-25-9"></a>
+<a id="__codelineno-25-10" name="__codelineno-25-10" href="#__codelineno-25-10"></a><span class="n">m_package</span> <span class="o">=</span> <span class="n">SchemaPackage</span><span class="p">()</span>
 <a id="__codelineno-25-11" name="__codelineno-25-11" href="#__codelineno-25-11"></a>
-<a id="__codelineno-25-12" name="__codelineno-25-12" href="#__codelineno-25-12"></a><span class="k">class</span><span class="w"> </span><span class="nc">Instrument</span><span class="p">(</span><span class="n">EntryData</span><span class="p">):</span>
-<a id="__codelineno-25-13" name="__codelineno-25-13" href="#__codelineno-25-13"></a><span class="w">    </span><span class="sd">"""A piece of equipment used to carry out a process."""</span>
-<a id="__codelineno-25-14" name="__codelineno-25-14" href="#__codelineno-25-14"></a>
-<a id="__codelineno-25-15" name="__codelineno-25-15" href="#__codelineno-25-15"></a>    <span class="n">name</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
-<a id="__codelineno-25-16" name="__codelineno-25-16" href="#__codelineno-25-16"></a>        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
-<a id="__codelineno-25-17" name="__codelineno-25-17" href="#__codelineno-25-17"></a>        <span class="n">description</span><span class="o">=</span><span class="s1">'The name this instrument is known by in the lab.'</span><span class="p">,</span>
-<a id="__codelineno-25-18" name="__codelineno-25-18" href="#__codelineno-25-18"></a>        <span class="n">a_eln</span><span class="o">=</span><span class="n">ELNAnnotation</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="s1">'StringEditQuantity'</span><span class="p">),</span>
-<a id="__codelineno-25-19" name="__codelineno-25-19" href="#__codelineno-25-19"></a>    <span class="p">)</span>
-<a id="__codelineno-25-20" name="__codelineno-25-20" href="#__codelineno-25-20"></a>
+<a id="__codelineno-25-12" name="__codelineno-25-12" href="#__codelineno-25-12"></a>
+<a id="__codelineno-25-13" name="__codelineno-25-13" href="#__codelineno-25-13"></a><span class="k">class</span><span class="w"> </span><span class="nc">Instrument</span><span class="p">(</span><span class="n">EntryData</span><span class="p">):</span>
+<a id="__codelineno-25-14" name="__codelineno-25-14" href="#__codelineno-25-14"></a><span class="w">    </span><span class="sd">"""A piece of equipment used to carry out a process."""</span>
+<a id="__codelineno-25-15" name="__codelineno-25-15" href="#__codelineno-25-15"></a>
+<a id="__codelineno-25-16" name="__codelineno-25-16" href="#__codelineno-25-16"></a>    <span class="n">name</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
+<a id="__codelineno-25-17" name="__codelineno-25-17" href="#__codelineno-25-17"></a>        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+<a id="__codelineno-25-18" name="__codelineno-25-18" href="#__codelineno-25-18"></a>        <span class="n">description</span><span class="o">=</span><span class="s1">'The name this instrument is known by in the lab.'</span><span class="p">,</span>
+<a id="__codelineno-25-19" name="__codelineno-25-19" href="#__codelineno-25-19"></a>        <span class="n">a_eln</span><span class="o">=</span><span class="n">ELNAnnotation</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="s1">'StringEditQuantity'</span><span class="p">),</span>
+<a id="__codelineno-25-20" name="__codelineno-25-20" href="#__codelineno-25-20"></a>    <span class="p">)</span>
 <a id="__codelineno-25-21" name="__codelineno-25-21" href="#__codelineno-25-21"></a>
-<a id="__codelineno-25-22" name="__codelineno-25-22" href="#__codelineno-25-22"></a><span class="k">class</span><span class="w"> </span><span class="nc">Process</span><span class="p">(</span><span class="n">ArchiveSection</span><span class="p">):</span>
-<a id="__codelineno-25-23" name="__codelineno-25-23" href="#__codelineno-25-23"></a><span class="w">    </span><span class="sd">"""A single step carried out on a sample."""</span>
-<a id="__codelineno-25-24" name="__codelineno-25-24" href="#__codelineno-25-24"></a>
-<a id="__codelineno-25-25" name="__codelineno-25-25" href="#__codelineno-25-25"></a>    <span class="n">start_time</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
-<a id="__codelineno-25-26" name="__codelineno-25-26" href="#__codelineno-25-26"></a>        <span class="nb">type</span><span class="o">=</span><span class="n">Datetime</span><span class="p">,</span>
-<a id="__codelineno-25-27" name="__codelineno-25-27" href="#__codelineno-25-27"></a>        <span class="n">description</span><span class="o">=</span><span class="s1">'When the process was started.'</span><span class="p">,</span>
-<a id="__codelineno-25-28" name="__codelineno-25-28" href="#__codelineno-25-28"></a>        <span class="n">a_eln</span><span class="o">=</span><span class="n">ELNAnnotation</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="s1">'DateTimeEditQuantity'</span><span class="p">),</span>
-<a id="__codelineno-25-29" name="__codelineno-25-29" href="#__codelineno-25-29"></a>    <span class="p">)</span>
-<a id="__codelineno-25-30" name="__codelineno-25-30" href="#__codelineno-25-30"></a>    <span class="n">instrument</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
-<a id="__codelineno-25-31" name="__codelineno-25-31" href="#__codelineno-25-31"></a>        <span class="nb">type</span><span class="o">=</span><span class="n">Instrument</span><span class="p">,</span>
-<a id="__codelineno-25-32" name="__codelineno-25-32" href="#__codelineno-25-32"></a>        <span class="n">description</span><span class="o">=</span><span class="s1">'The instrument used for this process.'</span><span class="p">,</span>
-<a id="__codelineno-25-33" name="__codelineno-25-33" href="#__codelineno-25-33"></a>        <span class="n">a_eln</span><span class="o">=</span><span class="n">ELNAnnotation</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="s1">'ReferenceEditQuantity'</span><span class="p">),</span>
-<a id="__codelineno-25-34" name="__codelineno-25-34" href="#__codelineno-25-34"></a>    <span class="p">)</span>
-<a id="__codelineno-25-35" name="__codelineno-25-35" href="#__codelineno-25-35"></a>
+<a id="__codelineno-25-22" name="__codelineno-25-22" href="#__codelineno-25-22"></a>
+<a id="__codelineno-25-23" name="__codelineno-25-23" href="#__codelineno-25-23"></a><span class="k">class</span><span class="w"> </span><span class="nc">Process</span><span class="p">(</span><span class="n">ArchiveSection</span><span class="p">):</span>
+<a id="__codelineno-25-24" name="__codelineno-25-24" href="#__codelineno-25-24"></a><span class="w">    </span><span class="sd">"""A single step carried out on a sample."""</span>
+<a id="__codelineno-25-25" name="__codelineno-25-25" href="#__codelineno-25-25"></a>
+<a id="__codelineno-25-26" name="__codelineno-25-26" href="#__codelineno-25-26"></a>    <span class="n">start_time</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
+<a id="__codelineno-25-27" name="__codelineno-25-27" href="#__codelineno-25-27"></a>        <span class="nb">type</span><span class="o">=</span><span class="n">Datetime</span><span class="p">,</span>
+<a id="__codelineno-25-28" name="__codelineno-25-28" href="#__codelineno-25-28"></a>        <span class="n">description</span><span class="o">=</span><span class="s1">'When the process was started.'</span><span class="p">,</span>
+<a id="__codelineno-25-29" name="__codelineno-25-29" href="#__codelineno-25-29"></a>        <span class="n">a_eln</span><span class="o">=</span><span class="n">ELNAnnotation</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="s1">'DateTimeEditQuantity'</span><span class="p">),</span>
+<a id="__codelineno-25-30" name="__codelineno-25-30" href="#__codelineno-25-30"></a>    <span class="p">)</span>
+<a id="__codelineno-25-31" name="__codelineno-25-31" href="#__codelineno-25-31"></a>    <span class="n">instrument</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
+<a id="__codelineno-25-32" name="__codelineno-25-32" href="#__codelineno-25-32"></a>        <span class="nb">type</span><span class="o">=</span><span class="n">Instrument</span><span class="p">,</span>
+<a id="__codelineno-25-33" name="__codelineno-25-33" href="#__codelineno-25-33"></a>        <span class="n">description</span><span class="o">=</span><span class="s1">'The instrument used for this process.'</span><span class="p">,</span>
+<a id="__codelineno-25-34" name="__codelineno-25-34" href="#__codelineno-25-34"></a>        <span class="n">a_eln</span><span class="o">=</span><span class="n">ELNAnnotation</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="s1">'ReferenceEditQuantity'</span><span class="p">),</span>
+<a id="__codelineno-25-35" name="__codelineno-25-35" href="#__codelineno-25-35"></a>    <span class="p">)</span>
 <a id="__codelineno-25-36" name="__codelineno-25-36" href="#__codelineno-25-36"></a>
-<a id="__codelineno-25-37" name="__codelineno-25-37" href="#__codelineno-25-37"></a><span class="k">class</span><span class="w"> </span><span class="nc">Evaporation</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
-<a id="__codelineno-25-38" name="__codelineno-25-38" href="#__codelineno-25-38"></a><span class="w">    </span><span class="sd">"""Depositing a material onto the sample from the vapour phase."""</span>
-<a id="__codelineno-25-39" name="__codelineno-25-39" href="#__codelineno-25-39"></a>
-<a id="__codelineno-25-40" name="__codelineno-25-40" href="#__codelineno-25-40"></a>    <span class="n">chamber_pressure</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
-<a id="__codelineno-25-41" name="__codelineno-25-41" href="#__codelineno-25-41"></a>        <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
-<a id="__codelineno-25-42" name="__codelineno-25-42" href="#__codelineno-25-42"></a>        <span class="n">unit</span><span class="o">=</span><span class="s1">'pascal'</span><span class="p">,</span>
-<a id="__codelineno-25-43" name="__codelineno-25-43" href="#__codelineno-25-43"></a>        <span class="n">description</span><span class="o">=</span><span class="s1">'The pressure in the chamber during evaporation.'</span><span class="p">,</span>
-<a id="__codelineno-25-44" name="__codelineno-25-44" href="#__codelineno-25-44"></a>        <span class="n">a_eln</span><span class="o">=</span><span class="n">ELNAnnotation</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="s1">'NumberEditQuantity'</span><span class="p">),</span>
-<a id="__codelineno-25-45" name="__codelineno-25-45" href="#__codelineno-25-45"></a>    <span class="p">)</span>
-<a id="__codelineno-25-46" name="__codelineno-25-46" href="#__codelineno-25-46"></a>
+<a id="__codelineno-25-37" name="__codelineno-25-37" href="#__codelineno-25-37"></a>
+<a id="__codelineno-25-38" name="__codelineno-25-38" href="#__codelineno-25-38"></a><span class="k">class</span><span class="w"> </span><span class="nc">Evaporation</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
+<a id="__codelineno-25-39" name="__codelineno-25-39" href="#__codelineno-25-39"></a><span class="w">    </span><span class="sd">"""Depositing a material onto the sample from the vapour phase."""</span>
+<a id="__codelineno-25-40" name="__codelineno-25-40" href="#__codelineno-25-40"></a>
+<a id="__codelineno-25-41" name="__codelineno-25-41" href="#__codelineno-25-41"></a>    <span class="n">chamber_pressure</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
+<a id="__codelineno-25-42" name="__codelineno-25-42" href="#__codelineno-25-42"></a>        <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
+<a id="__codelineno-25-43" name="__codelineno-25-43" href="#__codelineno-25-43"></a>        <span class="n">unit</span><span class="o">=</span><span class="s1">'pascal'</span><span class="p">,</span>
+<a id="__codelineno-25-44" name="__codelineno-25-44" href="#__codelineno-25-44"></a>        <span class="n">description</span><span class="o">=</span><span class="s1">'The pressure in the chamber during evaporation.'</span><span class="p">,</span>
+<a id="__codelineno-25-45" name="__codelineno-25-45" href="#__codelineno-25-45"></a>        <span class="n">a_eln</span><span class="o">=</span><span class="n">ELNAnnotation</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="s1">'NumberEditQuantity'</span><span class="p">),</span>
+<a id="__codelineno-25-46" name="__codelineno-25-46" href="#__codelineno-25-46"></a>    <span class="p">)</span>
 <a id="__codelineno-25-47" name="__codelineno-25-47" href="#__codelineno-25-47"></a>
-<a id="__codelineno-25-48" name="__codelineno-25-48" href="#__codelineno-25-48"></a><span class="k">class</span><span class="w"> </span><span class="nc">Annealing</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
-<a id="__codelineno-25-49" name="__codelineno-25-49" href="#__codelineno-25-49"></a><span class="w">    </span><span class="sd">"""Heating the sample to change its structure."""</span>
-<a id="__codelineno-25-50" name="__codelineno-25-50" href="#__codelineno-25-50"></a>
-<a id="__codelineno-25-51" name="__codelineno-25-51" href="#__codelineno-25-51"></a>    <span class="c1"># This section is always carried out in the same furnace, so the inherited</span>
-<a id="__codelineno-25-52" name="__codelineno-25-52" href="#__codelineno-25-52"></a>    <span class="c1"># "instrument" quantity is hidden and "temperature" is shown first.</span>
-<a id="__codelineno-25-53" name="__codelineno-25-53" href="#__codelineno-25-53"></a>    <span class="n">m_def</span> <span class="o">=</span> <span class="n">Section</span><span class="p">(</span>
-<a id="__codelineno-25-54" name="__codelineno-25-54" href="#__codelineno-25-54"></a>        <span class="n">a_display</span><span class="o">=</span><span class="n">SectionDisplayAnnotation</span><span class="p">(</span>
-<a id="__codelineno-25-55" name="__codelineno-25-55" href="#__codelineno-25-55"></a>            <span class="n">visible</span><span class="o">=</span><span class="n">Filter</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s1">'instrument'</span><span class="p">]),</span>
-<a id="__codelineno-25-56" name="__codelineno-25-56" href="#__codelineno-25-56"></a>            <span class="n">order</span><span class="o">=</span><span class="p">[</span><span class="s1">'temperature'</span><span class="p">,</span> <span class="s1">'start_time'</span><span class="p">],</span>
-<a id="__codelineno-25-57" name="__codelineno-25-57" href="#__codelineno-25-57"></a>        <span class="p">),</span>
-<a id="__codelineno-25-58" name="__codelineno-25-58" href="#__codelineno-25-58"></a>    <span class="p">)</span>
-<a id="__codelineno-25-59" name="__codelineno-25-59" href="#__codelineno-25-59"></a>    <span class="n">temperature</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
-<a id="__codelineno-25-60" name="__codelineno-25-60" href="#__codelineno-25-60"></a>        <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
-<a id="__codelineno-25-61" name="__codelineno-25-61" href="#__codelineno-25-61"></a>        <span class="n">unit</span><span class="o">=</span><span class="s1">'kelvin'</span><span class="p">,</span>
-<a id="__codelineno-25-62" name="__codelineno-25-62" href="#__codelineno-25-62"></a>        <span class="n">description</span><span class="o">=</span><span class="s1">'The temperature the sample was held at.'</span><span class="p">,</span>
-<a id="__codelineno-25-63" name="__codelineno-25-63" href="#__codelineno-25-63"></a>        <span class="n">a_eln</span><span class="o">=</span><span class="n">ELNAnnotation</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="s1">'NumberEditQuantity'</span><span class="p">),</span>
-<a id="__codelineno-25-64" name="__codelineno-25-64" href="#__codelineno-25-64"></a>    <span class="p">)</span>
-<a id="__codelineno-25-65" name="__codelineno-25-65" href="#__codelineno-25-65"></a>
+<a id="__codelineno-25-48" name="__codelineno-25-48" href="#__codelineno-25-48"></a>
+<a id="__codelineno-25-49" name="__codelineno-25-49" href="#__codelineno-25-49"></a><span class="k">class</span><span class="w"> </span><span class="nc">Annealing</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
+<a id="__codelineno-25-50" name="__codelineno-25-50" href="#__codelineno-25-50"></a><span class="w">    </span><span class="sd">"""Heating the sample to change its structure."""</span>
+<a id="__codelineno-25-51" name="__codelineno-25-51" href="#__codelineno-25-51"></a>
+<a id="__codelineno-25-52" name="__codelineno-25-52" href="#__codelineno-25-52"></a>    <span class="c1"># This section is always carried out in the same furnace, so the inherited</span>
+<a id="__codelineno-25-53" name="__codelineno-25-53" href="#__codelineno-25-53"></a>    <span class="c1"># "instrument" quantity is hidden and "temperature" is shown first.</span>
+<a id="__codelineno-25-54" name="__codelineno-25-54" href="#__codelineno-25-54"></a>    <span class="n">m_def</span> <span class="o">=</span> <span class="n">Section</span><span class="p">(</span>
+<a id="__codelineno-25-55" name="__codelineno-25-55" href="#__codelineno-25-55"></a>        <span class="n">a_display</span><span class="o">=</span><span class="n">SectionDisplayAnnotation</span><span class="p">(</span>
+<a id="__codelineno-25-56" name="__codelineno-25-56" href="#__codelineno-25-56"></a>            <span class="n">visible</span><span class="o">=</span><span class="n">Filter</span><span class="p">(</span><span class="n">exclude</span><span class="o">=</span><span class="p">[</span><span class="s1">'instrument'</span><span class="p">]),</span>
+<a id="__codelineno-25-57" name="__codelineno-25-57" href="#__codelineno-25-57"></a>            <span class="n">order</span><span class="o">=</span><span class="p">[</span><span class="s1">'temperature'</span><span class="p">,</span> <span class="s1">'start_time'</span><span class="p">],</span>
+<a id="__codelineno-25-58" name="__codelineno-25-58" href="#__codelineno-25-58"></a>        <span class="p">),</span>
+<a id="__codelineno-25-59" name="__codelineno-25-59" href="#__codelineno-25-59"></a>    <span class="p">)</span>
+<a id="__codelineno-25-60" name="__codelineno-25-60" href="#__codelineno-25-60"></a>    <span class="n">temperature</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
+<a id="__codelineno-25-61" name="__codelineno-25-61" href="#__codelineno-25-61"></a>        <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
+<a id="__codelineno-25-62" name="__codelineno-25-62" href="#__codelineno-25-62"></a>        <span class="n">unit</span><span class="o">=</span><span class="s1">'kelvin'</span><span class="p">,</span>
+<a id="__codelineno-25-63" name="__codelineno-25-63" href="#__codelineno-25-63"></a>        <span class="n">description</span><span class="o">=</span><span class="s1">'The temperature the sample was held at.'</span><span class="p">,</span>
+<a id="__codelineno-25-64" name="__codelineno-25-64" href="#__codelineno-25-64"></a>        <span class="n">a_eln</span><span class="o">=</span><span class="n">ELNAnnotation</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="s1">'NumberEditQuantity'</span><span class="p">),</span>
+<a id="__codelineno-25-65" name="__codelineno-25-65" href="#__codelineno-25-65"></a>    <span class="p">)</span>
 <a id="__codelineno-25-66" name="__codelineno-25-66" href="#__codelineno-25-66"></a>
-<a id="__codelineno-25-67" name="__codelineno-25-67" href="#__codelineno-25-67"></a><span class="k">class</span><span class="w"> </span><span class="nc">Sample</span><span class="p">(</span><span class="n">EntryData</span><span class="p">):</span>
-<a id="__codelineno-25-68" name="__codelineno-25-68" href="#__codelineno-25-68"></a><span class="w">    </span><span class="sd">"""A specimen that a sequence of processes is carried out on."""</span>
-<a id="__codelineno-25-69" name="__codelineno-25-69" href="#__codelineno-25-69"></a>
-<a id="__codelineno-25-70" name="__codelineno-25-70" href="#__codelineno-25-70"></a>    <span class="n">name</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
-<a id="__codelineno-25-71" name="__codelineno-25-71" href="#__codelineno-25-71"></a>        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
-<a id="__codelineno-25-72" name="__codelineno-25-72" href="#__codelineno-25-72"></a>        <span class="n">description</span><span class="o">=</span><span class="s1">'A short name for this sample.'</span><span class="p">,</span>
-<a id="__codelineno-25-73" name="__codelineno-25-73" href="#__codelineno-25-73"></a>        <span class="n">a_eln</span><span class="o">=</span><span class="n">ELNAnnotation</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="s1">'StringEditQuantity'</span><span class="p">),</span>
-<a id="__codelineno-25-74" name="__codelineno-25-74" href="#__codelineno-25-74"></a>    <span class="p">)</span>
-<a id="__codelineno-25-75" name="__codelineno-25-75" href="#__codelineno-25-75"></a>    <span class="n">substrate_type</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
-<a id="__codelineno-25-76" name="__codelineno-25-76" href="#__codelineno-25-76"></a>        <span class="nb">type</span><span class="o">=</span><span class="n">MEnum</span><span class="p">(</span><span class="s1">'silicon'</span><span class="p">,</span> <span class="s1">'glass'</span><span class="p">,</span> <span class="s1">'sapphire'</span><span class="p">),</span>
-<a id="__codelineno-25-77" name="__codelineno-25-77" href="#__codelineno-25-77"></a>        <span class="n">description</span><span class="o">=</span><span class="s1">'The material the sample was grown on.'</span><span class="p">,</span>
-<a id="__codelineno-25-78" name="__codelineno-25-78" href="#__codelineno-25-78"></a>        <span class="n">a_eln</span><span class="o">=</span><span class="n">ELNAnnotation</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="s1">'EnumEditQuantity'</span><span class="p">),</span>
-<a id="__codelineno-25-79" name="__codelineno-25-79" href="#__codelineno-25-79"></a>    <span class="p">)</span>
-<a id="__codelineno-25-80" name="__codelineno-25-80" href="#__codelineno-25-80"></a>    <span class="n">tags</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
-<a id="__codelineno-25-81" name="__codelineno-25-81" href="#__codelineno-25-81"></a>        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
-<a id="__codelineno-25-82" name="__codelineno-25-82" href="#__codelineno-25-82"></a>        <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="s1">'*'</span><span class="p">],</span>
-<a id="__codelineno-25-83" name="__codelineno-25-83" href="#__codelineno-25-83"></a>        <span class="n">description</span><span class="o">=</span><span class="s1">'Free-form labels used to group samples.'</span><span class="p">,</span>
-<a id="__codelineno-25-84" name="__codelineno-25-84" href="#__codelineno-25-84"></a>    <span class="p">)</span>
-<a id="__codelineno-25-85" name="__codelineno-25-85" href="#__codelineno-25-85"></a>    <span class="n">sample_id</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
-<a id="__codelineno-25-86" name="__codelineno-25-86" href="#__codelineno-25-86"></a>        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
-<a id="__codelineno-25-87" name="__codelineno-25-87" href="#__codelineno-25-87"></a>        <span class="n">description</span><span class="o">=</span><span class="s1">'An identifier derived from the name and the number of processes.'</span><span class="p">,</span>
-<a id="__codelineno-25-88" name="__codelineno-25-88" href="#__codelineno-25-88"></a>    <span class="p">)</span>
-<a id="__codelineno-25-89" name="__codelineno-25-89" href="#__codelineno-25-89"></a>
-<a id="__codelineno-25-90" name="__codelineno-25-90" href="#__codelineno-25-90"></a>    <span class="n">processes</span> <span class="o">=</span> <span class="n">SubSection</span><span class="p">(</span><span class="n">section</span><span class="o">=</span><span class="n">Process</span><span class="p">,</span> <span class="n">repeats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<a id="__codelineno-25-91" name="__codelineno-25-91" href="#__codelineno-25-91"></a>
-<a id="__codelineno-25-92" name="__codelineno-25-92" href="#__codelineno-25-92"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">normalize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">archive</span><span class="p">,</span> <span class="n">logger</span><span class="p">):</span>
-<a id="__codelineno-25-93" name="__codelineno-25-93" href="#__codelineno-25-93"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="n">archive</span><span class="p">,</span> <span class="n">logger</span><span class="p">)</span>
-<a id="__codelineno-25-94" name="__codelineno-25-94" href="#__codelineno-25-94"></a>
-<a id="__codelineno-25-95" name="__codelineno-25-95" href="#__codelineno-25-95"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">sample_id</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-25-96" name="__codelineno-25-96" href="#__codelineno-25-96"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">sample_id</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">--</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">processes</span><span class="p">)</span><span class="si">}</span><span class="s1">'</span>
+<a id="__codelineno-25-67" name="__codelineno-25-67" href="#__codelineno-25-67"></a>
+<a id="__codelineno-25-68" name="__codelineno-25-68" href="#__codelineno-25-68"></a><span class="k">class</span><span class="w"> </span><span class="nc">Sample</span><span class="p">(</span><span class="n">EntryData</span><span class="p">):</span>
+<a id="__codelineno-25-69" name="__codelineno-25-69" href="#__codelineno-25-69"></a><span class="w">    </span><span class="sd">"""A specimen that a sequence of processes is carried out on."""</span>
+<a id="__codelineno-25-70" name="__codelineno-25-70" href="#__codelineno-25-70"></a>
+<a id="__codelineno-25-71" name="__codelineno-25-71" href="#__codelineno-25-71"></a>    <span class="n">name</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
+<a id="__codelineno-25-72" name="__codelineno-25-72" href="#__codelineno-25-72"></a>        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+<a id="__codelineno-25-73" name="__codelineno-25-73" href="#__codelineno-25-73"></a>        <span class="n">description</span><span class="o">=</span><span class="s1">'A short name for this sample.'</span><span class="p">,</span>
+<a id="__codelineno-25-74" name="__codelineno-25-74" href="#__codelineno-25-74"></a>        <span class="n">a_eln</span><span class="o">=</span><span class="n">ELNAnnotation</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="s1">'StringEditQuantity'</span><span class="p">),</span>
+<a id="__codelineno-25-75" name="__codelineno-25-75" href="#__codelineno-25-75"></a>    <span class="p">)</span>
+<a id="__codelineno-25-76" name="__codelineno-25-76" href="#__codelineno-25-76"></a>    <span class="n">substrate_type</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
+<a id="__codelineno-25-77" name="__codelineno-25-77" href="#__codelineno-25-77"></a>        <span class="nb">type</span><span class="o">=</span><span class="n">MEnum</span><span class="p">(</span><span class="s1">'silicon'</span><span class="p">,</span> <span class="s1">'glass'</span><span class="p">,</span> <span class="s1">'sapphire'</span><span class="p">),</span>
+<a id="__codelineno-25-78" name="__codelineno-25-78" href="#__codelineno-25-78"></a>        <span class="n">description</span><span class="o">=</span><span class="s1">'The material the sample was grown on.'</span><span class="p">,</span>
+<a id="__codelineno-25-79" name="__codelineno-25-79" href="#__codelineno-25-79"></a>        <span class="n">a_eln</span><span class="o">=</span><span class="n">ELNAnnotation</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="s1">'EnumEditQuantity'</span><span class="p">),</span>
+<a id="__codelineno-25-80" name="__codelineno-25-80" href="#__codelineno-25-80"></a>    <span class="p">)</span>
+<a id="__codelineno-25-81" name="__codelineno-25-81" href="#__codelineno-25-81"></a>    <span class="n">thickness</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
+<a id="__codelineno-25-82" name="__codelineno-25-82" href="#__codelineno-25-82"></a>        <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span>
+<a id="__codelineno-25-83" name="__codelineno-25-83" href="#__codelineno-25-83"></a>        <span class="n">unit</span><span class="o">=</span><span class="s1">'meter'</span><span class="p">,</span>
+<a id="__codelineno-25-84" name="__codelineno-25-84" href="#__codelineno-25-84"></a>        <span class="n">description</span><span class="o">=</span><span class="s1">'The thickness of the sample.'</span><span class="p">,</span>
+<a id="__codelineno-25-85" name="__codelineno-25-85" href="#__codelineno-25-85"></a>        <span class="n">a_eln</span><span class="o">=</span><span class="n">ELNAnnotation</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="s1">'NumberEditQuantity'</span><span class="p">),</span>
+<a id="__codelineno-25-86" name="__codelineno-25-86" href="#__codelineno-25-86"></a>        <span class="n">a_display</span><span class="o">=</span><span class="n">QuantityDisplayAnnotation</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="s1">'nm'</span><span class="p">),</span>
+<a id="__codelineno-25-87" name="__codelineno-25-87" href="#__codelineno-25-87"></a>    <span class="p">)</span>
+<a id="__codelineno-25-88" name="__codelineno-25-88" href="#__codelineno-25-88"></a>    <span class="n">tags</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
+<a id="__codelineno-25-89" name="__codelineno-25-89" href="#__codelineno-25-89"></a>        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+<a id="__codelineno-25-90" name="__codelineno-25-90" href="#__codelineno-25-90"></a>        <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="s1">'*'</span><span class="p">],</span>
+<a id="__codelineno-25-91" name="__codelineno-25-91" href="#__codelineno-25-91"></a>        <span class="n">description</span><span class="o">=</span><span class="s1">'Free-form labels used to group samples.'</span><span class="p">,</span>
+<a id="__codelineno-25-92" name="__codelineno-25-92" href="#__codelineno-25-92"></a>    <span class="p">)</span>
+<a id="__codelineno-25-93" name="__codelineno-25-93" href="#__codelineno-25-93"></a>    <span class="n">sample_id</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
+<a id="__codelineno-25-94" name="__codelineno-25-94" href="#__codelineno-25-94"></a>        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+<a id="__codelineno-25-95" name="__codelineno-25-95" href="#__codelineno-25-95"></a>        <span class="n">description</span><span class="o">=</span><span class="s1">'An identifier derived from the name and the number of processes.'</span><span class="p">,</span>
+<a id="__codelineno-25-96" name="__codelineno-25-96" href="#__codelineno-25-96"></a>    <span class="p">)</span>
 <a id="__codelineno-25-97" name="__codelineno-25-97" href="#__codelineno-25-97"></a>
-<a id="__codelineno-25-98" name="__codelineno-25-98" href="#__codelineno-25-98"></a>
-<a id="__codelineno-25-99" name="__codelineno-25-99" href="#__codelineno-25-99"></a><span class="n">m_package</span><span class="o">.</span><span class="n">__init_metainfo__</span><span class="p">()</span>
+<a id="__codelineno-25-98" name="__codelineno-25-98" href="#__codelineno-25-98"></a>    <span class="n">processes</span> <span class="o">=</span> <span class="n">SubSection</span><span class="p">(</span><span class="n">section</span><span class="o">=</span><span class="n">Process</span><span class="p">,</span> <span class="n">repeats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-25-99" name="__codelineno-25-99" href="#__codelineno-25-99"></a>
+<a id="__codelineno-25-100" name="__codelineno-25-100" href="#__codelineno-25-100"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">normalize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">archive</span><span class="p">,</span> <span class="n">logger</span><span class="p">):</span>
+<a id="__codelineno-25-101" name="__codelineno-25-101" href="#__codelineno-25-101"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="n">archive</span><span class="p">,</span> <span class="n">logger</span><span class="p">)</span>
+<a id="__codelineno-25-102" name="__codelineno-25-102" href="#__codelineno-25-102"></a>
+<a id="__codelineno-25-103" name="__codelineno-25-103" href="#__codelineno-25-103"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">sample_id</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-25-104" name="__codelineno-25-104" href="#__codelineno-25-104"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">sample_id</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s1">--</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">processes</span><span class="p">)</span><span class="si">}</span><span class="s1">'</span>
+<a id="__codelineno-25-105" name="__codelineno-25-105" href="#__codelineno-25-105"></a>
+<a id="__codelineno-25-106" name="__codelineno-25-106" href="#__codelineno-25-106"></a>
+<a id="__codelineno-25-107" name="__codelineno-25-107" href="#__codelineno-25-107"></a><span class="n">m_package</span><span class="o">.</span><span class="n">__init_metainfo__</span><span class="p">()</span>
 </code></pre></div>
 <!-- fmt: on --><p></p>
 </div>
@@ -5793,17 +5821,26 @@ entry point that operates on a whole entry. See
 <a id="__codelineno-26-81" name="__codelineno-26-81" href="#__codelineno-26-81"></a><span class="w">          </span><span class="nt">m_annotations</span><span class="p">:</span>
 <a id="__codelineno-26-82" name="__codelineno-26-82" href="#__codelineno-26-82"></a><span class="w">            </span><span class="nt">eln</span><span class="p">:</span>
 <a id="__codelineno-26-83" name="__codelineno-26-83" href="#__codelineno-26-83"></a><span class="w">              </span><span class="nt">component</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">EnumEditQuantity</span>
-<a id="__codelineno-26-84" name="__codelineno-26-84" href="#__codelineno-26-84"></a><span class="w">        </span><span class="nt">tags</span><span class="p">:</span>
-<a id="__codelineno-26-85" name="__codelineno-26-85" href="#__codelineno-26-85"></a><span class="w">          </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str</span>
-<a id="__codelineno-26-86" name="__codelineno-26-86" href="#__codelineno-26-86"></a><span class="w">          </span><span class="nt">shape</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">'*'</span><span class="p p-Indicator">]</span>
-<a id="__codelineno-26-87" name="__codelineno-26-87" href="#__codelineno-26-87"></a><span class="w">          </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Free-form labels used to group samples.</span>
-<a id="__codelineno-26-88" name="__codelineno-26-88" href="#__codelineno-26-88"></a><span class="w">        </span><span class="nt">sample_id</span><span class="p">:</span>
-<a id="__codelineno-26-89" name="__codelineno-26-89" href="#__codelineno-26-89"></a><span class="w">          </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str</span>
-<a id="__codelineno-26-90" name="__codelineno-26-90" href="#__codelineno-26-90"></a><span class="w">          </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">An identifier derived from the name and the number of processes.</span>
-<a id="__codelineno-26-91" name="__codelineno-26-91" href="#__codelineno-26-91"></a><span class="w">      </span><span class="nt">sub_sections</span><span class="p">:</span>
-<a id="__codelineno-26-92" name="__codelineno-26-92" href="#__codelineno-26-92"></a><span class="w">        </span><span class="nt">processes</span><span class="p">:</span>
-<a id="__codelineno-26-93" name="__codelineno-26-93" href="#__codelineno-26-93"></a><span class="w">          </span><span class="nt">section</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Process</span>
-<a id="__codelineno-26-94" name="__codelineno-26-94" href="#__codelineno-26-94"></a><span class="w">          </span><span class="nt">repeats</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<a id="__codelineno-26-84" name="__codelineno-26-84" href="#__codelineno-26-84"></a><span class="w">        </span><span class="nt">thickness</span><span class="p">:</span>
+<a id="__codelineno-26-85" name="__codelineno-26-85" href="#__codelineno-26-85"></a><span class="w">          </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">float</span>
+<a id="__codelineno-26-86" name="__codelineno-26-86" href="#__codelineno-26-86"></a><span class="w">          </span><span class="nt">unit</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">meter</span>
+<a id="__codelineno-26-87" name="__codelineno-26-87" href="#__codelineno-26-87"></a><span class="w">          </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">The thickness of the sample.</span>
+<a id="__codelineno-26-88" name="__codelineno-26-88" href="#__codelineno-26-88"></a><span class="w">          </span><span class="nt">m_annotations</span><span class="p">:</span>
+<a id="__codelineno-26-89" name="__codelineno-26-89" href="#__codelineno-26-89"></a><span class="w">            </span><span class="nt">eln</span><span class="p">:</span>
+<a id="__codelineno-26-90" name="__codelineno-26-90" href="#__codelineno-26-90"></a><span class="w">              </span><span class="nt">component</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">NumberEditQuantity</span>
+<a id="__codelineno-26-91" name="__codelineno-26-91" href="#__codelineno-26-91"></a><span class="w">            </span><span class="nt">display</span><span class="p">:</span>
+<a id="__codelineno-26-92" name="__codelineno-26-92" href="#__codelineno-26-92"></a><span class="w">              </span><span class="nt">unit</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nm</span>
+<a id="__codelineno-26-93" name="__codelineno-26-93" href="#__codelineno-26-93"></a><span class="w">        </span><span class="nt">tags</span><span class="p">:</span>
+<a id="__codelineno-26-94" name="__codelineno-26-94" href="#__codelineno-26-94"></a><span class="w">          </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str</span>
+<a id="__codelineno-26-95" name="__codelineno-26-95" href="#__codelineno-26-95"></a><span class="w">          </span><span class="nt">shape</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">'*'</span><span class="p p-Indicator">]</span>
+<a id="__codelineno-26-96" name="__codelineno-26-96" href="#__codelineno-26-96"></a><span class="w">          </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Free-form labels used to group samples.</span>
+<a id="__codelineno-26-97" name="__codelineno-26-97" href="#__codelineno-26-97"></a><span class="w">        </span><span class="nt">sample_id</span><span class="p">:</span>
+<a id="__codelineno-26-98" name="__codelineno-26-98" href="#__codelineno-26-98"></a><span class="w">          </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">str</span>
+<a id="__codelineno-26-99" name="__codelineno-26-99" href="#__codelineno-26-99"></a><span class="w">          </span><span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">An identifier derived from the name and the number of processes.</span>
+<a id="__codelineno-26-100" name="__codelineno-26-100" href="#__codelineno-26-100"></a><span class="w">      </span><span class="nt">sub_sections</span><span class="p">:</span>
+<a id="__codelineno-26-101" name="__codelineno-26-101" href="#__codelineno-26-101"></a><span class="w">        </span><span class="nt">processes</span><span class="p">:</span>
+<a id="__codelineno-26-102" name="__codelineno-26-102" href="#__codelineno-26-102"></a><span class="w">          </span><span class="nt">section</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Process</span>
+<a id="__codelineno-26-103" name="__codelineno-26-103" href="#__codelineno-26-103"></a><span class="w">          </span><span class="nt">repeats</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
 </code></pre></div>
 </div>
 </div>
