@@ -1,9 +1,4 @@
-<!-- markdownlint-disable MD013 -->
-<!-- Disabled MD013: long lines are needed in this tutorial -->
-
 # Upload and publish data using the NOMAD API
-
-<!-- TODO: Align the capitalization of "project"/"entry" with the docs-wide decision (#365 uses "Project"/"Entry", #374 uses "project"/"entry"), and add "project" to the glossary. -->
 
 In this tutorial, we interact with the NOMAD API using Python and the [`nomad-utility-workflows`](https://fairmat-nfdi.github.io/nomad-utility-workflows/){:target="_blank" rel="noopener"} package, to programmatically perform the full workflow for uploading and publishing data. We work with example data files to create projects, inspect the generated entries, modify metadata, share the projects with collaborators, and publish them on the NOMAD test deployment. By the end of the tutorial, we will have reproduced the core project workflow available in the NOMAD GUI.
 
@@ -52,7 +47,7 @@ Before starting, make sure you have the following:
 
 ## Environment setup
 
-In this tutorial, we will use the [NOMAD test deployment](https://nomad-lab.eu/test/){:target="_blank" rel="noopener"}. Therefore, in all code examples, we will set `url="test"` when calling the helper functions. Later, you can switch to `url="prod"` or a custom NOMAD API URL if needed. When you switch to `url="prod"`, also set `nomad_gui`, defined in [Create projects](#create-projects), to `https://nomad-lab.eu/prod/v1/gui/v2`.
+In this tutorial, we will use the [NOMAD test deployment](https://nomad-lab.eu/test/){:target="_blank" rel="noopener"}. Therefore, in all code examples, we will set `url="test"` when calling the helper functions. Later, you can switch to `url="prod"` or a custom NOMAD API URL if needed.
 
 We assume you are working in a Python 3.11+ environment, preferably in a dedicated virtual environment for this tutorial.
 
@@ -142,34 +137,28 @@ We assume you are working in a Python 3.11+ environment, preferably in a dedicat
 
 Install the plugin and helper packages:
 
-<!-- markdownlint-disable MD046 -->
 ```python
 !pip install --upgrade pip
 !pip install "nomad-utility-workflows[vis]>=0.2.0"
 !pip install python-dotenv
 ```
-<!-- markdownlint-enable MD046 -->
 
 The `nomad-utility-workflows` provides high-level helpers for interacting with the NOMAD API and `python-dotenv` is used to load credentials from a local file, e.g., `env.txt`.
 
 Create a file named `env.txt` in your project folder with the following content and save this file next to your notebook or script and keep it private (do not commit it to version control):
 
-<!-- markdownlint-disable MD046 -->
 ```text
 NOMAD_USERNAME=your_email_or_username
 NOMAD_PASSWORD=your_password
 ```
-<!-- markdownlint-enable MD046 -->
 
 Before calling any helper functions, load `env.txt` so that the environment variables are visible to `nomad-utility-workflows`:
 
-<!-- markdownlint-disable MD046 -->
 ```python
 from dotenv import load_dotenv
 
 load_dotenv('env.txt')
 ```
-<!-- markdownlint-enable MD046 -->
 
 ??? success "Example notebook output"
 
@@ -184,7 +173,6 @@ This makes `NOMAD_USERNAME` and `NOMAD_PASSWORD` available to the package via en
 
 Now you can check which user you are authenticated as, and confirm that the credentials were loaded correctly using:
 
-<!-- markdownlint-disable MD046 -->
 ```python
 from nomad_utility_workflows.utils.users import who_am_i
 
@@ -193,17 +181,34 @@ print('Authenticated as:', me.name)
 print('Username:', me.username)
 print('Email:', me.email)
 ```
-<!-- markdownlint-enable MD046 -->
 
 ??? success "Example notebook output"
 
     ```
-    Authenticated as: FAIRmat Training
-    Username: test_siamak.nakhaie
+    Authenticated as: Your Name
+    Username: your_username
     Email: your.email@example.org
     ```
 
 This call confirms which NOMAD account is being used.
+
+<!-- TODO: The package's built-in address for `url='test'` (https://nomad-lab.eu/prod/v1/test/api/v1) rejects uploads larger than 1 MiB (nginx 413), so the first two uploads fail without the `core.NOMAD_TEST_URL` line below. Remove that line once FAIRmat-NFDI/nomad-utility-workflows#56 is fixed. -->
+<!-- TODO: `nomad_gui_url` in nomad-utility-workflows 0.3.2 builds links to the old GUI. Once FAIRmat-NFDI/nomad-utility-workflows#55 is fixed, replace the hand-built `nomad_gui` links with `.nomad_gui_url`. -->
+
+Finally, define the addresses that the following snippets use:
+
+```python
+from nomad_utility_workflows.utils import core
+
+# API address of the NOMAD test deployment
+core.NOMAD_TEST_URL = 'https://nomad-lab.eu/test/backend/api/v1'
+
+# NOMAD GUI of the test deployment, for links to projects and entries
+nomad_gui = 'https://nomad-lab.eu/test'
+```
+
+??? info "Using the production deployment"
+    To work with your own data on the production deployment, use `url='prod'` instead of `url='test'` in all helper functions, set `nomad_gui` to `https://nomad-lab.eu/prod/v1/gui/v2`, and leave out the `core.NOMAD_TEST_URL` line. Publishing there is irreversible.
 
 ---
 
@@ -213,7 +218,7 @@ Next, you create projects in NOMAD from the three example ZIP files.
 The helper `upload_files_to_nomad` both **creates a new project** and **uploads the given ZIP file** to it in a single API call.
 
 !!! info "Projects and uploads"
-    In the NOMAD GUI, you organize your data in projects. The NOMAD API and `nomad-utility-workflows` still use the term *upload* for a project: the API endpoints retain *upload* in their paths, helper functions such as `upload_files_to_nomad` and `get_upload_by_id` work on projects, and the `upload_id` they return is the project ID.
+    In the NOMAD GUI, you organize your data in projects. The NOMAD API and `nomad-utility-workflows` still use the term *upload* for a project: the API endpoints retain *upload* in their paths, helper functions such as `upload_files_to_nomad` and `get_upload_by_id` work on projects, and the `upload_id` they return identifies the project. You can find this ID as **Project ID** in the project's **SETTINGS** > **General**, and entries store it as `upload_id` in their metadata.
 
 !!! warning
 
@@ -221,29 +226,10 @@ The helper `upload_files_to_nomad` both **creates a new project** and **uploads 
     When running code snippets, always make sure that the `url` parameter is set to `test`, i.e.,
     `url="test"`.
 
-<!-- TODO (found 2026-09-29): upload size limit on the test deployment.
-`url='test'` in nomad-utility-workflows 0.3.2 points to https://nomad-lab.eu/prod/v1/test/api/v1, which currently rejects request bodies larger than 1 MiB (nginx "413 Request Entity Too Large").
-Without the workaround below, `upload_files_to_nomad` fails with a JSONDecodeError for miscellaneous_data.zip (1.97 MB) and FHI-aims.zip (1.27 MB); xps_nexus_data.zip (0.23 MB) still works.
-The new test API address https://nomad-lab.eu/test/backend/api/v1 and the production API accept these files.
-Once the limit on the old address is lifted, or the package sets NOMAD_TEST_URL (nomad_utility_workflows/utils/core.py) to the new address, remove the workaround below: the sentence, the snippet, and the explanation after it. -->
-
-Before the first upload, point `nomad-utility-workflows` to the current address of the test deployment:
-
-<!-- markdownlint-disable MD046 -->
-```python
-from nomad_utility_workflows.utils import core
-
-core.NOMAD_TEST_URL = 'https://nomad-lab.eu/test/backend/api/v1'
-```
-<!-- markdownlint-enable MD046 -->
-
-The address that the package uses for `url='test'` by default currently rejects files larger than 1 MiB, so the uploads below would fail without this line.
-
 ### Upload miscellaneous files
 
 As a first example, upload the miscellaneous files to the 'test' NOMAD instance:
 
-<!-- markdownlint-disable MD046 -->
 ```python
 import os
 from nomad_utility_workflows.utils.uploads import (
@@ -251,26 +237,17 @@ from nomad_utility_workflows.utils.uploads import (
     get_upload_by_id,
 )
 
-# Base URL of the new NOMAD GUI on the test deployment,
-# used below to build links to projects and entries
-nomad_gui = 'https://nomad-lab.eu/test'
-
 misc_zip_path = os.path.abspath('miscellaneous_data.zip')
 misc_upload_id = upload_files_to_nomad(filename=misc_zip_path, url='test')
 ```
-<!-- markdownlint-enable MD046 -->
 
 In this code:
 
-- `nomad_gui` is the base URL of the new NOMAD GUI on the test deployment; later snippets use it to build links to projects and entries.
 - `os.path.abspath("miscellaneous_data.zip")` resolves the ZIP file to an absolute path.
 - `upload_files_to_nomad(...)` creates a new project on the NOMAD test deployment, uploads the file to it, and returns the project's `upload_id`.
 
-<!-- TODO: nomad-utility-workflows 0.3.2 builds classic-GUI links in `nomad_gui_url`. Once it builds new-GUI links, replace the hand-built `nomad_gui` links with `.nomad_gui_url`. -->
-
 Let's now inspect the project and compare it with what we see in the GUI:
 
-<!-- markdownlint-disable MD046 -->
 ```python
 misc_upload = get_upload_by_id(upload_id=misc_upload_id, url='test')
 
@@ -282,7 +259,6 @@ print('Published:      ', misc_upload.published)
 print('Embargo:        ', misc_upload.with_embargo)
 print('GUI URL:        ', f'{nomad_gui}/projects/{misc_upload.upload_id}')
 ```
-<!-- markdownlint-enable MD046 -->
 
 ??? success "Example notebook output"
 
@@ -309,7 +285,6 @@ Open the printed link to see the project you just created in the NOMAD GUI. Beca
 
 You can repeat the same pattern for the DFT example (`FHI-aims.zip`) to create a separate project for simulated data and inspect its entries:
 
-<!-- markdownlint-disable MD046 -->
 ```python
 dft_zip_path = os.path.abspath('FHI-aims.zip')
 dft_upload_id = upload_files_to_nomad(filename=dft_zip_path, url='test')
@@ -317,7 +292,6 @@ dft_upload_id = upload_files_to_nomad(filename=dft_zip_path, url='test')
 dft_upload = get_upload_by_id(upload_id=dft_upload_id, url='test')
 print('GUI URL:', f'{nomad_gui}/projects/{dft_upload.upload_id}')
 ```
-<!-- markdownlint-enable MD046 -->
 
 ??? success "Example notebook output"
 
@@ -328,7 +302,6 @@ This snippet creates a new project for the DFT ZIP file and prints a direct GUI 
 
 To check whether entries were created, retrieve them, and print their IDs and URLs, you can type the following:
 
-<!-- markdownlint-disable MD046 -->
 ```python
 from nomad_utility_workflows.utils.entries import get_entries_of_upload
 
@@ -341,7 +314,6 @@ for entry in dft_entries:
         f'{nomad_gui}/projects/{entry.upload_id}/entries/{entry.entry_id}',
     )
 ```
-<!-- markdownlint-enable MD046 -->
 
 This snippet retrieves all the entries (here only one entry) created from the uploaded computations data and prints each entry’s ID together with its direct GUI URL.
 
@@ -358,11 +330,9 @@ This snippet retrieves all the entries (here only one entry) created from the up
 
 You can also inspect the same project in the NOMAD GUI using the link printed earlier. On the project page, the **ENTRIES** tab lists the entry created from the FHI-aims files.
 
-<!-- markdownlint-disable MD033 -->
 <div style="text-align: center;">
     <img src="images/upload_publish_api_1.png" alt="The ENTRIES tab of the DFT project in the NOMAD GUI" width="800">
 </div>
-<!-- markdownlint-enable MD033 -->
 
 ### Upload experimental data
 
@@ -383,8 +353,6 @@ The steps are similar to those you followed for the computations data.
         get_upload_by_id,
     )
     from nomad_utility_workflows.utils.entries import get_entries_of_upload
-
-    nomad_gui = 'https://nomad-lab.eu/test'
 
     xps_zip_path = os.path.abspath('xps_nexus_data.zip')
     xps_upload_id = upload_files_to_nomad(filename=xps_zip_path, url='test')
@@ -416,7 +384,6 @@ The steps are similar to those you followed for the computations data.
 
 After creating a project, e.g., the DFT project, it is important to check whether NOMAD has finished processing it and whether any errors occurred.
 
-<!-- markdownlint-disable MD046 -->
 ```python
 dft_upload = get_upload_by_id(upload_id=dft_upload_id, url='test')
 
@@ -430,7 +397,6 @@ print('Entries:        ', dft_upload.entries)
 print('Published:      ', dft_upload.published)
 print('Open in GUI:    ', f'{nomad_gui}/projects/{dft_upload.upload_id}')
 ```
-<!-- markdownlint-enable MD046 -->
 
 ??? success "Example notebook output"
 
@@ -454,7 +420,6 @@ This snippet:
 
 Once the project has been processed successfully, you can list all entries that were created from the uploaded files.
 
-<!-- markdownlint-disable MD046 -->
 ```python
 from nomad_utility_workflows.utils.entries import get_entries_of_upload
 
@@ -474,7 +439,6 @@ for entry in dft_entries:
         f'  GUI URL: {nomad_gui}/projects/{entry.upload_id}/entries/{entry.entry_id}\n'
     )
 ```
-<!-- markdownlint-enable MD046 -->
 
 ??? success "Example notebook output"
 
@@ -506,7 +470,6 @@ In the examples below, we use `dft_upload_id` to refer to the DFT project, but t
 
 You can update the project's **name** as well as the **entry-level metadata** (such as comment and references) for all entries contained in the project. The function `edit_upload_metadata` applies metadata changes to **every entry in the project**.
 
-<!-- markdownlint-disable MD046 -->
 ```python
 from nomad_utility_workflows.utils.uploads import edit_upload_metadata, get_upload_by_id
 from nomad_utility_workflows.utils.entries import get_entries_of_upload
@@ -525,7 +488,6 @@ edit_upload_metadata(
     timeout_in_sec=60,
 )
 ```
-<!-- markdownlint-enable MD046 -->
 
 ??? success "Example notebook output"
 
@@ -565,7 +527,6 @@ This code updates the project name and applies the comment and references to all
 
 To inspect it programmatically try:
 
-<!-- markdownlint-disable MD046 -->
 ```python
 # Upload-level metadata (only the name appears here)
 updated_upload = get_upload_by_id(dft_upload_id, url='test')
@@ -580,7 +541,6 @@ for entry in entries:
     print('Entry comment:', entry.comment)
     print('Entry references:', entry.references)
 ```
-<!-- markdownlint-enable MD046 -->
 
 ??? success "Example notebook output"
 
@@ -602,7 +562,6 @@ If you wish, you can collaborate on this project by sharing it with selected NOM
 
 Let’s start by searching for the user you want to share your project with. Replace `SearchSurname` in the snippet below with the name of that NOMAD user.
 
-<!-- markdownlint-disable MD046 -->
 ``` python
 from nomad_utility_workflows.utils.users import search_users_by_name
 
@@ -614,20 +573,18 @@ for user in candidates:
         f"with user_id='{user.user_id}'"
     )
 ```
-<!-- markdownlint-enable MD046 -->
 
 ??? success "Example notebook output"
 
     ```
-    Found the user 'Siamak Nakhaie' (username 'siamak.nakhaie') with user_id='13b845c3-e48d-4234-8c51-4f88c6897ac8'
-    Found the user 'Siamak Nakhaie' (username 'siamak.nakhaie@physik.hu-berlin.de') with user_id='ebb26223-0cec-4d81-98f5-3b25db945b54'
+    Found the user 'Jane Doe' (username 'jane.doe') with user_id='13b845c3-e48d-4234-8c51-4f88c6897ac8'
+    Found the user 'Jane Doe' (username 'jane.doe@example.org') with user_id='ebb26223-0cec-4d81-98f5-3b25db945b54'
     ```
 
 If several users have the same name, use the username to pick the right one.
 
 Once the user appears in the output, copy their `user_id`. In the next step, paste this `user_id` into the appropriate list and comment out all lines related to the role you do not want to assign.
 
-<!-- markdownlint-disable MD046 -->
 ```python
 from nomad_utility_workflows.utils.uploads import edit_upload_metadata
 
@@ -646,7 +603,6 @@ edit_upload_metadata(
 
 print('Access updated.')
 ```
-<!-- markdownlint-enable MD046 -->
 
 ??? success "Example notebook output"
 
@@ -659,7 +615,6 @@ If you wish, you can verify this on the project page under **SETTINGS** > **Coll
 
 If you plan to publish your project to NOMAD but want to delay when it becomes visible to everyone, you can set an embargo period. The example below applies an embargo of three months.
 
-<!-- markdownlint-disable MD046 -->
 ```python
 edit_upload_metadata(
     upload_id=dft_upload_id,
@@ -672,7 +627,6 @@ upload_with_embargo = get_upload_by_id(dft_upload_id, url='test')
 print('With embargo:', upload_with_embargo.with_embargo)
 print('Embargo length:', upload_with_embargo.embargo_length)
 ```
-<!-- markdownlint-enable MD046 -->
 
 ??? success "Example notebook output"
 
@@ -689,7 +643,6 @@ You can now publish your project on the NOMAD **test** deployment:
     Publishing data on the production server requires that you have the **rights to the data** and are **eligible to release them under the CC BY 4.0 license**, and this action is **irreversible**.
     For this tutorial, we use the test deployment. Please make sure that `url="test"` is set before triggering any publication action.
 
-<!-- markdownlint-disable MD046 -->
 ```python
 from nomad_utility_workflows.utils.uploads import publish_upload
 from pprint import pprint
@@ -697,7 +650,6 @@ from pprint import pprint
 response = publish_upload(upload_id=dft_upload_id, url='test', timeout_in_sec=60)
 pprint(response)
 ```
-<!-- markdownlint-enable MD046 -->
 
 ??? success "Example notebook output"
 
@@ -736,4 +688,4 @@ pprint(response)
 
 This code triggers the publication action for the DFT project and prints the server response confirming the operation.
 
-<!-- TODO: Decide whether to add a section on assigning a DOI to the published project via the API (/uploads/{upload_id}/action/assign-doi), mirroring "Assign a DOI to your project" in upload_publish.md -->
+<!-- TODO: Consider a step that assigns a DOI to the published project via the API (POST /uploads/{upload_id}/action/assign-doi), mirroring "Assign a DOI to your project" in upload_publish.md. The test deployment used in this tutorial cannot assign DOIs (DataCite is disabled there), and nomad-utility-workflows 0.3.2 has no helper for it. -->
