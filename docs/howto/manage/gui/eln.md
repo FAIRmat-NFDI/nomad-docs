@@ -15,7 +15,7 @@ If you want to create and edit ELN Entries directly in NOMAD, see
 
 ## elabFTW integration
 
-elabFTW is part of [the ELN Consortium](https://github.com/TheELNConsortium)
+elabFTW is part of [the ELN Consortium](https://github.com/TheELNConsortium){:target="_blank" rel="noopener"}
 and supports exporting experimental data in ELN file format. ELNFileFormat
 is a zipped file that contains **metadata** of your elabFTW project along
 with all other associated data of your experiments.
