@@ -103,17 +103,24 @@ This file is constructed according to NOMAD's schemas for [Archive Files](../../
 `m_def` defines the type of task according to NOMAD's MetaInfo schema, in this case a `TaskReference` to the archive `workflow2` section.  The use of `TaskReference` will be clarified in the [Nested workflows > In multiple entries](#in-multiple-entries) example below.
 
 <a id="path-specification"></a>
-**Considerations for archive path specification:**
+### Archive path specification
 
-- In general, the archive path can be represented as `<prefix>/<entry identifier>/<relative archive path>` (see also [How-to guides > Work with schemas > Link data with references](../../../reference/metainfo.md#reference-forms)).
+In general, an archive reference can be represented as
+`<prefix>/<entry_locator>#/<relative_archive_path>`:
 
-- The prefix for the archive path is given by: 1. `../upload/archive/mainfile` for entries that are contained within the same upload as the workflow YAML, or 2. `../uploads/<upload_id>/archive/` for entries contained in distinct uploads as the workflow YAML, where `<upload_id>` is a placeholders for the upload id, which can be obtained from the Overview page of any entry.
+- `<relative_archive_path>` identifies the section within the target Entry. Open the Entry's **ARCHIVE** page and navigate to the section you want to reference.
+- **Entry in the same Project:**
+    - `<prefix>` is `../upload/archive/mainfile`
+    - `<entry_locator>` is the path to the Entry's mainfile from the Project root
+- **Entry in another Project:**
+    - `<prefix>` is `../uploads/<upload_id>/archive`
+    - `<entry_locator>` is `<entry_id>`
 
-- The entry identifier is `<entry_id>#` (placeholder for the entry id, also found on the Overview page) for case 1 of the previous bullet, and `<path to mainfile>/<mainfile name>#` for case 2. `<path to mainfile>` is the path from the root of the original upload directory structure.
+In archive-reference paths, `upload` and `uploads` are backend terms for Projects, and `upload_id` is equivalent to the Project ID.
 
-- The relative archive path is the relative path to the archive section to be linked. The archive structure can be investigated using NOMAD's [MetaInfo Browser](https://nomad-lab.eu/prod/v1/gui/analyze/metainfo/nomad.datamodel.datamodel.EntryArchive){:target="_blank" rel="noopener"}.
+<!-- TODO(#363): After PR #363 is merged, link this syntax summary to the relevant schema-reference documentation. -->
 
-Download the complete example:
+### Download and reproduce the example
 
 [Download simple_workflow.zip](data/simple_workflow.zip){:.md-button .nomad-button}
 
@@ -156,32 +163,56 @@ To reproduce the example in a new Project:
     Reprocessing the updated file adds another input node to the custom
     workflow graph.
 
-## Referencing Tasks in different uploads
+## Reference an Entry in another Project
 
-As already mentioned under [Considerations for archive path specification](#path-specification), your workflow YAML can reference entries that you have previously uploaded to NOMAD. In this case, you should replace the path prefix `../upload/archive/mainfile/<mainfile_name>` with `../uploads/<upload_id>/archive/<entry_id>`.
+A workflow Entry can reference tasks or data in another Project on the same
+NOMAD deployment. For these references, use
+`../uploads/<upload_id>/archive/<entry_id>#/<relative_archive_path>` as
+described under [Archive path specification](#path-specification).
 
-??? Tip "Corresponding `dft.workflow.archive.yaml` from above example"
+To find the required identifiers:
 
+1. Open the target Project, select **SETTINGS**, and copy its **Project ID**.
+   This value equals `archive.metadata.upload_id`; use it as `<upload_id>`.
+1. Open the target Entry, select **ARCHIVE**, and navigate to
+   `metadata` > `entry_id`. Copy this value and use it as `<entry_id>`.
+   Alternatively, copy the value immediately after `/entries/` in the Entry's
+   URL.
+
+For example, adapt the `dft.workflow.archive.yaml` file from the previous
+section as follows:
+
+??? example "Reference the `dft.xml` Entry from another Project"
     ```yaml
     workflow2:
       name: DFT SinglePoint
       inputs:
         - name: Input system
-          section: '../upload/<upload_id>/archive/<entry_id>#/run/0/system/-1'
+          section: '../uploads/<upload_id>/archive/<entry_id>#/run/0/system/-1'
       outputs:
         - name: Output calculation
-          section: '../upload/<upload_id>/archive/<entry_id>#/run/0/calculation/-1'
+          section: '../uploads/<upload_id>/archive/<entry_id>#/run/0/calculation/-1'
       tasks:
         - m_def: nomad.datamodel.metainfo.workflow.TaskReference
-          task: '../upload/<upload_id>/archive/<entry_id>#/workflow2'
+          task: '../uploads/<upload_id>/archive/<entry_id>#/workflow2'
           name: DFT
           inputs:
             - name: Input structure
-              section: '../upload/<upload_id>/archive/<entry_id>#/run/0/system/-1'
+              section: '../uploads/<upload_id>/archive/<entry_id>#/run/0/system/-1'
           outputs:
             - name: Output calculation
-              section: '../upload/<upload_id>/archive/<entry_id>#/run/0/calculation/-1'
+              section: '../uploads/<upload_id>/archive/<entry_id>#/run/0/calculation/-1'
     ```
+
+To test the cross-Project references:
+
+1. Create a file named `dft-cross-project.workflow.archive.yaml` using the
+   contents shown above. Replace `<upload_id>` and `<entry_id>` with the
+   identifiers for the Project and Entry containing `dft.xml`.
+1. Create another Project and add only the new
+   `dft-cross-project.workflow.archive.yaml` file.
+1. After processing completes, open the resulting workflow Entry and confirm
+   that its graph contains the referenced DFT task from the original Project.
 
 ## Nested workflows
 
@@ -502,7 +533,7 @@ To reproduce the workflow shown in the video above, download the example files, 
 
 ## Referencing ELN entries created with the GUI
 
-To reference ELN entries created using the NOMAD GUI, use the upload and entry ids for the archive path specification, as detailed in [Referencing Tasks in Different Uploads](#referencing-tasks-in-different-uploads) above.
+To reference ELN entries created using the NOMAD GUI, use the upload and entry ids for the archive path specification, as detailed in [Reference an Entry in another Project](#reference-an-entry-in-another-project) above.
 
 ## Creating workflow graphs with the GUI using the ELN interface
 
