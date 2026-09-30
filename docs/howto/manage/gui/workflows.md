@@ -55,11 +55,14 @@ The parser-generated workflow has the following graph:
 ![Parser-generated single-point workflow graph in the light theme](images/single-point-nomad-workflow-card-light.png#only-light){:.screenshot}
 ![Parser-generated single-point workflow graph in the dark theme](images/single-point-nomad-workflow-card-dark.png#only-dark){:.screenshot}
 
-The example below recreates the central input-task-output path of this
-`SinglePoint` workflow graph in a separate custom workflow Entry defined with
-YAML. The custom workflow references the parser-generated `workflow2` section
+To demonstrate the creation of a custom workflow entry, the example below recreates the central input-task-output path of this
+`SinglePoint` workflow graph in a separate custom workflow Entry defined with a
+YAML file. The custom workflow references the parser-generated `workflow2` section
 as its task and explicitly uses the same system and final calculation sections
 as its input and output.
+
+<!-- TODO(#363): After PR #363 is merged, link "YAML file" to the relevant new schema how-to. -->
+<!-- TODO: Explain why the parser-generated workflow graph has three outputs while the custom workflow graph has one. -->
 
 To define the initial workflow, create a file `dft.workflow.archive.yaml` with the following content:
 
@@ -128,11 +131,9 @@ To reproduce the example in a new Project:
 1. Enter a Project name, select **ADD FILES**, and add
    `simple_workflow.zip`.
 1. Select **CREATE**.
-1. After processing completes, open **ENTRIES** and confirm that NOMAD created
-   two successfully processed Entries:
-
-   - a single-point Entry with the mainfile `dft.xml`; and
-   - a custom workflow Entry with the mainfile
+1. After processing completes, open **ENTRIES** and confirm that NOMAD created two successfully processed Entries:
+     - a single-point Entry with the mainfile `dft.xml`; and
+     - a custom workflow Entry with the mainfile
      `dft.workflow.archive.yaml`.
 
 1. Open the custom workflow Entry. Its **Overview** page contains this graph:
