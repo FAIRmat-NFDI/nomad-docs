@@ -108,8 +108,8 @@ integration requires the following information:
 To import data, follow these steps:
 
 1. Create or open a NOMAD Project and select **NEW ENTRY**.
-1. Choose the `Openbis Project Import` schema, name the Entry, and select
-  **CREATE**.
+1. Choose the `Openbis Project Import` schema, give the Entry a name, and select
+   **CREATE**.
 1. In the new Entry, enter the project URL, username, and password, then save
   the Entry. NOMAD retrieves and imports the project data.
 
