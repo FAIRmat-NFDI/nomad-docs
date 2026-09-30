@@ -56,12 +56,12 @@ The parser-generated workflow has the following graph:
 ![Parser-generated single-point workflow graph in the dark theme](images/single-point-nomad-workflow-card-dark.png#only-dark){:.screenshot}
 
 To demonstrate the creation of a custom workflow entry, the example below recreates the central input-task-output path of this
-`SinglePoint` workflow graph in a separate custom workflow Entry defined with a
-YAML file. The custom workflow references the parser-generated `workflow2` section
+`SinglePoint` workflow graph in a separate custom workflow Entry using YAML, as
+described in [How-to guides > ... > Populate data](../../schemas/define.md#populate-data).
+The custom workflow references the parser-generated `workflow2` section
 as its task and explicitly uses the same system and final calculation sections
 as its input and output.
 
-<!-- TODO(#363): After PR #363 is merged, link "YAML file" to the relevant new schema how-to. -->
 <!-- TODO: Explain why the parser-generated workflow graph has three outputs while the custom workflow graph has one. -->
 
 To define the initial workflow, create a file `dft.workflow.archive.yaml` with the following content:
@@ -86,6 +86,13 @@ workflow2:
         - name: Output calculation
           section: '../upload/archive/mainfile/dft.xml#/run/0/calculation/-1'
 ```
+
+The repeated `section` references create the graph edges. The workflow input
+and task input both reference the same system section, while the task output
+and workflow output both reference the same calculation section. More
+generally, NOMAD connects nodes whose matching references point to the same
+archive section. Between two tasks, the source task's output and the target
+task's input must match in this way.
 
 !!! Warning "Important"
     For the creation of workflow entries using YAMLs, the file must have the extension `archive.yaml`.
@@ -118,7 +125,9 @@ In general, an archive reference can be represented as
 
 In archive-reference paths, `upload` and `uploads` are backend terms for Projects, and `upload_id` is equivalent to the Project ID.
 
-<!-- TODO(#363): After PR #363 is merged, link this syntax summary to the relevant schema-reference documentation. -->
+For the general principles and supported forms, see
+[How-to guides > ... > Link data with references](../../schemas/define.md#link-data-with-references)
+and [Reference > Schema language > Reference forms](../../../reference/metainfo.md#reference-forms).
 
 ### Download and reproduce the example
 
@@ -225,7 +234,13 @@ The most common way to construct a nested workflow is by creating separate entri
 !!! Warning "Important"
     When `task` is linked to a `workflow2` section of a different upload, this sub-workflow task **must** be defined as a `TaskReference` by setting `m_def: nomad.datamodel.metainfo.workflow.TaskReference`. This is necessary to overwrite the default class for `workflow2.task`, `nomad.datamodel.metainfo.workflow.Task`, which is only allowed to contain a `Task` instance directly, but not allowed to reference one (see [General Workflow Schema](../../../explanation/workflows.md#the-built-in-abstract-workflow-schema)).
 
-We have already seen this case in [Simple Workflows with Support Tasks](#simple-workflows-with-supported-tasks). Actually, there is a convention in NOMAD that all simulation entries contain a workflow representation, even for single-step workflows. Thus, any workflow containing simulation tasks will be a nested workflow.
+We have already seen this case in
+[Simple Workflows with Supported Tasks](#simple-workflows-with-supported-tasks).
+On NOMAD Central, the installed simulation parsers add a workflow representation
+to recognized simulation Entries, including single-step calculations. A workflow
+that references these parser-generated simulation Entries as tasks is therefore
+a nested workflow. Other deployments may provide different simulation parsers
+and workflow metadata.
 
 ### In a single entry
 
@@ -369,19 +384,16 @@ You can reproduce this example by downloading the example data (with workflow YA
 A custom task is a task whose raw files NOMAD does not automatically recognize,
 or a task that has no associated raw files. The task must still be represented by
 an Entry before a workflow can reference it. One option is to create that Entry
-from a built-in or custom ELN schema. See [Enter data with ELNs](eln.md) for
-creating schema-based Entries and [Write a YAML schema package](yaml.md) for the
-general schema concepts.
+from a built-in or custom ELN schema.
 
-The easiest way to create entries for a custom task is to use one of NOMAD's
-built-in ELN schemas. You can create ELN Entries from these schemas in the GUI;
-see {{ nav_link("tutorial/eln/built_in_templates.md", breadcrumb=True) }}.
+**Related pages:** {{ nav_link("howto/schemas/schemas.md") }}.
 
 ### Represent files with `ElnFileManager`
 
 `ElnFileManager` is a built-in schema for referencing and annotating files in an
 ELN Entry. To instantiate this schema from YAML, set `data.m_def` to its full
-section-definition path. See [Schema package references](yaml.md#schema-package-references)
+section-definition path. See
+[How-to guides > ... > Populate data](../../schemas/define.md#populate-data)
 for the general purpose and syntax of `m_def`.
 
 For example, the following file defines an Entry that describes the creation of
@@ -398,8 +410,9 @@ data:
     description: 'The force field file for simulation input.'
 ```
 
-Upload the YAML file together with `water.top` so that the file reference can be
-resolved during processing.
+The `file` value identifies the path to `water.top` from the Project root. The
+file must exist at that path for NOMAD to resolve the reference during
+processing.
 
 ### Example workflow with ELN tasks
 
@@ -533,73 +546,45 @@ above.
 
 [Download Custom_ELN_Entries.zip](data/Custom_ELN_Entries.zip){:.md-button .nomad-button}
 
-## Referencing ELN entries created with the GUI
+## Create an experimental workflow with an ELN
 
-To reference ELN entries created using the NOMAD GUI, use the upload and entry ids for the archive path specification, as detailed in [Reference an Entry in another Project](#reference-an-entry-in-another-project) above.
+To build an experimental workflow by linking process and measurement Entries
+with the built-in *Experiment ELN* schema, follow
+[Tutorials > ... > Integrate your experiment](../../../tutorial/eln/built_in_templates.md#integrate-your-experiment).
 
-## Creating workflow graphs with the GUI using the ELN interface
+<!-- TODO: Document GUI-based workflow authoring here if the GUI gains a
+supported workflow-building flow. -->
 
-<!-- TODO - Add example, possibly from Tutorial 16? -->
-
-!!! Warning
-
-    Coming soon ...
-
-<!-- TODO - also ensuring connections in the workflow visualizer! Somewhere -->
 ## Using the workflow visualizer
 
-As we have seen above, when a workflow is defined within an entry, The Overview page will show an interactive graph of the `workflow2` section defined.
-The following video demonstrates the basic navigation functionalities of these interactive workflow graphs:
+When an Entry contains a `workflow2` section, its **OVERVIEW** page shows an
+interactive workflow graph. The visualizer supports the following actions:
 
-<video controls autoplay loop muted playsinline class="screenshot">
-  <source src="images/workflow-graph-usage.webm" type="video/webm">
-</video>
+- **Inspect the workflow structure:** Inputs, tasks, and outputs are arranged
+  from left to right. Arrows show their connections, and hovering over graph
+  elements highlights them or reveals their full labels.
+- **Navigate nested workflows:** Select a task node to open its workflow layer.
+  Use the back control or select the current workflow node to return to the
+  previous layer.
+- **Open referenced data:** Select the label of an input, task, or output to
+  open the referenced Entry or archive section. Use the browser's back button
+  to return to the workflow Entry.
+- **Focus on a connection:** Select an arrow between tasks to show the connected
+  tasks and their shared input and output context.
+- **Filter tasks:** Use the **Filter tasks to show** bar to limit the tasks
+  displayed in a large graph. The filter accepts comma-separated indices or
+  colon-separated ranges; negative indices and percentages are also supported.
+- **Adjust or export the view:** Enable the force-directed layout, show or hide
+  the legend, reset the graph, or download it as an SVG file.
 
-The nodes (inputs, tasks and outputs) are shown from left to right for the current workflow layer.
-The edges (arrows) from (to) a node denotes an input (output) to a section in the target node.
-One can see the description for the nodes and edges by hovering over them. When the
-inputs and outputs are clicked, the linked section is shown in the archive browser. By clicking
-on a task, the graph zooms into the nested workflow layer. By clicking on the arrows,
-only the relevant linked nodes are shown. One can go back to the previous view by clicking on
-the current workflow node.
-
-A number of controls are also provided on top of the graph. The first enables a filtering
-of the nodes following a python-like syntax i.e., list (comma-separated) or range (colon-separated).
-Negative index and percent are also supported. By default, the task nodes can be filtered
-but can be changed to inputs or outputs by clicking on one of the respective nodes. By clicking
-on the `play` button, a force-directed layout of the task nodes is enabled. The other tools
-enable to toggle the legend, go back to a previous view and reset the view.
-
-You can also use the graph to navigate to the referenced data, by clicking the labels above any task node or input/output, as shown in the following video:
-
-<video width="100%" controls>
-  <source src="./images/ELNFileManager.webm" alt="" type="video/webm">
-</video>
-
-Once you leave the workflow entry, you can use either the browser back button or, more generally, the "Entry References" section of the Overview page to navigate back to the workflow entry:
-
-<!-- TODO Add a video of navigating via the references at the bottom of the page. -->
-
-!!! Warning
-
-    Illustrative video coming soon ...
-
-!!! Tip "Proper creation of workflow entries"
-
-    <!-- ! add tips for creating the visualization properly -->
-
-    To ensure that the workflow visualizer functions correctly:
-
-      - To create a graph edge, at least one `input` of the in-node must match exactly an `output` of the out-node.
-<!-- TODO Add more tips -->
+<!-- TODO: Consider adding an in-product workflow visualizer tour or linking to
+a stable public demonstrator workflow Entry once one is maintained. -->
 
 ## Advanced Topics
 
-### Instantiating a workflow from YAML using a standardized workflow class
-
-!!! Warning
-
-    Coming soon ...
+<!-- TODO: Consider adding an advanced example that combines a schema
+normalizer plugin with YAML instantiation of a workflow, such as an NEB
+workflow. -->
 
 ### Extending the workflow schema
 
