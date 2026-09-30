@@ -88,7 +88,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#how-to-work-with-schemas-in-nomad" class="md-skip">
+        <a href="#how-to-start-working-with-schemas" class="md-skip">
           Skip to content
         </a>
       
@@ -2582,34 +2582,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../oasis/update.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Update
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../oasis/administer.html" class="md-nav__link">
         
   
@@ -2702,10 +2674,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_8">
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_7">
         
           
-          <label class="md-nav__link" for="__nav_3_5_8" id="__nav_3_5_8_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3_5_7" id="__nav_3_5_7_label" tabindex="0">
             
   
   
@@ -2723,8 +2695,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_5_8_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3_5_8">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_5_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_7">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -2741,7 +2713,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../oasis/migrations.html" class="md-nav__link">
+      <a href="../oasis/migrate.html" class="md-nav__link">
         
   
   
@@ -2769,14 +2741,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../oasis/migrations/mongo.html" class="md-nav__link">
+      <a href="../oasis/migrate/v2.0.html" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    MongoDB (5.x to 8.x)
+    NOMAD 2.0
   
 
     
@@ -2797,14 +2769,98 @@
   
   
     <li class="md-nav__item">
-      <a href="../oasis/migrations/elastic.html" class="md-nav__link">
+      <a href="../oasis/migrate/v1.4.2.html" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Elasticsearch (7.x to 9.x)
+    NOMAD 1.4.2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oasis/migrate/v1.2.2.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NOMAD 1.2.2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oasis/migrate/v1.2.0.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NOMAD 1.2.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../oasis/migrate/v0.8-to-v1.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NOMAD 0.8.x to 1.x
   
 
     
@@ -4619,7 +4675,7 @@
 
 
 
-<h1 id="how-to-work-with-schemas-in-nomad">How to work with schemas in NOMAD<a class="headerlink" href="#how-to-work-with-schemas-in-nomad" title="Permanent link">¶</a></h1>
+<h1 id="how-to-start-working-with-schemas">How to start working with schemas<a class="headerlink" href="#how-to-start-working-with-schemas" title="Permanent link">¶</a></h1>
 <p>Every piece of data in NOMAD follows a <em>schema</em>. A schema is a collection of
 <a href="../../reference/glossary.html#section-and-subsection">section</a> and
 <a href="../../reference/glossary.html#quantity">quantity</a> definitions that give your data names, types,
@@ -4635,35 +4691,35 @@ both use the same concepts of <em>section</em>, <em>quantity</em> and <em>subsec
 <thead>
 <tr>
 <th></th>
-<th>YAML schemas</th>
 <th>Python schemas</th>
+<th>YAML schemas</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Where it lives</td>
-<td>An <code>.archive.yaml</code> file you upload</td>
 <td>A plugin, installed into a NOMAD distribution</td>
+<td>An <code>.archive.yaml</code> file you upload</td>
 </tr>
 <tr>
 <td>Who can add it</td>
-<td>Any NOMAD user</td>
 <td>Plugin developers and Oasis administrators</td>
+<td>Any NOMAD user</td>
 </tr>
 <tr>
-<td>Distribution</td>
-<td>Within the upload it was uploaded to</td>
-<td>To every installation that installs the plugin</td>
+<td>Access</td>
+<td>All users on the deployment</td>
+<td>Anyone who has access to the upload that contains the file</td>
 </tr>
 <tr>
 <td>Custom <code>normalize</code> functions</td>
-<td>No</td>
 <td>Yes</td>
+<td>No</td>
 </tr>
 <tr>
 <td>Best for</td>
-<td>Exploring schemas, one-off and lab-specific ELNs</td>
 <td>Reusable schemas, derived data, anything shipped to others</td>
+<td>Exploring schemas, one-off and lab-specific ELNs</td>
 </tr>
 </tbody>
 </table>

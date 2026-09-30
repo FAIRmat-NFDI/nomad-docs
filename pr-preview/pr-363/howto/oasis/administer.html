@@ -11,7 +11,7 @@
       
       
       
-        <link rel="prev" href="update.html">
+        <link rel="prev" href="deploy.html">
       
       
         <link rel="next" href="secure.html">
@@ -2477,34 +2477,6 @@
                 
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="update.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Update
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
     
   
   
@@ -2708,10 +2680,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_8">
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5_7">
         
           
-          <label class="md-nav__link" for="__nav_3_5_8" id="__nav_3_5_8_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3_5_7" id="__nav_3_5_7_label" tabindex="0">
             
   
   
@@ -2729,8 +2701,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_5_8_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3_5_8">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_5_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5_7">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -2747,7 +2719,7 @@
   
   
     <li class="md-nav__item">
-      <a href="migrations.html" class="md-nav__link">
+      <a href="migrate.html" class="md-nav__link">
         
   
   
@@ -2775,14 +2747,14 @@
   
   
     <li class="md-nav__item">
-      <a href="migrations/mongo.html" class="md-nav__link">
+      <a href="migrate/v2.0.html" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    MongoDB (5.x to 8.x)
+    NOMAD 2.0
   
 
     
@@ -2803,14 +2775,98 @@
   
   
     <li class="md-nav__item">
-      <a href="migrations/elastic.html" class="md-nav__link">
+      <a href="migrate/v1.4.2.html" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Elasticsearch (7.x to 9.x)
+    NOMAD 1.4.2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="migrate/v1.2.2.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NOMAD 1.2.2
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="migrate/v1.2.0.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NOMAD 1.2.0
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="migrate/v0.8-to-v1.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NOMAD 0.8.x to 1.x
   
 
     
@@ -4684,14 +4740,14 @@ Here are a few examples:</p>
 <h3 id="re-processing">Re-processing<a class="headerlink" href="#re-processing" title="Permanent link">¶</a></h3>
 <p>Processing includes the conversion of raw files into NOMAD entries. Files are parsed,
 normalizers are called, the processing results are stored, and the search index
-is updated. In certain scenarios (failed processing, <a href="update.html#migration-steps">migration</a>,
+is updated. In certain scenarios (failed processing, <a href="migrate.html">migration</a>,
 changed plugins) might require that admins process certain uploads again.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>nomad<span class="w"> </span>admin<span class="w"> </span>uploads<span class="w"> </span>process
 </code></pre></div>
 <h3 id="re-indexing">Re-Indexing<a class="headerlink" href="#re-indexing" title="Permanent link">¶</a></h3>
 <p>Each NOMAD entry is represented in NOMAD's search index. Only if an entry is in this
 index, you can find it via the search interface. Some changes between NOMAD versions
-(see also our <a href="update.html#migration-steps">update guide</a>), might require that
+(see also our <a href="migrate.html">migration guide</a>), might require that
 you re-index all uploads.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>nomad<span class="w"> </span>admin<span class="w"> </span>uploads<span class="w"> </span>index
 </code></pre></div>
@@ -4732,7 +4788,7 @@ you re-index all uploads.</p>
       <nav class="md-footer__inner md-grid" aria-label="Footer">
         
           
-          <a href="update.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Update">
+          <a href="deploy.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Deploy">
             <div class="md-footer__button md-icon">
               
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
@@ -4742,7 +4798,7 @@ you re-index all uploads.</p>
                 Previous
               </span>
               <div class="md-ellipsis">
-                Update
+                Deploy
               </div>
             </div>
           </a>
