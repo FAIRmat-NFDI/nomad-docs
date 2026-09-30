@@ -23,11 +23,11 @@ your experiments.
 To import elabFTW data into NOMAD:
 
 1. In elabFTW, export the experiment as an `ELN Archive` and save the `.eln`
-  file to your computer without changing its extension.
+   file to your computer without changing its extension.
 1. In NOMAD, create or open a Project and add the exported file under
-  **FILES** using **UPLOAD FILES**.
+   **FILES** using **UPLOAD FILES**.
 1. NOMAD processes the archive and creates an Entry for each experiment in the
-  elabFTW project.
+   elabFTW project.
 
 Open an Entry to inspect the parsed data. The `ElabFTW Project Import` section
 contains metadata for the experiment, including `experiment_data` and
