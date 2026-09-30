@@ -102,9 +102,7 @@ might prefer kilocalorie per mole.
 The display unit should primarily be controlled through the [display annotation](../../../reference/annotations.md#display-annotations), like this:
 
 ```python
-distance = Quantity(
-    type=float, unit='meter', a_display={'unit': 'millimeter'}
-)
+distance = Quantity(type=float, unit='meter', a_display={'unit': 'millimeter'})
 ```
 
 !!! info
