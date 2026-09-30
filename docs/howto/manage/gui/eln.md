@@ -1,17 +1,17 @@
 # How to import data from third-party ELNs
 
-NOMAD can import data from third-party electronic lab notebooks (ELNs) using
-integration parsers and schemas. For instructions on creating and editing
-ELN Entries directly in NOMAD, see the
-[built-in ELN templates tutorial](../../../tutorial/eln/built_in_templates.md).
+This guide explains how to import data from third-party electronic lab notebooks
+(ELNs) into NOMAD using integration parsers and schemas.
 
-The integrations are maintained in the
-[NOMAD external ELN integrations repository](https://github.com/FAIRmat-NFDI/nomad-external-eln-integrations){:target="_blank" rel="noopener"}.
-Which integrations are available depends on the parsers and schemas installed
-in your NOMAD deployment. The procedures below cover elabFTW, Labfolder,
-Chemotion, and openBIS. In each case, the integration maps data from the
-external ELN into NOMAD Entries; the retrieval and mapping process differs by
-provider.
+The `nomad-external-eln-integrations` package provides these integrations.
+The specific integrations available in your NOMAD deployment depend on the
+parsers and schemas installed there. The procedures below cover elabFTW,
+Labfolder, Chemotion, and openBIS. In each case, the integration maps data from
+the external ELN into NOMAD Entries, although the retrieval and mapping process
+varies by provider.
+
+If you want to create and edit ELN Entries directly in NOMAD, see
+[Tutorials > ELN > Built-in ELN templates](../../../tutorial/eln/built_in_templates.md).
 
 ### elabFTW integration
 
