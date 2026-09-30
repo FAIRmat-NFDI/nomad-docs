@@ -294,7 +294,6 @@ an entry root section at the same time.
 | `nomad.datamodel.data.EntryData` | The abstract section definition for an entry's `data` section. |
 | `nomad.datamodel.data.ArchiveSection` | Adds support for `normalize` functions. |
 | `nomad.datamodel.metainfo.basesections.*` | The entity-activity base sections: samples, instruments, processes, measurements, analyses. |
-| `nomad.datamodel.metainfo.eln.*` | Commonly used ELN quantities. These are indexed, so specializations can use the NOMAD search. |
 | `nomad.datamodel.metainfo.workflow.*` | The definitions NOMAD uses to model workflows. |
 | `nomad.parsing.tabular.TableData` | Inherit parsing of `.csv` and `.xls` files. See [Parse tabular data](./tabular.md). |
 | `nomad.datamodel.metainfo.basesections.HDF5Normalizer` | Link quantities to HDF5 datasets for large data. See {{ nav_link("howto/plugins/tools/hdf5.md", breadcrumb=True) }}. |
@@ -398,9 +397,7 @@ another entry or another NOMAD installation. The full list of reference forms is
 
 Use a single quantity as the `type` when the source needs one *value* from elsewhere in the archive
 rather than the whole section. Reading the quantity gives you that value, so the data is exposed
-without being copied — and unlike a section reference, the referenced value can be indexed for
-search. This is how NOMAD's own `results` section surfaces parser output, with declarations such as
-`energies = Quantity(type=runschema.calculation.Dos.energies)`.
+without being copied.
 
 === "Python"
 

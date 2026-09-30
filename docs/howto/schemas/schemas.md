@@ -15,13 +15,13 @@ You can write a schema in two syntaxes. They describe the same thing: there is a
 between a Python schema package (written as classes) and a YAML or JSON one (written as objects), and
 both use the same concepts of *section*, *quantity* and *subsection*.
 
-| | YAML schemas | Python schemas |
+| | Python schemas | YAML schemas |
 | --- | --- | --- |
-| Where it lives | An `.archive.yaml` file you upload | A plugin, installed into a NOMAD distribution |
-| Who can add it | Any NOMAD user | Plugin developers and Oasis administrators |
-| Distribution | Within the upload it was uploaded to | To every installation that installs the plugin |
-| Custom `normalize` functions | No | Yes |
-| Best for | Exploring schemas, one-off and lab-specific ELNs | Reusable schemas, derived data, anything shipped to others |
+| Where it lives | A plugin, installed into a NOMAD distribution | An `.archive.yaml` file you upload |
+| Who can add it | Plugin developers and Oasis administrators | Any NOMAD user |
+| Access | All users on the deployment | Anyone who has access to the upload that contains the file |
+| Custom `normalize` functions | Yes | No |
+| Best for | Reusable schemas, derived data, anything shipped to others | Exploring schemas, one-off and lab-specific ELNs |
 
 Start with YAML if you are describing your own data and want to see results immediately. Move to
 Python when you need custom normalization, want to share the schema across installations, or want
