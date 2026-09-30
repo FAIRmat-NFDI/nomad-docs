@@ -343,8 +343,8 @@ the application itself allows users to interact with the API according to a conf
 Access control can therefore be configured on several levels:
 
 1. Network level — restrict access via firewall, VPN, or private network.
-1. Authentication level — require users to log in before accessing the API.
-1. Authorization level — control which operations users are allowed to perform after login.
+2. Authentication level — require users to log in before accessing the API.
+3. Authorization level — control which operations users are allowed to perform after login.
 
 You can learn more about [authentication and authorization in our explanation-section](../../explanation/auth.md#authentication-and-authorization).
 
@@ -619,6 +619,6 @@ A few notes on the realm configuration:
 This is an incomplete list of potential things to customize your NOMAD experience.
 
 - Learn [how to develop plugins](../plugins/plugins.md) that can be installed in an Oasis
-- Write YAML based [schemas](../manage/gui/yaml.md) and [ELNs](../manage/gui/elns.md)
-- Learn how to use the [tabular parser](../manage/gui/tabular.md) to manage data from XLS or CSV
+- Write YAML based [schemas](../schemas/define.md) and [ELNs](../schemas/define.md#annotate-for-the-gui)
+- Learn how to use the [tabular parser](../schemas/tabular.md) to manage data from XLS or CSV
 - Add specialized [NORTH tools](../manage/gui/north.md)

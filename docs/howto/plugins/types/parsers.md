@@ -408,23 +408,17 @@ argument `skip-normalizers`.
 There are several built-in schemas NOMAD (`nomad.datamodel.metainfo`).
 <!-- ? What about restructuring this part into the idea of "NOMAD has some predefined section and quantities ... please, check HERE... and HERE... for more information and details"? -->
 In the example below, we have made use of the base section for workflow and extended
-it to include a code-specific quantity `x_example_magic_value`.
+it to include a code-specific quantity `example_magic_value`.
 
 ```python
 # We extend the existing common definition of section Workflow
 class ExampleWorkflow(Workflow):
-    # We alter the default base class behavior to add all definitions to the existing
-    # base class instead of inheriting from the base class
-    m_def = Section(extends_base_section=True)
-
-    # We define an additional example quantity. Use the prefix x_<parsername>_ to denote
-    # non common quantities.
-    x_example_magic_value = Quantity(
+    example_magic_value = Quantity(
         type=int, description='The magic value from a magic source.'
     )
 ```
-<!-- TODO remove x_ notation in the future -->
-This is the approach for domain-specific schemas such as for [simulation workflows](https://github.com/nomad-coe/nomad-schema-plugin-simulation-workflow.git){:target="_blank" rel="noopener"}. Refer to [how to extend schemas](schema_packages.md#extending-existing-sections).
+
+This is the approach for domain-specific schemas such as for [simulation workflows](https://github.com/nomad-coe/nomad-schema-plugin-simulation-workflow.git){:target="_blank" rel="noopener"}.
 
 ## Other FileParser classes
 

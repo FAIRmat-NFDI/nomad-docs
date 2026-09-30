@@ -40,6 +40,15 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
+      # This workflow checks out historical tags, which predate the helper
+      # script. Get the current copy separately for the root URL sync below.
+      - name: Checkout deployment helper
+        uses: actions/checkout@v7
+        with:
+          ref: main
+          path: .deployment-tools
+          sparse-checkout: scripts
+
       # Tags older than the mike change lack extra.version.provider: mike, so
       # their pages would not show the version selector. Inject it textually
       # (the config contains !!python tags, so it cannot be safely re-parsed).
@@ -105,20 +114,24 @@ jobs:
         env:
           TAG: ${{ inputs.tag }}
 
-      # mike manages version directories, not root files such as CNAME.
-      - name: Preserve custom domain
+      # GitHub Pages cannot rewrite old unversioned URLs to the current stable
+      # version. Mirror the stable build into the root, and preserve root files
+      # such as CNAME that mike does not manage.
+      - name: Preserve custom domain and unversioned docs
         run: |
-          if [ ! -f docs/CNAME ]; then
+          git worktree add /tmp/gh-pages gh-pages
+          uv run python .deployment-tools/scripts/sync_legacy_urls.py /tmp/gh-pages
+
+          if [ -f docs/CNAME ]; then
+            cp docs/CNAME /tmp/gh-pages/CNAME
+          else
             echo "No docs/CNAME found; skipping custom-domain setup"
-            exit 0
           fi
 
-          git worktree add /tmp/gh-pages gh-pages
-          cp docs/CNAME /tmp/gh-pages/CNAME
-          git -C /tmp/gh-pages add CNAME
+          git -C /tmp/gh-pages add -A
           if git -C /tmp/gh-pages diff --cached --quiet; then
-            echo "CNAME is already up to date"
+            echo "Root compatibility files are already up to date"
           else
-            git -C /tmp/gh-pages commit -m "Update CNAME"
+            git -C /tmp/gh-pages commit -m "Preserve unversioned documentation URLs"
             git -C /tmp/gh-pages push origin gh-pages
           fi

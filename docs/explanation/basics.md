@@ -76,8 +76,8 @@ the entry corresponding to the mainfile, will be processed. Processing consist o
 Parsers are small programs that transform data from a recognized *mainfile* into a
 structured machine processable tree of data that we call the *archive* or [**processed data**](data.md)
 of the entry. Only one parser is used for each entry. The used parser is determined
-during matching and depends on the file format. [A dedicated guide](../howto/plugins/types/parsers.md#match-your-raw-file) shows how to match a specific file from your parser. Parsers can be added to NOMAD as
-[plugins](../howto/plugins/types/parsers.md); this is a list of [all available parsers in the central installation](../reference/parsers.md).
+during matching and depends on the file format. The {{ nav_link("howto/plugins/types/parsers.md", breadcrumb=True) }} shows how to match a specific file from your parser. Parsers can be added to NOMAD as
+plugins. The **Distribution Details** section of a NOMAD deployment's landing page lists the installed parser entry points. Details about the file formats supported by each parser should be maintained in the corresponding plugin documentation.
 
 !!! note
     A special case is the parsing of NOMAD archive files. Usually a parser converts a file
@@ -107,10 +107,10 @@ on all entries and the normalizer might decide to do something or not, depending
 it sees in the processed data.
 
 Normalize functions are special functions implemented as part of section definitions
-in [Python schemas](../howto/plugins/types/schema_packages.md#schema-packages-python-vs-yaml).
+in [Python schemas](../howto/schemas/schemas.md#choose-python-or-yaml).
 There is a special normalizer that will go through all processed data and execute these
 function if they are defined. Normalize functions get the respective section instance as
-input. This allows [schema plugin](../howto/plugins/types/schema_packages.md) developers to add normalizing to their sections.
+input. This allows [schema plugin](../howto/schemas/define.md) developers to add normalizing to their sections.
 Read about our [structured data](./data.md) to learn more about the different sections.
 
 ### Storing and indexing

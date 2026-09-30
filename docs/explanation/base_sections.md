@@ -1,9 +1,14 @@
 # Base sections
 
-As previously mentioned in [How to write a schema](../howto/manage/gui/yaml.md#base-sections-and-inheritance),
-base sections can be used when writing custom schemas to inherit properties and *functionality*
-from already defined sections. Here we explain the properties
-and functionality of specific base sections and how they can be used.
+A *base section* is a section definition that other definitions inherit from, so that custom schemas
+pick up both the properties and the *functionality* of definitions that already exist. This page
+explains the model NOMAD's built-in base sections are organized around, and what the most important
+ones mean.
+
+For instructions on inheriting from them, see
+[How-to guides > Work with schemas > Define a schema](../howto/schemas/define.md#inherit-from-a-base-section). For the
+generated per-class listing of every quantity, see
+[Reference > Base sections](../reference/basesections.md).
 
 ## `datamodel.metainfo.basesections`
 
@@ -110,12 +115,12 @@ If a PubChem CID is specified the details are retrieved directly.
 Otherwise a search query is made for the filled attributes in the following order:
 
 1. `smile`
-1. `canonical_smile`
-1. `inchi_key`
-1. `iupac_name`
-1. `name`
-1. `molecular_formula`
-1. `cas_number`
+2. `canonical_smile`
+3. `inchi_key`
+4. `iupac_name`
+5. `name`
+6. `molecular_formula`
+7. `cas_number`
 
 ### `Activity`
 

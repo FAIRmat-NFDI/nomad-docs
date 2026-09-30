@@ -11,11 +11,11 @@ In this tutorial, we use NOMAD’s Electronic Lab Notebook (ELN) functionality t
 In this tutorial, you will learn how to:
 
 1. Create and manage an ELN upload in NOMAD
-1. Create ELN entries for substances, samples, instruments, processes, and measurements using built-in schemas
-1. Reference and interlink ELN entries to represent complete experimental workflows
-1. Document material processing steps and visualize them using workflow graphs
-1. Combine processes and measurements into a single experiment entry
-1. Search, filter, and explore your ELN entries using the NOMAD GUI and custom widgets
+2. Create ELN entries for substances, samples, instruments, processes, and measurements using built-in schemas
+3. Reference and interlink ELN entries to represent complete experimental workflows
+4. Document material processing steps and visualize them using workflow graphs
+5. Combine processes and measurements into a single experiment entry
+6. Search, filter, and explore your ELN entries using the NOMAD GUI and custom widgets
 
 ---
 
@@ -30,10 +30,7 @@ Before starting, make sure you have:
    You can create an account by following the steps described in the
    [How-to guides > ... > Create a NOMAD account](../../howto/manage/gui/account.md#create-a-nomad-account).
 
-1. **Basic understanding of uploads and entries**  
-   Familiarity with uploads, entries, and how they relate to each other can be helpful. These concepts are introduced in the section [key elements in NOMAD](../upload_publish.md#the-key-elements-in-nomad) and will be reinforced throughout the tutorial.
-
-1. **Basic familiarity with experimental workflows**  
+2. **Basic familiarity with experimental workflows**  
    Familiarity with preparation, processing, and measurements can be helpful, but is not required.
 
 In this tutorial, we will use an example experiment involving the preparation of solution-processed polymer thin films and the measurement of their optical absorption spectrum.
@@ -53,9 +50,9 @@ In this tutorial, we will use an example experiment involving the preparation of
 
 ---
 
-## Create a new ELN upload
+## Create a new ELN project
 
-In NOMAD, an ELN is created by initiating a NOMAD upload. This process allows you to structure and document your research data efficiently. Create a new upload by following the steps in [Create new upload](../upload_publish.md#create-new-upload).
+In NOMAD, an ELN is created by initiating a NOMAD upload. This process allows you to structure and document your research data efficiently. Create a new upload by following the steps in [Create a new project](../upload_publish.md#create-a-new-project).
 
 ## Create ELN entries
 
@@ -268,8 +265,8 @@ The *steps* subsection in the *Material Processing ELN* allows us to document ea
 For the example process entry **Preparation of P3HT solution**, we will define the following three steps:
 
 1. Weighing the powder
-1. Filling the solvent
-1. Mixing the solution
+2. Filling the solvent
+3. Mixing the solution
 
 **Use the arrow buttons ⬅️➡️ below to follow the steps for defining the process stages in your material processing entry.**
 <div class="image-slider" id="slider6">
@@ -442,7 +439,7 @@ To search for entries in your ELN, follow these steps:
 
     ![screenshot of step 1](images/explore_ELN_step_1.png)
 
-1. From the drop-down menu, select *Entries*.
+2. From the drop-down menu, select *Entries*.
 
     ![screenshot of step 2](images/explore_ELN_step_2.png)
 

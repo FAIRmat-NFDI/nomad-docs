@@ -8,11 +8,11 @@ The entire setup for a running a NOMAD Oasis is contained in a Git repository, a
 
     For installing a production-ready, self-hosted NOMAD Oasis for research groups or institutions.
 
-1. **<a href="https://github.com/FAIRmat-NFDI/nomad-distro-dev/" target="_blank" rel="noopener">NOMAD distribution for development</a>**
+2. **<a href="https://github.com/FAIRmat-NFDI/nomad-distro-dev/" target="_blank" rel="noopener">NOMAD distribution for development</a>**
 
     Specialized template that allows for a much faster development cycle. This is targeted for plugin developers, Oasis administrators and for developing the `nomad-lab` package. Should not be used in production.
 
-Once you have created a distribution, you can proceed to learning more about the different [configuration options](./configure.md), different ways to [deploy your distribution](./deploy.md), and also about how to [update](./update.md), [administer](./administer.md) or [troubleshoot](./troubleshoot.md) your Oasis.
+Once you have created a distribution, you can proceed to learning more about the different [configuration options](./configure.md), different ways to [deploy your distribution](./deploy.md), and also about how to [migrate](./migrate.md), [administer](./administer.md) or [troubleshoot](./troubleshoot.md) your Oasis.
 
 !!! note
 

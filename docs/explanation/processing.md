@@ -12,8 +12,8 @@ Processing comprises three steps.
 1. **Matching** files to parsers that can process
 them. This step also creates empty entries for matched files.
 Those matched files are now [*mainfiles*](../reference/glossary.md#mainfile) and forever paired with the created entries.
-1. **Parsing** and **normalizing** to produce [*entry archives*](../reference/glossary.md#archive) for matched mainfile/entry-pairs.
-1. **Persisting** (including indexing of) the extracted data.
+2. **Parsing** and **normalizing** to produce [*entry archives*](../reference/glossary.md#archive) for matched mainfile/entry-pairs.
+3. **Persisting** (including indexing of) the extracted data.
 
 <figure markdown>
   ![processing](images/processing.png)
@@ -197,9 +197,9 @@ to open and read other *auxiliary* files.
 
 A notable special case are ELNs with `normalize` functions and references to files.
 ELNs can be designed to link the ELN with uploaded files via `FileEditQuantities` (see
-also [How to define ELNs](../howto/manage/gui/elns.md#example-eln-schema) or [ELN Annotations](../reference/annotations.md#eln-annotations)).
+also [How to define ELNs](../howto/schemas/define.md#the-complete-example) or [ELN Annotations](../reference/annotations.md#eln-annotations)).
 The underlying ELN's schema usually defines `normalize` functions that open the referenced
-files for more data. Certain modes of the [tabular parser](../howto/manage/gui/tabular.md), for example, use
+files for more data. Certain modes of the [tabular parser](../howto/schemas/tabular.md), for example, use
 this.
 
 ### Single file, multiple entries

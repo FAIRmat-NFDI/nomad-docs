@@ -9,12 +9,12 @@ Reference pages provide authoritative technical details. Use them when you need 
 ## Topics
 
 {{ nav_list(descriptions={
+    "reference/metainfo.md": "the Metainfo schema language: definition attributes, quantity types, and conventions.",
     "reference/config.md": "deployment and application configuration options.",
     "reference/annotations.md": "metainfo annotations and their arguments.",
     "reference/basesections.md": "generated reference for NOMAD base sections.",
     "reference/cli.md": "command-line interface reference.",
     "reference/plugins.md": "plugin reference material.",
-    "reference/parsers.md": "supported parser reference information.",
     "reference/code_guidelines.md": "coding conventions used in NOMAD.",
     "reference/glossary.md": "shared terminology used across the documentation.",
     "reference/tutorials.md": "an index of tutorial and training resources.",

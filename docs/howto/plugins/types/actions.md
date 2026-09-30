@@ -343,7 +343,7 @@ print(workflow_status.name)  # example output: RUNNING
 ```
 
 You can add these functionalities in the `normalize` of an
-[ELN schema](../../manage/gui/elns.md) and trigger actions from the ELN
+[ELN schema](../../schemas/define.md#annotate-for-the-gui) and trigger actions from the ELN
 entries. A schema that uses ELN quantities to trigger actions can look like this:
 
 ```py
@@ -555,8 +555,8 @@ staging, scope binding, or file move logic. NOMAD handles the asset lifecycle.
 Your responsibility is:
 
 1. Use `ActionAssetRef` in workflow/signal input models for binary inputs.
-1. Optionally add UI hints in schema metadata (for example, accepted media types).
-1. In activities, consume the referenced file/path via NOMAD-provided action
+2. Optionally add UI hints in schema metadata (for example, accepted media types).
+3. In activities, consume the referenced file/path via NOMAD-provided action
    asset helpers/patterns.
 
 Everything else (browser upload, backend validation, binding to action
