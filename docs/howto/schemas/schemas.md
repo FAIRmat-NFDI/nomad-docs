@@ -1,4 +1,4 @@
-# How to work with schemas in NOMAD
+# How to start working with schemas
 
 Every piece of data in NOMAD follows a *schema*. A schema is a collection of
 [section](../../reference/glossary.md#section-and-subsection) and
