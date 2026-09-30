@@ -149,7 +149,7 @@ a schema-based Entry that you can edit directly in NOMAD. To create an ELN Entry
    it in the data editor.
 
 **Related pages:** [Enter data with ELNs](eln.md);
-[Write a YAML schema package](yaml.md).
+[Define a schema](../../schemas/define.md).
 
 ## Visibility and access
 
