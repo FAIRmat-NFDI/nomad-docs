@@ -366,41 +366,26 @@ You can reproduce this example by downloading the example data (with workflow YA
 
 ## Workflows with custom tasks
 
-*custom tasks:* defined here as tasks for which the corresponding raw files are not automatically recognized by NOMAD, or perhaps there are no raw files at all for the task.
+A custom task is a task whose raw files NOMAD does not automatically recognize,
+or a task that has no associated raw files. The task must still be represented by
+an Entry before a workflow can reference it. One option is to create that Entry
+from a built-in or custom ELN schema. See [Enter data with ELNs](eln.md) for
+creating schema-based Entries and [Write a YAML schema package](yaml.md) for the
+general schema concepts.
 
 The easiest way to create entries for a custom task is to use one of NOMAD's
 built-in ELN schemas. You can create ELN Entries from these schemas in the GUI;
 see {{ nav_link("tutorial/eln/built_in_templates.md", breadcrumb=True) }}.
 
-### Creating an ELN entry from YAML
+### Represent files with `ElnFileManager`
 
-Analogous to the simulation code parsers, NOMAD has a parser for its native schema &mdash; the NOMAD MetaInfo. This parser is automatically executed for files named `<file_name>.archive.yaml` (see the Note under [Explanation > From files to data > Parsing](../../../explanation/basics.md#parsing)). Actually, this is exactly the functionality that we are using to upload our workflows.
+`ElnFileManager` is a built-in schema for referencing and annotating files in an
+ELN Entry. To instantiate this schema from YAML, set `data.m_def` to its full
+section-definition path. See [Schema package references](yaml.md#schema-package-references)
+for the general purpose and syntax of `m_def`.
 
-In this way, users can also create ELN entries, by uploading a YAML file populated according to one of NOMAD's ELN built-in schemas. For example, we can create a basic ELN entry by creating and uploading a file, e.g. `basic_eln_entry.archive.yaml`, with the contents:
-
-```yaml
-data:
-  m_def: "nomad.datamodel.metainfo.eln.ElnBaseSection"
-  name: "ELN entry from YAML"
-  description: "A test ELN entry..."
-```
-
-The `data` section is created and defined as type `ElnBaseSection`, meaning that we can populate all the quantities (e.g., name and description) living in this section (as seen in [MetaInfo Browser > ELNBaseSection](https://nomad-lab.eu/prod/v1/gui/analyze/metainfo/nomad/section_definitions@nomad.datamodel.metainfo.eln.ElnBaseSection){:target="_blank" rel="noopener"}).
-
-Uploading this yaml to the test deployment results in an entry with the overview page:
-
-<div class="click-zoom">
-    <label>
-        <input type="checkbox">
-        <img src="./images/basic-eln-entry.png" alt="Basic ELN Entry" width="100%" title="Click to zoom in">
-    </label>
-</div>
-
-### The `ELNFileManager`
-
-`ELNFileManager` is a built-in schema for referencing and annotating files within an ELN entry. You can create an `ELNFileManager` either from the GUI or via the YAML approach, in the same ways as described above.
-
-For example:
+For example, the following file defines an Entry that describes the creation of
+a force-field file:
 
 <h4><code>create_force_field.archive.yaml</code></h4>
 ```yaml
@@ -413,21 +398,17 @@ data:
     description: 'The force field file for simulation input.'
 ```
 
-Uploading to NOMAD with an empty dummy file called `water.top` should result in the following entry display:
-
-<video width="100%" controls>
-  <source src="./images/ELNFileManager.webm" alt="" type="video/webm">
-</video>
+Upload the YAML file together with `water.top` so that the file reference can be
+resolved during processing.
 
 ### Example workflow with ELN tasks
 
-For a concrete example, consider the following workflow consisting of 3 tasks for setting up a molecular dynamics simulation. Each task has as input some parameters and an execution script, and outputs some file:
+For a concrete example, consider a workflow consisting of three tasks for
+setting up a molecular dynamics simulation. Each task receives parameters or an
+execution script and produces a file.
 
-<video width="100%" controls>
-  <source src="./images/md-setup-workflow.webm" alt="MD Setup Workflow" type="video/webm">
-</video>
-
-Use the `ELNFileManager` class to create entries for each task, as well as for the workflow parameters and execution scripts:
+Use `ElnFileManager` to create Entries for each task and the execution scripts.
+The workflow parameters use the more general `ElnBaseSection` schema:
 
 ??? success "`create_force_field.archive.yaml`"
 
@@ -493,55 +474,62 @@ Now we construct the workflow YAML, `setup_workflow.archive.yaml`, as in the exa
 ??? success "`setup_workflow.archive.yaml`"
 
     ```yaml
-    "workflow2":
-      "name": "MD Setup workflow"
-      "inputs":
-      - "name": "workflow parameters"
-          "section": "../upload/archive/mainfile/Custom_ELN_Entries/workflow_parameters.archive.yaml#/data"
-      - "name": "workflow scripts"
-          "section": "../upload/archive/mainfile/Custom_ELN_Entries/workflow_scripts.archive.yaml#/data/Files"
-      "outputs":
-      - "name": "structure file"
-          "section": "../upload/archive/mainfile/Custom_ELN_Entries/insert_water.archive.yaml#/data/Files/0/file"
-      - "name": "force field file"
-          "section": "../upload/archive/mainfile/Custom_ELN_Entries/create_force_field.archive.yaml#/data/Files/0/file"
-      "tasks":
-      - "m_def": "nomad.datamodel.metainfo.workflow.TaskReference"
-          "name": "create box"
-          "task": "../upload/archive/mainfile/Custom_ELN_Entries/create_box.archive.yaml#/data"
-          "inputs":
-          - "name": "workflow parameters"
-          "section": "../upload/archive/mainfile/Custom_ELN_Entries/workflow_parameters.archive.yaml#/data"
-          - "name": "workflow script 1"
-          "section": "../upload/archive/mainfile/Custom_ELN_Entries/workflow_scripts.archive.yaml#/data/Files/0/file"
-          "outputs":
-          - "name": "initial box"
-          "section": "../upload/archive/mainfile/Custom_ELN_Entries/create_box.archive.yaml#/data/Files/0/file"
-      - "m_def": "nomad.datamodel.metainfo.workflow.TaskReference"
-          "name": "insert water"
-          "task": "../upload/archive/mainfile/Custom_ELN_Entries/insert_water.archive.yaml#/data"
-          "inputs":
-          - "name": "initial box"
-          "section": "../upload/archive/mainfile/Custom_ELN_Entries/create_box.archive.yaml#/data/Files/0/file"
-          - "name": "workflow script 1"
-          "section": "../upload/archive/mainfile/Custom_ELN_Entries/workflow_scripts.archive.yaml#/data/Files/0/file"
-          "outputs":
-          - "name": "structure file"
-          "section": "../upload/archive/mainfile/Custom_ELN_Entries/insert_water.archive.yaml#/data/Files/0/file"
-      - "m_def": "nomad.datamodel.metainfo.workflow.TaskReference"
-          "name": "create force field"
-          "task": "../upload/archive/mainfile/Custom_ELN_Entries/create_force_field.archive.yaml#/data"
-          "inputs":
-          - "name": "workflow parameters"
-          "section": "../upload/archive/mainfile/Custom_ELN_Entries/workflow_parameters.archive.yaml#/data"
-          - "name": "workflow script 2"
-          "section": "../upload/archive/mainfile/Custom_ELN_Entries/workflow_scripts.archive.yaml#/data/Files/1/file"
-          "outputs":
-          - "name": "force field file"
-          "section": "../upload/archive/mainfile/Custom_ELN_Entries/create_force_field.archive.yaml#/data/Files/0/file"
+    workflow2:
+      name: 'MD Setup workflow'
+      inputs:
+      - name: 'workflow parameters'
+        section: '../upload/archive/mainfile/Custom_ELN_Entries/workflow_parameters.archive.yaml#/data'
+      - name: 'workflow scripts'
+        section: '../upload/archive/mainfile/Custom_ELN_Entries/workflow_scripts.archive.yaml#/data/Files'
+      outputs:
+      - name: 'structure file'
+        section: '../upload/archive/mainfile/Custom_ELN_Entries/insert_water.archive.yaml#/data/Files/0/file'
+      - name: 'force field file'
+        section: '../upload/archive/mainfile/Custom_ELN_Entries/create_force_field.archive.yaml#/data/Files/0/file'
+      tasks:
+      - m_def: 'nomad.datamodel.metainfo.workflow.TaskReference'
+        name: 'create box'
+        task: '../upload/archive/mainfile/Custom_ELN_Entries/create_box.archive.yaml#/data'
+        inputs:
+        - name: 'workflow parameters'
+          section: '../upload/archive/mainfile/Custom_ELN_Entries/workflow_parameters.archive.yaml#/data'
+        - name: 'workflow script 1'
+          section: '../upload/archive/mainfile/Custom_ELN_Entries/workflow_scripts.archive.yaml#/data/Files/0/file'
+        outputs:
+        - name: 'initial box'
+          section: '../upload/archive/mainfile/Custom_ELN_Entries/create_box.archive.yaml#/data/Files/0/file'
+      - m_def: 'nomad.datamodel.metainfo.workflow.TaskReference'
+        name: 'insert water'
+        task: '../upload/archive/mainfile/Custom_ELN_Entries/insert_water.archive.yaml#/data'
+        inputs:
+        - name: 'initial box'
+          section: '../upload/archive/mainfile/Custom_ELN_Entries/create_box.archive.yaml#/data/Files/0/file'
+        - name: 'workflow script 1'
+          section: '../upload/archive/mainfile/Custom_ELN_Entries/workflow_scripts.archive.yaml#/data/Files/0/file'
+        outputs:
+        - name: 'structure file'
+          section: '../upload/archive/mainfile/Custom_ELN_Entries/insert_water.archive.yaml#/data/Files/0/file'
+      - m_def: 'nomad.datamodel.metainfo.workflow.TaskReference'
+        name: 'create force field'
+        task: '../upload/archive/mainfile/Custom_ELN_Entries/create_force_field.archive.yaml#/data'
+        inputs:
+        - name: 'workflow parameters'
+          section: '../upload/archive/mainfile/Custom_ELN_Entries/workflow_parameters.archive.yaml#/data'
+        - name: 'workflow script 2'
+          section: '../upload/archive/mainfile/Custom_ELN_Entries/workflow_scripts.archive.yaml#/data/Files/1/file'
+        outputs:
+        - name: 'force field file'
+          section: '../upload/archive/mainfile/Custom_ELN_Entries/create_force_field.archive.yaml#/data/Files/0/file'
     ```
 
-To reproduce the workflow shown in the video above, download the example files, entry YAMLs, and workflow YAML defined above, and upload them to NOMAD:
+After processing, the workflow Entry contains the following graph:
+
+![Custom-task workflow graph in the light theme](images/custom-task-workflow-card-light.png#only-light){:.screenshot}
+![Custom-task workflow graph in the dark theme](images/custom-task-workflow-card-dark.png#only-dark){:.screenshot}
+
+To reproduce the example, download the bundle and add it to a Project. It
+contains the referenced files, the Entry YAML files, and the workflow YAML shown
+above.
 
 [Download Custom_ELN_Entries.zip](data/Custom_ELN_Entries.zip){:.md-button .nomad-button}
 
