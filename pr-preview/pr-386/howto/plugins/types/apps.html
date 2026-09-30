@@ -2375,17 +2375,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#widgetperiodictabledeprecated" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        WidgetPeriodicTableDeprecated
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#widgetscatterplot" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2423,6 +2412,17 @@
     <span class="md-ellipsis">
       
         WidgetTerms
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#widgetperiodictabledeprecated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WidgetPeriodicTableDeprecated
       
     </span>
   </a>
@@ -4695,17 +4695,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#widgetperiodictabledeprecated" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        WidgetPeriodicTableDeprecated
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#widgetscatterplot" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4743,6 +4732,17 @@
     <span class="md-ellipsis">
       
         WidgetTerms
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#widgetperiodictabledeprecated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WidgetPeriodicTableDeprecated
       
     </span>
   </a>
@@ -6084,49 +6084,6 @@ contain basic details about the entry.</p>
 </tr>
 </tbody>
 </table>
-<h4 id="widgetperiodictabledeprecated">WidgetPeriodicTableDeprecated<a class="headerlink" href="#widgetperiodictabledeprecated" title="Permanent link">¶</a></h4>
-<p>Deprecated copy of WidgetPeriodicTable with a misspelled type.</p>
-<table>
-<thead>
-<tr>
-<th>name</th>
-<th>type</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>search_quantity</td>
-<td><code>str</code></td>
-<td>The targeted search quantity.<br><em>default:</em> <code>PydanticUndefined</code></td>
-</tr>
-<tr>
-<td>layout</td>
-<td><code>dict[str, Layout]</code></td>
-<td>Defines widget size and grid positioning for different breakpoints. The following breakpoints are supported: <code>sm</code>, <code>md</code>, <code>lg</code>, <code>xl</code> and <code>xxl</code>.<br><em>default:</em> <code>PydanticUndefined</code></td>
-</tr>
-<tr>
-<td>quantity</td>
-<td><code>str | None</code></td>
-<td><strong>deprecated</strong></td>
-</tr>
-<tr>
-<td>scale</td>
-<td><code>str | None</code></td>
-<td>Statistics scaling.<br><em>default:</em> <code>ScaleEnum.LINEAR</code></td>
-</tr>
-<tr>
-<td>title</td>
-<td><code>str | None</code></td>
-<td>Custom widget title. If not specified, a widget-specific default title is used.</td>
-</tr>
-<tr>
-<td>description</td>
-<td><code>str | None</code></td>
-<td>Optional description of the widget and the data it is showing. Can contain markdown notation. If populated, an icon is shown next to the title that can be clicked to show the description.</td>
-</tr>
-</tbody>
-</table>
 <h4 id="widgetscatterplot">WidgetScatterPlot<a class="headerlink" href="#widgetscatterplot" title="Permanent link">¶</a></h4>
 <p>Scatter plot widget configuration.</p>
 <table>
@@ -6321,6 +6278,49 @@ contain basic details about the entry.</p>
 <td>query_mode</td>
 <td><code>str | None</code></td>
 <td>The query mode to use when multiple terms are selected.</td>
+</tr>
+<tr>
+<td>title</td>
+<td><code>str | None</code></td>
+<td>Custom widget title. If not specified, a widget-specific default title is used.</td>
+</tr>
+<tr>
+<td>description</td>
+<td><code>str | None</code></td>
+<td>Optional description of the widget and the data it is showing. Can contain markdown notation. If populated, an icon is shown next to the title that can be clicked to show the description.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="widgetperiodictabledeprecated">WidgetPeriodicTableDeprecated<a class="headerlink" href="#widgetperiodictabledeprecated" title="Permanent link">¶</a></h4>
+<p>Deprecated copy of WidgetPeriodicTable with a misspelled type.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>search_quantity</td>
+<td><code>str</code></td>
+<td>The targeted search quantity.<br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>layout</td>
+<td><code>dict[str, Layout]</code></td>
+<td>Defines widget size and grid positioning for different breakpoints. The following breakpoints are supported: <code>sm</code>, <code>md</code>, <code>lg</code>, <code>xl</code> and <code>xxl</code>.<br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>quantity</td>
+<td><code>str | None</code></td>
+<td><strong>deprecated</strong></td>
+</tr>
+<tr>
+<td>scale</td>
+<td><code>str | None</code></td>
+<td>Statistics scaling.<br><em>default:</em> <code>ScaleEnum.LINEAR</code></td>
 </tr>
 <tr>
 <td>title</td>
@@ -7108,6 +7108,8 @@ quantities.</p>
       <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
         <script src="../../../create-image-sliders.js"></script>
+      
+        <script src="../../../diagram-zoom.js"></script>
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       

@@ -4036,17 +4036,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#exampleuploads" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ExampleUploads
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#unitsystems" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4117,6 +4106,17 @@
     <span class="md-ellipsis">
       
         Apps
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exampleuploads" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ExampleUploads
       
     </span>
   </a>
@@ -4339,10 +4339,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#normalizerentrypoint" class="md-nav__link">
+  <a href="#northtoolentrypoint" class="md-nav__link">
     <span class="md-ellipsis">
       
-        NormalizerEntryPoint
+        NORTHToolEntryPoint
       
     </span>
   </a>
@@ -4350,10 +4350,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#northtoolentrypoint" class="md-nav__link">
+  <a href="#normalizerentrypoint" class="md-nav__link">
     <span class="md-ellipsis">
       
-        NORTHToolEntryPoint
+        NormalizerEntryPoint
       
     </span>
   </a>
@@ -5190,17 +5190,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#exampleuploads" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ExampleUploads
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#unitsystems" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5271,6 +5260,17 @@
     <span class="md-ellipsis">
       
         Apps
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exampleuploads" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ExampleUploads
       
     </span>
   </a>
@@ -5493,10 +5493,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#normalizerentrypoint" class="md-nav__link">
+  <a href="#northtoolentrypoint" class="md-nav__link">
     <span class="md-ellipsis">
       
-        NormalizerEntryPoint
+        NORTHToolEntryPoint
       
     </span>
   </a>
@@ -5504,10 +5504,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#northtoolentrypoint" class="md-nav__link">
+  <a href="#normalizerentrypoint" class="md-nav__link">
     <span class="md-ellipsis">
       
-        NORTHToolEntryPoint
+        NormalizerEntryPoint
       
     </span>
   </a>
@@ -7449,29 +7449,6 @@ elements and defining the configuration of each element.</p>
 </tr>
 </tbody>
 </table>
-<h4 id="exampleuploads">ExampleUploads<a class="headerlink" href="#exampleuploads" title="Permanent link">¶</a></h4>
-<p>Controls the availability of example uploads.</p>
-<table>
-<thead>
-<tr>
-<th>name</th>
-<th>type</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>include</td>
-<td><code>list[str] | None</code></td>
-<td>List of included options. If not explicitly defined, all of the options will be included by default.</td>
-</tr>
-<tr>
-<td>exclude</td>
-<td><code>list[str] | None</code></td>
-<td>List of excluded options. Has higher precedence than include.</td>
-</tr>
-</tbody>
-</table>
 <h4 id="unitsystems">UnitSystems<a class="headerlink" href="#unitsystems" title="Permanent link">¶</a></h4>
 <p>Controls the available unit systems.</p>
 <table>
@@ -7643,6 +7620,29 @@ elements and defining the configuration of each element.</p>
 <td>options</td>
 <td><code>dict[str, App] | None</code></td>
 <td>Contains the available app options.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="exampleuploads">ExampleUploads<a class="headerlink" href="#exampleuploads" title="Permanent link">¶</a></h4>
+<p>Controls the availability of example uploads.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>include</td>
+<td><code>list[str] | None</code></td>
+<td>List of included options. If not explicitly defined, all of the options will be included by default.</td>
+</tr>
+<tr>
+<td>exclude</td>
+<td><code>list[str] | None</code></td>
+<td>List of excluded options. Has higher precedence than include.</td>
 </tr>
 </tbody>
 </table>
@@ -8361,8 +8361,8 @@ level (level) are considered. The files will be stored in fs.tmp.</p>
 </tr>
 </tbody>
 </table>
-<h4 id="normalizerentrypoint">NormalizerEntryPoint<a class="headerlink" href="#normalizerentrypoint" title="Permanent link">¶</a></h4>
-<p>Base model for normalizer plugin entry points.</p>
+<h4 id="northtoolentrypoint">NORTHToolEntryPoint<a class="headerlink" href="#northtoolentrypoint" title="Permanent link">¶</a></h4>
+<p>Base model for NORTH tool plugin entry points.</p>
 <table>
 <thead>
 <tr>
@@ -8373,9 +8373,9 @@ level (level) are considered. The files will be stored in fs.tmp.</p>
 </thead>
 <tbody>
 <tr>
-<td>level</td>
-<td><code>int</code></td>
-<td>Integer that determines the execution order of this normalizer within the processing of an individual entry. Normalizers with the lowest level is run first.<br><em>default:</em> <code>0</code></td>
+<td>north_tool</td>
+<td><code>NORTHTool</code></td>
+<td><em>default:</em> <code>PydanticUndefined</code></td>
 </tr>
 <tr>
 <td>id_url_safe</td>
@@ -8394,8 +8394,8 @@ level (level) are considered. The files will be stored in fs.tmp.</p>
 </tr>
 </tbody>
 </table>
-<h4 id="northtoolentrypoint">NORTHToolEntryPoint<a class="headerlink" href="#northtoolentrypoint" title="Permanent link">¶</a></h4>
-<p>Base model for NORTH tool plugin entry points.</p>
+<h4 id="normalizerentrypoint">NormalizerEntryPoint<a class="headerlink" href="#normalizerentrypoint" title="Permanent link">¶</a></h4>
+<p>Base model for normalizer plugin entry points.</p>
 <table>
 <thead>
 <tr>
@@ -8406,9 +8406,9 @@ level (level) are considered. The files will be stored in fs.tmp.</p>
 </thead>
 <tbody>
 <tr>
-<td>north_tool</td>
-<td><code>NORTHTool</code></td>
-<td><em>default:</em> <code>PydanticUndefined</code></td>
+<td>level</td>
+<td><code>int</code></td>
+<td>Integer that determines the execution order of this normalizer within the processing of an individual entry. Normalizers with the lowest level is run first.<br><em>default:</em> <code>0</code></td>
 </tr>
 <tr>
 <td>id_url_safe</td>
@@ -8966,6 +8966,8 @@ resource that can be downloaded.</p>
       <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
       
         <script src="../create-image-sliders.js"></script>
+      
+        <script src="../diagram-zoom.js"></script>
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
