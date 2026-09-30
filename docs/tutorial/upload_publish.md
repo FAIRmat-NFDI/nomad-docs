@@ -11,10 +11,10 @@ In this tutorial, we walk through the complete workflow for uploading and publis
 In this tutorial, you will learn how to:
 
 1. Upload raw research data files to NOMAD and organize them using projects
-1. View the entries that NOMAD generates from your files and check their processing status
-1. Share projects with collaborators and manage access permissions
-1. Publish projects and understand the role of embargoes
-1. Assign a Digital Object Identifier (DOI) to your published project
+2. View the entries that NOMAD generates from your files and check their processing status
+3. Share projects with collaborators and manage access permissions
+4. Publish projects and understand the role of embargoes
+5. Assign a Digital Object Identifier (DOI) to your published project
 
 ---
 
@@ -29,10 +29,10 @@ Before starting, make sure you have the following:
     You can create an account by following the steps described in the
     [How-to guides > ... > Create a NOMAD account](../howto/manage/gui/account.md#create-a-nomad-account).
 
-1. **Basic understanding of projects and entries**
+2. **Basic understanding of projects and entries**
     Familiarity with projects, entries, and how they relate to each other can be helpful.
 
-1. **Example files available on your local machine**  
+3. **Example files available on your local machine**  
     This tutorial uses the following example data files:
     - [Miscellaneous files (PDF, images, tables)](https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_3_files/example_files_upload/miscellaneous_data/miscellaneous_data.zip){:target="_blank" rel="noopener"},
     - [Computational data (DFT calculations)](https://github.com/FAIRmat-NFDI/FAIRmat-tutorial-16/raw/refs/heads/main/tutorial_16_materials/part_3_files/example_files_upload/computations_data/FHI-aims.zip){:target="_blank" rel="noopener"},
@@ -122,8 +122,8 @@ The project remains editable, and you can change its access settings at any time
 Now, let’s add files to the project using three different examples:
 
 1. Miscellaneous files (documents, images, or spreadsheets).
-1. DFT calculation of iron(III) oxide.
-1. X-ray photoelectron spectroscopy (XPS) measurement on polymers.
+2. DFT calculation of iron(III) oxide.
+3. X-ray photoelectron spectroscopy (XPS) measurement on polymers.
 
 Files can be added to a project individually, or you can group them into a compressed file in `.zip` or `.tar` formats.
 

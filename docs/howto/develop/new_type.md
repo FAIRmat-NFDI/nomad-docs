@@ -14,14 +14,14 @@ and serialization methods, and registering the type in `normalize_type()`. This 
 1. **Subclass `NonPrimitive` or `Primitive`.** Inherit from `NonPrimitive` if your type operates on
    individual scalar values or 1D lists; from `Primitive` if it wraps a native Python or NumPy scalar
    or array type.
-1. **Implement `_normalize_impl(self, value, **kwargs)`.** Define input validation and parsing.
+2. **Implement `_normalize_impl(self, value, **kwargs)`.** Define input validation and parsing.
    Convert valid input into your canonical runtime representation, or raise `TypeError`/`ValueError`
    if validation fails.
-1. **Implement `_serialize_impl(self, value, **kwargs)`.** Define how the canonical runtime object
+3. **Implement `_serialize_impl(self, value, **kwargs)`.** Define how the canonical runtime object
    becomes a JSON-serializable structure — a string, dict or number.
-1. **Implement `standard_type(self)` and `serialize_self()`.** Specify the generic Python type name
+4. **Implement `standard_type(self)` and `serialize_self()`.** Specify the generic Python type name
    used by schema mappers, and the self-serialization metadata dictionary.
-1. **Register in `normalize_type()`.** Add the string lookup aliases for your new type.
+5. **Register in `normalize_type()`.** Add the string lookup aliases for your new type.
 
 ## Background
 

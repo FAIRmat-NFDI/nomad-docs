@@ -115,12 +115,12 @@ If a PubChem CID is specified the details are retrieved directly.
 Otherwise a search query is made for the filled attributes in the following order:
 
 1. `smile`
-1. `canonical_smile`
-1. `inchi_key`
-1. `iupac_name`
-1. `name`
-1. `molecular_formula`
-1. `cas_number`
+2. `canonical_smile`
+3. `inchi_key`
+4. `iupac_name`
+5. `name`
+6. `molecular_formula`
+7. `cas_number`
 
 ### `Activity`
 

@@ -38,13 +38,13 @@ These can be defined in *absolute* terms, or *relative* to their section above u
 The annotations themselves can be manipulated in two possible ways:
 
 1. *definition* level, i.e. `m_def`.
-1. *attribute* level, i.e. the data instance generated during runtime.
+2. *attribute* level, i.e. the data instance generated during runtime.
 
 The mapping parser will search for the first available annotation in the following order:
 
 1. *attribute level*: specializes subsections to specific contexts.
-1. *definition level*: used for generic paths.
-1. *child sections' definitions* (i.e. all inheriting sections): used to bypass any abstract sections, which should not be instantiated themselves. (note)
+2. *definition level*: used for generic paths.
+3. *child sections' definitions* (i.e. all inheriting sections): used to bypass any abstract sections, which should not be instantiated themselves. (note)
 
 ![Path annotation in NOMAD datamodel](images/mapping_parser_path.webp)
 
@@ -95,7 +95,7 @@ It will look for any repeating units along the path and instantiate the same num
 To compose parallel branches into the same repeating subsection, i.e. $\text{no. subsections} = \sum_{\text{branches}} \text{parallel branch}$:
 
 1. generate different mappings and add them to the annotation `dict`. Each mapping comes with its own unique key.
-1. during the *conversion phase*, select `update_mode="append"`. Manipulate the order in the data via the conversion order of the various maps.
+2. during the *conversion phase*, select `update_mode="append"`. Manipulate the order in the data via the conversion order of the various maps.
 
 **Array quantities**, meanwhile, with `shape=['*']`, have to be handled using an *operator*.
 This is due to `shape` having variable rank, e.g. `shape=['*','*']`.

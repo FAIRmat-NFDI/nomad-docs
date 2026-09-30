@@ -25,7 +25,7 @@ default NOMAD configuration and NOMAD Central allow:
 1. Open the [NOMAD GUI](https://nomad-lab.eu/prod/v1/gui/v2/){:target="_blank" rel="noopener"}
    and sign in. If you do not have a NOMAD Central account, follow the
    [Create a NOMAD user account](account.md#create-a-nomad-account).
-1. Open **PROJECTS** and select **NEW PROJECT**. A prompt appears where you can
+2. Open **PROJECTS** and select **NEW PROJECT**. A prompt appears where you can
    add:
 
      - a **Project name** (mandatory)
@@ -34,7 +34,7 @@ default NOMAD configuration and NOMAD Central allow:
      **ADD FILES**
      - users or groups to your Project as **Reviewer** or **Coauthor**
 
-1. When you have finished filling in the prompt, select **CREATE**. NOMAD
+3. When you have finished filling in the prompt, select **CREATE**. NOMAD
    creates the Project and opens its **Overview** page.
 
 The Project name can be edited under **SETTINGS** > **General**.
@@ -52,7 +52,7 @@ You can create Entries in a Project in two ways:
 
 1. **From supported files:** Add files in a format recognized by an installed
    parser. NOMAD processes the files and creates Entries automatically.
-1. **From a schema:** On the Project **Overview** page or in any folder under
+2. **From a schema:** On the Project **Overview** page or in any folder under
    **FILES**, select **NEW ENTRY**, then choose a built-in or custom schema. NOMAD creates an editable Electronic Lab Notebook (ELN) Entry that you can complete in the data editor.
 
 ??? info "Additional Project and Entry metadata"
@@ -141,11 +141,11 @@ a schema-based Entry that you can edit directly in NOMAD. To create an ELN Entry
 
 1. On the Project **Overview** page or in any folder under
    **FILES**, select **NEW ENTRY**. You can create new folders using the `+` button under **FILES**.
-1. Choose a schema under **BUILT-IN SCHEMAS** or **CUSTOM SCHEMAS**. Custom
+2. Choose a schema under **BUILT-IN SCHEMAS** or **CUSTOM SCHEMAS**. Custom
    schemas come from schema packages uploaded to the current NOMAD deployment.
    Depending on your access, these can include schemas from this Project, your
    other Projects, or Projects shared or published by other users.
-1. Enter a filename and select **CREATE**. NOMAD creates the ELN and opens
+3. Enter a filename and select **CREATE**. NOMAD creates the ELN and opens
    it in the data editor.
 
 **Related pages:** [Enter data with ELNs](eln.md);
@@ -182,20 +182,20 @@ Only the Project owner can publish a Project or assign its DOI.
 1. Open **ENTRIES** and review every Entry. Confirm that all expected Entries
    are present and that their extracted or entered data are complete and
    correct.
-1. In the Project header, select the status button with the drop-down arrow.
+2. In the Project header, select the status button with the drop-down arrow.
    Depending on the current state, it is labelled **Completed**, **Failed**,
    **Processing**, or **Idle**. In the **Processing status** panel, confirm that
    **Matching** found the expected number of Entries, **Parsing** completed
    successfully for every Entry, and **Cleanup** reports no unresolved warnings
    or errors.
-1. For an Entry with failed processing, unexpected data, or a concerning
+3. For an Entry with failed processing, unexpected data, or a concerning
    warning, open the Entry and select **LOGS**. Review the processing messages,
    correct the source data or Entry as needed, and reprocess before publishing.
-1. Open **SETTINGS** > **General**.
-1. In **Publish**, select **No embargo** or an embargo period. If the Project
+4. Open **SETTINGS** > **General**.
+5. In **Publish**, select **No embargo** or an embargo period. If the Project
    is already publicly visible, the embargo control is disabled; change its
    visibility to **Private** first if you need an embargo.
-1. Select **PUBLISH** or **PUBLISH WITH EMBARGO**, then confirm the action.
+6. Select **PUBLISH** or **PUBLISH WITH EMBARGO**, then confirm the action.
 
 If processing errors persist or the impact of a warning is unclear, contact
 the administrator of your NOMAD deployment before publishing. NOMAD Central

@@ -11,7 +11,7 @@ It is important to understand that the NOMAD software and your data are independ
 Before performing any data or database migration on your Oasis:
 
 1. **Back up your data**: Make sure you have an up-to-date dump of your MongoDB database (e.g. using `scripts/backup-mongo.sh`) and that your uploaded files in `.volumes/fs` are securely backed up. See [Backups](administer.md#backups) for more details.
-1. **Review the release notes**: Check the [NOMAD distribution template releases](https://github.com/FAIRmat-NFDI/nomad-distro-template/releases){:target="_blank" rel="noopener"} and the [NOMAD Python packages releases](https://github.com/FAIRmat-NFDI/nomad/releases){:target="_blank" rel="noopener"} for version-specific considerations and changes to configuration files (`docker-compose.yaml`, `nomad.yaml`, etc.).
+2. **Review the release notes**: Check the [NOMAD distribution template releases](https://github.com/FAIRmat-NFDI/nomad-distro-template/releases){:target="_blank" rel="noopener"} and the [NOMAD Python packages releases](https://github.com/FAIRmat-NFDI/nomad/releases){:target="_blank" rel="noopener"} for version-specific considerations and changes to configuration files (`docker-compose.yaml`, `nomad.yaml`, etc.).
 
 After performing a migration, **verify container health**: check that all services start cleanly and report a healthy status using `docker compose ps` and `docker compose logs`.
 
