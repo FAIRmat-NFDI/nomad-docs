@@ -4772,7 +4772,7 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>--wait<span class="w"> </span>--wait-timeout<span class="w"> </span><span class="m">180</span><span class="w"> </span>nomad_oasis_elastic_9
 </code></pre></div>
 <h4 id="2-copy-mapping-and-create-index-in-es9">2. Copy Mapping and Create Index in ES9<a class="headerlink" href="#2-copy-mapping-and-create-index-in-es9" title="Permanent link">¶</a></h4>
-<p>Export the settings and mappings from ES7 and create the new index in ES9 (port 9201). The standard Oasis Compose configuration does not publish the ES7 port to the host, so run its <code>curl</code> commands inside the <code>elastic</code> service container.</p>
+<p>Export the settings and mappings from ES7 and create the new index in ES9 (port 9201).</p>
 <p>The effective index name may come from configuration overrides rather than directly from <code>configs/nomad.yaml</code>. Read it from the running NOMAD app container:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">set</span><span class="w"> </span>-o<span class="w"> </span>pipefail
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
