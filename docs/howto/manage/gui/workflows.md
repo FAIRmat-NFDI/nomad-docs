@@ -330,7 +330,7 @@ The workflow `tasks`:
             - name: Output DMFT at T1 calculation
               section: '../upload/archive/mainfile/DMFT/T1/dmft_t1.hdf5#/run/0/calculation/-1'
         - m_def: nomad.datamodel.metainfo.workflow.TaskReference
-          task: '../upload/archive/mainfile/DMFT/T1/dmft_t1.hdf5#/workflow2'
+          task: '../upload/archive/mainfile/DMFT/T2/dmft_t2.hdf5#/workflow2'
           name: DMFT at T2
           inputs:
             - name: Input TB calculation
@@ -342,11 +342,23 @@ The workflow `tasks`:
 
 Most importantly for this example: In contrast to [Nested workflows > In multiple files](#in-multiple-entries), where `TaskReference` was used to define sub-workflows, the task named `DMFT` is defined directly as type `Workflow`.
 
-When uploaded with the example data, this workflow file will produce an entry with the following nested workflow graph on the Overview page:
+When uploaded with the example data, this workflow file produces an Entry whose
+**Overview** page initially shows the complete `DFT+TB+DMFT` workflow:
 
-<video width="100%" controls>
-  <source src="./images/nested_workflow_one-entry.webm" alt="" type="video/webm">
-</video>
+![Top-level nested workflow graph in the light theme](images/nested-workflow-parent-card-light.png#only-light){:.screenshot}
+![Top-level nested workflow graph in the dark theme](images/nested-workflow-parent-card-dark.png#only-dark){:.screenshot}
+
+Select the `DMFT` task to enter the sub-workflow. The graph then shows the
+`DMFT at T1` and `DMFT at T2` tasks and their connections to the TB input and
+the two DMFT outputs. Use the back arrow in the workflow toolbar to return to
+the parent graph.
+
+<!-- TODO: Regenerate both child images without --allow-missing-nested-tasks
+after the GUI displays the nested DMFT tasks. The current captures show the
+reported "No tasks to show" defect. -->
+
+![DMFT sub-workflow graph in the light theme](images/nested-workflow-dmft-subworkflow-card-light.png#only-light){:.screenshot}
+![DMFT sub-workflow graph in the dark theme](images/nested-workflow-dmft-subworkflow-card-dark.png#only-dark){:.screenshot}
 
 You can reproduce this example by downloading the example data (with workflow YAML included at the root level), and uploading to NOMAD yourself:
 
