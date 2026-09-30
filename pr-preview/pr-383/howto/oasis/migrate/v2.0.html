@@ -4765,8 +4765,21 @@
 <p>Start the temporary ES9 container:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>nomad_oasis_elastic_9
 </code></pre></div>
-<p>Wait until ES9 is healthy and responding on port 9201:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>curl<span class="w"> </span>-fsS<span class="w"> </span>http://localhost:9201
+<p>Wait until ES9 is responding and its cluster health reaches at least <code>yellow</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">printf</span><span class="w"> </span><span class="s1">'Waiting for ES9'</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nv">attempt</span><span class="o">=</span><span class="m">0</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">until</span><span class="w"> </span>curl<span class="w"> </span>-fsS<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">  </span><span class="s1">'http://localhost:9201/_cluster/health?wait_for_status=yellow&amp;timeout=2s'</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">  </span>&gt;<span class="w"> </span>/dev/null<span class="w"> </span><span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span><span class="p">;</span><span class="w"> </span><span class="k">do</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">  </span><span class="nv">attempt</span><span class="o">=</span><span class="k">$((</span><span class="nv">attempt</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">1</span><span class="k">))</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="o">[</span><span class="w"> </span><span class="s2">"</span><span class="nv">$attempt</span><span class="s2">"</span><span class="w"> </span>-ge<span class="w"> </span><span class="m">60</span><span class="w"> </span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">then</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">    </span><span class="nb">printf</span><span class="w"> </span><span class="s1">'\nES9 did not become ready in time\n'</span><span class="w"> </span>&gt;<span class="p">&amp;</span><span class="m">2</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">    </span><span class="nb">exit</span><span class="w"> </span><span class="m">1</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">  </span><span class="k">fi</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">  </span><span class="nb">printf</span><span class="w"> </span><span class="s1">'.'</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">  </span>sleep<span class="w"> </span><span class="m">2</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="k">done</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="nb">printf</span><span class="w"> </span><span class="s1">' ES9 is ready\n'</span>
 </code></pre></div>
 <h4 id="2-copy-mapping-and-create-index-in-es9">2. Copy Mapping and Create Index in ES9<a class="headerlink" href="#2-copy-mapping-and-create-index-in-es9" title="Permanent link">¶</a></h4>
 <p>Export the settings and mappings from ES7 and create the new index in ES9 (port 9201). The standard Oasis Compose configuration does not publish the ES7 port to the host, so run its <code>curl</code> commands inside the <code>elastic</code> service container.</p>
