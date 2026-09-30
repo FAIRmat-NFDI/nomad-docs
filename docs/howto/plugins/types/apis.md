@@ -102,7 +102,7 @@ Read the official [FastAPI documentation](https://fastapi.tiangolo.com/tutorial/
 If you run NOMAD with this plugin following our [Oasis configuration documentation](../../oasis/configure.md) with the default configuration, you can curl this API and should receive the message:
 
 ```sh
-curl localhost:8000/nomad-oasis/apis/myapi/
+curl localhost:8000/nomad-oasis/backend/apis/myapi/
 ```
 
 ### Static files
@@ -128,7 +128,7 @@ app.mount('/static', StaticFiles(directory=static_folder), name='static')
 Then e.g. the file `static/static_page.html` will be available at:
 
 ```sh
-curl localhost:8000/nomad-oasis/apis/myapi/static/static_page.html
+curl localhost:8000/nomad-oasis/backend/apis/myapi/static/static_page.html
 ```
 
 !!! note
