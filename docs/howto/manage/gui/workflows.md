@@ -52,12 +52,14 @@ feature of all parser-supported mainfiles.
 
 The parser-generated workflow has the following graph:
 
-![Parser-generated single-point workflow graph](images/single-point-nomad-workflow-graph.png){:.screenshot}
+![Parser-generated single-point workflow graph in the light theme](images/single-point-nomad-workflow-card-light.png#only-light){:.screenshot}
+![Parser-generated single-point workflow graph in the dark theme](images/single-point-nomad-workflow-card-dark.png#only-dark){:.screenshot}
 
-The example below recreates this `SinglePoint` workflow graph in a separate
-custom workflow Entry defined with YAML. The custom workflow references the
-parser-generated `workflow2` section as its task and explicitly uses the same
-system and calculation sections as its input and output.
+The example below recreates the central input-task-output path of this
+`SinglePoint` workflow graph in a separate custom workflow Entry defined with
+YAML. The custom workflow references the parser-generated `workflow2` section
+as its task and explicitly uses the same system and final calculation sections
+as its input and output.
 
 To define the initial workflow, create a file `dft.workflow.archive.yaml` with the following content:
 
@@ -135,7 +137,8 @@ To reproduce the example in a new Project:
 
 1. Open the custom workflow Entry. Its **Overview** page contains this graph:
 
-![Custom single-point workflow graph](images/single-point-custom-nomad-workflow-graph.png){:.screenshot}
+![Custom single-point workflow graph in the light theme](images/single-point-custom-nomad-workflow-card-light.png#only-light){:.screenshot}
+![Custom single-point workflow graph in the dark theme](images/single-point-custom-nomad-workflow-card-dark.png#only-dark){:.screenshot}
 
 ??? tip "Add the methodology as a workflow input"
 
