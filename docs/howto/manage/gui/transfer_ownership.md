@@ -20,9 +20,3 @@ underlying model, and the case where a project was shared with you, see
 
 On acceptance, you become the project's owner. On refusal, ownership stays with the original owner
 and the temporary access is removed.
-
-!!! note
-    You can only transfer a project you own. If a project was shared with you (you are a coauthor
-    or reviewer, not the owner), you cannot transfer it — the owner must initiate the transfer.
-    To manage a shared project's collaborators programmatically, see
-    [Transfer project ownership via the API](../program/transfer_ownership.md#when-the-project-was-shared-with-you).

@@ -29,8 +29,6 @@ target must *accept* before ownership changes.
 - **Permissions.** Only the `main_author` can initiate a transfer. A coauthor can manage the
   project's collaborators (see [When the project was shared with you](#when-the-project-was-shared-with-you))
   but cannot transfer ownership.
-- **Groups.** Group ownership can be transferred with the same request-and-accept model, using
-  `resource_type: group`.
 
 The state-changing calls (request, respond, cancel) require a token with `uploads:write`.
 
