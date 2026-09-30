@@ -20,13 +20,13 @@ the workflow file, as in the downloadable examples in this guide.
 ## Further resources
 
 - [Explanation > Workflows](../../../explanation/workflows.md)
-- [Tutorials > Managing workflows and projects](../../../tutorial/workflows_projects.md)
+- [Tutorials > Manage workflows and projects](../../../tutorial/workflows_projects.md)
 
 ## Overview
 
 NOMAD workflows connect archive sections through inputs, tasks, and outputs.
 For supported data, NOMAD may create a workflow automatically during
-[Processing](../../../explanation/processing.md). A custom workflow Entry lets
+[Explanation > Processing](../../../explanation/processing.md). A custom workflow Entry lets
 you define these connections when the workflow is not created automatically.
 
 The examples in this guide use supported simulation files to provide reproducible task
@@ -55,7 +55,7 @@ The parser-generated workflow has the following graph:
 ![Parser-generated single-point workflow graph in the light theme](images/single-point-nomad-workflow-card-light.png#only-light){:.screenshot}
 ![Parser-generated single-point workflow graph in the dark theme](images/single-point-nomad-workflow-card-dark.png#only-dark){:.screenshot}
 
-To demonstrate the creation of a custom workflow entry, the example below recreates the central input-task-output path of this
+To demonstrate the creation of a custom workflow Entry, the example below recreates the central input-task-output path of this
 `SinglePoint` workflow graph in a separate custom workflow Entry using YAML, as
 described in [How-to guides > ... > Populate data](../../schemas/define.md#populate-data).
 The custom workflow references the parser-generated `workflow2` section
@@ -95,19 +95,25 @@ archive section. Between two tasks, the source task's output and the target
 task's input must match in this way.
 
 !!! Warning "Important"
-    For the creation of workflow entries using YAMLs, the file must have the extension `archive.yaml`.
+    A workflow file created from YAML must have a filename ending in
+    `.archive.yaml`.
 
-This file is constructed according to NOMAD's schemas for [Archive Files](../../../explanation/data.md#archives) and [General Workflows](../../../explanation/workflows.md#the-built-in-abstract-workflow-schema). The `workflow2` section of the archive has 3 possible subsections: `inputs`, `outputs`, and `tasks`:
+This file follows NOMAD's schemas for
+[Explanation > Data structure > Archives](../../../explanation/data.md#archives)
+and
+[Explanation > Workflows > The built-in abstract workflow schema](../../../explanation/workflows.md#the-built-in-abstract-workflow-schema).
+The `workflow2` section has three possible subsections: `inputs`, `outputs`, and
+`tasks`:
 
-**`inputs`**: a list of references to the global inputs of the workflow, with `name` and `section` attributes. `section` corresponds to a path for linking to the relevant archive section. In this case, the relative section path is `run[0].system[-1]`, linked to the Entry defined by the mainfile `dft.xml`. The prefix is discussed under [Considerations for archive path specification](#path-specification).
+**`inputs`**: a list of references to the global inputs of the workflow, with `name` and `section` attributes. `section` corresponds to a path for linking to the relevant archive section. In this case, the relative section path is `run[0].system[-1]`, linked to the Entry defined by the mainfile `dft.xml`. The prefix is discussed under [Archive path specification](#path-specification).
 
 **`outputs`**: identical to the inputs list, representing the global outputs of the workflow, with the relative section path `run[0].calculation[-1]` in this case.
 
 **`tasks`**: a list of references to the tasks/steps of the workflow. Each task contains `m_def`, `task`, `inputs`, and `outputs` attributes. `inputs`/`outputs` are task-specific versions of the lists defined above.
 
-`task` is the path for linking to the relevant archive section, analogous to the `section` attribute for `inputs`/`outputs`. However, this path **must** reference a task, which in all practical cases corresponds to a `workflow2` section
+`task` is the path for linking to the relevant archive section, analogous to the `section` attribute for `inputs`/`outputs`. However, this path **must** reference a task, which in all practical cases corresponds to a `workflow2` section.
 
-`m_def` defines the type of task according to NOMAD's MetaInfo schema, in this case a `TaskReference` to the archive `workflow2` section.  The use of `TaskReference` will be clarified in the [Nested workflows > In multiple entries](#in-multiple-entries) example below.
+`m_def` defines the type of task according to NOMAD's Metainfo schema, in this case a `TaskReference` to the archive `workflow2` section. The use of `TaskReference` is clarified under [Nested workflows > In multiple Entries](#in-multiple-entries).
 
 <a id="path-specification"></a>
 ### Archive path specification
@@ -225,14 +231,27 @@ To test the cross-Project references:
 
 ## Nested workflows
 
-Nested, or hierarchical, workflows correspond to workflow graphs containing task nodes that themselves can be represented as a directed graph, i.e., a sub-workflow. The [General Workflow Schema](../../../explanation/workflows.md#the-built-in-abstract-workflow-schema) allows for nested workflows through an inheritance relationship from the `Task` class to the `Workflow` class.
+Nested, or hierarchical, workflows contain task nodes that can themselves be
+represented as directed graphs. The
+[Explanation > Workflows > The built-in abstract workflow schema](../../../explanation/workflows.md#the-built-in-abstract-workflow-schema)
+supports this pattern through the inheritance relationship from `Task` to
+`Workflow`.
 
-### In multiple entries
+### In multiple Entries
 
-The most common way to construct a nested workflow is by creating separate entries for each (sub-)workflow. In this case, each sub-workflow archive will contain a populated `workflow2` section. Thus, to add a sub-workflow to your workflow YAML, the **best practice** is to directly link to this `workflow2` section, i.e., `task: <prefix>/<entry identifier>/workflow2`.
+The most common way to construct a nested workflow is by creating a separate
+Entry for each sub-workflow. Each sub-workflow archive then contains a populated
+`workflow2` section. To use it as a task, reference that section directly with
+`task: <prefix>/<entry_locator>#/workflow2`, following the forms under
+[Archive path specification](#path-specification).
 
 !!! Warning "Important"
-    When `task` is linked to a `workflow2` section of a different upload, this sub-workflow task **must** be defined as a `TaskReference` by setting `m_def: nomad.datamodel.metainfo.workflow.TaskReference`. This is necessary to overwrite the default class for `workflow2.task`, `nomad.datamodel.metainfo.workflow.Task`, which is only allowed to contain a `Task` instance directly, but not allowed to reference one (see [General Workflow Schema](../../../explanation/workflows.md#the-built-in-abstract-workflow-schema)).
+    When `task` references a `workflow2` section in another Entry, define the
+    sub-workflow task as a `TaskReference` by setting
+    `m_def: nomad.datamodel.metainfo.workflow.TaskReference`. The default type,
+    `nomad.datamodel.metainfo.workflow.Task`, can contain a `Task` directly but
+    cannot reference one in another Entry. See
+    [Explanation > Workflows > The built-in abstract workflow schema](../../../explanation/workflows.md#the-built-in-abstract-workflow-schema).
 
 We have already seen this case in
 [Simple Workflows with Supported Tasks](#simple-workflows-with-supported-tasks).
@@ -242,9 +261,11 @@ that references these parser-generated simulation Entries as tasks is therefore
 a nested workflow. Other deployments may provide different simulation parsers
 and workflow metadata.
 
-### In a single entry
+### In a single Entry
 
-Since a `Workflow` instance is also a `Task` instance due to inheritance, we can directly nest workflows within a single entry. Here we illustrate the concept using a concrete computational workflow, represented schematically as:
+Since a `Workflow` instance is also a `Task` instance due to inheritance, you
+can nest workflows directly within a single Entry. The following computational
+workflow illustrates this pattern:
 
 ```mermaid
 graph LR;
@@ -280,7 +301,8 @@ The mainfiles for these calculations are organized in the following file structu
         └── dmft_t2.hdf5
 ```
 
-We construct the YAML, `nested_workflow_one-entry.archive.yaml` in parts for clarity:
+The following snippets construct
+`nested_workflow_one-entry.archive.yaml` in parts for clarity.
 
 The overall `workflow2` section and global workflow `inputs`:
 
@@ -355,10 +377,13 @@ The workflow `tasks`:
               section: '../upload/archive/mainfile/DMFT/T2/dmft_t2.hdf5#/run/0/calculation/-1'
 ```
 
-Most importantly for this example: In contrast to [Nested workflows > In multiple files](#in-multiple-entries), where `TaskReference` was used to define sub-workflows, the task named `DMFT` is defined directly as type `Workflow`.
+Unlike the pattern under
+[Nested workflows > In multiple Entries](#in-multiple-entries), which uses a
+`TaskReference`, this example defines the `DMFT` task directly as a `Workflow`.
 
-When uploaded with the example data, this workflow file produces an Entry whose
-**Overview** page initially shows the complete `DFT+TB+DMFT` workflow:
+When added to a Project with the example data, this workflow file produces an
+Entry whose **Overview** page initially shows the complete `DFT+TB+DMFT`
+workflow:
 
 ![Top-level nested workflow graph in the light theme](images/nested-workflow-parent-card-light.png#only-light){:.screenshot}
 ![Top-level nested workflow graph in the dark theme](images/nested-workflow-parent-card-dark.png#only-dark){:.screenshot}
@@ -375,7 +400,8 @@ reported "No tasks to show" defect. -->
 ![DMFT sub-workflow graph in the light theme](images/nested-workflow-dmft-subworkflow-card-light.png#only-light){:.screenshot}
 ![DMFT sub-workflow graph in the dark theme](images/nested-workflow-dmft-subworkflow-card-dark.png#only-dark){:.screenshot}
 
-You can reproduce this example by downloading the example data (with workflow YAML included at the root level), and uploading to NOMAD yourself:
+To reproduce this example, download the compressed bundle and add it while
+creating a Project. The workflow YAML is located at the root of the bundle.
 
 [Download nested_workflow_one-entry.zip](data/nested_workflow_one-entry.zip){:.md-button .nomad-button}
 
@@ -406,12 +432,13 @@ data:
   name: 'Create force field'
   description: 'The force field is defined for input to the MD simulation engine.'
   Files:
-  - file: 'water.top'
+  - file: 'Custom_ELN_Entries/water.top'
     description: 'The force field file for simulation input.'
 ```
 
-The `file` value identifies the path to `water.top` from the Project root. The
-file must exist at that path for NOMAD to resolve the reference during
+The `file` value identifies the path to `water.top` from the Project root. In
+this example, the file must therefore be stored at
+`Custom_ELN_Entries/water.top` for NOMAD to resolve the reference during
 processing.
 
 ### Example workflow with ELN tasks
@@ -482,7 +509,8 @@ The workflow parameters use the more general `ElnBaseSection` schema:
         description: 'Creates the appropriate force field files for the simulation engine.'
     ```
 
-Now we construct the workflow YAML, `setup_workflow.archive.yaml`, as in the examples above:
+Define the workflow in `setup_workflow.archive.yaml` using the Entries shown
+above:
 
 ??? success "`setup_workflow.archive.yaml`"
 
@@ -588,16 +616,12 @@ workflow. -->
 
 ### Extending the workflow schema
 
-<!-- TODO Possibly update this example, and maybe define the scope of usage -->
+The abstract workflow schema supports general tools such as workflow searches,
+navigation, and graph visualization. You can extend it with specialized
+references, workflow or task parameters, and other workflow-specific metadata.
 
-The abstract workflow schema above allows us to build generalized tools for workflows,
-like workflow searches, navigation in workflow, graphical representations of workflows, etc. But, you can still augment the given section definitions with more information through
-inheritance. These information can be specialized references to denote inputs and outputs,
-can be additional workflow or task parameters, and much more.
-
-In this example, we created a special workflow section definition `GeometryOptimization`
-that defines a parameter `threshold` and an additional reference to the final
-calculation of the optimization:
+The following example defines a specialized `GeometryOptimizationWorkflow`
+with a convergence threshold and a reference to the final calculation:
 
 ```yaml
 definitions:
@@ -619,3 +643,6 @@ workflow2:
   inputs:
     ...
 ```
+
+For the general schema inheritance syntax, see
+[How-to guides > ... > Inherit from a base section](../../schemas/define.md#inherit-from-a-base-section).
