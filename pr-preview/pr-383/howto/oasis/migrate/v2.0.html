@@ -4847,30 +4847,32 @@
 <h4 id="5-finalize-the-migration">5. Finalize the Migration<a class="headerlink" href="#5-finalize-the-migration" title="Permanent link">¶</a></h4>
 <p>Once verified:</p>
 <ol>
-<li>Stop the running containers:</li>
-</ol>
+<li>
+<p>Stop the running containers:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>down
 </code></pre></div>
-<ol>
-<li>Update <code>docker-compose.yaml</code>:</li>
+</li>
+<li>
+<p>Update <code>docker-compose.yaml</code>:</p>
+<ul>
 <li>Set the main <code>elastic</code> service image to <code>docker.elastic.co/elasticsearch/elasticsearch:9.5.0</code>.</li>
 <li>Add <code>xpack.security.enabled=false</code> to the main <code>elastic</code> service's <code>environment</code> list so that NOMAD can continue to connect over unauthenticated HTTP.</li>
 <li>Change the volume mount for <code>elastic</code> to use the migrated volume <code>nomad_oasis_elastic_9</code> (or replace the old volume).</li>
 <li>Ensure <code>NOMAD_ELASTIC_VERSION: 9</code> is present in your NOMAD services (<code>app</code>, <code>worker</code>, etc.).</li>
-<li>
-<p>Remove the temporary <code>nomad_oasis_elastic_9</code> service definition from <code>docker-compose.yaml</code>.</p>
+<li>Remove the temporary <code>nomad_oasis_elastic_9</code> service definition from <code>docker-compose.yaml</code>.</li>
+</ul>
 </li>
 <li>
 <p>Start your upgraded NOMAD Oasis:</p>
-</li>
-</ol>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
 </code></pre></div>
-<ol>
-<li>Remove the old ES7 volume if no longer needed:</li>
-</ol>
+</li>
+<li>
+<p>Remove the old ES7 volume if no longer needed:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>docker<span class="w"> </span>volume<span class="w"> </span>rm<span class="w"> </span>nomad_oasis_elastic
 </code></pre></div>
+</li>
+</ol>
 <hr>
 <h3 id="option-2-start-from-a-fresh-es9-container-and-reindex-uploads">Option 2: Start from a fresh ES9 container and reindex uploads<a class="headerlink" href="#option-2-start-from-a-fresh-es9-container-and-reindex-uploads" title="Permanent link">¶</a></h3>
 <p>In NOMAD, <strong>MongoDB and the archive files (<code>.volumes/fs</code>) are the single source of truth</strong>. This option wipes the Elasticsearch volume, starts a fresh Elasticsearch 9 container, and reindexes all uploads from MongoDB and archive storage.</p>
