@@ -1,6 +1,6 @@
 # How to create a normalizer
 
-A normalizer takes the archive of an entry as input and manipulates (usually expands) the given archive. This way, a normalizer can add additional sections and quantities based on the information already available in the archive. All normalizers are executed in the order [determined by their `level`](#control-normalizer-execution-order) after parsing, but the normalizer may decide to not do anything based on the entry contents.
+A normalizer takes the archive of an entry as input and manipulates (usually expands) the given archive. This way, a normalizer can add additional sections and quantities based on the information already available in the archive. All normalizers are executed in the order [determined by their `execution_order`](#control-normalizer-execution-order) after parsing, but the normalizer may decide to not do anything based on the entry contents.
 
 This documentation shows you how to create a plugin entry point for a normalizer. You should read the [introduction to plugins](../plugins.md) to have a basic understanding of how plugins and plugin entry points work in the NOMAD ecosystem.
 
@@ -113,17 +113,20 @@ Here, we used the schema definition for the `run` section defined in this [plugi
 
 ## Control normalizer execution order
 
-`NormalizerEntryPoints` have an attribute `level`, which you can use to control their execution order. Normalizers are executed in order from lowest level to highest level. The default level for normalizers is `0`, but this can be changed per installation using `nomad.yaml`:
+`NormalizerEntryPoints` have an attribute `execution_order`, which you can use to control their execution order. Normalizers are executed in order from lowest to highest execution order. The default execution order for normalizers is `0`, but this can be changed per installation using `nomad.yaml`:
 
 ```yaml
 plugins:
   entry_points:
     options:
       "nomad_example.normalizers:mynormalizer1":
-        level: 1
+        execution_order: 1
       "nomad_example.normalizers:mynormalizer2":
-        level: 2
+        execution_order: 2
 ```
+
+!!! note
+    `execution_order` replaces the deprecated `level` attribute. Existing configurations that use `level` keep working, but should be migrated to `execution_order`.
 
 ## Running the normalizer
 
