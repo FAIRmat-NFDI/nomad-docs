@@ -4457,14 +4457,17 @@ When running code snippets, always make sure that the <code>url</code> parameter
 <p>Processing happens in the background. Define this helper to wait up to ten minutes for it to finish; you can reuse it for the XPS upload and publication below.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 <a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>
-<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">wait_for_process</span><span class="p">(</span><span class="n">upload_id</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">timeout_in_sec</span><span class="o">=</span><span class="mi">600</span><span class="p">):</span>
-<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>    <span class="n">deadline</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">+</span> <span class="n">timeout_in_sec</span>
-<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>    <span class="k">while</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">deadline</span><span class="p">:</span>
-<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a>        <span class="n">upload</span> <span class="o">=</span> <span class="n">get_upload_by_id</span><span class="p">(</span><span class="n">upload_id</span><span class="o">=</span><span class="n">upload_id</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">)</span>
-<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">upload</span><span class="o">.</span><span class="n">process_running</span><span class="p">:</span>
-<a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a>            <span class="k">return</span> <span class="n">upload</span>
-<a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a>        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-<a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a>    <span class="k">raise</span> <span class="ne">TimeoutError</span><span class="p">(</span><span class="sa">f</span><span class="s1">'NOMAD did not finish processing within </span><span class="si">{</span><span class="n">timeout_in_sec</span><span class="si">}</span><span class="s1"> seconds.'</span><span class="p">)</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="k">def</span><span class="w"> </span><span class="nf">wait_for_process</span><span class="p">(</span><span class="n">upload_id</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">timeout_in_sec</span><span class="o">=</span><span class="mi">600</span><span class="p">):</span>
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>    <span class="n">deadline</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">+</span> <span class="n">timeout_in_sec</span>
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a>    <span class="k">while</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">deadline</span><span class="p">:</span>
+<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a>        <span class="n">upload</span> <span class="o">=</span> <span class="n">get_upload_by_id</span><span class="p">(</span><span class="n">upload_id</span><span class="o">=</span><span class="n">upload_id</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">)</span>
+<a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">upload</span><span class="o">.</span><span class="n">process_running</span><span class="p">:</span>
+<a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a>            <span class="k">return</span> <span class="n">upload</span>
+<a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a>        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<a id="__codelineno-21-11" name="__codelineno-21-11" href="#__codelineno-21-11"></a>    <span class="k">raise</span> <span class="ne">TimeoutError</span><span class="p">(</span>
+<a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a>        <span class="sa">f</span><span class="s1">'NOMAD did not finish processing within </span><span class="si">{</span><span class="n">timeout_in_sec</span><span class="si">}</span><span class="s1"> seconds.'</span>
+<a id="__codelineno-21-13" name="__codelineno-21-13" href="#__codelineno-21-13"></a>    <span class="p">)</span>
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad_utility_workflows.utils.entries</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_entries_of_upload</span>
 <a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>
@@ -4640,14 +4643,14 @@ In the examples below, we use <code>dft_upload_id</code> to refer to the DFT pro
 <a id="__codelineno-31-9" name="__codelineno-31-9" href="#__codelineno-31-9"></a>  'upload_id': 'dcvqjWYgSZeDVLaJkL6E7w',
 <a id="__codelineno-31-10" name="__codelineno-31-10" href="#__codelineno-31-10"></a>  'upload_name': 'NOMAD Tutorial, Prepare DFT example for sharing using API',
 <a id="__codelineno-31-11" name="__codelineno-31-11" href="#__codelineno-31-11"></a>  'upload_create_time': '2026-09-29T09:47:05.108000Z',
-<a id="__codelineno-31-12" name="__codelineno-31-12" href="#__codelineno-31-12"></a>'main_author': '00000000-0000-4000-8000-000000000001',
+<a id="__codelineno-31-12" name="__codelineno-31-12" href="#__codelineno-31-12"></a>  'main_author': '00000000-0000-4000-8000-000000000001',
 <a id="__codelineno-31-13" name="__codelineno-31-13" href="#__codelineno-31-13"></a>  'coauthors': [],
 <a id="__codelineno-31-14" name="__codelineno-31-14" href="#__codelineno-31-14"></a>  'coauthor_groups': [],
 <a id="__codelineno-31-15" name="__codelineno-31-15" href="#__codelineno-31-15"></a>  'reviewers': [],
 <a id="__codelineno-31-16" name="__codelineno-31-16" href="#__codelineno-31-16"></a>  'reviewer_groups': [],
-<a id="__codelineno-31-17" name="__codelineno-31-17" href="#__codelineno-31-17"></a>'writers': ['00000000-0000-4000-8000-000000000001'],
+<a id="__codelineno-31-17" name="__codelineno-31-17" href="#__codelineno-31-17"></a>  'writers': ['00000000-0000-4000-8000-000000000001'],
 <a id="__codelineno-31-18" name="__codelineno-31-18" href="#__codelineno-31-18"></a>  'writer_groups': [],
-<a id="__codelineno-31-19" name="__codelineno-31-19" href="#__codelineno-31-19"></a>'viewers': ['00000000-0000-4000-8000-000000000001'],
+<a id="__codelineno-31-19" name="__codelineno-31-19" href="#__codelineno-31-19"></a>  'viewers': ['00000000-0000-4000-8000-000000000001'],
 <a id="__codelineno-31-20" name="__codelineno-31-20" href="#__codelineno-31-20"></a>  'viewer_groups': [],
 <a id="__codelineno-31-21" name="__codelineno-31-21" href="#__codelineno-31-21"></a>  'published': False,
 <a id="__codelineno-31-22" name="__codelineno-31-22" href="#__codelineno-31-22"></a>  'published_to': [],
