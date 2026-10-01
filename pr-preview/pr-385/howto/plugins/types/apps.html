@@ -2199,17 +2199,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#rowselection" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        RowSelection
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#rowactions" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2243,10 +2232,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#rowdetails" class="md-nav__link">
+  <a href="#rowselection" class="md-nav__link">
     <span class="md-ellipsis">
       
-        RowDetails
+        RowSelection
       
     </span>
   </a>
@@ -2254,10 +2243,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#searchquantities" class="md-nav__link">
+  <a href="#rowdetails" class="md-nav__link">
     <span class="md-ellipsis">
       
-        SearchQuantities
+        RowDetails
       
     </span>
   </a>
@@ -2401,6 +2390,17 @@
     <span class="md-ellipsis">
       
         WidgetPeriodicTableDeprecated
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#searchquantities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SearchQuantities
       
     </span>
   </a>
@@ -4519,17 +4519,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#rowselection" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        RowSelection
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#rowactions" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4563,10 +4552,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#rowdetails" class="md-nav__link">
+  <a href="#rowselection" class="md-nav__link">
     <span class="md-ellipsis">
       
-        RowDetails
+        RowSelection
       
     </span>
   </a>
@@ -4574,10 +4563,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#searchquantities" class="md-nav__link">
+  <a href="#rowdetails" class="md-nav__link">
     <span class="md-ellipsis">
       
-        SearchQuantities
+        RowDetails
       
     </span>
   </a>
@@ -4721,6 +4710,17 @@
     <span class="md-ellipsis">
       
         WidgetPeriodicTableDeprecated
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#searchquantities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SearchQuantities
       
     </span>
   </a>
@@ -5531,25 +5531,6 @@ the path without the need for specifying a schema, e.g. <code>results.material.s
 </tr>
 </tbody>
 </table>
-<h4 id="rowselection">RowSelection<a class="headerlink" href="#rowselection" title="Permanent link">¶</a></h4>
-<p>Controls the selection of rows. If enabled, rows can be selected and additional
-actions performed on them.</p>
-<table>
-<thead>
-<tr>
-<th>name</th>
-<th>type</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>enabled</td>
-<td><code>bool</code></td>
-<td>Whether to show the row selection.<br><em>default:</em> <code>True</code></td>
-</tr>
-</tbody>
-</table>
 <h4 id="rowactions">RowActions<a class="headerlink" href="#rowactions" title="Permanent link">¶</a></h4>
 <p>Controls the visualization of row actions that are shown at the end of each row.</p>
 <table>
@@ -5649,6 +5630,25 @@ actions performed on them.</p>
 </tr>
 </tbody>
 </table>
+<h4 id="rowselection">RowSelection<a class="headerlink" href="#rowselection" title="Permanent link">¶</a></h4>
+<p>Controls the selection of rows. If enabled, rows can be selected and additional
+actions performed on them.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>enabled</td>
+<td><code>bool</code></td>
+<td>Whether to show the row selection.<br><em>default:</em> <code>True</code></td>
+</tr>
+</tbody>
+</table>
 <h4 id="rowdetails">RowDetails<a class="headerlink" href="#rowdetails" title="Permanent link">¶</a></h4>
 <p>Controls the visualization of row details that are shown upon pressing the row and
 contain basic details about the entry.</p>
@@ -5665,36 +5665,6 @@ contain basic details about the entry.</p>
 <td>enabled</td>
 <td><code>bool</code></td>
 <td>Whether to show row details.<br><em>default:</em> <code>True</code></td>
-</tr>
-</tbody>
-</table>
-<h4 id="searchquantities">SearchQuantities<a class="headerlink" href="#searchquantities" title="Permanent link">¶</a></h4>
-<p>Controls the quantities that are available in the search interface.
-Search quantities correspond to pieces of information that can be queried in
-the search interface of the app, but also targeted in the rest of the app
-configuration. You can load quantities from custom schemas as search
-quantities, but note that not all quantities will be loaded: only scalar
-values are supported at the moment. The <code>include</code> and <code>exlude</code> attributes
-can use glob syntax to target metainfo, e.g. <code>results.*</code> or
-<code>*.#myschema.schema.MySchema</code>.</p>
-<table>
-<thead>
-<tr>
-<th>name</th>
-<th>type</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>include</td>
-<td><code>list[str] | None</code></td>
-<td>List of included options. Supports glob/wildcard syntax.</td>
-</tr>
-<tr>
-<td>exclude</td>
-<td><code>list[str] | None</code></td>
-<td>List of excluded options. Supports glob/wildcard syntax. Has higher precedence than include.</td>
 </tr>
 </tbody>
 </table>
@@ -6294,6 +6264,36 @@ can use glob syntax to target metainfo, e.g. <code>results.*</code> or
 <td>description</td>
 <td><code>str | None</code></td>
 <td>Optional description of the widget and the data it is showing. Can contain markdown notation. If populated, an icon is shown next to the title that can be clicked to show the description.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="searchquantities">SearchQuantities<a class="headerlink" href="#searchquantities" title="Permanent link">¶</a></h4>
+<p>Controls the quantities that are available in the search interface.
+Search quantities correspond to pieces of information that can be queried in
+the search interface of the app, but also targeted in the rest of the app
+configuration. You can load quantities from custom schemas as search
+quantities, but note that not all quantities will be loaded: only scalar
+values are supported at the moment. The <code>include</code> and <code>exlude</code> attributes
+can use glob syntax to target metainfo, e.g. <code>results.*</code> or
+<code>*.#myschema.schema.MySchema</code>.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>include</td>
+<td><code>list[str] | None</code></td>
+<td>List of included options. Supports glob/wildcard syntax.</td>
+</tr>
+<tr>
+<td>exclude</td>
+<td><code>list[str] | None</code></td>
+<td>List of excluded options. Supports glob/wildcard syntax. Has higher precedence than include.</td>
 </tr>
 </tbody>
 </table>
