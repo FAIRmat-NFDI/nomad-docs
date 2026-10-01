@@ -109,6 +109,10 @@ NOMAD extracts these compressed bundles and preserves their internal directory
 structure. Keep the files for one calculation or experiment together in the
 same Project so that the parser can associate them with the same Entry.
 
+Exports from external ELNs, such as `.eln` files or ZIP exports from
+Chemotion, are also processed into Entries. See
+{{ nav_link("howto/manage/gui/eln.md") }}.
+
 For scripted transfers, select the drop-down arrow next to **UPLOAD FILES** and
 choose **Upload via API**. The dialog provides an example command for uploading
 to the current Project folder.

@@ -69,7 +69,7 @@ subsection instead of placing it in the page-level list. Use a compact line at
 the end of the subsection:
 
 ```md
-**Related pages:** [Import data from ELNs](<path-to-page>);
+**Related pages:** [Import data from external ELNs](<path-to-page>);
 [Write a YAML schema package](<path-to-page>).
 ```
 
