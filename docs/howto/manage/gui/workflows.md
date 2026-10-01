@@ -116,6 +116,7 @@ The `workflow2` section has three possible subsections: `inputs`, `outputs`, and
 `m_def` defines the type of task according to NOMAD's Metainfo schema, in this case a `TaskReference` to the archive `workflow2` section. The use of `TaskReference` is clarified under [Nested workflows > In multiple Entries](#in-multiple-entries).
 
 <a id="path-specification"></a>
+
 ### Archive path specification
 
 In general, an archive reference can be represented as
@@ -150,15 +151,15 @@ The compressed file contains:
 To reproduce the example in a new Project:
 
 1. Open **PROJECTS** and select **NEW PROJECT**.
-1. Enter a Project name, select **ADD FILES**, and add
+2. Enter a Project name, select **ADD FILES**, and add
    `simple_workflow.zip`.
-1. Select **CREATE**.
-1. After processing completes, open **ENTRIES** and confirm that NOMAD created two successfully processed Entries:
+3. Select **CREATE**.
+4. After processing completes, open **ENTRIES** and confirm that NOMAD created two successfully processed Entries:
      - a single-point Entry with the mainfile `dft.xml`; and
      - a custom workflow Entry with the mainfile
      `dft.workflow.archive.yaml`.
 
-1. Open the custom workflow Entry. Its **Overview** page contains this graph:
+5. Open the custom workflow Entry. Its **Overview** page contains this graph:
 
 ![Custom single-point workflow graph in the light theme](images/single-point-custom-nomad-workflow-card-light.png#only-light){:.screenshot}
 ![Custom single-point workflow graph in the dark theme](images/single-point-custom-nomad-workflow-card-dark.png#only-dark){:.screenshot}
@@ -189,7 +190,7 @@ To find the required identifiers:
 
 1. Open the target Project, select **SETTINGS**, and copy its **Project ID**.
    This value equals `archive.metadata.upload_id`; use it as `<upload_id>`.
-1. Open the target Entry, select **ARCHIVE**, and navigate to
+2. Open the target Entry, select **ARCHIVE**, and navigate to
    `metadata` > `entry_id`. Copy this value and use it as `<entry_id>`.
    Alternatively, copy the value immediately after `/entries/` in the Entry's
    URL.
@@ -224,9 +225,9 @@ To test the cross-Project references:
 1. Create a file named `dft-cross-project.workflow.archive.yaml` using the
    contents shown above. Replace `<upload_id>` and `<entry_id>` with the
    identifiers for the Project and Entry containing `dft.xml`.
-1. Create another Project and add only the new
+2. Create another Project and add only the new
    `dft-cross-project.workflow.archive.yaml` file.
-1. After processing completes, open the resulting workflow Entry and confirm
+3. After processing completes, open the resulting workflow Entry and confirm
    that its graph contains the referenced DFT task from the original Project.
 
 ## Nested workflows
