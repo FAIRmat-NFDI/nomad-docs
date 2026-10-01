@@ -224,37 +224,10 @@
     cursor: zoom-out;
 }
 
-.diagram-zoom {
-    width: 100%;
-    cursor: zoom-in;
-}
-
-.diagram-zoom .mermaid svg {
+.workflow-schema-diagram .mermaid svg {
     width: 100% !important;
     max-width: none !important;
     height: auto !important;
-}
-
-.diagram-zoom:focus-visible {
-    outline: 0.15rem solid var(--md-accent-fg-color);
-    outline-offset: 0.2rem;
-}
-
-.diagram-zoom.is-zoomed {
-    position: fixed;
-    inset: 1rem;
-    z-index: 1000;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 1.5rem;
-    overflow: auto;
-    background: var(--md-default-bg-color);
-    box-shadow: 0 0 0 100vmax rgba(0, 0, 0, 0.55);
-    cursor: zoom-out;
-}
-
-.diagram-zoom.is-zoomed .mermaid svg {
-    min-width: 60rem;
 }
 
 /* =========================================================

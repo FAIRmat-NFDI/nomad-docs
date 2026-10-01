@@ -4041,9 +4041,10 @@ the data stored in those Entries.</p>
 <p>NOMAD stores the current workflow representation in the top-level <code>workflow2</code>
 section of an Entry archive. This section contains a <code>Workflow</code> instance from
 <code>nomad.datamodel.metainfo.workflow</code>.</p>
-<figure aria-label="Enlarge the general workflow model diagram" class="diagram-zoom" data-diagram-zoom="data-diagram-zoom">
-<pre class="mermaid"><code>classDiagram
-    direction LR
+<figure class="workflow-schema-diagram" style="width: 100%">
+<pre class="mermaid"><code>%%{init: {"themeVariables": {"fontSize": "18px"}}}%%
+classDiagram
+    direction TB
     class EntryArchive
     class Workflow
     class Task
@@ -4057,11 +4058,16 @@ section of an Entry archive. This section contains a <code>Workflow</code> insta
     Workflow *-- "0..*" Task : tasks
     Task *-- "0..*" Link : inputs
     Task *-- "0..*" Link : outputs
-    Task --&gt; ArchiveSection : section
     TaskReference --&gt; Task : task
     Link --&gt; ArchiveSection : section</code></pre>
-<figcaption>The classes and relationships in the general workflow model. Select the diagram to enlarge it.</figcaption>
+<figcaption>The classes and relationships in the general workflow model.</figcaption>
 </figure>
+<p>Open triangular arrowheads point from a subclass to its parent class. Filled
+diamonds identify contained subsections: an Entry archive contains its
+<code>workflow2</code>, a workflow contains tasks, and a task contains input and output
+links. Plain arrows represent references to sections or tasks stored elsewhere
+in the archive graph. The referenced <code>ArchiveSection</code> can, for example, belong
+to <code>run</code>, <code>data</code>, or another <code>workflow2</code>.</p>
 <p>The model has four central components:</p>
 <ul>
 <li>A <strong>link</strong> represents one input or output. Its <code>section</code> points to the archive
@@ -4088,15 +4094,51 @@ workflow data and schemas should use <code>workflow2</code>.</p>
 </div>
 <h3 id="example-provenance-graph">Example provenance graph<a class="headerlink" href="#example-provenance-graph" title="Permanent link">¶</a></h3>
 <p>Consider a geometry optimization followed by a ground-state calculation:</p>
-<pre class="mermaid"><code>flowchart LR
-    input([Input system]) --&gt; optimization[Geometry optimization]
-    optimization --&gt; relaxed([Relaxed system])
-    relaxed --&gt; ground_state[Ground-state calculation]
-    ground_state --&gt; result([Ground-state result])</code></pre>
-<p>The relaxed system is both the output of the geometry optimization and the
-input of the ground-state calculation. Both links therefore reference the same
-archive section. The tasks and referenced data may be stored together or in
-separate Entries without changing this logical relationship.</p>
+<figure style="width: 100%">
+<pre class="mermaid"><code>flowchart TB
+    input["Input system"]
+
+    subgraph optimization["Geometry optimization workflow"]
+        direction TB
+        step0(["Optimization step 0"])
+        calc0["Calculation 0"]
+        system1["System 1"]
+        step1(["Optimization step 1"])
+        calc1["Calculation 1"]
+        system2["System 2"]
+        step2(["Optimization step 2"])
+        calc2["Calculation 2"]
+
+        step0 --&gt; calc0
+        step0 --&gt; system1
+        system1 --&gt; step1
+        step1 --&gt; calc1
+        step1 --&gt; system2
+        system2 --&gt; step2
+        step2 --&gt; calc2
+    end
+
+    input --&gt; optimization
+    input --&gt; step0
+    step2 --&gt; relaxed["Relaxed system"]
+    optimization --&gt; relaxed
+    relaxed --&gt; ground_state(["Ground-state calculation task"])
+    ground_state --&gt; result["Ground-state calculation"]
+
+    style optimization stroke-dasharray: 5 5</code></pre>
+<figcaption>A nested geometry-optimization workflow followed by a ground-state calculation.</figcaption>
+</figure>
+<p>Rounded nodes represent tasks, rectangles represent referenced archive
+sections, the dashed box represents a workflow, and arrows represent links.
+Each optimization task produces a calculation section and an updated system
+section that becomes the input of the next task.
+The input-system link identifies both the geometry optimization's global input
+and the first task's input. Likewise, the relaxed-system link identifies both
+the final optimization task's output and the geometry optimization's global
+output. The relaxed system is then reused as the input of the ground-state
+calculation task.</p>
+<p>The tasks and referenced sections may be stored together or in separate
+Entries without changing these logical relationships.</p>
 <h3 id="nested-workflows">Nested workflows<a class="headerlink" href="#nested-workflows" title="Permanent link">¶</a></h3>
 <p>A task can represent a process with its own inputs, tasks, and outputs. Because
 a <code>Workflow</code> is also a <code>Task</code>, this sub-workflow can be contained directly in a
@@ -4237,8 +4279,6 @@ deployment.</p>
       <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
       
         <script src="../create-image-sliders.js"></script>
-      
-        <script src="../diagram-zoom.js"></script>
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
