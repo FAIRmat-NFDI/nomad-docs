@@ -517,14 +517,14 @@ edit_upload_metadata(
       'upload_id': 'dcvqjWYgSZeDVLaJkL6E7w',
       'upload_name': 'NOMAD Tutorial, Prepare DFT example for sharing using API',
       'upload_create_time': '2026-09-29T09:47:05.108000Z',
-      'main_author': 'f250f5ab-b05c-4bad-9939-5f4883c7a694',
+    'main_author': '00000000-0000-4000-8000-000000000001',
       'coauthors': [],
       'coauthor_groups': [],
       'reviewers': [],
       'reviewer_groups': [],
-      'writers': ['f250f5ab-b05c-4bad-9939-5f4883c7a694'],
+    'writers': ['00000000-0000-4000-8000-000000000001'],
       'writer_groups': [],
-      'viewers': ['f250f5ab-b05c-4bad-9939-5f4883c7a694'],
+    'viewers': ['00000000-0000-4000-8000-000000000001'],
       'viewer_groups': [],
       'published': False,
       'published_to': [],
@@ -591,8 +591,8 @@ for user in candidates:
 ??? success "Example notebook output"
 
     ```
-    Found the user 'Jane Doe' (username 'jane.doe') with user_id='13b845c3-e48d-4234-8c51-4f88c6897ac8'
-    Found the user 'Jane Doe' (username 'jane.doe@example.org') with user_id='ebb26223-0cec-4d81-98f5-3b25db945b54'
+    Found the user 'Jane Doe' (username 'jane.doe') with user_id='00000000-0000-4000-8000-000000000002'
+    Found the user 'Jane Doe' (username 'jane.doe@example.org') with user_id='00000000-0000-4000-8000-000000000003'
     ```
 
 If several users have the same name, use the username to pick the right one.
@@ -669,7 +669,7 @@ pprint(response)
 
     ```
     {'data': {'coauthor_groups': [],
-              'coauthors': ['ebb26223-0cec-4d81-98f5-3b25db945b54'],
+              'coauthors': ['00000000-0000-4000-8000-000000000003'],
               'complete_time': '2026-09-29T11:18:29.488000Z',
               'current_process': '_publish_upload',
               'embargo_length': 3,
@@ -677,7 +677,7 @@ pprint(response)
               'errors': [],
               'last_status_message': 'Process completed successfully',
               'license': 'CC BY 4.0',
-              'main_author': 'f250f5ab-b05c-4bad-9939-5f4883c7a694',
+              'main_author': '00000000-0000-4000-8000-000000000001',
               'process_running': True,
               'process_status': 'PENDING',
               'published': False,
@@ -690,13 +690,13 @@ pprint(response)
               'upload_name': 'NOMAD Tutorial, Prepare DFT example for sharing '
                              'using API',
               'viewer_groups': [],
-              'viewers': ['f250f5ab-b05c-4bad-9939-5f4883c7a694',
-                          'ebb26223-0cec-4d81-98f5-3b25db945b54'],
+              'viewers': ['00000000-0000-4000-8000-000000000001',
+                          '00000000-0000-4000-8000-000000000003'],
               'warnings': [],
               'with_embargo': True,
               'writer_groups': [],
-              'writers': ['f250f5ab-b05c-4bad-9939-5f4883c7a694',
-                          'ebb26223-0cec-4d81-98f5-3b25db945b54']},
+              'writers': ['00000000-0000-4000-8000-000000000001',
+                          '00000000-0000-4000-8000-000000000003']},
      'upload_id': 'dcvqjWYgSZeDVLaJkL6E7w'}
     ```
 
