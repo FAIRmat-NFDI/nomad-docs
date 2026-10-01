@@ -25,7 +25,7 @@
     
     
       
-        <title>Enter data with ELNs - Documentation</title>
+        <title>Import data from ELNs - Documentation</title>
       
     
     
@@ -162,7 +162,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Enter data with ELNs
+              Import data from ELNs
             
           </span>
         </div>
@@ -1292,7 +1292,7 @@
   <span class="md-ellipsis">
     
   
-    Enter data with ELNs
+    Import data from ELNs
   
 
     
@@ -1310,7 +1310,7 @@
   <span class="md-ellipsis">
     
   
-    Enter data with ELNs
+    Import data from ELNs
   
 
     
@@ -1334,6 +1334,17 @@
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
+      
+        <li class="md-nav__item">
+  <a href="#eln-file-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ELN file format
+      
+    </span>
+  </a>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#elabftw-integration" class="md-nav__link">
@@ -1393,6 +1404,17 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related pages
+      
+    </span>
+  </a>
   
 </li>
       
@@ -3879,6 +3901,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
       
         <li class="md-nav__item">
+  <a href="#eln-file-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ELN file format
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#elabftw-integration" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3936,6 +3969,17 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related pages
+      
+    </span>
+  </a>
   
 </li>
       
@@ -4051,26 +4095,28 @@
 <h1 id="how-to-import-data-from-third-party-elns">How to import data from third-party ELNs<a class="headerlink" href="#how-to-import-data-from-third-party-elns" title="Permanent link">¶</a></h1>
 <p>This guide explains how to import data from third-party electronic lab notebooks
 (ELNs) into NOMAD using integration parsers and schemas.</p>
-<p>The <code>nomad-external-eln-integrations</code> package provides these integrations.
-The specific integrations available in your NOMAD deployment depend on the
-parsers and schemas installed there. The procedures below cover elabFTW,
-Labfolder, Chemotion, and openBIS. In each case, the integration maps data from
-the external ELN into NOMAD Entries, although the retrieval and mapping process
-varies by provider.</p>
-<p>If you want to create and edit ELN Entries directly in NOMAD, see
-<a href="../../../tutorial/eln/built_in_templates.html">Tutorials &gt; ELN &gt; Built-in ELN templates</a>.</p>
+<p>The plugin
+<a href="https://github.com/FAIRmat-NFDI/nomad-external-eln-integrations" rel="noopener" target="_blank">nomad-external-eln-integrations</a>
+provides the four integrations described here: elabFTW, Labfolder, Chemotion,
+and openBIS. For elabFTW and Chemotion, you upload an exported file that NOMAD
+parses. For Labfolder and openBIS, you create a schema-based Entry and provide
+the connection details for the external system.</p>
+<h2 id="eln-file-format">ELN file format<a class="headerlink" href="#eln-file-format" title="Permanent link">¶</a></h2>
+<p>The
+<a href="https://github.com/TheELNConsortium/TheELNFileFormat" rel="noopener" target="_blank">ELN file format</a>
+is a ZIP-based exchange format for experimental results and data. A <code>.eln</code> file
+bundles structured metadata with the associated data files so that records can
+be transferred between compatible ELNs and other research data systems,
+including NOMAD.</p>
 <h2 id="elabftw-integration">elabFTW integration<a class="headerlink" href="#elabftw-integration" title="Permanent link">¶</a></h2>
-<p>elabFTW is part of <a href="https://github.com/TheELNConsortium" rel="noopener" target="_blank">the ELN Consortium</a>
-and supports exporting experimental data in ELN file format. ELNFileFormat
-is a zipped file that contains <strong>metadata</strong> of your elabFTW project along
-with all other associated data of your experiments.</p>
+<p>elabFTW can export one or more experiments in the ELN file format.</p>
 <p>To import elabFTW data into NOMAD:</p>
 <ol>
-<li>In elabFTW, export the experiment as an <code>ELN Archive</code> and save the <code>.eln</code>
+<li>In elabFTW, export your data as an <strong>ELN Archive</strong> and save the <code>.eln</code>
    file to your computer without changing its extension.</li>
 <li>In NOMAD, create or open a Project and add the exported file under
    <strong>FILES</strong> using <strong>UPLOAD FILES</strong>.</li>
-<li>NOMAD processes the archive and creates an Entry for each experiment in
+<li>NOMAD processes the <code>.eln</code> file and creates an Entry for each experiment in
    the elabFTW project.</li>
 </ol>
 <p>Open an Entry to inspect the parsed data. The <code>ElabFTW Project Import</code>
@@ -4154,6 +4200,11 @@ schema. The integration requires the following information:</p>
 </ol>
 <p>The normalizer will search for all entries in your Openbis project and
 attempt to import them one by one.</p>
+<h2 id="related-pages">Related pages<a class="headerlink" href="#related-pages" title="Permanent link">¶</a></h2>
+<ul>
+<li><a href="upload.html">How-to guides &gt; ... &gt; Create and publish Projects</a></li>
+<li><a href="../../../tutorial/eln/built_in_templates.html">Tutorials &gt; Use NOMAD as an ELN &gt; Use built-in ELN templates</a></li>
+</ul>
 
 
 
