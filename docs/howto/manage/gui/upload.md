@@ -148,8 +148,8 @@ a schema-based Entry that you can edit directly in NOMAD. To create an ELN Entry
 3. Enter a filename and select **CREATE**. NOMAD creates the ELN and opens
    it in the data editor.
 
-**Related pages:** [Enter data with ELNs](eln.md);
-[Define a schema](../../schemas/define.md).
+**Related pages:** {{ nav_link("tutorial/eln/built_in_templates.md") }};
+{{ nav_link("howto/schemas/define.md") }}.
 
 ## Visibility and access
 

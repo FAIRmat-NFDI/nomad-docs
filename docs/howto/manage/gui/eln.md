@@ -3,30 +3,33 @@
 This guide explains how to import data from third-party electronic lab notebooks
 (ELNs) into NOMAD using integration parsers and schemas.
 
-The `nomad-external-eln-integrations` package provides these integrations.
-The specific integrations available in your NOMAD deployment depend on the
-parsers and schemas installed there. The procedures below cover elabFTW,
-Labfolder, Chemotion, and openBIS. In each case, the integration maps data from
-the external ELN into NOMAD Entries, although the retrieval and mapping process
-varies by provider.
+The plugin
+[nomad-external-eln-integrations](https://github.com/FAIRmat-NFDI/nomad-external-eln-integrations){:target="_blank" rel="noopener"}
+provides the four integrations described here: elabFTW, Labfolder, Chemotion,
+and openBIS. For elabFTW and Chemotion, you upload an exported file that NOMAD
+parses. For Labfolder and openBIS, you create a schema-based Entry and provide
+the connection details for the external system.
 
-If you want to create and edit ELN Entries directly in NOMAD, see
-[Tutorials > ELN > Built-in ELN templates](../../../tutorial/eln/built_in_templates.md).
+## ELN file format
+
+The
+[ELN file format](https://github.com/TheELNConsortium/TheELNFileFormat){:target="_blank" rel="noopener"}
+is a ZIP-based exchange format for experimental results and data. A `.eln` file
+bundles structured metadata with the associated data files so that records can
+be transferred between compatible ELNs and other research data systems,
+including NOMAD.
 
 ## elabFTW integration
 
-elabFTW is part of [the ELN Consortium](https://github.com/TheELNConsortium){:target="_blank" rel="noopener"}
-and supports exporting experimental data in ELN file format. ELNFileFormat
-is a zipped file that contains **metadata** of your elabFTW project along
-with all other associated data of your experiments.
+elabFTW can export one or more experiments in the ELN file format.
 
 To import elabFTW data into NOMAD:
 
-1. In elabFTW, export the experiment as an `ELN Archive` and save the `.eln`
+1. In elabFTW, export your data as an **ELN Archive** and save the `.eln`
    file to your computer without changing its extension.
 2. In NOMAD, create or open a Project and add the exported file under
    **FILES** using **UPLOAD FILES**.
-3. NOMAD processes the archive and creates an Entry for each experiment in
+3. NOMAD processes the `.eln` file and creates an Entry for each experiment in
    the elabFTW project.
 
 Open an Entry to inspect the parsed data. The `ElabFTW Project Import`
@@ -124,3 +127,8 @@ To import data, follow these steps:
 
 The normalizer will search for all entries in your Openbis project and
 attempt to import them one by one.
+
+## Related pages
+
+- {{ nav_link("howto/manage/gui/upload.md", breadcrumb=True) }}
+- {{ nav_link("tutorial/eln/built_in_templates.md", breadcrumb=True) }}
