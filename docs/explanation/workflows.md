@@ -22,12 +22,12 @@ NOMAD stores the current workflow representation in the top-level `workflow2`
 section of an Entry archive. This section contains a `Workflow` instance from
 `nomad.datamodel.metainfo.workflow`.
 
-<figure markdown class="diagram-zoom" data-diagram-zoom
-        aria-label="Enlarge the general workflow model diagram">
+<figure markdown class="workflow-schema-diagram" style="width: 100%">
 
 ```mermaid
+%%{init: {"themeVariables": {"fontSize": "18px"}}}%%
 classDiagram
-    direction LR
+    direction TB
     class EntryArchive
     class Workflow
     class Task
@@ -41,13 +41,19 @@ classDiagram
     Workflow *-- "0..*" Task : tasks
     Task *-- "0..*" Link : inputs
     Task *-- "0..*" Link : outputs
-    Task --> ArchiveSection : section
     TaskReference --> Task : task
     Link --> ArchiveSection : section
 ```
 
-<figcaption>The classes and relationships in the general workflow model. Select the diagram to enlarge it.</figcaption>
+<figcaption>The classes and relationships in the general workflow model.</figcaption>
 </figure>
+
+Open triangular arrowheads point from a subclass to its parent class. Filled
+diamonds identify contained subsections: an Entry archive contains its
+`workflow2`, a workflow contains tasks, and a task contains input and output
+links. Plain arrows represent references to sections or tasks stored elsewhere
+in the archive graph. The referenced `ArchiveSection` can, for example, belong
+to `run`, `data`, or another `workflow2`.
 
 The model has four central components:
 
@@ -77,18 +83,57 @@ deployment.
 
 Consider a geometry optimization followed by a ground-state calculation:
 
+<figure markdown style="width: 100%">
+
 ```mermaid
-flowchart LR
-    input([Input system]) --> optimization[Geometry optimization]
-    optimization --> relaxed([Relaxed system])
-    relaxed --> ground_state[Ground-state calculation]
-    ground_state --> result([Ground-state result])
+flowchart TB
+    input["Input system"]
+
+    subgraph optimization["Geometry optimization workflow"]
+        direction TB
+        step0(["Optimization step 0"])
+        calc0["Calculation 0"]
+        system1["System 1"]
+        step1(["Optimization step 1"])
+        calc1["Calculation 1"]
+        system2["System 2"]
+        step2(["Optimization step 2"])
+        calc2["Calculation 2"]
+
+        step0 --> calc0
+        step0 --> system1
+        system1 --> step1
+        step1 --> calc1
+        step1 --> system2
+        system2 --> step2
+        step2 --> calc2
+    end
+
+    input --> optimization
+    input --> step0
+    step2 --> relaxed["Relaxed system"]
+    optimization --> relaxed
+    relaxed --> ground_state(["Ground-state calculation task"])
+    ground_state --> result["Ground-state calculation"]
+
+    style optimization stroke-dasharray: 5 5
 ```
 
-The relaxed system is both the output of the geometry optimization and the
-input of the ground-state calculation. Both links therefore reference the same
-archive section. The tasks and referenced data may be stored together or in
-separate Entries without changing this logical relationship.
+<figcaption>A nested geometry-optimization workflow followed by a ground-state calculation.</figcaption>
+</figure>
+
+Rounded nodes represent tasks, rectangles represent referenced archive
+sections, the dashed box represents a workflow, and arrows represent links.
+Each optimization task produces a calculation section and an updated system
+section that becomes the input of the next task.
+The input-system link identifies both the geometry optimization's global input
+and the first task's input. Likewise, the relaxed-system link identifies both
+the final optimization task's output and the geometry optimization's global
+output. The relaxed system is then reused as the input of the ground-state
+calculation task.
+
+The tasks and referenced sections may be stored together or in separate
+Entries without changing these logical relationships.
 
 ### Nested workflows
 
