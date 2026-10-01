@@ -4036,17 +4036,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#apps" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Apps
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#entry" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4073,6 +4062,17 @@
     <span class="md-ellipsis">
       
         Card
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Apps
       
     </span>
   </a>
@@ -5190,17 +5190,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#apps" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Apps
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#entry" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5227,6 +5216,17 @@
     <span class="md-ellipsis">
       
         Card
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Apps
       
     </span>
   </a>
@@ -7449,34 +7449,6 @@ elements and defining the configuration of each element.</p>
 </tr>
 </tbody>
 </table>
-<h4 id="apps">Apps<a class="headerlink" href="#apps" title="Permanent link">¶</a></h4>
-<p>Contains App definitions and controls their availability.</p>
-<table>
-<thead>
-<tr>
-<th>name</th>
-<th>type</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>include</td>
-<td><code>list[str] | None</code></td>
-<td>List of included options. If not explicitly defined, all of the options will be included by default.</td>
-</tr>
-<tr>
-<td>exclude</td>
-<td><code>list[str] | None</code></td>
-<td>List of excluded options. Has higher precedence than include.</td>
-</tr>
-<tr>
-<td>options</td>
-<td><code>dict[str, App] | None</code></td>
-<td>Contains the available app options.</td>
-</tr>
-</tbody>
-</table>
 <h4 id="entry">Entry<a class="headerlink" href="#entry" title="Permanent link">¶</a></h4>
 <p>Controls the entry visualization.</p>
 <table>
@@ -7543,6 +7515,34 @@ elements and defining the configuration of each element.</p>
 <td>error</td>
 <td><code>str</code></td>
 <td>The error message to show if an error is encountered within the card.<br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="apps">Apps<a class="headerlink" href="#apps" title="Permanent link">¶</a></h4>
+<p>Contains App definitions and controls their availability.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>include</td>
+<td><code>list[str] | None</code></td>
+<td>List of included options. If not explicitly defined, all of the options will be included by default.</td>
+</tr>
+<tr>
+<td>exclude</td>
+<td><code>list[str] | None</code></td>
+<td>List of excluded options. Has higher precedence than include.</td>
+</tr>
+<tr>
+<td>options</td>
+<td><code>dict[str, App] | None</code></td>
+<td>Contains the available app options.</td>
 </tr>
 </tbody>
 </table>
