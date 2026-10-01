@@ -1,9 +1,6 @@
-<!-- markdownlint-disable MD013 -->
-<!-- Disabled MD013: long lines are needed in this tutorial -->
-
 # Upload and publish data using the NOMAD API
 
-In this tutorial, we interact with the NOMAD API using Python and the [`nomad-utility-workflows`](https://fairmat-nfdi.github.io/nomad-utility-workflows/){:target="_blank" rel="noopener"} package, to programmatically perform the full data upload and publishing workflow. We work with example data files to inspect generated entries, modify metadata, organize entries into datasets, and publish the results on the NOMAD test deployment. By the end of the tutorial, we will have reproduced the core upload and publishing workflows available in the NOMAD GUI.
+In this tutorial, we interact with the NOMAD API using Python and the [`nomad-utility-workflows`](https://fairmat-nfdi.github.io/nomad-utility-workflows/){:target="_blank" rel="noopener"} package, to programmatically perform the full workflow for uploading and publishing data. We work with example data files to create projects, inspect the generated entries, modify metadata, share the projects with collaborators, and publish them on the NOMAD test deployment. By the end of the tutorial, we will have reproduced the core project workflow available in the NOMAD GUI.
 
 ---
 
@@ -12,11 +9,10 @@ In this tutorial, we interact with the NOMAD API using Python and the [`nomad-ut
 In this tutorial, you will learn how to:
 
 1. Authenticate with the NOMAD API using Python
-2. Upload raw research data to NOMAD and create uploads programmatically
-3. Retrieve uploads and entries and inspect or edit their metadata
-4. Group entries into datasets for curation and organization
-5. Share uploads with collaborators and manage access permissions
-6. Publish uploads on the NOMAD test deployment
+2. Create projects and upload raw research data to them programmatically
+3. Retrieve projects and their entries and inspect or edit their metadata
+4. Share projects with collaborators and manage access permissions
+5. Publish projects on the NOMAD test deployment
 
 ---
 
@@ -51,7 +47,7 @@ Before starting, make sure you have the following:
 
 ## Environment setup
 
-In this tutorial, we will use the [NOMAD test deployment](https://nomad-lab.eu/prod/v1/test/gui/search/entries){:target="_blank" rel="noopener"}. Therefore, in all code examples, we will set `url="test"` when calling the helper functions. Later, you can switch to `url="prod"` or a custom NOMAD API URL if needed.
+In this tutorial, we will use the [NOMAD test deployment](https://nomad-lab.eu/test/){:target="_blank" rel="noopener"}. Therefore, in all code examples, we will set `url="test"` when calling the helper functions. Later, you can switch to `url="prod"` or a custom NOMAD API URL if needed.
 
 We assume you are working in a Python 3.11+ environment, preferably in a dedicated virtual environment for this tutorial.
 
@@ -141,13 +137,11 @@ We assume you are working in a Python 3.11+ environment, preferably in a dedicat
 
 Install the plugin and helper packages:
 
-<!-- markdownlint-disable MD046 -->
-```bash
+```python
 !pip install --upgrade pip
 !pip install "nomad-utility-workflows[vis]>=0.2.0"
 !pip install python-dotenv
 ```
-<!-- markdownlint-disable MD046 -->
 
 The `nomad-utility-workflows` provides high-level helpers for interacting with the NOMAD API and `python-dotenv` is used to load credentials from a local file, e.g., `env.txt`.
 
@@ -160,13 +154,11 @@ NOMAD_PASSWORD=your_password
 
 Before calling any helper functions, load `env.txt` so that the environment variables are visible to `nomad-utility-workflows`:
 
-<!-- markdownlint-disable MD046 -->
 ```python
 from dotenv import load_dotenv
 
 load_dotenv('env.txt')
 ```
-<!-- markdownlint-disable MD046 -->
 
 ??? success "Example notebook output"
 
@@ -176,9 +168,11 @@ load_dotenv('env.txt')
 
 This makes `NOMAD_USERNAME` and `NOMAD_PASSWORD` available to the package via environment variables.
 
+!!! warning
+    `nomad-utility-workflows` reads `NOMAD_USERNAME` and `NOMAD_PASSWORD` only once, when you first import it. If you change `env.txt` afterwards, restart the kernel and run the cells again from the top.
+
 Now you can check which user you are authenticated as, and confirm that the credentials were loaded correctly using:
 
-<!-- markdownlint-disable MD046 -->
 ```python
 from nomad_utility_workflows.utils.users import who_am_i
 
@@ -187,28 +181,48 @@ print('Authenticated as:', me.name)
 print('Username:', me.username)
 print('Email:', me.email)
 ```
-<!-- markdownlint-disable MD046 -->
 
 ??? success "Example notebook output"
 
     ```
-    Authenticated as: Siamak Nakhaie
-    Username: siamak.nakhaie@physik.hu-berlin.de
-    Email: siamak.nakhaie@physik.hu-berlin.de
+    Authenticated as: Your Name
+    Username: your_username
+    Email: your.email@example.org
     ```
 
 This call confirms which NOMAD account is being used.
 
+<!-- TODO: The package's built-in address for `url='test'` (https://nomad-lab.eu/prod/v1/test/api/v1) rejects uploads larger than 1 MiB (nginx 413), so the first two uploads fail without the `core.NOMAD_TEST_URL` line below. Remove that line once FAIRmat-NFDI/nomad-utility-workflows#56 is fixed. -->
+<!-- TODO: `nomad_gui_url` in nomad-utility-workflows 0.3.2 builds links to the old GUI. Once FAIRmat-NFDI/nomad-utility-workflows#55 is fixed, replace the hand-built `nomad_gui` links with `.nomad_gui_url`. -->
+
+Finally, define the addresses that the following snippets use:
+
+```python
+from nomad_utility_workflows.utils import core
+
+# API address of the NOMAD test deployment
+core.NOMAD_TEST_URL = 'https://nomad-lab.eu/test/backend/api/v1'
+
+# NOMAD GUI of the test deployment, for links to projects and entries
+nomad_gui = 'https://nomad-lab.eu/test'
+```
+
+??? info "Using the production deployment"
+    To work with your own data on the production deployment, use `url='prod'` instead of `url='test'` in all helper functions, set `nomad_gui` to `https://nomad-lab.eu/prod/v1/gui/v2`, and leave out the `core.NOMAD_TEST_URL` line. Publishing there is irreversible.
+
 ---
 
-## Create uploads
+## Create projects
 
-Next, you create uploads in NOMAD from the three example ZIP files.
-The helper `upload_files_to_nomad` both **creates a new upload** and **attaches the given ZIP file** in a single step (in the GUI these are two actions; here they are combined into one API call).
+Next, you create projects in NOMAD from the three example ZIP files.
+The helper `upload_files_to_nomad` both **creates a new project** and **uploads the given ZIP file** to it in a single API call.
+
+!!! info "Projects and uploads"
+    In the NOMAD GUI, you organize your data in projects. The NOMAD API and `nomad-utility-workflows` still use the term *upload* for a project: the API endpoints retain *upload* in their paths, helper functions such as `upload_files_to_nomad` and `get_upload_by_id` work on projects, and the `upload_id` they return identifies the project. You can find this ID as **Project ID** in the project's **SETTINGS** > **General**, and entries store it as `upload_id` in their metadata.
 
 !!! warning
 
-    All uploads in this tutorial must be sent to the **[Test Deployment of NOMAD](https://nomad-lab.eu/prod/v1/test/gui/about/information){:target="_blank" rel="noopener"}** The data there **is not persistent** and will be deleted occasionally, which ensures that you can safely test uploading and publishing without affecting public data.
+    All projects in this tutorial must be created on the **[Test Deployment of NOMAD](https://nomad-lab.eu/test/){:target="_blank" rel="noopener"}**. The data there **is not persistent** and will be deleted occasionally, which ensures that you can safely test uploading and publishing without affecting public data.
     When running code snippets, always make sure that the `url` parameter is set to `test`, i.e.,
     `url="test"`.
 
@@ -216,7 +230,6 @@ The helper `upload_files_to_nomad` both **creates a new upload** and **attaches 
 
 As a first example, upload the miscellaneous files to the 'test' NOMAD instance:
 
-<!-- markdownlint-disable MD046 -->
 ```python
 import os
 from nomad_utility_workflows.utils.uploads import (
@@ -227,16 +240,14 @@ from nomad_utility_workflows.utils.uploads import (
 misc_zip_path = os.path.abspath('miscellaneous_data.zip')
 misc_upload_id = upload_files_to_nomad(filename=misc_zip_path, url='test')
 ```
-<!-- markdownlint-enable MD046 -->
 
 In this code:
 
 - `os.path.abspath("miscellaneous_data.zip")` resolves the ZIP file to an absolute path.
-- `upload_files_to_nomad(...)` uploads the file to the NOMAD test deployment and returns a new `upload_id`.
+- `upload_files_to_nomad(...)` creates a new project on the NOMAD test deployment, uploads the file to it, and returns the project's `upload_id`.
 
-Let's now inspect the Upload and compare it with what we see in the GUI:
+Let's now inspect the project and compare it with what we see in the GUI:
 
-<!-- markdownlint-disable MD046 -->
 ```python
 misc_upload = get_upload_by_id(upload_id=misc_upload_id, url='test')
 
@@ -246,88 +257,102 @@ print('Upload ID:      ', misc_upload.upload_id)
 print('Entries:        ', misc_upload.entries)
 print('Published:      ', misc_upload.published)
 print('Embargo:        ', misc_upload.with_embargo)
-print('GUI URL:        ', misc_upload.nomad_gui_url)
+print('GUI URL:        ', f'{nomad_gui}/projects/{misc_upload.upload_id}')
 ```
-<!-- markdownlint-enable MD046 -->
 
 ??? success "Example notebook output"
 
     ```
     Upload summary:
     ----------------
-    Upload ID:       -jUeyn8sQlG0FEIgg3CiHg
+    Upload ID:       Ei6OG0ziSGW3t8dTpmChmg
     Entries:         0
     Published:       False
     Embargo:         False
-    GUI URL:         https://nomad-lab.eu/prod/v1/test/gui/user/uploads/upload/id/-jUeyn8sQlG0FEIgg3CiHg
+    GUI URL:         https://nomad-lab.eu/test/projects/Ei6OG0ziSGW3t8dTpmChmg
     ```
 
 This code does the following:
 
-- `get_upload_by_id(...)` retrieves the upload metadata as a `NomadUpload` object.
-- The final `print(...)` statements show a compact summary: `upload_id`, `entries`, `published`, `with_embargo`, and the `nomad_gui_url`.
+- `get_upload_by_id(...)` retrieves the project metadata as a `NomadUpload` object.
+- The final `print(...)` statements show a compact summary: `upload_id`, `entries`, `published`, `with_embargo`, and a link to the project in the NOMAD GUI.
 
-In the NOMAD GUI, the upload you just created looks like this:
+Open the printed link to see the project you just created in the NOMAD GUI. Because the project was created without a name, the GUI shows *unavailable* as its name. You will name a project later, in [Edit the project's metadata](#edit-the-projects-metadata).
 
-<!-- markdownlint-disable MD033 -->
-<div style="text-align: center;">
-    <img src="images/api_gui_upload.png" alt="Screenshot of the NOMAD GUI" width="800">
-</div>
-<!-- markdownlint-enable MD033 -->
+<!-- TODO: `upload_files_to_nomad` cannot set a project name, although the API (POST /uploads) accepts `upload_name`. If the package adds it, name the projects at creation and remove the "unavailable" sentence. -->
 
 ### Upload computational data
 
-You can repeat the same pattern for the DFT example (`FHI-aims.zip`) to create a separate upload for simulated data and inspect its entries:
+You can repeat the same pattern for the DFT example (`FHI-aims.zip`) to create a separate project for simulated data and inspect its entries:
 
-<!-- markdownlint-disable MD046 -->
 ```python
 dft_zip_path = os.path.abspath('FHI-aims.zip')
 dft_upload_id = upload_files_to_nomad(filename=dft_zip_path, url='test')
 
 dft_upload = get_upload_by_id(upload_id=dft_upload_id, url='test')
-print('GUI URL:', dft_upload.nomad_gui_url)
+print('GUI URL:', f'{nomad_gui}/projects/{dft_upload.upload_id}')
 ```
-<!-- markdownlint-enable MD046 -->
 
 ??? success "Example notebook output"
 
     ```
-    GUI URL: https://nomad-lab.eu/prod/v1/test/gui/user/uploads/upload/id/HJQMQh7tT22gOU1uLbBI_g
+    GUI URL: https://nomad-lab.eu/test/projects/dcvqjWYgSZeDVLaJkL6E7w
     ```
-This snippet creates a new upload for the DFT ZIP file and prints a direct GUI link where you can monitor its processing status.
+This snippet creates a new project for the DFT ZIP file and prints a direct GUI link where you can monitor its processing status.
 
 To check whether entries were created, retrieve them, and print their IDs and URLs, you can type the following:
 
-<!-- markdownlint-disable MD046 -->
+Processing happens in the background. Define this helper to wait up to ten minutes for it to finish; you can reuse it for the XPS upload and publication below.
+
+```python
+import time
+
+
+def wait_for_process(upload_id, url='test', timeout_in_sec=600):
+    deadline = time.monotonic() + timeout_in_sec
+    while time.monotonic() < deadline:
+        upload = get_upload_by_id(upload_id=upload_id, url=url)
+        if not upload.process_running:
+            return upload
+        time.sleep(5)
+    raise TimeoutError(
+        f'NOMAD did not finish processing within {timeout_in_sec} seconds.'
+    )
+```
+
 ```python
 from nomad_utility_workflows.utils.entries import get_entries_of_upload
+
+wait_for_process(upload_id=dft_upload_id, url='test')
 
 dft_entries = get_entries_of_upload(
     upload_id=dft_upload_id, url='test', with_authentication=True
 )
 for entry in dft_entries:
-    print(entry.entry_id, entry.nomad_gui_url)
+    print(
+        entry.entry_id,
+        f'{nomad_gui}/projects/{entry.upload_id}/entries/{entry.entry_id}',
+    )
 ```
-<!-- markdownlint-disable MD046 -->
 
 This snippet retrieves all the entries (here only one entry) created from the uploaded computations data and prints each entry’s ID together with its direct GUI URL.
 
 ??? success "Example notebook output"
 
     ```
-    cvEq4wXAf3dN4xJv1hM7Mz040C38 https://nomad-lab.eu/prod/v1/test/gui/user/uploads/upload/id/HJQMQh7tT22gOU1uLbBI_g/entry/id/cvEq4wXAf3dN4xJv1hM7Mz040C38
+    kW6H8T0MGH4-0GXH7cbf7j82BBUJ https://nomad-lab.eu/test/projects/dcvqjWYgSZeDVLaJkL6E7w/entries/kW6H8T0MGH4-0GXH7cbf7j82BBUJ
     ```
 
 !!! warning
-    If NOMAD is still processing the upload, the list may be empty. Wait a few seconds and retry.
+    If `wait_for_process` times out, inspect the project in the GUI before retrying. Do not query entries while processing is ongoing because an empty result may be cached for up to three minutes.
 
-You can also inspect the same upload in the NOMAD GUI using the link printed earlier. The upload page will look similar to the example shown below:
+<!-- TODO: `get_entries_of_upload` raises KeyError: 'entry_metadata' for unprocessed entries and caches its result for 180 s. Simplify this warning (and the 3-minute hint in "Edit the project's metadata") once the package handles both. -->
 
-<!-- markdownlint-disable MD033 -->
+You can also inspect the same project in the NOMAD GUI using the link printed earlier. On the project page, the **ENTRIES** tab lists the entry created from the FHI-aims files.
+
 <div style="text-align: center;">
-    <img src="images/api_gui_upload_comp.png" alt="Screenshot of the NOMAD GUI" width="800">
+    <img src="images/upload_publish_api_1.png" alt="The ENTRIES tab of the DFT project in the NOMAD GUI" width="800">
 </div>
-<!-- markdownlint-enable MD033 -->
 
 ### Upload experimental data
 
@@ -335,14 +360,13 @@ The steps are similar to those you followed for the computations data.
 
 ??? example "Exercise: Upload XPS data and print the entry URL"
 
-    Upload the file `xps_nexus_data.zip` to the NOMAD **test** deployment and print the GUI URL of the entry created from that upload.
+    Upload the file `xps_nexus_data.zip` to the NOMAD **test** deployment and print the GUI URL of the entry created in that project.
 
 ??? success "Solution"
 
     Here is a ready-to-paste snippet for your Jupyter notebook:
     ```python
     import os
-    import time
     from nomad_utility_workflows.utils.uploads import (
         upload_files_to_nomad,
         get_upload_by_id,
@@ -353,28 +377,30 @@ The steps are similar to those you followed for the computations data.
     xps_upload_id = upload_files_to_nomad(filename=xps_zip_path, url='test')
 
     xps_upload = get_upload_by_id(xps_upload_id, url='test')
-    print('Upload GUI URL:', xps_upload.nomad_gui_url)
+    print('Upload GUI URL:', f'{nomad_gui}/projects/{xps_upload.upload_id}')
 
-    time.sleep(15)
+    wait_for_process(upload_id=xps_upload_id, url='test')
 
     xps_entries = get_entries_of_upload(
         upload_id=xps_upload_id, url='test', with_authentication=True
     )
     for entry in xps_entries:
-        print(entry.entry_id, entry.nomad_gui_url)
+        print(
+            entry.entry_id,
+            f'{nomad_gui}/projects/{entry.upload_id}/entries/{entry.entry_id}',
+        )
     ```
     **Example notebook output**
 
     ```
-    Upload GUI URL: https://nomad-lab.eu/prod/v1/test/gui/user/uploads/upload/id/VcjEreRpRQOU5kVWwUnFRg
-    iPR66Q3MGMMc1W3mMu87HdVwR9nD https://nomad-lab.eu/prod/v1/test/gui/user/uploads/upload/id/VcjEreRpRQOU5kVWwUnFRg/entry/id/iPR66Q3MGMMc1W3mMu87HdVwR9nD
+    Upload GUI URL: https://nomad-lab.eu/test/projects/VOZJDQx5RkOKKeJI7_Zl0Q
+    YcbAvycR3b5VEiwtQiOHFQ28xw6W https://nomad-lab.eu/test/projects/VOZJDQx5RkOKKeJI7_Zl0Q/entries/YcbAvycR3b5VEiwtQiOHFQ28xw6W
     ```
 
-### Inspect an upload
+### Inspect a project
 
-After creating an upload, e.g., the DFT upload, it is important to check whether NOMAD has finished processing it and whether any errors occurred.
+After creating a project, e.g., the DFT project, it is important to check whether NOMAD has finished processing it and whether any errors occurred.
 
-<!-- markdownlint-disable MD046 -->
 ```python
 dft_upload = get_upload_by_id(upload_id=dft_upload_id, url='test')
 
@@ -386,33 +412,31 @@ print('Errors:         ', dft_upload.errors)
 print('Warnings:       ', dft_upload.warnings)
 print('Entries:        ', dft_upload.entries)
 print('Published:      ', dft_upload.published)
-print('Open in GUI:    ', dft_upload.nomad_gui_url)
+print('Open in GUI:    ', f'{nomad_gui}/projects/{dft_upload.upload_id}')
 ```
-<!-- markdownlint-disable MD046 -->
 
 ??? success "Example notebook output"
 
     ```
     Upload status:
     --------------
-    Upload ID:       HJQMQh7tT22gOU1uLbBI_g
+    Upload ID:       dcvqjWYgSZeDVLaJkL6E7w
     Process status:  SUCCESS
     Errors:          []
     Warnings:        []
     Entries:         1
     Published:       False
-    Open in GUI:     https://nomad-lab.eu/prod/v1/test/gui/user/uploads/upload/id/HJQMQh7tT22gOU1uLbBI_g
+    Open in GUI:     https://nomad-lab.eu/test/projects/dcvqjWYgSZeDVLaJkL6E7w
     ```
 This snippet:
 
-- Retrieves the latest state of your DFT upload from the NOMAD API, using `dft_upload_id`
+- Retrieves the latest state of your DFT project from the NOMAD API, using `dft_upload_id`
 - Shows the processing status and any errors or warnings.
 - Tells you how many entries were created.
-- Provides a direct link to inspect the upload in the NOMAD GUI.
+- Provides a direct link to inspect the project in the NOMAD GUI.
 
-Once the upload has been processed successfully, you can list all entries that were created from the uploaded files.
+Once the project has been processed successfully, you can list all entries that were created from the uploaded files.
 
-<!-- markdownlint-disable MD046 -->
 ```python
 from nomad_utility_workflows.utils.entries import get_entries_of_upload
 
@@ -429,42 +453,40 @@ for entry in dft_entries:
         f'  name: {entry.entry_name}\n'
         f'  parser: {entry.parser_name}\n'
         f'  published: {entry.published}\n'
-        f'  GUI URL: {entry.nomad_gui_url}\n'
+        f'  GUI URL: {nomad_gui}/projects/{entry.upload_id}/entries/{entry.entry_id}\n'
     )
 ```
-<!-- markdownlint-enable MD046 -->
 
 ??? success "Example notebook output"
 
     ```
     Found 1 entries in the DFT upload:
 
-    - entry_id: cvEq4wXAf3dN4xJv1hM7Mz040C38
+    - entry_id: kW6H8T0MGH4-0GXH7cbf7j82BBUJ
       name: Fe2O3 FHI-aims DFT SinglePoint simulation
       parser: electronicparsers:fhiaims_parser_entry_point
       published: False
-      GUI URL: https://nomad-lab.eu/prod/v1/test/gui/user/uploads/upload/id/HJQMQh7tT22gOU1uLbBI_g/entry/id/cvEq4wXAf3dN4xJv1hM7Mz040C38
+      GUI URL: https://nomad-lab.eu/test/projects/dcvqjWYgSZeDVLaJkL6E7w/entries/kW6H8T0MGH4-0GXH7cbf7j82BBUJ
 
     ```
 
 This code:
 
-- Retrieves all entries belonging to the DFT upload.
+- Retrieves all entries belonging to the DFT project.
 - Prints a compact summary for each entry, including ID, name, parser, and publication status.
 - Provides a GUI link for each entry so you can open it directly in NOMAD.
 
 ---
 
-## Share and publish uploads
+## Share and publish projects
 
-After your upload has been created and processed, you can modify its metadata to prepare it for sharing or publication.
-In the examples below, we use `dft_upload_id` to refer to the DFT upload, but the same pattern applies to any other upload.
+After your project has been created and processed, you can modify its metadata to prepare it for sharing or publication.
+In the examples below, we use `dft_upload_id` to refer to the DFT project, but the same pattern applies to any other project.
 
-### Edit upload's metadata
+### Edit the project's metadata
 
-You can update the upload's **name** as well as the **entry-level metadata** (such as comment and references) for all entries contained in the upload. The function `edit_upload_metadata` applies metadata changes to **every entry in the upload**, similar to clicking the GUI button **EDIT METADATA OF ALL THE ENTRIES** in the upload page.
+You can update the project's **name** as well as the **entry-level metadata** (such as comment and references) for all entries contained in the project. The function `edit_upload_metadata` applies metadata changes to **every entry in the project**.
 
-<!-- markdownlint-disable MD046 -->
 ```python
 from nomad_utility_workflows.utils.uploads import edit_upload_metadata, get_upload_by_id
 from nomad_utility_workflows.utils.entries import get_entries_of_upload
@@ -480,31 +502,32 @@ edit_upload_metadata(
     upload_id=dft_upload_id,
     url='test',
     upload_metadata=metadata_update,
+    timeout_in_sec=60,
 )
 ```
-<!-- markdownlint-enable MD046 -->
 
 ??? success "Example notebook output"
 
     ```
-    {'upload_id': 'HJQMQh7tT22gOU1uLbBI_g',
+    {'upload_id': 'dcvqjWYgSZeDVLaJkL6E7w',
      'data': {'process_running': False,
-      'current_process': '_edit_upload_metadata',
+      'current_process': '_edit_metadata',
       'process_status': 'SUCCESS',
       'last_status_message': 'Process completed successfully',
       'errors': [],
       'warnings': [],
-      'upload_id': 'HJQMQh7tT22gOU1uLbBI_g',
+      'complete_time': '2026-09-29T10:09:43.994000Z',
+      'upload_id': 'dcvqjWYgSZeDVLaJkL6E7w',
       'upload_name': 'NOMAD Tutorial, Prepare DFT example for sharing using API',
-      'upload_create_time': '2025-12-08T15:38:58.775000',
-      'main_author': 'ebb26223-0cec-4d81-98f5-3b25db945b54',
+      'upload_create_time': '2026-09-29T09:47:05.108000Z',
+      'main_author': '00000000-0000-4000-8000-000000000001',
       'coauthors': [],
       'coauthor_groups': [],
       'reviewers': [],
       'reviewer_groups': [],
-      'writers': ['ebb26223-0cec-4d81-98f5-3b25db945b54'],
+      'writers': ['00000000-0000-4000-8000-000000000001'],
       'writer_groups': [],
-      'viewers': ['ebb26223-0cec-4d81-98f5-3b25db945b54'],
+      'viewers': ['00000000-0000-4000-8000-000000000001'],
       'viewer_groups': [],
       'published': False,
       'published_to': [],
@@ -512,16 +535,15 @@ edit_upload_metadata(
       'embargo_length': 0,
       'license': 'CC BY 4.0',
       'entries': 1,
-      'upload_files_server_path': '/nomad/test/fs/staging/H/HJQMQh7tT22gOU1uLbBI_g'}}
+      'upload_files_server_path': '/nomad/test/fs/staging/d/dcvqjWYgSZeDVLaJkL6E7w'}}
     ```
-This code updates the upload name and applies the comment and references to all entries in the upload.
+This code updates the project name and applies the comment and references to all entries in the project. `timeout_in_sec=60` lets the helper wait up to 60 seconds for the server's answer; the default of 10 seconds can be too short when NOMAD is busy.
 
 !!! warning
-    Running the next snippet before NOMAD finishes processing the entries may make it *look* as if the entries metadata is not updated. Wait up to 2 minutes and retry to ensure the snippet is executed only after NOMAD processing has completed.
+    Running the next snippet before NOMAD finishes processing the entries may make it *look* as if the entries metadata is not updated. Wait up to 3 minutes and retry to ensure the snippet is executed only after NOMAD processing has completed.
 
 To inspect it programmatically try:
 
-<!-- markdownlint-disable MD046 -->
 ```python
 # Upload-level metadata (only the name appears here)
 updated_upload = get_upload_by_id(dft_upload_id, url='test')
@@ -536,120 +558,50 @@ for entry in entries:
     print('Entry comment:', entry.comment)
     print('Entry references:', entry.references)
 ```
-<!-- markdownlint-enable MD046 -->
 
 ??? success "Example notebook output"
 
     ```
     Upload name (upload-level): NOMAD Tutorial, Prepare DFT example for sharing using API
 
-    Entry ID: cvEq4wXAf3dN4xJv1hM7Mz040C38
+    Entry ID: kW6H8T0MGH4-0GXH7cbf7j82BBUJ
     Entry comment: DFT upload created as part of the NOMAD API tutorial using nomad-utility-workflows.
     Entry references: ['https://doi.org/xx.xxxx/example-doi']
     ```
 
 Retrieving the entries again confirms that the metadata was updated correctly at the entry level.
 
-You can also confirm the changes by clicking **EDIT METADATA OF ALL THE ENTRIES** in the test deployment GUI for that upload. You will see that the metadata has been updated for all the entries of this upload.
+In the GUI, the new project name is shown on the project page and under **SETTINGS** > **General**.
 
-<!-- markdownlint-disable MD033 -->
-<div style="text-align: center;">
-    <img src="images/api_gui_upload_comp2.png" alt="Screenshot of the NOMAD GUI" width="800">
-</div>
-<!-- markdownlint-enable MD033 -->
+### Share your project
 
-### Assign the upload to a dataset
+If you wish, you can collaborate on this project by sharing it with selected NOMAD users of your choice. To do this, you first need to locate their NOMAD user account (their `user_id`). Once you have their `user_id`, you can assign them as a **coauthor** (write access) or a **reviewer** (read-only access).
 
-You can group your upload into a dataset so that related entries can later be queried or managed together.
+Let’s start by searching for the user you want to share your project with. Replace `SearchSurname` in the snippet below with the name of that NOMAD user.
 
-<!-- markdownlint-disable MD046 -->
-```python
-from nomad_utility_workflows.utils.datasets import create_dataset
-
-dataset_name = 'Example dataset to contain DFT data'
-dataset_id = create_dataset(dataset_name=dataset_name, url='test')
-print(f"Created dataset: dataset_id={dataset_id}, dataset_name='{dataset_name}'")
-```
-<!-- markdownlint-enable MD046 -->
-
-??? success "Example notebook output"
-
-    ```
-    Created dataset: dataset_id=431csah2RKSEV3ic38FmTA, dataset_name='Example dataset to contain DFT data'
-    ```
-
-To assign the upload, i.e., the entries of the upload, to the dataset you have created, it is enough that we update the upload's metadata to include the `dataset_id`:
-
-<!-- markdownlint-disable MD046 -->
-```python
-edit_upload_metadata(
-    upload_id=dft_upload_id,
-    url='test',
-    upload_metadata={'dataset_id': dataset_id},
-)
-```
-<!-- markdownlint-enable MD046 -->
-
-??? success "Example notebook output"
-
-    ```
-    {'upload_id': 'HJQMQh7tT22gOU1uLbBI_g',
-     'data': {'process_running': False,
-      'current_process': '_edit_upload_metadata',
-      'process_status': 'SUCCESS',
-      'last_status_message': 'Process completed successfully',
-      'errors': [],
-      'warnings': [],
-      'upload_id': 'HJQMQh7tT22gOU1uLbBI_g',
-      'upload_name': 'NOMAD Tutorial, Prepare DFT example for sharing using API',
-      'upload_create_time': '2025-12-08T15:38:58.775000',
-      'main_author': 'ebb26223-0cec-4d81-98f5-3b25db945b54',
-      'coauthors': [],
-      'coauthor_groups': [],
-      'reviewers': [],
-      'reviewer_groups': [],
-      'writers': ['ebb26223-0cec-4d81-98f5-3b25db945b54'],
-      'writer_groups': [],
-      'viewers': ['ebb26223-0cec-4d81-98f5-3b25db945b54'],
-      'viewer_groups': [],
-      'published': False,
-      'published_to': [],
-      'with_embargo': False,
-      'embargo_length': 0,
-      'license': 'CC BY 4.0',
-      'entries': 1,
-      'upload_files_server_path': '/nomad/test/fs/staging/H/HJQMQh7tT22gOU1uLbBI_g'}}
-    ```
-
-This assigns all entries contained in the upload to the newly created dataset.
-You can later verify this in the GUI under **EDIT METADATA** for any entry.
-
-### Share the upload with selected users
-
-If you wish, you can collaborate on this upload by sharing it with selected NOMAD users of your choice. To do this, you first need to locate their NOMAD user account (their `user_id`). Once you have their `user_id`, you can assign them as a **coauthor** (write access) or a **reviewer** (read-only access).
-
-Let’s start by searching for the user you want to share your upload with. Replace `SearchSurname` in the snippet below with the name of that NOMAD user.
-
-<!-- markdownlint-disable MD046 -->
 ``` python
 from nomad_utility_workflows.utils.users import search_users_by_name
 
 candidates = search_users_by_name('SearchSurname', url='test')
 
 for user in candidates:
-    print(f"Found the user '{user.name}' with user_id='{user.user_id}'")
+    print(
+        f"Found the user '{user.name}' (username '{user.username}') "
+        f"with user_id='{user.user_id}'"
+    )
 ```
-<!-- markdownlint-enable MD046 -->
 
 ??? success "Example notebook output"
 
     ```
-    Found the user 'Test_siamak Test_nakhaie' with user_id='f250f5ab-b05c-4bad-9939-5f4883c7a694'
+    Found the user 'Jane Doe' (username 'jane.doe') with user_id='00000000-0000-4000-8000-000000000002'
+    Found the user 'Jane Doe' (username 'jane.doe@example.org') with user_id='00000000-0000-4000-8000-000000000003'
     ```
+
+If several users have the same name, use the username to pick the right one.
 
 Once the user appears in the output, copy their `user_id`. In the next step, paste this `user_id` into the appropriate list and comment out all lines related to the role you do not want to assign.
 
-<!-- markdownlint-disable MD046 -->
 ```python
 from nomad_utility_workflows.utils.uploads import edit_upload_metadata
 
@@ -663,99 +615,113 @@ edit_upload_metadata(
         'coauthors': coauthor_ids,  # comment out if not needed
         'reviewers': reviewer_ids,  # comment out if not needed
     },
+    timeout_in_sec=60,
 )
 
 print('Access updated.')
 ```
-<!-- markdownlint-enable MD046 -->
 
 ??? success "Example notebook output"
 
     ```
     Access updated.
     ```
-If you wish, you can verify this in the upload page by clicking **EDIT UPLOAD MEMBERS**, which will look similar to:
-
-<!-- markdownlint-disable MD033 -->
-<div style="text-align: center;">
-    <img src="images/api_gui_upload_comp4.png" alt="Screenshot of the NOMAD GUI" width="800">
-</div>
-<!-- markdownlint-enable MD033 -->
+If you wish, you can verify this on the project page under **SETTINGS** > **Collaborators**.
 
 ### Set an embargo period
 
-If you plan to publish your upload to NOMAD but want to delay when it becomes visible to everyone, you can set an embargo period. The example below applies an embargo of one month.
+If you plan to publish your project to NOMAD but want to delay when it becomes visible to everyone, you can set an embargo period. The example below applies an embargo of three months.
 
-<!-- markdownlint-disable MD046 -->
 ```python
 edit_upload_metadata(
     upload_id=dft_upload_id,
     url='test',
-    upload_metadata={'embargo_length': 1},
+    upload_metadata={'embargo_length': 3},
+    timeout_in_sec=60,
 )
 
 upload_with_embargo = get_upload_by_id(dft_upload_id, url='test')
 print('With embargo:', upload_with_embargo.with_embargo)
 print('Embargo length:', upload_with_embargo.embargo_length)
 ```
-<!-- markdownlint-enable MD046 -->
 
 ??? success "Example notebook output"
 
     ```
     With embargo: True
-    Embargo length: 1.0
+    Embargo length: 3.0
     ```
 
-### Publish the upload
+### Publish your project
 
-You can now publish your upload on the NOMAD **test** deployment:
+You can now publish your project on the NOMAD **test** deployment:
 
 !!! warning
     Publishing data on the production server requires that you have the **rights to the data** and are **eligible to release them under the CC BY 4.0 license**, and this action is **irreversible**.
     For this tutorial, we use the test deployment. Please make sure that `url="test"` is set before triggering any publication action.
 
-<!-- markdownlint-disable MD046 -->
 ```python
 from nomad_utility_workflows.utils.uploads import publish_upload
 from pprint import pprint
 
-response = publish_upload(upload_id=dft_upload_id, url='test')
+response = publish_upload(upload_id=dft_upload_id, url='test', timeout_in_sec=60)
 pprint(response)
 ```
-<!-- markdownlint-enable MD046 -->
 
 ??? success "Example notebook output"
 
     ```
     {'data': {'coauthor_groups': [],
-                'coauthors': ['f250f5ab-b05c-4bad-9939-5f4883c7a694'],
-                'current_process': '_edit_upload_metadata',
-                'embargo_length': 1,
-                'entries': 1,
-                'errors': [],
-                'last_status_message': 'Process completed successfully',
-                'license': 'CC BY 4.0',
-                'main_author': 'ebb26223-0cec-4d81-98f5-3b25db945b54',
-                'process_running': True,
-                'process_status': 'PENDING',
-                'published': False,
-                'published_to': [],
-                'reviewer_groups': [],
-                'reviewers': [],
-                'upload_create_time': '2025-12-08T15:38:58.775000',
-                'upload_id': 'HJQMQh7tT22gOU1uLbBI_g',
-                'upload_name': 'NOMAD Tutorial, Prepare DFT example for sharing '
-                                'using API',
-                'viewer_groups': [],
-                'viewers': ['ebb26223-0cec-4d81-98f5-3b25db945b54',
-                            'f250f5ab-b05c-4bad-9939-5f4883c7a694'],
-                'warnings': [],
-                'with_embargo': True,
-                'writer_groups': [],
-                'writers': ['ebb26223-0cec-4d81-98f5-3b25db945b54',
-                            'f250f5ab-b05c-4bad-9939-5f4883c7a694']},
-        'upload_id': 'HJQMQh7tT22gOU1uLbBI_g'}
+              'coauthors': ['00000000-0000-4000-8000-000000000003'],
+              'complete_time': '2026-09-29T11:18:29.488000Z',
+              'current_process': '_publish_upload',
+              'embargo_length': 3,
+              'entries': 1,
+              'errors': [],
+              'last_status_message': 'Process completed successfully',
+              'license': 'CC BY 4.0',
+              'main_author': '00000000-0000-4000-8000-000000000001',
+              'process_running': True,
+              'process_status': 'PENDING',
+              'published': False,
+              'published_to': [],
+              'reviewer_groups': [],
+              'reviewers': [],
+              'upload_create_time': '2026-09-29T09:47:05.108000Z',
+              'upload_files_server_path': '/nomad/test/fs/staging/d/dcvqjWYgSZeDVLaJkL6E7w',
+              'upload_id': 'dcvqjWYgSZeDVLaJkL6E7w',
+              'upload_name': 'NOMAD Tutorial, Prepare DFT example for sharing '
+                             'using API',
+              'viewer_groups': [],
+              'viewers': ['00000000-0000-4000-8000-000000000001',
+                          '00000000-0000-4000-8000-000000000003'],
+              'warnings': [],
+              'with_embargo': True,
+              'writer_groups': [],
+              'writers': ['00000000-0000-4000-8000-000000000001',
+                          '00000000-0000-4000-8000-000000000003']},
+     'upload_id': 'dcvqjWYgSZeDVLaJkL6E7w'}
     ```
 
-This code triggers the publication action for the DFT upload and prints the server response confirming the operation.
+The response confirms that the publication request was accepted, not that publication succeeded. Publication runs asynchronously, so wait for it to finish and inspect its final status in a separate cell:
+
+```python
+published_upload = wait_for_process(upload_id=dft_upload_id, url='test')
+print('Process status:', published_upload.process_status)
+print('Published:', published_upload.published)
+print('Errors:', published_upload.errors)
+print('Warnings:', published_upload.warnings)
+```
+
+??? success "Final publication status"
+
+    ```
+    Process status: SUCCESS
+    Published: True
+    Errors: []
+    Warnings: []
+    ```
+
+Confirm that the process status is `SUCCESS`, `Published` is `True`, and `Errors` is empty; review any warnings as well. For details, see [Inspect a project](#inspect-a-project).
+
+<!-- TODO: Consider a step that assigns a DOI to the published project via the API (POST /uploads/{upload_id}/action/assign-doi), mirroring "Assign a DOI to your project" in upload_publish.md. The test deployment used in this tutorial cannot assign DOIs (DataCite is disabled there), and nomad-utility-workflows 0.3.2 has no helper for it. -->
