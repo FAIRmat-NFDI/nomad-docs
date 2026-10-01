@@ -2819,10 +2819,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-clear-old-elasticsearch-volume-and-start-services" class="md-nav__link">
+  <a href="#3-create-the-fresh-es9-volume-and-start-services" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Clear Old Elasticsearch Volume and Start Services
+        3. Create the Fresh ES9 Volume and Start Services
       
     </span>
   </a>
@@ -2834,6 +2834,17 @@
     <span class="md-ellipsis">
       
         4. Run the Indexing CLI Command
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-remove-the-old-es7-volume" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Remove the Old ES7 Volume
       
     </span>
   </a>
@@ -4086,10 +4097,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-clear-old-elasticsearch-volume-and-start-services" class="md-nav__link">
+  <a href="#3-create-the-fresh-es9-volume-and-start-services" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Clear Old Elasticsearch Volume and Start Services
+        3. Create the Fresh ES9 Volume and Start Services
       
     </span>
   </a>
@@ -4101,6 +4112,17 @@
     <span class="md-ellipsis">
       
         4. Run the Indexing CLI Command
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#5-remove-the-old-es7-volume" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Remove the Old ES7 Volume
       
     </span>
   </a>
@@ -4381,25 +4403,35 @@
 <li>Set <code>image: docker.elastic.co/elasticsearch/elasticsearch:9.5.0</code> under the <code>elastic</code> service.</li>
 <li>Add <code>xpack.security.enabled=false</code> to the <code>elastic</code> service's <code>environment</code> list so that NOMAD can continue to connect over unauthenticated HTTP.</li>
 <li>Ensure <code>NOMAD_ELASTIC_VERSION: 9</code> is set under the NOMAD container environment (<code>app</code>, <code>worker</code>, etc.).</li>
-</ul>
-<h4 id="3-clear-old-elasticsearch-volume-and-start-services">3. Clear Old Elasticsearch Volume and Start Services<a class="headerlink" href="#3-clear-old-elasticsearch-volume-and-start-services" title="Permanent link">¶</a></h4>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1"># 1. Stop all containers</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>docker<span class="w"> </span>compose<span class="w"> </span>down
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="c1"># 2. Remove the old Elasticsearch 7 volume</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>docker<span class="w"> </span>volume<span class="w"> </span>rm<span class="w"> </span>nomad_oasis_elastic
-<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>
-<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="c1"># 3. Start the upgraded stack</span>
-<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+<li>
+<p>Keep the <code>elastic:/usr/share/elasticsearch/data</code> service mount and change the top-level <code>elastic.name</code> to <code>nomad_oasis_elastic_9</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nt">volumes</span><span class="p">:</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="c1"># ... other volumes ...</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">  </span><span class="nt">elastic</span><span class="p">:</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"nomad_oasis_elastic_9"</span>
 </code></pre></div>
+</li>
+</ul>
+<h4 id="3-create-the-fresh-es9-volume-and-start-services">3. Create the Fresh ES9 Volume and Start Services<a class="headerlink" href="#3-create-the-fresh-es9-volume-and-start-services" title="Permanent link">¶</a></h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># Stop all containers</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>docker<span class="w"> </span>compose<span class="w"> </span>down
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="c1"># Start the upgraded stack; Compose creates nomad_oasis_elastic_9</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+</code></pre></div>
+<p>The old <code>nomad_oasis_elastic</code> volume remains available as a rollback until the migration is verified.</p>
 <h4 id="4-run-the-indexing-cli-command">4. Run the Indexing CLI Command<a class="headerlink" href="#4-run-the-indexing-cli-command" title="Permanent link">¶</a></h4>
 <p>Wait until <code>app</code> and <code>elastic</code> are healthy, then trigger re-indexing across all uploads:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>app<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>nomad.cli<span class="w"> </span>admin<span class="w"> </span>uploads<span class="w"> </span>index<span class="w"> </span>--parallel<span class="w"> </span><span class="m">4</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>app<span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>nomad.cli<span class="w"> </span>admin<span class="w"> </span>uploads<span class="w"> </span>index<span class="w"> </span>--parallel<span class="w"> </span><span class="m">4</span>
 </code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
 <p>You can increase <code>--parallel</code> based on available CPU cores. For large deployments, add <code>--print-progress 10</code> to monitor ongoing progress.</p>
 </div>
+<h4 id="5-remove-the-old-es7-volume">5. Remove the Old ES7 Volume<a class="headerlink" href="#5-remove-the-old-es7-volume" title="Permanent link">¶</a></h4>
+<p>After verifying that the uploads are indexed correctly, remove the old ES7 volume:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>docker<span class="w"> </span>volume<span class="w"> </span>rm<span class="w"> </span>nomad_oasis_elastic
+</code></pre></div>
 
 
 
