@@ -302,8 +302,25 @@ This snippet creates a new project for the DFT ZIP file and prints a direct GUI 
 
 To check whether entries were created, retrieve them, and print their IDs and URLs, you can type the following:
 
+Processing happens in the background. Define this helper to wait up to ten minutes for it to finish; you can reuse it for the XPS upload and publication below.
+
+```python
+import time
+
+def wait_for_process(upload_id, url='test', timeout_in_sec=600):
+    deadline = time.monotonic() + timeout_in_sec
+    while time.monotonic() < deadline:
+        upload = get_upload_by_id(upload_id=upload_id, url=url)
+        if not upload.process_running:
+            return upload
+        time.sleep(5)
+    raise TimeoutError(f'NOMAD did not finish processing within {timeout_in_sec} seconds.')
+```
+
 ```python
 from nomad_utility_workflows.utils.entries import get_entries_of_upload
+
+wait_for_process(upload_id=dft_upload_id, url='test')
 
 dft_entries = get_entries_of_upload(
     upload_id=dft_upload_id, url='test', with_authentication=True
@@ -324,7 +341,7 @@ This snippet retrieves all the entries (here only one entry) created from the up
     ```
 
 !!! warning
-    If NOMAD is still processing the project, the list may be empty, or the call may fail with `KeyError: 'entry_metadata'`. Wait until processing has finished and run the cell again. `get_entries_of_upload` keeps its result for up to three minutes, so an empty list may be repeated until then.
+    If `wait_for_process` times out, inspect the project in the GUI before retrying. Do not query entries while processing is ongoing because an empty result may be cached for up to three minutes.
 
 <!-- TODO: `get_entries_of_upload` raises KeyError: 'entry_metadata' for unprocessed entries and caches its result for 180 s. Simplify this warning (and the 3-minute hint in "Edit the project's metadata") once the package handles both. -->
 
@@ -347,7 +364,6 @@ The steps are similar to those you followed for the computations data.
     Here is a ready-to-paste snippet for your Jupyter notebook:
     ```python
     import os
-    import time
     from nomad_utility_workflows.utils.uploads import (
         upload_files_to_nomad,
         get_upload_by_id,
@@ -360,9 +376,7 @@ The steps are similar to those you followed for the computations data.
     xps_upload = get_upload_by_id(xps_upload_id, url='test')
     print('Upload GUI URL:', f'{nomad_gui}/projects/{xps_upload.upload_id}')
 
-    # wait until NOMAD has finished processing the project
-    while get_upload_by_id(xps_upload_id, url='test').process_running:
-        time.sleep(5)
+    wait_for_process(upload_id=xps_upload_id, url='test')
 
     xps_entries = get_entries_of_upload(
         upload_id=xps_upload_id, url='test', with_authentication=True
@@ -686,6 +700,25 @@ pprint(response)
      'upload_id': 'dcvqjWYgSZeDVLaJkL6E7w'}
     ```
 
-This code triggers the publication action for the DFT project and prints the server response confirming the operation.
+The response confirms that the publication request was accepted, not that publication succeeded. Publication runs asynchronously, so wait for it to finish and inspect its final status in a separate cell:
+
+```python
+published_upload = wait_for_process(upload_id=dft_upload_id, url='test')
+print('Process status:', published_upload.process_status)
+print('Published:', published_upload.published)
+print('Errors:', published_upload.errors)
+print('Warnings:', published_upload.warnings)
+```
+
+??? success "Final publication status"
+
+    ```
+    Process status: SUCCESS
+    Published: True
+    Errors: []
+    Warnings: []
+    ```
+
+Confirm that the process status is `SUCCESS`, `Published` is `True`, and `Errors` is empty; review any warnings as well. For details, see [Inspect a project](#inspect-a-project).
 
 <!-- TODO: Consider a step that assigns a DOI to the published project via the API (POST /uploads/{upload_id}/action/assign-doi), mirroring "Assign a DOI to your project" in upload_publish.md. The test deployment used in this tutorial cannot assign DOIs (DataCite is disabled there), and nomad-utility-workflows 0.3.2 has no helper for it. -->
