@@ -1,4 +1,4 @@
-# How to import data from third-party ELNs
+# How to import data from external ELNs
 
 This guide explains how to import data from third-party electronic lab notebooks
 (ELNs) into NOMAD using integration parsers and schemas.
