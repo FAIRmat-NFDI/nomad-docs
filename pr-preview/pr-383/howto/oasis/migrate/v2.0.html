@@ -4372,7 +4372,7 @@
 <p>Update <code>docker-compose.yaml</code>:</p>
 <ul>
 <li>Set the main <code>elastic</code> service image to <code>docker.elastic.co/elasticsearch/elasticsearch:9.5.0</code>.</li>
-<li>Add <code>xpack.security.enabled=false</code> to the main <code>elastic</code> service's <code>environment</code> list so that NOMAD can continue to connect over unauthenticated HTTP.</li>
+<li>Add <code>xpack.security.enabled=false</code> to the main <code>elastic</code> service's <code>environment</code> list to disable Elasticsearch's built-in TLS and authentication, matching NOMAD's existing plain-HTTP connection configuration.</li>
 <li>Change the volume mount for <code>elastic</code> to use the migrated volume <code>nomad_oasis_elastic_9</code> (or replace the old volume).</li>
 <li>Ensure <code>NOMAD_ELASTIC_VERSION: 9</code> is present in your NOMAD services (<code>app</code>, <code>worker</code>, etc.).</li>
 <li>Remove the temporary <code>nomad_oasis_elastic_9</code> service definition from <code>docker-compose.yaml</code>.</li>
@@ -4401,7 +4401,7 @@
 <p>In <code>docker-compose.yaml</code>:</p>
 <ul>
 <li>Set <code>image: docker.elastic.co/elasticsearch/elasticsearch:9.5.0</code> under the <code>elastic</code> service.</li>
-<li>Add <code>xpack.security.enabled=false</code> to the <code>elastic</code> service's <code>environment</code> list so that NOMAD can continue to connect over unauthenticated HTTP.</li>
+<li>Add <code>xpack.security.enabled=false</code> to the <code>elastic</code> service's <code>environment</code> list to disable Elasticsearch's built-in TLS and authentication, matching NOMAD's existing plain-HTTP connection configuration.</li>
 <li>Ensure <code>NOMAD_ELASTIC_VERSION: 9</code> is set under the NOMAD container environment (<code>app</code>, <code>worker</code>, etc.).</li>
 <li>
 <p>Keep the <code>elastic:/usr/share/elasticsearch/data</code> service mount and change the top-level <code>elastic.name</code> to <code>nomad_oasis_elastic_9</code>:</p>
