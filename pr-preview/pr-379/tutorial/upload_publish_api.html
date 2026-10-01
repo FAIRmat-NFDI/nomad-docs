@@ -4454,26 +4454,40 @@ When running code snippets, always make sure that the <code>url</code> parameter
 </details>
 <p>This snippet creates a new project for the DFT ZIP file and prints a direct GUI link where you can monitor its processing status.</p>
 <p>To check whether entries were created, retrieve them, and print their IDs and URLs, you can type the following:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad_utility_workflows.utils.entries</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_entries_of_upload</span>
+<p>Processing happens in the background. Define this helper to wait up to ten minutes for it to finish; you can reuse it for the XPS upload and publication below.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 <a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>
-<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="n">dft_entries</span> <span class="o">=</span> <span class="n">get_entries_of_upload</span><span class="p">(</span>
-<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>    <span class="n">upload_id</span><span class="o">=</span><span class="n">dft_upload_id</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">with_authentication</span><span class="o">=</span><span class="kc">True</span>
-<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="p">)</span>
-<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">dft_entries</span><span class="p">:</span>
-<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a>    <span class="nb">print</span><span class="p">(</span>
-<a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a>        <span class="n">entry</span><span class="o">.</span><span class="n">entry_id</span><span class="p">,</span>
-<a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a>        <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">nomad_gui</span><span class="si">}</span><span class="s1">/projects/</span><span class="si">{</span><span class="n">entry</span><span class="o">.</span><span class="n">upload_id</span><span class="si">}</span><span class="s1">/entries/</span><span class="si">{</span><span class="n">entry</span><span class="o">.</span><span class="n">entry_id</span><span class="si">}</span><span class="s1">'</span><span class="p">,</span>
-<a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a>    <span class="p">)</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">wait_for_process</span><span class="p">(</span><span class="n">upload_id</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">timeout_in_sec</span><span class="o">=</span><span class="mi">600</span><span class="p">):</span>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>    <span class="n">deadline</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">+</span> <span class="n">timeout_in_sec</span>
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>    <span class="k">while</span> <span class="n">time</span><span class="o">.</span><span class="n">monotonic</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">deadline</span><span class="p">:</span>
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a>        <span class="n">upload</span> <span class="o">=</span> <span class="n">get_upload_by_id</span><span class="p">(</span><span class="n">upload_id</span><span class="o">=</span><span class="n">upload_id</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">)</span>
+<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">upload</span><span class="o">.</span><span class="n">process_running</span><span class="p">:</span>
+<a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a>            <span class="k">return</span> <span class="n">upload</span>
+<a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a>        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a>    <span class="k">raise</span> <span class="ne">TimeoutError</span><span class="p">(</span><span class="sa">f</span><span class="s1">'NOMAD did not finish processing within </span><span class="si">{</span><span class="n">timeout_in_sec</span><span class="si">}</span><span class="s1"> seconds.'</span><span class="p">)</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad_utility_workflows.utils.entries</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_entries_of_upload</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="n">wait_for_process</span><span class="p">(</span><span class="n">upload_id</span><span class="o">=</span><span class="n">dft_upload_id</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">'test'</span><span class="p">)</span>
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="n">dft_entries</span> <span class="o">=</span> <span class="n">get_entries_of_upload</span><span class="p">(</span>
+<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>    <span class="n">upload_id</span><span class="o">=</span><span class="n">dft_upload_id</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">with_authentication</span><span class="o">=</span><span class="kc">True</span>
+<a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a><span class="p">)</span>
+<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a><span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">dft_entries</span><span class="p">:</span>
+<a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a>    <span class="nb">print</span><span class="p">(</span>
+<a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a>        <span class="n">entry</span><span class="o">.</span><span class="n">entry_id</span><span class="p">,</span>
+<a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a>        <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">nomad_gui</span><span class="si">}</span><span class="s1">/projects/</span><span class="si">{</span><span class="n">entry</span><span class="o">.</span><span class="n">upload_id</span><span class="si">}</span><span class="s1">/entries/</span><span class="si">{</span><span class="n">entry</span><span class="o">.</span><span class="n">entry_id</span><span class="si">}</span><span class="s1">'</span><span class="p">,</span>
+<a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a>    <span class="p">)</span>
 </code></pre></div>
 <p>This snippet retrieves all the entries (here only one entry) created from the uploaded computations data and prints each entry’s ID together with its direct GUI URL.</p>
 <details class="success">
 <summary>Example notebook output</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>kW6H8T0MGH4-0GXH7cbf7j82BBUJ https://nomad-lab.eu/test/projects/dcvqjWYgSZeDVLaJkL6E7w/entries/kW6H8T0MGH4-0GXH7cbf7j82BBUJ
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>kW6H8T0MGH4-0GXH7cbf7j82BBUJ https://nomad-lab.eu/test/projects/dcvqjWYgSZeDVLaJkL6E7w/entries/kW6H8T0MGH4-0GXH7cbf7j82BBUJ
 </code></pre></div>
 </details>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>If NOMAD is still processing the project, the list may be empty, or the call may fail with <code>KeyError: 'entry_metadata'</code>. Wait until processing has finished and run the cell again. <code>get_entries_of_upload</code> keeps its result for up to three minutes, so an empty list may be repeated until then.</p>
+<p>If <code>wait_for_process</code> times out, inspect the project in the GUI before retrying. Do not query entries while processing is ongoing because an empty result may be cached for up to three minutes.</p>
 </div>
 <!-- TODO: `get_entries_of_upload` raises KeyError: 'entry_metadata' for unprocessed entries and caches its result for 180 s. Simplify this warning (and the 3-minute hint in "Edit the project's metadata") once the package handles both. -->
 
@@ -4491,63 +4505,60 @@ When running code snippets, always make sure that the <code>url</code> parameter
 <details class="success">
 <summary>Solution</summary>
 <p>Here is a ready-to-paste snippet for your Jupyter notebook:
-</p><div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
-<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
-<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad_utility_workflows.utils.uploads</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>    <span class="n">upload_files_to_nomad</span><span class="p">,</span>
-<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a>    <span class="n">get_upload_by_id</span><span class="p">,</span>
-<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="p">)</span>
-<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad_utility_workflows.utils.entries</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_entries_of_upload</span>
-<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a>
-<a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a><span class="n">xps_zip_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">'xps_nexus_data.zip'</span><span class="p">)</span>
-<a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a><span class="n">xps_upload_id</span> <span class="o">=</span> <span class="n">upload_files_to_nomad</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">xps_zip_path</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">'test'</span><span class="p">)</span>
-<a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a>
-<a id="__codelineno-23-12" name="__codelineno-23-12" href="#__codelineno-23-12"></a><span class="n">xps_upload</span> <span class="o">=</span> <span class="n">get_upload_by_id</span><span class="p">(</span><span class="n">xps_upload_id</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">'test'</span><span class="p">)</span>
-<a id="__codelineno-23-13" name="__codelineno-23-13" href="#__codelineno-23-13"></a><span class="nb">print</span><span class="p">(</span><span class="s1">'Upload GUI URL:'</span><span class="p">,</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">nomad_gui</span><span class="si">}</span><span class="s1">/projects/</span><span class="si">{</span><span class="n">xps_upload</span><span class="o">.</span><span class="n">upload_id</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
-<a id="__codelineno-23-14" name="__codelineno-23-14" href="#__codelineno-23-14"></a>
-<a id="__codelineno-23-15" name="__codelineno-23-15" href="#__codelineno-23-15"></a><span class="c1"># wait until NOMAD has finished processing the project</span>
-<a id="__codelineno-23-16" name="__codelineno-23-16" href="#__codelineno-23-16"></a><span class="k">while</span> <span class="n">get_upload_by_id</span><span class="p">(</span><span class="n">xps_upload_id</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">'test'</span><span class="p">)</span><span class="o">.</span><span class="n">process_running</span><span class="p">:</span>
-<a id="__codelineno-23-17" name="__codelineno-23-17" href="#__codelineno-23-17"></a>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-<a id="__codelineno-23-18" name="__codelineno-23-18" href="#__codelineno-23-18"></a>
-<a id="__codelineno-23-19" name="__codelineno-23-19" href="#__codelineno-23-19"></a><span class="n">xps_entries</span> <span class="o">=</span> <span class="n">get_entries_of_upload</span><span class="p">(</span>
-<a id="__codelineno-23-20" name="__codelineno-23-20" href="#__codelineno-23-20"></a>    <span class="n">upload_id</span><span class="o">=</span><span class="n">xps_upload_id</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">with_authentication</span><span class="o">=</span><span class="kc">True</span>
-<a id="__codelineno-23-21" name="__codelineno-23-21" href="#__codelineno-23-21"></a><span class="p">)</span>
-<a id="__codelineno-23-22" name="__codelineno-23-22" href="#__codelineno-23-22"></a><span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">xps_entries</span><span class="p">:</span>
-<a id="__codelineno-23-23" name="__codelineno-23-23" href="#__codelineno-23-23"></a>    <span class="nb">print</span><span class="p">(</span>
-<a id="__codelineno-23-24" name="__codelineno-23-24" href="#__codelineno-23-24"></a>        <span class="n">entry</span><span class="o">.</span><span class="n">entry_id</span><span class="p">,</span>
-<a id="__codelineno-23-25" name="__codelineno-23-25" href="#__codelineno-23-25"></a>        <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">nomad_gui</span><span class="si">}</span><span class="s1">/projects/</span><span class="si">{</span><span class="n">entry</span><span class="o">.</span><span class="n">upload_id</span><span class="si">}</span><span class="s1">/entries/</span><span class="si">{</span><span class="n">entry</span><span class="o">.</span><span class="n">entry_id</span><span class="si">}</span><span class="s1">'</span><span class="p">,</span>
-<a id="__codelineno-23-26" name="__codelineno-23-26" href="#__codelineno-23-26"></a>    <span class="p">)</span>
+</p><div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad_utility_workflows.utils.uploads</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>    <span class="n">upload_files_to_nomad</span><span class="p">,</span>
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a>    <span class="n">get_upload_by_id</span><span class="p">,</span>
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="p">)</span>
+<a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad_utility_workflows.utils.entries</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_entries_of_upload</span>
+<a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a>
+<a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a><span class="n">xps_zip_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="s1">'xps_nexus_data.zip'</span><span class="p">)</span>
+<a id="__codelineno-24-9" name="__codelineno-24-9" href="#__codelineno-24-9"></a><span class="n">xps_upload_id</span> <span class="o">=</span> <span class="n">upload_files_to_nomad</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="n">xps_zip_path</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">'test'</span><span class="p">)</span>
+<a id="__codelineno-24-10" name="__codelineno-24-10" href="#__codelineno-24-10"></a>
+<a id="__codelineno-24-11" name="__codelineno-24-11" href="#__codelineno-24-11"></a><span class="n">xps_upload</span> <span class="o">=</span> <span class="n">get_upload_by_id</span><span class="p">(</span><span class="n">xps_upload_id</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">'test'</span><span class="p">)</span>
+<a id="__codelineno-24-12" name="__codelineno-24-12" href="#__codelineno-24-12"></a><span class="nb">print</span><span class="p">(</span><span class="s1">'Upload GUI URL:'</span><span class="p">,</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">nomad_gui</span><span class="si">}</span><span class="s1">/projects/</span><span class="si">{</span><span class="n">xps_upload</span><span class="o">.</span><span class="n">upload_id</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+<a id="__codelineno-24-13" name="__codelineno-24-13" href="#__codelineno-24-13"></a>
+<a id="__codelineno-24-14" name="__codelineno-24-14" href="#__codelineno-24-14"></a><span class="n">wait_for_process</span><span class="p">(</span><span class="n">upload_id</span><span class="o">=</span><span class="n">xps_upload_id</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">'test'</span><span class="p">)</span>
+<a id="__codelineno-24-15" name="__codelineno-24-15" href="#__codelineno-24-15"></a>
+<a id="__codelineno-24-16" name="__codelineno-24-16" href="#__codelineno-24-16"></a><span class="n">xps_entries</span> <span class="o">=</span> <span class="n">get_entries_of_upload</span><span class="p">(</span>
+<a id="__codelineno-24-17" name="__codelineno-24-17" href="#__codelineno-24-17"></a>    <span class="n">upload_id</span><span class="o">=</span><span class="n">xps_upload_id</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">with_authentication</span><span class="o">=</span><span class="kc">True</span>
+<a id="__codelineno-24-18" name="__codelineno-24-18" href="#__codelineno-24-18"></a><span class="p">)</span>
+<a id="__codelineno-24-19" name="__codelineno-24-19" href="#__codelineno-24-19"></a><span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">xps_entries</span><span class="p">:</span>
+<a id="__codelineno-24-20" name="__codelineno-24-20" href="#__codelineno-24-20"></a>    <span class="nb">print</span><span class="p">(</span>
+<a id="__codelineno-24-21" name="__codelineno-24-21" href="#__codelineno-24-21"></a>        <span class="n">entry</span><span class="o">.</span><span class="n">entry_id</span><span class="p">,</span>
+<a id="__codelineno-24-22" name="__codelineno-24-22" href="#__codelineno-24-22"></a>        <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">nomad_gui</span><span class="si">}</span><span class="s1">/projects/</span><span class="si">{</span><span class="n">entry</span><span class="o">.</span><span class="n">upload_id</span><span class="si">}</span><span class="s1">/entries/</span><span class="si">{</span><span class="n">entry</span><span class="o">.</span><span class="n">entry_id</span><span class="si">}</span><span class="s1">'</span><span class="p">,</span>
+<a id="__codelineno-24-23" name="__codelineno-24-23" href="#__codelineno-24-23"></a>    <span class="p">)</span>
 </code></pre></div>
 <strong>Example notebook output</strong><p></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>Upload GUI URL: https://nomad-lab.eu/test/projects/VOZJDQx5RkOKKeJI7_Zl0Q
-<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>YcbAvycR3b5VEiwtQiOHFQ28xw6W https://nomad-lab.eu/test/projects/VOZJDQx5RkOKKeJI7_Zl0Q/entries/YcbAvycR3b5VEiwtQiOHFQ28xw6W
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>Upload GUI URL: https://nomad-lab.eu/test/projects/VOZJDQx5RkOKKeJI7_Zl0Q
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>YcbAvycR3b5VEiwtQiOHFQ28xw6W https://nomad-lab.eu/test/projects/VOZJDQx5RkOKKeJI7_Zl0Q/entries/YcbAvycR3b5VEiwtQiOHFQ28xw6W
 </code></pre></div>
 </details>
 <h3 id="inspect-a-project">Inspect a project<a class="headerlink" href="#inspect-a-project" title="Permanent link">¶</a></h3>
 <p>After creating a project, e.g., the DFT project, it is important to check whether NOMAD has finished processing it and whether any errors occurred.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="n">dft_upload</span> <span class="o">=</span> <span class="n">get_upload_by_id</span><span class="p">(</span><span class="n">upload_id</span><span class="o">=</span><span class="n">dft_upload_id</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">'test'</span><span class="p">)</span>
-<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>
-<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="nb">print</span><span class="p">(</span><span class="s1">'Upload status:'</span><span class="p">)</span>
-<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="nb">print</span><span class="p">(</span><span class="s1">'--------------'</span><span class="p">)</span>
-<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a><span class="nb">print</span><span class="p">(</span><span class="s1">'Upload ID:      '</span><span class="p">,</span> <span class="n">dft_upload</span><span class="o">.</span><span class="n">upload_id</span><span class="p">)</span>
-<a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a><span class="nb">print</span><span class="p">(</span><span class="s1">'Process status: '</span><span class="p">,</span> <span class="n">dft_upload</span><span class="o">.</span><span class="n">process_status</span><span class="p">)</span>
-<a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a><span class="nb">print</span><span class="p">(</span><span class="s1">'Errors:         '</span><span class="p">,</span> <span class="n">dft_upload</span><span class="o">.</span><span class="n">errors</span><span class="p">)</span>
-<a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a><span class="nb">print</span><span class="p">(</span><span class="s1">'Warnings:       '</span><span class="p">,</span> <span class="n">dft_upload</span><span class="o">.</span><span class="n">warnings</span><span class="p">)</span>
-<a id="__codelineno-25-9" name="__codelineno-25-9" href="#__codelineno-25-9"></a><span class="nb">print</span><span class="p">(</span><span class="s1">'Entries:        '</span><span class="p">,</span> <span class="n">dft_upload</span><span class="o">.</span><span class="n">entries</span><span class="p">)</span>
-<a id="__codelineno-25-10" name="__codelineno-25-10" href="#__codelineno-25-10"></a><span class="nb">print</span><span class="p">(</span><span class="s1">'Published:      '</span><span class="p">,</span> <span class="n">dft_upload</span><span class="o">.</span><span class="n">published</span><span class="p">)</span>
-<a id="__codelineno-25-11" name="__codelineno-25-11" href="#__codelineno-25-11"></a><span class="nb">print</span><span class="p">(</span><span class="s1">'Open in GUI:    '</span><span class="p">,</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">nomad_gui</span><span class="si">}</span><span class="s1">/projects/</span><span class="si">{</span><span class="n">dft_upload</span><span class="o">.</span><span class="n">upload_id</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="n">dft_upload</span> <span class="o">=</span> <span class="n">get_upload_by_id</span><span class="p">(</span><span class="n">upload_id</span><span class="o">=</span><span class="n">dft_upload_id</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">'test'</span><span class="p">)</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="nb">print</span><span class="p">(</span><span class="s1">'Upload status:'</span><span class="p">)</span>
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="nb">print</span><span class="p">(</span><span class="s1">'--------------'</span><span class="p">)</span>
+<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="nb">print</span><span class="p">(</span><span class="s1">'Upload ID:      '</span><span class="p">,</span> <span class="n">dft_upload</span><span class="o">.</span><span class="n">upload_id</span><span class="p">)</span>
+<a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a><span class="nb">print</span><span class="p">(</span><span class="s1">'Process status: '</span><span class="p">,</span> <span class="n">dft_upload</span><span class="o">.</span><span class="n">process_status</span><span class="p">)</span>
+<a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a><span class="nb">print</span><span class="p">(</span><span class="s1">'Errors:         '</span><span class="p">,</span> <span class="n">dft_upload</span><span class="o">.</span><span class="n">errors</span><span class="p">)</span>
+<a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a><span class="nb">print</span><span class="p">(</span><span class="s1">'Warnings:       '</span><span class="p">,</span> <span class="n">dft_upload</span><span class="o">.</span><span class="n">warnings</span><span class="p">)</span>
+<a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a><span class="nb">print</span><span class="p">(</span><span class="s1">'Entries:        '</span><span class="p">,</span> <span class="n">dft_upload</span><span class="o">.</span><span class="n">entries</span><span class="p">)</span>
+<a id="__codelineno-26-10" name="__codelineno-26-10" href="#__codelineno-26-10"></a><span class="nb">print</span><span class="p">(</span><span class="s1">'Published:      '</span><span class="p">,</span> <span class="n">dft_upload</span><span class="o">.</span><span class="n">published</span><span class="p">)</span>
+<a id="__codelineno-26-11" name="__codelineno-26-11" href="#__codelineno-26-11"></a><span class="nb">print</span><span class="p">(</span><span class="s1">'Open in GUI:    '</span><span class="p">,</span> <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">nomad_gui</span><span class="si">}</span><span class="s1">/projects/</span><span class="si">{</span><span class="n">dft_upload</span><span class="o">.</span><span class="n">upload_id</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
 </code></pre></div>
 <details class="success">
 <summary>Example notebook output</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>Upload status:
-<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>--------------
-<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>Upload ID:       dcvqjWYgSZeDVLaJkL6E7w
-<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>Process status:  SUCCESS
-<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a>Errors:          []
-<a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a>Warnings:        []
-<a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a>Entries:         1
-<a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a>Published:       False
-<a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a>Open in GUI:     https://nomad-lab.eu/test/projects/dcvqjWYgSZeDVLaJkL6E7w
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>Upload status:
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>--------------
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>Upload ID:       dcvqjWYgSZeDVLaJkL6E7w
+<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>Process status:  SUCCESS
+<a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a>Errors:          []
+<a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a>Warnings:        []
+<a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a>Entries:         1
+<a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a>Published:       False
+<a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a>Open in GUI:     https://nomad-lab.eu/test/projects/dcvqjWYgSZeDVLaJkL6E7w
 </code></pre></div>
 </details>
 <p>This snippet:</p>
@@ -4558,33 +4569,33 @@ When running code snippets, always make sure that the <code>url</code> parameter
 <li>Provides a direct link to inspect the project in the NOMAD GUI.</li>
 </ul>
 <p>Once the project has been processed successfully, you can list all entries that were created from the uploaded files.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad_utility_workflows.utils.entries</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_entries_of_upload</span>
-<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>
-<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="n">dft_entries</span> <span class="o">=</span> <span class="n">get_entries_of_upload</span><span class="p">(</span>
-<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>    <span class="n">upload_id</span><span class="o">=</span><span class="n">dft_upload_id</span><span class="p">,</span>
-<a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a>    <span class="n">url</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span>
-<a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a>    <span class="n">with_authentication</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a><span class="p">)</span>
-<a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a>
-<a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">dft_entries</span><span class="p">)</span><span class="si">}</span><span class="s1"> entries in the DFT upload:</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
-<a id="__codelineno-27-10" name="__codelineno-27-10" href="#__codelineno-27-10"></a><span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">dft_entries</span><span class="p">:</span>
-<a id="__codelineno-27-11" name="__codelineno-27-11" href="#__codelineno-27-11"></a>    <span class="nb">print</span><span class="p">(</span>
-<a id="__codelineno-27-12" name="__codelineno-27-12" href="#__codelineno-27-12"></a>        <span class="sa">f</span><span class="s1">'- entry_id: </span><span class="si">{</span><span class="n">entry</span><span class="o">.</span><span class="n">entry_id</span><span class="si">}</span><span class="se">\n</span><span class="s1">'</span>
-<a id="__codelineno-27-13" name="__codelineno-27-13" href="#__codelineno-27-13"></a>        <span class="sa">f</span><span class="s1">'  name: </span><span class="si">{</span><span class="n">entry</span><span class="o">.</span><span class="n">entry_name</span><span class="si">}</span><span class="se">\n</span><span class="s1">'</span>
-<a id="__codelineno-27-14" name="__codelineno-27-14" href="#__codelineno-27-14"></a>        <span class="sa">f</span><span class="s1">'  parser: </span><span class="si">{</span><span class="n">entry</span><span class="o">.</span><span class="n">parser_name</span><span class="si">}</span><span class="se">\n</span><span class="s1">'</span>
-<a id="__codelineno-27-15" name="__codelineno-27-15" href="#__codelineno-27-15"></a>        <span class="sa">f</span><span class="s1">'  published: </span><span class="si">{</span><span class="n">entry</span><span class="o">.</span><span class="n">published</span><span class="si">}</span><span class="se">\n</span><span class="s1">'</span>
-<a id="__codelineno-27-16" name="__codelineno-27-16" href="#__codelineno-27-16"></a>        <span class="sa">f</span><span class="s1">'  GUI URL: </span><span class="si">{</span><span class="n">nomad_gui</span><span class="si">}</span><span class="s1">/projects/</span><span class="si">{</span><span class="n">entry</span><span class="o">.</span><span class="n">upload_id</span><span class="si">}</span><span class="s1">/entries/</span><span class="si">{</span><span class="n">entry</span><span class="o">.</span><span class="n">entry_id</span><span class="si">}</span><span class="se">\n</span><span class="s1">'</span>
-<a id="__codelineno-27-17" name="__codelineno-27-17" href="#__codelineno-27-17"></a>    <span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad_utility_workflows.utils.entries</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_entries_of_upload</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="n">dft_entries</span> <span class="o">=</span> <span class="n">get_entries_of_upload</span><span class="p">(</span>
+<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a>    <span class="n">upload_id</span><span class="o">=</span><span class="n">dft_upload_id</span><span class="p">,</span>
+<a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a>    <span class="n">url</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span>
+<a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a>    <span class="n">with_authentication</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a><span class="p">)</span>
+<a id="__codelineno-28-8" name="__codelineno-28-8" href="#__codelineno-28-8"></a>
+<a id="__codelineno-28-9" name="__codelineno-28-9" href="#__codelineno-28-9"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">dft_entries</span><span class="p">)</span><span class="si">}</span><span class="s1"> entries in the DFT upload:</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
+<a id="__codelineno-28-10" name="__codelineno-28-10" href="#__codelineno-28-10"></a><span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">dft_entries</span><span class="p">:</span>
+<a id="__codelineno-28-11" name="__codelineno-28-11" href="#__codelineno-28-11"></a>    <span class="nb">print</span><span class="p">(</span>
+<a id="__codelineno-28-12" name="__codelineno-28-12" href="#__codelineno-28-12"></a>        <span class="sa">f</span><span class="s1">'- entry_id: </span><span class="si">{</span><span class="n">entry</span><span class="o">.</span><span class="n">entry_id</span><span class="si">}</span><span class="se">\n</span><span class="s1">'</span>
+<a id="__codelineno-28-13" name="__codelineno-28-13" href="#__codelineno-28-13"></a>        <span class="sa">f</span><span class="s1">'  name: </span><span class="si">{</span><span class="n">entry</span><span class="o">.</span><span class="n">entry_name</span><span class="si">}</span><span class="se">\n</span><span class="s1">'</span>
+<a id="__codelineno-28-14" name="__codelineno-28-14" href="#__codelineno-28-14"></a>        <span class="sa">f</span><span class="s1">'  parser: </span><span class="si">{</span><span class="n">entry</span><span class="o">.</span><span class="n">parser_name</span><span class="si">}</span><span class="se">\n</span><span class="s1">'</span>
+<a id="__codelineno-28-15" name="__codelineno-28-15" href="#__codelineno-28-15"></a>        <span class="sa">f</span><span class="s1">'  published: </span><span class="si">{</span><span class="n">entry</span><span class="o">.</span><span class="n">published</span><span class="si">}</span><span class="se">\n</span><span class="s1">'</span>
+<a id="__codelineno-28-16" name="__codelineno-28-16" href="#__codelineno-28-16"></a>        <span class="sa">f</span><span class="s1">'  GUI URL: </span><span class="si">{</span><span class="n">nomad_gui</span><span class="si">}</span><span class="s1">/projects/</span><span class="si">{</span><span class="n">entry</span><span class="o">.</span><span class="n">upload_id</span><span class="si">}</span><span class="s1">/entries/</span><span class="si">{</span><span class="n">entry</span><span class="o">.</span><span class="n">entry_id</span><span class="si">}</span><span class="se">\n</span><span class="s1">'</span>
+<a id="__codelineno-28-17" name="__codelineno-28-17" href="#__codelineno-28-17"></a>    <span class="p">)</span>
 </code></pre></div>
 <details class="success">
 <summary>Example notebook output</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>Found 1 entries in the DFT upload:
-<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a>
-<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>- entry_id: kW6H8T0MGH4-0GXH7cbf7j82BBUJ
-<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a>  name: Fe2O3 FHI-aims DFT SinglePoint simulation
-<a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a>  parser: electronicparsers:fhiaims_parser_entry_point
-<a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a>  published: False
-<a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a>  GUI URL: https://nomad-lab.eu/test/projects/dcvqjWYgSZeDVLaJkL6E7w/entries/kW6H8T0MGH4-0GXH7cbf7j82BBUJ
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>Found 1 entries in the DFT upload:
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>
+<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a>- entry_id: kW6H8T0MGH4-0GXH7cbf7j82BBUJ
+<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a>  name: Fe2O3 FHI-aims DFT SinglePoint simulation
+<a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a>  parser: electronicparsers:fhiaims_parser_entry_point
+<a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a>  published: False
+<a id="__codelineno-29-7" name="__codelineno-29-7" href="#__codelineno-29-7"></a>  GUI URL: https://nomad-lab.eu/test/projects/dcvqjWYgSZeDVLaJkL6E7w/entries/kW6H8T0MGH4-0GXH7cbf7j82BBUJ
 </code></pre></div>
 </details>
 <p>This code:</p>
@@ -4599,52 +4610,52 @@ When running code snippets, always make sure that the <code>url</code> parameter
 In the examples below, we use <code>dft_upload_id</code> to refer to the DFT project, but the same pattern applies to any other project.</p>
 <h3 id="edit-the-projects-metadata">Edit the project's metadata<a class="headerlink" href="#edit-the-projects-metadata" title="Permanent link">¶</a></h3>
 <p>You can update the project's <strong>name</strong> as well as the <strong>entry-level metadata</strong> (such as comment and references) for all entries contained in the project. The function <code>edit_upload_metadata</code> applies metadata changes to <strong>every entry in the project</strong>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad_utility_workflows.utils.uploads</span><span class="w"> </span><span class="kn">import</span> <span class="n">edit_upload_metadata</span><span class="p">,</span> <span class="n">get_upload_by_id</span>
-<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad_utility_workflows.utils.entries</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_entries_of_upload</span>
-<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a>
-<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="n">metadata_update</span> <span class="o">=</span> <span class="p">{</span>
-<a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a>    <span class="s1">'upload_name'</span><span class="p">:</span> <span class="s1">'NOMAD Tutorial, Prepare DFT example for sharing using API'</span><span class="p">,</span>
-<a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a>    <span class="s1">'comment'</span><span class="p">:</span> <span class="s1">'DFT upload created as part of the NOMAD API tutorial using nomad-utility-workflows.'</span><span class="p">,</span>
-<a id="__codelineno-29-7" name="__codelineno-29-7" href="#__codelineno-29-7"></a>    <span class="s1">'references'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'https://doi.org/xx.xxxx/example-doi'</span><span class="p">],</span>
-<a id="__codelineno-29-8" name="__codelineno-29-8" href="#__codelineno-29-8"></a><span class="p">}</span>
-<a id="__codelineno-29-9" name="__codelineno-29-9" href="#__codelineno-29-9"></a>
-<a id="__codelineno-29-10" name="__codelineno-29-10" href="#__codelineno-29-10"></a><span class="c1"># Apply the metadata update</span>
-<a id="__codelineno-29-11" name="__codelineno-29-11" href="#__codelineno-29-11"></a><span class="n">edit_upload_metadata</span><span class="p">(</span>
-<a id="__codelineno-29-12" name="__codelineno-29-12" href="#__codelineno-29-12"></a>    <span class="n">upload_id</span><span class="o">=</span><span class="n">dft_upload_id</span><span class="p">,</span>
-<a id="__codelineno-29-13" name="__codelineno-29-13" href="#__codelineno-29-13"></a>    <span class="n">url</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span>
-<a id="__codelineno-29-14" name="__codelineno-29-14" href="#__codelineno-29-14"></a>    <span class="n">upload_metadata</span><span class="o">=</span><span class="n">metadata_update</span><span class="p">,</span>
-<a id="__codelineno-29-15" name="__codelineno-29-15" href="#__codelineno-29-15"></a>    <span class="n">timeout_in_sec</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span>
-<a id="__codelineno-29-16" name="__codelineno-29-16" href="#__codelineno-29-16"></a><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad_utility_workflows.utils.uploads</span><span class="w"> </span><span class="kn">import</span> <span class="n">edit_upload_metadata</span><span class="p">,</span> <span class="n">get_upload_by_id</span>
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad_utility_workflows.utils.entries</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_entries_of_upload</span>
+<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a>
+<a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a><span class="n">metadata_update</span> <span class="o">=</span> <span class="p">{</span>
+<a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a>    <span class="s1">'upload_name'</span><span class="p">:</span> <span class="s1">'NOMAD Tutorial, Prepare DFT example for sharing using API'</span><span class="p">,</span>
+<a id="__codelineno-30-6" name="__codelineno-30-6" href="#__codelineno-30-6"></a>    <span class="s1">'comment'</span><span class="p">:</span> <span class="s1">'DFT upload created as part of the NOMAD API tutorial using nomad-utility-workflows.'</span><span class="p">,</span>
+<a id="__codelineno-30-7" name="__codelineno-30-7" href="#__codelineno-30-7"></a>    <span class="s1">'references'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'https://doi.org/xx.xxxx/example-doi'</span><span class="p">],</span>
+<a id="__codelineno-30-8" name="__codelineno-30-8" href="#__codelineno-30-8"></a><span class="p">}</span>
+<a id="__codelineno-30-9" name="__codelineno-30-9" href="#__codelineno-30-9"></a>
+<a id="__codelineno-30-10" name="__codelineno-30-10" href="#__codelineno-30-10"></a><span class="c1"># Apply the metadata update</span>
+<a id="__codelineno-30-11" name="__codelineno-30-11" href="#__codelineno-30-11"></a><span class="n">edit_upload_metadata</span><span class="p">(</span>
+<a id="__codelineno-30-12" name="__codelineno-30-12" href="#__codelineno-30-12"></a>    <span class="n">upload_id</span><span class="o">=</span><span class="n">dft_upload_id</span><span class="p">,</span>
+<a id="__codelineno-30-13" name="__codelineno-30-13" href="#__codelineno-30-13"></a>    <span class="n">url</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span>
+<a id="__codelineno-30-14" name="__codelineno-30-14" href="#__codelineno-30-14"></a>    <span class="n">upload_metadata</span><span class="o">=</span><span class="n">metadata_update</span><span class="p">,</span>
+<a id="__codelineno-30-15" name="__codelineno-30-15" href="#__codelineno-30-15"></a>    <span class="n">timeout_in_sec</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span>
+<a id="__codelineno-30-16" name="__codelineno-30-16" href="#__codelineno-30-16"></a><span class="p">)</span>
 </code></pre></div>
 <details class="success">
 <summary>Example notebook output</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>{'upload_id': 'dcvqjWYgSZeDVLaJkL6E7w',
-<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a> 'data': {'process_running': False,
-<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a>  'current_process': '_edit_metadata',
-<a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a>  'process_status': 'SUCCESS',
-<a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a>  'last_status_message': 'Process completed successfully',
-<a id="__codelineno-30-6" name="__codelineno-30-6" href="#__codelineno-30-6"></a>  'errors': [],
-<a id="__codelineno-30-7" name="__codelineno-30-7" href="#__codelineno-30-7"></a>  'warnings': [],
-<a id="__codelineno-30-8" name="__codelineno-30-8" href="#__codelineno-30-8"></a>  'complete_time': '2026-09-29T10:09:43.994000Z',
-<a id="__codelineno-30-9" name="__codelineno-30-9" href="#__codelineno-30-9"></a>  'upload_id': 'dcvqjWYgSZeDVLaJkL6E7w',
-<a id="__codelineno-30-10" name="__codelineno-30-10" href="#__codelineno-30-10"></a>  'upload_name': 'NOMAD Tutorial, Prepare DFT example for sharing using API',
-<a id="__codelineno-30-11" name="__codelineno-30-11" href="#__codelineno-30-11"></a>  'upload_create_time': '2026-09-29T09:47:05.108000Z',
-<a id="__codelineno-30-12" name="__codelineno-30-12" href="#__codelineno-30-12"></a>  'main_author': 'f250f5ab-b05c-4bad-9939-5f4883c7a694',
-<a id="__codelineno-30-13" name="__codelineno-30-13" href="#__codelineno-30-13"></a>  'coauthors': [],
-<a id="__codelineno-30-14" name="__codelineno-30-14" href="#__codelineno-30-14"></a>  'coauthor_groups': [],
-<a id="__codelineno-30-15" name="__codelineno-30-15" href="#__codelineno-30-15"></a>  'reviewers': [],
-<a id="__codelineno-30-16" name="__codelineno-30-16" href="#__codelineno-30-16"></a>  'reviewer_groups': [],
-<a id="__codelineno-30-17" name="__codelineno-30-17" href="#__codelineno-30-17"></a>  'writers': ['f250f5ab-b05c-4bad-9939-5f4883c7a694'],
-<a id="__codelineno-30-18" name="__codelineno-30-18" href="#__codelineno-30-18"></a>  'writer_groups': [],
-<a id="__codelineno-30-19" name="__codelineno-30-19" href="#__codelineno-30-19"></a>  'viewers': ['f250f5ab-b05c-4bad-9939-5f4883c7a694'],
-<a id="__codelineno-30-20" name="__codelineno-30-20" href="#__codelineno-30-20"></a>  'viewer_groups': [],
-<a id="__codelineno-30-21" name="__codelineno-30-21" href="#__codelineno-30-21"></a>  'published': False,
-<a id="__codelineno-30-22" name="__codelineno-30-22" href="#__codelineno-30-22"></a>  'published_to': [],
-<a id="__codelineno-30-23" name="__codelineno-30-23" href="#__codelineno-30-23"></a>  'with_embargo': False,
-<a id="__codelineno-30-24" name="__codelineno-30-24" href="#__codelineno-30-24"></a>  'embargo_length': 0,
-<a id="__codelineno-30-25" name="__codelineno-30-25" href="#__codelineno-30-25"></a>  'license': 'CC BY 4.0',
-<a id="__codelineno-30-26" name="__codelineno-30-26" href="#__codelineno-30-26"></a>  'entries': 1,
-<a id="__codelineno-30-27" name="__codelineno-30-27" href="#__codelineno-30-27"></a>  'upload_files_server_path': '/nomad/test/fs/staging/d/dcvqjWYgSZeDVLaJkL6E7w'}}
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>{'upload_id': 'dcvqjWYgSZeDVLaJkL6E7w',
+<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a> 'data': {'process_running': False,
+<a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a>  'current_process': '_edit_metadata',
+<a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a>  'process_status': 'SUCCESS',
+<a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a>  'last_status_message': 'Process completed successfully',
+<a id="__codelineno-31-6" name="__codelineno-31-6" href="#__codelineno-31-6"></a>  'errors': [],
+<a id="__codelineno-31-7" name="__codelineno-31-7" href="#__codelineno-31-7"></a>  'warnings': [],
+<a id="__codelineno-31-8" name="__codelineno-31-8" href="#__codelineno-31-8"></a>  'complete_time': '2026-09-29T10:09:43.994000Z',
+<a id="__codelineno-31-9" name="__codelineno-31-9" href="#__codelineno-31-9"></a>  'upload_id': 'dcvqjWYgSZeDVLaJkL6E7w',
+<a id="__codelineno-31-10" name="__codelineno-31-10" href="#__codelineno-31-10"></a>  'upload_name': 'NOMAD Tutorial, Prepare DFT example for sharing using API',
+<a id="__codelineno-31-11" name="__codelineno-31-11" href="#__codelineno-31-11"></a>  'upload_create_time': '2026-09-29T09:47:05.108000Z',
+<a id="__codelineno-31-12" name="__codelineno-31-12" href="#__codelineno-31-12"></a>'main_author': '00000000-0000-4000-8000-000000000001',
+<a id="__codelineno-31-13" name="__codelineno-31-13" href="#__codelineno-31-13"></a>  'coauthors': [],
+<a id="__codelineno-31-14" name="__codelineno-31-14" href="#__codelineno-31-14"></a>  'coauthor_groups': [],
+<a id="__codelineno-31-15" name="__codelineno-31-15" href="#__codelineno-31-15"></a>  'reviewers': [],
+<a id="__codelineno-31-16" name="__codelineno-31-16" href="#__codelineno-31-16"></a>  'reviewer_groups': [],
+<a id="__codelineno-31-17" name="__codelineno-31-17" href="#__codelineno-31-17"></a>'writers': ['00000000-0000-4000-8000-000000000001'],
+<a id="__codelineno-31-18" name="__codelineno-31-18" href="#__codelineno-31-18"></a>  'writer_groups': [],
+<a id="__codelineno-31-19" name="__codelineno-31-19" href="#__codelineno-31-19"></a>'viewers': ['00000000-0000-4000-8000-000000000001'],
+<a id="__codelineno-31-20" name="__codelineno-31-20" href="#__codelineno-31-20"></a>  'viewer_groups': [],
+<a id="__codelineno-31-21" name="__codelineno-31-21" href="#__codelineno-31-21"></a>  'published': False,
+<a id="__codelineno-31-22" name="__codelineno-31-22" href="#__codelineno-31-22"></a>  'published_to': [],
+<a id="__codelineno-31-23" name="__codelineno-31-23" href="#__codelineno-31-23"></a>  'with_embargo': False,
+<a id="__codelineno-31-24" name="__codelineno-31-24" href="#__codelineno-31-24"></a>  'embargo_length': 0,
+<a id="__codelineno-31-25" name="__codelineno-31-25" href="#__codelineno-31-25"></a>  'license': 'CC BY 4.0',
+<a id="__codelineno-31-26" name="__codelineno-31-26" href="#__codelineno-31-26"></a>  'entries': 1,
+<a id="__codelineno-31-27" name="__codelineno-31-27" href="#__codelineno-31-27"></a>  'upload_files_server_path': '/nomad/test/fs/staging/d/dcvqjWYgSZeDVLaJkL6E7w'}}
 </code></pre></div>
 </details>
 <p>This code updates the project name and applies the comment and references to all entries in the project. <code>timeout_in_sec=60</code> lets the helper wait up to 60 seconds for the server's answer; the default of 10 seconds can be too short when NOMAD is busy.</p>
@@ -4653,26 +4664,26 @@ In the examples below, we use <code>dft_upload_id</code> to refer to the DFT pro
 <p>Running the next snippet before NOMAD finishes processing the entries may make it <em>look</em> as if the entries metadata is not updated. Wait up to 3 minutes and retry to ensure the snippet is executed only after NOMAD processing has completed.</p>
 </div>
 <p>To inspect it programmatically try:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="c1"># Upload-level metadata (only the name appears here)</span>
-<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="n">updated_upload</span> <span class="o">=</span> <span class="n">get_upload_by_id</span><span class="p">(</span><span class="n">dft_upload_id</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">'test'</span><span class="p">)</span>
-<a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="nb">print</span><span class="p">(</span><span class="s1">'Upload name (upload-level):'</span><span class="p">,</span> <span class="n">updated_upload</span><span class="o">.</span><span class="n">upload_name</span><span class="p">)</span>
-<a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a>
-<a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a><span class="c1"># Entry-level metadata (comment and references live here)</span>
-<a id="__codelineno-31-6" name="__codelineno-31-6" href="#__codelineno-31-6"></a><span class="n">entries</span> <span class="o">=</span> <span class="n">get_entries_of_upload</span><span class="p">(</span>
-<a id="__codelineno-31-7" name="__codelineno-31-7" href="#__codelineno-31-7"></a>    <span class="n">upload_id</span><span class="o">=</span><span class="n">dft_upload_id</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">with_authentication</span><span class="o">=</span><span class="kc">True</span>
-<a id="__codelineno-31-8" name="__codelineno-31-8" href="#__codelineno-31-8"></a><span class="p">)</span>
-<a id="__codelineno-31-9" name="__codelineno-31-9" href="#__codelineno-31-9"></a><span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">entries</span><span class="p">:</span>
-<a id="__codelineno-31-10" name="__codelineno-31-10" href="#__codelineno-31-10"></a>    <span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">Entry ID:'</span><span class="p">,</span> <span class="n">entry</span><span class="o">.</span><span class="n">entry_id</span><span class="p">)</span>
-<a id="__codelineno-31-11" name="__codelineno-31-11" href="#__codelineno-31-11"></a>    <span class="nb">print</span><span class="p">(</span><span class="s1">'Entry comment:'</span><span class="p">,</span> <span class="n">entry</span><span class="o">.</span><span class="n">comment</span><span class="p">)</span>
-<a id="__codelineno-31-12" name="__codelineno-31-12" href="#__codelineno-31-12"></a>    <span class="nb">print</span><span class="p">(</span><span class="s1">'Entry references:'</span><span class="p">,</span> <span class="n">entry</span><span class="o">.</span><span class="n">references</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="c1"># Upload-level metadata (only the name appears here)</span>
+<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="n">updated_upload</span> <span class="o">=</span> <span class="n">get_upload_by_id</span><span class="p">(</span><span class="n">dft_upload_id</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">'test'</span><span class="p">)</span>
+<a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a><span class="nb">print</span><span class="p">(</span><span class="s1">'Upload name (upload-level):'</span><span class="p">,</span> <span class="n">updated_upload</span><span class="o">.</span><span class="n">upload_name</span><span class="p">)</span>
+<a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a>
+<a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a><span class="c1"># Entry-level metadata (comment and references live here)</span>
+<a id="__codelineno-32-6" name="__codelineno-32-6" href="#__codelineno-32-6"></a><span class="n">entries</span> <span class="o">=</span> <span class="n">get_entries_of_upload</span><span class="p">(</span>
+<a id="__codelineno-32-7" name="__codelineno-32-7" href="#__codelineno-32-7"></a>    <span class="n">upload_id</span><span class="o">=</span><span class="n">dft_upload_id</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">with_authentication</span><span class="o">=</span><span class="kc">True</span>
+<a id="__codelineno-32-8" name="__codelineno-32-8" href="#__codelineno-32-8"></a><span class="p">)</span>
+<a id="__codelineno-32-9" name="__codelineno-32-9" href="#__codelineno-32-9"></a><span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">entries</span><span class="p">:</span>
+<a id="__codelineno-32-10" name="__codelineno-32-10" href="#__codelineno-32-10"></a>    <span class="nb">print</span><span class="p">(</span><span class="s1">'</span><span class="se">\n</span><span class="s1">Entry ID:'</span><span class="p">,</span> <span class="n">entry</span><span class="o">.</span><span class="n">entry_id</span><span class="p">)</span>
+<a id="__codelineno-32-11" name="__codelineno-32-11" href="#__codelineno-32-11"></a>    <span class="nb">print</span><span class="p">(</span><span class="s1">'Entry comment:'</span><span class="p">,</span> <span class="n">entry</span><span class="o">.</span><span class="n">comment</span><span class="p">)</span>
+<a id="__codelineno-32-12" name="__codelineno-32-12" href="#__codelineno-32-12"></a>    <span class="nb">print</span><span class="p">(</span><span class="s1">'Entry references:'</span><span class="p">,</span> <span class="n">entry</span><span class="o">.</span><span class="n">references</span><span class="p">)</span>
 </code></pre></div>
 <details class="success">
 <summary>Example notebook output</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>Upload name (upload-level): NOMAD Tutorial, Prepare DFT example for sharing using API
-<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>
-<a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a>Entry ID: kW6H8T0MGH4-0GXH7cbf7j82BBUJ
-<a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a>Entry comment: DFT upload created as part of the NOMAD API tutorial using nomad-utility-workflows.
-<a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a>Entry references: ['https://doi.org/xx.xxxx/example-doi']
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>Upload name (upload-level): NOMAD Tutorial, Prepare DFT example for sharing using API
+<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a>
+<a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a>Entry ID: kW6H8T0MGH4-0GXH7cbf7j82BBUJ
+<a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a>Entry comment: DFT upload created as part of the NOMAD API tutorial using nomad-utility-workflows.
+<a id="__codelineno-33-5" name="__codelineno-33-5" href="#__codelineno-33-5"></a>Entry references: ['https://doi.org/xx.xxxx/example-doi']
 </code></pre></div>
 </details>
 <p>Retrieving the entries again confirms that the metadata was updated correctly at the entry level.</p>
@@ -4680,64 +4691,64 @@ In the examples below, we use <code>dft_upload_id</code> to refer to the DFT pro
 <h3 id="share-your-project">Share your project<a class="headerlink" href="#share-your-project" title="Permanent link">¶</a></h3>
 <p>If you wish, you can collaborate on this project by sharing it with selected NOMAD users of your choice. To do this, you first need to locate their NOMAD user account (their <code>user_id</code>). Once you have their <code>user_id</code>, you can assign them as a <strong>coauthor</strong> (write access) or a <strong>reviewer</strong> (read-only access).</p>
 <p>Let’s start by searching for the user you want to share your project with. Replace <code>SearchSurname</code> in the snippet below with the name of that NOMAD user.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad_utility_workflows.utils.users</span><span class="w"> </span><span class="kn">import</span> <span class="n">search_users_by_name</span>
-<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a>
-<a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a><span class="n">candidates</span> <span class="o">=</span> <span class="n">search_users_by_name</span><span class="p">(</span><span class="s1">'SearchSurname'</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">'test'</span><span class="p">)</span>
-<a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a>
-<a id="__codelineno-33-5" name="__codelineno-33-5" href="#__codelineno-33-5"></a><span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">candidates</span><span class="p">:</span>
-<a id="__codelineno-33-6" name="__codelineno-33-6" href="#__codelineno-33-6"></a>    <span class="nb">print</span><span class="p">(</span>
-<a id="__codelineno-33-7" name="__codelineno-33-7" href="#__codelineno-33-7"></a>        <span class="sa">f</span><span class="s2">"Found the user '</span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">' (username '</span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">username</span><span class="si">}</span><span class="s2">') "</span>
-<a id="__codelineno-33-8" name="__codelineno-33-8" href="#__codelineno-33-8"></a>        <span class="sa">f</span><span class="s2">"with user_id='</span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">user_id</span><span class="si">}</span><span class="s2">'"</span>
-<a id="__codelineno-33-9" name="__codelineno-33-9" href="#__codelineno-33-9"></a>    <span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad_utility_workflows.utils.users</span><span class="w"> </span><span class="kn">import</span> <span class="n">search_users_by_name</span>
+<a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a>
+<a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a><span class="n">candidates</span> <span class="o">=</span> <span class="n">search_users_by_name</span><span class="p">(</span><span class="s1">'SearchSurname'</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">'test'</span><span class="p">)</span>
+<a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a>
+<a id="__codelineno-34-5" name="__codelineno-34-5" href="#__codelineno-34-5"></a><span class="k">for</span> <span class="n">user</span> <span class="ow">in</span> <span class="n">candidates</span><span class="p">:</span>
+<a id="__codelineno-34-6" name="__codelineno-34-6" href="#__codelineno-34-6"></a>    <span class="nb">print</span><span class="p">(</span>
+<a id="__codelineno-34-7" name="__codelineno-34-7" href="#__codelineno-34-7"></a>        <span class="sa">f</span><span class="s2">"Found the user '</span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">' (username '</span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">username</span><span class="si">}</span><span class="s2">') "</span>
+<a id="__codelineno-34-8" name="__codelineno-34-8" href="#__codelineno-34-8"></a>        <span class="sa">f</span><span class="s2">"with user_id='</span><span class="si">{</span><span class="n">user</span><span class="o">.</span><span class="n">user_id</span><span class="si">}</span><span class="s2">'"</span>
+<a id="__codelineno-34-9" name="__codelineno-34-9" href="#__codelineno-34-9"></a>    <span class="p">)</span>
 </code></pre></div>
 <details class="success">
 <summary>Example notebook output</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>Found the user 'Jane Doe' (username 'jane.doe') with user_id='13b845c3-e48d-4234-8c51-4f88c6897ac8'
-<a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a>Found the user 'Jane Doe' (username 'jane.doe@example.org') with user_id='ebb26223-0cec-4d81-98f5-3b25db945b54'
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>Found the user 'Jane Doe' (username 'jane.doe') with user_id='00000000-0000-4000-8000-000000000002'
+<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>Found the user 'Jane Doe' (username 'jane.doe@example.org') with user_id='00000000-0000-4000-8000-000000000003'
 </code></pre></div>
 </details>
 <p>If several users have the same name, use the username to pick the right one.</p>
 <p>Once the user appears in the output, copy their <code>user_id</code>. In the next step, paste this <code>user_id</code> into the appropriate list and comment out all lines related to the role you do not want to assign.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad_utility_workflows.utils.uploads</span><span class="w"> </span><span class="kn">import</span> <span class="n">edit_upload_metadata</span>
-<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>
-<a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="n">coauthor_ids</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'paste-user-id-here'</span><span class="p">]</span>  <span class="c1"># write access</span>
-<a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a><span class="n">reviewer_ids</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'paste-user-id-here'</span><span class="p">]</span>  <span class="c1"># read-only access</span>
-<a id="__codelineno-35-5" name="__codelineno-35-5" href="#__codelineno-35-5"></a>
-<a id="__codelineno-35-6" name="__codelineno-35-6" href="#__codelineno-35-6"></a><span class="n">edit_upload_metadata</span><span class="p">(</span>
-<a id="__codelineno-35-7" name="__codelineno-35-7" href="#__codelineno-35-7"></a>    <span class="n">upload_id</span><span class="o">=</span><span class="n">dft_upload_id</span><span class="p">,</span>
-<a id="__codelineno-35-8" name="__codelineno-35-8" href="#__codelineno-35-8"></a>    <span class="n">url</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span>
-<a id="__codelineno-35-9" name="__codelineno-35-9" href="#__codelineno-35-9"></a>    <span class="n">upload_metadata</span><span class="o">=</span><span class="p">{</span>
-<a id="__codelineno-35-10" name="__codelineno-35-10" href="#__codelineno-35-10"></a>        <span class="s1">'coauthors'</span><span class="p">:</span> <span class="n">coauthor_ids</span><span class="p">,</span>  <span class="c1"># comment out if not needed</span>
-<a id="__codelineno-35-11" name="__codelineno-35-11" href="#__codelineno-35-11"></a>        <span class="s1">'reviewers'</span><span class="p">:</span> <span class="n">reviewer_ids</span><span class="p">,</span>  <span class="c1"># comment out if not needed</span>
-<a id="__codelineno-35-12" name="__codelineno-35-12" href="#__codelineno-35-12"></a>    <span class="p">},</span>
-<a id="__codelineno-35-13" name="__codelineno-35-13" href="#__codelineno-35-13"></a>    <span class="n">timeout_in_sec</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span>
-<a id="__codelineno-35-14" name="__codelineno-35-14" href="#__codelineno-35-14"></a><span class="p">)</span>
-<a id="__codelineno-35-15" name="__codelineno-35-15" href="#__codelineno-35-15"></a>
-<a id="__codelineno-35-16" name="__codelineno-35-16" href="#__codelineno-35-16"></a><span class="nb">print</span><span class="p">(</span><span class="s1">'Access updated.'</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad_utility_workflows.utils.uploads</span><span class="w"> </span><span class="kn">import</span> <span class="n">edit_upload_metadata</span>
+<a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a>
+<a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a><span class="n">coauthor_ids</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'paste-user-id-here'</span><span class="p">]</span>  <span class="c1"># write access</span>
+<a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a><span class="n">reviewer_ids</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'paste-user-id-here'</span><span class="p">]</span>  <span class="c1"># read-only access</span>
+<a id="__codelineno-36-5" name="__codelineno-36-5" href="#__codelineno-36-5"></a>
+<a id="__codelineno-36-6" name="__codelineno-36-6" href="#__codelineno-36-6"></a><span class="n">edit_upload_metadata</span><span class="p">(</span>
+<a id="__codelineno-36-7" name="__codelineno-36-7" href="#__codelineno-36-7"></a>    <span class="n">upload_id</span><span class="o">=</span><span class="n">dft_upload_id</span><span class="p">,</span>
+<a id="__codelineno-36-8" name="__codelineno-36-8" href="#__codelineno-36-8"></a>    <span class="n">url</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span>
+<a id="__codelineno-36-9" name="__codelineno-36-9" href="#__codelineno-36-9"></a>    <span class="n">upload_metadata</span><span class="o">=</span><span class="p">{</span>
+<a id="__codelineno-36-10" name="__codelineno-36-10" href="#__codelineno-36-10"></a>        <span class="s1">'coauthors'</span><span class="p">:</span> <span class="n">coauthor_ids</span><span class="p">,</span>  <span class="c1"># comment out if not needed</span>
+<a id="__codelineno-36-11" name="__codelineno-36-11" href="#__codelineno-36-11"></a>        <span class="s1">'reviewers'</span><span class="p">:</span> <span class="n">reviewer_ids</span><span class="p">,</span>  <span class="c1"># comment out if not needed</span>
+<a id="__codelineno-36-12" name="__codelineno-36-12" href="#__codelineno-36-12"></a>    <span class="p">},</span>
+<a id="__codelineno-36-13" name="__codelineno-36-13" href="#__codelineno-36-13"></a>    <span class="n">timeout_in_sec</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span>
+<a id="__codelineno-36-14" name="__codelineno-36-14" href="#__codelineno-36-14"></a><span class="p">)</span>
+<a id="__codelineno-36-15" name="__codelineno-36-15" href="#__codelineno-36-15"></a>
+<a id="__codelineno-36-16" name="__codelineno-36-16" href="#__codelineno-36-16"></a><span class="nb">print</span><span class="p">(</span><span class="s1">'Access updated.'</span><span class="p">)</span>
 </code></pre></div>
 <details class="success">
 <summary>Example notebook output</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>Access updated.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>Access updated.
 </code></pre></div>
 </details>
 <p>If you wish, you can verify this on the project page under <strong>SETTINGS</strong> &gt; <strong>Collaborators</strong>.</p>
 <h3 id="set-an-embargo-period">Set an embargo period<a class="headerlink" href="#set-an-embargo-period" title="Permanent link">¶</a></h3>
 <p>If you plan to publish your project to NOMAD but want to delay when it becomes visible to everyone, you can set an embargo period. The example below applies an embargo of three months.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="n">edit_upload_metadata</span><span class="p">(</span>
-<a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>    <span class="n">upload_id</span><span class="o">=</span><span class="n">dft_upload_id</span><span class="p">,</span>
-<a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a>    <span class="n">url</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span>
-<a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a>    <span class="n">upload_metadata</span><span class="o">=</span><span class="p">{</span><span class="s1">'embargo_length'</span><span class="p">:</span> <span class="mi">3</span><span class="p">},</span>
-<a id="__codelineno-37-5" name="__codelineno-37-5" href="#__codelineno-37-5"></a>    <span class="n">timeout_in_sec</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span>
-<a id="__codelineno-37-6" name="__codelineno-37-6" href="#__codelineno-37-6"></a><span class="p">)</span>
-<a id="__codelineno-37-7" name="__codelineno-37-7" href="#__codelineno-37-7"></a>
-<a id="__codelineno-37-8" name="__codelineno-37-8" href="#__codelineno-37-8"></a><span class="n">upload_with_embargo</span> <span class="o">=</span> <span class="n">get_upload_by_id</span><span class="p">(</span><span class="n">dft_upload_id</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">'test'</span><span class="p">)</span>
-<a id="__codelineno-37-9" name="__codelineno-37-9" href="#__codelineno-37-9"></a><span class="nb">print</span><span class="p">(</span><span class="s1">'With embargo:'</span><span class="p">,</span> <span class="n">upload_with_embargo</span><span class="o">.</span><span class="n">with_embargo</span><span class="p">)</span>
-<a id="__codelineno-37-10" name="__codelineno-37-10" href="#__codelineno-37-10"></a><span class="nb">print</span><span class="p">(</span><span class="s1">'Embargo length:'</span><span class="p">,</span> <span class="n">upload_with_embargo</span><span class="o">.</span><span class="n">embargo_length</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="n">edit_upload_metadata</span><span class="p">(</span>
+<a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a>    <span class="n">upload_id</span><span class="o">=</span><span class="n">dft_upload_id</span><span class="p">,</span>
+<a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a>    <span class="n">url</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span>
+<a id="__codelineno-38-4" name="__codelineno-38-4" href="#__codelineno-38-4"></a>    <span class="n">upload_metadata</span><span class="o">=</span><span class="p">{</span><span class="s1">'embargo_length'</span><span class="p">:</span> <span class="mi">3</span><span class="p">},</span>
+<a id="__codelineno-38-5" name="__codelineno-38-5" href="#__codelineno-38-5"></a>    <span class="n">timeout_in_sec</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span>
+<a id="__codelineno-38-6" name="__codelineno-38-6" href="#__codelineno-38-6"></a><span class="p">)</span>
+<a id="__codelineno-38-7" name="__codelineno-38-7" href="#__codelineno-38-7"></a>
+<a id="__codelineno-38-8" name="__codelineno-38-8" href="#__codelineno-38-8"></a><span class="n">upload_with_embargo</span> <span class="o">=</span> <span class="n">get_upload_by_id</span><span class="p">(</span><span class="n">dft_upload_id</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">'test'</span><span class="p">)</span>
+<a id="__codelineno-38-9" name="__codelineno-38-9" href="#__codelineno-38-9"></a><span class="nb">print</span><span class="p">(</span><span class="s1">'With embargo:'</span><span class="p">,</span> <span class="n">upload_with_embargo</span><span class="o">.</span><span class="n">with_embargo</span><span class="p">)</span>
+<a id="__codelineno-38-10" name="__codelineno-38-10" href="#__codelineno-38-10"></a><span class="nb">print</span><span class="p">(</span><span class="s1">'Embargo length:'</span><span class="p">,</span> <span class="n">upload_with_embargo</span><span class="o">.</span><span class="n">embargo_length</span><span class="p">)</span>
 </code></pre></div>
 <details class="success">
 <summary>Example notebook output</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>With embargo: True
-<a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a>Embargo length: 3.0
+<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>With embargo: True
+<a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a>Embargo length: 3.0
 </code></pre></div>
 </details>
 <h3 id="publish-your-project">Publish your project<a class="headerlink" href="#publish-your-project" title="Permanent link">¶</a></h3>
@@ -4747,47 +4758,62 @@ In the examples below, we use <code>dft_upload_id</code> to refer to the DFT pro
 <p>Publishing data on the production server requires that you have the <strong>rights to the data</strong> and are <strong>eligible to release them under the CC BY 4.0 license</strong>, and this action is <strong>irreversible</strong>.
 For this tutorial, we use the test deployment. Please make sure that <code>url="test"</code> is set before triggering any publication action.</p>
 </div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad_utility_workflows.utils.uploads</span><span class="w"> </span><span class="kn">import</span> <span class="n">publish_upload</span>
-<a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pprint</span><span class="w"> </span><span class="kn">import</span> <span class="n">pprint</span>
-<a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a>
-<a id="__codelineno-39-4" name="__codelineno-39-4" href="#__codelineno-39-4"></a><span class="n">response</span> <span class="o">=</span> <span class="n">publish_upload</span><span class="p">(</span><span class="n">upload_id</span><span class="o">=</span><span class="n">dft_upload_id</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">timeout_in_sec</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
-<a id="__codelineno-39-5" name="__codelineno-39-5" href="#__codelineno-39-5"></a><span class="n">pprint</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad_utility_workflows.utils.uploads</span><span class="w"> </span><span class="kn">import</span> <span class="n">publish_upload</span>
+<a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pprint</span><span class="w"> </span><span class="kn">import</span> <span class="n">pprint</span>
+<a id="__codelineno-40-3" name="__codelineno-40-3" href="#__codelineno-40-3"></a>
+<a id="__codelineno-40-4" name="__codelineno-40-4" href="#__codelineno-40-4"></a><span class="n">response</span> <span class="o">=</span> <span class="n">publish_upload</span><span class="p">(</span><span class="n">upload_id</span><span class="o">=</span><span class="n">dft_upload_id</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">timeout_in_sec</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
+<a id="__codelineno-40-5" name="__codelineno-40-5" href="#__codelineno-40-5"></a><span class="n">pprint</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
 </code></pre></div>
 <details class="success">
 <summary>Example notebook output</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>{'data': {'coauthor_groups': [],
-<a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a>          'coauthors': ['ebb26223-0cec-4d81-98f5-3b25db945b54'],
-<a id="__codelineno-40-3" name="__codelineno-40-3" href="#__codelineno-40-3"></a>          'complete_time': '2026-09-29T11:18:29.488000Z',
-<a id="__codelineno-40-4" name="__codelineno-40-4" href="#__codelineno-40-4"></a>          'current_process': '_publish_upload',
-<a id="__codelineno-40-5" name="__codelineno-40-5" href="#__codelineno-40-5"></a>          'embargo_length': 3,
-<a id="__codelineno-40-6" name="__codelineno-40-6" href="#__codelineno-40-6"></a>          'entries': 1,
-<a id="__codelineno-40-7" name="__codelineno-40-7" href="#__codelineno-40-7"></a>          'errors': [],
-<a id="__codelineno-40-8" name="__codelineno-40-8" href="#__codelineno-40-8"></a>          'last_status_message': 'Process completed successfully',
-<a id="__codelineno-40-9" name="__codelineno-40-9" href="#__codelineno-40-9"></a>          'license': 'CC BY 4.0',
-<a id="__codelineno-40-10" name="__codelineno-40-10" href="#__codelineno-40-10"></a>          'main_author': 'f250f5ab-b05c-4bad-9939-5f4883c7a694',
-<a id="__codelineno-40-11" name="__codelineno-40-11" href="#__codelineno-40-11"></a>          'process_running': True,
-<a id="__codelineno-40-12" name="__codelineno-40-12" href="#__codelineno-40-12"></a>          'process_status': 'PENDING',
-<a id="__codelineno-40-13" name="__codelineno-40-13" href="#__codelineno-40-13"></a>          'published': False,
-<a id="__codelineno-40-14" name="__codelineno-40-14" href="#__codelineno-40-14"></a>          'published_to': [],
-<a id="__codelineno-40-15" name="__codelineno-40-15" href="#__codelineno-40-15"></a>          'reviewer_groups': [],
-<a id="__codelineno-40-16" name="__codelineno-40-16" href="#__codelineno-40-16"></a>          'reviewers': [],
-<a id="__codelineno-40-17" name="__codelineno-40-17" href="#__codelineno-40-17"></a>          'upload_create_time': '2026-09-29T09:47:05.108000Z',
-<a id="__codelineno-40-18" name="__codelineno-40-18" href="#__codelineno-40-18"></a>          'upload_files_server_path': '/nomad/test/fs/staging/d/dcvqjWYgSZeDVLaJkL6E7w',
-<a id="__codelineno-40-19" name="__codelineno-40-19" href="#__codelineno-40-19"></a>          'upload_id': 'dcvqjWYgSZeDVLaJkL6E7w',
-<a id="__codelineno-40-20" name="__codelineno-40-20" href="#__codelineno-40-20"></a>          'upload_name': 'NOMAD Tutorial, Prepare DFT example for sharing '
-<a id="__codelineno-40-21" name="__codelineno-40-21" href="#__codelineno-40-21"></a>                         'using API',
-<a id="__codelineno-40-22" name="__codelineno-40-22" href="#__codelineno-40-22"></a>          'viewer_groups': [],
-<a id="__codelineno-40-23" name="__codelineno-40-23" href="#__codelineno-40-23"></a>          'viewers': ['f250f5ab-b05c-4bad-9939-5f4883c7a694',
-<a id="__codelineno-40-24" name="__codelineno-40-24" href="#__codelineno-40-24"></a>                      'ebb26223-0cec-4d81-98f5-3b25db945b54'],
-<a id="__codelineno-40-25" name="__codelineno-40-25" href="#__codelineno-40-25"></a>          'warnings': [],
-<a id="__codelineno-40-26" name="__codelineno-40-26" href="#__codelineno-40-26"></a>          'with_embargo': True,
-<a id="__codelineno-40-27" name="__codelineno-40-27" href="#__codelineno-40-27"></a>          'writer_groups': [],
-<a id="__codelineno-40-28" name="__codelineno-40-28" href="#__codelineno-40-28"></a>          'writers': ['f250f5ab-b05c-4bad-9939-5f4883c7a694',
-<a id="__codelineno-40-29" name="__codelineno-40-29" href="#__codelineno-40-29"></a>                      'ebb26223-0cec-4d81-98f5-3b25db945b54']},
-<a id="__codelineno-40-30" name="__codelineno-40-30" href="#__codelineno-40-30"></a> 'upload_id': 'dcvqjWYgSZeDVLaJkL6E7w'}
+<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>{'data': {'coauthor_groups': [],
+<a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a>          'coauthors': ['00000000-0000-4000-8000-000000000003'],
+<a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a>          'complete_time': '2026-09-29T11:18:29.488000Z',
+<a id="__codelineno-41-4" name="__codelineno-41-4" href="#__codelineno-41-4"></a>          'current_process': '_publish_upload',
+<a id="__codelineno-41-5" name="__codelineno-41-5" href="#__codelineno-41-5"></a>          'embargo_length': 3,
+<a id="__codelineno-41-6" name="__codelineno-41-6" href="#__codelineno-41-6"></a>          'entries': 1,
+<a id="__codelineno-41-7" name="__codelineno-41-7" href="#__codelineno-41-7"></a>          'errors': [],
+<a id="__codelineno-41-8" name="__codelineno-41-8" href="#__codelineno-41-8"></a>          'last_status_message': 'Process completed successfully',
+<a id="__codelineno-41-9" name="__codelineno-41-9" href="#__codelineno-41-9"></a>          'license': 'CC BY 4.0',
+<a id="__codelineno-41-10" name="__codelineno-41-10" href="#__codelineno-41-10"></a>          'main_author': '00000000-0000-4000-8000-000000000001',
+<a id="__codelineno-41-11" name="__codelineno-41-11" href="#__codelineno-41-11"></a>          'process_running': True,
+<a id="__codelineno-41-12" name="__codelineno-41-12" href="#__codelineno-41-12"></a>          'process_status': 'PENDING',
+<a id="__codelineno-41-13" name="__codelineno-41-13" href="#__codelineno-41-13"></a>          'published': False,
+<a id="__codelineno-41-14" name="__codelineno-41-14" href="#__codelineno-41-14"></a>          'published_to': [],
+<a id="__codelineno-41-15" name="__codelineno-41-15" href="#__codelineno-41-15"></a>          'reviewer_groups': [],
+<a id="__codelineno-41-16" name="__codelineno-41-16" href="#__codelineno-41-16"></a>          'reviewers': [],
+<a id="__codelineno-41-17" name="__codelineno-41-17" href="#__codelineno-41-17"></a>          'upload_create_time': '2026-09-29T09:47:05.108000Z',
+<a id="__codelineno-41-18" name="__codelineno-41-18" href="#__codelineno-41-18"></a>          'upload_files_server_path': '/nomad/test/fs/staging/d/dcvqjWYgSZeDVLaJkL6E7w',
+<a id="__codelineno-41-19" name="__codelineno-41-19" href="#__codelineno-41-19"></a>          'upload_id': 'dcvqjWYgSZeDVLaJkL6E7w',
+<a id="__codelineno-41-20" name="__codelineno-41-20" href="#__codelineno-41-20"></a>          'upload_name': 'NOMAD Tutorial, Prepare DFT example for sharing '
+<a id="__codelineno-41-21" name="__codelineno-41-21" href="#__codelineno-41-21"></a>                         'using API',
+<a id="__codelineno-41-22" name="__codelineno-41-22" href="#__codelineno-41-22"></a>          'viewer_groups': [],
+<a id="__codelineno-41-23" name="__codelineno-41-23" href="#__codelineno-41-23"></a>          'viewers': ['00000000-0000-4000-8000-000000000001',
+<a id="__codelineno-41-24" name="__codelineno-41-24" href="#__codelineno-41-24"></a>                      '00000000-0000-4000-8000-000000000003'],
+<a id="__codelineno-41-25" name="__codelineno-41-25" href="#__codelineno-41-25"></a>          'warnings': [],
+<a id="__codelineno-41-26" name="__codelineno-41-26" href="#__codelineno-41-26"></a>          'with_embargo': True,
+<a id="__codelineno-41-27" name="__codelineno-41-27" href="#__codelineno-41-27"></a>          'writer_groups': [],
+<a id="__codelineno-41-28" name="__codelineno-41-28" href="#__codelineno-41-28"></a>          'writers': ['00000000-0000-4000-8000-000000000001',
+<a id="__codelineno-41-29" name="__codelineno-41-29" href="#__codelineno-41-29"></a>                      '00000000-0000-4000-8000-000000000003']},
+<a id="__codelineno-41-30" name="__codelineno-41-30" href="#__codelineno-41-30"></a> 'upload_id': 'dcvqjWYgSZeDVLaJkL6E7w'}
 </code></pre></div>
 </details>
-<p>This code triggers the publication action for the DFT project and prints the server response confirming the operation.</p>
+<p>The response confirms that the publication request was accepted, not that publication succeeded. Publication runs asynchronously, so wait for it to finish and inspect its final status in a separate cell:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="n">published_upload</span> <span class="o">=</span> <span class="n">wait_for_process</span><span class="p">(</span><span class="n">upload_id</span><span class="o">=</span><span class="n">dft_upload_id</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="s1">'test'</span><span class="p">)</span>
+<a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a><span class="nb">print</span><span class="p">(</span><span class="s1">'Process status:'</span><span class="p">,</span> <span class="n">published_upload</span><span class="o">.</span><span class="n">process_status</span><span class="p">)</span>
+<a id="__codelineno-42-3" name="__codelineno-42-3" href="#__codelineno-42-3"></a><span class="nb">print</span><span class="p">(</span><span class="s1">'Published:'</span><span class="p">,</span> <span class="n">published_upload</span><span class="o">.</span><span class="n">published</span><span class="p">)</span>
+<a id="__codelineno-42-4" name="__codelineno-42-4" href="#__codelineno-42-4"></a><span class="nb">print</span><span class="p">(</span><span class="s1">'Errors:'</span><span class="p">,</span> <span class="n">published_upload</span><span class="o">.</span><span class="n">errors</span><span class="p">)</span>
+<a id="__codelineno-42-5" name="__codelineno-42-5" href="#__codelineno-42-5"></a><span class="nb">print</span><span class="p">(</span><span class="s1">'Warnings:'</span><span class="p">,</span> <span class="n">published_upload</span><span class="o">.</span><span class="n">warnings</span><span class="p">)</span>
+</code></pre></div>
+<details class="success">
+<summary>Final publication status</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>Process status: SUCCESS
+<a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a>Published: True
+<a id="__codelineno-43-3" name="__codelineno-43-3" href="#__codelineno-43-3"></a>Errors: []
+<a id="__codelineno-43-4" name="__codelineno-43-4" href="#__codelineno-43-4"></a>Warnings: []
+</code></pre></div>
+</details>
+<p>Confirm that the process status is <code>SUCCESS</code>, <code>Published</code> is <code>True</code>, and <code>Errors</code> is empty; review any warnings as well. For details, see <a href="#inspect-a-project">Inspect a project</a>.</p>
 <!-- TODO: Consider a step that assigns a DOI to the published project via the API (POST /uploads/{upload_id}/action/assign-doi), mirroring "Assign a DOI to your project" in upload_publish.md. The test deployment used in this tutorial cannot assign DOIs (DataCite is disabled there), and nomad-utility-workflows 0.3.2 has no helper for it. -->
 
 
