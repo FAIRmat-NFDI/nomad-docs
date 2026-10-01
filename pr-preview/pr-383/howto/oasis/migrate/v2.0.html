@@ -2713,15 +2713,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#option-1-reindex-data-from-es7-to-es9-running-two-containers" class="md-nav__link">
+  <a href="#option-1-reindex-data-directly-from-es7-to-es9-running-two-containers" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Option 1: Reindex data from ES7 to ES9 (Running two containers)
+        Option 1: Reindex data directly from ES7 to ES9 (running two containers)
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Option 1: Reindex data from ES7 to ES9 (Running two containers)">
+    <nav class="md-nav" aria-label="Option 1: Reindex data directly from ES7 to ES9 (running two containers)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -2785,15 +2785,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#option-2-start-from-a-fresh-es9-container-and-reindex-uploads" class="md-nav__link">
+  <a href="#option-2-start-with-a-fresh-es9-index-and-reindex-uploads" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Option 2: Start from a fresh ES9 container and reindex uploads
+        Option 2: Start with a fresh ES9 index and reindex uploads
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Option 2: Start from a fresh ES9 container and reindex uploads">
+    <nav class="md-nav" aria-label="Option 2: Start with a fresh ES9 index and reindex uploads">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -3980,15 +3980,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#option-1-reindex-data-from-es7-to-es9-running-two-containers" class="md-nav__link">
+  <a href="#option-1-reindex-data-directly-from-es7-to-es9-running-two-containers" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Option 1: Reindex data from ES7 to ES9 (Running two containers)
+        Option 1: Reindex data directly from ES7 to ES9 (running two containers)
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Option 1: Reindex data from ES7 to ES9 (Running two containers)">
+    <nav class="md-nav" aria-label="Option 1: Reindex data directly from ES7 to ES9 (running two containers)">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -4052,15 +4052,15 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#option-2-start-from-a-fresh-es9-container-and-reindex-uploads" class="md-nav__link">
+  <a href="#option-2-start-with-a-fresh-es9-index-and-reindex-uploads" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Option 2: Start from a fresh ES9 container and reindex uploads
+        Option 2: Start with a fresh ES9 index and reindex uploads
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Option 2: Start from a fresh ES9 container and reindex uploads">
+    <nav class="md-nav" aria-label="Option 2: Start with a fresh ES9 index and reindex uploads">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -4222,17 +4222,17 @@
 <h2 id="elasticsearch-migration-v717-to-v95">Elasticsearch Migration (v7.17 to v9.5)<a class="headerlink" href="#elasticsearch-migration-v717-to-v95" title="Permanent link">¶</a></h2>
 <p>Starting with <strong>NOMAD 2.0</strong>, the default Elasticsearch image has been changed from <strong>Elasticsearch 7</strong> to <strong>Elasticsearch 9</strong> (default container version <code>9.5.0</code>).</p>
 <p>Because Elasticsearch 9 cannot read indices created with Elasticsearch 7 due to major Lucene version changes, existing data cannot be read directly from an old Elasticsearch 7 volume.</p>
-<p>There are two migration options available:</p>
+<p>There are two migration options:</p>
 <ol>
-<li><strong>Option 1: Reindex data from ES7 to ES9 (Running two containers)</strong> — Runs an ES9 container alongside ES7 and migrates index data directly via Elasticsearch's <code>_reindex</code> API without reprocessing archive files.</li>
-<li><strong>Option 2: Start from a fresh ES9 container and reindex uploads</strong> — In NOMAD, MongoDB and the archive files (<code>.volumes/fs</code>) are the single source of truth. This option starts with a clean ES9 container and rebuilds the search index by reindexing uploads.</li>
+<li><strong>Option 1: Reindex data directly from ES7 to ES9 (running two containers)</strong> — Runs ES9 alongside ES7 and migrates the existing index through Elasticsearch's <code>_reindex</code> API. This is usually faster because it copies indexed documents without reprocessing archive files.</li>
+<li><strong>Option 2: Start with a fresh ES9 index and reindex uploads</strong> — Discards the ES7 search index and rebuilds it from MongoDB and the archive files (<code>.volumes/fs</code>), which are NOMAD's source of truth. This is simpler but can be considerably slower because NOMAD must read and index every upload again.</li>
 </ol>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Previously, NOMAD maintained a separate materials index (<code>nomad_materials_v1</code> / <code>nomad_oasis_materials_v1</code>). This index is deprecated and dropped in NOMAD 2.0. <strong>Only the entries index (<code>nomad_oasis_entries_v1</code> or <code>nomad_entries_v1</code>) needs to be migrated.</strong></p>
 </div>
 <hr>
-<h3 id="option-1-reindex-data-from-es7-to-es9-running-two-containers">Option 1: Reindex data from ES7 to ES9 (Running two containers)<a class="headerlink" href="#option-1-reindex-data-from-es7-to-es9-running-two-containers" title="Permanent link">¶</a></h3>
+<h3 id="option-1-reindex-data-directly-from-es7-to-es9-running-two-containers">Option 1: Reindex data directly from ES7 to ES9 (running two containers)<a class="headerlink" href="#option-1-reindex-data-directly-from-es7-to-es9-running-two-containers" title="Permanent link">¶</a></h3>
 <p>This approach runs a temporary Elasticsearch 9 container alongside your existing Elasticsearch 7 container, copies over the index mappings, and streams documents over the Docker network using Elasticsearch's remote <code>_reindex</code> API.</p>
 <h4 id="1-add-the-temporary-nomad_oasis_elastic_9-service">1. Add the Temporary <code>nomad_oasis_elastic_9</code> Service<a class="headerlink" href="#1-add-the-temporary-nomad_oasis_elastic_9-service" title="Permanent link">¶</a></h4>
 <p>Add the <code>nomad_oasis_elastic_9</code> service and volume to your <code>docker-compose.yaml</code> (while keeping your existing <code>elastic</code> 7.x service running):</p>
@@ -4368,7 +4368,7 @@
 </li>
 </ol>
 <hr>
-<h3 id="option-2-start-from-a-fresh-es9-container-and-reindex-uploads">Option 2: Start from a fresh ES9 container and reindex uploads<a class="headerlink" href="#option-2-start-from-a-fresh-es9-container-and-reindex-uploads" title="Permanent link">¶</a></h3>
+<h3 id="option-2-start-with-a-fresh-es9-index-and-reindex-uploads">Option 2: Start with a fresh ES9 index and reindex uploads<a class="headerlink" href="#option-2-start-with-a-fresh-es9-index-and-reindex-uploads" title="Permanent link">¶</a></h3>
 <p>In NOMAD, <strong>MongoDB and the archive files (<code>.volumes/fs</code>) are the single source of truth</strong>. This option wipes the Elasticsearch volume, starts a fresh Elasticsearch 9 container, and reindexes all uploads from MongoDB and archive storage.</p>
 <h4 id="1-back-up-mongodb-and-file-storage">1. Back Up MongoDB and File Storage<a class="headerlink" href="#1-back-up-mongodb-and-file-storage" title="Permanent link">¶</a></h4>
 <p>Before proceeding, run a MongoDB backup:</p>
