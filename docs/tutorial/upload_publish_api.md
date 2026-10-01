@@ -307,6 +307,7 @@ Processing happens in the background. Define this helper to wait up to ten minut
 ```python
 import time
 
+
 def wait_for_process(upload_id, url='test', timeout_in_sec=600):
     deadline = time.monotonic() + timeout_in_sec
     while time.monotonic() < deadline:
@@ -314,7 +315,9 @@ def wait_for_process(upload_id, url='test', timeout_in_sec=600):
         if not upload.process_running:
             return upload
         time.sleep(5)
-    raise TimeoutError(f'NOMAD did not finish processing within {timeout_in_sec} seconds.')
+    raise TimeoutError(
+        f'NOMAD did not finish processing within {timeout_in_sec} seconds.'
+    )
 ```
 
 ```python
@@ -517,14 +520,14 @@ edit_upload_metadata(
       'upload_id': 'dcvqjWYgSZeDVLaJkL6E7w',
       'upload_name': 'NOMAD Tutorial, Prepare DFT example for sharing using API',
       'upload_create_time': '2026-09-29T09:47:05.108000Z',
-    'main_author': '00000000-0000-4000-8000-000000000001',
+      'main_author': '00000000-0000-4000-8000-000000000001',
       'coauthors': [],
       'coauthor_groups': [],
       'reviewers': [],
       'reviewer_groups': [],
-    'writers': ['00000000-0000-4000-8000-000000000001'],
+      'writers': ['00000000-0000-4000-8000-000000000001'],
       'writer_groups': [],
-    'viewers': ['00000000-0000-4000-8000-000000000001'],
+      'viewers': ['00000000-0000-4000-8000-000000000001'],
       'viewer_groups': [],
       'published': False,
       'published_to': [],
