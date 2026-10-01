@@ -1283,7 +1283,7 @@
   <span class="md-ellipsis">
     
   
-    Enter data with ELNs
+    Import data from external ELNs
   
 
     
@@ -4640,7 +4640,9 @@
 <p><a class="md-button nomad-button" href="data/nested_workflow_one-entry.zip">Download nested_workflow_one-entry.zip</a></p>
 <h2 id="workflows-with-custom-tasks">Workflows with custom tasks<a class="headerlink" href="#workflows-with-custom-tasks" title="Permanent link">¶</a></h2>
 <p><em>custom tasks:</em> defined here as tasks for which the corresponding raw files are not automatically recognized by NOMAD, or perhaps there are no raw files at all for the task.</p>
-<p>The easiest way to create entries for a custom task is to use one of NOMAD's built-in ELN schemas. ELN entries can be created from these schema using the user interface: <a href="eln.html#create-a-basic-eln-entry">How to &gt; Manage &gt; Create a basic ELN entry</a>.</p>
+<p>The easiest way to create entries for a custom task is to use one of NOMAD's
+built-in ELN schemas. You can create ELN Entries from these schemas in the GUI;
+see <a href="../../../tutorial/eln/built_in_templates.html">Tutorials &gt; Use NOMAD as an ELN &gt; Use built-in ELN templates</a>.</p>
 <h3 id="creating-an-eln-entry-from-yaml">Creating an ELN entry from YAML<a class="headerlink" href="#creating-an-eln-entry-from-yaml" title="Permanent link">¶</a></h3>
 <p>Analogous to the simulation code parsers, NOMAD has a parser for its native schema — the NOMAD MetaInfo. This parser is automatically executed for files named <code>&lt;file_name&gt;.archive.yaml</code> (see the Note under <a href="../../../explanation/basics.html#parsing">Explanation &gt; From files to data &gt; Parsing</a>). Actually, this is exactly the functionality that we are using to upload our workflows.</p>
 <p>In this way, users can also create ELN entries, by uploading a YAML file populated according to one of NOMAD's ELN built-in schemas. For example, we can create a basic ELN entry by creating and uploading a file, e.g. <code>basic_eln_entry.archive.yaml</code>, with the contents:</p>
