@@ -109,6 +109,10 @@ NOMAD extracts these compressed bundles and preserves their internal directory
 structure. Keep the files for one calculation or experiment together in the
 same Project so that the parser can associate them with the same Entry.
 
+Exports from external ELNs, such as `.eln` files or ZIP exports from
+Chemotion, are also processed into Entries. See
+{{ nav_link("howto/manage/gui/eln.md") }}.
+
 For scripted transfers, select the drop-down arrow next to **UPLOAD FILES** and
 choose **Upload via API**. The dialog provides an example command for uploading
 to the current Project folder.
@@ -148,8 +152,8 @@ a schema-based Entry that you can edit directly in NOMAD. To create an ELN Entry
 3. Enter a filename and select **CREATE**. NOMAD creates the ELN and opens
    it in the data editor.
 
-**Related pages:** [Enter data with ELNs](eln.md);
-[Define a schema](../../schemas/define.md).
+**Related pages:** {{ nav_link("tutorial/eln/built_in_templates.md") }};
+{{ nav_link("howto/schemas/define.md") }}.
 
 ## Visibility and access
 

@@ -310,7 +310,9 @@ You can reproduce this example by downloading the example data (with workflow YA
 
 *custom tasks:* defined here as tasks for which the corresponding raw files are not automatically recognized by NOMAD, or perhaps there are no raw files at all for the task.
 
-The easiest way to create entries for a custom task is to use one of NOMAD's built-in ELN schemas. ELN entries can be created from these schema using the user interface: [How to > Manage > Create a basic ELN entry](./eln.md#create-a-basic-eln-entry).
+The easiest way to create entries for a custom task is to use one of NOMAD's
+built-in ELN schemas. You can create ELN Entries from these schemas in the GUI;
+see {{ nav_link("tutorial/eln/built_in_templates.md", breadcrumb=True) }}.
 
 ### Creating an ELN entry from YAML
 
