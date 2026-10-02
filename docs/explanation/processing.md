@@ -61,9 +61,10 @@ is still processing (or scheduled to be processed).
 
 In most scenarios, entry processing is not triggered individually, but as part of an upload
 processing. Many entries of one upload might be processed at the same time. Some order
-can be enforced through *processing levels*. Levels are part of the parser metadata and
-entries paired to parsers with a higher level are processed after entries with a
-parser of lower level. See also [how to write parsers](../howto/plugins/types/parsers.md).
+can be enforced through the *execution order* of parsers. The execution order is part of the
+parser entry point and entries paired to parsers with a higher execution order are processed
+after entries with a parser of lower execution order. See also
+[how to control parser execution order](../howto/plugins/types/parsers.md#control-parser-execution-order).
 
 ## Customize processing
 
