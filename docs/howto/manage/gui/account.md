@@ -19,9 +19,9 @@ sign-in method to use.
     - **NOMAD account:** Sign in with your NOMAD credentials, or create a new account by selecting **Register**. Complete the form and security
       check, and select **Register** again. Follow the link in the verification
       email to activate the account before signing in.
-    - **Helmholtz AAI:** To sign in using an account from a participating institution or
+    - **External accounts:** To sign in using an account from a participating institution or
       another available identity provider, select **University / Institute /
-      ORCID / Other**. Search for and select your provider, then follow its
+      ORCID / Other**. This will take you to the Helmholtz ID page. Search for and select your provider, then follow its
       instructions to complete sign-in. See the
       [Helmholtz AAI](https://hifis.net/aai/){:target="_blank" rel="noopener"}
       website for more information.
