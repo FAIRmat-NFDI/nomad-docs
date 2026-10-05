@@ -60,7 +60,7 @@ To use this parser, three kinds of annotation must be included in the schema: `t
     Some of them give rise to "not possible" data structures but are still listed for completeness, a brief explanation of why it is not possible to implement them is also provided.
     The main bring-home message is that a tabular data file can be parsed in one or more entries in NOMAD, giving rise to diverse and arbitrarily complex structures.
 
-In the following sections, two examples will be illustrated. A [tabular data file](../howto/schemas/tabular.md#preparing-the-tabular-data-file) is parsed into one or more [data archive files](../explanation/data.md#archives), their structure is based on a [schema archive file](../explanation/data.md#schemas). NOMAD archive files are denoted as Entries.
+In the following sections, two examples will be illustrated. A [tabular data file](../howto/schemas/tabular.md#preparing-the-tabular-data-file) is parsed into one or more [data archive files](../explanation/data.md#archives), their structure is based on a [schema archive file](../explanation/data.md#schemas). NOMAD archive files are denoted as entries.
 
 !!! note
     From the NOMAD point of view, a schema file and a data file are the same kind of file where different sections have been filled (see [archive files description](../explanation/data.md#archives)). Specifically, a schema file has its `definitions` section filled while a data file will have its `data` section filled. See [How to write a schema](../howto/schemas/schemas.md#get-your-schema-into-nomad) for a more complete description of an archive file.
@@ -134,7 +134,7 @@ Here the tabular data file is parsed by columns, directly within the Entry where
 </p>
 
 In this example, each row of the tabular data file will be placed in a new Entry that is an instance of a class defined in the schema. This would make sense for, say, an inventory spreadsheet where each row can be a separate entity such as a sample, a substrate, etc.
-In this case, a manyfold of Entries will be generated based on the only class available in the schema. These Entries will not be bundled together by a parent Entry but just live in our NOMAD Upload as a spare list, to bundle them together it is useful to check the dedicated [How-to](../howto/schemas/tabular.md#7-row-mode-multiple-new-entries-parse-to-my-path). They might still be referenced manually inside an overarching Entry, such as an experiment Entry, from the ELN with `ReferenceEditQuantity`.
+In this case, a manyfold of entries will be generated based on the only class available in the schema. These entries will not be bundled together by a parent entry but just live in our NOMAD upload as a spare list, to bundle them together it is useful to check the dedicated [How-to](../howto/schemas/tabular.md#7-row-mode-multiple-new-entries-parse-to-my-path). They might still be referenced manually inside an overarching entry, such as an experiment entry, from the ELN with `ReferenceEditQuantity`.
 
 ```yaml
 definitions:

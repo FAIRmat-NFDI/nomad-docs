@@ -275,7 +275,7 @@ For example, if one wants to fetch all entries under an upload with a specific p
 
 Both the query and the pagination fields must comply with the underlying models, depending on the specific token (see [NOMAD API Dashboard](https://nomad-lab.eu/prod/v1/api/v1/extensions/docs){:target="_blank" rel="noopener"}).
 
-## Accessing Archives
+## Accessing archives
 
 The [Basic Data Fetching](#basic-data-fetching) functionality can be extended to fetching NOMAD archives.
 An archive is the processed data of an entry, which is stored on the file system as a binary file.
@@ -326,7 +326,7 @@ curl -X 'POST' \
 ### Nested Fetching
 
 The archive is `JSON` compatible, which means it is effectively a `JSON` object, with a tree-like structure.
-Thus, one can apply the exact same fetching logic as in [Accessing Archives](#accessing-archives), while 'expressing' the intention to fetch data from any level of the tree.
+Thus, one can apply the exact same fetching logic as in [Accessing archives](#accessing-archives), while 'expressing' the intention to fetch data from any level of the tree.
 For example, if one wants to fetch `n_quantities` under `metadata`, a subsection of the archive root, the request would be:
 
 ```json hl_lines="6"

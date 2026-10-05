@@ -1,13 +1,13 @@
 # How to create custom workflows
 
-This guide shows you how to create a custom workflow Entry that connects
-existing NOMAD Entries and archive sections as inputs, tasks, and outputs. It
-covers Entries created from supported files or schemas, references within and
-across Projects, and nested workflows. The resulting Entry contains an
+This guide shows you how to create a custom workflow entry that connects
+existing NOMAD entries and archive sections as inputs, tasks, and outputs. It
+covers entries created from supported files or schemas, references within and
+across projects, and nested workflows. The resulting entry contains an
 interactive workflow graph for inspecting the connections and navigating to
 the referenced data.
 
-To begin, you need a Project to which you can add files. The Entries and data that the
+To begin, you need a project to which you can add files. The entries and data that the
 workflow connects can already exist, or you can add their files together with
 the workflow file, as in the downloadable examples in this guide.
 
@@ -18,7 +18,7 @@ They can also be reproduced on a NOMAD Oasis with the
 installed.
 
 !!! note
-    When trying these examples on NOMAD Central, keep test Projects
+    When trying these examples on NOMAD Central, keep test projects
     unpublished. Publishing is permanent and cannot be undone.
 
 ## Recommended preparation
@@ -36,11 +36,11 @@ installed.
 
 NOMAD workflows connect archive sections through inputs, tasks, and outputs.
 For supported data, NOMAD may create a workflow automatically during
-[Explanation > Processing](../../../explanation/processing.md). A custom workflow Entry lets
+[Explanation > Processing](../../../explanation/processing.md). A custom workflow entry lets
 you define these connections when the workflow is not created automatically.
 
 The examples in this guide use supported simulation files to provide reproducible task
-Entries. Their scientific methods are not relevant to the workflow patterns
+entries. Their scientific methods are not relevant to the workflow patterns
 demonstrated here.
 
 ## Simple workflows with supported tasks
@@ -57,7 +57,7 @@ The task is represented by `dft.xml`, the mainfile of a density functional
 theory (DFT) calculation performed with VASP, an electronic-structure
 simulation code. In this example, the VASP parser provided by the
 [electronic-parsers plugin](https://github.com/nomad-coe/electronic-parsers){:target="_blank" rel="noopener"}
-creates an Entry with a `workflow2` section representing the single-point
+creates an entry with a `workflow2` section representing the single-point
 calculation. This behavior is specific to the parser and is not a general
 feature of all parser-supported mainfiles.
 
@@ -78,7 +78,7 @@ normalizer artifact rather than a distinct result.
 
 For simplicity, the custom workflow below does not reproduce this
 parser-specific output set. Instead, it recreates the central input-task-output
-path of the `SinglePoint` workflow graph in a separate custom workflow Entry
+path of the `SinglePoint` workflow graph in a separate custom workflow entry
 using YAML, as described in
 [How-to guides > ... > Populate data](../../schemas/define.md#populate-data).
 The custom workflow references the parser-generated `workflow2` section
@@ -128,7 +128,7 @@ and
 The `workflow2` section has three possible subsections: `inputs`, `outputs`, and
 `tasks`:
 
-**`inputs`**: a list of references to the global inputs of the workflow, with `name` and `section` attributes. `section` corresponds to a path for linking to the relevant archive section. In this case, the relative section path is `run[0].system[-1]`, linked to the Entry defined by the mainfile `dft.xml`. The prefix is discussed under [Archive path specification](#path-specification).
+**`inputs`**: a list of references to the global inputs of the workflow, with `name` and `section` attributes. `section` corresponds to a path for linking to the relevant archive section. In this case, the relative section path is `run[0].system[-1]`, linked to the entry defined by the mainfile `dft.xml`. The prefix is discussed under [Archive path specification](#path-specification).
 
 **`outputs`**: identical to the inputs list, representing the global outputs of the workflow, with the relative section path `run[0].calculation[-1]` in this case.
 
@@ -137,7 +137,7 @@ in this example contains `m_def`, `task`, `name`, `inputs`, and `outputs`
 attributes. `name` supplies the task label shown in the workflow graph.
 `inputs`/`outputs` are task-specific versions of the lists defined above.
 
-`m_def` defines the type of task according to NOMAD's Metainfo schema, in this case a `TaskReference` to the archive `workflow2` section. The use of `TaskReference` is clarified under [Nested workflows > In multiple Entries](#in-multiple-entries).
+`m_def` defines the type of task according to NOMAD's Metainfo schema, in this case a `TaskReference` to the archive `workflow2` section. The use of `TaskReference` is clarified under [Nested workflows > In multiple entries](#in-multiple-entries).
 
 `task` is the path for linking to the relevant archive section, analogous to the `section` attribute for `inputs`/`outputs`. However, this path **must** reference a task, which in all practical cases corresponds to a `workflow2` section.
 
@@ -148,15 +148,15 @@ attributes. `name` supplies the task label shown in the workflow graph.
 In general, an archive reference can be represented as
 `<prefix>/<entry_locator>#/<relative_archive_path>`:
 
-- `<relative_archive_path>` identifies the section within the target Entry. Open the Entry's **ARCHIVE** page and navigate to the section you want to reference.
-- **Entry in the same Project:**
+- `<relative_archive_path>` identifies the section within the target entry. Open the entry's **ARCHIVE** page and navigate to the section you want to reference.
+- **Entry in the same project:**
     - `<prefix>` is `../upload/archive/mainfile`
-    - `<entry_locator>` is the path to the Entry's mainfile from the Project root
-- **Entry in another Project:**
+    - `<entry_locator>` is the path to the entry's mainfile from the project root
+- **Entry in another project:**
     - `<prefix>` is `../uploads/<upload_id>/archive`
     - `<entry_locator>` is `<entry_id>`
 
-In archive-reference paths, `upload` and `uploads` are backend terms for Projects, and `upload_id` is equivalent to the Project ID.
+In archive-reference paths, `upload` and `uploads` are backend terms for projects, and `upload_id` is equivalent to the project ID.
 
 For the general principles and supported forms, see
 [How-to guides > ... > Link data with references](../../schemas/define.md#link-data-with-references)
@@ -174,18 +174,18 @@ The compressed file contains:
 ├── dft.workflow.archive.yaml
 ```
 
-To reproduce the example in a new Project:
+To reproduce the example in a new project:
 
 1. Open **PROJECTS** and select **NEW PROJECT**.
-2. Enter a Project name, select **ADD FILES**, and add
+2. Enter a project name, select **ADD FILES**, and add
    `simple_workflow.zip`.
 3. Select **CREATE**.
-4. After processing completes, open **ENTRIES** and confirm that NOMAD created two successfully processed Entries:
-     - a single-point Entry with the mainfile `dft.xml`; and
-     - a custom workflow Entry with the mainfile
+4. After processing completes, open **ENTRIES** and confirm that NOMAD created two successfully processed entries:
+     - a single-point entry with the mainfile `dft.xml`; and
+     - a custom workflow entry with the mainfile
      `dft.workflow.archive.yaml`.
 
-5. Open the custom workflow Entry. Its **Overview** page contains this graph:
+5. Open the custom workflow entry. Its **Overview** page contains this graph:
 
 ![Custom single-point workflow graph in the light theme](images/single-point-custom-nomad-workflow-card-light.png#only-light){:.screenshot}
 ![Custom single-point workflow graph in the dark theme](images/single-point-custom-nomad-workflow-card-dark.png#only-dark){:.screenshot}
@@ -197,7 +197,7 @@ shared section as one connected output node.
 ??? tip "Add the methodology as a workflow input"
 
     You can also represent the calculation's methodological parameters as an
-    input. They are stored at `run[0].method[-1]` in the `dft.xml` Entry. Add
+    input. They are stored at `run[0].method[-1]` in the `dft.xml` entry. Add
     the following item to both `workflow2.inputs` and
     `workflow2.tasks[0].inputs` in `dft.workflow.archive.yaml`:
 
@@ -209,28 +209,28 @@ shared section as one connected output node.
     Reprocessing the updated file adds another input node to the custom
     workflow graph.
 
-## Reference an Entry in another Project
+## Reference an entry in another project
 
-A workflow Entry can reference tasks or data in another Project on the same
+A workflow entry can reference tasks or data in another project on the same
 NOMAD deployment. For these references, use
 `../uploads/<upload_id>/archive/<entry_id>#/<relative_archive_path>` as
 described under [Archive path specification](#path-specification).
 
 To find the required identifiers:
 
-1. Open the target Entry, select **ARCHIVE**, and navigate to
+1. Open the target entry, select **ARCHIVE**, and navigate to
    `metadata` > `upload_id`. Copy this value and use it as `<upload_id>`.
-   Alternatively, open the target Project, select **SETTINGS**, and copy its
+   Alternatively, open the target project, select **SETTINGS**, and copy its
    **Project ID**, which is the same identifier.
-2. In the target Entry's **ARCHIVE**, navigate to `metadata` > `entry_id`.
+2. In the target entry's **ARCHIVE**, navigate to `metadata` > `entry_id`.
    Copy this value and use it as `<entry_id>`.
-   Alternatively, copy the value immediately after `/entries/` in the Entry's
+   Alternatively, copy the value immediately after `/entries/` in the entry's
    URL.
 
 For example, the `dft.workflow.archive.yaml` file from the previous section can
 be adapted as follows:
 
-??? example "Reference the `dft.xml` Entry from another Project"
+??? example "Reference the `dft.xml` entry from another project"
     ```yaml
     workflow2:
       name: DFT SinglePoint
@@ -252,15 +252,15 @@ be adapted as follows:
               section: '../uploads/<upload_id>/archive/<entry_id>#/run/0/calculation/-1'
     ```
 
-To test the cross-Project references:
+To test the cross-project references:
 
 1. Create a file named `dft-cross-project.workflow.archive.yaml` using the
    contents shown above. Replace `<upload_id>` and `<entry_id>` with the
-   identifiers for the Project and Entry containing `dft.xml`.
-2. Create another Project and add only the new
+   identifiers for the project and entry containing `dft.xml`.
+2. Create another project and add only the new
    `dft-cross-project.workflow.archive.yaml` file.
-3. After processing completes, open the resulting workflow Entry and confirm
-   that its graph contains the referenced DFT task from the original Project.
+3. After processing completes, open the resulting workflow entry and confirm
+   that its graph contains the referenced DFT task from the original project.
 
 ## Nested workflows
 
@@ -270,34 +270,34 @@ represented as directed graphs. The
 supports this pattern through the inheritance relationship from `Task` to
 `Workflow`.
 
-### In multiple Entries
+### In multiple entries
 
 The most common way to construct a nested workflow is by creating a separate
-Entry for each sub-workflow. Each sub-workflow archive then contains a populated
+entry for each sub-workflow. Each sub-workflow archive then contains a populated
 `workflow2` section. To use it as a task, reference that section directly with
 `task: <prefix>/<entry_locator>#/workflow2`, following the forms under
 [Archive path specification](#path-specification).
 
 !!! Warning "Important"
-    When `task` references a `workflow2` section in another Entry, define the
+    When `task` references a `workflow2` section in another entry, define the
     sub-workflow task as a `TaskReference` by setting
     `m_def: nomad.datamodel.metainfo.workflow.TaskReference`. The default type,
     `nomad.datamodel.metainfo.workflow.Task`, can contain a `Task` directly but
-    cannot reference one in another Entry. See
+    cannot reference one in another entry. See
     [Explanation > Workflows > The built-in abstract workflow schema](../../../explanation/workflows.md#the-built-in-abstract-workflow-schema).
 
 We have already seen this case in
 [Simple Workflows with Supported Tasks](#simple-workflows-with-supported-tasks).
 On NOMAD Central, the installed simulation parsers add a workflow representation
-to recognized simulation Entries, including single-step calculations. A workflow
-that references these parser-generated simulation Entries as tasks is therefore
+to recognized simulation entries, including single-step calculations. A workflow
+that references these parser-generated simulation entries as tasks is therefore
 a nested workflow. Other deployments may provide different simulation parsers
 and workflow metadata.
 
-### In a single Entry
+### In a single entry
 
 Since a `Workflow` instance is also a `Task` instance due to inheritance, you
-can nest workflows directly within a single Entry. The following computational
+can nest workflows directly within a single entry. The following computational
 workflow illustrates this pattern:
 
 ```mermaid
@@ -415,11 +415,11 @@ The workflow `tasks`:
 ```
 
 Unlike the pattern under
-[Nested workflows > In multiple Entries](#in-multiple-entries), which uses a
+[Nested workflows > In multiple entries](#in-multiple-entries), which uses a
 `TaskReference`, this example defines the `DMFT` task directly as a `Workflow`.
 
-When added to a Project with the example data, this workflow file produces an
-Entry whose **Overview** page initially shows the complete `DFT+TB+DMFT`
+When added to a project with the example data, this workflow file produces an
+entry whose **Overview** page initially shows the complete `DFT+TB+DMFT`
 workflow:
 
 ![Top-level nested workflow graph in the light theme](images/nested-workflow-parent-card-light.png#only-light){:.screenshot}
@@ -434,7 +434,7 @@ workflow toolbar to return to the parent graph.
 ![DMFT sub-workflow graph in the dark theme](images/nested-workflow-dmft-subworkflow-card-dark.png#only-dark){:.screenshot}
 
 To reproduce this example, download the compressed bundle and add it while
-creating a Project. The workflow YAML is located at the root of the bundle.
+creating a project. The workflow YAML is located at the root of the bundle.
 
 [Download nested_workflow_one-entry.zip](data/nested_workflow_one-entry.zip){:.md-button .nomad-button}
 
@@ -442,7 +442,7 @@ creating a Project. The workflow YAML is located at the root of the bundle.
 
 A custom task is a task whose raw files NOMAD does not automatically recognize,
 or a task that has no associated raw files. The task must still be represented by
-an Entry before a workflow can reference it. One option is to create that Entry
+an entry before a workflow can reference it. One option is to create that entry
 from a built-in or custom Electronic Lab Notebook (ELN) schema.
 
 **Related pages:** {{ nav_link("howto/schemas/schemas.md") }}.
@@ -450,12 +450,12 @@ from a built-in or custom Electronic Lab Notebook (ELN) schema.
 ### Represent files with `ElnFileManager`
 
 `ElnFileManager` is a built-in schema for referencing and annotating files in an
-ELN Entry. To instantiate this schema from YAML, set `data.m_def` to its full
+ELN entry. To instantiate this schema from YAML, set `data.m_def` to its full
 section-definition path. See
 [How-to guides > ... > Populate data](../../schemas/define.md#populate-data)
 for the general purpose and syntax of `m_def`.
 
-For example, the following file defines an Entry that describes the creation of
+For example, the following file defines an entry that describes the creation of
 a force-field file:
 
 <h4><code>create_force_field.archive.yaml</code></h4>
@@ -469,7 +469,7 @@ data:
     description: 'The force field file for simulation input.'
 ```
 
-The `file` value identifies the path to `water.top` from the Project root. In
+The `file` value identifies the path to `water.top` from the project root. In
 this example, the file must therefore be stored at
 `Custom_ELN_Entries/water.top` for NOMAD to resolve the reference during
 processing.
@@ -480,7 +480,7 @@ For a concrete example, consider a workflow consisting of three tasks for
 setting up a molecular dynamics (MD) simulation. Each task receives parameters
 or an execution script and produces a file.
 
-Use `ElnFileManager` to create Entries for each task and the execution scripts.
+Use `ElnFileManager` to create entries for each task and the execution scripts.
 The workflow parameters use the more general `ElnBaseSection` schema:
 
 ??? success "`create_force_field.archive.yaml`"
@@ -542,7 +542,7 @@ The workflow parameters use the more general `ElnBaseSection` schema:
         description: 'Creates the appropriate force field files for the simulation engine.'
     ```
 
-Define the workflow in `setup_workflow.archive.yaml` using the Entries shown
+Define the workflow in `setup_workflow.archive.yaml` using the entries shown
 above:
 
 ??? success "`setup_workflow.archive.yaml`"
@@ -596,20 +596,20 @@ above:
           section: '../upload/archive/mainfile/Custom_ELN_Entries/create_force_field.archive.yaml#/data/Files/0/file'
     ```
 
-After processing, the workflow Entry contains the following graph:
+After processing, the workflow entry contains the following graph:
 
 ![Custom-task workflow graph in the light theme](images/custom-task-workflow-card-light.png#only-light){:.screenshot}
 ![Custom-task workflow graph in the dark theme](images/custom-task-workflow-card-dark.png#only-dark){:.screenshot}
 
-To reproduce the example, download the bundle and add it to a Project. It
-contains the referenced files, the Entry YAML files, and the workflow YAML shown
+To reproduce the example, download the bundle and add it to a project. It
+contains the referenced files, the entry YAML files, and the workflow YAML shown
 above.
 
 [Download Custom_ELN_Entries.zip](data/Custom_ELN_Entries.zip){:.md-button .nomad-button}
 
 ## Create an experimental workflow with an ELN
 
-To build an experimental workflow by linking process and measurement Entries
+To build an experimental workflow by linking process and measurement entries
 with the built-in *Experiment ELN* schema, follow
 [Tutorials > ... > Integrate your experiment](../../../tutorial/eln/built_in_templates.md#integrate-your-experiment).
 
@@ -618,10 +618,10 @@ supported workflow-building flow. -->
 
 ## Using the workflow visualizer
 
-When an Entry contains a `workflow2` section, its **CONNECTIVITY** page shows
-an interactive workflow graph. Depending on the Entry layout, a **Workflow**
+When an entry contains a `workflow2` section, its **CONNECTIVITY** page shows
+an interactive workflow graph. Depending on the entry layout, a **Workflow**
 card may also appear on **OVERVIEW**. In addition to the graph,
-**CONNECTIVITY** lists Entries referenced by or referencing the current Entry,
+**CONNECTIVITY** lists entries referenced by or referencing the current entry,
 as well as activity references.
 
 The visualizer supports the following actions:
@@ -633,8 +633,8 @@ The visualizer supports the following actions:
   Use the back control or select the current workflow node to return to the
   previous layer.
 - **Open referenced data:** Select the label of an input, task, or output to
-  open the referenced Entry or archive section. Use the browser's back button
-  to return to the workflow Entry.
+  open the referenced entry or archive section. Use the browser's back button
+  to return to the workflow entry.
 - **Focus on a connection:** Select an arrow between tasks to show the connected
   tasks and their shared input and output context.
 - **Filter tasks:** Use the **Filter tasks to show** bar to limit the tasks
@@ -646,7 +646,7 @@ The visualizer supports the following actions:
   the legend, reset the graph, or download it as an SVG file.
 
 <!-- TODO: Consider adding an in-product workflow visualizer tour or linking to
-a stable public demonstrator workflow Entry once one is maintained. -->
+a stable public demonstrator workflow entry once one is maintained. -->
 
 ## Advanced Topics
 

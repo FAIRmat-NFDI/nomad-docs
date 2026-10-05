@@ -459,7 +459,7 @@ The notebook walks through these steps:
 
 Testing the GUI outcome requires a local NOMAD GUI development setup. For that, use [Option 2: `nomad-distro-dev`](plugin_structure.md#option-2-nomad-distro-dev) from the previous tutorial and add your plugin to that environment. With this, you can spin up a local development deployment of NOMAD.
 
-Let's start by creating a new Upload (or Project) there:
+Let's start by creating a new upload (or project) there:
 
 - Create an entry and populate the temperature.
 

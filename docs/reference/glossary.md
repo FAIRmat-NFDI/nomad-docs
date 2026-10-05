@@ -187,7 +187,7 @@ definitions. Schemas are organized in [schema packages](#schema-package), i.e. c
 
 *Schema packages* contain a collection of [schema](#schema) definitions. Schema packages may be defined as [YAML files](../howto/schemas/define.md) or in Python as [plugin entry points](../howto/schemas/define.md).
 
-## Section and Subsection
+## Section and subsection
 
 All [processed data](#processed-data) is structured into sections and quantities. *Sections*
 provide hierarchy and organization, *quantities* refer to the actual pieces of data.

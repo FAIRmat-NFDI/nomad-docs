@@ -88,6 +88,31 @@ follow-up material rather than part of the procedure.
 
 **Use consistent, canonical names.** NOMAD, NOMAD Oasis, MongoDB, Elasticsearch, etc.
 
+**Use sentence case for domain concepts.** Treat NOMAD concepts as common nouns
+in running prose. Write *project*, *entry*, *archive*, *schema*, *section*,
+*subsection*, *quantity*, *dataset*, and *mainfile* in lowercase, including
+their plural forms. Do not capitalize a term merely because it has a definition
+in the glossary. Normal capitalization still applies at the beginning of a
+sentence and in headings.
+
+**Match exact GUI labels.** When referring to a specific label in the GUI,
+preserve the capitalization displayed in the interface and format the label in
+bold, for example **Projects**, **Entries**, **ARCHIVE**, **Project ID**, and
+**ADD EXAMPLE PROJECT**. Use lowercase when referring to the underlying concept,
+for example *project page*, *entry ID*, and *entry archive*.
+
+**Preserve code and technical identifiers.** Reproduce class names, API fields,
+endpoints, configuration options, and archive paths exactly and format them as
+code, for example `EntryArchive`, `ArchiveSection`, `upload_id`, `entry_id`, and
+`/uploads`.
+
+**Distinguish projects from uploads.** In user-facing instructions, use
+*project* for the container that holds files and entries. Use *upload* as a verb
+for transferring files and as a technical noun when referring to NOMAD's
+backend upload resource, upload processing, API endpoints, upload IDs, or
+archive-reference syntax. Each GUI project corresponds to a backend upload
+resource.
+
 **Backticks, quotes, bold, and italics.**
 
 - Use `backticks` for:
