@@ -13,10 +13,10 @@ to the NOMAD core services.
 
 From a user’s perspective, NORTH can be used for running complex or tool-specific analyses
 directly on data that is stored inside NOMAD, be this API-retrievable input from NOMAD entries
-or data from NOMAD uploads. Results achieved within the container can be written back
+or data from NOMAD projects. Results achieved within the container can be written back
 (using the NOMAD API, see [How-to > ... > How to use the API](../howto/manage/program/api.md)) as derived data, metadata, or artifacts.
-Running a reprocessing of an upload afterwards allows for an indexing of these results obtained
-with NORTH, provided that the software tools in NORTH write using data structures and schemas
+Reprocessing the project afterwards allows results obtained with NORTH to be indexed,
+provided that the software tools in NORTH write using data structures and schemas
 that NOMAD understands. The reprocessing can be triggered through the API or the NOMAD GUI.
 
 The connection between the container and the NOMAD file system removes the need
@@ -100,7 +100,7 @@ Beyond its importance for managing the expectations as to how NOMAD reacts to an
 individual NORTH tools offer, it is important to know that using different data schemas
 in a NORTH tool compared to the NOMAD deployment does not always come without challenges.
 
-Users may encounter issues when reprocessing uploads that contain results from a NORTH tool
+Users may encounter issues when reprocessing projects that contain results from a NORTH tool
 analysis, if the tool wrote data using a schema version different from the one used in the
 NOMAD deployment. This can lead to partial or complete incompatibilities. By providing
 individual NORTH tools as optional extensions of a NOMAD plugin, the responsibility

@@ -1,18 +1,33 @@
 # Processing
 
-NOMAD extracts structured data from files via *processing*. Processing creates
-[*entries*](../reference/glossary.md#entry) from files. It produces the schema-based structured
-data associated with each entry (i.e. the [*entry archives*](../reference/glossary.md#archive)). To understand the role of processing
-in NOMAD also read the ["From file to data" page](./basics.md).
+NOMAD uses *processing* to produce the structured data associated with an
+[*entry*](../reference/glossary.md#entry), known as its
+[*archive*](../reference/glossary.md#archive). Every entry has a mainfile, but
+the relationship between the mainfile, parser, and entry can be established in
+different ways:
+
+- **Automatic parser matching:** An installed parser recognizes an added file
+  and NOMAD creates a static entry from it.
+- **Schema-based entry:** A user creates an editable entry from a schema. The
+  data editor creates and updates its mainfile, and `normalize` functions can
+  read additional files selected in the entry.
+- **Hybrid parsing:** A parser recognizes an added file and creates an editable
+  schema-based entry with the file reference already populated.
+
+The {{ nav_link("tutorial/develop_plugin/create_parser.md", breadcrumb=True) }}
+compares these three patterns. For the relationships between projects, files,
+mainfiles, and entries, see [Explanation > From files to data](./basics.md).
 
 ## Processing steps
 
 Processing comprises three steps.
 
-1. **Matching** files to parsers that can process
-them. This step also creates empty entries for matched files.
-Those matched files are now [*mainfiles*](../reference/glossary.md#mainfile) and forever paired with the created entries.
-2. **Parsing** and **normalizing** to produce [*entry archives*](../reference/glossary.md#archive) for matched mainfile/entry-pairs.
+1. **Matching** associates files with parsers that can process them. For files
+   recognized by an installed parser, this step also creates the entry and
+   establishes the recognized file as its
+   [*mainfile*](../reference/glossary.md#mainfile). Schema-based entries already
+   have a mainfile created through the data editor.
+2. **Parsing** and **normalizing** to produce [*entry archives*](../reference/glossary.md#archive) for matched mainfile/entry pairs.
 3. **Persisting** (including indexing of) the extracted data.
 
 <figure markdown>
@@ -22,15 +37,20 @@ Those matched files are now [*mainfiles*](../reference/glossary.md#mainfile) and
 
 ## Processing triggers, scheduling, execution
 
-For most end-users, processing is fully automated and will be automatically run when
-files are added or changed. Here, processing is triggered by the file upload API.
+For most users, processing runs automatically when files are added to or changed
+in a project. In the backend, these actions use the file upload API to trigger
+processing of the corresponding upload resource.
 However, in more [advanced scenarios](#processing-scenarios), other triggers might apply.
 The three possible triggers are:
 
-- New files are uploaded or existing files are changed. This includes creating and updating ELN entries.
-The respective file upload API will call the processing.
-- The processing of an upload is manually triggered, e.g. to re-process data. This might be done via the UI, the API, or CLI.
-- The processing of one entry, programmatically triggers the processing of other files, e.g. in a `normalize` function.
+- New files are uploaded or existing files are changed. This includes creating and updating schema-based entries.
+  The corresponding file upload API call triggers processing.
+- A user with write access manually reprocesses an editable project by opening
+  its processing-status panel and selecting **Reprocess**. The equivalent API
+  operation is `POST /uploads/{upload_id}/action/process`. Administrators can
+  also reprocess published projects or use the CLI.
+- The processing of one entry programmatically triggers the processing of other files,
+  for example in a `normalize` function.
 
 Most processing is done asynchronously. Entities that need processing
 are scheduled in a queue. Depending on the trigger, this might happen in the NOMAD app
@@ -40,12 +60,14 @@ See also the [architecture documentation](./architecture.md). The worker can pro
 from the queue concurrently.
 
 As an exception, entities can also be processed *locally* and synchronously. This means the processing is
-not done in the NOMAD worker, but where it is called. This is used for example, when an ELN is saved to have
-an immediate update on the respective entry with-in one API call.
+not done in the NOMAD worker, but where it is called. This is used, for example, when an ELN is saved to have
+an immediate update on the respective entry within one API call.
 
 ## Processed entities
 
-We differentiate two types of entities that can be processed: **uploads** and **entries**.
+We differentiate two types of backend entities that can be processed: **uploads** and **entries**.
+In this context, an upload is the backend resource that represents a
+[project](../reference/glossary.md#project), not the act of transferring a file.
 The same entity can only be scheduled for processing, if it is not already scheduled or processing.
 See also the [documentation "from files to data"](./basics.md) to understand the relationships
 between all NOMAD entities.
@@ -53,14 +75,14 @@ between all NOMAD entities.
 ### Uploads
 
 Upload processing is scheduled if one or many files in the upload have changed. Upload processing
-includes the matching step, it creates new entries, and triggers the processing of
-new or afflicted entries. An upload is considered processing as long as any of its entries
+includes the matching step, creates new entries, and triggers the processing of
+new or affected entries. An upload is considered processing as long as any of its entries
 is still processing (or scheduled to be processed).
 
 ### Entries
 
-In most scenarios, entry processing is not triggered individually, but as part of an upload
-processing. Many entries of one upload might be processed at the same time. Some order
+In most scenarios, entry processing is not triggered individually, but as part of upload
+processing. Many entries in one upload might be processed at the same time. Some order
 can be enforced through *processing levels*. Levels are part of the parser metadata and
 entries paired to parsers with a higher level are processed after entries with a
 parser of lower level. See also [how to write parsers](../howto/plugins/types/parsers.md).
@@ -102,9 +124,9 @@ def is_mainfile(self, filename: str, ...) -> Union[bool, Iterable[str]]
 
 If this function does not return `False`, the parser matches with the file and entries
 are created. If the return is `True`, exactly one entry will be created. If the
-result is an iterable of strings, the same entry is sill created, but now also additional
-entries are created for each string. These strings are called *entry keys* and the additional
-entries are *child* entries. See the also [single file, multiple entries scenario](#single-file-single-entry).
+result is an iterable of strings, the same entry is still created, but additional
+entries are also created for each string. These strings are called *entry keys* and the additional
+entries are *child entries*. See also the [single file, multiple entries scenario](#single-file-multiple-entries).
 
 In principle, the `is_mainfile` implementation can do whatever it wants: consider the filename, open the file,
 reading it partially, reading it whole, etc. However, most NOMAD parsers extend a specialized parser
@@ -243,21 +265,23 @@ Another use-case is automation. The `normalize` function of on ELN schema might 
 user input to create many more ELNs. This can be use-ful for parameter studies, where
 one experiment has to be repeated many times in a consistent way.
 
-### Re-processing
+### Reprocessing
 
-Typically a new file is uploaded, an entry created, and processed. But, we also need
-to re-processing entries because either the file was changed (e.g. an ELN was changed and saved
-or a new version of a file was uploaded), or because the parser or schema (including `normalize` functions)
-was changed. While the first case, usually triggers automated re-processing, the later
-case required manual intervention.
+Adding or changing a file, creating a schema-based entry, and saving an edited
+entry normally trigger processing automatically. Manual reprocessing is needed
+when the files have not changed but their interpretation has—for example, after
+updating a parser, schema, or `normalize` function.
 
-Either the user manually re-processes an upload from the UI, because they know that
-they changed a respective schema for example, or the NOMAD (Oasis) admin re-processes
-(all) uploads, e.g. via the CLI, because they know the NOMAD version or some plugin has
-changed.
+For an editable project, a user with write access can open the processing-status
+panel in the project header and select **Reprocess**. The backend operation is
+`POST /uploads/{upload_id}/action/process`. Only administrators can use this
+operation for a published project. NOMAD Oasis administrators can also reprocess
+uploads through the CLI; see
+[How-to guides > ... > Re-processing](../howto/oasis/administer.md#re-processing).
 
-Depending on configuration, re-processing might only process existing entries, match
-for new entries, or remove entries that no longer match.
+Depending on the deployment's reprocessing configuration, this operation may
+reprocess existing entries, match new entries, or remove entries that no longer
+match.
 
 ## Strategies for re-usable processing code
 
