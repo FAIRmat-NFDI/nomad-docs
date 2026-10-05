@@ -218,7 +218,7 @@ Next, you create projects in NOMAD from the three example ZIP files.
 The helper `upload_files_to_nomad` both **creates a new project** and **uploads the given ZIP file** to it in a single API call.
 
 !!! info "Projects and uploads"
-    In the NOMAD GUI, you organize your data in projects. The NOMAD API and `nomad-utility-workflows` still use the term *upload* for a project: the API endpoints retain *upload* in their paths, helper functions such as `upload_files_to_nomad` and `get_upload_by_id` work on projects, and the `upload_id` they return identifies the project. You can find this ID as **Project ID** in the project's **SETTINGS** > **General**, and entries store it as `upload_id` in their metadata.
+    In the NOMAD GUI, you organize your data in projects. The NOMAD API and `nomad-utility-workflows` use the term *upload* for the corresponding backend resource: API endpoints retain *upload* in their paths, helper functions such as `upload_files_to_nomad` and `get_upload_by_id` work on projects, and the `upload_id` they return identifies the project. You can find this ID as **Project ID** in the project's **SETTINGS** > **General**, and entries store it as `upload_id` in their metadata.
 
 !!! warning
 
@@ -335,7 +335,7 @@ for entry in dft_entries:
     )
 ```
 
-This snippet retrieves all the entries (here only one entry) created from the uploaded computations data and prints each entry’s ID together with its direct GUI URL.
+This snippet retrieves all the entries (here only one entry) created from the uploaded computations data and prints each entry's ID together with its direct GUI URL.
 
 ??? success "Example notebook output"
 
@@ -540,7 +540,7 @@ edit_upload_metadata(
 This code updates the project name and applies the comment and references to all entries in the project. `timeout_in_sec=60` lets the helper wait up to 60 seconds for the server's answer; the default of 10 seconds can be too short when NOMAD is busy.
 
 !!! warning
-    Running the next snippet before NOMAD finishes processing the entries may make it *look* as if the entries metadata is not updated. Wait up to 3 minutes and retry to ensure the snippet is executed only after NOMAD processing has completed.
+    Running the next snippet before NOMAD finishes processing the entries may make it *look* as if the entry metadata is not updated. Wait up to 3 minutes and retry to ensure the snippet is executed only after NOMAD processing has completed.
 
 To inspect it programmatically try:
 

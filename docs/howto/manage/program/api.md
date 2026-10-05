@@ -2,6 +2,10 @@
 
 This guide is about using NOMAD's REST APIs directly, e.g. via Python's `requests` library.
 
+The GUI organizes files and entries in projects. The API represents each project
+as an upload resource, so endpoint paths, request fields, and response fields retain
+terms such as `uploads` and `upload_id`.
+
 To access the processed data with our client library `nomad-lab` follow
 [How to access processed data](archive_query.md). You can also watch our
 [video tutorial on the API](../../../tutorial/access_api.md).
@@ -127,7 +131,7 @@ This will give you something like this:
 }
 ```
 
-The `entry_id` is a unique identifier for, well, entries. You can use it to access other
+The `entry_id` is a unique identifier for entries. You can use it to access other
 entry data. For example, you want to access the entry's archive. More precisely, you want
 to gather the formula and energies from the main workflow result. The following requests
 the archive based on the `entry_id` and only requires some archive sections.
@@ -269,7 +273,6 @@ with different functions in the API:
 
 - Entries
 - Uploads
-- Datasets
 - Users
 
 The API URLs typically start with the entity, followed by the kind of data. Examples
@@ -376,7 +379,7 @@ you'll probably want to do one of the following things.
 ## Download raw files
 
 You can use [queries](#queries) to download raw files, but typically you don't want to
-download file-by-file or entry-by-entry. Therefore, we allow to download a large set of
+download file by file or entry by entry. Therefore, we allow to download a large set of
 files in one big zip-file. Here, you might want to use a program like *curl* to download
 directly from the shell:
 
@@ -447,9 +450,9 @@ page size.
 ## User Groups
 
 You can create a user group and add other users to that group via the API. These groups
-can be used as [upload members](../gui/upload.md#visibility-and-access) to make it
-easier to give viewing or editing rights for an upload to multiple users at once, e.g.
-a working group.
+can be added as [project collaborators](../gui/upload.md#visibility-and-access) to make it
+easier to give viewing or editing rights for a project to multiple users at once, e.g.
+a working group. In the API, project collaborators are represented as upload members.
 
 To create a group, send an authenticated POST request to `/groups` including the
 `group_name` and a list of user IDs in the `members` field:

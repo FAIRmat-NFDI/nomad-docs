@@ -129,7 +129,9 @@ There are a few existing data resources (called documents) stored in MongoDB (se
 
 1. `uploads`: The metadata of an upload, including, `upload_id`, `upload_name`, `main_author`, etc.
 2. `entries`: The metadata of an entry, including, `entry_id`, `entry_create_time`, `mainfile`, etc.
-3. `datasets`: The metadata of a dataset, including, `dataset_id`, `dataset_name`, `user_id`, etc.
+3. `datasets`: Legacy dataset metadata retained in the backend, including
+   `dataset_id`, `dataset_name`, `user_id`, etc. Projects replace datasets in
+   the current GUI publication workflow.
 4. `groups`: The metadata of a user group, including, `owner`, `members`, etc.
 
 One can apply the same logic to fetch data from these structures.

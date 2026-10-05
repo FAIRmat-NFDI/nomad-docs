@@ -24,9 +24,10 @@ Refer to our guide for [auth with `curl`](./auth.md#with-curl).
 ### Raw files vs processed data
 
 We are covering two types of resources: *raw files* and *processed data*.
-The former is organized into uploads and sub directory. The organization depends
+The former is organized into backend uploads and subdirectories. Each upload
+resource corresponds to a project in the GUI. The organization depends
 on how the author was providing the files.
-The later is organized by entries. Each NOMAD entry has corresponding structured data.
+The latter is organized by entries. Each NOMAD entry has corresponding structured data.
 
 Endpoints that target raw files typically contain `raw`, e.g. `uploads/<id>/raw`
 or `entries/raw/query`. Endpoints that target processed data contain `archive`
@@ -35,29 +36,31 @@ or `entries/raw/query`. Endpoints that target processed data contain `archive`
 
 ### Entry vs upload
 
-API endpoints for data download either target *entries* or *uploads*. For both types
+API endpoints for data download either target *entries* or backend *uploads*. For both types
 of entities, endpoints for raw files and processed data (as well as searchable metadata)
 exist. API endpoint paths start with the entity, e.g. `uploads/<id>/raw` or `entries/<id>/raw`.
 
-## Download a whole upload
+## Download a whole project
 
-Let's assume you want to download an entire upload. In this example the upload ID is
+The API represents a project as an upload resource. To download an entire project,
+use its upload ID—the value shown as **Project ID** under **SETTINGS** in the GUI.
+In this example, the upload ID is
 `wW45wJKiREOYTY0ARuknkA`.
 
 ```sh
 curl -X GET "{{ nomad_url() }}/v1/uploads/wW45wJKiREOYTY0ARuknkA/raw" -o download.zip
 ```
 
-This will create a `download.zip` file in the current folder. The zip file will contain
-the raw file directory of the upload.
+This creates a `download.zip` file in the current folder containing the project's
+raw-file directory.
 
-The used `uploads/<id>/raw` endpoint is only available for published uploads. For those,
+The `uploads/<id>/raw` endpoint is only available for published projects. For those,
 all raw files have already been
-packed into a zip file and this endpoint simply lets you download it. This is the simplest
+packed into a ZIP file and this endpoint simply lets you download it. This is the simplest
 and most reliable download implementation.
 
 Alternatively, you can download specific files or sub-directories. This method is available
-for all uploads. Including un-published uploads.
+for all projects, including unpublished projects.
 
 ```sh
 curl -X GET "{{ nomad_url() }}/v1/uploads/wW45wJKiREOYTY0ARuknkA/raw/?compress=true" -o download.zip
@@ -65,43 +68,46 @@ curl -X GET "{{ nomad_url() }}/v1/uploads/wW45wJKiREOYTY0ARuknkA/raw/?compress=t
 
 This endpoint looks very similar, but is implemented very differently. Note that we
 put an empty path `/` to the end of the URL, plus a query parameter `compress=true`.
-The path can be replaced with any directory or file path in the upload; `/` would denote the
-whole upload. The query parameter says that we want to download the whole directory
-as a zip file, instead of an individual file. This traverses through all files and
-creates a zip file on the fly.
+The path can be replaced with any directory or file path in the project; `/` denotes the
+whole project. The query parameter says that we want to download the whole directory
+as a ZIP file instead of an individual file. This traverses all files and
+creates a ZIP file on the fly.
 
-## Download a whole dataset
+## Download raw files matching a query
 
-Now let's assume that you want to download all raw files that are associated with
-all the entries of an entire dataset. In this example the dataset DOI is
-`10.17172/NOMAD/2023.11.17-2`.
+To download raw files associated with multiple entries, submit a search query to
+the `entries/raw/query` endpoint. This example selects entries whose material
+contains both titanium and oxygen:
 
 ```sh
 curl -X POST "{{ nomad_url() }}/v1/entries/raw/query" \
 -H 'Content-Type: application/json' \
 -d '{
     "query": {
-        "datasets.doi": "10.17172/NOMAD/2023.11.17-2"
+        "results.material.elements": {
+            "all": ["Ti", "O"]
+        }
     }
 }' \
 -o download.zip
 ```
 
-This time, we use the `entries/raw/query` endpoint that is based on entries and not on uploads. Here, we
-select entries with a query. In the example, we query for the dataset DOI, but you
-can replace this with any NOMAD search query (look out for the `<>` symbol on the
-[search interface]({{ nomad_url() }}/../gui/search/entries)). The zip file will contain all raw files from all the
-directories that have the mainfile of one of the entries that match the queries.
+The ZIP file contains the raw files from directories containing the mainfiles of
+the matching entries. You can replace the example with any
+[How-to guides > ... > Queries](api.md#queries).
 
-This might not necessarily download all uploaded files. Alternatively, you can use a query to
-get all upload ids and then use the method from the previous section:
+This does not necessarily download every file in each matching project. To
+download complete projects instead, aggregate the upload IDs for the matching
+entries and use the method from the previous section:
 
 ```sh
 curl -X POST "{{ nomad_url() }}/v1/entries/query" \
 -H 'Content-Type: application/json' \
 -d '{
     "query": {
-        "datasets.doi": "10.17172/NOMAD/2023.11.17-2"
+        "results.material.elements": {
+            "all": ["Ti", "O"]
+        }
     },
     "pagination": {
         "page_size": 0
@@ -116,16 +122,16 @@ curl -X POST "{{ nomad_url() }}/v1/entries/query" \
 }'
 ```
 
-The last command will print JSON data that contains all the upload ids. It uses
+The last command prints JSON data containing all the upload IDs. It uses
 the `entries/query` endpoint that allows you to query NOMAD's search.
 It does not return any results (`page_size: 0`),
-but performs an aggregation over all search results and collects the upload ids
+but performs an aggregation over all search results and collects the upload IDs
 from all entries.
 
-## Download some processed data for a whole dataset
+## Download processed data matching a query
 
 Similar to raw files, you can also download processed data. This is also an
-entry based operation based on a query. This time we also specify a `required`
+entry-based operation based on a query. This time we also specify a `required`
 to explain which parts of the processed data, we are interested in:
 
 ```sh
@@ -133,7 +139,9 @@ curl -X POST "{{ nomad_url() }}/v1/entries/archive/download/query" \
 -H 'Content-Type: application/json' \
 -d '{
     "query": {
-        "datasets.doi": "10.17172/NOMAD/2023.11.17-2"
+        "results.material.elements": {
+            "all": ["Ti", "O"]
+        }
     },
     "required": {
         "metadata": {
@@ -159,4 +167,4 @@ with one json file per entry. There are no directories and the files are named
 `<entry-id>.json`. To associate the json files with entries, you should require
 information that tells you more about the entries, e.g. `required.metadata.mainfile`.
 
-See also the [How to access processed data](./archive_query.md) how-to guide.
+See also [How-to guides > ... > Access processed data](./archive_query.md).

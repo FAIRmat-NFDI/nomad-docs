@@ -1,239 +1,227 @@
-# How to publish data using Python
+# How to manage data with Python
 
-## What you will learn
+In this guide, you will use Python's `requests` package to create and manage a
+NOMAD project through direct calls to the NOMAD API. You will add files,
+monitor processing, update metadata, publish the project, and optionally assign
+a DOI.
 
-- How to use the Python `requests` module to perform basic data management functions in NOMAD.
+The GUI calls the user-facing container a *project*, while the API represents
+the same container as an *upload* resource. Consequently, API paths and fields
+use names such as `uploads` and `upload_id`.
 
-## Recommended preparation
+## Before you begin
 
-- {{ nav_link("tutorial/upload_publish.md", breadcrumb=True) }}
+Install `requests` in your Python environment:
 
-## Further resources
+```sh
+pip install requests
+```
 
-- [Use the API](./api.md)
-- [nomad-utility-workflows > How-to Guides > Perform API Calls](https://fairmat-nfdi.github.io/nomad-utility-workflows/how_to/use_api_functions.html){:target="_blank" rel="noopener"}
+[Create a personal access token](./auth.md#create-a-pat) with the
+`uploads:read`, `uploads:write`, and `uploads:publish` scopes, then
+[save it in the `NOMAD_PAT` environment variable](./auth.md#use-a-pat).
+Assigning a DOI also requires the `uploads:assign_doi` scope.
 
-## Uploading, changing metadata, and publishing via Python API
+The examples below use the NOMAD test deployment. Change `api_url` only when
+you are ready to work with another deployment.
 
-The [NOMAD API](api.md) allows uploading, publishing, etc. using a local Python environment, as an alternative to the NOMAD GUI. An overview of all API functionalities is provided in [How to use the API](api.md)
+```python
+api_url = 'https://nomad-lab.eu/prod/v1/test/api/v1'
+```
 
-We have prepare some simple Python functions to facilitate use of this API. For use as demonstrated below, copy the following code into a file called `nomad_api.py`:
+!!! warning
+    Publishing is irreversible. Use the test deployment while developing and
+    validating your script. Publish on NOMAD Central only when you have the
+    rights to the data and can release them under the required license.
+
+## Define the API functions
+
+Create a file named `nomad_api.py` containing these functions:
 
 ```python
 import os
+import time
+from pathlib import Path
+
 import requests
 
 
-def create_dataset(nomad_url, dataset_name):
-    """Create a dataset to group a series of NOMAD entries"""
-    try:
+def auth_headers():
+    return {'Authorization': f'Bearer {os.environ["NOMAD_PAT"]}'}
+
+
+def create_project(api_url, file_path):
+    """Create a project and add a file or compressed file to it."""
+    path = Path(file_path)
+    with path.open('rb') as file_object:
         response = requests.post(
-            nomad_url + 'datasets/',
-            headers={
-                'Authorization': f'Bearer {os.environ["NOMAD_PAT"]}',
-                'Accept': 'application/json',
-            },
-            json={'dataset_name': dataset_name},
-            timeout=10,
+            f'{api_url}/uploads',
+            params={'file_name': path.name},
+            headers=auth_headers(),
+            data=file_object,
+            timeout=60,
         )
-        dataset_id = response.json().get('dataset_id')
-        if dataset_id:
-            return dataset_id
-
-        print('response is missing dataset_id: ')
-        print(response.json())
-        return
-    except Exception:
-        print('something went wrong trying to create a dataset')
-        return
+    response.raise_for_status()
+    return response.json()['upload_id']
 
 
-def upload_to_NOMAD(nomad_url, upload_file):
-    """Upload a single file as a new NOMAD upload. Compressed zip/tar files are
-    automatically decompressed.
-    """
-    with open(upload_file, 'rb') as f:
-        try:
-            response = requests.post(
-                f'{nomad_url}uploads?file_name={os.path.basename(upload_file)}',
-                headers={
-                    'Authorization': f'Bearer {os.environ["NOMAD_PAT"]}',
-                    'Accept': 'application/json',
-                },
-                data=f,
-                timeout=30,
-            )
-            upload_id = response.json().get('upload_id')
-            if upload_id:
-                return upload_id
-
-            print('response is missing upload_id: ')
-            print(response.json())
-            return
-        except Exception:
-            print('something went wrong uploading to NOMAD')
-            return
+def get_project(api_url, upload_id):
+    """Return the backend metadata for a project."""
+    response = requests.get(
+        f'{api_url}/uploads/{upload_id}',
+        headers=auth_headers(),
+        timeout=30,
+    )
+    response.raise_for_status()
+    return response.json()['data']
 
 
-def check_upload_status(nomad_url, upload_id):
-    """
-    # upload success => returns 'Process publish_upload completed successfully'
-    # publish success => 'Process publish_upload completed successfully'
-    """
-    try:
-        response = requests.get(
-            nomad_url + 'uploads/' + upload_id,
-            headers={'Authorization': f'Bearer {os.environ["NOMAD_PAT"]}'},
-            timeout=30,
-        )
-        status_message = response.json().get('data').get('last_status_message')
-        if status_message:
-            return status_message
-
-        print('response is missing status_message: ')
-        print(response.json())
-        return
-    except Exception:
-        print('something went wrong trying to check the status of upload' + upload_id)
-        # upload gets deleted from the upload staging area once published...or in this case something went wrong
-        return
+def wait_for_processing(api_url, upload_id, interval=2):
+    """Wait until the current project operation has finished."""
+    while True:
+        project = get_project(api_url, upload_id)
+        if not project['process_running']:
+            return project
+        time.sleep(interval)
 
 
-def edit_upload_metadata(nomad_url, upload_id, metadata):
-    """
-    Example of new metadata:
-    upload_name = 'Test_Upload_Name'
-    metadata = {
-        "metadata": {
-        "upload_name": upload_name,
-        "references": ["https://doi.org/xx.xxxx/xxxxxx"],
-        "datasets": dataset_id,
-        "embargo_length": 0,
-        "coauthors": ["coauthor@affiliation.de"],
-        "comment": 'This is a test upload...'
-        },
-    }
-    """
-
-    try:
-        response = requests.post(
-            nomad_url + 'uploads/' + upload_id + '/edit',
-            headers={
-                'Authorization': f'Bearer {os.environ["NOMAD_PAT"]}',
-                'Accept': 'application/json',
-            },
-            json=metadata,
-            timeout=30,
-        )
-        return response
-    except Exception:
-        print('something went wrong trying to add metadata to upload' + upload_id)
-        return
+def edit_project_metadata(api_url, upload_id, metadata):
+    """Update project metadata and shared metadata for its entries."""
+    response = requests.post(
+        f'{api_url}/uploads/{upload_id}/edit',
+        headers=auth_headers(),
+        json={'metadata': metadata},
+        timeout=60,
+    )
+    response.raise_for_status()
+    return response.json()
 
 
-def publish_upload(nomad_url, upload_id):
-    """Publish an upload"""
-    try:
-        response = requests.post(
-            nomad_url + 'uploads/' + upload_id + '/action/publish',
-            headers={
-                'Authorization': f'Bearer {os.environ["NOMAD_PAT"]}',
-                'Accept': 'application/json',
-            },
-            timeout=30,
-        )
-        return response
-    except Exception:
-        print('something went wrong trying to publish upload: ' + upload_id)
-        return
+def publish_project(api_url, upload_id):
+    """Publish a project."""
+    response = requests.post(
+        f'{api_url}/uploads/{upload_id}/action/publish',
+        headers=auth_headers(),
+        timeout=30,
+    )
+    response.raise_for_status()
+    return response.json()
+
+
+def assign_project_doi(api_url, upload_id):
+    """Assign a DOI to a published project."""
+    response = requests.post(
+        f'{api_url}/uploads/{upload_id}/action/assign-doi',
+        headers=auth_headers(),
+        timeout=30,
+    )
+    response.raise_for_status()
+    return response.json()
 ```
 
-[Create a personal access token (PAT)](./auth.md#create-a-pat) with at least `"datasets:write"`,
-`"uploads:read"`, `"uploads:write"` and `"uploads:publish"` permissions, for accessing your unpublished uploads.
-And [save it as environment variable `NOMAD_PAT`](./auth.md#use-a-pat).
+Calling `raise_for_status()` makes `requests` raise an exception when NOMAD
+returns an unsuccessful HTTP status. For production scripts, catch
+`requests.HTTPError` and report the response body so that API errors remain
+visible.
 
-Now, we will demonstrate how to use these functions. Within a notebook or Python script, import the above functions:
+## Create a project
+
+Import the functions and add a file or compressed file. NOMAD creates the
+project and returns its backend `upload_id`:
 
 ```python
-from nomad_api import *
+from nomad_api import create_project, wait_for_processing
+
+upload_id = create_project(api_url, 'test_data.zip')
+print('Project ID:', upload_id)
 ```
 
-Define the NOMAD API endpoint:
+The `upload_id` is the value displayed as **Project ID** under **SETTINGS** in
+the GUI. If the supplied files contain parser-supported mainfiles, NOMAD
+creates and processes the corresponding entries automatically.
+
+Wait for processing and inspect its outcome:
 
 ```python
-# nomad_url = 'https://nomad-lab.eu/prod/v1/api/v1/'  # production nomad
-nomad_url = (
-    'https://nomad-lab.eu/prod/v1/test/api/v1/'  # test nomad (deleted occassionally)
-)
+project = wait_for_processing(api_url, upload_id)
+print('Process status:', project['process_status'])
+print('Errors:', project['errors'])
+print('Warnings:', project['warnings'])
 ```
 
-Create a dataset for grouping uploads that belong to, e.g., a publication:
+Confirm that `process_status` is `SUCCESS`, review all warnings, and resolve any
+errors before continuing.
+
+## Update the metadata
+
+The `/uploads/{upload_id}/edit` endpoint can update project-level metadata and
+metadata shared by the entries in the project. This example sets the project
+name and adds a comment and reference to its entries:
 
 ```python
-dataset_id = create_dataset(nomad_url, 'Test_Dataset')
-```
+from nomad_api import edit_project_metadata
 
-Upload some test data to NOMAD:
-
-```python
-upload_id = upload_to_NOMAD(nomad_url, 'test_data.zip')
-```
-
-Check the status to make sure the upload was processed correctly:
-
-```python
-last_status_message = check_upload_status(nomad_url, upload_id)
-print(last_status_message)
-```
-
-The immediate result may be:
-
-    'Waiting for results (level 0)'
-
-After some time you will get:
-
-    'Process process_upload completed successfully'
-
-??? tip
-
-    Some data, e.g., large systems or molecular dynamics trajectories, take some time to process. In this case, you can call the above function intermittantly, e.g., in a while loop with a sleep call in between, waiting for `last_status_message` to be "Process process_upload completed successfully"
-
-Now that the upload processing is complete, we can add coauthors, references, and other comments, as well as link to a dataset and provide a proper name for the upload:
-
-```python
 metadata = {
-    'metadata': {
-        'upload_name': 'Test_Upload',
-        'references': ['https://doi.org/xx.xxxx/x.xxxx'],
-        'datasets': dataset_id,
-        'embargo_length': 0,
-        'coauthors': ['coauthor@affiliation.de'],
-        'comment': 'This is a test upload...',
-    },
+    'upload_name': 'API example project',
+    'comment': 'Created using direct requests to the NOMAD API.',
+    'references': ['https://doi.org/xx.xxxx/example'],
+    'embargo_length': 0,
 }
-response = edit_upload_metadata(nomad_url, upload_id, metadata)
+
+response = edit_project_metadata(api_url, upload_id, metadata)
+print(response)
 ```
 
-Check the upload again to make sure that the metadata was changed:
+Use NOMAD user IDs when setting collaborators through fields such as
+`coauthors` or `reviewers`. See the interactive API documentation for all
+metadata fields accepted by this endpoint.
+
+## Publish the project
+
+Before publishing, ensure that every intended entry was processed successfully
+and that its metadata and files are complete and correct. Then request
+publication:
 
 ```python
-last_status_message = check_upload_status(nomad_url, upload_id)
-print(last_status_message)
+from nomad_api import publish_project, wait_for_processing
+
+publish_project(api_url, upload_id)
+project = wait_for_processing(api_url, upload_id)
+
+print('Process status:', project['process_status'])
+print('Published:', project['published'])
+print('Errors:', project['errors'])
+print('Warnings:', project['warnings'])
 ```
 
-    'Process edit_upload_metadata completed successfully'
+The publication request starts an asynchronous operation. Confirm that its
+final `process_status` is `SUCCESS`, `published` is `True`, and `errors` is
+empty.
 
-Now, we are ready to publish:
+## Optionally assign a DOI
+
+DOI assignment is available on NOMAD Central and on NOMAD Oasis deployments
+with DataCite integration enabled. The project must be published, contain at
+least one entry, and be owned by the authenticated user.
+
+!!! warning
+    DOI assignment is irreversible. The DOI remains permanently associated
+    with the project.
 
 ```python
-response = publish_upload(nomad_url, upload_id)
+from nomad_api import assign_project_doi
+
+response = assign_project_doi(api_url, upload_id)
+print(response['data']['doi'])
 ```
 
-Once again check the status:
+The NOMAD test deployment normally has no DataCite integration, so run this
+step only against a deployment where DOI assignment is configured.
 
-```python
-last_status_message = check_upload_status(nomad_url, upload_id)
-print(last_status_message)
-```
+## Related pages
 
-    'Process publish_upload completed successfully'
+- {{ nav_link("tutorial/upload_publish.md", breadcrumb=True) }}
+- {{ nav_link("tutorial/upload_publish_api.md", breadcrumb=True) }}
+- {{ nav_link("howto/manage/program/api.md", breadcrumb=True) }}
+- {{ nav_link("howto/manage/program/auth.md", breadcrumb=True) }}
+- [NOMAD Utility Workflows > How-to Guides > Perform API Calls](https://fairmat-nfdi.github.io/nomad-utility-workflows/how_to/use_api_functions.html){:target="_blank" rel="noopener"}
