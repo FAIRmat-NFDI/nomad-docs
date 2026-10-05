@@ -653,7 +653,7 @@ This folder should be treated as run-scoped state; do not place global caches he
 
 ### Quick decision rule
 
-- NOMAD dataset/raw data -> upload files.
+- NOMAD project/raw data -> upload files.
 - Reusable across runs/users/actions -> global `action_artifacts_dir()`.
 - User-uploaded run input files -> `action_instance_assets_dir(action_instance_id)`.
 - Plugin-generated run outputs/intermediates -> `action_instance_artifacts_dir(action_instance_id)`.

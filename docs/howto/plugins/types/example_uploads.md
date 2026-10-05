@@ -1,6 +1,18 @@
 # How to create an example upload
 
-Example uploads can be used to add representative collections of data for your plugin. Example uploads are available to end users on the **Uploads** page under **Add example uploads**. There, users can instantiate an example upload with a click. This can be very useful for educational or demonstration purposes but also for testing.
+An example upload is a plugin entry point that provides a representative
+collection of data. *Example upload* is the backend and plugin term; in the GUI,
+users instantiate the collection as a pre-populated example project. This is
+useful for education, demonstrations, and testing.
+
+Users can create an example project in either of these locations:
+
+- On the landing page, select **Add Example Project** under **Quick Actions**.
+- On the **Projects** page, select **ADD EXAMPLE PROJECT** above the
+  **All Projects** table.
+
+The available examples depend on the example-upload entry points installed in
+the NOMAD deployment.
 
 This documentation shows you how to create a plugin entry point for an example upload. You should read the [introduction to plugins](../plugins.md) to have a basic understanding of how plugins and plugin entry points work in the NOMAD ecosystem.
 
