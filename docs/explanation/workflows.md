@@ -13,6 +13,7 @@ the data stored in those Entries.
 ## Related pages
 
 - {{ nav_link("howto/manage/gui/workflows.md", breadcrumb=True) }}
+- {{ nav_link("explanation/processing.md", breadcrumb=True) }}
 - {{ nav_link("howto/schemas/define.md", breadcrumb=True) }}
 - {{ nav_link("tutorial/eln/built_in_templates.md", breadcrumb=True) }}
 

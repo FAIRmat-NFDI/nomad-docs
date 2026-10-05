@@ -13,14 +13,14 @@ the workflow file, as in the downloadable examples in this guide.
 
 ## Recommended preparation
 
-- [How-to guides > ... > Upload and publish data](upload.md)
-- [Explanation > From files to data](../../../explanation/basics.md)
-- [Explanation > Data structure](../../../explanation/data.md)
+- {{ nav_link("howto/manage/gui/upload.md", breadcrumb=True) }}
+- {{ nav_link("explanation/basics.md", breadcrumb=True) }}
+- {{ nav_link("explanation/data.md", breadcrumb=True) }}
 
 ## Further resources
 
-- [Explanation > Workflows](../../../explanation/workflows.md)
-- [Tutorials > Manage workflows and projects](../../../tutorial/workflows_projects.md)
+- {{ nav_link("explanation/workflows.md", breadcrumb=True) }}
+- {{ nav_link("tutorial/workflows_projects.md", breadcrumb=True) }}
 
 ## Overview
 
@@ -620,6 +620,8 @@ workflow. -->
 The abstract workflow schema supports general tools such as workflow searches,
 navigation, and graph visualization. You can extend it with specialized
 references, workflow or task parameters, and other workflow-specific metadata.
+The distinction between these general and specialized schemas is described in
+[Explanation > Workflows > Custom and standardized workflows](../../../explanation/workflows.md#custom-and-standardized-workflows).
 
 The following example defines a specialized `GeometryOptimizationWorkflow`
 with a convergence threshold and a reference to the final calculation:
