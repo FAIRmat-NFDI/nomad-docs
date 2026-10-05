@@ -133,7 +133,7 @@ to the current project folder.
 
     - Stripping is filename-based. Ensure `POTCAR` appears in the filename for licensed files.
     - `POTCAR` files **must be uncompressed** for automated stripping to work. Compressed files (e.g., `POTCAR.gz`) will not be properly processed and may be entirely removed without creating stripped versions.
-    - Stripping only occurs upon publication. We strongly recommend **against** temporarily making unpublished uploads publicly visible when they contain licensed material.
+    - Stripping only occurs upon publication. We strongly recommend **against** temporarily making unpublished projects publicly visible when they contain licensed material.
 
     While NOMAD provides this service as a courtesy, **uploaders remain responsible for
     verifying overall license compliance**.
@@ -216,7 +216,7 @@ the files remains restricted until the embargo ends.
 On NOMAD Central, or on a NOMAD Oasis deployment with DataCite integration
 enabled, **SETTINGS** > **General** also contains **Digital Object Identifier
 (DOI)**. After publishing, select **ASSIGN DOI** and confirm the action. The DOI
-is assigned directly to the project; creating a dataset is not required.
+is assigned directly to the project.
 
 !!! warning
     Publication and DOI assignment is irreversible: the DOI remains permanently associated with the project.

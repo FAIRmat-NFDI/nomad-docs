@@ -192,7 +192,7 @@ Hover over individual data points to inspect their values. Use the **ETL** widge
 
 Notice which ETL materials occur among entries with higher open-circuit voltages. The plot shows relationships in the available data; it does not by itself establish that the ETL material causes a change in device performance.
 
-Click an entry to inspect its full metadata, associated datasets, and publication information.
+Click an entry to inspect its full metadata and publication information.
 
 ---
 

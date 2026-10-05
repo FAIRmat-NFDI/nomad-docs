@@ -45,7 +45,7 @@ files from one installation to another.
 
 We implemented a *bundle* format for published data. A bundle is a zip file that contains
 all raw files, archive files of an *upload*, and a bit of metadata, e.g. with
-information on upload name, dates, authors, datasets, etc. This bundle format
+information on upload name, dates, authors, etc. This bundle format
 is our tranfer file format. Bundles are exported on one end and imported on
 the other.
 

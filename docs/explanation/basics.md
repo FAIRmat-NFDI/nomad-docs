@@ -12,12 +12,15 @@ analysis tools independent from specific file formats.
   <figcaption>NOMAD's datamodel and processing</figcaption>
 </figure>
 
-## Uploads
+## Projects and uploads
 
-Users create **uploads** to organize files. Think of an upload like a project:
-many files can be put into a single upload and an upload can be structured with directories.
-You can collaborate on uploads, share uploads, and publish uploads. The files in an
-upload are called **raw files**.
+Users create **projects** to organize files and entries. A project can contain
+many files arranged in directories. Project owners can invite collaborators and
+publish the project. The files in a project are called **raw files**.
+
+In NOMAD's backend, each project is represented by an **upload** resource.
+Technical documentation therefore uses terms such as *upload API*, *upload ID*,
+and *upload processing* for operations on the corresponding backend resource.
 Raw files are managed by users and they are never changed by NOMAD.
 
 !!! note
@@ -41,29 +44,15 @@ the processed data, is up to the parser.
 
 All uploaded **raw files** are analysed to find files with a recognized format. Each file
 that follows a recognized format is a **mainfile**. For each mainfile, NOMAD will create
-a database **entry**. The entry is eternally matched to the mainfile. The entry ID, for example,
+a database **entry**. The entry remains matched to the mainfile. The entry ID, for example,
 is a hash over the upload ID and the mainfile path (and an optional key) within the upload.
-This **matching** process is automatic, and users cannot create entries
-manually.
+This **matching** process is automatic for parser-supported files.
 
 !!! note
-    We say that raw files are not changed by NOMAD and that users cannot create entries,
-    but what about ELNs? There is a *create entry* button in the UI?
-
-    However,
-    NOMAD will simply create an editable **mainfile** that indirectly creates an entry.
-    The user might use NOMAD as an editor to change the file, but the content is
-    determined by the users. Contrary to the processed data that is created
-    from raw files by NOMAD.
-
-## Datasets
-
-Users can build collections of entries to form **datasets**. You can imagine datasets
-like tags or albums in other systems. Each entry can be contain in many datasets and
-a dataset can hold many entries. Datasets can also overlap. Datasets are only
-indirectly related to files. The main purpose of **datasets** in NOMAD is to have citable
-collections of data. Users can get a DOI for their datasets. Datasets have no influence
-on the processing of data.
+    Users can also create schema-based entries from the GUI. NOMAD creates an
+    editable **mainfile** for such an entry and processes it in the same way as
+    other mainfiles. The user controls the file content through the data editor;
+    NOMAD creates the processed data from that file.
 
 ## Processing
 

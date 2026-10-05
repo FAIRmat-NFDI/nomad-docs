@@ -41,13 +41,6 @@ An *author* is typically a natural person that has uploaded a piece of data into
 has authorship over it. Often *authors* are [users](#user), but not always.
 Therefore, we have to distinguish between authors and users.
 
-## Dataset
-
-Users can organize [entries](#entry) into *datasets*. Datasets are not created automatically,
-don't confuse them with [uploads](#upload). Datasets can be compared to albums, labels, or tags
-on other platforms. Datasets are used to reference a collection of data and users can get a DOI for their
-datasets.
-
 ## Deployment (NOMAD Oasis)
 
 NOMAD *Deployment* refers to a live instance of a NOMAD [distribution](#distribution-distro) running on some hardware. A deployment is also known as an *Oasis*.
@@ -67,7 +60,7 @@ are edited (e.g. which type of widget) can be controlled through [annotations](#
 ## Entry
 
 Data in NOMAD is organized in *entries* (as in "database *entry*"). Entries have an
-*entry ID*. Entries can be searched for and entries have individual pages on the NOMAD GUI. Entries are always
+*entry ID*. Entries can be searched for and have individual pages in the NOMAD GUI. Entries are always
 associated with [raw files](#raw-file), where one of these files is the [mainfile](#mainfile).
 Raw files are processed to create the [processed data](#processed-data) (or the [archive](#archive))
 for an entry.
@@ -85,8 +78,8 @@ of an entry is retrieved from that mainfile.
 ## Metadata
 
 In NOMAD *metadata* refers to a specific technical sub-set of [processed data](#processed-data).
-The metadata of an [entry](#entry) comprises ids, timestamps, hashes, authors, datasets,
-references, used schema, and other information.
+The metadata of an [entry](#entry) comprises IDs, timestamps, hashes, authors,
+references, the used schema, and other information.
 
 ## Metainfo
 
@@ -143,6 +136,13 @@ processed data is further refined by running [normalizers](#normalizer). Last, t
 processed data is saved and indexed. The exact processing time depends on the size of the
 uploaded data and users can track the processing state of each entry in the GUI.
 
+## Project
+
+A *project* is the user-facing container for files and [entries](#entry) in the
+NOMAD GUI. Project owners can invite collaborators, publish the project, and,
+when supported by the deployment, assign it a DOI. Each project is represented
+by an [upload](#upload) resource in NOMAD's backend.
+
 ## Quantity
 
 All [processed data](#processed-data) is structured into sections and quantities. Sections
@@ -156,9 +156,9 @@ the respective schema.
 
 ## Raw file
 
-A *raw file* is any file that was provided by a NOMAD user. A raw-file might produce an
-[entry](#entry), if it is of a supported file-format, but does not have to. Raw files
-always belong to an [upload](#upload) and might be associated with an [entry](#entry)
+A *raw file* is any file that was provided by a NOMAD user. A raw file might produce an
+[entry](#entry), if it is of a supported file format, but does not have to. Raw files
+always belong to a [project](#project) and might be associated with an [entry](#entry)
 (in this case, raw-files are also [mainfiles](#mainfile)).
 
 The sum of all raw files is also referred to as the *Repository*. This is an old term
@@ -199,15 +199,10 @@ all properties (subsections, quantities) from other section definitions using th
 
 ## Upload
 
-NOMAD organizes [raw-files](#raw-file) (and all [entries](#entry) created from them)
-in *uploads*. Uploads consist of a directory structure of raw-files and a list of
-respective entries.
-
-Uploads are created by a single [user](#user), the *owner*. Uploads have two states.
-Initially, they are mutable and have limited visibility. Owners can invite other to
-collaborate and those users can add/remove/change data.
-The owner can publish an upload at some point, where the upload becomes immutable and visible
-to everyone. Uploads are the smallest unit of data that can be individually shared and published.
+An *upload* is the backend resource that represents a [project](#project). It
+contains the project's [raw files](#raw-file) and the [entries](#entry) created
+from them. API endpoints, configuration options, processing terminology, and
+identifiers such as `upload_id` retain the term *upload*.
 
 ## User
 

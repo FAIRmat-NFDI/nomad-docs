@@ -1,6 +1,6 @@
 # Data structure
 
-The basic unit of data in NOMAD is the [*entry*](../reference/glossary.md#entry). An entry typically corresponds to one file in an [upload](../reference/glossary.md#upload) that NOMAD recognizes and processes, such as the main output file of a simulation code, a measurement file, or an [ELN](../reference/glossary.md#eln) form. Each entry has its own ID and is found, viewed, and accessed independently of the others. Everything NOMAD knows about an entry is kept in one structured document, the entry's [archive](../reference/glossary.md#archive).
+The basic unit of data in NOMAD is the [*entry*](../reference/glossary.md#entry). An entry typically corresponds to one file in a [project](../reference/glossary.md#project) that NOMAD recognizes and processes, such as the main output file of a simulation code, a measurement file, or an [ELN](../reference/glossary.md#eln) form. Each entry has its own ID and is found, viewed, and accessed independently of the others. Everything NOMAD knows about an entry is kept in one structured document, the entry's [archive](../reference/glossary.md#archive).
 
 To understand how the data in an entry is organized, you need three concepts, which this page covers in turn:
 
@@ -34,7 +34,7 @@ flowchart LR
 Of these subsections, `data` carries the entry's actual content, while the others describe, summarize, or relate it:
 
 - `data`: Holds the entry-specific content and is where custom schemas plug in. A subclass of `EntryData`. See [The data section](#the-data-section).
-- `metadata`: Added by NOMAD during processing. It contains ids, timestamps, authors, datasets, references, and an index of all the sections and quantities used in the entry, which search relies on. Users and plugins cannot extend it. Instance of `EntryMetadata`.
+- `metadata`: Added by NOMAD during processing. It contains IDs, timestamps, authors, references, and an index of all the sections and quantities used in the entry, which search relies on. Users and plugins cannot extend it. Instance of `EntryMetadata`.
 - `results`: A summary of the entry that follows a fixed structure, independent of the data type, with the subsections `material`, `method`, `properties`, and `eln`. Parsers or uploaded archive files can populate it directly, but it is usually populated during normalization. Its structure is controlled by NOMAD, and some of the search is built on it. Instance of `Results`.
 - `workflow2`: Describes the entry as a [workflow](./workflows.md) of tasks with inputs and outputs. Instance of `Workflow`.
 - `definitions`: is only filled for schema entries and contains the definitions they provide. Instance of `Package`.
@@ -80,7 +80,7 @@ A schema reaches NOMAD in one of three ways, and which one you use decides who c
 
 - **Built into NOMAD.** The definitions that ship with the `nomad-lab` package itself: the root `EntryArchive` and `metadata` in `nomad.datamodel`, and the shared, domain-independent definitions in `nomad.datamodel.metainfo`, including the built-in base sections. They are present in every installation.
 - **A Python schema package in a plugin.** A plugin declares a schema package entry point whose definitions are loaded at startup. Once the plugin is installed, the schema is available to every user of that installation, and it can carry `normalize` functions that NOMAD runs during processing.
-- **An uploaded archive file.** Any user can upload a `.archive.yaml` or `.archive.json` file that fills the `definitions` section. NOMAD stores the package and makes it available within the upload it was uploaded to. No installation and no plugin development is needed, but the schema does not leave that upload, and it cannot carry `normalize` functions.
+- **An uploaded archive file.** Any user can upload a `.archive.yaml` or `.archive.json` file that fills the `definitions` section. NOMAD stores the package and makes it available within the project to which it was uploaded. No installation and no plugin development is needed, but the schema does not leave that project, and it cannot carry `normalize` functions.
 
 The two syntaxes describe the same thing, and there is a one-to-one translation between them. For the trade-off between them and for the mechanics of each route, see [How-to guides > ... > Start working with schemas](../howto/schemas/schemas.md#choose-python-or-yaml).
 
