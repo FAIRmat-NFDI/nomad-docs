@@ -381,7 +381,7 @@ So far, you have created a standalone schema section for parsing and visualizing
 
 Now, you will reuse the `Optical_absorption` section inside the polymer-processing ELN schema created in the [previous tutorial](custom_eln_yaml.md).
 
-This allows you to upload an optical absorption file and visualize the spectrum directly within the same ELN entry.
+This allows you to upload an optical absorption file and visualize the spectrum directly within the same ELN entry. The plot belongs to the **Optical absorption** subsection: open this subsection and then its **Figures** to see it.
 
 !!! task "Task"
     Add the `Optical_absorption` section as a subsection in the `polymer_processing.archive.yaml` custom ELN schema.
@@ -393,7 +393,7 @@ This allows you to upload an optical absorption file and visualize the spectrum 
 ??? success "Solution"
     In your `polymer_processing.archive.yaml`, add an `Optical_absorption` subsection under `Experiment_Information` and give it the same section definition you built in this tutorial (the one that includes `TableData` and `PlotSection`, with `PlotSection` listed first).
 
-    The complete example below shows one possible result, where `Optical_absorption` is added at the same level as `Sample`, `Solution`, and `Preparation`.
+    The complete example below shows one possible result, where `Optical_absorption` is added at the same level as `Sample`, `Solution`, and `Preparation`. It also contains an optional `info_about_data` quantity for notes about the measurement, which is not needed for parsing or plotting.
 
     ```yaml
     definitions:

@@ -537,7 +537,7 @@ Add the following `sub_sections:` block inside the `Solution` subsection:
     Indentation matters in YAML because it defines the structure of your schema.
 
     - Keys at the same level should have the same indentation (for example, `Sample`, `Solution`, and `Preparation` under `sub_sections:`).
-    - Keys that define a section (`base_sections`, `quantities`, `sub_sections`, `m_annotations`) must be indented one level (two spaces) deeper than the section name.
+    - Keys that define a section (`base_sections`, `quantities`, `sub_sections`, `m_annotations`) must be indented one level (two spaces) deeper than the section name. In a subsection, they are indented one level deeper than its `section:` key, i.e., two levels (four spaces) deeper than the subsection name.
     - Keys that define a quantity (`type`, `unit`, `default`, `m_annotations`) must be indented one level (two spaces) deeper than the quantity name.
 
 ??? success "Checkpoint 6 (final file)"
@@ -650,6 +650,6 @@ Test the final schema in the project that you created at Checkpoint 3:
 3. Click **NEW ENTRY**. In the **CUSTOM SCHEMAS** tab, keep **This project** selected and click `Experiment_Information`.
 4. Enter `polymer_film_experiment_2` as the **Filename** and click **CREATE**.
 
-In addition to the fields of the main section, the new entry now lists the subsections `Sample`, `Solution`, and `Preparation` under **Subsections**. To add a subsection to the entry, click the **(+)** button next to its name, fill in its fields, and click **SAVE**.
+In addition to the fields of the main section, the new entry now lists the subsections `Sample`, `Solution`, and `Preparation` under **Subsections**. To add a subsection, e.g., `Sample`, click the **(+)** button next to its name, fill in its fields, and click **SAVE**.
 
 ![ELN entry with the Sample, Solution, and Preparation subsections and their (+) buttons](images/custom_eln_yaml_2.png)

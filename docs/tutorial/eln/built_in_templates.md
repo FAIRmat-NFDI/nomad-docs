@@ -1,6 +1,6 @@
 # Use built-in ELN templates in NOMAD
 
-In this tutorial, we use NOMAD’s Electronic Lab Notebook (ELN) functionality to document an experiment in the NOMAD GUI. We follow the experimental workflow from defining substances and instruments to recording processing steps and measurements, using built-in ELN templates to structure and interlink the resulting entries. By the end of the tutorial, we will have documented a complete experiment as a coherent, navigable ELN record in NOMAD.
+In this tutorial, we use NOMAD’s Electronic Lab Notebook (ELN) functionality to document an experiment in the NOMAD GUI. We follow the experimental workflow from defining substances and instruments to recording processing steps and measurements, using built-in ELN templates to structure and interlink the resulting entries. By the end of the tutorial, we will have documented an example experiment as a coherent, navigable ELN record in NOMAD.
 
 ![From entities and activities to structure ELN](images/ELN_0.png)
 
@@ -170,7 +170,7 @@ You can reference other entries in the same way wherever an ELN field refers to 
 
 ??? task "Create an ELN entry for a sample"
 
-    Create an ELN entry for the P3HT solution in chloroform with the *Generic Sample ELN* schema and the filename `P3HT_solution_in_CF`. Reference its components, the `P3HT_powder` and `Chloroform` entries, in the same way as above.
+    Create an ELN entry for the P3HT solution in chloroform with the *Generic Sample ELN* schema and the filename `P3HT_solution_in_CF`. Reference its components, the `P3HT_powder` and `Chloroform` entries, in the same way as above: add one component, click **SAVE**, click **data** in the path at the top, and add the second one.
 
     Include as many details as you like, e.g., a **Description** and **Tags**.
 
@@ -226,7 +226,7 @@ Now, let's create an entry for the **preparation of the P3HT solution**. Follow 
 
     - **Steps:** Define the step-by-step procedure for the material processing.
     - **Instruments:** List the instruments used in the process.
-    - **Samples:** Specify the samples that are created or used in the process.
+    - **Samples:** Reference the samples that have undergone the process. NOMAD shows them as outputs of the process in the workflow graph.
     - **Process identifiers:** Identifiers of the process, from which NOMAD creates the **ID**.
 
 Once the entry is created, we can fill in the relevant fields with detailed and accurate information. Fields can also be updated as needed to keep the entry accurate and useful.
@@ -236,10 +236,10 @@ Fill in the fields of the process entry, e.g., the **starting Time** and **endin
 1. Under **Subsections**, click the **(+)** button next to **Instruments**.
 2. Keep *InstrumentReference* and click the check mark (✓) next to **CHANGE SCHEMA** to confirm it.
 3. Reference the `Balance` entry in the **instrument reference** field, in the same way as you referenced the P3HT powder in the sample entry.
-4. Click **SAVE**.
+4. Click **SAVE**, and then click **data** in the path at the top to return to the process.
 
 ??? task "Reference a sample to your process ELN"
-    For the process entry created above, reference the sample entry `P3HT_solution_in_CF` in the **Samples** subsection. NOMAD then shows this sample as the output of the process in the workflow graph, as described below.
+    For the process entry created above, reference the sample entry `P3HT_solution_in_CF` in the **Samples** subsection, click **SAVE**, and then click **data** in the path at the top to return to the process. NOMAD then shows this sample as the output of the process in the workflow graph, as described below.
 
     If this sample entry does not exist yet, first create it with the *Generic Sample ELN* schema, as described in the sample task above.
 
@@ -343,7 +343,7 @@ NOMAD fills in the **step name**, the **starting time**, and the **activity ID**
 
     These entries have been created using the NOMAD ELN built-in schema, organized into folders, and categorized with custom tags.
 
-    You can drag and drop this file into a new project in NOMAD, e.g., `Example NOMAD ELN`, to view its contents.
+    To follow the search example below, create a new project named `Example NOMAD ELN` and upload this file with **UPLOAD FILES**. Wait until the processing status at the top right of the project page shows **Completed**. If it stays **Idle**, click the status, and switch on **Auto Reprocessing** in the **Processing status** panel.
 
 Imagine you have created multiple entries for substances, samples, instruments, processes, and measurements, and you need to quickly find a specific experiment or material. Instead of manually searching through files, NOMAD’s ELN allows you to search, filter, and organize your entries—saving you time and effort.
 
@@ -373,7 +373,7 @@ To search for entries in your ELN, select the **ENTRIES** tab on your project pa
     <div class="nav-arrow right" id="next2">→</div>
 </div>
 
-In the **ENTRIES** tab, you can enter specific keywords in the search bar to find relevant entries or create custom widgets to visualize your ELN data.
+In the **ENTRIES** tab, you can enter specific keywords in the search bar to find relevant entries or create custom widgets to visualize your ELN data. The widgets in the last image are created in the task below.
 
 ??? info "Filtering entries in NOMAD"
     NOMAD provides various filters that can be used to efficiently find your ELN entries, but the following two filters are particularly effective:
@@ -403,6 +403,6 @@ Widgets allow you to customize your search interface to better suit your data ex
 
     The new widget displays the ELN entry types in your project along with their corresponding counts.
 
-    You can now follow the same steps to create a custom widget for filtering by custom tags. In step 3, select `results.eln.tags` instead of `results.eln.sections`. The new widget allows you to quickly view and filter your entries by the custom tags you have assigned.
+    You can now follow the same steps to create a custom widget for filtering by custom tags. In step 3, select `results.eln.tags` instead of `results.eln.sections`, and in step 4, enter `My ELN tags` as the **Title**. The new widget allows you to quickly view and filter your entries by the custom tags you have assigned.
 
 ---
