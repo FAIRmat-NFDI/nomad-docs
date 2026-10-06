@@ -21,6 +21,7 @@ By the end of this how-to guide, you will:
 - Understand how to initialize `Transformer` with simple keyword arguments, dictionaries, or `Rules` objects.
 - Learn how to transform lists and repeating subsections using **array rules** (`[n]`, `[n1]`, `[*]`).
 - Know how to populate **default values across array elements** (e.g. adding missing `m_def` annotations).
+- Know how to **merge into existing data** with `update_mode` instead of replacing it.
 - Use conditional logic (regex evaluation) and rule references (`use_rule`) for complex workflows.
 
 ---
@@ -47,11 +48,12 @@ result = Transformer.map(data, target='version', default_value='1.0')
 # Output: {"version": "1.0"}
 ```
 
-You can also pass `inplace=True` to modify the input dictionary directly, or pass an existing `target_data` dictionary:
+By default, the result only contains the targets. Pass `inplace=True` to write the targets into a copy of the input instead, or pass an existing `target_data` dictionary:
 
 ```python
-# Modifies data in-place
-Transformer.map(data, source='user.last_name', target='surname', inplace=True)
+# Returns a copy of data with the target added, data itself is not modified
+result = Transformer.map(data, source='user.last_name', target='surname', inplace=True)
+# Output: {"user": {"first_name": "Alice", "last_name": "Smith"}, "age": 30, "surname": "Smith"}
 ```
 
 ### 2. Shorthand Initializations
@@ -79,6 +81,18 @@ Transformer.map(data, source='user.last_name', target='surname', inplace=True)
         {'source': 'input.x', 'target': 'output.x'},
         {'source': 'input.y', 'target': 'output.y'},
     ])
+    result = transformer.transform(data)
+    ```
+
+=== "Rules Dictionary"
+
+    ```python
+    transformer = Transformer({
+        'rules': {
+            'copy_x': {'source': 'input.x', 'target': 'output.x'},
+            'copy_y': {'source': 'input.y', 'target': 'output.y'},
+        }
+    })
     result = transformer.transform(data)
     ```
 
@@ -214,6 +228,10 @@ Transformer.map(
 # Result: {"items": [{"status": "pending"}, {"status": "pending"}, {"status": "pending"}]}
 ```
 
+!!! note "Wildcards only apply to lists"
+
+    `[*]` iterates over list elements, not over the keys of a dictionary. A target such as `data.[*]` raises a `ValueError`. To move all keys of a section into another section, target the section itself and use an `update_mode`, see [Merging into Existing Data](#merging-into-existing-data).
+
 ### 4. Conditional Rules in Arrays
 
 When applying conditions to repeating elements, you can use the array placeholder in the condition's `regex_path`. The placeholder dynamically resolves to the corresponding item's index:
@@ -236,6 +254,197 @@ rule = Rule(
 ```
 
 Only elements matching the condition will receive the target assignment.
+
+---
+
+## Merging into Existing Data
+
+By default, a rule replaces whatever already exists at its target. Set `update_mode` to merge the value into the existing target instead:
+
+| `update_mode`       | Fields only in the target | Fields in both      | Lists              |
+| ------------------- | ------------------------- | ------------------- | ------------------ |
+| `replace` (default) | removed                   | new value           | replaced           |
+| `overwrite`         | kept                      | new value wins      | replaced           |
+| `extend`            | kept                      | existing value wins | new items appended |
+
+`overwrite` and `extend` merge nested dictionaries recursively. If the existing value or the new value is not a dictionary, `replace` and `overwrite` both write the new value, while `extend` keeps the existing one.
+
+### 1. Moving a Section into Its Parent
+
+A common migration step is moving all fields of a subsection into its parent section without listing every field. The following moves the content of `pure_substance` into `data`:
+
+```python
+data = {
+    'data': {
+        'name': 'water',
+        'formula': 'old',
+        'tags': ['a'],
+        'pure_substance': {'formula': 'H2O', 'mass': 18.02, 'tags': ['b']},
+    }
+}
+
+result = Transformer.map(
+    data,
+    source='data.pure_substance',
+    target='data',
+    update_mode='overwrite',
+    delete_sources=True,
+    inplace=True,
+)
+```
+
+Output, depending on `update_mode`:
+
+=== "replace"
+
+    ```json
+    {"data": {"formula": "H2O", "mass": 18.02, "tags": ["b"]}}
+    ```
+
+    Everything else in `data`, such as `name`, is lost.
+
+=== "overwrite"
+
+    ```json
+    {"data": {"name": "water", "formula": "H2O", "tags": ["b"], "mass": 18.02}}
+    ```
+
+=== "extend"
+
+    ```json
+    {"data": {"name": "water", "formula": "old", "tags": ["a", "b"], "mass": 18.02}}
+    ```
+
+### 2. Setting a Default for All Rules
+
+Instead of setting `update_mode` on every rule, set it once for the whole rule set. A rule's own `update_mode` takes precedence:
+
+```python
+rules = {
+    'update_mode': 'extend',
+    'rules': {
+        'move_pure_substance': {'source': 'data.pure_substance', 'target': 'data'},
+        'move_label': {
+            'source': 'data.label',
+            'target': 'data.name',
+            'update_mode': 'overwrite',
+        },
+    },
+}
+```
+
+The same works with `Rules(update_mode='extend', rules={...})`. The update mode of a rule is determined in the following order:
+
+1. The rule's own `update_mode`.
+2. The `update_mode` of the rule set.
+3. The `update_mode` argument of `transform()` or `Transformer.map()`. This is useful to set a default without editing a rules file.
+4. `replace`.
+
+### 3. Combining Several Sources into One Target
+
+Rules are applied in order, so several rules can write into the same target. The first rule creates the target, the following rules merge into it:
+
+```python
+transformer = Transformer({
+    'rules': {
+        'move_a': {'source': 'a', 'target': 'b'},
+        'move_c': {'source': 'c', 'target': 'b', 'update_mode': 'extend'},
+    }
+})
+result = transformer.transform(
+    {'a': {'x': 1, 'l': [1]}, 'c': {'x': 2, 'y': 2, 'l': [2]}},
+    inplace=True,
+    delete_sources=True,
+)
+# Output: {"b": {"x": 1, "l": [1, 2], "y": 2}}
+```
+
+!!! warning "Use unique rule names"
+
+    Rules are stored in a dictionary. If two rules have the same name, only the last one is applied.
+
+### 4. Writing to the Root
+
+Use an empty `target` to write to the root of the target data:
+
+```python
+result = Transformer.map(
+    {'k': 0, 'metadata': {'author': 'Alice', 'year': 2024}},
+    source='metadata',
+    target='',
+    update_mode='overwrite',
+    delete_sources=True,
+    inplace=True,
+)
+# Output: {"k": 0, "author": "Alice", "year": 2024}
+```
+
+With the default `replace`, the root is replaced entirely, so all other data is lost. The value must be of the same type as the root, usually a dictionary, otherwise a `TypeError` is raised.
+
+### 5. Merging into Repeating Subsections
+
+`update_mode` works with array placeholders. The following moves each element of `elemental_composition` into the `nested_system` of the corresponding `sub_system`, keeping the existing `m_def`:
+
+```python
+data = {
+    'data': {
+        'elemental_composition': [
+            {'element': 'H', 'atomic_fraction': 0.67},
+            {'element': 'O', 'atomic_fraction': 0.33},
+        ],
+        'sub_system': [
+            {'label': 'hydrogen', 'nested_system': {'m_def': 'Element'}},
+            {'label': 'oxygen'},
+        ],
+    }
+}
+
+result = Transformer.map(
+    data,
+    source='data.elemental_composition[n1]',
+    target='data.sub_system[n1].nested_system',
+    update_mode='overwrite',
+    delete_sources=True,
+    inplace=True,
+)
+```
+
+Output:
+
+```json
+{
+  "data": {
+    "elemental_composition": [],
+    "sub_system": [
+      {
+        "label": "hydrogen",
+        "nested_system": {"m_def": "Element", "element": "H", "atomic_fraction": 0.67}
+      },
+      {
+        "label": "oxygen",
+        "nested_system": {"element": "O", "atomic_fraction": 0.33}
+      }
+    ]
+  }
+}
+```
+
+With `extend`, a `default_value` is only written where the target does not exist yet. This is useful to add a missing `m_def` without changing existing ones:
+
+```python
+result = Transformer.map(
+    {'sub_systems': [{'nested_system': {'m_def': 'Custom'}}, {'nested_system': {}}]},
+    target='sub_systems[n1].nested_system.m_def',
+    default_value='Element',
+    update_mode='extend',
+    inplace=True,
+)
+# Output: {"sub_systems": [{"nested_system": {"m_def": "Custom"}}, {"nested_system": {"m_def": "Element"}}]}
+```
+
+!!! warning "`extend` with `delete_sources`"
+
+    With `extend`, values that conflict with existing fields are not written. If you also set `delete_sources=True`, the source is still deleted, so these values are lost.
 
 ---
 
@@ -284,7 +493,7 @@ rules = {
 
 !!! important "Rule Overwriting"
 
-    The referenced rule's fields are overwritten by the local rule. This allows you to import shared mapping structures and override only specific attributes.
+    Fields set on the referenced rule overwrite the fields of the local rule. Fields that are not set on the referenced rule, such as `update_mode` or `default_value`, are taken from the local rule. This allows you to reuse shared mapping structures and only fill in the missing attributes locally.
 
 ### 3. Nested Structure Manipulation & JMESPath
 
@@ -308,3 +517,9 @@ Transformer.map(
     data, source='old_field', target='new_field', delete_sources=True, inplace=True
 )
 ```
+
+Only sources whose value was actually transferred are deleted:
+
+- Array placeholders are resolved, so `items[n]` deletes every transferred element of `items`. The emptied list itself is kept.
+- Sources of rules whose conditions are not met are kept.
+- A source is kept if its target lies inside it (for example `source='a'`, `target='a.copy'`), since deleting it would also delete the transferred data.
