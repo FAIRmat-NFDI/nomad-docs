@@ -22,6 +22,7 @@ By the end of this how-to guide, you will:
 - Learn how to transform lists and repeating subsections using **array rules** (`[n]`, `[n1]`, `[*]`).
 - Know how to populate **default values across array elements** (e.g. adding missing `m_def` annotations).
 - Know how to **merge into existing data** with `update_mode` instead of replacing it.
+- Know how to apply rules **step by step** and **clean up** the result with delete rules.
 - Use conditional logic (regex evaluation) and rule references (`use_rule`) for complex workflows.
 
 ---
@@ -55,6 +56,8 @@ By default, the result only contains the targets. Pass `inplace=True` to write t
 result = Transformer.map(data, source='user.last_name', target='surname', inplace=True)
 # Output: {"user": {"first_name": "Alice", "last_name": "Smith"}, "age": 30, "surname": "Smith"}
 ```
+
+Values are copied into the result, so modifying the result never changes the input data. Only a `target_data` that you pass is modified directly.
 
 ### 2. Shorthand Initializations
 
@@ -448,6 +451,91 @@ result = Transformer.map(
 
 ---
 
+## Step-by-Step Transformations
+
+### 1. Sequential Rule Sets
+
+By default, every rule reads from the original source data, so a rule cannot see what previous rules wrote. Set `sequential` on the rule set to apply the rules one after another to a single document. Each rule then reads from the result of the previous rules:
+
+```python
+rules = {
+    'sequential': True,
+    'rules': {
+        'step1': {'source': 'a', 'target': 'b'},
+        'step2': {'source': 'b.x', 'target': 'c'},  # reads the 'b' written by step1
+    },
+}
+result = Transformer(rules).transform({'a': {'x': 1}})
+# Output: {"a": {"x": 1}, "b": {"x": 1}, "c": 1}
+```
+
+Without `sequential`, `step2` finds no `b` in the source and `c` is not written.
+
+Sequential rule sets always work on a copy of the source data, which itself is not modified. The result therefore contains all source data, as with `inplace=True`, and passing a separate `target_data` raises a `ValueError`.
+
+With `delete_sources=True`, the sources of each rule are deleted right after the rule is applied. This allows a later rule to write to a path that an earlier rule moved away:
+
+```python
+rules = {
+    'sequential': True,
+    'rules': {
+        'move_a': {'source': 'a', 'target': 'b'},
+        'move_c': {'source': 'c', 'target': 'a'},
+    },
+}
+result = Transformer(rules).transform({'a': 1, 'c': 2}, delete_sources=True)
+# Output: {"b": 1, "a": 2}
+```
+
+### 2. Cleaning Up the Target
+
+A rule with `"action": "delete"` deletes its `target` from the target data. Since rules are applied in order, delete rules at the end of a rule set clean up the result after all other rules have been applied:
+
+```python
+rules = {
+    'sequential': True,
+    'update_mode': 'overwrite',
+    'rules': {
+        'merge_substance': {'source': 'data.pure_substance', 'target': 'data'},
+        'merge_composition': {
+            'source': 'data.elemental_composition[n1]',
+            'target': 'data.sub_system[n1].nested_system',
+        },
+        'set_m_def': {
+            'target': 'data.sub_system[n1].nested_system.m_def',
+            'default_value': 'Element',
+            'update_mode': 'extend',
+        },
+        'drop_tmp': {'target': 'data.sub_system[n1].tmp', 'action': 'delete'},
+    },
+}
+result = Transformer(rules).transform(archive, delete_sources=True)
+```
+
+Notice that:
+
+- Array placeholders (`[n]`, `[n1]`, `[*]`) are resolved against the target data, so `data.sub_system[n1].tmp` is deleted in every element of `sub_system`.
+- Paths that do not exist are ignored.
+- A delete rule only defines `target` and `action`. Combining it with `source`, `default_value`, `update_mode` or `conditions` raises a validation error.
+- Delete rules always act on the target data. Without `sequential` or `inplace`, the target only contains what the previous rules wrote, and the source data is never modified.
+
+For a single deletion, use `Transformer.map`:
+
+```python
+result = Transformer.map(data, target='sub_systems[n].tmp', action='delete', inplace=True)
+```
+
+### 3. Deleting Paths from Python
+
+If you post-process the result of `transform()` in Python, use `Transformer.delete_path`. It modifies the data in place, supports the same array placeholders and returns the data:
+
+```python
+result = transformer.transform(data)
+Transformer.delete_path(result, 'sub_systems[n].tmp')
+```
+
+---
+
 ## Advanced Features
 
 ### 1. Conditional Copy Based on Regex
@@ -510,7 +598,7 @@ Transformer.map(data, source='f.nested.key', target='flattened_key')
 
 ### 4. Deleting Source Keys
 
-To remove source fields from the original structure after copying (useful during dictionary cleanup or migration):
+To remove the transferred source fields from the result (useful during dictionary cleanup or migration):
 
 ```python
 Transformer.map(
@@ -523,3 +611,43 @@ Only sources whose value was actually transferred are deleted:
 - Array placeholders are resolved, so `items[n]` deletes every transferred element of `items`. The emptied list itself is kept.
 - Sources of rules whose conditions are not met are kept.
 - A source is kept if its target lies inside it (for example `source='a'`, `target='a.copy'`), since deleting it would also delete the transferred data.
+- Sources are deleted from the result, the data passed to `transform()` is not modified. Without `inplace=True` or `sequential`, the result does not contain the sources in the first place.
+- Sources are deleted after all rules have been applied, or after each rule for [sequential rule sets](#1-sequential-rule-sets).
+
+---
+
+## Reference
+
+### Rule fields
+
+| Field           | Description                                                                                                                         |
+| --------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| `source`        | JMESPath to the value in the source data. Supports array placeholders such as `[n1]`.                                               |
+| `target`        | Path to write to in the target data. Supports array placeholders. Use `''` for the root.                                            |
+| `default_value` | Value to write if the source does not exist or no `source` is given.                                                                |
+| `conditions`    | Regex conditions that must be met to apply the rule.                                                                                |
+| `use_rule`      | Reference to another rule, `#<rule_set>.<rule>`, whose set fields overwrite the local ones.                                         |
+| `update_mode`   | `replace` (default), `overwrite` or `extend`. See [Merging into Existing Data](#merging-into-existing-data).                         |
+| `action`        | `set` (default) or `delete`. See [Cleaning Up the Target](#2-cleaning-up-the-target).                                               |
+
+### Rule set fields
+
+| Field         | Description                                                                                                   |
+| ------------- | ------------------------------------------------------------------------------------------------------------- |
+| `rules`       | Dictionary of named rules, applied in order.                                                                  |
+| `name`        | Name of the rule set.                                                                                         |
+| `update_mode` | Default `update_mode` for all rules that do not define their own.                                             |
+| `sequential`  | If true, each rule reads from the result of the previous rules. See [Sequential Rule Sets](#1-sequential-rule-sets). |
+
+### `transform()` arguments
+
+| Argument         | Description                                                                                                      |
+| ---------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `source_data`    | The data to transform. It is never modified.                                                                     |
+| `mapping_name`   | Name of the rule set to apply. Optional if there is only one, or one named `default`.                            |
+| `target_data`    | Existing data to write the targets into. It is modified directly. Not supported for sequential rule sets.        |
+| `inplace`        | If true, write the targets into a copy of the source data.                                                       |
+| `delete_sources` | If true, delete the transferred sources from the result. See [Deleting Source Keys](#4-deleting-source-keys).    |
+| `update_mode`    | Default `update_mode` for rules that neither define one nor inherit one from the rule set.                       |
+
+`Transformer.map()` accepts `target_data`, `inplace`, `delete_sources` and `update_mode` as well. To define the transformation, pass the rule fields (`source`, `target`, `default_value`, `conditions`, `use_rule`, `update_mode`, `action`) for a single rule, or `rule` or `rules` for an existing rule or rule set.
