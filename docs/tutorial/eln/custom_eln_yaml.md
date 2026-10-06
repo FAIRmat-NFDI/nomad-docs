@@ -643,10 +643,10 @@ Add the following `sub_sections:` block inside the `Solution` subsection:
 
 ## Test your custom schema in NOMAD
 
-Test the final schema in the project that you created at Checkpoint 3:
+Test the final schema in the project that you created at Checkpoint 3. If you skipped that test, first create the project: select **Projects** from the menu on the left, click **NEW PROJECT**, enter `Polymer processing ELN` as the **Project name**, and click **CREATE**.
 
 1. Select **Projects** from the menu on the left and open the project `Polymer processing ELN`.
-2. Click **UPLOAD FILES** and upload the updated `polymer_processing.archive.yaml`. NOMAD asks whether to overwrite the existing file. Click **OVERWRITE**, and wait until the processing status at the top right of the project page shows **Completed**.
+2. Click **UPLOAD FILES** and upload the updated `polymer_processing.archive.yaml`. If NOMAD asks whether to overwrite the existing file, click **OVERWRITE**. Wait until the processing status at the top right of the project page shows **Completed**.
 3. Click **NEW ENTRY**. In the **CUSTOM SCHEMAS** tab, keep **This project** selected and click `Experiment_Information`.
 4. Enter `polymer_film_experiment_2` as the **Filename** and click **CREATE**.
 

@@ -56,11 +56,7 @@ In NOMAD, an ELN is created within a NOMAD project. The project allows you to st
 
 ## Create ELN entries
 
-The next step is to create entries for your substances, instruments, processes, and measurements. In NOMAD, each ELN entry is structured using templates called *built-in schemas*. These templates are specifically designed to capture relevant information for different types of entries, ensuring consistency and completeness in documentation.
-
-They include general fields tailored to the type of entry you are creating.
-
-To create ELN entries using the templates provided by NOMAD, we will generate instances from the built-in schemas. This will automatically create entries with predefined fields, allowing us to efficiently fill in the relevant information of our experiment.
+The next step is to create entries for your substances, instruments, processes, and measurements. In NOMAD, each ELN entry is structured using templates called *built-in schemas*. These templates provide predefined fields for each type of entry, which ensures consistency and completeness in documentation.
 
 To create an ELN entry from a built-in schema:
 
@@ -150,8 +146,6 @@ Now, let's create an entry for the **P3HT thin film**. Follow the steps describe
     - **Components:** Specify the components used to create the sample, including raw materials or system components.
     - **Sample identifiers:** Identifiers of the sample, from which NOMAD creates the **ID**.
 
-Once the entry is created, we can fill in the relevant fields with detailed and accurate information. Fields can also be updated as needed to keep the entry accurate and useful.
-
 Fill in the fields of the sample entry in the same way as for the substance entry. In addition, reference the substance from which the thin film is made:
 
 1. Under **Subsections**, click the **(+)** button next to **Components**.
@@ -193,8 +187,6 @@ Now, let's create an entry for the **balance** that is used to weigh the polymer
 
     - **Instrument identifiers:** Identifiers of the instrument, from which NOMAD creates the **ID**.
 
-Once the entry is created, we can fill in the relevant fields with detailed and accurate information. Fields can also be updated as needed to keep the entry accurate and useful.
-
 As for the substance entry, NOMAD has already filled in the **name**, the **Datetime**, and the **ID**. Fill in further fields, e.g., **Description** and **Tags**, and click **SAVE**.
 
 ??? task "Create an ELN entry for an instrument"
@@ -229,9 +221,7 @@ Now, let's create an entry for the **preparation of the P3HT solution**. Follow 
     - **Samples:** Reference the samples that have undergone the process. NOMAD shows them as outputs of the process in the workflow graph.
     - **Process identifiers:** Identifiers of the process, from which NOMAD creates the **ID**.
 
-Once the entry is created, we can fill in the relevant fields with detailed and accurate information. Fields can also be updated as needed to keep the entry accurate and useful.
-
-Fill in the fields of the process entry, e.g., the **starting Time** and **ending time** of the process, **Location**, **Description**, and **Tags**. In addition, reference the balance that you used to weigh the powder:
+Fill in the fields of the process entry: set the **starting Time** to when the process started, and fill in, e.g., **Location**, **Description**, and **Tags**. In addition, reference the balance that you used to weigh the powder:
 
 1. Under **Subsections**, click the **(+)** button next to **Instruments**.
 2. Keep *InstrumentReference* and click the check mark (✓) next to **CHANGE SCHEMA** to confirm it.
@@ -288,8 +278,6 @@ Now, let's create an entry for the **optical absorption measurement**. Follow th
     - **Instruments:** List the instruments used in the measurement.
     - **Results:** Provide information about the results of the measurements (text and images).
     - **Measurement identifiers:** Identifiers of the measurement, from which NOMAD creates the **ID**.
-
-Once the entry is created, we can fill in the relevant fields with detailed and accurate information. Fields can also be updated as needed to keep the entry accurate and useful.
 
 Fill in the fields of the measurement entry, e.g., **starting Time**, **Location**, **Description**, and **Tags**. In addition:
 
