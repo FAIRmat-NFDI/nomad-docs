@@ -14,12 +14,6 @@ previous step.
 - Install the `nomad-lab` package as described in
   {{ nav_link("howto/oasis/install.md", breadcrumb=True) }}.
 
-## Related pages
-
-- {{ nav_link("reference/json_transformer.md", breadcrumb=True) }}
-- {{ nav_link("howto/schemas/evolution.md", breadcrumb=True) }}
-- {{ nav_link("reference/metainfo.md", breadcrumb=True) }}
-
 ## Quick start: minimal mapping
 
 If you only need to transform or copy a few fields, you do not need to construct verbose `Rules` or configuration dictionaries.
@@ -772,3 +766,9 @@ Only sources whose value was actually transferred are deleted:
 - A source is kept if its target lies inside it (for example `source='a'`, `target='a.copy'`), since deleting it would also delete the transferred data.
 - Sources are deleted from the result, the data passed to `transform()` is not modified. Without `inplace=True` or `sequential`, the result does not contain the sources in the first place.
 - Sources are deleted after all rules have been applied, or after each rule for [sequential rule sets](#use-sequential-rule-sets).
+
+## Related pages
+
+- {{ nav_link("reference/json_transformer.md", breadcrumb=True) }}
+- {{ nav_link("howto/schemas/evolution.md", breadcrumb=True) }}
+- {{ nav_link("reference/metainfo.md", breadcrumb=True) }}

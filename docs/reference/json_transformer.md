@@ -4,10 +4,6 @@ This page lists the fields used to define JSON transformation rules and the
 arguments accepted by the `Transformer` methods from
 `nomad.utils.json_transformer`.
 
-## Related pages
-
-- {{ nav_link("howto/manage/program/json_transformer.md", breadcrumb=True) }}
-
 ## Rule models
 
 ### `Rule`
@@ -69,3 +65,7 @@ arguments accepted by the `Transformer` methods from
 | `delete_sources` | If `True`, remove successfully transferred source paths from the result. |
 | `update_mode` | Update mode for a single rule, or the default for rules that do not define or inherit one. |
 | `action` | Action for a single rule: `set` or `delete`. |
+
+## Related pages
+
+- {{ nav_link("howto/manage/program/json_transformer.md", breadcrumb=True) }}
