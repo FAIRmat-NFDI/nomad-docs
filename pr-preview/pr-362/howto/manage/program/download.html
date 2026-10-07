@@ -4150,7 +4150,7 @@ or <code>entries/raw/query</code>. Endpoints that target processed data contain 
 of entities, endpoints for raw files and processed data (as well as searchable metadata)
 exist. API endpoint paths start with the entity, e.g. <code>uploads/&lt;id&gt;/raw</code> or <code>entries/&lt;id&gt;/raw</code>.</p>
 <h2 id="download-a-whole-upload">Download a whole upload<a class="headerlink" href="#download-a-whole-upload" title="Permanent link">¶</a></h2>
-<p>Let's assume you want to download an entire upload. In this example the upload id is
+<p>Let's assume you want to download an entire upload. In this example the upload ID is
 <code>wW45wJKiREOYTY0ARuknkA</code>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">"http://localhost:8000/nomad-oasis/api/v1/uploads/wW45wJKiREOYTY0ARuknkA/raw"</span><span class="w"> </span>-o<span class="w"> </span>download.zip
 </code></pre></div>

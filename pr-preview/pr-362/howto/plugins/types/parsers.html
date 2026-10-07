@@ -4266,7 +4266,7 @@
 <p>If you have installed a NOMAD plugin into a Python virtual environment, you can run a parser from that plugin with the <code>nomad</code> command line interface. The following command will uses the CLI to parse a given input file, and store the resulting JSON output into an output file:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>nomad<span class="w"> </span>parse<span class="w"> </span>&lt;input-file&gt;<span class="w"> </span>&gt;<span class="w"> </span>&lt;output-file&gt;
 </code></pre></div>
-<p>The parse command will automatically match the right parser to your file and run the parser. To skip the parser matching, i.e. the process that determined which parser fits to the given file, you can use the <code>--parser</code> argument to provide a parser entry point id:</p>
+<p>The parse command will automatically match the right parser to your file and run the parser. To skip the parser matching, i.e. the process that determined which parser fits to the given file, you can use the <code>--parser</code> argument to provide a parser entry point ID:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>nomad<span class="w"> </span>parse<span class="w"> </span>--parser<span class="w"> </span>&lt;parser_entry_point_id&gt;<span class="w"> </span>&lt;input-file&gt;
 </code></pre></div>
 <p>You can check the <a href="../../../reference/cli.html#nomad-parse">CLI reference for <code>nomad parse</code></a> for the full list of arguments, but the following should get you started:</p>
