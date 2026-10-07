@@ -4,9 +4,7 @@ This page lists the fields used to define JSON transformation rules and the
 arguments accepted by the `Transformer` methods from
 `nomad.utils.json_transformer`.
 
-## Rule models
-
-### `Rule`
+## Rule fields
 
 | Field | Description |
 | --- | --- |
@@ -18,7 +16,7 @@ arguments accepted by the `Transformer` methods from
 | `update_mode` | How to combine the value with an existing target: `replace` (default), `overwrite`, or `extend`. |
 | `action` | Action to perform: `set` (default) or `delete`. |
 
-### `Rules`
+## Rule-set fields
 
 | Field | Description |
 | --- | --- |
@@ -28,9 +26,9 @@ arguments accepted by the `Transformer` methods from
 | `update_mode` | Default update mode for rules that do not define their own. |
 | `sequential` | If `True`, each rule reads from the result produced by the preceding rules. |
 
-## Transformer methods
+## Method arguments
 
-### `transform()`
+### `Transformer.transform()`
 
 | Argument | Description |
 | --- | --- |
