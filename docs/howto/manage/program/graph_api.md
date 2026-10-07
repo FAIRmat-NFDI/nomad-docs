@@ -297,7 +297,7 @@ Thus, to fetch the contents of an archive with entry ID `<example_entry_id>`, on
 
 The `plain` directive means 'just return the data as it is'. Other directives are introduced in the following sections.
 
-In the following, let's use the random entry id `x36WdKPMctUOkjXMyV8oQq2zWcSx` to make things more concrete. Our request to fetch the archive becomes:
+In the following, let's use the random entry ID `x36WdKPMctUOkjXMyV8oQq2zWcSx` to make things more concrete. Our request to fetch the archive becomes:
 
 ```json hl_lines="3-6"
 {

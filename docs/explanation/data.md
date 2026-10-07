@@ -1,6 +1,6 @@
 # Data structure
 
-The basic unit of data in NOMAD is the [*entry*](../reference/glossary.md#entry). An entry typically corresponds to one file in an [upload](../reference/glossary.md#upload) that NOMAD recognizes and processes, such as the main output file of a simulation code, a measurement file, or an [ELN](../reference/glossary.md#eln) form. Each entry has its own id and is found, viewed, and accessed independently of the others. Everything NOMAD knows about an entry is kept in one structured document, the entry's [archive](../reference/glossary.md#archive).
+The basic unit of data in NOMAD is the [*entry*](../reference/glossary.md#entry). An entry typically corresponds to one file in an [upload](../reference/glossary.md#upload) that NOMAD recognizes and processes, such as the main output file of a simulation code, a measurement file, or an [ELN](../reference/glossary.md#eln) form. Each entry has its own ID and is found, viewed, and accessed independently of the others. Everything NOMAD knows about an entry is kept in one structured document, the entry's [archive](../reference/glossary.md#archive).
 
 To understand how the data in an entry is organized, you need three concepts, which this page covers in turn:
 

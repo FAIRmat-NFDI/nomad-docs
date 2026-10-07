@@ -86,7 +86,7 @@ but should help you to navigate the codebase:
   [Pint](https://pint.readthedocs.io){:target="_blank" rel="noopener"}.
 
 - `utils`: Utility modules, e.g. the structured logging system
-  ([structlog](https://www.structlog.org/){:target="_blank" rel="noopener"}), id generation, and hashes.
+  ([structlog](https://www.structlog.org/){:target="_blank" rel="noopener"}), ID generation, and hashes.
 
 - `files.py`: Functionality to maintain the files for uploads in staging and published.
   The interface to the file system.

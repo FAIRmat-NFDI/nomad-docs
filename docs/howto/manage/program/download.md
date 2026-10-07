@@ -41,7 +41,7 @@ exist. API endpoint paths start with the entity, e.g. `uploads/<id>/raw` or `ent
 
 ## Download a whole upload
 
-Let's assume you want to download an entire upload. In this example the upload id is
+Let's assume you want to download an entire upload. In this example the upload ID is
 `wW45wJKiREOYTY0ARuknkA`.
 
 ```sh
