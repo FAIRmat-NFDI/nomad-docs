@@ -1,39 +1,30 @@
 # How to transform JSON data structures
 
-## Who is this how-to guide for?
+In this guide, you will use the `Transformer` class from
+`nomad.utils.json_transformer` to map, migrate, and normalize JSON data. The
+examples cover simple field mappings, repeating structures, merge strategies,
+sequential transformations, conditions, and rule references.
 
-This guide is designed for developers and data managers who need to parse, migrate, or normalize JSON-formatted data structures into another JSON format. A common NOMAD use case is transforming an external API response, or migrating legacy archives and repeating subsections onto modern NOMAD schema definitions (such as adding `m_def` annotations).
+All examples can be run independently unless they explicitly continue the
+previous step.
 
-This document covers the principles, shortcuts, and advanced features of the `Transformer` class from `nomad.utils.json_transformer`.
+## Before you begin
 
-## What should you know before this how-to guide?
+- Be familiar with Python dictionaries and lists.
+- Install the `nomad-lab` package as described in
+  {{ nav_link("howto/oasis/install.md", breadcrumb=True) }}.
 
-Before diving into this guide, you should be familiar with the following:
+## Related pages
 
-- A basic understanding of Python dictionaries and lists.
-- The `nomad-lab` package. Follow the [How to install NOMAD Python library](../../../howto/oasis/install.md#how-to-install-the-nomad-python-library) guide.
+- {{ nav_link("reference/json_transformer.md", breadcrumb=True) }}
+- {{ nav_link("howto/schemas/evolution.md", breadcrumb=True) }}
+- {{ nav_link("reference/metainfo.md", breadcrumb=True) }}
 
-## What you will know at the end of this how-to guide?
-
-By the end of this how-to guide, you will:
-
-- Know how to quickly map JSON fields with minimal boilerplate using `Transformer.map`.
-- Understand how to initialize `Transformer` with simple keyword arguments, dictionaries, or `Rules` objects.
-- Learn how to transform lists and repeating subsections using **array rules** (`[n]`, `[n1]`, `[*]`).
-- Know how to populate **default values across array elements** (e.g. adding missing `m_def` annotations).
-- Know how to **merge into existing data** with `update_mode` instead of replacing it.
-- Know how to apply rules **step by step** and **clean up** the result with delete rules.
-- Use conditional logic (regex evaluation) and rule references (`use_rule`) for complex workflows.
-
-All examples in this guide can be run on their own, unless they explicitly continue the previous step.
-
----
-
-## Quick Start: Minimal Mapping
+## Quick start: minimal mapping
 
 If you only need to transform or copy a few fields, you do not need to construct verbose `Rules` or configuration dictionaries.
 
-### 1. One-Liner with `Transformer.map`
+### Map one field with `Transformer.map`
 
 Use the `Transformer.map(...)` classmethod to apply a mapping in a single line:
 
@@ -61,7 +52,7 @@ result = Transformer.map(data, source='user.last_name', target='surname', inplac
 
 All values are copied into the result, so the result never shares nested dictionaries or lists with the input data or the rules, and modifying it never changes them. Only a `target_data` that you pass is modified directly.
 
-### 2. Shorthand Initializations
+### Use shorthand initializations
 
 `Transformer` accepts multiple input formats to fit your preferred style. The following examples transform this data:
 
@@ -117,13 +108,11 @@ data = {'input': {'x': 1, 'y': 2}}
 
 When using any of the shorthands above, you can simply call `transformer.transform(data)` without specifying a mapping name.
 
----
-
-## Standard Usage: Named Transformation Rules
+## Standard usage: named transformation rules
 
 For modular or multi-rule migrations, you can define named rule groups using `nomad.datamodel.metainfo.annotations.Rules` and `Rule`.
 
-### 1. Define Your Transformation Rules
+### Define transformation rules
 
 Save the following rules and data as `basic_transformation.json`:
 
@@ -146,7 +135,7 @@ rules = {'example_transformation': Rules(**json_example['schema'])}
 transformer = Transformer(rules)
 ```
 
-### 2. Transform the Data
+### Transform the data
 
 Continuing the previous step, pass your source JSON and the rule group name to `transform()`:
 
@@ -165,13 +154,11 @@ Output:
 }
 ```
 
----
-
-## Working with Arrays and Repeating Structures
+## Work with arrays and repeating structures
 
 NOMAD archives often contain repeating lists of items, such as subsections, measurements, or calculation steps. The `Transformer` supports array notation to extract, transform, or populate values across all items in a list.
 
-### 1. Array Index Placeholders (`[n]`, `[n1]`, `[n2]`, ...)
+### Use array index placeholders (`[n]`, `[n1]`, `[n2]`, ...)
 
 Use placeholders such as `[n]`, `[n1]`, or `[n2]` to indicate repeating array elements. `Transformer` automatically detects array syntax and iterates through all matching list elements.
 
@@ -224,7 +211,7 @@ The result only contains the targets of the rules. Pass `inplace=True` to `trans
 
     `Transformer` automatically inspects rule paths for array patterns like `[n]`. Setting `array_rules=True` explicitly in `transformer.transform(data, array_rules=True)` is supported for backward compatibility, but is no longer mandatory when array placeholders are present.
 
-### 2. Populating `default_value` Across Repeating Items
+### Populate `default_value` across repeating items
 
 A common migration requirement is adding a missing field (such as a Metainfo definition `m_def`) to all items in an array:
 
@@ -273,7 +260,7 @@ Notice that:
 - The `Transformer` iterates through each existing item in `sub_systems`, creating any intermediate dictionaries (such as `nested_system` if missing), and writes the `default_value`.
 - If a `source` is provided but does not exist in some elements, the `default_value` is safely used as the fallback for those elements.
 
-### 3. Wildcard Target Notation (`[*]`)
+### Use wildcard target notation (`[*]`)
 
 When the target path in your destination data structure is already a list, you can use the wildcard `[*]` notation to fill every element with a default value:
 
@@ -293,9 +280,9 @@ result = Transformer.map(
 
 !!! note "Wildcards only apply to lists"
 
-    `[*]` iterates over list elements, not over the keys of a dictionary. A target such as `data.[*]` raises a `ValueError`. To move all keys of a section into another section, target the section itself and use an `update_mode`, see [Merging into Existing Data](#merging-into-existing-data).
+    `[*]` iterates over list elements, not over the keys of a dictionary. A target such as `data.[*]` raises a `ValueError`. To move all keys of a section into another section, target the section itself and use an `update_mode`, see [Merge into existing data](#merge-into-existing-data).
 
-### 4. Conditional Rules in Arrays
+### Apply conditional rules in arrays
 
 When applying conditions to repeating elements, you can use the array placeholder in the condition's `regex_path`. The placeholder dynamically resolves to the corresponding item's index:
 
@@ -323,9 +310,7 @@ result = Transformer.map(data, rule=rule, inplace=True)
 
 Only elements matching the condition will receive the target assignment.
 
----
-
-## Merging into Existing Data
+## Merge into existing data
 
 By default, a rule replaces whatever already exists at its target. Set `update_mode` to merge the value into the existing target instead:
 
@@ -337,7 +322,7 @@ By default, a rule replaces whatever already exists at its target. Set `update_m
 
 `overwrite` and `extend` merge nested dictionaries recursively. If the existing value or the new value is not a dictionary, `replace` and `overwrite` both write the new value, while `extend` keeps the existing one.
 
-### 1. Moving a Section into Its Parent
+### Move a section into its parent
 
 A common migration step is moving all fields of a subsection into its parent section without listing every field. The following moves the content of `pure_substance` into `data`:
 
@@ -385,7 +370,7 @@ Output, depending on `update_mode`:
     {"data": {"name": "water", "formula": "old", "tags": ["a", "b"], "mass": 18.02}}
     ```
 
-### 2. Setting a Default for All Rules
+### Set a default for all rules
 
 Instead of setting `update_mode` on every rule, set it once for the whole rule set. A rule's own `update_mode` takes precedence:
 
@@ -410,7 +395,7 @@ The same works with `Rules(update_mode='extend', rules={...})`. The update mode 
 3. The `update_mode` argument of `transform()` or `Transformer.map()`. This is useful to set a default without editing a rules file.
 4. `replace`.
 
-### 3. Combining Several Sources into One Target
+### Combine several sources into one target
 
 Rules are applied in order, so several rules can write into the same target. The first rule creates the target, the following rules merge into it:
 
@@ -435,7 +420,7 @@ result = transformer.transform(
 
     Rules are stored in a dictionary. If two rules have the same name, only the last one is applied.
 
-### 4. Writing to the Root
+### Write to the root
 
 Use an empty `target` to write to the root of the target data:
 
@@ -455,7 +440,7 @@ result = Transformer.map(
 
 With the default `replace`, the root is replaced entirely, so all other data is lost. The value must be of the same type as the root, usually a dictionary, otherwise a `TypeError` is raised.
 
-### 5. Merging into Repeating Subsections
+### Merge into repeating subsections
 
 `update_mode` works with array placeholders. The following moves each element of `elemental_composition` into the `nested_system` of the corresponding `sub_system`, keeping the existing `m_def`:
 
@@ -522,11 +507,9 @@ result = Transformer.map(
 
     With `extend`, values that conflict with existing fields are not written. If you also set `delete_sources=True`, the source is still deleted, so these values are lost.
 
----
+## Apply step-by-step transformations
 
-## Step-by-Step Transformations
-
-### 1. Sequential Rule Sets
+### Use sequential rule sets
 
 By default, every rule reads from the original source data, so a rule cannot see what previous rules wrote. Set `sequential` on the rule set to apply the rules one after another to a single document. Each rule then reads from the result of the previous rules:
 
@@ -562,7 +545,7 @@ result = Transformer(rules).transform({'a': 1, 'c': 2}, delete_sources=True)
 # Output: {"b": 1, "a": 2}
 ```
 
-### 2. Cleaning Up the Target
+### Clean up the target
 
 A rule with `"action": "delete"` deletes its `target` from the target data. Since rules are applied in order, delete rules at the end of a rule set clean up the result after all other rules have been applied:
 
@@ -640,7 +623,7 @@ result = Transformer.map(
 # Output: {"sub_systems": [{"label": "a"}, {"label": "b"}]}
 ```
 
-### 3. Deleting Paths from Python
+### Delete paths from Python
 
 If you post-process the result of `transform()` in Python, use `Transformer.delete_path`. It modifies the data in place, supports the same array placeholders and returns the data:
 
@@ -653,11 +636,9 @@ Transformer.delete_path(result, 'systems[n].tmp')
 # Output: {"systems": [{"label": "a"}, {"label": "b"}]}
 ```
 
----
+## Use advanced features
 
-## Advanced Features
-
-### 1. Conditional Copy Based on Regex
+### Copy conditionally with a regular expression
 
 You can use regular expressions to evaluate input values before copying.
 
@@ -690,7 +671,7 @@ result = transformer.transform({'a': 25}, 'conditional_transformation')
 
 The rule checks if the value at path `"a"` matches `"^3\\d$"`. If the condition is met, the value is copied to `"age"`. If not met, `"default_value"` is applied.
 
-### 2. Resolving References (`use_rule`)
+### Resolve references with `use_rule`
 
 When mapping related entities, a rule can inherit or reference another rule by setting `use_rule` to a path starting with `#`:
 
@@ -732,7 +713,7 @@ result = Transformer(rules).transform(data, 'employee_info')
 
     Fields set on the referenced rule overwrite the fields of the local rule. Fields that are not set on the referenced rule, such as `update_mode` or `default_value`, are taken from the local rule. This allows you to reuse shared mapping structures and only fill in the missing attributes locally.
 
-### 3. Nested Structure Manipulation & JMESPath
+### Manipulate nested structures with JMESPath
 
 `Transformer` paths support standard dot notation for nesting as well as JMESPath expressions on source paths (such as filters `[?condition]` and projections `[*]`).
 
@@ -770,7 +751,7 @@ result = Transformer.map(
 # Output: {"manager": "Alice"}
 ```
 
-### 4. Deleting Source Keys
+### Delete source keys
 
 To remove the transferred source fields from the result (useful during dictionary cleanup or migration):
 
@@ -790,10 +771,4 @@ Only sources whose value was actually transferred are deleted:
 - Sources of rules whose conditions are not met are kept.
 - A source is kept if its target lies inside it (for example `source='a'`, `target='a.copy'`), since deleting it would also delete the transferred data.
 - Sources are deleted from the result, the data passed to `transform()` is not modified. Without `inplace=True` or `sequential`, the result does not contain the sources in the first place.
-- Sources are deleted after all rules have been applied, or after each rule for [sequential rule sets](#1-sequential-rule-sets).
-
----
-
-## Reference
-
-For all fields of rules and rule sets, and all arguments of `transform()` and `Transformer.map()`, see {{ nav_link("reference/json_transformer.md") }}.
+- Sources are deleted after all rules have been applied, or after each rule for [sequential rule sets](#use-sequential-rule-sets).
