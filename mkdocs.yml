@@ -105,6 +105,7 @@ nav:
       - Schema language: reference/metainfo.md
       - Configuration: reference/config.md
       - Annotations: reference/annotations.md
+      - JSON transformer: reference/json_transformer.md
       - Base sections: reference/basesections.md
       - CLI: reference/cli.md
       - Plugins: reference/plugins.md
