@@ -4087,7 +4087,7 @@ The entry point should be defined in <code>*/apis/__init__.py</code> like this:<
 <p>Here you can see that a new subclass of <code>APIEntryPoint</code> was defined. In this new class you have to override the <code>load</code> method to determine the FastAPI app that makes your API.
 In the reference you can see all of the available <a href="../../../reference/plugins.html#apientrypoint">configuration options for a <code>APIEntryPoint</code></a>.</p>
 <p>The <code>id_url_safe</code> determines the URL of the API. If not set, it is derived from the
-entry point id (e.g. <code>nomad_example.apis-myapi</code>); here we set it explicitly to get the
+entry point ID (e.g. <code>nomad_example.apis-myapi</code>); here we set it explicitly to get the
 shorter <code>{api_base_path}/apis/myapi/</code>. The resolved mount path is available as the
 <code>prefix</code> attribute of the loaded entry point.</p>
 <div class="admonition warning">

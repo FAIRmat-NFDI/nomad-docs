@@ -4158,8 +4158,8 @@ the same definition</em> in the new schema, you can safely replace the schema. I
 the data — or you break it.</p>
 <h2 id="how-nomad-identifies-a-definition-version">How NOMAD identifies a definition version<a class="headerlink" href="#how-nomad-identifies-a-definition-version" title="Permanent link">¶</a></h2>
 <p>Every definition carries a <code>definition_id</code>, a hash-like identifier that uniquely identifies it. Any
-change to a definition that affects the data it describes produces a new definition id. Some
-applications use the definition id to distinguish between versions of the same schema package.</p>
+change to a definition that affects the data it describes produces a new definition ID. Some
+applications use the definition ID to distinguish between versions of the same schema package.</p>
 <p>You can include definition ids when serializing with <code>m_to_dict(with_def_id=True)</code>.</p>
 <h2 id="safe-and-unsafe-changes">Safe and unsafe changes<a class="headerlink" href="#safe-and-unsafe-changes" title="Permanent link">¶</a></h2>
 <p><em>Adding</em> to a schema is generally safe — new section definitions, new quantities, new subsections.

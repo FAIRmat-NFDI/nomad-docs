@@ -4195,7 +4195,7 @@ although the latter is almost never necessary in Python.</p>
 <p><em>archive data</em>: The normalized data of an entry in NOMAD's Metainfo-based format.</p>
 </li>
 </ul>
-<p>Throughout NOMAD, we use different ids. If something is called <em>id</em>, it is usually a
+<p>Throughout NOMAD, we use different IDs. If something is called an <em>ID</em>, it is usually a
 random uuid and has no semantic connection to the entity it identifies. If something is
 called a <em>hash</em> then it is a hash generated based on the entity it identifies. This means
 either the whole thing or just some properties of this entities.</p>
@@ -4220,7 +4220,7 @@ either the whole thing or just some properties of this entities.</p>
   entry-related file on the filesystem without having to ask a database about it.</p>
 </li>
 <li>
-<p>The <code>pid</code> or (<code>coe_calc_id</code>) is a legacy sequential integer id, previously used to
+<p>The <code>pid</code> or (<code>coe_calc_id</code>) is a legacy sequential integer ID, previously used to
   identify entries. We still store the <code>pid</code> on these older entries for historical
   purposes.</p>
 </li>
@@ -4306,8 +4306,8 @@ from the one used in the actual log call.</p>
 </ul>
 <p>Keys that are present for events related to processing an entry:</p>
 <ul>
-<li><code>nomad.upload_id</code>: id of the currently processed upload</li>
-<li><code>nomad.entry_id</code>: id of the currently processed entry</li>
+<li><code>nomad.upload_id</code>: ID of the currently processed upload</li>
+<li><code>nomad.entry_id</code>: ID of the currently processed entry</li>
 <li><code>nomad.mainfile</code>: mainfile of the currently processed entry</li>
 </ul>
 <p>Keys that are present for events related to exceptions:</p>

@@ -4895,7 +4895,7 @@ The other files are mounted into the docker containers.</p>
 <li>The services are setup to restart <code>always</code>, you might want to change this to <code>no</code> while debugging errors to prevent indefinite restarts.</li>
 <li>Make sure that the <code>PWD</code> environment variable is set. NORTH needs to create bind mounts that require absolute paths and we need to pass the current working directory to the configuration from the PWD variable (see hub service in the <code>docker-compose.yaml</code>).</li>
 <li>The <code>north</code> service needs to run docker containers. We have to use the systems docker group as a group. You might need to replace <code>991</code> with your
-  systems docker group id.</li>
+  systems docker group ID.</li>
 </ul>
 <h3 id="nomadyaml">nomad.yaml<a class="headerlink" href="#nomadyaml" title="Permanent link">¶</a></h3>
 <p>NOMAD app and worker read the <code>nomad.yaml</code> for configuration.</p>
