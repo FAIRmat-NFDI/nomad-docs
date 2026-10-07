@@ -232,7 +232,7 @@ It is in turn composed by the following quantities:
   the sample, the process number, or machine name), e.g. 4001-8, YAG-2-34.
   This is to be managed and decided internally by the labs, although we recommend to avoid
   the following characters in it: "\_", "/", "\\" and ".".
-- `lab_id`: Full readable id. Ideally a human readable id convention, which is simple,
+- `lab_id`: Full readable ID. Ideally a human readable ID convention, which is simple,
   understandable and still have chances of becoming unique.
   If the `owner`, `short_name`, `ìnstitute`, and `datetime` are provided, this will
   be formed automatically by joining these components by an underscore (\_).

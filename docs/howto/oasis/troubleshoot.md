@@ -54,7 +54,7 @@ elastic:
     start_period: 60s
 ```
 
-Unfortunately there is no way yet to use the NORTH tools with the central user management, since the jupyterhub spawner does not respect proxy variables.
+Unfortunately there is no way yet to use the NORTH tools with the central user management, since the JupyterHub spawner does not respect proxy variables.
 It has not been tested yet when using an authentication which does not require the proxy, e.g. a local keycloak server.
 
 If you have issues please contact us on discord n the [oasis channel](https://discord.com/channels/1201445470485106719/1205480348050395136){:target="_blank" rel="noopener"}.

@@ -21,8 +21,8 @@ the data — or you break it.
 ## How NOMAD identifies a definition version
 
 Every definition carries a `definition_id`, a hash-like identifier that uniquely identifies it. Any
-change to a definition that affects the data it describes produces a new definition id. Some
-applications use the definition id to distinguish between versions of the same schema package.
+change to a definition that affects the data it describes produces a new definition ID. Some
+applications use the definition ID to distinguish between versions of the same schema package.
 
 You can include definition ids when serializing with `m_to_dict(with_def_id=True)`.
 

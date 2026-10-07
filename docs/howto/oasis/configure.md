@@ -43,7 +43,7 @@ A few things to notice:
 - The services are setup to restart `always`, you might want to change this to `no` while debugging errors to prevent indefinite restarts.
 - Make sure that the `PWD` environment variable is set. NORTH needs to create bind mounts that require absolute paths and we need to pass the current working directory to the configuration from the PWD variable (see hub service in the `docker-compose.yaml`).
 - The `north` service needs to run docker containers. We have to use the systems docker group as a group. You might need to replace `991` with your
-  systems docker group id.
+  systems docker group ID.
 
 ### nomad.yaml
 

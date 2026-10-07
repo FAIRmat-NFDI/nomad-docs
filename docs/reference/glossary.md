@@ -67,7 +67,7 @@ are edited (e.g. which type of widget) can be controlled through [annotations](#
 ## Entry
 
 Data in NOMAD is organized in *entries* (as in "database *entry*"). Entries have an
-*entry id*. Entries can be searched for and entries have individual pages on the NOMAD GUI. Entries are always
+*entry ID*. Entries can be searched for and entries have individual pages on the NOMAD GUI. Entries are always
 associated with [raw files](#raw-file), where one of these files is the [mainfile](#mainfile).
 Raw files are processed to create the [processed data](#processed-data) (or the [archive](#archive))
 for an entry.

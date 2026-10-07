@@ -105,7 +105,7 @@ hello_dashboard = "nomad_example.dashboards:hello_dashboard"
 NOMAD mounts your dashboard at `{api_base_path}/dashboards/{id_url_safe}/`,
 where `id_url_safe` is the URL-safe identifier of the entry point. If you
 do not set it explicitly, it is automatically derived from the entry-point
-id (which is the full Python entry-point name, e.g.
+ID (which is the full Python entry-point name, e.g.
 `nomad_example.dashboards-hello_dashboard`). For a shorter, friendlier URL
 you can override it on the entry point:
 
