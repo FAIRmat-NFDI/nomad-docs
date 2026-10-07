@@ -41,8 +41,8 @@ the processed data, is up to the parser.
 
 All uploaded **raw files** are analysed to find files with a recognized format. Each file
 that follows a recognized format is a **mainfile**. For each mainfile, NOMAD will create
-a database **entry**. The entry is eternally matched to the mainfile. The entry id, for example,
-is a hash over the upload id and the mainfile path (and an optional key) within the upload.
+a database **entry**. The entry is eternally matched to the mainfile. The entry ID, for example,
+is a hash over the upload ID and the mainfile path (and an optional key) within the upload.
 This **matching** process is automatic, and users cannot create entries
 manually.
 

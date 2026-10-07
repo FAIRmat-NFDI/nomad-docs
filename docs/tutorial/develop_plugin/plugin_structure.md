@@ -23,7 +23,7 @@ This tutorial assumes basic familiarity with Python and Git, as well as minimal 
 Before starting this tutorial, make sure you have the following:
 
 1. **GitHub account**
-   Required to create and manage the plugin repository. You can create a free account at [github.com/signup](https://github.com/signup){:target="_blank" rel="noopener"}.
+   Required to create and manage the plugin repository. You can create a free account on the [GitHub sign-up page](https://github.com/signup){:target="_blank" rel="noopener"}.
 
 2. **Basic understanding of Python**
    You should be comfortable reading and writing basic Python code, including modules, functions,
@@ -57,8 +57,7 @@ Before starting this tutorial, make sure you have the following:
 
 ## Create a plugin repository
 
-First, you will version-control your NOMAD plugin by creating a GitHub repository from the official template. Start from the official GitHub template repository at
-[github.com/FAIRmat-NFDI/nomad-plugin-template](https://github.com/FAIRmat-NFDI/nomad-plugin-template){:target="_blank" rel="noopener"}.
+First, you will version-control your NOMAD plugin by creating a GitHub repository from the official template. Start from the official [`nomad-plugin-template` repository](https://github.com/FAIRmat-NFDI/nomad-plugin-template){:target="_blank" rel="noopener"}.
 
 To create a new repository from the template, select **Use this template** and then choose
 **Create a new repository**. You must be logged in to GitHub to see this option.
