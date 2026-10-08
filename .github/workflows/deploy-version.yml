@@ -9,14 +9,13 @@ on:
         description: "Tag to deploy, e.g. v1.4.2"
         required: true
 
-# Same production URLs as in deploy-docs.yml, so that backfilled versions do
-# not link to the Oasis default (http://localhost:8000/nomad-oasis/...).
+# Same repository variables as in deploy-docs.yml, so that backfilled versions
+# do not link to the Oasis default (http://localhost:8000/nomad-oasis/...).
 env:
-  NOMAD_SERVICES_API_HOST: nomad-lab.eu
-  NOMAD_SERVICES_API_PORT: "443"
-  # TODO: change to "/" once the new NOMAD version is out.
-  NOMAD_SERVICES_API_BASE_PATH: /prod/v1
-  NOMAD_SERVICES_HTTPS: "true"
+  NOMAD_SERVICES_API_HOST: ${{ vars.NOMAD_SERVICES_API_HOST }}
+  NOMAD_SERVICES_API_PORT: ${{ vars.NOMAD_SERVICES_API_PORT }}
+  NOMAD_SERVICES_API_BASE_PATH: ${{ vars.NOMAD_SERVICES_API_BASE_PATH }}
+  NOMAD_SERVICES_HTTPS: ${{ vars.NOMAD_SERVICES_HTTPS }}
 
 # Serialize with the regular deploy workflow: both write to gh-pages.
 concurrency:
@@ -35,6 +34,16 @@ jobs:
         with:
           ref: ${{ inputs.tag }}
           fetch-depth: 0
+
+      # A missing variable would publish broken API links, so stop here instead.
+      - name: Check NOMAD URL variables
+        run: |
+          for name in NOMAD_SERVICES_API_HOST NOMAD_SERVICES_API_PORT NOMAD_SERVICES_API_BASE_PATH NOMAD_SERVICES_HTTPS; do
+            if [ -z "${!name}" ]; then
+              echo "::error::Repository variable ${name} is not set (Settings > Secrets and variables > Actions > Variables)."
+              exit 1
+            fi
+          done
 
       - name: Install uv
         # Needs a recent uv: older versions put '--with' packages in an

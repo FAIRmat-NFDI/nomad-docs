@@ -8,15 +8,15 @@ on:
 env:
   UV_VERSION: 0.6
   # Point the `nomad_url()` macro at the central production instance so the
-  # published docs render real URLs (https://nomad-lab.eu/prod/v1/api/...).
-  # Without these, the macro falls back to the Oasis default
-  # (http://localhost:8000/nomad-oasis/...). Local and Oasis builds that
-  # do not set these keep the default behaviour.
-  NOMAD_SERVICES_API_HOST: nomad-lab.eu
-  NOMAD_SERVICES_API_PORT: "443"
-  # TODO: change to "/" once the new NOMAD version is out.
-  NOMAD_SERVICES_API_BASE_PATH: /prod/v1
-  NOMAD_SERVICES_HTTPS: "true"
+  # published docs render real API URLs. The values are repository variables
+  # (Settings > Secrets and variables > Actions > Variables), so they can be
+  # changed without a commit; re-run this workflow afterwards. Local and Oasis
+  # builds that do not set them keep the Oasis default
+  # (http://localhost:8000/nomad-oasis/...).
+  NOMAD_SERVICES_API_HOST: ${{ vars.NOMAD_SERVICES_API_HOST }}
+  NOMAD_SERVICES_API_PORT: ${{ vars.NOMAD_SERVICES_API_PORT }}
+  NOMAD_SERVICES_API_BASE_PATH: ${{ vars.NOMAD_SERVICES_API_BASE_PATH }}
+  NOMAD_SERVICES_HTTPS: ${{ vars.NOMAD_SERVICES_HTTPS }}
 
 # develop/tag pushes all write to the gh-pages branch, so serialize them.
 concurrency:
@@ -32,6 +32,16 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v7
+
+      # A missing variable would publish broken API links, so stop here instead.
+      - name: Check NOMAD URL variables
+        run: |
+          for name in NOMAD_SERVICES_API_HOST NOMAD_SERVICES_API_PORT NOMAD_SERVICES_API_BASE_PATH NOMAD_SERVICES_HTTPS; do
+            if [ -z "${!name}" ]; then
+              echo "::error::Repository variable ${name} is not set (Settings > Secrets and variables > Actions > Variables)."
+              exit 1
+            fi
+          done
 
       # mike deploys into the gh-pages branch; make it available even in a shallow clone.
       # (|| true: on a very first deploy the branch may not exist yet, mike will create it.)
