@@ -49,12 +49,18 @@ classDiagram
 <figcaption>The classes and relationships in the general workflow model.</figcaption>
 </figure>
 
-Open triangular arrowheads point from a subclass to its parent class. Filled
-diamonds identify contained subsections: an Entry archive contains its
-`workflow2`, a workflow contains tasks, and a task contains input and output
-links. Plain arrows represent references to sections or tasks stored elsewhere
-in the archive graph. The referenced `ArchiveSection` can, for example, belong
-to `run`, `data`, or another `workflow2`.
+**Diagram legend**
+
+| Notation | Meaning |
+| --- | --- |
+| `<\|--` with an open triangular arrowhead | Inheritance from a subclass to its parent class |
+| `*--` with a filled diamond | Composition of contained subsections |
+| `-->` with a plain arrowhead | Reference to another section or task |
+| `0..1` | Zero or one instance |
+| `0..*` | Zero or more instances |
+
+The referenced `ArchiveSection` can, for example, belong to `run`, `data`, or
+another `workflow2`.
 
 The model has four central components:
 
