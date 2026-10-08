@@ -61,8 +61,9 @@ The model has four central components:
 - A **link** represents one input or output. Its `section` points to the archive
   section containing the data, while its `name` provides a label for displays
   such as the workflow graph.
-- A **task** represents an activity that used inputs to produce outputs. Its
-  optional `section` can identify the archive section describing that activity.
+- A **task** represents an activity that used inputs to produce outputs. A
+  task's optional `section` can identify the archive section describing that
+  activity.
 - A **task reference** is a proxy for a task or workflow defined elsewhere,
   such as in another Entry. It can supply a local name, inputs, and outputs or
   obtain them from the referenced task.
