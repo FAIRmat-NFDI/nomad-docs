@@ -204,8 +204,8 @@ To find the required identifiers:
    Alternatively, copy the value immediately after `/entries/` in the Entry's
    URL.
 
-For example, adapt the `dft.workflow.archive.yaml` file from the previous
-section as follows:
+For example, the `dft.workflow.archive.yaml` file from the previous section can
+be adapted as follows:
 
 ??? example "Reference the `dft.xml` Entry from another Project"
     ```yaml
