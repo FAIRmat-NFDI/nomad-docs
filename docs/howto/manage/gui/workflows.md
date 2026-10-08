@@ -302,7 +302,7 @@ workflow illustrates this pattern:
 
 ```mermaid
 graph LR;
-    A2((Inputs)) --> B2[DFT];
+    A2((Input structure)) --> B2[DFT];
     B2 --> C2[TB];
     C2 --> D21[DMFT at T1];
     C2 --> D22[DMFT at T2];
@@ -312,8 +312,8 @@ graph LR;
         D22;
     end
 
-    D21 --> E21([Output calculation T1])
-    D22 --> E22([Output calculation T2])
+    D21 --> E21([Output DMFT at T1 calculation])
+    D22 --> E22([Output DMFT at T2 calculation])
 ```
 
 This workflow contains a series of electronic-structure calculations: a
@@ -426,9 +426,9 @@ workflow:
 ![Top-level nested workflow graph in the dark theme](images/nested-workflow-parent-card-dark.png#only-dark){:.screenshot}
 
 Select the `DMFT` task to enter the sub-workflow. The graph then shows the
-`DMFT at T1` and `DMFT at T2` tasks and their connections to the TB input and
-the two DMFT outputs. Use the back arrow in the workflow toolbar to return to
-the parent graph.
+`DMFT at T1` and `DMFT at T2` tasks. Both receive the TB calculation as input,
+and each connects to its corresponding DMFT output. Use the back arrow in the
+workflow toolbar to return to the parent graph.
 
 ![DMFT sub-workflow graph in the light theme](images/nested-workflow-dmft-subworkflow-card-light.png#only-light){:.screenshot}
 ![DMFT sub-workflow graph in the dark theme](images/nested-workflow-dmft-subworkflow-card-dark.png#only-dark){:.screenshot}
