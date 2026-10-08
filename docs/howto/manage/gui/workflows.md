@@ -115,7 +115,10 @@ The `workflow2` section has three possible subsections: `inputs`, `outputs`, and
 
 **`outputs`**: identical to the inputs list, representing the global outputs of the workflow, with the relative section path `run[0].calculation[-1]` in this case.
 
-**`tasks`**: a list of references to the tasks/steps of the workflow. Each task contains `m_def`, `task`, `inputs`, and `outputs` attributes. `inputs`/`outputs` are task-specific versions of the lists defined above.
+**`tasks`**: a list of references to the tasks/steps of the workflow. Each task
+in this example contains `m_def`, `task`, `name`, `inputs`, and `outputs`
+attributes. `name` supplies the task label shown in the workflow graph.
+`inputs`/`outputs` are task-specific versions of the lists defined above.
 
 `task` is the path for linking to the relevant archive section, analogous to the `section` attribute for `inputs`/`outputs`. However, this path **must** reference a task, which in all practical cases corresponds to a `workflow2` section.
 
