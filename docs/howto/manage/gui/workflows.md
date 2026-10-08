@@ -430,10 +430,6 @@ Select the `DMFT` task to enter the sub-workflow. The graph then shows the
 the two DMFT outputs. Use the back arrow in the workflow toolbar to return to
 the parent graph.
 
-<!-- TODO: Regenerate both child images without --allow-missing-nested-tasks
-after the GUI displays the nested DMFT tasks. The current captures show the
-reported "No tasks to show" defect. -->
-
 ![DMFT sub-workflow graph in the light theme](images/nested-workflow-dmft-subworkflow-card-light.png#only-light){:.screenshot}
 ![DMFT sub-workflow graph in the dark theme](images/nested-workflow-dmft-subworkflow-card-dark.png#only-dark){:.screenshot}
 
