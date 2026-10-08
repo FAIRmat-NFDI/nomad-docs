@@ -614,8 +614,10 @@ interactive workflow graph. The visualizer supports the following actions:
 - **Focus on a connection:** Select an arrow between tasks to show the connected
   tasks and their shared input and output context.
 - **Filter tasks:** Use the **Filter tasks to show** bar to limit the tasks
-  displayed in a large graph. The filter accepts comma-separated indices or
-  colon-separated ranges; negative indices and percentages are also supported.
+  displayed in a large graph. Enter zero-based indices and press Enter to apply
+  the filter. For example, `0` selects the first task, `0,2,4` selects
+  individual tasks, `0:5` selects the first five tasks, `:50%` selects the
+  first half, and `-5:` selects the last five tasks.
 - **Adjust or export the view:** Enable the force-directed layout, show or hide
   the legend, reset the graph, or download it as an SVG file.
 
