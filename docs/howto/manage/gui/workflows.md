@@ -43,12 +43,16 @@ graph LR;
     B[DFT] --> C([Output calculation]);
 ```
 
-The task is represented by `dft.xml`, the mainfile of a VASP calculation. In
-this example, the VASP parser provided by the
+The task is represented by `dft.xml`, the mainfile of a calculation performed
+with VASP, an electronic-structure simulation code. In this example, the VASP
+parser provided by the
 [electronic-parsers plugin](https://github.com/nomad-coe/electronic-parsers){:target="_blank" rel="noopener"}
 creates an Entry with a `workflow2` section representing the single-point
 calculation. This behavior is specific to the parser and is not a general
 feature of all parser-supported mainfiles.
+
+<!-- TODO: When this example transitions to nomad-simulation-parsers, link to
+the corresponding parser documentation. -->
 
 The parser-generated workflow has the following graph:
 
