@@ -54,7 +54,8 @@ feature of all parser-supported mainfiles.
 <!-- TODO: When this example transitions to nomad-simulation-parsers, link to
 the corresponding parser documentation. -->
 
-The parser-generated workflow has the following graph:
+Open the parser-generated Entry and select **CONNECTIVITY** to view its workflow
+graph:
 
 ![Parser-generated single-point workflow graph in the light theme](images/single-point-nomad-workflow-card-light.png#only-light){:.screenshot}
 ![Parser-generated single-point workflow graph in the dark theme](images/single-point-nomad-workflow-card-dark.png#only-dark){:.screenshot}
@@ -599,8 +600,13 @@ supported workflow-building flow. -->
 
 ## Using the workflow visualizer
 
-When an Entry contains a `workflow2` section, its **OVERVIEW** page shows an
-interactive workflow graph. The visualizer supports the following actions:
+When an Entry contains a `workflow2` section, its **CONNECTIVITY** page shows
+an interactive workflow graph. Depending on the Entry layout, a **Workflow**
+card may also appear on **OVERVIEW**. In addition to the graph,
+**CONNECTIVITY** lists Entries referenced by or referencing the current Entry,
+as well as activity references.
+
+The visualizer supports the following actions:
 
 - **Inspect the workflow structure:** Inputs, tasks, and outputs are arranged
   from left to right. Arrows show their connections, and hovering over graph
