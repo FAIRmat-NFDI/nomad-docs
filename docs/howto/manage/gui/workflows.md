@@ -208,10 +208,12 @@ described under [Archive path specification](#path-specification).
 
 To find the required identifiers:
 
-1. Open the target Project, select **SETTINGS**, and copy its **Project ID**.
-   This value equals `archive.metadata.upload_id`; use it as `<upload_id>`.
-2. Open the target Entry, select **ARCHIVE**, and navigate to
-   `metadata` > `entry_id`. Copy this value and use it as `<entry_id>`.
+1. Open the target Entry, select **ARCHIVE**, and navigate to
+   `metadata` > `upload_id`. Copy this value and use it as `<upload_id>`.
+   Alternatively, open the target Project, select **SETTINGS**, and copy its
+   **Project ID**, which is the same identifier.
+2. In the target Entry's **ARCHIVE**, navigate to `metadata` > `entry_id`.
+   Copy this value and use it as `<entry_id>`.
    Alternatively, copy the value immediately after `/entries/` in the Entry's
    URL.
 
