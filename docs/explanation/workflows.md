@@ -81,9 +81,14 @@ deployment.
     Some older Entry archives use the legacy top-level `workflow` section. New
     workflow data and schemas should use `workflow2`.
 
-### Example provenance graph
+### Nested workflow example
 
-Consider a geometry optimization followed by a ground-state calculation:
+A task can represent a process with its own inputs, tasks, and outputs. Because
+a `Workflow` is also a `Task`, a workflow can be contained directly in a parent
+workflow. A `TaskReference` can instead link to a workflow stored elsewhere.
+
+Consider a parent workflow containing a geometry optimization followed by a
+ground-state calculation:
 
 <figure markdown style="width: 100%">
 
@@ -140,15 +145,9 @@ output. The relaxed system is then reused as the input of the ground-state
 calculation task.
 
 The tasks and referenced sections may be stored together or in separate
-Entries without changing these logical relationships.
-
-### Nested workflows
-
-A task can represent a process with its own inputs, tasks, and outputs. Because
-a `Workflow` is also a `Task`, this sub-workflow can be contained directly in a
-parent workflow. A `TaskReference` can instead link to a workflow stored
-elsewhere. Both forms produce a hierarchical provenance graph while allowing
-each referenced Entry to remain independently accessible.
+Entries without changing these logical relationships. Directly contained and
+referenced workflows both produce a hierarchical provenance graph while
+allowing each referenced Entry to remain independently accessible.
 
 ## Custom and standardized workflows
 
