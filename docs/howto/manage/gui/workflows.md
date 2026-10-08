@@ -68,6 +68,8 @@ as its input and output.
 
 <!-- TODO: Explain why the parser-generated workflow graph has three outputs while the custom workflow graph has one. -->
 
+### Create the custom workflow YAML file
+
 To define the initial workflow, create a file `dft.workflow.archive.yaml` with the following content:
 
 ```yaml
