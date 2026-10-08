@@ -60,14 +60,20 @@ graph:
 ![Parser-generated single-point workflow graph in the light theme](images/single-point-nomad-workflow-card-light.png#only-light){:.screenshot}
 ![Parser-generated single-point workflow graph in the dark theme](images/single-point-nomad-workflow-card-dark.png#only-dark){:.screenshot}
 
-To demonstrate the creation of a custom workflow Entry, the example below recreates the central input-task-output path of this
-`SinglePoint` workflow graph in a separate custom workflow Entry using YAML, as
-described in [How-to guides > ... > Populate data](../../schemas/define.md#populate-data).
+The parser normalizer exposes three global output links in this graph. The two
+nodes labeled **Output calculation** refer to the same final calculation
+section, while **Output system** refers to the final system section. They do
+not represent three separate calculations. The duplicate calculation link is a
+normalizer artifact rather than a distinct result.
+
+For simplicity, the custom workflow below does not reproduce this
+parser-specific output set. Instead, it recreates the central input-task-output
+path of the `SinglePoint` workflow graph in a separate custom workflow Entry
+using YAML, as described in
+[How-to guides > ... > Populate data](../../schemas/define.md#populate-data).
 The custom workflow references the parser-generated `workflow2` section
 as its task and explicitly uses the same system and final calculation sections
 as its input and output.
-
-<!-- TODO: Explain why the parser-generated workflow graph has three outputs while the custom workflow graph has one. -->
 
 ### Create the custom workflow YAML file
 
@@ -173,6 +179,10 @@ To reproduce the example in a new Project:
 
 ![Custom single-point workflow graph in the light theme](images/single-point-custom-nomad-workflow-card-light.png#only-light){:.screenshot}
 ![Custom single-point workflow graph in the dark theme](images/single-point-custom-nomad-workflow-card-dark.png#only-dark){:.screenshot}
+
+This graph has one output node because the task output and global workflow
+output reference the same calculation section. The visualizer represents this
+shared section as one connected output node.
 
 ??? tip "Add the methodology as a workflow input"
 
