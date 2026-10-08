@@ -4038,8 +4038,9 @@ classDiagram
     Task *-- "0..*" Link : inputs
     Task *-- "0..*" Link : outputs
     TaskReference --&gt; Task : task
+    Task --&gt; ArchiveSection : section
     Link --&gt; ArchiveSection : section</code></pre>
-<figcaption>The classes and relationships in the general workflow model.</figcaption>
+<figcaption>The core classes and relationships used to represent workflow provenance. Framework-level inheritance and other schema details are omitted.</figcaption>
 </figure>
 <p><strong>Diagram legend</strong></p>
 <table>
@@ -4104,14 +4105,14 @@ workflow data and schemas should use <code>workflow2</code>.</p>
 a <code>Workflow</code> is also a <code>Task</code>, a workflow can be contained directly in a parent
 workflow. A <code>TaskReference</code> can instead link to a workflow stored elsewhere.</p>
 <p>Consider a parent workflow containing a geometry optimization followed by a
-ground-state calculation:</p>
+single-point workflow for a ground-state calculation:</p>
 <figure style="width: 100%">
 <pre class="mermaid"><code>flowchart TB
     input["Input system"]
 
-    subgraph parent["Combined workflow"]
+    subgraph parent["Relaxation and ground-state workflow"]
         direction TB
-        subgraph optimization["Geometry optimization workflow"]
+        subgraph optimization["Geometry optimization"]
             direction TB
             step0(["Optimization step 0"])
             calc0["Calculation 0"]
@@ -4133,26 +4134,35 @@ ground-state calculation:</p>
 
         step2 --&gt; relaxed["Relaxed system"]
         optimization --&gt; relaxed
-        relaxed --&gt; ground_state(["Ground-state calculation task"])
+        subgraph single_point["Single-point"]
+            ground_state(["Ground-state calculation task"])
+        end
+
+        relaxed --&gt; single_point
+        relaxed --&gt; ground_state
     end
 
     input --&gt; optimization
     input --&gt; step0
     ground_state --&gt; result["Ground-state result"]
+    single_point --&gt; result
 
     style parent stroke-dasharray: 5 5
-    style optimization stroke-dasharray: 5 5</code></pre>
-<figcaption>A parent workflow containing a nested geometry-optimization workflow followed by a ground-state calculation.</figcaption>
+    style optimization stroke-dasharray: 5 5
+    style single_point stroke-dasharray: 5 5</code></pre>
+<figcaption>A parent workflow containing nested geometry-optimization and single-point workflows.</figcaption>
 </figure>
 <p>Rounded nodes represent tasks, rectangles represent referenced archive
-sections, the dashed box represents a workflow, and arrows represent links.
+sections, dashed boxes represent workflows, and arrows represent links.
 Each optimization task produces a calculation section and an updated system
 section that becomes the input of the next task.
 The input-system link identifies both the geometry optimization's global input
 and the first task's input. Likewise, the relaxed-system link identifies both
 the final optimization task's output and the geometry optimization's global
 output. The relaxed system is then reused as the input of the ground-state
-calculation task.</p>
+calculation task and as the global input of its single-point workflow.
+Likewise, the ground-state result is both the task output and the global output
+of the single-point workflow.</p>
 <p>The tasks and referenced sections may be stored together or in separate
 Entries without changing these logical relationships. Directly contained and
 referenced workflows both produce a hierarchical provenance graph while
