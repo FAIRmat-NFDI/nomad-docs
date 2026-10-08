@@ -3326,6 +3326,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
       
         <li class="md-nav__item">
+  <a href="#related-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related pages
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#the-built-in-abstract-workflow-schema" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3338,21 +3349,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#example-workflow" class="md-nav__link">
+  <a href="#nested-workflow-example" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Example workflow
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#standardized-versus-custom-workflows" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Standardized versus custom workflows
+        Nested workflow example
       
     </span>
   </a>
@@ -3361,6 +3361,28 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-and-standardized-workflows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom and standardized workflows
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-workflow-data-is-created" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How workflow data is created
+      
+    </span>
+  </a>
   
 </li>
       
@@ -3853,6 +3875,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
       
         <li class="md-nav__item">
+  <a href="#related-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related pages
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#the-built-in-abstract-workflow-schema" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3865,21 +3898,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#example-workflow" class="md-nav__link">
+  <a href="#nested-workflow-example" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Example workflow
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#standardized-versus-custom-workflows" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Standardized versus custom workflows
+        Nested workflow example
       
     </span>
   </a>
@@ -3888,6 +3910,28 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-and-standardized-workflows" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Custom and standardized workflows
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-workflow-data-is-created" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How workflow data is created
+      
+    </span>
+  </a>
   
 </li>
       
@@ -3957,87 +4001,208 @@
 
 
 <h1 id="workflows">Workflows<a class="headerlink" href="#workflows" title="Permanent link">¶</a></h1>
+<p>A workflow in NOMAD is a record of provenance: it describes how inputs were
+used by tasks to produce outputs. It represents a process that has taken place
+or is documented in stored data. It is not a workflow engine and does not
+execute the tasks it describes.</p>
+<p>The inputs, tasks, and outputs can refer to archive sections in one Entry or
+across multiple Entries. A Project groups files and Entries for management,
+access, and publication, whereas a workflow expresses relationships between
+the data stored in those Entries.</p>
+<h2 id="related-pages">Related pages<a class="headerlink" href="#related-pages" title="Permanent link">¶</a></h2>
+<ul>
+<li><a href="../howto/manage/gui/workflows.html">How-to guides &gt; ... &gt; Create custom workflows</a></li>
+<li><a href="processing.html">Explanation &gt; Processing</a></li>
+<li><a href="../howto/schemas/define.html">How-to guides &gt; Work with schemas &gt; Define a schema</a></li>
+<li><a href="../tutorial/eln/built_in_templates.html">Tutorials &gt; Use NOMAD as an ELN &gt; Use built-in ELN templates</a></li>
+</ul>
 <h2 id="the-built-in-abstract-workflow-schema">The built-in abstract workflow schema<a class="headerlink" href="#the-built-in-abstract-workflow-schema" title="Permanent link">¶</a></h2>
-<p>Workflows are an important aspect of data as they explain how the data came to be. Let's
-first clarify that <em>workflow</em> refers to a workflow that already happened and that has
-produced <em>input</em> and <em>output</em> data that are <em>linked</em> through <em>tasks</em> that have been
-performed . This often is also referred to as <em>data provenance</em> or <em>provenance graph</em>.</p>
-<p>The following shows the overall abstract schema for <em>worklows</em> that can be found
-in <code>nomad.datamodel.metainfo.workflow</code> (blue):</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/workflow-schema.png" data-desc-position="bottom"><img alt="workflow schema" src="images/workflow-schema.png"></a></p>
-<p>In this UML diagram, filled diamonds denote a “contains“ relationship with the
-diamond on the containing section. Open arrows denote inheritance and point to the parent section.
-Filled arrows denote sub-sections, named with the arrow label and defined by the section the arrow
-is pointed towards.</p>
-<p>The idea is that <em>workflows</em> are stored in a top-level archive section along-side other
-sections that contain the <em>inputs</em> and <em>outputs</em>. This way the <em>workflow</em> or <em>provenance graph</em>
-is just additional piece of the archive that describes how the data in this (or other archives) is connected.</p>
-<h3 id="example-workflow">Example workflow<a class="headerlink" href="#example-workflow" title="Permanent link">¶</a></h3>
-<p>Consider an example <em>workflow</em> consisting of a geometry optimization and ground state
-calculation performed by two individual DFT code runs. The code runs are stored in
-NOMAD entries <code>geom_opt.archive.yaml</code> and <code>ground_state.archive.yaml</code> using the <code>run</code>
-top-level section.</p>
-<p>Here is a logical depiction of the workflow and all its tasks, inputs, and outputs.</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/example-workflow.png" data-desc-position="bottom"><img alt="example workflow" src="images/example-workflow.png"></a></p>
-<h3 id="standardized-versus-custom-workflows">Standardized versus custom workflows<a class="headerlink" href="#standardized-versus-custom-workflows" title="Permanent link">¶</a></h3>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Coming soon...</p>
+<p>NOMAD stores the current workflow representation in the top-level <code>workflow2</code>
+section of an Entry archive. This section contains a <code>Workflow</code> instance from
+<code>nomad.datamodel.metainfo.workflow</code>.</p>
+<figure class="workflow-schema-diagram" style="width: 100%">
+<pre class="mermaid"><code>%%{init: {"themeVariables": {"fontSize": "18px"}}}%%
+classDiagram
+    direction TB
+    class EntryArchive
+    class Workflow
+    class Task
+    class TaskReference
+    class Link
+    class ArchiveSection
+
+    EntryArchive *-- "0..1" Workflow : workflow2
+    Task &lt;|-- Workflow
+    Task &lt;|-- TaskReference
+    Workflow *-- "0..*" Task : tasks
+    Task *-- "0..*" Link : inputs
+    Task *-- "0..*" Link : outputs
+    TaskReference --&gt; Task : task
+    Task --&gt; ArchiveSection : section
+    Link --&gt; ArchiveSection : section</code></pre>
+<figcaption>The core classes and relationships used to represent workflow provenance. Framework-level inheritance and other schema details are omitted.</figcaption>
+</figure>
+<p><strong>Diagram legend</strong></p>
+<table>
+<thead>
+<tr>
+<th>Notation</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;\|--</code> with an open triangular arrowhead</td>
+<td>Inheritance from a subclass to its parent class</td>
+</tr>
+<tr>
+<td><code>*--</code> with a filled diamond</td>
+<td>Composition of contained subsections</td>
+</tr>
+<tr>
+<td><code>--&gt;</code> with a plain arrowhead</td>
+<td>Reference to another section or task</td>
+</tr>
+<tr>
+<td><code>0..1</code></td>
+<td>Zero or one instance</td>
+</tr>
+<tr>
+<td><code>0..*</code></td>
+<td>Zero or more instances</td>
+</tr>
+</tbody>
+</table>
+<p>The referenced <code>ArchiveSection</code> can, for example, belong to <code>run</code>, <code>data</code>, or
+another <code>workflow2</code>.</p>
+<p>The model has four central components:</p>
+<ul>
+<li>A <strong>link</strong> represents one input or output. Its <code>section</code> points to the archive
+  section containing the data, while its <code>name</code> provides a label for displays
+  such as the workflow graph.</li>
+<li>A <strong>task</strong> represents an activity that used inputs to produce outputs. A
+  task's optional <code>section</code> can identify the archive section describing that
+  activity.</li>
+<li>A <strong>task reference</strong> is a proxy for a task or workflow defined elsewhere,
+  such as in another Entry. It can supply a local name, inputs, and outputs or
+  obtain them from the referenced task.</li>
+<li>A <strong>workflow</strong> is a task that also contains other tasks. Because <code>Workflow</code>
+  inherits from <code>Task</code>, a workflow can itself be used as a task in another
+  workflow.</li>
+</ul>
+<p>The model stores references rather than separate graph edges. When links on
+different nodes point to the same archive section, NOMAD can represent the
+shared data as a connection in the workflow graph. References can point to
+sections in the same Entry or to Entries elsewhere on the same NOMAD
+deployment.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Some older Entry archives use the legacy top-level <code>workflow</code> section. New
+workflow data and schemas should use <code>workflow2</code>.</p>
 </div>
-<!-- TODO - add description here -->
+<h3 id="nested-workflow-example">Nested workflow example<a class="headerlink" href="#nested-workflow-example" title="Permanent link">¶</a></h3>
+<p>A task can represent a process with its own inputs, tasks, and outputs. Because
+a <code>Workflow</code> is also a <code>Task</code>, a workflow can be contained directly in a parent
+workflow. A <code>TaskReference</code> can instead link to a workflow stored elsewhere.</p>
+<p>Consider a parent workflow containing a geometry optimization followed by a
+single-point workflow for a ground-state calculation:</p>
+<figure style="width: 100%">
+<pre class="mermaid"><code>flowchart TB
+    input["Input system"]
 
-<!-- Below is text copied directly from a book chapter explaining NOMAD workflows, it should be adapted for the docs
+    subgraph parent["Relaxation and ground-state workflow"]
+        direction TB
+        subgraph optimization["Geometry optimization"]
+            direction TB
+            step0(["Optimization step 0"])
+            calc0["Calculation 0"]
+            system1["System 1"]
+            step1(["Optimization step 1"])
+            calc1["Calculation 1"]
+            system2["System 2"]
+            step2(["Optimization step 2"])
+            calc2["Calculation 2"]
 
-\subsection{Workflow storage in NOMAD} \label{sec:NOMAD}
+            step0 --&gt; calc0
+            step0 --&gt; system1
+            system1 --&gt; step1
+            step1 --&gt; calc1
+            step1 --&gt; system2
+            system2 --&gt; step2
+            step2 --&gt; calc2
+        end
 
-To present NOMAD's workflow support, it is useful to first describe its basic organization and corresponding terminology. The fundamental unit of storage within the NOMAD repository is an \emph{entry}. Each entry contains both the raw uploaded files as well as an ``archive,'' \ie the extracted (meta)data stored within NOMAD's structured data schema. NOMAD entries can be organized hierarchically into uploads, workflows, and datasets. Users can arbitrarily group simulations together upon upload. NOMAD's parsing interface will automatically identify supported simulations and create individual entries for each of them. Datasets allow users to group entries together that were not necessarily uploaded or published at the same time, while obtaining a single DOI for a collection of data. Finally, workflows provide directed connections between entries (or between metadata sections within entries), along with additional surrounding metadata, that facilitate specific scientific processes to be documented in great detail. This organization of data provides ample flexibility for researchers to conveniently manage their data at various stages of the project life cycle.
+        step2 --&gt; relaxed["Relaxed system"]
+        optimization --&gt; relaxed
+        subgraph single_point["Single-point"]
+            ground_state(["Ground-state calculation task"])
+        end
 
-Within its core schema, NOMAD represents workflows as a collection of inputs, outputs, and tasks. The tasks themselves contain inputs and outputs, each with a link to specific sections or quantities within the archive of a particular entry, as demonstrated in Fig.~\ref{fig:nomad_workflows_a}. Task references are proxy tasks used to compose workflows or tasks that are contained in different entries. In this way, any workflow in NOMAD can be mapped to a directed graph structure. The simplicity of this schema enables immense flexibility, \eg the creation of hierarchical workflows with tasks that represent an underlying sub-workflow, as demonstrated by the example workflow shown in Figure~\ref{fig:nomad_workflows_b}.
+        relaxed --&gt; single_point
+        relaxed --&gt; ground_state
+    end
 
-% \begin{figure}[h!]
-% \centering
-% \includegraphics[width=0.72\linewidth]{chapters/Workflow_Schema.jpg}
-% \caption{(a) UML diagram representing the core workflow schema in NOMAD. Filled diamonds denote a ``contains`` relationship with the diamond on the containing section. Open arrows denote inheritance and point to the parent section. Filled arrows denote sub-sections, named with the arrow label and defined by the section the arrow is pointed towards. (b) Example schematic of a hierarchical workflow according to the NOMAD schema. The ``system`` and ``calc`` sections represent the structure and output (meta)data, respectively, for an individual simulation entry. The arrows in this panel represent the edges between workflow tasks, distinct from the meaning of the filled errors in panel (a). Figure adapted from the NOMAD documentation~\cite{NOMADDocs}.
-% \label{fig:nomad_workflows}}
-% \end{figure}
+    input --&gt; optimization
+    input --&gt; step0
+    ground_state --&gt; result["Ground-state result"]
+    single_point --&gt; result
 
-\begin{figure}[h!]
-\centering
-\includegraphics[width=\linewidth]{chapters/workflow_schema_a.jpg}
-\caption{UML diagram representing the core workflow schema in NOMAD. Filled diamonds denote a ``contains`` relationship with the diamond on the containing section. Open arrows denote inheritance and point to the parent section. Filled arrows denote sub-sections, named with the arrow label and defined by the section the arrow is pointed towards. Figure adapted from the NOMAD documentation~\cite{NOMADDocs}.
-\label{fig:nomad_workflows_a}}
-\end{figure}
-
-\begin{figure}[h!]
-\centering
-\includegraphics[width=0.6\linewidth]{chapters/workflow_schema_b.jpg}
-\caption{Example schematic of a hierarchical workflow according to the NOMAD schema. The ``system`` and ``calc`` sections represent the structure and output (meta)data, respectively, for an individual simulation entry. The arrows represent the edges between workflow tasks, distinct from the meaning of the filled errors in Fig.~\ref{fig:nomad_workflows_a}. Figure adapted from the NOMAD documentation~\cite{NOMADDocs}.
-\label{fig:nomad_workflows_b}}
-\end{figure}
-
-NOMAD supports two distinct workflow implementations: custom and standardized. Custom workflows allow users to arbitrarily link NOMAD entries with one another according to the core workflow schema. In practice, this can be achieved by providing the relevant workflow information within a YAML file. The creation of such a workflow YAML involves defining connections to specific sections of the internal NOMAD metadata schema, which represents a significant barrier for non-experts. To lower this barrier, a workflow utilities module~\cite{Rudzinski2025Utility} has been developed to automate the creation of workflow YAMLs with as little NOMAD-specific user knowledge as possible. When uploaded to NOMAD, the workflow YAML is automatically processed, creating a workflow entry along with an interactive workflow graph that navigates to the referenced sub-workflows, tasks, and (meta)data. Users can adopt this approach to not only connect entries that are uploaded at the same time as the workflow YAML, but also to link to existing NOMAD entries.
-
-Custom workflows can also be created via the ELN functionalities in NOMAD. In particular, users can utilize the ``Experiment'' ELN template, which already contains a hierarchical structure for defining a series of activities (\ie sub-workflows) and underlying steps (\ie tasks). These steps may be generally linked with lab processes (measurements, analyses, synthesis steps, etc.), and can be entered and edited directly using NOMAD's ELN user interface. The resulting populated hierarchy of experimental steps are automatically mapped and stored within NOMAD's core workflow schema, enabling a corresponding visualization via NOMAD's interactive workflow graphs, and resulting in a consistent description of experimental and computational workflows throughout the repository. In fact, ELN entries can also be leveraged to document custom tasks within a computational workflow, such as manual file manipulations or the execution of custom scripts.
-% NOTES - may add more specific description/example -- Physical Vapor Deposition -- from shipment to growth, to sample, to sample cutting.
-% Bundle a series of steps in the lab, preprocessing of substrate, raw file from machine performing deposition, get multilayer sample from the chamber, each sample sent to characterization,
-
-In contrast to custom workflows, standardized workflows in NOMAD contain a well-defined structure, as determined by a specialized workflow schema. This schema may be as specific as required and may include normalization functions that, \eg extract (meta)data from individual workflow tasks (corresponding to NOMAD entries) to compile overarching statistics or analyses. For example, when one of the NOMAD parsers identifies a $GW$ calculation, which takes as input a single-point DFT calculation, a $GW$ workflow is instantiated. The preceding DFT calculation is then automatically identified and linked within the $GW$ workflow, while extracting and plotting the DFT and $GW$ band structures for comparison on the workflow overview page. Community members can implement their own standardized schemas within a NOMAD \emph{plugin}, providing a bottom-up and low-barrier route for workflow standardization.
-
-Given a standardized workflow schema, there are two ways to create corresponding entries in NOMAD. The first is for the user to provide the workflow (meta)data within a workflow YAML, identical to the custom workflow approach. In this case, a reference to the schema is included in the workflow (meta)data, and any restrictions implied by this schema should be followed to ensure full functionality. Although it requires some knowledge of the NOMAD workflow YAML schema, this approach is accessible to researchers who have limited programming knowledge but want to document a workflow that is not already supported within NOMAD's parsers. The second, and more robust, option is automated identification and creation of standardized workflows via NOMAD's parser codes (as in the $GW$ example above). Parser plugins may be developed for both traditional simulations codes as well as for domain-specific workflow libraries. In fact, in addition to workflow support within many of NOMAD's simulation code parsers, NOMAD's workflow parsers~\cite{Ladines2025Workflow} already provide support for several of the workflow libraries from Table~\ref{tab:workflow_software}: AFLOW, ASR, FHI-vibes, and Atomate.
-% AFLOW
-% ASR
-% Atomate
-% ElaStic
-% FHI-vibes
-% LOBSTER
-% phonopy
-% QuantumEspressoEPW
-% QuantumEspressPhonon
-% QuantumEspressoXSpectra
-
-In principal, parser plugins can also be developed for workflow managers, although this has not yet been implemented. Instead, recent work~\cite{Bereau2024Martignac} has opted for the reverse integration, \ie the workflow manager performs a mapping of the workflow (meta)data from its native schema to NOMAD's and creates NOMAD workflow YAMLs for upload. In this case, the integration was implemented into an interfacing module that links the workflow manager and NOMAD, while standardizing the execution of domain-specific workflows. It was demonstrated that this approach may be advantageous for modular and dynamic workflows, as on-the-fly NOMAD queries can be executed to utilize existing data in the NOMAD repository. Thus, it is especially relevant for high-throughput applications.
-
-Overall, NOMAD provides a variety of flexible options for retaining data provenance through the hierarchical storage of directed tasks and associated (meta)data. While custom workflows are essential for agile usage and development, promoting immediate adoption of FAIR data management practices, standardized workflows enable powerful search, visualization, and analysis features. The creation of specific workflow entries via parser plugins (Python-based), NOMAD's native workflow schema (YAML-based), and the ELN user interface (web-based GUI), provide a range of approaches accessible to all researchers. Thus, NOMAD fosters a dynamic ecosystem of workflow support that paves the way for FAIR workflow data management.  -->
+    style parent stroke-dasharray: 5 5
+    style optimization stroke-dasharray: 5 5
+    style single_point stroke-dasharray: 5 5</code></pre>
+<figcaption>A parent workflow containing nested geometry-optimization and single-point workflows.</figcaption>
+</figure>
+<p>Rounded nodes represent tasks, rectangles represent referenced archive
+sections, dashed boxes represent workflows, and arrows represent links.
+Each optimization task produces a calculation section and an updated system
+section that becomes the input of the next task.
+The input-system link identifies both the geometry optimization's global input
+and the first task's input. Likewise, the relaxed-system link identifies both
+the final optimization task's output and the geometry optimization's global
+output. The relaxed system is then reused as the input of the ground-state
+calculation task and as the global input of its single-point workflow.
+Likewise, the ground-state result is both the task output and the global output
+of the single-point workflow.</p>
+<p>The tasks and referenced sections may be stored together or in separate
+Entries without changing these logical relationships. Directly contained and
+referenced workflows both produce a hierarchical provenance graph while
+allowing each referenced Entry to remain independently accessible.</p>
+<h2 id="custom-and-standardized-workflows">Custom and standardized workflows<a class="headerlink" href="#custom-and-standardized-workflows" title="Permanent link">¶</a></h2>
+<p>The distinction between a custom and a standardized workflow concerns the
+schema used to describe it, not whether a person or software created the
+workflow Entry.</p>
+<p>A <strong>custom workflow</strong> uses the general <code>Workflow</code>, <code>Task</code>, and <code>Link</code> model
+directly. Its author selects the relevant archive sections and defines how they
+are connected. This is flexible enough to document processes that do not yet
+have a domain-specific workflow schema, while still enabling common graph and
+navigation tools.</p>
+<p>A <strong>standardized workflow</strong> uses a specialized <code>Workflow</code> subclass with a
+defined scientific meaning and structure. Such a schema can add method and
+result sections, workflow-specific quantities, references, and normalization
+logic. Examples in NOMAD's simulation schema include <code>SinglePoint</code>,
+<code>GeometryOptimization</code>, and <code>GW</code>. Plugins can provide additional specialized
+workflow schemas for other domains.</p>
+<p>Standardization allows tools to rely on more than the general provenance
+graph. A shared schema can support consistent normalization, search,
+validation, and domain-specific presentation. The general inputs, tasks, and
+outputs remain available because the specialized schema inherits from
+<code>Workflow</code>.</p>
+<h2 id="how-workflow-data-is-created">How workflow data is created<a class="headerlink" href="#how-workflow-data-is-created" title="Permanent link">¶</a></h2>
+<p>The same workflow model can be populated through several routes:</p>
+<ul>
+<li><strong>Parsers and normalizers</strong> can create a workflow while processing supported
+  files. For example, simulation parsers installed on NOMAD Central can create
+  specialized workflows for recognized calculations.</li>
+<li><strong>ELN and other schema normalizers</strong> can translate structured records, such
+  as experiment activities and steps, into the general workflow model.</li>
+<li><strong>Archive YAML files</strong> can define a custom workflow explicitly or
+  instantiate an accessible specialized workflow schema with <code>m_def</code>.</li>
+<li><strong>Plugins</strong> can define specialized workflow schemas and the parsing or
+  normalization logic that populates them.</li>
+</ul>
+<p>These routes can produce either general or specialized workflows. Their
+availability depends on the parsers, schemas, and plugins installed in a NOMAD
+deployment.</p>
 
 
 
