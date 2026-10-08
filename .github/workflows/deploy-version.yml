@@ -9,6 +9,15 @@ on:
         description: "Tag to deploy, e.g. v1.4.2"
         required: true
 
+# Same production URLs as in deploy-docs.yml, so that backfilled versions do
+# not link to the Oasis default (http://localhost:8000/nomad-oasis/...).
+env:
+  NOMAD_SERVICES_API_HOST: nomad-lab.eu
+  NOMAD_SERVICES_API_PORT: "443"
+  # TODO: change to "/" once the new NOMAD version is out.
+  NOMAD_SERVICES_API_BASE_PATH: /prod/v1
+  NOMAD_SERVICES_HTTPS: "true"
+
 # Serialize with the regular deploy workflow: both write to gh-pages.
 concurrency:
   group: deploy-docs

@@ -76,6 +76,7 @@ jobs:
         env:
           NOMAD_SERVICES_API_HOST: nomad-lab.eu
           NOMAD_SERVICES_API_PORT: "443"
+          # TODO: change to "/" once the new NOMAD version is out.
           NOMAD_SERVICES_API_BASE_PATH: /prod/v1
           NOMAD_SERVICES_HTTPS: "true"
         run: |
