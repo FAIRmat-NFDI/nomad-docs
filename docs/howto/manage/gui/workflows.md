@@ -120,9 +120,9 @@ in this example contains `m_def`, `task`, `name`, `inputs`, and `outputs`
 attributes. `name` supplies the task label shown in the workflow graph.
 `inputs`/`outputs` are task-specific versions of the lists defined above.
 
-`task` is the path for linking to the relevant archive section, analogous to the `section` attribute for `inputs`/`outputs`. However, this path **must** reference a task, which in all practical cases corresponds to a `workflow2` section.
-
 `m_def` defines the type of task according to NOMAD's Metainfo schema, in this case a `TaskReference` to the archive `workflow2` section. The use of `TaskReference` is clarified under [Nested workflows > In multiple Entries](#in-multiple-entries).
+
+`task` is the path for linking to the relevant archive section, analogous to the `section` attribute for `inputs`/`outputs`. However, this path **must** reference a task, which in all practical cases corresponds to a `workflow2` section.
 
 <a id="path-specification"></a>
 
