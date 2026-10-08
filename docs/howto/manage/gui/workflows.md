@@ -43,9 +43,9 @@ graph LR;
     B[DFT] --> C([Output calculation]);
 ```
 
-The task is represented by `dft.xml`, the mainfile of a calculation performed
-with VASP, an electronic-structure simulation code. In this example, the VASP
-parser provided by the
+The task is represented by `dft.xml`, the mainfile of a density functional
+theory (DFT) calculation performed with VASP, an electronic-structure
+simulation code. In this example, the VASP parser provided by the
 [electronic-parsers plugin](https://github.com/nomad-coe/electronic-parsers){:target="_blank" rel="noopener"}
 creates an Entry with a `workflow2` section representing the single-point
 calculation. This behavior is specific to the parser and is not a general
@@ -288,7 +288,11 @@ graph LR;
     D22 --> E22([Output calculation T2])
 ```
 
-This workflow contains a series of electronic structure calculations: a DFT and a TB calculation performed in serial, followed by two DMFT calculations performed in parallel at two different temperatures. The DMFT workflow task is considered as a sub-workflow.
+This workflow contains a series of electronic-structure calculations: a
+density functional theory (DFT) calculation and a tight-binding (TB)
+calculation performed in series, followed by two dynamical mean-field theory
+(DMFT) calculations performed in parallel at different temperatures. The DMFT
+workflow task is represented as a sub-workflow.
 
 The mainfiles for these calculations are organized in the following file structure, stored with `nested_workflow_one-entry.zip`:
 
@@ -415,7 +419,7 @@ creating a Project. The workflow YAML is located at the root of the bundle.
 A custom task is a task whose raw files NOMAD does not automatically recognize,
 or a task that has no associated raw files. The task must still be represented by
 an Entry before a workflow can reference it. One option is to create that Entry
-from a built-in or custom ELN schema.
+from a built-in or custom Electronic Lab Notebook (ELN) schema.
 
 **Related pages:** {{ nav_link("howto/schemas/schemas.md") }}.
 
@@ -449,8 +453,8 @@ processing.
 ### Example workflow with ELN tasks
 
 For a concrete example, consider a workflow consisting of three tasks for
-setting up a molecular dynamics simulation. Each task receives parameters or an
-execution script and produces a file.
+setting up a molecular dynamics (MD) simulation. Each task receives parameters
+or an execution script and produces a file.
 
 Use `ElnFileManager` to create Entries for each task and the execution scripts.
 The workflow parameters use the more general `ElnBaseSection` schema:
