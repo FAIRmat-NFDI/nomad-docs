@@ -91,37 +91,42 @@ Consider a geometry optimization followed by a ground-state calculation:
 flowchart TB
     input["Input system"]
 
-    subgraph optimization["Geometry optimization workflow"]
+    subgraph parent["Combined workflow"]
         direction TB
-        step0(["Optimization step 0"])
-        calc0["Calculation 0"]
-        system1["System 1"]
-        step1(["Optimization step 1"])
-        calc1["Calculation 1"]
-        system2["System 2"]
-        step2(["Optimization step 2"])
-        calc2["Calculation 2"]
+        subgraph optimization["Geometry optimization workflow"]
+            direction TB
+            step0(["Optimization step 0"])
+            calc0["Calculation 0"]
+            system1["System 1"]
+            step1(["Optimization step 1"])
+            calc1["Calculation 1"]
+            system2["System 2"]
+            step2(["Optimization step 2"])
+            calc2["Calculation 2"]
 
-        step0 --> calc0
-        step0 --> system1
-        system1 --> step1
-        step1 --> calc1
-        step1 --> system2
-        system2 --> step2
-        step2 --> calc2
+            step0 --> calc0
+            step0 --> system1
+            system1 --> step1
+            step1 --> calc1
+            step1 --> system2
+            system2 --> step2
+            step2 --> calc2
+        end
+
+        step2 --> relaxed["Relaxed system"]
+        optimization --> relaxed
+        relaxed --> ground_state(["Ground-state calculation task"])
     end
 
     input --> optimization
     input --> step0
-    step2 --> relaxed["Relaxed system"]
-    optimization --> relaxed
-    relaxed --> ground_state(["Ground-state calculation task"])
-    ground_state --> result["Ground-state calculation"]
+    ground_state --> result["Ground-state result"]
 
+    style parent stroke-dasharray: 5 5
     style optimization stroke-dasharray: 5 5
 ```
 
-<figcaption>A nested geometry-optimization workflow followed by a ground-state calculation.</figcaption>
+<figcaption>A parent workflow containing a nested geometry-optimization workflow followed by a ground-state calculation.</figcaption>
 </figure>
 
 Rounded nodes represent tasks, rectangles represent referenced archive
