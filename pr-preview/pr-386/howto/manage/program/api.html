@@ -4381,25 +4381,25 @@ that allows you to use NOMAD as a set of resources (think data) that can be uplo
 accessed, downloaded, searched for, etc. via
 <a href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol" rel="noopener" target="_blank">HTTP requests</a>.</p>
 <p>You can get an overview on all NOMAD APIs on the
-<a href="http://localhost:8000/nomad-oasis/api../../gui/analyze/apis">API page</a>. We will focus here on NOMAD's main
+<a href="https://nomad-lab.eu/prod/v1/api/../gui/analyze/apis">API page</a>. We will focus here on NOMAD's main
 API (v1). In fact, this API is also used by the web interface and should provide
 everything you need.</p>
 <p>There are different tools and libraries to use the NOMAD API that come with different
 trade-offs between expressiveness, learning curve, and convenience.</p>
 <h3 id="you-can-use-your-browser">You can use your browser<a class="headerlink" href="#you-can-use-your-browser" title="Permanent link">¶</a></h3>
 <p>For example to see the metadata for all entries with elements <em>Ti</em> and <em>O</em> go here:
-<a href="http://localhost:8000/nomad-oasis/api/v1/entries?elements=Ti&amp;elements=O">http://localhost:8000/nomad-oasis/api/v1/entries?elements=Ti&amp;elements=O</a></p>
+<a href="https://nomad-lab.eu/prod/v1/api/v1/entries?elements=Ti&amp;elements=O">https://nomad-lab.eu/prod/v1/api/v1/entries?elements=Ti&amp;elements=O</a></p>
 <h3 id="use-curl-or-wget">Use <code>curl</code> or <code>wget</code><a class="headerlink" href="#use-curl-or-wget" title="Permanent link">¶</a></h3>
 <p>REST API's use resources located via URLs. You access URLs with <code>curl</code> or <code>wget</code>. Same
 <em>Ti</em>, <em>O</em> example as before:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>curl<span class="w"> </span><span class="s2">"http://localhost:8000/nomad-oasis/api/v1/entries?results.material.elements=Ti&amp;results.material.elements=O"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>json.tool
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>curl<span class="w"> </span><span class="s2">"https://nomad-lab.eu/prod/v1/api/v1/entries?results.material.elements=Ti&amp;results.material.elements=O"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>python<span class="w"> </span>-m<span class="w"> </span>json.tool
 </code></pre></div>
 <h3 id="use-python-and-requests">Use Python and <code>requests</code><a class="headerlink" href="#use-python-and-requests" title="Permanent link">¶</a></h3>
 <p><code>Requests</code> is a popular Python library to use the internet's HTTP protocol that is used to
 communicate with REST APIs. Install with <code>pip install requests</code>.
 See <a href="#using-requests">Using <code>requests</code></a>.</p>
 <h3 id="use-our-dashboard">Use our dashboard<a class="headerlink" href="#use-our-dashboard" title="Permanent link">¶</a></h3>
-<p>The NOMAD API has an <a href="http://localhost:8000/nomad-oasis/api/v1">OpenAPI dashboard</a>. This is an interactive
+<p>The NOMAD API has an <a href="https://nomad-lab.eu/prod/v1/api/v1">OpenAPI dashboard</a>. This is an interactive
 documentation of all API functions that allows you to try these functions in the browser.</p>
 <h3 id="use-nomads-python-package">Use NOMAD's Python package<a class="headerlink" href="#use-nomads-python-package" title="Permanent link">¶</a></h3>
 <p>Install the <a href="../../oasis/install.html#how-to-install-the-nomad-python-library">NOMAD Python client library</a> and use its <code>ArchiveQuery</code>
@@ -4415,7 +4415,7 @@ the recommended authentication mechanism is via <strong>tokens</strong>.</p>
 <h2 id="using-requests">Using <code>requests</code><a class="headerlink" href="#using-requests" title="Permanent link">¶</a></h2>
 <p>If you are comfortable with REST APIs and using Pythons <code>requests</code> library, this example
 demonstrates the basic concepts of NOMAD's main API. You can get more documentation and
-details on all functions from the <a href="http://localhost:8000/nomad-oasis/api/v1/">API dashboard</a>.</p>
+details on all functions from the <a href="https://nomad-lab.eu/prod/v1/api/v1/">API dashboard</a>.</p>
 <p>The following issues a search query for all entries that have both <em>Ti</em> and <em>O</em>
 among the elements of their respective materials. It restricts the results to
 one entry and only returns the <code>entry_id</code>.</p>
@@ -4782,7 +4782,7 @@ you'll probably want to do one of the following things.</p>
 download file-by-file or entry-by-entry. Therefore, we allow to download a large set of
 files in one big zip-file. Here, you might want to use a program like <em>curl</em> to download
 directly from the shell:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>curl<span class="w"> </span><span class="s2">"http://localhost:8000/nomad-oasis/api/v1/entries/raw?results.material.elements=Ti&amp;results.material.elements=O"</span><span class="w"> </span>-o<span class="w"> </span>download.zip
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>curl<span class="w"> </span><span class="s2">"https://nomad-lab.eu/prod/v1/api/v1/entries/raw?results.material.elements=Ti&amp;results.material.elements=O"</span><span class="w"> </span>-o<span class="w"> </span>download.zip
 </code></pre></div>
 <h2 id="access-processed-data-archives">Access processed data (archives)<a class="headerlink" href="#access-processed-data-archives" title="Permanent link">¶</a></h2>
 <p>Above under <a href="#using-requests">Using <code>requests</code></a>, you've already learned how to access archive
@@ -4932,7 +4932,7 @@ a working group.</p>
 <a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a><span class="w">  </span><span class="p">]</span>
 <a id="__codelineno-26-10" name="__codelineno-26-10" href="#__codelineno-26-10"></a><span class="p">}</span>
 </code></pre></div>
-<p>See the <a href="http://localhost:8000/nomad-oasis/api/v1/extensions/docs#/groups">OpenAPI dashboard</a> for a concise
+<p>See the <a href="https://nomad-lab.eu/prod/v1/api/v1/extensions/docs#/groups">OpenAPI dashboard</a> for a concise
 summary of the endpoints.</p>
 
 

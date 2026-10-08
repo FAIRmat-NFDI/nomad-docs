@@ -3349,21 +3349,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#example-provenance-graph" class="md-nav__link">
+  <a href="#nested-workflow-example" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Example provenance graph
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#nested-workflows" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Nested workflows
+        Nested workflow example
       
     </span>
   </a>
@@ -3909,21 +3898,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#example-provenance-graph" class="md-nav__link">
+  <a href="#nested-workflow-example" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Example provenance graph
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#nested-workflows" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Nested workflows
+        Nested workflow example
       
     </span>
   </a>
@@ -4063,19 +4041,47 @@ classDiagram
     Link --&gt; ArchiveSection : section</code></pre>
 <figcaption>The classes and relationships in the general workflow model.</figcaption>
 </figure>
-<p>Open triangular arrowheads point from a subclass to its parent class. Filled
-diamonds identify contained subsections: an Entry archive contains its
-<code>workflow2</code>, a workflow contains tasks, and a task contains input and output
-links. Plain arrows represent references to sections or tasks stored elsewhere
-in the archive graph. The referenced <code>ArchiveSection</code> can, for example, belong
-to <code>run</code>, <code>data</code>, or another <code>workflow2</code>.</p>
+<p><strong>Diagram legend</strong></p>
+<table>
+<thead>
+<tr>
+<th>Notation</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&lt;\|--</code> with an open triangular arrowhead</td>
+<td>Inheritance from a subclass to its parent class</td>
+</tr>
+<tr>
+<td><code>*--</code> with a filled diamond</td>
+<td>Composition of contained subsections</td>
+</tr>
+<tr>
+<td><code>--&gt;</code> with a plain arrowhead</td>
+<td>Reference to another section or task</td>
+</tr>
+<tr>
+<td><code>0..1</code></td>
+<td>Zero or one instance</td>
+</tr>
+<tr>
+<td><code>0..*</code></td>
+<td>Zero or more instances</td>
+</tr>
+</tbody>
+</table>
+<p>The referenced <code>ArchiveSection</code> can, for example, belong to <code>run</code>, <code>data</code>, or
+another <code>workflow2</code>.</p>
 <p>The model has four central components:</p>
 <ul>
 <li>A <strong>link</strong> represents one input or output. Its <code>section</code> points to the archive
   section containing the data, while its <code>name</code> provides a label for displays
   such as the workflow graph.</li>
-<li>A <strong>task</strong> represents an activity that used inputs to produce outputs. Its
-  optional <code>section</code> can identify the archive section describing that activity.</li>
+<li>A <strong>task</strong> represents an activity that used inputs to produce outputs. A
+  task's optional <code>section</code> can identify the archive section describing that
+  activity.</li>
 <li>A <strong>task reference</strong> is a proxy for a task or workflow defined elsewhere,
   such as in another Entry. It can supply a local name, inputs, and outputs or
   obtain them from the referenced task.</li>
@@ -4093,41 +4099,50 @@ deployment.</p>
 <p>Some older Entry archives use the legacy top-level <code>workflow</code> section. New
 workflow data and schemas should use <code>workflow2</code>.</p>
 </div>
-<h3 id="example-provenance-graph">Example provenance graph<a class="headerlink" href="#example-provenance-graph" title="Permanent link">¶</a></h3>
-<p>Consider a geometry optimization followed by a ground-state calculation:</p>
+<h3 id="nested-workflow-example">Nested workflow example<a class="headerlink" href="#nested-workflow-example" title="Permanent link">¶</a></h3>
+<p>A task can represent a process with its own inputs, tasks, and outputs. Because
+a <code>Workflow</code> is also a <code>Task</code>, a workflow can be contained directly in a parent
+workflow. A <code>TaskReference</code> can instead link to a workflow stored elsewhere.</p>
+<p>Consider a parent workflow containing a geometry optimization followed by a
+ground-state calculation:</p>
 <figure style="width: 100%">
 <pre class="mermaid"><code>flowchart TB
     input["Input system"]
 
-    subgraph optimization["Geometry optimization workflow"]
+    subgraph parent["Combined workflow"]
         direction TB
-        step0(["Optimization step 0"])
-        calc0["Calculation 0"]
-        system1["System 1"]
-        step1(["Optimization step 1"])
-        calc1["Calculation 1"]
-        system2["System 2"]
-        step2(["Optimization step 2"])
-        calc2["Calculation 2"]
+        subgraph optimization["Geometry optimization workflow"]
+            direction TB
+            step0(["Optimization step 0"])
+            calc0["Calculation 0"]
+            system1["System 1"]
+            step1(["Optimization step 1"])
+            calc1["Calculation 1"]
+            system2["System 2"]
+            step2(["Optimization step 2"])
+            calc2["Calculation 2"]
 
-        step0 --&gt; calc0
-        step0 --&gt; system1
-        system1 --&gt; step1
-        step1 --&gt; calc1
-        step1 --&gt; system2
-        system2 --&gt; step2
-        step2 --&gt; calc2
+            step0 --&gt; calc0
+            step0 --&gt; system1
+            system1 --&gt; step1
+            step1 --&gt; calc1
+            step1 --&gt; system2
+            system2 --&gt; step2
+            step2 --&gt; calc2
+        end
+
+        step2 --&gt; relaxed["Relaxed system"]
+        optimization --&gt; relaxed
+        relaxed --&gt; ground_state(["Ground-state calculation task"])
     end
 
     input --&gt; optimization
     input --&gt; step0
-    step2 --&gt; relaxed["Relaxed system"]
-    optimization --&gt; relaxed
-    relaxed --&gt; ground_state(["Ground-state calculation task"])
-    ground_state --&gt; result["Ground-state calculation"]
+    ground_state --&gt; result["Ground-state result"]
 
+    style parent stroke-dasharray: 5 5
     style optimization stroke-dasharray: 5 5</code></pre>
-<figcaption>A nested geometry-optimization workflow followed by a ground-state calculation.</figcaption>
+<figcaption>A parent workflow containing a nested geometry-optimization workflow followed by a ground-state calculation.</figcaption>
 </figure>
 <p>Rounded nodes represent tasks, rectangles represent referenced archive
 sections, the dashed box represents a workflow, and arrows represent links.
@@ -4139,13 +4154,9 @@ the final optimization task's output and the geometry optimization's global
 output. The relaxed system is then reused as the input of the ground-state
 calculation task.</p>
 <p>The tasks and referenced sections may be stored together or in separate
-Entries without changing these logical relationships.</p>
-<h3 id="nested-workflows">Nested workflows<a class="headerlink" href="#nested-workflows" title="Permanent link">¶</a></h3>
-<p>A task can represent a process with its own inputs, tasks, and outputs. Because
-a <code>Workflow</code> is also a <code>Task</code>, this sub-workflow can be contained directly in a
-parent workflow. A <code>TaskReference</code> can instead link to a workflow stored
-elsewhere. Both forms produce a hierarchical provenance graph while allowing
-each referenced Entry to remain independently accessible.</p>
+Entries without changing these logical relationships. Directly contained and
+referenced workflows both produce a hierarchical provenance graph while
+allowing each referenced Entry to remain independently accessible.</p>
 <h2 id="custom-and-standardized-workflows">Custom and standardized workflows<a class="headerlink" href="#custom-and-standardized-workflows" title="Permanent link">¶</a></h2>
 <p>The distinction between a custom and a standardized workflow concerns the
 schema used to describe it, not whether a person or software created the

@@ -1437,6 +1437,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#create-the-custom-workflow-yaml-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create the custom workflow YAML file
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#archive-path-specification" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4074,6 +4085,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#create-the-custom-workflow-yaml-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Create the custom workflow YAML file
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#archive-path-specification" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4358,6 +4380,16 @@ the referenced data.</p>
 <p>To begin, you need a Project to which you can add files. The Entries and data that the
 workflow connects can already exist, or you can add their files together with
 the workflow file, as in the downloadable examples in this guide.</p>
+<p>The simulation examples in this guide have been tested on
+<a href="https://nomad-lab.eu/prod/v1/gui/v2/" rel="noopener" target="_blank">NOMAD Central</a>.
+They can also be reproduced on a NOMAD Oasis with the
+<a href="https://github.com/nomad-coe/electronic-parsers" rel="noopener" target="_blank"><code>electronic-parsers</code> plugin</a>
+installed.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When trying these examples on NOMAD Central, keep test Projects
+unpublished. Publishing is permanent and cannot be undone.</p>
+</div>
 <h2 id="recommended-preparation">Recommended preparation<a class="headerlink" href="#recommended-preparation" title="Permanent link">¶</a></h2>
 <ul>
 <li><a href="upload.html">How-to guides &gt; ... &gt; Create and publish Projects</a></li>
@@ -4382,23 +4414,34 @@ demonstrated here.</p>
 <pre class="mermaid"><code>graph LR;
     A((Input structure)) --&gt; B[DFT];
     B[DFT] --&gt; C([Output calculation]);</code></pre>
-<p>The task is represented by <code>dft.xml</code>, the mainfile of a VASP calculation. In
-this example, the VASP parser provided by the
+<p>The task is represented by <code>dft.xml</code>, the mainfile of a density functional
+theory (DFT) calculation performed with VASP, an electronic-structure
+simulation code. In this example, the VASP parser provided by the
 <a href="https://github.com/nomad-coe/electronic-parsers" rel="noopener" target="_blank">electronic-parsers plugin</a>
 creates an Entry with a <code>workflow2</code> section representing the single-point
 calculation. This behavior is specific to the parser and is not a general
 feature of all parser-supported mainfiles.</p>
-<p>The parser-generated workflow has the following graph:</p>
+<!-- TODO: When this example transitions to nomad-simulation-parsers, link to
+the corresponding parser documentation. -->
+
+<p>Open the parser-generated Entry and select <strong>CONNECTIVITY</strong> to view its workflow
+graph:</p>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/single-point-nomad-workflow-card-light.png#only-light" data-desc-position="bottom"><img alt="Parser-generated single-point workflow graph in the light theme" class="screenshot" src="images/single-point-nomad-workflow-card-light.png#only-light"></a>
 <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/single-point-nomad-workflow-card-dark.png#only-dark" data-desc-position="bottom"><img alt="Parser-generated single-point workflow graph in the dark theme" class="screenshot" src="images/single-point-nomad-workflow-card-dark.png#only-dark"></a></p>
-<p>To demonstrate the creation of a custom workflow Entry, the example below recreates the central input-task-output path of this
-<code>SinglePoint</code> workflow graph in a separate custom workflow Entry using YAML, as
-described in <a href="../../schemas/define.html#populate-data">How-to guides &gt; ... &gt; Populate data</a>.
+<p>The parser normalizer exposes three global output links in this graph. The two
+nodes labeled <strong>Output calculation</strong> refer to the same final calculation
+section, while <strong>Output system</strong> refers to the final system section. They do
+not represent three separate calculations. The duplicate calculation link is a
+normalizer artifact rather than a distinct result.</p>
+<p>For simplicity, the custom workflow below does not reproduce this
+parser-specific output set. Instead, it recreates the central input-task-output
+path of the <code>SinglePoint</code> workflow graph in a separate custom workflow Entry
+using YAML, as described in
+<a href="../../schemas/define.html#populate-data">How-to guides &gt; ... &gt; Populate data</a>.
 The custom workflow references the parser-generated <code>workflow2</code> section
 as its task and explicitly uses the same system and final calculation sections
 as its input and output.</p>
-<!-- TODO: Explain why the parser-generated workflow graph has three outputs while the custom workflow graph has one. -->
-
+<h3 id="create-the-custom-workflow-yaml-file">Create the custom workflow YAML file<a class="headerlink" href="#create-the-custom-workflow-yaml-file" title="Permanent link">¶</a></h3>
 <p>To define the initial workflow, create a file <code>dft.workflow.archive.yaml</code> with the following content:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">workflow2</span><span class="p">:</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">DFT SinglePoint</span>
@@ -4438,9 +4481,12 @@ The <code>workflow2</code> section has three possible subsections: <code>inputs<
 <code>tasks</code>:</p>
 <p><strong><code>inputs</code></strong>: a list of references to the global inputs of the workflow, with <code>name</code> and <code>section</code> attributes. <code>section</code> corresponds to a path for linking to the relevant archive section. In this case, the relative section path is <code>run[0].system[-1]</code>, linked to the Entry defined by the mainfile <code>dft.xml</code>. The prefix is discussed under <a href="#path-specification">Archive path specification</a>.</p>
 <p><strong><code>outputs</code></strong>: identical to the inputs list, representing the global outputs of the workflow, with the relative section path <code>run[0].calculation[-1]</code> in this case.</p>
-<p><strong><code>tasks</code></strong>: a list of references to the tasks/steps of the workflow. Each task contains <code>m_def</code>, <code>task</code>, <code>inputs</code>, and <code>outputs</code> attributes. <code>inputs</code>/<code>outputs</code> are task-specific versions of the lists defined above.</p>
-<p><code>task</code> is the path for linking to the relevant archive section, analogous to the <code>section</code> attribute for <code>inputs</code>/<code>outputs</code>. However, this path <strong>must</strong> reference a task, which in all practical cases corresponds to a <code>workflow2</code> section.</p>
+<p><strong><code>tasks</code></strong>: a list of references to the tasks/steps of the workflow. Each task
+in this example contains <code>m_def</code>, <code>task</code>, <code>name</code>, <code>inputs</code>, and <code>outputs</code>
+attributes. <code>name</code> supplies the task label shown in the workflow graph.
+<code>inputs</code>/<code>outputs</code> are task-specific versions of the lists defined above.</p>
 <p><code>m_def</code> defines the type of task according to NOMAD's Metainfo schema, in this case a <code>TaskReference</code> to the archive <code>workflow2</code> section. The use of <code>TaskReference</code> is clarified under <a href="#in-multiple-entries">Nested workflows &gt; In multiple Entries</a>.</p>
+<p><code>task</code> is the path for linking to the relevant archive section, analogous to the <code>section</code> attribute for <code>inputs</code>/<code>outputs</code>. However, this path <strong>must</strong> reference a task, which in all practical cases corresponds to a <code>workflow2</code> section.</p>
 <p><a id="path-specification"></a></p>
 <h3 id="archive-path-specification">Archive path specification<a class="headerlink" href="#archive-path-specification" title="Permanent link">¶</a></h3>
 <p>In general, an archive reference can be represented as
@@ -4489,6 +4535,9 @@ and <a href="../../../reference/metainfo.html#reference-forms">Reference &gt; Sc
 </ol>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/single-point-custom-nomad-workflow-card-light.png#only-light" data-desc-position="bottom"><img alt="Custom single-point workflow graph in the light theme" class="screenshot" src="images/single-point-custom-nomad-workflow-card-light.png#only-light"></a>
 <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/single-point-custom-nomad-workflow-card-dark.png#only-dark" data-desc-position="bottom"><img alt="Custom single-point workflow graph in the dark theme" class="screenshot" src="images/single-point-custom-nomad-workflow-card-dark.png#only-dark"></a></p>
+<p>This graph has one output node because the task output and global workflow
+output reference the same calculation section. The visualizer represents this
+shared section as one connected output node.</p>
 <details class="tip">
 <summary>Add the methodology as a workflow input</summary>
 <p>You can also represent the calculation's methodological parameters as an
@@ -4508,15 +4557,17 @@ NOMAD deployment. For these references, use
 described under <a href="#path-specification">Archive path specification</a>.</p>
 <p>To find the required identifiers:</p>
 <ol>
-<li>Open the target Project, select <strong>SETTINGS</strong>, and copy its <strong>Project ID</strong>.
-   This value equals <code>archive.metadata.upload_id</code>; use it as <code>&lt;upload_id&gt;</code>.</li>
 <li>Open the target Entry, select <strong>ARCHIVE</strong>, and navigate to
-   <code>metadata</code> &gt; <code>entry_id</code>. Copy this value and use it as <code>&lt;entry_id&gt;</code>.
+   <code>metadata</code> &gt; <code>upload_id</code>. Copy this value and use it as <code>&lt;upload_id&gt;</code>.
+   Alternatively, open the target Project, select <strong>SETTINGS</strong>, and copy its
+   <strong>Project ID</strong>, which is the same identifier.</li>
+<li>In the target Entry's <strong>ARCHIVE</strong>, navigate to <code>metadata</code> &gt; <code>entry_id</code>.
+   Copy this value and use it as <code>&lt;entry_id&gt;</code>.
    Alternatively, copy the value immediately after <code>/entries/</code> in the Entry's
    URL.</li>
 </ol>
-<p>For example, adapt the <code>dft.workflow.archive.yaml</code> file from the previous
-section as follows:</p>
+<p>For example, the <code>dft.workflow.archive.yaml</code> file from the previous section can
+be adapted as follows:</p>
 <details class="example">
 <summary>Reference the <code>dft.xml</code> Entry from another Project</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nt">workflow2</span><span class="p">:</span>
@@ -4582,7 +4633,7 @@ and workflow metadata.</p>
 can nest workflows directly within a single Entry. The following computational
 workflow illustrates this pattern:</p>
 <pre class="mermaid"><code>graph LR;
-    A2((Inputs)) --&gt; B2[DFT];
+    A2((Input structure)) --&gt; B2[DFT];
     B2 --&gt; C2[TB];
     C2 --&gt; D21[DMFT at T1];
     C2 --&gt; D22[DMFT at T2];
@@ -4592,9 +4643,13 @@ workflow illustrates this pattern:</p>
         D22;
     end
 
-    D21 --&gt; E21([Output calculation T1])
-    D22 --&gt; E22([Output calculation T2])</code></pre>
-<p>This workflow contains a series of electronic structure calculations: a DFT and a TB calculation performed in serial, followed by two DMFT calculations performed in parallel at two different temperatures. The DMFT workflow task is considered as a sub-workflow.</p>
+    D21 --&gt; E21([Output DMFT at T1 calculation])
+    D22 --&gt; E22([Output DMFT at T2 calculation])</code></pre>
+<p>This workflow contains a series of electronic-structure calculations: a
+density functional theory (DFT) calculation and a tight-binding (TB)
+calculation performed in series, followed by two dynamical mean-field theory
+(DMFT) calculations performed in parallel at different temperatures. The DMFT
+workflow task is represented as a sub-workflow.</p>
 <p>The mainfiles for these calculations are organized in the following file structure, stored with <code>nested_workflow_one-entry.zip</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>.
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>├── DFT
@@ -4683,13 +4738,9 @@ workflow:</p>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/nested-workflow-parent-card-light.png#only-light" data-desc-position="bottom"><img alt="Top-level nested workflow graph in the light theme" class="screenshot" src="images/nested-workflow-parent-card-light.png#only-light"></a>
 <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/nested-workflow-parent-card-dark.png#only-dark" data-desc-position="bottom"><img alt="Top-level nested workflow graph in the dark theme" class="screenshot" src="images/nested-workflow-parent-card-dark.png#only-dark"></a></p>
 <p>Select the <code>DMFT</code> task to enter the sub-workflow. The graph then shows the
-<code>DMFT at T1</code> and <code>DMFT at T2</code> tasks and their connections to the TB input and
-the two DMFT outputs. Use the back arrow in the workflow toolbar to return to
-the parent graph.</p>
-<!-- TODO: Regenerate both child images without --allow-missing-nested-tasks
-after the GUI displays the nested DMFT tasks. The current captures show the
-reported "No tasks to show" defect. -->
-
+<code>DMFT at T1</code> and <code>DMFT at T2</code> tasks. Both receive the TB calculation as input,
+and each connects to its corresponding DMFT output. Use the back arrow in the
+workflow toolbar to return to the parent graph.</p>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/nested-workflow-dmft-subworkflow-card-light.png#only-light" data-desc-position="bottom"><img alt="DMFT sub-workflow graph in the light theme" class="screenshot" src="images/nested-workflow-dmft-subworkflow-card-light.png#only-light"></a>
 <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/nested-workflow-dmft-subworkflow-card-dark.png#only-dark" data-desc-position="bottom"><img alt="DMFT sub-workflow graph in the dark theme" class="screenshot" src="images/nested-workflow-dmft-subworkflow-card-dark.png#only-dark"></a></p>
 <p>To reproduce this example, download the compressed bundle and add it while
@@ -4699,7 +4750,7 @@ creating a Project. The workflow YAML is located at the root of the bundle.</p>
 <p>A custom task is a task whose raw files NOMAD does not automatically recognize,
 or a task that has no associated raw files. The task must still be represented by
 an Entry before a workflow can reference it. One option is to create that Entry
-from a built-in or custom ELN schema.</p>
+from a built-in or custom Electronic Lab Notebook (ELN) schema.</p>
 <p><strong>Related pages:</strong> <a href="../../schemas/schemas.html">Start working with schemas</a>.</p>
 <h3 id="represent-files-with-elnfilemanager">Represent files with <code>ElnFileManager</code><a class="headerlink" href="#represent-files-with-elnfilemanager" title="Permanent link">¶</a></h3>
 <p><code>ElnFileManager</code> is a built-in schema for referencing and annotating files in an
@@ -4724,8 +4775,8 @@ this example, the file must therefore be stored at
 processing.</p>
 <h3 id="example-workflow-with-eln-tasks">Example workflow with ELN tasks<a class="headerlink" href="#example-workflow-with-eln-tasks" title="Permanent link">¶</a></h3>
 <p>For a concrete example, consider a workflow consisting of three tasks for
-setting up a molecular dynamics simulation. Each task receives parameters or an
-execution script and produces a file.</p>
+setting up a molecular dynamics (MD) simulation. Each task receives parameters
+or an execution script and produces a file.</p>
 <p>Use <code>ElnFileManager</code> to create Entries for each task and the execution scripts.
 The workflow parameters use the more general <code>ElnBaseSection</code> schema:</p>
 <details class="success">
@@ -4849,8 +4900,12 @@ with the built-in <em>Experiment ELN</em> schema, follow
 supported workflow-building flow. -->
 
 <h2 id="using-the-workflow-visualizer">Using the workflow visualizer<a class="headerlink" href="#using-the-workflow-visualizer" title="Permanent link">¶</a></h2>
-<p>When an Entry contains a <code>workflow2</code> section, its <strong>OVERVIEW</strong> page shows an
-interactive workflow graph. The visualizer supports the following actions:</p>
+<p>When an Entry contains a <code>workflow2</code> section, its <strong>CONNECTIVITY</strong> page shows
+an interactive workflow graph. Depending on the Entry layout, a <strong>Workflow</strong>
+card may also appear on <strong>OVERVIEW</strong>. In addition to the graph,
+<strong>CONNECTIVITY</strong> lists Entries referenced by or referencing the current Entry,
+as well as activity references.</p>
+<p>The visualizer supports the following actions:</p>
 <ul>
 <li><strong>Inspect the workflow structure:</strong> Inputs, tasks, and outputs are arranged
   from left to right. Arrows show their connections, and hovering over graph
@@ -4864,8 +4919,10 @@ interactive workflow graph. The visualizer supports the following actions:</p>
 <li><strong>Focus on a connection:</strong> Select an arrow between tasks to show the connected
   tasks and their shared input and output context.</li>
 <li><strong>Filter tasks:</strong> Use the <strong>Filter tasks to show</strong> bar to limit the tasks
-  displayed in a large graph. The filter accepts comma-separated indices or
-  colon-separated ranges; negative indices and percentages are also supported.</li>
+  displayed in a large graph. Enter zero-based indices and press Enter to apply
+  the filter. For example, <code>0</code> selects the first task, <code>0,2,4</code> selects
+  individual tasks, <code>0:5</code> selects the first five tasks, <code>:50%</code> selects the
+  first half, and <code>-5:</code> selects the last five tasks.</li>
 <li><strong>Adjust or export the view:</strong> Enable the force-directed layout, show or hide
   the legend, reset the graph, or download it as an SVG file.</li>
 </ul>

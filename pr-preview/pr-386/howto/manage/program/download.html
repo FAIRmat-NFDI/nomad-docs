@@ -4122,9 +4122,9 @@ or <code>entries/raw/query</code>. Endpoints that target processed data contain 
 of entities, endpoints for raw files and processed data (as well as searchable metadata)
 exist. API endpoint paths start with the entity, e.g. <code>uploads/&lt;id&gt;/raw</code> or <code>entries/&lt;id&gt;/raw</code>.</p>
 <h2 id="download-a-whole-upload">Download a whole upload<a class="headerlink" href="#download-a-whole-upload" title="Permanent link">¶</a></h2>
-<p>Let's assume you want to download an entire upload. In this example the upload id is
+<p>Let's assume you want to download an entire upload. In this example the upload ID is
 <code>wW45wJKiREOYTY0ARuknkA</code>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">"http://localhost:8000/nomad-oasis/api/v1/uploads/wW45wJKiREOYTY0ARuknkA/raw"</span><span class="w"> </span>-o<span class="w"> </span>download.zip
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">"https://nomad-lab.eu/prod/v1/api/v1/uploads/wW45wJKiREOYTY0ARuknkA/raw"</span><span class="w"> </span>-o<span class="w"> </span>download.zip
 </code></pre></div>
 <p>This will create a <code>download.zip</code> file in the current folder. The zip file will contain
 the raw file directory of the upload.</p>
@@ -4134,7 +4134,7 @@ packed into a zip file and this endpoint simply lets you download it. This is th
 and most reliable download implementation.</p>
 <p>Alternatively, you can download specific files or sub-directories. This method is available
 for all uploads. Including un-published uploads.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">"http://localhost:8000/nomad-oasis/api/v1/uploads/wW45wJKiREOYTY0ARuknkA/raw/?compress=true"</span><span class="w"> </span>-o<span class="w"> </span>download.zip
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">"https://nomad-lab.eu/prod/v1/api/v1/uploads/wW45wJKiREOYTY0ARuknkA/raw/?compress=true"</span><span class="w"> </span>-o<span class="w"> </span>download.zip
 </code></pre></div>
 <p>This endpoint looks very similar, but is implemented very differently. Note that we
 put an empty path <code>/</code> to the end of the URL, plus a query parameter <code>compress=true</code>.
@@ -4146,7 +4146,7 @@ creates a zip file on the fly.</p>
 <p>Now let's assume that you want to download all raw files that are associated with
 all the entries of an entire dataset. In this example the dataset DOI is
 <code>10.17172/NOMAD/2023.11.17-2</code>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">"http://localhost:8000/nomad-oasis/api/v1/entries/raw/query"</span><span class="w"> </span><span class="se">\</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">"https://nomad-lab.eu/prod/v1/api/v1/entries/raw/query"</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>-d<span class="w"> </span><span class="s1">'{</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="s1">    "query": {</span>
@@ -4158,11 +4158,11 @@ all the entries of an entire dataset. In this example the dataset DOI is
 <p>This time, we use the <code>entries/raw/query</code> endpoint that is based on entries and not on uploads. Here, we
 select entries with a query. In the example, we query for the dataset DOI, but you
 can replace this with any NOMAD search query (look out for the <code>&lt;&gt;</code> symbol on the
-<a href="http://localhost:8000/nomad-oasis/api/../gui/search/entries">search interface</a>). The zip file will contain all raw files from all the
+<a href="https://nomad-lab.eu/prod/v1/api/../gui/search/entries">search interface</a>). The zip file will contain all raw files from all the
 directories that have the mainfile of one of the entries that match the queries.</p>
 <p>This might not necessarily download all uploaded files. Alternatively, you can use a query to
 get all upload ids and then use the method from the previous section:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">"http://localhost:8000/nomad-oasis/api/v1/entries/query"</span><span class="w"> </span><span class="se">\</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">"https://nomad-lab.eu/prod/v1/api/v1/entries/query"</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>-d<span class="w"> </span><span class="s1">'{</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="s1">    "query": {</span>
@@ -4189,7 +4189,7 @@ from all entries.</p>
 <p>Similar to raw files, you can also download processed data. This is also an
 entry based operation based on a query. This time we also specify a <code>required</code>
 to explain which parts of the processed data, we are interested in:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">"http://localhost:8000/nomad-oasis/api/v1/entries/archive/download/query"</span><span class="w"> </span><span class="se">\</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">"https://nomad-lab.eu/prod/v1/api/v1/entries/archive/download/query"</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>-d<span class="w"> </span><span class="s1">'{</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="s1">    "query": {</span>
