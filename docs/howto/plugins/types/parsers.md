@@ -110,6 +110,59 @@ myparser = MyParserEntryPoint(
 
 You can find all of the available matching criteria in the [`ParserEntryPoint` reference](../../../reference/plugins.md#parserentrypoint)
 
+### Control parser matching order
+
+Each file is assigned to at most one parser. NOMAD checks the parsers one by one and the first parser whose matching criteria fit the file is used, even if other parsers would also match it. When several parsers can match the same files, for example a generic parser and a more specialized one, you can use the `matching_order` attribute to decide which parser gets to claim them first.
+
+Parsers with a lower `matching_order` are checked first. Parsers with the same `matching_order` are checked in alphabetical order of their entry point id. The default value is `0`. If all parsers use the default value, the order in which the parsers were registered is used instead. You can set the matching order in the entry point:
+
+```python
+myparser = MyParserEntryPoint(
+    name='MyParser',
+    description='My custom parser.',
+    mainfile_name_re='.*\.myparser',
+    matching_order=-1,
+)
+```
+
+or change it per installation using `nomad.yaml`:
+
+```yaml
+plugins:
+  entry_points:
+    options:
+      "nomad_example.parsers:myparser":
+        matching_order: -1
+```
+
+Here a negative value makes sure that `myparser` is checked before all parsers that use the default value.
+
+## Control parser execution order
+
+`ParserEntryPoints` have an attribute `execution_order`, which you can use to control the order in which entries are processed within an upload. Entries matched by parsers with a higher execution order are processed after all entries matched by parsers with a lower execution order. This is useful when a parser needs to read the results of other entries in the same upload. The default execution order for parsers is `0`, but this can be changed per installation using `nomad.yaml`:
+
+```yaml
+plugins:
+  entry_points:
+    options:
+      "nomad_example.parsers:myparser":
+        execution_order: 1
+```
+
+!!! note
+    `execution_order` replaces the deprecated `level` attribute. Existing configurations that use `level` keep working, but should be migrated to `execution_order`.
+
+### Matching order vs. execution order
+
+The two attributes control different steps of processing and are independent of each other:
+
+| Attribute | Controls | Step | Effect |
+| --- | --- | --- | --- |
+| `matching_order` | Which parser is assigned to a file | Matching, when entries are created | Lower values are checked first. The first matching parser claims the file. |
+| `execution_order` | When the entries of a parser are processed | Processing, after matching | Lower values are processed first. Entries with higher values wait until the entries with lower values are processed. |
+
+For example, `matching_order` decides whether a file is parsed by your parser or by another parser that also matches it. It has no effect on when that file is processed. `execution_order` only becomes relevant once the file has been matched to your parser, and it does not change which parser a file gets.
+
 ## Running a parser
 
 Parsers automatically run for the matched files within a NOMAD distribution, but it is also possible to run the manually for specific files. This can be useful for testing and for connecting them into external software.
