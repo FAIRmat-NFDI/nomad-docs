@@ -3788,6 +3788,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#dataset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dataset
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#deployment-nomad-oasis" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4155,6 +4166,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#dataset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dataset
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#deployment-nomad-oasis" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4504,6 +4526,13 @@ its use in favor of <em>processed data</em> (e.g. NOMAD Repository and NOMAD Arc
 <p>An <em>author</em> is typically a natural person that has uploaded a piece of data into NOMAD and
 has authorship over it. Often <em>authors</em> are <a href="#user">users</a>, but not always.
 Therefore, we have to distinguish between authors and users.</p>
+<h2 id="dataset">Dataset<a class="headerlink" href="#dataset" title="Permanent link">¶</a></h2>
+<p>A <em>dataset</em> is a backend resource retained for existing named collections of
+<a href="#entry">entries</a>. A dataset can contain entries from multiple
+<a href="#project">projects</a>, and an entry can belong to multiple datasets. Existing
+dataset links and DOIs can still be resolved in the NOMAD GUI, and datasets
+remain accessible through the API. Projects are the current user-facing unit
+for organizing, publishing, and assigning a DOI to data.</p>
 <h2 id="deployment-nomad-oasis">Deployment (NOMAD Oasis)<a class="headerlink" href="#deployment-nomad-oasis" title="Permanent link">¶</a></h2>
 <p>NOMAD <em>Deployment</em> refers to a live instance of a NOMAD <a href="#distribution-distro">distribution</a> running on some hardware. A deployment is also known as an <em>Oasis</em>.</p>
 <h2 id="distribution-distro">Distribution (distro)<a class="headerlink" href="#distribution-distro" title="Permanent link">¶</a></h2>
@@ -4529,7 +4558,7 @@ of an entry is retrieved from that mainfile.</p>
 <h2 id="metadata">Metadata<a class="headerlink" href="#metadata" title="Permanent link">¶</a></h2>
 <p>In NOMAD <em>metadata</em> refers to a specific technical sub-set of <a href="#processed-data">processed data</a>.
 The metadata of an <a href="#entry">entry</a> comprises IDs, timestamps, hashes, authors,
-references, the used schema, and other information.</p>
+<a href="#dataset">datasets</a>, references, the used schema, and other information.</p>
 <h2 id="metainfo">Metainfo<a class="headerlink" href="#metainfo" title="Permanent link">¶</a></h2>
 <p>The term <em>metainfo</em> refers to the sum of all <a href="#schema">schemas</a>. In particular it is
 associated with all pre-defined schemas that are used to represent all
