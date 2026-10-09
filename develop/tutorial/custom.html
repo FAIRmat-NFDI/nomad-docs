@@ -3933,7 +3933,7 @@ We will make use of the tabular parser in a custom yaml schema. To obtain some s
 <p class="admonition-title">important</p>
 <p>The ranges of the three <code>mapping_options</code>, namely <code>file_mode</code>, <code>mapping_mode</code>, and <code>sections</code> can give rise to twelve different combinations (see table in <a href="../reference/annotations.html#available-combinations">Reference</a>). It is worth to analyze each of them to understand which is the best choice to pursue from case to case.
 Some of them give rise to "not possible" data structures but are still listed for completeness, a brief explanation of why it is not possible to implement them is also provided.
-The main bring-home message is that a tabular data file can be parsed in one or more entries in NOMAD, giving rise to diverse and arbitrarily complex structures.</p>
+The main take-home message is that a tabular data file can be parsed in one or more entries in NOMAD, giving rise to diverse and arbitrarily complex structures.</p>
 </div>
 <p>In the following sections, two examples will be illustrated. A <a href="../howto/schemas/tabular.html#preparing-the-tabular-data-file">tabular data file</a> is parsed into one or more <a href="../explanation/data.html#archives">data archive files</a>, their structure is based on a <a href="../explanation/data.html#schemas">schema archive file</a>. NOMAD archive files are denoted as entries.</p>
 <div class="admonition note">
@@ -4002,7 +4002,7 @@ The main bring-home message is that a tabular data file can be parsed in one or 
 </p>
 
 <p>In this example, each row of the tabular data file will be placed in a new entry that is an instance of a class defined in the schema. This would make sense for, say, an inventory spreadsheet where each row can be a separate entity such as a sample, a substrate, etc.
-In this case, a manyfold of entries will be generated based on the only class available in the schema. These entries will not be bundled together by a parent entry but just live in our NOMAD upload as a spare list, to bundle them together it is useful to check the dedicated <a href="../howto/schemas/tabular.html#7-row-mode-multiple-new-entries-parse-to-my-path">How-to</a>. They might still be referenced manually inside an overarching entry, such as an experiment entry, from the ELN with <code>ReferenceEditQuantity</code>.</p>
+In this case, a manyfold of entries will be generated based on the only class available in the schema. These entries will not be bundled together by a parent entry but just live in our NOMAD project as a spare list, to bundle them together it is useful to check the dedicated <a href="../howto/schemas/tabular.html#7-row-mode-multiple-new-entries-parse-to-my-path">How-to</a>. They might still be referenced manually inside an overarching entry, such as an experiment entry, from the ELN with <code>ReferenceEditQuantity</code>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">definitions</span><span class="p">:</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">'My</span><span class="nv"> </span><span class="s">test</span><span class="nv"> </span><span class="s">ELN'</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">sections</span><span class="p">:</span>

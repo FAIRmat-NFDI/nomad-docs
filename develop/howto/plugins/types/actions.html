@@ -5087,7 +5087,7 @@ intermediate files tied to one workflow execution:</p>
 <p>This folder should be treated as run-scoped state; do not place global caches here.</p>
 <h3 id="quick-decision-rule">Quick decision rule<a class="headerlink" href="#quick-decision-rule" title="Permanent link">¶</a></h3>
 <ul>
-<li>NOMAD dataset/raw data -&gt; upload files.</li>
+<li>NOMAD project/raw data -&gt; upload files.</li>
 <li>Reusable across runs/users/actions -&gt; global <code>action_artifacts_dir()</code>.</li>
 <li>User-uploaded run input files -&gt; <code>action_instance_assets_dir(action_instance_id)</code>.</li>
 <li>Plugin-generated run outputs/intermediates -&gt; <code>action_instance_artifacts_dir(action_instance_id)</code>.</li>
