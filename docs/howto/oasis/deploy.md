@@ -362,15 +362,15 @@ Regardless of the cloud provider, the deployment typically follows these steps:
 
     - Choose a Linux-based operating system (OS). (e.g. Ubuntu, Amazon Linux, Red Hat, SUSE Linux). This tutorial is based on using Ubuntu.
     - Select an instance type based on your workload ([see appropriate hardware resources](#hardware-considerations)). If you are unsure, you could start with a `c5.xlarge` instance.
-    - In network settings, ensure that "Auto-assign public IP" is enabled
-    - In network settings, ensure that "Allow HTTPS traffic from the internet" is enabled.
-    - In network settings, ensure that "Allow HTTP traffic from the internet" is enabled.
+    - In network settings, ensure that **Auto-assign public IP** is enabled
+    - In network settings, ensure that **Allow HTTPS traffic from the internet** is enabled.
+    - In network settings, ensure that **Allow HTTP traffic from the internet** is enabled.
     - In the storage settings, add persistent storage for databases and files stored by NOMAD. The default [EBS (Elastic Block Store)](https://docs.aws.amazon.com/ebs/latest/userguide/what-is-ebs.html){:target="_blank" rel="noopener"} is a recommended option, as it provides durable and scalable storage. Learn more in the [AWS Storage Guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Storage.html){:target="_blank" rel="noopener"}. We recommend starting with at least 30 GiB of storage to have space for the docker images and databases.
     - Launch the instance
 
 3. Configure Network & Security
 
-    - Check that inbound traffic is allowed in the [*Network & Security/Security Groups*](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html){:target="_blank" rel="noopener"} settings. Inbound traffic should be allowed for:
+    - Check that inbound traffic is allowed in the [**Network & Security** > **Security Groups**](https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html){:target="_blank" rel="noopener"} settings. Inbound traffic should be allowed for:
         - HTTP: Protocol TCP, port 80, source 0.0.0.0/0
         - HTTPS: Protocol TCP, port 443, source 0.0.0.0/0
         - (Optional) SSH: Protocol TCP, port 22, source 0.0.0.0/0
@@ -390,7 +390,7 @@ Regardless of the cloud provider, the deployment typically follows these steps:
 
     - Ensure that Git is installed to be able to easily sync the distribution configuration. You can check this by running `git --version`. Generic installations instructions are found on [git > Linux](https://git-scm.com/downloads/linux){:target="_blank" rel="noopener"}.
 
-    - Create a NOMAD Oasis distribution using our template [`nomad-distro-template`](https://github.com/FAIRmat-NFDI/nomad-distro-template){:target="_blank" rel="noopener"}. We recommend creating a new repository by presssing the "Use this template button", but for testing it is also possible to use the existing template repository directly.
+    - Create a NOMAD Oasis distribution using our template [`nomad-distro-template`](https://github.com/FAIRmat-NFDI/nomad-distro-template){:target="_blank" rel="noopener"}. We recommend creating a new repository by selecting **Use this template**, but for testing it is also possible to use the existing template repository directly.
 
     - Follow the deployment instructions in the `README.md` file under *Deploying the distribution/For a new Oasis*. This typically consists of cloning the repository, setting up file priviledges and then running `docker compose pull` + `docker compose up -d`.
 

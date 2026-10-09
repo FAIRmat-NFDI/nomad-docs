@@ -619,7 +619,7 @@ perform the test without any recording.
 
 ## Build custom Oasis image
 
-To create a custom Oasis image (e.g. with custom plugins), you could use the [nomad-distro-template](https://github.com/FAIRmat-NFDI/nomad-distro-template){:target="_blank" rel="noopener"} by clicking the [`Use this template` button](https://github.com/new?template_name=nomad-distro-template&template_owner=FAIRmat-NFDI){:target="_blank" rel="noopener"}. For detailed instructions on building and deploying custom Oasis images, please refer to the documentation in that repository.
+To create a custom Oasis image (e.g. with custom plugins), you could use the [nomad-distro-template](https://github.com/FAIRmat-NFDI/nomad-distro-template){:target="_blank" rel="noopener"} by clicking the [**Use this template** button](https://github.com/new?template_name=nomad-distro-template&template_owner=FAIRmat-NFDI){:target="_blank" rel="noopener"}. For detailed instructions on building and deploying custom Oasis images, please refer to the documentation in that repository.
 
 ## Setup your IDE
 

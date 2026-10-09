@@ -64,7 +64,7 @@ feature of all parser-supported mainfiles.
 <!-- TODO: When this example transitions to nomad-simulation-parsers, link to
 the corresponding parser documentation. -->
 
-Open the parser-generated Entry and select **CONNECTIVITY** to view its workflow
+Open the parser-generated entry and select **CONNECTIVITY** to view its workflow
 graph:
 
 ![Parser-generated single-point workflow graph in the light theme](images/single-point-nomad-workflow-card-light.png#only-light){:.screenshot}
@@ -425,7 +425,7 @@ workflow:
 ![Top-level nested workflow graph in the light theme](images/nested-workflow-parent-card-light.png#only-light){:.screenshot}
 ![Top-level nested workflow graph in the dark theme](images/nested-workflow-parent-card-dark.png#only-dark){:.screenshot}
 
-Select the `DMFT` task to enter the sub-workflow. The graph then shows the
+Select the **DMFT** task to enter the sub-workflow. The graph then shows the
 `DMFT at T1` and `DMFT at T2` tasks. Both receive the TB calculation as input,
 and each connects to its corresponding DMFT output. Use the back arrow in the
 workflow toolbar to return to the parent graph.

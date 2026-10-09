@@ -6,7 +6,7 @@ A single Python plugin package can contain multiple [plugin entry points](../../
 
 {{ nav_list("Create entry points") }}
 
-See the [FAIRmat-NFDI GitHub organization page](https://github.com/FAIRmat-NFDI){:target="_blank" rel="noopener"} for a list of plugins developed by FAIRmat. You can also see the list of activated plugins and plugin entry points at the bottom of the *Information page* (`about/information`) of any NOMAD installation, for example check out the [central NOMAD installation](https://nomad-lab.eu/prod/v1/gui/about/information){:target="_blank" rel="noopener"}.
+See the [FAIRmat-NFDI GitHub organization page](https://github.com/FAIRmat-NFDI){:target="_blank" rel="noopener"} for a list of plugins developed by FAIRmat. You can also see the list of activated plugins and plugin entry points at the bottom of the **Information** page (`about/information`) of any NOMAD installation, for example check out the [central NOMAD installation](https://nomad-lab.eu/prod/v1/gui/about/information){:target="_blank" rel="noopener"}.
 
 ## Plugin anatomy
 

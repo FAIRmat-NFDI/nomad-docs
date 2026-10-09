@@ -471,7 +471,7 @@ Let's start by creating a new upload (or project) there:
     ![Results section](../images/plugin_tutorial_schema_2_dark.png#gh-dark-mode-only)
     ![Results section](../images/plugin_tutorial_schema_2_light.png#gh-light-mode-only)
 
-- Open the `Figures` section to find the spectral radiance plot.
+- Open the **Figures** section to find the spectral radiance plot.
 
     ![Figures plot](../images/plugin_tutorial_schema_3_dark.png#gh-dark-mode-only)
     ![Figures plot](../images/plugin_tutorial_schema_3_light.png#gh-light-mode-only)

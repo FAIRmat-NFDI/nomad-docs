@@ -310,17 +310,17 @@ In the following examples, you will learn how to upload a raw file from a SPECS 
     **Step 1:** Click on the **CREATE FROM SCHEMA** button in your project page.
     ![Screenshot of step 1](images/example_3-3_create_from_schema.png)
 
-    **Step 2:** In the *create new entry from schema* window, click on the drop-down menu of the built-in schema, and select *NexusDataConverter*
+    **Step 2:** In the **Create new entry from schema** window, click on the drop-down menu of the built-in schema, and select **NexusDataConverter**.
 
     **Step 3:** Give a descriptive name for the entry.
 
-    **Step 4:** Click on CREATE. This will take you the NexusDataConverter entry page.
+    **Step 4:** Click on **CREATE**. This will take you the NexusDataConverter entry page.
 
     ![Screenshot of steps 2 - 4](images/example_3-3_NexusDataConverter.png)
 
-    **Step 5:** From the reader drop-down menu, choose the appropriate reader for your files. For this exercise select *xps*.
+    **Step 5:** From the reader drop-down menu, choose the appropriate reader for your files. For this exercise select **xps**.
 
-    **Step 6:** From the nxdl drop-down menu, choose the appropriate application definition for your experiment. For this exercise select *NXxps*
+    **Step 6:** From the nxdl drop-down menu, choose the appropriate application definition for your experiment. For this exercise select **NXxps**.
 
     **Step 7:** Upload the raw data file `PBTTT_XPS_SPECS_raw.xml`.
 
@@ -367,17 +367,17 @@ In the following examples, you will learn how to upload a raw file from a SPECS 
 
     ![Screenshot of step 1](images/example_3-3_create_from_schema.png)
 
-    - **Step 2:** In the *create new entry from schema* window, click on the drop-down menu of the built-in schema, and select *NexusDataConverter*
+    - **Step 2:** In the **Create new entry from schema** window, click on the drop-down menu of the built-in schema, and select **NexusDataConverter**.
 
     - **Step 3:** Give a descriptive name for the entry.
 
-    - **Step 4:** Click on CREATE. This will take you the NexusDataConverter entry page.
+    - **Step 4:** Click on **CREATE**. This will take you the NexusDataConverter entry page.
 
     ![Screenshot of steps 2 - 4](images/example_3-3_NexusDataConverter.png)
 
-    - **Step 5:** From the reader drop-down menu, choose the appropriate reader for your files. For this exercise select *xps*.
+    - **Step 5:** From the reader drop-down menu, choose the appropriate reader for your files. For this exercise select **xps**.
 
-    - **Step 6:** From the nxdl drop-down menu, choose the appropriate application definition for your experiment. For this exercise select *NXxps*
+    - **Step 6:** From the nxdl drop-down menu, choose the appropriate application definition for your experiment. For this exercise select **NXxps**.
 
     - **Step 7:** Upload the raw data file `PBTTT_XPS_SPECS_raw.xml` as well as the ELN data file `eln_data_xml.yaml`.
 

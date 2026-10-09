@@ -74,7 +74,7 @@ for an entry.
 
 ## Example upload
 
-*Example uploads* are pre-prepared uploads containing data that typically showcases certain features of a plugin. The contents of example uploads can be fixed, created programmatically or fetched from online sources. Example uploads can be instantiated by using the "Example uploads" -button in the "Uploads" -page of the GUI. Example uploads can be defined by creating an example upload [plugin entry point](#plugin-entry-point).
+*Example uploads* are pre-prepared uploads containing data that typically showcases certain features of a plugin. The contents of example uploads can be fixed, created programmatically or fetched from online sources. Example uploads can be instantiated by using the **Example uploads** button on the **Uploads** page of the GUI. Example uploads can be defined by creating an example upload [plugin entry point](#plugin-entry-point).
 
 ## Mainfile
 

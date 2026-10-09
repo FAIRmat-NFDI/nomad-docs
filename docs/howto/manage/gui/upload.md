@@ -119,20 +119,20 @@ to the current project folder.
 
 ??? warning "License Compliance for VASP POTCAR Files"
 
-    The VASP license does **not** permit users to freely distribute **POTCAR** files, which are
-    considered copyrighted material. To ensure compliance, NOMAD automatically handles POTCAR
+    The VASP license does **not** permit users to freely distribute `POTCAR` files, which are
+    considered copyrighted material. To ensure compliance, NOMAD automatically handles `POTCAR`
     files for you.
 
-    Upon **publication**, NOMAD removes the original POTCAR files and replaces them with
+    Upon **publication**, NOMAD removes the original `POTCAR` files and replaces them with
     `POTCAR.stripped` files. The stripped files contain a checksum of the original file
     at the top, followed by metadata headers extracted from the original POTCAR, but not
     the proprietary pseudopotential data. The stripped files can be accessed and downloaded
-    by anyone, while the original POTCAR files are automatically removed.
+    by anyone, while the original `POTCAR` files are automatically removed.
 
     **Important considerations:**
 
-    - Stripping is filename-based. Ensure "POTCAR" appears in the filename for licensed files.
-    - POTCAR files **must be uncompressed** for automated stripping to work. Compressed files (e.g., `POTCAR.gz`) will not be properly processed and may be entirely removed without creating stripped versions.
+    - Stripping is filename-based. Ensure `POTCAR` appears in the filename for licensed files.
+    - `POTCAR` files **must be uncompressed** for automated stripping to work. Compressed files (e.g., `POTCAR.gz`) will not be properly processed and may be entirely removed without creating stripped versions.
     - Stripping only occurs upon publication. We strongly recommend **against** temporarily making unpublished uploads publicly visible when they contain licensed material.
 
     While NOMAD provides this service as a courtesy, **uploaders remain responsible for
@@ -144,7 +144,7 @@ An [Electronic Lab Notebook (ELN)](../../../reference/glossary.md#eln) entry is
 a schema-based entry that you can edit directly in NOMAD. To create an ELN entry:
 
 1. On the project **Overview** page or in any folder under
-   **FILES**, select **NEW ENTRY**. You can create new folders using the `+` button under **FILES**.
+   **FILES**, select **NEW ENTRY**. You can create new folders using the **+** button under **FILES**.
 2. Choose a schema under **BUILT-IN SCHEMAS** or **CUSTOM SCHEMAS**. Custom
    schemas come from schema packages uploaded to the current NOMAD deployment.
    Depending on your access, these can include schemas from this project, your

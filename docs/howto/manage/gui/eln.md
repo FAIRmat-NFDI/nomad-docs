@@ -98,7 +98,7 @@ requires the following information:
 To import Labfolder data into NOMAD:
 
 1. Create or open a NOMAD project and select **NEW ENTRY**.
-2. Choose the `Labfolder Project Import` schema, name the entry, and select
+2. Choose the **Labfolder Project Import** schema, name the entry, and select
    **CREATE**.
 3. In the new entry, enter the project URL, email, and password, then save
    the entry. NOMAD retrieves the project data and populates the entry.
@@ -158,7 +158,7 @@ schema. The integration requires the following information:
 To import openBIS data into NOMAD:
 
 1. Create or open a NOMAD project and select **NEW ENTRY**.
-2. Choose the `Openbis Project Import` schema, give the entry a name, and
+2. Choose the **Openbis Project Import** schema, give the entry a name, and
    select **CREATE**.
 3. In the new entry, enter the project URL, username, and password, then
    save the entry. NOMAD retrieves and imports the project data.

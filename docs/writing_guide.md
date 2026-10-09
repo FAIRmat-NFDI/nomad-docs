@@ -119,11 +119,11 @@ resource.
     - Code (e.g., inline commands, file names, parameters, API endpoints, config options, environment variables).
     - Literal values the user must type, e.g., in the UI.
 
-- Use "double quotes" when quoting actual text strings (e.g., labels in the UI, button names, error messages).
+- Use "double quotes" for quoted prose and exact messages, such as error
+  messages.
 
-<!-- TODO check bold and it usage and try to be more specific -->
 - Use **bold** for:
-    - Certain UI elements (buttons, menu items, field names).
+    - Exact GUI labels (buttons, menu items, field names).
     - Bullet list labels for clarity.
     - Important emphasis (but use sparingly).
 
@@ -139,7 +139,8 @@ resource.
 
 **Copy-paste ready.** Commands should run as-is. If a placeholder is required, surround it with angle brackets and use a descriptive name with hyphens separating words. Like this: `<your-token>`.
 
-**UI copy.** Quote exact button/label text in bold or code.
+**UI copy.** Format exact button and label text in bold. Do not use quotation
+marks or code formatting for GUI labels.
 
 ### Admonitions
 
@@ -176,7 +177,7 @@ Images that can be represented in code should be preferred. The docs support [Me
 </figure>
 ````
 
-The second best format is SVG. SVG files scale to different resolutions, produce small file sizes, and are easy to modify later. It is recommended to use [draw.io](https://www.drawio.com/){:target="_blank" rel="noopener"} to produce any complex diagrams, and then export them in the SVG format using the "Include a copy of my diagram" option which allows for easy editing later.
+The second best format is SVG. SVG files scale to different resolutions, produce small file sizes, and are easy to modify later. It is recommended to use [draw.io](https://www.drawio.com/){:target="_blank" rel="noopener"} to produce any complex diagrams, and then export them in the SVG format using the **Include a copy of my diagram** option which allows for easy editing later.
 
 When other options are not suitable, the preferred raster image format is JPG.
 
