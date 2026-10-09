@@ -93,8 +93,10 @@ curl -X POST "{{ nomad_url() }}/v1/entries/raw/query" \
 ```
 
 The ZIP file contains the raw files from directories containing the mainfiles of
-the matching entries. You can replace the example with any
-[How-to guides > ... > Queries](api.md#queries).
+the matching entries. Each project's files are stored under a directory named
+with its upload ID. The ZIP file also contains `manifest.json`, which maps each
+entry to its upload ID, entry ID, and mainfile. You can replace the example with
+any [How-to guides > ... > Queries](api.md#queries).
 
 This does not necessarily download every file in each matching project. To
 download complete projects instead, aggregate the upload IDs for the matching
@@ -176,9 +178,11 @@ curl -X POST "{{ nomad_url() }}/v1/entries/archive/download/query" \
 -o download.zip
 ```
 
-Here we use the `entries/archive/download/query` endpoint. The result is a zip file
-with one json file per entry. There are no directories and the files are named
-`<entry-id>.json`. To associate the json files with entries, you should require
-information that tells you more about the entries, e.g. `required.metadata.mainfile`.
+Here we use the `entries/archive/download/query` endpoint. The resulting ZIP
+file contains one JSON file per entry, stored as
+`<upload-id>/<entry-id>.json`. It also contains `manifest.json`, which records
+the upload ID, entry ID, parser name, and JSON path for each result. Request
+additional metadata such as `required.metadata.mainfile` when it will help you
+interpret the downloaded processed data.
 
 See also [How-to guides > ... > Access processed data](./archive_query.md).

@@ -47,7 +47,10 @@ import requests
 
 
 def auth_headers():
-    return {'Authorization': f'Bearer {os.environ["NOMAD_PAT"]}'}
+    return {
+        'Authorization': f'Bearer {os.environ["NOMAD_PAT"]}',
+        'Accept': 'application/json',
+    }
 
 
 def create_project(api_url, file_path):
