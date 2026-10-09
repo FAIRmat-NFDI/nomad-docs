@@ -4161,8 +4161,10 @@ contains both titanium and oxygen:</p>
 <a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>-o<span class="w"> </span>download.zip
 </code></pre></div>
 <p>The ZIP file contains the raw files from directories containing the mainfiles of
-the matching entries. You can replace the example with any
-<a href="api.html#queries">How-to guides &gt; ... &gt; Queries</a>.</p>
+the matching entries. Each project's files are stored under a directory named
+with its upload ID. The ZIP file also contains <code>manifest.json</code>, which maps each
+entry to its upload ID, entry ID, and mainfile. You can replace the example with
+any <a href="api.html#queries">How-to guides &gt; ... &gt; Queries</a>.</p>
 <p>This does not necessarily download every file in each matching project. To
 download complete projects instead, aggregate the upload IDs for the matching
 entries and use the method from the previous section:</p>
@@ -4231,10 +4233,12 @@ to explain which parts of the processed data, we are interested in:</p>
 <a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a><span class="s1">}'</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a>-o<span class="w"> </span>download.zip
 </code></pre></div>
-<p>Here we use the <code>entries/archive/download/query</code> endpoint. The result is a zip file
-with one json file per entry. There are no directories and the files are named
-<code>&lt;entry-id&gt;.json</code>. To associate the json files with entries, you should require
-information that tells you more about the entries, e.g. <code>required.metadata.mainfile</code>.</p>
+<p>Here we use the <code>entries/archive/download/query</code> endpoint. The resulting ZIP
+file contains one JSON file per entry, stored as
+<code>&lt;upload-id&gt;/&lt;entry-id&gt;.json</code>. It also contains <code>manifest.json</code>, which records
+the upload ID, entry ID, parser name, and JSON path for each result. Request
+additional metadata such as <code>required.metadata.mainfile</code> when it will help you
+interpret the downloaded processed data.</p>
 <p>See also <a href="archive_query.html">How-to guides &gt; ... &gt; Access processed data</a>.</p>
 
 
