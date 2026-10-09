@@ -5,10 +5,10 @@ used by tasks to produce outputs. It represents a process that has taken place
 or is documented in stored data. It is not a workflow engine and does not
 execute the tasks it describes.
 
-The inputs, tasks, and outputs can refer to archive sections in one Entry or
-across multiple Entries. A Project groups files and Entries for management,
+The inputs, tasks, and outputs can refer to archive sections in one entry or
+across multiple entries. A project groups files and entries for management,
 access, and publication, whereas a workflow expresses relationships between
-the data stored in those Entries.
+the data stored in those entries.
 
 ## Related pages
 
@@ -20,7 +20,7 @@ the data stored in those Entries.
 ## The built-in abstract workflow schema
 
 NOMAD stores the current workflow representation in the top-level `workflow2`
-section of an Entry archive. This section contains a `Workflow` instance from
+section of an entry archive. This section contains a `Workflow` instance from
 `nomad.datamodel.metainfo.workflow`.
 
 <figure markdown class="workflow-schema-diagram" style="width: 100%">
@@ -72,7 +72,7 @@ The model has four central components:
   task's optional `section` can identify the archive section describing that
   activity.
 - A **task reference** is a proxy for a task or workflow defined elsewhere,
-  such as in another Entry. It can supply a local name, inputs, and outputs or
+  such as in another entry. It can supply a local name, inputs, and outputs or
   obtain them from the referenced task.
 - A **workflow** is a task that also contains other tasks. Because `Workflow`
   inherits from `Task`, a workflow can itself be used as a task in another
@@ -81,11 +81,11 @@ The model has four central components:
 The model stores references rather than separate graph edges. When links on
 different nodes point to the same archive section, NOMAD can represent the
 shared data as a connection in the workflow graph. References can point to
-sections in the same Entry or to Entries elsewhere on the same NOMAD
+sections in the same entry or to entries elsewhere on the same NOMAD
 deployment.
 
 !!! note
-    Some older Entry archives use the legacy top-level `workflow` section. New
+    Some older entry archives use the legacy top-level `workflow` section. New
     workflow data and schemas should use `workflow2`.
 
 ### Nested workflow example
@@ -161,15 +161,15 @@ Likewise, the ground-state result is both the task output and the global output
 of the single-point workflow.
 
 The tasks and referenced sections may be stored together or in separate
-Entries without changing these logical relationships. Directly contained and
+entries without changing these logical relationships. Directly contained and
 referenced workflows both produce a hierarchical provenance graph while
-allowing each referenced Entry to remain independently accessible.
+allowing each referenced entry to remain independently accessible.
 
 ## Custom and standardized workflows
 
 The distinction between a custom and a standardized workflow concerns the
 schema used to describe it, not whether a person or software created the
-workflow Entry.
+workflow entry.
 
 A **custom workflow** uses the general `Workflow`, `Task`, and `Link` model
 directly. Its author selects the relevant archive sections and defines how they

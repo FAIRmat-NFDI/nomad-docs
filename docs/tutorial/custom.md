@@ -51,7 +51,7 @@ We will make use of the tabular parser in a custom yaml schema. To obtain some s
 
 3) a tabular data file must be dragged in the annotated [quantity](../howto/schemas/define.md#add-quantities) in order for NOMAD to parse it (the quantity is called `data_file` in the following examples)
 
-#### To be an Entry or not to be an Entry
+#### To be an entry or not to be an entry
 
 To use this parser, three kinds of annotation must be included in the schema: `tabular`, `tabular_parser`, `label_quantity`. Refer to the dedicated [Reference](../reference/annotations.md#tabular-data) section for the full list of options.
 
@@ -60,7 +60,7 @@ To use this parser, three kinds of annotation must be included in the schema: `t
     Some of them give rise to "not possible" data structures but are still listed for completeness, a brief explanation of why it is not possible to implement them is also provided.
     The main bring-home message is that a tabular data file can be parsed in one or more entries in NOMAD, giving rise to diverse and arbitrarily complex structures.
 
-In the following sections, two examples will be illustrated. A [tabular data file](../howto/schemas/tabular.md#preparing-the-tabular-data-file) is parsed into one or more [data archive files](../explanation/data.md#archives), their structure is based on a [schema archive file](../explanation/data.md#schemas). NOMAD archive files are denoted as Entries.
+In the following sections, two examples will be illustrated. A [tabular data file](../howto/schemas/tabular.md#preparing-the-tabular-data-file) is parsed into one or more [data archive files](../explanation/data.md#archives), their structure is based on a [schema archive file](../explanation/data.md#schemas). NOMAD archive files are denoted as entries.
 
 !!! note
     From the NOMAD point of view, a schema file and a data file are the same kind of file where different sections have been filled (see [archive files description](../explanation/data.md#archives)). Specifically, a schema file has its `definitions` section filled while a data file will have its `data` section filled. See [How to write a schema](../howto/schemas/schemas.md#get-your-schema-into-nomad) for a more complete description of an archive file.
@@ -73,10 +73,10 @@ We want instantiate an object created from the schema already shown in the first
     <img width="30%" src="images/2col.png" alt="table with two columns">
 </p>
 
-The two columns in the file will be stored in a NOMAD Entry archive within two array quantities, as shown in the image below. In the case where the section to be filled is not in the root level of our schema but nested inside, it is useful to check the dedicated [How-to](../howto/schemas/tabular.md#2-column-mode-current-entry-parse-to-my-path).
+The two columns in the file will be stored in a NOMAD entry archive within two array quantities, as shown in the image below. In the case where the section to be filled is not in the root level of our schema but nested inside, it is useful to check the dedicated [How-to](../howto/schemas/tabular.md#2-column-mode-current-entry-parse-to-my-path).
 
 <p align="center" width="100%">
-    <img width="100%" src="images/tabular-1.png" alt="column-wise parsing into quantities of the same NOMAD Entry">
+    <img width="100%" src="images/tabular-1.png" alt="column-wise parsing into quantities of the same NOMAD entry">
 </p>
 
 The schema will be decorated by the annotations mentioned at the beginning of this section  and will look like this:
@@ -122,7 +122,7 @@ definitions:
               name: "My header 2"
 ```
 
-Here the tabular data file is parsed by columns, directly within the Entry where the `TableData` is inherited and filling the quantities in the root level of the schema (see dedicated how-to to learn [how to inherit tabular parser in your schema](../howto/schemas/tabular.md#inheriting-the-tabledata-base-section)).
+Here the tabular data file is parsed by columns, directly within the entry where the `TableData` is inherited and filling the quantities in the root level of the schema (see dedicated how-to to learn [how to inherit tabular parser in your schema](../howto/schemas/tabular.md#inheriting-the-tabledata-base-section)).
 
 !!! note
     In yaml files a dash character indicates a list element. `mapping_options` is a list because it is possible to parse multiple tabular sheets from the same schema with different parsing options. `sections` in turn is a list because multiple sections of the schema can be parsed with same parsing options.
@@ -130,11 +130,11 @@ Here the tabular data file is parsed by columns, directly within the Entry where
 #### Example 2
 
 <p align="center" width="100%">
-    <img width="100%" src="images/tabular-6.png" alt="row-wise parsing into individual NOMAD Entry">
+    <img width="100%" src="images/tabular-6.png" alt="row-wise parsing into individual NOMAD entry">
 </p>
 
-In this example, each row of the tabular data file will be placed in a new Entry that is an instance of a class defined in the schema. This would make sense for, say, an inventory spreadsheet where each row can be a separate entity such as a sample, a substrate, etc.
-In this case, a manyfold of Entries will be generated based on the only class available in the schema. These Entries will not be bundled together by a parent Entry but just live in our NOMAD Upload as a spare list, to bundle them together it is useful to check the dedicated [How-to](../howto/schemas/tabular.md#7-row-mode-multiple-new-entries-parse-to-my-path). They might still be referenced manually inside an overarching Entry, such as an experiment Entry, from the ELN with `ReferenceEditQuantity`.
+In this example, each row of the tabular data file will be placed in a new entry that is an instance of a class defined in the schema. This would make sense for, say, an inventory spreadsheet where each row can be a separate entity such as a sample, a substrate, etc.
+In this case, a manyfold of entries will be generated based on the only class available in the schema. These entries will not be bundled together by a parent entry but just live in our NOMAD upload as a spare list, to bundle them together it is useful to check the dedicated [How-to](../howto/schemas/tabular.md#7-row-mode-multiple-new-entries-parse-to-my-path). They might still be referenced manually inside an overarching entry, such as an experiment entry, from the ELN with `ReferenceEditQuantity`.
 
 ```yaml
 definitions:

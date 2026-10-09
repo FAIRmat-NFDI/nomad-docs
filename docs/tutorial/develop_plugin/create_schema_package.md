@@ -459,7 +459,7 @@ The notebook walks through these steps:
 
 Testing the GUI outcome requires a local NOMAD GUI development setup. For that, use [Option 2: `nomad-distro-dev`](plugin_structure.md#option-2-nomad-distro-dev) from the previous tutorial and add your plugin to that environment. With this, you can spin up a local development deployment of NOMAD.
 
-Let's start by creating a new Upload (or Project) there:
+Let's start by creating a new upload (or project) there:
 
 - Create an entry and populate the temperature.
 
@@ -471,7 +471,7 @@ Let's start by creating a new Upload (or Project) there:
     ![Results section](../images/plugin_tutorial_schema_2_dark.png#gh-dark-mode-only)
     ![Results section](../images/plugin_tutorial_schema_2_light.png#gh-light-mode-only)
 
-- Open the `Figures` section to find the spectral radiance plot.
+- Open the **Figures** section to find the spectral radiance plot.
 
     ![Figures plot](../images/plugin_tutorial_schema_3_dark.png#gh-dark-mode-only)
     ![Figures plot](../images/plugin_tutorial_schema_3_light.png#gh-light-mode-only)

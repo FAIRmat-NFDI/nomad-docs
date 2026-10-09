@@ -69,10 +69,10 @@ In the **Entries** app, the filter panel on the left allows you to narrow the se
 
 Search results update automatically as you apply filters. Let's narrow the results to VASP calculations of hexagonal boron nitride that contain band-structure data.
 
-- Under **Elements/Formula**, select *B* and *N* in the periodic table and check the box *only compositions that exclusively contain these atoms*. The search results now contain entries with only boron and nitrogen.
-- Under **Structure/Symmetry**, select *hexagonal* from the **Crystal system** section. Notice that the results are now limited to hexagonal structures containing boron and nitrogen.
-- Under **Method**, select *VASP* from the **Program name** section. The results now show entries from calculations performed with VASP.
-- Under **Electronic**, select *Band structure* from the **Electronic properties** section.
+- Under **Elements/Formula**, select **B** and **N** in the periodic table and check the box **only compositions that exclusively contain these atoms**. The search results now contain entries with only boron and nitrogen.
+- Under **Structure/Symmetry**, select **hexagonal** from the **Crystal system** section. Notice that the results are now limited to hexagonal structures containing boron and nitrogen.
+- Under **Method**, select **VASP** from the **Program name** section. The results now show entries from calculations performed with VASP.
+- Under **Electronic**, select **Band structure** from the **Electronic properties** section.
 
 You have now narrowed the search to VASP calculations of hexagonal boron nitride that contain band-structure data.
 
@@ -87,8 +87,8 @@ You can also search for specific quantities and values directly from the search 
 
 Start by searching for the elements from the previous example:
 
-- Type "boron" and select *results.material.material_name = Boron* from the suggested quantities.
-- Type "nitrogen" and select *results.material.material_name = Nitrogen* from the suggested quantities.
+- Type `boron` and select `results.material.material_name = Boron` from the suggested quantities.
+- Type `nitrogen` and select `results.material.material_name = Nitrogen` from the suggested quantities.
 
 Notice that the search results update as you add each condition.
 
@@ -101,7 +101,7 @@ Notice that the search results update as you add each condition.
 
     Now use the search bar to find a quantity related to the band gap.
 
-    - Try searching for *"bandgap"*, *"band gap"*, or *"band_gap"*.
+    - Try searching for `bandgap`, `band gap`, or `band_gap`.
     - Look at the suggested quantities and their metainfo paths.
     - Can you find a quantity containing the band gap value?
     - Can you find information indicating whether the band gap is **direct** or **indirect**?
@@ -170,7 +170,7 @@ Let's explore the available solar-cell data to investigate the following questio
 ### Filter by absorber composition
 
 - Under **Elements/Formula** in the filter menu, click the **(+)** button next to the periodic table to pin the widget to the dashboard.
-- Select *Cs*, *Pb*, *Br*, and *I* to find entries containing the elements of the absorber.
+- Select **Cs**, **Pb**, **Br**, and **I** to find entries containing the elements of the absorber.
 
 The results are now limited to entries containing Cs, Pb, Br, and I.
 
@@ -178,8 +178,8 @@ The results are now limited to entries containing Cs, Pb, Br, and I.
 
 - Click the **TERMS** button to add a widget that filters by ETL materials.
 - For the quantity, type `electron_transport_layer` and select `results.properties.optoelectronic.solar_cell.electron_transport_layer`.
-- Set the statistics scaling to *linear* and enter `ETL` as the widget title.
-- Click *DONE*.
+- Set the statistics scaling to **linear** and enter `ETL` as the widget title.
+- Click **DONE**.
 
 ### Explore device performance
 
@@ -188,7 +188,7 @@ The results are now limited to entries containing Cs, Pb, Br, and I.
 - In the y-axis quantity field, type `efficiency` and select `results.properties.optoelectronic.solar_cell.efficiency`.
 - In the marker color field, type `short_circuit_current` and select `results.properties.optoelectronic.solar_cell.short_circuit_current_density`.
 
-Hover over individual data points to inspect their values. Use the *ETL* widget to select different ETL materials and observe how the distribution of points changes.
+Hover over individual data points to inspect their values. Use the **ETL** widget to select different ETL materials and observe how the distribution of points changes.
 
 Notice which ETL materials occur among entries with higher open-circuit voltages. The plot shows relationships in the available data; it does not by itself establish that the ETL material causes a change in device performance.
 
@@ -212,8 +212,8 @@ The Solar Cells app provides predefined filters and widgets for exploring solar-
 
 ### Filter by absorber and ETL
 
-- Select *Sn* in the periodic table to find entries containing tin.
-- In the ETL **TERMS** widget, select *C60*.
+- Select **Sn** in the periodic table to find entries containing tin.
+- In the ETL **TERMS** widget, select **C60**.
 
 The results are now limited to Sn-based solar-cell entries that use C60 as the ETL.
 

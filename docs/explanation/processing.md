@@ -214,7 +214,7 @@ list of keys NOMAD will create an additional child entry for each key, and the p
 is passed the archives of the additional child entries. One example is a parser for a tabular format that
 produces individual entries for each row of the table.
 
-Since `normalize` functions are defined as part of `Sections` in a schema and called for
+Since `normalize` functions are defined as part of sections in a schema and called for
 section instances, the `normalize` functions are called individually for the entry and
 all child entries.
 
