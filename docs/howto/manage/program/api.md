@@ -273,6 +273,7 @@ with different functions in the API:
 
 - Entries
 - Uploads
+- Datasets (retained backend resources for existing collections)
 - Users
 
 The API URLs typically start with the entity, followed by the kind of data. Examples
