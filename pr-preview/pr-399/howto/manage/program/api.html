@@ -1774,7 +1774,7 @@
   <span class="md-ellipsis">
     
   
-    Publish data using Python
+    Manage data with Python
   
 
     
@@ -4370,6 +4370,9 @@
 
 <h1 id="how-to-use-the-api">How to use the API<a class="headerlink" href="#how-to-use-the-api" title="Permanent link">¶</a></h1>
 <p>This guide is about using NOMAD's REST APIs directly, e.g. via Python's <code>requests</code> library.</p>
+<p>The GUI organizes files and entries in projects. The API represents each project
+as an upload resource, so endpoint paths, request fields, and response fields retain
+terms such as <code>uploads</code> and <code>upload_id</code>.</p>
 <p>To access the processed data with our client library <code>nomad-lab</code> follow
 <a href="archive_query.html">How to access processed data</a>. You can also watch our
 <a href="../../../tutorial/access_api.html">video tutorial on the API</a>.</p>
@@ -4466,7 +4469,7 @@ one entry and only returns the <code>entry_id</code>.</p>
 <a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a><span class="w">  </span><span class="p">]</span>
 <a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a><span class="p">}</span>
 </code></pre></div>
-<p>The <code>entry_id</code> is a unique identifier for, well, entries. You can use it to access other
+<p>The <code>entry_id</code> is a unique identifier for entries. You can use it to access other
 entry data. For example, you want to access the entry's archive. More precisely, you want
 to gather the formula and energies from the main workflow result. The following requests
 the archive based on the <code>entry_id</code> and only requires some archive sections.</p>
@@ -4595,7 +4598,7 @@ with different functions in the API:</p>
 <ul>
 <li>Entries</li>
 <li>Uploads</li>
-<li>Datasets</li>
+<li>Datasets (retained backend resources for existing collections)</li>
 <li>Users</li>
 </ul>
 <p>The API URLs typically start with the entity, followed by the kind of data. Examples
@@ -4779,7 +4782,7 @@ concepts</a> above to create the queries that you need.</p>
 you'll probably want to do one of the following things.</p>
 <h2 id="download-raw-files">Download raw files<a class="headerlink" href="#download-raw-files" title="Permanent link">¶</a></h2>
 <p>You can use <a href="#queries">queries</a> to download raw files, but typically you don't want to
-download file-by-file or entry-by-entry. Therefore, we allow to download a large set of
+download file by file or entry by entry. Therefore, we allow to download a large set of
 files in one big zip-file. Here, you might want to use a program like <em>curl</em> to download
 directly from the shell:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>curl<span class="w"> </span><span class="s2">"https://nomad-lab.eu/prod/v1/api/v1/entries/raw?results.material.elements=Ti&amp;results.material.elements=O"</span><span class="w"> </span>-o<span class="w"> </span>download.zip
@@ -4905,9 +4908,9 @@ in the response body that will inform you about the limit, e.g. the maximum allo
 page size.</p>
 <h2 id="user-groups">User Groups<a class="headerlink" href="#user-groups" title="Permanent link">¶</a></h2>
 <p>You can create a user group and add other users to that group via the API. These groups
-can be used as <a href="../gui/upload.html#visibility-and-access">upload members</a> to make it
-easier to give viewing or editing rights for an upload to multiple users at once, e.g.
-a working group.</p>
+can be added as <a href="../gui/upload.html#visibility-and-access">project collaborators</a> to make it
+easier to give viewing or editing rights for a project to multiple users at once, e.g.
+a working group. In the API, project collaborators are represented as upload members.</p>
 <p>To create a group, send an authenticated POST request to <code>/groups</code> including the
 <code>group_name</code> and a list of user IDs in the <code>members</code> field:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="c1">// POST /groups</span>
