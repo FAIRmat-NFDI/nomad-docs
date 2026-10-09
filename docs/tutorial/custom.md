@@ -58,7 +58,7 @@ To use this parser, three kinds of annotation must be included in the schema: `t
 !!! tip "important"
     The ranges of the three `mapping_options`, namely `file_mode`, `mapping_mode`, and `sections` can give rise to twelve different combinations (see table in [Reference](../reference/annotations.md#available-combinations)). It is worth to analyze each of them to understand which is the best choice to pursue from case to case.
     Some of them give rise to "not possible" data structures but are still listed for completeness, a brief explanation of why it is not possible to implement them is also provided.
-    The main bring-home message is that a tabular data file can be parsed in one or more entries in NOMAD, giving rise to diverse and arbitrarily complex structures.
+    The main take-home message is that a tabular data file can be parsed in one or more entries in NOMAD, giving rise to diverse and arbitrarily complex structures.
 
 In the following sections, two examples will be illustrated. A [tabular data file](../howto/schemas/tabular.md#preparing-the-tabular-data-file) is parsed into one or more [data archive files](../explanation/data.md#archives), their structure is based on a [schema archive file](../explanation/data.md#schemas). NOMAD archive files are denoted as entries.
 
@@ -134,7 +134,7 @@ Here the tabular data file is parsed by columns, directly within the entry where
 </p>
 
 In this example, each row of the tabular data file will be placed in a new entry that is an instance of a class defined in the schema. This would make sense for, say, an inventory spreadsheet where each row can be a separate entity such as a sample, a substrate, etc.
-In this case, a manyfold of entries will be generated based on the only class available in the schema. These entries will not be bundled together by a parent entry but just live in our NOMAD upload as a spare list, to bundle them together it is useful to check the dedicated [How-to](../howto/schemas/tabular.md#7-row-mode-multiple-new-entries-parse-to-my-path). They might still be referenced manually inside an overarching entry, such as an experiment entry, from the ELN with `ReferenceEditQuantity`.
+In this case, a manyfold of entries will be generated based on the only class available in the schema. These entries will not be bundled together by a parent entry but just live in our NOMAD project as a spare list, to bundle them together it is useful to check the dedicated [How-to](../howto/schemas/tabular.md#7-row-mode-multiple-new-entries-parse-to-my-path). They might still be referenced manually inside an overarching entry, such as an experiment entry, from the ELN with `ReferenceEditQuantity`.
 
 ```yaml
 definitions:

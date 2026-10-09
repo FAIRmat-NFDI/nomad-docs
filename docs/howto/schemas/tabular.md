@@ -74,7 +74,7 @@ losing/overwriting your manually-entered data by the parser!
 
 ## Importing data in NOMAD
 
-After writing a schema file and creating a new upload in NOMAD (or using an existing upload), it is possible to upload the schema file. After creating a new entry out of one section of the schema, the tabular data file must be dropped in the quantity designated by the `FileEditQuantity` annotation. After clicking save the parsing will start. In the Overview page of the NOMAD upload, new entries are created and appended to the Processed data section. In the entry page, clicking on DATA tab (on top of the screen) and in the entry lane, the data is populated under the `data` subsection.
+After writing a schema file, add it to a new or existing project. After creating a new entry out of one section of the schema, add the tabular data file to the quantity designated by the `FileEditQuantity` annotation. Saving the entry starts parsing. New entries are then shown on the project page, and the populated data are available under the `data` subsection of each entry's **ARCHIVE** tab.
 
 ## Hands-on examples of all tabular parser modes
 
@@ -183,7 +183,7 @@ Example analogous to the previous, where the new created entry contains now a re
 </p>
 
 The last feature available for tabular parser is now introduced: `multiple_new_entries`. It is only meaningful for `row` mode because each row of the tabular data file will be placed in a new entry that is an instance of a class defined in the schema, this would not make sense for columns, though, as they usually need to be parsed all together in one class of the schema, for example the "timestamp" and "temperature" columns in a spreadsheet file would need to lie in the same class as they belong to the same part of experiment.
-A further comment is needed to explain the combination of this feature with `root`. As mentioned before, using `root` foresees to graft data directly in the present entry. In this case, this means that a manyfold of entries will be generated based on the only class available in the schema. These entries will not be bundled together by a parent entry but just live in our NOMAD upload as a spare list. They might be referenced manually by the user with `ReferenceEditQuantity` in other archive files. Bundling them together in one overarching entry already at the parsing stage would require the next and last example to be introduced.
+A further comment is needed to explain the combination of this feature with `root`. As mentioned before, using `root` foresees to graft data directly in the present entry. In this case, this means that a manyfold of entries will be generated based on the only class available in the schema. These entries will not be bundled together by a parent entry but just live in the NOMAD project as a spare list. They might be referenced manually by the user with `ReferenceEditQuantity` in other archive files. Bundling them together in one overarching entry already at the parsing stage would require the next and last example to be introduced.
 
 !!!important
     - `data_file` quantity, i.e. the tabular data file name, is located in the parent entry, the data is parsed in the children entries.

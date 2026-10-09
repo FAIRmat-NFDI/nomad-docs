@@ -43,7 +43,7 @@ A few tips that will help us to solve your issues quicker:
 - **Bugs**: Think how we could reproduce the problem:
 
     - What NOMAD URL are you using (UI), which package version (Python)?
-    - Is there an upload or entry ID that we can look at?
+    - Is there an upload ID or entry ID that we can look at?
     - Example files or code snippets?
     - Don't screenshot code, copy and paste instead. Use [code blocks](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-and-highlighting-code-blocks#syntax-highlighting){:target="_blank" rel="noopener"}.
 
