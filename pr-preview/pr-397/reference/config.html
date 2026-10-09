@@ -4036,6 +4036,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#exampleuploads" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ExampleUploads
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#apps" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4128,17 +4139,6 @@
     <span class="md-ellipsis">
       
         Theme
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#exampleuploads" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ExampleUploads
       
     </span>
   </a>
@@ -4350,17 +4350,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#apientrypoint" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        APIEntryPoint
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#exampleuploadentrypoint" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4376,6 +4365,17 @@
     <span class="md-ellipsis">
       
         UploadResource
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apientrypoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        APIEntryPoint
       
     </span>
   </a>
@@ -5190,6 +5190,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#exampleuploads" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ExampleUploads
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#apps" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5282,17 +5293,6 @@
     <span class="md-ellipsis">
       
         Theme
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#exampleuploads" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ExampleUploads
       
     </span>
   </a>
@@ -5504,17 +5504,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#apientrypoint" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        APIEntryPoint
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#exampleuploadentrypoint" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5530,6 +5519,17 @@
     <span class="md-ellipsis">
       
         UploadResource
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#apientrypoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        APIEntryPoint
       
     </span>
   </a>
@@ -7449,6 +7449,29 @@ elements and defining the configuration of each element.</p>
 </tr>
 </tbody>
 </table>
+<h4 id="exampleuploads">ExampleUploads<a class="headerlink" href="#exampleuploads" title="Permanent link">¶</a></h4>
+<p>Controls the availability of example uploads.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>include</td>
+<td><code>list[str] | None</code></td>
+<td>List of included options. If not explicitly defined, all of the options will be included by default.</td>
+</tr>
+<tr>
+<td>exclude</td>
+<td><code>list[str] | None</code></td>
+<td>List of excluded options. Has higher precedence than include.</td>
+</tr>
+</tbody>
+</table>
 <h4 id="apps">Apps<a class="headerlink" href="#apps" title="Permanent link">¶</a></h4>
 <p>Contains App definitions and controls their availability.</p>
 <table>
@@ -7656,29 +7679,6 @@ elements and defining the configuration of each element.</p>
 <td>title</td>
 <td><code>str</code></td>
 <td>Site name in the browser tab.<br><em>default:</em> <code>PydanticUndefined</code></td>
-</tr>
-</tbody>
-</table>
-<h4 id="exampleuploads">ExampleUploads<a class="headerlink" href="#exampleuploads" title="Permanent link">¶</a></h4>
-<p>Controls the availability of example uploads.</p>
-<table>
-<thead>
-<tr>
-<th>name</th>
-<th>type</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>include</td>
-<td><code>list[str] | None</code></td>
-<td>List of included options. If not explicitly defined, all of the options will be included by default.</td>
-</tr>
-<tr>
-<td>exclude</td>
-<td><code>list[str] | None</code></td>
-<td>List of excluded options. Has higher precedence than include.</td>
 </tr>
 </tbody>
 </table>
@@ -8408,39 +8408,6 @@ level (level) are considered. The files will be stored in fs.tmp.</p>
 </tr>
 </tbody>
 </table>
-<h4 id="apientrypoint">APIEntryPoint<a class="headerlink" href="#apientrypoint" title="Permanent link">¶</a></h4>
-<p>Base model for API plugin entry points.</p>
-<table>
-<thead>
-<tr>
-<th>name</th>
-<th>type</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>id_url_safe</td>
-<td><code>str | None</code></td>
-<td>URL-safe identifier for the plugin entry point. If no custom name is provided, one is automatically generated from the entry point id. Any custom identifier is checked for URL-safety and for collisions with other entry points with the same type within the same NOMAD deployment.</td>
-</tr>
-<tr>
-<td>name</td>
-<td><code>str | None</code></td>
-<td>Name of the plugin entry point.</td>
-</tr>
-<tr>
-<td>description</td>
-<td><code>str | None</code></td>
-<td>A human readable description of the plugin entry point.</td>
-</tr>
-<tr>
-<td>prefix</td>
-<td><code>str | None</code></td>
-<td>The prefix for the API. The URL for the API will be the base URL of the NOMAD installation followed by this prefix. The prefix must not collide with any other API prefixes. There is no default, this field must be set.</td>
-</tr>
-</tbody>
-</table>
 <h4 id="exampleuploadentrypoint">ExampleUploadEntryPoint<a class="headerlink" href="#exampleuploadentrypoint" title="Permanent link">¶</a></h4>
 <p>Base model for example upload plugin entry points.</p>
 <table>
@@ -8516,6 +8483,39 @@ resource that can be downloaded.</p>
 <td>target</td>
 <td><code>str</code></td>
 <td>File path within the upload where the file should be stored.<br><em>default:</em> ""</td>
+</tr>
+</tbody>
+</table>
+<h4 id="apientrypoint">APIEntryPoint<a class="headerlink" href="#apientrypoint" title="Permanent link">¶</a></h4>
+<p>Base model for API plugin entry points.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id_url_safe</td>
+<td><code>str | None</code></td>
+<td>URL-safe identifier for the plugin entry point. If no custom name is provided, one is automatically generated from the entry point id. Any custom identifier is checked for URL-safety and for collisions with other entry points with the same type within the same NOMAD deployment.</td>
+</tr>
+<tr>
+<td>name</td>
+<td><code>str | None</code></td>
+<td>Name of the plugin entry point.</td>
+</tr>
+<tr>
+<td>description</td>
+<td><code>str | None</code></td>
+<td>A human readable description of the plugin entry point.</td>
+</tr>
+<tr>
+<td>prefix</td>
+<td><code>str | None</code></td>
+<td>The prefix for the API. The URL for the API will be the base URL of the NOMAD installation followed by this prefix. The prefix must not collide with any other API prefixes. There is no default, this field must be set.</td>
 </tr>
 </tbody>
 </table>
