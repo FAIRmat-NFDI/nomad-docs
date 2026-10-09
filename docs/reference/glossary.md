@@ -41,6 +41,15 @@ An *author* is typically a natural person that has uploaded a piece of data into
 has authorship over it. Often *authors* are [users](#user), but not always.
 Therefore, we have to distinguish between authors and users.
 
+## Dataset
+
+A *dataset* is a backend resource retained for existing named collections of
+[entries](#entry). A dataset can contain entries from multiple
+[projects](#project), and an entry can belong to multiple datasets. Existing
+dataset links and DOIs can still be resolved in the NOMAD GUI, and datasets
+remain accessible through the API. Projects are the current user-facing unit
+for organizing, publishing, and assigning a DOI to data.
+
 ## Deployment (NOMAD Oasis)
 
 NOMAD *Deployment* refers to a live instance of a NOMAD [distribution](#distribution-distro) running on some hardware. A deployment is also known as an *Oasis*.
@@ -79,7 +88,7 @@ of an entry is retrieved from that mainfile.
 
 In NOMAD *metadata* refers to a specific technical sub-set of [processed data](#processed-data).
 The metadata of an [entry](#entry) comprises IDs, timestamps, hashes, authors,
-references, the used schema, and other information.
+[datasets](#dataset), references, the used schema, and other information.
 
 ## Metainfo
 

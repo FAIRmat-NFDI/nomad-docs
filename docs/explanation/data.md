@@ -34,7 +34,7 @@ flowchart LR
 Of these subsections, `data` carries the entry's actual content, while the others describe, summarize, or relate it:
 
 - `data`: Holds the entry-specific content and is where custom schemas plug in. A subclass of `EntryData`. See [The data section](#the-data-section).
-- `metadata`: Added by NOMAD during processing. It contains IDs, timestamps, authors, references, and an index of all the sections and quantities used in the entry, which search relies on. Users and plugins cannot extend it. Instance of `EntryMetadata`.
+- `metadata`: Added by NOMAD during processing. It contains IDs, timestamps, authors, datasets, references, and an index of all the sections and quantities used in the entry, which search relies on. Users and plugins cannot extend it. Instance of `EntryMetadata`.
 - `results`: A summary of the entry that follows a fixed structure, independent of the data type, with the subsections `material`, `method`, `properties`, and `eln`. Parsers or uploaded archive files can populate it directly, but it is usually populated during normalization. Its structure is controlled by NOMAD, and some of the search is built on it. Instance of `Results`.
 - `workflow2`: Describes the entry as a [workflow](./workflows.md) of tasks with inputs and outputs. Instance of `Workflow`.
 - `definitions`: is only filled for schema entries and contains the definitions they provide. Instance of `Package`.
