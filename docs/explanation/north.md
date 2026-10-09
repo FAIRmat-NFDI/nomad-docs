@@ -78,8 +78,6 @@ Consult the reference section of the documentation to find details about individ
 <!-- TODO: once there is a nomad-registry on the homepage (https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-lab-homepage/-/work_items/12), change the sentence above to
 Users should consult the [NOMAD plugin registry](<add-link>>) which details which plugins offer NORTH tool entry points.-->
 
-Learn more about running existing NOMAD tools in [How-to guides > ... > How to analyze data in NORTH](../howto/manage/gui/north.md).
-
 ## Custom user-provided tools
 
 In addition to centrally provided tools, users can package their own tools as Docker containers
