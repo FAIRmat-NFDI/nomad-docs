@@ -3810,7 +3810,7 @@
   <a href="#to-be-an-entry-or-not-to-be-an-entry" class="md-nav__link">
     <span class="md-ellipsis">
       
-        To be an Entry or not to be an Entry
+        To be an entry or not to be an entry
       
     </span>
   </a>
@@ -3927,7 +3927,7 @@ We will make use of the tabular parser in a custom yaml schema. To obtain some s
 <div class="highlight"><pre><span></span><code>&lt;!-- TODO: a link to the part upload etc should be inserted --&gt;
 </code></pre></div>
 <p>3) a tabular data file must be dragged in the annotated <a href="../howto/schemas/define.html#add-quantities">quantity</a> in order for NOMAD to parse it (the quantity is called <code>data_file</code> in the following examples)</p>
-<h4 id="to-be-an-entry-or-not-to-be-an-entry">To be an Entry or not to be an Entry<a class="headerlink" href="#to-be-an-entry-or-not-to-be-an-entry" title="Permanent link">¶</a></h4>
+<h4 id="to-be-an-entry-or-not-to-be-an-entry">To be an entry or not to be an entry<a class="headerlink" href="#to-be-an-entry-or-not-to-be-an-entry" title="Permanent link">¶</a></h4>
 <p>To use this parser, three kinds of annotation must be included in the schema: <code>tabular</code>, <code>tabular_parser</code>, <code>label_quantity</code>. Refer to the dedicated <a href="../reference/annotations.html#tabular-data">Reference</a> section for the full list of options.</p>
 <div class="admonition tip">
 <p class="admonition-title">important</p>
@@ -3946,9 +3946,9 @@ The main bring-home message is that a tabular data file can be parsed in one or 
     <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/2col.png" data-desc-position="bottom"><img width="30%" src="images/2col.png" alt="table with two columns"></a>
 </p>
 
-<p>The two columns in the file will be stored in a NOMAD Entry archive within two array quantities, as shown in the image below. In the case where the section to be filled is not in the root level of our schema but nested inside, it is useful to check the dedicated <a href="../howto/schemas/tabular.html#2-column-mode-current-entry-parse-to-my-path">How-to</a>.</p>
+<p>The two columns in the file will be stored in a NOMAD entry archive within two array quantities, as shown in the image below. In the case where the section to be filled is not in the root level of our schema but nested inside, it is useful to check the dedicated <a href="../howto/schemas/tabular.html#2-column-mode-current-entry-parse-to-my-path">How-to</a>.</p>
 <p align="center" width="100%">
-    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/tabular-1.png" data-desc-position="bottom"><img width="100%" src="images/tabular-1.png" alt="column-wise parsing into quantities of the same NOMAD Entry"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/tabular-1.png" data-desc-position="bottom"><img width="100%" src="images/tabular-1.png" alt="column-wise parsing into quantities of the same NOMAD entry"></a>
 </p>
 
 <p>The schema will be decorated by the annotations mentioned at the beginning of this section  and will look like this:</p>
@@ -3991,17 +3991,17 @@ The main bring-home message is that a tabular data file can be parsed in one or 
 <a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a><span class="w">            </span><span class="nt">tabular</span><span class="p">:</span>
 <a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a><span class="w">              </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">"My</span><span class="nv"> </span><span class="s">header</span><span class="nv"> </span><span class="s">2"</span>
 </code></pre></div>
-<p>Here the tabular data file is parsed by columns, directly within the Entry where the <code>TableData</code> is inherited and filling the quantities in the root level of the schema (see dedicated how-to to learn <a href="../howto/schemas/tabular.html#inheriting-the-tabledata-base-section">how to inherit tabular parser in your schema</a>).</p>
+<p>Here the tabular data file is parsed by columns, directly within the entry where the <code>TableData</code> is inherited and filling the quantities in the root level of the schema (see dedicated how-to to learn <a href="../howto/schemas/tabular.html#inheriting-the-tabledata-base-section">how to inherit tabular parser in your schema</a>).</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>In yaml files a dash character indicates a list element. <code>mapping_options</code> is a list because it is possible to parse multiple tabular sheets from the same schema with different parsing options. <code>sections</code> in turn is a list because multiple sections of the schema can be parsed with same parsing options.</p>
 </div>
 <h4 id="example-2">Example 2<a class="headerlink" href="#example-2" title="Permanent link">¶</a></h4>
 <p align="center" width="100%">
-    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/tabular-6.png" data-desc-position="bottom"><img width="100%" src="images/tabular-6.png" alt="row-wise parsing into individual NOMAD Entry"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/tabular-6.png" data-desc-position="bottom"><img width="100%" src="images/tabular-6.png" alt="row-wise parsing into individual NOMAD entry"></a>
 </p>
 
-<p>In this example, each row of the tabular data file will be placed in a new Entry that is an instance of a class defined in the schema. This would make sense for, say, an inventory spreadsheet where each row can be a separate entity such as a sample, a substrate, etc.
+<p>In this example, each row of the tabular data file will be placed in a new entry that is an instance of a class defined in the schema. This would make sense for, say, an inventory spreadsheet where each row can be a separate entity such as a sample, a substrate, etc.
 In this case, a manyfold of entries will be generated based on the only class available in the schema. These entries will not be bundled together by a parent entry but just live in our NOMAD upload as a spare list, to bundle them together it is useful to check the dedicated <a href="../howto/schemas/tabular.html#7-row-mode-multiple-new-entries-parse-to-my-path">How-to</a>. They might still be referenced manually inside an overarching entry, such as an experiment entry, from the ELN with <code>ReferenceEditQuantity</code>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">definitions</span><span class="p">:</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">'My</span><span class="nv"> </span><span class="s">test</span><span class="nv"> </span><span class="s">ELN'</span>

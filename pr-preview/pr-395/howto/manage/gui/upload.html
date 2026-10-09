@@ -4287,18 +4287,18 @@ choose <strong>Upload via API</strong>. The dialog provides an example command f
 to the current project folder.</p>
 <details class="warning">
 <summary>License Compliance for VASP POTCAR Files</summary>
-<p>The VASP license does <strong>not</strong> permit users to freely distribute <strong>POTCAR</strong> files, which are
-considered copyrighted material. To ensure compliance, NOMAD automatically handles POTCAR
+<p>The VASP license does <strong>not</strong> permit users to freely distribute <code>POTCAR</code> files, which are
+considered copyrighted material. To ensure compliance, NOMAD automatically handles <code>POTCAR</code>
 files for you.</p>
-<p>Upon <strong>publication</strong>, NOMAD removes the original POTCAR files and replaces them with
+<p>Upon <strong>publication</strong>, NOMAD removes the original <code>POTCAR</code> files and replaces them with
 <code>POTCAR.stripped</code> files. The stripped files contain a checksum of the original file
 at the top, followed by metadata headers extracted from the original POTCAR, but not
 the proprietary pseudopotential data. The stripped files can be accessed and downloaded
-by anyone, while the original POTCAR files are automatically removed.</p>
+by anyone, while the original <code>POTCAR</code> files are automatically removed.</p>
 <p><strong>Important considerations:</strong></p>
 <ul>
-<li>Stripping is filename-based. Ensure "POTCAR" appears in the filename for licensed files.</li>
-<li>POTCAR files <strong>must be uncompressed</strong> for automated stripping to work. Compressed files (e.g., <code>POTCAR.gz</code>) will not be properly processed and may be entirely removed without creating stripped versions.</li>
+<li>Stripping is filename-based. Ensure <code>POTCAR</code> appears in the filename for licensed files.</li>
+<li><code>POTCAR</code> files <strong>must be uncompressed</strong> for automated stripping to work. Compressed files (e.g., <code>POTCAR.gz</code>) will not be properly processed and may be entirely removed without creating stripped versions.</li>
 <li>Stripping only occurs upon publication. We strongly recommend <strong>against</strong> temporarily making unpublished uploads publicly visible when they contain licensed material.</li>
 </ul>
 <p>While NOMAD provides this service as a courtesy, <strong>uploaders remain responsible for
@@ -4309,7 +4309,7 @@ verifying overall license compliance</strong>.</p>
 a schema-based entry that you can edit directly in NOMAD. To create an ELN entry:</p>
 <ol>
 <li>On the project <strong>Overview</strong> page or in any folder under
-   <strong>FILES</strong>, select <strong>NEW ENTRY</strong>. You can create new folders using the <code>+</code> button under <strong>FILES</strong>.</li>
+   <strong>FILES</strong>, select <strong>NEW ENTRY</strong>. You can create new folders using the <strong>+</strong> button under <strong>FILES</strong>.</li>
 <li>Choose a schema under <strong>BUILT-IN SCHEMAS</strong> or <strong>CUSTOM SCHEMAS</strong>. Custom
    schemas come from schema packages uploaded to the current NOMAD deployment.
    Depending on your access, these can include schemas from this project, your

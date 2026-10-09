@@ -4281,10 +4281,10 @@
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/explore_2.png" data-desc-position="bottom"><img alt="Filter panel in the NOMAD Entries app" src="images/explore_2.png"></a></p>
 <p>Search results update automatically as you apply filters. Let's narrow the results to VASP calculations of hexagonal boron nitride that contain band-structure data.</p>
 <ul>
-<li>Under <strong>Elements/Formula</strong>, select <em>B</em> and <em>N</em> in the periodic table and check the box <em>only compositions that exclusively contain these atoms</em>. The search results now contain entries with only boron and nitrogen.</li>
-<li>Under <strong>Structure/Symmetry</strong>, select <em>hexagonal</em> from the <strong>Crystal system</strong> section. Notice that the results are now limited to hexagonal structures containing boron and nitrogen.</li>
-<li>Under <strong>Method</strong>, select <em>VASP</em> from the <strong>Program name</strong> section. The results now show entries from calculations performed with VASP.</li>
-<li>Under <strong>Electronic</strong>, select <em>Band structure</em> from the <strong>Electronic properties</strong> section.</li>
+<li>Under <strong>Elements/Formula</strong>, select <strong>B</strong> and <strong>N</strong> in the periodic table and check the box <strong>only compositions that exclusively contain these atoms</strong>. The search results now contain entries with only boron and nitrogen.</li>
+<li>Under <strong>Structure/Symmetry</strong>, select <strong>hexagonal</strong> from the <strong>Crystal system</strong> section. Notice that the results are now limited to hexagonal structures containing boron and nitrogen.</li>
+<li>Under <strong>Method</strong>, select <strong>VASP</strong> from the <strong>Program name</strong> section. The results now show entries from calculations performed with VASP.</li>
+<li>Under <strong>Electronic</strong>, select <strong>Band structure</strong> from the <strong>Electronic properties</strong> section.</li>
 </ul>
 <p>You have now narrowed the search to VASP calculations of hexagonal boron nitride that contain band-structure data.</p>
 <p>You can pin filters that you want to keep readily accessible. Click the <strong>(+)</strong> button next to each of the filters you just used. The pinned filters are added to the search interface, where you can access and modify them without navigating through the filter menu.</p>
@@ -4295,8 +4295,8 @@
 <p>You can also search for specific quantities and values directly from the search bar. As you type, NOMAD suggests searchable quantities and shows their paths in the NOMAD metainfo.</p>
 <p>Start by searching for the elements from the previous example:</p>
 <ul>
-<li>Type "boron" and select <em>results.material.material_name = Boron</em> from the suggested quantities.</li>
-<li>Type "nitrogen" and select <em>results.material.material_name = Nitrogen</em> from the suggested quantities.</li>
+<li>Type <code>boron</code> and select <code>results.material.material_name = Boron</code> from the suggested quantities.</li>
+<li>Type <code>nitrogen</code> and select <code>results.material.material_name = Nitrogen</code> from the suggested quantities.</li>
 </ul>
 <p>Notice that the search results update as you add each condition.</p>
 <div class="admonition task">
@@ -4309,7 +4309,7 @@ Can you find filters for:</p>
 </ul>
 <p>Now use the search bar to find a quantity related to the band gap.</p>
 <ul>
-<li>Try searching for <em>"bandgap"</em>, <em>"band gap"</em>, or <em>"band_gap"</em>.</li>
+<li>Try searching for <code>bandgap</code>, <code>band gap</code>, or <code>band_gap</code>.</li>
 <li>Look at the suggested quantities and their metainfo paths.</li>
 <li>Can you find a quantity containing the band gap value?</li>
 <li>Can you find information indicating whether the band gap is <strong>direct</strong> or <strong>indirect</strong>?</li>
@@ -4391,15 +4391,15 @@ Imagine that we have fabricated a solar-cell device using <em>CsPbBr2I</em>, a m
 <h3 id="filter-by-absorber-composition">Filter by absorber composition<a class="headerlink" href="#filter-by-absorber-composition" title="Permanent link">¶</a></h3>
 <ul>
 <li>Under <strong>Elements/Formula</strong> in the filter menu, click the <strong>(+)</strong> button next to the periodic table to pin the widget to the dashboard.</li>
-<li>Select <em>Cs</em>, <em>Pb</em>, <em>Br</em>, and <em>I</em> to find entries containing the elements of the absorber.</li>
+<li>Select <strong>Cs</strong>, <strong>Pb</strong>, <strong>Br</strong>, and <strong>I</strong> to find entries containing the elements of the absorber.</li>
 </ul>
 <p>The results are now limited to entries containing Cs, Pb, Br, and I.</p>
 <h3 id="compare-etl-materials">Compare ETL materials<a class="headerlink" href="#compare-etl-materials" title="Permanent link">¶</a></h3>
 <ul>
 <li>Click the <strong>TERMS</strong> button to add a widget that filters by ETL materials.</li>
 <li>For the quantity, type <code>electron_transport_layer</code> and select <code>results.properties.optoelectronic.solar_cell.electron_transport_layer</code>.</li>
-<li>Set the statistics scaling to <em>linear</em> and enter <code>ETL</code> as the widget title.</li>
-<li>Click <em>DONE</em>.</li>
+<li>Set the statistics scaling to <strong>linear</strong> and enter <code>ETL</code> as the widget title.</li>
+<li>Click <strong>DONE</strong>.</li>
 </ul>
 <h3 id="explore-device-performance">Explore device performance<a class="headerlink" href="#explore-device-performance" title="Permanent link">¶</a></h3>
 <ul>
@@ -4408,7 +4408,7 @@ Imagine that we have fabricated a solar-cell device using <em>CsPbBr2I</em>, a m
 <li>In the y-axis quantity field, type <code>efficiency</code> and select <code>results.properties.optoelectronic.solar_cell.efficiency</code>.</li>
 <li>In the marker color field, type <code>short_circuit_current</code> and select <code>results.properties.optoelectronic.solar_cell.short_circuit_current_density</code>.</li>
 </ul>
-<p>Hover over individual data points to inspect their values. Use the <em>ETL</em> widget to select different ETL materials and observe how the distribution of points changes.</p>
+<p>Hover over individual data points to inspect their values. Use the <strong>ETL</strong> widget to select different ETL materials and observe how the distribution of points changes.</p>
 <p>Notice which ETL materials occur among entries with higher open-circuit voltages. The plot shows relationships in the available data; it does not by itself establish that the ETL material causes a change in device performance.</p>
 <p>Click an entry to inspect its full metadata, associated datasets, and publication information.</p>
 <hr>
@@ -4423,8 +4423,8 @@ Imagine that we have fabricated a solar-cell device using <em>CsPbBr2I</em>, a m
 <p>The Solar Cells app provides predefined filters and widgets for exploring solar-cell data.</p>
 <h3 id="filter-by-absorber-and-etl">Filter by absorber and ETL<a class="headerlink" href="#filter-by-absorber-and-etl" title="Permanent link">¶</a></h3>
 <ul>
-<li>Select <em>Sn</em> in the periodic table to find entries containing tin.</li>
-<li>In the ETL <strong>TERMS</strong> widget, select <em>C60</em>.</li>
+<li>Select <strong>Sn</strong> in the periodic table to find entries containing tin.</li>
+<li>In the ETL <strong>TERMS</strong> widget, select <strong>C60</strong>.</li>
 </ul>
 <p>The results are now limited to Sn-based solar-cell entries that use C60 as the ETL.</p>
 <h3 id="compare-htl-materials">Compare HTL materials<a class="headerlink" href="#compare-htl-materials" title="Permanent link">¶</a></h3>
