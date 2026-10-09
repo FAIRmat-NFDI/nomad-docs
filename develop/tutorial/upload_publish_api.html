@@ -1706,7 +1706,7 @@
   <span class="md-ellipsis">
     
   
-    Publish data using Python
+    Manage data with Python
   
 
     
@@ -4385,7 +4385,7 @@ Running code snippets out of order may lead to errors, e.g., due to missing impo
 The helper <code>upload_files_to_nomad</code> both <strong>creates a new project</strong> and <strong>uploads the given ZIP file</strong> to it in a single API call.</p>
 <div class="admonition info">
 <p class="admonition-title">Projects and uploads</p>
-<p>In the NOMAD GUI, you organize your data in projects. The NOMAD API and <code>nomad-utility-workflows</code> still use the term <em>upload</em> for a project: the API endpoints retain <em>upload</em> in their paths, helper functions such as <code>upload_files_to_nomad</code> and <code>get_upload_by_id</code> work on projects, and the <code>upload_id</code> they return identifies the project. You can find this ID as <strong>Project ID</strong> in the project's <strong>SETTINGS</strong> &gt; <strong>General</strong>, and entries store it as <code>upload_id</code> in their metadata.</p>
+<p>In the NOMAD GUI, you organize your data in projects. The NOMAD API and <code>nomad-utility-workflows</code> use the term <em>upload</em> for the corresponding backend resource: API endpoints retain <em>upload</em> in their paths, helper functions such as <code>upload_files_to_nomad</code> and <code>get_upload_by_id</code> work on projects, and the <code>upload_id</code> they return identifies the project. You can find this ID as <strong>Project ID</strong> in the project's <strong>SETTINGS</strong> &gt; <strong>General</strong>, and entries store it as <code>upload_id</code> in their metadata.</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -4482,7 +4482,7 @@ When running code snippets, always make sure that the <code>url</code> parameter
 <a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a>        <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">nomad_gui</span><span class="si">}</span><span class="s1">/projects/</span><span class="si">{</span><span class="n">entry</span><span class="o">.</span><span class="n">upload_id</span><span class="si">}</span><span class="s1">/entries/</span><span class="si">{</span><span class="n">entry</span><span class="o">.</span><span class="n">entry_id</span><span class="si">}</span><span class="s1">'</span><span class="p">,</span>
 <a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a>    <span class="p">)</span>
 </code></pre></div>
-<p>This snippet retrieves all the entries (here only one entry) created from the uploaded computations data and prints each entry’s ID together with its direct GUI URL.</p>
+<p>This snippet retrieves all the entries (here only one entry) created from the uploaded computations data and prints each entry's ID together with its direct GUI URL.</p>
 <details class="success">
 <summary>Example notebook output</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>kW6H8T0MGH4-0GXH7cbf7j82BBUJ https://nomad-lab.eu/test/projects/dcvqjWYgSZeDVLaJkL6E7w/entries/kW6H8T0MGH4-0GXH7cbf7j82BBUJ
@@ -4664,7 +4664,7 @@ In the examples below, we use <code>dft_upload_id</code> to refer to the DFT pro
 <p>This code updates the project name and applies the comment and references to all entries in the project. <code>timeout_in_sec=60</code> lets the helper wait up to 60 seconds for the server's answer; the default of 10 seconds can be too short when NOMAD is busy.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Running the next snippet before NOMAD finishes processing the entries may make it <em>look</em> as if the entries metadata is not updated. Wait up to 3 minutes and retry to ensure the snippet is executed only after NOMAD processing has completed.</p>
+<p>Running the next snippet before NOMAD finishes processing the entries may make it <em>look</em> as if the entry metadata is not updated. Wait up to 3 minutes and retry to ensure the snippet is executed only after NOMAD processing has completed.</p>
 </div>
 <p>To inspect it programmatically try:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="c1"># Upload-level metadata (only the name appears here)</span>
