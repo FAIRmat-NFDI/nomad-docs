@@ -4093,15 +4093,26 @@ other mainfiles. The user controls the file content through the data editor;
 NOMAD creates the processed data from that file.</p>
 </div>
 <h2 id="processing">Processing<a class="headerlink" href="#processing" title="Permanent link">¶</a></h2>
-<p>The processing of entries is automatic. Initially and on each mainfile change,
-the entry corresponding to the mainfile, will be processed. Processing consist of
-<strong>parsing</strong>, <strong>normalizing</strong>, and <strong>persisting</strong> the created data, as explained in more detail in the <a href="processing.html">Processing section</a>.</p>
+<p>Processing normally starts automatically when files in a project change or a
+schema-based entry is saved. A user with write access can also reprocess an
+editable project manually. Processing consists of <strong>parsing</strong>, <strong>normalizing</strong>,
+and <strong>persisting</strong> the created data, as explained under
+<a href="processing.html">Explanation &gt; Processing</a>.</p>
 <h3 id="parsing">Parsing<a class="headerlink" href="#parsing" title="Permanent link">¶</a></h3>
-<p>Parsers are small programs that transform data from a recognized <em>mainfile</em> into a
-structured machine processable tree of data that we call the <em>archive</em> or <a href="data.html"><strong>processed data</strong></a>
-of the entry. Only one parser is used for each entry. The used parser is determined
-during matching and depends on the file format. The <a href="../howto/plugins/types/parsers.html">How-to guides &gt; ... &gt; Parsers</a> shows how to match a specific file from your parser. Parsers can be added to NOMAD as
-plugins. The <strong>Distribution Details</strong> section of a NOMAD deployment's landing page lists the installed parser entry points. Details about the file formats supported by each parser should be maintained in the corresponding plugin documentation.</p>
+<p>Parsers transform a <em>mainfile</em> into the structured, machine-processable tree of
+data called the entry's <em>archive</em>, or <a href="data.html"><strong>processed data</strong></a>. For a
+parser-supported file, matching selects one installed parser based on the file
+format. A schema-based entry instead uses NOMAD's native archive-file parser to
+load the data entered in the GUI; its schema can provide <code>normalize</code> functions
+that interpret additional files selected in the entry. A hybrid parser can
+match an added file and use it to create an editable schema-based entry.</p>
+<p>The <a href="../tutorial/develop_plugin/create_parser.html">Tutorials &gt; ... &gt; NOMAD parsing approaches</a>
+compares these patterns. The
+<a href="../howto/plugins/types/parsers.html">How-to guides &gt; ... &gt; Parsers</a> explains parser
+matching and registration. The <strong>Distribution Details</strong> section of a NOMAD
+deployment's landing page lists the installed parser entry points. Details about
+the file formats supported by each parser should be maintained in the
+corresponding plugin documentation.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>A special case is the parsing of NOMAD archive files. Usually a parser converts a file
