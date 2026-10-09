@@ -96,20 +96,6 @@ The ZIP file contains the raw files from directories containing the mainfiles of
 the matching entries. You can replace the example with any
 [How-to guides > ... > Queries](api.md#queries).
 
-Existing dataset links and DOIs are still resolved by NOMAD. To download the
-entries from one of these retained backend collections, replace the `query`
-object with a query for its DOI:
-
-```json
-{
-    "query": {
-        "datasets.doi": "10.17172/NOMAD/2023.11.17-2"
-    }
-}
-```
-
-You can instead identify an existing dataset by using `datasets.dataset_id`.
-
 This does not necessarily download every file in each matching project. To
 download complete projects instead, aggregate the upload IDs for the matching
 entries and use the method from the previous section:
@@ -141,6 +127,20 @@ the `entries/query` endpoint that allows you to query NOMAD's search.
 It does not return any results (`page_size: 0`),
 but performs an aggregation over all search results and collects the upload IDs
 from all entries.
+
+Existing dataset links and DOIs are still resolved by NOMAD. To download the
+entries from one of these retained backend collections, use the
+`entries/raw/query` endpoint with a query for its DOI:
+
+```json
+{
+    "query": {
+        "datasets.doi": "10.17172/NOMAD/2023.11.17-2"
+    }
+}
+```
+
+You can instead identify an existing dataset by using `datasets.dataset_id`.
 
 ## Download processed data matching a query
 
@@ -180,7 +180,5 @@ Here we use the `entries/archive/download/query` endpoint. The result is a zip f
 with one json file per entry. There are no directories and the files are named
 `<entry-id>.json`. To associate the json files with entries, you should require
 information that tells you more about the entries, e.g. `required.metadata.mainfile`.
-When resolving an existing dataset, the query can select its DOI or ID in the
-same way as the raw-file download above.
 
 See also [How-to guides > ... > Access processed data](./archive_query.md).
