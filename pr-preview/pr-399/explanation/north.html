@@ -4087,10 +4087,10 @@ to the NOMAD core services.</p>
 <h2 id="user-perspective">User perspective<a class="headerlink" href="#user-perspective" title="Permanent link">¶</a></h2>
 <p>From a user’s perspective, NORTH can be used for running complex or tool-specific analyses
 directly on data that is stored inside NOMAD, be this API-retrievable input from NOMAD entries
-or data from NOMAD uploads. Results achieved within the container can be written back
+or data from NOMAD projects. Results achieved within the container can be written back
 (using the NOMAD API, see <a href="../howto/manage/program/api.html">How-to &gt; ... &gt; How to use the API</a>) as derived data, metadata, or artifacts.
-Running a reprocessing of an upload afterwards allows for an indexing of these results obtained
-with NORTH, provided that the software tools in NORTH write using data structures and schemas
+Reprocessing the project afterwards allows results obtained with NORTH to be indexed,
+provided that the software tools in NORTH write using data structures and schemas
 that NOMAD understands. The reprocessing can be triggered through the API or the NOMAD GUI.</p>
 <p>The connection between the container and the NOMAD file system removes the need
 for copying and downloading large datasets. Container images remove the need for installing
@@ -4150,7 +4150,7 @@ as built-in tools.</p>
 <p>Beyond its importance for managing the expectations as to how NOMAD reacts to and what
 individual NORTH tools offer, it is important to know that using different data schemas
 in a NORTH tool compared to the NOMAD deployment does not always come without challenges.</p>
-<p>Users may encounter issues when reprocessing uploads that contain results from a NORTH tool
+<p>Users may encounter issues when reprocessing projects that contain results from a NORTH tool
 analysis, if the tool wrote data using a schema version different from the one used in the
 NOMAD deployment. This can lead to partial or complete incompatibilities. By providing
 individual NORTH tools as optional extensions of a NOMAD plugin, the responsibility
