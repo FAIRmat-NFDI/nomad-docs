@@ -4681,9 +4681,9 @@ For example, if one wants to fetch the <code>upload_name</code> and <code>upload
 <ol>
 <li><code>uploads</code>: The metadata of an upload, including, <code>upload_id</code>, <code>upload_name</code>, <code>main_author</code>, etc.</li>
 <li><code>entries</code>: The metadata of an entry, including, <code>entry_id</code>, <code>entry_create_time</code>, <code>mainfile</code>, etc.</li>
-<li><code>datasets</code>: Legacy dataset metadata retained in the backend, including
-   <code>dataset_id</code>, <code>dataset_name</code>, <code>user_id</code>, etc. Projects replace datasets in
-   the current GUI publication workflow.</li>
+<li><code>datasets</code>: A retained backend resource for existing dataset collections,
+   including <code>dataset_id</code>, <code>dataset_name</code>, <code>user_id</code>, etc. The GUI can resolve
+   and display these datasets, but projects are the current user-facing unit.</li>
 <li><code>groups</code>: The metadata of a user group, including, <code>owner</code>, <code>members</code>, etc.</li>
 </ol>
 <p>One can apply the same logic to fetch data from these structures.

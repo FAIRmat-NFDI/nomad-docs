@@ -4050,7 +4050,8 @@ again is stored in files. Therefore, data transfer is basically "just" copying
 files from one installation to another.</p>
 <p>We implemented a <em>bundle</em> format for published data. A bundle is a zip file that contains
 all raw files, archive files of an <em>upload</em>, and a bit of metadata, e.g. with
-information on upload name, dates, authors, etc. This bundle format
+information on upload name, dates, authors, and datasets when they are included
+in the export. This bundle format
 is our tranfer file format. Bundles are exported on one end and imported on
 the other.</p>
 <p>Upon import, the reciving NOMAD replicates the state of the upload on the
