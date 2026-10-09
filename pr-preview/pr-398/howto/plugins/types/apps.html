@@ -2221,10 +2221,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#widgetperiodictabledeprecated" class="md-nav__link">
+  <a href="#widgetterms" class="md-nav__link">
     <span class="md-ellipsis">
       
-        WidgetPeriodicTableDeprecated
+        WidgetTerms
       
     </span>
   </a>
@@ -2236,17 +2236,6 @@
     <span class="md-ellipsis">
       
         Layout
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#widgetterms" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        WidgetTerms
       
     </span>
   </a>
@@ -2291,6 +2280,17 @@
     <span class="md-ellipsis">
       
         Axis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#widgetperiodictabledeprecated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WidgetPeriodicTableDeprecated
       
     </span>
   </a>
@@ -4541,10 +4541,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#widgetperiodictabledeprecated" class="md-nav__link">
+  <a href="#widgetterms" class="md-nav__link">
     <span class="md-ellipsis">
       
-        WidgetPeriodicTableDeprecated
+        WidgetTerms
       
     </span>
   </a>
@@ -4556,17 +4556,6 @@
     <span class="md-ellipsis">
       
         Layout
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#widgetterms" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        WidgetTerms
       
     </span>
   </a>
@@ -4611,6 +4600,17 @@
     <span class="md-ellipsis">
       
         Axis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#widgetperiodictabledeprecated" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WidgetPeriodicTableDeprecated
       
     </span>
   </a>
@@ -5573,92 +5573,6 @@ included:</p>
 </tr>
 </tbody>
 </table>
-<h4 id="widgetperiodictabledeprecated">WidgetPeriodicTableDeprecated<a class="headerlink" href="#widgetperiodictabledeprecated" title="Permanent link">¶</a></h4>
-<p>Deprecated copy of WidgetPeriodicTable with a misspelled type.</p>
-<table>
-<thead>
-<tr>
-<th>name</th>
-<th>type</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>search_quantity</td>
-<td><code>str</code></td>
-<td>The targeted search quantity.<br><em>default:</em> <code>PydanticUndefined</code></td>
-</tr>
-<tr>
-<td>layout</td>
-<td><code>dict[str, Layout]</code></td>
-<td>Defines widget size and grid positioning for different breakpoints. The following breakpoints are supported: <code>sm</code>, <code>md</code>, <code>lg</code>, <code>xl</code> and <code>xxl</code>.<br><em>default:</em> <code>PydanticUndefined</code></td>
-</tr>
-<tr>
-<td>quantity</td>
-<td><code>str | None</code></td>
-<td><strong>deprecated</strong></td>
-</tr>
-<tr>
-<td>scale</td>
-<td><code>str | None</code></td>
-<td>Statistics scaling.<br><em>default:</em> <code>ScaleEnum.LINEAR</code></td>
-</tr>
-<tr>
-<td>title</td>
-<td><code>str | None</code></td>
-<td>Custom widget title. If not specified, a widget-specific default title is used.</td>
-</tr>
-<tr>
-<td>description</td>
-<td><code>str | None</code></td>
-<td>Optional description of the widget and the data it is showing. Can contain markdown notation. If populated, an icon is shown next to the title that can be clicked to show the description.</td>
-</tr>
-</tbody>
-</table>
-<h4 id="layout">Layout<a class="headerlink" href="#layout" title="Permanent link">¶</a></h4>
-<p>Defines widget size and grid positioning for different breakpoints.</p>
-<table>
-<thead>
-<tr>
-<th>name</th>
-<th>type</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>h</td>
-<td><code>int</code></td>
-<td>Height in grid units<br><em>default:</em> <code>PydanticUndefined</code></td>
-</tr>
-<tr>
-<td>w</td>
-<td><code>int</code></td>
-<td>Width in grid units.<br><em>default:</em> <code>PydanticUndefined</code></td>
-</tr>
-<tr>
-<td>x</td>
-<td><code>int</code></td>
-<td>Horizontal start location in the grid.<br><em>default:</em> <code>PydanticUndefined</code></td>
-</tr>
-<tr>
-<td>y</td>
-<td><code>int</code></td>
-<td>Vertical start location in the grid.<br><em>default:</em> <code>PydanticUndefined</code></td>
-</tr>
-<tr>
-<td>minH</td>
-<td><code>int | None</code></td>
-<td>Minimum height in grid units.<br><em>default:</em> <code>3</code></td>
-</tr>
-<tr>
-<td>minW</td>
-<td><code>int | None</code></td>
-<td>Minimum width in grid units.<br><em>default:</em> <code>3</code></td>
-</tr>
-</tbody>
-</table>
 <h4 id="widgetterms">WidgetTerms<a class="headerlink" href="#widgetterms" title="Permanent link">¶</a></h4>
 <p>Terms widget configuration.</p>
 <table>
@@ -5714,6 +5628,49 @@ included:</p>
 <td>description</td>
 <td><code>str | None</code></td>
 <td>Optional description of the widget and the data it is showing. Can contain markdown notation. If populated, an icon is shown next to the title that can be clicked to show the description.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="layout">Layout<a class="headerlink" href="#layout" title="Permanent link">¶</a></h4>
+<p>Defines widget size and grid positioning for different breakpoints.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>h</td>
+<td><code>int</code></td>
+<td>Height in grid units<br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>w</td>
+<td><code>int</code></td>
+<td>Width in grid units.<br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>x</td>
+<td><code>int</code></td>
+<td>Horizontal start location in the grid.<br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>y</td>
+<td><code>int</code></td>
+<td>Vertical start location in the grid.<br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>minH</td>
+<td><code>int | None</code></td>
+<td>Minimum height in grid units.<br><em>default:</em> <code>3</code></td>
+</tr>
+<tr>
+<td>minW</td>
+<td><code>int | None</code></td>
+<td>Minimum width in grid units.<br><em>default:</em> <code>3</code></td>
 </tr>
 </tbody>
 </table>
@@ -5876,6 +5833,49 @@ included:</p>
 <td>scale</td>
 <td><code>str | None</code></td>
 <td>Defines the axis scaling. Defaults to linear scaling.<br><em>default:</em> <code>ScaleEnum.LINEAR</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="widgetperiodictabledeprecated">WidgetPeriodicTableDeprecated<a class="headerlink" href="#widgetperiodictabledeprecated" title="Permanent link">¶</a></h4>
+<p>Deprecated copy of WidgetPeriodicTable with a misspelled type.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>search_quantity</td>
+<td><code>str</code></td>
+<td>The targeted search quantity.<br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>layout</td>
+<td><code>dict[str, Layout]</code></td>
+<td>Defines widget size and grid positioning for different breakpoints. The following breakpoints are supported: <code>sm</code>, <code>md</code>, <code>lg</code>, <code>xl</code> and <code>xxl</code>.<br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>quantity</td>
+<td><code>str | None</code></td>
+<td><strong>deprecated</strong></td>
+</tr>
+<tr>
+<td>scale</td>
+<td><code>str | None</code></td>
+<td>Statistics scaling.<br><em>default:</em> <code>ScaleEnum.LINEAR</code></td>
+</tr>
+<tr>
+<td>title</td>
+<td><code>str | None</code></td>
+<td>Custom widget title. If not specified, a widget-specific default title is used.</td>
+</tr>
+<tr>
+<td>description</td>
+<td><code>str | None</code></td>
+<td>Optional description of the widget and the data it is showing. Can contain markdown notation. If populated, an icon is shown next to the title that can be clicked to show the description.</td>
 </tr>
 </tbody>
 </table>
