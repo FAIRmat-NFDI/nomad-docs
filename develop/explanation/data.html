@@ -4057,7 +4057,7 @@
 
 
 <h1 id="data-structure">Data structure<a class="headerlink" href="#data-structure" title="Permanent link">¶</a></h1>
-<p>The basic unit of data in NOMAD is the <a href="../reference/glossary.html#entry"><em>entry</em></a>. An entry typically corresponds to one file in an <a href="../reference/glossary.html#upload">upload</a> that NOMAD recognizes and processes, such as the main output file of a simulation code, a measurement file, or an <a href="../reference/glossary.html#eln">ELN</a> form. Each entry has its own ID and is found, viewed, and accessed independently of the others. Everything NOMAD knows about an entry is kept in one structured document, the entry's <a href="../reference/glossary.html#archive">archive</a>.</p>
+<p>The basic unit of data in NOMAD is the <a href="../reference/glossary.html#entry"><em>entry</em></a>. An entry typically corresponds to one file in a <a href="../reference/glossary.html#project">project</a> that NOMAD recognizes and processes, such as the main output file of a simulation code, a measurement file, or an <a href="../reference/glossary.html#eln">ELN</a> form. Each entry has its own ID and is found, viewed, and accessed independently of the others. Everything NOMAD knows about an entry is kept in one structured document, the entry's <a href="../reference/glossary.html#archive">archive</a>.</p>
 <p>To understand how the data in an entry is organized, you need three concepts, which this page covers in turn:</p>
 <ul>
 <li>The <strong>archive</strong>: concrete data of a single entry.</li>
@@ -4081,7 +4081,7 @@ flowchart LR
 <p>Of these subsections, <code>data</code> carries the entry's actual content, while the others describe, summarize, or relate it:</p>
 <ul>
 <li><code>data</code>: Holds the entry-specific content and is where custom schemas plug in. A subclass of <code>EntryData</code>. See <a href="#the-data-section">The data section</a>.</li>
-<li><code>metadata</code>: Added by NOMAD during processing. It contains ids, timestamps, authors, datasets, references, and an index of all the sections and quantities used in the entry, which search relies on. Users and plugins cannot extend it. Instance of <code>EntryMetadata</code>.</li>
+<li><code>metadata</code>: Added by NOMAD during processing. It contains IDs, timestamps, authors, datasets, references, and an index of all the sections and quantities used in the entry, which search relies on. Users and plugins cannot extend it. Instance of <code>EntryMetadata</code>.</li>
 <li><code>results</code>: A summary of the entry that follows a fixed structure, independent of the data type, with the subsections <code>material</code>, <code>method</code>, <code>properties</code>, and <code>eln</code>. Parsers or uploaded archive files can populate it directly, but it is usually populated during normalization. Its structure is controlled by NOMAD, and some of the search is built on it. Instance of <code>Results</code>.</li>
 <li><code>workflow2</code>: Describes the entry as a <a href="workflows.html">workflow</a> of tasks with inputs and outputs. Instance of <code>Workflow</code>.</li>
 <li><code>definitions</code>: is only filled for schema entries and contains the definitions they provide. Instance of <code>Package</code>.</li>
@@ -4118,7 +4118,7 @@ flowchart LR
 <ul>
 <li><strong>Built into NOMAD.</strong> The definitions that ship with the <code>nomad-lab</code> package itself: the root <code>EntryArchive</code> and <code>metadata</code> in <code>nomad.datamodel</code>, and the shared, domain-independent definitions in <code>nomad.datamodel.metainfo</code>, including the built-in base sections. They are present in every installation.</li>
 <li><strong>A Python schema package in a plugin.</strong> A plugin declares a schema package entry point whose definitions are loaded at startup. Once the plugin is installed, the schema is available to every user of that installation, and it can carry <code>normalize</code> functions that NOMAD runs during processing.</li>
-<li><strong>An uploaded archive file.</strong> Any user can upload a <code>.archive.yaml</code> or <code>.archive.json</code> file that fills the <code>definitions</code> section. NOMAD stores the package and makes it available within the upload it was uploaded to. No installation and no plugin development is needed, but the schema does not leave that upload, and it cannot carry <code>normalize</code> functions.</li>
+<li><strong>An uploaded archive file.</strong> Any user can upload a <code>.archive.yaml</code> or <code>.archive.json</code> file that fills the <code>definitions</code> section. NOMAD stores the package and makes it available within the project to which it was uploaded. No installation and no plugin development is needed, but the schema does not leave that project, and it cannot carry <code>normalize</code> functions.</li>
 </ul>
 <p>The two syntaxes describe the same thing, and there is a one-to-one translation between them. For the trade-off between them and for the mechanics of each route, see <a href="../howto/schemas/schemas.html#choose-python-or-yaml">How-to guides &gt; ... &gt; Start working with schemas</a>.</p>
 <h3 id="re-use-and-interoperability">Re-use and interoperability<a class="headerlink" href="#re-use-and-interoperability" title="Permanent link">¶</a></h3>

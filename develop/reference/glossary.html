@@ -3953,6 +3953,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Project
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#quantity" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4320,6 +4331,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Project
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#quantity" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4505,10 +4527,12 @@ its use in favor of <em>processed data</em> (e.g. NOMAD Repository and NOMAD Arc
 has authorship over it. Often <em>authors</em> are <a href="#user">users</a>, but not always.
 Therefore, we have to distinguish between authors and users.</p>
 <h2 id="dataset">Dataset<a class="headerlink" href="#dataset" title="Permanent link">¶</a></h2>
-<p>Users can organize <a href="#entry">entries</a> into <em>datasets</em>. Datasets are not created automatically,
-don't confuse them with <a href="#upload">uploads</a>. Datasets can be compared to albums, labels, or tags
-on other platforms. Datasets are used to reference a collection of data and users can get a DOI for their
-datasets.</p>
+<p>A <em>dataset</em> is a backend resource retained for existing named collections of
+<a href="#entry">entries</a>. A dataset can contain entries from multiple
+<a href="#project">projects</a>, and an entry can belong to multiple datasets. Existing
+dataset links and DOIs can still be resolved in the NOMAD GUI, and datasets
+remain accessible through the API. Projects are the current user-facing unit
+for organizing, publishing, and assigning a DOI to data.</p>
 <h2 id="deployment-nomad-oasis">Deployment (NOMAD Oasis)<a class="headerlink" href="#deployment-nomad-oasis" title="Permanent link">¶</a></h2>
 <p>NOMAD <em>Deployment</em> refers to a live instance of a NOMAD <a href="#distribution-distro">distribution</a> running on some hardware. A deployment is also known as an <em>Oasis</em>.</p>
 <h2 id="distribution-distro">Distribution (distro)<a class="headerlink" href="#distribution-distro" title="Permanent link">¶</a></h2>
@@ -4521,7 +4545,7 @@ an entry. As all entries, <em>ELNs</em> are based on a <a href="#schema">schema<
 are edited (e.g. which type of widget) can be controlled through <a href="#annotation">annotations</a>.</p>
 <h2 id="entry">Entry<a class="headerlink" href="#entry" title="Permanent link">¶</a></h2>
 <p>Data in NOMAD is organized in <em>entries</em> (as in "database <em>entry</em>"). Entries have an
-<em>entry ID</em>. Entries can be searched for and entries have individual pages on the NOMAD GUI. Entries are always
+<em>entry ID</em>. Entries can be searched for and have individual pages in the NOMAD GUI. Entries are always
 associated with <a href="#raw-file">raw files</a>, where one of these files is the <a href="#mainfile">mainfile</a>.
 Raw files are processed to create the <a href="#processed-data">processed data</a> (or the <a href="#archive">archive</a>)
 for an entry.</p>
@@ -4533,8 +4557,8 @@ for an entry.</p>
 of an entry is retrieved from that mainfile.</p>
 <h2 id="metadata">Metadata<a class="headerlink" href="#metadata" title="Permanent link">¶</a></h2>
 <p>In NOMAD <em>metadata</em> refers to a specific technical sub-set of <a href="#processed-data">processed data</a>.
-The metadata of an <a href="#entry">entry</a> comprises ids, timestamps, hashes, authors, datasets,
-references, used schema, and other information.</p>
+The metadata of an <a href="#entry">entry</a> comprises IDs, timestamps, hashes, authors,
+<a href="#dataset">datasets</a>, references, the used schema, and other information.</p>
 <h2 id="metainfo">Metainfo<a class="headerlink" href="#metainfo" title="Permanent link">¶</a></h2>
 <p>The term <em>metainfo</em> refers to the sum of all <a href="#schema">schemas</a>. In particular it is
 associated with all pre-defined schemas that are used to represent all
@@ -4575,6 +4599,11 @@ Third, we run the parser to create <a href="#processed-data">processed data</a>.
 processed data is further refined by running <a href="#normalizer">normalizers</a>. Last, the
 processed data is saved and indexed. The exact processing time depends on the size of the
 uploaded data and users can track the processing state of each entry in the GUI.</p>
+<h2 id="project">Project<a class="headerlink" href="#project" title="Permanent link">¶</a></h2>
+<p>A <em>project</em> is the user-facing container for files and <a href="#entry">entries</a> in the
+NOMAD GUI. Project owners can invite collaborators, publish the project, and,
+when supported by the deployment, assign it a DOI. Each project is represented
+by an <a href="#upload">upload</a> resource in NOMAD's backend.</p>
 <h2 id="quantity">Quantity<a class="headerlink" href="#quantity" title="Permanent link">¶</a></h2>
 <p>All <a href="#processed-data">processed data</a> is structured into sections and quantities. Sections
 provide hierarchy and organization, <em>quantities</em> refer to the actual pieces of data.
@@ -4584,9 +4613,9 @@ Quantities can have many types and shapes; examples are strings, numbers, lists,
 Quantities in processed data are associated with a respective quantity definition from
 the respective schema.</p>
 <h2 id="raw-file">Raw file<a class="headerlink" href="#raw-file" title="Permanent link">¶</a></h2>
-<p>A <em>raw file</em> is any file that was provided by a NOMAD user. A raw-file might produce an
-<a href="#entry">entry</a>, if it is of a supported file-format, but does not have to. Raw files
-always belong to an <a href="#upload">upload</a> and might be associated with an <a href="#entry">entry</a>
+<p>A <em>raw file</em> is any file that was provided by a NOMAD user. A raw file might produce an
+<a href="#entry">entry</a>, if it is of a supported file format, but does not have to. Raw files
+always belong to a <a href="#project">project</a> and might be associated with an <a href="#entry">entry</a>
 (in this case, raw-files are also <a href="#mainfile">mainfiles</a>).</p>
 <p>The sum of all raw files is also referred to as the <em>Repository</em>. This is an old term
 from when NOMAD was implemented as several services (e.g. NOMAD Repository and NOMAD Archive).</p>
@@ -4613,14 +4642,10 @@ provide hierarchy and organization, <em>quantities</em> refer to the actual piec
 all properties (subsections, quantities) from other section definitions using them as
 <em>base sections</em>.</p>
 <h2 id="upload">Upload<a class="headerlink" href="#upload" title="Permanent link">¶</a></h2>
-<p>NOMAD organizes <a href="#raw-file">raw-files</a> (and all <a href="#entry">entries</a> created from them)
-in <em>uploads</em>. Uploads consist of a directory structure of raw-files and a list of
-respective entries.</p>
-<p>Uploads are created by a single <a href="#user">user</a>, the <em>owner</em>. Uploads have two states.
-Initially, they are mutable and have limited visibility. Owners can invite other to
-collaborate and those users can add/remove/change data.
-The owner can publish an upload at some point, where the upload becomes immutable and visible
-to everyone. Uploads are the smallest unit of data that can be individually shared and published.</p>
+<p>An <em>upload</em> is the backend resource that represents a <a href="#project">project</a>. It
+contains the project's <a href="#raw-file">raw files</a> and the <a href="#entry">entries</a> created
+from them. API endpoints, configuration options, processing terminology, and
+identifiers such as <code>upload_id</code> retain the term <em>upload</em>.</p>
 <h2 id="user">User<a class="headerlink" href="#user" title="Permanent link">¶</a></h2>
 <p>A <em>user</em> is anyone with a NOMAD account. It is different from an <a href="#author">author</a> as
 all users can be authors, but not all authors have to be users. All data in NOMAD is always

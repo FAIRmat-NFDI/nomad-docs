@@ -3186,10 +3186,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
       
         <li class="md-nav__item">
-  <a href="#uploads" class="md-nav__link">
+  <a href="#projects-and-uploads" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Uploads
+        Projects and uploads
       
     </span>
   </a>
@@ -3212,17 +3212,6 @@
     <span class="md-ellipsis">
       
         Entries
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#datasets" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Datasets
       
     </span>
   </a>
@@ -3908,10 +3897,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
       
         <li class="md-nav__item">
-  <a href="#uploads" class="md-nav__link">
+  <a href="#projects-and-uploads" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Uploads
+        Projects and uploads
       
     </span>
   </a>
@@ -3934,17 +3923,6 @@
     <span class="md-ellipsis">
       
         Entries
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#datasets" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Datasets
       
     </span>
   </a>
@@ -4077,11 +4055,13 @@ analysis tools independent from specific file formats.</p>
   </p>
 <figcaption>NOMAD's datamodel and processing</figcaption>
 </figure>
-<h2 id="uploads">Uploads<a class="headerlink" href="#uploads" title="Permanent link">¶</a></h2>
-<p>Users create <strong>uploads</strong> to organize files. Think of an upload like a project:
-many files can be put into a single upload and an upload can be structured with directories.
-You can collaborate on uploads, share uploads, and publish uploads. The files in an
-upload are called <strong>raw files</strong>.
+<h2 id="projects-and-uploads">Projects and uploads<a class="headerlink" href="#projects-and-uploads" title="Permanent link">¶</a></h2>
+<p>Users create <strong>projects</strong> to organize files and entries. A project can contain
+many files arranged in directories. Project owners can invite collaborators and
+publish the project. The files in a project are called <strong>raw files</strong>.</p>
+<p>In NOMAD's backend, each project is represented by an <strong>upload</strong> resource.
+Technical documentation therefore uses terms such as <em>upload API</em>, <em>upload ID</em>,
+and <em>upload processing</em> for operations on the corresponding backend resource.
 Raw files are managed by users and they are never changed by NOMAD.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -4102,27 +4082,16 @@ the processed data, is up to the parser.</p>
 <h2 id="entries">Entries<a class="headerlink" href="#entries" title="Permanent link">¶</a></h2>
 <p>All uploaded <strong>raw files</strong> are analysed to find files with a recognized format. Each file
 that follows a recognized format is a <strong>mainfile</strong>. For each mainfile, NOMAD will create
-a database <strong>entry</strong>. The entry is eternally matched to the mainfile. The entry ID, for example,
+a database <strong>entry</strong>. The entry remains matched to the mainfile. The entry ID, for example,
 is a hash over the upload ID and the mainfile path (and an optional key) within the upload.
-This <strong>matching</strong> process is automatic, and users cannot create entries
-manually.</p>
+This <strong>matching</strong> process is automatic for parser-supported files.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>We say that raw files are not changed by NOMAD and that users cannot create entries,
-but what about ELNs? There is a <em>create entry</em> button in the UI?</p>
-<p>However,
-NOMAD will simply create an editable <strong>mainfile</strong> that indirectly creates an entry.
-The user might use NOMAD as an editor to change the file, but the content is
-determined by the users. Contrary to the processed data that is created
-from raw files by NOMAD.</p>
+<p>Users can also create schema-based entries from the GUI. NOMAD creates an
+editable <strong>mainfile</strong> for such an entry and processes it in the same way as
+other mainfiles. The user controls the file content through the data editor;
+NOMAD creates the processed data from that file.</p>
 </div>
-<h2 id="datasets">Datasets<a class="headerlink" href="#datasets" title="Permanent link">¶</a></h2>
-<p>Users can build collections of entries to form <strong>datasets</strong>. You can imagine datasets
-like tags or albums in other systems. Each entry can be contain in many datasets and
-a dataset can hold many entries. Datasets can also overlap. Datasets are only
-indirectly related to files. The main purpose of <strong>datasets</strong> in NOMAD is to have citable
-collections of data. Users can get a DOI for their datasets. Datasets have no influence
-on the processing of data.</p>
 <h2 id="processing">Processing<a class="headerlink" href="#processing" title="Permanent link">¶</a></h2>
 <p>The processing of entries is automatic. Initially and on each mainfile change,
 the entry corresponding to the mainfile, will be processed. Processing consist of
