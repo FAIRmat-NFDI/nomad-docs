@@ -56,17 +56,29 @@ This **matching** process is automatic for parser-supported files.
 
 ## Processing
 
-The processing of entries is automatic. Initially and on each mainfile change,
-the entry corresponding to the mainfile, will be processed. Processing consist of
-**parsing**, **normalizing**, and **persisting** the created data, as explained in more detail in the [Processing section](processing.md).
+Processing normally starts automatically when files in a project change or a
+schema-based entry is saved. A user with write access can also reprocess an
+editable project manually. Processing consists of **parsing**, **normalizing**,
+and **persisting** the created data, as explained under
+[Explanation > Processing](processing.md).
 
 ### Parsing
 
-Parsers are small programs that transform data from a recognized *mainfile* into a
-structured machine processable tree of data that we call the *archive* or [**processed data**](data.md)
-of the entry. Only one parser is used for each entry. The used parser is determined
-during matching and depends on the file format. The {{ nav_link("howto/plugins/types/parsers.md", breadcrumb=True) }} shows how to match a specific file from your parser. Parsers can be added to NOMAD as
-plugins. The **Distribution Details** section of a NOMAD deployment's landing page lists the installed parser entry points. Details about the file formats supported by each parser should be maintained in the corresponding plugin documentation.
+Parsers transform a *mainfile* into the structured, machine-processable tree of
+data called the entry's *archive*, or [**processed data**](data.md). For a
+parser-supported file, matching selects one installed parser based on the file
+format. A schema-based entry instead uses NOMAD's native archive-file parser to
+load the data entered in the GUI; its schema can provide `normalize` functions
+that interpret additional files selected in the entry. A hybrid parser can
+match an added file and use it to create an editable schema-based entry.
+
+The {{ nav_link("tutorial/develop_plugin/create_parser.md", breadcrumb=True) }}
+compares these patterns. The
+{{ nav_link("howto/plugins/types/parsers.md", breadcrumb=True) }} explains parser
+matching and registration. The **Distribution Details** section of a NOMAD
+deployment's landing page lists the installed parser entry points. Details about
+the file formats supported by each parser should be maintained in the
+corresponding plugin documentation.
 
 !!! note
     A special case is the parsing of NOMAD archive files. Usually a parser converts a file
