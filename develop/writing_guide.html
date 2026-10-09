@@ -4001,6 +4001,27 @@ follow-up material rather than part of the procedure.</p>
 <p><strong>New window for external links.</strong> All external links should use <code>[](){:target="_blank" rel="noopener"}</code> to open a new browser window.</p>
 <h3 id="terminology-capitalization-and-text-stylizing">Terminology, capitalization, and text stylizing<a class="headerlink" href="#terminology-capitalization-and-text-stylizing" title="Permanent link">¶</a></h3>
 <p><strong>Use consistent, canonical names.</strong> NOMAD, NOMAD Oasis, MongoDB, Elasticsearch, etc.</p>
+<p><strong>Use sentence case for domain concepts.</strong> Treat NOMAD concepts as common nouns
+in running prose. Write <em>project</em>, <em>entry</em>, <em>archive</em>, <em>schema</em>, <em>section</em>,
+<em>subsection</em>, <em>quantity</em>, <em>dataset</em>, and <em>mainfile</em> in lowercase, including
+their plural forms. Do not capitalize a term merely because it has a definition
+in the glossary. Normal capitalization still applies at the beginning of a
+sentence and in headings.</p>
+<p><strong>Match exact GUI labels.</strong> When referring to a specific label in the GUI,
+preserve the capitalization displayed in the interface and format the label in
+bold, for example <strong>Projects</strong>, <strong>Entries</strong>, <strong>ARCHIVE</strong>, <strong>Project ID</strong>, and
+<strong>ADD EXAMPLE PROJECT</strong>. Use lowercase when referring to the underlying concept,
+for example <em>project page</em>, <em>entry ID</em>, and <em>entry archive</em>.</p>
+<p><strong>Preserve code and technical identifiers.</strong> Reproduce class names, API fields,
+endpoints, configuration options, and archive paths exactly and format them as
+code, for example <code>EntryArchive</code>, <code>ArchiveSection</code>, <code>upload_id</code>, <code>entry_id</code>, and
+<code>/uploads</code>.</p>
+<p><strong>Distinguish projects from uploads.</strong> In user-facing instructions, use
+<em>project</em> for the container that holds files and entries. Use <em>upload</em> as a verb
+for transferring files and as a technical noun when referring to NOMAD's
+backend upload resource, upload processing, API endpoints, upload IDs, or
+archive-reference syntax. Each GUI project corresponds to a backend upload
+resource.</p>
 <p><strong>Backticks, quotes, bold, and italics.</strong></p>
 <ul>
 <li>
@@ -4011,15 +4032,13 @@ follow-up material rather than part of the procedure.</p>
 </ul>
 </li>
 <li>
-<p>Use "double quotes" when quoting actual text strings (e.g., labels in the UI, button names, error messages).</p>
+<p>Use "double quotes" for quoted prose and exact messages, such as error
+  messages.</p>
 </li>
-</ul>
-<!-- TODO check bold and it usage and try to be more specific -->
-<ul>
 <li>
 <p>Use <strong>bold</strong> for:</p>
 <ul>
-<li>Certain UI elements (buttons, menu items, field names).</li>
+<li>Exact GUI labels (buttons, menu items, field names).</li>
 <li>Bullet list labels for clarity.</li>
 <li>Important emphasis (but use sparingly).</li>
 </ul>
@@ -4036,7 +4055,8 @@ follow-up material rather than part of the procedure.</p>
 <h3 id="code-commands-and-ui-text">Code, commands, and UI text<a class="headerlink" href="#code-commands-and-ui-text" title="Permanent link">¶</a></h3>
 <p><strong>Blocks &amp; highlighting.</strong> Use fenced code blocks with a language tag (e.g., ```bash, ```python).</p>
 <p><strong>Copy-paste ready.</strong> Commands should run as-is. If a placeholder is required, surround it with angle brackets and use a descriptive name with hyphens separating words. Like this: <code>&lt;your-token&gt;</code>.</p>
-<p><strong>UI copy.</strong> Quote exact button/label text in bold or code.</p>
+<p><strong>UI copy.</strong> Format exact button and label text in bold. Do not use quotation
+marks or code formatting for GUI labels.</p>
 <h3 id="admonitions">Admonitions<a class="headerlink" href="#admonitions" title="Permanent link">¶</a></h3>
 <blockquote>
 <p>⚠️ <strong>Attention:</strong> An admonition is a highlighted block in documentation used to draw attention to important information, such as notes, warnings, tips, or examples.</p>
@@ -4073,7 +4093,7 @@ Any of the standard admonition titles are allowed. Additionally, here is a list 
 <a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>  &lt;figcaption&gt;Relation between NOMAD distributions, plugins and entry points.&lt;/figcaption&gt;
 <a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>&lt;/figure&gt;
 </code></pre></div>
-<p>The second best format is SVG. SVG files scale to different resolutions, produce small file sizes, and are easy to modify later. It is recommended to use <a href="https://www.drawio.com/" rel="noopener" target="_blank">draw.io</a> to produce any complex diagrams, and then export them in the SVG format using the "Include a copy of my diagram" option which allows for easy editing later.</p>
+<p>The second best format is SVG. SVG files scale to different resolutions, produce small file sizes, and are easy to modify later. It is recommended to use <a href="https://www.drawio.com/" rel="noopener" target="_blank">draw.io</a> to produce any complex diagrams, and then export them in the SVG format using the <strong>Include a copy of my diagram</strong> option which allows for easy editing later.</p>
 <p>When other options are not suitable, the preferred raster image format is JPG.</p>
 <h3 id="adding-image-sliders">Adding image sliders<a class="headerlink" href="#adding-image-sliders" title="Permanent link">¶</a></h3>
 <p>Image sliders can be added using the following syntax:</p>

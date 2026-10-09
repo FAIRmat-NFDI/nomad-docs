@@ -4741,9 +4741,9 @@ for creating an account.</p>
 <ul>
 <li>Choose a Linux-based operating system (OS). (e.g. Ubuntu, Amazon Linux, Red Hat, SUSE Linux). This tutorial is based on using Ubuntu.</li>
 <li>Select an instance type based on your workload (<a href="#hardware-considerations">see appropriate hardware resources</a>). If you are unsure, you could start with a <code>c5.xlarge</code> instance.</li>
-<li>In network settings, ensure that "Auto-assign public IP" is enabled</li>
-<li>In network settings, ensure that "Allow HTTPS traffic from the internet" is enabled.</li>
-<li>In network settings, ensure that "Allow HTTP traffic from the internet" is enabled.</li>
+<li>In network settings, ensure that <strong>Auto-assign public IP</strong> is enabled</li>
+<li>In network settings, ensure that <strong>Allow HTTPS traffic from the internet</strong> is enabled.</li>
+<li>In network settings, ensure that <strong>Allow HTTP traffic from the internet</strong> is enabled.</li>
 <li>In the storage settings, add persistent storage for databases and files stored by NOMAD. The default <a href="https://docs.aws.amazon.com/ebs/latest/userguide/what-is-ebs.html" rel="noopener" target="_blank">EBS (Elastic Block Store)</a> is a recommended option, as it provides durable and scalable storage. Learn more in the <a href="https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Storage.html" rel="noopener" target="_blank">AWS Storage Guide</a>. We recommend starting with at least 30 GiB of storage to have space for the docker images and databases.</li>
 <li>Launch the instance</li>
 </ul>
@@ -4752,7 +4752,7 @@ for creating an account.</p>
 <p>Configure Network &amp; Security</p>
 <ul>
 <li>
-<p>Check that inbound traffic is allowed in the <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html" rel="noopener" target="_blank"><em>Network &amp; Security/Security Groups</em></a> settings. Inbound traffic should be allowed for:</p>
+<p>Check that inbound traffic is allowed in the <a href="https://docs.aws.amazon.com/vpc/latest/userguide/vpc-security-groups.html" rel="noopener" target="_blank"><strong>Network &amp; Security</strong> &gt; <strong>Security Groups</strong></a> settings. Inbound traffic should be allowed for:</p>
 <ul>
 <li>HTTP: Protocol TCP, port 80, source 0.0.0.0/0</li>
 <li>HTTPS: Protocol TCP, port 443, source 0.0.0.0/0</li>
@@ -4784,7 +4784,7 @@ for creating an account.</p>
 <p>Ensure that Git is installed to be able to easily sync the distribution configuration. You can check this by running <code>git --version</code>. Generic installations instructions are found on <a href="https://git-scm.com/downloads/linux" rel="noopener" target="_blank">git &gt; Linux</a>.</p>
 </li>
 <li>
-<p>Create a NOMAD Oasis distribution using our template <a href="https://github.com/FAIRmat-NFDI/nomad-distro-template" rel="noopener" target="_blank"><code>nomad-distro-template</code></a>. We recommend creating a new repository by presssing the "Use this template button", but for testing it is also possible to use the existing template repository directly.</p>
+<p>Create a NOMAD Oasis distribution using our template <a href="https://github.com/FAIRmat-NFDI/nomad-distro-template" rel="noopener" target="_blank"><code>nomad-distro-template</code></a>. We recommend creating a new repository by selecting <strong>Use this template</strong>, but for testing it is also possible to use the existing template repository directly.</p>
 </li>
 <li>
 <p>Follow the deployment instructions in the <code>README.md</code> file under <em>Deploying the distribution/For a new Oasis</em>. This typically consists of cloning the repository, setting up file priviledges and then running <code>docker compose pull</code> + <code>docker compose up -d</code>.</p>

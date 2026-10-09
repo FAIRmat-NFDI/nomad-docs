@@ -1757,12 +1757,12 @@
   <a href="#accessing-archives" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Accessing Archives
+        Accessing archives
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Accessing Archives">
+    <nav class="md-nav" aria-label="Accessing archives">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -4254,12 +4254,12 @@
   <a href="#accessing-archives" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Accessing Archives
+        Accessing archives
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Accessing Archives">
+    <nav class="md-nav" aria-label="Accessing archives">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -4804,7 +4804,7 @@ For example, if one wants to fetch all entries under an upload with a specific p
 <a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="p">}</span>
 </code></pre></div>
 <p>Both the query and the pagination fields must comply with the underlying models, depending on the specific token (see <a href="https://nomad-lab.eu/prod/v1/api/v1/extensions/docs" rel="noopener" target="_blank">NOMAD API Dashboard</a>).</p>
-<h2 id="accessing-archives">Accessing Archives<a class="headerlink" href="#accessing-archives" title="Permanent link">¶</a></h2>
+<h2 id="accessing-archives">Accessing archives<a class="headerlink" href="#accessing-archives" title="Permanent link">¶</a></h2>
 <p>The <a href="#basic-data-fetching">Basic Data Fetching</a> functionality can be extended to fetching NOMAD archives.
 An archive is the processed data of an entry, which is stored on the file system as a binary file.
 Each archive thus corresponds to an entry, and the corresponding entry ID can be used as the unique identifier to access the archive.
@@ -4843,7 +4843,7 @@ Thus, to fetch the contents of an archive with entry ID <code>&lt;example_entry_
 </code></pre></div>
 <h3 id="nested-fetching">Nested Fetching<a class="headerlink" href="#nested-fetching" title="Permanent link">¶</a></h3>
 <p>The archive is <code>JSON</code> compatible, which means it is effectively a <code>JSON</code> object, with a tree-like structure.
-Thus, one can apply the exact same fetching logic as in <a href="#accessing-archives">Accessing Archives</a>, while 'expressing' the intention to fetch data from any level of the tree.
+Thus, one can apply the exact same fetching logic as in <a href="#accessing-archives">Accessing archives</a>, while 'expressing' the intention to fetch data from any level of the tree.
 For example, if one wants to fetch <code>n_quantities</code> under <code>metadata</code>, a subsection of the archive root, the request would be:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="p">{</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">   </span><span class="nt">"entries"</span><span class="p">:{</span>

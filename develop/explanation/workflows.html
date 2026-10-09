@@ -4005,10 +4005,10 @@
 used by tasks to produce outputs. It represents a process that has taken place
 or is documented in stored data. It is not a workflow engine and does not
 execute the tasks it describes.</p>
-<p>The inputs, tasks, and outputs can refer to archive sections in one Entry or
-across multiple Entries. A Project groups files and Entries for management,
+<p>The inputs, tasks, and outputs can refer to archive sections in one entry or
+across multiple entries. A project groups files and entries for management,
 access, and publication, whereas a workflow expresses relationships between
-the data stored in those Entries.</p>
+the data stored in those entries.</p>
 <h2 id="related-pages">Related pages<a class="headerlink" href="#related-pages" title="Permanent link">¶</a></h2>
 <ul>
 <li><a href="../howto/manage/gui/workflows.html">How-to guides &gt; ... &gt; Create custom workflows</a></li>
@@ -4018,7 +4018,7 @@ the data stored in those Entries.</p>
 </ul>
 <h2 id="the-built-in-abstract-workflow-schema">The built-in abstract workflow schema<a class="headerlink" href="#the-built-in-abstract-workflow-schema" title="Permanent link">¶</a></h2>
 <p>NOMAD stores the current workflow representation in the top-level <code>workflow2</code>
-section of an Entry archive. This section contains a <code>Workflow</code> instance from
+section of an entry archive. This section contains a <code>Workflow</code> instance from
 <code>nomad.datamodel.metainfo.workflow</code>.</p>
 <figure class="workflow-schema-diagram" style="width: 100%">
 <pre class="mermaid"><code>%%{init: {"themeVariables": {"fontSize": "18px"}}}%%
@@ -4084,7 +4084,7 @@ another <code>workflow2</code>.</p>
   task's optional <code>section</code> can identify the archive section describing that
   activity.</li>
 <li>A <strong>task reference</strong> is a proxy for a task or workflow defined elsewhere,
-  such as in another Entry. It can supply a local name, inputs, and outputs or
+  such as in another entry. It can supply a local name, inputs, and outputs or
   obtain them from the referenced task.</li>
 <li>A <strong>workflow</strong> is a task that also contains other tasks. Because <code>Workflow</code>
   inherits from <code>Task</code>, a workflow can itself be used as a task in another
@@ -4093,11 +4093,11 @@ another <code>workflow2</code>.</p>
 <p>The model stores references rather than separate graph edges. When links on
 different nodes point to the same archive section, NOMAD can represent the
 shared data as a connection in the workflow graph. References can point to
-sections in the same Entry or to Entries elsewhere on the same NOMAD
+sections in the same entry or to entries elsewhere on the same NOMAD
 deployment.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Some older Entry archives use the legacy top-level <code>workflow</code> section. New
+<p>Some older entry archives use the legacy top-level <code>workflow</code> section. New
 workflow data and schemas should use <code>workflow2</code>.</p>
 </div>
 <h3 id="nested-workflow-example">Nested workflow example<a class="headerlink" href="#nested-workflow-example" title="Permanent link">¶</a></h3>
@@ -4164,13 +4164,13 @@ calculation task and as the global input of its single-point workflow.
 Likewise, the ground-state result is both the task output and the global output
 of the single-point workflow.</p>
 <p>The tasks and referenced sections may be stored together or in separate
-Entries without changing these logical relationships. Directly contained and
+entries without changing these logical relationships. Directly contained and
 referenced workflows both produce a hierarchical provenance graph while
-allowing each referenced Entry to remain independently accessible.</p>
+allowing each referenced entry to remain independently accessible.</p>
 <h2 id="custom-and-standardized-workflows">Custom and standardized workflows<a class="headerlink" href="#custom-and-standardized-workflows" title="Permanent link">¶</a></h2>
 <p>The distinction between a custom and a standardized workflow concerns the
 schema used to describe it, not whether a person or software created the
-workflow Entry.</p>
+workflow entry.</p>
 <p>A <strong>custom workflow</strong> uses the general <code>Workflow</code>, <code>Task</code>, and <code>Link</code> model
 directly. Its author selects the relevant archive sections and defines how they
 are connected. This is flexible enough to document processes that do not yet

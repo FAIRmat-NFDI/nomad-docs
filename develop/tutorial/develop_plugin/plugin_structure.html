@@ -4410,7 +4410,7 @@ if you are unfamiliar with any of them:</p>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../images/codespace_dark.png#gh-dark-mode-only" data-desc-position="bottom"><img alt="Use codespace" src="../images/codespace_dark.png#gh-dark-mode-only"></a>
 <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../images/codespace_light.png#gh-light-mode-only" data-desc-position="bottom"><img alt="Use codespace" src="../images/codespace_light.png#gh-light-mode-only"></a></p>
 <h4 id="option-2-developing-locally">Option 2: Developing locally<a class="headerlink" href="#option-2-developing-locally" title="Permanent link">¶</a></h4>
-<p>If you prefer to work locally, click on the <strong>&lt;&gt; Code</strong> button in the repository and choose the <strong>“Local”</strong> tab, copy the repository URL, and clone it to a selected location in your machine by running in terminal:</p>
+<p>If you prefer to work locally, click on the <strong>&lt;&gt; Code</strong> button in the repository and choose the <strong>Local</strong> tab, copy the repository URL, and clone it to a selected location in your machine by running in terminal:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>LOCAL/PATH/ON/YOUR/MACHINE
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>git<span class="w"> </span>clone<span class="w"> </span>PATH/COPIED/FROM/REPOSITORY
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nb">cd</span><span class="w"> </span>REPOSITORY_NAME
@@ -4493,11 +4493,11 @@ For example:</p>
 </code></pre></div>
 <h4 id="enable-cruft-updates">Enable cruft updates<a class="headerlink" href="#enable-cruft-updates" title="Permanent link">¶</a></h4>
 <p>The template repository includes a GitHub Actions workflow that checks for updates to the cookiecutter template. The workflow runs automatically once a week and can also be triggered manually. To enable this functionality, grant the workflow permission to write to the repository and create pull requests.</p>
-<p>From your plugin repository on GitHub, open the <strong>Settings</strong> page, and navigate to <strong>Actions → General</strong> (on the left pane):</p>
+<p>From your plugin repository on GitHub, open the <strong>Settings</strong> page, and navigate to <strong>Actions</strong> &gt; <strong>General</strong> (on the left pane):</p>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../images/github_settings_dark.png#gh-dark-mode-only" data-desc-position="bottom"><img alt="Use template" src="../images/github_settings_dark.png#gh-dark-mode-only"></a>
 <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../images/github_settings_light.png#gh-light-mode-only" data-desc-position="bottom"><img alt="Use template" src="../images/github_settings_light.png#gh-light-mode-only"></a></p>
-<p>Scroll to the bottom of the page, select the "Read and write permissions"
-and check the "Allow GitHub Actions to create and approve pull requests" options, and then click <strong>Save</strong>.</p>
+<p>Scroll to the bottom of the page, select <strong>Read and write permissions</strong>
+and check <strong>Allow GitHub Actions to create and approve pull requests</strong>, and then click <strong>Save</strong>.</p>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../images/workflow_permissions_dark.png#gh-dark-mode-only" data-desc-position="bottom"><img alt="Use template" src="../images/workflow_permissions_dark.png#gh-dark-mode-only"></a>
 <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../images/workflow_permissions_light.png#gh-light-mode-only" data-desc-position="bottom"><img alt="Use template" src="../images/workflow_permissions_light.png#gh-light-mode-only"></a></p>
 <h2 id="developing-the-plugin">Developing the plugin<a class="headerlink" href="#developing-the-plugin" title="Permanent link">¶</a></h2>
@@ -4529,7 +4529,7 @@ and check the "Allow GitHub Actions to create and approve pull requests" options
 <h3 id="option-2-nomad-distro-dev">Option 2: <code>nomad-distro-dev</code><a class="headerlink" href="#option-2-nomad-distro-dev" title="Permanent link">¶</a></h3>
 <p>This option is designed to be used with a local Linux-based machine. The <code>nomad-distro-dev</code> also works with macOS or Windows, but some NOMAD plugins might not function correctly there.</p>
 <p>This setup is required when you need to verify plugin behavior in the NOMAD GUI.</p>
-<p>Start with forking <a href="https://github.com/FAIRmat-NFDI/nomad-distro-dev" rel="noopener" target="_blank"><code>nomad-distro-dev</code></a> repository (<code>Fork</code> -&gt; <code>Create a new fork</code> in the upper right part of the page). You will also need the following additional software installed on your system:</p>
+<p>Start with forking the <a href="https://github.com/FAIRmat-NFDI/nomad-distro-dev" rel="noopener" target="_blank"><code>nomad-distro-dev</code></a> repository (<strong>Fork</strong> &gt; <strong>Create a new fork</strong> in the upper-right part of the page). You will also need the following additional software installed on your system:</p>
 <ul>
 <li>
 <p><a href="https://docs.docker.com/engine/install/" rel="noopener" target="_blank">Docker</a> - generally, only <code>docker-compose</code> functionality will be needed</p>

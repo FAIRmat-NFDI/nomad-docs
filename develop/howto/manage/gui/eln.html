@@ -4088,7 +4088,7 @@
 provides the integrations described here: a generic importer for <code>.eln</code>
 files, and dedicated integrations for elabFTW, Labfolder, Chemotion, and
 openBIS. For <code>.eln</code> files, elabFTW, and Chemotion, you upload an exported file
-that NOMAD parses. For Labfolder and openBIS, you create a schema-based Entry and provide
+that NOMAD parses. For Labfolder and openBIS, you create a schema-based entry and provide
 the connection details for the external system.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -4113,13 +4113,13 @@ elabFTW are handled by the dedicated
 <li>In your ELN, export the records you want to transfer in the ELN file
    format and save the <code>.eln</code> file to your computer without changing its
    extension.</li>
-<li>In NOMAD, create or open a Project and add the exported file under
+<li>In NOMAD, create or open a project and add the exported file under
    <strong>FILES</strong> using <strong>UPLOAD FILES</strong>.</li>
-<li>NOMAD processes the <code>.eln</code> file and creates an Entry for each record
-   (experiment) in the exported file. Each Entry is named after the record's
+<li>NOMAD processes the <code>.eln</code> file and creates an entry for each record
+   (experiment) in the exported file. Each entry is named after the record's
    title.</li>
 </ol>
-<p>Open an Entry to inspect the parsed data in the <code>ELN Import</code> section. Because
+<p>Open an entry to inspect the parsed data in the <code>ELN Import</code> section. Because
 ELNs export different amounts of information, the importer maps the fields
 that the ELN file format defines for all tools:</p>
 <ul>
@@ -4127,10 +4127,10 @@ that the ELN file format defines for all tools:</p>
   and modification dates, keywords, identifier, category, rating, and the URL
   of the record in the source ELN. <code>source_software</code> names the ELN that
   produced the file.</li>
-<li><strong>extra_fields</strong>: tool-specific fields that have no dedicated Quantity,
+<li><strong>extra_fields</strong>: tool-specific fields that have no dedicated quantity,
   stored as JSON.</li>
 <li><strong>files</strong>: a subsection for each file of the record, with its name, format,
-  size, and checksum, and a link to the file in the Project.</li>
+  size, and checksum, and a link to the file in the project.</li>
 <li><strong>comments</strong>: comments made on the record, with their author and date.</li>
 </ul>
 <h2 id="elabftw-integration">elabFTW integration<a class="headerlink" href="#elabftw-integration" title="Permanent link">¶</a></h2>
@@ -4139,12 +4139,12 @@ that the ELN file format defines for all tools:</p>
 <ol>
 <li>In elabFTW, export your data as an <strong>ELN Archive</strong> and save the <code>.eln</code>
    file to your computer without changing its extension.</li>
-<li>In NOMAD, create or open a Project and add the exported file under
+<li>In NOMAD, create or open a project and add the exported file under
    <strong>FILES</strong> using <strong>UPLOAD FILES</strong>.</li>
-<li>NOMAD processes the <code>.eln</code> file and creates an Entry for each experiment in
+<li>NOMAD processes the <code>.eln</code> file and creates an entry for each experiment in
    the exported file.</li>
 </ol>
-<p>Open an Entry to inspect the parsed data. The <code>ELabFTW Project Import</code>
+<p>Open an entry to inspect the parsed data. The <code>ELabFTW Project Import</code>
 section contains metadata for the experiment, including
 <code>experiment_data</code> and <code>experiment_files</code> subsections.</p>
 <p>The <strong>experiment_data</strong> section contains detailed information about the given
@@ -4167,19 +4167,19 @@ requires the following information:</p>
 </ul>
 <p>To import Labfolder data into NOMAD:</p>
 <ol>
-<li>Create or open a NOMAD Project and select <strong>NEW ENTRY</strong>.</li>
-<li>Choose the <code>Labfolder Project Import</code> schema, name the Entry, and select
+<li>Create or open a NOMAD project and select <strong>NEW ENTRY</strong>.</li>
+<li>Choose the <strong>Labfolder Project Import</strong> schema, name the entry, and select
    <strong>CREATE</strong>.</li>
-<li>In the new Entry, enter the project URL, email, and password, then save
-   the Entry. NOMAD retrieves the project data and populates the Entry.</li>
+<li>In the new entry, enter the project URL, email, and password, then save
+   the entry. NOMAD retrieves the project data and populates the entry.</li>
 </ol>
 <p>Each Labfolder entry in your project appears under <code>entries</code>, and its
 <code>elements</code> subsection lists the data and files of that entry. NOMAD imports
 six element types returned by Labfolder's API:</p>
 <ul>
 <li><code>TEXT</code>: content of text fields.</li>
-<li><code>FILE</code>: attached files, which NOMAD downloads into the Project.</li>
-<li><code>IMAGE</code>: images, which NOMAD downloads into the Project.</li>
+<li><code>FILE</code>: attached files, which NOMAD downloads into the project.</li>
+<li><code>IMAGE</code>: images, which NOMAD downloads into the project.</li>
 <li><code>TABLE</code>: tables, stored as JSON content.</li>
 <li><code>DATA</code>: structured data elements. NOMAD also provides <code>labfolder_data</code>, a
   flattened and aggregated version of the data content.</li>
@@ -4187,7 +4187,7 @@ six element types returned by Labfolder's API:</p>
 </ul>
 <p>To fetch the project again after changes in Labfolder, enable
 <code>resync_labfolder_repository</code>, enter your email and password again, and save
-the Entry.</p>
+the entry.</p>
 <h2 id="chemotion-integration">Chemotion integration<a class="headerlink" href="#chemotion-integration" title="Permanent link">¶</a></h2>
 <p>NOMAD supports importing your data from a Chemotion repository via the
 <code>chemotion</code> parser. The parser maps your data, which is structured under
@@ -4197,15 +4197,15 @@ populate the NOMAD schema.</p>
 <p>To import Chemotion data into NOMAD:</p>
 <ol>
 <li>Export your data from Chemotion as a ZIP file and save it to your computer.</li>
-<li>In NOMAD, create or open a Project and add the ZIP file under <strong>FILES</strong>
+<li>In NOMAD, create or open a project and add the ZIP file under <strong>FILES</strong>
    using <strong>UPLOAD FILES</strong>.</li>
-<li>NOMAD processes the archive and creates an Entry in the Project.</li>
+<li>NOMAD processes the archive and creates an entry in the project.</li>
 </ol>
-<p>Open the resulting Entry to inspect the parsed data in the <code>Chemotion Project
+<p>Open the resulting entry to inspect the parsed data in the <code>Chemotion Project
 Import</code> section. Other sections are populated when the exported data contains
 corresponding information.</p>
 <p>If a section contains an image or attachment, it is appended to the same
-section under the <code>file</code> Quantity.</p>
+section under the <code>file</code> quantity.</p>
 <h2 id="openbis-integration">openBIS integration<a class="headerlink" href="#openbis-integration" title="Permanent link">¶</a></h2>
 <p>openBIS provides API endpoints for interacting with ELN data. NOMAD
 retrieves, parses, and maps data from your openBIS instance to a NOMAD
@@ -4221,14 +4221,14 @@ schema. The integration requires the following information:</p>
 </ul>
 <p>To import openBIS data into NOMAD:</p>
 <ol>
-<li>Create or open a NOMAD Project and select <strong>NEW ENTRY</strong>.</li>
-<li>Choose the <code>Openbis Project Import</code> schema, give the Entry a name, and
+<li>Create or open a NOMAD project and select <strong>NEW ENTRY</strong>.</li>
+<li>Choose the <strong>Openbis Project Import</strong> schema, give the entry a name, and
    select <strong>CREATE</strong>.</li>
-<li>In the new Entry, enter the project URL, username, and password, then
-   save the Entry. NOMAD retrieves and imports the project data.</li>
+<li>In the new entry, enter the project URL, username, and password, then
+   save the entry. NOMAD retrieves and imports the project data.</li>
 </ol>
 <p>NOMAD imports all spaces, projects, and experiments that your account can
-access into this Entry, together with the experiment attachments.</p>
+access into this entry, together with the experiment attachments.</p>
 <h2 id="related-pages">Related pages<a class="headerlink" href="#related-pages" title="Permanent link">¶</a></h2>
 <ul>
 <li><a href="upload.html">How-to guides &gt; ... &gt; Create and publish Projects</a></li>

@@ -4455,7 +4455,7 @@
 <h1 id="how-to-create-a-dashboard">How to create a dashboard<a class="headerlink" href="#how-to-create-a-dashboard" title="Permanent link">¶</a></h1>
 <h2 id="what-is-a-dashboard">What is a dashboard?<a class="headerlink" href="#what-is-a-dashboard" title="Permanent link">¶</a></h2>
 <p>A <strong>dashboard</strong> is a custom web interface that a NOMAD plugin contributes
-to the NOMAD GUI. Users discover installed dashboards on the <em>Dashboards</em>
+to the NOMAD GUI. Users discover installed dashboards on the <strong>Dashboards</strong>
 page of the GUI and can open each one either <strong>embedded</strong> (inside an iframe
 on a dedicated viewer page in the GUI) or in a <strong>new browser tab</strong>.</p>
 <p>Dashboards can be used for a wide variety of purposes:</p>
@@ -4475,8 +4475,8 @@ is different:</p>
 <ul>
 <li><strong>Audience.</strong> APIs target other programs (clients, scripts, integrations),
   while dashboards target end users working in a browser.</li>
-<li><strong>How they surface in the GUI.</strong> APIs are listed on the <em>APIs</em> page, with
-  links to reach each mounted API. Dashboards are listed on the <em>Dashboards</em>
+<li><strong>How they surface in the GUI.</strong> APIs are listed on the <strong>APIs</strong> page, with
+  links to reach each mounted API. Dashboards are listed on the <strong>Dashboards</strong>
   page, with embedded and new-tab launchers, icons and descriptions.</li>
 <li><strong>Typical content.</strong> APIs serve JSON endpoints, whereas dashboards serve
   HTML and JS, optionally a full SPA.</li>
@@ -4665,14 +4665,14 @@ the NOMAD look-and-feel.</p>
 the NOMAD GUI:</p>
 <ul>
 <li><strong><code>embedded</code></strong> — opens the dashboard inside an iframe on a dedicated
-  <em>Dashboard viewer</em> page within the GUI. Best for dashboards that
+  <strong>Dashboard viewer</strong> page within the GUI. Best for dashboards that
   should feel like a native part of NOMAD.</li>
 <li><strong><code>tab</code></strong> — opens the dashboard in a new browser tab. Best for
   dashboards that benefit from being full-window, or that the user
   wants to keep open alongside the rest of the GUI.</li>
 </ul>
 <p>The <strong>order matters</strong>: the first entry is the default action when the
-user clicks the dashboard's row in the <em>Dashboards</em> table. The other
+user clicks the dashboard's row in the <strong>Dashboards</strong> table. The other
 mode is still available as a secondary action. Listing only one mode
 hides the other action button entirely.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># Embedded is the primary action; clicking the row opens the iframe view.</span>
