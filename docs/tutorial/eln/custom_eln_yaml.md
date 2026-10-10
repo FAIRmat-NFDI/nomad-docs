@@ -57,7 +57,7 @@ Before starting, make sure you have:
 
 ---
 
-## Step 1: Create the schema file
+## Create the schema file
 
 Create a new file named `polymer_processing.archive.yaml` in a local working directory. This file will contain the custom ELN schema definitions for the example experiment in this tutorial.
 
@@ -66,7 +66,7 @@ Create a new file named `polymer_processing.archive.yaml` in a local working dir
 
 ---
 
-## Step 2: Declare the schema package
+## Declare the schema package
 
 Open `polymer_processing.archive.yaml` and add the following content:
 
@@ -93,7 +93,7 @@ At this point, the file declares an empty schema package that can now be extende
 
 ---
 
-## Step 3: Add a main experiment section
+## Add a main experiment section
 
 A schema must contain at least one section. Here, you will define a section called `Experiment_Information` that will represent the experiment entry and hold all related metadata.
 
@@ -112,7 +112,7 @@ Add the following content to the schema file:
 Note that `base_sections:` must be indented one level (two spaces) with respect to `Experiment_Information:`, and will include an indented list for the base sections to inherit from.
 
 ??? success "Checkpoint 1"
-    Your file so far (after step 3) should look like the following:
+    Your file so far should look like the following:
     ```yaml
     definitions:
       name: Processing of polymer thin-films
@@ -126,7 +126,7 @@ Note that `base_sections:` must be indented one level (two spaces) with respect 
 
 ---
 
-## Step 4: Add quantities to the main section
+## Add quantities to the main section
 
 Quantities define the individual data fields that will be stored for each experiment entry. They are added using `quantities:`.
 
@@ -153,11 +153,12 @@ Define the quantities `Name`, `Researcher`, `Date`, and `Additional_Notes`, by a
 - `type:` specifies the data type.
 
 - `default:` provides a placeholder value (optional).
+<!-- TODO: In GUI v2 (tested on the develop deployment on 2026-09-30), the ELN editor shows "no value" instead of the default value of a quantity. Clarify whether this is intended and reword this line accordingly. -->
 
 - If a quantity represents a physical value, you can also add a `unit` key.
 
 ??? success "Checkpoint 2"
-    Your file so far (after step 4) should look like the following:
+    Your file so far should look like the following:
     ```yaml
     definitions:
       name: Processing of polymer thin-films
@@ -180,7 +181,7 @@ Define the quantities `Name`, `Researcher`, `Date`, and `Additional_Notes`, by a
 
 ---
 
-## Step 5: Turn quantities into ELN fields
+## Turn quantities into ELN fields
 
 So far, you have defined the data structure of your schema.
 Next, you will configure how these quantities are displayed and edited in the NOMAD ELN interface.
@@ -207,7 +208,7 @@ Start by updating the `Name` quantity as follows:
 Note that `m_annotations:` is used to configure the `Name` quantity, it is indented one level (two spaces) with respect to `Name:`, i.e., it aligns with `type:` and `default:` in the `Name` block.
 
 ??? info "NOMAD's editable ELN components"
-    For a list of editable components in NOMAD, see [editable quantities](https://nomad-lab.eu/prod/v1/gui/dev/editquantity){:target="_blank" rel="noopener"}.
+    For a list of editable components in NOMAD, see [Reference > Annotations > ELN annotations](../../reference/annotations.md#eln-annotations).
 
 Now update the remaining quantities:
 
@@ -217,7 +218,7 @@ Now update the remaining quantities:
 
 - Use `RichTextEditQuantity` for `Additional_Notes`.
 
-After completing this step, your schema defines both structure and GUI behavior for the main experiment fields.
+Your schema now defines both the structure and the GUI behavior of the main experiment fields.
 
 ??? success "Checkpoint 3 - Test your schema in NOMAD"
     This is the complete `polymer_processing.archive.yaml` file up to this point. Use it as a checkpoint to compare against your file.
@@ -255,26 +256,26 @@ After completing this step, your schema defines both structure and GUI behavior 
     ```
     You have reached the milestone: your schema is now functional.
 
-    You can now upload this file to NOMAD and verify that it creates an ELN entry with the fields you defined.
+    Test it in NOMAD by uploading the schema file to a project and creating an ELN entry from it:
 
-    <p><strong>Use the arrow buttons ⬅️➡️ below to follow the steps for uploading the schema and creating a test ELN entry.</strong></p>
-    <div class="image-slider" id="slider_milestone_custom_yaml">
-        <div class="nav-arrow left" id="prev_milestone_custom_yaml">←</div>
-        <img src="images/milestone_custom_yaml_1.png" alt="Step 1" class="active">
-        <img src="images/milestone_custom_yaml_2.png" alt="Step 2">
-        <img src="images/milestone_custom_yaml_3.png" alt="Step 3">
-        <img src="images/milestone_custom_yaml_4.png" alt="Step 4">
-        <img src="images/milestone_custom_yaml_5.png" alt="Step 5">
-        <div class="nav-arrow right" id="next_milestone_custom_yaml">→</div>
-    </div>
+    1. Select **Projects** from the menu on the left, click **NEW PROJECT**, enter `Polymer processing ELN` as the **Project name**, and click **CREATE**.
+    2. On the project page, click **UPLOAD FILES** and upload `polymer_processing.archive.yaml`. Wait until the processing status at the top right of the project page shows **Completed**. If it stays **Idle**, click the status, and switch on **Auto Reprocessing** in the **Processing status** panel. The **ENTRIES** tab now lists your schema as an entry of the type *Schema*.
+    3. Click **NEW ENTRY**. In the **CUSTOM SCHEMAS** tab, keep **This project** selected and click `Experiment_Information`.
+    4. Enter `polymer_film_experiment_1` as the **Filename** and click **CREATE**. NOMAD adds the extension `.archive.json` to the filename.
+
+    NOMAD creates the entry and opens it in the **ARCHIVE** tab. The entry contains the fields that you defined in the schema.
+
+    ![New ELN entry with the fields Name, Researcher, Date, and Additional Notes](images/custom_eln_yaml_1.png)
+
+    Keep this project, as you will use it again to test the final schema at the end of this tutorial.
 
 ---
 
-## Step 6: Add subsections for sample, solution, and processing
+## Add subsections for sample, solution, and processing
 
 Subsections define nested sections within a section. They allow you to group related information, such as sample details, solution composition, and preparation steps, into separate blocks within the ELN template.
 
-In this step, you will extend your ELN schema by adding subsections under `Experiment_Information:` using the `sub_sections:` key.
+Now, you will extend your ELN schema by adding subsections under `Experiment_Information:` using the `sub_sections:` key.
 
 Declare the subsections `Sample`, `Solution`, and `Preparation`, by adding the following content to the schema file:
 
@@ -341,7 +342,7 @@ Declare the subsections `Sample`, `Solution`, and `Preparation`, by adding the f
               section:
     ```
 
-Next, you will define each subsection (`Sample`, `Solution`, and `Preparation`) using the same building blocks introduced in steps 3 to 5, such as `base_sections:`, `quantities:`, and `m_annotations:`.
+Next, you will define each subsection (`Sample`, `Solution`, and `Preparation`) using the same building blocks introduced in the previous sections, such as `base_sections:`, `quantities:`, and `m_annotations:`.
 
 These elements go under `section:` and are indented one level (two spaces) with respect to it.
 
@@ -536,7 +537,7 @@ Add the following `sub_sections:` block inside the `Solution` subsection:
     Indentation matters in YAML because it defines the structure of your schema.
 
     - Keys at the same level should have the same indentation (for example, `Sample`, `Solution`, and `Preparation` under `sub_sections:`).
-    - Keys that define a section (`base_sections`, `quantities`, `sub_sections`, `m_annotations`) must be indented one level (two spaces) deeper than the section name.
+    - Keys that define a section (`base_sections`, `quantities`, `sub_sections`, `m_annotations`) must be indented one level (two spaces) deeper than the section name. In a subsection, they are indented one level deeper than its `section:` key, i.e., two levels (four spaces) deeper than the subsection name.
     - Keys that define a quantity (`type`, `unit`, `default`, `m_annotations`) must be indented one level (two spaces) deeper than the quantity name.
 
 ??? success "Checkpoint 6 (final file)"
@@ -640,17 +641,15 @@ Add the following `sub_sections:` block inside the `Solution` subsection:
 
 ---
 
-## Step 7: Test your custom schema in NOMAD
+## Test your custom schema in NOMAD
 
-You can now upload this file to NOMAD and verify that it creates an ELN entry with the fields you defined.
+Test the final schema in the project that you created at Checkpoint 3. If you skipped that test, first create the project: select **Projects** from the menu on the left, click **NEW PROJECT**, enter `Polymer processing ELN` as the **Project name**, and click **CREATE**.
 
-<p><strong>Use the arrow buttons ⬅️➡️ below to follow the steps for uploading the schema and creating a test ELN entry.</strong></p>
-<div class="image-slider" id="slider_final_custom_yaml">
-    <div class="nav-arrow left" id="prev_final_custom_yaml">←</div>
-    <img src="images/final_custom_yaml_1.png" alt="Step 1" class="active">
-    <img src="images/final_custom_yaml_2.png" alt="Step 2">
-    <img src="images/final_custom_yaml_3.png" alt="Step 3">
-    <img src="images/final_custom_yaml_4.png" alt="Step 4">
-    <img src="images/final_custom_yaml_5.png" alt="Step 5">
-    <div class="nav-arrow right" id="next_final_custom_yaml">→</div>
-</div>
+1. Select **Projects** from the menu on the left and open the project `Polymer processing ELN`.
+2. Click **UPLOAD FILES** and upload the updated `polymer_processing.archive.yaml`. If NOMAD asks whether to overwrite the existing file, click **OVERWRITE**. Wait until the processing status at the top right of the project page shows **Completed**.
+3. Click **NEW ENTRY**. In the **CUSTOM SCHEMAS** tab, keep **This project** selected and click `Experiment_Information`.
+4. Enter `polymer_film_experiment_2` as the **Filename** and click **CREATE**.
+
+In addition to the fields of the main section, the new entry now lists the subsections `Sample`, `Solution`, and `Preparation` under **Subsections**. To add a subsection, e.g., `Sample`, click the **(+)** button next to its name, fill in its fields, and click **SAVE**.
+
+![ELN entry with the Sample, Solution, and Preparation subsections and their (+) buttons](images/custom_eln_yaml_2.png)
