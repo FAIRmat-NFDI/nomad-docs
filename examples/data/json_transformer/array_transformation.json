@@ -1,0 +1,30 @@
+{
+  "data": {
+    "sub_systems": [
+      {
+        "name": "system_1",
+        "nested_system": {
+          "type": "lattice"
+        }
+      },
+      {
+        "name": "system_2",
+        "nested_system": {
+          "type": "molecule"
+        }
+      }
+    ]
+  },
+  "schema": {
+    "rules": {
+      "add_m_def": {
+        "target": "sub_systems[n1].nested_system.m_def",
+        "default_value": "nomad.datamodel.metainfo.basesections.v2.Element"
+      },
+      "map_name": {
+        "source": "sub_systems[n1].name",
+        "target": "sub_systems[n1].label"
+      }
+    }
+  }
+}
