@@ -35,7 +35,7 @@ nav:
               - Create custom workflows: howto/manage/gui/workflows.md
           - Work programmatically:
               # - Install nomad-lab: howto/programmatic/pythonlib.md # TODO Integrate into "Use the API"
-              - Use the API: howto/manage/program/api.md # TODO separate into How-to and Explanation/Reference
+              - Use the API: howto/manage/program/api.md
               - Authenticate programmatically: howto/manage/program/auth.md
               - Download data: howto/manage/program/download.md
               - Manage data with Python: howto/manage/program/publish_python.md
@@ -101,6 +101,7 @@ nav:
       - NORTH: explanation/north.md
   - Reference:
       - Overview: reference/overview.md
+      - REST API: reference/api.md
       - Schema language: reference/metainfo.md
       - Configuration: reference/config.md
       - Annotations: reference/annotations.md
