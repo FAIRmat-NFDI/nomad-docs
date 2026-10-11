@@ -238,7 +238,7 @@ The result will look like this:
 You can work with the results in the given JSON (or respective Python dict/list) data
 already. If you have [NOMAD's Python library](../../../howto/oasis/install.md#how-to-install-the-nomad-python-library) installed, you can take the
 archive data and use the Python interface. The
-[Python interface](./archive_query.md#wrap-data-with-python-schema-classes)
+[schema-aware Python objects](./archive_query.md#download-and-inspect-the-results)
 will help with code-completion (e.g. in notebook environments), resolve archive references
 (e.g. from workflow to calculation to system), and allow unit conversion:
 

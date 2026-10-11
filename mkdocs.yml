@@ -101,6 +101,7 @@ nav:
       - NORTH: explanation/north.md
   - Reference:
       - Overview: reference/overview.md
+      - ArchiveQuery client: reference/archive_query.md
       - Schema language: reference/metainfo.md
       - Configuration: reference/config.md
       - Annotations: reference/annotations.md
