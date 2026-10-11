@@ -3,7 +3,8 @@
 Authentication determines **who is making the request**.
 Authorization then determines **what that request is allowed to do**.
 
-NOMAD supports multiple authentication mechanisms for API requests using [different types of tokens](#access-tokens).
+NOMAD supports multiple authentication mechanisms for API requests using
+[different types of tokens](#access-tokens).
 
 The following diagram summarizes how access to an API endpoint is evaluated.
 [Administrator-configurable settings](../reference/config.md#auth) are highlighted in red.
@@ -61,7 +62,8 @@ NOMAD supports several types of access tokens for authenticating and authorizing
 Keycloak access tokens authenticate a user through the NOMAD identity provider `keycloak`
 using OpenID Connect (OIDC).
 
-- Short-lived (currently 24 hours) and may require refreshing
+- Short-lived, with a lifetime controlled by the identity provider, and may
+  require refreshing
 - Primarily intended for interactive use (e.g. via the GUI)
 - Grant the full set of user scopes (no scope restriction possible)
 
@@ -77,9 +79,12 @@ PATs can be issued with **explicit scopes**, allowing fine-grained control over
 the operations a user or token is allowed to perform.
 
 Unlike Keycloak access tokens, which typically have fixed and short lifetimes,
-PATs can be created with a **customizable expiration time**, making them
-well suited for long-running scripts or integrations where repeatedly acquiring
-new tokens would be inconvenient.
+PATs can be created with a **customizable expiration time** within the maximum
+allowed by the deployment. This makes them well suited for long-running scripts
+or integrations where repeatedly acquiring new tokens would be inconvenient.
+
+A PAT is accepted only by the NOMAD deployment that issued it. A separate PAT
+is required for another Oasis or NOMAD Central environment.
 
 PAT scopes must always be explicitly specified. Wildcard expressions such as
 `*:read` are supported only in configuration and are **not allowed in tokens**.
@@ -96,8 +101,9 @@ authentication method**.
 
     ### Simple tokens
 
-    Simple tokens are legacy tokens that grant a broad set of user permissions,
-    effectively corresponding to full access except for token-management scopes.
+    Simple tokens include the legacy app and signature tokens. They grant a
+    broad set of user permissions, effectively corresponding to full access
+    except for token-management scopes.
 
     Both token types are deprecated and will be removed in a future release.
     They should not be used for new integrations. Use **Personal Access Tokens (PATs)** instead.
@@ -134,3 +140,9 @@ whose value corresponds to the string representation used in tokens and configur
 (e.g. `datasets:read`).
 
 {{ enum_table("nomad.auth.scopes.Scope") }}
+
+## Related pages
+
+- {{ nav_link("howto/manage/program/auth.md", breadcrumb=True) }} — create, use, rotate, and revoke a Personal Access Token.
+- {{ nav_link("howto/manage/program/api.md", breadcrumb=True) }} — send REST API requests from Python.
+- {{ nav_link("reference/config.md", breadcrumb=True) }} — configure authentication and authorization for an Oasis.
