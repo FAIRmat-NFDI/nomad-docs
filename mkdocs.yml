@@ -117,7 +117,6 @@ not_in_nav: |
   # Contributor documentation is linked from README.md, not the user navigation.
   /writing_guide.md
   # Legacy pages retained until their content is handled by later refactoring stages.
-  /tutorial/access_api.md
   /tutorial/custom.md
   /tutorial/nomad_repo.md
 validation:

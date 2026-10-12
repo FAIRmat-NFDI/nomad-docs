@@ -7,8 +7,7 @@ as an upload resource, so endpoint paths, request fields, and response fields re
 terms such as `uploads` and `upload_id`.
 
 To access processed data with the `nomad-lab` client library, follow
-{{ nav_link("howto/manage/program/archive_query.md", breadcrumb=True) }}. You
-can also watch [Tutorials > Accessing data via API](../../../tutorial/access_api.md).
+{{ nav_link("howto/manage/program/archive_query.md", breadcrumb=True) }}.
 
 ## Different options to use the API
 
