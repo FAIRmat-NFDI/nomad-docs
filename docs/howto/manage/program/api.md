@@ -25,6 +25,30 @@ URL before running the scripts. For the NOMAD develop deployment, use:
 export NOMAD_API_URL="https://nomad-lab.eu/develop/backend/api/v1"
 ```
 
+## Build a query in the GUI
+
+The GUI can translate filters into an API query:
+
+1. Open the NOMAD GUI, select **Apps**, and open **Entries** or another search
+   app.
+2. Use the filter bar or the filter controls to restrict the displayed results.
+   For the query used below, add the **Elements** filter and select titanium and
+   oxygen. The active filters appear as chips above the results.
+3. Select the `<>` **View API call for the query** button next to the filter
+   chips.
+4. Inspect the **API** dialog:
+
+     - **Query** contains the API-compatible `owner` and `query` generated from
+       the active filters.
+     - **Request** shows the HTTP method, endpoint URL, and full request body used
+       to render the page, including display-related options such as pagination
+       and aggregations.
+     - **Response** contains the data returned by that request.
+
+Use **Query** as a starting point for your own request. Include the additional
+fields from **Request** only when your script needs the corresponding result or
+aggregation settings.
+
 ## Send an Entry search request
 
 Create `query_entries.py` with the following content:
