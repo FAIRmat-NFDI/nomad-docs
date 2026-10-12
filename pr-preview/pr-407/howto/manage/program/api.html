@@ -1459,10 +1459,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#you-can-use-your-browser" class="md-nav__link">
+  <a href="#build-a-query-in-the-gui" class="md-nav__link">
     <span class="md-ellipsis">
       
-        You can use your browser
+        Build a query in the GUI
       
     </span>
   </a>
@@ -1492,10 +1492,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#use-our-dashboard" class="md-nav__link">
+  <a href="#use-the-openapi-dashboard" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Use our dashboard
+        Use the OpenAPI dashboard
       
     </span>
   </a>
@@ -4051,10 +4051,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#you-can-use-your-browser" class="md-nav__link">
+  <a href="#build-a-query-in-the-gui" class="md-nav__link">
     <span class="md-ellipsis">
       
-        You can use your browser
+        Build a query in the GUI
       
     </span>
   </a>
@@ -4084,10 +4084,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#use-our-dashboard" class="md-nav__link">
+  <a href="#use-the-openapi-dashboard" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Use our dashboard
+        Use the OpenAPI dashboard
       
     </span>
   </a>
@@ -4388,10 +4388,30 @@ API (v1). In fact, this API is also used by the web interface and should provide
 everything you need.</p>
 <p>There are different tools and libraries to use the NOMAD API that come with different
 trade-offs between expressiveness, learning curve, and convenience.</p>
-<h3 id="you-can-use-your-browser">You can use your browser<a class="headerlink" href="#you-can-use-your-browser" title="Permanent link">¶</a></h3>
-<p>For example, open an
-<a href="https://nomad-lab.eu/prod/v1/api/v1/entries?elements=Ti&amp;elements=O" rel="noopener" target="_blank">Entries API request for titanium and oxygen</a>
-to see the matching Entry metadata.</p>
+<h3 id="build-a-query-in-the-gui">Build a query in the GUI<a class="headerlink" href="#build-a-query-in-the-gui" title="Permanent link">¶</a></h3>
+<p>The GUI can translate filters into an API query:</p>
+<ol>
+<li>Open the NOMAD GUI, select <strong>Apps</strong>, and open <strong>Entries</strong> or another search
+   app.</li>
+<li>Use the filter bar or the filter controls to restrict the displayed results.
+   The active filters appear as chips above the results.</li>
+<li>Select the <code>&lt;&gt;</code> <strong>View API call for the query</strong> button next to the filter
+   chips.</li>
+<li>
+<p>Inspect the <strong>API</strong> dialog:</p>
+<ul>
+<li><strong>Query</strong> contains the API-compatible <code>owner</code> and <code>query</code> generated from
+ the active filters.</li>
+<li><strong>Request</strong> shows the HTTP method, endpoint URL, and full request body used
+ to render the page, including display-related options such as pagination
+ and aggregations.</li>
+<li><strong>Response</strong> contains the data returned by that request.</li>
+</ul>
+</li>
+</ol>
+<p>Use <strong>Query</strong> as a starting point for your own request. Include the additional
+fields from <strong>Request</strong> only when your script needs the corresponding result or
+aggregation settings.</p>
 <h3 id="use-curl-or-wget">Use <code>curl</code> or <code>wget</code><a class="headerlink" href="#use-curl-or-wget" title="Permanent link">¶</a></h3>
 <p>REST API's use resources located via URLs. You access URLs with <code>curl</code> or <code>wget</code>. Same
 <em>Ti</em>, <em>O</em> example as before:</p>
@@ -4401,7 +4421,7 @@ to see the matching Entry metadata.</p>
 <p><code>Requests</code> is a popular Python library to use the internet's HTTP protocol that is used to
 communicate with REST APIs. Install with <code>pip install requests</code>.
 See <a href="#using-requests">Using <code>requests</code></a>.</p>
-<h3 id="use-our-dashboard">Use our dashboard<a class="headerlink" href="#use-our-dashboard" title="Permanent link">¶</a></h3>
+<h3 id="use-the-openapi-dashboard">Use the OpenAPI dashboard<a class="headerlink" href="#use-the-openapi-dashboard" title="Permanent link">¶</a></h3>
 <p>The NOMAD API has an <a href="https://nomad-lab.eu/prod/v1/api/v1" rel="noopener" target="_blank">OpenAPI dashboard</a>. This is an interactive
 documentation of all API functions that allows you to try these functions in the browser.</p>
 <h3 id="use-nomads-python-package">Use NOMAD's Python package<a class="headerlink" href="#use-nomads-python-package" title="Permanent link">¶</a></h3>
