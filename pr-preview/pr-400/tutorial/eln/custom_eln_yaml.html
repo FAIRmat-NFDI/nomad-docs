@@ -1448,34 +1448,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../howto/manage/gui/north.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Analyze data in NORTH
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../howto/manage/gui/workflows.html" class="md-nav__link">
         
   
@@ -1650,7 +1622,7 @@
   <span class="md-ellipsis">
     
   
-    Publish data using Python
+    Manage data with Python
   
 
     
@@ -4132,8 +4104,8 @@
 <p><strong>Optional: familiarity with key NOMAD schema concepts</strong><br>
    It may be helpful to review the following concepts:</p>
 <ul>
-<li><a href="../../reference/glossary.html#schema-package">Schema package</a>, <a href="../../reference/glossary.html#schema">Schema</a></li>
-<li><a href="../../reference/glossary.html#section-and-subsection">Section and Subsection</a>, <a href="../../reference/glossary.html#quantity">Quantity</a></li>
+<li><a href="../../reference/glossary.html#schema-package">Schema package</a>, <a href="../../reference/glossary.html#schema">schema</a></li>
+<li><a href="../../reference/glossary.html#section-and-subsection">Section and subsection</a>, <a href="../../reference/glossary.html#quantity">quantity</a></li>
 <li><a href="../../reference/glossary.html#annotation">Annotation</a></li>
 </ul>
 </li>
@@ -4340,7 +4312,7 @@ You have reached the milestone: your schema is now functional.<p></p>
 <p>Test it in NOMAD by uploading the schema file to a project and creating an ELN entry from it:</p>
 <ol>
 <li>Select <strong>Projects</strong> from the menu on the left, click <strong>NEW PROJECT</strong>, enter <code>Polymer processing ELN</code> as the <strong>Project name</strong>, and click <strong>CREATE</strong>.</li>
-<li>On the project page, click <strong>UPLOAD FILES</strong> and upload <code>polymer_processing.archive.yaml</code>. Wait until the processing status at the top right of the project page shows <strong>Completed</strong>. If it stays <strong>Idle</strong>, click the status, and switch on <strong>Auto Reprocessing</strong> in the <strong>Processing status</strong> panel. The <strong>ENTRIES</strong> tab now lists your schema as an entry of the type <em>Schema</em>.</li>
+<li>On the project page, click <strong>UPLOAD FILES</strong> and upload <code>polymer_processing.archive.yaml</code>. Wait until the processing status at the top right of the project page shows <strong>Completed</strong>. If it stays <strong>Idle</strong>, click the status, and switch on <strong>Auto Reprocessing</strong> in the <strong>Processing status</strong> panel. The <strong>ENTRIES</strong> tab now lists your schema as an entry of the type <strong>Schema</strong>.</li>
 <li>Click <strong>NEW ENTRY</strong>. In the <strong>CUSTOM SCHEMAS</strong> tab, keep <strong>This project</strong> selected and click <code>Experiment_Information</code>.</li>
 <li>Enter <code>polymer_film_experiment_1</code> as the <strong>Filename</strong> and click <strong>CREATE</strong>. NOMAD adds the extension <code>.archive.json</code> to the filename.</li>
 </ol>
@@ -4462,7 +4434,7 @@ You can then tailor what is shown in the ELN by annotating the subsection and hi
 <p><code>overview: true</code> shows the Solution subsection in the entry’s <strong>OVERVIEW</strong> tab in the GUI.</p>
 </li>
 <li>
-<p><code>hide: ['chemical_formula', 'description']</code> hides inherited fields from ELNSample that are not needed in this template.</p>
+<p><code>hide: ['chemical_formula', 'description']</code> hides inherited fields from <code>ELNSample</code> that are not needed in this template.</p>
 </li>
 <li>
 <p>The <code>Concentration</code> quantity adds a numeric field with the <code>unit</code> mg/ml, rendered in the GUI using <code>NumberEditQuantity</code>.</p>
