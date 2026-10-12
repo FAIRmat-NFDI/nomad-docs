@@ -36,8 +36,8 @@ Before starting, make sure you have:
 
 4. **Optional: familiarity with key NOMAD schema concepts**  
    It may be helpful to review the following concepts:
-    - [Schema package](../../reference/glossary.md#schema-package), [Schema](../../reference/glossary.md#schema)
-    - [Section and Subsection](../../reference/glossary.md#section-and-subsection), [Quantity](../../reference/glossary.md#quantity)
+    - [Schema package](../../reference/glossary.md#schema-package), [schema](../../reference/glossary.md#schema)
+    - [Section and subsection](../../reference/glossary.md#section-and-subsection), [quantity](../../reference/glossary.md#quantity)
     - [Annotation](../../reference/glossary.md#annotation)
 
 ??? example "About the example experiment used in this tutorial"
@@ -259,7 +259,7 @@ Your schema now defines both the structure and the GUI behavior of the main expe
     Test it in NOMAD by uploading the schema file to a project and creating an ELN entry from it:
 
     1. Select **Projects** from the menu on the left, click **NEW PROJECT**, enter `Polymer processing ELN` as the **Project name**, and click **CREATE**.
-    2. On the project page, click **UPLOAD FILES** and upload `polymer_processing.archive.yaml`. Wait until the processing status at the top right of the project page shows **Completed**. If it stays **Idle**, click the status, and switch on **Auto Reprocessing** in the **Processing status** panel. The **ENTRIES** tab now lists your schema as an entry of the type *Schema*.
+    2. On the project page, click **UPLOAD FILES** and upload `polymer_processing.archive.yaml`. Wait until the processing status at the top right of the project page shows **Completed**. If it stays **Idle**, click the status, and switch on **Auto Reprocessing** in the **Processing status** panel. The **ENTRIES** tab now lists your schema as an entry of the type **Schema**.
     3. Click **NEW ENTRY**. In the **CUSTOM SCHEMAS** tab, keep **This project** selected and click `Experiment_Information`.
     4. Enter `polymer_film_experiment_1` as the **Filename** and click **CREATE**. NOMAD adds the extension `.archive.json` to the filename.
 
@@ -395,7 +395,7 @@ To achieve this, add the following content to your schema file:
 
 - `overview: true` shows the Solution subsection in the entry’s **OVERVIEW** tab in the GUI.
 
-- `hide: ['chemical_formula', 'description']` hides inherited fields from ELNSample that are not needed in this template.
+- `hide: ['chemical_formula', 'description']` hides inherited fields from `ELNSample` that are not needed in this template.
 
 - The `Concentration` quantity adds a numeric field with the `unit` mg/ml, rendered in the GUI using `NumberEditQuantity`.
 

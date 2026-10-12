@@ -36,7 +36,7 @@ Before starting, make sure you have:
 In this tutorial, we will use an example experiment involving the preparation of solution-processed polymer thin films and the measurement of their optical absorption spectrum.
 
 ??? example "About the example experiment used for this exercise"
-    In this exercise, we will work with an example experiment involving the preparation and characterization of poly(3-hexylthiophene-2,5-diyl) ("P3HT") thin films. The experiment consists of three main activities: preparing solutions, depositing thin films, and measuring optical absorption.
+    In this exercise, we will work with an example experiment involving the preparation and characterization of poly(3-hexylthiophene-2,5-diyl) (P3HT) thin films. The experiment consists of three main activities: preparing solutions, depositing thin films, and measuring optical absorption.
 
     1. **Preparing solutions:** The polymer powder is mixed with a solvent in predefined quantities to achieve the desired concentration. A scale is used to accurately weigh the polymer powder, ensuring precise solution concentration.
 
@@ -79,7 +79,7 @@ The following sections refer to these steps and tell you which built-in schema a
 
 ### Create a substance entry
 
-Now, let's create an entry for the **P3HT powder**. Follow the steps described above to create an entry: select *Substance ELN* as the built-in schema and enter `P3HT_powder` as the **Filename**.
+Now, let's create an entry for the **P3HT powder**. Follow the steps described above to create an entry: select **Substance ELN** as the built-in schema and enter `P3HT_powder` as the **Filename**.
 
 ??? info "Input fields offered by the built-in schema *Substance ELN*"
     The built-in schema *Substance ELN* provides the following fields for input:
@@ -90,7 +90,7 @@ Now, let's create an entry for the **P3HT powder**. Follow the steps described a
     - **detailed substance description:** A free text field for additional information.
     - **Tags:** User-selected tags to improve searchability.
 
-    Additional subsections available in the *data* subsection include:
+    Additional subsections available in the `data` subsection include:
 
     - **Elemental composition:** Define the chemical composition with atomic and mass fractions.
     - **Pure substance:** Specify if the material is a pure substance purchased from an external vendor, with fields like:
@@ -108,7 +108,7 @@ NOMAD has already filled in the **substance name** (from the filename), the **Da
 1. In the **detailed substance description** field, describe the substance, e.g., `Regioregular poly(3-hexylthiophene-2,5-diyl) powder for preparing P3HT solutions.` You can also add images to this field.
 2. Click the **(+)** button at the right end of the **Tags** field, and enter a tag, e.g., `polymer`. Tags improve the searchability of your entries.
 3. Under **Subsections**, click the **(+)** button next to **Pure substance**.
-4. Click **CHANGE SCHEMA** and select *PubChem Pure Substance Section*.
+4. Click **CHANGE SCHEMA** and select **PubChem Pure Substance Section**.
 5. Click the check mark (✓) next to **CHANGE SCHEMA** to confirm your selection.
 6. In the **substance name** field of the pure substance, enter `P3HT`.
 7. Click **SAVE**.
@@ -129,7 +129,7 @@ NOMAD searches PubChem for the substance name and fills in the other fields, e.g
 
 ### Create a sample entry
 
-Now, let's create an entry for the **P3HT thin film**. Follow the steps described above to create an entry: select *Generic Sample ELN* as the built-in schema and enter `P3HT_Thin_Film` as the **Filename**.
+Now, let's create an entry for the **P3HT thin film**. Follow the steps described above to create an entry: select **Generic Sample ELN** as the built-in schema and enter `P3HT_Thin_Film` as the **Filename**.
 
 ??? info "Input fields offered by the built-in schema *Generic Sample ELN*"
     The built-in schema *Generic Sample ELN* provides the following fields for input:
@@ -140,7 +140,7 @@ Now, let's create an entry for the **P3HT thin film**. Follow the steps describe
     - **Description:** A free text field for additional information.
     - **Tags:** User-selected tags to improve searchability.
 
-    Additional subsections available in the *data* subsection include:
+    Additional subsections available in the `data` subsection include:
 
     - **Elemental composition:** Define the chemical composition with atomic and mass fractions.
     - **Components:** Specify the components used to create the sample, including raw materials or system components.
@@ -149,7 +149,7 @@ Now, let's create an entry for the **P3HT thin film**. Follow the steps describe
 Fill in the fields of the sample entry in the same way as for the substance entry. In addition, reference the substance from which the thin film is made:
 
 1. Under **Subsections**, click the **(+)** button next to **Components**.
-2. Click **CHANGE SCHEMA** and select *SystemComponent*.
+2. Click **CHANGE SCHEMA** and select **SystemComponent**.
 3. Click the check mark (✓) next to **CHANGE SCHEMA** to confirm your selection.
 4. Click the pencil icon at the right end of the **System** field.
 5. In the **Select section** dialog, click **This project** to show only the entries of your project.
@@ -172,7 +172,7 @@ You can reference other entries in the same way wherever an ELN field refers to 
 
 ### Create an instrument entry
 
-Now, let's create an entry for the **balance** that is used to weigh the polymer powder. Follow the steps described above to create an entry: select *Instrument ELN* as the built-in schema and enter `Balance` as the **Filename**.
+Now, let's create an entry for the **balance** that is used to weigh the polymer powder. Follow the steps described above to create an entry: select **Instrument ELN** as the built-in schema and enter `Balance` as the **Filename**.
 
 ??? info "Input fields offered by the built-in schema *Instrument ELN*"
     The built-in schema *Instrument ELN* provides the following fields for input:
@@ -183,7 +183,7 @@ Now, let's create an entry for the **balance** that is used to weigh the polymer
     - **Description:** A free text field for additional information.
     - **Tags:** User-selected tags to improve searchability.
 
-    Additional subsections available in the *data* subsection include:
+    Additional subsections available in the `data` subsection include:
 
     - **Instrument identifiers:** Identifiers of the instrument, from which NOMAD creates the **ID**.
 
@@ -201,7 +201,7 @@ As for the substance entry, NOMAD has already filled in the **name**, the **Date
 
 ### Create a process entry
 
-Now, let's create an entry for the **preparation of the P3HT solution**. Follow the steps described above to create an entry: select *Material Processing ELN* as the built-in schema and enter `Preparation_of_P3HT_solution` as the **Filename**.
+Now, let's create an entry for the **preparation of the P3HT solution**. Follow the steps described above to create an entry: select **Material Processing ELN** as the built-in schema and enter `Preparation_of_P3HT_solution` as the **Filename**.
 
 ??? info "Input fields offered by the built-in schema *Material Processing ELN*"
     The *Material Processing ELN* schema provides the following fields for input:
@@ -214,7 +214,7 @@ Now, let's create an entry for the **preparation of the P3HT solution**. Follow 
     - **ending time:** Allows entry of a date/time stamp for the end of the process.
     - **Tags:** User-selected tags to improve searchability.
 
-    Additional subsections available in the *data* subsection include:
+    Additional subsections available in the `data` subsection include:
 
     - **Steps:** Define the step-by-step procedure for the material processing.
     - **Instruments:** List the instruments used in the process.
@@ -224,7 +224,7 @@ Now, let's create an entry for the **preparation of the P3HT solution**. Follow 
 Fill in the fields of the process entry: set the **starting Time** to when the process started, and fill in, e.g., **Location**, **Description**, and **Tags**. In addition, reference the balance that you used to weigh the powder:
 
 1. Under **Subsections**, click the **(+)** button next to **Instruments**.
-2. Keep *InstrumentReference* and click the check mark (✓) next to **CHANGE SCHEMA** to confirm it.
+2. Keep **InstrumentReference** and click the check mark (✓) next to **CHANGE SCHEMA** to confirm it.
 3. Reference the `Balance` entry in the **instrument reference** field, in the same way as you referenced the P3HT powder in the sample entry.
 4. Click **SAVE**, and then click **data** in the path at the top to return to the process.
 
@@ -261,7 +261,7 @@ NOMAD uses the steps to create a workflow graph of the process. To see it, click
 
 ### Create a measurement entry
 
-Now, let's create an entry for the **optical absorption measurement**. Follow the steps described above to create an entry: select *Measurement ELN* as the built-in schema and enter `Optical_absorption_measurement` as the **Filename**.
+Now, let's create an entry for the **optical absorption measurement**. Follow the steps described above to create an entry: select **Measurement ELN** as the built-in schema and enter `Optical_absorption_measurement` as the **Filename**.
 
 ??? info "Input fields offered by the built-in schema *Measurement ELN*"
     - **name:** Automatically used as the entry name.
@@ -271,7 +271,7 @@ Now, let's create an entry for the **optical absorption measurement**. Follow th
     - **Location:** A text field specifying the location where the measurement took place.
     - **Tags:** User-selected tags to improve searchability.
 
-    Additional subsections available in the *data* subsection include:
+    Additional subsections available in the `data` subsection include:
 
     - **Steps:** Define the step-by-step procedure for the measurement.
     - **Samples:** Specify the samples that are being measured.
@@ -281,7 +281,7 @@ Now, let's create an entry for the **optical absorption measurement**. Follow th
 
 Fill in the fields of the measurement entry, e.g., **starting Time**, **Location**, **Description**, and **Tags**. In addition:
 
-1. Under **Subsections**, click the **(+)** button next to **Instruments**, keep *InstrumentReference*, and click the check mark (✓) next to **CHANGE SCHEMA**.
+1. Under **Subsections**, click the **(+)** button next to **Instruments**, keep **InstrumentReference**, and click the check mark (✓) next to **CHANGE SCHEMA**.
 2. Reference the `Optical_spectrometer` entry from the instrument task in the **instrument reference** field, in the same way as you referenced entries before, and click **SAVE**.
 3. In the path at the top, click **data**, and then click the **(+)** button next to **Results**.
 4. Enter a **name** for the result, e.g., `Absorption spectrum`, and describe the outcome of the measurement in the **Result** field, e.g., `Absorption maximum at 552 nm.` You can also add images to this field.
@@ -293,7 +293,7 @@ Fill in the fields of the measurement entry, e.g., **starting Time**, **Location
 
 Once all substances, samples, processes, and measurements are defined, you can integrate them into a structured workflow using the *Experiment ELN* schema. The *Experiment ELN* schema allows linking *processes* and *measurements* into a single entry for a comprehensive overview of your experimental workflow.
 
-Now, create an entry for the **characterization of P3HT**. Follow the steps described above to create an entry: select *Experiment ELN* as the built-in schema and enter `Characterization_of_P3HT` as the **Filename**.
+Now, create an entry for the **characterization of P3HT**. Follow the steps described above to create an entry: select **Experiment ELN** as the built-in schema and enter `Characterization_of_P3HT` as the **Filename**.
 
 ??? info "Input fields offered by the built-in schema *Experiment ELN*"
     - **name:** Automatically used as the entry name.
@@ -303,7 +303,7 @@ Now, create an entry for the **characterization of P3HT**. Follow the steps desc
     - **Location:** A text field specifying the location where the experiment took place.
     - **Tags:** User-selected tags to improve searchability.
 
-    Additional subsections available in the *data* subsection include:
+    Additional subsections available in the `data` subsection include:
 
     - **Steps:** Reference the processes and measurements that make up the experiment.
     - **Experiment identifiers:** Identifiers of the experiment, from which NOMAD creates the **ID**.
@@ -368,11 +368,11 @@ In the **ENTRIES** tab, you can enter specific keywords in the search bar to fin
 
     - Filter by built-in schema used to create the entry.
 
-        For example: *ELNInstrument*, *ELNSubstance*, *ELNSample*, etc.
+        For example: `ELNInstrument`, `ELNSubstance`, `ELNSample`, etc.
 
     - Filter by custom tags, where you assign common tags to related entries for easy grouping.
 
-        For example: tag all solvents as "my_solvent" or all samples as "my_samples".
+        For example: tag all solvents as `my_solvent` or all samples as `my_samples`.
 
     Using these filters helps you quickly locate specific entries in your ELN.
 
