@@ -9,7 +9,7 @@ asynchronous interface.
 ## Before you begin
 
 Install the `nomad-lab` Python package as described in
-[How-to guides > ... > Install a NOMAD Oasis > How to install the NOMAD Python library](../../oasis/install.md#how-to-install-the-nomad-python-library).
+[How-to guides > ... > Install > How to install the NOMAD Python Library](../../oasis/install.md#how-to-install-the-nomad-python-library).
 
 The examples query public data and do not require authentication. By default,
 the client connects to NOMAD Central. To use another NOMAD deployment, set its
@@ -57,7 +57,8 @@ archive_query = ArchiveQuery(
 )
 ```
 
-Use the same [query syntax as the Entries API](./api.md#queries). Request only
+Use the query syntax described in
+[How-to guides > ... > Use the API > Queries](./api.md#queries). Request only
 the archive data that your analysis needs: a narrowly scoped `required`
 selection reduces both server work and transferred data.
 

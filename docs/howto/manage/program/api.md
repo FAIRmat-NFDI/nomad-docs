@@ -6,9 +6,9 @@ The GUI organizes files and entries in projects. The API represents each project
 as an upload resource, so endpoint paths, request fields, and response fields retain
 terms such as `uploads` and `upload_id`.
 
-To access the processed data with our client library `nomad-lab` follow
-[How to access processed data](archive_query.md). You can also watch our
-[video tutorial on the API](../../../tutorial/access_api.md).
+To access processed data with the `nomad-lab` client library, follow
+{{ nav_link("howto/manage/program/archive_query.md", breadcrumb=True) }}. You
+can also watch [Tutorials > Accessing data via API](../../../tutorial/access_api.md).
 
 ## Different options to use the API
 
@@ -20,7 +20,7 @@ accessed, downloaded, searched for, etc. via
 [HTTP requests](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol){:target="_blank" rel="noopener"}.
 
 You can get an overview on all NOMAD APIs on the
-[API page]({{ nomad_url() }}/../gui/analyze/apis). We will focus here on NOMAD's main
+[NOMAD APIs page]({{ nomad_url() }}/../gui/analyze/apis){:target="_blank" rel="noopener"}. We will focus here on NOMAD's main
 API (v1). In fact, this API is also used by the web interface and should provide
 everything you need.
 
@@ -29,8 +29,9 @@ trade-offs between expressiveness, learning curve, and convenience.
 
 ### You can use your browser
 
-For example to see the metadata for all entries with elements *Ti* and *O* go here:
-[{{ nomad_url() }}/v1/entries?elements=Ti&elements=O]({{ nomad_url() }}/v1/entries?elements=Ti&elements=O)
+For example, open an
+[Entries API request for titanium and oxygen]({{ nomad_url() }}/v1/entries?elements=Ti&elements=O){:target="_blank" rel="noopener"}
+to see the matching Entry metadata.
 
 ### Use `curl` or `wget`
 
@@ -49,14 +50,15 @@ See [Using `requests`](#using-requests).
 
 ### Use our dashboard
 
-The NOMAD API has an [OpenAPI dashboard]({{ nomad_url() }}/v1). This is an interactive
+The NOMAD API has an [OpenAPI dashboard]({{ nomad_url() }}/v1){:target="_blank" rel="noopener"}. This is an interactive
 documentation of all API functions that allows you to try these functions in the browser.
 
 ### Use NOMAD's Python package
 
-Install the [NOMAD Python client library](../../../howto/oasis/install.md#how-to-install-the-nomad-python-library) and use its `ArchiveQuery`
-functionality for a more convenient query based access of archive data following the
-[How-to access the processed data](archive_query.md) guide.
+Install the NOMAD Python client library as described in
+[How-to guides > ... > Install > How to install the NOMAD Python Library](../../../howto/oasis/install.md#how-to-install-the-nomad-python-library),
+then follow {{ nav_link("howto/manage/program/archive_query.md", breadcrumb=True) }}
+to use its `ArchiveQuery` functionality for convenient access to archive data.
 
 ## Authentication and authorization
 
@@ -67,13 +69,15 @@ must authenticate you and verify that you have the required permissions.
 For **programmatic API usage**, such as scripts, notebooks, CLI workflows, or CI jobs,
 the recommended authentication mechanism is via **tokens**.
 
-Read more about [acquiring and managing tokens here](./auth.md).
+Acquire and manage tokens as described in
+{{ nav_link("howto/manage/program/auth.md", breadcrumb=True) }}.
 
 ## Using `requests`
 
 If you are comfortable with REST APIs and using Pythons `requests` library, this example
 demonstrates the basic concepts of NOMAD's main API. You can get more documentation and
-details on all functions from the [API dashboard]({{ nomad_url() }}/v1/).
+details on all functions from the
+[OpenAPI dashboard]({{ nomad_url() }}/v1/){:target="_blank" rel="noopener"}.
 
 The following issues a search query for all entries that have both *Ti* and *O*
 among the elements of their respective materials. It restricts the results to
@@ -236,10 +240,11 @@ The result will look like this:
 ```
 
 You can work with the results in the given JSON (or respective Python dict/list) data
-already. If you have [NOMAD's Python library](../../../howto/oasis/install.md#how-to-install-the-nomad-python-library) installed, you can take the
-archive data and use the Python interface. The
-[schema-aware Python objects](./archive_query.md#download-and-inspect-the-results)
-will help with code-completion (e.g. in notebook environments), resolve archive references
+already. If you have the NOMAD Python library installed as described in
+[How-to guides > ... > Install > How to install the NOMAD Python Library](../../../howto/oasis/install.md#how-to-install-the-nomad-python-library),
+you can take the archive data and use the Python interface. As described in
+[How-to guides > ... > Access processed data > Download and inspect the results](./archive_query.md#download-and-inspect-the-results),
+schema-aware Python objects help with code-completion (e.g. in notebook environments), resolve archive references
 (e.g. from workflow to calculation to system), and allow unit conversion:
 
 ```py
@@ -268,8 +273,8 @@ the API:
 - Raw files, the files as they were uploaded to NOMAD.
 - Archive data, all of the extracted data for an entry.
 
-There are also different entities (see also [Datamodel](../../../explanation/basics.md))
-with different functions in the API:
+{{ nav_link("explanation/basics.md", breadcrumb=True) }} describes the different
+entities that have functions in the API:
 
 - Entries
 - Uploads
@@ -286,7 +291,7 @@ are:
 
 ## Common concepts
 
-The [Using `requests`](#using-requests) above, showed how to execute a basic search.
+The [Using `requests`](#using-requests) section shows how to execute a basic search.
 This includes some fundamental concepts that can be applied to many parts of the API.
 Let's discuss some of the common concepts.
 
@@ -302,7 +307,8 @@ included. Second, the response will contain the results under the key `data`.
 
 All functions that allow a query will also allow to specify the `owner`. Depending on the
 API function, its default value will be mostly `visible`. Some values are only available
-if you are [logged in](#authentication-and-authorization).
+if you are authenticated. See
+[Authentication and authorization](#authentication-and-authorization).
 
 {{ doc_snippet('owner')}}
 
@@ -371,15 +377,15 @@ certain query by paginating.
 
 ## Search for entries
 
-See [Using `requests`](#using-requests) for a typical search example. Combine the [different
-concepts](#common-concepts) above to create the queries that you need.
+See [Using `requests`](#using-requests) for a typical search example. Combine the
+[Common concepts](#common-concepts) to create the queries that you need.
 
 Searching for entries is typically just an initial step. Once you know what entries exist
 you'll probably want to do one of the following things.
 
 ## Download raw files
 
-You can use [queries](#queries) to download raw files, but typically you don't want to
+You can use [Queries](#queries) to download raw files, but typically you don't want to
 download file by file or entry by entry. Therefore, we allow to download a large set of
 files in one big zip-file. Here, you might want to use a program like *curl* to download
 directly from the shell:
@@ -390,7 +396,7 @@ curl "{{ nomad_url() }}/v1/entries/raw?results.material.elements=Ti&results.mate
 
 ## Access processed data (archives)
 
-Above under [Using `requests`](#using-requests), you've already learned how to access archive
+In [Using `requests`](#using-requests), you learned how to access archive
 data. A special feature of the archive API functions is that you can define what is
 `required` from the archives.
 
@@ -439,8 +445,8 @@ or 10 concurrent requests.
 
 Consider to use endpoints that allow you to retrieve full
 pages of resources, instead of endpoints that force you to access resources one at a time.
-See also the sections on [types of data](#different-kinds-of-data) and
-[pagination](#pagination).
+See also [Different kinds of data](#different-kinds-of-data) and
+[Pagination](#pagination).
 
 However, pagination also has its limits and you might ask for pages that are too large.
 If you get responses in the 400 range, e.g. **422 Unprocessable Content** or **400 Bad request**,
@@ -451,9 +457,11 @@ page size.
 ## User Groups
 
 You can create a user group and add other users to that group via the API. These groups
-can be added as [project collaborators](../gui/upload.md#visibility-and-access) to make it
-easier to give viewing or editing rights for a project to multiple users at once, e.g.
-a working group. In the API, project collaborators are represented as upload members.
+can be added as Project collaborators, as described in
+[How-to guides > ... > Create and publish projects > Visibility and access](../gui/upload.md#visibility-and-access),
+to make it easier to give viewing or editing rights for a Project to multiple users at
+once, e.g. a working group. In the API, Project collaborators are represented as upload
+members.
 
 To create a group, send an authenticated POST request to `/groups` including the
 `group_name` and a list of user IDs in the `members` field:
@@ -485,5 +493,7 @@ Editing is similar but at another endpoint:
 }
 ```
 
-See the [OpenAPI dashboard]({{ nomad_url() }}/v1/extensions/docs#/groups) for a concise
+See the
+[OpenAPI dashboard]({{ nomad_url() }}/v1/extensions/docs#/groups){:target="_blank" rel="noopener"}
+for a concise
 summary of the endpoints.
