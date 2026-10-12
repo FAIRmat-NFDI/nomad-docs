@@ -26,11 +26,28 @@ everything you need.
 There are different tools and libraries to use the NOMAD API that come with different
 trade-offs between expressiveness, learning curve, and convenience.
 
-### You can use your browser
+### Build a query in the GUI
 
-For example, open an
-[Entries API request for titanium and oxygen]({{ nomad_url() }}/v1/entries?elements=Ti&elements=O){:target="_blank" rel="noopener"}
-to see the matching Entry metadata.
+The GUI can translate filters into an API query:
+
+1. Open the NOMAD GUI, select **Apps**, and open **Entries** or another search
+   app.
+2. Use the filter bar or the filter controls to restrict the displayed results.
+   The active filters appear as chips above the results.
+3. Select the `<>` **View API call for the query** button next to the filter
+   chips.
+4. Inspect the **API** dialog:
+
+     - **Query** contains the API-compatible `owner` and `query` generated from
+     the active filters.
+     - **Request** shows the HTTP method, endpoint URL, and full request body used
+     to render the page, including display-related options such as pagination
+     and aggregations.
+     - **Response** contains the data returned by that request.
+
+Use **Query** as a starting point for your own request. Include the additional
+fields from **Request** only when your script needs the corresponding result or
+aggregation settings.
 
 ### Use `curl` or `wget`
 
@@ -47,7 +64,7 @@ curl "{{ nomad_url() }}/v1/entries?results.material.elements=Ti&results.material
 communicate with REST APIs. Install with `pip install requests`.
 See [Using `requests`](#using-requests).
 
-### Use our dashboard
+### Use the OpenAPI dashboard
 
 The NOMAD API has an [OpenAPI dashboard]({{ nomad_url() }}/v1){:target="_blank" rel="noopener"}. This is an interactive
 documentation of all API functions that allows you to try these functions in the browser.
