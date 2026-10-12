@@ -375,19 +375,24 @@ def define_env(env):
             category.append(parser)
 
         def render_category(name: str, category: list[ParserEntryPoint]) -> str:
-            return f'## {name}s\n\n' + '\n\n'.join([
-                render_parser(parser) for parser in category
-            ])
+            return f'## {name}s\n\n' + '\n\n'.join(
+                [render_parser(parser) for parser in category]
+            )
 
         return (
-            ', '.join([
-                f'[{parser.code_name}](#{slugify(parser.code_name, "-")})'
-                for parser in parsers
-            ])
+            ', '.join(
+                [
+                    f'[{parser.code_name}](#{slugify(parser.code_name, "-")})'
+                    for parser in parsers
+                ]
+            )
             + '\n\n'
-            + '\n\n'.join([
-                render_category(name, category) for name, category in categories.items()
-            ])
+            + '\n\n'.join(
+                [
+                    render_category(name, category)
+                    for name, category in categories.items()
+                ]
+            )
         )
 
     @env.macro
@@ -427,10 +432,12 @@ def define_env(env):
                 category = 'schema package'
             categories.setdefault(category, []).append(plugin_entry_point)
 
-        return '\n\n'.join([
-            f'**{category}**: {", ".join([render_plugin(plugin) for plugin in plugins])}'
-            for category, plugins in categories.items()
-        ])
+        return '\n\n'.join(
+            [
+                f'**{category}**: {", ".join([render_plugin(plugin) for plugin in plugins])}'
+                for category, plugins in categories.items()
+            ]
+        )
 
     @env.macro
     def metainfo_package(path, heading=None, hide=[]):  # pylint: disable=unused-variable

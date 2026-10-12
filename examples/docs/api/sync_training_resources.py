@@ -158,20 +158,22 @@ def fetch_training_resources(
             description = _strip_html(d.get('description') or '')
             date_created = d.get('date_created')
 
-            out.append({
-                'entry_id': entry_id,
-                'upload_id': upload_id,
-                'title': title,
-                'identifier': identifier,
-                'date_created': date_created,
-                'description': description,
-                'tags': tags,
-                'keyword': d.get('keyword') or [],
-                'subject': d.get('subject') or [],
-                'educational_level': d.get('educational_level') or [],
-                'instructional_method': d.get('instructional_method') or [],
-                'learning_resource_type': d.get('learning_resource_type') or [],
-            })
+            out.append(
+                {
+                    'entry_id': entry_id,
+                    'upload_id': upload_id,
+                    'title': title,
+                    'identifier': identifier,
+                    'date_created': date_created,
+                    'description': description,
+                    'tags': tags,
+                    'keyword': d.get('keyword') or [],
+                    'subject': d.get('subject') or [],
+                    'educational_level': d.get('educational_level') or [],
+                    'instructional_method': d.get('instructional_method') or [],
+                    'learning_resource_type': d.get('learning_resource_type') or [],
+                }
+            )
 
         page_after_value = (resp.get('pagination') or {}).get('next_page_after_value')
         if not page_after_value:

@@ -98,13 +98,15 @@ def test_navigation_index_renders_breadcrumb_links(target, expected):
 def test_navigation_index_renders_current_section_list_without_current_page():
     navigation = NavigationIndex(NAV)
 
-    assert navigation.list(None, 'tutorial/overview.md') == '\n'.join([
-        '- **Upload data**',
-        '    - [With the GUI](upload.md)',
-        '- **Develop plugins**',
-        '    - **Create a parser**',
-        '        - [Parser tutorial](parser.md)',
-    ])
+    assert navigation.list(None, 'tutorial/overview.md') == '\n'.join(
+        [
+            '- **Upload data**',
+            '    - [With the GUI](upload.md)',
+            '- **Develop plugins**',
+            '    - **Create a parser**',
+            '        - [Parser tutorial](parser.md)',
+        ]
+    )
 
 
 def test_navigation_index_renders_selected_child_section_list():
@@ -163,10 +165,12 @@ def test_navigation_index_wraps_markdown_targets_containing_spaces():
 
 def test_navigation_index_rejects_duplicate_source_paths():
     with pytest.raises(NavigationError, match='occurs more than once'):
-        NavigationIndex([
-            {'First': 'topic/page.md'},
-            {'Second': r'topic\page.md'},
-        ])
+        NavigationIndex(
+            [
+                {'First': 'topic/page.md'},
+                {'Second': r'topic\page.md'},
+            ]
+        )
 
 
 def test_navigation_index_rejects_pages_without_explicit_titles():

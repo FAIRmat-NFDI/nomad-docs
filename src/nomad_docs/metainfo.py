@@ -127,11 +127,13 @@ def section_markdown_from_section_cls(
         result += '**properties**:\n\n'
         result += '|name|type| |\n'
         result += '|----|----|-|\n'
-        result += ''.join([
-            property_row(property)
-            for property in properties
-            if property.name not in hide
-        ])
+        result += ''.join(
+            [
+                property_row(property)
+                for property in properties
+                if property.name not in hide
+            ]
+        )
         result += '\n\n'
 
     # Not every section class derives from ArchiveSection, so `normalize` may be absent.
@@ -140,13 +142,15 @@ def section_markdown_from_section_cls(
         if normalize.__doc__:
             result += f'**normalization**: \n\n{utils.strip(normalize.__doc__)}\n\n'
         else:
-            result += f'**normalization** without further documentation\n\n'
+            result += '**normalization** without further documentation\n\n'
 
     return result
 
 
 def package_markdown_from_package(pkg):
-    return ''.join([
-        section_markdown_from_section_cls(section_def.section_cls, pkg=pkg)
-        for section_def in pkg.section_definitions
-    ])
+    return ''.join(
+        [
+            section_markdown_from_section_cls(section_def.section_cls, pkg=pkg)
+            for section_def in pkg.section_definitions
+        ]
+    )
