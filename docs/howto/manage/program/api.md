@@ -140,26 +140,21 @@ creation, scopes, and secure handling.
 ## Discover available endpoints
 
 Each deployment provides interactive API documentation generated from its
-current OpenAPI contract. Open the [core API dashboard]({{ nomad_url() }}/v1/){:target="_blank" rel="noopener"}
+current OpenAPI contract. Open the core [NOMAD API dashboard]({{ nomad_url() }}/v1/){:target="_blank" rel="noopener"}
 to inspect request and response models or try an operation in the browser.
 
 The GUI's [APIs page]({{ nomad_url() }}/../gui/v2/apis){:target="_blank" rel="noopener"}
 also lists the core API and APIs supplied by installed plugins. The available
 plugin APIs therefore depend on the NOMAD deployment.
 
-## Choose the next workflow
-
-| Goal | Continue with |
-| --- | --- |
-| Understand shared REST request and response fields | {{ nav_link("reference/api.md", breadcrumb=True) }} |
-| Download Projects, raw files, or processed archives | {{ nav_link("howto/manage/program/download.md", breadcrumb=True) }} |
-| Query processed archives as schema-aware Python objects | {{ nav_link("howto/manage/program/archive_query.md", breadcrumb=True) }} |
-| Create, update, or publish Projects with Python | {{ nav_link("howto/manage/program/publish_python.md", breadcrumb=True) }} |
-| Traverse related NOMAD resources in one request | {{ nav_link("howto/manage/program/graph_api.md", breadcrumb=True) }} |
-| Create or update user groups | [Reference > REST API > User groups](../../../reference/api.md#user-groups) |
-
 ## Related pages
 
-- {{ nav_link("reference/api.md", breadcrumb=True) }} — base URLs, resources, query syntax, ownership, pagination, errors, and limits.
-- {{ nav_link("explanation/data.md", breadcrumb=True) }} — the relationship between Projects, Entries, archives, and schemas.
-- {{ nav_link("explanation/auth.md", breadcrumb=True) }} — authentication and authorization concepts.
+- {{ nav_link("howto/manage/program/download.md", breadcrumb=True) }} - download Projects, raw files, or processed archives
+- {{ nav_link("howto/manage/program/archive_query.md", breadcrumb=True) }} - query processed archives as schema-aware Python objects 
+- {{ nav_link("howto/manage/program/publish_python.md", breadcrumb=True) }} - create, update, or publish Projects with Python 
+- {{ nav_link("howto/manage/program/graph_api.md", breadcrumb=True) }} - traverse related NOMAD resources in one request 
+- {{ nav_link("explanation/data.md", breadcrumb=True) }} - the relationship between Projects, Entries, archives, and schemas.
+- {{ nav_link("explanation/auth.md", breadcrumb=True) }} - authentication and authorization concepts.
+- {{ nav_link("reference/api.md", breadcrumb=True) }} - understand shared REST request and response fields: base URLs, resources, query syntax, ownership, pagination, errors, and limits.
+- [Reference > REST API > User groups](../../../reference/api.md#user-groups) - create or update user groups
+
