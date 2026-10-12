@@ -149,12 +149,10 @@ plugin APIs therefore depend on the NOMAD deployment.
 
 ## Related pages
 
-- {{ nav_link("howto/manage/program/download.md", breadcrumb=True) }} - download Projects, raw files, or processed archives
-- {{ nav_link("howto/manage/program/archive_query.md", breadcrumb=True) }} - query processed archives as schema-aware Python objects 
-- {{ nav_link("howto/manage/program/publish_python.md", breadcrumb=True) }} - create, update, or publish Projects with Python 
-- {{ nav_link("howto/manage/program/graph_api.md", breadcrumb=True) }} - traverse related NOMAD resources in one request 
-- {{ nav_link("explanation/data.md", breadcrumb=True) }} - the relationship between Projects, Entries, archives, and schemas.
-- {{ nav_link("explanation/auth.md", breadcrumb=True) }} - authentication and authorization concepts.
-- {{ nav_link("reference/api.md", breadcrumb=True) }} - understand shared REST request and response fields: base URLs, resources, query syntax, ownership, pagination, errors, and limits.
-- [Reference > REST API > User groups](../../../reference/api.md#user-groups) - create or update user groups
-
+- {{ nav_link("howto/manage/program/download.md", breadcrumb=True) }} — download Projects, raw files, or processed archives.
+- {{ nav_link("howto/manage/program/archive_query.md", breadcrumb=True) }} — query processed archives as schema-aware Python objects.
+- {{ nav_link("howto/manage/program/publish_python.md", breadcrumb=True) }} — create, update, or publish Projects with Python.
+- {{ nav_link("howto/manage/program/graph_api.md", breadcrumb=True) }} — traverse related NOMAD resources in one request.
+- {{ nav_link("explanation/data.md", breadcrumb=True) }} — the relationship between Projects, Entries, archives, and schemas.
+- {{ nav_link("explanation/auth.md", breadcrumb=True) }} — authentication and authorization concepts.
+- {{ nav_link("reference/api.md", breadcrumb=True) }} — shared REST request and response fields, including base URLs, resources, query syntax, ownership, pagination, errors, limits, and user-group endpoints.
