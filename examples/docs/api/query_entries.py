@@ -25,7 +25,7 @@ response = requests.post(
 response.raise_for_status()
 payload = response.json()
 
-print(f"Total matching Entries: {payload['pagination']['total']}")
+print(f'Total matching Entries: {payload["pagination"]["total"]}')
 for entry in payload['data']:
     formula = entry['results']['material']['chemical_formula_hill']
     print(entry['entry_id'], formula)
