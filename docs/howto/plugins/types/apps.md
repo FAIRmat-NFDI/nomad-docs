@@ -161,6 +161,58 @@ These are the available widgets:
 - [`WidgetBoxPlot`](#widgetboxplot): Displays a box plot for a numerical search quantity, optionally grouped and subgrouped by a categorical search quantity.
 - [`WidgetPeriodicTable`](#widgetperiodictable): Displays a periodic table with occurrence of each element using a search quantity that contains chemical element names.
 
+
+#### Responsive design for widgets
+
+NOMAD can be used on a wide variety of devices from desktops to mobile phones. While most of the interface already automatically adjusts based on screen sizes, the widgets will usually need a manual layout because they are placed on a fixed grid.
+
+NOMAD configures the following breakpoints for different dashboard sizes:
+
+| Breakpoint | Grid width (px) | Columns | Typical environment       |
+| ---------- | --------------- | ------- | ------------------------- |
+| `sm`       | < 1065          | 12      | Mobile phones / tablets   |
+| `md`       | 1065 – 1420     | 18      | Tablets / smaller laptops |
+| `lg`       | 1420 – 1775     | 24      | Desktops (Full HD)        |
+| `xl`       | 1775 – 2130     | 30      | Large desktops            |
+| `xxl`      | ≥ 2130          | 36      | 4K and ultrawide displays |
+
+A few things to keep in mind when designing a layout:
+
+- The **grid width is the width of the widget area, not the width of the browser window**. Other interface elements – like the the search menu on the left – also take up space.
+- The grid cells are square: the height of a row is the same as the width of a column. This means that `h` and `w` use the same unit, and a widget with `w=12, h=6` is always twice as wide as it is tall.
+- Each widget is at least 3 columns wide and 3 rows tall, unless you change this with `minW` and `minH`.
+
+For each breakpoint, you can define a separate layout. You do not need to provide a layout for each size: in a typical scenario you would define a layout for desktops using `lg`, and another one for phones using `sm`. A breakpoint without a layout copies the layout from the nearest larger breakpoint that has one. If there is no larger one, it uses the nearest smaller one instead. If the copied layout does not look right on some screen size, add a layout for that breakpoint too.
+
+In this example, two widgets are placed side by side on desktops and stacked on top of each other on phones:
+
+<!-- fmt: off -->
+```python
+from nomad.config.models.ui import Dashboard, Layout, WidgetPeriodicTable, WidgetTerms
+
+dashboard = Dashboard(
+    widgets=[
+        WidgetPeriodicTable(
+            search_quantity='results.material.elements',
+            layout={
+                'lg': Layout(x=0, y=0, w=12, h=6),  # Desktop: left half
+                'sm': Layout(x=0, y=0, w=12, h=6),  # Phone: full width, on top
+            },
+        ),
+        WidgetTerms(
+            search_quantity='results.method.simulation.program_name',
+            layout={
+                'lg': Layout(x=12, y=0, w=12, h=6),  # Desktop: right half
+                'sm': Layout(x=0, y=6, w=12, h=6),  # Phone: full width, below
+            },
+        ),
+    ]
+)
+```
+<!-- fmt: on -->
+
+Here the `xl` and `xxl` breakpoints have no larger breakpoint with a layout, so they use the `lg` layout. The `md` breakpoint also uses the `lg` layout, because `lg` is the nearest larger one.
+
 ### Row actions
 
 You may add specific, always-visible row actions for each result table row. These actions are shown as buttons at the end of the table rows, and can open new pages for different resources linked to the entry. Here is an example of two actions, one opening up a NORTH tool, and the other for opening up a link.
