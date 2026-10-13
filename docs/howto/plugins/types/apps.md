@@ -213,6 +213,12 @@ dashboard = Dashboard(
 
 Here the `xl` and `xxl` breakpoints have no larger breakpoint with a layout, so they use the `lg` layout. The `md` breakpoint also uses the `lg` layout, because `lg` is the nearest larger one.
 
+!!! tip "Testing your layout on different screen sizes"
+
+    - Use the device emulation of your browser's developer tools to try out different screen sizes without switching devices. In Chrome and Edge, open the developer tools (<kbd>F12</kbd>) and toggle the device toolbar (<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>M</kbd>, or <kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>M</kbd> on macOS). In Firefox, open the Responsive Design Mode (<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>M</kbd>, or <kbd>Cmd</kbd>+<kbd>Option</kbd>+<kbd>M</kbd> on macOS). You can then pick a device preset or type in a custom width.
+    - Check every breakpoint you have defined a layout for, and also the ones that copy it from another breakpoint. Slowly resizing the window across the widths in the table above shows you where the layout switches.
+    - Browser zoom (<kbd>Ctrl</kbd>+<kbd>-</kbd> and <kbd>Ctrl</kbd>+<kbd>+</kbd>) changes the width that the page sees. Zooming out to 50% doubles it, which is a quick way to preview the `xl` and `xxl` layouts on a smaller monitor.
+
 ### Row actions
 
 You may add specific, always-visible row actions for each result table row. These actions are shown as buttons at the end of the table rows, and can open new pages for different resources linked to the entry. Here is an example of two actions, one opening up a NORTH tool, and the other for opening up a link.
