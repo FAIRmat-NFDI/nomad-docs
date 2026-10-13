@@ -161,7 +161,6 @@ These are the available widgets:
 - [`WidgetBoxPlot`](#widgetboxplot): Displays a box plot for a numerical search quantity, optionally grouped and subgrouped by a categorical search quantity.
 - [`WidgetPeriodicTable`](#widgetperiodictable): Displays a periodic table with occurrence of each element using a search quantity that contains chemical element names.
 
-
 #### Responsive design for widgets
 
 NOMAD can be used on a wide variety of devices from desktops to mobile phones. While most of the interface already automatically adjusts based on screen sizes, the widgets will usually need a manual layout because they are placed on a fixed grid.
