@@ -1,24 +1,24 @@
 # REST API
 
-This reference summarizes conventions shared by NOMAD's core REST API. The
+This reference summarizes conventions used by the built-in NOMAD API. The
 deployment's OpenAPI document is the authoritative source for individual
 endpoint paths, request models, and response models.
 
 ## API discovery and base URLs
 
 The GUI's [APIs page]({{ nomad_url() }}/../gui/v2/apis){:target="_blank" rel="noopener"}
-lists the core API and APIs contributed by installed plugins. Plugin APIs vary
-between deployments.
+lists the built-in NOMAD API and APIs contributed by installed plugins. Plugin
+APIs vary between deployments.
 
 The built-in NOMAD API is documented through:
 
 - an [interactive OpenAPI dashboard]({{ nomad_url() }}/v1/){:target="_blank" rel="noopener"}; and
 - its [OpenAPI JSON document]({{ nomad_url() }}/v1/openapi.json){:target="_blank" rel="noopener"}.
 
-Core API v1 operations use a base URL ending in `/api/v1`. For example:
+The built-in NOMAD API uses a base URL ending in `/api/v1`. For example:
 
 ```text
-https://nomad-lab.eu/prod/v1/api/v1
+https://nomad-lab.eu/backend/api/v1
 https://nomad-lab.eu/develop/backend/api/v1
 https://<oasis-host>/<optional-prefix>/api/v1
 ```
