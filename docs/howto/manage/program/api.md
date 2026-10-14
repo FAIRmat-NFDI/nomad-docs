@@ -85,9 +85,8 @@ response rather than depend on copied output.
 
 ## Request the next page
 
-The first response contains `pagination.next_page_after_value` when more
-results are available. Pass that opaque value as `page_after_value` in the next
-request:
+Each non-final response contains `pagination.next_page_after_value`. Pass that
+value unchanged as `page_after_value` in the next request:
 
 ```python
 next_value = payload['pagination'].get('next_page_after_value')
