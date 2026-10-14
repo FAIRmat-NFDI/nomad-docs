@@ -65,16 +65,15 @@ Run the script:
 python query_entries.py
 ```
 
-The request body has four independent controls:
+The request body combines four fields:
 
-- `owner` limits the search by publication state and the authenticated user's
-  relationship to the Entries. `public` selects published Entries without an
+- `"owner": "public"` restricts the search to published Entries without an
   embargo.
-- `query` selects Entries whose normalized material contains both titanium and
-  oxygen.
-- `pagination` limits this response to three Entries.
-- `required` limits the returned metadata to each Entry's ID and chemical
-  formula.
+- `query` requires the normalized material to contain both titanium and oxygen.
+- `"page_size": 3` under `pagination` limits the current page to at most three
+  Entries.
+- `required.include` limits the returned metadata to each Entry's ID and
+  chemical formula.
 
 Calling `raise_for_status()` makes the script stop on an unsuccessful HTTP
 response instead of trying to interpret an error as a successful result.
