@@ -60,7 +60,8 @@ Authorization: Bearer <token>
 ```
 
 Create personal access tokens with only the scopes required by the operation.
-The OpenAPI dashboard lists the accepted scopes for each endpoint.
+For the available scopes and how they control access, see
+{{ nav_link("explanation/auth.md", breadcrumb=True) }}.
 
 ## Response layout
 
