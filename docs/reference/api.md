@@ -303,8 +303,8 @@ another. When the server applies a limit, reduce concurrency or page size as
 appropriate and retry temporary responses with bounded backoff. Respect
 `Retry-After` when the response provides it.
 
-Clients should set timeouts, call `raise_for_status()` or perform equivalent
-status handling, and report the response body when a request fails.
+Set request timeouts, call `raise_for_status()` or perform equivalent status
+handling, and inspect the response body for error details when a request fails.
 
 ## Related pages
 
