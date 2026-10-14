@@ -9,7 +9,7 @@ Reference pages provide authoritative technical details. Use them when you need 
 ## Topics
 
 {{ nav_list(descriptions={
-    "reference/api.md": "the core REST API: resources, requests, queries, pagination, errors, and API usage limits.",
+    "reference/api.md": "the built-in NOMAD API: resources, requests, queries, pagination, errors, and API usage limits.",
     "reference/metainfo.md": "the Metainfo schema language: definition attributes, quantity types, and conventions.",
     "reference/config.md": "deployment and application configuration options.",
     "reference/annotations.md": "metainfo annotations and their arguments.",
