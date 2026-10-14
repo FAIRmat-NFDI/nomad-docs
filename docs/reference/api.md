@@ -298,10 +298,10 @@ Common HTTP status categories are:
 | `503` | Service unavailable, which can include a concurrency or temporary-capacity limit. |
 
 Page-size, request-rate, and concurrency limits are deployment and endpoint
-specific. Do not document one value as universal. When the server applies a
-limit, reduce concurrency or page size as appropriate and retry temporary
-responses with bounded backoff. Respect `Retry-After` when the response
-provides it.
+specific. Do not assume that limits observed on one deployment apply to
+another. When the server applies a limit, reduce concurrency or page size as
+appropriate and retry temporary responses with bounded backoff. Respect
+`Retry-After` when the response provides it.
 
 Clients should set timeouts, call `raise_for_status()` or perform equivalent
 status handling, and report the response body when a request fails.
