@@ -4543,8 +4543,8 @@ specific. Do not assume that limits observed on one deployment apply to
 another. When the server applies a limit, reduce concurrency or page size as
 appropriate and retry temporary responses with bounded backoff. Respect
 <code>Retry-After</code> when the response provides it.</p>
-<p>Clients should set timeouts, call <code>raise_for_status()</code> or perform equivalent
-status handling, and report the response body when a request fails.</p>
+<p>Set request timeouts, call <code>raise_for_status()</code> or perform equivalent status
+handling, and inspect the response body for error details when a request fails.</p>
 <h2 id="related-pages">Related pages<a class="headerlink" href="#related-pages" title="Permanent link">¶</a></h2>
 <ul>
 <li><a href="../howto/manage/program/api.html">How-to guides &gt; ... &gt; Use the API</a> — send and paginate a public Entry query.</li>
