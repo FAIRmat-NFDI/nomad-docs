@@ -98,8 +98,9 @@ the authenticated user's relationship to the Entry.
 | `admin` | All Entries; available only to administrators. |
 
 Use `public` for reproducible public-data scripts that do not need
-authentication. Other scopes require authentication to expose non-public data,
-and the server always applies the user's permissions.
+authentication. Other ownership scopes require authentication to expose
+non-public data, but selecting one cannot grant access beyond the authenticated
+user's existing permissions.
 
 ## Entry queries
 
