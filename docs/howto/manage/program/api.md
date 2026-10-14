@@ -18,7 +18,7 @@ pip install requests
 ```
 
 The examples use public data and do not require authentication. They connect
-to NOMAD Central by default. To test against another deployment, set its API v1
+to NOMAD Central by default. To test against another deployment, set its API
 URL before running the scripts. For the NOMAD develop deployment, use:
 
 ```sh
