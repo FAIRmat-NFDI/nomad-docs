@@ -2485,10 +2485,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#widgetscatterplotdeprecated" class="md-nav__link">
+  <a href="#widgetboxplot" class="md-nav__link">
     <span class="md-ellipsis">
       
-        WidgetScatterPlotDeprecated
+        WidgetBoxPlot
       
     </span>
   </a>
@@ -2496,10 +2496,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#widgetboxplot" class="md-nav__link">
+  <a href="#widgetscatterplotdeprecated" class="md-nav__link">
     <span class="md-ellipsis">
       
-        WidgetBoxPlot
+        WidgetScatterPlotDeprecated
       
     </span>
   </a>
@@ -4822,10 +4822,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#widgetscatterplotdeprecated" class="md-nav__link">
+  <a href="#widgetboxplot" class="md-nav__link">
     <span class="md-ellipsis">
       
-        WidgetScatterPlotDeprecated
+        WidgetBoxPlot
       
     </span>
   </a>
@@ -4833,10 +4833,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#widgetboxplot" class="md-nav__link">
+  <a href="#widgetscatterplotdeprecated" class="md-nav__link">
     <span class="md-ellipsis">
       
-        WidgetBoxPlot
+        WidgetScatterPlotDeprecated
       
     </span>
   </a>
@@ -5127,7 +5127,7 @@
 <a id="__codelineno-3-41" name="__codelineno-3-41" href="#__codelineno-3-41"></a>            <span class="p">),</span>
 <a id="__codelineno-3-42" name="__codelineno-3-42" href="#__codelineno-3-42"></a>            <span class="n">Column</span><span class="p">(</span>
 <a id="__codelineno-3-43" name="__codelineno-3-43" href="#__codelineno-3-43"></a>                <span class="n">search_quantity</span><span class="o">=</span><span class="sa">f</span><span class="s1">'data.my_repeated_section[*].myquantity#</span><span class="si">{</span><span class="n">schema</span><span class="si">}</span><span class="s1">'</span><span class="p">,</span>
-<a id="__codelineno-3-44" name="__codelineno-3-44" href="#__codelineno-3-44"></a>                <span class="n">align</span><span class="o">=</span><span class="s1">'middle'</span><span class="p">,</span>
+<a id="__codelineno-3-44" name="__codelineno-3-44" href="#__codelineno-3-44"></a>                <span class="n">align</span><span class="o">=</span><span class="s1">'center'</span><span class="p">,</span>
 <a id="__codelineno-3-45" name="__codelineno-3-45" href="#__codelineno-3-45"></a>                <span class="n">selected</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 <a id="__codelineno-3-46" name="__codelineno-3-46" href="#__codelineno-3-46"></a>            <span class="p">),</span>
 <a id="__codelineno-3-47" name="__codelineno-3-47" href="#__codelineno-3-47"></a>            <span class="n">Column</span><span class="p">(</span><span class="n">search_quantity</span><span class="o">=</span><span class="s1">'upload_create_time'</span><span class="p">),</span>
@@ -5250,7 +5250,7 @@ the path without the need for specifying a schema, e.g. <code>results.material.s
 <a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>    <span class="p">),</span>
 <a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>    <span class="n">Column</span><span class="p">(</span>
 <a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>        <span class="n">search_quantity</span><span class="o">=</span><span class="sa">f</span><span class="s1">'data.my_repeated_section[*].myquantity#</span><span class="si">{</span><span class="n">schema</span><span class="si">}</span><span class="s1">'</span><span class="p">,</span>
-<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>        <span class="n">align</span><span class="o">=</span><span class="s1">'middle'</span><span class="p">,</span>
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>        <span class="n">align</span><span class="o">=</span><span class="s1">'center'</span><span class="p">,</span>
 <a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>        <span class="n">selected</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 <a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a>    <span class="p">),</span>
 <a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a><span class="p">]</span>
@@ -5473,14 +5473,14 @@ the path without the need for specifying a schema, e.g. <code>results.material.s
 <a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>        <span class="n">WidgetPeriodicTable</span><span class="p">(</span>
 <a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>            <span class="n">search_quantity</span><span class="o">=</span><span class="s1">'results.material.elements'</span><span class="p">,</span>
 <a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>            <span class="n">layout</span><span class="o">=</span><span class="p">{</span>
-<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>                <span class="s1">'lg'</span><span class="p">:</span> <span class="n">Layout</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="mi">6</span><span class="p">),</span> <span class="c1"># Desktop: left half</span>
-<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>                <span class="s1">'sm'</span><span class="p">:</span> <span class="n">Layout</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="mi">6</span><span class="p">),</span> <span class="c1"># Phone: full width, on top</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>                <span class="s1">'lg'</span><span class="p">:</span> <span class="n">Layout</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="mi">6</span><span class="p">),</span>  <span class="c1"># Desktop: left half</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>                <span class="s1">'sm'</span><span class="p">:</span> <span class="n">Layout</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="mi">6</span><span class="p">),</span>  <span class="c1"># Phone: full width, on top</span>
 <a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>            <span class="p">},</span>
 <a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>        <span class="p">),</span>
 <a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>        <span class="n">WidgetTerms</span><span class="p">(</span>
 <a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>            <span class="n">search_quantity</span><span class="o">=</span><span class="s1">'results.method.simulation.program_name'</span><span class="p">,</span>
 <a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>            <span class="n">layout</span><span class="o">=</span><span class="p">{</span>
-<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a>                <span class="s1">'lg'</span><span class="p">:</span> <span class="n">Layout</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="mi">6</span><span class="p">),</span> <span class="c1"># Desktop: right half</span>
+<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a>                <span class="s1">'lg'</span><span class="p">:</span> <span class="n">Layout</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="mi">6</span><span class="p">),</span>  <span class="c1"># Desktop: right half</span>
 <a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a>                <span class="s1">'sm'</span><span class="p">:</span> <span class="n">Layout</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="mi">6</span><span class="p">),</span>  <span class="c1"># Phone: full width, below</span>
 <a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a>            <span class="p">},</span>
 <a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a>        <span class="p">),</span>
@@ -6650,74 +6650,6 @@ quantities.</p>
 </tr>
 </tbody>
 </table>
-<h4 id="widgetscatterplotdeprecated">WidgetScatterPlotDeprecated<a class="headerlink" href="#widgetscatterplotdeprecated" title="Permanent link">¶</a></h4>
-<p>Deprecated copy of WidgetScatterPlot with a misspelled type.</p>
-<table>
-<thead>
-<tr>
-<th>name</th>
-<th>type</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>layout</td>
-<td><code>dict[str, Layout]</code></td>
-<td>Defines widget size and grid positioning for different breakpoints. The following breakpoints are supported: <code>sm</code>, <code>md</code>, <code>lg</code>, <code>xl</code> and <code>xxl</code>.<br><em>default:</em> <code>PydanticUndefined</code></td>
-</tr>
-<tr>
-<td>x</td>
-<td><code>AxisLimitedScale | str</code></td>
-<td>Configures the information source and display options for the x-axis.<br><em>default:</em> <code>PydanticUndefined</code></td>
-</tr>
-<tr>
-<td>y</td>
-<td><code>AxisLimitedScale | str</code></td>
-<td>Configures the information source and display options for the y-axis.<br><em>default:</em> <code>PydanticUndefined</code></td>
-</tr>
-<tr>
-<td>size</td>
-<td><code>int</code></td>
-<td>Maximum number of entries to fetch. Notice that the actual number may be more or less, depending on how many entries exist and how many of the requested values each entry contains.<br><em>default:</em> <code>1000</code><br><strong>deprecated</strong></td>
-</tr>
-<tr>
-<td>sample_size</td>
-<td><code>int</code></td>
-<td>Maximum number of samples to fetch. Notice that the actual number of data points may be more or less, depending on how many entries exist and how many of the requested values each entry contains.<br><em>default:</em> <code>1000</code></td>
-</tr>
-<tr>
-<td>drag_mode</td>
-<td><code>str</code></td>
-<td>Action to perform on mouse drag.<br><em>default:</em> <code>DragModeEnum.ZOOM</code></td>
-</tr>
-<tr>
-<td>autorange</td>
-<td><code>bool</code></td>
-<td>Whether to automatically set the range according to the data limits.<br><em>default:</em> <code>True</code></td>
-</tr>
-<tr>
-<td>title</td>
-<td><code>str | None</code></td>
-<td>Custom widget title. If not specified, a widget-specific default title is used.</td>
-</tr>
-<tr>
-<td>description</td>
-<td><code>str | None</code></td>
-<td>Optional description of the widget and the data it is showing. Can contain markdown notation. If populated, an icon is shown next to the title that can be clicked to show the description.</td>
-</tr>
-<tr>
-<td>markers</td>
-<td><code>Markers | None</code></td>
-<td>Configures the information source and display options for the markers.</td>
-</tr>
-<tr>
-<td>color</td>
-<td><code>str | None</code></td>
-<td>Quantity used for coloring points. Note that this field is deprecated and <code>markers</code> should be used instead.</td>
-</tr>
-</tbody>
-</table>
 <h4 id="widgetboxplot">WidgetBoxPlot<a class="headerlink" href="#widgetboxplot" title="Permanent link">¶</a></h4>
 <p>Box plot widget configuration.</p>
 <table>
@@ -6788,6 +6720,74 @@ quantities.</p>
 <td>description</td>
 <td><code>str | None</code></td>
 <td>Optional description of the widget and the data it is showing. Can contain markdown notation. If populated, an icon is shown next to the title that can be clicked to show the description.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="widgetscatterplotdeprecated">WidgetScatterPlotDeprecated<a class="headerlink" href="#widgetscatterplotdeprecated" title="Permanent link">¶</a></h4>
+<p>Deprecated copy of WidgetScatterPlot with a misspelled type.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>layout</td>
+<td><code>dict[str, Layout]</code></td>
+<td>Defines widget size and grid positioning for different breakpoints. The following breakpoints are supported: <code>sm</code>, <code>md</code>, <code>lg</code>, <code>xl</code> and <code>xxl</code>.<br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>x</td>
+<td><code>AxisLimitedScale | str</code></td>
+<td>Configures the information source and display options for the x-axis.<br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>y</td>
+<td><code>AxisLimitedScale | str</code></td>
+<td>Configures the information source and display options for the y-axis.<br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>size</td>
+<td><code>int</code></td>
+<td>Maximum number of entries to fetch. Notice that the actual number may be more or less, depending on how many entries exist and how many of the requested values each entry contains.<br><em>default:</em> <code>1000</code><br><strong>deprecated</strong></td>
+</tr>
+<tr>
+<td>sample_size</td>
+<td><code>int</code></td>
+<td>Maximum number of samples to fetch. Notice that the actual number of data points may be more or less, depending on how many entries exist and how many of the requested values each entry contains.<br><em>default:</em> <code>1000</code></td>
+</tr>
+<tr>
+<td>drag_mode</td>
+<td><code>str</code></td>
+<td>Action to perform on mouse drag.<br><em>default:</em> <code>DragModeEnum.ZOOM</code></td>
+</tr>
+<tr>
+<td>autorange</td>
+<td><code>bool</code></td>
+<td>Whether to automatically set the range according to the data limits.<br><em>default:</em> <code>True</code></td>
+</tr>
+<tr>
+<td>title</td>
+<td><code>str | None</code></td>
+<td>Custom widget title. If not specified, a widget-specific default title is used.</td>
+</tr>
+<tr>
+<td>description</td>
+<td><code>str | None</code></td>
+<td>Optional description of the widget and the data it is showing. Can contain markdown notation. If populated, an icon is shown next to the title that can be clicked to show the description.</td>
+</tr>
+<tr>
+<td>markers</td>
+<td><code>Markers | None</code></td>
+<td>Configures the information source and display options for the markers.</td>
+</tr>
+<tr>
+<td>color</td>
+<td><code>str | None</code></td>
+<td>Quantity used for coloring points. Note that this field is deprecated and <code>markers</code> should be used instead.</td>
 </tr>
 </tbody>
 </table>
