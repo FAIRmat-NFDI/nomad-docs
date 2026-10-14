@@ -165,7 +165,8 @@ Use `and`, `or`, and `not` for explicit logical combinations:
 
 The searchable quantities depend on the endpoint and installed schema
 packages. Use the request model and searchable-quantity information exposed by
-the deployment rather than assuming every archive quantity is indexed.
+the deployment to identify which quantities are indexed and available for
+queries.
 
 Entry search also accepts an `optimade_filter` criterion using OPTIMADE filter
 syntax:
