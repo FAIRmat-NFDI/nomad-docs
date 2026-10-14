@@ -106,8 +106,8 @@ Continue until `next_page_after_value` is absent. Prefer this cursor-based
 method when iterating through a result set because page numbers and offsets
 have endpoint-specific restrictions.
 
-A complete pagination example is available in
-[`examples/docs/api/pagination.py`](https://github.com/FAIRmat-NFDI/nomad-docs/blob/develop/examples/docs/api/pagination.py){:target="_blank" rel="noopener"}.
+For field definitions and additional pagination behavior, see
+[Reference > REST API > Pagination](../../../reference/api.md#pagination).
 
 ## Authenticate a request
 
