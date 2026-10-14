@@ -4179,9 +4179,8 @@ the complete result set under <code>pagination</code>. Entry IDs and the order o
 can change as the deployment's data changes; scripts should consume the
 response rather than depend on copied output.</p>
 <h2 id="request-the-next-page">Request the next page<a class="headerlink" href="#request-the-next-page" title="Permanent link">¶</a></h2>
-<p>The first response contains <code>pagination.next_page_after_value</code> when more
-results are available. Pass that opaque value as <code>page_after_value</code> in the next
-request:</p>
+<p>Each non-final response contains <code>pagination.next_page_after_value</code>. Pass that
+value unchanged as <code>page_after_value</code> in the next request:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">next_value</span> <span class="o">=</span> <span class="n">payload</span><span class="p">[</span><span class="s1">'pagination'</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'next_page_after_value'</span><span class="p">)</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="k">if</span> <span class="n">next_value</span><span class="p">:</span>
@@ -4197,12 +4196,13 @@ request:</p>
 <p>Continue until <code>next_page_after_value</code> is absent. Prefer this cursor-based
 method when iterating through a result set because page numbers and offsets
 have endpoint-specific restrictions.</p>
-<p>A complete pagination example is available in
-<a href="https://github.com/FAIRmat-NFDI/nomad-docs/blob/develop/examples/docs/api/pagination.py" rel="noopener" target="_blank"><code>examples/docs/api/pagination.py</code></a>.</p>
+<p>For field definitions and additional pagination behavior, see
+<a href="../../../reference/api.html#pagination">Reference &gt; REST API &gt; Pagination</a>.</p>
 <h2 id="authenticate-a-request">Authenticate a request<a class="headerlink" href="#authenticate-a-request" title="Permanent link">¶</a></h2>
 <p>Public Entry searches do not need a token. To access non-public data or perform
 write operations, create a personal access token with the minimum required
-scopes and store it in <code>NOMAD_PAT</code>. Add it to the request headers:</p>
+scopes. Set the <code>NOMAD_PAT</code> environment variable to the token value, then add
+it to the request headers:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>
