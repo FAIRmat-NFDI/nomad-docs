@@ -40,7 +40,7 @@ deployment's API dashboard.
 
 Many resources support both a collection path, such as `/entries`, and an
 individual-resource path, such as `/entries/{entry_id}`. Consult the OpenAPI
-dashboard rather than inferring whether a particular HTTP method is supported.
+dashboard to determine which HTTP methods each path supports.
 
 ## Request conventions
 
