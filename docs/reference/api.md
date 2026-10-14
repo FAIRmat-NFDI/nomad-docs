@@ -2,8 +2,7 @@
 
 This reference summarizes conventions shared by NOMAD's core REST API. The
 deployment's OpenAPI document is the authoritative source for individual
-endpoint paths, request models, response models, and required authorization
-scopes.
+endpoint paths, request models, and response models.
 
 ## API discovery and base URLs
 
