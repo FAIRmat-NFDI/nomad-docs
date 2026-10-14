@@ -113,7 +113,8 @@ For field definitions and additional pagination behavior, see
 
 Public Entry searches do not need a token. To access non-public data or perform
 write operations, create a personal access token with the minimum required
-scopes and store it in `NOMAD_PAT`. Add it to the request headers:
+scopes. Set the `NOMAD_PAT` environment variable to the token value, then add
+it to the request headers:
 
 ```python
 import os
