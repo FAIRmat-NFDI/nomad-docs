@@ -4162,16 +4162,15 @@ aggregation settings.</p>
 <p>Run the script:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>python<span class="w"> </span>query_entries.py
 </code></pre></div>
-<p>The request body has four independent controls:</p>
+<p>The request body combines four fields:</p>
 <ul>
-<li><code>owner</code> limits the search by publication state and the authenticated user's
-  relationship to the Entries. <code>public</code> selects published Entries without an
+<li><code>"owner": "public"</code> restricts the search to published Entries without an
   embargo.</li>
-<li><code>query</code> selects Entries whose normalized material contains both titanium and
-  oxygen.</li>
-<li><code>pagination</code> limits this response to three Entries.</li>
-<li><code>required</code> limits the returned metadata to each Entry's ID and chemical
-  formula.</li>
+<li><code>query</code> requires the normalized material to contain both titanium and oxygen.</li>
+<li><code>"page_size": 3</code> under <code>pagination</code> limits the current page to at most three
+  Entries.</li>
+<li><code>required.include</code> limits the returned metadata to each Entry's ID and
+  chemical formula.</li>
 </ul>
 <p>Calling <code>raise_for_status()</code> makes the script stop on an unsuccessful HTTP
 response instead of trying to interpret an error as a successful result.</p>
