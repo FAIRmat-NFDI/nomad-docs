@@ -221,8 +221,8 @@ data. Use `"include-resolved"` to include a complete referenced branch. Set
 references with their target data instead of retaining the targets at their
 original archive paths.
 
-Request only the fields needed by the client. Narrow selections reduce server
-work, transfer size, and memory use.
+Request only the fields you need. Narrow selections reduce server work,
+transfer size, and memory use.
 
 ## Pagination
 
