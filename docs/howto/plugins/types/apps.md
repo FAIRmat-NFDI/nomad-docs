@@ -7,7 +7,7 @@
 
 Apps provide customized views of data in the GUI, making it easier for the users to navigate and understand the data related to a specific domain. This typically means that certain domain-specific properties are highlighted, different units may be used for physical properties, and specialized widgets may be presented. This becomes crucial for NOMAD installations to be able to scale with data that contains a mixture of experiments and simulations, different techniques, and physical properties spanning different time and length scales.
 
-Apps only affect the way data is *displayed* for the user: if you wish to affect the underlying data structure, you will need to write a [Python schema package](../../schemas/define.md) or a [YAML schema package](../../schemas/define.md).
+Apps only affect the way data is *displayed* for the user: if you wish to affect the underlying data structure, you will need to [write a schema](../../schemas/define.md).
 
 This documentation shows you how to create a plugin entry point for an app. You should read the [introduction to plugins](../plugins.md) to have a basic understanding of how plugins and plugin entry points work in the NOMAD ecosystem.
 
@@ -183,7 +183,40 @@ A few things to keep in mind when designing a layout:
 
 For each breakpoint, you can define a separate layout. You do not need to provide a layout for each size: in a typical scenario you would define a layout for desktops using `lg`, and another one for phones using `sm`. A breakpoint without a layout copies the layout from the nearest larger breakpoint that has one. If there is no larger one, it uses the nearest smaller one instead. If the copied layout does not look right on some screen size, add a layout for that breakpoint too.
 
-In this example, two widgets are placed side by side on desktops and stacked on top of each other on phones:
+A convenient way to create a layout is to arrange the widgets directly in the GUI and then export the result:
+
+1. Open your app and set the browser to a width where the breakpoint you want to design for is active.
+2. Move widgets by dragging their title, and resize them by dragging their bottom-right corner. Changes only affect the layout of the currently active breakpoint, so repeat this for each screen size you want to customize.
+3. Click the **Dashboard export/import** button in the dashboard toolbar. The dialog shows the current widgets and their layouts in YAML, which you can copy into your app definition.
+
+You can also edit the YAML in the dialog and click **Save** to try out changes right away. The GUI does not store any of these changes: reloading the page or clicking the reset button restores the dashboard defined in your app.
+
+The exported YAML is a list of widgets that you can load into a `Dashboard` with `parse_obj`, in the same way as in the [tip about loading apps from YAML](#creating-an-app). In this example, two widgets are placed side by side on desktops and stacked on top of each other on phones:
+
+<!-- fmt: off -->
+```python
+import yaml
+from nomad.config.models.ui import Dashboard
+
+widgets_yaml = """
+- type: periodic_table
+  search_quantity: results.material.elements
+  layout:
+    lg: {x: 0, y: 0, w: 12, h: 6, minW: 3, minH: 3}  # Desktop: left half
+    sm: {x: 0, y: 0, w: 12, h: 6, minW: 3, minH: 3}  # Phone: full width, on top
+- type: terms
+  search_quantity: results.method.simulation.program_name
+  layout:
+    lg: {x: 12, y: 0, w: 12, h: 6, minW: 3, minH: 3} # Desktop: right half
+    sm: {x: 0, y: 6, w: 12, h: 6, minW: 3, minH: 3}  # Phone: full width, below
+"""
+dashboard = Dashboard.parse_obj({'widgets': yaml.safe_load(widgets_yaml)})
+```
+<!-- fmt: on -->
+
+The export contains a layout for every breakpoint, including the ones that were copied from another breakpoint using the rules described above. If you wish, you can remove the breakpoints you did not change, as in this example, which only keeps `lg` and `sm`.
+
+You can also define the layout directly with the Python models. This creates the same dashboard as the YAML example above:
 
 <!-- fmt: off -->
 ```python
@@ -209,8 +242,6 @@ dashboard = Dashboard(
 )
 ```
 <!-- fmt: on -->
-
-Here the `xl` and `xxl` breakpoints have no larger breakpoint with a layout, so they use the `lg` layout. The `md` breakpoint also uses the `lg` layout, because `lg` is the nearest larger one.
 
 !!! tip "Testing your layout on different screen sizes"
 
