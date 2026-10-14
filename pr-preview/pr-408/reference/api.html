@@ -4178,7 +4178,7 @@ deployment's API dashboard.</p>
 </table>
 <p>Many resources support both a collection path, such as <code>/entries</code>, and an
 individual-resource path, such as <code>/entries/{entry_id}</code>. Consult the OpenAPI
-dashboard rather than inferring whether a particular HTTP method is supported.</p>
+dashboard to determine which HTTP methods each path supports.</p>
 <h2 id="request-conventions">Request conventions<a class="headerlink" href="#request-conventions" title="Permanent link">¶</a></h2>
 <p>Use the HTTP method declared by the endpoint. <code>GET</code> operations normally encode
 inputs as URL query parameters. <code>POST</code> operations normally use a JSON request
@@ -4226,7 +4226,7 @@ For the available scopes and how they control access, see
 </table>
 <p>The exact envelope varies by endpoint. Some individual-resource operations
 return their model directly; others wrap it in <code>data</code>. Use the endpoint's
-declared response model rather than assuming every response has the same shape.</p>
+declared response model to determine the response shape.</p>
 <p>Error responses normally include a <code>detail</code> field. Validation errors can return
 <code>detail</code> as a list containing the affected request locations and messages.</p>
 <h2 id="ownership-scopes">Ownership scopes<a class="headerlink" href="#ownership-scopes" title="Permanent link">¶</a></h2>
@@ -4345,7 +4345,8 @@ Append an operator to a quantity path to change the comparison:</p>
 </code></pre></div>
 <p>The searchable quantities depend on the endpoint and installed schema
 packages. Use the request model and searchable-quantity information exposed by
-the deployment rather than assuming every archive quantity is indexed.</p>
+the deployment to identify which quantities are indexed and available for
+queries.</p>
 <p>Entry search also accepts an <code>optimade_filter</code> criterion using OPTIMADE filter
 syntax:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">{</span>
@@ -4388,8 +4389,8 @@ data. Use <code>"include-resolved"</code> to include a complete referenced branc
 <code>"resolve-inplace": true</code> at the root of <code>required</code> to replace returned
 references with their target data instead of retaining the targets at their
 original archive paths.</p>
-<p>Request only the fields needed by the client. Narrow selections reduce server
-work, transfer size, and memory use.</p>
+<p>Request only the fields you need. Narrow selections reduce server work,
+transfer size, and memory use.</p>
 <h2 id="pagination">Pagination<a class="headerlink" href="#pagination" title="Permanent link">¶</a></h2>
 <p>Paginated requests and responses can contain:</p>
 <table>
@@ -4538,10 +4539,10 @@ assigning the group as a Project collaborator through an upload API request.</p>
 </tbody>
 </table>
 <p>Page-size, request-rate, and concurrency limits are deployment and endpoint
-specific. Do not document one value as universal. When the server applies a
-limit, reduce concurrency or page size as appropriate and retry temporary
-responses with bounded backoff. Respect <code>Retry-After</code> when the response
-provides it.</p>
+specific. Do not assume that limits observed on one deployment apply to
+another. When the server applies a limit, reduce concurrency or page size as
+appropriate and retry temporary responses with bounded backoff. Respect
+<code>Retry-After</code> when the response provides it.</p>
 <p>Clients should set timeouts, call <code>raise_for_status()</code> or perform equivalent
 status handling, and report the response body when a request fails.</p>
 <h2 id="related-pages">Related pages<a class="headerlink" href="#related-pages" title="Permanent link">¶</a></h2>
