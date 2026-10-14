@@ -4121,20 +4121,20 @@
 
 
 <h1 id="rest-api">REST API<a class="headerlink" href="#rest-api" title="Permanent link">¶</a></h1>
-<p>This reference summarizes conventions shared by NOMAD's core REST API. The
+<p>This reference summarizes conventions used by the built-in NOMAD API. The
 deployment's OpenAPI document is the authoritative source for individual
 endpoint paths, request models, and response models.</p>
 <h2 id="api-discovery-and-base-urls">API discovery and base URLs<a class="headerlink" href="#api-discovery-and-base-urls" title="Permanent link">¶</a></h2>
 <p>The GUI's <a href="https://nomad-lab.eu/prod/v1/api/../gui/v2/apis" rel="noopener" target="_blank">APIs page</a>
-lists the core API and APIs contributed by installed plugins. Plugin APIs vary
-between deployments.</p>
-<p>The core API provides:</p>
+lists the built-in NOMAD API and APIs contributed by installed plugins. Plugin
+APIs vary between deployments.</p>
+<p>The built-in NOMAD API is documented through:</p>
 <ul>
 <li>an <a href="https://nomad-lab.eu/prod/v1/api/v1/" rel="noopener" target="_blank">interactive OpenAPI dashboard</a>; and</li>
 <li>its <a href="https://nomad-lab.eu/prod/v1/api/v1/openapi.json" rel="noopener" target="_blank">OpenAPI JSON document</a>.</li>
 </ul>
-<p>Core API v1 operations use a base URL ending in <code>/api/v1</code>. For example:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>https://nomad-lab.eu/prod/v1/api/v1
+<p>The built-in NOMAD API uses a base URL ending in <code>/api/v1</code>. For example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>https://nomad-lab.eu/backend/api/v1
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>https://nomad-lab.eu/develop/backend/api/v1
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>https://&lt;oasis-host&gt;/&lt;optional-prefix&gt;/api/v1
 </code></pre></div>
@@ -4190,7 +4190,8 @@ body:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="err">Authorization: Bearer &lt;token&gt;</span>
 </code></pre></div>
 <p>Create personal access tokens with only the scopes required by the operation.
-The OpenAPI dashboard lists the accepted scopes for each endpoint.</p>
+For the available scopes and how they control access, see
+<a href="../explanation/auth.html">Explanation &gt; Authentication and authorization</a>.</p>
 <h2 id="response-layout">Response layout<a class="headerlink" href="#response-layout" title="Permanent link">¶</a></h2>
 <p>Many collection and query operations return an object with these fields:</p>
 <table>
@@ -4270,8 +4271,9 @@ the authenticated user's relationship to the Entry.</p>
 </tbody>
 </table>
 <p>Use <code>public</code> for reproducible public-data scripts that do not need
-authentication. Other scopes require authentication to expose non-public data,
-and the server always applies the user's permissions.</p>
+authentication. Other ownership scopes require authentication to expose
+non-public data, but selecting one cannot grant access beyond the authenticated
+user's existing permissions.</p>
 <h2 id="entry-queries">Entry queries<a class="headerlink" href="#entry-queries" title="Permanent link">¶</a></h2>
 <p>Entry query objects map searchable quantity paths to criteria. Different
 criteria in one object are combined with logical AND:</p>
