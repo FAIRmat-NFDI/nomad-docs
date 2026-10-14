@@ -2,7 +2,7 @@ import os
 
 import requests
 
-api_url = os.getenv('NOMAD_API_URL', 'https://nomad-lab.eu/prod/v1/api/v1')
+api_url = os.getenv('NOMAD_API_URL', 'https://nomad-lab.eu/backend/api/v1')
 request_body = {
     'owner': 'public',
     'query': {
