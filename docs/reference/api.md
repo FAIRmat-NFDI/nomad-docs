@@ -77,7 +77,7 @@ Many collection and query operations return an object with these fields:
 
 The exact envelope varies by endpoint. Some individual-resource operations
 return their model directly; others wrap it in `data`. Use the endpoint's
-declared response model rather than assuming every response has the same shape.
+declared response model to determine the response shape.
 
 Error responses normally include a `detail` field. Validation errors can return
 `detail` as a list containing the affected request locations and messages.
