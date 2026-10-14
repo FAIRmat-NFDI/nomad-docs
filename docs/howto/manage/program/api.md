@@ -34,8 +34,8 @@ The GUI can translate filters into an API query:
 2. Use the filter bar or the filter controls to restrict the displayed results.
    For the query used below, add the **Elements** filter and select titanium and
    oxygen. The active filters appear as chips above the results.
-3. Select the `<>` **View API call for the query** button next to the filter
-   chips.
+3. Select the button with the **View API call for the query** tooltip next to
+   the filter chips.
 4. Inspect the **API** dialog:
 
      - **Query** contains the API-compatible `owner` and `query` generated from
