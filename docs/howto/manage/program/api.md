@@ -83,7 +83,7 @@ the complete result set under `pagination`. Entry IDs and the order of results
 can change as the deployment's data changes; scripts should consume the
 response rather than depend on copied output.
 
-## Request the next page
+### Request the next page
 
 Each non-final response contains `pagination.next_page_after_value`. Pass that
 value unchanged as `page_after_value` in the next request:
