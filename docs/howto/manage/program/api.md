@@ -1,9 +1,10 @@
 # How to use the API
 
 In this guide, you will use Python's `requests` package to call NOMAD's REST
-API directly. You will search public Entries, limit the returned metadata, and
-request the next page of results. The same request structure applies to other
-REST API resources and NOMAD deployments.
+API directly. A public Entry search serves as a concrete example: you will
+limit the returned metadata and request the next page of results. The API also
+supports other resources and operations, and the same request structure applies
+across NOMAD deployments.
 
 The GUI calls the user-facing file container a *Project*. The REST API
 represents the same container as an *upload* resource, so endpoint paths and
@@ -49,7 +50,7 @@ Use **Query** as a starting point for your own request. Include the additional
 fields from **Request** only when your script needs the corresponding result or
 aggregation settings.
 
-## Send an Entry search request
+## Example: send an Entry search request
 
 Create `query_entries.py` with the following content:
 
