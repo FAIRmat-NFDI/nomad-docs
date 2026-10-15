@@ -84,7 +84,7 @@ Password-based credentials are instead supplied through the `username` and
 | `retry` | `1` | Number of retries for selected server errors while fetching Entry identifiers. |
 | `sleep_time` | `4.0` | Seconds between fetch retries. |
 
-Use smaller `batch_size` and `semaphore` values when archive responses are
+Use smaller `batch_size` and `semaphore` values when individual archives are
 large. Respect deployment-specific rate limits by setting
 `max_requests_per_second` conservatively.
 
