@@ -290,7 +290,9 @@ Common HTTP status categories are:
 
 | Status | Meaning |
 | --- | --- |
-| `200`, `201`, `204` | Successful retrieval, creation, or operation without a response body. |
+| `200` | Request completed successfully; the response body depends on the endpoint. |
+| `201` | Resource created successfully; the response body depends on the endpoint. |
+| `204` | Request completed successfully without a response body. |
 | `400`, `422` | Invalid request syntax, values, or model validation. Inspect `detail`. |
 | `401` | Missing, expired, or invalid authentication. |
 | `403` | Authenticated, but missing the required scope or resource permission. |
