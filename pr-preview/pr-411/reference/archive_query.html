@@ -3570,10 +3570,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#transfer-controls" class="md-nav__link">
+  <a href="#request-and-batching-controls" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Transfer controls
+        Request and batching controls
       
     </span>
   </a>
@@ -3765,6 +3765,34 @@
     
   
     Annotations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="json_transformer.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JSON transformer
   
 
     
@@ -4002,10 +4030,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#transfer-controls" class="md-nav__link">
+  <a href="#request-and-batching-controls" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Transfer controls
+        Request and batching controls
       
     </span>
   </a>
@@ -4281,8 +4309,9 @@ methods, result formats, and transfer behavior of the client.</p>
 </tbody>
 </table>
 <p>Except for <code>public</code>, a scope may require authentication to return non-public
-Entries. The server applies the authenticated user's permissions in every
-case.</p>
+Entries. Selecting a scope does not grant additional access: the server returns
+only Entries that the authenticated user has permission to view. The <code>admin</code>
+scope returns all Entries only for an administrator account.</p>
 <h2 id="connection-and-authentication-options">Connection and authentication options<a class="headerlink" href="#connection-and-authentication-options" title="Permanent link">¶</a></h2>
 <table>
 <thead>
@@ -4318,14 +4347,16 @@ case.</p>
 <p>The corresponding environment variables are:</p>
 <ul>
 <li><code>NOMAD_CLIENT_URL</code> for the API base URL, such as
-  <code>https://nomad-lab.eu/prod/v1/api</code>.</li>
+  <code>https://nomad-lab.eu/develop/backend/api</code>.</li>
 <li><code>NOMAD_CLIENT_ACCESS_TOKEN</code> for a bearer token, including a personal access
   token.</li>
 </ul>
-<p>An explicit <code>url</code> overrides <code>NOMAD_CLIENT_URL</code>. The access token is read from
-the client configuration; username and password credentials are supplied as
-constructor arguments.</p>
-<h2 id="transfer-controls">Transfer controls<a class="headerlink" href="#transfer-controls" title="Permanent link">¶</a></h2>
+<p>An explicit <code>url</code> overrides <code>NOMAD_CLIENT_URL</code>. <code>ArchiveQuery</code> has no access
+token constructor argument; its authentication handler reads the token from
+the client configuration populated by <code>NOMAD_CLIENT_ACCESS_TOKEN</code>.
+Password-based credentials are instead supplied through the <code>username</code> and
+<code>password</code> constructor arguments.</p>
+<h2 id="request-and-batching-controls">Request and batching controls<a class="headerlink" href="#request-and-batching-controls" title="Permanent link">¶</a></h2>
 <table>
 <thead>
 <tr>
@@ -4367,7 +4398,7 @@ constructor arguments.</p>
 </tr>
 </tbody>
 </table>
-<p>Use smaller <code>batch_size</code> and <code>semaphore</code> values when archive responses are
+<p>Use smaller <code>batch_size</code> and <code>semaphore</code> values when individual archives are
 large. Respect deployment-specific rate limits by setting
 <code>max_requests_per_second</code> conservatively.</p>
 <p>The fetch phase retries HTTP 500, 502, and 504 responses according to <code>retry</code>
@@ -4379,10 +4410,13 @@ description.</p>
 <h2 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">¶</a></h2>
 <h3 id="fetchnumber0"><code>fetch(number=0)</code><a class="headerlink" href="#fetchnumber0" title="Permanent link">¶</a></h3>
 <p>Search synchronously and append matching <code>(entry_id, upload_id)</code> pairs to the
-pending list. <code>number</code> is a target rather than a strict limit: because the
-search proceeds in pages, the result can include additional pairs up to the
-current page boundary and <code>results_max</code>. With <code>number=0</code>, fetch up to the
-remaining <code>results_max</code> limit. The return value is the number of pairs added.</p>
+pending list. <code>number</code> is a minimum target for the call rather than a strict
+limit. The client requests complete pages containing up to <code>page_size</code> Entries
+and keeps the entire final page unless that would exceed <code>results_max</code>.
+Consequently, the pending list can receive up to <code>page_size - 1</code> more pairs
+than requested. With <code>number=0</code>, fetch up to the remaining <code>results_max</code> limit.</p>
+<!-- TODO: Reassess the fetch(number) description after https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR/-/work_items/2725 is resolved. -->
+
 <h3 id="downloadnumber0-as_plain_dictfalse"><code>download(number=0, *, as_plain_dict=False)</code><a class="headerlink" href="#downloadnumber0-as_plain_dictfalse" title="Permanent link">¶</a></h3>
 <p>Download Entries from the pending list synchronously. If no Entries have been
 fetched, the method fetches first. If <code>number</code> exceeds the pending count, it
