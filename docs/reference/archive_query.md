@@ -73,7 +73,7 @@ the client configuration populated by `NOMAD_CLIENT_ACCESS_TOKEN`.
 Password-based credentials are instead supplied through the `username` and
 `password` constructor arguments.
 
-## Transfer controls
+## Request and batching controls
 
 | Option | Default | Description |
 | --- | --- | --- |

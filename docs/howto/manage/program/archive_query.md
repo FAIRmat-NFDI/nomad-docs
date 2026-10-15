@@ -120,7 +120,7 @@ fetches more matching Entries whenever its pending list contains fewer than
 
 For large queries, tune request concurrency and rate limiting conservatively
 for the deployment you use. See
-[Reference > ArchiveQuery client > Transfer controls](../../../reference/archive_query.md#transfer-controls)
+[Reference > ArchiveQuery client > Request and batching controls](../../../reference/archive_query.md#request-and-batching-controls)
 for the relevant options.
 
 ## Retrieve plain dictionaries
