@@ -9,13 +9,6 @@ PATs are the recommended authentication method for scripts, notebooks, command-l
 workflows, and CI jobs. Each PAT is restricted to explicitly selected scopes and
 is accepted only by the NOMAD deployment that issued it.
 
-## Related pages
-
-- {{ nav_link("howto/manage/program/api.md", breadcrumb=True) }} — send REST API requests and paginate results.
-- {{ nav_link("explanation/auth.md", breadcrumb=True) }} — understand token types, scopes, and authorization decisions.
-- {{ nav_link("howto/manage/program/publish_python.md", breadcrumb=True) }} — create, update, and publish projects with Python.
-- {{ nav_link("howto/manage/program/download.md", breadcrumb=True) }} — download projects, files, and processed data.
-
 ## Before you begin
 
 Sign in to the NOMAD deployment that your program will access. Identify the API
@@ -194,3 +187,10 @@ tokens are deprecated. They grant broad user permissions, cannot be scoped for
 one integration, and remain valid until they expire or the deployment's signing
 secret changes. Migrate existing app-token workflows to PATs rather than using
 an app token to avoid Keycloak-token expiration.
+
+## Related pages
+
+- {{ nav_link("howto/manage/program/api.md", breadcrumb=True) }} — send REST API requests and paginate results.
+- {{ nav_link("explanation/auth.md", breadcrumb=True) }} — understand token types, scopes, and authorization decisions.
+- {{ nav_link("howto/manage/program/publish_python.md", breadcrumb=True) }} — create, update, and publish projects with Python.
+- {{ nav_link("howto/manage/program/download.md", breadcrumb=True) }} — download projects, files, and processed data.

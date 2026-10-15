@@ -49,12 +49,6 @@ flowchart TD
     classDef success stroke:#2ea44f,stroke-width:4px;
 ```
 
-## Related pages
-
-- {{ nav_link("howto/manage/program/auth.md", breadcrumb=True) }} — create, use, rotate, and revoke a personal access token.
-- {{ nav_link("howto/manage/program/api.md", breadcrumb=True) }} — send REST API requests from Python.
-- {{ nav_link("reference/config.md", breadcrumb=True) }} — configure authentication and authorization for a NOMAD Oasis.
-
 ## Access tokens
 
 NOMAD supports several types of access tokens for authenticating and authorizing API requests:
@@ -147,3 +141,9 @@ whose value corresponds to the string representation used in tokens and configur
 (e.g. `datasets:read`).
 
 {{ enum_table("nomad.auth.scopes.Scope") }}
+
+## Related pages
+
+- {{ nav_link("howto/manage/program/auth.md", breadcrumb=True) }} — create, use, rotate, and revoke a personal access token.
+- {{ nav_link("howto/manage/program/api.md", breadcrumb=True) }} — send REST API requests from Python.
+- {{ nav_link("reference/config.md", breadcrumb=True) }} — configure authentication and authorization for a NOMAD Oasis.
