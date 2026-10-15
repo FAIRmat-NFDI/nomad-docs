@@ -27,7 +27,7 @@ Do not construct another deployment's URL by replacing only its hostname. A
 deployment can use a different path prefix; obtain its URL from that
 deployment's API dashboard.
 
-## Core resources
+## Built-in resources
 
 | Resource | Purpose |
 | --- | --- |
@@ -251,7 +251,7 @@ ordering and can change when either changes.
 
 ## User groups
 
-The `groups` resource uses these core endpoints:
+The `groups` resource uses these built-in endpoints:
 
 | Operation | Endpoint | Required scope |
 | --- | --- | --- |
