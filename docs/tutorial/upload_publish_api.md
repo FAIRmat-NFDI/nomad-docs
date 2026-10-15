@@ -162,7 +162,7 @@ load_dotenv('env.txt')
 
 ??? success "Example notebook output"
 
-    ```
+    ```text
     True
     ```
 
@@ -184,7 +184,7 @@ print('Email:', me.email)
 
 ??? success "Example notebook output"
 
-    ```
+    ```text
     Authenticated as: Your Name
     Username: your_username
     Email: your.email@example.org
@@ -262,7 +262,7 @@ print('GUI URL:        ', f'{nomad_gui}/projects/{misc_upload.upload_id}')
 
 ??? success "Example notebook output"
 
-    ```
+    ```text
     Upload summary:
     ----------------
     Upload ID:       Ei6OG0ziSGW3t8dTpmChmg
@@ -295,7 +295,7 @@ print('GUI URL:', f'{nomad_gui}/projects/{dft_upload.upload_id}')
 
 ??? success "Example notebook output"
 
-    ```
+    ```text
     GUI URL: https://nomad-lab.eu/test/projects/dcvqjWYgSZeDVLaJkL6E7w
     ```
 This snippet creates a new project for the DFT ZIP file and prints a direct GUI link where you can monitor its processing status.
@@ -339,7 +339,7 @@ This snippet retrieves all the entries (here only one entry) created from the up
 
 ??? success "Example notebook output"
 
-    ```
+    ```text
     kW6H8T0MGH4-0GXH7cbf7j82BBUJ https://nomad-lab.eu/test/projects/dcvqjWYgSZeDVLaJkL6E7w/entries/kW6H8T0MGH4-0GXH7cbf7j82BBUJ
     ```
 
@@ -392,7 +392,7 @@ The steps are similar to those you followed for the computations data.
     ```
     **Example notebook output**
 
-    ```
+    ```text
     Upload GUI URL: https://nomad-lab.eu/test/projects/VOZJDQx5RkOKKeJI7_Zl0Q
     YcbAvycR3b5VEiwtQiOHFQ28xw6W https://nomad-lab.eu/test/projects/VOZJDQx5RkOKKeJI7_Zl0Q/entries/YcbAvycR3b5VEiwtQiOHFQ28xw6W
     ```
@@ -417,7 +417,7 @@ print('Open in GUI:    ', f'{nomad_gui}/projects/{dft_upload.upload_id}')
 
 ??? success "Example notebook output"
 
-    ```
+    ```text
     Upload status:
     --------------
     Upload ID:       dcvqjWYgSZeDVLaJkL6E7w
@@ -459,7 +459,7 @@ for entry in dft_entries:
 
 ??? success "Example notebook output"
 
-    ```
+    ```text
     Found 1 entries in the DFT upload:
 
     - entry_id: kW6H8T0MGH4-0GXH7cbf7j82BBUJ
@@ -508,7 +508,7 @@ edit_upload_metadata(
 
 ??? success "Example notebook output"
 
-    ```
+    ```text
     {'upload_id': 'dcvqjWYgSZeDVLaJkL6E7w',
      'data': {'process_running': False,
       'current_process': '_edit_metadata',
@@ -561,7 +561,7 @@ for entry in entries:
 
 ??? success "Example notebook output"
 
-    ```
+    ```text
     Upload name (upload-level): NOMAD Tutorial, Prepare DFT example for sharing using API
 
     Entry ID: kW6H8T0MGH4-0GXH7cbf7j82BBUJ
@@ -593,7 +593,7 @@ for user in candidates:
 
 ??? success "Example notebook output"
 
-    ```
+    ```text
     Found the user 'Jane Doe' (username 'jane.doe') with user_id='00000000-0000-4000-8000-000000000002'
     Found the user 'Jane Doe' (username 'jane.doe@example.org') with user_id='00000000-0000-4000-8000-000000000003'
     ```
@@ -623,7 +623,7 @@ print('Access updated.')
 
 ??? success "Example notebook output"
 
-    ```
+    ```text
     Access updated.
     ```
 If you wish, you can verify this on the project page under **SETTINGS** > **Collaborators**.
@@ -647,7 +647,7 @@ print('Embargo length:', upload_with_embargo.embargo_length)
 
 ??? success "Example notebook output"
 
-    ```
+    ```text
     With embargo: True
     Embargo length: 3.0
     ```
@@ -670,7 +670,7 @@ pprint(response)
 
 ??? success "Example notebook output"
 
-    ```
+    ```text
     {'data': {'coauthor_groups': [],
               'coauthors': ['00000000-0000-4000-8000-000000000003'],
               'complete_time': '2026-09-29T11:18:29.488000Z',
@@ -715,7 +715,7 @@ print('Warnings:', published_upload.warnings)
 
 ??? success "Final publication status"
 
-    ```
+    ```text
     Process status: SUCCESS
     Published: True
     Errors: []
