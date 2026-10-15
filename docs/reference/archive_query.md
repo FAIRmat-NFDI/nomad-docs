@@ -47,8 +47,9 @@ The ownership scopes are:
 | `admin` | All Entries. This scope requires an administrator account. |
 
 Except for `public`, a scope may require authentication to return non-public
-Entries. The server applies the authenticated user's permissions in every
-case.
+Entries. Selecting a scope does not grant additional access: the server returns
+only Entries that the authenticated user has permission to view. The `admin`
+scope returns all Entries only for an administrator account.
 
 ## Connection and authentication options
 
