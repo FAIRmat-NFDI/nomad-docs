@@ -12,6 +12,7 @@ Reference pages provide authoritative technical details. Use them when you need 
     "reference/metainfo.md": "the Metainfo schema language: definition attributes, quantity types, and conventions.",
     "reference/config.md": "deployment and application configuration options.",
     "reference/annotations.md": "metainfo annotations and their arguments.",
+    "reference/json_transformer.md": "fields of JSON transformation rules and arguments of the `Transformer`.",
     "reference/basesections.md": "generated reference for NOMAD base sections.",
     "reference/cli.md": "command-line interface reference.",
     "reference/plugins.md": "plugin reference material.",
