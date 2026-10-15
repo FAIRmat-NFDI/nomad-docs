@@ -4280,15 +4280,15 @@ methods, result formats, and transfer behavior of the client.</p>
 <tbody>
 <tr>
 <td><code>public</code></td>
-<td>Published Entries without embargo. No authentication is required.</td>
+<td>Published Entries without embargo.</td>
 </tr>
 <tr>
 <td><code>visible</code></td>
-<td>Public Entries plus Entries visible to the authenticated user.</td>
+<td>Public Entries plus, when authenticated, other Entries visible to the user.</td>
 </tr>
 <tr>
 <td><code>all</code></td>
-<td>Published Entries, including embargoed Entries visible to the authenticated user, plus Entries owned by or shared with that user.</td>
+<td>All published Entries, including embargoed Entries, plus, when authenticated, unpublished Entries owned by or shared with the user.</td>
 </tr>
 <tr>
 <td><code>shared</code></td>
@@ -4308,10 +4308,11 @@ methods, result formats, and transfer behavior of the client.</p>
 </tr>
 </tbody>
 </table>
-<p>Except for <code>public</code>, a scope may require authentication to return non-public
-Entries. Selecting a scope does not grant additional access: the server returns
-only Entries that the authenticated user has permission to view. The <code>admin</code>
-scope returns all Entries only for an administrator account.</p>
+<p>The <code>public</code>, <code>visible</code>, and <code>all</code> scopes can be used without authentication.
+Authentication expands the results returned by <code>visible</code> and <code>all</code> to include
+Entries that the user has permission to view. The <code>shared</code>, <code>user</code>, and
+<code>staging</code> scopes require authentication, and <code>admin</code> requires an administrator
+account. Selecting a scope does not grant additional access.</p>
 <h2 id="connection-and-authentication-options">Connection and authentication options<a class="headerlink" href="#connection-and-authentication-options" title="Permanent link">¶</a></h2>
 <table>
 <thead>
@@ -4351,9 +4352,8 @@ scope returns all Entries only for an administrator account.</p>
 <li><code>NOMAD_CLIENT_ACCESS_TOKEN</code> for a bearer token, including a personal access
   token.</li>
 </ul>
-<p>An explicit <code>url</code> overrides <code>NOMAD_CLIENT_URL</code>. <code>ArchiveQuery</code> has no access
-token constructor argument; its authentication handler reads the token from
-the client configuration populated by <code>NOMAD_CLIENT_ACCESS_TOKEN</code>.
+<p>An explicit <code>url</code> overrides <code>NOMAD_CLIENT_URL</code>. <code>ArchiveQuery</code> reads the token
+from the client configuration populated by <code>NOMAD_CLIENT_ACCESS_TOKEN</code>.
 Password-based credentials are instead supplied through the <code>username</code> and
 <code>password</code> constructor arguments.</p>
 <h2 id="request-and-batching-controls">Request and batching controls<a class="headerlink" href="#request-and-batching-controls" title="Permanent link">¶</a></h2>
