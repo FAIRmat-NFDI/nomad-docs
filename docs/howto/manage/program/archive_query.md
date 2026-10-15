@@ -110,7 +110,7 @@ print(batch_query.entry_list())
 while batch_query.entry_list():
     batch = batch_query.download(5)
     for archive in batch:
-        process(archive)
+        print(archive.metadata.entry_id)
 ```
 
 Calling `download(number)` without fetching first is also valid. The client
