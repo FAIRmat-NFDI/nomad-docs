@@ -198,7 +198,7 @@ To include entries from other projects:
    be included and whether any of them are still unpublished.
 4. Select **SAVE**.
 
-The included entries now appear under **ENTRIES**, marked with an **Included**
+The included entries now appear under **ENTRIES**, marked with an **included**
 label, and can be searched and filtered together with the project's own
 entries.
 
