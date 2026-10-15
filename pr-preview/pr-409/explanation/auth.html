@@ -3382,6 +3382,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
       
         <li class="md-nav__item">
+  <a href="#related-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related pages
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#access-tokens" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3408,7 +3419,7 @@
   <a href="#personal-access-tokens-pats" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Personal Access Tokens (PATs)
+        Personal access tokens (PATs)
       
     </span>
   </a>
@@ -3447,17 +3458,6 @@
     <span class="md-ellipsis">
       
         Authorization via scopes
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#related-pages" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Related pages
       
     </span>
   </a>
@@ -3953,6 +3953,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
       
         <li class="md-nav__item">
+  <a href="#related-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related pages
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#access-tokens" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3979,7 +3990,7 @@
   <a href="#personal-access-tokens-pats" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Personal Access Tokens (PATs)
+        Personal access tokens (PATs)
       
     </span>
   </a>
@@ -4018,17 +4029,6 @@
     <span class="md-ellipsis">
       
         Authorization via scopes
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#related-pages" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Related pages
       
     </span>
   </a>
@@ -4103,17 +4103,18 @@
 <h1 id="authentication-and-authorization">Authentication and authorization<a class="headerlink" href="#authentication-and-authorization" title="Permanent link">¶</a></h1>
 <p>Authentication determines <strong>who is making the request</strong>.
 Authorization then determines <strong>what that request is allowed to do</strong>.</p>
-<p>NOMAD supports multiple authentication mechanisms for API requests using
-<a href="#access-tokens">different types of tokens</a>.</p>
+<p>NOMAD supports multiple authentication mechanisms for API requests, as
+described under <a href="#access-tokens">Access tokens</a>.</p>
 <p>The following diagram summarizes how access to an API endpoint is evaluated.
-<a href="../reference/config.html#auth">Administrator-configurable settings</a> are highlighted in red.</p>
+<a href="../reference/config.html#auth">Reference &gt; Configuration &gt; Authentication</a>
+settings are highlighted in red.</p>
 <pre class="mermaid"><code>%%{init:{
   'themeVariables': {
     'fontSize': '36px'
   }
 }}%%
 flowchart TD
-    A[Request reaches Oasis] --&gt; B{Network access allowed by deployment?}
+    A[Request reaches NOMAD deployment] --&gt; B{Network access allowed by deployment?}
     B -- No --&gt; X[Access blocked outside NOMAD]
     B -- Yes --&gt; C{Valid token provided?}
 
@@ -4143,11 +4144,17 @@ flowchart TD
 
     classDef config stroke:#d73a49,stroke-width:4px;
     classDef success stroke:#2ea44f,stroke-width:4px;</code></pre>
+<h2 id="related-pages">Related pages<a class="headerlink" href="#related-pages" title="Permanent link">¶</a></h2>
+<ul>
+<li><a href="../howto/manage/program/auth.html">How-to guides &gt; ... &gt; Authenticate programmatically</a> — create, use, rotate, and revoke a personal access token.</li>
+<li><a href="../howto/manage/program/api.html">How-to guides &gt; ... &gt; Use the API</a> — send REST API requests from Python.</li>
+<li><a href="../reference/config.html">Reference &gt; Configuration</a> — configure authentication and authorization for a NOMAD Oasis.</li>
+</ul>
 <h2 id="access-tokens">Access tokens<a class="headerlink" href="#access-tokens" title="Permanent link">¶</a></h2>
 <p>NOMAD supports several types of access tokens for authenticating and authorizing API requests:</p>
 <ul>
 <li>Keycloak access tokens – obtained through the login flow used by the web UI or API clients</li>
-<li>Personal Access Tokens (PATs) – long-lived tokens created by users for scripts and automation</li>
+<li>Personal access tokens (PATs) – long-lived tokens created by users for scripts and automation</li>
 <li>Upload tokens (<em>legacy, deprecated</em> — will be removed in a future release)</li>
 <li>Simple (app/signature) tokens (<em>legacy, deprecated</em> — will be removed in a future release)</li>
 </ul>
@@ -4161,9 +4168,9 @@ using OpenID Connect (OIDC).</p>
 <li>Grant the full set of user scopes (no scope restriction possible)</li>
 </ul>
 <p>Due to these limitations, they are generally not suitable for long-running scripts or
-automated workflows. Use <strong>Personal Access Tokens (PATs)</strong> instead.</p>
-<h3 id="personal-access-tokens-pats">Personal Access Tokens (PATs)<a class="headerlink" href="#personal-access-tokens-pats" title="Permanent link">¶</a></h3>
-<p>Personal Access Tokens (PATs) are tokens created by users for programmatic access,
+automated workflows. Use <strong>personal access tokens (PATs)</strong> instead.</p>
+<h3 id="personal-access-tokens-pats">Personal access tokens (PATs)<a class="headerlink" href="#personal-access-tokens-pats" title="Permanent link">¶</a></h3>
+<p>Personal access tokens (PATs) are tokens created by users for programmatic access,
 such as scripts, or automated workflows.</p>
 <p>PATs can be issued with <strong>explicit scopes</strong>, allowing fine-grained control over
 the operations a user or token is allowed to perform.</p>
@@ -4172,10 +4179,10 @@ PATs can be created with a <strong>customizable expiration time</strong> within 
 allowed by the deployment. This makes them well suited for long-running scripts
 or integrations where repeatedly acquiring new tokens would be inconvenient.</p>
 <p>A PAT is accepted only by the NOMAD deployment that issued it. A separate PAT
-is required for another Oasis or NOMAD Central environment.</p>
+is required for another NOMAD Oasis or NOMAD Central environment.</p>
 <p>PAT scopes must always be explicitly specified. Wildcard expressions such as
 <code>*:read</code> are supported only in configuration and are <strong>not allowed in tokens</strong>.</p>
-<p>For programmatic API usage, <strong>Personal Access Tokens are generally the recommended
+<p>For programmatic API usage, <strong>personal access tokens are generally the recommended
 authentication method</strong>.</p>
 <div class="admonition info">
 <p class="admonition-title">Deprecated tokens</p>
@@ -4187,7 +4194,7 @@ They only grant upload-related permissions: <code>uploads:*</code>.</p>
 broad set of user permissions, effectively corresponding to full access
 except for token-management scopes.</p>
 <p>Both token types are deprecated and will be removed in a future release.
-They should not be used for new integrations. Use <strong>Personal Access Tokens (PATs)</strong> instead.</p>
+They should not be used for new integrations. Use <strong>personal access tokens (PATs)</strong> instead.</p>
 </div>
 <h2 id="authorization-via-scopes">Authorization via scopes<a class="headerlink" href="#authorization-via-scopes" title="Permanent link">¶</a></h2>
 <p>Authorization to use specific <strong>API features</strong> is scope-based.
@@ -4366,12 +4373,6 @@ whose value corresponds to the string representation used in tokens and configur
 </tr>
 </tbody>
 </table>
-<h2 id="related-pages">Related pages<a class="headerlink" href="#related-pages" title="Permanent link">¶</a></h2>
-<ul>
-<li><a href="../howto/manage/program/auth.html">How-to guides &gt; ... &gt; Authenticate programmatically</a> — create, use, rotate, and revoke a Personal Access Token.</li>
-<li><a href="../howto/manage/program/api.html">How-to guides &gt; ... &gt; Use the API</a> — send REST API requests from Python.</li>
-<li><a href="../reference/config.html">Reference &gt; Configuration</a> — configure authentication and authorization for an Oasis.</li>
-</ul>
 
 
 

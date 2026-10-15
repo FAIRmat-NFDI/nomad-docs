@@ -1475,6 +1475,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
       
         <li class="md-nav__item">
+  <a href="#related-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related pages
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#before-you-begin" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1573,17 +1584,6 @@
     <span class="md-ellipsis">
       
         Do not use app tokens for new integrations
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#related-pages" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Related pages
       
     </span>
   </a>
@@ -3990,6 +3990,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix="">
       
         <li class="md-nav__item">
+  <a href="#related-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related pages
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#before-you-begin" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4088,17 +4099,6 @@
     <span class="md-ellipsis">
       
         Do not use app tokens for new integrations
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#related-pages" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Related pages
       
     </span>
   </a>
@@ -4215,18 +4215,25 @@
 
 
 <h1 id="how-to-authenticate-programmatically">How to authenticate programmatically<a class="headerlink" href="#how-to-authenticate-programmatically" title="Permanent link">¶</a></h1>
-<p>In this guide, you will create a Personal Access Token (PAT) in the NOMAD GUI
+<p>In this guide, you will create a personal access token (PAT) in the NOMAD GUI
 and use it to authenticate a Python or command-line API request. You will also
 learn how to rotate or revoke the token when its secret is exposed, it expires,
 or an integration no longer needs access.</p>
 <p>PATs are the recommended authentication method for scripts, notebooks, command-line
 workflows, and CI jobs. Each PAT is restricted to explicitly selected scopes and
 is accepted only by the NOMAD deployment that issued it.</p>
+<h2 id="related-pages">Related pages<a class="headerlink" href="#related-pages" title="Permanent link">¶</a></h2>
+<ul>
+<li><a href="api.html">How-to guides &gt; ... &gt; Use the API</a> — send REST API requests and paginate results.</li>
+<li><a href="../../../explanation/auth.html">Explanation &gt; Authentication and authorization</a> — understand token types, scopes, and authorization decisions.</li>
+<li><a href="publish_python.html">How-to guides &gt; ... &gt; Manage data with Python</a> — create, update, and publish projects with Python.</li>
+<li><a href="download.html">How-to guides &gt; ... &gt; Download data</a> — download projects, files, and processed data.</li>
+</ul>
 <h2 id="before-you-begin">Before you begin<a class="headerlink" href="#before-you-begin" title="Permanent link">¶</a></h2>
 <p>Sign in to the NOMAD deployment that your program will access. Identify the API
 resources and operations it needs. PAT scopes use the form
 <code>&lt;resource&gt;:&lt;action&gt;</code>; grant only the corresponding scopes to the token.</p>
-<p>The examples below list your Projects through the backend <code>uploads</code> resource
+<p>The examples below list your projects through the backend <code>uploads</code> resource
 and therefore require the <code>uploads:read</code> scope. See
 <a href="../../../explanation/auth.html#authorization-via-scopes">Explanation &gt; Authentication and authorization &gt; Authorization via scopes</a>
 for the complete core-scope reference.</p>
@@ -4262,12 +4269,12 @@ prevents the secret from being displayed or included in the command itself.</p>
 <p><code>NOMAD_PAT</code> is the example variable used explicitly by the <code>requests</code> and
 <code>curl</code> commands below. Other clients may expect a specific variable; for
 example, <code>ArchiveQuery</code> reads <code>NOMAD_CLIENT_ACCESS_TOKEN</code>. See
-<a href="archive_query.html#access-non-public-entries">How-to guides &gt; ... &gt; Access processed data &gt; Access non-public Entries</a>.</p>
+<a href="archive_query.html#access-non-public-entries">How-to guides &gt; ... &gt; Access processed data &gt; Access non-public entries</a>.</p>
 <p>Also define the complete API v1 base URL for the deployment that issued the
 token:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">NOMAD_API_URL</span><span class="o">=</span><span class="s2">"https://nomad-lab.eu/prod/v1/api/v1"</span>
 </code></pre></div>
-<p>For an Oasis, obtain its base URL from its API dashboard instead of replacing
+<p>For a NOMAD Oasis, obtain its base URL from its API dashboard instead of replacing
 only the hostname in the NOMAD Central URL.</p>
 <h3 id="with-python-requests">With Python <code>requests</code><a class="headerlink" href="#with-python-requests" title="Permanent link">¶</a></h3>
 <p>Pass the PAT as a bearer token in the <code>Authorization</code> header:</p>
@@ -4307,7 +4314,7 @@ the token to unrelated hosts unless the configuration is carefully scoped.</p>
   account may not have access to the requested resource.</li>
 <li><strong>Unexpected deployment:</strong> verify the complete API base URL. Tokens are not
   transferable between NOMAD Central, its test or develop deployments, and
-  Oasis deployments.</li>
+  NOMAD Oasis deployments.</li>
 </ul>
 <p>The <strong>Tokens</strong> page shows each token's status and last use, which can help
 identify an expired token or confirm that a request reached the deployment.</p>
@@ -4390,13 +4397,6 @@ tokens are deprecated. They grant broad user permissions, cannot be scoped for
 one integration, and remain valid until they expire or the deployment's signing
 secret changes. Migrate existing app-token workflows to PATs rather than using
 an app token to avoid Keycloak-token expiration.</p>
-<h2 id="related-pages">Related pages<a class="headerlink" href="#related-pages" title="Permanent link">¶</a></h2>
-<ul>
-<li><a href="api.html">How-to guides &gt; ... &gt; Use the API</a> — send REST API requests and paginate results.</li>
-<li><a href="../../../explanation/auth.html">Explanation &gt; Authentication and authorization</a> — understand token types, scopes, and authorization decisions.</li>
-<li><a href="publish_python.html">How-to guides &gt; ... &gt; Manage data with Python</a> — create, update, and publish Projects with Python.</li>
-<li><a href="download.html">How-to guides &gt; ... &gt; Download data</a> — download Projects, files, and processed data.</li>
-</ul>
 
 
 

@@ -4378,28 +4378,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#exampleuploadentrypoint" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ExampleUploadEntryPoint
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#uploadresource" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        UploadResource
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#normalizerentrypoint" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4448,6 +4426,28 @@
     <span class="md-ellipsis">
       
         SchemaPackageEntryPoint
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exampleuploadentrypoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ExampleUploadEntryPoint
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uploadresource" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UploadResource
       
     </span>
   </a>
@@ -5560,28 +5560,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#exampleuploadentrypoint" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        ExampleUploadEntryPoint
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#uploadresource" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        UploadResource
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#normalizerentrypoint" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5630,6 +5608,28 @@
     <span class="md-ellipsis">
       
         SchemaPackageEntryPoint
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exampleuploadentrypoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        ExampleUploadEntryPoint
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uploadresource" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        UploadResource
       
     </span>
   </a>
@@ -8464,84 +8464,6 @@ level (level) are considered. The files will be stored in fs.tmp.</p>
 </tr>
 </tbody>
 </table>
-<h4 id="exampleuploadentrypoint">ExampleUploadEntryPoint<a class="headerlink" href="#exampleuploadentrypoint" title="Permanent link">¶</a></h4>
-<p>Base model for example upload plugin entry points.</p>
-<table>
-<thead>
-<tr>
-<th>name</th>
-<th>type</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>id_url_safe</td>
-<td><code>str | None</code></td>
-<td>URL-safe identifier for the plugin entry point. If no custom name is provided, one is automatically generated from the entry point id. Any custom identifier is checked for URL-safety and for collisions with other entry points with the same type within the same NOMAD deployment.</td>
-</tr>
-<tr>
-<td>name</td>
-<td><code>str | None</code></td>
-<td>Name of the plugin entry point.</td>
-</tr>
-<tr>
-<td>description</td>
-<td><code>str | None</code></td>
-<td>Longer description of the example upload.<br><em>default:</em> <code>PydanticUndefined</code></td>
-</tr>
-<tr>
-<td>category</td>
-<td><code>str | None</code></td>
-<td>Category for the example upload.<br><em>default:</em> <code>PydanticUndefined</code></td>
-</tr>
-<tr>
-<td>title</td>
-<td><code>str | None</code></td>
-<td>Title of the example upload.<br><em>default:</em> <code>PydanticUndefined</code></td>
-</tr>
-<tr>
-<td>resources</td>
-<td><code>None | list[UploadResource | str] | UploadResource | str</code></td>
-<td>List of data resources for this example upload.</td>
-</tr>
-<tr>
-<td>path</td>
-<td><code>str | None</code></td>
-<td><strong>deprecated</strong></td>
-</tr>
-<tr>
-<td>url</td>
-<td><code>str | None</code></td>
-<td><strong>deprecated</strong></td>
-</tr>
-</tbody>
-</table>
-<h4 id="uploadresource">UploadResource<a class="headerlink" href="#uploadresource" title="Permanent link">¶</a></h4>
-<p>Represents a request to include a certain resource into an example
-upload. Can point to a local folder/file, or alternatively to an online
-resource that can be downloaded.</p>
-<table>
-<thead>
-<tr>
-<th>name</th>
-<th>type</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>path</td>
-<td><code>str</code></td>
-<td>Path to a file/folder within the python package (filepaths should start from the package root directory) or to an online URL.<br><em>default:</em> <code>PydanticUndefined</code></td>
-</tr>
-<tr>
-<td>target</td>
-<td><code>str</code></td>
-<td>File path within the upload where the file should be stored.<br><em>default:</em> ""</td>
-</tr>
-</tbody>
-</table>
 <h4 id="normalizerentrypoint">NormalizerEntryPoint<a class="headerlink" href="#normalizerentrypoint" title="Permanent link">¶</a></h4>
 <p>Base model for normalizer plugin entry points.</p>
 <table>
@@ -8744,6 +8666,84 @@ resource that can be downloaded.</p>
 <td>description</td>
 <td><code>str | None</code></td>
 <td>A human readable description of the plugin entry point.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="exampleuploadentrypoint">ExampleUploadEntryPoint<a class="headerlink" href="#exampleuploadentrypoint" title="Permanent link">¶</a></h4>
+<p>Base model for example upload plugin entry points.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>id_url_safe</td>
+<td><code>str | None</code></td>
+<td>URL-safe identifier for the plugin entry point. If no custom name is provided, one is automatically generated from the entry point id. Any custom identifier is checked for URL-safety and for collisions with other entry points with the same type within the same NOMAD deployment.</td>
+</tr>
+<tr>
+<td>name</td>
+<td><code>str | None</code></td>
+<td>Name of the plugin entry point.</td>
+</tr>
+<tr>
+<td>description</td>
+<td><code>str | None</code></td>
+<td>Longer description of the example upload.<br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>category</td>
+<td><code>str | None</code></td>
+<td>Category for the example upload.<br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>title</td>
+<td><code>str | None</code></td>
+<td>Title of the example upload.<br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>resources</td>
+<td><code>None | list[UploadResource | str] | UploadResource | str</code></td>
+<td>List of data resources for this example upload.</td>
+</tr>
+<tr>
+<td>path</td>
+<td><code>str | None</code></td>
+<td><strong>deprecated</strong></td>
+</tr>
+<tr>
+<td>url</td>
+<td><code>str | None</code></td>
+<td><strong>deprecated</strong></td>
+</tr>
+</tbody>
+</table>
+<h4 id="uploadresource">UploadResource<a class="headerlink" href="#uploadresource" title="Permanent link">¶</a></h4>
+<p>Represents a request to include a certain resource into an example
+upload. Can point to a local folder/file, or alternatively to an online
+resource that can be downloaded.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>path</td>
+<td><code>str</code></td>
+<td>Path to a file/folder within the python package (filepaths should start from the package root directory) or to an online URL.<br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>target</td>
+<td><code>str</code></td>
+<td>File path within the upload where the file should be stored.<br><em>default:</em> ""</td>
 </tr>
 </tbody>
 </table>
