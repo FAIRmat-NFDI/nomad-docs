@@ -90,9 +90,9 @@ the `nomad-lab` package. To access a plugin-defined archive section as a typed
 object, install its matching schema package in the same Python environment.
 Otherwise, retrieve it as a plain dictionary as described below.
 
-## Process results in batches
+## Retrieve results in batches
 
-For a larger result set, separate the search from the downloads. `fetch()`
+For a larger result set, separate the search from archive retrieval. `fetch()`
 adds matching `(entry_id, upload_id)` pairs to a local pending list, and
 `download()` removes successfully retrieved Entries from that list:
 
