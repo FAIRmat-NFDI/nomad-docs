@@ -186,7 +186,7 @@ For each breakpoint, you can define a separate layout. You do not need to provid
 A convenient way to create a layout is to arrange the widgets directly in the GUI and then export the result:
 
 1. Open your app and set the browser to a width where the breakpoint you want to design for is active.
-2. Move widgets by dragging their title, and resize them by dragging their bottom-right corner. Changes only affect the layout of the currently active breakpoint, so repeat this for each screen size you want to customize.
+2. Move widgets by dragging their title, and resize them by dragging their bottom-right corner. Changes only affect the layout of the currently active breakpoint, so repeat this for each screen size you want to customize. See tips below on testing for different screen sizes.
 3. Click the **Dashboard export/import** button in the dashboard toolbar. The dialog shows the current widgets and their layouts in YAML, which you can copy into your app definition.
 
 You can also edit the YAML in the dialog and click **Save** to try out changes right away. The GUI does not store any of these changes: reloading the page or clicking the reset button restores the dashboard defined in your app.
