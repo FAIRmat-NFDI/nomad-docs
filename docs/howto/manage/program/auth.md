@@ -54,6 +54,11 @@ export NOMAD_PAT
 Paste the token when `read` waits for input and press Enter. The `-s` option
 prevents the secret from being displayed or included in the command itself.
 
+`NOMAD_PAT` is the example variable used explicitly by the `requests` and
+`curl` commands below. Other clients may expect a specific variable; for
+example, `ArchiveQuery` reads `NOMAD_CLIENT_ACCESS_TOKEN`. See
+[How-to guides > ... > Access processed data > Access non-public Entries](./archive_query.md#access-non-public-entries).
+
 Also define the complete API v1 base URL for the deployment that issued the
 token:
 
