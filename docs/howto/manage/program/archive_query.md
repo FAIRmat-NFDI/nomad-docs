@@ -183,7 +183,7 @@ is already running, including in a Jupyter notebook. They do not require
 ## Access non-public Entries
 
 Create a personal access token as described in
-[How-to guides > ... > Authenticate programmatically > Personal Access Tokens](./auth.md#personal-access-tokens)
+[How-to guides > ... > Authenticate programmatically > Create a PAT](./auth.md#create-a-pat)
 and set the `NOMAD_CLIENT_ACCESS_TOKEN` environment variable before starting
 Python:
 
@@ -191,8 +191,9 @@ Python:
 export NOMAD_CLIENT_ACCESS_TOKEN="<personal-access-token>"
 ```
 
-Do not put access tokens directly in source files. Then choose an authenticated
-ownership scope such as `visible`, `user`, `shared`, or `staging`.
+Do not put access tokens directly in source files. Then choose an ownership
+scope that includes the non-public Entries you need, such as `visible`, `user`,
+`shared`, or `staging`.
 
 ## Complete example
 
