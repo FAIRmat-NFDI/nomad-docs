@@ -141,10 +141,10 @@ archives = plain_query.download(as_plain_dict=True)
 print(archives[0]['metadata']['entry_id'])
 ```
 
-## Convert typed results to a dataframe
+## Convert schema-aware results to a dataframe
 
-After a synchronous typed download, flatten the results into a pandas
-dataframe:
+After retrieving schema-aware `EntryArchive` objects with the synchronous
+`download()` method, flatten the results into a pandas dataframe:
 
 ```python
 dataframe = archive_query.entries_to_dataframe(
