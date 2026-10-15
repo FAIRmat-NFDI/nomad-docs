@@ -70,7 +70,8 @@ The request body combines four fields:
 
 - `"owner": "public"` restricts the search to published Entries without an
   embargo.
-- `query` requires the normalized material to contain both titanium and oxygen.
+- `"query"` applies the `all` operator to `results.material.elements`, requiring
+  the normalized material to contain both titanium and oxygen.
 - `"page_size": 3` under `pagination` limits the current page to at most three
   Entries.
 - `required.include` limits the returned metadata to each Entry's ID and
