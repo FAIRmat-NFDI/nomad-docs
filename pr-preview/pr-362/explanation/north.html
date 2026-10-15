@@ -1298,34 +1298,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../howto/manage/gui/north.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Analyze data in NORTH
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../howto/manage/gui/workflows.html" class="md-nav__link">
         
   
@@ -1500,7 +1472,7 @@
   <span class="md-ellipsis">
     
   
-    Publish data using Python
+    Manage data with Python
   
 
     
@@ -4115,10 +4087,10 @@ to the NOMAD core services.</p>
 <h2 id="user-perspective">User perspective<a class="headerlink" href="#user-perspective" title="Permanent link">¶</a></h2>
 <p>From a user’s perspective, NORTH can be used for running complex or tool-specific analyses
 directly on data that is stored inside NOMAD, be this API-retrievable input from NOMAD entries
-or data from NOMAD uploads. Results achieved within the container can be written back
+or data from NOMAD projects. Results achieved within the container can be written back
 (using the NOMAD API, see <a href="../howto/manage/program/api.html">How-to &gt; ... &gt; How to use the API</a>) as derived data, metadata, or artifacts.
-Running a reprocessing of an upload afterwards allows for an indexing of these results obtained
-with NORTH, provided that the software tools in NORTH write using data structures and schemas
+Reprocessing the project afterwards allows results obtained with NORTH to be indexed,
+provided that the software tools in NORTH write using data structures and schemas
 that NOMAD understands. The reprocessing can be triggered through the API or the NOMAD GUI.</p>
 <p>The connection between the container and the NOMAD file system removes the need
 for copying and downloading large datasets. Container images remove the need for installing
@@ -4163,7 +4135,6 @@ dependency (e.g. in <code>pyproject.toml</code>). NOMAD automatically discovers 
 <!-- TODO: once there is a nomad-registry on the homepage (https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-lab-homepage/-/work_items/12), change the sentence above to
 Users should consult the [NOMAD plugin registry](<add-link>>) which details which plugins offer NORTH tool entry points.-->
 
-<p>Learn more about running existing NOMAD tools in <a href="../howto/manage/gui/north.html">How-to guides &gt; ... &gt; How to analyze data in NORTH</a>.</p>
 <h2 id="custom-user-provided-tools">Custom user-provided tools<a class="headerlink" href="#custom-user-provided-tools" title="Permanent link">¶</a></h2>
 <p>In addition to centrally provided tools, users can package their own tools as Docker containers
 and run these via NORTH on NOMAD data. This is especially relevant for organizations and users
@@ -4178,7 +4149,7 @@ as built-in tools.</p>
 <p>Beyond its importance for managing the expectations as to how NOMAD reacts to and what
 individual NORTH tools offer, it is important to know that using different data schemas
 in a NORTH tool compared to the NOMAD deployment does not always come without challenges.</p>
-<p>Users may encounter issues when reprocessing uploads that contain results from a NORTH tool
+<p>Users may encounter issues when reprocessing projects that contain results from a NORTH tool
 analysis, if the tool wrote data using a schema version different from the one used in the
 NOMAD deployment. This can lead to partial or complete incompatibilities. By providing
 individual NORTH tools as optional extensions of a NOMAD plugin, the responsibility
