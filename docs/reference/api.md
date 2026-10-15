@@ -97,9 +97,10 @@ the authenticated user's relationship to the Entry.
 | `staging` | Unpublished Entries owned by or shared with the authenticated user. |
 | `admin` | All Entries; available only to administrators. |
 
-Use `public` for reproducible public-data scripts that do not need
-authentication. Other ownership scopes require authentication to expose
-non-public data, but selecting one cannot grant access beyond the authenticated
+Use `public` for reproducible public-data scripts. The `public`, `visible`, and
+`all` scopes can be used without authentication, but anonymous requests remain
+limited to Entries accessible without signing in. Other ownership scopes require
+authentication. Selecting a scope cannot grant access beyond the authenticated
 user's existing permissions.
 
 ## Entry queries
