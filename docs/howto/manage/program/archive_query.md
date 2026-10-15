@@ -28,9 +28,10 @@ An `ArchiveQuery` combines two selections:
 - `required` selects the archive sections and quantities to download for each
   matching Entry.
 
-The following query selects public VASP calculations containing titanium and
-oxygen. It downloads identifying metadata and the normalized material data,
-while limiting the result to five Entries:
+The following query selects public simulation Entries produced with VASP for
+materials containing both titanium and oxygen. It downloads identifying
+metadata and the normalized material data, while limiting the result to five
+Entries:
 
 ```python
 from nomad.client import ArchiveQuery
