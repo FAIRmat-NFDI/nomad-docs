@@ -67,9 +67,11 @@ The corresponding environment variables are:
 - `NOMAD_CLIENT_ACCESS_TOKEN` for a bearer token, including a personal access
   token.
 
-An explicit `url` overrides `NOMAD_CLIENT_URL`. The access token is read from
-the client configuration; password-based credentials are supplied through the
-`username` and `password` constructor arguments.
+An explicit `url` overrides `NOMAD_CLIENT_URL`. `ArchiveQuery` has no access
+token constructor argument; its authentication handler reads the token from
+the client configuration populated by `NOMAD_CLIENT_ACCESS_TOKEN`.
+Password-based credentials are instead supplied through the `username` and
+`password` constructor arguments.
 
 ## Transfer controls
 
