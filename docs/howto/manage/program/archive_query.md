@@ -184,14 +184,15 @@ is already running, including in a Jupyter notebook. They do not require
 
 Create a personal access token as described in
 [How-to guides > ... > Authenticate programmatically > Personal Access Tokens](./auth.md#personal-access-tokens)
-and make it available to the Python client:
+and set the `NOMAD_CLIENT_ACCESS_TOKEN` environment variable before starting
+Python:
 
 ```sh
 export NOMAD_CLIENT_ACCESS_TOKEN="<personal-access-token>"
 ```
 
-Then choose an authenticated ownership scope such as `visible`, `user`,
-`shared`, or `staging`. Do not put access tokens directly in source files.
+Do not put access tokens directly in source files. Then choose an authenticated
+ownership scope such as `visible`, `user`, `shared`, or `staging`.
 
 ## Complete example
 
