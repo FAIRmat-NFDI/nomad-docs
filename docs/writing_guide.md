@@ -17,7 +17,11 @@ When contributing, identify which type of documentation your addition belongs to
 
 ## Best Practice
 
-- **Set the context clearly.** For Tutorials and How-tos, define prerequisite knowledge and list page-wide additional resources at the top of the page. Keep subsection-specific related pages with the relevant subsection. For Explanations, provide enough background to orient the reader.
+- **Set the context clearly.** For Tutorials and How-tos, define prerequisite
+  knowledge near the top of the page and collect page-wide additional resources
+  in a **Related pages** section at the end. Keep subsection-specific related
+  pages with the relevant subsection. For Explanations, provide enough
+  background to orient the reader.
 - **Think in user flows.** Imagine how a user encounters problems or tasks, not how the codebase is organized.
 - **Be as detailed as required, as concise as possible.** Include all steps or context the user needs, but avoid unnecessary narrative.
 - **Prefer clarity over cleverness.** Simple, direct wording beats jargon, metaphors, or over-complicated phrasing.
@@ -53,7 +57,7 @@ text, grouping, or breadcrumb supplies the missing context.
 
 If the referenced section belongs to the current page, drop the global path, i.e., `[Search Interface & Filters](<path-to-referenced-section>)`.
 
-**Related pages.** Use a `## Related pages` section near the top of a page for
+**Related pages.** Use a `## Related pages` section at the end of a page for
 cross-links that apply to the page as a whole. List each page separately and
 use the standardized path-style link names described above. For example:
 
