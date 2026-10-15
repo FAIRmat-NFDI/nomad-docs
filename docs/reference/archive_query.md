@@ -68,8 +68,8 @@ The corresponding environment variables are:
   token.
 
 An explicit `url` overrides `NOMAD_CLIENT_URL`. The access token is read from
-the client configuration; username and password credentials are supplied as
-constructor arguments.
+the client configuration; password-based credentials are supplied through the
+`username` and `password` constructor arguments.
 
 ## Transfer controls
 
