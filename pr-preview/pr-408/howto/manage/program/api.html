@@ -1469,17 +1469,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#send-an-entry-search-request" class="md-nav__link">
+  <a href="#example-send-an-entry-search-request" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Send an Entry search request
+        Example: send an Entry search request
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
+    <nav class="md-nav" aria-label="Example: send an Entry search request">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#request-the-next-page" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1487,6 +1488,11 @@
       
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -3917,17 +3923,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#send-an-entry-search-request" class="md-nav__link">
+  <a href="#example-send-an-entry-search-request" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Send an Entry search request
+        Example: send an Entry search request
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
+    <nav class="md-nav" aria-label="Example: send an Entry search request">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#request-the-next-page" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -3935,6 +3942,11 @@
       
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -4082,9 +4094,10 @@
 
 <h1 id="how-to-use-the-api">How to use the API<a class="headerlink" href="#how-to-use-the-api" title="Permanent link">¶</a></h1>
 <p>In this guide, you will use Python's <code>requests</code> package to call NOMAD's REST
-API directly. You will search public Entries, limit the returned metadata, and
-request the next page of results. The same request structure applies to other
-REST API resources and NOMAD deployments.</p>
+API directly. A public Entry search serves as a concrete example: you will
+limit the returned metadata and request the next page of results. The API also
+supports other resources and operations, and the same request structure applies
+across NOMAD deployments.</p>
 <p>The GUI calls the user-facing file container a <em>Project</em>. The REST API
 represents the same container as an <em>upload</em> resource, so endpoint paths and
 fields retain backend names such as <code>uploads</code> and <code>upload_id</code>.</p>
@@ -4122,7 +4135,7 @@ URL before running the scripts. For the NOMAD develop deployment, use:</p>
 <p>Use <strong>Query</strong> as a starting point for your own request. Include the additional
 fields from <strong>Request</strong> only when your script needs the corresponding result or
 aggregation settings.</p>
-<h2 id="send-an-entry-search-request">Send an Entry search request<a class="headerlink" href="#send-an-entry-search-request" title="Permanent link">¶</a></h2>
+<h2 id="example-send-an-entry-search-request">Example: send an Entry search request<a class="headerlink" href="#example-send-an-entry-search-request" title="Permanent link">¶</a></h2>
 <p>Create <code>query_entries.py</code> with the following content:</p>
 <!-- fmt: off -->
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
@@ -4166,7 +4179,8 @@ aggregation settings.</p>
 <ul>
 <li><code>"owner": "public"</code> restricts the search to published Entries without an
   embargo.</li>
-<li><code>query</code> requires the normalized material to contain both titanium and oxygen.</li>
+<li><code>"query"</code> applies the <code>all</code> operator to <code>results.material.elements</code>, requiring
+  the normalized material to contain both titanium and oxygen.</li>
 <li><code>"page_size": 3</code> under <code>pagination</code> limits the current page to at most three
   Entries.</li>
 <li><code>required.include</code> limits the returned metadata to each Entry's ID and
@@ -4178,7 +4192,7 @@ response instead of trying to interpret an error as a successful result.</p>
 the complete result set under <code>pagination</code>. Entry IDs and the order of results
 can change as the deployment's data changes; scripts should consume the
 response rather than depend on copied output.</p>
-<h2 id="request-the-next-page">Request the next page<a class="headerlink" href="#request-the-next-page" title="Permanent link">¶</a></h2>
+<h3 id="request-the-next-page">Request the next page<a class="headerlink" href="#request-the-next-page" title="Permanent link">¶</a></h3>
 <p>Each non-final response contains <code>pagination.next_page_after_value</code>. Pass that
 value unchanged as <code>page_after_value</code> in the next request:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">next_value</span> <span class="o">=</span> <span class="n">payload</span><span class="p">[</span><span class="s1">'pagination'</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'next_page_after_value'</span><span class="p">)</span>
@@ -4199,10 +4213,11 @@ have endpoint-specific restrictions.</p>
 <p>For field definitions and additional pagination behavior, see
 <a href="../../../reference/api.html#pagination">Reference &gt; REST API &gt; Pagination</a>.</p>
 <h2 id="authenticate-a-request">Authenticate a request<a class="headerlink" href="#authenticate-a-request" title="Permanent link">¶</a></h2>
-<p>Public Entry searches do not need a token. To access non-public data or perform
-write operations, create a personal access token with the minimum required
-scopes. Set the <code>NOMAD_PAT</code> environment variable to the token value, then add
-it to the request headers:</p>
+<p>Public Entry searches do not require authentication. Requirements for other
+requests depend on the resource, endpoint, and deployment. To authenticate with
+a personal access token, create one with the minimum required scopes. Set the
+<code>NOMAD_PAT</code> environment variable to the token value, then add it to the request
+headers:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="n">headers</span> <span class="o">=</span> <span class="p">{</span>

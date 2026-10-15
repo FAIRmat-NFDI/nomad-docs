@@ -3531,10 +3531,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#core-resources" class="md-nav__link">
+  <a href="#built-in-resources" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Core resources
+        Built-in resources
       
     </span>
   </a>
@@ -3946,10 +3946,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#core-resources" class="md-nav__link">
+  <a href="#built-in-resources" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Core resources
+        Built-in resources
       
     </span>
   </a>
@@ -4141,7 +4141,7 @@ APIs vary between deployments.</p>
 <p>Do not construct another deployment's URL by replacing only its hostname. A
 deployment can use a different path prefix; obtain its URL from that
 deployment's API dashboard.</p>
-<h2 id="core-resources">Core resources<a class="headerlink" href="#core-resources" title="Permanent link">¶</a></h2>
+<h2 id="built-in-resources">Built-in resources<a class="headerlink" href="#built-in-resources" title="Permanent link">¶</a></h2>
 <table>
 <thead>
 <tr>
@@ -4270,9 +4270,10 @@ the authenticated user's relationship to the Entry.</p>
 </tr>
 </tbody>
 </table>
-<p>Use <code>public</code> for reproducible public-data scripts that do not need
-authentication. Other ownership scopes require authentication to expose
-non-public data, but selecting one cannot grant access beyond the authenticated
+<p>Use <code>public</code> for reproducible public-data scripts. The <code>public</code>, <code>visible</code>, and
+<code>all</code> scopes can be used without authentication, but anonymous requests remain
+limited to Entries accessible without signing in. Other ownership scopes require
+authentication. Selecting a scope cannot grant access beyond the authenticated
 user's existing permissions.</p>
 <h2 id="entry-queries">Entry queries<a class="headerlink" href="#entry-queries" title="Permanent link">¶</a></h2>
 <p>Entry query objects map searchable quantity paths to criteria. Different
@@ -4443,7 +4444,7 @@ result set, begin without <code>page_after_value</code> and pass each returned
 <p>Treat cursor values as opaque. Their format depends on the endpoint and
 ordering and can change when either changes.</p>
 <h2 id="user-groups">User groups<a class="headerlink" href="#user-groups" title="Permanent link">¶</a></h2>
-<p>The <code>groups</code> resource uses these core endpoints:</p>
+<p>The <code>groups</code> resource uses these built-in endpoints:</p>
 <table>
 <thead>
 <tr>
@@ -4509,8 +4510,16 @@ assigning the group as a Project collaborator through an upload API request.</p>
 </thead>
 <tbody>
 <tr>
-<td><code>200</code>, <code>201</code>, <code>204</code></td>
-<td>Successful retrieval, creation, or operation without a response body.</td>
+<td><code>200</code></td>
+<td>Request completed successfully; the response body depends on the endpoint.</td>
+</tr>
+<tr>
+<td><code>201</code></td>
+<td>Resource created successfully; the response body depends on the endpoint.</td>
+</tr>
+<tr>
+<td><code>204</code></td>
+<td>Request completed successfully without a response body.</td>
 </tr>
 <tr>
 <td><code>400</code>, <code>422</code></td>
