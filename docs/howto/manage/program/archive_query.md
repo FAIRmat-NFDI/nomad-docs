@@ -64,10 +64,10 @@ Request only
 the archive data that your analysis needs: a narrowly scoped `required`
 selection reduces both server work and transferred data.
 
-## Download and inspect the results
+## Retrieve and inspect the results
 
-Call `download()` to search and download the matching archives. If you have not
-called `fetch()` first, `download()` performs the search automatically:
+Call `download()` to search for and retrieve the matching archives. If you have
+not called `fetch()` first, `download()` performs the search automatically:
 
 ```python
 archives = archive_query.download()
