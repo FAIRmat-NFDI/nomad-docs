@@ -132,7 +132,7 @@ Files can be added to a project individually, or you can group them into a compr
 
     **Files recognized by NOMAD**
 
-    - If NOMAD recognizes an uploaded file as a **mainfile**, it uses a compatible parser to extract and organize the data according to a data schema. A mainfile is the file that triggers the parser and from which NOMAD creates an entry. 
+    - If NOMAD recognizes an uploaded file as a **mainfile**, it uses a compatible parser to extract and organize the data according to a data schema. A mainfile is the file that triggers the parser and from which NOMAD creates an entry.
 
     - The structured data become an **entry** that can be searched, analyzed, and displayed through visualizations.
 
@@ -207,7 +207,7 @@ NOMAD recognizes the *FHI-aims* files, extracts information from them, and organ
 
     **Uploading the files**
 
-    Upload `FHI-aims.zip` using either of the methods described above: drag and drop the archive into the upload area, or select it through the **UPLOAD FILES** dialog.
+    Upload `FHI-aims.zip` using either of the methods described above: drag and drop the compressed file into the upload area, or select it through the **UPLOAD FILES** dialog.
 
     After the files are uploaded, NOMAD automatically begins processing them. It identifies supported file formats and uses the corresponding parsers to extract and structure relevant data and metadata. The specific processing steps depend on the type of data.
 
@@ -310,17 +310,17 @@ In the following examples, you will learn how to upload a raw file from a SPECS 
     **Step 1:** Click on the **CREATE FROM SCHEMA** button in your project page.
     ![Screenshot of step 1](images/example_3-3_create_from_schema.png)
 
-    **Step 2:** In the *create new entry from schema* window, click on the drop-down menu of the built-in schema, and select *NexusDataConverter*
+    **Step 2:** In the **Create new entry from schema** window, click on the drop-down menu of the built-in schema, and select **NexusDataConverter**.
 
     **Step 3:** Give a descriptive name for the entry.
 
-    **Step 4:** Click on CREATE. This will take you the NexusDataConverter entry page.
+    **Step 4:** Click on **CREATE**. This will take you the NexusDataConverter entry page.
 
     ![Screenshot of steps 2 - 4](images/example_3-3_NexusDataConverter.png)
 
-    **Step 5:** From the reader drop-down menu, choose the appropriate reader for your files. For this exercise select *xps*.
+    **Step 5:** From the reader drop-down menu, choose the appropriate reader for your files. For this exercise select **xps**.
 
-    **Step 6:** From the nxdl drop-down menu, choose the appropriate application definition for your experiment. For this exercise select *NXxps*
+    **Step 6:** From the nxdl drop-down menu, choose the appropriate application definition for your experiment. For this exercise select **NXxps**.
 
     **Step 7:** Upload the raw data file `PBTTT_XPS_SPECS_raw.xml`.
 
@@ -332,7 +332,7 @@ In the following examples, you will learn how to upload a raw file from a SPECS 
 
     Check the overview page of your project. There you will find two newly created entries; one for the NexusDataConverter and one for the generated `.nxs` file from your raw file.
 
-    NOMAD still stores your `.xml` raw file in the upload directory.
+    NOMAD still stores your `.xml` raw file in the project directory.
 
     ![Screenshot of the project page after nexus conversion.](images/example_3-3_NexusDataConverter_3.png)
 
@@ -367,17 +367,17 @@ In the following examples, you will learn how to upload a raw file from a SPECS 
 
     ![Screenshot of step 1](images/example_3-3_create_from_schema.png)
 
-    - **Step 2:** In the *create new entry from schema* window, click on the drop-down menu of the built-in schema, and select *NexusDataConverter*
+    - **Step 2:** In the **Create new entry from schema** window, click on the drop-down menu of the built-in schema, and select **NexusDataConverter**.
 
     - **Step 3:** Give a descriptive name for the entry.
 
-    - **Step 4:** Click on CREATE. This will take you the NexusDataConverter entry page.
+    - **Step 4:** Click on **CREATE**. This will take you the NexusDataConverter entry page.
 
     ![Screenshot of steps 2 - 4](images/example_3-3_NexusDataConverter.png)
 
-    - **Step 5:** From the reader drop-down menu, choose the appropriate reader for your files. For this exercise select *xps*.
+    - **Step 5:** From the reader drop-down menu, choose the appropriate reader for your files. For this exercise select **xps**.
 
-    - **Step 6:** From the nxdl drop-down menu, choose the appropriate application definition for your experiment. For this exercise select *NXxps*
+    - **Step 6:** From the nxdl drop-down menu, choose the appropriate application definition for your experiment. For this exercise select **NXxps**.
 
     - **Step 7:** Upload the raw data file `PBTTT_XPS_SPECS_raw.xml` as well as the ELN data file `eln_data_xml.yaml`.
 
@@ -428,11 +428,5 @@ After publishing your project, you can assign it a Digital Object Identifier (DO
 </div>
 
 The DOI is now permanently associated with your project and is displayed under **Digital Object Identifier (DOI)** in the project settings.
-
-<!-- TODO: Create the contents for the following two sections
-### Group entries into a dataset
-
-### Manage a dataset and assign it a DOI
--->
 
 ---

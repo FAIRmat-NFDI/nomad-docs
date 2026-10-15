@@ -3,7 +3,7 @@
 ## What is a dashboard?
 
 A **dashboard** is a custom web interface that a NOMAD plugin contributes
-to the NOMAD GUI. Users discover installed dashboards on the *Dashboards*
+to the NOMAD GUI. Users discover installed dashboards on the **Dashboards**
 page of the GUI and can open each one either **embedded** (inside an iframe
 on a dedicated viewer page in the GUI) or in a **new browser tab**.
 
@@ -25,8 +25,8 @@ is different:
 
 - **Audience.** APIs target other programs (clients, scripts, integrations),
   while dashboards target end users working in a browser.
-- **How they surface in the GUI.** APIs are listed on the *APIs* page, with
-  links to reach each mounted API. Dashboards are listed on the *Dashboards*
+- **How they surface in the GUI.** APIs are listed on the **APIs** page, with
+  links to reach each mounted API. Dashboards are listed on the **Dashboards**
   page, with embedded and new-tab launchers, icons and descriptions.
 - **Typical content.** APIs serve JSON endpoints, whereas dashboards serve
   HTML and JS, optionally a full SPA.
@@ -252,14 +252,14 @@ The `launch_modes` list controls how a user can open the dashboard from
 the NOMAD GUI:
 
 - **`embedded`** — opens the dashboard inside an iframe on a dedicated
-  *Dashboard viewer* page within the GUI. Best for dashboards that
+  **Dashboard viewer** page within the GUI. Best for dashboards that
   should feel like a native part of NOMAD.
 - **`tab`** — opens the dashboard in a new browser tab. Best for
   dashboards that benefit from being full-window, or that the user
   wants to keep open alongside the rest of the GUI.
 
 The **order matters**: the first entry is the default action when the
-user clicks the dashboard's row in the *Dashboards* table. The other
+user clicks the dashboard's row in the **Dashboards** table. The other
 mode is still available as a secondary action. Listing only one mode
 hides the other action button entirely.
 

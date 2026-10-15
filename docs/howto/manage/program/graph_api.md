@@ -129,7 +129,9 @@ There are a few existing data resources (called documents) stored in MongoDB (se
 
 1. `uploads`: The metadata of an upload, including, `upload_id`, `upload_name`, `main_author`, etc.
 2. `entries`: The metadata of an entry, including, `entry_id`, `entry_create_time`, `mainfile`, etc.
-3. `datasets`: The metadata of a dataset, including, `dataset_id`, `dataset_name`, `user_id`, etc.
+3. `datasets`: A retained backend resource for existing dataset collections,
+   including `dataset_id`, `dataset_name`, `user_id`, etc. The GUI can resolve
+   and display these datasets, but projects are the current user-facing unit.
 4. `groups`: The metadata of a user group, including, `owner`, `members`, etc.
 
 One can apply the same logic to fetch data from these structures.
@@ -275,7 +277,7 @@ For example, if one wants to fetch all entries under an upload with a specific p
 
 Both the query and the pagination fields must comply with the underlying models, depending on the specific token (see [NOMAD API Dashboard](https://nomad-lab.eu/prod/v1/api/v1/extensions/docs){:target="_blank" rel="noopener"}).
 
-## Accessing Archives
+## Accessing archives
 
 The [Basic Data Fetching](#basic-data-fetching) functionality can be extended to fetching NOMAD archives.
 An archive is the processed data of an entry, which is stored on the file system as a binary file.
@@ -326,7 +328,7 @@ curl -X 'POST' \
 ### Nested Fetching
 
 The archive is `JSON` compatible, which means it is effectively a `JSON` object, with a tree-like structure.
-Thus, one can apply the exact same fetching logic as in [Accessing Archives](#accessing-archives), while 'expressing' the intention to fetch data from any level of the tree.
+Thus, one can apply the exact same fetching logic as in [Accessing archives](#accessing-archives), while 'expressing' the intention to fetch data from any level of the tree.
 For example, if one wants to fetch `n_quantities` under `metadata`, a subsection of the archive root, the request would be:
 
 ```json hl_lines="6"

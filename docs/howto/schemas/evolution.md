@@ -110,7 +110,7 @@ follows the old version.
 #### Migrate processed data
 
 Where your schema is instantiated by a parser, processed data — entry archives — can be migrated by
-reprocessing the affected uploads with a new version of the parser that follows the new schema. Users
+reprocessing the affected projects with a new version of the parser that follows the new schema. Users
 need to be told to reprocess.
 
 #### Migrate raw files

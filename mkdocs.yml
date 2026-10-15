@@ -32,14 +32,13 @@ nav:
               - Create an account and sign in: howto/manage/gui/account.md
               - Create and publish Projects: howto/manage/gui/upload.md
               - Import data from external ELNs: howto/manage/gui/eln.md
-              - Analyze data in NORTH: howto/manage/gui/north.md # TODO rename depending on how-to content
               - Create custom workflows: howto/manage/gui/workflows.md
           - Work programmatically:
               # - Install nomad-lab: howto/programmatic/pythonlib.md # TODO Integrate into "Use the API"
               - Use the API: howto/manage/program/api.md # TODO separate into How-to and Explanation/Reference
               - Authenticate programmatically: howto/manage/program/auth.md
               - Download data: howto/manage/program/download.md
-              - Publish data using Python: howto/manage/program/publish_python.md
+              - Manage data with Python: howto/manage/program/publish_python.md
               - Access processed data: howto/manage/program/archive_query.md
               - Transform JSON data structures: howto/manage/program/json_transformer.md
               - Make Graph API calls: howto/manage/program/graph_api.md # TODO consolidate into a single page with supporting explanation/reference material

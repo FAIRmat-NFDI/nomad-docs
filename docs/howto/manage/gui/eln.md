@@ -8,7 +8,7 @@ The plugin
 provides the integrations described here: a generic importer for `.eln`
 files, and dedicated integrations for elabFTW, Labfolder, Chemotion, and
 openBIS. For `.eln` files, elabFTW, and Chemotion, you upload an exported file
-that NOMAD parses. For Labfolder and openBIS, you create a schema-based Entry and provide
+that NOMAD parses. For Labfolder and openBIS, you create a schema-based entry and provide
 the connection details for the external system.
 
 !!! note
@@ -38,13 +38,13 @@ To import a `.eln` file into NOMAD:
 1. In your ELN, export the records you want to transfer in the ELN file
    format and save the `.eln` file to your computer without changing its
    extension.
-2. In NOMAD, create or open a Project and add the exported file under
+2. In NOMAD, create or open a project and add the exported file under
    **FILES** using **UPLOAD FILES**.
-3. NOMAD processes the `.eln` file and creates an Entry for each record
-   (experiment) in the exported file. Each Entry is named after the record's
+3. NOMAD processes the `.eln` file and creates an entry for each record
+   (experiment) in the exported file. Each entry is named after the record's
    title.
 
-Open an Entry to inspect the parsed data in the `ELN Import` section. Because
+Open an entry to inspect the parsed data in the `ELN Import` section. Because
 ELNs export different amounts of information, the importer maps the fields
 that the ELN file format defines for all tools:
 
@@ -52,10 +52,10 @@ that the ELN file format defines for all tools:
   and modification dates, keywords, identifier, category, rating, and the URL
   of the record in the source ELN. `source_software` names the ELN that
   produced the file.
-- **extra_fields**: tool-specific fields that have no dedicated Quantity,
+- **extra_fields**: tool-specific fields that have no dedicated quantity,
   stored as JSON.
 - **files**: a subsection for each file of the record, with its name, format,
-  size, and checksum, and a link to the file in the Project.
+  size, and checksum, and a link to the file in the project.
 - **comments**: comments made on the record, with their author and date.
 
 ## elabFTW integration
@@ -66,12 +66,12 @@ To import elabFTW data into NOMAD:
 
 1. In elabFTW, export your data as an **ELN Archive** and save the `.eln`
    file to your computer without changing its extension.
-2. In NOMAD, create or open a Project and add the exported file under
+2. In NOMAD, create or open a project and add the exported file under
    **FILES** using **UPLOAD FILES**.
-3. NOMAD processes the `.eln` file and creates an Entry for each experiment in
+3. NOMAD processes the `.eln` file and creates an entry for each experiment in
    the exported file.
 
-Open an Entry to inspect the parsed data. The `ELabFTW Project Import`
+Open an entry to inspect the parsed data. The `ELabFTW Project Import`
 section contains metadata for the experiment, including
 `experiment_data` and `experiment_files` subsections.
 
@@ -97,19 +97,19 @@ requires the following information:
 
 To import Labfolder data into NOMAD:
 
-1. Create or open a NOMAD Project and select **NEW ENTRY**.
-2. Choose the `Labfolder Project Import` schema, name the Entry, and select
+1. Create or open a NOMAD project and select **NEW ENTRY**.
+2. Choose the **Labfolder Project Import** schema, name the entry, and select
    **CREATE**.
-3. In the new Entry, enter the project URL, email, and password, then save
-   the Entry. NOMAD retrieves the project data and populates the Entry.
+3. In the new entry, enter the project URL, email, and password, then save
+   the entry. NOMAD retrieves the project data and populates the entry.
 
 Each Labfolder entry in your project appears under `entries`, and its
 `elements` subsection lists the data and files of that entry. NOMAD imports
 six element types returned by Labfolder's API:
 
 - `TEXT`: content of text fields.
-- `FILE`: attached files, which NOMAD downloads into the Project.
-- `IMAGE`: images, which NOMAD downloads into the Project.
+- `FILE`: attached files, which NOMAD downloads into the project.
+- `IMAGE`: images, which NOMAD downloads into the project.
 - `TABLE`: tables, stored as JSON content.
 - `DATA`: structured data elements. NOMAD also provides `labfolder_data`, a
   flattened and aggregated version of the data content.
@@ -117,7 +117,7 @@ six element types returned by Labfolder's API:
 
 To fetch the project again after changes in Labfolder, enable
 `resync_labfolder_repository`, enter your email and password again, and save
-the Entry.
+the entry.
 
 ## Chemotion integration
 
@@ -130,16 +130,16 @@ populate the NOMAD schema.
 To import Chemotion data into NOMAD:
 
 1. Export your data from Chemotion as a ZIP file and save it to your computer.
-2. In NOMAD, create or open a Project and add the ZIP file under **FILES**
+2. In NOMAD, create or open a project and add the ZIP file under **FILES**
    using **UPLOAD FILES**.
-3. NOMAD processes the archive and creates an Entry in the Project.
+3. NOMAD processes the archive and creates an entry in the project.
 
-Open the resulting Entry to inspect the parsed data in the `Chemotion Project
+Open the resulting entry to inspect the parsed data in the `Chemotion Project
 Import` section. Other sections are populated when the exported data contains
 corresponding information.
 
 If a section contains an image or attachment, it is appended to the same
-section under the `file` Quantity.
+section under the `file` quantity.
 
 ## openBIS integration
 
@@ -157,14 +157,14 @@ schema. The integration requires the following information:
 
 To import openBIS data into NOMAD:
 
-1. Create or open a NOMAD Project and select **NEW ENTRY**.
-2. Choose the `Openbis Project Import` schema, give the Entry a name, and
+1. Create or open a NOMAD project and select **NEW ENTRY**.
+2. Choose the **Openbis Project Import** schema, give the entry a name, and
    select **CREATE**.
-3. In the new Entry, enter the project URL, username, and password, then
-   save the Entry. NOMAD retrieves and imports the project data.
+3. In the new entry, enter the project URL, username, and password, then
+   save the entry. NOMAD retrieves and imports the project data.
 
 NOMAD imports all spaces, projects, and experiments that your account can
-access into this Entry, together with the experiment attachments.
+access into this entry, together with the experiment attachments.
 
 ## Related pages
 

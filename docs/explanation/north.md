@@ -13,10 +13,10 @@ to the NOMAD core services.
 
 From a user’s perspective, NORTH can be used for running complex or tool-specific analyses
 directly on data that is stored inside NOMAD, be this API-retrievable input from NOMAD entries
-or data from NOMAD uploads. Results achieved within the container can be written back
+or data from NOMAD projects. Results achieved within the container can be written back
 (using the NOMAD API, see [How-to > ... > How to use the API](../howto/manage/program/api.md)) as derived data, metadata, or artifacts.
-Running a reprocessing of an upload afterwards allows for an indexing of these results obtained
-with NORTH, provided that the software tools in NORTH write using data structures and schemas
+Reprocessing the project afterwards allows results obtained with NORTH to be indexed,
+provided that the software tools in NORTH write using data structures and schemas
 that NOMAD understands. The reprocessing can be triggered through the API or the NOMAD GUI.
 
 The connection between the container and the NOMAD file system removes the need
@@ -78,8 +78,6 @@ Consult the reference section of the documentation to find details about individ
 <!-- TODO: once there is a nomad-registry on the homepage (https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-lab-homepage/-/work_items/12), change the sentence above to
 Users should consult the [NOMAD plugin registry](<add-link>>) which details which plugins offer NORTH tool entry points.-->
 
-Learn more about running existing NOMAD tools in [How-to guides > ... > How to analyze data in NORTH](../howto/manage/gui/north.md).
-
 ## Custom user-provided tools
 
 In addition to centrally provided tools, users can package their own tools as Docker containers
@@ -100,7 +98,7 @@ Beyond its importance for managing the expectations as to how NOMAD reacts to an
 individual NORTH tools offer, it is important to know that using different data schemas
 in a NORTH tool compared to the NOMAD deployment does not always come without challenges.
 
-Users may encounter issues when reprocessing uploads that contain results from a NORTH tool
+Users may encounter issues when reprocessing projects that contain results from a NORTH tool
 analysis, if the tool wrote data using a schema version different from the one used in the
 NOMAD deployment. This can lead to partial or complete incompatibilities. By providing
 individual NORTH tools as optional extensions of a NOMAD plugin, the responsibility
