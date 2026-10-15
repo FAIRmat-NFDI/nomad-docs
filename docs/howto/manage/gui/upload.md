@@ -171,7 +171,7 @@ of these roles:
 Select **SAVE** after changing the collaborator list or a role. If group
 collaboration is enabled in the deployment, **ADD GROUP** provides the same
 role choices for a user group. See
-[How-to guides > ... > API Overview > User Groups](../program/api.md#user-groups)
+[Reference > REST API > User groups](../../../reference/api.md#user-groups)
 for information about creating and editing groups.
 
 Under **Visibility**, select **Private** or **Public**, then select **SAVE**.

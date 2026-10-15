@@ -96,7 +96,7 @@ The ZIP file contains the raw files from directories containing the mainfiles of
 the matching entries. Each project's files are stored under a directory named
 with its upload ID. The ZIP file also contains `manifest.json`, which maps each
 entry to its upload ID, entry ID, and mainfile. You can replace the example with
-any [How-to guides > ... > Queries](api.md#queries).
+any [Entry query](../../../reference/api.md#entry-queries).
 
 This does not necessarily download every file in each matching project. To
 download complete projects instead, aggregate the upload IDs for the matching

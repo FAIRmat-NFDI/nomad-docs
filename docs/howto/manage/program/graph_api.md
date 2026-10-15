@@ -6,9 +6,7 @@
 
 ## Recommended preparation
 
-- [Tutorials > Accessing data via API](../../../tutorial/access_api.md)
-
-- [Use the API](./api.md)
+- {{ nav_link("howto/manage/program/api.md", breadcrumb=True) }}
 
 ## Further resources
 

@@ -118,7 +118,8 @@ Read about our [structured data](./data.md) to learn more about the different se
 
 As a last technical step, the processed data is stored and some information is passed
 into the search index. The store for processed data is internal to NOMAD and processed
-data cannot be accessed directly and only via the [archive API](../howto/manage/program/api.md#access-processed-data-archives)
+data cannot be accessed directly and only via the
+[archive API](../howto/manage/program/download.md#download-processed-data-matching-a-query)
 or [ArchiveQuery](../howto/manage/program/archive_query.md) Python library functionality.
 What information is stored in the search index is determined
 by the *metadata* and *results* sections and cannot be changed by users or plugins.
