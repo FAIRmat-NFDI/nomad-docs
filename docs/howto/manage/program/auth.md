@@ -1,6 +1,6 @@
 # How to authenticate programmatically
 
-In this guide, you will create a Personal Access Token (PAT) in the NOMAD GUI
+In this guide, you will create a personal access token (PAT) in the NOMAD GUI
 and use it to authenticate a Python or command-line API request. You will also
 learn how to rotate or revoke the token when its secret is exposed, it expires,
 or an integration no longer needs access.
@@ -9,13 +9,20 @@ PATs are the recommended authentication method for scripts, notebooks, command-l
 workflows, and CI jobs. Each PAT is restricted to explicitly selected scopes and
 is accepted only by the NOMAD deployment that issued it.
 
+## Related pages
+
+- {{ nav_link("howto/manage/program/api.md", breadcrumb=True) }} — send REST API requests and paginate results.
+- {{ nav_link("explanation/auth.md", breadcrumb=True) }} — understand token types, scopes, and authorization decisions.
+- {{ nav_link("howto/manage/program/publish_python.md", breadcrumb=True) }} — create, update, and publish projects with Python.
+- {{ nav_link("howto/manage/program/download.md", breadcrumb=True) }} — download projects, files, and processed data.
+
 ## Before you begin
 
 Sign in to the NOMAD deployment that your program will access. Identify the API
 resources and operations it needs. PAT scopes use the form
 `<resource>:<action>`; grant only the corresponding scopes to the token.
 
-The examples below list your Projects through the backend `uploads` resource
+The examples below list your projects through the backend `uploads` resource
 and therefore require the `uploads:read` scope. See
 [Explanation > Authentication and authorization > Authorization via scopes](../../../explanation/auth.md#authorization-via-scopes)
 for the complete core-scope reference.
@@ -57,7 +64,7 @@ prevents the secret from being displayed or included in the command itself.
 `NOMAD_PAT` is the example variable used explicitly by the `requests` and
 `curl` commands below. Other clients may expect a specific variable; for
 example, `ArchiveQuery` reads `NOMAD_CLIENT_ACCESS_TOKEN`. See
-[How-to guides > ... > Access processed data > Access non-public Entries](./archive_query.md#access-non-public-entries).
+[How-to guides > ... > Access processed data > Access non-public entries](./archive_query.md#access-non-public-entries).
 
 Also define the complete API v1 base URL for the deployment that issued the
 token:
@@ -66,7 +73,7 @@ token:
 export NOMAD_API_URL="https://nomad-lab.eu/prod/v1/api/v1"
 ```
 
-For an Oasis, obtain its base URL from its API dashboard instead of replacing
+For a NOMAD Oasis, obtain its base URL from its API dashboard instead of replacing
 only the hostname in the NOMAD Central URL.
 
 ### With Python `requests`
@@ -117,7 +124,7 @@ the token to unrelated hosts unless the configuration is carefully scoped.
   account may not have access to the requested resource.
 - **Unexpected deployment:** verify the complete API base URL. Tokens are not
   transferable between NOMAD Central, its test or develop deployments, and
-  Oasis deployments.
+  NOMAD Oasis deployments.
 
 The **Tokens** page shows each token's status and last use, which can help
 identify an expired token or confirm that a request reached the deployment.
@@ -187,10 +194,3 @@ tokens are deprecated. They grant broad user permissions, cannot be scoped for
 one integration, and remain valid until they expire or the deployment's signing
 secret changes. Migrate existing app-token workflows to PATs rather than using
 an app token to avoid Keycloak-token expiration.
-
-## Related pages
-
-- {{ nav_link("howto/manage/program/api.md", breadcrumb=True) }} — send REST API requests and paginate results.
-- {{ nav_link("explanation/auth.md", breadcrumb=True) }} — understand token types, scopes, and authorization decisions.
-- {{ nav_link("howto/manage/program/publish_python.md", breadcrumb=True) }} — create, update, and publish Projects with Python.
-- {{ nav_link("howto/manage/program/download.md", breadcrumb=True) }} — download Projects, files, and processed data.

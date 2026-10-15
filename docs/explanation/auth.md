@@ -3,11 +3,12 @@
 Authentication determines **who is making the request**.
 Authorization then determines **what that request is allowed to do**.
 
-NOMAD supports multiple authentication mechanisms for API requests using
-[different types of tokens](#access-tokens).
+NOMAD supports multiple authentication mechanisms for API requests, as
+described under [Access tokens](#access-tokens).
 
 The following diagram summarizes how access to an API endpoint is evaluated.
-[Administrator-configurable settings](../reference/config.md#auth) are highlighted in red.
+[Reference > Configuration > Authentication](../reference/config.md#auth)
+settings are highlighted in red.
 
 ```mermaid
 %%{init:{
@@ -16,7 +17,7 @@ The following diagram summarizes how access to an API endpoint is evaluated.
   }
 }}%%
 flowchart TD
-    A[Request reaches Oasis] --> B{Network access allowed by deployment?}
+    A[Request reaches NOMAD deployment] --> B{Network access allowed by deployment?}
     B -- No --> X[Access blocked outside NOMAD]
     B -- Yes --> C{Valid token provided?}
 
@@ -48,12 +49,18 @@ flowchart TD
     classDef success stroke:#2ea44f,stroke-width:4px;
 ```
 
+## Related pages
+
+- {{ nav_link("howto/manage/program/auth.md", breadcrumb=True) }} — create, use, rotate, and revoke a personal access token.
+- {{ nav_link("howto/manage/program/api.md", breadcrumb=True) }} — send REST API requests from Python.
+- {{ nav_link("reference/config.md", breadcrumb=True) }} — configure authentication and authorization for a NOMAD Oasis.
+
 ## Access tokens
 
 NOMAD supports several types of access tokens for authenticating and authorizing API requests:
 
 - Keycloak access tokens – obtained through the login flow used by the web UI or API clients
-- Personal Access Tokens (PATs) – long-lived tokens created by users for scripts and automation
+- Personal access tokens (PATs) – long-lived tokens created by users for scripts and automation
 - Upload tokens (*legacy, deprecated* — will be removed in a future release)
 - Simple (app/signature) tokens (*legacy, deprecated* — will be removed in a future release)
 
@@ -68,11 +75,11 @@ using OpenID Connect (OIDC).
 - Grant the full set of user scopes (no scope restriction possible)
 
 Due to these limitations, they are generally not suitable for long-running scripts or
-automated workflows. Use **Personal Access Tokens (PATs)** instead.
+automated workflows. Use **personal access tokens (PATs)** instead.
 
-### Personal Access Tokens (PATs)
+### Personal access tokens (PATs)
 
-Personal Access Tokens (PATs) are tokens created by users for programmatic access,
+Personal access tokens (PATs) are tokens created by users for programmatic access,
 such as scripts, or automated workflows.
 
 PATs can be issued with **explicit scopes**, allowing fine-grained control over
@@ -84,12 +91,12 @@ allowed by the deployment. This makes them well suited for long-running scripts
 or integrations where repeatedly acquiring new tokens would be inconvenient.
 
 A PAT is accepted only by the NOMAD deployment that issued it. A separate PAT
-is required for another Oasis or NOMAD Central environment.
+is required for another NOMAD Oasis or NOMAD Central environment.
 
 PAT scopes must always be explicitly specified. Wildcard expressions such as
 `*:read` are supported only in configuration and are **not allowed in tokens**.
 
-For programmatic API usage, **Personal Access Tokens are generally the recommended
+For programmatic API usage, **personal access tokens are generally the recommended
 authentication method**.
 
 !!! info "Deprecated tokens"
@@ -106,7 +113,7 @@ authentication method**.
     except for token-management scopes.
 
     Both token types are deprecated and will be removed in a future release.
-    They should not be used for new integrations. Use **Personal Access Tokens (PATs)** instead.
+    They should not be used for new integrations. Use **personal access tokens (PATs)** instead.
 
 ## Authorization via scopes
 
@@ -140,9 +147,3 @@ whose value corresponds to the string representation used in tokens and configur
 (e.g. `datasets:read`).
 
 {{ enum_table("nomad.auth.scopes.Scope") }}
-
-## Related pages
-
-- {{ nav_link("howto/manage/program/auth.md", breadcrumb=True) }} — create, use, rotate, and revoke a Personal Access Token.
-- {{ nav_link("howto/manage/program/api.md", breadcrumb=True) }} — send REST API requests from Python.
-- {{ nav_link("reference/config.md", breadcrumb=True) }} — configure authentication and authorization for an Oasis.
