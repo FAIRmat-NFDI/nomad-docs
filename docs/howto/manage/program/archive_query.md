@@ -84,45 +84,10 @@ quantities carry Pint units, and archive references can be followed as Python
 attributes. Call `archive.m_to_dict()` to serialize a typed archive back to a
 JSON-compatible dictionary.
 
-For example, the common `workflow2` section can reference the calculation that
-produced a workflow result. This query follows those references and converts
-the total energy to electron volts:
-
-```python
-from nomad.metainfo import units
-
-workflow_query = ArchiveQuery(
-    owner='public',
-    query={
-        'results.method.simulation.program_name': 'VASP',
-        'results.material.elements': {'all': ['Ti', 'O']},
-    },
-    required={
-        'workflow2': {
-            'results': {
-                'calculation_result_ref': {
-                    'energy': {'total': '*'},
-                    'system_ref': {'chemical_composition_reduced': '*'},
-                },
-            },
-        },
-    },
-    results_max=1,
-    page_size=1,
-)
-
-archive = workflow_query.download()[0]
-calculation = archive.workflow2.results.calculation_result_ref
-formula = calculation.system_ref.chemical_composition_reduced
-energy = calculation.energy.total.value.to(units.eV)
-
-print(f'{formula}: {energy}')
-```
-
-The schema package that defines a plugin-specific archive section must be
-installed in your Python environment to access that section as a typed object.
-The common `metadata`, `results`, and `workflow2` sections are available with
-the `nomad-lab` package.
+The built-in `metadata` and `results` sections used above are available with
+the `nomad-lab` package. To access a plugin-defined archive section as a typed
+object, install its matching schema package in the same Python environment.
+Otherwise, retrieve it as a plain dictionary as described below.
 
 ## Process results in batches
 
