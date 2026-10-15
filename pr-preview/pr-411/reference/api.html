@@ -3531,10 +3531,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#core-resources" class="md-nav__link">
+  <a href="#built-in-resources" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Core resources
+        Built-in resources
       
     </span>
   </a>
@@ -3974,10 +3974,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#core-resources" class="md-nav__link">
+  <a href="#built-in-resources" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Core resources
+        Built-in resources
       
     </span>
   </a>
@@ -4149,28 +4149,27 @@
 
 
 <h1 id="rest-api">REST API<a class="headerlink" href="#rest-api" title="Permanent link">¶</a></h1>
-<p>This reference summarizes conventions shared by NOMAD's core REST API. The
+<p>This reference summarizes conventions used by the built-in NOMAD API. The
 deployment's OpenAPI document is the authoritative source for individual
-endpoint paths, request models, response models, and required authorization
-scopes.</p>
+endpoint paths, request models, and response models.</p>
 <h2 id="api-discovery-and-base-urls">API discovery and base URLs<a class="headerlink" href="#api-discovery-and-base-urls" title="Permanent link">¶</a></h2>
 <p>The GUI's <a href="https://nomad-lab.eu/prod/v1/api/../gui/v2/apis" rel="noopener" target="_blank">APIs page</a>
-lists the core API and APIs contributed by installed plugins. Plugin APIs vary
-between deployments.</p>
-<p>The core API provides:</p>
+lists the built-in NOMAD API and APIs contributed by installed plugins. Plugin
+APIs vary between deployments.</p>
+<p>The built-in NOMAD API is documented through:</p>
 <ul>
 <li>an <a href="https://nomad-lab.eu/prod/v1/api/v1/" rel="noopener" target="_blank">interactive OpenAPI dashboard</a>; and</li>
 <li>its <a href="https://nomad-lab.eu/prod/v1/api/v1/openapi.json" rel="noopener" target="_blank">OpenAPI JSON document</a>.</li>
 </ul>
-<p>Core API v1 operations use a base URL ending in <code>/api/v1</code>. For example:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>https://nomad-lab.eu/prod/v1/api/v1
+<p>The built-in NOMAD API uses a base URL ending in <code>/api/v1</code>. For example:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>https://nomad-lab.eu/backend/api/v1
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>https://nomad-lab.eu/develop/backend/api/v1
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>https://&lt;oasis-host&gt;/&lt;optional-prefix&gt;/api/v1
 </code></pre></div>
 <p>Do not construct another deployment's URL by replacing only its hostname. A
 deployment can use a different path prefix; obtain its URL from that
 deployment's API dashboard.</p>
-<h2 id="core-resources">Core resources<a class="headerlink" href="#core-resources" title="Permanent link">¶</a></h2>
+<h2 id="built-in-resources">Built-in resources<a class="headerlink" href="#built-in-resources" title="Permanent link">¶</a></h2>
 <table>
 <thead>
 <tr>
@@ -4207,7 +4206,7 @@ deployment's API dashboard.</p>
 </table>
 <p>Many resources support both a collection path, such as <code>/entries</code>, and an
 individual-resource path, such as <code>/entries/{entry_id}</code>. Consult the OpenAPI
-dashboard rather than inferring whether a particular HTTP method is supported.</p>
+dashboard to determine which HTTP methods each path supports.</p>
 <h2 id="request-conventions">Request conventions<a class="headerlink" href="#request-conventions" title="Permanent link">¶</a></h2>
 <p>Use the HTTP method declared by the endpoint. <code>GET</code> operations normally encode
 inputs as URL query parameters. <code>POST</code> operations normally use a JSON request
@@ -4219,7 +4218,8 @@ body:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="err">Authorization: Bearer &lt;token&gt;</span>
 </code></pre></div>
 <p>Create personal access tokens with only the scopes required by the operation.
-The OpenAPI dashboard lists the accepted scopes for each endpoint.</p>
+For the available scopes and how they control access, see
+<a href="../explanation/auth.html">Explanation &gt; Authentication and authorization</a>.</p>
 <h2 id="response-layout">Response layout<a class="headerlink" href="#response-layout" title="Permanent link">¶</a></h2>
 <p>Many collection and query operations return an object with these fields:</p>
 <table>
@@ -4254,7 +4254,7 @@ The OpenAPI dashboard lists the accepted scopes for each endpoint.</p>
 </table>
 <p>The exact envelope varies by endpoint. Some individual-resource operations
 return their model directly; others wrap it in <code>data</code>. Use the endpoint's
-declared response model rather than assuming every response has the same shape.</p>
+declared response model to determine the response shape.</p>
 <p>Error responses normally include a <code>detail</code> field. Validation errors can return
 <code>detail</code> as a list containing the affected request locations and messages.</p>
 <h2 id="ownership-scopes">Ownership scopes<a class="headerlink" href="#ownership-scopes" title="Permanent link">¶</a></h2>
@@ -4298,9 +4298,11 @@ the authenticated user's relationship to the Entry.</p>
 </tr>
 </tbody>
 </table>
-<p>Use <code>public</code> for reproducible public-data scripts that do not need
-authentication. Other scopes require authentication to expose non-public data,
-and the server always applies the user's permissions.</p>
+<p>Use <code>public</code> for reproducible public-data scripts. The <code>public</code>, <code>visible</code>, and
+<code>all</code> scopes can be used without authentication, but anonymous requests remain
+limited to Entries accessible without signing in. Other ownership scopes require
+authentication. Selecting a scope cannot grant access beyond the authenticated
+user's existing permissions.</p>
 <h2 id="entry-queries">Entry queries<a class="headerlink" href="#entry-queries" title="Permanent link">¶</a></h2>
 <p>Entry query objects map searchable quantity paths to criteria. Different
 criteria in one object are combined with logical AND:</p>
@@ -4372,7 +4374,8 @@ Append an operator to a quantity path to change the comparison:</p>
 </code></pre></div>
 <p>The searchable quantities depend on the endpoint and installed schema
 packages. Use the request model and searchable-quantity information exposed by
-the deployment rather than assuming every archive quantity is indexed.</p>
+the deployment to identify which quantities are indexed and available for
+queries.</p>
 <p>Entry search also accepts an <code>optimade_filter</code> criterion using OPTIMADE filter
 syntax:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="p">{</span>
@@ -4415,8 +4418,8 @@ data. Use <code>"include-resolved"</code> to include a complete referenced branc
 <code>"resolve-inplace": true</code> at the root of <code>required</code> to replace returned
 references with their target data instead of retaining the targets at their
 original archive paths.</p>
-<p>Request only the fields needed by the client. Narrow selections reduce server
-work, transfer size, and memory use.</p>
+<p>Request only the fields you need. Narrow selections reduce server work,
+transfer size, and memory use.</p>
 <h2 id="pagination">Pagination<a class="headerlink" href="#pagination" title="Permanent link">¶</a></h2>
 <p>Paginated requests and responses can contain:</p>
 <table>
@@ -4469,7 +4472,7 @@ result set, begin without <code>page_after_value</code> and pass each returned
 <p>Treat cursor values as opaque. Their format depends on the endpoint and
 ordering and can change when either changes.</p>
 <h2 id="user-groups">User groups<a class="headerlink" href="#user-groups" title="Permanent link">¶</a></h2>
-<p>The <code>groups</code> resource uses these core endpoints:</p>
+<p>The <code>groups</code> resource uses these built-in endpoints:</p>
 <table>
 <thead>
 <tr>
@@ -4535,8 +4538,16 @@ assigning the group as a Project collaborator through an upload API request.</p>
 </thead>
 <tbody>
 <tr>
-<td><code>200</code>, <code>201</code>, <code>204</code></td>
-<td>Successful retrieval, creation, or operation without a response body.</td>
+<td><code>200</code></td>
+<td>Request completed successfully; the response body depends on the endpoint.</td>
+</tr>
+<tr>
+<td><code>201</code></td>
+<td>Resource created successfully; the response body depends on the endpoint.</td>
+</tr>
+<tr>
+<td><code>204</code></td>
+<td>Request completed successfully without a response body.</td>
 </tr>
 <tr>
 <td><code>400</code>, <code>422</code></td>
@@ -4565,12 +4576,12 @@ assigning the group as a Project collaborator through an upload API request.</p>
 </tbody>
 </table>
 <p>Page-size, request-rate, and concurrency limits are deployment and endpoint
-specific. Do not document one value as universal. When the server applies a
-limit, reduce concurrency or page size as appropriate and retry temporary
-responses with bounded backoff. Respect <code>Retry-After</code> when the response
-provides it.</p>
-<p>Clients should set timeouts, call <code>raise_for_status()</code> or perform equivalent
-status handling, and report the response body when a request fails.</p>
+specific. Do not assume that limits observed on one deployment apply to
+another. When the server applies a limit, reduce concurrency or page size as
+appropriate and retry temporary responses with bounded backoff. Respect
+<code>Retry-After</code> when the response provides it.</p>
+<p>Set request timeouts, call <code>raise_for_status()</code> or perform equivalent status
+handling, and inspect the response body for error details when a request fails.</p>
 <h2 id="related-pages">Related pages<a class="headerlink" href="#related-pages" title="Permanent link">¶</a></h2>
 <ul>
 <li><a href="../howto/manage/program/api.html">How-to guides &gt; ... &gt; Use the API</a> — send and paginate a public Entry query.</li>
