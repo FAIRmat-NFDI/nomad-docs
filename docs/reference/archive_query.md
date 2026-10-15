@@ -63,7 +63,7 @@ scope returns all Entries only for an administrator account.
 The corresponding environment variables are:
 
 - `NOMAD_CLIENT_URL` for the API base URL, such as
-  `https://nomad-lab.eu/prod/v1/api`.
+  `https://nomad-lab.eu/develop/backend/api`.
 - `NOMAD_CLIENT_ACCESS_TOKEN` for a bearer token, including a personal access
   token.
 
