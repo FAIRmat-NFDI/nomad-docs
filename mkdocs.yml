@@ -102,6 +102,7 @@ nav:
   - Reference:
       - Overview: reference/overview.md
       - REST API: reference/api.md
+      - ArchiveQuery client: reference/archive_query.md
       - Schema language: reference/metainfo.md
       - Configuration: reference/config.md
       - Annotations: reference/annotations.md
