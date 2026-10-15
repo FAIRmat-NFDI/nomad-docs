@@ -100,10 +100,13 @@ description.
 ### `fetch(number=0)`
 
 Search synchronously and append matching `(entry_id, upload_id)` pairs to the
-pending list. `number` is a target rather than a strict limit: because the
-search proceeds in pages, the result can include additional pairs up to the
-current page boundary and `results_max`. With `number=0`, fetch up to the
-remaining `results_max` limit. The return value is the number of pairs added.
+pending list. `number` is a minimum target for the call rather than a strict
+limit. The client requests complete pages containing up to `page_size` Entries
+and keeps the entire final page unless that would exceed `results_max`.
+Consequently, the pending list can receive up to `page_size - 1` more pairs
+than requested. With `number=0`, fetch up to the remaining `results_max` limit.
+
+<!-- TODO: Reassess the fetch(number) description after https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR/-/work_items/2725 is resolved. -->
 
 ### `download(number=0, *, as_plain_dict=False)`
 
