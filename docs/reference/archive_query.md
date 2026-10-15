@@ -38,18 +38,19 @@ The ownership scopes are:
 
 | Scope | Entries included |
 | --- | --- |
-| `public` | Published Entries without embargo. No authentication is required. |
-| `visible` | Public Entries plus Entries visible to the authenticated user. |
-| `all` | Published Entries, including embargoed Entries visible to the authenticated user, plus Entries owned by or shared with that user. |
+| `public` | Published Entries without embargo. |
+| `visible` | Public Entries plus, when authenticated, other Entries visible to the user. |
+| `all` | All published Entries, including embargoed Entries, plus, when authenticated, unpublished Entries owned by or shared with the user. |
 | `shared` | Entries owned by or shared with the authenticated user. |
 | `user` | Entries owned by the authenticated user. |
 | `staging` | Unpublished Entries owned by or shared with the authenticated user. |
 | `admin` | All Entries. This scope requires an administrator account. |
 
-Except for `public`, a scope may require authentication to return non-public
-Entries. Selecting a scope does not grant additional access: the server returns
-only Entries that the authenticated user has permission to view. The `admin`
-scope returns all Entries only for an administrator account.
+The `public`, `visible`, and `all` scopes can be used without authentication.
+Authentication expands the results returned by `visible` and `all` to include
+Entries that the user has permission to view. The `shared`, `user`, and
+`staging` scopes require authentication, and `admin` requires an administrator
+account. Selecting a scope does not grant additional access.
 
 ## Connection and authentication options
 
@@ -67,9 +68,8 @@ The corresponding environment variables are:
 - `NOMAD_CLIENT_ACCESS_TOKEN` for a bearer token, including a personal access
   token.
 
-An explicit `url` overrides `NOMAD_CLIENT_URL`. `ArchiveQuery` has no access
-token constructor argument; its authentication handler reads the token from
-the client configuration populated by `NOMAD_CLIENT_ACCESS_TOKEN`.
+An explicit `url` overrides `NOMAD_CLIENT_URL`. `ArchiveQuery` reads the token
+from the client configuration populated by `NOMAD_CLIENT_ACCESS_TOKEN`.
 Password-based credentials are instead supplied through the `username` and
 `password` constructor arguments.
 
