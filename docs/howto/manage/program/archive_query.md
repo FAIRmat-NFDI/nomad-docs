@@ -180,7 +180,7 @@ The synchronous `fetch()` and `download()` methods also work when an event loop
 is already running, including in a Jupyter notebook. They do not require
 `nest_asyncio`.
 
-## Access non-public Entries
+## Access non-public entries
 
 Create a personal access token as described in
 [How-to guides > ... > Authenticate programmatically > Create a PAT](./auth.md#create-a-pat)
