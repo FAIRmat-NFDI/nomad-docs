@@ -13,4 +13,4 @@ widgets_yaml = """
     lg: {x: 12, y: 0, w: 12, h: 6, minW: 3, minH: 3} # Desktop: right half
     sm: {x: 0, y: 6, w: 12, h: 6, minW: 3, minH: 3}  # Phone: full width, below
 """
-dashboard = Dashboard.parse_obj({'widgets': yaml.safe_load(widgets_yaml)})
+dashboard = Dashboard.model_validate({'widgets': yaml.safe_load(widgets_yaml)})
