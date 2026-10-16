@@ -19,7 +19,7 @@ In this tutorial, you will learn how to:
 
 ## Before you begin
 
-This tutorial does not require prior experience with creating custom schemas. However, familiarity with the [NOMAD ELN functionality](built_in_templates.md) is helpful.
+This tutorial does not require prior experience with creating custom schemas. Familiarity with NOMAD's ELN functionality is helpful. For an introduction, see [Tutorials > ... > Use built-in ELN templates](built_in_templates.md).
 
 Before starting, make sure you have:
 
@@ -40,9 +40,9 @@ Before starting, make sure you have:
     - [Section and subsection](../../reference/glossary.md#section-and-subsection), [quantity](../../reference/glossary.md#quantity)
     - [Annotation](../../reference/glossary.md#annotation)
 
-??? example "About the example experiment used in this tutorial"
+This tutorial uses an example experiment involving the solution processing of polymer thin films to illustrate how experimental metadata can be structured in a custom ELN schema.
 
-    In this tutorial, we use an example experiment involving the solution processing of polymer thin films to illustrate how experimental metadata can be structured in a custom ELN schema.
+??? example "About the example experiment used in this tutorial"
 
     The experiment is represented by general contextual metadata, including its name, the responsible researcher, the date, and free-text notes.
 
@@ -61,8 +61,8 @@ Before starting, make sure you have:
 
 Create a new file named `polymer_processing.archive.yaml` in a local working directory. This file will contain the custom ELN schema definitions for the example experiment in this tutorial.
 
-??? info "The `.archive.yaml` extension is needed"
-    NOMAD recognizes files with the `.archive.yaml` extension as archive files. In this tutorial, we use such a file to define a schema package.
+!!! info "The `.archive.yaml` extension is needed"
+    NOMAD recognizes files with the `.archive.yaml` extension as archive files. This tutorial uses such a file to define a schema package.
 
 ---
 
@@ -153,9 +153,10 @@ Define the quantities `Name`, `Researcher`, `Date`, and `Additional_Notes`, by a
 - `type:` specifies the data type.
 
 - `default:` provides a placeholder value (optional).
-<!-- TODO: In GUI v2 (tested on the develop deployment on 2026-09-30), the ELN editor shows "no value" instead of the default value of a quantity. Clarify whether this is intended and reword this line accordingly. -->
 
 - If a quantity represents a physical value, you can also add a `unit` key.
+
+<!-- TODO: In GUI v2 (tested on the develop deployment on 2026-09-30), the ELN editor shows "no value" instead of the default value of a quantity. Clarify whether this is intended and reword the `default:` line above accordingly. -->
 
 ??? success "Checkpoint 2"
     Your file so far should look like the following:
@@ -207,7 +208,7 @@ Start by updating the `Name` quantity as follows:
 
 Note that `m_annotations:` is used to configure the `Name` quantity, it is indented one level (two spaces) with respect to `Name:`, i.e., it aligns with `type:` and `default:` in the `Name` block.
 
-??? info "NOMAD's editable ELN components"
+!!! info "NOMAD's editable ELN components"
     For a list of editable components in NOMAD, see [Reference > Annotations > ELN annotations](../../reference/annotations.md#eln-annotations).
 
 Now update the remaining quantities:
@@ -258,20 +259,18 @@ Your schema now defines both the structure and the GUI behavior of the main expe
 
     Test it in NOMAD by uploading the schema file to a project and creating an ELN entry from it:
 
-    1. Select **Projects** from the menu on the left, click **NEW PROJECT**, enter `Polymer processing ELN` as the **Project name**, and click **CREATE**.
-    2. On the project page, click **UPLOAD FILES** and upload `polymer_processing.archive.yaml`. Wait until the processing status at the top right of the project page shows **Completed**. If it stays **Idle**, click the status, and switch on **Auto Reprocessing** in the **Processing status** panel. The **ENTRIES** tab now lists your schema as an entry of the type **Schema**.
-    3. Click **NEW ENTRY**. In the **CUSTOM SCHEMAS** tab, keep **This project** selected and click `Experiment_Information`.
-    4. Enter `polymer_film_experiment_1` as the **Filename** and click **CREATE**. NOMAD adds the extension `.archive.json` to the filename.
+    1. Create a NOMAD project to contain your custom ELN schema and entries. Follow the steps in [Tutorials > ... > Create a new project](../upload_publish.md#create-a-new-project) and name the project `Polymer processing ELN test`.
+    2. Click **UPLOAD FILES** on the project page and upload `polymer_processing.archive.yaml`. Continue when the processing status shows **Completed**. The **ENTRIES** tab then lists your schema as an entry of the type **Schema**.
+    3. Click **NEW ENTRY** on the **OVERVIEW** tab. Open the **CUSTOM SCHEMAS** tab, keep **This project** selected, and click `Experiment_Information`.
+    4. Enter `polymer_film_experiment` as the **Filename** and click **CREATE**. NOMAD adds the `.archive.json` extension to the filename.
 
     NOMAD creates the entry and opens it in the **ARCHIVE** tab. The entry contains the fields that you defined in the schema.
 
     ![New ELN entry with the fields Name, Researcher, Date, and Additional Notes](images/custom_eln_yaml_1.png)
 
-    Keep this project, as you will use it again to test the final schema at the end of this tutorial.
-
 ---
 
-## Add subsections for sample, solution, and processing
+## Add the subsections
 
 Subsections define nested sections within a section. They allow you to group related information, such as sample details, solution composition, and preparation steps, into separate blocks within the ELN template.
 
@@ -373,7 +372,7 @@ Add the following content to the schema file:
 
 Define the `Solution` subsection by inheriting from the base section `nomad.datamodel.metainfo.eln.ELNSample`, hiding the inherited fields `chemical_formula` and `description`, and adding a new quantity `Concentration` to capture a numeric value with a unit.
 
-To achieve this, add the following content to your schema file:
+Add the following content to your schema file:
 
 ```yaml
             base_sections:
@@ -643,13 +642,15 @@ Add the following `sub_sections:` block inside the `Solution` subsection:
 
 ## Test your custom schema in NOMAD
 
-Test the final schema in the project that you created at Checkpoint 3. If you skipped that test, first create the project: select **Projects** from the menu on the left, click **NEW PROJECT**, enter `Polymer processing ELN` as the **Project name**, and click **CREATE**.
+Test the completed schema by uploading it to a new NOMAD project and creating an ELN entry from it:
 
-1. Select **Projects** from the menu on the left and open the project `Polymer processing ELN`.
-2. Click **UPLOAD FILES** and upload the updated `polymer_processing.archive.yaml`. If NOMAD asks whether to overwrite the existing file, click **OVERWRITE**. Wait until the processing status at the top right of the project page shows **Completed**.
-3. Click **NEW ENTRY**. In the **CUSTOM SCHEMAS** tab, keep **This project** selected and click `Experiment_Information`.
-4. Enter `polymer_film_experiment_2` as the **Filename** and click **CREATE**.
+1. Create a NOMAD project to contain your custom ELN schema and entries. Follow the steps in [Tutorials > ... > Create a new project](../upload_publish.md#create-a-new-project) and name the project `Polymer processing ELN`.
+2. Click **UPLOAD FILES** on the project page and upload `polymer_processing.archive.yaml`. Continue when the processing status shows **Completed**. The **ENTRIES** tab then lists your schema as an entry of the type **Schema**.
+3. Click **NEW ENTRY** on the **OVERVIEW** tab. Open the **CUSTOM SCHEMAS** tab, keep **This project** selected, and click `Experiment_Information`.
+4. Enter `polymer_film_experiment` as the **Filename** and click **CREATE**.
 
-In addition to the fields of the main section, the new entry now lists the subsections `Sample`, `Solution`, and `Preparation` under **Subsections**. To add a subsection, e.g., `Sample`, click the **(+)** button next to its name, fill in its fields, and click **SAVE**.
+NOMAD creates the entry and opens its **ARCHIVE** tab. The entry contains the main-section fields and lists `Sample`, `Solution`, and `Preparation` under **Subsections**.
+
+To add a subsection, click the **(+)** button next to its name, fill in its fields, and click **SAVE**.
 
 ![ELN entry with the Sample, Solution, and Preparation subsections and their (+) buttons](images/custom_eln_yaml_2.png)

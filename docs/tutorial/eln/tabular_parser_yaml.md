@@ -1,4 +1,4 @@
-# Parse tabular measurement data with the tabular parser
+# Parse and visualize tabular data in NOMAD
 
 In this tutorial, we transform a tabular measurement file into a structured NOMAD entry using NOMAD's tabular parser. We build and configure a YAML-based parser that extracts data from tabular files such as `.csv` or `.xlsx`, stores them as an entry, and enables visualization in NOMAD. By the end of the tutorial, we will have created a reusable parser for tabular data that can be integrated into a custom ELN schema.
 
@@ -17,7 +17,7 @@ In this tutorial, you will learn how to:
 
 ## Before you begin
 
-This tutorial builds on the previous tutorial [create a custom ELN schema in NOMAD using YAML](custom_eln_yaml.md). Basic familiarity with defining sections and quantities in a `.archive.yaml` file is assumed.
+This tutorial assumes basic familiarity with YAML and with defining sections and quantities in a `.archive.yaml` schema file. It builds on [Tutorials > ... > Create a custom ELN schema](custom_eln_yaml.md).
 
 Before starting, make sure you have:
 
@@ -32,9 +32,9 @@ Before starting, make sure you have:
 3. **A YAML-capable editor or IDE (e.g., VS Code)**  
     You will edit a YAML file during the tutorial. Using an editor or IDE with YAML support (for example, VS Code) is recommended.
 
-??? example "About the measurement data used in this tutorial"
+This tutorial uses an example optical absorption spectrum of P3HT to demonstrate how tabular measurement data stored in a `.csv` file can be parsed, structured, and visualized in a custom NOMAD ELN schema.
 
-    In this tutorial, we use an example optical absorption spectrum of P3HT to demonstrate how tabular measurement data stored in a `.csv` file can be parsed, structured, and visualized in a custom NOMAD ELN schema.
+??? example "About the measurement data used in this tutorial"
 
     Download the example file [`P3HT_optical.csv`](data/P3HT_optical.csv){:download}
 
@@ -53,7 +53,7 @@ Before starting, make sure you have:
 
 ---
 
-## Declare the schema package and add a parser section
+## Set up the schema package
 
 Create a new file named `optical_absorption.archive.yaml` in a local working directory, then add the following content:
 
@@ -72,9 +72,9 @@ definitions:
 
 Note that `name:` and `sections:` must be indented one level (two spaces) with respect to `definitions:`.
 
-## Inherit the base sections for parsing and plotting
+## Inherit the base sections
 
-To ensure that the `Optical_absorption` section is treated as a valid NOMAD entry and supports tabular file parsing and visualization, inherit from the appropriate base sections using `base_sections:`.
+Add `base_sections` to make `Optical_absorption` a valid NOMAD entry and enable tabular-file parsing and plotting.
 
 Add the following content to the schema file:
 
@@ -86,8 +86,6 @@ Add the following content to the schema file:
 ```
 
 **Where to paste:** under `Optical_absorption:` and indented one level (two spaces) with respect to it.
-
-List `PlotSection` first, so that NOMAD creates the plot after the tabular parser has read the data from the file. Otherwise, the plot remains empty.
 
 ??? success "Checkpoint 1"
     Your file so far should look like the following:
@@ -102,7 +100,7 @@ List `PlotSection` first, so that NOMAD creates the plot after the tabular parse
             - nomad.parsing.tabular.TableData
     ```
 
-## Add the quantities to the parser section
+## Add quantities to parser section
 
 Now define the quantities required for the tabular parser section:
 
@@ -156,9 +154,9 @@ Add the following content to the schema file:
               shape: ['*']
     ```
 
-## Configure how NOMAD handles the quantities
+## Configure quantities behavior
 
-In the previous section, you defined the required quantities for the tabular parser. Now you add an `m_annotations:` block to each quantity, so that NOMAD knows how to handle it correctly in the GUI and during parsing.
+Add `m_annotations:` blocks to the quantities to configure file input, parser behavior, and the mapping between table columns and schema quantities.
 
 **The `data_file` quantity**
 
@@ -279,9 +277,7 @@ Add a `tabular` annotation under `absorbance` quantity:
 
 ## Create a plot for the data
 
-So far, you have defined how the tabular data are parsed and mapped to schema quantities.
-
-Now, you will configure how these quantities are visualized in the NOMAD ELN by adding a `plotly_express` annotation to the `Optical_absorption` section.
+Add a `plotly_express` annotation to the `Optical_absorption` section to plot `absorbance` against `wavelength` in the NOMAD entry.
 
 Add the following content to the schema file:
 
@@ -363,25 +359,21 @@ Add the following content to the schema file:
 
 ## Test your tabular parser in NOMAD
 
-Test the parser by uploading the schema file to a NOMAD project, creating an entry from the `Optical_absorption` section, and attaching the measurement file to this entry:
+Test the parser by uploading the schema file to a NOMAD project, creating an entry from the `Optical_absorption` section, and attaching the example measurement file:
 
-1. Select **Projects** from the menu on the left, click **NEW PROJECT**, enter `Optical absorption measurements` as the **Project name**, and click **CREATE**.
-2. On the project page, click **UPLOAD FILES** and upload `optical_absorption.archive.yaml`. Wait until the processing status at the top right of the project page shows **Completed**. If it stays **Idle**, click the status, and switch on **Auto Reprocessing** in the **Processing status** panel.
-3. Click **NEW ENTRY**. In the **CUSTOM SCHEMAS** tab, keep **This project** selected and click `Optical_absorption`.
-4. Enter `P3HT_optical_absorption` as the **Filename** and click **CREATE**. NOMAD adds the extension `.archive.json` to the filename.
-5. In the new entry, click the upload icon (↑) at the right end of the **Data file** field, select `P3HT_optical.csv`, and click **SAVE**.
+1. Create a NOMAD project to contain your tabular parser schema and entries. Follow the steps in [Tutorials > ... > Create a new project](../upload_publish.md#create-a-new-project) and name the project `Optical absorption measurements`.
+2. Click **UPLOAD FILES** on the project page and upload `optical_absorption.archive.yaml`. Continue when the processing status shows **Completed**.
+3. Click **NEW ENTRY** on the **OVERVIEW** tab. Open the **CUSTOM SCHEMAS** tab, keep **This project** selected, and click `Optical_absorption`.
+4. Enter `P3HT_optical_absorption` as the **Filename** and click **CREATE**. NOMAD adds the `.archive.json` extension to the filename.
+5. Click the upload icon (↑) next to the **Data file** field, select `P3HT_optical.csv`, and click **SAVE**.
 
 NOMAD parses `P3HT_optical.csv` and fills the `wavelength` and `absorbance` quantities with the values of its columns. To see the plotted optical spectrum, click the **OVERVIEW** tab of the entry and scroll down to the **Plots** card.
 
 ![Entry overview with the filled Wavelength and Absorbance quantities and the plotted optical spectrum](images/tabular_parser_yaml_1.png)
 
-## Integrate the tabular parser section into an ELN template
+## Integrate your parser into an ELN
 
-So far, you have created a standalone schema section for parsing and visualizing optical absorption data.
-
-Now, you will reuse the `Optical_absorption` section inside the polymer-processing ELN schema created in the [previous tutorial](custom_eln_yaml.md).
-
-This allows you to upload an optical absorption file and visualize the spectrum directly within the same ELN entry. The plot belongs to the **Optical absorption** subsection: open this subsection and then its **Figures** to see it.
+Reuse the `Optical_absorption` section in the polymer-processing schema created in [Tutorials > ... > Create a custom ELN schema](custom_eln_yaml.md). This allows one ELN entry to contain the experiment information, optical absorption data, and resulting plot.
 
 !!! task "Task"
     Add the `Optical_absorption` section as a subsection in the `polymer_processing.archive.yaml` custom ELN schema.
@@ -391,7 +383,7 @@ This allows you to upload an optical absorption file and visualize the spectrum 
     - Its indentation level matches that of `Sample`, `Solution`, and `Preparation`.
 
 ??? success "Solution"
-    In your `polymer_processing.archive.yaml`, add an `Optical_absorption` subsection under `Experiment_Information` and give it the same section definition you built in this tutorial (the one that includes `TableData` and `PlotSection`, with `PlotSection` listed first).
+    In your `polymer_processing.archive.yaml`, add an `Optical_absorption` subsection under `Experiment_Information` and give it the same section definition you built in this tutorial (the one that includes `TableData` and `PlotSection`).
 
     The complete example below shows one possible result, where `Optical_absorption` is added at the same level as `Sample`, `Solution`, and `Preparation`. It also contains an optional `info_about_data` quantity for notes about the measurement, which is not needed for parsing or plotting.
 

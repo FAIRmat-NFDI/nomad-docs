@@ -15,7 +15,7 @@ nav:
       - Use NOMAD as an ELN:
           - Use built-in ELN templates: tutorial/eln/built_in_templates.md
           - Create a custom ELN schema: tutorial/eln/custom_eln_yaml.md
-          - Parse tabular measurement data: tutorial/eln/tabular_parser_yaml.md
+          - Parse tabular data: tutorial/eln/tabular_parser_yaml.md
       - Manage workflows and projects: tutorial/workflows_projects.md
       - Develop a NOMAD plugin:
           - Set up a plugin project: tutorial/develop_plugin/plugin_structure.md
