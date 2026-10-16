@@ -1,6 +1,6 @@
 # How to parse tabular data
 
-Refer to the [Reference guide](../../reference/annotations.md) for the full list of annotations connected to this parser and to the [Tutorials > Use NOMAD as an ELN > Parse tabular measurement data](../../tutorial/eln/tabular_parser_yaml.md)  for a detailed description of each of them.
+Refer to the [Reference guide](../../reference/annotations.md) for the full list of annotations connected to this parser and to the [Tutorials > Use NOMAD as an ELN > Parse tabular data](../../tutorial/eln/tabular_parser_yaml.md)  for a detailed description of each of them.
 
 ## Preparing the tabular data file
 
