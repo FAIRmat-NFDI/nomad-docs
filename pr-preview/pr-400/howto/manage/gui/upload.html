@@ -703,7 +703,7 @@
   <span class="md-ellipsis">
     
   
-    Parse tabular measurement data
+    Parse tabular data
   
 
     
@@ -1391,6 +1391,17 @@
     <span class="md-ellipsis">
       
         Create ELN entries from built-in or custom schemas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#include-entries-from-other-projects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Include entries from other projects
       
     </span>
   </a>
@@ -3639,6 +3650,62 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../reference/api.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    REST API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/archive_query.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ArchiveQuery client
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../reference/metainfo.html" class="md-nav__link">
         
   
@@ -3703,6 +3770,34 @@
     
   
     Annotations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/json_transformer.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JSON transformer
   
 
     
@@ -4007,6 +4102,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#include-entries-from-other-projects" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Include entries from other projects
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4291,6 +4397,66 @@ a schema-based entry that you can edit directly in NOMAD. To create an ELN entry
 </ol>
 <p><strong>Related pages:</strong> <a href="../../../tutorial/eln/built_in_templates.html">Use built-in ELN templates</a>;
 <a href="../../schemas/define.html">Define a schema</a>.</p>
+<h3 id="include-entries-from-other-projects">Include entries from other projects<a class="headerlink" href="#include-entries-from-other-projects" title="Permanent link">¶</a></h3>
+<p>A project can include entries from other projects. This lets you combine data from several
+projects without copying or reprocessing any files, and allows you to create larger
+logical collections of entries that would not otherwise be possible e.g. due to project
+size limits. Included entries appear in the project's <strong>ENTRIES</strong> list next to the
+project's own entries, but their files and data stay in the project they came from. Also
+the visibility and access control are still controlled by the project that contains the
+files.</p>
+<div class="admonition info">
+<p class="admonition-title">Replacement for datasets</p>
+<p>Included entries replace the <strong>Datasets</strong> feature of NOMAD v1.0. Existing
+datasets keep working as before and remain accessible in NOMAD v2.0.0, but
+new datasets can no longer be created in the GUI. To group entries from
+several projects, include them in a project instead.</p>
+</div>
+<p>Typical uses include:</p>
+<ul>
+<li><strong>Collecting the data behind a publication:</strong> The results for a paper are
+  often spread over several projects, for example one per measurement campaign,
+  simulation series, or group member. Create a dedicated project that includes
+  entries from all of them, publish it, and cite its single DOI in the paper.</li>
+<li><strong>Sharing reference data:</strong> Keep common data, such as calibration
+  measurements, substrate characterizations, or reference calculations, in one
+  project and include it in every project that relies on it. The reference data
+  is stored only once and stays the same wherever it is used.</li>
+<li><strong>Comparing simulations and experiments:</strong> Include experimental entries in a
+  simulation project, or the other way around, to search and compare both kinds
+  of data in one entries list.</li>
+<li><strong>Building curated collections:</strong> Gather published entries from your own or
+  other people's projects into a themed collection, such as a benchmark set for
+  a class of materials. The included entries retain their original authorship and
+  provenance.</li>
+</ul>
+<p>To include entries from other projects:</p>
+<ol>
+<li>On the project <strong>Overview</strong> page, select the drop-down arrow next to
+   <strong>NEW ENTRY</strong>, then choose <strong>Include entries from other projects</strong>.</li>
+<li>Search for a project by its project ID and add it to the list. Repeat for
+   each project you want to include. To stop including a project, remove it
+   from the list.</li>
+<li>Select <strong>NEXT</strong>. NOMAD checks your selection and shows how many entries will
+   be included and whether any of them are still unpublished.</li>
+<li>Select <strong>SAVE</strong>.</li>
+</ol>
+<p>The included entries now appear under <strong>ENTRIES</strong>, marked with an <strong>included</strong>
+label, and can be searched and filtered together with the project's own
+entries.</p>
+<p>Keep the following in mind when you include entries:</p>
+<ul>
+<li><strong>Included entries are a snapshot.</strong> Only entries that exist when you select
+  <strong>SAVE</strong> are included. If entries are later added to one of the included
+  projects, open the dialog and save again to include them as well.</li>
+<li><strong>Ownership does not change.</strong> Each entry belongs to exactly one project.
+  Including an entry does not copy or move it, and it can only be edited in the
+  project it belongs to.</li>
+<li><strong>Inclusion is not recursive.</strong> Only a project's own entries are included,
+  not the entries it has itself included from other projects.</li>
+<li><strong>Publishing requires published entries.</strong> A project cannot be published
+  while any of its included entries are unpublished or published under embargo. Ask the owners of those projects to publish them first.</li>
+</ul>
 <h2 id="visibility-and-access">Visibility and access<a class="headerlink" href="#visibility-and-access" title="Permanent link">¶</a></h2>
 <p>On the project page, the project owner can select <strong>SETTINGS</strong> to manage
 access.</p>
@@ -4305,7 +4471,7 @@ of these roles:</p>
 <p>Select <strong>SAVE</strong> after changing the collaborator list or a role. If group
 collaboration is enabled in the deployment, <strong>ADD GROUP</strong> provides the same
 role choices for a user group. See
-<a href="../program/api.html#user-groups">How-to guides &gt; ... &gt; API Overview &gt; User Groups</a>
+<a href="../../../reference/api.html#user-groups">Reference &gt; REST API &gt; User groups</a>
 for information about creating and editing groups.</p>
 <p>Under <strong>Visibility</strong>, select <strong>Private</strong> or <strong>Public</strong>, then select <strong>SAVE</strong>.
 A public, unpublished project is visible to everyone. Public visibility and a
