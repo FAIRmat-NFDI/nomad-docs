@@ -157,10 +157,13 @@ a schema-based entry that you can edit directly in NOMAD. To create an ELN entry
 
 ### Include entries from other projects
 
-A project can include entries from other projects. Included entries appear in
-the project's **ENTRIES** list next to the project's own entries, but their
-files and data stay in the project they came from. This lets you combine
-data from several projects without copying or reprocessing any files.
+A project can include entries from other projects. This lets you combine data from several
+projects without copying or reprocessing any files, and allows you to create larger
+logical collections of entries that would not otherwise be possible e.g. due to project
+size limits. Included entries appear in the project's **ENTRIES** list next to the
+project's own entries, but their files and data stay in the project they came from. Also
+the visibility and access control are still controlled by the project that contains the
+files.
 
 !!! info "Replacement for datasets"
 
@@ -184,8 +187,8 @@ Typical uses include:
   of data in one entries list.
 - **Building curated collections:** Gather published entries from your own or
   other people's projects into a themed collection, such as a benchmark set for
-  a class of materials. The included entries still belong to their original
-  projects, so the original authors keep the credit for their data.
+  a class of materials. The included entries retain their original authorship and
+  provenance.
 
 To include entries from other projects:
 
@@ -213,8 +216,7 @@ Keep the following in mind when you include entries:
 - **Inclusion is not recursive.** Only a project's own entries are included,
   not the entries it has itself included from other projects.
 - **Publishing requires published entries.** A project cannot be published
-  while any of its included entries are unpublished. Ask the owners of those
-  projects to publish them first.
+  while any of its included entries are unpublished or published under embargo. Ask the owners of those projects to publish them first.
 
 ## Visibility and access
 
