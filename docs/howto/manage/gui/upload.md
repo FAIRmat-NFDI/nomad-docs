@@ -155,6 +155,69 @@ a schema-based entry that you can edit directly in NOMAD. To create an ELN entry
 **Related pages:** {{ nav_link("tutorial/eln/built_in_templates.md") }};
 {{ nav_link("howto/schemas/define.md") }}.
 
+### Include entries from other projects
+
+A project can include entries from other projects. This lets you combine data from several
+projects without copying or reprocessing any files, and allows you to create larger
+logical collections of entries that would not otherwise be possible e.g. due to project
+size limits. Included entries appear in the project's **ENTRIES** list next to the
+project's own entries, but their files and data stay in the project they came from. Also
+the visibility and access control are still controlled by the project that contains the
+files.
+
+!!! info "Replacement for datasets"
+
+    Included entries replace the **Datasets** feature of NOMAD v1.0. Existing
+    datasets keep working as before and remain accessible in NOMAD v2.0.0, but
+    new datasets can no longer be created in the GUI. To group entries from
+    several projects, include them in a project instead.
+
+Typical uses include:
+
+- **Collecting the data behind a publication:** The results for a paper are
+  often spread over several projects, for example one per measurement campaign,
+  simulation series, or group member. Create a dedicated project that includes
+  entries from all of them, publish it, and cite its single DOI in the paper.
+- **Sharing reference data:** Keep common data, such as calibration
+  measurements, substrate characterizations, or reference calculations, in one
+  project and include it in every project that relies on it. The reference data
+  is stored only once and stays the same wherever it is used.
+- **Comparing simulations and experiments:** Include experimental entries in a
+  simulation project, or the other way around, to search and compare both kinds
+  of data in one entries list.
+- **Building curated collections:** Gather published entries from your own or
+  other people's projects into a themed collection, such as a benchmark set for
+  a class of materials. The included entries retain their original authorship and
+  provenance.
+
+To include entries from other projects:
+
+1. On the project **Overview** page, select the drop-down arrow next to
+   **NEW ENTRY**, then choose **Include entries from other projects**.
+2. Search for a project by its project ID and add it to the list. Repeat for
+   each project you want to include. To stop including a project, remove it
+   from the list.
+3. Select **NEXT**. NOMAD checks your selection and shows how many entries will
+   be included and whether any of them are still unpublished.
+4. Select **SAVE**.
+
+The included entries now appear under **ENTRIES**, marked with an **included**
+label, and can be searched and filtered together with the project's own
+entries.
+
+Keep the following in mind when you include entries:
+
+- **Included entries are a snapshot.** Only entries that exist when you select
+  **SAVE** are included. If entries are later added to one of the included
+  projects, open the dialog and save again to include them as well.
+- **Ownership does not change.** Each entry belongs to exactly one project.
+  Including an entry does not copy or move it, and it can only be edited in the
+  project it belongs to.
+- **Inclusion is not recursive.** Only a project's own entries are included,
+  not the entries it has itself included from other projects.
+- **Publishing requires published entries.** A project cannot be published
+  while any of its included entries are unpublished or published under embargo. Ask the owners of those projects to publish them first.
+
 ## Visibility and access
 
 On the project page, the project owner can select **SETTINGS** to manage
