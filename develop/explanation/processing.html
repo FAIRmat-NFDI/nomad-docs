@@ -4506,11 +4506,12 @@ includes the matching step, creates new entries, and triggers the processing of
 new or affected entries. An upload is considered processing as long as any of its entries
 is still processing (or scheduled to be processed).</p>
 <h3 id="entries">Entries<a class="headerlink" href="#entries" title="Permanent link">¶</a></h3>
-<p>In most scenarios, entry processing is not triggered individually, but as part of upload
-processing. Many entries in one upload might be processed at the same time. Some order
-can be enforced through <em>processing levels</em>. Levels are part of the parser metadata and
-entries paired to parsers with a higher level are processed after entries with a
-parser of lower level. See also <a href="../howto/plugins/types/parsers.html">how to write parsers</a>.</p>
+<p>In most scenarios, entry processing is not triggered individually, but as part of an upload
+processing. Many entries of one upload might be processed at the same time. Some order
+can be enforced through the <em>execution order</em> of parsers. The execution order is part of the
+parser entry point and entries paired to parsers with a higher execution order are processed
+after entries with a parser of lower execution order. See also
+<a href="../howto/plugins/types/parsers.html#control-parser-execution-order">how to control parser execution order</a>.</p>
 <h2 id="customize-processing">Customize processing<a class="headerlink" href="#customize-processing" title="Permanent link">¶</a></h2>
 <p>NOMAD provides just the framework for processing. The actual work depends on plugins, parsers
 and schemas for specific file types. While NOMAD comes with a build-in set of plugins, you can build your own plugins to support new file types, ELNs, and workflows.</p>

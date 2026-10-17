@@ -2213,6 +2213,51 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Match your raw file">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#control-parser-matching-order" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Control parser matching order
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#control-parser-execution-order" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Control parser execution order
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Control parser execution order">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#matching-order-vs-execution-order" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Matching order vs. execution order
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -4031,6 +4076,51 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Match your raw file">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#control-parser-matching-order" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Control parser matching order
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#control-parser-execution-order" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Control parser execution order
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Control parser execution order">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#matching-order-vs-execution-order" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Matching order vs. execution order
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -4288,14 +4378,71 @@
 <a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="p">)</span>
 </code></pre></div>
 <p>You can find all of the available matching criteria in the <a href="../../../reference/plugins.html#parserentrypoint"><code>ParserEntryPoint</code> reference</a></p>
+<h3 id="control-parser-matching-order">Control parser matching order<a class="headerlink" href="#control-parser-matching-order" title="Permanent link">¶</a></h3>
+<p>Each file is assigned to at most one parser. NOMAD checks the parsers one by one and the first parser whose matching criteria fit the file is used, even if other parsers would also match it. When several parsers can match the same files, for example a generic parser and a more specialized one, you can use the <code>matching_order</code> attribute to decide which parser gets to claim them first.</p>
+<p>Parsers with a lower <code>matching_order</code> are checked first. Parsers with the same <code>matching_order</code> are checked in alphabetical order of their entry point ID. The default value is <code>0</code>. If all parsers use the default value, the order in which the parsers were registered is used instead. You can set the matching order in the entry point:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">myparser</span> <span class="o">=</span> <span class="n">MyParserEntryPoint</span><span class="p">(</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="n">name</span><span class="o">=</span><span class="s1">'MyParser'</span><span class="p">,</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    <span class="n">description</span><span class="o">=</span><span class="s1">'My custom parser.'</span><span class="p">,</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    <span class="n">mainfile_name_re</span><span class="o">=</span><span class="s1">'.*\.myparser'</span><span class="p">,</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    <span class="n">matching_order</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="p">)</span>
+</code></pre></div>
+<p>or change it per installation using <code>nomad.yaml</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nt">plugins</span><span class="p">:</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="nt">entry_points</span><span class="p">:</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="nt">options</span><span class="p">:</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">      </span><span class="s">"nomad_example.parsers:myparser"</span><span class="p p-Indicator">:</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">        </span><span class="nt">matching_order</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">-1</span>
+</code></pre></div>
+<p>Here a negative value makes sure that <code>myparser</code> is checked before all parsers that use the default value.</p>
+<h2 id="control-parser-execution-order">Control parser execution order<a class="headerlink" href="#control-parser-execution-order" title="Permanent link">¶</a></h2>
+<p><code>ParserEntryPoints</code> have an attribute <code>execution_order</code>, which you can use to control the order in which entries are processed within an upload. Entries matched by parsers with a higher execution order are processed after all entries matched by parsers with a lower execution order. This is useful when a parser needs to read the results of other entries in the same upload. The default execution order for parsers is <code>0</code>, but this can be changed per installation using <code>nomad.yaml</code>:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nt">plugins</span><span class="p">:</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="nt">entry_points</span><span class="p">:</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="nt">options</span><span class="p">:</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">      </span><span class="s">"nomad_example.parsers:myparser"</span><span class="p p-Indicator">:</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">        </span><span class="nt">execution_order</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>execution_order</code> replaces the deprecated <code>level</code> attribute. Existing configurations that use <code>level</code> keep working, but should be migrated to <code>execution_order</code>.</p>
+</div>
+<h3 id="matching-order-vs-execution-order">Matching order vs. execution order<a class="headerlink" href="#matching-order-vs-execution-order" title="Permanent link">¶</a></h3>
+<p>The two attributes control different steps of processing and are independent of each other:</p>
+<table>
+<thead>
+<tr>
+<th>Attribute</th>
+<th>Controls</th>
+<th>Step</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>matching_order</code></td>
+<td>Which parser is assigned to a file</td>
+<td>Matching, when entries are created</td>
+<td>Lower values are checked first. The first matching parser claims the file.</td>
+</tr>
+<tr>
+<td><code>execution_order</code></td>
+<td>When the entries of a parser are processed</td>
+<td>Processing, after matching</td>
+<td>Lower values are processed first. Entries with higher values wait until the entries with lower values are processed.</td>
+</tr>
+</tbody>
+</table>
+<p>For example, <code>matching_order</code> decides whether a file is parsed by your parser or by another parser that also matches it. It has no effect on when that file is processed. <code>execution_order</code> only becomes relevant once the file has been matched to your parser, and it does not change which parser a file gets.</p>
 <h2 id="running-a-parser">Running a parser<a class="headerlink" href="#running-a-parser" title="Permanent link">¶</a></h2>
 <p>Parsers automatically run for the matched files within a NOMAD distribution, but it is also possible to run the manually for specific files. This can be useful for testing and for connecting them into external software.</p>
 <h3 id="using-the-cli">Using the CLI<a class="headerlink" href="#using-the-cli" title="Permanent link">¶</a></h3>
 <p>If you have installed a NOMAD plugin into a Python virtual environment, you can run a parser from that plugin with the <code>nomad</code> command line interface. The following command will uses the CLI to parse a given input file, and store the resulting JSON output into an output file:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>nomad<span class="w"> </span>parse<span class="w"> </span>&lt;input-file&gt;<span class="w"> </span>&gt;<span class="w"> </span>&lt;output-file&gt;
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>nomad<span class="w"> </span>parse<span class="w"> </span>&lt;input-file&gt;<span class="w"> </span>&gt;<span class="w"> </span>&lt;output-file&gt;
 </code></pre></div>
 <p>The parse command will automatically match the right parser to your file and run the parser. To skip the parser matching, i.e. the process that determined which parser fits to the given file, you can use the <code>--parser</code> argument to provide a parser entry point ID:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>nomad<span class="w"> </span>parse<span class="w"> </span>--parser<span class="w"> </span>&lt;parser_entry_point_id&gt;<span class="w"> </span>&lt;input-file&gt;
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>nomad<span class="w"> </span>parse<span class="w"> </span>--parser<span class="w"> </span>&lt;parser_entry_point_id&gt;<span class="w"> </span>&lt;input-file&gt;
 </code></pre></div>
 <p>You can check the <a href="../../../reference/cli.html#nomad-parse">CLI reference for <code>nomad parse</code></a> for the full list of arguments, but the following should get you started:</p>
 <ul>
@@ -4307,57 +4454,57 @@
 <h3 id="within-python-code">Within python code<a class="headerlink" href="#within-python-code" title="Permanent link">¶</a></h3>
 <p>You can also invoke the NOMAD parsers using Python. This will give you the parse
 results as metainfo objects to conveniently analyze the results in Python. You can either run the parser class directly:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.datamodel</span><span class="w"> </span><span class="kn">import</span> <span class="n">EntryArchive</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad_example.parsers.myparser</span><span class="w"> </span><span class="kn">import</span> <span class="n">MyParser</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="n">p</span> <span class="o">=</span> <span class="n">ExampleParser</span><span class="p">()</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="n">a</span> <span class="o">=</span> <span class="n">EntryArchive</span><span class="p">()</span>
-<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="n">p</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">'tests/data/example.out'</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">logger</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">())</span>
-<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>
-<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">m_to_dict</span><span class="p">())</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.datamodel</span><span class="w"> </span><span class="kn">import</span> <span class="n">EntryArchive</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad_example.parsers.myparser</span><span class="w"> </span><span class="kn">import</span> <span class="n">MyParser</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="n">p</span> <span class="o">=</span> <span class="n">ExampleParser</span><span class="p">()</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="n">a</span> <span class="o">=</span> <span class="n">EntryArchive</span><span class="p">()</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="n">p</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">'tests/data/example.out'</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">logger</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">())</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">m_to_dict</span><span class="p">())</span>
 </code></pre></div>
 <p>Or alternatively through the <code>parse</code> function that is also used internally by the CLI:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">parse</span><span class="p">,</span> <span class="n">normalize_all</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="c1"># Match and run the parser</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="n">archives</span> <span class="o">=</span> <span class="n">parse</span><span class="p">(</span><span class="s1">'path/to/your/file'</span><span class="p">)</span>
-<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="c1"># Run all normalizers</span>
-<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="k">for</span> <span class="n">archive</span> <span class="ow">in</span> <span class="n">archives</span><span class="p">:</span>
-<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>    <span class="n">normalize_all</span><span class="p">(</span><span class="n">archive</span><span class="p">)</span>
-<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>
-<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>    <span class="c1"># Get the 'main section' section_run as a metainfo object</span>
-<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>    <span class="n">section_run</span> <span class="o">=</span> <span class="n">archive</span><span class="o">.</span><span class="n">run</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>
-<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>    <span class="c1"># Get the same data as JSON serializable Python dict</span>
-<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>    <span class="n">python_dict</span> <span class="o">=</span> <span class="n">section_run</span><span class="o">.</span><span class="n">m_to_dict</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">parse</span><span class="p">,</span> <span class="n">normalize_all</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="c1"># Match and run the parser</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="n">archives</span> <span class="o">=</span> <span class="n">parse</span><span class="p">(</span><span class="s1">'path/to/your/file'</span><span class="p">)</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="c1"># Run all normalizers</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="k">for</span> <span class="n">archive</span> <span class="ow">in</span> <span class="n">archives</span><span class="p">:</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>    <span class="n">normalize_all</span><span class="p">(</span><span class="n">archive</span><span class="p">)</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>    <span class="c1"># Get the 'main section' section_run as a metainfo object</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>    <span class="n">section_run</span> <span class="o">=</span> <span class="n">archive</span><span class="o">.</span><span class="n">run</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>    <span class="c1"># Get the same data as JSON serializable Python dict</span>
+<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>    <span class="n">python_dict</span> <span class="o">=</span> <span class="n">section_run</span><span class="o">.</span><span class="n">m_to_dict</span><span class="p">()</span>
 </code></pre></div>
 <h2 id="parsing-text-files">Parsing text files<a class="headerlink" href="#parsing-text-files" title="Permanent link">¶</a></h2>
 <p>ASCII text files are amongst the most common files used. Here, we show you how to parse the text by matching specific <a href="https://realpython.com/regex-python/" rel="noopener" target="_blank">regular expressions</a> in these files. For the following example, we will use the project file <code>tests/data/example.out</code>:</p>
 <!-- TODO can I get rid of this? -->
 <p>Check out the <code>master</code> branch of the <code>exampleparser</code> project,</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>git<span class="w"> </span>checkout<span class="w"> </span>master
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>git<span class="w"> </span>checkout<span class="w"> </span>master
 </code></pre></div>
 <p>and examine the file to be parsed in <code>tests/data/example.out</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>2020/05/15
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>               *** super_code v2 ***
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>system 1
-<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>--------
-<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>sites: H(1.23, 0, 0), H(-1.23, 0, 0), O(0, 0.33, 0)
-<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>latice: (0, 0, 0), (1, 0, 0), (1, 1, 0)
-<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>energy: 1.29372
-<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>
-<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>*** This was done with magic source                                ***
-<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>***                                x°42                            ***
-<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>
-<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>
-<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>system 2
-<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a>--------
-<a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a>sites: H(1.23, 0, 0), H(-1.23, 0, 0), O(0, 0.33, 0)
-<a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a>cell: (0, 0, 0), (1, 0, 0), (1, 1, 0)
-<a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a>energy: 1.29372
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>2020/05/15
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>               *** super_code v2 ***
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>system 1
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>--------
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>sites: H(1.23, 0, 0), H(-1.23, 0, 0), O(0, 0.33, 0)
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>latice: (0, 0, 0), (1, 0, 0), (1, 1, 0)
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>energy: 1.29372
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>*** This was done with magic source                                ***
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>***                                x°42                            ***
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a>
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a>
+<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a>system 2
+<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a>--------
+<a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a>sites: H(1.23, 0, 0), H(-1.23, 0, 0), O(0, 0.33, 0)
+<a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a>cell: (0, 0, 0), (1, 0, 0), (1, 1, 0)
+<a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a>energy: 1.29372
 </code></pre></div>
 <p>At the top there is some general information such as date, name of the code (<code>super_code</code>)
 and its version (<code>v2</code>). Then is information for two systems (<code>system 1</code> and <code>system 2</code>),
@@ -4365,46 +4512,46 @@ separated with a string containing a code-specific value <code>magic source</cod
 <p>In order to convert the information from this file into the NOMAD archive, we first have to
 parse the necessary quantities. The <code>nomad-lab</code> Python package provides a <code>text_parser</code>
 module for declarative (i.e., semi-automated) parsing of text files. You can define text file parsers as follows:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">str_to_sites</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>    <span class="n">sym</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">'('</span><span class="p">)</span>
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>    <span class="n">pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pos</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">')'</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">','</span><span class="p">)[:</span><span class="mi">3</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
-<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>    <span class="k">return</span> <span class="n">sym</span><span class="p">,</span> <span class="n">pos</span>
-<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>
-<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>
-<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="n">calculation_parser</span> <span class="o">=</span> <span class="n">TextParser</span><span class="p">(</span>
-<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>    <span class="n">quantities</span><span class="o">=</span><span class="p">[</span>
-<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>        <span class="n">Quantity</span><span class="p">(</span>
-<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>            <span class="s1">'sites'</span><span class="p">,</span>
-<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>            <span class="sa">r</span><span class="s1">'([A-Z]\([\d\.\, \-]+\))'</span><span class="p">,</span>
-<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>            <span class="n">str_operation</span><span class="o">=</span><span class="n">str_to_sites</span><span class="p">,</span>
-<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>            <span class="n">repeats</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>        <span class="p">),</span>
-<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a>        <span class="n">Quantity</span><span class="p">(</span>
-<a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a>            <span class="n">Model</span><span class="o">.</span><span class="n">lattice</span><span class="p">,</span>
-<a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a>            <span class="sa">r</span><span class="s1">'(?:latice|cell): \((\d)\, (\d), (\d)\)\,?\s*\((\d)\, (\d), (\d)\)\,?\s*\((\d)\, (\d), (\d)\)\,?\s*'</span><span class="p">,</span>
-<a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a>            <span class="n">repeats</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a>        <span class="p">),</span>
-<a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a>        <span class="n">Quantity</span><span class="p">(</span><span class="s1">'energy'</span><span class="p">,</span> <span class="sa">r</span><span class="s1">'energy: (\d\.\d+)'</span><span class="p">),</span>
-<a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a>        <span class="n">Quantity</span><span class="p">(</span>
-<a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a>            <span class="s1">'magic_source'</span><span class="p">,</span>
-<a id="__codelineno-12-23" name="__codelineno-12-23" href="#__codelineno-12-23"></a>            <span class="sa">r</span><span class="s1">'done with magic source\s*\*</span><span class="si">{3}</span><span class="s1">\s*\*</span><span class="si">{3}</span><span class="s1">\s*[^\d]*(\d+)'</span><span class="p">,</span>
-<a id="__codelineno-12-24" name="__codelineno-12-24" href="#__codelineno-12-24"></a>            <span class="n">repeats</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-<a id="__codelineno-12-25" name="__codelineno-12-25" href="#__codelineno-12-25"></a>        <span class="p">),</span>
-<a id="__codelineno-12-26" name="__codelineno-12-26" href="#__codelineno-12-26"></a>    <span class="p">]</span>
-<a id="__codelineno-12-27" name="__codelineno-12-27" href="#__codelineno-12-27"></a><span class="p">)</span>
-<a id="__codelineno-12-28" name="__codelineno-12-28" href="#__codelineno-12-28"></a>
-<a id="__codelineno-12-29" name="__codelineno-12-29" href="#__codelineno-12-29"></a><span class="n">mainfile_parser</span> <span class="o">=</span> <span class="n">TextParser</span><span class="p">(</span>
-<a id="__codelineno-12-30" name="__codelineno-12-30" href="#__codelineno-12-30"></a>    <span class="n">quantities</span><span class="o">=</span><span class="p">[</span>
-<a id="__codelineno-12-31" name="__codelineno-12-31" href="#__codelineno-12-31"></a>        <span class="n">Quantity</span><span class="p">(</span><span class="s1">'date'</span><span class="p">,</span> <span class="sa">r</span><span class="s1">'(\d\d\d\d\/\d\d\/\d\d)'</span><span class="p">,</span> <span class="n">repeats</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
-<a id="__codelineno-12-32" name="__codelineno-12-32" href="#__codelineno-12-32"></a>        <span class="n">Quantity</span><span class="p">(</span><span class="s1">'program_version'</span><span class="p">,</span> <span class="sa">r</span><span class="s1">'super\_code\s*v(\d+)\s*'</span><span class="p">,</span> <span class="n">repeats</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
-<a id="__codelineno-12-33" name="__codelineno-12-33" href="#__codelineno-12-33"></a>        <span class="n">Quantity</span><span class="p">(</span>
-<a id="__codelineno-12-34" name="__codelineno-12-34" href="#__codelineno-12-34"></a>            <span class="s1">'calculation'</span><span class="p">,</span>
-<a id="__codelineno-12-35" name="__codelineno-12-35" href="#__codelineno-12-35"></a>            <span class="sa">r</span><span class="s1">'\s*system \d+([\s\S]+?energy: [\d\.]+)([\s\S]+\*\*\*)*'</span><span class="p">,</span>
-<a id="__codelineno-12-36" name="__codelineno-12-36" href="#__codelineno-12-36"></a>            <span class="n">sub_parser</span><span class="o">=</span><span class="n">calculation_parser</span><span class="p">,</span>
-<a id="__codelineno-12-37" name="__codelineno-12-37" href="#__codelineno-12-37"></a>            <span class="n">repeats</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<a id="__codelineno-12-38" name="__codelineno-12-38" href="#__codelineno-12-38"></a>        <span class="p">),</span>
-<a id="__codelineno-12-39" name="__codelineno-12-39" href="#__codelineno-12-39"></a>    <span class="p">]</span>
-<a id="__codelineno-12-40" name="__codelineno-12-40" href="#__codelineno-12-40"></a><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">str_to_sites</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>    <span class="n">sym</span><span class="p">,</span> <span class="n">pos</span> <span class="o">=</span> <span class="n">string</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">'('</span><span class="p">)</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>    <span class="n">pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">pos</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">')'</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">','</span><span class="p">)[:</span><span class="mi">3</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>    <span class="k">return</span> <span class="n">sym</span><span class="p">,</span> <span class="n">pos</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="n">calculation_parser</span> <span class="o">=</span> <span class="n">TextParser</span><span class="p">(</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>    <span class="n">quantities</span><span class="o">=</span><span class="p">[</span>
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>        <span class="n">Quantity</span><span class="p">(</span>
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>            <span class="s1">'sites'</span><span class="p">,</span>
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>            <span class="sa">r</span><span class="s1">'([A-Z]\([\d\.\, \-]+\))'</span><span class="p">,</span>
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a>            <span class="n">str_operation</span><span class="o">=</span><span class="n">str_to_sites</span><span class="p">,</span>
+<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a>            <span class="n">repeats</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a>        <span class="p">),</span>
+<a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a>        <span class="n">Quantity</span><span class="p">(</span>
+<a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a>            <span class="n">Model</span><span class="o">.</span><span class="n">lattice</span><span class="p">,</span>
+<a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a>            <span class="sa">r</span><span class="s1">'(?:latice|cell): \((\d)\, (\d), (\d)\)\,?\s*\((\d)\, (\d), (\d)\)\,?\s*\((\d)\, (\d), (\d)\)\,?\s*'</span><span class="p">,</span>
+<a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a>            <span class="n">repeats</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<a id="__codelineno-15-19" name="__codelineno-15-19" href="#__codelineno-15-19"></a>        <span class="p">),</span>
+<a id="__codelineno-15-20" name="__codelineno-15-20" href="#__codelineno-15-20"></a>        <span class="n">Quantity</span><span class="p">(</span><span class="s1">'energy'</span><span class="p">,</span> <span class="sa">r</span><span class="s1">'energy: (\d\.\d+)'</span><span class="p">),</span>
+<a id="__codelineno-15-21" name="__codelineno-15-21" href="#__codelineno-15-21"></a>        <span class="n">Quantity</span><span class="p">(</span>
+<a id="__codelineno-15-22" name="__codelineno-15-22" href="#__codelineno-15-22"></a>            <span class="s1">'magic_source'</span><span class="p">,</span>
+<a id="__codelineno-15-23" name="__codelineno-15-23" href="#__codelineno-15-23"></a>            <span class="sa">r</span><span class="s1">'done with magic source\s*\*</span><span class="si">{3}</span><span class="s1">\s*\*</span><span class="si">{3}</span><span class="s1">\s*[^\d]*(\d+)'</span><span class="p">,</span>
+<a id="__codelineno-15-24" name="__codelineno-15-24" href="#__codelineno-15-24"></a>            <span class="n">repeats</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<a id="__codelineno-15-25" name="__codelineno-15-25" href="#__codelineno-15-25"></a>        <span class="p">),</span>
+<a id="__codelineno-15-26" name="__codelineno-15-26" href="#__codelineno-15-26"></a>    <span class="p">]</span>
+<a id="__codelineno-15-27" name="__codelineno-15-27" href="#__codelineno-15-27"></a><span class="p">)</span>
+<a id="__codelineno-15-28" name="__codelineno-15-28" href="#__codelineno-15-28"></a>
+<a id="__codelineno-15-29" name="__codelineno-15-29" href="#__codelineno-15-29"></a><span class="n">mainfile_parser</span> <span class="o">=</span> <span class="n">TextParser</span><span class="p">(</span>
+<a id="__codelineno-15-30" name="__codelineno-15-30" href="#__codelineno-15-30"></a>    <span class="n">quantities</span><span class="o">=</span><span class="p">[</span>
+<a id="__codelineno-15-31" name="__codelineno-15-31" href="#__codelineno-15-31"></a>        <span class="n">Quantity</span><span class="p">(</span><span class="s1">'date'</span><span class="p">,</span> <span class="sa">r</span><span class="s1">'(\d\d\d\d\/\d\d\/\d\d)'</span><span class="p">,</span> <span class="n">repeats</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+<a id="__codelineno-15-32" name="__codelineno-15-32" href="#__codelineno-15-32"></a>        <span class="n">Quantity</span><span class="p">(</span><span class="s1">'program_version'</span><span class="p">,</span> <span class="sa">r</span><span class="s1">'super\_code\s*v(\d+)\s*'</span><span class="p">,</span> <span class="n">repeats</span><span class="o">=</span><span class="kc">False</span><span class="p">),</span>
+<a id="__codelineno-15-33" name="__codelineno-15-33" href="#__codelineno-15-33"></a>        <span class="n">Quantity</span><span class="p">(</span>
+<a id="__codelineno-15-34" name="__codelineno-15-34" href="#__codelineno-15-34"></a>            <span class="s1">'calculation'</span><span class="p">,</span>
+<a id="__codelineno-15-35" name="__codelineno-15-35" href="#__codelineno-15-35"></a>            <span class="sa">r</span><span class="s1">'\s*system \d+([\s\S]+?energy: [\d\.]+)([\s\S]+\*\*\*)*'</span><span class="p">,</span>
+<a id="__codelineno-15-36" name="__codelineno-15-36" href="#__codelineno-15-36"></a>            <span class="n">sub_parser</span><span class="o">=</span><span class="n">calculation_parser</span><span class="p">,</span>
+<a id="__codelineno-15-37" name="__codelineno-15-37" href="#__codelineno-15-37"></a>            <span class="n">repeats</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<a id="__codelineno-15-38" name="__codelineno-15-38" href="#__codelineno-15-38"></a>        <span class="p">),</span>
+<a id="__codelineno-15-39" name="__codelineno-15-39" href="#__codelineno-15-39"></a>    <span class="p">]</span>
+<a id="__codelineno-15-40" name="__codelineno-15-40" href="#__codelineno-15-40"></a><span class="p">)</span>
 </code></pre></div>
 <p>The quantities to be parsed can be specified as a list of <code>Quantity</code> objects in <code>TextParser</code>.
 Each quantity should have a name and a <em>regular expression (re)</em> pattern to match the value.
@@ -4436,99 +4583,99 @@ of key-value pairs, where the key is defined by the name of the quantities and t
 based on the matched re pattern.</p>
 <p>To parse a file, simply do:
 To parse a file, specify the path to such file and call the <code>parse()</code> function of <code>TextParser</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">mainfile_parser</span><span class="o">.</span><span class="n">mainfile</span> <span class="o">=</span> <span class="n">mainfile</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="n">mainfile_parser</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="n">mainfile_parser</span><span class="o">.</span><span class="n">mainfile</span> <span class="o">=</span> <span class="n">mainfile</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="n">mainfile_parser</span><span class="o">.</span><span class="n">parse</span><span class="p">()</span>
 </code></pre></div>
 <p>This will populate the <code>mainfile_parser</code> object with parsed data and it can be accessed
 like a Python dict with quantity names as keys or directly as attributes:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">mainfile_parser</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'date'</span><span class="p">)</span>
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="s1">'2020/05/15'</span>
-<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>
-<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="n">mainfile_parser</span><span class="o">.</span><span class="n">calculation</span>
-<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="p">[</span><span class="n">TextParser</span><span class="p">(</span><span class="n">example</span><span class="o">.</span><span class="n">out</span><span class="p">)</span> <span class="o">--&gt;</span> <span class="mi">4</span> <span class="n">parsed</span> <span class="n">quantities</span> <span class="p">(</span><span class="n">sites</span><span class="p">,</span> <span class="n">lattice_vectors</span><span class="p">,</span> <span class="n">energy</span><span class="p">,</span> <span class="n">magic_source</span><span class="p">),</span> <span class="n">TextParser</span><span class="p">(</span><span class="n">example</span><span class="o">.</span><span class="n">out</span><span class="p">)</span> <span class="o">--&gt;</span> <span class="mi">3</span> <span class="n">parsed</span> <span class="n">quantities</span> <span class="p">(</span><span class="n">sites</span><span class="p">,</span> <span class="n">lattice_vectors</span><span class="p">,</span> <span class="n">energy</span><span class="p">)]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="n">mainfile_parser</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'date'</span><span class="p">)</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="s1">'2020/05/15'</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="n">mainfile_parser</span><span class="o">.</span><span class="n">calculation</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="p">[</span><span class="n">TextParser</span><span class="p">(</span><span class="n">example</span><span class="o">.</span><span class="n">out</span><span class="p">)</span> <span class="o">--&gt;</span> <span class="mi">4</span> <span class="n">parsed</span> <span class="n">quantities</span> <span class="p">(</span><span class="n">sites</span><span class="p">,</span> <span class="n">lattice_vectors</span><span class="p">,</span> <span class="n">energy</span><span class="p">,</span> <span class="n">magic_source</span><span class="p">),</span> <span class="n">TextParser</span><span class="p">(</span><span class="n">example</span><span class="o">.</span><span class="n">out</span><span class="p">)</span> <span class="o">--&gt;</span> <span class="mi">3</span> <span class="n">parsed</span> <span class="n">quantities</span> <span class="p">(</span><span class="n">sites</span><span class="p">,</span> <span class="n">lattice_vectors</span><span class="p">,</span> <span class="n">energy</span><span class="p">)]</span>
 </code></pre></div>
 <p>The next step is to write the parsed data into the NOMAD archive. We can use one of the
 <a href="schema_packages.html#schema-packages-developed-by-fairmat">predefined plugins containing schema packages</a> in NOMAD.
 However, to better illustrate the connection between a parser and a schema we will define our own schema in this example (See <a href="schema_packages.html#how-to-create-a-schema-package">How to create a schema package</a> for additional information on this topic). We define a root section called <code>Simulation</code> containing two subsections, <code>Model</code> and <code>Output</code>. The definitions are found in <code>exampleparser/metainfo/example.py</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Model</span><span class="p">(</span><span class="n">ArchiveSection</span><span class="p">):</span>
-<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>    <span class="n">m_def</span> <span class="o">=</span> <span class="n">Section</span><span class="p">()</span>
-<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>
-<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>    <span class="n">n_atoms</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
-<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>        <span class="nb">type</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"""Number of atoms in the model system."""</span>
-<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>    <span class="p">)</span>
-<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>
-<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>    <span class="n">labels</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
-<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="s1">'n_atoms'</span><span class="p">],</span> <span class="n">description</span><span class="o">=</span><span class="s2">"""Labels of the atoms."""</span>
-<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>    <span class="p">)</span>
-<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>
-<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a>    <span class="n">positions</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
-<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a>        <span class="nb">type</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="s1">'n_atoms'</span><span class="p">],</span> <span class="n">description</span><span class="o">=</span><span class="s2">"""Positions of the atoms."""</span>
-<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a>    <span class="p">)</span>
-<a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a>
-<a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a>    <span class="n">lattice</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
-<a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a>        <span class="nb">type</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span>
-<a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a>        <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
-<a id="__codelineno-15-19" name="__codelineno-15-19" href="#__codelineno-15-19"></a>        <span class="n">description</span><span class="o">=</span><span class="s2">"""Lattice vectors of the model system."""</span><span class="p">,</span>
-<a id="__codelineno-15-20" name="__codelineno-15-20" href="#__codelineno-15-20"></a>    <span class="p">)</span>
-<a id="__codelineno-15-21" name="__codelineno-15-21" href="#__codelineno-15-21"></a>
-<a id="__codelineno-15-22" name="__codelineno-15-22" href="#__codelineno-15-22"></a>
-<a id="__codelineno-15-23" name="__codelineno-15-23" href="#__codelineno-15-23"></a><span class="k">class</span><span class="w"> </span><span class="nc">Output</span><span class="p">(</span><span class="n">ArchiveSection</span><span class="p">):</span>
-<a id="__codelineno-15-24" name="__codelineno-15-24" href="#__codelineno-15-24"></a>    <span class="n">m_def</span> <span class="o">=</span> <span class="n">Section</span><span class="p">()</span>
-<a id="__codelineno-15-25" name="__codelineno-15-25" href="#__codelineno-15-25"></a>
-<a id="__codelineno-15-26" name="__codelineno-15-26" href="#__codelineno-15-26"></a>    <span class="n">model</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
-<a id="__codelineno-15-27" name="__codelineno-15-27" href="#__codelineno-15-27"></a>        <span class="nb">type</span><span class="o">=</span><span class="n">Reference</span><span class="p">(</span><span class="n">Model</span><span class="p">),</span> <span class="n">description</span><span class="o">=</span><span class="s2">"""Reference to the model system."""</span>
-<a id="__codelineno-15-28" name="__codelineno-15-28" href="#__codelineno-15-28"></a>    <span class="p">)</span>
-<a id="__codelineno-15-29" name="__codelineno-15-29" href="#__codelineno-15-29"></a>
-<a id="__codelineno-15-30" name="__codelineno-15-30" href="#__codelineno-15-30"></a>    <span class="n">energy</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
-<a id="__codelineno-15-31" name="__codelineno-15-31" href="#__codelineno-15-31"></a>        <span class="nb">type</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span>
-<a id="__codelineno-15-32" name="__codelineno-15-32" href="#__codelineno-15-32"></a>        <span class="n">unit</span><span class="o">=</span><span class="s1">'eV'</span><span class="p">,</span>
-<a id="__codelineno-15-33" name="__codelineno-15-33" href="#__codelineno-15-33"></a>        <span class="n">description</span><span class="o">=</span><span class="s2">"""Value of the total energy of the system."""</span><span class="p">,</span>
-<a id="__codelineno-15-34" name="__codelineno-15-34" href="#__codelineno-15-34"></a>    <span class="p">)</span>
-<a id="__codelineno-15-35" name="__codelineno-15-35" href="#__codelineno-15-35"></a>
-<a id="__codelineno-15-36" name="__codelineno-15-36" href="#__codelineno-15-36"></a>
-<a id="__codelineno-15-37" name="__codelineno-15-37" href="#__codelineno-15-37"></a><span class="k">class</span><span class="w"> </span><span class="nc">Simulation</span><span class="p">(</span><span class="n">ArchiveSection</span><span class="p">):</span>
-<a id="__codelineno-15-38" name="__codelineno-15-38" href="#__codelineno-15-38"></a>    <span class="n">m_def</span> <span class="o">=</span> <span class="n">Section</span><span class="p">()</span>
-<a id="__codelineno-15-39" name="__codelineno-15-39" href="#__codelineno-15-39"></a>
-<a id="__codelineno-15-40" name="__codelineno-15-40" href="#__codelineno-15-40"></a>    <span class="n">code_name</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
-<a id="__codelineno-15-41" name="__codelineno-15-41" href="#__codelineno-15-41"></a>        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"""Name of the code used for the simulation."""</span>
-<a id="__codelineno-15-42" name="__codelineno-15-42" href="#__codelineno-15-42"></a>    <span class="p">)</span>
-<a id="__codelineno-15-43" name="__codelineno-15-43" href="#__codelineno-15-43"></a>
-<a id="__codelineno-15-44" name="__codelineno-15-44" href="#__codelineno-15-44"></a>    <span class="n">code_version</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"""Version of the code."""</span><span class="p">)</span>
-<a id="__codelineno-15-45" name="__codelineno-15-45" href="#__codelineno-15-45"></a>
-<a id="__codelineno-15-46" name="__codelineno-15-46" href="#__codelineno-15-46"></a>    <span class="n">date</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">Datetime</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"""Execution date of the simulation."""</span><span class="p">)</span>
-<a id="__codelineno-15-47" name="__codelineno-15-47" href="#__codelineno-15-47"></a>
-<a id="__codelineno-15-48" name="__codelineno-15-48" href="#__codelineno-15-48"></a>    <span class="n">model</span> <span class="o">=</span> <span class="n">SubSection</span><span class="p">(</span><span class="n">sub_section</span><span class="o">=</span><span class="n">Model</span><span class="p">,</span> <span class="n">repeats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<a id="__codelineno-15-49" name="__codelineno-15-49" href="#__codelineno-15-49"></a>
-<a id="__codelineno-15-50" name="__codelineno-15-50" href="#__codelineno-15-50"></a>    <span class="n">output</span> <span class="o">=</span> <span class="n">SubSection</span><span class="p">(</span><span class="n">sub_section</span><span class="o">=</span><span class="n">Output</span><span class="p">,</span> <span class="n">repeats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Model</span><span class="p">(</span><span class="n">ArchiveSection</span><span class="p">):</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>    <span class="n">m_def</span> <span class="o">=</span> <span class="n">Section</span><span class="p">()</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>    <span class="n">n_atoms</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>        <span class="nb">type</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int32</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"""Number of atoms in the model system."""</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>    <span class="p">)</span>
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>    <span class="n">labels</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="s1">'n_atoms'</span><span class="p">],</span> <span class="n">description</span><span class="o">=</span><span class="s2">"""Labels of the atoms."""</span>
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>    <span class="p">)</span>
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>
+<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>    <span class="n">positions</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
+<a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a>        <span class="nb">type</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="s1">'n_atoms'</span><span class="p">],</span> <span class="n">description</span><span class="o">=</span><span class="s2">"""Positions of the atoms."""</span>
+<a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a>    <span class="p">)</span>
+<a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a>
+<a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a>    <span class="n">lattice</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
+<a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a>        <span class="nb">type</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span>
+<a id="__codelineno-18-18" name="__codelineno-18-18" href="#__codelineno-18-18"></a>        <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
+<a id="__codelineno-18-19" name="__codelineno-18-19" href="#__codelineno-18-19"></a>        <span class="n">description</span><span class="o">=</span><span class="s2">"""Lattice vectors of the model system."""</span><span class="p">,</span>
+<a id="__codelineno-18-20" name="__codelineno-18-20" href="#__codelineno-18-20"></a>    <span class="p">)</span>
+<a id="__codelineno-18-21" name="__codelineno-18-21" href="#__codelineno-18-21"></a>
+<a id="__codelineno-18-22" name="__codelineno-18-22" href="#__codelineno-18-22"></a>
+<a id="__codelineno-18-23" name="__codelineno-18-23" href="#__codelineno-18-23"></a><span class="k">class</span><span class="w"> </span><span class="nc">Output</span><span class="p">(</span><span class="n">ArchiveSection</span><span class="p">):</span>
+<a id="__codelineno-18-24" name="__codelineno-18-24" href="#__codelineno-18-24"></a>    <span class="n">m_def</span> <span class="o">=</span> <span class="n">Section</span><span class="p">()</span>
+<a id="__codelineno-18-25" name="__codelineno-18-25" href="#__codelineno-18-25"></a>
+<a id="__codelineno-18-26" name="__codelineno-18-26" href="#__codelineno-18-26"></a>    <span class="n">model</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
+<a id="__codelineno-18-27" name="__codelineno-18-27" href="#__codelineno-18-27"></a>        <span class="nb">type</span><span class="o">=</span><span class="n">Reference</span><span class="p">(</span><span class="n">Model</span><span class="p">),</span> <span class="n">description</span><span class="o">=</span><span class="s2">"""Reference to the model system."""</span>
+<a id="__codelineno-18-28" name="__codelineno-18-28" href="#__codelineno-18-28"></a>    <span class="p">)</span>
+<a id="__codelineno-18-29" name="__codelineno-18-29" href="#__codelineno-18-29"></a>
+<a id="__codelineno-18-30" name="__codelineno-18-30" href="#__codelineno-18-30"></a>    <span class="n">energy</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
+<a id="__codelineno-18-31" name="__codelineno-18-31" href="#__codelineno-18-31"></a>        <span class="nb">type</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">,</span>
+<a id="__codelineno-18-32" name="__codelineno-18-32" href="#__codelineno-18-32"></a>        <span class="n">unit</span><span class="o">=</span><span class="s1">'eV'</span><span class="p">,</span>
+<a id="__codelineno-18-33" name="__codelineno-18-33" href="#__codelineno-18-33"></a>        <span class="n">description</span><span class="o">=</span><span class="s2">"""Value of the total energy of the system."""</span><span class="p">,</span>
+<a id="__codelineno-18-34" name="__codelineno-18-34" href="#__codelineno-18-34"></a>    <span class="p">)</span>
+<a id="__codelineno-18-35" name="__codelineno-18-35" href="#__codelineno-18-35"></a>
+<a id="__codelineno-18-36" name="__codelineno-18-36" href="#__codelineno-18-36"></a>
+<a id="__codelineno-18-37" name="__codelineno-18-37" href="#__codelineno-18-37"></a><span class="k">class</span><span class="w"> </span><span class="nc">Simulation</span><span class="p">(</span><span class="n">ArchiveSection</span><span class="p">):</span>
+<a id="__codelineno-18-38" name="__codelineno-18-38" href="#__codelineno-18-38"></a>    <span class="n">m_def</span> <span class="o">=</span> <span class="n">Section</span><span class="p">()</span>
+<a id="__codelineno-18-39" name="__codelineno-18-39" href="#__codelineno-18-39"></a>
+<a id="__codelineno-18-40" name="__codelineno-18-40" href="#__codelineno-18-40"></a>    <span class="n">code_name</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
+<a id="__codelineno-18-41" name="__codelineno-18-41" href="#__codelineno-18-41"></a>        <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"""Name of the code used for the simulation."""</span>
+<a id="__codelineno-18-42" name="__codelineno-18-42" href="#__codelineno-18-42"></a>    <span class="p">)</span>
+<a id="__codelineno-18-43" name="__codelineno-18-43" href="#__codelineno-18-43"></a>
+<a id="__codelineno-18-44" name="__codelineno-18-44" href="#__codelineno-18-44"></a>    <span class="n">code_version</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"""Version of the code."""</span><span class="p">)</span>
+<a id="__codelineno-18-45" name="__codelineno-18-45" href="#__codelineno-18-45"></a>
+<a id="__codelineno-18-46" name="__codelineno-18-46" href="#__codelineno-18-46"></a>    <span class="n">date</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">Datetime</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s2">"""Execution date of the simulation."""</span><span class="p">)</span>
+<a id="__codelineno-18-47" name="__codelineno-18-47" href="#__codelineno-18-47"></a>
+<a id="__codelineno-18-48" name="__codelineno-18-48" href="#__codelineno-18-48"></a>    <span class="n">model</span> <span class="o">=</span> <span class="n">SubSection</span><span class="p">(</span><span class="n">sub_section</span><span class="o">=</span><span class="n">Model</span><span class="p">,</span> <span class="n">repeats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-18-49" name="__codelineno-18-49" href="#__codelineno-18-49"></a>
+<a id="__codelineno-18-50" name="__codelineno-18-50" href="#__codelineno-18-50"></a>    <span class="n">output</span> <span class="o">=</span> <span class="n">SubSection</span><span class="p">(</span><span class="n">sub_section</span><span class="o">=</span><span class="n">Output</span><span class="p">,</span> <span class="n">repeats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </code></pre></div>
 <p>Each of the classes inherit from the base class <code>ArchiveSection</code>. This is the abstract class used in NOMAD to define sections and subsections in a schema. The <code>Model</code> section is used to store the <code>sites</code> and <code>lattice/cell</code> information, while the <code>Output</code> section is used to store the <code>energy</code> quantity.
 Each of the classes that we defined is a sub-class of <code>ArchiveSection</code>. This is required in order to assign these sections to the <code>data</code> section
 of the NOMAD archive.</p>
 <p>The following is the implementation of the <code>parse</code> function of <code>ExampleParser</code> to write the parsed quantities from our mainfile parser into the archive:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mainfile</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">archive</span><span class="p">:</span> <span class="n">EntryArchive</span><span class="p">,</span> <span class="n">logger</span><span class="p">):</span>
-<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>    <span class="n">simulation</span> <span class="o">=</span> <span class="n">Simulation</span><span class="p">(</span>
-<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>        <span class="n">code_name</span><span class="o">=</span><span class="s1">'super_code'</span><span class="p">,</span> <span class="n">code_version</span><span class="o">=</span><span class="n">mainfile_parser</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'program_version'</span><span class="p">)</span>
-<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>    <span class="p">)</span>
-<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>    <span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">mainfile_parser</span><span class="o">.</span><span class="n">date</span><span class="p">,</span> <span class="s1">'%Y/%m/</span><span class="si">%d</span><span class="s1">'</span><span class="p">)</span>
-<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>    <span class="n">simulation</span><span class="o">.</span><span class="n">date</span> <span class="o">=</span> <span class="n">date</span>
-<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>
-<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>    <span class="k">for</span> <span class="n">calculation</span> <span class="ow">in</span> <span class="n">mainfile_parser</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'calculation'</span><span class="p">,</span> <span class="p">[]):</span>
-<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a>        <span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">()</span>
-<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a>        <span class="n">model</span><span class="o">.</span><span class="n">lattice</span> <span class="o">=</span> <span class="n">calculation</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'lattice_vectors'</span><span class="p">)</span>
-<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a>        <span class="n">sites</span> <span class="o">=</span> <span class="n">calculation</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'sites'</span><span class="p">)</span>
-<a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a>        <span class="n">model</span><span class="o">.</span><span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="n">site</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="n">sites</span><span class="p">]</span>
-<a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a>        <span class="n">model</span><span class="o">.</span><span class="n">positions</span> <span class="o">=</span> <span class="p">[</span><span class="n">site</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="n">sites</span><span class="p">]</span>
-<a id="__codelineno-16-14" name="__codelineno-16-14" href="#__codelineno-16-14"></a>        <span class="n">simulation</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
-<a id="__codelineno-16-15" name="__codelineno-16-15" href="#__codelineno-16-15"></a>
-<a id="__codelineno-16-16" name="__codelineno-16-16" href="#__codelineno-16-16"></a>        <span class="n">output</span> <span class="o">=</span> <span class="n">Output</span><span class="p">()</span>
-<a id="__codelineno-16-17" name="__codelineno-16-17" href="#__codelineno-16-17"></a>        <span class="n">output</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
-<a id="__codelineno-16-18" name="__codelineno-16-18" href="#__codelineno-16-18"></a>        <span class="n">output</span><span class="o">.</span><span class="n">energy</span> <span class="o">=</span> <span class="n">calculation</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'energy'</span><span class="p">)</span> <span class="o">*</span> <span class="n">units</span><span class="o">.</span><span class="n">eV</span>
-<a id="__codelineno-16-19" name="__codelineno-16-19" href="#__codelineno-16-19"></a>        <span class="n">magic_source</span> <span class="o">=</span> <span class="n">calculation</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'magic_source'</span><span class="p">)</span>
-<a id="__codelineno-16-20" name="__codelineno-16-20" href="#__codelineno-16-20"></a>        <span class="k">if</span> <span class="n">magic_source</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-16-21" name="__codelineno-16-21" href="#__codelineno-16-21"></a>            <span class="n">archive</span><span class="o">.</span><span class="n">workflow2</span> <span class="o">=</span> <span class="n">Workflow</span><span class="p">(</span><span class="n">x_example_magic_value</span><span class="o">=</span><span class="n">magic_source</span><span class="p">)</span>
-<a id="__codelineno-16-22" name="__codelineno-16-22" href="#__codelineno-16-22"></a>        <span class="n">simulation</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
-<a id="__codelineno-16-23" name="__codelineno-16-23" href="#__codelineno-16-23"></a>    <span class="c1"># put the simulation section into archive data</span>
-<a id="__codelineno-16-24" name="__codelineno-16-24" href="#__codelineno-16-24"></a>    <span class="n">archive</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">simulation</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">parse</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mainfile</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">archive</span><span class="p">:</span> <span class="n">EntryArchive</span><span class="p">,</span> <span class="n">logger</span><span class="p">):</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>    <span class="n">simulation</span> <span class="o">=</span> <span class="n">Simulation</span><span class="p">(</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>        <span class="n">code_name</span><span class="o">=</span><span class="s1">'super_code'</span><span class="p">,</span> <span class="n">code_version</span><span class="o">=</span><span class="n">mainfile_parser</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'program_version'</span><span class="p">)</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>    <span class="p">)</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>    <span class="n">date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">mainfile_parser</span><span class="o">.</span><span class="n">date</span><span class="p">,</span> <span class="s1">'%Y/%m/</span><span class="si">%d</span><span class="s1">'</span><span class="p">)</span>
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>    <span class="n">simulation</span><span class="o">.</span><span class="n">date</span> <span class="o">=</span> <span class="n">date</span>
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>    <span class="k">for</span> <span class="n">calculation</span> <span class="ow">in</span> <span class="n">mainfile_parser</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'calculation'</span><span class="p">,</span> <span class="p">[]):</span>
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>        <span class="n">model</span> <span class="o">=</span> <span class="n">Model</span><span class="p">()</span>
+<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a>        <span class="n">model</span><span class="o">.</span><span class="n">lattice</span> <span class="o">=</span> <span class="n">calculation</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'lattice_vectors'</span><span class="p">)</span>
+<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a>        <span class="n">sites</span> <span class="o">=</span> <span class="n">calculation</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'sites'</span><span class="p">)</span>
+<a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a>        <span class="n">model</span><span class="o">.</span><span class="n">labels</span> <span class="o">=</span> <span class="p">[</span><span class="n">site</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="n">sites</span><span class="p">]</span>
+<a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a>        <span class="n">model</span><span class="o">.</span><span class="n">positions</span> <span class="o">=</span> <span class="p">[</span><span class="n">site</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">site</span> <span class="ow">in</span> <span class="n">sites</span><span class="p">]</span>
+<a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a>        <span class="n">simulation</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
+<a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a>
+<a id="__codelineno-19-16" name="__codelineno-19-16" href="#__codelineno-19-16"></a>        <span class="n">output</span> <span class="o">=</span> <span class="n">Output</span><span class="p">()</span>
+<a id="__codelineno-19-17" name="__codelineno-19-17" href="#__codelineno-19-17"></a>        <span class="n">output</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+<a id="__codelineno-19-18" name="__codelineno-19-18" href="#__codelineno-19-18"></a>        <span class="n">output</span><span class="o">.</span><span class="n">energy</span> <span class="o">=</span> <span class="n">calculation</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'energy'</span><span class="p">)</span> <span class="o">*</span> <span class="n">units</span><span class="o">.</span><span class="n">eV</span>
+<a id="__codelineno-19-19" name="__codelineno-19-19" href="#__codelineno-19-19"></a>        <span class="n">magic_source</span> <span class="o">=</span> <span class="n">calculation</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">'magic_source'</span><span class="p">)</span>
+<a id="__codelineno-19-20" name="__codelineno-19-20" href="#__codelineno-19-20"></a>        <span class="k">if</span> <span class="n">magic_source</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-19-21" name="__codelineno-19-21" href="#__codelineno-19-21"></a>            <span class="n">archive</span><span class="o">.</span><span class="n">workflow2</span> <span class="o">=</span> <span class="n">Workflow</span><span class="p">(</span><span class="n">x_example_magic_value</span><span class="o">=</span><span class="n">magic_source</span><span class="p">)</span>
+<a id="__codelineno-19-22" name="__codelineno-19-22" href="#__codelineno-19-22"></a>        <span class="n">simulation</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+<a id="__codelineno-19-23" name="__codelineno-19-23" href="#__codelineno-19-23"></a>    <span class="c1"># put the simulation section into archive data</span>
+<a id="__codelineno-19-24" name="__codelineno-19-24" href="#__codelineno-19-24"></a>    <span class="n">archive</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">simulation</span>
 </code></pre></div>
 <p>We first assign the code name and version as well as the date that the simulation was performed. For each of the parsed
 calculations, we create a model and an output section to which we write the corresponding
@@ -4541,11 +4688,11 @@ argument <code>skip-normalizers</code>.</p>
 <!-- ? What about restructuring this part into the idea of "NOMAD has some predefined section and quantities ... please, check HERE... and HERE... for more information and details"? -->
 <p>In the example below, we have made use of the base section for workflow and extended
 it to include a code-specific quantity <code>example_magic_value</code>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1"># We extend the existing common definition of section Workflow</span>
-<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="k">class</span><span class="w"> </span><span class="nc">ExampleWorkflow</span><span class="p">(</span><span class="n">Workflow</span><span class="p">):</span>
-<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>    <span class="n">example_magic_value</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
-<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>        <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">'The magic value from a magic source.'</span>
-<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>    <span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="c1"># We extend the existing common definition of section Workflow</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="k">class</span><span class="w"> </span><span class="nc">ExampleWorkflow</span><span class="p">(</span><span class="n">Workflow</span><span class="p">):</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>    <span class="n">example_magic_value</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>        <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="s1">'The magic value from a magic source.'</span>
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>    <span class="p">)</span>
 </code></pre></div>
 <p>This is the approach for domain-specific schemas such as for <a href="https://github.com/nomad-coe/nomad-schema-plugin-simulation-workflow.git" rel="noopener" target="_blank">simulation workflows</a>.</p>
 <h2 id="other-fileparser-classes">Other FileParser classes<a class="headerlink" href="#other-fileparser-classes" title="Permanent link">¶</a></h2>
