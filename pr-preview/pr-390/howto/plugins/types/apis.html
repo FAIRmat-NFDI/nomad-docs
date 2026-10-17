@@ -703,7 +703,7 @@
   <span class="md-ellipsis">
     
   
-    Parse tabular measurement data
+    Parse tabular data
   
 
     
@@ -1279,35 +1279,7 @@
   <span class="md-ellipsis">
     
   
-    Enter data with ELNs
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../manage/gui/north.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Analyze data in NORTH
+    Import data from external ELNs
   
 
     
@@ -1502,7 +1474,7 @@
   <span class="md-ellipsis">
     
   
-    Publish data using Python
+    Manage data with Python
   
 
     
@@ -3600,6 +3572,62 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../reference/api.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    REST API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/archive_query.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ArchiveQuery client
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../reference/metainfo.html" class="md-nav__link">
         
   
@@ -3664,6 +3692,34 @@
     
   
     Annotations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../reference/json_transformer.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JSON transformer
   
 
     
@@ -4087,7 +4143,7 @@ The entry point should be defined in <code>*/apis/__init__.py</code> like this:<
 <p>Here you can see that a new subclass of <code>APIEntryPoint</code> was defined. In this new class you have to override the <code>load</code> method to determine the FastAPI app that makes your API.
 In the reference you can see all of the available <a href="../../../reference/plugins.html#apientrypoint">configuration options for a <code>APIEntryPoint</code></a>.</p>
 <p>The <code>id_url_safe</code> determines the URL of the API. If not set, it is derived from the
-entry point id (e.g. <code>nomad_example.apis-myapi</code>); here we set it explicitly to get the
+entry point ID (e.g. <code>nomad_example.apis-myapi</code>); here we set it explicitly to get the
 shorter <code>{api_base_path}/apis/myapi/</code>. The resolved mount path is available as the
 <code>prefix</code> attribute of the loaded entry point.</p>
 <div class="admonition warning">

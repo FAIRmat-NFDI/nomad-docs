@@ -703,7 +703,7 @@
   <span class="md-ellipsis">
     
   
-    Parse tabular measurement data
+    Parse tabular data
   
 
     
@@ -1279,35 +1279,7 @@
   <span class="md-ellipsis">
     
   
-    Enter data with ELNs
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../manage/gui/north.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Analyze data in NORTH
+    Import data from external ELNs
   
 
     
@@ -1502,7 +1474,7 @@
   <span class="md-ellipsis">
     
   
-    Publish data using Python
+    Manage data with Python
   
 
     
@@ -3592,6 +3564,62 @@
   
   
     <li class="md-nav__item">
+      <a href="../../reference/api.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    REST API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/archive_query.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ArchiveQuery client
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../reference/metainfo.html" class="md-nav__link">
         
   
@@ -3656,6 +3684,34 @@
     
   
     Annotations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/json_transformer.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JSON transformer
   
 
     
@@ -4042,7 +4098,7 @@ both use the same concepts of <em>section</em>, <em>quantity</em> and <em>subsec
 <tr>
 <td>Access</td>
 <td>All users on the deployment</td>
-<td>Anyone who has access to the upload that contains the file</td>
+<td>Anyone who has access to the project that contains the file</td>
 </tr>
 <tr>
 <td>Custom <code>normalize</code> functions</td>
@@ -4093,7 +4149,7 @@ point reference.</p>
 <p>A YAML schema is delivered by uploading it. NOMAD archive files carry data in NOMAD's native
 format and end in <code>.archive.yaml</code> or <code>.archive.json</code>; because a YAML schema is itself just data,
 the same file format carries schemas too.</p>
-<p>Upload the file like any other, and the definitions become available within that upload.</p>
+<p>Upload the file like any other, and the definitions become available within that project.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">definitions</span><span class="p">:</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">'Sample</span><span class="nv"> </span><span class="s">management</span><span class="nv"> </span><span class="s">example</span><span class="nv"> </span><span class="s">schema'</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">  </span><span class="nt">sections</span><span class="p">:</span>

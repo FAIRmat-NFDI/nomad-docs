@@ -703,7 +703,7 @@
   <span class="md-ellipsis">
     
   
-    Parse tabular measurement data
+    Parse tabular data
   
 
     
@@ -1279,35 +1279,7 @@
   <span class="md-ellipsis">
     
   
-    Enter data with ELNs
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../manage/gui/north.html" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Analyze data in NORTH
+    Import data from external ELNs
   
 
     
@@ -1502,7 +1474,7 @@
   <span class="md-ellipsis">
     
   
-    Publish data using Python
+    Manage data with Python
   
 
     
@@ -3910,6 +3882,62 @@
   
   
     <li class="md-nav__item">
+      <a href="../../reference/api.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    REST API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/archive_query.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ArchiveQuery client
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../reference/metainfo.html" class="md-nav__link">
         
   
@@ -3974,6 +4002,34 @@
     
   
     Annotations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reference/json_transformer.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JSON transformer
   
 
     
@@ -5009,7 +5065,7 @@ will prepare the API traffic for you. A simple example could look like this:</p>
 <p><code>&lt;state_name&gt;</code>: Specifies an initial backend configuration for this test. These
   states are defined as Python functions that are stored in
   <code>nomad-FAIR/tests/states</code>, example given below. These functions may, for example,
-  prepare several uploads entries, datasets, etc. for the test.</p>
+  prepare several uploads, entries, etc. for the test.</p>
 </li>
 <li>
 <p><code>&lt;snapshot_name&gt;</code>: Specifies a filepath for reading/recording pre-recorded API
@@ -5085,7 +5141,7 @@ perform the test without any recording.</p>
 </li>
 </ol>
 <h2 id="build-custom-oasis-image">Build custom Oasis image<a class="headerlink" href="#build-custom-oasis-image" title="Permanent link">¶</a></h2>
-<p>To create a custom Oasis image (e.g. with custom plugins), you could use the <a href="https://github.com/FAIRmat-NFDI/nomad-distro-template" rel="noopener" target="_blank">nomad-distro-template</a> by clicking the <a href="https://github.com/new?template_name=nomad-distro-template&amp;template_owner=FAIRmat-NFDI" rel="noopener" target="_blank"><code>Use this template</code> button</a>. For detailed instructions on building and deploying custom Oasis images, please refer to the documentation in that repository.</p>
+<p>To create a custom Oasis image (e.g. with custom plugins), you could use the <a href="https://github.com/FAIRmat-NFDI/nomad-distro-template" rel="noopener" target="_blank">nomad-distro-template</a> by clicking the <a href="https://github.com/new?template_name=nomad-distro-template&amp;template_owner=FAIRmat-NFDI" rel="noopener" target="_blank"><strong>Use this template</strong> button</a>. For detailed instructions on building and deploying custom Oasis images, please refer to the documentation in that repository.</p>
 <h2 id="setup-your-ide">Setup your IDE<a class="headerlink" href="#setup-your-ide" title="Permanent link">¶</a></h2>
 <p>The documentation section for development guidelines (see below) provide details on how
 the code is organized, tested, formatted, and documented. To help you meet these
