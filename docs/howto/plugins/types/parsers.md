@@ -114,7 +114,7 @@ You can find all of the available matching criteria in the [`ParserEntryPoint` r
 
 Each file is assigned to at most one parser. NOMAD checks the parsers one by one and the first parser whose matching criteria fit the file is used, even if other parsers would also match it. When several parsers can match the same files, for example a generic parser and a more specialized one, you can use the `matching_order` attribute to decide which parser gets to claim them first.
 
-Parsers with a lower `matching_order` are checked first. Parsers with the same `matching_order` are checked in alphabetical order of their entry point id. The default value is `0`. If all parsers use the default value, the order in which the parsers were registered is used instead. You can set the matching order in the entry point:
+Parsers with a lower `matching_order` are checked first. Parsers with the same `matching_order` are checked in alphabetical order of their entry point ID. The default value is `0`. If all parsers use the default value, the order in which the parsers were registered is used instead. You can set the matching order in the entry point:
 
 ```python
 myparser = MyParserEntryPoint(
