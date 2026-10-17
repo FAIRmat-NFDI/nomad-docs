@@ -88,7 +88,7 @@ class Program(general.Program):
     )
 ```
 
-### Controlling Repeating Sections
+### Controlling repeating sections
 
 **Subsections** that are defined as **repeating** in the schema are automatically picked up by the mapping parser.
 It will look for any repeating units along the path and instantiate the same number of subsections, i.e. $\text{no. subsections} = \prod_{\text{segments}} \text{repeating path segment}$.

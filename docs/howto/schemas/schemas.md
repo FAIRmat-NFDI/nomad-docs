@@ -19,7 +19,7 @@ both use the same concepts of *section*, *quantity* and *subsection*.
 | --- | --- | --- |
 | Where it lives | A plugin, installed into a NOMAD distribution | An `.archive.yaml` file you upload |
 | Who can add it | Plugin developers and Oasis administrators | Any NOMAD user |
-| Access | All users on the deployment | Anyone who has access to the upload that contains the file |
+| Access | All users on the deployment | Anyone who has access to the project that contains the file |
 | Custom `normalize` functions | Yes | No |
 | Best for | Reusable schemas, derived data, anything shipped to others | Exploring schemas, one-off and lab-specific ELNs |
 
@@ -70,7 +70,7 @@ Writing the definitions is the same job in both syntaxes; getting them in front 
     format and end in `.archive.yaml` or `.archive.json`; because a YAML schema is itself just data,
     the same file format carries schemas too.
 
-    Upload the file like any other, and the definitions become available within that upload.
+    Upload the file like any other, and the definitions become available within that project.
 
     ```yaml
     definitions:

@@ -43,7 +43,7 @@ A few tips that will help us to solve your issues quicker:
 - **Bugs**: Think how we could reproduce the problem:
 
     - What NOMAD URL are you using (UI), which package version (Python)?
-    - Is there an upload or entry id that we can look at?
+    - Is there an upload ID or entry ID that we can look at?
     - Example files or code snippets?
     - Don't screenshot code, copy and paste instead. Use [code blocks](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-and-highlighting-code-blocks#syntax-highlighting){:target="_blank" rel="noopener"}.
 
@@ -112,7 +112,7 @@ On the [main GitLab project](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR){:
   current official NOMAD runs on).
 
 - *feature branches*: this is where you work. Typically they are automatically (use the
-  "Create merge request" button) named after issues: `<issue-number>-<issue-title>`.
+  **Create merge request** button) named after issues: `<issue-number>-<issue-title>`.
 
 - `vX.X.X` or `vX.X.XrcX`: *tags* for (pre-)releases.
 
@@ -126,7 +126,7 @@ branches.
 ### Create the MR
 
 Ideally, have an issue first and create the merge request (and branch) in the GitLab UI.
-There is a "Create merge request" button on each issue. When done manually, branches
+There is a **Create merge request** button on each issue. When done manually, branches
 should be based on the `develop` branch and merge request should target `develop` as well.
 
 ### Commit

@@ -58,7 +58,7 @@ Here you can see that a new subclass of `APIEntryPoint` was defined. In this new
 In the reference you can see all of the available [configuration options for a `APIEntryPoint`](../../../reference/plugins.md#apientrypoint).
 
 The `id_url_safe` determines the URL of the API. If not set, it is derived from the
-entry point id (e.g. `nomad_example.apis-myapi`); here we set it explicitly to get the
+entry point ID (e.g. `nomad_example.apis-myapi`); here we set it explicitly to get the
 shorter `{api_base_path}/apis/myapi/`. The resolved mount path is available as the
 `prefix` attribute of the loaded entry point.
 

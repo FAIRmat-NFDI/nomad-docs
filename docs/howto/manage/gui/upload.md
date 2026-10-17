@@ -1,26 +1,26 @@
-# How to create and publish Projects
+# How to create and publish projects
 
-A **Project** is the container for files, Entries, collaborators, publication
+A **project** is the container for files, entries, collaborators, publication
 settings, and an optional DOI.
 
 <a id="upload-limits"></a>
 
 ## Project requirements and limitations
 
-A Project can be created and stored without files or an Entry. To publish the
-Project, it must contain at least one successfully processed Entry. This
-ensures that every published Project contains structured data that NOMAD can
+A project can be created and stored without files or an entry. To publish the
+project, it must contain at least one successfully processed entry. This
+ensures that every published project contains structured data that NOMAD can
 index and make searchable.
 
 Project limits are configurable and can differ between deployments. The
 default NOMAD configuration and NOMAD Central allow:
 
-- a maximum Project size of **32 GiB**, controlled by
+- a maximum project size of **32 GiB**, controlled by
   [`process.max_upload_size`](../../../reference/config.md#process); and
-- at most **10 unpublished Projects** per user, controlled by
+- at most **10 unpublished projects** per user, controlled by
   [`services.upload_limit`](../../../reference/config.md#services).
 
-## Create a Project
+## Create a project
 
 1. Open the [NOMAD GUI](https://nomad-lab.eu/prod/v1/gui/v2/){:target="_blank" rel="noopener"}
    and sign in. If you do not have a NOMAD Central account, follow the
@@ -32,33 +32,33 @@ default NOMAD configuration and NOMAD Central allow:
      - a description
      - initial files by drag-and-drop or by browsing your file system with
      **ADD FILES**
-     - users or groups to your Project as **Reviewer** or **Coauthor**
+     - users or groups to your project as **Reviewer** or **Coauthor**
 
 3. When you have finished filling in the prompt, select **CREATE**. NOMAD
-   creates the Project and opens its **Overview** page.
+   creates the project and opens its **Overview** page.
 
-The Project name can be edited under **SETTINGS** > **General**.
+The project name can be edited under **SETTINGS** > **General**.
 
-### Add a Project README
+### Add a project README
 
-To provide a longer, formatted description of the Project, add a file named
-`README.md` to the Project root. NOMAD renders its Markdown content below
-**All Files** on the Project **Overview** page. You can add the README in the
+To provide a longer, formatted description of the project, add a file named
+`README.md` to the project root. NOMAD renders its Markdown content below
+**All Files** on the project **Overview** page. You can add the README in the
 **New Project** prompt or upload it later.
 
-## Create Entries
+## Create entries
 
-You can create Entries in a Project in two ways:
+You can create entries in a project in two ways:
 
 1. **From supported files:** Add files in a format recognized by an installed
-   parser. NOMAD processes the files and creates Entries automatically.
-2. **From a schema:** On the Project **Overview** page or in any folder under
-   **FILES**, select **NEW ENTRY**, then choose a built-in or custom schema. NOMAD creates an editable Electronic Lab Notebook (ELN) Entry that you can complete in the data editor.
+   parser. NOMAD processes the files and creates entries automatically.
+2. **From a schema:** On the project **Overview** page or in any folder under
+   **FILES**, select **NEW ENTRY**, then choose a built-in or custom schema. NOMAD creates an editable Electronic Lab Notebook (ELN) entry that you can complete in the data editor.
 
-??? info "Additional Project and Entry metadata"
-      Beyond the Project name and description, additional comments and references
-      can be added as Project metadata in a file named `nomad.json` or
-      `nomad.yaml`. The file can also contain Entry-specific comments. For
+??? info "Additional project and entry metadata"
+      Beyond the project name and description, additional comments and references
+      can be added as project metadata in a file named `nomad.json` or
+      `nomad.yaml`. The file can also contain entry-specific comments. For
       example, a `nomad.json` file can have the following format:
 
       ```json
@@ -73,126 +73,193 @@ You can create Entries in a Project in two ways:
       }
       ```
 
-      NOMAD reads this file when processing the Project. Add it before, or in
+      NOMAD reads this file when processing the project. Add it before, or in
       the same file transfer as, the mainfiles to which it applies. If you add
-      it later, reprocess the Project to apply the metadata to its Entries.
+      it later, reprocess the project to apply the metadata to its entries.
 
-### Create Entries from supported files
+### Create entries from supported files
 
 <a id="processing-files"></a>
 
-#### How uploaded files become Entries
+#### How uploaded files become entries
 
 NOMAD checks the files using the parsers and plugins installed in the current
 deployment. When a parser recognizes a file as the primary raw-data source
-that defines an Entry, that file becomes the Entry's
+that defines an entry, that file becomes the entry's
 [**mainfile**](../../../reference/glossary.md#mainfile). NOMAD then creates and
-processes the corresponding Entry. Which file formats are supported therefore
+processes the corresponding entry. Which file formats are supported therefore
 depends on the parsers and plugins installed in the deployment. See
 [Explanation > Processing](../../../explanation/processing.md) for a detailed
 explanation of file matching and processing.
 
-All Project files remain available under **FILES**, but only recognized
-mainfiles produce Entries that appear under **ENTRIES** and can be found in
+All project files remain available under **FILES**, but only recognized
+mainfiles produce entries that appear under **ENTRIES** and can be found in
 search. Parsers can also associate other files with a mainfile as **auxiliary
-files** for the resulting Entry. A Project must contain at least one
-successfully processed Entry before it can be published.
+files** for the resulting entry. A project must contain at least one
+successfully processed entry before it can be published.
 
 If you added supported files in the **New Project** prompt, the corresponding
-Entries are created automatically during Project creation. To create further
-Entries from files, open **FILES** and select **UPLOAD FILES**, then choose one
+entries are created automatically during project creation. To create further
+entries from files, open **FILES** and select **UPLOAD FILES**, then choose one
 or more files. Alternatively, drag files into the file-list area below
 **All Files**.
 
 You can add individual files or package them in a `.zip` or `.tar.gz` file.
 NOMAD extracts these compressed bundles and preserves their internal directory
 structure. Keep the files for one calculation or experiment together in the
-same Project so that the parser can associate them with the same Entry.
+same project so that the parser can associate them with the same entry.
+
+Exports from external ELNs, such as `.eln` files or ZIP exports from
+Chemotion, are also processed into entries. See
+{{ nav_link("howto/manage/gui/eln.md") }}.
 
 For scripted transfers, select the drop-down arrow next to **UPLOAD FILES** and
 choose **Upload via API**. The dialog provides an example command for uploading
-to the current Project folder.
+to the current project folder.
 
 ??? warning "License Compliance for VASP POTCAR Files"
 
-    The VASP license does **not** permit users to freely distribute **POTCAR** files, which are
-    considered copyrighted material. To ensure compliance, NOMAD automatically handles POTCAR
+    The VASP license does **not** permit users to freely distribute `POTCAR` files, which are
+    considered copyrighted material. To ensure compliance, NOMAD automatically handles `POTCAR`
     files for you.
 
-    Upon **publication**, NOMAD removes the original POTCAR files and replaces them with
+    Upon **publication**, NOMAD removes the original `POTCAR` files and replaces them with
     `POTCAR.stripped` files. The stripped files contain a checksum of the original file
     at the top, followed by metadata headers extracted from the original POTCAR, but not
     the proprietary pseudopotential data. The stripped files can be accessed and downloaded
-    by anyone, while the original POTCAR files are automatically removed.
+    by anyone, while the original `POTCAR` files are automatically removed.
 
     **Important considerations:**
 
-    - Stripping is filename-based. Ensure "POTCAR" appears in the filename for licensed files.
-    - POTCAR files **must be uncompressed** for automated stripping to work. Compressed files (e.g., `POTCAR.gz`) will not be properly processed and may be entirely removed without creating stripped versions.
-    - Stripping only occurs upon publication. We strongly recommend **against** temporarily making unpublished uploads publicly visible when they contain licensed material.
+    - Stripping is filename-based. Ensure `POTCAR` appears in the filename for licensed files.
+    - `POTCAR` files **must be uncompressed** for automated stripping to work. Compressed files (e.g., `POTCAR.gz`) will not be properly processed and may be entirely removed without creating stripped versions.
+    - Stripping only occurs upon publication. We strongly recommend **against** temporarily making unpublished projects publicly visible when they contain licensed material.
 
     While NOMAD provides this service as a courtesy, **uploaders remain responsible for
     verifying overall license compliance**.
 
-### Create ELN Entries from built-in or custom schemas
+### Create ELN entries from built-in or custom schemas
 
-An [Electronic Lab Notebook (ELN)](../../../reference/glossary.md#eln) Entry is
-a schema-based Entry that you can edit directly in NOMAD. To create an ELN Entry:
+An [Electronic Lab Notebook (ELN)](../../../reference/glossary.md#eln) entry is
+a schema-based entry that you can edit directly in NOMAD. To create an ELN entry:
 
-1. On the Project **Overview** page or in any folder under
-   **FILES**, select **NEW ENTRY**. You can create new folders using the `+` button under **FILES**.
+1. On the project **Overview** page or in any folder under
+   **FILES**, select **NEW ENTRY**. You can create new folders using the **+** button under **FILES**.
 2. Choose a schema under **BUILT-IN SCHEMAS** or **CUSTOM SCHEMAS**. Custom
    schemas come from schema packages uploaded to the current NOMAD deployment.
-   Depending on your access, these can include schemas from this Project, your
-   other Projects, or Projects shared or published by other users.
+   Depending on your access, these can include schemas from this project, your
+   other projects, or projects shared or published by other users.
 3. Enter a filename and select **CREATE**. NOMAD creates the ELN and opens
    it in the data editor.
 
-**Related pages:** [Enter data with ELNs](eln.md);
-[Define a schema](../../schemas/define.md).
+**Related pages:** {{ nav_link("tutorial/eln/built_in_templates.md") }};
+{{ nav_link("howto/schemas/define.md") }}.
+
+### Include entries from other projects
+
+A project can include entries from other projects. This lets you combine data from several
+projects without copying or reprocessing any files, and allows you to create larger
+logical collections of entries that would not otherwise be possible e.g. due to project
+size limits. Included entries appear in the project's **ENTRIES** list next to the
+project's own entries, but their files and data stay in the project they came from. Also
+the visibility and access control are still controlled by the project that contains the
+files.
+
+!!! info "Replacement for datasets"
+
+    Included entries replace the **Datasets** feature of NOMAD v1.0. Existing
+    datasets keep working as before and remain accessible in NOMAD v2.0.0, but
+    new datasets can no longer be created in the GUI. To group entries from
+    several projects, include them in a project instead.
+
+Typical uses include:
+
+- **Collecting the data behind a publication:** The results for a paper are
+  often spread over several projects, for example one per measurement campaign,
+  simulation series, or group member. Create a dedicated project that includes
+  entries from all of them, publish it, and cite its single DOI in the paper.
+- **Sharing reference data:** Keep common data, such as calibration
+  measurements, substrate characterizations, or reference calculations, in one
+  project and include it in every project that relies on it. The reference data
+  is stored only once and stays the same wherever it is used.
+- **Comparing simulations and experiments:** Include experimental entries in a
+  simulation project, or the other way around, to search and compare both kinds
+  of data in one entries list.
+- **Building curated collections:** Gather published entries from your own or
+  other people's projects into a themed collection, such as a benchmark set for
+  a class of materials. The included entries retain their original authorship and
+  provenance.
+
+To include entries from other projects:
+
+1. On the project **Overview** page, select the drop-down arrow next to
+   **NEW ENTRY**, then choose **Include entries from other projects**.
+2. Search for a project by its project ID and add it to the list. Repeat for
+   each project you want to include. To stop including a project, remove it
+   from the list.
+3. Select **NEXT**. NOMAD checks your selection and shows how many entries will
+   be included and whether any of them are still unpublished.
+4. Select **SAVE**.
+
+The included entries now appear under **ENTRIES**, marked with an **included**
+label, and can be searched and filtered together with the project's own
+entries.
+
+Keep the following in mind when you include entries:
+
+- **Included entries are a snapshot.** Only entries that exist when you select
+  **SAVE** are included. If entries are later added to one of the included
+  projects, open the dialog and save again to include them as well.
+- **Ownership does not change.** Each entry belongs to exactly one project.
+  Including an entry does not copy or move it, and it can only be edited in the
+  project it belongs to.
+- **Inclusion is not recursive.** Only a project's own entries are included,
+  not the entries it has itself included from other projects.
+- **Publishing requires published entries.** A project cannot be published
+  while any of its included entries are unpublished or published under embargo. Ask the owners of those projects to publish them first.
 
 ## Visibility and access
 
-On the Project page, the Project owner can select **SETTINGS** to manage
+On the project page, the project owner can select **SETTINGS** to manage
 access.
 
 Under **Collaborators**, use **ADD USER** to add a collaborator and assign one
 of these roles:
 
-- **Reviewer** can view the files and Entries in an unpublished Project but
+- **Reviewer** can view the files and entries in an unpublished project but
   cannot change them.
-- **Coauthor** can view and modify the files and Entries while the Project is
+- **Coauthor** can view and modify the files and entries while the project is
   unpublished.
 
 Select **SAVE** after changing the collaborator list or a role. If group
 collaboration is enabled in the deployment, **ADD GROUP** provides the same
 role choices for a user group. See
-[How-to guides > ... > API Overview > User Groups](../program/api.md#user-groups)
+[Reference > REST API > User groups](../../../reference/api.md#user-groups)
 for information about creating and editing groups.
 
 Under **Visibility**, select **Private** or **Public**, then select **SAVE**.
-A public, unpublished Project is visible to everyone. Public visibility and a
-publication embargo cannot be used together, so keep the Project private if
+A public, unpublished project is visible to everyone. Public visibility and a
+publication embargo cannot be used together, so keep the project private if
 you intend to publish it under embargo.
 
 ## Publish and assign a DOI
 
-Only the Project owner can publish a Project or assign its DOI.
+Only the project owner can publish a project or assign its DOI.
 
-1. Open **ENTRIES** and review every Entry. Confirm that all expected Entries
+1. Open **ENTRIES** and review every entry. Confirm that all expected entries
    are present and that their extracted or entered data are complete and
    correct.
-2. In the Project header, select the status button with the drop-down arrow.
+2. In the project header, select the status button with the drop-down arrow.
    Depending on the current state, it is labelled **Completed**, **Failed**,
    **Processing**, or **Idle**. In the **Processing status** panel, confirm that
-   **Matching** found the expected number of Entries, **Parsing** completed
-   successfully for every Entry, and **Cleanup** reports no unresolved warnings
+   **Matching** found the expected number of entries, **Parsing** completed
+   successfully for every entry, and **Cleanup** reports no unresolved warnings
    or errors.
-3. For an Entry with failed processing, unexpected data, or a concerning
-   warning, open the Entry and select **LOGS**. Review the processing messages,
-   correct the source data or Entry as needed, and reprocess before publishing.
+3. For an entry with failed processing, unexpected data, or a concerning
+   warning, open the entry and select **LOGS**. Review the processing messages,
+   correct the source data or entry as needed, and reprocess before publishing.
 4. Open **SETTINGS** > **General**.
-5. In **Publish**, select **No embargo** or an embargo period. If the Project
+5. In **Publish**, select **No embargo** or an embargo period. If the project
    is already publicly visible, the embargo control is disabled; change its
    visibility to **Private** first if you need an embargo.
 6. Select **PUBLISH** or **PUBLISH WITH EMBARGO**, then confirm the action.
@@ -201,21 +268,21 @@ If processing errors persist or the impact of a warning is unclear, contact
 the administrator of your NOMAD deployment before publishing. NOMAD Central
 users and NOMAD Oasis administrators who need further assistance can contact
 [NOMAD > Support](https://nomad-lab.eu/nomad-lab/support.html){:target="_blank" rel="noopener"}.
-Include the Project ID, the affected Entries, and the relevant processing logs
+Include the project ID, the affected entries, and the relevant processing logs
 in your request.
 
-Publication is permanent. The Project's files and Entries become read-only
+Publication is permanent. The project's files and entries become read-only
 and cannot be edited or deleted. Without an embargo, the data become public
-immediately. With an embargo, the Entry metadata are public while access to
+immediately. With an embargo, the entry metadata are public while access to
 the files remains restricted until the embargo ends.
 
 On NOMAD Central, or on a NOMAD Oasis deployment with DataCite integration
 enabled, **SETTINGS** > **General** also contains **Digital Object Identifier
 (DOI)**. After publishing, select **ASSIGN DOI** and confirm the action. The DOI
-is assigned directly to the Project; creating a dataset is not required.
+is assigned directly to the project.
 
 !!! warning
-    Publication and DOI assignment is irreversible: the DOI remains permanently associated with the Project.
+    Publication and DOI assignment is irreversible: the DOI remains permanently associated with the project.
 
 !!! note
     DOI controls are only shown on deployments with DataCite integration.
@@ -224,12 +291,12 @@ is assigned directly to the Project; creating a dataset is not required.
 ## Strategies for large amounts of data
 
 Test the workflow first with a small, representative subset of the data.
-Review the resulting files and Entries, then delete the test Project if it is
+Review the resulting files and entries, then delete the test project if it is
 no longer needed.
 
-When data exceed the deployment's Project-size limit, split them across
-multiple Projects. Do not split the mainfile and auxiliary files belonging to
-one Entry between Projects. The appropriate split therefore depends on how
+When data exceed the deployment's project-size limit, split them across
+multiple projects. Do not split the mainfile and auxiliary files belonging to
+one entry between projects. The appropriate split therefore depends on how
 the data are organized.
 
 For repeatable transfers, choose **Upload via API** from the **UPLOAD FILES**
@@ -244,5 +311,5 @@ processing and publication workflow with representative data.
     Contact [NOMAD > Support](https://nomad-lab.eu/nomad-lab/support.html){:target="_blank" rel="noopener"}
     before transferring hundreds of gigabytes or requesting an exceptional
     transfer arrangement. Allow time to agree on an appropriate transfer and
-    Project layout. Server-side transfers require coordination with NOMAD
+    project layout. Server-side transfers require coordination with NOMAD
     Central operators and are not part of the ordinary end-user workflow.

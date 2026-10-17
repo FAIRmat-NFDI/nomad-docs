@@ -15,7 +15,7 @@ nav:
       - Use NOMAD as an ELN:
           - Use built-in ELN templates: tutorial/eln/built_in_templates.md
           - Create a custom ELN schema: tutorial/eln/custom_eln_yaml.md
-          - Parse tabular measurement data: tutorial/eln/tabular_parser_yaml.md
+          - Parse tabular data: tutorial/eln/tabular_parser_yaml.md
       - Manage workflows and projects: tutorial/workflows_projects.md
       - Develop a NOMAD plugin:
           - Set up a plugin project: tutorial/develop_plugin/plugin_structure.md
@@ -31,15 +31,14 @@ nav:
           - With the GUI:
               - Create an account and sign in: howto/manage/gui/account.md
               - Create and publish Projects: howto/manage/gui/upload.md
-              - Enter data with ELNs: howto/manage/gui/eln.md
-              - Analyze data in NORTH: howto/manage/gui/north.md # TODO rename depending on how-to content
+              - Import data from external ELNs: howto/manage/gui/eln.md
               - Create custom workflows: howto/manage/gui/workflows.md
           - Work programmatically:
               # - Install nomad-lab: howto/programmatic/pythonlib.md # TODO Integrate into "Use the API"
-              - Use the API: howto/manage/program/api.md # TODO separate into How-to and Explanation/Reference
+              - Use the API: howto/manage/program/api.md
               - Authenticate programmatically: howto/manage/program/auth.md
               - Download data: howto/manage/program/download.md
-              - Publish data using Python: howto/manage/program/publish_python.md
+              - Manage data with Python: howto/manage/program/publish_python.md
               - Access processed data: howto/manage/program/archive_query.md
               - Transform JSON data structures: howto/manage/program/json_transformer.md
               - Make Graph API calls: howto/manage/program/graph_api.md # TODO consolidate into a single page with supporting explanation/reference material
@@ -102,9 +101,12 @@ nav:
       - NORTH: explanation/north.md
   - Reference:
       - Overview: reference/overview.md
+      - REST API: reference/api.md
+      - ArchiveQuery client: reference/archive_query.md
       - Schema language: reference/metainfo.md
       - Configuration: reference/config.md
       - Annotations: reference/annotations.md
+      - JSON transformer: reference/json_transformer.md
       - Base sections: reference/basesections.md
       - CLI: reference/cli.md
       - Plugins: reference/plugins.md
@@ -117,7 +119,6 @@ not_in_nav: |
   # Contributor documentation is linked from README.md, not the user navigation.
   /writing_guide.md
   # Legacy pages retained until their content is handled by later refactoring stages.
-  /tutorial/access_api.md
   /tutorial/custom.md
   /tutorial/nomad_repo.md
 validation:

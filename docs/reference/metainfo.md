@@ -30,7 +30,7 @@ and how they are serialized. Type names are **case insensitive**.
 | `File` | `File` | `str` | JSON string | A path relative to the upload. |
 | `Capitalized` | `Capitalized` | `str` | JSON string | Capitalizes the first letter on assignment. |
 | `Any` | `Any` | any | as-is | No validation. |
-| `User` | `User` | NOMAD user | user id string | |
+| `User` | `User` | NOMAD user | user ID string | |
 | `Author` | `Author` | `Author` | JSON object | |
 | `*<section name>*` | `MySection` | section instance or `MProxy` | reference URL | See [Work with schemas > Link data with references](../howto/schemas/define.md#link-data-with-references). |
 | `{type_kind: quantity_reference, type_data: <Section>/<quantity>}` | `MySection.my_quantity` | the target quantity's value | reference URL ending in the quantity name | Assign the section that holds the quantity, not the value. |
@@ -102,7 +102,7 @@ quantity's name. The host and path parts correspond to the
 | `nomad.datamodel.metainfo.workflow` | A *section definition* written in Python as part of the NOMAD code. Targets section definitions only. |
 | `../upload/raw/data.archive.yaml#/data` | A section in a different `.archive.yaml` file of the same upload. |
 | `../upload/archive/mainfile/data.archive.yaml#/data` | A section in a processed archive, given by the entry *mainfile*. |
-| `../upload/archive/zxhS43h2kqHsVDqMboiP9cULrS_v#/data` | A section in a processed archive, given by entry id. |
+| `../upload/archive/zxhS43h2kqHsVDqMboiP9cULrS_v#/data` | A section in a processed archive, given by entry ID. |
 | `../uploads/zxhS43h2kqHsVDqMboiP9cULrS_v/raw/data.archive.yaml#/data` | A section in an entry of a different upload. |
 | `/entries/{entry_id}/archive#/data/processes/0` | A section in a different entry on the same NOMAD installation. |
 | `/uploads/{upload_id}/archive/{entry_id}#/data/processes/0` | The same, addressed by upload. |
@@ -138,7 +138,7 @@ need:
 | Option | Effect |
 | --- | --- |
 | `with_meta` | Include `m_def`, and `m_parent_index`/`m_parent_sub_section` where applicable. |
-| `with_def_id` | Include the [definition id](../howto/schemas/evolution.md) of each definition. |
+| `with_def_id` | Include the [definition ID](../howto/schemas/evolution.md) of each definition. |
 | `include_defaults` | Include quantities that still hold their default value. |
 | `include_derived` | Include derived quantities. |
 | `resolve_references` | Replace references with what they point to — the target section, or the target value for a quantity reference — instead of reference URLs. |

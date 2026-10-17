@@ -70,7 +70,7 @@ Here are a few examples:
 
 For a complete list refer to the [CLI reference documentation](../../reference/cli.md#nomad-admin-uploads).
 
-Alternatively, you can use a list of upload ids at the end of the command, e.g.:
+Alternatively, you can use a list of upload IDs at the end of the command, e.g.:
 
 ```sh
 ```sh

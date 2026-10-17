@@ -9,9 +9,12 @@ Reference pages provide authoritative technical details. Use them when you need 
 ## Topics
 
 {{ nav_list(descriptions={
+    "reference/api.md": "the built-in NOMAD API: resources, requests, queries, pagination, errors, and API usage limits.",
+    "reference/archive_query.md": "the Python ArchiveQuery client: options, methods, result formats, and transfer behavior.",
     "reference/metainfo.md": "the Metainfo schema language: definition attributes, quantity types, and conventions.",
     "reference/config.md": "deployment and application configuration options.",
     "reference/annotations.md": "metainfo annotations and their arguments.",
+    "reference/json_transformer.md": "fields of JSON transformation rules and arguments of the `Transformer`.",
     "reference/basesections.md": "generated reference for NOMAD base sections.",
     "reference/cli.md": "command-line interface reference.",
     "reference/plugins.md": "plugin reference material.",

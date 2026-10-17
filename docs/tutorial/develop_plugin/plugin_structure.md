@@ -23,7 +23,7 @@ This tutorial assumes basic familiarity with Python and Git, as well as minimal 
 Before starting this tutorial, make sure you have the following:
 
 1. **GitHub account**
-   Required to create and manage the plugin repository. You can create a free account at [github.com/signup](https://github.com/signup){:target="_blank" rel="noopener"}.
+   Required to create and manage the plugin repository. You can create a free account on the [GitHub sign-up page](https://github.com/signup){:target="_blank" rel="noopener"}.
 
 2. **Basic understanding of Python**
    You should be comfortable reading and writing basic Python code, including modules, functions,
@@ -57,8 +57,7 @@ Before starting this tutorial, make sure you have the following:
 
 ## Create a plugin repository
 
-First, you will version-control your NOMAD plugin by creating a GitHub repository from the official template. Start from the official GitHub template repository at
-[github.com/FAIRmat-NFDI/nomad-plugin-template](https://github.com/FAIRmat-NFDI/nomad-plugin-template){:target="_blank" rel="noopener"}.
+First, you will version-control your NOMAD plugin by creating a GitHub repository from the official template. Start from the official [`nomad-plugin-template` repository](https://github.com/FAIRmat-NFDI/nomad-plugin-template){:target="_blank" rel="noopener"}.
 
 To create a new repository from the template, select **Use this template** and then choose
 **Create a new repository**. You must be logged in to GitHub to see this option.
@@ -89,7 +88,7 @@ To use a GitHub Codespace for plugin development, click on the **<> Code** butto
 
 #### Option 2: Developing locally
 
-If you prefer to work locally, click on the **<> Code** button in the repository and choose the **“Local”** tab, copy the repository URL, and clone it to a selected location in your machine by running in terminal:
+If you prefer to work locally, click on the **<> Code** button in the repository and choose the **Local** tab, copy the repository URL, and clone it to a selected location in your machine by running in terminal:
 
 ```sh
 cd LOCAL/PATH/ON/YOUR/MACHINE
@@ -198,13 +197,13 @@ git push
 
 The template repository includes a GitHub Actions workflow that checks for updates to the cookiecutter template. The workflow runs automatically once a week and can also be triggered manually. To enable this functionality, grant the workflow permission to write to the repository and create pull requests.
 
-From your plugin repository on GitHub, open the **Settings** page, and navigate to **Actions → General** (on the left pane):
+From your plugin repository on GitHub, open the **Settings** page, and navigate to **Actions** > **General** (on the left pane):
 
 ![Use template](../images/github_settings_dark.png#gh-dark-mode-only)
 ![Use template](../images/github_settings_light.png#gh-light-mode-only)
 
-Scroll to the bottom of the page, select the "Read and write permissions"
-and check the "Allow GitHub Actions to create and approve pull requests" options, and then click **Save**.
+Scroll to the bottom of the page, select **Read and write permissions**
+and check **Allow GitHub Actions to create and approve pull requests**, and then click **Save**.
 
 ![Use template](../images/workflow_permissions_dark.png#gh-dark-mode-only)
 ![Use template](../images/workflow_permissions_light.png#gh-light-mode-only)
@@ -265,7 +264,7 @@ This option is designed to be used with a local Linux-based machine. The `nomad-
 
 This setup is required when you need to verify plugin behavior in the NOMAD GUI.
 
-Start with forking [`nomad-distro-dev`](https://github.com/FAIRmat-NFDI/nomad-distro-dev){:target="_blank" rel="noopener"} repository (`Fork` -> `Create a new fork` in the upper right part of the page). You will also need the following additional software installed on your system:
+Start with forking the [`nomad-distro-dev`](https://github.com/FAIRmat-NFDI/nomad-distro-dev){:target="_blank" rel="noopener"} repository (**Fork** > **Create a new fork** in the upper-right part of the page). You will also need the following additional software installed on your system:
 
 - [Docker](https://docs.docker.com/engine/install/){:target="_blank" rel="noopener"} - generally, only `docker-compose` functionality will be needed
 
