@@ -7,7 +7,7 @@
 
 Apps provide customized views of data in the GUI, making it easier for the users to navigate and understand the data related to a specific domain. This typically means that certain domain-specific properties are highlighted, different units may be used for physical properties, and specialized widgets may be presented. This becomes crucial for NOMAD installations to be able to scale with data that contains a mixture of experiments and simulations, different techniques, and physical properties spanning different time and length scales.
 
-Apps only affect the way data is *displayed* for the user: if you wish to affect the underlying data structure, you will need to write a [Python schema package](../../schemas/define.md) or a [YAML schema package](../../schemas/define.md).
+Apps only affect the way data is *displayed* for the user: if you wish to affect the underlying data structure, you will need to [write a schema](../../schemas/define.md).
 
 This documentation shows you how to create a plugin entry point for an app. You should read the [introduction to plugins](../plugins.md) to have a basic understanding of how plugins and plugin entry points work in the NOMAD ecosystem.
 
@@ -160,6 +160,60 @@ These are the available widgets:
 - [`WidgetScatterplot`](#widgetscatterplot): Displays a scatter plot for two numerical search quantities.
 - [`WidgetBoxPlot`](#widgetboxplot): Displays a box plot for a numerical search quantity, optionally grouped and subgrouped by a categorical search quantity.
 - [`WidgetPeriodicTable`](#widgetperiodictable): Displays a periodic table with occurrence of each element using a search quantity that contains chemical element names.
+
+#### Responsive design for widgets
+
+NOMAD can be used on a wide variety of devices from desktops to mobile phones. While most of the interface already automatically adjusts based on screen sizes, the widgets will usually need a manual layout because they are placed on a fixed grid.
+
+NOMAD configures the following breakpoints for different dashboard sizes:
+
+| Breakpoint | Grid width (px) | Columns | Typical environment       |
+| ---------- | --------------- | ------- | ------------------------- |
+| `sm`       | < 1065          | 12      | Mobile phones / tablets   |
+| `md`       | 1065 – 1420     | 18      | Tablets / smaller laptops |
+| `lg`       | 1420 – 1775     | 24      | Desktops (Full HD)        |
+| `xl`       | 1775 – 2130     | 30      | Large desktops            |
+| `xxl`      | ≥ 2130          | 36      | 4K and ultrawide displays |
+
+A few things to keep in mind when designing a layout:
+
+- The **grid width is the width of the widget area, not the width of the browser window**. Other interface elements – like the the search menu on the left – also take up space.
+- The grid cells are square: the height of a row is the same as the width of a column. This means that `h` and `w` use the same unit, and a widget with `w=12, h=6` is always twice as wide as it is tall.
+- Each widget is at least 3 columns wide and 3 rows tall, unless you change this with `minW` and `minH`.
+
+For each breakpoint, you can define a separate layout. You do not need to provide a layout for each size: in a typical scenario you would define a layout for desktops using `lg`, and another one for phones using `sm`. A breakpoint without a layout copies the layout from the nearest larger breakpoint that has one. If there is no larger one, it uses the nearest smaller one instead. If the copied layout does not look right on some screen size, add a layout for that breakpoint too.
+
+A convenient way to create a layout is to arrange the widgets directly in the GUI and then export the result:
+
+1. Open your app and set the browser to a width where the breakpoint you want to design for is active.
+2. Move widgets by dragging their title, and resize them by dragging their bottom-right corner. Changes only affect the layout of the currently active breakpoint, so repeat this for each screen size you want to customize. See tips below on testing for different screen sizes.
+3. Click the **Dashboard export/import** button in the dashboard toolbar. The dialog shows the current widgets and their layouts in YAML, which you can copy into your app definition.
+
+You can also edit the YAML in the dialog and click **Save** to try out changes right away. The GUI does not store any of these changes: reloading the page or clicking the reset button restores the dashboard defined in your app.
+
+The exported YAML is a list of widgets that you can load into a `Dashboard` with `parse_obj`, in the same way as in the [tip about loading apps from YAML](#creating-an-app). In this example, two widgets are placed side by side on desktops and stacked on top of each other on phones:
+
+<!-- fmt: off -->
+```python
+--8<-- "examples/plugins/layout_yaml.py"
+```
+<!-- fmt: on -->
+
+The export contains a layout for every breakpoint, including the ones that were copied from another breakpoint using the rules described above. If you wish, you can remove the breakpoints you did not change, as in this example, which only keeps `lg` and `sm`.
+
+You can also define the layout directly with the Python models. This creates the same dashboard as the YAML example above:
+
+<!-- fmt: off -->
+```python
+--8<-- "examples/plugins/layout.py"
+```
+<!-- fmt: on -->
+
+!!! tip "Testing your layout on different screen sizes"
+
+    - Use the device emulation of your browser's developer tools to try out different screen sizes without switching devices. In Chrome and Edge, open the developer tools (<kbd>F12</kbd>) and toggle the device toolbar (<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>M</kbd>, or <kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>M</kbd> on macOS). In Firefox, open the Responsive Design Mode (<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>M</kbd>, or <kbd>Cmd</kbd>+<kbd>Option</kbd>+<kbd>M</kbd> on macOS). You can then pick a device preset or type in a custom width.
+    - Check every breakpoint you have defined a layout for, and also the ones that copy it from another breakpoint. Slowly resizing the window across the widths in the table above shows you where the layout switches.
+    - Browser zoom (<kbd>Ctrl</kbd>+<kbd>-</kbd> and <kbd>Ctrl</kbd>+<kbd>+</kbd>) changes the width that the page sees. Zooming out to 50% doubles it, which is a quick way to preview the `xl` and `xxl` layouts on a smaller monitor.
 
 ### Row actions
 

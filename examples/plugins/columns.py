@@ -12,7 +12,7 @@ columns = [
     ),
     Column(
         search_quantity=f'data.my_repeated_section[*].myquantity#{schema}',
-        align='middle',
+        align='center',
         selected=False,
     ),
 ]
