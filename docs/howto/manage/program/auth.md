@@ -2,8 +2,8 @@
 
 In this guide, you will create a personal access token (PAT) in the NOMAD GUI
 and use it to authenticate a Python or command-line API request. You will also
-learn how to rotate or revoke the token when its secret is exposed, it expires,
-or an integration no longer needs access.
+learn how to rotate a token if its secret is exposed, revoke it when an
+integration no longer needs access, and replace it after it expires.
 
 PATs are the recommended authentication method for scripts, notebooks, command-line
 workflows, and CI jobs. Each PAT is restricted to explicitly selected scopes and
