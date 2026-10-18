@@ -122,14 +122,14 @@ environment for unattended workflows.
 Do not put a NOMAD authorization header in a global `.curlrc`: `curl` would send
 the token to unrelated hosts unless the configuration is carefully scoped.
 
-## Diagnose an authentication failure
+## Diagnose authentication and authorization failures
 
-- **HTTP 401 Unauthorized:** check that `NOMAD_PAT` is set, contains the complete
-  secret, has not expired or been revoked, and was issued by the deployment in
-  `NOMAD_API_URL`.
-- **HTTP 403 Forbidden:** inspect the response's `detail` field. The token is
-  valid, but it may lack one or more scopes required by the endpoint, or your
-  account may not have access to the requested resource.
+- **HTTP 401 Unauthorized (authentication failure):** check that `NOMAD_PAT` is
+  set, contains the complete secret, has not expired or been revoked, and was
+  issued by the deployment in `NOMAD_API_URL`.
+- **HTTP 403 Forbidden (authorization failure):** inspect the response's
+  `detail` field. The token is valid, but it may lack one or more scopes required
+  by the endpoint, or your account may not have access to the requested resource.
 - **Unexpected deployment:** verify the complete API base URL. Tokens are not
   transferable between NOMAD Central, its test or develop deployments, and
   NOMAD Oasis deployments.
