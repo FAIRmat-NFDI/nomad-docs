@@ -3893,17 +3893,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#plotannotation-deprecated" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        PlotAnnotation (Deprecated)
-      
-    </span>
-  </a>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -4431,17 +4420,6 @@
     <span class="md-ellipsis">
       
         plot annotations in python
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#plotannotation-deprecated" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        PlotAnnotation (Deprecated)
       
     </span>
   </a>
@@ -5517,75 +5495,6 @@ and additionally utilizing different flavours of plot annotations. The different
 <a id="__codelineno-18-71" name="__codelineno-18-71" href="#__codelineno-18-71"></a>        <span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="s1">'*'</span><span class="p">],</span> <span class="n">unit</span><span class="o">=</span><span class="s1">'Pa'</span><span class="p">,</span> <span class="n">a_eln</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">component</span><span class="o">=</span><span class="s1">'NumberEditQuantity'</span><span class="p">)</span>
 <a id="__codelineno-18-72" name="__codelineno-18-72" href="#__codelineno-18-72"></a>    <span class="p">)</span>
 </code></pre></div>
-<h3 id="plotannotation-deprecated">PlotAnnotation (Deprecated)<a class="headerlink" href="#plotannotation-deprecated" title="Permanent link">¶</a></h3>
-<p>The <code>PlotAnnotation</code> is now deprecated and will be removed in future releases.
-We recommend transitioning to the use of <code>PlotSection</code> and <code>PlotlyGraphObjectAnnotation</code> for your plotting needs.</p>
-<p>This annotation can be used to add a plot to a section or quantity. Example:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Evaporation</span><span class="p">(</span><span class="n">MSection</span><span class="p">):</span>
-<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>    <span class="n">m_def</span> <span class="o">=</span> <span class="n">Section</span><span class="p">(</span><span class="n">a_plot</span><span class="o">=</span><span class="p">{</span>
-<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>        <span class="s1">'label'</span><span class="p">:</span> <span class="s1">'Temperature and Pressure'</span><span class="p">,</span>
-<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>        <span class="s1">'x'</span><span class="p">:</span> <span class="s1">'process_time'</span><span class="p">,</span>
-<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>        <span class="s1">'y'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'./substrate_temperature'</span><span class="p">,</span> <span class="s1">'./chamber_pressure'</span><span class="p">],</span>
-<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>        <span class="s1">'config'</span><span class="p">:</span> <span class="p">{</span>
-<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>            <span class="s1">'editable'</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
-<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>            <span class="s1">'scrollZoom'</span><span class="p">:</span> <span class="kc">False</span>
-<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>        <span class="p">}</span>
-<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a>    <span class="p">})</span>
-<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a>    <span class="n">time</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="s1">'*'</span><span class="p">],</span> <span class="n">unit</span><span class="o">=</span><span class="s1">'s'</span><span class="p">)</span>
-<a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a>    <span class="n">substrate_temperature</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="s1">'*'</span><span class="p">],</span> <span class="n">unit</span><span class="o">=</span><span class="s1">'K'</span><span class="p">)</span>
-<a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a>    <span class="n">chamber_pressure</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">[</span><span class="s1">'*'</span><span class="p">],</span> <span class="n">unit</span><span class="o">=</span><span class="s1">'Pa'</span><span class="p">)</span>
-</code></pre></div>
-<p>You can create multi-line plots by using lists of the properties <code>y</code> (and <code>x</code>).
-You either have multiple sets of <code>y</code>-values over a single set of <code>x</code>-values. Or
-you have pairs of <code>x</code> and <code>y</code> values. For this purpose the annotation properties
-<code>x</code> and <code>y</code> can reference a single quantity or a list of quantities.
-For repeating sub sections, the section instance can be selected with an index, e.g.
-"sub_section_name/2/parameter_name" or with a slice notation <code>start:stop</code> where
-negative values index from the end of the array, e.g.
-"sub_section_name/1:-5/parameter_name".</p>
-<p>The interactive examples of the plot annotations can be found
-<a href="https://nomad-lab.eu/prod/v1/staging/gui/dev/plot">here</a>.</p>
-<table>
-<thead>
-<tr>
-<th>name</th>
-<th>type</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>x</td>
-<td><code>list[str] | str</code></td>
-<td>A path or list of paths to the x-axes values. Each path is a <code>/</code> separated list of sub-section and quantity names that leads from the annotation section to the quantity. Repeating sub sections are indexed between two <code>/</code>s with an integer or a slice <code>start:stop</code>.<br><em>default:</em> <code>PydanticUndefined</code></td>
-</tr>
-<tr>
-<td>y</td>
-<td><code>list[str] | str</code></td>
-<td>A path or list of paths to the y-axes values. list of sub-section and quantity names that leads from the annotation section to the quantity. Repeating sub sections are indexed between two <code>/</code>s with an integer or a slice <code>start:stop</code>.<br><em>default:</em> <code>PydanticUndefined</code></td>
-</tr>
-<tr>
-<td>label</td>
-<td><code>str | None</code></td>
-<td>Is passed to plotly to define the label of the plot.</td>
-</tr>
-<tr>
-<td>lines</td>
-<td><code>list[dict] | None</code></td>
-<td>A list of dicts passed as <code>traces</code> to plotly to configure the lines of the plot. See <a href="https://plotly.com/javascript/reference/scatter/">https://plotly.com/javascript/reference/scatter/</a> for details.</td>
-</tr>
-<tr>
-<td>layout</td>
-<td><code>dict | None</code></td>
-<td>A dict passed as <code>layout</code> to plotly to configure the plot layout. See <a href="https://plotly.com/javascript/reference/layout/">https://plotly.com/javascript/reference/layout/</a> for details.</td>
-</tr>
-<tr>
-<td>config</td>
-<td><code>dict | None</code></td>
-<td>A dict passed as <code>config</code> to plotly to configure the plot functionality. See <a href="https://plotly.com/javascript/configuration-options/">https://plotly.com/javascript/configuration-options/</a> for details.</td>
-</tr>
-</tbody>
-</table>
 <h2 id="h5web">H5Web<a class="headerlink" href="#h5web" title="Permanent link">¶</a></h2>
 <p>The H5WebAnnotation provides a way to control how H5Web renders visualization for
 <a href="../howto/plugins/tools/hdf5.html#hdf5dataset">HDF5Dataset</a> quantities. The annotation values are written to the
@@ -5602,49 +5511,49 @@ entry overview page.
 <!-- TODO Re-Add link to some definition or example of overview page (and possibly below) --></p>
 </div>
 <p>An example of use of H5WebAnnotation in Python schemas:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.datamodel.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">ArchiveSection</span><span class="p">,</span> <span class="n">EntryData</span>
-<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.metainfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">Section</span>
-<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.datamodel.hdf5</span><span class="w"> </span><span class="kn">import</span> <span class="n">HDF5Dataset</span>
-<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.datamodel.metainfo.annotations</span><span class="w"> </span><span class="kn">import</span> <span class="n">H5WebAnnotation</span>
-<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>
-<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="k">class</span><span class="w"> </span><span class="nc">A</span><span class="p">(</span><span class="n">ArchiveSection</span><span class="p">):</span>
-<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a>
-<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a>    <span class="n">m_def</span> <span class="o">=</span> <span class="n">Section</span><span class="p">(</span><span class="n">a_h5web</span><span class="o">=</span><span class="n">H5WebAnnotation</span><span class="p">(</span>
-<a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a>        <span class="n">axes</span><span class="o">=</span><span class="s1">'x'</span><span class="p">,</span>
-<a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a>        <span class="n">signal</span><span class="o">=</span><span class="s1">'y'</span>
-<a id="__codelineno-20-11" name="__codelineno-20-11" href="#__codelineno-20-11"></a>        <span class="n">auxiliary_signals</span><span class="o">=</span><span class="p">[</span><span class="s1">'y_err'</span><span class="p">]))</span>
-<a id="__codelineno-20-12" name="__codelineno-20-12" href="#__codelineno-20-12"></a>
-<a id="__codelineno-20-13" name="__codelineno-20-13" href="#__codelineno-20-13"></a>    <span class="n">x</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
-<a id="__codelineno-20-14" name="__codelineno-20-14" href="#__codelineno-20-14"></a>        <span class="nb">type</span><span class="o">=</span><span class="n">HDF5Dataset</span><span class="p">,</span>
-<a id="__codelineno-20-15" name="__codelineno-20-15" href="#__codelineno-20-15"></a>        <span class="n">unit</span><span class="o">=</span><span class="s1">'s'</span><span class="p">,</span>
-<a id="__codelineno-20-16" name="__codelineno-20-16" href="#__codelineno-20-16"></a>        <span class="n">a_h5web</span> <span class="o">=</span> <span class="n">H5WebAnnotation</span><span class="p">(</span>
-<a id="__codelineno-20-17" name="__codelineno-20-17" href="#__codelineno-20-17"></a>            <span class="n">long_name</span><span class="o">=</span><span class="s1">'my_x_label (s)'</span>
-<a id="__codelineno-20-18" name="__codelineno-20-18" href="#__codelineno-20-18"></a>        <span class="p">))</span>
-<a id="__codelineno-20-19" name="__codelineno-20-19" href="#__codelineno-20-19"></a>
-<a id="__codelineno-20-20" name="__codelineno-20-20" href="#__codelineno-20-20"></a>    <span class="n">y</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
-<a id="__codelineno-20-21" name="__codelineno-20-21" href="#__codelineno-20-21"></a>        <span class="nb">type</span><span class="o">=</span><span class="n">HDF5Dataset</span><span class="p">,</span>
-<a id="__codelineno-20-22" name="__codelineno-20-22" href="#__codelineno-20-22"></a>        <span class="n">unit</span><span class="o">=</span><span class="s1">'m'</span><span class="p">,</span>
-<a id="__codelineno-20-23" name="__codelineno-20-23" href="#__codelineno-20-23"></a>        <span class="n">a_h5web</span> <span class="o">=</span> <span class="n">H5WebAnnotation</span><span class="p">(</span>
-<a id="__codelineno-20-24" name="__codelineno-20-24" href="#__codelineno-20-24"></a>            <span class="n">long_name</span><span class="o">=</span><span class="s1">'my_y_label (m)'</span>
-<a id="__codelineno-20-25" name="__codelineno-20-25" href="#__codelineno-20-25"></a>        <span class="p">))</span>
-<a id="__codelineno-20-26" name="__codelineno-20-26" href="#__codelineno-20-26"></a>
-<a id="__codelineno-20-27" name="__codelineno-20-27" href="#__codelineno-20-27"></a>    <span class="n">y_err</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
-<a id="__codelineno-20-28" name="__codelineno-20-28" href="#__codelineno-20-28"></a>        <span class="nb">type</span><span class="o">=</span><span class="n">HDF5Dataset</span><span class="p">,</span>
-<a id="__codelineno-20-29" name="__codelineno-20-29" href="#__codelineno-20-29"></a>        <span class="n">unit</span><span class="o">=</span><span class="s1">'m'</span><span class="p">,</span>
-<a id="__codelineno-20-30" name="__codelineno-20-30" href="#__codelineno-20-30"></a>        <span class="n">a_h5web</span> <span class="o">=</span> <span class="n">H5WebAnnotation</span><span class="p">(</span>
-<a id="__codelineno-20-31" name="__codelineno-20-31" href="#__codelineno-20-31"></a>            <span class="n">long_name</span><span class="o">=</span><span class="s1">'my_y_err_label'</span>
-<a id="__codelineno-20-32" name="__codelineno-20-32" href="#__codelineno-20-32"></a>        <span class="p">))</span>
-<a id="__codelineno-20-33" name="__codelineno-20-33" href="#__codelineno-20-33"></a>
-<a id="__codelineno-20-34" name="__codelineno-20-34" href="#__codelineno-20-34"></a><span class="k">class</span><span class="w"> </span><span class="nc">B</span><span class="p">(</span><span class="n">EntryData</span><span class="p">):</span>
-<a id="__codelineno-20-35" name="__codelineno-20-35" href="#__codelineno-20-35"></a>
-<a id="__codelineno-20-36" name="__codelineno-20-36" href="#__codelineno-20-36"></a>    <span class="n">m_def</span> <span class="o">=</span> <span class="n">Section</span><span class="p">(</span><span class="n">a_h5web</span><span class="o">=</span><span class="n">H5WebAnnotation</span><span class="p">(</span>
-<a id="__codelineno-20-37" name="__codelineno-20-37" href="#__codelineno-20-37"></a>      <span class="n">axes</span><span class="o">=</span><span class="s1">'value_x'</span><span class="p">,</span> <span class="n">signal</span><span class="o">=</span><span class="s1">'value_y'</span><span class="p">,</span> <span class="n">paths</span><span class="o">=</span><span class="p">[</span><span class="s1">'a/0'</span><span class="p">]))</span>
-<a id="__codelineno-20-38" name="__codelineno-20-38" href="#__codelineno-20-38"></a>
-<a id="__codelineno-20-39" name="__codelineno-20-39" href="#__codelineno-20-39"></a>    <span class="n">a</span> <span class="o">=</span> <span class="n">SubSection</span><span class="p">(</span><span class="n">sub_section</span><span class="o">=</span><span class="n">A</span><span class="p">,</span> <span class="n">repeats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<a id="__codelineno-20-40" name="__codelineno-20-40" href="#__codelineno-20-40"></a>
-<a id="__codelineno-20-41" name="__codelineno-20-41" href="#__codelineno-20-41"></a>    <span class="n">value_x</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">HDF5Dataset</span><span class="p">)</span>
-<a id="__codelineno-20-42" name="__codelineno-20-42" href="#__codelineno-20-42"></a>
-<a id="__codelineno-20-43" name="__codelineno-20-43" href="#__codelineno-20-43"></a>    <span class="n">value_y</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">HDF5Dataset</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">'m'</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.datamodel.data</span><span class="w"> </span><span class="kn">import</span> <span class="n">ArchiveSection</span><span class="p">,</span> <span class="n">EntryData</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.metainfo</span><span class="w"> </span><span class="kn">import</span> <span class="n">Section</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.datamodel.hdf5</span><span class="w"> </span><span class="kn">import</span> <span class="n">HDF5Dataset</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.datamodel.metainfo.annotations</span><span class="w"> </span><span class="kn">import</span> <span class="n">H5WebAnnotation</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="k">class</span><span class="w"> </span><span class="nc">A</span><span class="p">(</span><span class="n">ArchiveSection</span><span class="p">):</span>
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>    <span class="n">m_def</span> <span class="o">=</span> <span class="n">Section</span><span class="p">(</span><span class="n">a_h5web</span><span class="o">=</span><span class="n">H5WebAnnotation</span><span class="p">(</span>
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>        <span class="n">axes</span><span class="o">=</span><span class="s1">'x'</span><span class="p">,</span>
+<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a>        <span class="n">signal</span><span class="o">=</span><span class="s1">'y'</span>
+<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a>        <span class="n">auxiliary_signals</span><span class="o">=</span><span class="p">[</span><span class="s1">'y_err'</span><span class="p">]))</span>
+<a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a>
+<a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a>    <span class="n">x</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
+<a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a>        <span class="nb">type</span><span class="o">=</span><span class="n">HDF5Dataset</span><span class="p">,</span>
+<a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a>        <span class="n">unit</span><span class="o">=</span><span class="s1">'s'</span><span class="p">,</span>
+<a id="__codelineno-19-16" name="__codelineno-19-16" href="#__codelineno-19-16"></a>        <span class="n">a_h5web</span> <span class="o">=</span> <span class="n">H5WebAnnotation</span><span class="p">(</span>
+<a id="__codelineno-19-17" name="__codelineno-19-17" href="#__codelineno-19-17"></a>            <span class="n">long_name</span><span class="o">=</span><span class="s1">'my_x_label (s)'</span>
+<a id="__codelineno-19-18" name="__codelineno-19-18" href="#__codelineno-19-18"></a>        <span class="p">))</span>
+<a id="__codelineno-19-19" name="__codelineno-19-19" href="#__codelineno-19-19"></a>
+<a id="__codelineno-19-20" name="__codelineno-19-20" href="#__codelineno-19-20"></a>    <span class="n">y</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
+<a id="__codelineno-19-21" name="__codelineno-19-21" href="#__codelineno-19-21"></a>        <span class="nb">type</span><span class="o">=</span><span class="n">HDF5Dataset</span><span class="p">,</span>
+<a id="__codelineno-19-22" name="__codelineno-19-22" href="#__codelineno-19-22"></a>        <span class="n">unit</span><span class="o">=</span><span class="s1">'m'</span><span class="p">,</span>
+<a id="__codelineno-19-23" name="__codelineno-19-23" href="#__codelineno-19-23"></a>        <span class="n">a_h5web</span> <span class="o">=</span> <span class="n">H5WebAnnotation</span><span class="p">(</span>
+<a id="__codelineno-19-24" name="__codelineno-19-24" href="#__codelineno-19-24"></a>            <span class="n">long_name</span><span class="o">=</span><span class="s1">'my_y_label (m)'</span>
+<a id="__codelineno-19-25" name="__codelineno-19-25" href="#__codelineno-19-25"></a>        <span class="p">))</span>
+<a id="__codelineno-19-26" name="__codelineno-19-26" href="#__codelineno-19-26"></a>
+<a id="__codelineno-19-27" name="__codelineno-19-27" href="#__codelineno-19-27"></a>    <span class="n">y_err</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span>
+<a id="__codelineno-19-28" name="__codelineno-19-28" href="#__codelineno-19-28"></a>        <span class="nb">type</span><span class="o">=</span><span class="n">HDF5Dataset</span><span class="p">,</span>
+<a id="__codelineno-19-29" name="__codelineno-19-29" href="#__codelineno-19-29"></a>        <span class="n">unit</span><span class="o">=</span><span class="s1">'m'</span><span class="p">,</span>
+<a id="__codelineno-19-30" name="__codelineno-19-30" href="#__codelineno-19-30"></a>        <span class="n">a_h5web</span> <span class="o">=</span> <span class="n">H5WebAnnotation</span><span class="p">(</span>
+<a id="__codelineno-19-31" name="__codelineno-19-31" href="#__codelineno-19-31"></a>            <span class="n">long_name</span><span class="o">=</span><span class="s1">'my_y_err_label'</span>
+<a id="__codelineno-19-32" name="__codelineno-19-32" href="#__codelineno-19-32"></a>        <span class="p">))</span>
+<a id="__codelineno-19-33" name="__codelineno-19-33" href="#__codelineno-19-33"></a>
+<a id="__codelineno-19-34" name="__codelineno-19-34" href="#__codelineno-19-34"></a><span class="k">class</span><span class="w"> </span><span class="nc">B</span><span class="p">(</span><span class="n">EntryData</span><span class="p">):</span>
+<a id="__codelineno-19-35" name="__codelineno-19-35" href="#__codelineno-19-35"></a>
+<a id="__codelineno-19-36" name="__codelineno-19-36" href="#__codelineno-19-36"></a>    <span class="n">m_def</span> <span class="o">=</span> <span class="n">Section</span><span class="p">(</span><span class="n">a_h5web</span><span class="o">=</span><span class="n">H5WebAnnotation</span><span class="p">(</span>
+<a id="__codelineno-19-37" name="__codelineno-19-37" href="#__codelineno-19-37"></a>      <span class="n">axes</span><span class="o">=</span><span class="s1">'value_x'</span><span class="p">,</span> <span class="n">signal</span><span class="o">=</span><span class="s1">'value_y'</span><span class="p">,</span> <span class="n">paths</span><span class="o">=</span><span class="p">[</span><span class="s1">'a/0'</span><span class="p">]))</span>
+<a id="__codelineno-19-38" name="__codelineno-19-38" href="#__codelineno-19-38"></a>
+<a id="__codelineno-19-39" name="__codelineno-19-39" href="#__codelineno-19-39"></a>    <span class="n">a</span> <span class="o">=</span> <span class="n">SubSection</span><span class="p">(</span><span class="n">sub_section</span><span class="o">=</span><span class="n">A</span><span class="p">,</span> <span class="n">repeats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-19-40" name="__codelineno-19-40" href="#__codelineno-19-40"></a>
+<a id="__codelineno-19-41" name="__codelineno-19-41" href="#__codelineno-19-41"></a>    <span class="n">value_x</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">HDF5Dataset</span><span class="p">)</span>
+<a id="__codelineno-19-42" name="__codelineno-19-42" href="#__codelineno-19-42"></a>
+<a id="__codelineno-19-43" name="__codelineno-19-43" href="#__codelineno-19-43"></a>    <span class="n">value_y</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="n">HDF5Dataset</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="s1">'m'</span><span class="p">)</span>
 </code></pre></div>
 <p>In this example, an H5Web view of the variables <code>x</code>, <code>y</code>, and <code>y_err</code> is displayed in the page of the subsection <code>A</code>.
 The plot of variables <code>x_value</code> and <code>y_value</code> is also displayed; as the <code>B</code> class is an <code>EntryData</code>, the plot is shown in the entry overview page. Additionally, alongside with the plot of the class <code>B</code>, the overview page presents also the plot contained in the subsection <code>A</code>, due to the <code>paths</code> attribute. The <code>paths</code> attribute allows to show in a parent section or subsection the plots originally contained in children subsections. Parents and children refer here to <strong>composed</strong> object.</p>
