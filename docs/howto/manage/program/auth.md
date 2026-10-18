@@ -44,27 +44,32 @@ for a program that reads several kinds of NOMAD data, but a single
 ## Use a PAT
 
 Store the secret in an environment variable rather than placing it directly in
-source code:
+source code. Also define the complete API v1 base URL for the deployment that
+issued the token.
 
-```sh
-read -r -s NOMAD_PAT
-export NOMAD_PAT
-```
+=== "Bash or Zsh"
 
-Paste the token when `read` waits for input and press Enter. The `-s` option
-prevents the secret from being displayed or included in the command itself.
+    ```bash
+    read -r -s NOMAD_PAT
+    export NOMAD_PAT
+    export NOMAD_API_URL="https://nomad-lab.eu/backend/api/v1"
+    ```
+
+=== "PowerShell"
+
+    ```powershell
+    $securePat = Read-Host 'NOMAD PAT' -AsSecureString
+    $env:NOMAD_PAT = [System.Net.NetworkCredential]::new('', $securePat).Password
+    $env:NOMAD_API_URL = 'https://nomad-lab.eu/backend/api/v1'
+    ```
+
+Paste the token when prompted and press Enter. Both methods prevent the secret
+from being displayed or included in the command itself.
 
 `NOMAD_PAT` is the example variable used explicitly by the `requests` and
 `curl` commands below. Other clients may expect a specific variable; for
 example, `ArchiveQuery` reads `NOMAD_CLIENT_ACCESS_TOKEN`. See
 [How-to guides > ... > Access processed data > Access non-public entries](./archive_query.md#access-non-public-entries).
-
-Also define the complete API v1 base URL for the deployment that issued the
-token:
-
-```sh
-export NOMAD_API_URL="https://nomad-lab.eu/backend/api/v1"
-```
 
 For a NOMAD Oasis, obtain its base URL from its API dashboard instead of replacing
 only the hostname in the NOMAD Central URL.
@@ -93,11 +98,21 @@ projects = response.json()['data']
 
 Use the same header from the command line:
 
-```sh
-curl --fail-with-body --silent --show-error \
-  "${NOMAD_API_URL}/uploads?page_size=1" \
-  -H "Authorization: Bearer ${NOMAD_PAT}"
-```
+=== "Bash or Zsh"
+
+    ```bash
+    curl --fail-with-body --silent --show-error \
+      "${NOMAD_API_URL}/uploads?page_size=1" \
+      -H "Authorization: Bearer ${NOMAD_PAT}"
+    ```
+
+=== "PowerShell"
+
+    ```powershell
+    curl.exe --fail-with-body --silent --show-error `
+      "${env:NOMAD_API_URL}/uploads?page_size=1" `
+      -H "Authorization: Bearer ${env:NOMAD_PAT}"
+    ```
 
 Using an environment variable keeps the token out of the command text, but
 other processes running as your user may still be able to inspect your
