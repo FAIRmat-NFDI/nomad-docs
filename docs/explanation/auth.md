@@ -7,8 +7,8 @@ NOMAD supports multiple authentication mechanisms for API requests, as
 described under [Access tokens](#access-tokens).
 
 The following diagram summarizes how access to an API endpoint is evaluated.
-[Reference > Configuration > Authentication](../reference/config.md#auth)
-settings are highlighted in red.
+Administrator-configurable settings are highlighted in red and documented in
+[Reference > Configuration > Authentication](../reference/config.md#auth).
 
 ```mermaid
 %%{init:{
