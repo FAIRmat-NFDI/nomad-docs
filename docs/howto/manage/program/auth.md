@@ -63,7 +63,7 @@ Also define the complete API v1 base URL for the deployment that issued the
 token:
 
 ```sh
-export NOMAD_API_URL="https://nomad-lab.eu/prod/v1/api/v1"
+export NOMAD_API_URL="https://nomad-lab.eu/backend/api/v1"
 ```
 
 For a NOMAD Oasis, obtain its base URL from its API dashboard instead of replacing
