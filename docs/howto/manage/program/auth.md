@@ -18,7 +18,7 @@ resources and operations it needs. PAT scopes use the form
 The examples below list your projects through the backend `uploads` resource
 and therefore require the `uploads:read` scope. See
 [Explanation > Authentication and authorization > Authorization via scopes](../../../explanation/auth.md#authorization-via-scopes)
-for the complete core-scope reference.
+for the complete list of available scopes.
 
 ## Create a PAT
 
