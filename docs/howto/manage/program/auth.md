@@ -195,13 +195,14 @@ Creation and rotation return the new `raw_token` only once. Consult the
 deployment's [OpenAPI dashboard]({{ nomad_url() }}/v1/){:target="_blank" rel="noopener"}
 for the current request and response models.
 
-## Do not use app tokens for new integrations
+## Do not use simple tokens for new integrations
 
-The legacy `/auth/app_token` endpoint still exists for compatibility, but app
-tokens are deprecated. They grant broad user permissions, cannot be scoped for
-one integration, and remain valid until they expire or the deployment's signing
-secret changes. Migrate existing app-token workflows to PATs rather than using
-an app token to avoid Keycloak-token expiration.
+The legacy `/auth/app_token` and `/auth/signature_token` endpoints still exist
+for compatibility, but the simple tokens they issue are deprecated. These
+tokens grant broad user permissions, cannot be scoped for one integration, and
+remain valid until they expire or the deployment's signing secret changes.
+Migrate existing app- or signature-token workflows to PATs rather than using a
+simple token to avoid Keycloak-token expiration.
 
 ## Related pages
 
