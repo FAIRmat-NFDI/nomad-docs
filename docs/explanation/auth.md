@@ -90,8 +90,8 @@ is required for another NOMAD Oasis or NOMAD Central environment.
 PAT scopes must always be explicitly specified. Wildcard expressions such as
 `*:read` are supported only in configuration and are **not allowed in tokens**.
 
-For programmatic API usage, **personal access tokens are generally the recommended
-authentication method**.
+For programmatic API usage, **PATs are generally the recommended authentication
+method**.
 
 !!! info "Deprecated tokens"
 
