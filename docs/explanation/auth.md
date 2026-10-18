@@ -69,12 +69,12 @@ using OpenID Connect (OIDC).
 - Grant the full set of user scopes (no scope restriction possible)
 
 Due to these limitations, they are generally not suitable for long-running scripts or
-automated workflows. Use **personal access tokens (PATs)** instead.
+automated workflows. Use **PATs** instead.
 
-### Personal access tokens (PATs)
+### Personal access tokens
 
-Personal access tokens (PATs) are tokens created by users for programmatic access,
-such as scripts, or automated workflows.
+PATs are tokens created by users for programmatic access, such as scripts or
+automated workflows.
 
 PATs can be issued with **explicit scopes**, allowing fine-grained control over
 the operations a user or token is allowed to perform.
@@ -107,7 +107,7 @@ method**.
     except for token-management scopes.
 
     Both token types are deprecated and will be removed in a future release.
-    They should not be used for new integrations. Use **personal access tokens (PATs)** instead.
+    They should not be used for new integrations. Use **PATs** instead.
 
 ## Authorization via scopes
 
