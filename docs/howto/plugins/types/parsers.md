@@ -1,8 +1,8 @@
-# How to write a parser
+# How to create a parser
 
 NOMAD uses parsers to automatically extract information from raw files and output that information into structured [archives](../../../reference/glossary.md#archive). Parsers can decide which files act upon based on the filename, mime type or file contents and can also decide into which schema the information should be populated into.
 
-This documentation shows you how to write a plugin entry point for a parser. You should read the [introduction to plugins](../plugins.md) to have a basic understanding of how plugins and plugin entry points work in the NOMAD ecosystem.
+This documentation shows you how to create a plugin entry point for a parser. You should read the [introduction to plugins](../plugins.md) to have a basic understanding of how plugins and plugin entry points work in the NOMAD ecosystem.
 
 ## Getting started
 
@@ -32,7 +32,6 @@ from nomad.config.models.plugins import ParserEntryPoint
 
 
 class MyParserEntryPoint(ParserEntryPoint):
-
     def load(self):
         from nomad_example.parsers.myparser import MyParser
 
@@ -40,9 +39,9 @@ class MyParserEntryPoint(ParserEntryPoint):
 
 
 myparser = MyParserEntryPoint(
-    name = 'MyParser',
-    description = 'My custom parser.',
-    mainfile_name_re = '.*\.myparser',
+    name='MyParser',
+    description='My custom parser.',
+    mainfile_name_re='.*\.myparser',
 )
 ```
 
@@ -102,14 +101,67 @@ If you are using the `MatchingParser` interface you can configure which files ar
 
 ```python
 myparser = MyParserEntryPoint(
-    name = 'MyParser',
-    description = 'My custom parser.',
-    mainfile_name_re = '.*\.myparser',
-    mainfile_contents_re = '\s*\n\s*HELLO WORLD',
+    name='MyParser',
+    description='My custom parser.',
+    mainfile_name_re='.*\.myparser',
+    mainfile_contents_re='\s*\n\s*HELLO WORLD',
 )
 ```
 
 You can find all of the available matching criteria in the [`ParserEntryPoint` reference](../../../reference/plugins.md#parserentrypoint)
+
+### Control parser matching order
+
+Each file is assigned to at most one parser. NOMAD checks the parsers one by one and the first parser whose matching criteria fit the file is used, even if other parsers would also match it. When several parsers can match the same files, for example a generic parser and a more specialized one, you can use the `matching_order` attribute to decide which parser gets to claim them first.
+
+Parsers with a lower `matching_order` are checked first. Parsers with the same `matching_order` are checked in alphabetical order of their entry point ID. The default value is `0`. If all parsers use the default value, the order in which the parsers were registered is used instead. You can set the matching order in the entry point:
+
+```python
+myparser = MyParserEntryPoint(
+    name='MyParser',
+    description='My custom parser.',
+    mainfile_name_re='.*\.myparser',
+    matching_order=-1,
+)
+```
+
+or change it per installation using `nomad.yaml`:
+
+```yaml
+plugins:
+  entry_points:
+    options:
+      "nomad_example.parsers:myparser":
+        matching_order: -1
+```
+
+Here a negative value makes sure that `myparser` is checked before all parsers that use the default value.
+
+## Control parser execution order
+
+`ParserEntryPoints` have an attribute `execution_order`, which you can use to control the order in which entries are processed within an upload. Entries matched by parsers with a higher execution order are processed after all entries matched by parsers with a lower execution order. This is useful when a parser needs to read the results of other entries in the same upload. The default execution order for parsers is `0`, but this can be changed per installation using `nomad.yaml`:
+
+```yaml
+plugins:
+  entry_points:
+    options:
+      "nomad_example.parsers:myparser":
+        execution_order: 1
+```
+
+!!! note
+    `execution_order` replaces the deprecated `level` attribute. Existing configurations that use `level` keep working, but should be migrated to `execution_order`.
+
+### Matching order vs. execution order
+
+The two attributes control different steps of processing and are independent of each other:
+
+| Attribute | Controls | Step | Effect |
+| --- | --- | --- | --- |
+| `matching_order` | Which parser is assigned to a file | Matching, when entries are created | Lower values are checked first. The first matching parser claims the file. |
+| `execution_order` | When the entries of a parser are processed | Processing, after matching | Lower values are processed first. Entries with higher values wait until the entries with lower values are processed. |
+
+For example, `matching_order` decides whether a file is parsed by your parser or by another parser that also matches it. It has no effect on when that file is processed. `execution_order` only becomes relevant once the file has been matched to your parser, and it does not change which parser a file gets.
 
 ## Running a parser
 
@@ -123,7 +175,7 @@ If you have installed a NOMAD plugin into a Python virtual environment, you can 
 nomad parse <input-file> > <output-file>
 ```
 
-The parse command will automatically match the right parser to your file and run the parser. To skip the parser matching, i.e. the process that determined which parser fits to the given file, you can use the `--parser` argument to provide a parser entry point id:
+The parse command will automatically match the right parser to your file and run the parser. To skip the parser matching, i.e. the process that determined which parser fits to the given file, you can use the `--parser` argument to provide a parser entry point ID:
 
 ```sh
 nomad parse --parser <parser_entry_point_id> <input-file>
@@ -307,7 +359,7 @@ mainfile_parser.calculation
 
 The next step is to write the parsed data into the NOMAD archive. We can use one of the
 [predefined plugins containing schema packages](schema_packages.md#schema-packages-developed-by-fairmat) in NOMAD.
-However, to better illustrate the connection between a parser and a schema we will define our own schema in this example (See [How to write a schema in python](./schema_packages.md#how-to-write-a-schema-package) for additional information on this topic). We define a root section called `Simulation` containing two subsections, `Model` and `Output`. The definitions are found in `exampleparser/metainfo/example.py`:
+However, to better illustrate the connection between a parser and a schema we will define our own schema in this example (See [How to create a schema package](./schema_packages.md#how-to-create-a-schema-package) for additional information on this topic). We define a root section called `Simulation` containing two subsections, `Model` and `Output`. The definitions are found in `exampleparser/metainfo/example.py`:
 
 ```python
 class Model(ArchiveSection):
@@ -330,6 +382,7 @@ class Model(ArchiveSection):
         shape=[3, 3],
         description="""Lattice vectors of the model system.""",
     )
+
 
 class Output(ArchiveSection):
     m_def = Section()
@@ -408,23 +461,17 @@ argument `skip-normalizers`.
 There are several built-in schemas NOMAD (`nomad.datamodel.metainfo`).
 <!-- ? What about restructuring this part into the idea of "NOMAD has some predefined section and quantities ... please, check HERE... and HERE... for more information and details"? -->
 In the example below, we have made use of the base section for workflow and extended
-it to include a code-specific quantity `x_example_magic_value`.
+it to include a code-specific quantity `example_magic_value`.
 
 ```python
 # We extend the existing common definition of section Workflow
 class ExampleWorkflow(Workflow):
-    # We alter the default base class behavior to add all definitions to the existing
-    # base class instead of inheriting from the base class
-    m_def = Section(extends_base_section=True)
-
-    # We define an additional example quantity. Use the prefix x_<parsername>_ to denote
-    # non common quantities.
-    x_example_magic_value = Quantity(
+    example_magic_value = Quantity(
         type=int, description='The magic value from a magic source.'
     )
 ```
-<!-- TODO remove x_ notation in the future -->
-This is the approach for domain-specific schemas such as for [simulation workflows](https://github.com/nomad-coe/nomad-schema-plugin-simulation-workflow.git){:target="_blank" rel="noopener"}. Refer to [how to extend schemas](schema_packages.md#extending-existing-sections).
+
+This is the approach for domain-specific schemas such as for [simulation workflows](https://github.com/nomad-coe/nomad-schema-plugin-simulation-workflow.git){:target="_blank" rel="noopener"}.
 
 ## Other FileParser classes
 

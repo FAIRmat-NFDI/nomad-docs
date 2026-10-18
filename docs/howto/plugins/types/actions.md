@@ -1,4 +1,4 @@
-# How to define an action
+# How to create an action
 
 Actions allow to define executable workflows in NOMAD. They are an
 alternative to [normalizers](../../../tutorial/custom.md#custom-normalizers) and can
@@ -15,7 +15,7 @@ It allows for better resource allocation like GPUs for specific actions.
     workflow requires robust interaction with an external API, longer
     processing time (for example, days), or special resource allocation, use actions.
 
-This documentation shows you how to write a plugin entry point for an action.
+This documentation shows you how to create a plugin entry point for an action.
 You should read the [introduction to plugins](../plugins.md)
 to have a basic understanding of how plugins and plugin entry points work in the NOMAD ecosystem.
 
@@ -343,7 +343,7 @@ print(workflow_status.name)  # example output: RUNNING
 ```
 
 You can add these functionalities in the `normalize` of an
-[ELN schema](../../manage/gui/elns.md) and trigger actions from the ELN
+[ELN schema](../../schemas/define.md#annotate-for-the-gui) and trigger actions from the ELN
 entries. A schema that uses ELN quantities to trigger actions can look like this:
 
 ```py
@@ -653,7 +653,7 @@ This folder should be treated as run-scoped state; do not place global caches he
 
 ### Quick decision rule
 
-- NOMAD dataset/raw data -> upload files.
+- NOMAD project/raw data -> upload files.
 - Reusable across runs/users/actions -> global `action_artifacts_dir()`.
 - User-uploaded run input files -> `action_instance_assets_dir(action_instance_id)`.
 - Plugin-generated run outputs/intermediates -> `action_instance_artifacts_dir(action_instance_id)`.
@@ -780,6 +780,7 @@ When a user triggers the action, they will be prompted to enter their API key. T
 from temporalio import activity
 from nomad_example.actions.myaction.models import MyActionInput
 
+
 @activity.defn
 async def my_activity(data: MyActionInput):
     # Get the secret value
@@ -795,6 +796,7 @@ Since NOMAD uses `model_dump_json` to serialize the input models, you must provi
 
 ```python
 from pydantic import BaseModel, Field, SecretStr, SecretBytes, field_serializer
+
 
 class SimpleModelDumpable(BaseModel):
     password: SecretStr

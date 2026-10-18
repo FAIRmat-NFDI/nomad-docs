@@ -1,4 +1,4 @@
-# Managing workflows and projects
+# Manage workflows and projects in NOMAD
 
 [NOMAD Tutorial Workflow](https://fairmat-nfdi.github.io/nomad-tutorial-workflows/latest){:target="_blank" rel="noopener"} provides a stand-alone tutorial on workflow and project management with NOMAD. It utilizes the `nomad-utility-workflows` Python module to lower the entry barrier for advanced NOMAD usage.
 

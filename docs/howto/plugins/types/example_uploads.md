@@ -1,8 +1,20 @@
-# How to write an example upload
+# How to create an example upload
 
-Example uploads can be used to add representative collections of data for your plugin. Example uploads are available for end-users in the *Uploads*-page under the *Add example uploads*-button. There, users can instantiate an example upload with a click. This can be very useful for educational or demonstration purposes but also for testing.
+An example upload is a plugin entry point that provides a representative
+collection of data. *Example upload* is the backend and plugin term; in the GUI,
+users instantiate the collection as a pre-populated example project. This is
+useful for education, demonstrations, and testing.
 
-This documentation shows you how to write a plugin entry point for an example upload. You should read the [introduction to plugins](../plugins.md) to have a basic understanding of how plugins and plugin entry points work in the NOMAD ecosystem.
+Users can create an example project in either of these locations:
+
+- On the landing page, select **Add Example Project** under **Quick Actions**.
+- On the **Projects** page, select **ADD EXAMPLE PROJECT** above the
+  **All Projects** table.
+
+The available examples depend on the example-upload entry points installed in
+the NOMAD deployment.
+
+This documentation shows you how to create a plugin entry point for an example upload. You should read the [introduction to plugins](../plugins.md) to have a basic understanding of how plugins and plugin entry points work in the NOMAD ecosystem.
 
 ## Getting started
 
@@ -31,10 +43,10 @@ The entry point is an instance of an `ExampleUploadEntryPoint` or its subclass. 
 from nomad.config.models.plugins import ExampleUploadEntryPoint
 
 myexampleupload = ExampleUploadEntryPoint(
-    title = 'My Example Upload',
-    category = 'Examples',
-    description = 'Description of this example upload.',
-    resources=['example_uploads/getting_started/*']
+    title='My Example Upload',
+    category='Examples',
+    description='Description of this example upload.',
+    resources=['example_uploads/getting_started/*'],
 )
 ```
 
@@ -67,14 +79,13 @@ There are three main ways to include data in an example upload, and you can also
 
     # Include a file/folder into a specific location within the upload
     resources = UploadResource(
-        path='example_uploads/getting_started',
-        target='upload_subfolder'
+        path='example_uploads/getting_started', target='upload_subfolder'
     )
 
     # Include multiple files/folders. The resources will be added in the given order.
     resources = [
         'example_uploads/getting_started/README.md',
-        'example_uploads/getting_started/data.txt'
+        'example_uploads/getting_started/data.txt',
     ]
     ```
 
@@ -94,8 +105,7 @@ There are three main ways to include data in an example upload, and you can also
 
     # Include a file into a specific location within the upload
     resources = UploadResource(
-        path='http://my_large_file_address.zip',
-        target='upload_subfolder'
+        path='http://my_large_file_address.zip', target='upload_subfolder'
     )
 
     # Include multiple online files
@@ -114,7 +124,6 @@ There are three main ways to include data in an example upload, and you can also
 
 
     class MyExampleUploadEntryPoint(ExampleUploadEntryPoint):
-
         def load(self, upload_path: str):
             """Custom load function that generates a data file on the fly."""
             filepath = os.path.join(upload_path, 'my_large_data.npy')

@@ -1,10 +1,10 @@
-# How to write an API
+# How to create an API
 
 APIs allow you to add more APIs to the NOMAD app. More specifically you can create
 a [FastAPI](https://fastapi.tiangolo.com){:target="_blank" rel="noopener"} app that can be mounted into the main NOMAD app alongside other apis
 such as `/api/v1`, `/optimade`, etc.
 
-This documentation shows you how to write a plugin entry point for an API.
+This documentation shows you how to create a plugin entry point for an API.
 You should read the [introduction to plugins](../plugins.md)
 to have a basic understanding of how plugins and plugin entry points work in the NOMAD ecosystem.
 
@@ -33,7 +33,7 @@ for more details on the best development practices for plugins, including lintin
 
 The entry point defines basic information about your API and is used to automatically
 load it into a NOMAD distribution. It is an instance of a `APIEntryPoint` or its subclass and it contains a `load` method which returns a `fastapi.FastAPI` app instance.
-Furthermore, it allows you to define a path prefix for your API.
+NOMAD mounts the API under `{api_base_path}/apis/{id_url_safe}/`.
 The entry point should be defined in `*/apis/__init__.py` like this:
 
 ```python
@@ -41,7 +41,6 @@ from nomad.config.models.plugins import APIEntryPoint
 
 
 class MyAPIEntryPoint(APIEntryPoint):
-
     def load(self):
         from nomad_example.apis.myapi import app
 
@@ -49,14 +48,28 @@ class MyAPIEntryPoint(APIEntryPoint):
 
 
 myapi = MyAPIEntryPoint(
-    prefix = 'myapi',
-    name = 'MyAPI',
-    description = 'My custom API.',
+    name='MyAPI',
+    description='My custom API.',
+    id_url_safe='myapi',
 )
 ```
 
 Here you can see that a new subclass of `APIEntryPoint` was defined. In this new class you have to override the `load` method to determine the FastAPI app that makes your API.
 In the reference you can see all of the available [configuration options for a `APIEntryPoint`](../../../reference/plugins.md#apientrypoint).
+
+The `id_url_safe` determines the URL of the API. If not set, it is derived from the
+entry point ID (e.g. `nomad_example.apis-myapi`); here we set it explicitly to get the
+shorter `{api_base_path}/apis/myapi/`. The resolved mount path is available as the
+`prefix` attribute of the loaded entry point.
+
+!!! warning
+    You can also set `prefix` explicitly to mount the API at an arbitrary path below
+    `{api_base_path}`. Do not do this unless you know what you are doing: custom
+    prefixes are not checked for collisions with other routes served by NOMAD.
+
+To register an API that is served by a separate service, set `external_url` (an
+absolute `http(s)://` URL) instead of overriding `load()`. NOMAD will then not mount
+anything and only lists the API.
 
 The entry point instance should then be added to the `[project.entry-points.'nomad.plugin']` table in `pyproject.toml` in order for it to be automatically detected:
 
@@ -76,13 +89,12 @@ from nomad.config import config
 
 myapi_entry_point = config.get_plugin_entry_point('nomad_example.apis:myapi')
 
-app = FastAPI(
-    root_path=f'{config.services.api_base_path}/{myapi_entry_point.prefix}'
-)
+app = FastAPI(root_path=f'{config.services.api_base_path}/{myapi_entry_point.prefix}')
+
 
 @app.get('/')
 async def root():
-    return {"message": "Hello World"}
+    return {'message': 'Hello World'}
 ```
 
 Read the official [FastAPI documentation](https://fastapi.tiangolo.com/tutorial/){:target="_blank" rel="noopener"} to learn how to build apps and APIs with FastAPI.
@@ -90,7 +102,7 @@ Read the official [FastAPI documentation](https://fastapi.tiangolo.com/tutorial/
 If you run NOMAD with this plugin following our [Oasis configuration documentation](../../oasis/configure.md) with the default configuration, you can curl this API and should receive the message:
 
 ```sh
-curl localhost:8000/nomad-oasis/myapi/
+curl localhost:8000/nomad-oasis/backend/apis/myapi/
 ```
 
 ### Static files
@@ -107,18 +119,16 @@ from nomad.config import config
 
 myapi_entry_point = config.get_plugin_entry_point('nomad_example.apis:myapi')
 
-app = FastAPI(
-    root_path=f'{config.services.api_base_path}/{myapi_entry_point.prefix}'
-)
+app = FastAPI(root_path=f'{config.services.api_base_path}/{myapi_entry_point.prefix}')
 
 static_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), 'static'))
-app.mount("/static", StaticFiles(directory=static_folder), name="static")
+app.mount('/static', StaticFiles(directory=static_folder), name='static')
 ```
 
 Then e.g. the file `static/static_page.html` will be available at:
 
 ```sh
-curl localhost:8000/nomad-oasis/myapi/static/static_page.html
+curl localhost:8000/nomad-oasis/backend/apis/myapi/static/static_page.html
 ```
 
 !!! note
@@ -152,7 +162,9 @@ from nomad.auth.scopes import Scope
 
 app = FastAPI(
     ...,
-    dependencies=[Depends(get_current_user([Scope.UPLOADS_READ], allow_anonymous=False))],
+    dependencies=[
+        Depends(get_current_user([Scope.UPLOADS_READ], allow_anonymous=False))
+    ],
 )
 ```
 
@@ -170,12 +182,13 @@ from nomad.auth.scopes import Scope
 
 app = FastAPI(...)
 
-@app.get("/uploads")
+
+@app.get('/uploads')
 async def list_uploads(
     user: Annotated[
         User,
         Depends(get_current_user([Scope.UPLOADS_READ], allow_anonymous=False)),
     ],
 ):
-    return {"message": "Protected endpoint"}
+    return {'message': 'Protected endpoint'}
 ```

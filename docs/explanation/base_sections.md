@@ -1,9 +1,14 @@
-# How to use base sections
+# Base sections
 
-As previously mentioned in [How to write a schema](../howto/manage/gui/yaml.md#base-sections-and-inheritance),
-base sections can be used when writing custom schemas to inherit properties and *functionality*
-from already defined sections. Here we explain the properties
-and functionality of specific base sections and how they can be used.
+A *base section* is a section definition that other definitions inherit from, so that custom schemas
+pick up both the properties and the *functionality* of definitions that already exist. This page
+explains the model NOMAD's built-in base sections are organized around, and what the most important
+ones mean.
+
+For instructions on inheriting from them, see
+[How-to guides > Work with schemas > Define a schema](../howto/schemas/define.md#inherit-from-a-base-section). For the
+generated per-class listing of every quantity, see
+[Reference > Base sections](../reference/basesections.md).
 
 ## `datamodel.metainfo.basesections`
 
@@ -227,7 +232,7 @@ It is in turn composed by the following quantities:
   the sample, the process number, or machine name), e.g. 4001-8, YAG-2-34.
   This is to be managed and decided internally by the labs, although we recommend to avoid
   the following characters in it: "\_", "/", "\\" and ".".
-- `lab_id`: Full readable id. Ideally a human readable id convention, which is simple,
+- `lab_id`: Full readable ID. Ideally a human readable ID convention, which is simple,
   understandable and still have chances of becoming unique.
   If the `owner`, `short_name`, `ìnstitute`, and `datetime` are provided, this will
   be formed automatically by joining these components by an underscore (\_).
@@ -255,9 +260,10 @@ sample section:
 
     ```python
     class MySample(CompositeSystem, EntryData):
-        '''
+        """
         A custom sample section.
-        '''
+        """
+
         m_def = Section(
             a_template=dict(
                 sample_identifiers=dict(),

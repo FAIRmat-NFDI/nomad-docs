@@ -1,193 +1,315 @@
-# How to upload and publish data for supported formats
+# How to create and publish projects
 
-This guide describes how to upload data in NOMAD [supported file formats](../../../reference/parsers.md). You find a list of supported formats on top of each upload page, see below.
+A **project** is the container for files, entries, collaborators, publication
+settings, and an optional DOI.
 
-## Preparing files
+<a id="upload-limits"></a>
 
-You can upload files one by one, but you can also provider larger `.zip` or `.tar.gz`
-archive files, if this is easier to you. Also the file upload via frp or command line with
-`curl` or with `wget` generates an archive files. The specific layout of these files is up to you.
-NOMAD will simply extract them and consider the whole directory structure within.
+## Project requirements and limitations
 
-## Create an upload and add files
+A project can be created and stored without files or an entry. To publish the
+project, it must contain at least one successfully processed entry. This
+ensures that every published project contains structured data that NOMAD can
+index and make searchable.
 
-Open [NOMAD](https://nomad-lab.eu/prod/v1){:target="_blank" rel="noopener"} and log in; if you don't have a NOMAD account, please create one.
+Project limits are configurable and can differ between deployments. The
+default NOMAD configuration and NOMAD Central allow:
 
-Go to `PUBLISH` / `Uploads`. Here you can create an upload with the `CREATE A NEW UPLOAD`
-button. This will bring you to the upload page.
+- a maximum project size of **32 GiB**, controlled by
+  [`process.max_upload_size`](../../../reference/config.md#process); and
+- at most **10 unpublished projects** per user, controlled by
+  [`services.upload_limit`](../../../reference/config.md#services).
 
-Before you start, make sure that the size of your data does not exceed the [upload limits](#upload-limits). If it does, please contact us.
+## Create a project
 
-You can drop your files on (or click) the `CLICK OR DROP FILES` button. On top you will
-see a list of supported file formats and details on the files to upload.
-You can also go to the `FILES` tab. Here you can create directories and drop files into directories.
+1. Open the [NOMAD GUI](https://nomad-lab.eu/prod/v1/gui/v2/){:target="_blank" rel="noopener"}
+   and sign in. If you do not have a NOMAD Central account, follow the
+   [Create a NOMAD user account](account.md#create-a-nomad-account).
+2. Open **PROJECTS** and select **NEW PROJECT**. A prompt appears where you can
+   add:
 
-## Processing files
+     - a **Project name** (mandatory)
+     - a description
+     - initial files by drag-and-drop or by browsing your file system with
+     **ADD FILES**
+     - users or groups to your project as **Reviewer** or **Coauthor**
 
-NOMAD interprets your files. It checks each file and recognizes the main output file of the
-supported codes. NOMAD creates an entry for this **mainfile** that represents the respective
-data of this code run, experiment, etc.
+3. When you have finished filling in the prompt, select **CREATE**. NOMAD
+   creates the project and opens its **Overview** page.
 
-While you can browse all files of an upload from its **upload page**, NOMAD only
-allows to search for such recognized **mainfiles**. As long as your upload does not contain any
-files that are recognized by NOMAD, you cannot publish the data.
+The project name can be edited under **SETTINGS** > **General**.
 
-However, all files that are associated to a recognized *mainfile* by being in the
-same directory are displayed as **auxiliary** files next to the entry represented
-by the **mainfile**.
+### Add a project README
 
-!!! warning "License Compliance for VASP"
+To provide a longer, formatted description of the project, add a file named
+`README.md` to the project root. NOMAD renders its Markdown content below
+**All Files** on the project **Overview** page. You can add the README in the
+**New Project** prompt or upload it later.
 
-    The VASP license does **not** permit users to freely distribute **POTCAR** files, which are
-    considered copyrighted material. To ensure compliance, NOMAD automatically handles POTCAR
+## Create entries
+
+You can create entries in a project in two ways:
+
+1. **From supported files:** Add files in a format recognized by an installed
+   parser. NOMAD processes the files and creates entries automatically.
+2. **From a schema:** On the project **Overview** page or in any folder under
+   **FILES**, select **NEW ENTRY**, then choose a built-in or custom schema. NOMAD creates an editable Electronic Lab Notebook (ELN) entry that you can complete in the data editor.
+
+??? info "Additional project and entry metadata"
+      Beyond the project name and description, additional comments and references
+      can be added as project metadata in a file named `nomad.json` or
+      `nomad.yaml`. The file can also contain entry-specific comments. For
+      example, a `nomad.json` file can have the following format:
+
+      ```json
+      {
+         "comment": "Data from a research project",
+         "references": ["https://example.org/article"],
+         "entries": {
+            "path/to/mainfile": {
+               "comment": "Metadata for this entry"
+            }
+         }
+      }
+      ```
+
+      NOMAD reads this file when processing the project. Add it before, or in
+      the same file transfer as, the mainfiles to which it applies. If you add
+      it later, reprocess the project to apply the metadata to its entries.
+
+### Create entries from supported files
+
+<a id="processing-files"></a>
+
+#### How uploaded files become entries
+
+NOMAD checks the files using the parsers and plugins installed in the current
+deployment. When a parser recognizes a file as the primary raw-data source
+that defines an entry, that file becomes the entry's
+[**mainfile**](../../../reference/glossary.md#mainfile). NOMAD then creates and
+processes the corresponding entry. Which file formats are supported therefore
+depends on the parsers and plugins installed in the deployment. See
+[Explanation > Processing](../../../explanation/processing.md) for a detailed
+explanation of file matching and processing.
+
+All project files remain available under **FILES**, but only recognized
+mainfiles produce entries that appear under **ENTRIES** and can be found in
+search. Parsers can also associate other files with a mainfile as **auxiliary
+files** for the resulting entry. A project must contain at least one
+successfully processed entry before it can be published.
+
+If you added supported files in the **New Project** prompt, the corresponding
+entries are created automatically during project creation. To create further
+entries from files, open **FILES** and select **UPLOAD FILES**, then choose one
+or more files. Alternatively, drag files into the file-list area below
+**All Files**.
+
+You can add individual files or package them in a `.zip` or `.tar.gz` file.
+NOMAD extracts these compressed bundles and preserves their internal directory
+structure. Keep the files for one calculation or experiment together in the
+same project so that the parser can associate them with the same entry.
+
+Exports from external ELNs, such as `.eln` files or ZIP exports from
+Chemotion, are also processed into entries. See
+{{ nav_link("howto/manage/gui/eln.md") }}.
+
+For scripted transfers, select the drop-down arrow next to **UPLOAD FILES** and
+choose **Upload via API**. The dialog provides an example command for uploading
+to the current project folder.
+
+??? warning "License Compliance for VASP POTCAR Files"
+
+    The VASP license does **not** permit users to freely distribute `POTCAR` files, which are
+    considered copyrighted material. To ensure compliance, NOMAD automatically handles `POTCAR`
     files for you.
 
-    Upon **publication**, NOMAD removes the original POTCAR files and replaces them with
+    Upon **publication**, NOMAD removes the original `POTCAR` files and replaces them with
     `POTCAR.stripped` files. The stripped files contain a checksum of the original file
     at the top, followed by metadata headers extracted from the original POTCAR, but not
     the proprietary pseudopotential data. The stripped files can be accessed and downloaded
-    by anyone, while the original POTCAR files are automatically removed.
+    by anyone, while the original `POTCAR` files are automatically removed.
 
     **Important considerations:**
 
-    - Stripping is filename-based. Ensure "POTCAR" appears in the filename for licensed files.
-    - POTCAR files **must be uncompressed** for automated stripping to work. Compressed files (e.g., `POTCAR.gz`) will not be properly processed and may be entirely removed without creating stripped versions.
-    - Stripping only occurs upon publication. We strongly recommend **against** temporarily making unpublished uploads publicly visible when they contain licensed material.
+    - Stripping is filename-based. Ensure `POTCAR` appears in the filename for licensed files.
+    - `POTCAR` files **must be uncompressed** for automated stripping to work. Compressed files (e.g., `POTCAR.gz`) will not be properly processed and may be entirely removed without creating stripped versions.
+    - Stripping only occurs upon publication. We strongly recommend **against** temporarily making unpublished projects publicly visible when they contain licensed material.
 
     While NOMAD provides this service as a courtesy, **uploaders remain responsible for
     verifying overall license compliance**.
 
+### Create ELN entries from built-in or custom schemas
+
+An [Electronic Lab Notebook (ELN)](../../../reference/glossary.md#eln) entry is
+a schema-based entry that you can edit directly in NOMAD. To create an ELN entry:
+
+1. On the project **Overview** page or in any folder under
+   **FILES**, select **NEW ENTRY**. You can create new folders using the **+** button under **FILES**.
+2. Choose a schema under **BUILT-IN SCHEMAS** or **CUSTOM SCHEMAS**. Custom
+   schemas come from schema packages uploaded to the current NOMAD deployment.
+   Depending on your access, these can include schemas from this project, your
+   other projects, or projects shared or published by other users.
+3. Enter a filename and select **CREATE**. NOMAD creates the ELN and opens
+   it in the data editor.
+
+**Related pages:** {{ nav_link("tutorial/eln/built_in_templates.md") }};
+{{ nav_link("howto/schemas/define.md") }}.
+
+### Include entries from other projects
+
+A project can include entries from other projects. This lets you combine data from several
+projects without copying or reprocessing any files, and allows you to create larger
+logical collections of entries that would not otherwise be possible e.g. due to project
+size limits. Included entries appear in the project's **ENTRIES** list next to the
+project's own entries, but their files and data stay in the project they came from. Also
+the visibility and access control are still controlled by the project that contains the
+files.
+
+!!! info "Replacement for datasets"
+
+    Included entries replace the **Datasets** feature of NOMAD v1.0. Existing
+    datasets keep working as before and remain accessible in NOMAD v2.0.0, but
+    new datasets can no longer be created in the GUI. To group entries from
+    several projects, include them in a project instead.
+
+Typical uses include:
+
+- **Collecting the data behind a publication:** The results for a paper are
+  often spread over several projects, for example one per measurement campaign,
+  simulation series, or group member. Create a dedicated project that includes
+  entries from all of them, publish it, and cite its single DOI in the paper.
+- **Sharing reference data:** Keep common data, such as calibration
+  measurements, substrate characterizations, or reference calculations, in one
+  project and include it in every project that relies on it. The reference data
+  is stored only once and stays the same wherever it is used.
+- **Comparing simulations and experiments:** Include experimental entries in a
+  simulation project, or the other way around, to search and compare both kinds
+  of data in one entries list.
+- **Building curated collections:** Gather published entries from your own or
+  other people's projects into a themed collection, such as a benchmark set for
+  a class of materials. The included entries retain their original authorship and
+  provenance.
+
+To include entries from other projects:
+
+1. On the project **Overview** page, select the drop-down arrow next to
+   **NEW ENTRY**, then choose **Include entries from other projects**.
+2. Search for a project by its project ID and add it to the list. Repeat for
+   each project you want to include. To stop including a project, remove it
+   from the list.
+3. Select **NEXT**. NOMAD checks your selection and shows how many entries will
+   be included and whether any of them are still unpublished.
+4. Select **SAVE**.
+
+The included entries now appear under **ENTRIES**, marked with an **included**
+label, and can be searched and filtered together with the project's own
+entries.
+
+Keep the following in mind when you include entries:
+
+- **Included entries are a snapshot.** Only entries that exist when you select
+  **SAVE** are included. If entries are later added to one of the included
+  projects, open the dialog and save again to include them as well.
+- **Ownership does not change.** Each entry belongs to exactly one project.
+  Including an entry does not copy or move it, and it can only be edited in the
+  project it belongs to.
+- **Inclusion is not recursive.** Only a project's own entries are included,
+  not the entries it has itself included from other projects.
+- **Publishing requires published entries.** A project cannot be published
+  while any of its included entries are unpublished or published under embargo. Ask the owners of those projects to publish them first.
+
 ## Visibility and access
 
-You can edit who has access to your upload. Click on the *Edit upload members* button to
-open the corresponding dialog. There you can search for users (or groups, see below) and
-add them to the list as reviewers, who can view your upload before it is published.
+On the project page, the project owner can select **SETTINGS** to manage
+access.
 
-The table below the search field shows who has been added and their role. In each row you
-can remove the member or change their role from Reviewer to Co-author, who may also edit
-the upload. You must confirm the dialog for the changes to take effect.
+Under **Collaborators**, use **ADD USER** to add a collaborator and assign one
+of these roles:
 
-You can also make the upload visible for everyone, even not logged in users, by using
-the checkbox in the same upload step. Note that you cannot use this feature if the upload
-is published with embargo and vice versa.
+- **Reviewer** can view the files and entries in an unpublished project but
+  cannot change them.
+- **Coauthor** can view and modify the files and entries while the project is
+  unpublished.
+
+Select **SAVE** after changing the collaborator list or a role. If group
+collaboration is enabled in the deployment, **ADD GROUP** provides the same
+role choices for a user group. See
+[Reference > REST API > User groups](../../../reference/api.md#user-groups)
+for information about creating and editing groups.
+
+Under **Visibility**, select **Private** or **Public**, then select **SAVE**.
+A public, unpublished project is visible to everyone. Public visibility and a
+publication embargo cannot be used together, so keep the project private if
+you intend to publish it under embargo.
+
+## Publish and assign a DOI
+
+Only the project owner can publish a project or assign its DOI.
+
+1. Open **ENTRIES** and review every entry. Confirm that all expected entries
+   are present and that their extracted or entered data are complete and
+   correct.
+2. In the project header, select the status button with the drop-down arrow.
+   Depending on the current state, it is labelled **Completed**, **Failed**,
+   **Processing**, or **Idle**. In the **Processing status** panel, confirm that
+   **Matching** found the expected number of entries, **Parsing** completed
+   successfully for every entry, and **Cleanup** reports no unresolved warnings
+   or errors.
+3. For an entry with failed processing, unexpected data, or a concerning
+   warning, open the entry and select **LOGS**. Review the processing messages,
+   correct the source data or entry as needed, and reprocess before publishing.
+4. Open **SETTINGS** > **General**.
+5. In **Publish**, select **No embargo** or an embargo period. If the project
+   is already publicly visible, the embargo control is disabled; change its
+   visibility to **Private** first if you need an embargo.
+6. Select **PUBLISH** or **PUBLISH WITH EMBARGO**, then confirm the action.
+
+If processing errors persist or the impact of a warning is unclear, contact
+the administrator of your NOMAD deployment before publishing. NOMAD Central
+users and NOMAD Oasis administrators who need further assistance can contact
+[NOMAD > Support](https://nomad-lab.eu/nomad-lab/support.html){:target="_blank" rel="noopener"}.
+Include the project ID, the affected entries, and the relevant processing logs
+in your request.
+
+Publication is permanent. The project's files and entries become read-only
+and cannot be edited or deleted. Without an embargo, the data become public
+immediately. With an embargo, the entry metadata are public while access to
+the files remains restricted until the embargo ends.
+
+On NOMAD Central, or on a NOMAD Oasis deployment with DataCite integration
+enabled, **SETTINGS** > **General** also contains **Digital Object Identifier
+(DOI)**. After publishing, select **ASSIGN DOI** and confirm the action. The DOI
+is assigned directly to the project.
+
+!!! warning
+    Publication and DOI assignment is irreversible: the DOI remains permanently associated with the project.
 
 !!! note
-    Instead of single users you may also give access via user groups. Switch the search
-    type from *User* to *Group*, search for the group name, and optionally change their
-    role. This feature must be enabled in the config file `nomad.yaml`.
-
-    See [API](../program/api.md#user-groups) on how to create and edit user groups.
-
-## Add user metadata
-
-NOMAD automatically extracts as much information as possible from your files but you
-can still specify additional metadata. This is what we call *user metadata*. This includes
-comments, additional web-references, and datasets (use the *edit metadata* function on
-the *upload page*).
-
-User metadata can also be provided in an uploaded file, either named `nomad.json` or
-`nomad.yaml`. Here is a JSON example:
-
-```json
-{
-    "comment": "Data from a cool research project",
-    "references": ["http://archivex.org/mypaper"],
-    "coauthors": [
-        "<email-or-username>",
-        "<email-or-username>"
-    ],
-    "datasets": [
-        "<dataset-name>"
-    ],
-    "entries": {
-        "path/to/entry_dir/vasp.xml": {
-            "comment": "An entry specific comment."
-        }
-    }
-}
-```
-
-This file is only applied during the initial processing of an entry. So make sure you either
-upload it first or with everything else as part of an archive file.
-
-## Publish and get a DOI
-
-This section shows how to publish your data on NOMAD and assign a DOI.
-
-!!! Info "DOI's can only be assigned to datasets"
-    You must add entries to a dataset before assigning a DOI.
-
-1. Create an upload and add your data files (entries).
-2. Select an embargo period (if needed) from the dropdown menu in the *Publish* section at the bottom of the upload page.  
-   If you want to publish immediately, select *No embargo*.
-3. Click on the `PUBLISH` button on the upload page. A confirmation prompt will appear on the screen. Click on `PUBLISH`.
-
-    !!! warning "Warning"
-        Once published, the upload becomes immutable, meaning its contents can no longer be modified.
-        However, you can still edit its metadata.
-
-4. In the *Process data* section of the upload page, select the entries to include in a dataset by checking the boxes next to them.
-5. Click the <img src="images/icon-edit-metadata.png" alt="Edit metadata icon" width="20"> icon to open the `Edit upload metadata` window for the selected entries.
-6. In the *Datasets* section:
-    - Create a new dataset by providing a name and clicking `ADD ENTRY TO NEW DATASET`, or
-    - Select an existing dataset from the dropdown menu and click `ADD ENTRY TO EXISTING DATASET`.
-
-    Click `SUBMIT`.
-
-7. Go to the dataset page by clicking on `Datasets` under the `PUBLISH` menu in the top panel.
-8. Click on the <img src="images/icon-assign-doi.png" alt="Assign DOI icon" width="20"> icon next to the dataset to assign a DOI.
-9. A confirmation prompt will appear on the screen. Click on `ASSIGN DOI`.
-
- After assigning a DOI, the dataset becomes permanent. Entries can be added, but not removed.
-
-## Upload limits
-
-- One upload cannot exceed **32 GB** in size.
-- Only **10 non published uploads** are allowed per user.
-- Only uploads with at least one recognized entry can be published. See also [supported codes/formats](../../../reference/parsers.md) below.
+    DOI controls are only shown on deployments with DataCite integration.
+    They may therefore be absent from a NOMAD Oasis.
 
 ## Strategies for large amounts of data
 
-Before attempting to upload large amounts of data, run some experiments with a representative
-and small subset of your data. Use this to simulate a larger upload that you can review and edit
-in the normal way. You do not have to publish this test upload; simply delete it before publish,
-once you are satisfied with the results.
+Test the workflow first with a small, representative subset of the data.
+Review the resulting files and entries, then delete the test project if it is
+no longer needed.
 
-Ask for assistance and [Contact us](https://nomad-lab.eu/about/support){:target="_blank" rel="noopener"} in advance. This will
-allow us to react to your specific situation and eventually prepare additional measures.
-Allow enough time before you need your data to be published. Adding multiple hundreds of
-GBs to NOMAD isn't a trivial feat and will take some time and effort on all sides.
+When data exceed the deployment's project-size limit, split them across
+multiple projects. Do not split the mainfile and auxiliary files belonging to
+one entry between projects. The appropriate split therefore depends on how
+the data are organized.
 
-The [upload limits](#upload-limits) above are necessary to keep NOMAD data manageable and we cannot easily
-grant exceptions to these rules. This means you have to split your data into 32 GB uploads.
-Uploading these files, observing the processing, and publishing the data can be automatized through NOMAD APIs.
+For repeatable transfers, choose **Upload via API** from the **UPLOAD FILES**
+drop-down menu or automate the backend upload endpoints. These APIs retain
+*upload* in their paths and require a
+[How-to guides > ... > Programmatic authentication > Create a PAT](../program/auth.md#create-a-pat)
+with at least the `uploads:write` permission. The upload endpoint also supports
+direct publication through `publish_directly`; use it only after testing the
+processing and publication workflow with representative data.
 
-When splitting your data, it is important to not split subdirectories that contain files of the same single entry. NOMAD can only bundle those related files to an entry if
-they are part of the same upload (and directory). Therefore, there is no single recipe to
-follow, and a script to split your data depends heavily on how your data is organized.
-
-If you provide data for a potentially large amount of entries, it might be advisable
-to provide *user metadata* via file. See [user metadata](#add-user-metadata) above for details.
-
-To further automate, you can also upload and directly publish data. After performing some
-smaller test uploads, you should consider skipping our staging and publish the upload
-right away. This can save you some time and additional API calls. The upload endpoint
-has a parameter `publish_directly` and requires [getting and setting up a token](../program/auth.md#create-a-pat)
-with at least `"uploads:write"` permission. You can modify the upload command you get on the upload page as follows:
-
-```shell
-curl "http://nomad-lab.eu/prod/v1/uploads/?publish_directly=true" \
-  -H "Authorization: Bearer ${NOMAD_PAT}" \
-  -T <local_file>
-```
-
-HTTP makes it easy for you to upload files via browser and `curl`, but it is not an
-ideal protocol for the stable transfer of large and many files. Alternatively, we can organize
-a separate manual file transfer to our servers. We will put your prepared upload
-files (.zip or .tag.gz) on a predefined path on the NOMAD servers. NOMAD allows to *"upload"*
-files directly from its servers via an additional `local_path` parameter:
-
-```shell
-curl -X PUT "http://nomad-lab.eu/prod/v1/api/uploads/?local_path=<path-to-upload-file>" \
-  -H "Authorization: Bearer ${NOMAD_PAT}"
-```
+!!! info
+    Contact [NOMAD > Support](https://nomad-lab.eu/nomad-lab/support.html){:target="_blank" rel="noopener"}
+    before transferring hundreds of gigabytes or requesting an exceptional
+    transfer arrangement. Allow time to agree on an appropriate transfer and
+    project layout. Server-side transfers require coordination with NOMAD
+    Central operators and are not part of the ordinary end-user workflow.

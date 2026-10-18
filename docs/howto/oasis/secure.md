@@ -1,4 +1,4 @@
-# Secure your Oasis
+# How to secure a NOMAD Oasis
 
 NOMAD provides a comprehensive set of security features to protect your Oasis. However, properly enabling and configuring these features is the responsibility of the deployment administrator. This guide outlines the key security measures available and best practices for implementing them.
 

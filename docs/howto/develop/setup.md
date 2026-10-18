@@ -5,7 +5,7 @@ all sources, set up a *Python* and *Node.js* environment, install all necessary 
 run the infrastructure in development mode, learn to run the test suites, and set up
 *Visual Studio Code* for NOMAD development.
 
-For installing and using the NOMAD Python package `nomad-lab` directly, see [Manage and find data > Programmatically > API Overview](../manage/program/api.md).
+For installing and using the NOMAD Python package `nomad-lab` directly, see [Manage and find data > Programmatically > Use the API](../manage/program/api.md).
 
 ## Clone the sources
 
@@ -538,7 +538,7 @@ Here the important parameters are:
 - `<state_name>`: Specifies an initial backend configuration for this test. These
   states are defined as Python functions that are stored in
   `nomad-FAIR/tests/states`, example given below. These functions may, for example,
-  prepare several uploads entries, datasets, etc. for the test.
+  prepare several uploads, entries, etc. for the test.
 
 - `<snapshot_name>`: Specifies a filepath for reading/recording pre-recorded API
   traffic.
@@ -550,21 +550,18 @@ from nomad import infrastructure
 from nomad.utils import create_uuid
 from nomad.utils.exampledata import ExampleData
 
+
 def search():
     infrastructure.setup()
-    main_author = infrastructure.user_management.get_user(username="test")
+    main_author = infrastructure.user_management.get_user(username='test')
     data = ExampleData(main_author=main_author)
     upload_id = create_uuid()
     data.create_upload(upload_id=upload_id, published=True, embargo_length=0)
     data.create_entry(
         upload_id=upload_id,
         entry_id=create_uuid(),
-        mainfile="test_content/test_entry/mainfile.json",
-        results={
-            "material": {"elements": ["C", "H"]},
-            "method": {},
-            "properties": {}
-        }
+        mainfile='test_content/test_entry/mainfile.json',
+        results={'material': {'elements': ['C', 'H']}, 'method': {}, 'properties': {}},
     )
     data.save()
 ```
@@ -622,7 +619,7 @@ perform the test without any recording.
 
 ## Build custom Oasis image
 
-To create a custom Oasis image (e.g. with custom plugins), you could use the [nomad-distro-template](https://github.com/FAIRmat-NFDI/nomad-distro-template){:target="_blank" rel="noopener"} by clicking the [`Use this template` button](https://github.com/new?template_name=nomad-distro-template&template_owner=FAIRmat-NFDI){:target="_blank" rel="noopener"}. For detailed instructions on building and deploying custom Oasis images, please refer to the documentation in that repository.
+To create a custom Oasis image (e.g. with custom plugins), you could use the [nomad-distro-template](https://github.com/FAIRmat-NFDI/nomad-distro-template){:target="_blank" rel="noopener"} by clicking the [**Use this template** button](https://github.com/new?template_name=nomad-distro-template&template_owner=FAIRmat-NFDI){:target="_blank" rel="noopener"}. For detailed instructions on building and deploying custom Oasis images, please refer to the documentation in that repository.
 
 ## Setup your IDE
 

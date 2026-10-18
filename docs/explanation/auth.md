@@ -1,4 +1,4 @@
-# Authentication and Authorization
+# Authentication and authorization
 
 Authentication determines **who is making the request**.
 Authorization then determines **what that request is allowed to do**.

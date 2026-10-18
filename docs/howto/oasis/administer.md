@@ -1,4 +1,4 @@
-# How to perform admin tasks
+# How to administer a NOMAD Oasis
 
 ## Backups
 
@@ -6,7 +6,7 @@ To backup your Oasis at least the file data and mongodb data needs to be saved. 
 default all data is stored in a directory called `.volumes` that is created in the
 current working directory of your installation/docker-compose. This directory can be backed up like any other file backup (e.g. rsync).
 
-To backup the mongodb, please refer to the official [mongodb documentation](https://docs.mongodb.com/manual/core/backups/){:target="_blank" rel="noopener"}. We suggest a simple mongodump export that is backed up alongside your files. The default configuration mounts `.volumes/mongo` into the mongodb container (as `/backup`) for this purpose. You can use this to export the NOMAD mongo database. Combine this with rsync on the `.volumes` directory and everything should be set. To create a new mongodump run:
+To backup the mongodb, please refer to the official [mongodb documentation](https://www.mongodb.com/docs/manual/core/backups/){:target="_blank" rel="noopener"}. We suggest a simple mongodump export that is backed up alongside your files. The default configuration mounts `.volumes/mongo` into the mongodb container (as `/backup`) for this purpose. You can use this to export the NOMAD mongo database. Combine this with rsync on the `.volumes` directory and everything should be set. To create a new mongodump run:
 
 ```sh
 docker exec nomad_oasis_mongo mongodump -d nomad_oasis_v1 -o /backup
@@ -70,7 +70,7 @@ Here are a few examples:
 
 For a complete list refer to the [CLI reference documentation](../../reference/cli.md#nomad-admin-uploads).
 
-Alternatively, you can use a list of upload ids at the end of the command, e.g.:
+Alternatively, you can use a list of upload IDs at the end of the command, e.g.:
 
 ```sh
 ```sh
@@ -87,7 +87,7 @@ cat file_with_ids.txt | xargs nomad admin uploads ls --
 
 Processing includes the conversion of raw files into NOMAD entries. Files are parsed,
 normalizers are called, the processing results are stored, and the search index
-is updated. In certain scenarios (failed processing, [migration](update.md#migration-steps),
+is updated. In certain scenarios (failed processing, [migration](migrate.md),
 changed plugins) might require that admins process certain uploads again.
 
 ```sh
@@ -98,7 +98,7 @@ nomad admin uploads process
 
 Each NOMAD entry is represented in NOMAD's search index. Only if an entry is in this
 index, you can find it via the search interface. Some changes between NOMAD versions
-(see also our [update guide](update.md#migration-steps)), might require that
+(see also our [migration guide](migrate.md)), might require that
 you re-index all uploads.
 
 ```sh

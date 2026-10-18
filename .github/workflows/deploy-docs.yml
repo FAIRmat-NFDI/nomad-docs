@@ -3,10 +3,22 @@ name: Deploy MkDocs Site
 on:
   push:
     branches: ["develop"]
-    tags: ["v*"]
+    # Only release tags (v1.4.3, v2.0.0); pre-releases such as v2.1.0rc1 are
+    # not deployed. scripts/docs_version.py enforces the same pattern.
+    tags: ["v[0-9]+.[0-9]+.[0-9]+"]
 
 env:
   UV_VERSION: 0.6
+  # Point the `nomad_url()` macro at the central production instance so the
+  # published docs render real API URLs. The values are repository variables
+  # (Settings > Secrets and variables > Actions > Variables), so they can be
+  # changed without a commit; re-run this workflow afterwards. Local and Oasis
+  # builds that do not set them keep the Oasis default
+  # (http://localhost:8000/nomad-oasis/...).
+  NOMAD_SERVICES_API_HOST: ${{ vars.NOMAD_SERVICES_API_HOST }}
+  NOMAD_SERVICES_API_PORT: ${{ vars.NOMAD_SERVICES_API_PORT }}
+  NOMAD_SERVICES_API_BASE_PATH: ${{ vars.NOMAD_SERVICES_API_BASE_PATH }}
+  NOMAD_SERVICES_HTTPS: ${{ vars.NOMAD_SERVICES_HTTPS }}
 
 # develop/tag pushes all write to the gh-pages branch, so serialize them.
 concurrency:
@@ -22,6 +34,16 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v7
+
+      # A missing variable would publish broken API links, so stop here instead.
+      - name: Check NOMAD URL variables
+        run: |
+          for name in NOMAD_SERVICES_API_HOST NOMAD_SERVICES_API_PORT NOMAD_SERVICES_API_BASE_PATH NOMAD_SERVICES_HTTPS; do
+            if [ -z "${!name}" ]; then
+              echo "::error::Repository variable ${name} is not set (Settings > Secrets and variables > Actions > Variables)."
+              exit 1
+            fi
+          done
 
       # mike deploys into the gh-pages branch; make it available even in a shallow clone.
       # (|| true: on a very first deploy the branch may not exist yet, mike will create it.)
@@ -48,10 +70,26 @@ jobs:
             --with 'nomad-lab[dev,infrastructure] @ https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR.git' \
             mike deploy develop --push
 
-      # Tagged releases (v1.4.3) become selectable versions (1.4.3). The
-      # newest v* tag is labelled "(stable)" and becomes the default page.
-      - name: Deploy release tag
+      # Tagged releases become selectable versions, see scripts/docs_version.py:
+      # from v2.0.0 on, one version per minor release that each patch replaces
+      # (v2.0.3 -> 2.0.x); older tags one version per patch (v1.4.3 -> 1.4.3).
+      - name: Resolve docs version
+        id: docs-version
         if: startsWith(github.ref, 'refs/tags/v')
+        run: |
+          set -o pipefail
+          git ls-remote --tags origin \
+            | sed 's|.*refs/tags/||' \
+            | python3 scripts/docs_version.py "${GITHUB_REF_NAME}" \
+            | tee -a "$GITHUB_OUTPUT"
+
+      # The newest release tag is labelled "(stable)" and becomes the default page.
+      - name: Deploy release tag
+        if: steps.docs-version.outputs.deploy == 'true'
+        env:
+          VERSION: ${{ steps.docs-version.outputs.version }}
+          ALIAS: ${{ steps.docs-version.outputs.alias }}
+          STABLE: ${{ steps.docs-version.outputs.stable }}
         run: |
           run_mike() {
             uv run \
@@ -59,17 +97,14 @@ jobs:
               mike "$@"
           }
 
-          VERSION=${GITHUB_REF_NAME#v}
-          echo "Deploying release docs as version: ${VERSION}"
-          run_mike deploy "${VERSION}"
+          # The exact version (2.0.3) becomes an alias that redirects every page
+          # to 2.0.x. Each deploy rewrites all aliases of the version, so always
+          # pass --alias-type=redirect (mike's default symlinks would replace
+          # the redirects of earlier patches).
+          echo "Deploying tag ${GITHUB_REF_NAME} as docs version ${VERSION}"
+          run_mike deploy --alias-type=redirect "${VERSION}" ${ALIAS:+"${ALIAS}"}
 
-          LATEST_TAG=$(git ls-remote --tags origin \
-            | sed 's|.*refs/tags/||' \
-            | grep -v '\^{}' \
-            | grep -E '^v[0-9]+(\.[0-9]+)*$' \
-            | sort -V \
-            | tail -1)
-          if [ "${LATEST_TAG}" = "${GITHUB_REF_NAME}" ]; then
+          if [ "${STABLE}" = "true" ]; then
             echo "Tag ${GITHUB_REF_NAME} is the newest release; marking ${VERSION} as stable"
             # Remove the "(stable)" label from any previous stable version.
             while IFS= read -r v; do
@@ -81,7 +116,7 @@ jobs:
             run_mike retitle "${VERSION}" "${VERSION} (stable)"
             run_mike set-default "${VERSION}"
           else
-            echo "Tag ${GITHUB_REF_NAME} is not the newest release (${LATEST_TAG}); deploying without the stable label"
+            echo "Tag ${GITHUB_REF_NAME} is not the newest release; deploying without the stable label"
           fi
 
           # Push all mike commits after the version metadata is ready.

@@ -8,16 +8,16 @@ The NOMAD Docs follow the [Diátaxis framework](https://diataxis.fr/){:target="_
 
 - **Tutorials**: learning-oriented, step-by-step introductions.
 - **How-to guides**: goal-oriented, practical instructions.
-- **Explanations**: understanding-oriented, clarifications and context.
+- **Explanation**: understanding-oriented, clarifications and context.
 - **Reference**: information-oriented, precise and authoritative.
 
 When contributing, identify which type of documentation your addition belongs to. A clear separation will help users quickly find what they need.
 
-> **Tip:** Contributions often span multiple types. For example, a new *How-to* may also require a supporting *Explanation* page. It may help you to first draft all of your material in one place, and then reorganize it according to the Diátaxis structure.
+> **Tip:** Contributions often span multiple types. For example, a new how-to guide may also require a supporting explanation page. It may help you to first draft all of your material in one place, and then reorganize it according to the Diátaxis structure.
 
 ## Best Practice
 
-- **Set the context clearly.** For Tutorials and How-tos, define prerequisite knowledge and list additional resources at the top of the page. For Explanations, provide enough background to orient the reader.
+- **Set the context clearly.** For Tutorials and How-tos, define prerequisite knowledge and list page-wide additional resources at the top of the page. Keep subsection-specific related pages with the relevant subsection. For Explanations, provide enough background to orient the reader.
 - **Think in user flows.** Imagine how a user encounters problems or tasks, not how the codebase is organized.
 - **Be as detailed as required, as concise as possible.** Include all steps or context the user needs, but avoid unnecessary narrative.
 - **Prefer clarity over cleverness.** Simple, direct wording beats jargon, metaphors, or over-complicated phrasing.
@@ -31,15 +31,52 @@ When contributing, identify which type of documentation your addition belongs to
 
 **Auto-TOC awareness:** Headings populate the Table of Contents; admonition titles do not. Use real headings for navigable sections.
 
+**Navigation titles and page headings:** Page titles in `mkdocs.yml` are the
+concise labels shown in the sidebar and on overview-page links generated with
+`nav_link`. Keep them short enough for the sidebar, but grammatical enough to
+stand alone in a card or breadcrumb. The first heading of the page may be more
+descriptive, for example by adding "How to", NOMAD-specific context, or the
+intended outcome. The navigation title and page heading should clearly refer to
+the same task or concept, even when they are not identical.
+Within deeper navigation sections, a child title may rely on its parent title
+for context, for example "With the GUI" under "Upload and publish data". Avoid
+using such inherited labels outside their parent group unless the surrounding
+text, grouping, or breadcrumb supplies the missing context.
+
 ### Links
 
 **Link checks.** Broken internal or external links will cause CI/CD to fail. Try to fix them when possible. If you cannot resolve a broken link, create an issue and tag a maintainer.
 
 **Descriptive link naming.** Use descriptive link text (instead of `here/link`).
 
-**Internal links: standardized naming.** Use the path hierarchy to the referenced page or section, separated by >'s. For example: `[Tutorial > Exploring Data > Search Interface & Filters](<path-to-referenced-section>)`. Long paths can be shortened with `...`, e.g., `[Tutorial > ... > Search Interface & Filters](<path-to-referenced-section>)`, using your best judgement.
+**Internal links: standardized naming.** Use the path hierarchy to the referenced page or section, separated by >'s. For example: `[Tutorials > Explore data > Search interface and filters](<path-to-referenced-section>)`. Long paths can be shortened with `...`, e.g., `[Tutorials > ... > Search interface and filters](<path-to-referenced-section>)`, using your best judgement.
 
 If the referenced section belongs to the current page, drop the global path, i.e., `[Search Interface & Filters](<path-to-referenced-section>)`.
+
+**Related pages.** Use a `## Related pages` section near the top of a page for
+cross-links that apply to the page as a whole. List each page separately and
+use the standardized path-style link names described above. For example:
+
+```md
+## Related pages
+
+- [Tutorial > ... > Use built-in ELN templates](<path-to-page>)
+- [Explanation > Processing](<path-to-page>)
+```
+
+When a related page applies only to one subsection, keep the link with that
+subsection instead of placing it in the page-level list. Use a compact line at
+the end of the subsection:
+
+```md
+**Related pages:** [Import data from external ELNs](<path-to-page>);
+[Write a YAML schema package](<path-to-page>).
+```
+
+For this compact, section-specific form, the page titles are sufficient as
+link text unless the surrounding context leaves their location or purpose
+ambiguous. Avoid a narrative “see also” sentence when the links are optional
+follow-up material rather than part of the procedure.
 
 **External links to NOMAD-related documentation.** External links to, e.g., NOMAD plugin documentation should follow the same syntax as internal link names, with the name of the plugin as the root. For example, `[NOMAD Utility Workflows > How-to Guides > Create Custom Workflows](https://fairmat-nfdi.github.io/nomad-utility-workflows/how_to/create_custom_workflows.html){:target="_blank" rel="noopener"}`.
 
@@ -51,17 +88,42 @@ If the referenced section belongs to the current page, drop the global path, i.e
 
 **Use consistent, canonical names.** NOMAD, NOMAD Oasis, MongoDB, Elasticsearch, etc.
 
+**Use sentence case for domain concepts.** Treat NOMAD concepts as common nouns
+in running prose. Write *project*, *entry*, *archive*, *schema*, *section*,
+*subsection*, *quantity*, *dataset*, and *mainfile* in lowercase, including
+their plural forms. Do not capitalize a term merely because it has a definition
+in the glossary. Normal capitalization still applies at the beginning of a
+sentence and in headings.
+
+**Match exact GUI labels.** When referring to a specific label in the GUI,
+preserve the capitalization displayed in the interface and format the label in
+bold, for example **Projects**, **Entries**, **ARCHIVE**, **Project ID**, and
+**ADD EXAMPLE PROJECT**. Use lowercase when referring to the underlying concept,
+for example *project page*, *entry ID*, and *entry archive*.
+
+**Preserve code and technical identifiers.** Reproduce class names, API fields,
+endpoints, configuration options, and archive paths exactly and format them as
+code, for example `EntryArchive`, `ArchiveSection`, `upload_id`, `entry_id`, and
+`/uploads`.
+
+**Distinguish projects from uploads.** In user-facing instructions, use
+*project* for the container that holds files and entries. Use *upload* as a verb
+for transferring files and as a technical noun when referring to NOMAD's
+backend upload resource, upload processing, API endpoints, upload IDs, or
+archive-reference syntax. Each GUI project corresponds to a backend upload
+resource.
+
 **Backticks, quotes, bold, and italics.**
 
 - Use `backticks` for:
     - Code (e.g., inline commands, file names, parameters, API endpoints, config options, environment variables).
     - Literal values the user must type, e.g., in the UI.
 
-- Use "double quotes" when quoting actual text strings (e.g., labels in the UI, button names, error messages).
+- Use "double quotes" for quoted prose and exact messages, such as error
+  messages.
 
-<!-- TODO check bold and it usage and try to be more specific -->
 - Use **bold** for:
-    - Certain UI elements (buttons, menu items, field names).
+    - Exact GUI labels (buttons, menu items, field names).
     - Bullet list labels for clarity.
     - Important emphasis (but use sparingly).
 
@@ -77,7 +139,8 @@ If the referenced section belongs to the current page, drop the global path, i.e
 
 **Copy-paste ready.** Commands should run as-is. If a placeholder is required, surround it with angle brackets and use a descriptive name with hyphens separating words. Like this: `<your-token>`.
 
-**UI copy.** Quote exact button/label text in bold or code.
+**UI copy.** Format exact button and label text in bold. Do not use quotation
+marks or code formatting for GUI labels.
 
 ### Admonitions
 
@@ -114,7 +177,7 @@ Images that can be represented in code should be preferred. The docs support [Me
 </figure>
 ````
 
-The second best format is SVG. SVG files scale to different resolutions, produce small file sizes, and are easy to modify later. It is recommended to use [draw.io](https://www.drawio.com/){:target="_blank" rel="noopener"} to produce any complex diagrams, and then export them in the SVG format using the "Include a copy of my diagram" option which allows for easy editing later.
+The second best format is SVG. SVG files scale to different resolutions, produce small file sizes, and are easy to modify later. It is recommended to use [draw.io](https://www.drawio.com/){:target="_blank" rel="noopener"} to produce any complex diagrams, and then export them in the SVG format using the **Include a copy of my diagram** option which allows for easy editing later.
 
 When other options are not suitable, the preferred raster image format is JPG.
 
@@ -141,3 +204,45 @@ If you use more than one slider on the same page, make sure to give them differe
 **Keep the navigation structure.** The location of docs .md files should mirror the navigation bar, with subfolders named after the organizational subsections of the bar.
 
 **Images and data.** All assets specific to an individual markdown file should be stored within an immediate sub-directory of the file, labeled accordingly. Please use `images/` and `data/` for the image and data files, respectively. Sharing assets between .md files in different locations is currently not allowed. If there is an exceptional case, please create a GitHub issue and tag a relevant maintainer.
+
+### Navigation coverage
+
+By default, user-facing Markdown pages under `docs/` appear in the
+`nav` section of `mkdocs.yml`. Note: The strict documentation build reports a warning,
+and therefore fails in CI, when a page is added under `docs/` without being added
+to the navigation.
+
+On overview pages, use navigation macros for links that represent pages in the
+navigation. The macros use titles and order from `mkdocs.yml` and generate
+relative links from the current page. This keeps overview-page links consistent
+with the sidebar without duplicating labels in Markdown.
+
+Use `nav_list` for overview-page lists that should follow a section of the
+navigation. Pass a direct child section title, for example
+`nav_list("Develop plugins")`, to render that section and its descendants in nav
+order. Pass a documentation-root-relative page path, for example
+`nav_list("tutorial/explore.md")`, to render a single page. Call `nav_list()`
+without a target to render the current page's section, excluding the current page
+itself. If a flat overview list needs short supporting text, pass a
+`descriptions` mapping keyed by source path. Use this for the main lists on
+section overview pages so their membership, grouping, and order stay aligned
+with `mkdocs.yml`.
+
+Use `nav_link` for curated links and prose links that should point to one known
+page. Pass the documentation-root-relative source path, for example
+`nav_link("reference/config.md")`, inside the Jinja expression delimiters. Use
+short labels for curated link lists, including the home page cards, because the
+surrounding card or section already provides context. For cross-category links
+in prose, pass `breadcrumb=True` to include the navigation hierarchy. If a page
+has more than one intermediate navigation section, the breadcrumb is abbreviated
+as `Section > ... > Page name`. Keep the overview card headings, descriptions,
+and surrounding markup in Markdown so they can be edited independently.
+
+There may be special cases of independent pages that are linked but should not
+appear in the navigation. These intentional exceptions should be listed under
+`not_in_nav` in `mkdocs.yml`. Only add a page to this list when it has a documented
+reason to remain outside the navigation; do not use it merely to silence the build.
+Remove the exception when the page is added to the navigation, moved outside `docs/`, or deleted.
+
+Most authoring resources that should not be published belong outside `docs/`. For
+example, use `templates/tutorial.md` as the starting point for a new tutorial.

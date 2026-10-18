@@ -1,4 +1,4 @@
-# Write a normalizer
+# How to write a normalizer
 
 ## The `update_entry` method
 

@@ -38,15 +38,15 @@ These can be defined in *absolute* terms, or *relative* to their section above u
 The annotations themselves can be manipulated in two possible ways:
 
 1. *definition* level, i.e. `m_def`.
-1. *attribute* level, i.e. the data instance generated during runtime.
+2. *attribute* level, i.e. the data instance generated during runtime.
 
 The mapping parser will search for the first available annotation in the following order:
 
 1. *attribute level*: specializes subsections to specific contexts.
-1. *definition level*: used for generic paths.
-1. *child sections' definitions* (i.e. all inheriting sections): used to bypass any abstract sections, which should not be instantiated themselves. (note)
+2. *definition level*: used for generic paths.
+3. *child sections' definitions* (i.e. all inheriting sections): used to bypass any abstract sections, which should not be instantiated themselves. (note)
 
-![Path annotation in NOMAD datamodel](images/mapping_parser_path.png)
+![Path annotation in NOMAD datamodel](images/mapping_parser_path.webp)
 
 In the case of quantities, there is no practical distinction between options 1 and 2.
 By convention, we use the shorter *attribute-level* annotation.
@@ -88,14 +88,14 @@ class Program(general.Program):
     )
 ```
 
-### Controlling Repeating Sections
+### Controlling repeating sections
 
 **Subsections** that are defined as **repeating** in the schema are automatically picked up by the mapping parser.
 It will look for any repeating units along the path and instantiate the same number of subsections, i.e. $\text{no. subsections} = \prod_{\text{segments}} \text{repeating path segment}$.
 To compose parallel branches into the same repeating subsection, i.e. $\text{no. subsections} = \sum_{\text{branches}} \text{parallel branch}$:
 
 1. generate different mappings and add them to the annotation `dict`. Each mapping comes with its own unique key.
-1. during the *conversion phase*, select `update_mode="append"`. Manipulate the order in the data via the conversion order of the various maps.
+2. during the *conversion phase*, select `update_mode="append"`. Manipulate the order in the data via the conversion order of the various maps.
 
 **Array quantities**, meanwhile, with `shape=['*']`, have to be handled using an *operator*.
 This is due to `shape` having variable rank, e.g. `shape=['*','*']`.
@@ -180,14 +180,14 @@ are prefixed by `attribute_prefix` ('@' by default). The following XML:
 will be converted to:
 
 ```python
-    data = {
-      'a' : {
+data = {
+    'a': {
         'b': [
-          {'@name': 'item1', '__value': 'name'},
-          {'@name': 'item2', '__value': 'name2'}
+            {'@name': 'item1', '__value': 'name'},
+            {'@name': 'item2', '__value': 'name2'},
         ]
-      }
     }
+}
 ```
 
 The conversion can be reversed using the `from_dict` method.
@@ -220,6 +220,7 @@ Other attributes are currently accessible.
 ```python
 from nomad.datamodel.metainfo.annotations import Mapper as MappingAnnotation
 
+
 class BSection(ArchiveSection):
     v = Quantity(type=np.float64, shape=[2, 2])
     v.m_annotations['mapping'] = dict(
@@ -233,11 +234,13 @@ class BSection(ArchiveSection):
         hdf5=MappingAnnotation(mapper='g.v[-2]'),
     )
 
+
 class ExampleSection(ArchiveSection):
     b = SubSection(sub_section=BSection, repeats=True)
     b.m_annotations['mapping'] = dict(
         xml=MappingAnnotation(mapper='a.b1'), hdf5=MappingAnnotation(mapper='.g1')
     )
+
 
 ExampleSection.m_def.m_annotations['mapping'] = dict(
     xml=MappingAnnotation(mapper='a'), hdf5=MappingAnnotation(mapper='g')
@@ -267,43 +270,44 @@ instead generate it from a dictionary by using the `from_dict` method. By invoki
 HDF5 data.
 
 ```python
-    class ExampleHDF5Parser(HDF5Parser):
-        @staticmethod
-        def get_v(value):
-            return np.array(value)[1:, :2]
+class ExampleHDF5Parser(HDF5Parser):
+    @staticmethod
+    def get_v(value):
+        return np.array(value)[1:, :2]
 
-    archive_parser = MetainfoParser()
-    archive_parser.annotation_key = 'hdf5'
-    archive_parser.data_object = ExampleSection(b=[BSection(v=np.eye(2))])
 
-    hdf5_parser = ExampleHDF5Parser()
-    d = dict(
+archive_parser = MetainfoParser()
+archive_parser.annotation_key = 'hdf5'
+archive_parser.data_object = ExampleSection(b=[BSection(v=np.eye(2))])
+
+hdf5_parser = ExampleHDF5Parser()
+d = dict(
+    g=dict(
+        g1=dict(v=[dict(d=np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))]),
+        v=['x', 'y', 'z'],
         g=dict(
-            g1=dict(v=[dict(d=np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]]))]),
-            v=['x', 'y', 'z'],
-            g=dict(
-                c1=dict(
-                    i=[4, 6],
-                    f=[
-                        {'@index': 0, '__value': 1},
-                        {'@index': 2, '__value': 2},
-                        {'@index': 1, '__value': 1},
-                    ],
-                    d=[dict(e=[3, 0, 4, 8, 1, 6]), dict(e=[1, 7, 8, 3, 9, 1])],
-                ),
-                c=dict(v=[dict(d=np.eye(3), e=np.zeros(3)), dict(d=np.ones((3, 3)))]),
+            c1=dict(
+                i=[4, 6],
+                f=[
+                    {'@index': 0, '__value': 1},
+                    {'@index': 2, '__value': 2},
+                    {'@index': 1, '__value': 1},
+                ],
+                d=[dict(e=[3, 0, 4, 8, 1, 6]), dict(e=[1, 7, 8, 3, 9, 1])],
             ),
-        )
+            c=dict(v=[dict(d=np.eye(3), e=np.zeros(3)), dict(d=np.ones((3, 3)))]),
+        ),
     )
-    hdf5_parser.from_dict(d)
+)
+hdf5_parser.from_dict(d)
 
-    hdf5_parser.convert(archive_parser)
+hdf5_parser.convert(archive_parser)
 
-    # >>> archive_parser.data_object
-    # ExampleSection(b, b2)
-    # >>> archive_parser.data_object.b[1].v
-    # array([[4., 5.],
-    #   [7., 8.]])
+# >>> archive_parser.data_object
+# ExampleSection(b, b2)
+# >>> archive_parser.data_object.b[1].v
+# array([[4., 5.],
+#   [7., 8.]])
 ```
 
 ## Mapper

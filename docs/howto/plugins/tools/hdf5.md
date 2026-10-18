@@ -12,7 +12,7 @@ data is implemented. In the following we discuss two quantity types to enable th
 of large datasets to HDF5: `HDF5Reference` and `HDF5Dataset`. These are defined in
 `nomad.datamodel.hdf5`. Another class called `HDF5Normalizer` defined in
 `nomad.datamodel.metainfo.basesections` can be inherited
-[and used directly in a yaml schema](../../manage/gui/yaml.md#hdf5normalizer).
+[and used directly in a YAML schema](#hdf5normalizer).
 
 ## HDF5Reference
 
@@ -24,6 +24,7 @@ implemented. The following example illustrates how to use these.
 ```python
 from nomad.datamodel import ArchiveSection
 from nomad.datamodel.hdf5 import HDF5Reference
+
 
 class LargeData(ArchiveSection):
     value = Quantity(type=HDF5Reference)
@@ -57,16 +58,14 @@ path = 'external.h5#path/to/data'
 HDF5Reference.write_dataset(archive, data, path)
 archive.data.value = path
 HDF5Reference.read_dataset(archive, path)
-array([[1., 0., 0.],
-       [0., 1., 0.],
-       [0., 0., 1.]])
+array([[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]])
 ```
 
 We use `write_dataset` to write our data into a raw HDF5 file in `test_upload` with the
 filename and dataset location in `path`. Additionally, archive is required to resolve the
 upload metadata. We then assign the reference to the dataset to `value`. To reference a
 file in another upload, follow the same form for
-[reference values](../../manage/gui/yaml.md#different-forms-of-references) e.g.
+[reference values](../../../reference/metainfo.md#reference-forms) e.g.
 `/uploads/<upload_id>/raw/large_data.hdf5#group/large_field`.
 
 !!! important
@@ -82,6 +81,7 @@ To use HDF5 storage for archive quantities, one should use `HDF5Dataset`.
 
 ```python
 from nomad.datamodel.hdf5 import HDF5Dataset
+
 
 class LargeData(ArchiveSection):
     value = Quantity(type=HDF5Dataset)
@@ -110,6 +110,7 @@ In the second case, the dataset created in the HDF5 file will contain a link and
 
 ```python
 from nomad.datamodel.hdf5 import HDF5Dataset
+
 
 class LargeData(ArchiveSection):
     value_1 = Quantity(type=HDF5Dataset)
@@ -175,23 +176,58 @@ all sub sections and `**` to recursively search sub sections.
 
 ```python
 class MySubSection(ArchiveSection):
-
     m_def = Section(a_h5web=H5WebAnnotation(axes='x', signal='y'))
 
-    x = Quantity(
-        type=HDF5Reference
-    )
+    x = Quantity(type=HDF5Reference)
 
-    y = Quantity(
-        type=HDF5Reference
-    )
+    y = Quantity(type=HDF5Reference)
+
 
 class MySection(ArchiveSection):
-
     m_def = Section(a_h5web=H5WebAnnotation(paths=['my_sub/0']))
 
     my_sub = SubSection(sub_section=MySubSection, repeats=True)
+```
 
+## HDF5Normalizer
+
+A different flavor of ***reading*** HDF5 files into NOMAD quantities is through defining a
+[YAML schema](../../schemas/define.md) and inheriting `HDF5Normalizer` into base-sections. Two essential components
+of using `HDF5Normalizer` class is to first define a quantity that is annotated with `FileEditQuantity` field
+to enable one to drop/upload the `*.h5` file, and to define relevant quantities annotated with `path`
+attribute under `hdf5`. These quantities are then picked up by the normalizer to extract the values to be found
+denoted by the `path`. The supported `Hierarchical Data Format` file extensions are:
+
+- ```.h5```
+- ```.hdf5```
+- ```.he5```
+- ```.h5part```
+- ```.nxs```
+- ```.mat```
+- ```.nc4```
+
+A minimum example to import your hdf5 and map it to NOMAD quantities is by using the following custom schema:
+
+```yaml
+definitions:
+  name: 'hdf5'
+  sections:
+    Test_HDF5:
+      base_sections:
+        - 'nomad.datamodel.data.EntryData'
+        - 'nomad.datamodel.metainfo.basesections.HDF5Normalizer'
+      quantities:
+        datafile:
+          type: str
+          m_annotations:
+            eln:
+              component: FileEditQuantity
+        charge_density:
+          type: np.float32
+          shape: [ '*', '*', '*' ]
+          m_annotations:
+            hdf5:
+              path: '/path/to/charge_density'
 ```
 
 ## Metadata for large quantities

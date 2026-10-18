@@ -1,4 +1,4 @@
-from nomad.config.models.ui import Axis, Menu, MenuItemTerms, MenuItemHistogram
+from nomad.config.models.ui import Axis, Menu, MenuItemHistogram, MenuItemTerms
 
 # This is a top level menu that is always visible. It shows two items: a terms
 # item and a submenu beneath it.

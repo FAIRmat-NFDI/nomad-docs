@@ -9,6 +9,14 @@ on:
         description: "Tag to deploy, e.g. v1.4.2"
         required: true
 
+# Same repository variables as in deploy-docs.yml, so that backfilled versions
+# do not link to the Oasis default (http://localhost:8000/nomad-oasis/...).
+env:
+  NOMAD_SERVICES_API_HOST: ${{ vars.NOMAD_SERVICES_API_HOST }}
+  NOMAD_SERVICES_API_PORT: ${{ vars.NOMAD_SERVICES_API_PORT }}
+  NOMAD_SERVICES_API_BASE_PATH: ${{ vars.NOMAD_SERVICES_API_BASE_PATH }}
+  NOMAD_SERVICES_HTTPS: ${{ vars.NOMAD_SERVICES_HTTPS }}
+
 # Serialize with the regular deploy workflow: both write to gh-pages.
 concurrency:
   group: deploy-docs
@@ -26,6 +34,16 @@ jobs:
         with:
           ref: ${{ inputs.tag }}
           fetch-depth: 0
+
+      # A missing variable would publish broken API links, so stop here instead.
+      - name: Check NOMAD URL variables
+        run: |
+          for name in NOMAD_SERVICES_API_HOST NOMAD_SERVICES_API_PORT NOMAD_SERVICES_API_BASE_PATH NOMAD_SERVICES_HTTPS; do
+            if [ -z "${!name}" ]; then
+              echo "::error::Repository variable ${name} is not set (Settings > Secrets and variables > Actions > Variables)."
+              exit 1
+            fi
+          done
 
       - name: Install uv
         # Needs a recent uv: older versions put '--with' packages in an
@@ -70,13 +88,22 @@ jobs:
               print('already configured')
           EOF
 
-      - name: Deploy version
+      # Same tag -> version mapping as deploy-docs.yml (v2.0.3 -> 2.0.x,
+      # v1.4.3 -> 1.4.3). Fails for tags that are not v<major>.<minor>.<patch>.
+      - name: Resolve docs version
+        id: docs-version
         run: |
-          if [[ ! "${TAG}" =~ ^v[0-9]+(\.[0-9]+)*$ ]]; then
-            echo "Invalid tag: ${TAG}; expected v<major>.<minor>.<patch>"
-            exit 1
-          fi
+          set -o pipefail
+          git ls-remote --tags origin \
+            | sed 's|.*refs/tags/||' \
+            | python3 .deployment-tools/scripts/docs_version.py "${TAG}" \
+            | tee -a "$GITHUB_OUTPUT"
+        env:
+          TAG: ${{ inputs.tag }}
 
+      - name: Deploy version
+        if: steps.docs-version.outputs.deploy == 'true'
+        run: |
           run_mike() {
             uv run \
               --with mike \
@@ -84,17 +111,12 @@ jobs:
               mike "$@"
           }
 
-          VERSION=${TAG#v}
+          # The exact version (2.0.3) becomes a redirecting alias of 2.0.x;
+          # see deploy-docs.yml for why --alias-type=redirect is always passed.
           echo "Deploying tag ${TAG} as version ${VERSION}"
-          run_mike deploy "${VERSION}"
+          run_mike deploy --alias-type=redirect "${VERSION}" ${ALIAS:+"${ALIAS}"}
 
-          LATEST_TAG=$(git ls-remote --tags origin \
-            | sed 's|.*refs/tags/||' \
-            | grep -v '\^{}' \
-            | grep -E '^v[0-9]+(\.[0-9]+)*$' \
-            | sort -V \
-            | tail -1)
-          if [ "${LATEST_TAG}" = "${TAG}" ]; then
+          if [ "${STABLE}" = "true" ]; then
             echo "Tag ${TAG} is the newest release; marking ${VERSION} as stable"
             # Remove the "(stable)" label from any previous stable version.
             while IFS= read -r v; do
@@ -106,13 +128,16 @@ jobs:
             run_mike retitle "${VERSION}" "${VERSION} (stable)"
             run_mike set-default "${VERSION}"
           else
-            echo "Tag ${TAG} is not the newest release (${LATEST_TAG}); deploying without the stable label"
+            echo "Tag ${TAG} is not the newest release; deploying without the stable label"
           fi
 
           # Push all mike commits after the version metadata is ready.
           git push origin gh-pages
         env:
           TAG: ${{ inputs.tag }}
+          VERSION: ${{ steps.docs-version.outputs.version }}
+          ALIAS: ${{ steps.docs-version.outputs.alias }}
+          STABLE: ${{ steps.docs-version.outputs.stable }}
 
       # GitHub Pages cannot rewrite old unversioned URLs to the current stable
       # version. Mirror the stable build into the root, and preserve root files

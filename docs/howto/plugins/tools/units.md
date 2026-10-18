@@ -34,10 +34,7 @@ choice is controlled by the `unit` attribute of a
 ```python
 from nomad.metainfo import Quantity
 
-my_energies = Quantity(
-  dtype=float,
-  unit='eV'
-)
+my_energies = Quantity(dtype=float, unit='eV')
 ```
 
 The data will always be stored in this unit and will be returned in this unit
@@ -62,11 +59,7 @@ from nomad.metainfo import MSection, Quantity
 
 # Here is a section with a quantity definition
 class MySection(MSection):
-    my_energies = Quantity(
-        type=np.float64,
-        shape=[2],
-        unit='eV'
-    )
+    my_energies = Quantity(type=np.float64, shape=[2], unit='eV')
 
 
 my_section = MySection()
@@ -106,12 +99,20 @@ viewing the data in this unit helps you to understand it better. E.g. a
 physicist might be familiar with working with electron volts, whereas a chemist
 might prefer kilocalorie per mole.
 
-Currently the display unit is controlled through the [ELN annotation](../../../reference/annotations.md#eln-annotations), like this:
+The display unit should primarily be controlled through the [display annotation](../../../reference/annotations.md#display-annotations), like this:
 
 ```python
-distance = Quantity(
-  dtype=float,
-  unit='meter',
-  a_eln=dict(defaultDisplayUnit='millimeter')
-)
+distance = Quantity(type=float, unit='meter', a_display={'unit': 'millimeter'})
 ```
+
+!!! info
+    The display unit can also be set through the [ELN annotation](../../../reference/annotations.md#eln-annotations):
+
+    ```python
+    distance = Quantity(
+        type=float, unit='meter', a_eln=dict(defaultDisplayUnit='millimeter')
+    )
+    ```
+
+    The more generic display annotation is, however, preferred, as it can also
+    be used to set the unit in non-ELN schemas.

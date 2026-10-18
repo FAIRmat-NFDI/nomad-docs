@@ -1,9 +1,11 @@
 [project]
 name = "nomad-docs"
-version = "1.4.3"
+version = "2.0.0"
 description = "The official NOMAD documentation (starting from 2025)"
 readme = "README.md"
-authors = [{ name = "Ahmed Ilyas", email = "ahmed.n.ilyas@gmail.com" }]
+authors = [
+  { name = "NOMAD Authors", email = "support@nomad-lab.eu" },
+]
 requires-python = ">=3.10"
 dependencies = [
   "mkdocs-click",
@@ -14,9 +16,9 @@ dependencies = [
   "mkdocs-material-extensions",
   "mkdocs-material",
   "mkdocs-redirects",
-  "mkdocs<2",
+  "mkdocs>=1.6.0,<2",
   "mike",
-  "nomad-lab[infrastructure]==1.4.3",
+  "nomad-lab[infrastructure]==2.0.0",
   "pydantic>=2.0",
   "regex",
 ]
@@ -35,3 +37,8 @@ source-exclude = ["docs/**"]
 
 [dependency-groups]
 dev = ["pytest>=7.4.4"]
+
+[tool.ruff.format]
+# use single quotes for strings.
+quote-style = "single"
+

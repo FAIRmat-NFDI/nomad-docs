@@ -1,4 +1,4 @@
-# How to configure an Oasis
+# How to configure a NOMAD Oasis
 
 ## Configuration files
 
@@ -43,7 +43,7 @@ A few things to notice:
 - The services are setup to restart `always`, you might want to change this to `no` while debugging errors to prevent indefinite restarts.
 - Make sure that the `PWD` environment variable is set. NORTH needs to create bind mounts that require absolute paths and we need to pass the current working directory to the configuration from the PWD variable (see hub service in the `docker-compose.yaml`).
 - The `north` service needs to run docker containers. We have to use the systems docker group as a group. You might need to replace `991` with your
-  systems docker group id.
+  systems docker group ID.
 
 ### nomad.yaml
 
@@ -59,7 +59,6 @@ You should change the following:
   users back to this host. Make sure this is the hostname that your users can access.
 - Replace `deployment`, `deployment_url`, and `maintainer_email` with representative values.
   The `deployment_url` should be the URL to the deployment's api (should end with `/api`).
-- To enable the *log transfer* set `logtransfer.enable: true` ([data privacy notice above](#sharing-data-through-log-transfer-and-data-privacy-notice)).
 - You can change `api_base_path` to run NOMAD under a different path prefix.
 - You should generate your own `north.jupyterhub_crypt_key`. You can generate one
   with `openssl rand -hex 32`.
@@ -615,34 +614,11 @@ A few notes on the realm configuration:
 - We disabled the https requirement on the default realm for simplicity. You should change
   this for a production system.
 
-## Sharing data through log transfer and data privacy notice
-
-NOMAD includes a *log transfer* functions. When enabled this automatically collects
-and transfers non-personalized logging data to us. Currently, this functionality is experimental
-and requires opt-in. However, in upcoming versions of NOMAD Oasis, we might change to opt-out.
-
-To enable this functionality add `logtransfer.enabled: true` to you `nomad.yaml`.
-
-The service collects log-data and aggregated statistics, such as the number of users or the
-number of uploaded datasets. In any case this data does not personally identify any users or
-contains any uploaded data. All data is in an aggregated and anonymized form.
-
-The data is solely used by the NOMAD developers and FAIRmat, including but not limited to:
-
-- Analyzing and monitoring system performance to identify and resolve issues.
-- Improving our NOMAD software based on usage patterns.
-- Generating aggregated and anonymized reports.
-
-We do not share any collected data with any third parties.
-
-We may update this data privacy notice from time to time to reflect changes in our data practices.
-We encourage you to review this notice periodically for any updates.
-
 ## Further steps
 
 This is an incomplete list of potential things to customize your NOMAD experience.
 
 - Learn [how to develop plugins](../plugins/plugins.md) that can be installed in an Oasis
-- Write YAML based [schemas](../manage/gui/yaml.md) and [ELNs](../manage/gui/elns.md)
-- Learn how to use the [tabular parser](../manage/gui/tabular.md) to manage data from XLS or CSV
-- Add specialized [NORTH tools](../manage/gui/north.md)
+- Write YAML based [schemas](../schemas/define.md) and [ELNs](../schemas/define.md#annotate-for-the-gui)
+- Learn how to use the [tabular parser](../schemas/tabular.md) to manage data from XLS or CSV
+- Add specialized [NORTH tools](../plugins/types/north_tools.md)

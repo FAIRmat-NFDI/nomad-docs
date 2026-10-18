@@ -98,12 +98,27 @@ from nomad.config.models.plugins import ParserEntryPoint
 class MyParserEntryPoint(ParserEntryPoint):
     parameter: int = Field(0, description='Config parameter for this parser.')
 
+
 myparser = MyParserEntryPoint(
-    name = 'MyParser',
-    description = 'My custom parser.',
-    mainfile_name_re = '.*\.myparser',
+    name='MyParser',
+    description='My custom parser.',
+    mainfile_name_re='.*\.myparser',
 )
 ```
+
+!!! warning "Sensitive configuration"
+
+    Plugin configuration may be serialized and exposed to clients. Define confidential
+    fields, such as passwords, tokens, and API keys, using Pydantic's [`SecretStr`](https://pydantic.dev/docs/validation/latest/api/pydantic/types/#pydantic.types.SecretStr){:target="_blank" rel="noopener"} and
+    exclude them from serialization:
+
+    ```python
+    from pydantic import Field, SecretStr
+
+    credential: SecretStr = Field(..., exclude=True)
+    ```
+
+    Access the value only where it is needed by calling `credential.get_secret_value()`.
 
 The plugin entry point behaviour can be controlled in `nomad.yaml` using `plugins.entry_points.options`:
 
@@ -123,7 +138,6 @@ The configuration class has a `load` method that returns the entry point resourc
 
 ```python
 class MyParserEntryPoint(ParserEntryPoint):
-
     def load(self):
         from nomad_example.parsers.myparser import MyParser
 

@@ -5,7 +5,6 @@ on:
     branches: ["main", "develop"]
     # tags: ["v*.*.*"]
   pull_request:
-    branches: ["main", "develop"]
     types:
       - opened
       - synchronize
@@ -31,13 +30,22 @@ jobs:
             *.md
             docs/**/*.md
 
+  ruff-format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: astral-sh/ruff-action@v4.1.0
+        with:
+          args: format --preview --check --diff
+
   check-links:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
 
       - name: Check links in markdown files
-        uses: UmbrellaDocs/action-linkspector@v1.5.4
+        uses: UmbrellaDocs/action-linkspector@v1.5.5
         with:
           config_file: .github/workflows/configs/.linkspector.yml
           filter_mode: "nofilter" # check all files (not just added)
@@ -57,10 +65,36 @@ jobs:
           python-version: ${{ env.PYTHON_VERSION }}
 
       - name: Check mkdocs build
+        # The `nomad_url()` macro renders relative to the configured instance.
+        # Use the same repository variables as the production deploy (see
+        # deploy-docs.yml) so `site/` points at the central NOMAD API — this is the
+        # directory that is copied into the nomad package and published as the PR
+        # preview below, so it must be built with the production config. Then fail
+        # if the Oasis default (localhost/nomad-oasis) leaks into the output.
+        # `.linkspector` intentionally ignores localhost, so it cannot catch this
+        # class of regression.
+        env:
+          NOMAD_SERVICES_API_HOST: ${{ vars.NOMAD_SERVICES_API_HOST }}
+          NOMAD_SERVICES_API_PORT: ${{ vars.NOMAD_SERVICES_API_PORT }}
+          NOMAD_SERVICES_API_BASE_PATH: ${{ vars.NOMAD_SERVICES_API_BASE_PATH }}
+          NOMAD_SERVICES_HTTPS: ${{ vars.NOMAD_SERVICES_HTTPS }}
         run: |
+          for name in NOMAD_SERVICES_API_HOST NOMAD_SERVICES_API_PORT NOMAD_SERVICES_API_BASE_PATH NOMAD_SERVICES_HTTPS; do
+            if [ -z "${!name}" ]; then
+              echo "::error::Repository variable ${name} is not set (Settings > Secrets and variables > Actions > Variables)."
+              exit 1
+            fi
+          done
           uv run \
             --with 'nomad-lab[infrastructure] @ https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR.git' \
             mkdocs build --strict
+          # Match the exact string the misconfigured macro emits. A bare
+          # "localhost"/"nomad-oasis" grep would flag legitimate Oasis docs
+          # (nginx/docker-compose configs, Oasis curl examples).
+          if grep -rniE 'localhost:8000/nomad-oasis/api' site; then
+            echo "::error::Oasis default URL leaked from nomad_url() into the production docs build. Check the NOMAD_SERVICES_* repository variables."
+            exit 1
+          fi
 
       - name: Copy built docs
         run: |
@@ -74,7 +108,9 @@ jobs:
           uv run pytest tests
 
       - name: Deploy PR Preview
-        if: github.event_name == 'pull_request'
+        # pr-preview-action does not support fork PRs: GITHUB_TOKEN is read-only there.
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository
         uses: rossjrw/pr-preview-action@v1
         with:
           source-dir: site
+          pages-base-url: docs.nomad-lab.eu

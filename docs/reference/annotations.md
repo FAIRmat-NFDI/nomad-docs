@@ -61,7 +61,7 @@ MySection:
 {{ pydantic_model('nomad.datamodel.metainfo.annotations.TabularAnnotation', heading='### `tabular`') }}
 
 Each and every quantity to be filled with data from tabular data files should be annotated as the following example.
-A practical example is provided in [How To](../howto/manage/gui/tabular.md#preparing-the-tabular-data-file) section.
+A practical example is provided in [How To](../howto/schemas/tabular.md#preparing-the-tabular-data-file) section.
 
 ```yaml
 my_quantity:
@@ -85,20 +85,20 @@ One special quantity will be dedicated to host the tabular data file. In the fol
 
 ### Available Combinations
 
-| Tutorial ref.                      | `file_mode`            | `mapping_mode` | `sections` | How to ref.                                                                                 |
-| ---------------------------------- | ---------------------- | -------------- | ---------- | ------------------------------------------------------------------------------------------- |
-| 1                                  | `current_entry`        | `column`       | `root`     | [HowTo](../howto/manage/gui/tabular.md#1-column-mode-current-entry-parse-to-root)           |
-| 2                                  | `current_entry`        | `column`       | my path    | [HowTo](../howto/manage/gui/tabular.md#2-column-mode-current-entry-parse-to-my-path)        |
-| <span style="color:red">np1</span> | `current_entry`        | `row`          | `root`     | <span style="color:red">Not possible</span>                                                 |
-| 3                                  | `current_entry`        | `row`          | my path    | [HowTo](../howto/manage/gui/tabular.md#3-row-mode-current-entry-parse-to-my-path)           |
-| <span style="color:red">np2</span> | `single_new_entry`     | `column`       | `root`     | <span style="color:red">Not possible</span>                                                 |
-| 4                                  | `single_new_entry`     | `column`       | my path    | [HowTo](../howto/manage/gui/tabular.md#4-column-mode-single-new-entry-parse-to-my-path)     |
-| <span style="color:red">np3</span> | `single_new_entry`     | `row`          | `root`     | <span style="color:red">Not possible</span>                                                 |
-| 5                                  | `single_new_entry`     | `row`          | my path    | [HowTo](../howto/manage/gui/tabular.md#5-row-mode-single-new-entry-parse-to-my-path)        |
-| <span style="color:red">np4</span> | `multiple_new_entries` | `column`       | `root`     | <span style="color:red">Not possible</span>                                                 |
-| <span style="color:red">np5</span> | `multiple_new_entries` | `column`       | my path    | <span style="color:red">Not possible</span>                                                 |
-| 6                                  | `multiple_new_entries` | `row`          | `root`     | [HowTo](../howto/manage/gui/tabular.md#6-row-mode-multiple-new-entries-parse-to-root)       |
-| 7                                  | `multiple_new_entries` | `row`          | my path    | [HowTo](../howto/manage/gui/tabular.md#7-row-mode-multiple-new-entries-parse-to-my-path)    |
+| Tutorial ref.                      | `file_mode`            | `mapping_mode` | `sections` | How to ref.                                                                           |
+| ---------------------------------- | ---------------------- | -------------- | ---------- | ------------------------------------------------------------------------------------- |
+| 1                                  | `current_entry`        | `column`       | `root`     | [HowTo](../howto/schemas/tabular.md#1-column-mode-current-entry-parse-to-root)        |
+| 2                                  | `current_entry`        | `column`       | my path    | [HowTo](../howto/schemas/tabular.md#2-column-mode-current-entry-parse-to-my-path)     |
+| <span style="color:red">np1</span> | `current_entry`        | `row`          | `root`     | <span style="color:red">Not possible</span>                                           |
+| 3                                  | `current_entry`        | `row`          | my path    | [HowTo](../howto/schemas/tabular.md#3-row-mode-current-entry-parse-to-my-path)        |
+| <span style="color:red">np2</span> | `single_new_entry`     | `column`       | `root`     | <span style="color:red">Not possible</span>                                           |
+| 4                                  | `single_new_entry`     | `column`       | my path    | [HowTo](../howto/schemas/tabular.md#4-column-mode-single-new-entry-parse-to-my-path)  |
+| <span style="color:red">np3</span> | `single_new_entry`     | `row`          | `root`     | <span style="color:red">Not possible</span>                                           |
+| 5                                  | `single_new_entry`     | `row`          | my path    | [HowTo](../howto/schemas/tabular.md#5-row-mode-single-new-entry-parse-to-my-path)     |
+| <span style="color:red">np4</span> | `multiple_new_entries` | `column`       | `root`     | <span style="color:red">Not possible</span>                                           |
+| <span style="color:red">np5</span> | `multiple_new_entries` | `column`       | my path    | <span style="color:red">Not possible</span>                                           |
+| 6                                  | `multiple_new_entries` | `row`          | `root`     | [HowTo](../howto/schemas/tabular.md#6-row-mode-multiple-new-entries-parse-to-root)    |
+| 7                                  | `multiple_new_entries` | `row`          | my path    | [HowTo](../howto/schemas/tabular.md#7-row-mode-multiple-new-entries-parse-to-my-path) |
 
 ```yaml
 data_file:
@@ -210,6 +210,7 @@ from nomad.datamodel.metainfo.plot import PlotSection
 from nomad.metainfo import Quantity, Section
 from nomad.datamodel.data import EntryData
 
+
 class CustomSection(PlotSection, EntryData):
     m_def = Section(
         a_plotly_graph_object=[
@@ -217,24 +218,15 @@ class CustomSection(PlotSection, EntryData):
                 'label': 'graph object 1',
                 'data': {'x': '#time', 'y': '#chamber_pressure'},
                 'layout': {
-                    'title': {
-                        'text': 'Plot in section level'
-                    },
-                    'xaxis': {
-                        'title': {
-                            'text': 'x data'
-                        }
-                    },
-                    'yaxis': {
-                        'title': {
-                            'text': 'y data'
-                        }
-                    }
-                }
-            }, {
+                    'title': {'text': 'Plot in section level'},
+                    'xaxis': {'title': {'text': 'x data'}},
+                    'yaxis': {'title': {'text': 'y data'}},
+                },
+            },
+            {
                 'label': 'graph object 2',
-                'data': {'x': '#time', 'y': '#substrate_temperature'}
-            }
+                'data': {'x': '#time', 'y': '#substrate_temperature'},
+            },
         ],
         a_plotly_express={
             'label': 'fig 2',
@@ -242,51 +234,51 @@ class CustomSection(PlotSection, EntryData):
             'method': 'scatter',
             'x': '#substrate_temperature',
             'y': '#chamber_pressure',
-            'color': '#chamber_pressure'
+            'color': '#chamber_pressure',
         },
         a_plotly_subplots={
             'label': 'fig 1',
             'index': 1,
             'parameters': {'rows': 2, 'cols': 2},
-            'layout': {
-                'title': {
-                    'text': 'All plots'
-                }
-            },
+            'layout': {'title': {'text': 'All plots'}},
             'plotly_express': [
                 {
                     'method': 'scatter',
                     'x': '#time',
                     'y': '#chamber_pressure',
-                    'color': '#chamber_pressure'
+                    'color': '#chamber_pressure',
                 },
                 {
                     'method': 'scatter',
                     'x': '#time',
                     'y': '#substrate_temperature',
-                    'color': '#substrate_temperature'
+                    'color': '#substrate_temperature',
                 },
                 {
                     'method': 'scatter',
                     'x': '#substrate_temperature',
                     'y': '#chamber_pressure',
-                    'color': '#chamber_pressure'
+                    'color': '#chamber_pressure',
                 },
                 {
                     'method': 'scatter',
                     'x': '#substrate_temperature',
                     'y': '#chamber_pressure',
-                    'color': '#substrate_temperature'
-                }
-            ]
-        }
+                    'color': '#substrate_temperature',
+                },
+            ],
+        },
     )
-    time = Quantity(type=float, shape=['*'], unit='s', a_eln=dict(component='NumberEditQuantity'))
-    substrate_temperature = Quantity(type=float, shape=['*'], unit='K', a_eln=dict(component='NumberEditQuantity'))
-    chamber_pressure = Quantity(type=float, shape=['*'], unit='Pa', a_eln=dict(component='NumberEditQuantity'))
+    time = Quantity(
+        type=float, shape=['*'], unit='s', a_eln=dict(component='NumberEditQuantity')
+    )
+    substrate_temperature = Quantity(
+        type=float, shape=['*'], unit='K', a_eln=dict(component='NumberEditQuantity')
+    )
+    chamber_pressure = Quantity(
+        type=float, shape=['*'], unit='Pa', a_eln=dict(component='NumberEditQuantity')
+    )
 ```
-
-{{ pydantic_model('nomad.datamodel.metainfo.annotations.PlotAnnotation', heading='### PlotAnnotation (Deprecated)') }}
 
 ## H5Web
 
@@ -296,8 +288,8 @@ corresponding HDF5 object attributes and are subsequently read by H5Web.
 
 Usage:
 
-- Use this base section as a type in your Quantity.
-- Add addictional annotations to trigger the H5Web visualizer to the section containing the Quantity, and, optionally, to its parent sections.
+- Use this base section as a type in your quantity.
+- Add addictional annotations to trigger the H5Web visualizer to the section containing the quantity, and, optionally, to its parent sections.
 
 !!! note
 
@@ -358,7 +350,7 @@ The plot of variables `x_value` and `y_value` is also displayed; as the `B` clas
 
 !!! note
 
-    The `paths` variable points in the example above to a [repeated subsection](../howto/plugins/types/schema_packages.md#schemapackage-class), hence the path provided includes a serial number pointing to the subsection object to be displayed in the entry overview page. To show in the overview page a non-repeatable subsection, no serial number is required in the path.
+    The `paths` variable points in the example above to a [repeated subsection](../howto/schemas/define.md#add-subsections), hence the path provided includes a serial number pointing to the subsection object to be displayed in the entry overview page. To show in the overview page a non-repeatable subsection, no serial number is required in the path.
 
 H5Web implements visualization features through the attributes shown above, they can be attached to datasets and groups of an HDF5 file.
 The conventions for the attributes are rooted in the NeXus language and more explanations can be found in the [NXData documentation page](https://manual.nexusformat.org/classes/base_classes/NXdata.html){:target="_blank" rel="noopener"} and in the [Associating plottable data documentation page](https://manual.nexusformat.org/datarules.html#design-findplottable-niac2014){:target="_blank" rel="noopener"}.
