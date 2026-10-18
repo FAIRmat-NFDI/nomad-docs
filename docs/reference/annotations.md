@@ -280,8 +280,6 @@ class CustomSection(PlotSection, EntryData):
     )
 ```
 
-{{ pydantic_model('nomad.datamodel.metainfo.annotations.PlotAnnotation', heading='### PlotAnnotation (Deprecated)') }}
-
 ## H5Web
 
 The H5WebAnnotation provides a way to control how H5Web renders visualization for
