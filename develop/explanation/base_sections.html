@@ -21,7 +21,7 @@
       
       
       <link rel="icon" href="../assets/favicon.png">
-      <meta name="generator" content="mkdocs-ProperDocs 1.6.7, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-ProperDocs 1.6.7, mkdocs-material-9.7.7">
     
     
       
@@ -29,7 +29,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -4323,7 +4323,7 @@ model.</p>
 inheritance, composition and association between the base sections.
 For more information on UML Class diagrams please see
 <a href="https://en.wikipedia.org/wiki/Class_diagram" rel="noopener" target="_blank">en.wikipedia.org/wiki/Class_diagram</a>.</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/base-sections.svg" data-desc-position="bottom"><img alt="entity activity model" src="images/base-sections.svg"></a></p>
+<p></p>
 <p>All the base sections defined in this model are abstract in the sense that they cannot be
 instantiated in NOMAD directly.
 Instead, the user is expected to implement these in their own schemas by inheriting a base
@@ -4355,10 +4355,10 @@ its identity."</p>
 <p>See <a href="http://purl.obolibrary.org/obo/BFO_0000002" rel="noopener" target="_blank">BFO_0000002</a> for semantic context.</p>
 </div>
 <p>The <code>Entity</code> section is currently subclassed by <code>System</code>, <code>Collection</code> and <code>Instrument</code>.</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/entity-sections.svg" data-desc-position="bottom"><img alt="entity sections" src="images/entity-sections.svg"></a></p>
+<p></p>
 <h4 id="collection"><code>Collection</code><a class="headerlink" href="#collection" title="Permanent link">¶</a></h4>
 <p>The <code>Collection</code> section should be inherited when attempting to group entities together.</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/collection-sections.svg" data-desc-position="bottom"><img alt="collection sections" src="images/collection-sections.svg"></a></p>
+<p></p>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
 </div>
@@ -4379,7 +4379,7 @@ the <code>lab_id</code> or vice versa.</p>
 <h4 id="instrument"><code>Instrument</code><a class="headerlink" href="#instrument" title="Permanent link">¶</a></h4>
 <p>The <code>Instrument</code> section should be inherited when describing any tools used for material
 creation or characterization.</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/instrument-sections.svg" data-desc-position="bottom"><img alt="instrument sections" src="images/instrument-sections.svg"></a></p>
+<p></p>
 <h4 id="system"><code>System</code><a class="headerlink" href="#system" title="Permanent link">¶</a></h4>
 <p>The main <code>Entity</code> section is <code>System</code> which is intended to cover any material system from
 atomic to device scale.
@@ -4390,7 +4390,7 @@ fraction within the system.</p>
 <p>There are two specializations of <code>System</code> which differentiates
 between the theoretical concept of a pure material, <code>PureSubstance</code>, and an actual physical
 material combining several pure substances, <code>CompositeSystem</code>.</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/system-sections.svg" data-desc-position="bottom"><img alt="system" src="images/system-sections.svg"></a></p>
+<p></p>
 <h5 id="pubchempuresubstancesection"><code>PubChemPureSubstanceSection</code><a class="headerlink" href="#pubchempuresubstancesection" title="Permanent link">¶</a></h5>
 <p>This is a specialization of the <code>PureSubstanceSection</code> which will automatically search the
 PubChem database for additional information about the substance.
@@ -4416,10 +4416,10 @@ Otherwise a search query is made for the filled attributes in the following orde
 and <code>Experiment</code>.
 These subclasses are intended to cover all types of activities and should be used instead
 of inheriting directly from <code>Activity</code>.</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/activity-sections.svg" data-desc-position="bottom"><img alt="activity sections" src="images/activity-sections.svg"></a></p>
+<p></p>
 <h4 id="experiment"><code>Experiment</code><a class="headerlink" href="#experiment" title="Permanent link">¶</a></h4>
 <p>The <code>Experiment</code> section should be inherited when attempting to group activities together.</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/experiment-sections.svg" data-desc-position="bottom"><img alt="experiment sections" src="images/experiment-sections.svg"></a></p>
+<p></p>
 <div class="admonition example">
 <p class="admonition-title">Example</p>
 </div>
@@ -4445,7 +4445,7 @@ samples, the <code>Experiment</code> section can be inherited to group these tog
 specialized further in the <a href="#plugin-nomad-material-processing"><code>nomad-material-processing</code></a>
 plugin detailed below.
 The main feature of the <code>Process</code> section is that it adds <code>ProcessSteps</code> with a duration.</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/process-sections.svg" data-desc-position="bottom"><img alt="process sections" src="images/process-sections.svg"></a></p>
+<p></p>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
 <p>By "SynthesisMethod" we mean:</p>
@@ -4462,7 +4462,7 @@ that is the evaluant, by physically examining it or its proxies. [ obi : pppb ]"
 </div>
 <p>The <code>Measurement</code> section adds <code>samples</code> which are references to instances of (subclasses
 of) <code>CompositeSystem</code>.</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/measurement-sections.svg" data-desc-position="bottom"><img alt="measurement sections" src="images/measurement-sections.svg"></a></p>
+<p></p>
 <h4 id="analysis"><code>Analysis</code><a class="headerlink" href="#analysis" title="Permanent link">¶</a></h4>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
@@ -4479,7 +4479,7 @@ of) <code>CompositeSystem</code>.</p>
 sub sections) of some archive.
 In addition, it provides the <code>outputs</code> which is a repeating section of <code>AnalysisResult</code>
 which are intended to be further specialized by the user.</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/analysis-sections.svg" data-desc-position="bottom"><img alt="analysis sections" src="images/analysis-sections.svg"></a></p>
+<p></p>
 <h3 id="readableidentifiers"><code>ReadableIdentifiers</code><a class="headerlink" href="#readableidentifiers" title="Permanent link">¶</a></h3>
 <p>This base sub section is meant to be composed into the entity-activity sections mentioned
 above to provide a standardized readable identifier.</p>
@@ -4635,7 +4635,7 @@ maintained by FAIRmat and is currently hosted on
       <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.path", "navigation.footer", "navigation.top", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../create-image-sliders.js"></script>
       

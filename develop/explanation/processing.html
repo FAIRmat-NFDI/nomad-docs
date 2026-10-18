@@ -21,7 +21,7 @@
       
       
       <link rel="icon" href="../assets/favicon.png">
-      <meta name="generator" content="mkdocs-ProperDocs 1.6.7, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-ProperDocs 1.6.7, mkdocs-material-9.7.7">
     
     
       
@@ -29,7 +29,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -4464,7 +4464,7 @@ mainfiles, and entries, see <a href="basics.html">Explanation &gt; From files to
 <li><strong>Persisting</strong> (including indexing of) the extracted data.</li>
 </ol>
 <figure>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/processing.png" data-desc-position="bottom"><img alt="processing" src="images/processing.png"></a>
+<p>
   </p>
 <figcaption>Processing steps and how they interact with files, entries, and archives.</figcaption>
 </figure>
@@ -4594,13 +4594,13 @@ function implementation.</p>
 <h2 id="processing-scenarios">Processing scenarios<a class="headerlink" href="#processing-scenarios" title="Permanent link">¶</a></h2>
 <h3 id="single-file-single-entry">Single file, single entry<a class="headerlink" href="#single-file-single-entry" title="Permanent link">¶</a></h3>
 <figure>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/processing-single-single.png" data-desc-position="bottom"><img alt="processing" src="images/processing-single-single.png"></a></p>
+<p></p>
 </figure>
 <p>This is the "normal" case. A parser is matched to a mainfile. During processing,
 only the mainfile is read to populate the <code>EntryArchive</code> with data.</p>
 <h3 id="multiple-files-single-entry">Multiple files, single entry<a class="headerlink" href="#multiple-files-single-entry" title="Permanent link">¶</a></h3>
 <figure>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/processing-multi-single.png" data-desc-position="bottom"><img alt="processing" src="images/processing-multi-single.png"></a></p>
+<p></p>
 </figure>
 <p>Same as above: a parser is matched to a mainfile. But, during processing,
 the mainfile and other files are read to populate the <code>EntryArchive</code> with data. Only the
@@ -4614,7 +4614,7 @@ files for more data. Certain modes of the <a href="../howto/schemas/tabular.html
 this.</p>
 <h3 id="single-file-multiple-entries">Single file, multiple entries<a class="headerlink" href="#single-file-multiple-entries" title="Permanent link">¶</a></h3>
 <figure>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/processing-single-multi.png" data-desc-position="bottom"><img alt="processing" src="images/processing-single-multi.png"></a></p>
+<p></p>
 </figure>
 <p>A parser can match a mainfile in two ways. It's <code>is_mainfile</code> function can simply return <code>True</code>,
 meaning that the parser can parse this file. Or, it returns a list of keys. With the
@@ -4629,7 +4629,7 @@ entries created from a mainfile and a key, the key is also included in the ID. A
 the entry identity is internally locked to the mainfile (and the respective key).</p>
 <h3 id="creating-files-spawning-entries">Creating files, spawning entries<a class="headerlink" href="#creating-files-spawning-entries" title="Permanent link">¶</a></h3>
 <figure>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/processing-spawn.png" data-desc-position="bottom"><img alt="processing" src="images/processing-spawn.png"></a></p>
+<p></p>
 </figure>
 <p>During processing, parsers or <code>normalize</code> functions can also create new (or update existing)
 files. And the processing might also trigger processing of these freshly created (or updated)
@@ -4698,7 +4698,7 @@ is easy to add new keys, but it is also dangerous because no static or semantic 
 occurs. <em>Readers</em> and <em>writers</em> might be a good strategy to re-use parts of a parser,
 but <em>reader</em> and <em>writer</em> implementations remain strongly connected and inter-dependent.</p>
 <figure>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/reader-writer.png" data-desc-position="bottom"><img alt="processing" src="images/reader-writer.png"></a>
+<p>
   </p>
 <figcaption>Read and written data items might overlap but are rarely the same.</figcaption>
 </figure>
@@ -4802,7 +4802,7 @@ an HDF5 file (data).</p>
       <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.path", "navigation.footer", "navigation.top", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../create-image-sliders.js"></script>
       

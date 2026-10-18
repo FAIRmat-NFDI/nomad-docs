@@ -21,7 +21,7 @@
       
       
       <link rel="icon" href="../../assets/favicon.png">
-      <meta name="generator" content="mkdocs-ProperDocs 1.6.7, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-ProperDocs 1.6.7, mkdocs-material-9.7.7">
     
     
       
@@ -29,7 +29,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -4448,8 +4448,8 @@ if you are unfamiliar with any of them:</p>
 <p>First, you will version-control your NOMAD plugin by creating a GitHub repository from the official template. Start from the official <a href="https://github.com/FAIRmat-NFDI/nomad-plugin-template" rel="noopener" target="_blank"><code>nomad-plugin-template</code> repository</a>.</p>
 <p>To create a new repository from the template, select <strong>Use this template</strong> and then choose
 <strong>Create a new repository</strong>. You must be logged in to GitHub to see this option.</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../images/use_template_dark.png#gh-dark-mode-only" data-desc-position="bottom"><img alt="Use template" src="../images/use_template_dark.png#gh-dark-mode-only"></a>
-<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../images/use_template_light.png#gh-light-mode-only" data-desc-position="bottom"><img alt="Use template" src="../images/use_template_light.png#gh-light-mode-only"></a></p>
+<p>
+</p>
 <p>Enter a repository name (for example, <code>nomad-optical-microscopy</code>) and select <strong>Create repository</strong> to complete the setup.</p>
 <!-- TODO: add image slider to show the two steps -->
 
@@ -4463,8 +4463,8 @@ if you are unfamiliar with any of them:</p>
 </ol>
 <h4 id="option-1-using-github-codespaces-recommended">Option 1: Using GitHub Codespaces (Recommended)<a class="headerlink" href="#option-1-using-github-codespaces-recommended" title="Permanent link">¶</a></h4>
 <p>To use a GitHub Codespace for plugin development, click on the <strong>&lt;&gt; Code</strong> button in the repository and choose <strong>Create codespace on main</strong>.</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../images/codespace_dark.png#gh-dark-mode-only" data-desc-position="bottom"><img alt="Use codespace" src="../images/codespace_dark.png#gh-dark-mode-only"></a>
-<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../images/codespace_light.png#gh-light-mode-only" data-desc-position="bottom"><img alt="Use codespace" src="../images/codespace_light.png#gh-light-mode-only"></a></p>
+<p>
+</p>
 <h4 id="option-2-developing-locally">Option 2: Developing locally<a class="headerlink" href="#option-2-developing-locally" title="Permanent link">¶</a></h4>
 <p>If you prefer to work locally, click on the <strong>&lt;&gt; Code</strong> button in the repository and choose the <strong>Local</strong> tab, copy the repository URL, and clone it to a selected location in your machine by running in terminal:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">cd</span><span class="w"> </span>LOCAL/PATH/ON/YOUR/MACHINE
@@ -4550,12 +4550,12 @@ For example:</p>
 <h4 id="enable-cruft-updates">Enable cruft updates<a class="headerlink" href="#enable-cruft-updates" title="Permanent link">¶</a></h4>
 <p>The template repository includes a GitHub Actions workflow that checks for updates to the cookiecutter template. The workflow runs automatically once a week and can also be triggered manually. To enable this functionality, grant the workflow permission to write to the repository and create pull requests.</p>
 <p>From your plugin repository on GitHub, open the <strong>Settings</strong> page, and navigate to <strong>Actions</strong> &gt; <strong>General</strong> (on the left pane):</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../images/github_settings_dark.png#gh-dark-mode-only" data-desc-position="bottom"><img alt="Use template" src="../images/github_settings_dark.png#gh-dark-mode-only"></a>
-<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../images/github_settings_light.png#gh-light-mode-only" data-desc-position="bottom"><img alt="Use template" src="../images/github_settings_light.png#gh-light-mode-only"></a></p>
+<p>
+</p>
 <p>Scroll to the bottom of the page, select <strong>Read and write permissions</strong>
 and check <strong>Allow GitHub Actions to create and approve pull requests</strong>, and then click <strong>Save</strong>.</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../images/workflow_permissions_dark.png#gh-dark-mode-only" data-desc-position="bottom"><img alt="Use template" src="../images/workflow_permissions_dark.png#gh-dark-mode-only"></a>
-<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="../images/workflow_permissions_light.png#gh-light-mode-only" data-desc-position="bottom"><img alt="Use template" src="../images/workflow_permissions_light.png#gh-light-mode-only"></a></p>
+<p>
+</p>
 <h2 id="developing-the-plugin">Developing the plugin<a class="headerlink" href="#developing-the-plugin" title="Permanent link">¶</a></h2>
 <p>The structure of the plugin is now ready for development for your specific purposes. If you plan to work with a single plugin and can avoid using NOMAD GUI functionality, stand-alone installation of the plugin will be sufficient. If you plan to work with multiple plugins or GUI-specific functionality, or if you wish to develop the core NOMAD package, we recommend using a dedicated <a href="https://github.com/FAIRmat-NFDI/nomad-distro-dev" rel="noopener" target="_blank"><code>nomad-distro-dev</code></a> development environment.</p>
 <h3 id="option-1-stand-alone-installation-of-the-plugin">Option 1: Stand-alone installation of the plugin<a class="headerlink" href="#option-1-stand-alone-installation-of-the-plugin" title="Permanent link">¶</a></h3>
@@ -4695,7 +4695,7 @@ and check <strong>Allow GitHub Actions to create and approve pull requests</stro
       <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.path", "navigation.footer", "navigation.top", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../../create-image-sliders.js"></script>
       

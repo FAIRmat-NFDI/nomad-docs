@@ -21,7 +21,7 @@
       
       
       <link rel="icon" href="../../../assets/favicon.png">
-      <meta name="generator" content="mkdocs-ProperDocs 1.6.7, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-ProperDocs 1.6.7, mkdocs-material-9.7.7">
     
     
       
@@ -29,7 +29,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -4482,8 +4482,8 @@ the corresponding parser documentation. -->
 
 <p>Open the parser-generated entry and select <strong>CONNECTIVITY</strong> to view its workflow
 graph:</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/single-point-nomad-workflow-card-light.png#only-light" data-desc-position="bottom"><img alt="Parser-generated single-point workflow graph in the light theme" class="screenshot" src="images/single-point-nomad-workflow-card-light.png#only-light"></a>
-<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/single-point-nomad-workflow-card-dark.png#only-dark" data-desc-position="bottom"><img alt="Parser-generated single-point workflow graph in the dark theme" class="screenshot" src="images/single-point-nomad-workflow-card-dark.png#only-dark"></a></p>
+<p>
+</p>
 <p>The parser normalizer exposes three global output links in this graph. The two
 nodes labeled <strong>Output calculation</strong> refer to the same final calculation
 section, while <strong>Output system</strong> refers to the final system section. They do
@@ -4589,8 +4589,8 @@ and <a href="../../../reference/metainfo.html#reference-forms">Reference &gt; Sc
 <p>Open the custom workflow entry. Its <strong>Overview</strong> page contains this graph:</p>
 </li>
 </ol>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/single-point-custom-nomad-workflow-card-light.png#only-light" data-desc-position="bottom"><img alt="Custom single-point workflow graph in the light theme" class="screenshot" src="images/single-point-custom-nomad-workflow-card-light.png#only-light"></a>
-<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/single-point-custom-nomad-workflow-card-dark.png#only-dark" data-desc-position="bottom"><img alt="Custom single-point workflow graph in the dark theme" class="screenshot" src="images/single-point-custom-nomad-workflow-card-dark.png#only-dark"></a></p>
+<p>
+</p>
 <p>This graph has one output node because the task output and global workflow
 output reference the same calculation section. The visualizer represents this
 shared section as one connected output node.</p>
@@ -4791,14 +4791,14 @@ workflow task is represented as a sub-workflow.</p>
 <p>When added to a project with the example data, this workflow file produces an
 entry whose <strong>Overview</strong> page initially shows the complete <code>DFT+TB+DMFT</code>
 workflow:</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/nested-workflow-parent-card-light.png#only-light" data-desc-position="bottom"><img alt="Top-level nested workflow graph in the light theme" class="screenshot" src="images/nested-workflow-parent-card-light.png#only-light"></a>
-<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/nested-workflow-parent-card-dark.png#only-dark" data-desc-position="bottom"><img alt="Top-level nested workflow graph in the dark theme" class="screenshot" src="images/nested-workflow-parent-card-dark.png#only-dark"></a></p>
+<p>
+</p>
 <p>Select the <strong>DMFT</strong> task to enter the sub-workflow. The graph then shows the
 <code>DMFT at T1</code> and <code>DMFT at T2</code> tasks. Both receive the TB calculation as input,
 and each connects to its corresponding DMFT output. Use the back arrow in the
 workflow toolbar to return to the parent graph.</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/nested-workflow-dmft-subworkflow-card-light.png#only-light" data-desc-position="bottom"><img alt="DMFT sub-workflow graph in the light theme" class="screenshot" src="images/nested-workflow-dmft-subworkflow-card-light.png#only-light"></a>
-<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/nested-workflow-dmft-subworkflow-card-dark.png#only-dark" data-desc-position="bottom"><img alt="DMFT sub-workflow graph in the dark theme" class="screenshot" src="images/nested-workflow-dmft-subworkflow-card-dark.png#only-dark"></a></p>
+<p>
+</p>
 <p>To reproduce this example, download the compressed bundle and add it while
 creating a project. The workflow YAML is located at the root of the bundle.</p>
 <p><a class="md-button nomad-button" href="data/nested_workflow_one-entry.zip">Download nested_workflow_one-entry.zip</a></p>
@@ -4942,8 +4942,8 @@ above:</p>
 </code></pre></div>
 </details>
 <p>After processing, the workflow entry contains the following graph:</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/custom-task-workflow-card-light.png#only-light" data-desc-position="bottom"><img alt="Custom-task workflow graph in the light theme" class="screenshot" src="images/custom-task-workflow-card-light.png#only-light"></a>
-<a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/custom-task-workflow-card-dark.png#only-dark" data-desc-position="bottom"><img alt="Custom-task workflow graph in the dark theme" class="screenshot" src="images/custom-task-workflow-card-dark.png#only-dark"></a></p>
+<p>
+</p>
 <p>To reproduce the example, download the bundle and add it to a project. It
 contains the referenced files, the entry YAML files, and the workflow YAML shown
 above.</p>
@@ -5114,7 +5114,7 @@ with a convergence threshold and a reference to the final calculation:</p>
       <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.path", "navigation.footer", "navigation.top", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../../../create-image-sliders.js"></script>
       

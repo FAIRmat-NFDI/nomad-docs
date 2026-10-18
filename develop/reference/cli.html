@@ -21,7 +21,7 @@
       
       
       <link rel="icon" href="../assets/favicon.png">
-      <meta name="generator" content="mkdocs-ProperDocs 1.6.7, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-ProperDocs 1.6.7, mkdocs-material-9.7.7">
     
     
       
@@ -29,7 +29,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -3813,17 +3813,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#nomad-admin-ops-nginx-conf" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        nginx-conf
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#nomad-admin-ops-prototypes-update" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4359,6 +4348,17 @@
     <span class="md-ellipsis">
       
         api-model
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nomad-dev-config" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        config
       
     </span>
   </a>
@@ -4748,17 +4748,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#nomad-admin-ops-nginx-conf" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        nginx-conf
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#nomad-admin-ops-prototypes-update" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5301,6 +5290,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#nomad-dev-config" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        config
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#nomad-dev-example-data" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5503,10 +5503,12 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>nomad [OPTIONS] COMMAND [ARGS]...
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>  -v, --verbose     sets log level to info
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  --debug           sets log level to debug
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  --log-label TEXT  Label applied to logg entries.
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  --help            Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>  -v, --verbose           sets log level to info
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  --debug                 sets log level to debug
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  --log-label TEXT        Label applied to logg entries.
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>  -f, --config-file FILE  Specify one or more NOMAD config yaml files. Can be
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>                          repeated, later files overwrite earlier ones.
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>  --help                  Show this message and exit.
 </code></pre></div>
 <p><strong>Subcommands</strong></p>
 <ul>
@@ -5600,7 +5602,6 @@ Remember: With great power comes great responsibility!</p>
 <p><strong>Subcommands</strong></p>
 <ul>
 <li><em><a href="#nomad-admin-ops-dump">dump</a></em>: Dump the mongo db.</li>
-<li><em><a href="#nomad-admin-ops-nginx-conf">nginx-conf</a></em>: Generate an nginx.conf to serve the GUI and proxy pass to API container.</li>
 <li><em><a href="#nomad-admin-ops-prototypes-update">prototypes-update</a></em>: Updates the AFLOW prototype information using the latest online version and writes the results to a python module in the given FILEPATH.</li>
 <li><em><a href="#nomad-admin-ops-restore">restore</a></em>: Restore the mongo db.</li>
 <li><em><a href="#nomad-admin-ops-springer-update">springer-update</a></em>: Updates the springer database in nomad.config.normalize.springer_db_path.</li>
@@ -5614,58 +5615,44 @@ Remember: With great power comes great responsibility!</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>  --restore  Do not dump, but restore.
 <a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>  --help     Show this message and exit.
 </code></pre></div>
-<h5 id="nomad-admin-ops-nginx-conf">nomad admin ops nginx-conf<a class="headerlink" href="#nomad-admin-ops-nginx-conf" title="Permanent link">¶</a></h5>
-<p>Generate an nginx.conf to serve the GUI and proxy pass to API container.</p>
-<p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>nomad admin ops nginx-conf [OPTIONS]
-</code></pre></div>
-<p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>  --prefix TEXT           Alter the url path prefix.
-<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>  --host TEXT             Alter the NOMAD app host.
-<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>  --port TEXT             Alter the NOMAD port host.
-<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>  --server / --no-server  Control writing of the outer server {} block. Useful
-<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>                          when conf file is included within another
-<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>                          nginx.conf.
-<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>  --help                  Show this message and exit.
-</code></pre></div>
 <h5 id="nomad-admin-ops-prototypes-update">nomad admin ops prototypes-update<a class="headerlink" href="#nomad-admin-ops-prototypes-update" title="Permanent link">¶</a></h5>
 <p>Updates the AFLOW prototype information using the latest online version and writes the results to a python module in the given FILEPATH.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>nomad admin ops prototypes-update [OPTIONS] FILEPATH
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>nomad admin ops prototypes-update [OPTIONS] FILEPATH
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>  --matches-only  Only update the match information that depends on the
-<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>                  symmetry analysis settings. Will not perform an online
-<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>                  update.
-<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>  --help          Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>  --matches-only  Only update the match information that depends on the
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>                  symmetry analysis settings. Will not perform an online
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>                  update.
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>  --help          Show this message and exit.
 </code></pre></div>
 <h5 id="nomad-admin-ops-restore">nomad admin ops restore<a class="headerlink" href="#nomad-admin-ops-restore" title="Permanent link">¶</a></h5>
 <p>Restore the mongo db.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>nomad admin ops restore [OPTIONS] PATH_TO_DUMP
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>nomad admin ops restore [OPTIONS] PATH_TO_DUMP
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>  --help  Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>  --help  Show this message and exit.
 </code></pre></div>
 <h5 id="nomad-admin-ops-springer-update">nomad admin ops springer-update<a class="headerlink" href="#nomad-admin-ops-springer-update" title="Permanent link">¶</a></h5>
 <p>Updates the springer database in nomad.config.normalize.springer_db_path.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>nomad admin ops springer-update [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>nomad admin ops springer-update [OPTIONS]
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>  --max-n-query INTEGER  Number of unsuccessful springer request before
-<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>                         returning an error. Default is 10.
-<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>  --retry-time INTEGER   Time in seconds to retry after unsuccessful request.
-<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>                         Default is 120.
-<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a>  --help                 Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>  --max-n-query INTEGER  Number of unsuccessful springer request before
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>                         returning an error. Default is 10.
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>  --retry-time INTEGER   Time in seconds to retry after unsuccessful request.
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>                         Default is 120.
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>  --help                 Show this message and exit.
 </code></pre></div>
 <h4 id="nomad-admin-pats">nomad admin pats<a class="headerlink" href="#nomad-admin-pats" title="Permanent link">¶</a></h4>
 <p>Personal access token (PAT) management.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>nomad admin pats [OPTIONS] COMMAND [ARGS]...
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a>nomad admin pats [OPTIONS] COMMAND [ARGS]...
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>  --help  Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>  --help  Show this message and exit.
 </code></pre></div>
 <p><strong>Subcommands</strong></p>
 <ul>
@@ -5674,68 +5661,68 @@ Remember: With great power comes great responsibility!</p>
 <h5 id="nomad-admin-pats-prune">nomad admin pats prune<a class="headerlink" href="#nomad-admin-pats-prune" title="Permanent link">¶</a></h5>
 <p>Prune expired/revoked personal access tokens (PAT).</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>nomad admin pats prune [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>nomad admin pats prune [OPTIONS]
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>  --inactive-for TEXT             Prune PATs inactive for this duration, e.g.
-<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>                                  12h, 7d, 1month. Exactly one of --inactive-
-<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>                                  for or --inactive-before must be provided.
-<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>  --inactive-before [%Y-%m-%d|%Y-%m-%dT%H:%M:%S|%Y-%m-%d %H:%M:%S]
-<a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a>                                  Absolute inactivity cutoff timestamp
-<a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a>                                  (ISO-8601), e.g. 2026-01-01T09:00:00.
-<a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a>                                  Exactly one of --inactive-for or --inactive-
-<a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a>                                  before must be provided. Timezone-aware
-<a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a>                                  values are supported; if timezone is
-<a id="__codelineno-27-10" name="__codelineno-27-10" href="#__codelineno-27-10"></a>                                  omitted, UTC is assumed.
-<a id="__codelineno-27-11" name="__codelineno-27-11" href="#__codelineno-27-11"></a>  --expired                       Select expired PATs for pruning. At least
-<a id="__codelineno-27-12" name="__codelineno-27-12" href="#__codelineno-27-12"></a>                                  one of --expired or --revoked is required.
-<a id="__codelineno-27-13" name="__codelineno-27-13" href="#__codelineno-27-13"></a>  --revoked                       Select revoked PATs for pruning. At least
-<a id="__codelineno-27-14" name="__codelineno-27-14" href="#__codelineno-27-14"></a>                                  one of --expired or --revoked is required.
-<a id="__codelineno-27-15" name="__codelineno-27-15" href="#__codelineno-27-15"></a>  --dry-run, --dry                Show matched PATs without deleting them.
-<a id="__codelineno-27-16" name="__codelineno-27-16" href="#__codelineno-27-16"></a>  --user-id TEXT                  Restrict pruning to a single user.
-<a id="__codelineno-27-17" name="__codelineno-27-17" href="#__codelineno-27-17"></a>  --help                          Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>  --inactive-for TEXT             Prune PATs inactive for this duration, e.g.
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>                                  12h, 7d, 1month. Exactly one of --inactive-
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>                                  for or --inactive-before must be provided.
+<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a>  --inactive-before [%Y-%m-%d|%Y-%m-%dT%H:%M:%S|%Y-%m-%d %H:%M:%S]
+<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a>                                  Absolute inactivity cutoff timestamp
+<a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a>                                  (ISO-8601), e.g. 2026-01-01T09:00:00.
+<a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a>                                  Exactly one of --inactive-for or --inactive-
+<a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a>                                  before must be provided. Timezone-aware
+<a id="__codelineno-25-9" name="__codelineno-25-9" href="#__codelineno-25-9"></a>                                  values are supported; if timezone is
+<a id="__codelineno-25-10" name="__codelineno-25-10" href="#__codelineno-25-10"></a>                                  omitted, UTC is assumed.
+<a id="__codelineno-25-11" name="__codelineno-25-11" href="#__codelineno-25-11"></a>  --expired                       Select expired PATs for pruning. At least
+<a id="__codelineno-25-12" name="__codelineno-25-12" href="#__codelineno-25-12"></a>                                  one of --expired or --revoked is required.
+<a id="__codelineno-25-13" name="__codelineno-25-13" href="#__codelineno-25-13"></a>  --revoked                       Select revoked PATs for pruning. At least
+<a id="__codelineno-25-14" name="__codelineno-25-14" href="#__codelineno-25-14"></a>                                  one of --expired or --revoked is required.
+<a id="__codelineno-25-15" name="__codelineno-25-15" href="#__codelineno-25-15"></a>  --dry-run, --dry                Show matched PATs without deleting them.
+<a id="__codelineno-25-16" name="__codelineno-25-16" href="#__codelineno-25-16"></a>  --user-id TEXT                  Restrict pruning to a single user.
+<a id="__codelineno-25-17" name="__codelineno-25-17" href="#__codelineno-25-17"></a>  --help                          Show this message and exit.
 </code></pre></div>
 <h4 id="nomad-admin-reset">nomad admin reset<a class="headerlink" href="#nomad-admin-reset" title="Permanent link">¶</a></h4>
 <p>Reset/remove all databases.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>nomad admin reset [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>nomad admin reset [OPTIONS]
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>  --remove            Do not just reset all dbs, but also remove them.
-<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>  --i-am-really-sure  Must be set for the command to to anything.
-<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a>  --help              Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a>  --remove            Do not just reset all dbs, but also remove them.
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a>  --i-am-really-sure  Must be set for the command to to anything.
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>  --help              Show this message and exit.
 </code></pre></div>
 <h4 id="nomad-admin-reset-processing">nomad admin reset-processing<a class="headerlink" href="#nomad-admin-reset-processing" title="Permanent link">¶</a></h4>
 <p>Reset all uploads and entries "stuck" in processing using level mongodb operations.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>nomad admin reset-processing [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a>nomad admin reset-processing [OPTIONS]
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>  --zero-complete-time  Sets the complete time to epoch zero.
-<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>  --help                Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a>  --zero-complete-time  Sets the complete time to epoch zero.
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a>  --help                Show this message and exit.
 </code></pre></div>
 <h4 id="nomad-admin-rewrite-dataset-doi-urls">nomad admin rewrite-dataset-doi-urls<a class="headerlink" href="#nomad-admin-rewrite-dataset-doi-urls" title="Permanent link">¶</a></h4>
 <p>Rewrites the existing dataset URLs in existing DOI records with freshly generated dataset URLs.
 This is useful, if the URL layout has changed.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>nomad admin rewrite-dataset-doi-urls [OPTIONS] [DOIS]...
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>nomad admin rewrite-dataset-doi-urls [OPTIONS] [DOIS]...
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>  --dry                         Just test if DOI exists and print is current
-<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a>                                URL.
-<a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a>  --save-existing-records TEXT  A filename to store the existing DOI records
-<a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a>                                in.
-<a id="__codelineno-33-5" name="__codelineno-33-5" href="#__codelineno-33-5"></a>  --help                        Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>  --dry                         Just test if DOI exists and print is current
+<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>                                URL.
+<a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a>  --save-existing-records TEXT  A filename to store the existing DOI records
+<a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a>                                in.
+<a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a>  --help                        Show this message and exit.
 </code></pre></div>
 <h4 id="nomad-admin-run">nomad admin run<a class="headerlink" href="#nomad-admin-run" title="Permanent link">¶</a></h4>
 <p>Run a nomad service locally (outside docker).</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>nomad admin run [OPTIONS] COMMAND [ARGS]...
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>nomad admin run [OPTIONS] COMMAND [ARGS]...
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>  -f, --config-file FILE  Specify one or more NOMAD config yaml files. Can be
-<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>                          repeated. Later files overwrite earlier ones.
-<a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a>  --help                  Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>  -f, --config-file FILE  Specify one or more NOMAD config yaml files. Can be
+<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a>                          repeated, later files overwrite earlier ones.
+<a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a>  --help                  Show this message and exit.
 </code></pre></div>
 <p><strong>Subcommands</strong></p>
 <ul>
@@ -5750,91 +5737,110 @@ This is useful, if the URL layout has changed.</p>
 <h5 id="nomad-admin-run-action-cpu-worker">nomad admin run action-cpu-worker<a class="headerlink" href="#nomad-admin-run-action-cpu-worker" title="Permanent link">¶</a></h5>
 <p>Run the action cpu worker.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>nomad admin run action-cpu-worker [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>nomad admin run action-cpu-worker [OPTIONS]
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>  --pool-size, --workers INTEGER  Number of workers.
-<a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>  --help                          Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>  --pool-size, --workers INTEGER  Number of workers.
+<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>  -f, --config-file FILE          Specify one or more NOMAD config yaml files.
+<a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a>                                  Can be repeated, later files overwrite
+<a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a>                                  earlier ones.
+<a id="__codelineno-35-5" name="__codelineno-35-5" href="#__codelineno-35-5"></a>  --help                          Show this message and exit.
 </code></pre></div>
 <h5 id="nomad-admin-run-action-gpu-worker">nomad admin run action-gpu-worker<a class="headerlink" href="#nomad-admin-run-action-gpu-worker" title="Permanent link">¶</a></h5>
 <p>Run the action gpu worker.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>nomad admin run action-gpu-worker [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>nomad admin run action-gpu-worker [OPTIONS]
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>  --pool-size, --workers INTEGER  Number of workers.
-<a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a>  --help                          Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a>  --pool-size, --workers INTEGER  Number of workers.
+<a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>  -f, --config-file FILE          Specify one or more NOMAD config yaml files.
+<a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a>                                  Can be repeated, later files overwrite
+<a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a>                                  earlier ones.
+<a id="__codelineno-37-5" name="__codelineno-37-5" href="#__codelineno-37-5"></a>  --help                          Show this message and exit.
 </code></pre></div>
 <h5 id="nomad-admin-run-action-internal-worker">nomad admin run action-internal-worker<a class="headerlink" href="#nomad-admin-run-action-internal-worker" title="Permanent link">¶</a></h5>
 <p>Run the action internal worker.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>nomad admin run action-internal-worker [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a>nomad admin run action-internal-worker [OPTIONS]
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>  --pool-size, --workers INTEGER  Number of workers.
-<a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a>  --max-tasks-per-child INTEGER   Number of tasks per worker.
-<a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a>  --max-concurrent-activities INTEGER
-<a id="__codelineno-41-4" name="__codelineno-41-4" href="#__codelineno-41-4"></a>                                  Maximum number of concurrent activities for
-<a id="__codelineno-41-5" name="__codelineno-41-5" href="#__codelineno-41-5"></a>                                  the internal worker.
-<a id="__codelineno-41-6" name="__codelineno-41-6" href="#__codelineno-41-6"></a>  --help                          Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a>  --pool-size, --workers INTEGER  Number of workers.
+<a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a>  --max-tasks-per-child INTEGER   Number of tasks per worker.
+<a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a>  --max-concurrent-activities INTEGER
+<a id="__codelineno-39-4" name="__codelineno-39-4" href="#__codelineno-39-4"></a>                                  Maximum number of concurrent activities for
+<a id="__codelineno-39-5" name="__codelineno-39-5" href="#__codelineno-39-5"></a>                                  the internal worker.
+<a id="__codelineno-39-6" name="__codelineno-39-6" href="#__codelineno-39-6"></a>  -f, --config-file FILE          Specify one or more NOMAD config yaml files.
+<a id="__codelineno-39-7" name="__codelineno-39-7" href="#__codelineno-39-7"></a>                                  Can be repeated, later files overwrite
+<a id="__codelineno-39-8" name="__codelineno-39-8" href="#__codelineno-39-8"></a>                                  earlier ones.
+<a id="__codelineno-39-9" name="__codelineno-39-9" href="#__codelineno-39-9"></a>  --help                          Show this message and exit.
 </code></pre></div>
 <h5 id="nomad-admin-run-app">nomad admin run app<a class="headerlink" href="#nomad-admin-run-app" title="Permanent link">¶</a></h5>
 <p>Run the nomad development app with all apis.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>nomad admin run app [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a>nomad admin run app [OPTIONS]
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>  --with-gui         The app will configure the gui for production and service
-<a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a>                     it.
-<a id="__codelineno-43-3" name="__codelineno-43-3" href="#__codelineno-43-3"></a>  --host TEXT        Passed as host parameter.
-<a id="__codelineno-43-4" name="__codelineno-43-4" href="#__codelineno-43-4"></a>  --port INTEGER     Passed as port parameter.
-<a id="__codelineno-43-5" name="__codelineno-43-5" href="#__codelineno-43-5"></a>  --log-config TEXT  Passed as log-config parameter.
-<a id="__codelineno-43-6" name="__codelineno-43-6" href="#__codelineno-43-6"></a>  --gunicorn         Run app with gunicorn instead of uvicorn.
-<a id="__codelineno-43-7" name="__codelineno-43-7" href="#__codelineno-43-7"></a>  --workers INTEGER  Passed to uvicorn workers parameter.
-<a id="__codelineno-43-8" name="__codelineno-43-8" href="#__codelineno-43-8"></a>  --help             Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a>  --with-gui              The app will configure the gui for production and
+<a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a>                          service it.
+<a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a>  --host TEXT             Passed as host parameter.
+<a id="__codelineno-41-4" name="__codelineno-41-4" href="#__codelineno-41-4"></a>  --port INTEGER          Passed as port parameter.
+<a id="__codelineno-41-5" name="__codelineno-41-5" href="#__codelineno-41-5"></a>  --log-config TEXT       Passed as log-config parameter.
+<a id="__codelineno-41-6" name="__codelineno-41-6" href="#__codelineno-41-6"></a>  --gunicorn              Run app with gunicorn instead of uvicorn.
+<a id="__codelineno-41-7" name="__codelineno-41-7" href="#__codelineno-41-7"></a>  --workers INTEGER       Passed to uvicorn workers parameter.
+<a id="__codelineno-41-8" name="__codelineno-41-8" href="#__codelineno-41-8"></a>  -f, --config-file FILE  Specify one or more NOMAD config yaml files. Can be
+<a id="__codelineno-41-9" name="__codelineno-41-9" href="#__codelineno-41-9"></a>                          repeated, later files overwrite earlier ones.
+<a id="__codelineno-41-10" name="__codelineno-41-10" href="#__codelineno-41-10"></a>  --help                  Show this message and exit.
 </code></pre></div>
 <h5 id="nomad-admin-run-appworker">nomad admin run appworker<a class="headerlink" href="#nomad-admin-run-appworker" title="Permanent link">¶</a></h5>
 <p>Run both app and worker.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a>nomad admin run appworker [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a>nomad admin run appworker [OPTIONS]
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a>  --app-host TEXT                 Passed as app host parameter.
-<a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a>  --app-port INTEGER              Passed as app port parameter.
-<a id="__codelineno-45-3" name="__codelineno-45-3" href="#__codelineno-45-3"></a>  --fastapi-workers INTEGER       Number of FastAPI workers.
-<a id="__codelineno-45-4" name="__codelineno-45-4" href="#__codelineno-45-4"></a>  --temporal-pool-size, --temporal-workers INTEGER
-<a id="__codelineno-45-5" name="__codelineno-45-5" href="#__codelineno-45-5"></a>                                  Number of temporal workers.
-<a id="__codelineno-45-6" name="__codelineno-45-6" href="#__codelineno-45-6"></a>  --dev                           Use one worker (for dev. env.).
-<a id="__codelineno-45-7" name="__codelineno-45-7" href="#__codelineno-45-7"></a>  --help                          Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a>  --app-host TEXT                 Passed as app host parameter.
+<a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a>  --app-port INTEGER              Passed as app port parameter.
+<a id="__codelineno-43-3" name="__codelineno-43-3" href="#__codelineno-43-3"></a>  --fastapi-workers INTEGER       Number of FastAPI workers.
+<a id="__codelineno-43-4" name="__codelineno-43-4" href="#__codelineno-43-4"></a>  --temporal-pool-size, --temporal-workers INTEGER
+<a id="__codelineno-43-5" name="__codelineno-43-5" href="#__codelineno-43-5"></a>                                  Number of temporal workers.
+<a id="__codelineno-43-6" name="__codelineno-43-6" href="#__codelineno-43-6"></a>  --dev                           Use one worker (for dev. env.).
+<a id="__codelineno-43-7" name="__codelineno-43-7" href="#__codelineno-43-7"></a>  -f, --config-file FILE          Specify one or more NOMAD config yaml files.
+<a id="__codelineno-43-8" name="__codelineno-43-8" href="#__codelineno-43-8"></a>                                  Can be repeated, later files overwrite
+<a id="__codelineno-43-9" name="__codelineno-43-9" href="#__codelineno-43-9"></a>                                  earlier ones.
+<a id="__codelineno-43-10" name="__codelineno-43-10" href="#__codelineno-43-10"></a>  --help                          Show this message and exit.
 </code></pre></div>
 <h5 id="nomad-admin-run-hub">nomad admin run hub<a class="headerlink" href="#nomad-admin-run-hub" title="Permanent link">¶</a></h5>
 <p>Run the jupyter hub.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a>nomad admin run hub [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a>nomad admin run hub [OPTIONS]
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a>  --help  Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a>  -f, --config-file FILE  Specify one or more NOMAD config yaml files. Can be
+<a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a>                          repeated, later files overwrite earlier ones.
+<a id="__codelineno-45-3" name="__codelineno-45-3" href="#__codelineno-45-3"></a>  --help                  Show this message and exit.
 </code></pre></div>
 <h5 id="nomad-admin-run-worker">nomad admin run worker<a class="headerlink" href="#nomad-admin-run-worker" title="Permanent link">¶</a></h5>
 <p>Run the action internal worker.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a>nomad admin run worker [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a>nomad admin run worker [OPTIONS]
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a>  --pool-size, --workers INTEGER  Number of workers.
-<a id="__codelineno-49-2" name="__codelineno-49-2" href="#__codelineno-49-2"></a>  --max-tasks-per-child INTEGER   Number of tasks per worker.
-<a id="__codelineno-49-3" name="__codelineno-49-3" href="#__codelineno-49-3"></a>  --max-concurrent-activities INTEGER
-<a id="__codelineno-49-4" name="__codelineno-49-4" href="#__codelineno-49-4"></a>                                  Maximum number of concurrent activities for
-<a id="__codelineno-49-5" name="__codelineno-49-5" href="#__codelineno-49-5"></a>                                  the internal worker.
-<a id="__codelineno-49-6" name="__codelineno-49-6" href="#__codelineno-49-6"></a>  --help                          Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a>  --pool-size, --workers INTEGER  Number of workers.
+<a id="__codelineno-47-2" name="__codelineno-47-2" href="#__codelineno-47-2"></a>  --max-tasks-per-child INTEGER   Number of tasks per worker.
+<a id="__codelineno-47-3" name="__codelineno-47-3" href="#__codelineno-47-3"></a>  --max-concurrent-activities INTEGER
+<a id="__codelineno-47-4" name="__codelineno-47-4" href="#__codelineno-47-4"></a>                                  Maximum number of concurrent activities for
+<a id="__codelineno-47-5" name="__codelineno-47-5" href="#__codelineno-47-5"></a>                                  the internal worker.
+<a id="__codelineno-47-6" name="__codelineno-47-6" href="#__codelineno-47-6"></a>  -f, --config-file FILE          Specify one or more NOMAD config yaml files.
+<a id="__codelineno-47-7" name="__codelineno-47-7" href="#__codelineno-47-7"></a>                                  Can be repeated, later files overwrite
+<a id="__codelineno-47-8" name="__codelineno-47-8" href="#__codelineno-47-8"></a>                                  earlier ones.
+<a id="__codelineno-47-9" name="__codelineno-47-9" href="#__codelineno-47-9"></a>  --help                          Show this message and exit.
 </code></pre></div>
 <h4 id="nomad-admin-upgrade">nomad admin upgrade<a class="headerlink" href="#nomad-admin-upgrade" title="Permanent link">¶</a></h4>
 <p>Commands for upgrading to a newer NOMAD version</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a>nomad admin upgrade [OPTIONS] COMMAND [ARGS]...
+<div class="highlight"><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a>nomad admin upgrade [OPTIONS] COMMAND [ARGS]...
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a>  --help  Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a>  --help  Show this message and exit.
 </code></pre></div>
 <p><strong>Subcommands</strong></p>
 <ul>
@@ -5846,94 +5852,94 @@ Note, it is strongly recommended to run this command with loglevel verbose, i.e.
 <div class="highlight"><pre><span></span><code>nomad -v upgrade migrate-mongo ...
 </code></pre></div>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a>nomad admin upgrade migrate-mongo [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a>nomad admin upgrade migrate-mongo [OPTIONS]
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a>  --host TEXT                     The mongodb host. By default same as the
-<a id="__codelineno-53-2" name="__codelineno-53-2" href="#__codelineno-53-2"></a>                                  configured db.
-<a id="__codelineno-53-3" name="__codelineno-53-3" href="#__codelineno-53-3"></a>  --port INTEGER                  The mongodb port. By default same as the
-<a id="__codelineno-53-4" name="__codelineno-53-4" href="#__codelineno-53-4"></a>                                  configured db.
-<a id="__codelineno-53-5" name="__codelineno-53-5" href="#__codelineno-53-5"></a>  --src-db-name TEXT              The name of the source database.  [required]
-<a id="__codelineno-53-6" name="__codelineno-53-6" href="#__codelineno-53-6"></a>  --dst-db-name TEXT              The name of the destination database. By
-<a id="__codelineno-53-7" name="__codelineno-53-7" href="#__codelineno-53-7"></a>                                  default same as the configured db.
-<a id="__codelineno-53-8" name="__codelineno-53-8" href="#__codelineno-53-8"></a>  --upload-query TEXT             An mongo upload query. All uploads matching
-<a id="__codelineno-53-9" name="__codelineno-53-9" href="#__codelineno-53-9"></a>                                  the query will be included in the migration.
-<a id="__codelineno-53-10" name="__codelineno-53-10" href="#__codelineno-53-10"></a>  --entry-query TEXT              An mongo entry query. All uploads with an
-<a id="__codelineno-53-11" name="__codelineno-53-11" href="#__codelineno-53-11"></a>                                  entry matching the query will be included in
-<a id="__codelineno-53-12" name="__codelineno-53-12" href="#__codelineno-53-12"></a>                                  the migration.
-<a id="__codelineno-53-13" name="__codelineno-53-13" href="#__codelineno-53-13"></a>  --ids-from-file TEXT            Reads upload IDs from the specified file.
-<a id="__codelineno-53-14" name="__codelineno-53-14" href="#__codelineno-53-14"></a>                                  Cannot be used together with the --upload-
-<a id="__codelineno-53-15" name="__codelineno-53-15" href="#__codelineno-53-15"></a>                                  query or --entry-query options. This can for
-<a id="__codelineno-53-16" name="__codelineno-53-16" href="#__codelineno-53-16"></a>                                  example be used to retry just the uploads
-<a id="__codelineno-53-17" name="__codelineno-53-17" href="#__codelineno-53-17"></a>                                  that has previously failed (as these ids can
-<a id="__codelineno-53-18" name="__codelineno-53-18" href="#__codelineno-53-18"></a>                                  be exported to file using --failed-ids-to-
-<a id="__codelineno-53-19" name="__codelineno-53-19" href="#__codelineno-53-19"></a>                                  file). You can specify both --ids-from-file
-<a id="__codelineno-53-20" name="__codelineno-53-20" href="#__codelineno-53-20"></a>                                  and --failed-ids-to-file at the same time
-<a id="__codelineno-53-21" name="__codelineno-53-21" href="#__codelineno-53-21"></a>                                  with the same file name.
-<a id="__codelineno-53-22" name="__codelineno-53-22" href="#__codelineno-53-22"></a>  --failed-ids-to-file TEXT       Write the IDs of failed and skipped uploads
-<a id="__codelineno-53-23" name="__codelineno-53-23" href="#__codelineno-53-23"></a>                                  to the specified file. This can for example
-<a id="__codelineno-53-24" name="__codelineno-53-24" href="#__codelineno-53-24"></a>                                  be used to subsequently retry just the
-<a id="__codelineno-53-25" name="__codelineno-53-25" href="#__codelineno-53-25"></a>                                  uploads that failed (as these ids can be
-<a id="__codelineno-53-26" name="__codelineno-53-26" href="#__codelineno-53-26"></a>                                  loaded from file using --ids-from-file). You
-<a id="__codelineno-53-27" name="__codelineno-53-27" href="#__codelineno-53-27"></a>                                  can specify both --ids-from-file and
-<a id="__codelineno-53-28" name="__codelineno-53-28" href="#__codelineno-53-28"></a>                                  --failed-ids-to-file at the same time with
-<a id="__codelineno-53-29" name="__codelineno-53-29" href="#__codelineno-53-29"></a>                                  the same file name.
-<a id="__codelineno-53-30" name="__codelineno-53-30" href="#__codelineno-53-30"></a>  --upload-update TEXT            json with updates to apply to all converted
-<a id="__codelineno-53-31" name="__codelineno-53-31" href="#__codelineno-53-31"></a>                                  uploads
-<a id="__codelineno-53-32" name="__codelineno-53-32" href="#__codelineno-53-32"></a>  --entry-update TEXT             json with updates to apply to all converted
-<a id="__codelineno-53-33" name="__codelineno-53-33" href="#__codelineno-53-33"></a>                                  entries
-<a id="__codelineno-53-34" name="__codelineno-53-34" href="#__codelineno-53-34"></a>  --overwrite [always|if-newer|never]
-<a id="__codelineno-53-35" name="__codelineno-53-35" href="#__codelineno-53-35"></a>                                  If an upload already exists in the
-<a id="__codelineno-53-36" name="__codelineno-53-36" href="#__codelineno-53-36"></a>                                  destination db, this option determines
-<a id="__codelineno-53-37" name="__codelineno-53-37" href="#__codelineno-53-37"></a>                                  whether it and its child records should be
-<a id="__codelineno-53-38" name="__codelineno-53-38" href="#__codelineno-53-38"></a>                                  overwritten with the data from the source
-<a id="__codelineno-53-39" name="__codelineno-53-39" href="#__codelineno-53-39"></a>                                  db. Possible values are "always", "if-
-<a id="__codelineno-53-40" name="__codelineno-53-40" href="#__codelineno-53-40"></a>                                  newer", "never". Selecting "always" always
-<a id="__codelineno-53-41" name="__codelineno-53-41" href="#__codelineno-53-41"></a>                                  overwrites, "never" never overwrites, and
-<a id="__codelineno-53-42" name="__codelineno-53-42" href="#__codelineno-53-42"></a>                                  "if-newer" overwrites if the upload either
-<a id="__codelineno-53-43" name="__codelineno-53-43" href="#__codelineno-53-43"></a>                                  doesn't exist in the destination, or it
-<a id="__codelineno-53-44" name="__codelineno-53-44" href="#__codelineno-53-44"></a>                                  exists but its complete_time (i.e. last time
-<a id="__codelineno-53-45" name="__codelineno-53-45" href="#__codelineno-53-45"></a>                                  it was processed) is older than in the
-<a id="__codelineno-53-46" name="__codelineno-53-46" href="#__codelineno-53-46"></a>                                  source db.
-<a id="__codelineno-53-47" name="__codelineno-53-47" href="#__codelineno-53-47"></a>  --fix-problems                  If a minor, fixable problem is encountered,
-<a id="__codelineno-53-48" name="__codelineno-53-48" href="#__codelineno-53-48"></a>                                  fixes it automaticall; otherwise fail.
-<a id="__codelineno-53-49" name="__codelineno-53-49" href="#__codelineno-53-49"></a>  --dry                           Dry run (not writing anything to the
-<a id="__codelineno-53-50" name="__codelineno-53-50" href="#__codelineno-53-50"></a>                                  destination database).
-<a id="__codelineno-53-51" name="__codelineno-53-51" href="#__codelineno-53-51"></a>  --help                          Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a>  --host TEXT                     The mongodb host. By default same as the
+<a id="__codelineno-51-2" name="__codelineno-51-2" href="#__codelineno-51-2"></a>                                  configured db.
+<a id="__codelineno-51-3" name="__codelineno-51-3" href="#__codelineno-51-3"></a>  --port INTEGER                  The mongodb port. By default same as the
+<a id="__codelineno-51-4" name="__codelineno-51-4" href="#__codelineno-51-4"></a>                                  configured db.
+<a id="__codelineno-51-5" name="__codelineno-51-5" href="#__codelineno-51-5"></a>  --src-db-name TEXT              The name of the source database.  [required]
+<a id="__codelineno-51-6" name="__codelineno-51-6" href="#__codelineno-51-6"></a>  --dst-db-name TEXT              The name of the destination database. By
+<a id="__codelineno-51-7" name="__codelineno-51-7" href="#__codelineno-51-7"></a>                                  default same as the configured db.
+<a id="__codelineno-51-8" name="__codelineno-51-8" href="#__codelineno-51-8"></a>  --upload-query TEXT             An mongo upload query. All uploads matching
+<a id="__codelineno-51-9" name="__codelineno-51-9" href="#__codelineno-51-9"></a>                                  the query will be included in the migration.
+<a id="__codelineno-51-10" name="__codelineno-51-10" href="#__codelineno-51-10"></a>  --entry-query TEXT              An mongo entry query. All uploads with an
+<a id="__codelineno-51-11" name="__codelineno-51-11" href="#__codelineno-51-11"></a>                                  entry matching the query will be included in
+<a id="__codelineno-51-12" name="__codelineno-51-12" href="#__codelineno-51-12"></a>                                  the migration.
+<a id="__codelineno-51-13" name="__codelineno-51-13" href="#__codelineno-51-13"></a>  --ids-from-file TEXT            Reads upload IDs from the specified file.
+<a id="__codelineno-51-14" name="__codelineno-51-14" href="#__codelineno-51-14"></a>                                  Cannot be used together with the --upload-
+<a id="__codelineno-51-15" name="__codelineno-51-15" href="#__codelineno-51-15"></a>                                  query or --entry-query options. This can for
+<a id="__codelineno-51-16" name="__codelineno-51-16" href="#__codelineno-51-16"></a>                                  example be used to retry just the uploads
+<a id="__codelineno-51-17" name="__codelineno-51-17" href="#__codelineno-51-17"></a>                                  that has previously failed (as these ids can
+<a id="__codelineno-51-18" name="__codelineno-51-18" href="#__codelineno-51-18"></a>                                  be exported to file using --failed-ids-to-
+<a id="__codelineno-51-19" name="__codelineno-51-19" href="#__codelineno-51-19"></a>                                  file). You can specify both --ids-from-file
+<a id="__codelineno-51-20" name="__codelineno-51-20" href="#__codelineno-51-20"></a>                                  and --failed-ids-to-file at the same time
+<a id="__codelineno-51-21" name="__codelineno-51-21" href="#__codelineno-51-21"></a>                                  with the same file name.
+<a id="__codelineno-51-22" name="__codelineno-51-22" href="#__codelineno-51-22"></a>  --failed-ids-to-file TEXT       Write the IDs of failed and skipped uploads
+<a id="__codelineno-51-23" name="__codelineno-51-23" href="#__codelineno-51-23"></a>                                  to the specified file. This can for example
+<a id="__codelineno-51-24" name="__codelineno-51-24" href="#__codelineno-51-24"></a>                                  be used to subsequently retry just the
+<a id="__codelineno-51-25" name="__codelineno-51-25" href="#__codelineno-51-25"></a>                                  uploads that failed (as these ids can be
+<a id="__codelineno-51-26" name="__codelineno-51-26" href="#__codelineno-51-26"></a>                                  loaded from file using --ids-from-file). You
+<a id="__codelineno-51-27" name="__codelineno-51-27" href="#__codelineno-51-27"></a>                                  can specify both --ids-from-file and
+<a id="__codelineno-51-28" name="__codelineno-51-28" href="#__codelineno-51-28"></a>                                  --failed-ids-to-file at the same time with
+<a id="__codelineno-51-29" name="__codelineno-51-29" href="#__codelineno-51-29"></a>                                  the same file name.
+<a id="__codelineno-51-30" name="__codelineno-51-30" href="#__codelineno-51-30"></a>  --upload-update TEXT            json with updates to apply to all converted
+<a id="__codelineno-51-31" name="__codelineno-51-31" href="#__codelineno-51-31"></a>                                  uploads
+<a id="__codelineno-51-32" name="__codelineno-51-32" href="#__codelineno-51-32"></a>  --entry-update TEXT             json with updates to apply to all converted
+<a id="__codelineno-51-33" name="__codelineno-51-33" href="#__codelineno-51-33"></a>                                  entries
+<a id="__codelineno-51-34" name="__codelineno-51-34" href="#__codelineno-51-34"></a>  --overwrite [always|if-newer|never]
+<a id="__codelineno-51-35" name="__codelineno-51-35" href="#__codelineno-51-35"></a>                                  If an upload already exists in the
+<a id="__codelineno-51-36" name="__codelineno-51-36" href="#__codelineno-51-36"></a>                                  destination db, this option determines
+<a id="__codelineno-51-37" name="__codelineno-51-37" href="#__codelineno-51-37"></a>                                  whether it and its child records should be
+<a id="__codelineno-51-38" name="__codelineno-51-38" href="#__codelineno-51-38"></a>                                  overwritten with the data from the source
+<a id="__codelineno-51-39" name="__codelineno-51-39" href="#__codelineno-51-39"></a>                                  db. Possible values are "always", "if-
+<a id="__codelineno-51-40" name="__codelineno-51-40" href="#__codelineno-51-40"></a>                                  newer", "never". Selecting "always" always
+<a id="__codelineno-51-41" name="__codelineno-51-41" href="#__codelineno-51-41"></a>                                  overwrites, "never" never overwrites, and
+<a id="__codelineno-51-42" name="__codelineno-51-42" href="#__codelineno-51-42"></a>                                  "if-newer" overwrites if the upload either
+<a id="__codelineno-51-43" name="__codelineno-51-43" href="#__codelineno-51-43"></a>                                  doesn't exist in the destination, or it
+<a id="__codelineno-51-44" name="__codelineno-51-44" href="#__codelineno-51-44"></a>                                  exists but its complete_time (i.e. last time
+<a id="__codelineno-51-45" name="__codelineno-51-45" href="#__codelineno-51-45"></a>                                  it was processed) is older than in the
+<a id="__codelineno-51-46" name="__codelineno-51-46" href="#__codelineno-51-46"></a>                                  source db.
+<a id="__codelineno-51-47" name="__codelineno-51-47" href="#__codelineno-51-47"></a>  --fix-problems                  If a minor, fixable problem is encountered,
+<a id="__codelineno-51-48" name="__codelineno-51-48" href="#__codelineno-51-48"></a>                                  fixes it automaticall; otherwise fail.
+<a id="__codelineno-51-49" name="__codelineno-51-49" href="#__codelineno-51-49"></a>  --dry                           Dry run (not writing anything to the
+<a id="__codelineno-51-50" name="__codelineno-51-50" href="#__codelineno-51-50"></a>                                  destination database).
+<a id="__codelineno-51-51" name="__codelineno-51-51" href="#__codelineno-51-51"></a>  --help                          Show this message and exit.
 </code></pre></div>
 <h4 id="nomad-admin-uploads">nomad admin uploads<a class="headerlink" href="#nomad-admin-uploads" title="Permanent link">¶</a></h4>
 <p>Upload related commands</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a>nomad admin uploads [OPTIONS] COMMAND [ARGS]...
+<div class="highlight"><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a>nomad admin uploads [OPTIONS] COMMAND [ARGS]...
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a>  --uploads-mongo-query TEXT      A query
-<a id="__codelineno-55-2" name="__codelineno-55-2" href="#__codelineno-55-2"></a>  --entries-mongo-query TEXT      A query
-<a id="__codelineno-55-3" name="__codelineno-55-3" href="#__codelineno-55-3"></a>  --entries-es-query TEXT         A query
-<a id="__codelineno-55-4" name="__codelineno-55-4" href="#__codelineno-55-4"></a>  --unpublished                   Select only uploads in staging
-<a id="__codelineno-55-5" name="__codelineno-55-5" href="#__codelineno-55-5"></a>  --published                     Select only uploads that are publised
-<a id="__codelineno-55-6" name="__codelineno-55-6" href="#__codelineno-55-6"></a>  --outdated                      Select published uploads with older nomad
-<a id="__codelineno-55-7" name="__codelineno-55-7" href="#__codelineno-55-7"></a>                                  version
-<a id="__codelineno-55-8" name="__codelineno-55-8" href="#__codelineno-55-8"></a>  --processing                    Select only processing uploads
-<a id="__codelineno-55-9" name="__codelineno-55-9" href="#__codelineno-55-9"></a>  --processing-failure-uploads    Select uploads with failed processing
-<a id="__codelineno-55-10" name="__codelineno-55-10" href="#__codelineno-55-10"></a>  --processing-failure-entries    Select uploads with entries with failed
-<a id="__codelineno-55-11" name="__codelineno-55-11" href="#__codelineno-55-11"></a>                                  processing
-<a id="__codelineno-55-12" name="__codelineno-55-12" href="#__codelineno-55-12"></a>  --processing-failure            Select uploads where the upload or any entry
-<a id="__codelineno-55-13" name="__codelineno-55-13" href="#__codelineno-55-13"></a>                                  has failed processing
-<a id="__codelineno-55-14" name="__codelineno-55-14" href="#__codelineno-55-14"></a>  --processing-incomplete-uploads
-<a id="__codelineno-55-15" name="__codelineno-55-15" href="#__codelineno-55-15"></a>                                  Select uploads that have not yet been
-<a id="__codelineno-55-16" name="__codelineno-55-16" href="#__codelineno-55-16"></a>                                  processed
-<a id="__codelineno-55-17" name="__codelineno-55-17" href="#__codelineno-55-17"></a>  --processing-incomplete-entries
-<a id="__codelineno-55-18" name="__codelineno-55-18" href="#__codelineno-55-18"></a>                                  Select uploads where any entry has net yot
-<a id="__codelineno-55-19" name="__codelineno-55-19" href="#__codelineno-55-19"></a>                                  been processed
-<a id="__codelineno-55-20" name="__codelineno-55-20" href="#__codelineno-55-20"></a>  --processing-incomplete         Select uploads where the upload or any entry
-<a id="__codelineno-55-21" name="__codelineno-55-21" href="#__codelineno-55-21"></a>                                  has not yet been processed
-<a id="__codelineno-55-22" name="__codelineno-55-22" href="#__codelineno-55-22"></a>  --processing-necessary          Select uploads where the upload or any entry
-<a id="__codelineno-55-23" name="__codelineno-55-23" href="#__codelineno-55-23"></a>                                  has either not been processed or processing
-<a id="__codelineno-55-24" name="__codelineno-55-24" href="#__codelineno-55-24"></a>                                  has failed in the past
-<a id="__codelineno-55-25" name="__codelineno-55-25" href="#__codelineno-55-25"></a>  --unindexed                     Select uploads that have no entries in the
-<a id="__codelineno-55-26" name="__codelineno-55-26" href="#__codelineno-55-26"></a>                                  elastic search index.
-<a id="__codelineno-55-27" name="__codelineno-55-27" href="#__codelineno-55-27"></a>  --help                          Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a>  --uploads-mongo-query TEXT      A query
+<a id="__codelineno-53-2" name="__codelineno-53-2" href="#__codelineno-53-2"></a>  --entries-mongo-query TEXT      A query
+<a id="__codelineno-53-3" name="__codelineno-53-3" href="#__codelineno-53-3"></a>  --entries-es-query TEXT         A query
+<a id="__codelineno-53-4" name="__codelineno-53-4" href="#__codelineno-53-4"></a>  --unpublished                   Select only uploads in staging
+<a id="__codelineno-53-5" name="__codelineno-53-5" href="#__codelineno-53-5"></a>  --published                     Select only uploads that are publised
+<a id="__codelineno-53-6" name="__codelineno-53-6" href="#__codelineno-53-6"></a>  --outdated                      Select published uploads with older nomad
+<a id="__codelineno-53-7" name="__codelineno-53-7" href="#__codelineno-53-7"></a>                                  version
+<a id="__codelineno-53-8" name="__codelineno-53-8" href="#__codelineno-53-8"></a>  --processing                    Select only processing uploads
+<a id="__codelineno-53-9" name="__codelineno-53-9" href="#__codelineno-53-9"></a>  --processing-failure-uploads    Select uploads with failed processing
+<a id="__codelineno-53-10" name="__codelineno-53-10" href="#__codelineno-53-10"></a>  --processing-failure-entries    Select uploads with entries with failed
+<a id="__codelineno-53-11" name="__codelineno-53-11" href="#__codelineno-53-11"></a>                                  processing
+<a id="__codelineno-53-12" name="__codelineno-53-12" href="#__codelineno-53-12"></a>  --processing-failure            Select uploads where the upload or any entry
+<a id="__codelineno-53-13" name="__codelineno-53-13" href="#__codelineno-53-13"></a>                                  has failed processing
+<a id="__codelineno-53-14" name="__codelineno-53-14" href="#__codelineno-53-14"></a>  --processing-incomplete-uploads
+<a id="__codelineno-53-15" name="__codelineno-53-15" href="#__codelineno-53-15"></a>                                  Select uploads that have not yet been
+<a id="__codelineno-53-16" name="__codelineno-53-16" href="#__codelineno-53-16"></a>                                  processed
+<a id="__codelineno-53-17" name="__codelineno-53-17" href="#__codelineno-53-17"></a>  --processing-incomplete-entries
+<a id="__codelineno-53-18" name="__codelineno-53-18" href="#__codelineno-53-18"></a>                                  Select uploads where any entry has net yot
+<a id="__codelineno-53-19" name="__codelineno-53-19" href="#__codelineno-53-19"></a>                                  been processed
+<a id="__codelineno-53-20" name="__codelineno-53-20" href="#__codelineno-53-20"></a>  --processing-incomplete         Select uploads where the upload or any entry
+<a id="__codelineno-53-21" name="__codelineno-53-21" href="#__codelineno-53-21"></a>                                  has not yet been processed
+<a id="__codelineno-53-22" name="__codelineno-53-22" href="#__codelineno-53-22"></a>  --processing-necessary          Select uploads where the upload or any entry
+<a id="__codelineno-53-23" name="__codelineno-53-23" href="#__codelineno-53-23"></a>                                  has either not been processed or processing
+<a id="__codelineno-53-24" name="__codelineno-53-24" href="#__codelineno-53-24"></a>                                  has failed in the past
+<a id="__codelineno-53-25" name="__codelineno-53-25" href="#__codelineno-53-25"></a>  --unindexed                     Select uploads that have no entries in the
+<a id="__codelineno-53-26" name="__codelineno-53-26" href="#__codelineno-53-26"></a>                                  elastic search index.
+<a id="__codelineno-53-27" name="__codelineno-53-27" href="#__codelineno-53-27"></a>  --help                          Show this message and exit.
 </code></pre></div>
 <p><strong>Subcommands</strong></p>
 <ul>
@@ -5956,234 +5962,233 @@ Note, it is strongly recommended to run this command with loglevel verbose, i.e.
 <h5 id="nomad-admin-uploads-chown">nomad admin uploads chown<a class="headerlink" href="#nomad-admin-uploads-chown" title="Permanent link">¶</a></h5>
 <p>Change the owner of the upload and all its entries.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a>nomad admin uploads chown [OPTIONS] USERNAME [UPLOADS]...
+<div class="highlight"><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a>nomad admin uploads chown [OPTIONS] USERNAME [UPLOADS]...
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a>  --help  Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a>  --help  Show this message and exit.
 </code></pre></div>
 <h5 id="nomad-admin-uploads-convert-archive">nomad admin uploads convert-archive<a class="headerlink" href="#nomad-admin-uploads-convert-archive" title="Permanent link">¶</a></h5>
 <p>Convert selected uploads to the new format.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a>nomad admin uploads convert-archive [OPTIONS] [UPLOADS]...
+<div class="highlight"><pre><span></span><code><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a>nomad admin uploads convert-archive [OPTIONS] [UPLOADS]...
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a>  -o, --overwrite           Overwrite existing target files.
-<a id="__codelineno-59-2" name="__codelineno-59-2" href="#__codelineno-59-2"></a>  -d, --delete-old          Delete old archives once successfully converted.
-<a id="__codelineno-59-3" name="__codelineno-59-3" href="#__codelineno-59-3"></a>  -m, --migrate             Only convert v1 archive files to v1.2 archive
-<a id="__codelineno-59-4" name="__codelineno-59-4" href="#__codelineno-59-4"></a>                            files.
-<a id="__codelineno-59-5" name="__codelineno-59-5" href="#__codelineno-59-5"></a>  -f, --force-repack        Force repacking existing archives that are already
-<a id="__codelineno-59-6" name="__codelineno-59-6" href="#__codelineno-59-6"></a>                            in the new format
-<a id="__codelineno-59-7" name="__codelineno-59-7" href="#__codelineno-59-7"></a>  -p, --parallel INTEGER    Number of processes to use for conversion. Default
-<a id="__codelineno-59-8" name="__codelineno-59-8" href="#__codelineno-59-8"></a>                            is os.cpu_count().
-<a id="__codelineno-59-9" name="__codelineno-59-9" href="#__codelineno-59-9"></a>  -s, --size-limit INTEGER  Only handle archives under limited size in GB.
-<a id="__codelineno-59-10" name="__codelineno-59-10" href="#__codelineno-59-10"></a>                            Default is -1 (no limit).
-<a id="__codelineno-59-11" name="__codelineno-59-11" href="#__codelineno-59-11"></a>  --help                    Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a>  -o, --overwrite           Overwrite existing target files.
+<a id="__codelineno-57-2" name="__codelineno-57-2" href="#__codelineno-57-2"></a>  -d, --delete-old          Delete old archives once successfully converted.
+<a id="__codelineno-57-3" name="__codelineno-57-3" href="#__codelineno-57-3"></a>  -m, --migrate             Only convert v1 archive files to v1.2 archive
+<a id="__codelineno-57-4" name="__codelineno-57-4" href="#__codelineno-57-4"></a>                            files.
+<a id="__codelineno-57-5" name="__codelineno-57-5" href="#__codelineno-57-5"></a>  -f, --force-repack        Force repacking existing archives that are already
+<a id="__codelineno-57-6" name="__codelineno-57-6" href="#__codelineno-57-6"></a>                            in the new format
+<a id="__codelineno-57-7" name="__codelineno-57-7" href="#__codelineno-57-7"></a>  -p, --parallel INTEGER    Number of processes to use for conversion. Default
+<a id="__codelineno-57-8" name="__codelineno-57-8" href="#__codelineno-57-8"></a>                            is os.cpu_count().
+<a id="__codelineno-57-9" name="__codelineno-57-9" href="#__codelineno-57-9"></a>  -s, --size-limit INTEGER  Only handle archives under limited size in GB.
+<a id="__codelineno-57-10" name="__codelineno-57-10" href="#__codelineno-57-10"></a>                            Default is -1 (no limit).
+<a id="__codelineno-57-11" name="__codelineno-57-11" href="#__codelineno-57-11"></a>  --help                    Show this message and exit.
 </code></pre></div>
 <h5 id="nomad-admin-uploads-export">nomad admin uploads export<a class="headerlink" href="#nomad-admin-uploads-export" title="Permanent link">¶</a></h5>
 <p>List selected uploads</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a>nomad admin uploads export [OPTIONS] [UPLOADS]...
+<div class="highlight"><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a>nomad admin uploads export [OPTIONS] [UPLOADS]...
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a>  --required TEXT    The required in JSON format
-<a id="__codelineno-61-2" name="__codelineno-61-2" href="#__codelineno-61-2"></a>  -o, --output TEXT  The file to write data to
-<a id="__codelineno-61-3" name="__codelineno-61-3" href="#__codelineno-61-3"></a>  --help             Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a>  --required TEXT    The required in JSON format
+<a id="__codelineno-59-2" name="__codelineno-59-2" href="#__codelineno-59-2"></a>  -o, --output TEXT  The file to write data to
+<a id="__codelineno-59-3" name="__codelineno-59-3" href="#__codelineno-59-3"></a>  --help             Show this message and exit.
 </code></pre></div>
 <h5 id="nomad-admin-uploads-export-bundle">nomad admin uploads export-bundle<a class="headerlink" href="#nomad-admin-uploads-export-bundle" title="Permanent link">¶</a></h5>
 <p>Export one or more uploads as bundles.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a>nomad admin uploads export-bundle [OPTIONS] [UPLOADS]...
+<div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a>nomad admin uploads export-bundle [OPTIONS] [UPLOADS]...
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-63-1" name="__codelineno-63-1" href="#__codelineno-63-1"></a>  --out-dir TEXT       Output folder. Default value is "./bundles" (defined in
-<a id="__codelineno-63-2" name="__codelineno-63-2" href="#__codelineno-63-2"></a>                       config)
-<a id="__codelineno-63-3" name="__codelineno-63-3" href="#__codelineno-63-3"></a>  --uncompressed       Specify to export each bundle as an uncompressed
-<a id="__codelineno-63-4" name="__codelineno-63-4" href="#__codelineno-63-4"></a>                       folder, instead of a zip-file.
-<a id="__codelineno-63-5" name="__codelineno-63-5" href="#__codelineno-63-5"></a>  --overwrite          Specify to, for each bundle, overwrite the destination
-<a id="__codelineno-63-6" name="__codelineno-63-6" href="#__codelineno-63-6"></a>                       file/folder if it already exists.
-<a id="__codelineno-63-7" name="__codelineno-63-7" href="#__codelineno-63-7"></a>  -s, --settings TEXT  The export settings, specified as json. Settings not
-<a id="__codelineno-63-8" name="__codelineno-63-8" href="#__codelineno-63-8"></a>                       specified in the dictionary will be set to the default
-<a id="__codelineno-63-9" name="__codelineno-63-9" href="#__codelineno-63-9"></a>                       values.
-<a id="__codelineno-63-10" name="__codelineno-63-10" href="#__codelineno-63-10"></a>  -i, --ignore-errors  Specify to ignore errors on individual uploads, and
-<a id="__codelineno-63-11" name="__codelineno-63-11" href="#__codelineno-63-11"></a>                       continue exporting (the default behaviour is to abort
-<a id="__codelineno-63-12" name="__codelineno-63-12" href="#__codelineno-63-12"></a>                       on first failing upload).
-<a id="__codelineno-63-13" name="__codelineno-63-13" href="#__codelineno-63-13"></a>  --help               Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a>  --out-dir TEXT       Output folder. Default value is "./bundles" (defined in
+<a id="__codelineno-61-2" name="__codelineno-61-2" href="#__codelineno-61-2"></a>                       config)
+<a id="__codelineno-61-3" name="__codelineno-61-3" href="#__codelineno-61-3"></a>  --uncompressed       Specify to export each bundle as an uncompressed
+<a id="__codelineno-61-4" name="__codelineno-61-4" href="#__codelineno-61-4"></a>                       folder, instead of a zip-file.
+<a id="__codelineno-61-5" name="__codelineno-61-5" href="#__codelineno-61-5"></a>  --overwrite          Specify to, for each bundle, overwrite the destination
+<a id="__codelineno-61-6" name="__codelineno-61-6" href="#__codelineno-61-6"></a>                       file/folder if it already exists.
+<a id="__codelineno-61-7" name="__codelineno-61-7" href="#__codelineno-61-7"></a>  -s, --settings TEXT  The export settings, specified as json. Settings not
+<a id="__codelineno-61-8" name="__codelineno-61-8" href="#__codelineno-61-8"></a>                       specified in the dictionary will be set to the default
+<a id="__codelineno-61-9" name="__codelineno-61-9" href="#__codelineno-61-9"></a>                       values.
+<a id="__codelineno-61-10" name="__codelineno-61-10" href="#__codelineno-61-10"></a>  -i, --ignore-errors  Specify to ignore errors on individual uploads, and
+<a id="__codelineno-61-11" name="__codelineno-61-11" href="#__codelineno-61-11"></a>                       continue exporting (the default behaviour is to abort
+<a id="__codelineno-61-12" name="__codelineno-61-12" href="#__codelineno-61-12"></a>                       on first failing upload).
+<a id="__codelineno-61-13" name="__codelineno-61-13" href="#__codelineno-61-13"></a>  --help               Show this message and exit.
 </code></pre></div>
 <h5 id="nomad-admin-uploads-import-bundle">nomad admin uploads import-bundle<a class="headerlink" href="#nomad-admin-uploads-import-bundle" title="Permanent link">¶</a></h5>
 <p>Import one or more uploads from bundles. Unless specified by the user,
 the configured default import settings are used.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-64-1" name="__codelineno-64-1" href="#__codelineno-64-1"></a>nomad admin uploads import-bundle [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a>nomad admin uploads import-bundle [OPTIONS]
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-65-1" name="__codelineno-65-1" href="#__codelineno-65-1"></a>  --in TEXT                     The input path, specifying a bundle or a
-<a id="__codelineno-65-2" name="__codelineno-65-2" href="#__codelineno-65-2"></a>                                folder containing multiple bundles.
-<a id="__codelineno-65-3" name="__codelineno-65-3" href="#__codelineno-65-3"></a>  -m, --multi                   Specify this flag if the input_path is a
-<a id="__codelineno-65-4" name="__codelineno-65-4" href="#__codelineno-65-4"></a>                                folder containing multiple bundles, and all
-<a id="__codelineno-65-5" name="__codelineno-65-5" href="#__codelineno-65-5"></a>                                these should be imported. If this option is
-<a id="__codelineno-65-6" name="__codelineno-65-6" href="#__codelineno-65-6"></a>                                specified without specifying --in, we will
-<a id="__codelineno-65-7" name="__codelineno-65-7" href="#__codelineno-65-7"></a>                                default the input path to ./bundles
-<a id="__codelineno-65-8" name="__codelineno-65-8" href="#__codelineno-65-8"></a>  -s, --settings TEXT           The import settings, specified as json.
-<a id="__codelineno-65-9" name="__codelineno-65-9" href="#__codelineno-65-9"></a>                                Settings not specified in the dictionary will
-<a id="__codelineno-65-10" name="__codelineno-65-10" href="#__codelineno-65-10"></a>                                be set to the default values.
-<a id="__codelineno-65-11" name="__codelineno-65-11" href="#__codelineno-65-11"></a>  -e, --embargo_length INTEGER  The embargo length (0-36 months). 0 means no
-<a id="__codelineno-65-12" name="__codelineno-65-12" href="#__codelineno-65-12"></a>                                embargo. If unspecified, the embargo period
-<a id="__codelineno-65-13" name="__codelineno-65-13" href="#__codelineno-65-13"></a>                                defined in the bundle will be used.
-<a id="__codelineno-65-14" name="__codelineno-65-14" href="#__codelineno-65-14"></a>  -i, --ignore-errors           Specify this flag to ignore errors on
-<a id="__codelineno-65-15" name="__codelineno-65-15" href="#__codelineno-65-15"></a>                                individual bundles, and continue importing
-<a id="__codelineno-65-16" name="__codelineno-65-16" href="#__codelineno-65-16"></a>                                (the default behaviour is to abort on first
-<a id="__codelineno-65-17" name="__codelineno-65-17" href="#__codelineno-65-17"></a>                                failing bundle).
-<a id="__codelineno-65-18" name="__codelineno-65-18" href="#__codelineno-65-18"></a>  --help                        Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-63-1" name="__codelineno-63-1" href="#__codelineno-63-1"></a>  --in TEXT                     The input path, specifying a bundle or a
+<a id="__codelineno-63-2" name="__codelineno-63-2" href="#__codelineno-63-2"></a>                                folder containing multiple bundles.
+<a id="__codelineno-63-3" name="__codelineno-63-3" href="#__codelineno-63-3"></a>  -m, --multi                   Specify this flag if the input_path is a
+<a id="__codelineno-63-4" name="__codelineno-63-4" href="#__codelineno-63-4"></a>                                folder containing multiple bundles, and all
+<a id="__codelineno-63-5" name="__codelineno-63-5" href="#__codelineno-63-5"></a>                                these should be imported. If this option is
+<a id="__codelineno-63-6" name="__codelineno-63-6" href="#__codelineno-63-6"></a>                                specified without specifying --in, we will
+<a id="__codelineno-63-7" name="__codelineno-63-7" href="#__codelineno-63-7"></a>                                default the input path to ./bundles
+<a id="__codelineno-63-8" name="__codelineno-63-8" href="#__codelineno-63-8"></a>  -s, --settings TEXT           The import settings, specified as json.
+<a id="__codelineno-63-9" name="__codelineno-63-9" href="#__codelineno-63-9"></a>                                Settings not specified in the dictionary will
+<a id="__codelineno-63-10" name="__codelineno-63-10" href="#__codelineno-63-10"></a>                                be set to the default values.
+<a id="__codelineno-63-11" name="__codelineno-63-11" href="#__codelineno-63-11"></a>  -e, --embargo_length INTEGER  The embargo length (0-36 months). 0 means no
+<a id="__codelineno-63-12" name="__codelineno-63-12" href="#__codelineno-63-12"></a>                                embargo. If unspecified, the embargo period
+<a id="__codelineno-63-13" name="__codelineno-63-13" href="#__codelineno-63-13"></a>                                defined in the bundle will be used.
+<a id="__codelineno-63-14" name="__codelineno-63-14" href="#__codelineno-63-14"></a>  -i, --ignore-errors           Specify this flag to ignore errors on
+<a id="__codelineno-63-15" name="__codelineno-63-15" href="#__codelineno-63-15"></a>                                individual bundles, and continue importing
+<a id="__codelineno-63-16" name="__codelineno-63-16" href="#__codelineno-63-16"></a>                                (the default behaviour is to abort on first
+<a id="__codelineno-63-17" name="__codelineno-63-17" href="#__codelineno-63-17"></a>                                failing bundle).
+<a id="__codelineno-63-18" name="__codelineno-63-18" href="#__codelineno-63-18"></a>  --help                        Show this message and exit.
 </code></pre></div>
 <h5 id="nomad-admin-uploads-index">nomad admin uploads index<a class="headerlink" href="#nomad-admin-uploads-index" title="Permanent link">¶</a></h5>
 <p>(Re-)index all entries of the given uploads.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-66-1" name="__codelineno-66-1" href="#__codelineno-66-1"></a>nomad admin uploads index [OPTIONS] [UPLOADS]...
+<div class="highlight"><pre><span></span><code><a id="__codelineno-64-1" name="__codelineno-64-1" href="#__codelineno-64-1"></a>nomad admin uploads index [OPTIONS] [UPLOADS]...
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a>  --parallel INTEGER        Use the given amount of parallel processes.
-<a id="__codelineno-67-2" name="__codelineno-67-2" href="#__codelineno-67-2"></a>                            Default is 1.
-<a id="__codelineno-67-3" name="__codelineno-67-3" href="#__codelineno-67-3"></a>  --transformer TEXT        Qualified name to a Python function that should be
-<a id="__codelineno-67-4" name="__codelineno-67-4" href="#__codelineno-67-4"></a>                            applied to each EntryMetadata.
-<a id="__codelineno-67-5" name="__codelineno-67-5" href="#__codelineno-67-5"></a>  --skip-materials          Only update the entries index.
-<a id="__codelineno-67-6" name="__codelineno-67-6" href="#__codelineno-67-6"></a>  --print-progress INTEGER  Prints a dot every given seconds. Can be used to
-<a id="__codelineno-67-7" name="__codelineno-67-7" href="#__codelineno-67-7"></a>                            keep terminal open that have an i/o-based timeout.
-<a id="__codelineno-67-8" name="__codelineno-67-8" href="#__codelineno-67-8"></a>  --help                    Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-65-1" name="__codelineno-65-1" href="#__codelineno-65-1"></a>  --parallel INTEGER        Use the given amount of parallel processes.
+<a id="__codelineno-65-2" name="__codelineno-65-2" href="#__codelineno-65-2"></a>                            Default is 1.
+<a id="__codelineno-65-3" name="__codelineno-65-3" href="#__codelineno-65-3"></a>  --transformer TEXT        Qualified name to a Python function that should be
+<a id="__codelineno-65-4" name="__codelineno-65-4" href="#__codelineno-65-4"></a>                            applied to each EntryMetadata.
+<a id="__codelineno-65-5" name="__codelineno-65-5" href="#__codelineno-65-5"></a>  --print-progress INTEGER  Prints a dot every given seconds. Can be used to
+<a id="__codelineno-65-6" name="__codelineno-65-6" href="#__codelineno-65-6"></a>                            keep terminal open that have an i/o-based timeout.
+<a id="__codelineno-65-7" name="__codelineno-65-7" href="#__codelineno-65-7"></a>  --help                    Show this message and exit.
 </code></pre></div>
 <h5 id="nomad-admin-uploads-integrity">nomad admin uploads integrity<a class="headerlink" href="#nomad-admin-uploads-integrity" title="Permanent link">¶</a></h5>
 <p>Check certain integrity criteria and return a list of upload IDs.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-68-1" name="__codelineno-68-1" href="#__codelineno-68-1"></a>nomad admin uploads integrity [OPTIONS] [UPLOADS]...
+<div class="highlight"><pre><span></span><code><a id="__codelineno-66-1" name="__codelineno-66-1" href="#__codelineno-66-1"></a>nomad admin uploads integrity [OPTIONS] [UPLOADS]...
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-69-1" name="__codelineno-69-1" href="#__codelineno-69-1"></a>  --both-storages           Select uploads that have both staging and public
-<a id="__codelineno-69-2" name="__codelineno-69-2" href="#__codelineno-69-2"></a>                            versions.
-<a id="__codelineno-69-3" name="__codelineno-69-3" href="#__codelineno-69-3"></a>  --missing-storage         Select uploads of which the corresponding raw
-<a id="__codelineno-69-4" name="__codelineno-69-4" href="#__codelineno-69-4"></a>                            folder (for staging) or the raw zip archive (for
-<a id="__codelineno-69-5" name="__codelineno-69-5" href="#__codelineno-69-5"></a>                            public) is missing in the file system. This only
-<a id="__codelineno-69-6" name="__codelineno-69-6" href="#__codelineno-69-6"></a>                            checks the existence of folder/archive uploaded by
-<a id="__codelineno-69-7" name="__codelineno-69-7" href="#__codelineno-69-7"></a>                            user. To check the contents, use the --missing-
-<a id="__codelineno-69-8" name="__codelineno-69-8" href="#__codelineno-69-8"></a>                            raw-files flag.
-<a id="__codelineno-69-9" name="__codelineno-69-9" href="#__codelineno-69-9"></a>  --missing-raw-files       Select uploads that any of the files listed in
-<a id="__codelineno-69-10" name="__codelineno-69-10" href="#__codelineno-69-10"></a>                            metadata/files is missing. Use --check-all-entries
-<a id="__codelineno-69-11" name="__codelineno-69-11" href="#__codelineno-69-11"></a>                            to check files for all entries in the upload. It
-<a id="__codelineno-69-12" name="__codelineno-69-12" href="#__codelineno-69-12"></a>                            uses the indexed ES data and does not open the
-<a id="__codelineno-69-13" name="__codelineno-69-13" href="#__codelineno-69-13"></a>                            msgpack archive files.
-<a id="__codelineno-69-14" name="__codelineno-69-14" href="#__codelineno-69-14"></a>  --missing-archive-files   Select uploads that miss archive (msgpack) files.
-<a id="__codelineno-69-15" name="__codelineno-69-15" href="#__codelineno-69-15"></a>  --missing-index           Select uploads of which the ES index information
-<a id="__codelineno-69-16" name="__codelineno-69-16" href="#__codelineno-69-16"></a>                            is missing.
-<a id="__codelineno-69-17" name="__codelineno-69-17" href="#__codelineno-69-17"></a>  --entry-mismatch          Select uploads that have different numbers of
-<a id="__codelineno-69-18" name="__codelineno-69-18" href="#__codelineno-69-18"></a>                            entries in mongo and ES.
-<a id="__codelineno-69-19" name="__codelineno-69-19" href="#__codelineno-69-19"></a>  --nomad-version-mismatch  Select uploads that have different nomad versions
-<a id="__codelineno-69-20" name="__codelineno-69-20" href="#__codelineno-69-20"></a>                            in archive and ES.
-<a id="__codelineno-69-21" name="__codelineno-69-21" href="#__codelineno-69-21"></a>  --old-archive-format      Select uploads that are using the old archive
-<a id="__codelineno-69-22" name="__codelineno-69-22" href="#__codelineno-69-22"></a>                            format (v1).
-<a id="__codelineno-69-23" name="__codelineno-69-23" href="#__codelineno-69-23"></a>  --not-preferred-suffix    Select uploads that are using the preferred
-<a id="__codelineno-69-24" name="__codelineno-69-24" href="#__codelineno-69-24"></a>                            (first) suffix in the configuration.
-<a id="__codelineno-69-25" name="__codelineno-69-25" href="#__codelineno-69-25"></a>  --check-all-entries       Check all entries in the upload, otherwise only
-<a id="__codelineno-69-26" name="__codelineno-69-26" href="#__codelineno-69-26"></a>                            check one entry per upload.
-<a id="__codelineno-69-27" name="__codelineno-69-27" href="#__codelineno-69-27"></a>  --help                    Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-67-1" name="__codelineno-67-1" href="#__codelineno-67-1"></a>  --both-storages           Select uploads that have both staging and public
+<a id="__codelineno-67-2" name="__codelineno-67-2" href="#__codelineno-67-2"></a>                            versions.
+<a id="__codelineno-67-3" name="__codelineno-67-3" href="#__codelineno-67-3"></a>  --missing-storage         Select uploads of which the corresponding raw
+<a id="__codelineno-67-4" name="__codelineno-67-4" href="#__codelineno-67-4"></a>                            folder (for staging) or the raw zip archive (for
+<a id="__codelineno-67-5" name="__codelineno-67-5" href="#__codelineno-67-5"></a>                            public) is missing in the file system. This only
+<a id="__codelineno-67-6" name="__codelineno-67-6" href="#__codelineno-67-6"></a>                            checks the existence of folder/archive uploaded by
+<a id="__codelineno-67-7" name="__codelineno-67-7" href="#__codelineno-67-7"></a>                            user. To check the contents, use the --missing-
+<a id="__codelineno-67-8" name="__codelineno-67-8" href="#__codelineno-67-8"></a>                            raw-files flag.
+<a id="__codelineno-67-9" name="__codelineno-67-9" href="#__codelineno-67-9"></a>  --missing-raw-files       Select uploads that any of the files listed in
+<a id="__codelineno-67-10" name="__codelineno-67-10" href="#__codelineno-67-10"></a>                            metadata/files is missing. Use --check-all-entries
+<a id="__codelineno-67-11" name="__codelineno-67-11" href="#__codelineno-67-11"></a>                            to check files for all entries in the upload. It
+<a id="__codelineno-67-12" name="__codelineno-67-12" href="#__codelineno-67-12"></a>                            uses the indexed ES data and does not open the
+<a id="__codelineno-67-13" name="__codelineno-67-13" href="#__codelineno-67-13"></a>                            msgpack archive files.
+<a id="__codelineno-67-14" name="__codelineno-67-14" href="#__codelineno-67-14"></a>  --missing-archive-files   Select uploads that miss archive (msgpack) files.
+<a id="__codelineno-67-15" name="__codelineno-67-15" href="#__codelineno-67-15"></a>  --missing-index           Select uploads of which the ES index information
+<a id="__codelineno-67-16" name="__codelineno-67-16" href="#__codelineno-67-16"></a>                            is missing.
+<a id="__codelineno-67-17" name="__codelineno-67-17" href="#__codelineno-67-17"></a>  --entry-mismatch          Select uploads that have different numbers of
+<a id="__codelineno-67-18" name="__codelineno-67-18" href="#__codelineno-67-18"></a>                            entries in mongo and ES.
+<a id="__codelineno-67-19" name="__codelineno-67-19" href="#__codelineno-67-19"></a>  --nomad-version-mismatch  Select uploads that have different nomad versions
+<a id="__codelineno-67-20" name="__codelineno-67-20" href="#__codelineno-67-20"></a>                            in archive and ES.
+<a id="__codelineno-67-21" name="__codelineno-67-21" href="#__codelineno-67-21"></a>  --old-archive-format      Select uploads that are using the old archive
+<a id="__codelineno-67-22" name="__codelineno-67-22" href="#__codelineno-67-22"></a>                            format (v1).
+<a id="__codelineno-67-23" name="__codelineno-67-23" href="#__codelineno-67-23"></a>  --not-preferred-suffix    Select uploads that are using the preferred
+<a id="__codelineno-67-24" name="__codelineno-67-24" href="#__codelineno-67-24"></a>                            (first) suffix in the configuration.
+<a id="__codelineno-67-25" name="__codelineno-67-25" href="#__codelineno-67-25"></a>  --check-all-entries       Check all entries in the upload, otherwise only
+<a id="__codelineno-67-26" name="__codelineno-67-26" href="#__codelineno-67-26"></a>                            check one entry per upload.
+<a id="__codelineno-67-27" name="__codelineno-67-27" href="#__codelineno-67-27"></a>  --help                    Show this message and exit.
 </code></pre></div>
 <h5 id="nomad-admin-uploads-ls">nomad admin uploads ls<a class="headerlink" href="#nomad-admin-uploads-ls" title="Permanent link">¶</a></h5>
 <p>List selected uploads</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-70-1" name="__codelineno-70-1" href="#__codelineno-70-1"></a>nomad admin uploads ls [OPTIONS] [UPLOADS]...
+<div class="highlight"><pre><span></span><code><a id="__codelineno-68-1" name="__codelineno-68-1" href="#__codelineno-68-1"></a>nomad admin uploads ls [OPTIONS] [UPLOADS]...
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-71-1" name="__codelineno-71-1" href="#__codelineno-71-1"></a>  -e, --entries   Include details about upload entries in the output.
-<a id="__codelineno-71-2" name="__codelineno-71-2" href="#__codelineno-71-2"></a>  --ids           Only include the upload ids in the output.
-<a id="__codelineno-71-3" name="__codelineno-71-3" href="#__codelineno-71-3"></a>  --json          Output a JSON array instead of a tabulated list.
-<a id="__codelineno-71-4" name="__codelineno-71-4" href="#__codelineno-71-4"></a>  --size INTEGER  Controls the maximum size of returned uploads, use -1 to
-<a id="__codelineno-71-5" name="__codelineno-71-5" href="#__codelineno-71-5"></a>                  return all.
-<a id="__codelineno-71-6" name="__codelineno-71-6" href="#__codelineno-71-6"></a>  --help          Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-69-1" name="__codelineno-69-1" href="#__codelineno-69-1"></a>  -e, --entries   Include details about upload entries in the output.
+<a id="__codelineno-69-2" name="__codelineno-69-2" href="#__codelineno-69-2"></a>  --ids           Only include the upload ids in the output.
+<a id="__codelineno-69-3" name="__codelineno-69-3" href="#__codelineno-69-3"></a>  --json          Output a JSON array instead of a tabulated list.
+<a id="__codelineno-69-4" name="__codelineno-69-4" href="#__codelineno-69-4"></a>  --size INTEGER  Controls the maximum size of returned uploads, use -1 to
+<a id="__codelineno-69-5" name="__codelineno-69-5" href="#__codelineno-69-5"></a>                  return all.
+<a id="__codelineno-69-6" name="__codelineno-69-6" href="#__codelineno-69-6"></a>  --help          Show this message and exit.
 </code></pre></div>
 <h5 id="nomad-admin-uploads-process">nomad admin uploads process<a class="headerlink" href="#nomad-admin-uploads-process" title="Permanent link">¶</a></h5>
 <p>Reprocess selected uploads.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-72-1" name="__codelineno-72-1" href="#__codelineno-72-1"></a>nomad admin uploads process [OPTIONS] [UPLOADS]...
+<div class="highlight"><pre><span></span><code><a id="__codelineno-70-1" name="__codelineno-70-1" href="#__codelineno-70-1"></a>nomad admin uploads process [OPTIONS] [UPLOADS]...
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-73-1" name="__codelineno-73-1" href="#__codelineno-73-1"></a>  --parallel INTEGER        Use the given amount of parallel processes.
-<a id="__codelineno-73-2" name="__codelineno-73-2" href="#__codelineno-73-2"></a>                            Default is 1.
-<a id="__codelineno-73-3" name="__codelineno-73-3" href="#__codelineno-73-3"></a>  --process-running         Also reprocess already running processes.
-<a id="__codelineno-73-4" name="__codelineno-73-4" href="#__codelineno-73-4"></a>  --setting TEXT            key=value to overwrite a default reprocess config
-<a id="__codelineno-73-5" name="__codelineno-73-5" href="#__codelineno-73-5"></a>                            setting.
-<a id="__codelineno-73-6" name="__codelineno-73-6" href="#__codelineno-73-6"></a>  --print-progress INTEGER  Prints a dot every given seconds. Can be used to
-<a id="__codelineno-73-7" name="__codelineno-73-7" href="#__codelineno-73-7"></a>                            keep terminal open that have an i/o-based timeout.
-<a id="__codelineno-73-8" name="__codelineno-73-8" href="#__codelineno-73-8"></a>  --help                    Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-71-1" name="__codelineno-71-1" href="#__codelineno-71-1"></a>  --parallel INTEGER        Use the given amount of parallel processes.
+<a id="__codelineno-71-2" name="__codelineno-71-2" href="#__codelineno-71-2"></a>                            Default is 1.
+<a id="__codelineno-71-3" name="__codelineno-71-3" href="#__codelineno-71-3"></a>  --process-running         Also reprocess already running processes.
+<a id="__codelineno-71-4" name="__codelineno-71-4" href="#__codelineno-71-4"></a>  --setting TEXT            key=value to overwrite a default reprocess config
+<a id="__codelineno-71-5" name="__codelineno-71-5" href="#__codelineno-71-5"></a>                            setting.
+<a id="__codelineno-71-6" name="__codelineno-71-6" href="#__codelineno-71-6"></a>  --print-progress INTEGER  Prints a dot every given seconds. Can be used to
+<a id="__codelineno-71-7" name="__codelineno-71-7" href="#__codelineno-71-7"></a>                            keep terminal open that have an i/o-based timeout.
+<a id="__codelineno-71-8" name="__codelineno-71-8" href="#__codelineno-71-8"></a>  --help                    Show this message and exit.
 </code></pre></div>
 <h5 id="nomad-admin-uploads-publish">nomad admin uploads publish<a class="headerlink" href="#nomad-admin-uploads-publish" title="Permanent link">¶</a></h5>
 <p>Publish selected uploads.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-74-1" name="__codelineno-74-1" href="#__codelineno-74-1"></a>nomad admin uploads publish [OPTIONS] [UPLOADS]...
+<div class="highlight"><pre><span></span><code><a id="__codelineno-72-1" name="__codelineno-72-1" href="#__codelineno-72-1"></a>nomad admin uploads publish [OPTIONS] [UPLOADS]...
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-75-1" name="__codelineno-75-1" href="#__codelineno-75-1"></a>  --parallel INTEGER        Use the given amount of parallel processes.
-<a id="__codelineno-75-2" name="__codelineno-75-2" href="#__codelineno-75-2"></a>                            Default is 1.
-<a id="__codelineno-75-3" name="__codelineno-75-3" href="#__codelineno-75-3"></a>  --embargo-length INTEGER  Use an embargo length (months) for the
-<a id="__codelineno-75-4" name="__codelineno-75-4" href="#__codelineno-75-4"></a>                            publication.
-<a id="__codelineno-75-5" name="__codelineno-75-5" href="#__codelineno-75-5"></a>  --help                    Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-73-1" name="__codelineno-73-1" href="#__codelineno-73-1"></a>  --parallel INTEGER        Use the given amount of parallel processes.
+<a id="__codelineno-73-2" name="__codelineno-73-2" href="#__codelineno-73-2"></a>                            Default is 1.
+<a id="__codelineno-73-3" name="__codelineno-73-3" href="#__codelineno-73-3"></a>  --embargo-length INTEGER  Use an embargo length (months) for the
+<a id="__codelineno-73-4" name="__codelineno-73-4" href="#__codelineno-73-4"></a>                            publication.
+<a id="__codelineno-73-5" name="__codelineno-73-5" href="#__codelineno-73-5"></a>  --help                    Show this message and exit.
 </code></pre></div>
 <h5 id="nomad-admin-uploads-re-pack">nomad admin uploads re-pack<a class="headerlink" href="#nomad-admin-uploads-re-pack" title="Permanent link">¶</a></h5>
 <p>Repack selected uploads.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-76-1" name="__codelineno-76-1" href="#__codelineno-76-1"></a>nomad admin uploads re-pack [OPTIONS] [UPLOADS]...
+<div class="highlight"><pre><span></span><code><a id="__codelineno-74-1" name="__codelineno-74-1" href="#__codelineno-74-1"></a>nomad admin uploads re-pack [OPTIONS] [UPLOADS]...
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-77-1" name="__codelineno-77-1" href="#__codelineno-77-1"></a>  --help  Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-75-1" name="__codelineno-75-1" href="#__codelineno-75-1"></a>  --help  Show this message and exit.
 </code></pre></div>
 <h5 id="nomad-admin-uploads-reset">nomad admin uploads reset<a class="headerlink" href="#nomad-admin-uploads-reset" title="Permanent link">¶</a></h5>
 <p>Reset the processing state.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-78-1" name="__codelineno-78-1" href="#__codelineno-78-1"></a>nomad admin uploads reset [OPTIONS] [UPLOADS]...
+<div class="highlight"><pre><span></span><code><a id="__codelineno-76-1" name="__codelineno-76-1" href="#__codelineno-76-1"></a>nomad admin uploads reset [OPTIONS] [UPLOADS]...
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-79-1" name="__codelineno-79-1" href="#__codelineno-79-1"></a>  --with-entries  Also reset all entries.
-<a id="__codelineno-79-2" name="__codelineno-79-2" href="#__codelineno-79-2"></a>  --success       Set the process status to success instead of pending
-<a id="__codelineno-79-3" name="__codelineno-79-3" href="#__codelineno-79-3"></a>  --failure       Set the process status to failure instead of pending.
-<a id="__codelineno-79-4" name="__codelineno-79-4" href="#__codelineno-79-4"></a>  --help          Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-77-1" name="__codelineno-77-1" href="#__codelineno-77-1"></a>  --with-entries  Also reset all entries.
+<a id="__codelineno-77-2" name="__codelineno-77-2" href="#__codelineno-77-2"></a>  --success       Set the process status to success instead of pending
+<a id="__codelineno-77-3" name="__codelineno-77-3" href="#__codelineno-77-3"></a>  --failure       Set the process status to failure instead of pending.
+<a id="__codelineno-77-4" name="__codelineno-77-4" href="#__codelineno-77-4"></a>  --help          Show this message and exit.
 </code></pre></div>
 <h5 id="nomad-admin-uploads-rm">nomad admin uploads rm<a class="headerlink" href="#nomad-admin-uploads-rm" title="Permanent link">¶</a></h5>
 <p>Delete selected upload</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-80-1" name="__codelineno-80-1" href="#__codelineno-80-1"></a>nomad admin uploads rm [OPTIONS] [UPLOADS]...
+<div class="highlight"><pre><span></span><code><a id="__codelineno-78-1" name="__codelineno-78-1" href="#__codelineno-78-1"></a>nomad admin uploads rm [OPTIONS] [UPLOADS]...
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-81-1" name="__codelineno-81-1" href="#__codelineno-81-1"></a>  --skip-es     Keep the elastic index version of the data.
-<a id="__codelineno-81-2" name="__codelineno-81-2" href="#__codelineno-81-2"></a>  --skip-mongo  Keep uploads and entries in mongo.
-<a id="__codelineno-81-3" name="__codelineno-81-3" href="#__codelineno-81-3"></a>  --skip-files  Keep all related files.
-<a id="__codelineno-81-4" name="__codelineno-81-4" href="#__codelineno-81-4"></a>  --help        Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-79-1" name="__codelineno-79-1" href="#__codelineno-79-1"></a>  --skip-es     Keep the elastic index version of the data.
+<a id="__codelineno-79-2" name="__codelineno-79-2" href="#__codelineno-79-2"></a>  --skip-mongo  Keep uploads and entries in mongo.
+<a id="__codelineno-79-3" name="__codelineno-79-3" href="#__codelineno-79-3"></a>  --skip-files  Keep all related files.
+<a id="__codelineno-79-4" name="__codelineno-79-4" href="#__codelineno-79-4"></a>  --help        Show this message and exit.
 </code></pre></div>
 <h5 id="nomad-admin-uploads-stop">nomad admin uploads stop<a class="headerlink" href="#nomad-admin-uploads-stop" title="Permanent link">¶</a></h5>
 <p>Attempt to abort the processing of uploads.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-82-1" name="__codelineno-82-1" href="#__codelineno-82-1"></a>nomad admin uploads stop [OPTIONS] [UPLOADS]...
+<div class="highlight"><pre><span></span><code><a id="__codelineno-80-1" name="__codelineno-80-1" href="#__codelineno-80-1"></a>nomad admin uploads stop [OPTIONS] [UPLOADS]...
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-83-1" name="__codelineno-83-1" href="#__codelineno-83-1"></a>  --entries    Only stop entries processing.
-<a id="__codelineno-83-2" name="__codelineno-83-2" href="#__codelineno-83-2"></a>  --kill       Use the kill signal and force task failure.
-<a id="__codelineno-83-3" name="__codelineno-83-3" href="#__codelineno-83-3"></a>  --no-celery  Do not attempt to stop the actual celery tasks
-<a id="__codelineno-83-4" name="__codelineno-83-4" href="#__codelineno-83-4"></a>  --help       Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-81-1" name="__codelineno-81-1" href="#__codelineno-81-1"></a>  --entries    Only stop entries processing.
+<a id="__codelineno-81-2" name="__codelineno-81-2" href="#__codelineno-81-2"></a>  --kill       Use the kill signal and force task failure.
+<a id="__codelineno-81-3" name="__codelineno-81-3" href="#__codelineno-81-3"></a>  --no-celery  Do not attempt to stop the actual celery tasks
+<a id="__codelineno-81-4" name="__codelineno-81-4" href="#__codelineno-81-4"></a>  --help       Show this message and exit.
 </code></pre></div>
 <h5 id="nomad-admin-uploads-unpublish">nomad admin uploads unpublish<a class="headerlink" href="#nomad-admin-uploads-unpublish" title="Permanent link">¶</a></h5>
 <p>Unpublish selected uploads.
 WARNING: this operation changes the visibility of the target uploads!
 This may break existing dependencies and should only be used with caution.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-84-1" name="__codelineno-84-1" href="#__codelineno-84-1"></a>nomad admin uploads unpublish [OPTIONS] [UPLOADS]...
+<div class="highlight"><pre><span></span><code><a id="__codelineno-82-1" name="__codelineno-82-1" href="#__codelineno-82-1"></a>nomad admin uploads unpublish [OPTIONS] [UPLOADS]...
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-85-1" name="__codelineno-85-1" href="#__codelineno-85-1"></a>  --parallel INTEGER  Use the given amount of parallel processes. Default is
-<a id="__codelineno-85-2" name="__codelineno-85-2" href="#__codelineno-85-2"></a>                      1.
-<a id="__codelineno-85-3" name="__codelineno-85-3" href="#__codelineno-85-3"></a>  --help              Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-83-1" name="__codelineno-83-1" href="#__codelineno-83-1"></a>  --parallel INTEGER  Use the given amount of parallel processes. Default is
+<a id="__codelineno-83-2" name="__codelineno-83-2" href="#__codelineno-83-2"></a>                      1.
+<a id="__codelineno-83-3" name="__codelineno-83-3" href="#__codelineno-83-3"></a>  --help              Show this message and exit.
 </code></pre></div>
 <h4 id="nomad-admin-users">nomad admin users<a class="headerlink" href="#nomad-admin-users" title="Permanent link">¶</a></h4>
 <p>Add, import, export users.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-86-1" name="__codelineno-86-1" href="#__codelineno-86-1"></a>nomad admin users [OPTIONS] COMMAND [ARGS]...
+<div class="highlight"><pre><span></span><code><a id="__codelineno-84-1" name="__codelineno-84-1" href="#__codelineno-84-1"></a>nomad admin users [OPTIONS] COMMAND [ARGS]...
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-87-1" name="__codelineno-87-1" href="#__codelineno-87-1"></a>  --help  Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-85-1" name="__codelineno-85-1" href="#__codelineno-85-1"></a>  --help  Show this message and exit.
 </code></pre></div>
 <p><strong>Subcommands</strong></p>
 <ul>
@@ -6192,33 +6197,33 @@ This may break existing dependencies and should only be used with caution.</p>
 <h5 id="nomad-admin-users-import">nomad admin users import<a class="headerlink" href="#nomad-admin-users-import" title="Permanent link">¶</a></h5>
 <p>Import users to keycloak from a JSON file.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-88-1" name="__codelineno-88-1" href="#__codelineno-88-1"></a>nomad admin users import [OPTIONS] PATH_TO_USERS_FILE
+<div class="highlight"><pre><span></span><code><a id="__codelineno-86-1" name="__codelineno-86-1" href="#__codelineno-86-1"></a>nomad admin users import [OPTIONS] PATH_TO_USERS_FILE
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-89-1" name="__codelineno-89-1" href="#__codelineno-89-1"></a>  --help  Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-87-1" name="__codelineno-87-1" href="#__codelineno-87-1"></a>  --help  Show this message and exit.
 </code></pre></div>
 <h3 id="nomad-clean">nomad clean<a class="headerlink" href="#nomad-clean" title="Permanent link">¶</a></h3>
 <p>Cleanse the given path by removing empty folders.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-90-1" name="__codelineno-90-1" href="#__codelineno-90-1"></a>nomad clean [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-88-1" name="__codelineno-88-1" href="#__codelineno-88-1"></a>nomad clean [OPTIONS]
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-91-1" name="__codelineno-91-1" href="#__codelineno-91-1"></a>  --path TEXT  Cleanse the given path by removing empty folders.
-<a id="__codelineno-91-2" name="__codelineno-91-2" href="#__codelineno-91-2"></a>  --help       Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-89-1" name="__codelineno-89-1" href="#__codelineno-89-1"></a>  --path TEXT  Cleanse the given path by removing empty folders.
+<a id="__codelineno-89-2" name="__codelineno-89-2" href="#__codelineno-89-2"></a>  --help       Show this message and exit.
 </code></pre></div>
 <h3 id="nomad-client">nomad client<a class="headerlink" href="#nomad-client" title="Permanent link">¶</a></h3>
 <p>Commands that use the nomad API to do useful things</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-92-1" name="__codelineno-92-1" href="#__codelineno-92-1"></a>nomad client [OPTIONS] COMMAND [ARGS]...
+<div class="highlight"><pre><span></span><code><a id="__codelineno-90-1" name="__codelineno-90-1" href="#__codelineno-90-1"></a>nomad client [OPTIONS] COMMAND [ARGS]...
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-93-1" name="__codelineno-93-1" href="#__codelineno-93-1"></a>  -n, --url TEXT       The URL where nomad is running, default is
-<a id="__codelineno-93-2" name="__codelineno-93-2" href="#__codelineno-93-2"></a>                       "https://nomad-lab.eu/prod/v1/api".
-<a id="__codelineno-93-3" name="__codelineno-93-3" href="#__codelineno-93-3"></a>  -u, --user TEXT      the user name to login, default is no login.
-<a id="__codelineno-93-4" name="__codelineno-93-4" href="#__codelineno-93-4"></a>  -w, --password TEXT  the password used to login.
-<a id="__codelineno-93-5" name="__codelineno-93-5" href="#__codelineno-93-5"></a>  --token-via-api      retrieve the access token from the api not keycloak.
-<a id="__codelineno-93-6" name="__codelineno-93-6" href="#__codelineno-93-6"></a>  --no-ssl-verify      disables SSL verificaton when talking to nomad.
-<a id="__codelineno-93-7" name="__codelineno-93-7" href="#__codelineno-93-7"></a>  --help               Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-91-1" name="__codelineno-91-1" href="#__codelineno-91-1"></a>  -n, --url TEXT       The URL where nomad is running, default is
+<a id="__codelineno-91-2" name="__codelineno-91-2" href="#__codelineno-91-2"></a>                       "https://nomad-lab.eu/prod/v1/api".
+<a id="__codelineno-91-3" name="__codelineno-91-3" href="#__codelineno-91-3"></a>  -u, --user TEXT      the user name to login, default is no login.
+<a id="__codelineno-91-4" name="__codelineno-91-4" href="#__codelineno-91-4"></a>  -w, --password TEXT  the password used to login.
+<a id="__codelineno-91-5" name="__codelineno-91-5" href="#__codelineno-91-5"></a>  --token-via-api      retrieve the access token from the api not keycloak.
+<a id="__codelineno-91-6" name="__codelineno-91-6" href="#__codelineno-91-6"></a>  --no-ssl-verify      disables SSL verificaton when talking to nomad.
+<a id="__codelineno-91-7" name="__codelineno-91-7" href="#__codelineno-91-7"></a>  --help               Show this message and exit.
 </code></pre></div>
 <p><strong>Subcommands</strong></p>
 <ul>
@@ -6231,81 +6236,84 @@ This may break existing dependencies and should only be used with caution.</p>
 <h4 id="nomad-client-datatests">nomad client datatests<a class="headerlink" href="#nomad-client-datatests" title="Permanent link">¶</a></h4>
 <p>Metainfo compatibility tests against data in a NOMAD installation.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-94-1" name="__codelineno-94-1" href="#__codelineno-94-1"></a>nomad client datatests [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-92-1" name="__codelineno-92-1" href="#__codelineno-92-1"></a>nomad client datatests [OPTIONS]
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-95-1" name="__codelineno-95-1" href="#__codelineno-95-1"></a>  --help  Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-93-1" name="__codelineno-93-1" href="#__codelineno-93-1"></a>  --help  Show this message and exit.
 </code></pre></div>
 <h4 id="nomad-client-integrationtests">nomad client integrationtests<a class="headerlink" href="#nomad-client-integrationtests" title="Permanent link">¶</a></h4>
 <p>Runs a few example operations as a test.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-96-1" name="__codelineno-96-1" href="#__codelineno-96-1"></a>nomad client integrationtests [OPTIONS]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-94-1" name="__codelineno-94-1" href="#__codelineno-94-1"></a>nomad client integrationtests [OPTIONS]
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-97-1" name="__codelineno-97-1" href="#__codelineno-97-1"></a>  --skip-parsers  Skip extensive upload and parser tests.
-<a id="__codelineno-97-2" name="__codelineno-97-2" href="#__codelineno-97-2"></a>  --skip-publish  Skip publish the upload. Should not be done on an production
-<a id="__codelineno-97-3" name="__codelineno-97-3" href="#__codelineno-97-3"></a>                  environment.
-<a id="__codelineno-97-4" name="__codelineno-97-4" href="#__codelineno-97-4"></a>  --skip-doi      Skip assigning a doi to a dataset.
-<a id="__codelineno-97-5" name="__codelineno-97-5" href="#__codelineno-97-5"></a>  --help          Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-95-1" name="__codelineno-95-1" href="#__codelineno-95-1"></a>  --skip-parsers  Skip extensive upload and parser tests.
+<a id="__codelineno-95-2" name="__codelineno-95-2" href="#__codelineno-95-2"></a>  --skip-publish  Skip publish the upload. Should not be done on an production
+<a id="__codelineno-95-3" name="__codelineno-95-3" href="#__codelineno-95-3"></a>                  environment.
+<a id="__codelineno-95-4" name="__codelineno-95-4" href="#__codelineno-95-4"></a>  --skip-doi      Skip assigning a doi to a dataset.
+<a id="__codelineno-95-5" name="__codelineno-95-5" href="#__codelineno-95-5"></a>  --help          Show this message and exit.
 </code></pre></div>
 <h4 id="nomad-client-local">nomad client local<a class="headerlink" href="#nomad-client-local" title="Permanent link">¶</a></h4>
 <p>Run processing locally.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-98-1" name="__codelineno-98-1" href="#__codelineno-98-1"></a>nomad client local [OPTIONS] ENTRY_ID
+<div class="highlight"><pre><span></span><code><a id="__codelineno-96-1" name="__codelineno-96-1" href="#__codelineno-96-1"></a>nomad client local [OPTIONS] ENTRY_ID
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-99-1" name="__codelineno-99-1" href="#__codelineno-99-1"></a>  --override                     Override existing local entry data.
-<a id="__codelineno-99-2" name="__codelineno-99-2" href="#__codelineno-99-2"></a>  --show-archive / --no-archive  Whether to print out the archive data into
-<a id="__codelineno-99-3" name="__codelineno-99-3" href="#__codelineno-99-3"></a>                                 stdout.
-<a id="__codelineno-99-4" name="__codelineno-99-4" href="#__codelineno-99-4"></a>  --show-metadata                Print the extracted repo metadata.
-<a id="__codelineno-99-5" name="__codelineno-99-5" href="#__codelineno-99-5"></a>  --skip-normalizers             Do not normalize.
-<a id="__codelineno-99-6" name="__codelineno-99-6" href="#__codelineno-99-6"></a>  --not-strict                   Also match artificial parsers.
-<a id="__codelineno-99-7" name="__codelineno-99-7" href="#__codelineno-99-7"></a>  --help                         Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-97-1" name="__codelineno-97-1" href="#__codelineno-97-1"></a>  --override                     Override existing local entry data.
+<a id="__codelineno-97-2" name="__codelineno-97-2" href="#__codelineno-97-2"></a>  --show-archive / --no-archive  Whether to print out the archive data into
+<a id="__codelineno-97-3" name="__codelineno-97-3" href="#__codelineno-97-3"></a>                                 stdout.
+<a id="__codelineno-97-4" name="__codelineno-97-4" href="#__codelineno-97-4"></a>  --show-metadata                Print the extracted repo metadata.
+<a id="__codelineno-97-5" name="__codelineno-97-5" href="#__codelineno-97-5"></a>  --skip-normalizers             Do not normalize.
+<a id="__codelineno-97-6" name="__codelineno-97-6" href="#__codelineno-97-6"></a>  --not-strict                   Also match artificial parsers.
+<a id="__codelineno-97-7" name="__codelineno-97-7" href="#__codelineno-97-7"></a>  --help                         Show this message and exit.
 </code></pre></div>
 <h4 id="nomad-client-synchdb">nomad client synchdb<a class="headerlink" href="#nomad-client-synchdb" title="Permanent link">¶</a></h4>
 <p>Synchronizes the NOMAD database with the given external database.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-100-1" name="__codelineno-100-1" href="#__codelineno-100-1"></a>nomad client synchdb [OPTIONS] DB_NAME ROOT_URL
+<div class="highlight"><pre><span></span><code><a id="__codelineno-98-1" name="__codelineno-98-1" href="#__codelineno-98-1"></a>nomad client synchdb [OPTIONS] DB_NAME ROOT_URL
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-101-1" name="__codelineno-101-1" href="#__codelineno-101-1"></a>  --outfile TEXT      File to read/write files missing in NOMAD database
-<a id="__codelineno-101-2" name="__codelineno-101-2" href="#__codelineno-101-2"></a>  --nomadfile TEXT    File to read/write files in NOMAD database
-<a id="__codelineno-101-3" name="__codelineno-101-3" href="#__codelineno-101-3"></a>  --dbfile TEXT       File to read/write files in given database
-<a id="__codelineno-101-4" name="__codelineno-101-4" href="#__codelineno-101-4"></a>  --local_path TEXT   Directory to which the files will be downloaded
-<a id="__codelineno-101-5" name="__codelineno-101-5" href="#__codelineno-101-5"></a>  --parallel INTEGER  Number of processes to spawn to download/upload files
-<a id="__codelineno-101-6" name="__codelineno-101-6" href="#__codelineno-101-6"></a>  --do-download       Flag to automatically download downloaded files
-<a id="__codelineno-101-7" name="__codelineno-101-7" href="#__codelineno-101-7"></a>  --do-upload         Flag to automatically upload downloaded files
-<a id="__codelineno-101-8" name="__codelineno-101-8" href="#__codelineno-101-8"></a>  --do-publish        Flag to automatically publish upload
-<a id="__codelineno-101-9" name="__codelineno-101-9" href="#__codelineno-101-9"></a>  --cleanup           Flag to clean up downloaded files
-<a id="__codelineno-101-10" name="__codelineno-101-10" href="#__codelineno-101-10"></a>  --help              Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-99-1" name="__codelineno-99-1" href="#__codelineno-99-1"></a>  --outfile TEXT      File to read/write files missing in NOMAD database
+<a id="__codelineno-99-2" name="__codelineno-99-2" href="#__codelineno-99-2"></a>  --nomadfile TEXT    File to read/write files in NOMAD database
+<a id="__codelineno-99-3" name="__codelineno-99-3" href="#__codelineno-99-3"></a>  --dbfile TEXT       File to read/write files in given database
+<a id="__codelineno-99-4" name="__codelineno-99-4" href="#__codelineno-99-4"></a>  --local_path TEXT   Directory to which the files will be downloaded
+<a id="__codelineno-99-5" name="__codelineno-99-5" href="#__codelineno-99-5"></a>  --parallel INTEGER  Number of processes to spawn to download/upload files
+<a id="__codelineno-99-6" name="__codelineno-99-6" href="#__codelineno-99-6"></a>  --do-download       Flag to automatically download downloaded files
+<a id="__codelineno-99-7" name="__codelineno-99-7" href="#__codelineno-99-7"></a>  --do-upload         Flag to automatically upload downloaded files
+<a id="__codelineno-99-8" name="__codelineno-99-8" href="#__codelineno-99-8"></a>  --do-publish        Flag to automatically publish upload
+<a id="__codelineno-99-9" name="__codelineno-99-9" href="#__codelineno-99-9"></a>  --cleanup           Flag to clean up downloaded files
+<a id="__codelineno-99-10" name="__codelineno-99-10" href="#__codelineno-99-10"></a>  --help              Show this message and exit.
 </code></pre></div>
 <h4 id="nomad-client-upload">nomad client upload<a class="headerlink" href="#nomad-client-upload" title="Permanent link">¶</a></h4>
 <p>Upload files to nomad. The given path can be a single file or a directory. For file(s) that are not .zip or .tar files, a temporary .zip file will be created and uploaded.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-102-1" name="__codelineno-102-1" href="#__codelineno-102-1"></a>nomad client upload [OPTIONS] PATH...
+<div class="highlight"><pre><span></span><code><a id="__codelineno-100-1" name="__codelineno-100-1" href="#__codelineno-100-1"></a>nomad client upload [OPTIONS] PATH...
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-103-1" name="__codelineno-103-1" href="#__codelineno-103-1"></a>  --upload-name TEXT    Optional name for the upload of a single file. Will be
-<a id="__codelineno-103-2" name="__codelineno-103-2" href="#__codelineno-103-2"></a>                        ignored on directories.
-<a id="__codelineno-103-3" name="__codelineno-103-3" href="#__codelineno-103-3"></a>  --local-path          Upload files "offline": files will not be uploaded,
-<a id="__codelineno-103-4" name="__codelineno-103-4" href="#__codelineno-103-4"></a>                        but processed were they are. Only works when run on
-<a id="__codelineno-103-5" name="__codelineno-103-5" href="#__codelineno-103-5"></a>                        the nomad host.
-<a id="__codelineno-103-6" name="__codelineno-103-6" href="#__codelineno-103-6"></a>  --publish             Automatically move upload out of the staging area
-<a id="__codelineno-103-7" name="__codelineno-103-7" href="#__codelineno-103-7"></a>                        after successful processing
-<a id="__codelineno-103-8" name="__codelineno-103-8" href="#__codelineno-103-8"></a>  --ignore-path-prefix  Ignores common path prefixes when creating an upload.
-<a id="__codelineno-103-9" name="__codelineno-103-9" href="#__codelineno-103-9"></a>  --help                Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-101-1" name="__codelineno-101-1" href="#__codelineno-101-1"></a>  --upload-name TEXT    Optional name for the upload of a single file. Will be
+<a id="__codelineno-101-2" name="__codelineno-101-2" href="#__codelineno-101-2"></a>                        ignored on directories.
+<a id="__codelineno-101-3" name="__codelineno-101-3" href="#__codelineno-101-3"></a>  --local-path          Upload files "offline": files will not be uploaded,
+<a id="__codelineno-101-4" name="__codelineno-101-4" href="#__codelineno-101-4"></a>                        but processed were they are. Only works when run on
+<a id="__codelineno-101-5" name="__codelineno-101-5" href="#__codelineno-101-5"></a>                        the nomad host.
+<a id="__codelineno-101-6" name="__codelineno-101-6" href="#__codelineno-101-6"></a>  --publish             Automatically move upload out of the staging area
+<a id="__codelineno-101-7" name="__codelineno-101-7" href="#__codelineno-101-7"></a>                        after successful processing
+<a id="__codelineno-101-8" name="__codelineno-101-8" href="#__codelineno-101-8"></a>  --ignore-path-prefix  Ignores common path prefixes when creating an upload.
+<a id="__codelineno-101-9" name="__codelineno-101-9" href="#__codelineno-101-9"></a>  --help                Show this message and exit.
 </code></pre></div>
 <h3 id="nomad-dev">nomad dev<a class="headerlink" href="#nomad-dev" title="Permanent link">¶</a></h3>
 <p>Commands related to the nomad source code.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-104-1" name="__codelineno-104-1" href="#__codelineno-104-1"></a>nomad dev [OPTIONS] COMMAND [ARGS]...
+<div class="highlight"><pre><span></span><code><a id="__codelineno-102-1" name="__codelineno-102-1" href="#__codelineno-102-1"></a>nomad dev [OPTIONS] COMMAND [ARGS]...
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-105-1" name="__codelineno-105-1" href="#__codelineno-105-1"></a>  --help  Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-103-1" name="__codelineno-103-1" href="#__codelineno-103-1"></a>  -f, --config-file FILE  Specify one or more NOMAD config yaml files. Can be
+<a id="__codelineno-103-2" name="__codelineno-103-2" href="#__codelineno-103-2"></a>                          repeated, later files overwrite earlier ones.
+<a id="__codelineno-103-3" name="__codelineno-103-3" href="#__codelineno-103-3"></a>  --help                  Show this message and exit.
 </code></pre></div>
 <p><strong>Subcommands</strong></p>
 <ul>
 <li><em><a href="#nomad-dev-api-model">api-model</a></em>: Export an API model in JSON schema.</li>
+<li><em><a href="#nomad-dev-config">config</a></em>: Prints the effective NOMAD configuration, i.e. the result of merging the built-in defaults, the config files and the NOMAD_* environment variables. Optionally limited to a section, e.g. <code>nomad dev config auth</code>.</li>
 <li><em><a href="#nomad-dev-example-data">example-data</a></em>: Adds a few pieces of data to NOMAD.</li>
 <li><em><a href="#nomad-dev-gui-artifacts">gui-artifacts</a></em>: Generates all python-based GUI artifacts into javascript code.</li>
 <li><em><a href="#nomad-dev-gui-config">gui-config</a></em>: Generates the GUI development config JS file based on NOMAD config.</li>
@@ -6320,10 +6328,20 @@ This may break existing dependencies and should only be used with caution.</p>
 <h4 id="nomad-dev-api-model">nomad dev api-model<a class="headerlink" href="#nomad-dev-api-model" title="Permanent link">¶</a></h4>
 <p>Export an API model in JSON schema.</p>
 <p><strong>Usage:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-106-1" name="__codelineno-106-1" href="#__codelineno-106-1"></a>nomad dev api-model [OPTIONS] MODEL
+<div class="highlight"><pre><span></span><code><a id="__codelineno-104-1" name="__codelineno-104-1" href="#__codelineno-104-1"></a>nomad dev api-model [OPTIONS] MODEL
 </code></pre></div>
 <p><strong>Options:</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-107-1" name="__codelineno-107-1" href="#__codelineno-107-1"></a>  --help  Show this message and exit.
+<div class="highlight"><pre><span></span><code><a id="__codelineno-105-1" name="__codelineno-105-1" href="#__codelineno-105-1"></a>  --help  Show this message and exit.
+</code></pre></div>
+<h4 id="nomad-dev-config">nomad dev config<a class="headerlink" href="#nomad-dev-config" title="Permanent link">¶</a></h4>
+<p>Prints the effective NOMAD configuration, i.e. the result of merging the built-in defaults, the config files and the NOMAD_* environment variables. Optionally limited to a section, e.g. <code>nomad dev config auth</code>.</p>
+<p><strong>Usage:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-106-1" name="__codelineno-106-1" href="#__codelineno-106-1"></a>nomad dev config [OPTIONS] [SECTION]
+</code></pre></div>
+<p><strong>Options:</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-107-1" name="__codelineno-107-1" href="#__codelineno-107-1"></a>  -f, --config-file FILE  Specify one or more NOMAD config yaml files. Can be
+<a id="__codelineno-107-2" name="__codelineno-107-2" href="#__codelineno-107-2"></a>                          repeated, later files overwrite earlier ones.
+<a id="__codelineno-107-3" name="__codelineno-107-3" href="#__codelineno-107-3"></a>  --help                  Show this message and exit.
 </code></pre></div>
 <h4 id="nomad-dev-example-data">nomad dev example-data<a class="headerlink" href="#nomad-dev-example-data" title="Permanent link">¶</a></h4>
 <p>Adds a few pieces of data to NOMAD.</p>
@@ -6534,7 +6552,7 @@ This may break existing dependencies and should only be used with caution.</p>
       <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.path", "navigation.footer", "navigation.top", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../create-image-sliders.js"></script>
       
