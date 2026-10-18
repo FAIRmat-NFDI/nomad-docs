@@ -180,9 +180,9 @@ It is unsuitable for many federated or multi-factor login configurations and
 requires the program to handle an account password. Use a scoped PAT for new
 programmatic integrations whenever possible.
 
-Keycloak access tokens grant the scopes assigned to the user rather than a
-restricted selection. They can bootstrap fully programmatic PAT management,
-but the PAT endpoints themselves require token-management scopes:
+Keycloak access tokens include the full user scope set, including the
+token-management scopes required to manage PATs programmatically. PATs cannot
+themselves be granted these scopes. The relevant endpoints are:
 
 | Operation | Endpoint | Required scopes |
 | --- | --- | --- |
