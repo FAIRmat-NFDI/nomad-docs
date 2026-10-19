@@ -191,9 +191,9 @@ Python:
 export NOMAD_CLIENT_ACCESS_TOKEN="<personal-access-token>"
 ```
 
-Do not put access tokens directly in source files. Then choose an ownership
-scope that includes the non-public Entries you need, such as `visible`, `user`,
-`shared`, or `staging`.
+Do not put access tokens directly in source files. For each query, choose an
+ownership scope that includes the non-public entries you need, such as
+`visible`, `user`, `shared`, or `staging`.
 
 ## Complete example
 
