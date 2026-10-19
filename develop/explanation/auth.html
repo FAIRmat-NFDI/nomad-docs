@@ -3405,10 +3405,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#personal-access-tokens-pats" class="md-nav__link">
+  <a href="#personal-access-tokens" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Personal Access Tokens (PATs)
+        Personal access tokens
       
     </span>
   </a>
@@ -3447,6 +3447,17 @@
     <span class="md-ellipsis">
       
         Authorization via scopes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related pages
       
     </span>
   </a>
@@ -3965,10 +3976,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#personal-access-tokens-pats" class="md-nav__link">
+  <a href="#personal-access-tokens" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Personal Access Tokens (PATs)
+        Personal access tokens
       
     </span>
   </a>
@@ -4007,6 +4018,17 @@
     <span class="md-ellipsis">
       
         Authorization via scopes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#related-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Related pages
       
     </span>
   </a>
@@ -4081,16 +4103,18 @@
 <h1 id="authentication-and-authorization">Authentication and authorization<a class="headerlink" href="#authentication-and-authorization" title="Permanent link">¶</a></h1>
 <p>Authentication determines <strong>who is making the request</strong>.
 Authorization then determines <strong>what that request is allowed to do</strong>.</p>
-<p>NOMAD supports multiple authentication mechanisms for API requests using <a href="#access-tokens">different types of tokens</a>.</p>
+<p>NOMAD supports multiple authentication mechanisms for API requests, as
+described under <a href="#access-tokens">Access tokens</a>.</p>
 <p>The following diagram summarizes how access to an API endpoint is evaluated.
-<a href="../reference/config.html#auth">Administrator-configurable settings</a> are highlighted in red.</p>
+Administrator-configurable settings are highlighted in red and documented in
+<a href="../reference/config.html#auth">Reference &gt; Configuration &gt; Authentication</a>.</p>
 <pre class="mermaid"><code>%%{init:{
   'themeVariables': {
     'fontSize': '36px'
   }
 }}%%
 flowchart TD
-    A[Request reaches Oasis] --&gt; B{Network access allowed by deployment?}
+    A[Request reaches NOMAD deployment] --&gt; B{Network access allowed by deployment?}
     B -- No --&gt; X[Access blocked outside NOMAD]
     B -- Yes --&gt; C{Valid token provided?}
 
@@ -4124,7 +4148,7 @@ flowchart TD
 <p>NOMAD supports several types of access tokens for authenticating and authorizing API requests:</p>
 <ul>
 <li>Keycloak access tokens – obtained through the login flow used by the web UI or API clients</li>
-<li>Personal Access Tokens (PATs) – long-lived tokens created by users for scripts and automation</li>
+<li>Personal access tokens (PATs) – long-lived tokens created by users for scripts and automation</li>
 <li>Upload tokens (<em>legacy, deprecated</em> — will be removed in a future release)</li>
 <li>Simple (app/signature) tokens (<em>legacy, deprecated</em> — will be removed in a future release)</li>
 </ul>
@@ -4132,35 +4156,39 @@ flowchart TD
 <p>Keycloak access tokens authenticate a user through the NOMAD identity provider <code>keycloak</code>
 using OpenID Connect (OIDC).</p>
 <ul>
-<li>Short-lived (currently 24 hours) and may require refreshing</li>
+<li>Short-lived, with a lifetime controlled by the identity provider, and may
+  require refreshing</li>
 <li>Primarily intended for interactive use (e.g. via the GUI)</li>
 <li>Grant the full set of user scopes (no scope restriction possible)</li>
 </ul>
 <p>Due to these limitations, they are generally not suitable for long-running scripts or
-automated workflows. Use <strong>Personal Access Tokens (PATs)</strong> instead.</p>
-<h3 id="personal-access-tokens-pats">Personal Access Tokens (PATs)<a class="headerlink" href="#personal-access-tokens-pats" title="Permanent link">¶</a></h3>
-<p>Personal Access Tokens (PATs) are tokens created by users for programmatic access,
-such as scripts, or automated workflows.</p>
+automated workflows. Use <strong>PATs</strong> instead.</p>
+<h3 id="personal-access-tokens">Personal access tokens<a class="headerlink" href="#personal-access-tokens" title="Permanent link">¶</a></h3>
+<p>PATs are tokens created by users for programmatic access, such as scripts or
+automated workflows.</p>
 <p>PATs can be issued with <strong>explicit scopes</strong>, allowing fine-grained control over
 the operations a user or token is allowed to perform.</p>
 <p>Unlike Keycloak access tokens, which typically have fixed and short lifetimes,
-PATs can be created with a <strong>customizable expiration time</strong>, making them
-well suited for long-running scripts or integrations where repeatedly acquiring
-new tokens would be inconvenient.</p>
+PATs can be created with a <strong>customizable expiration time</strong> within the maximum
+allowed by the deployment. This makes them well suited for long-running scripts
+or integrations where repeatedly acquiring new tokens would be inconvenient.</p>
+<p>A PAT is accepted only by the NOMAD deployment that issued it. A separate PAT
+is required for another NOMAD Oasis or NOMAD Central environment.</p>
 <p>PAT scopes must always be explicitly specified. Wildcard expressions such as
 <code>*:read</code> are supported only in configuration and are <strong>not allowed in tokens</strong>.</p>
-<p>For programmatic API usage, <strong>Personal Access Tokens are generally the recommended
-authentication method</strong>.</p>
+<p>For programmatic API usage, <strong>PATs are generally the recommended authentication
+method</strong>.</p>
 <div class="admonition info">
 <p class="admonition-title">Deprecated tokens</p>
 <h3 id="upload-tokens">Upload tokens<a class="headerlink" href="#upload-tokens" title="Permanent link">¶</a></h3>
 <p>Upload tokens are legacy tokens with a fixed scope set.
 They only grant upload-related permissions: <code>uploads:*</code>.</p>
 <h3 id="simple-tokens">Simple tokens<a class="headerlink" href="#simple-tokens" title="Permanent link">¶</a></h3>
-<p>Simple tokens are legacy tokens that grant a broad set of user permissions,
-effectively corresponding to full access except for token-management scopes.</p>
+<p>Simple tokens include the legacy app and signature tokens. They grant a
+broad set of user permissions, effectively corresponding to full access
+except for token-management scopes.</p>
 <p>Both token types are deprecated and will be removed in a future release.
-They should not be used for new integrations. Use <strong>Personal Access Tokens (PATs)</strong> instead.</p>
+They should not be used for new integrations. Use <strong>PATs</strong> instead.</p>
 </div>
 <h2 id="authorization-via-scopes">Authorization via scopes<a class="headerlink" href="#authorization-via-scopes" title="Permanent link">¶</a></h2>
 <p>Authorization to use specific <strong>API features</strong> is scope-based.
@@ -4335,6 +4363,12 @@ whose value corresponds to the string representation used in tokens and configur
 </tr>
 </tbody>
 </table>
+<h2 id="related-pages">Related pages<a class="headerlink" href="#related-pages" title="Permanent link">¶</a></h2>
+<ul>
+<li><a href="../howto/manage/program/auth.html">How-to guides &gt; ... &gt; Authenticate programmatically</a> — create, use, rotate, and revoke a personal access token.</li>
+<li><a href="../howto/manage/program/api.html">How-to guides &gt; ... &gt; Use the API</a> — send REST API requests from Python.</li>
+<li><a href="../reference/config.html">Reference &gt; Configuration</a> — configure authentication and authorization for a NOMAD Oasis.</li>
+</ul>
 
 
 

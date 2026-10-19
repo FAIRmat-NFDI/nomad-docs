@@ -1639,7 +1639,7 @@
   <a href="#access-non-public-entries" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Access non-public Entries
+        Access non-public entries
       
     </span>
   </a>
@@ -4064,7 +4064,7 @@
   <a href="#access-non-public-entries" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Access non-public Entries
+        Access non-public entries
       
     </span>
   </a>
@@ -4346,15 +4346,16 @@ directly:</p>
 <p>The synchronous <code>fetch()</code> and <code>download()</code> methods also work when an event loop
 is already running, including in a Jupyter notebook. They do not require
 <code>nest_asyncio</code>.</p>
-<h2 id="access-non-public-entries">Access non-public Entries<a class="headerlink" href="#access-non-public-entries" title="Permanent link">¶</a></h2>
+<h2 id="access-non-public-entries">Access non-public entries<a class="headerlink" href="#access-non-public-entries" title="Permanent link">¶</a></h2>
 <p>Create a personal access token as described in
-<a href="auth.html#personal-access-tokens">How-to guides &gt; ... &gt; Authenticate programmatically &gt; Personal Access Tokens</a>
+<a href="auth.html#create-a-pat">How-to guides &gt; ... &gt; Authenticate programmatically &gt; Create a PAT</a>
 and set the <code>NOMAD_CLIENT_ACCESS_TOKEN</code> environment variable before starting
 Python:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">NOMAD_CLIENT_ACCESS_TOKEN</span><span class="o">=</span><span class="s2">"&lt;personal-access-token&gt;"</span>
 </code></pre></div>
-<p>Do not put access tokens directly in source files. Then choose an authenticated
-ownership scope such as <code>visible</code>, <code>user</code>, <code>shared</code>, or <code>staging</code>.</p>
+<p>Do not put access tokens directly in source files. For each query, choose an
+ownership scope that includes the non-public entries you need, such as
+<code>visible</code>, <code>user</code>, <code>shared</code>, or <code>staging</code>.</p>
 <h2 id="complete-example">Complete example<a class="headerlink" href="#complete-example" title="Permanent link">¶</a></h2>
 <!-- fmt: off -->
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">ArchiveQuery</span>
