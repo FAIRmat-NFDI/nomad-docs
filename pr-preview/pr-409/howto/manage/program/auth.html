@@ -21,7 +21,7 @@
       
       
       <link rel="icon" href="../../../assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -29,7 +29,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -703,7 +703,7 @@
   <span class="md-ellipsis">
     
   
-    Parse tabular measurement data
+    Parse tabular data
   
 
     
@@ -1536,10 +1536,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#diagnose-an-authentication-failure" class="md-nav__link">
+  <a href="#diagnose-authentication-and-authorization-failures" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Diagnose an authentication failure
+        Diagnose authentication and authorization failures
       
     </span>
   </a>
@@ -1569,10 +1569,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#do-not-use-app-tokens-for-new-integrations" class="md-nav__link">
+  <a href="#do-not-use-simple-tokens-for-new-integrations" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Do not use app tokens for new integrations
+        Do not use simple tokens for new integrations
       
     </span>
   </a>
@@ -4051,10 +4051,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#diagnose-an-authentication-failure" class="md-nav__link">
+  <a href="#diagnose-authentication-and-authorization-failures" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Diagnose an authentication failure
+        Diagnose authentication and authorization failures
       
     </span>
   </a>
@@ -4084,10 +4084,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#do-not-use-app-tokens-for-new-integrations" class="md-nav__link">
+  <a href="#do-not-use-simple-tokens-for-new-integrations" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Do not use app tokens for new integrations
+        Do not use simple tokens for new integrations
       
     </span>
   </a>
@@ -4217,8 +4217,8 @@
 <h1 id="how-to-authenticate-programmatically">How to authenticate programmatically<a class="headerlink" href="#how-to-authenticate-programmatically" title="Permanent link">¶</a></h1>
 <p>In this guide, you will create a personal access token (PAT) in the NOMAD GUI
 and use it to authenticate a Python or command-line API request. You will also
-learn how to rotate or revoke the token when its secret is exposed, it expires,
-or an integration no longer needs access.</p>
+learn how to rotate a token if its secret is exposed, revoke it when an
+integration no longer needs access, and replace it after it expires.</p>
 <p>PATs are the recommended authentication method for scripts, notebooks, command-line
 workflows, and CI jobs. Each PAT is restricted to explicitly selected scopes and
 is accepted only by the NOMAD deployment that issued it.</p>
@@ -4229,7 +4229,7 @@ resources and operations it needs. PAT scopes use the form
 <p>The examples below list your projects through the backend <code>uploads</code> resource
 and therefore require the <code>uploads:read</code> scope. See
 <a href="../../../explanation/auth.html#authorization-via-scopes">Explanation &gt; Authentication and authorization &gt; Authorization via scopes</a>
-for the complete core-scope reference.</p>
+for the complete list of available scopes.</p>
 <h2 id="create-a-pat">Create a PAT<a class="headerlink" href="#create-a-pat" title="Permanent link">¶</a></h2>
 <ol>
 <li>In the NOMAD GUI, open your profile menu and select <strong>Settings</strong>.</li>
@@ -4253,20 +4253,30 @@ for a program that reads several kinds of NOMAD data, but a single
 <code>uploads:read</code> scope is narrower and is sufficient for the examples below.</p>
 <h2 id="use-a-pat">Use a PAT<a class="headerlink" href="#use-a-pat" title="Permanent link">¶</a></h2>
 <p>Store the secret in an environment variable rather than placing it directly in
-source code:</p>
+source code. Also define the complete API v1 base URL for the deployment that
+issued the token.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="__tabbed_1_1" name="__tabbed_1" type="radio"><input id="__tabbed_1_2" name="__tabbed_1" type="radio"><div class="tabbed-labels"><label for="__tabbed_1_1">Bash or Zsh</label><label for="__tabbed_1_2">PowerShell</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">read</span><span class="w"> </span>-r<span class="w"> </span>-s<span class="w"> </span>NOMAD_PAT
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">export</span><span class="w"> </span>NOMAD_PAT
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nb">export</span><span class="w"> </span><span class="nv">NOMAD_API_URL</span><span class="o">=</span><span class="s2">"https://nomad-lab.eu/backend/api/v1"</span>
 </code></pre></div>
-<p>Paste the token when <code>read</code> waits for input and press Enter. The <code>-s</code> option
-prevents the secret from being displayed or included in the command itself.</p>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nv">$securePat</span> <span class="p">=</span> <span class="nb">Read-Host</span> <span class="s1">'NOMAD PAT'</span> <span class="n">-AsSecureString</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nv">$env:NOMAD_PAT</span> <span class="p">=</span> <span class="no">[System.Net.NetworkCredential]</span><span class="p">::</span><span class="n">new</span><span class="p">(</span><span class="s1">''</span><span class="p">,</span> <span class="nv">$securePat</span><span class="p">).</span><span class="n">Password</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nv">$env:NOMAD_API_URL</span> <span class="p">=</span> <span class="s1">'https://nomad-lab.eu/backend/api/v1'</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Paste the token when prompted and press Enter. Both methods prevent the secret
+from being displayed or included in the command itself.</p>
 <p><code>NOMAD_PAT</code> is the example variable used explicitly by the <code>requests</code> and
 <code>curl</code> commands below. Other clients may expect a specific variable; for
 example, <code>ArchiveQuery</code> reads <code>NOMAD_CLIENT_ACCESS_TOKEN</code>. See
 <a href="archive_query.html#access-non-public-entries">How-to guides &gt; ... &gt; Access processed data &gt; Access non-public entries</a>.</p>
-<p>Also define the complete API v1 base URL for the deployment that issued the
-token:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">NOMAD_API_URL</span><span class="o">=</span><span class="s2">"https://nomad-lab.eu/prod/v1/api/v1"</span>
-</code></pre></div>
 <p>For a NOMAD Oasis, obtain its base URL from its API dashboard instead of replacing
 only the hostname in the NOMAD Central URL.</p>
 <h3 id="with-python-requests">With Python <code>requests</code><a class="headerlink" href="#with-python-requests" title="Permanent link">¶</a></h3>
@@ -4287,24 +4297,36 @@ only the hostname in the NOMAD Central URL.</p>
 </code></pre></div>
 <h3 id="with-curl">With <code>curl</code><a class="headerlink" href="#with-curl" title="Permanent link">¶</a></h3>
 <p>Use the same header from the command line:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="__tabbed_2_1" name="__tabbed_2" type="radio"><input id="__tabbed_2_2" name="__tabbed_2" type="radio"><div class="tabbed-labels"><label for="__tabbed_2_1">Bash or Zsh</label><label for="__tabbed_2_2">PowerShell</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>curl<span class="w"> </span>--fail-with-body<span class="w"> </span>--silent<span class="w"> </span>--show-error<span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="s2">"</span><span class="si">${</span><span class="nv">NOMAD_API_URL</span><span class="si">}</span><span class="s2">/uploads?page_size=1"</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span>-H<span class="w"> </span><span class="s2">"Authorization: Bearer </span><span class="si">${</span><span class="nv">NOMAD_PAT</span><span class="si">}</span><span class="s2">"</span>
 </code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">curl</span><span class="p">.</span><span class="n">exe</span> <span class="p">-</span><span class="n">-fail-with-body</span> <span class="p">-</span><span class="n">-silent</span> <span class="p">-</span><span class="n">-show-error</span> <span class="p">`</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>  <span class="s2">"${env:NOMAD_API_URL}/uploads?page_size=1"</span> <span class="p">`</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>  <span class="n">-H</span> <span class="s2">"Authorization: Bearer ${env:NOMAD_PAT}"</span>
+</code></pre></div>
+</div>
+</div>
+</div>
 <p>Using an environment variable keeps the token out of the command text, but
 other processes running as your user may still be able to inspect your
 environment. Prefer the secret store provided by your CI system or execution
 environment for unattended workflows.</p>
 <p>Do not put a NOMAD authorization header in a global <code>.curlrc</code>: <code>curl</code> would send
 the token to unrelated hosts unless the configuration is carefully scoped.</p>
-<h2 id="diagnose-an-authentication-failure">Diagnose an authentication failure<a class="headerlink" href="#diagnose-an-authentication-failure" title="Permanent link">¶</a></h2>
+<h2 id="diagnose-authentication-and-authorization-failures">Diagnose authentication and authorization failures<a class="headerlink" href="#diagnose-authentication-and-authorization-failures" title="Permanent link">¶</a></h2>
 <ul>
-<li><strong>HTTP 401 Unauthorized:</strong> check that <code>NOMAD_PAT</code> is set, contains the complete
-  secret, has not expired or been revoked, and was issued by the deployment in
-  <code>NOMAD_API_URL</code>.</li>
-<li><strong>HTTP 403 Forbidden:</strong> inspect the response's <code>detail</code> field. The token is
-  valid, but it may lack one or more scopes required by the endpoint, or your
-  account may not have access to the requested resource.</li>
+<li><strong>HTTP 401 Unauthorized (authentication failure):</strong> check that <code>NOMAD_PAT</code> is
+  set, contains the complete secret, has not expired or been revoked, and was
+  issued by the deployment in <code>NOMAD_API_URL</code>.</li>
+<li><strong>HTTP 403 Forbidden (authorization failure):</strong> inspect the response's
+  <code>detail</code> field. The token is valid, but it may lack one or more scopes required
+  by the endpoint, or your account may not have access to the requested resource.</li>
 <li><strong>Unexpected deployment:</strong> verify the complete API base URL. Tokens are not
   transferable between NOMAD Central, its test or develop deployments, and
   NOMAD Oasis deployments.</li>
@@ -4326,30 +4348,30 @@ revoked tokens cannot be rotated; create a replacement instead.</p>
 <p>The GUI and the interactive OpenAPI dashboard use short-lived Keycloak access
 tokens. Some compatibility workflows also obtain one directly with a username
 and password:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"NOMAD_API_URL"</span><span class="p">]</span><span class="si">}</span><span class="s1">/auth/token'</span><span class="p">,</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>    <span class="n">data</span><span class="o">=</span><span class="p">{</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>        <span class="s1">'username'</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">'NOMAD_USERNAME'</span><span class="p">],</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>        <span class="s1">'password'</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">'NOMAD_PASSWORD'</span><span class="p">],</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>        <span class="s1">'grant_type'</span><span class="p">:</span> <span class="s1">'password'</span><span class="p">,</span>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>    <span class="p">},</span>
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>    <span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="p">)</span>
-<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
-<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>
-<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="n">access_token</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s1">'access_token'</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>    <span class="sa">f</span><span class="s1">'</span><span class="si">{</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s2">"NOMAD_API_URL"</span><span class="p">]</span><span class="si">}</span><span class="s1">/auth/token'</span><span class="p">,</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>    <span class="n">data</span><span class="o">=</span><span class="p">{</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>        <span class="s1">'username'</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">'NOMAD_USERNAME'</span><span class="p">],</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>        <span class="s1">'password'</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">'NOMAD_PASSWORD'</span><span class="p">],</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>        <span class="s1">'grant_type'</span><span class="p">:</span> <span class="s1">'password'</span><span class="p">,</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>    <span class="p">},</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>    <span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="p">)</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="n">access_token</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">()[</span><span class="s1">'access_token'</span><span class="p">]</span>
 </code></pre></div>
 <p>This password-based flow works only when the deployment and account permit it.
 It is unsuitable for many federated or multi-factor login configurations and
 requires the program to handle an account password. Use a scoped PAT for new
 programmatic integrations whenever possible.</p>
-<p>Keycloak access tokens grant the scopes assigned to the user rather than a
-restricted selection. They can bootstrap fully programmatic PAT management,
-but the PAT endpoints themselves require token-management scopes:</p>
+<p>Keycloak access tokens include the full user scope set, including the
+token-management scopes required to manage PATs programmatically. PATs cannot
+themselves be granted these scopes. The relevant endpoints are:</p>
 <table>
 <thead>
 <tr>
@@ -4384,12 +4406,13 @@ but the PAT endpoints themselves require token-management scopes:</p>
 <p>Creation and rotation return the new <code>raw_token</code> only once. Consult the
 deployment's <a href="https://nomad-lab.eu/prod/v1/api/v1/" rel="noopener" target="_blank">OpenAPI dashboard</a>
 for the current request and response models.</p>
-<h2 id="do-not-use-app-tokens-for-new-integrations">Do not use app tokens for new integrations<a class="headerlink" href="#do-not-use-app-tokens-for-new-integrations" title="Permanent link">¶</a></h2>
-<p>The legacy <code>/auth/app_token</code> endpoint still exists for compatibility, but app
-tokens are deprecated. They grant broad user permissions, cannot be scoped for
-one integration, and remain valid until they expire or the deployment's signing
-secret changes. Migrate existing app-token workflows to PATs rather than using
-an app token to avoid Keycloak-token expiration.</p>
+<h2 id="do-not-use-simple-tokens-for-new-integrations">Do not use simple tokens for new integrations<a class="headerlink" href="#do-not-use-simple-tokens-for-new-integrations" title="Permanent link">¶</a></h2>
+<p>The legacy <code>/auth/app_token</code> and <code>/auth/signature_token</code> endpoints still exist
+for compatibility, but the simple tokens they issue are deprecated. These
+tokens grant broad user permissions, cannot be scoped for one integration, and
+remain valid until they expire or the deployment's signing secret changes.
+Migrate existing app- or signature-token workflows to PATs rather than using a
+simple token to avoid Keycloak-token expiration.</p>
 <h2 id="related-pages">Related pages<a class="headerlink" href="#related-pages" title="Permanent link">¶</a></h2>
 <ul>
 <li><a href="api.html">How-to guides &gt; ... &gt; Use the API</a> — send REST API requests and paginate results.</li>
@@ -4492,7 +4515,7 @@ an app token to avoid Keycloak-token expiration.</p>
       <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.path", "navigation.footer", "navigation.top", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../../../create-image-sliders.js"></script>
       

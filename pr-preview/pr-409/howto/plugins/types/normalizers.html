@@ -21,7 +21,7 @@
       
       
       <link rel="icon" href="../../../assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -29,7 +29,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -703,7 +703,7 @@
   <span class="md-ellipsis">
     
   
-    Parse tabular measurement data
+    Parse tabular data
   
 
     
@@ -4119,7 +4119,7 @@
 
 
 <h1 id="how-to-create-a-normalizer">How to create a normalizer<a class="headerlink" href="#how-to-create-a-normalizer" title="Permanent link">¶</a></h1>
-<p>A normalizer takes the archive of an entry as input and manipulates (usually expands) the given archive. This way, a normalizer can add additional sections and quantities based on the information already available in the archive. All normalizers are executed in the order <a href="#control-normalizer-execution-order">determined by their <code>level</code></a> after parsing, but the normalizer may decide to not do anything based on the entry contents.</p>
+<p>A normalizer takes the archive of an entry as input and manipulates (usually expands) the given archive. This way, a normalizer can add additional sections and quantities based on the information already available in the archive. All normalizers are executed in the order <a href="#control-normalizer-execution-order">determined by their <code>execution_order</code></a> after parsing, but the normalizer may decide to not do anything based on the entry contents.</p>
 <p>This documentation shows you how to create a plugin entry point for a normalizer. You should read the <a href="../plugins.html">introduction to plugins</a> to have a basic understanding of how plugins and plugin entry points work in the NOMAD ecosystem.</p>
 <h2 id="getting-started">Getting started<a class="headerlink" href="#getting-started" title="Permanent link">¶</a></h2>
 <p>You can use our <a href="https://github.com/FAIRmat-NFDI/nomad-plugin-template" rel="noopener" target="_blank">template repository</a> to create an initial structure for a plugin containing a normalizer. The relevant part of the repository layout will look something like this:</p>
@@ -4202,15 +4202,19 @@
 </code></pre></div>
 <p>Here, we used the schema definition for the <code>run</code> section defined in this <a href="schema_packages.html#schema-packages-developed-by-fairmat">plugin</a>.</p>
 <h2 id="control-normalizer-execution-order">Control normalizer execution order<a class="headerlink" href="#control-normalizer-execution-order" title="Permanent link">¶</a></h2>
-<p><code>NormalizerEntryPoints</code> have an attribute <code>level</code>, which you can use to control their execution order. Normalizers are executed in order from lowest level to highest level. The default level for normalizers is <code>0</code>, but this can be changed per installation using <code>nomad.yaml</code>:</p>
+<p><code>NormalizerEntryPoints</code> have an attribute <code>execution_order</code>, which you can use to control their execution order. Normalizers are executed in order from lowest to highest execution order. The default execution order for normalizers is <code>0</code>, but this can be changed per installation using <code>nomad.yaml</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nt">plugins</span><span class="p">:</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="nt">entry_points</span><span class="p">:</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="nt">options</span><span class="p">:</span>
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">      </span><span class="s">"nomad_example.normalizers:mynormalizer1"</span><span class="p p-Indicator">:</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">        </span><span class="nt">level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">        </span><span class="nt">execution_order</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span>
 <a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">      </span><span class="s">"nomad_example.normalizers:mynormalizer2"</span><span class="p p-Indicator">:</span>
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">        </span><span class="nt">level</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">        </span><span class="nt">execution_order</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span>
 </code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code>execution_order</code> replaces the deprecated <code>level</code> attribute. Existing configurations that use <code>level</code> keep working, but should be migrated to <code>execution_order</code>.</p>
+</div>
 <h2 id="running-the-normalizer">Running the normalizer<a class="headerlink" href="#running-the-normalizer" title="Permanent link">¶</a></h2>
 <p>If you have the plugin package and <code>nomad-lab</code> installed in your Python environment, you can run the normalization as a part of the parsing process using the NOMAD CLI:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>nomad<span class="w"> </span>parse<span class="w"> </span>&lt;filepath&gt;
@@ -4322,7 +4326,7 @@
       <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["navigation.path", "navigation.footer", "navigation.top", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../../../create-image-sliders.js"></script>
       

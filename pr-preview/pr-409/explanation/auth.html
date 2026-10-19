@@ -21,7 +21,7 @@
       
       
       <link rel="icon" href="../assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -29,7 +29,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -703,7 +703,7 @@
   <span class="md-ellipsis">
     
   
-    Parse tabular measurement data
+    Parse tabular data
   
 
     
@@ -3405,10 +3405,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#personal-access-tokens-pats" class="md-nav__link">
+  <a href="#personal-access-tokens" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Personal access tokens (PATs)
+        Personal access tokens
       
     </span>
   </a>
@@ -3976,10 +3976,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#personal-access-tokens-pats" class="md-nav__link">
+  <a href="#personal-access-tokens" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Personal access tokens (PATs)
+        Personal access tokens
       
     </span>
   </a>
@@ -4106,8 +4106,8 @@ Authorization then determines <strong>what that request is allowed to do</strong
 <p>NOMAD supports multiple authentication mechanisms for API requests, as
 described under <a href="#access-tokens">Access tokens</a>.</p>
 <p>The following diagram summarizes how access to an API endpoint is evaluated.
-<a href="../reference/config.html#auth">Reference &gt; Configuration &gt; Authentication</a>
-settings are highlighted in red.</p>
+Administrator-configurable settings are highlighted in red and documented in
+<a href="../reference/config.html#auth">Reference &gt; Configuration &gt; Authentication</a>.</p>
 <pre class="mermaid"><code>%%{init:{
   'themeVariables': {
     'fontSize': '36px'
@@ -4162,10 +4162,10 @@ using OpenID Connect (OIDC).</p>
 <li>Grant the full set of user scopes (no scope restriction possible)</li>
 </ul>
 <p>Due to these limitations, they are generally not suitable for long-running scripts or
-automated workflows. Use <strong>personal access tokens (PATs)</strong> instead.</p>
-<h3 id="personal-access-tokens-pats">Personal access tokens (PATs)<a class="headerlink" href="#personal-access-tokens-pats" title="Permanent link">¶</a></h3>
-<p>Personal access tokens (PATs) are tokens created by users for programmatic access,
-such as scripts, or automated workflows.</p>
+automated workflows. Use <strong>PATs</strong> instead.</p>
+<h3 id="personal-access-tokens">Personal access tokens<a class="headerlink" href="#personal-access-tokens" title="Permanent link">¶</a></h3>
+<p>PATs are tokens created by users for programmatic access, such as scripts or
+automated workflows.</p>
 <p>PATs can be issued with <strong>explicit scopes</strong>, allowing fine-grained control over
 the operations a user or token is allowed to perform.</p>
 <p>Unlike Keycloak access tokens, which typically have fixed and short lifetimes,
@@ -4176,8 +4176,8 @@ or integrations where repeatedly acquiring new tokens would be inconvenient.</p>
 is required for another NOMAD Oasis or NOMAD Central environment.</p>
 <p>PAT scopes must always be explicitly specified. Wildcard expressions such as
 <code>*:read</code> are supported only in configuration and are <strong>not allowed in tokens</strong>.</p>
-<p>For programmatic API usage, <strong>personal access tokens are generally the recommended
-authentication method</strong>.</p>
+<p>For programmatic API usage, <strong>PATs are generally the recommended authentication
+method</strong>.</p>
 <div class="admonition info">
 <p class="admonition-title">Deprecated tokens</p>
 <h3 id="upload-tokens">Upload tokens<a class="headerlink" href="#upload-tokens" title="Permanent link">¶</a></h3>
@@ -4188,7 +4188,7 @@ They only grant upload-related permissions: <code>uploads:*</code>.</p>
 broad set of user permissions, effectively corresponding to full access
 except for token-management scopes.</p>
 <p>Both token types are deprecated and will be removed in a future release.
-They should not be used for new integrations. Use <strong>personal access tokens (PATs)</strong> instead.</p>
+They should not be used for new integrations. Use <strong>PATs</strong> instead.</p>
 </div>
 <h2 id="authorization-via-scopes">Authorization via scopes<a class="headerlink" href="#authorization-via-scopes" title="Permanent link">¶</a></h2>
 <p>Authorization to use specific <strong>API features</strong> is scope-based.
@@ -4266,10 +4266,6 @@ whose value corresponds to the string representation used in tokens and configur
 <td><code>external_optimade:read</code></td>
 </tr>
 <tr>
-<td><code>FEDERATION_WRITE</code></td>
-<td><code>federation:write</code></td>
-</tr>
-<tr>
 <td><code>GRAPH_READ</code></td>
 <td><code>graph:read</code></td>
 </tr>
@@ -4334,6 +4330,14 @@ whose value corresponds to the string representation used in tokens and configur
 <td><code>uploads:assign_doi</code></td>
 </tr>
 <tr>
+<td><code>UPLOADS_EXPORT</code></td>
+<td><code>uploads:export</code></td>
+</tr>
+<tr>
+<td><code>UPLOADS_IMPORT</code></td>
+<td><code>uploads:import</code></td>
+</tr>
+<tr>
 <td><code>UPLOADS_PROCESS</code></td>
 <td><code>uploads:process</code></td>
 </tr>
@@ -4348,14 +4352,6 @@ whose value corresponds to the string representation used in tokens and configur
 <tr>
 <td><code>UPLOADS_WRITE</code></td>
 <td><code>uploads:write</code></td>
-</tr>
-<tr>
-<td><code>UPLOADS_BUNDLE_READ</code></td>
-<td><code>uploads_bundle:read</code></td>
-</tr>
-<tr>
-<td><code>UPLOADS_BUNDLE_WRITE</code></td>
-<td><code>uploads_bundle:write</code></td>
 </tr>
 <tr>
 <td><code>USERS_INVITE</code></td>
@@ -4468,7 +4464,7 @@ whose value corresponds to the string representation used in tokens and configur
       <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.path", "navigation.footer", "navigation.top", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../create-image-sliders.js"></script>
       

@@ -21,7 +21,7 @@
       
       
       <link rel="icon" href="../assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -29,7 +29,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -703,7 +703,7 @@
   <span class="md-ellipsis">
     
   
-    Parse tabular measurement data
+    Parse tabular data
   
 
     
@@ -4751,7 +4751,7 @@ or enum quantity in your sections named <code>tags</code>, its values will be se
 <p><strong>normalization</strong>: </p>
 <ul>
 <li>If the instance is of type <code>EntryData</code>, it sets the archive's entry name based on the instance's name.</li>
-<li>Sets the <code>datetime</code> field to the current time if it is not already set.</li>
+<li>Sets the <code>datetime</code> field to the creation time of the entry if it is not already set.</li>
 <li>Manages the <code>lab_id</code> field and updates the archive's <code>results.eln.lab_ids</code> list.</li>
 <li>Adds the instance's <code>name</code> and <code>description</code> to the archive's <code>results.eln.names</code> and <code>results.eln.descriptions</code> lists, respectively.</li>
 <li>Handles the <code>tags</code> attribute, if present, and updates the archive's <code>results.eln.tags</code> list.</li>
@@ -4764,7 +4764,7 @@ or enum quantity in your sections named <code>tags</code>, its values will be se
 <p><strong>normalization</strong>: </p>
 <ul>
 <li>If the instance is of type <code>EntryData</code>, it sets the archive's entry name based on the instance's name.</li>
-<li>Sets the <code>datetime</code> field to the current time if it is not already set.</li>
+<li>Sets the <code>datetime</code> field to the creation time of the entry if it is not already set.</li>
 <li>Manages the <code>lab_id</code> field and updates the archive's <code>results.eln.lab_ids</code> list.</li>
 <li>Adds the instance's <code>name</code> and <code>description</code> to the archive's <code>results.eln.names</code> and <code>results.eln.descriptions</code> lists, respectively.</li>
 <li>Handles the <code>tags</code> attribute, if present, and updates the archive's <code>results.eln.tags</code> list.</li>
@@ -4970,7 +4970,7 @@ taken from the <code>datetime</code> property of the referenced activity.</p>
 <p><strong>normalization</strong>: </p>
 <ul>
 <li>If the instance is of type <code>EntryData</code>, it sets the archive's entry name based on the instance's name.</li>
-<li>Sets the <code>datetime</code> field to the current time if it is not already set.</li>
+<li>Sets the <code>datetime</code> field to the creation time of the entry if it is not already set.</li>
 <li>Manages the <code>lab_id</code> field and updates the archive's <code>results.eln.lab_ids</code> list.</li>
 <li>Adds the instance's <code>name</code> and <code>description</code> to the archive's <code>results.eln.names</code> and <code>results.eln.descriptions</code> lists, respectively.</li>
 <li>Handles the <code>tags</code> attribute, if present, and updates the archive's <code>results.eln.tags</code> list.</li>
@@ -5687,8 +5687,8 @@ the first name joined with the first two letters of the last name of the author.
 If the institute is not filled a institute abreviations will be constructed from
 the author's affiliation.</p>
 <p>If no datetime is filled, the datetime will be taken from the <code>datetime</code>
-property of the parent, if it exists, otherwise the current date and time will be
-used.</p>
+property of the parent, if it exists, otherwise the creation time of the entry
+will be used.</p>
 <p>If no short name is filled, the name will be taken from the parent name, if it
 exists, otherwise it will be taken from the archive metadata entry name, if it
 exists, and finally if no other options are available it will use the name of the
@@ -5838,7 +5838,7 @@ mainfile.</p>
       <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.path", "navigation.footer", "navigation.top", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../create-image-sliders.js"></script>
       

@@ -21,7 +21,7 @@
       
       
       <link rel="icon" href="../assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -29,7 +29,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
@@ -703,7 +703,7 @@
   <span class="md-ellipsis">
     
   
-    Parse tabular measurement data
+    Parse tabular data
   
 
     
@@ -4251,6 +4251,10 @@
 </table>
 <h4 id="apientrypoint">APIEntryPoint<a class="headerlink" href="#apientrypoint" title="Permanent link">¶</a></h4>
 <p>Base model for API plugin entry points.</p>
+<p>An API entry point either (a) returns a FastAPI instance from <code>load()</code>
+that will be mounted under <code>{api_base_path}/apis/{id_url_safe}</code> (or
+under a custom <code>prefix</code>), or (b) declares an <code>external_url</code> pointing
+to an API served by a separate service.</p>
 <table>
 <thead>
 <tr>
@@ -4278,7 +4282,12 @@
 <tr>
 <td>prefix</td>
 <td><code>str | None</code></td>
-<td>The prefix for the API. The URL for the API will be the base URL of the NOMAD installation followed by this prefix. The prefix must not collide with any other API prefixes. There is no default, this field must be set.</td>
+<td>The path under which the API is mounted, relative to the base path of the NOMAD backend. If not set, it is automatically generated as <code>apis/{id_url_safe}</code>, which guarantees a predictable, collision-free location. You should not set this manually unless you know what you are doing: a custom prefix must not collide with any other route served by the NOMAD backend. Cannot be combined with <code>external_url</code>.</td>
+</tr>
+<tr>
+<td>external_url</td>
+<td><code>str | None</code></td>
+<td>Absolute URL to an API served outside of NOMAD. When set, <code>load()</code> is not called and no mount is performed.</td>
 </tr>
 </tbody>
 </table>
@@ -4319,7 +4328,7 @@
 <p>Base model for dashboard plugin entry points.</p>
 <p>A dashboard entry point either (a) returns a FastAPI instance from
 <code>load()</code> that will be mounted under
-<code>{app_base}/dashboards/{id_url_safe}</code>, or (b) declares an
+<code>{api_base_path}/dashboards/{id_url_safe}</code>, or (b) declares an
 <code>external_url</code> pointing to a dashboard served by a separate service.</p>
 <table>
 <thead>
@@ -4403,16 +4412,6 @@
 <td><code>None | list[UploadResource | str] | UploadResource | str</code></td>
 <td>List of data resources for this example upload.</td>
 </tr>
-<tr>
-<td>path</td>
-<td><code>str | None</code></td>
-<td><strong>deprecated</strong></td>
-</tr>
-<tr>
-<td>url</td>
-<td><code>str | None</code></td>
-<td><strong>deprecated</strong></td>
-</tr>
 </tbody>
 </table>
 <h4 id="normalizerentrypoint">NormalizerEntryPoint<a class="headerlink" href="#normalizerentrypoint" title="Permanent link">¶</a></h4>
@@ -4427,9 +4426,9 @@
 </thead>
 <tbody>
 <tr>
-<td>level</td>
+<td>execution_order</td>
 <td><code>int</code></td>
-<td>Integer that determines the execution order of this normalizer within the processing of an individual entry. Normalizers with the lowest level is run first.<br><em>default:</em> <code>0</code></td>
+<td>Integer that determines the execution order of this normalizer within the processing of an individual entry. Normalizers with the lowest execution order are run first.<br><em>default:</em> <code>0</code></td>
 </tr>
 <tr>
 <td>id_url_safe</td>
@@ -4445,6 +4444,11 @@
 <td>description</td>
 <td><code>str | None</code></td>
 <td>A human readable description of the plugin entry point.</td>
+</tr>
+<tr>
+<td>level</td>
+<td><code>int | None</code></td>
+<td><strong>deprecated</strong></td>
 </tr>
 </tbody>
 </table>
@@ -4493,9 +4497,14 @@
 </thead>
 <tbody>
 <tr>
-<td>level</td>
+<td>execution_order</td>
 <td><code>int</code></td>
-<td>Integer that determines the execution order of this parser within an upload. Parser with lowest level will be executed first. Note that this only controls the order in which matched parsers are executed, but does not affect the order in which parsers are matched to files.<br><em>default:</em> <code>0</code></td>
+<td>Integer that determines the execution order of this parser within an upload. Parsers with the lowest execution order will be executed first. Note that this only controls the order in which matched parsers are executed, but does not affect the order in which parsers are matched to files.<br><em>default:</em> <code>0</code></td>
+</tr>
+<tr>
+<td>matching_order</td>
+<td><code>int</code></td>
+<td>Integer that determines the order in which this parser is considered when matching files. Parsers with the lowest matching order are considered first. Parsers with the same matching order are ordered alphabetically by name. If all parsers use the default value, their registration order is retained.<br><em>default:</em> <code>0</code></td>
 </tr>
 <tr>
 <td>aliases</td>
@@ -4536,6 +4545,11 @@
 <td>description</td>
 <td><code>str | None</code></td>
 <td>A human readable description of the plugin entry point.</td>
+</tr>
+<tr>
+<td>level</td>
+<td><code>int | None</code></td>
+<td><strong>deprecated</strong></td>
 </tr>
 <tr>
 <td>mainfile_contents_re</td>
@@ -4686,7 +4700,7 @@
       <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.path", "navigation.footer", "navigation.top", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../create-image-sliders.js"></script>
       
