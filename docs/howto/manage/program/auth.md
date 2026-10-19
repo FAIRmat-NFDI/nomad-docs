@@ -1,277 +1,212 @@
 # How to authenticate programmatically
 
-NOMAD uses tokens to authenticate requests and enforce access control.
+In this guide, you will create a personal access token (PAT) in the NOMAD GUI
+and use it to authenticate a Python or command-line API request. You will also
+learn how to rotate a token if its secret is exposed, revoke it when an
+integration no longer needs access, and replace it after it expires.
 
-For programmatic API usage (scripts, notebooks, CLI workflows, CI jobs),
-the recommended approach is to use **Personal Access Tokens (PATs)**.
+PATs are the recommended authentication method for scripts, notebooks, command-line
+workflows, and CI jobs. Each PAT is restricted to explicitly selected scopes and
+is accepted only by the NOMAD deployment that issued it.
 
-NOMAD supports [multiple token types](../../../explanation/auth.md#access-tokens):
+## Before you begin
 
-- Personal Access Tokens (PATs) — **recommended** for programmatic use
-- Keycloak access tokens — mainly for interactive or legacy workflows
+Sign in to the NOMAD deployment that your program will access. Identify the API
+resources and operations it needs. PAT scopes use the form
+`<resource>:<action>`; grant only the corresponding scopes to the token.
 
-## Personal Access Tokens
+The examples below list your projects through the backend `uploads` resource
+and therefore require the `uploads:read` scope. See
+[Explanation > Authentication and authorization > Authorization via scopes](../../../explanation/auth.md#authorization-via-scopes)
+for the complete list of available scopes.
 
-[Personal Access Tokens (PATs)](../../../explanation/auth.md#personal-access-tokens-pats) are
-the [preferred way for programmatic access](../../../explanation/auth.md#personal-access-tokens-pats) to the API.
+## Create a PAT
 
-!!! note
-    GUI management page for PATs is coming soon.
-
-### Create a PAT
-
-A PAT can be created via the API with the [keycloak access token](#keycloak-access-tokens). For example:
-
-!!! warning
-    Always grant the **minimum required scopes** when creating a PAT.
-    Avoid unnecessary permissions (e.g. write access if only read is needed).
-
-!!! note
-    The raw token is **only returned once** when the token is created.
-    Store it securely.
-
-```python
-import requests
-
-response = requests.post(
-    '{{ nomad_url() }}/v1/auth/pats',
-    headers={'Authorization': 'Bearer <keycloak-access-token>'},
-    json={
-        'metadata': {
-            'name': 'My script token',
-            'scopes': ['uploads:read', 'uploads:write'],
-        },
-        'expires_in_days': 30,
-    },
-)
-response.raise_for_status()
-
-pat = response.json()
-raw_token = pat['raw_token']
-```
-
-### Use a PAT
-
-Once created, we recommend [storing it in an environment variable](https://en.wikipedia.org/wiki/Environment_variable){:target="_blank" rel="noopener"}, for example on macOS/Linux:
-
-```bash
-export NOMAD_PAT="<personal-access-token>"
-```
-
-This helps avoid hardcoding secrets in scripts, which can be accidentally leaked
-through version control, logs, or shared files.
-
-#### With Python `requests`
-
-Use the PAT in subsequent requests:
-
-```python
-import os
-import requests
-
-response = requests.get(
-    '{{ nomad_url() }}/v1/uploads',
-    headers={'Authorization': f'Bearer {os.environ["NOMAD_PAT"]}'},
-)
-response.raise_for_status()
-```
-
-#### With `curl`
-
-Use the PAT in the `Authorization` header:
-
-```bash
-curl "{{ nomad_url() }}/v1/uploads" \
-  -H "Authorization: Bearer ${NOMAD_PAT}"
-```
+1. In the NOMAD GUI, open your profile menu and select **Settings**.
+2. Under **User Settings**, select **Tokens**.
+3. Select **CREATE NEW TOKEN**.
+4. Enter a token name and choose an expiration date. A description is optional.
+   Available expiration options depend on the deployment configuration.
+5. Select the scopes required by your program. For the examples on this page,
+   select `uploads:read`.
+6. Select **CREATE TOKEN**.
+7. Select **COPY TOKEN** and store the token securely before closing the dialog.
 
 !!! warning
-    You can set default headers in [`~/.curlrc`](https://everything.curl.dev/cmdline/configfile.html){:target="_blank" rel="noopener"},
-    but be careful: those headers are applied to ALL `curl` requests using that config. This can
-    accidentally send your PAT to unintended endpoints.
+    NOMAD displays the token secret only once. NOMAD cannot show it again after
+    you close the dialog. If you lose the secret, rotate the token or create a
+    replacement.
 
-    ```.curlrc
-    header = "Authorization: Bearer ${NOMAD_PAT}"
+The **READ ONLY** shortcut selects all available read scopes. This is convenient
+for a program that reads several kinds of NOMAD data, but a single
+`uploads:read` scope is narrower and is sufficient for the examples below.
+
+## Use a PAT
+
+Store the secret in an environment variable rather than placing it directly in
+source code. Also define the complete API v1 base URL for the deployment that
+issued the token.
+
+=== "Bash or Zsh"
+
+    ```bash
+    read -r -s NOMAD_PAT
+    export NOMAD_PAT
+    export NOMAD_API_URL="https://nomad-lab.eu/backend/api/v1"
     ```
 
-#### With `wget`
+=== "PowerShell"
 
-Use the PAT in the `Authorization` header:
+    ```powershell
+    $securePat = Read-Host 'NOMAD PAT' -AsSecureString
+    $env:NOMAD_PAT = [System.Net.NetworkCredential]::new('', $securePat).Password
+    $env:NOMAD_API_URL = 'https://nomad-lab.eu/backend/api/v1'
+    ```
 
-```bash
-wget \
-  --header="Authorization: Bearer ${NOMAD_PAT}" \
-  -O - \
-  "{{ nomad_url() }}/v1/uploads"
-```
+Paste the token when prompted and press Enter. Both methods prevent the secret
+from being displayed or included in the command itself.
 
-### List your PATs
+`NOMAD_PAT` is the example variable used explicitly by the `requests` and
+`curl` commands below. Other clients may expect a specific variable; for
+example, `ArchiveQuery` reads `NOMAD_CLIENT_ACCESS_TOKEN`. See
+[How-to guides > ... > Access processed data > Access non-public entries](./archive_query.md#access-non-public-entries).
 
-You can list all PATs for your account, and optionally filter, sort, and paginate the results.
+For a NOMAD Oasis, obtain its base URL from its API dashboard instead of replacing
+only the hostname in the NOMAD Central URL.
 
-For example, this request searches for PATs whose name matches `"ci"`,
-filters for active tokens, sorts by most recently created first, and
-returns the first page of results:
+### With Python `requests`
+
+Pass the PAT as a bearer token in the `Authorization` header:
 
 ```python
 import os
+
 import requests
 
 response = requests.get(
-    '{{ nomad_url() }}/v1/auth/pats',
+    f'{os.environ["NOMAD_API_URL"]}/uploads',
     headers={'Authorization': f'Bearer {os.environ["NOMAD_PAT"]}'},
-    params={
-        'search': 'ci',
-        'state': 'active',
-        'order_by': 'created_desc',
-        'page_size': 20,
-        'page': 1,
-    },
+    params={'page_size': 1},
+    timeout=30,
 )
 response.raise_for_status()
 
-result = response.json()
-
-tokens = result['data']
+projects = response.json()['data']
 ```
 
-You can filter and sort PATs using query parameters, see the API dashboard for available options and examples.
+### With `curl`
 
-### Inspect a PAT
+Use the same header from the command line:
 
-You can retrieve metadata for a specific PAT with its ID:
+=== "Bash or Zsh"
 
-```python
-import requests
+    ```bash
+    curl --fail-with-body --silent --show-error \
+      "${NOMAD_API_URL}/uploads?page_size=1" \
+      -H "Authorization: Bearer ${NOMAD_PAT}"
+    ```
 
-pat_id = '<pat-id>'
+=== "PowerShell"
 
-response = requests.get(
-    f'{{ nomad_url() }}/v1/auth/pats/{pat_id}',
-    headers={'Authorization': 'Bearer <keycloak-access-token>'},
-)
-response.raise_for_status()
+    ```powershell
+    curl.exe --fail-with-body --silent --show-error `
+      "${env:NOMAD_API_URL}/uploads?page_size=1" `
+      -H "Authorization: Bearer ${env:NOMAD_PAT}"
+    ```
 
-token_metadata = response.json()
-```
+Using an environment variable keeps the token out of the command text, but
+other processes running as your user may still be able to inspect your
+environment. Prefer the secret store provided by your CI system or execution
+environment for unattended workflows.
 
-### Revoke a PAT
+Do not put a NOMAD authorization header in a global `.curlrc`: `curl` would send
+the token to unrelated hosts unless the configuration is carefully scoped.
 
-To revoke a PAT:
+## Diagnose authentication and authorization failures
 
-```python
-import requests
+- **HTTP 401 Unauthorized (authentication failure):** check that `NOMAD_PAT` is
+  set, contains the complete secret, has not expired or been revoked, and was
+  issued by the deployment in `NOMAD_API_URL`.
+- **HTTP 403 Forbidden (authorization failure):** inspect the response's
+  `detail` field. The token is valid, but it may lack one or more scopes required
+  by the endpoint, or your account may not have access to the requested resource.
+- **Unexpected deployment:** verify the complete API base URL. Tokens are not
+  transferable between NOMAD Central, its test or develop deployments, and
+  NOMAD Oasis deployments.
 
-pat_id = '<pat-id>'
+The **Tokens** page shows each token's status and last use, which can help
+identify an expired token or confirm that a request reached the deployment.
 
-response = requests.delete(
-    f'{{ nomad_url() }}/v1/auth/pats/{pat_id}',
-    headers={'Authorization': 'Bearer <keycloak-access-token>'},
-)
-response.raise_for_status()
-```
+## Rotate or revoke a PAT
 
-### Rotate a PAT
+Return to **User Settings > Tokens** and find the token in the table.
 
-To replace an existing PAT with a new one:
+- Select the **Rotate token** action to revoke the current secret and replace it
+  with a new one. Copy the new secret before closing the dialog, then update
+  every program or secret store that used the old value.
+- Select the **Revoke token** action when an integration no longer needs access
+  or when you suspect that the secret has been exposed.
 
-```python
-import requests
+Rotation and revocation take effect immediately and cannot be undone. Expired or
+revoked tokens cannot be rotated; create a replacement instead.
 
-pat_id = '<pat-id>'
+## Use a Keycloak access token when required
 
-response = requests.post(
-    f'{{ nomad_url() }}/v1/auth/pats/{pat_id}/rotate',
-    headers={'Authorization': 'Bearer <keycloak-access-token>'},
-)
-response.raise_for_status()
-
-new_pat = response.json()
-new_raw_token = new_pat['raw_token']
-```
-
-!!! warning
-    Rotating a PAT **revokes the previous token** and returns a new raw token value,
-    which is **only visible once**.
-
-## Keycloak access tokens
-
-NOMAD also supports [keycloak access tokens](../../../explanation/auth.md#keycloak-access-tokens) for authenticated API access.
-
-For interactive use in the dashboard, use the **Authorize** button. The dashboard GUI
-manages the keycloak access token automatically while you try out API operations.
-
-!!! warning
-    For new programmatic integrations, prefer **Personal Access Tokens (PATs)** over
-    directly using account credentials to obtain keycloak access tokens.
-
-Keycloak access tokens may also be used to call the API directly. For example:
+The GUI and the interactive OpenAPI dashboard use short-lived Keycloak access
+tokens. Some compatibility workflows also obtain one directly with a username
+and password:
 
 ```python
 import os
+
 import requests
 
 response = requests.post(
-    '{{ nomad_url() }}/v1/auth/token',
+    f'{os.environ["NOMAD_API_URL"]}/auth/token',
     data={
-        'username': os.getenv('NOMAD_USERNAME'),
-        'password': os.getenv('NOMAD_PASSWORD'),
+        'username': os.environ['NOMAD_USERNAME'],
+        'password': os.environ['NOMAD_PASSWORD'],
         'grant_type': 'password',
     },
+    timeout=30,
 )
 response.raise_for_status()
 
-token = response.json()['access_token']
-
-response = requests.get(
-    '{{ nomad_url() }}/v1/uploads',
-    headers={'Authorization': f'Bearer {token}'},
-)
-response.raise_for_status()
-
-uploads = response.json()['data']
+access_token = response.json()['access_token']
 ```
 
-If you have the [NOMAD Python package](../../../howto/oasis/install.md#how-to-install-the-nomad-python-library)
-installed, you can also use the `nomad.client.Auth` helper:
+This password-based flow works only when the deployment and account permit it.
+It is unsuitable for many federated or multi-factor login configurations and
+requires the program to handle an account password. Use a scoped PAT for new
+programmatic integrations whenever possible.
 
-!!! warning
-    This username/password-based flow is kept mainly for compatibility and
-    trusted first-party usage. For new programmatic integrations, prefer
-    Personal Access Tokens (PATs) instead.
+Keycloak access tokens include the full user scope set, including the
+token-management scopes required to manage PATs programmatically. PATs cannot
+themselves be granted these scopes. The relevant endpoints are:
 
-```python
-import os
-import requests
-from nomad.client import Auth
+| Operation | Endpoint | Required scopes |
+| --- | --- | --- |
+| Create | `POST /auth/pats` | `tokens:create` |
+| List or inspect | `GET /auth/pats`, `GET /auth/pats/{pat_id}` | `tokens:read` |
+| Rotate | `POST /auth/pats/{pat_id}/rotate` | `tokens:create`, `tokens:delete` |
+| Revoke | `DELETE /auth/pats/{pat_id}` | `tokens:delete` |
 
-response = requests.get(
-    '{{ nomad_url() }}/v1/uploads',
-    auth=Auth(
-        user=os.getenv('NOMAD_USERNAME'),
-        password=os.getenv('NOMAD_PASSWORD'),
-    ),
-)
-response.raise_for_status()
+Creation and rotation return the new `raw_token` only once. Consult the
+deployment's [OpenAPI dashboard]({{ nomad_url() }}/v1/){:target="_blank" rel="noopener"}
+for the current request and response models.
 
-uploads = response.json()['data']
-```
+## Do not use simple tokens for new integrations
 
-## App token
+The legacy `/auth/app_token` and `/auth/signature_token` endpoints still exist
+for compatibility, but the simple tokens they issue are deprecated. These
+tokens grant broad user permissions, cannot be scoped for one integration, and
+remain valid until they expire or the deployment's signing secret changes.
+Migrate existing app- or signature-token workflows to PATs rather than using a
+simple token to avoid Keycloak-token expiration.
 
-!!! info "Deprecated tokens"
-    app token is deprecated and will be removed in a future release.
-    They should not be used for new integrations. Use [**Personal Access Tokens (PATs)**](#personal-access-tokens) instead.
+## Related pages
 
-If the short-term expiration of the default *access token* does not suit your needs,
-you can request an *app token* with a user-defined expiration. For example, you can
-send the GET request `/auth/app_token?expires_in=86400` together with some way of
-authentication, e.g. header `Authorization: Bearer <access token>`. The API will return
-an app token, which is valid for 24 hours in subsequent request headers with the format
-`Authorization: Bearer <app token>`. The request will be declined if the expiration is
-larger than the maximum expiration defined by the API config.
-
-!!! warning
-    Despite the name, the app token is used to impersonate the user who requested it.
-    It does not discern between different uses and will only become invalid once it
-    expires (or when the API's secret is changed).
+- {{ nav_link("howto/manage/program/api.md", breadcrumb=True) }} — send REST API requests and paginate results.
+- {{ nav_link("explanation/auth.md", breadcrumb=True) }} — understand token types, scopes, and authorization decisions.
+- {{ nav_link("howto/manage/program/publish_python.md", breadcrumb=True) }} — create, update, and publish projects with Python.
+- {{ nav_link("howto/manage/program/download.md", breadcrumb=True) }} — download projects, files, and processed data.
