@@ -4353,9 +4353,9 @@ and set the <code>NOMAD_CLIENT_ACCESS_TOKEN</code> environment variable before s
 Python:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nb">export</span><span class="w"> </span><span class="nv">NOMAD_CLIENT_ACCESS_TOKEN</span><span class="o">=</span><span class="s2">"&lt;personal-access-token&gt;"</span>
 </code></pre></div>
-<p>Do not put access tokens directly in source files. Then choose an ownership
-scope that includes the non-public Entries you need, such as <code>visible</code>, <code>user</code>,
-<code>shared</code>, or <code>staging</code>.</p>
+<p>Do not put access tokens directly in source files. For each query, choose an
+ownership scope that includes the non-public entries you need, such as
+<code>visible</code>, <code>user</code>, <code>shared</code>, or <code>staging</code>.</p>
 <h2 id="complete-example">Complete example<a class="headerlink" href="#complete-example" title="Permanent link">¶</a></h2>
 <!-- fmt: off -->
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.client</span><span class="w"> </span><span class="kn">import</span> <span class="n">ArchiveQuery</span>

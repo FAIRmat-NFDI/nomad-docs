@@ -4257,10 +4257,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#temporaloidc" class="md-nav__link">
+  <a href="#workerconfig" class="md-nav__link">
     <span class="md-ellipsis">
       
-        TemporalOIDC
+        WorkerConfig
       
     </span>
   </a>
@@ -4268,10 +4268,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#workerconfig" class="md-nav__link">
+  <a href="#temporaloidc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        WorkerConfig
+        TemporalOIDC
       
     </span>
   </a>
@@ -5450,10 +5450,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#temporaloidc" class="md-nav__link">
+  <a href="#workerconfig" class="md-nav__link">
     <span class="md-ellipsis">
       
-        TemporalOIDC
+        WorkerConfig
       
     </span>
   </a>
@@ -5461,10 +5461,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#workerconfig" class="md-nav__link">
+  <a href="#temporaloidc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        WorkerConfig
+        TemporalOIDC
       
     </span>
   </a>
@@ -8141,53 +8141,6 @@ elements and defining the configuration of each element.</p>
 </tr>
 </tbody>
 </table>
-<h4 id="temporaloidc">TemporalOIDC<a class="headerlink" href="#temporaloidc" title="Permanent link">¶</a></h4>
-<table>
-<thead>
-<tr>
-<th>name</th>
-<th>type</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>enabled</td>
-<td><code>bool</code></td>
-<td>Use an OAuth 2.0 client-credentials access token to authenticate Temporal clients.<br><em>default:</em> <code>False</code></td>
-</tr>
-<tr>
-<td>refresh_margin</td>
-<td><code>float</code></td>
-<td>Number of seconds before expiry at which an access token is renewed.<br><em>default:</em> <code>30</code></td>
-</tr>
-<tr>
-<td>request_timeout</td>
-<td><code>float</code></td>
-<td>Timeout in seconds for requests to the OIDC token endpoint.<br><em>default:</em> <code>10</code></td>
-</tr>
-<tr>
-<td>token_url</td>
-<td><code>str | None</code></td>
-<td>OIDC token endpoint used to obtain Temporal access tokens.</td>
-</tr>
-<tr>
-<td>client_id</td>
-<td><code>str | None</code></td>
-<td>Confidential OIDC client ID representing this NOMAD deployment.</td>
-</tr>
-<tr>
-<td>client_secret</td>
-<td><code>SecretStr | None</code></td>
-<td>Confidential OIDC client secret. Configure this through deployment secrets.</td>
-</tr>
-<tr>
-<td>scope</td>
-<td><code>str | None</code></td>
-<td>Optional OAuth 2.0 scope sent with client-credentials token requests.</td>
-</tr>
-</tbody>
-</table>
 <h4 id="workerconfig">WorkerConfig<a class="headerlink" href="#workerconfig" title="Permanent link">¶</a></h4>
 <table>
 <thead>
@@ -8252,6 +8205,53 @@ elements and defining the configuration of each element.</p>
 <td>min_activity_slots</td>
 <td><code>int | None</code></td>
 <td>If max_concurrent_activities is not set, this optionally overrides the minimum number of activity slots for resource-based tuning. If unset, NOMAD uses <code>pool_size</code> as the minimum.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="temporaloidc">TemporalOIDC<a class="headerlink" href="#temporaloidc" title="Permanent link">¶</a></h4>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>enabled</td>
+<td><code>bool</code></td>
+<td>Use an OAuth 2.0 client-credentials access token to authenticate Temporal clients.<br><em>default:</em> <code>False</code></td>
+</tr>
+<tr>
+<td>refresh_margin</td>
+<td><code>float</code></td>
+<td>Number of seconds before expiry at which an access token is renewed.<br><em>default:</em> <code>30</code></td>
+</tr>
+<tr>
+<td>request_timeout</td>
+<td><code>float</code></td>
+<td>Timeout in seconds for requests to the OIDC token endpoint.<br><em>default:</em> <code>10</code></td>
+</tr>
+<tr>
+<td>token_url</td>
+<td><code>str | None</code></td>
+<td>OIDC token endpoint used to obtain Temporal access tokens.</td>
+</tr>
+<tr>
+<td>client_id</td>
+<td><code>str | None</code></td>
+<td>Confidential OIDC client ID representing this NOMAD deployment.</td>
+</tr>
+<tr>
+<td>client_secret</td>
+<td><code>SecretStr | None</code></td>
+<td>Confidential OIDC client secret. Configure this through deployment secrets.</td>
+</tr>
+<tr>
+<td>scope</td>
+<td><code>str | None</code></td>
+<td>Optional OAuth 2.0 scope sent with client-credentials token requests.</td>
 </tr>
 </tbody>
 </table>
