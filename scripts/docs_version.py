@@ -3,7 +3,7 @@
 
 Only tags of the form ``vMAJOR.MINOR.PATCH`` are released. Starting from
 v2.0.0, each minor release gets one entry in the version selector, which
-every patch release replaces (``v2.0.3`` is deployed as ``2.0.x``). Older
+every patch release replaces (``v2.0.3`` is deployed as ``2.0``). Older
 releases keep one entry per patch version (``v1.4.3`` is ``1.4.3``).
 The exact patch version (``2.0.3``) is kept as a mike alias that redirects
 to the shared entry, so links to ``/2.0.3/...`` keep working.
@@ -16,7 +16,7 @@ Usage::
 The release tags of the repository are read from stdin and the result is
 written to stdout as GitHub Actions step outputs:
 
-- ``version``: the mike version name, e.g. ``2.0.x``
+- ``version``: the mike version name, e.g. ``2.0``
 - ``alias``: the exact version, e.g. ``2.0.3``; empty if it equals ``version``
 - ``stable``: ``true`` if the tag is the newest release overall
 - ``deploy``: ``true`` unless a newer patch release already owns the version
@@ -32,7 +32,7 @@ from collections.abc import Iterable
 
 TAG_PATTERN = re.compile(r'^v(\d+)\.(\d+)\.(\d+)$')
 
-# First release whose patch versions share a single "MAJOR.MINOR.x" entry.
+# First release whose patch versions share a single "MAJOR.MINOR" entry.
 FIRST_MINOR_SERIES_RELEASE = (2, 0, 0)
 
 Release = tuple[int, int, int]
@@ -50,7 +50,7 @@ def version_name(release: Release) -> str:
     major, minor, patch = release
     if release < FIRST_MINOR_SERIES_RELEASE:
         return f'{major}.{minor}.{patch}'
-    return f'{major}.{minor}.x'
+    return f'{major}.{minor}'
 
 
 def resolve(tag: str, tags: Iterable[str]) -> dict[str, str]:
