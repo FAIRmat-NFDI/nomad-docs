@@ -72,7 +72,7 @@ jobs:
 
       # Tagged releases become selectable versions, see scripts/docs_version.py:
       # from v2.0.0 on, one version per minor release that each patch replaces
-      # (v2.0.3 -> 2.0.x); older tags one version per patch (v1.4.3 -> 1.4.3).
+      # (v2.0.3 -> 2.0); older tags one version per patch (v1.4.3 -> 1.4.3).
       - name: Resolve docs version
         id: docs-version
         if: startsWith(github.ref, 'refs/tags/v')
@@ -98,7 +98,7 @@ jobs:
           }
 
           # The exact version (2.0.3) becomes an alias that redirects every page
-          # to 2.0.x. Each deploy rewrites all aliases of the version, so always
+          # to 2.0. Each deploy rewrites all aliases of the version, so always
           # pass --alias-type=redirect (mike's default symlinks would replace
           # the redirects of earlier patches).
           echo "Deploying tag ${GITHUB_REF_NAME} as docs version ${VERSION}"
