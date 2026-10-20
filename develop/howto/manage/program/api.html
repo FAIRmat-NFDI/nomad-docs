@@ -4154,6 +4154,10 @@ API directly. A public Entry search serves as a concrete example: you will
 limit the returned metadata and request the next page of results. The API also
 supports other resources and operations, and the same request structure applies
 across NOMAD deployments.</p>
+<p>Use the REST API directly when you want full control over requests and
+responses, minimal Python dependencies, or JSON-compatible data. For efficient
+bulk retrieval of processed archives as schema-aware Python objects, use
+<a href="archive_query.html">How-to guides &gt; ... &gt; Access processed data</a>.</p>
 <p>The GUI calls the user-facing file container a <em>Project</em>. The REST API
 represents the same container as an <em>upload</em> resource, so endpoint paths and
 fields retain backend names such as <code>uploads</code> and <code>upload_id</code>.</p>
