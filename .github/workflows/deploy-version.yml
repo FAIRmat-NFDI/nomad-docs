@@ -88,7 +88,7 @@ jobs:
               print('already configured')
           EOF
 
-      # Same tag -> version mapping as deploy-docs.yml (v2.0.3 -> 2.0.x,
+      # Same tag -> version mapping as deploy-docs.yml (v2.0.3 -> 2.0,
       # v1.4.3 -> 1.4.3). Fails for tags that are not v<major>.<minor>.<patch>.
       - name: Resolve docs version
         id: docs-version
@@ -111,7 +111,7 @@ jobs:
               mike "$@"
           }
 
-          # The exact version (2.0.3) becomes a redirecting alias of 2.0.x;
+          # The exact version (2.0.3) becomes a redirecting alias of 2.0;
           # see deploy-docs.yml for why --alias-type=redirect is always passed.
           echo "Deploying tag ${TAG} as version ${VERSION}"
           run_mike deploy --alias-type=redirect "${VERSION}" ${ALIAS:+"${ALIAS}"}
