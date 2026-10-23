@@ -4354,7 +4354,7 @@
 <p>The effective index name may come from configuration overrides rather than directly from <code>configs/nomad.yaml</code>. Read it from the running NOMAD app container:</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Check effective entries index name by running <code>docker compose exec -T app python -c 'from nomad.config import config; print(config.elastic.entries_index)'</code>.</p>
+<p>Check effective entries index name by running <code>docker compose exec -T app python -c 'from nomad.config import config; print(config.elastic.entries_index)'</code>. It should be either <code>nomad_oasis_entries_v1</code> for a standard Oasis deployment or <code>nomad_entries_v1</code> if unset.</p>
 </div>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nb">set</span><span class="w"> </span>-o<span class="w"> </span>pipefail
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
@@ -4376,15 +4376,17 @@
 <a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">  </span>--slurpfile<span class="w"> </span>mapping<span class="w"> </span><span class="s2">"/tmp/</span><span class="si">${</span><span class="nv">INDEX</span><span class="si">}</span><span class="s2">-mapping.json"</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="w">  </span><span class="s1">'{</span>
 <a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="s1">    settings: {</span>
-<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="s1">      number_of_replicas: 0,</span>
-<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="s1">      analysis: ($settings[0][$index].settings.index.analysis // {})</span>
-<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="s1">    },</span>
-<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a><span class="s1">    mappings: $mapping[0][$index].mappings</span>
-<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a><span class="s1">  }'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a><span class="w">  </span>curl<span class="w"> </span>-sS<span class="w"> </span>--fail-with-body<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">"http://localhost:9201/</span><span class="si">${</span><span class="nv">INDEX</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a><span class="w">    </span>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a><span class="w">    </span>--data-binary<span class="w"> </span>@-<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a><span class="w">  </span><span class="nb">printf</span><span class="w"> </span><span class="s1">'\nCreated %s on ES9\n'</span><span class="w"> </span><span class="s2">"</span><span class="nv">$INDEX</span><span class="s2">"</span>
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="s1">      number_of_shards:</span>
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="s1">        (($settings[0][$index].settings.index.number_of_shards // "1") | tonumber),</span>
+<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="s1">      number_of_replicas: 0,</span>
+<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a><span class="s1">      analysis: ($settings[0][$index].settings.index.analysis // {})</span>
+<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a><span class="s1">    },</span>
+<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a><span class="s1">    mappings: $mapping[0][$index].mappings</span>
+<a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a><span class="s1">  }'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a><span class="w">  </span>curl<span class="w"> </span>-sS<span class="w"> </span>--fail-with-body<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">"http://localhost:9201/</span><span class="si">${</span><span class="nv">INDEX</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a><span class="w">    </span>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a><span class="w">    </span>--data-binary<span class="w"> </span>@-<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a><span class="w">  </span><span class="nb">printf</span><span class="w"> </span><span class="s1">'\nCreated %s on ES9\n'</span><span class="w"> </span><span class="s2">"</span><span class="nv">$INDEX</span><span class="s2">"</span>
 </code></pre></div>
 <h4 id="3-reindex-from-es7-to-es9">3. Reindex from ES7 to ES9<a class="headerlink" href="#3-reindex-from-es7-to-es9" title="Permanent link">¶</a></h4>
 <p>Trigger the remote reindex from the ES7 container (<code>http://elastic:9200</code>) into ES9:</p>
