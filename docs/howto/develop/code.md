@@ -106,15 +106,15 @@ point is `gui/src/index.js`.
 
 ## Documentation
 
-The documentation is based on [MkDocs](https://www.mkdocs.org/){:target="_blank" rel="noopener"}. The
+The documentation is based on [ProperDocs](https://properdocs.org/){:target="_blank" rel="noopener"}. The
 important files and directories are:
 
 - `docs`: Contains all the Markdown files that contribute to the documentation system.
 
-- `mkdocs.yml`: The index and configuration of the documentation. New files have to be
+- `properdocs.yml`: The index and configuration of the documentation. New files have to be
   added here as well.
 
-- `nomad/mkdocs.py`: Python code that defines
+- `src/nomad_docs/__init__.py`: Python code that defines
   [macros](https://mkdocs-macros-plugin.readthedocs.io/){:target="_blank" rel="noopener"} which can be
   used in Markdown.
 

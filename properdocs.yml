@@ -126,7 +126,7 @@ validation:
     omitted_files: warn
   links:
     # MkDocs reports missing anchors as info by default; promote them so
-    # `mkdocs build --strict` fails the build.
+    # `properdocs build --strict` fails the build.
     anchors: warn
 theme:
   name: material
@@ -180,7 +180,7 @@ markdown_extensions:
   - pymdownx.snippets
   # Content tabs, used to switch code examples between Python and YAML.
   # Do not add `slugify`: its tree processor runs after MkDocs collects anchors,
-  # so slugged tab ids would fail `mkdocs build --strict`.
+  # so slugged tab ids would fail `properdocs build --strict`.
   - pymdownx.tabbed:
       alternate_style: true
   - mkdocs-click
