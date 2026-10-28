@@ -35,7 +35,7 @@ When contributing, identify which type of documentation your addition belongs to
 
 **Auto-TOC awareness:** Headings populate the Table of Contents; admonition titles do not. Use real headings for navigable sections.
 
-**Navigation titles and page headings:** Page titles in `mkdocs.yml` are the
+**Navigation titles and page headings:** Page titles in `properdocs.yml` are the
 concise labels shown in the sidebar and on overview-page links generated with
 `nav_link`. Keep them short enough for the sidebar, but grammatical enough to
 stand alone in a card or breadcrumb. The first heading of the page may be more
@@ -212,12 +212,12 @@ If you use more than one slider on the same page, make sure to give them differe
 ### Navigation coverage
 
 By default, user-facing Markdown pages under `docs/` appear in the
-`nav` section of `mkdocs.yml`. Note: The strict documentation build reports a warning,
+`nav` section of `properdocs.yml`. Note: The strict documentation build reports a warning,
 and therefore fails in CI, when a page is added under `docs/` without being added
 to the navigation.
 
 On overview pages, use navigation macros for links that represent pages in the
-navigation. The macros use titles and order from `mkdocs.yml` and generate
+navigation. The macros use titles and order from `properdocs.yml` and generate
 relative links from the current page. This keeps overview-page links consistent
 with the sidebar without duplicating labels in Markdown.
 
@@ -230,7 +230,7 @@ without a target to render the current page's section, excluding the current pag
 itself. If a flat overview list needs short supporting text, pass a
 `descriptions` mapping keyed by source path. Use this for the main lists on
 section overview pages so their membership, grouping, and order stay aligned
-with `mkdocs.yml`.
+with `properdocs.yml`.
 
 Use `nav_link` for curated links and prose links that should point to one known
 page. Pass the documentation-root-relative source path, for example
@@ -244,7 +244,7 @@ and surrounding markup in Markdown so they can be edited independently.
 
 There may be special cases of independent pages that are linked but should not
 appear in the navigation. These intentional exceptions should be listed under
-`not_in_nav` in `mkdocs.yml`. Only add a page to this list when it has a documented
+`not_in_nav` in `properdocs.yml`. Only add a page to this list when it has a documented
 reason to remain outside the navigation; do not use it merely to silence the build.
 Remove the exception when the page is added to the navigation, moved outside `docs/`, or deleted.
 

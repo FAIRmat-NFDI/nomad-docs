@@ -2,7 +2,7 @@
 
 This module provides the ``nav_link`` and ``nav_list`` macros used on overview
 pages. They resolve links, labels, breadcrumbs, list membership, and list order
-through ``mkdocs.yml`` instead of duplicating navigation structure in Markdown.
+through ``properdocs.yml`` instead of duplicating navigation structure in Markdown.
 The navigation index rejects entries without explicit titles, detects duplicate
 page paths, and can preserve manually authored per-page descriptions.
 """
@@ -22,7 +22,7 @@ class NavigationError(ValueError):
 
 @dataclass
 class NavigationNode:
-    """A section or page in the MkDocs navigation tree."""
+    """A section or page in the ProperDocs navigation tree."""
 
     title: str
     source_path: str | None = None
@@ -35,7 +35,7 @@ class NavigationNode:
 
 
 class NavigationIndex:
-    """Index page titles and breadcrumbs from ``mkdocs.yml`` navigation."""
+    """Index page titles and breadcrumbs from ``properdocs.yml`` navigation."""
 
     def __init__(self, nav: object):
         self._root = NavigationNode('root')
@@ -52,7 +52,7 @@ class NavigationIndex:
             return self._titles[normalized_path]
         except KeyError as exc:
             raise NavigationError(
-                f"Documentation page '{normalized_path}' is not present in mkdocs.yml nav."
+                f"Documentation page '{normalized_path}' is not present in properdocs.yml nav."
             ) from exc
 
     def label_for(self, source_path: str) -> str:
@@ -63,7 +63,7 @@ class NavigationIndex:
             breadcrumb = self._breadcrumbs[normalized_path]
         except KeyError as exc:
             raise NavigationError(
-                f"Documentation page '{normalized_path}' is not present in mkdocs.yml nav."
+                f"Documentation page '{normalized_path}' is not present in properdocs.yml nav."
             ) from exc
 
         intermediate_sections = breadcrumb[1:-1]
@@ -156,7 +156,9 @@ class NavigationIndex:
 
     def _visit_root(self, nav: object) -> None:
         if not _is_sequence(nav):
-            raise NavigationError('mkdocs.yml nav must be a list of navigation items.')
+            raise NavigationError(
+                'properdocs.yml nav must be a list of navigation items.'
+            )
         self._visit_items(nav, self._root, ())
 
     def _visit_items(
@@ -173,13 +175,13 @@ class NavigationIndex:
                     )
                     raise NavigationError(
                         f"Navigation page '{normalized_path}' has no explicit title. "
-                        "Use 'Title: path.md' in mkdocs.yml."
+                        "Use 'Title: path.md' in properdocs.yml."
                     )
                 continue
 
             if not isinstance(item, Mapping):
                 raise NavigationError(
-                    'mkdocs.yml nav items must be page paths or title mappings.'
+                    'properdocs.yml nav items must be page paths or title mappings.'
                 )
 
             for title, target in item.items():
@@ -214,7 +216,7 @@ class NavigationIndex:
         if normalized_path in self._titles:
             raise NavigationError(
                 f"Documentation page '{normalized_path}' occurs more than once "
-                'in mkdocs.yml nav.'
+                'in properdocs.yml nav.'
             )
         self._titles[normalized_path] = title
         self._breadcrumbs[normalized_path] = (*parent_titles, title)
@@ -228,7 +230,7 @@ class NavigationIndex:
             return self._pages[normalized_path]
         except KeyError as exc:
             raise NavigationError(
-                f"Documentation page '{normalized_path}' is not present in mkdocs.yml nav."
+                f"Documentation page '{normalized_path}' is not present in properdocs.yml nav."
             ) from exc
 
     def _find_child_section(
@@ -337,7 +339,7 @@ def register_nav_link(env: Any) -> None:
 
     @env.macro
     def nav_link(source_path: str, breadcrumb: bool = False) -> str:
-        """Render a link whose title and target come from ``mkdocs.yml``."""
+        """Render a link whose title and target come from ``properdocs.yml``."""
 
         try:
             current_source_path = env.page.file.src_uri

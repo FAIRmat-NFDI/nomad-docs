@@ -168,7 +168,7 @@ The following command can be used to install NOMAD.
 
     ```shell
     sh scripts/generate_docs_artifacts.sh
-    mkdocs build
+    properdocs build
     mkdir -p nomad/app/static/docs
     cp -r site/* nomad/app/static/docs
     ```
@@ -395,7 +395,7 @@ You have to provide static files to serve the docs and NOMAD distribution:
 
 ```shell
 ./scripts/generate_docs_artifacts.sh
-rm -rf site && mkdocs build && mv site nomad/app/static/docs
+rm -rf site && properdocs build && mv site nomad/app/static/docs
 ```
 
 You need to have the infrastructure partially running: `elastic`, `mongo`, `rabbitmq`.

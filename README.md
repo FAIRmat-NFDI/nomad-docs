@@ -64,10 +64,10 @@ pipx install uv
 
 ### 2. Run the Local Docs Server
 
-Once `uv` is installed, you can start the MkDocs server with:
+Once `uv` is installed, you can start the ProperDocs server with:
 
 ```bash
-uv run mkdocs serve
+uv run properdocs serve
 ```
 
 This will install all requirements in a virtual environment and start the local development server.
@@ -92,7 +92,7 @@ This test checks for broken links in all markdown files (`.md`) within the `docs
 
 ### 2. Documentation Build
 
-This test builds the MkDocs documentation using the `--strict` flag. This flag treats any warnings as errors, ensuring that the documentation is always in a buildable state.
+This test builds the ProperDocs documentation using the `--strict` flag. This flag treats any warnings as errors, ensuring that the documentation is always in a buildable state.
 
 ### 3. Pytest
 

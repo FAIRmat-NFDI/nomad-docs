@@ -47,7 +47,7 @@ jobs:
 
       - name: Install uv
         # Needs a recent uv: older versions put '--with' packages in an
-        # ephemeral env where the 'mkdocs build' subprocess spawned by mike
+        # ephemeral env where the documentation build subprocess spawned by mike
         # cannot find the mike plugin. (The regular deploy workflow avoids
         # this by declaring mike as a project dependency.)
         uses: astral-sh/setup-uv@v7
@@ -74,7 +74,14 @@ jobs:
         run: |
           python3 - <<'EOF'
           import pathlib, re
-          p = pathlib.Path('mkdocs.yml')
+          p = next(
+              (pathlib.Path(name) for name in
+               ('properdocs.yml', 'mkdocs.yml')
+               if pathlib.Path(name).is_file()),
+              None,
+          )
+          if p is None:
+              raise SystemExit('No documentation configuration file found')
           s = p.read_text()
           if 'provider: mike' not in s:
               m = re.search(r'(?m)^extra:\s*$', s)
