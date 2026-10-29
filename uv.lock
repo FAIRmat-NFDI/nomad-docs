@@ -4415,7 +4415,6 @@ source = { editable = "." }
 dependencies = [
     { name = "click" },
     { name = "mike" },
-    { name = "mkdocs" },
     { name = "mkdocs-click" },
     { name = "mkdocs-git-revision-date-localized-plugin" },
     { name = "mkdocs-glightbox" },
@@ -4425,6 +4424,7 @@ dependencies = [
     { name = "mkdocs-material-extensions" },
     { name = "mkdocs-redirects" },
     { name = "nomad-lab", extra = ["infrastructure"] },
+    { name = "properdocs" },
     { name = "pydantic" },
     { name = "regex" },
 ]
@@ -4438,7 +4438,6 @@ dev = [
 requires-dist = [
     { name = "click", specifier = ">=8.4.0" },
     { name = "mike" },
-    { name = "mkdocs", specifier = ">=1.6.0,<2" },
     { name = "mkdocs-click" },
     { name = "mkdocs-git-revision-date-localized-plugin" },
     { name = "mkdocs-glightbox" },
@@ -4447,6 +4446,7 @@ requires-dist = [
     { name = "mkdocs-material-extensions" },
     { name = "mkdocs-redirects" },
     { name = "nomad-lab", extras = ["infrastructure"], specifier = "==2.0.0" },
+    { name = "properdocs", specifier = ">=1.6.0" },
     { name = "pydantic", specifier = ">=2.0" },
     { name = "regex" },
 ]
