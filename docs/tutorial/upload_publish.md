@@ -15,6 +15,7 @@ In this tutorial, you will learn how to:
 3. Share projects with collaborators and manage access permissions
 4. Publish projects and understand the role of embargoes
 5. Assign a Digital Object Identifier (DOI) to your published project
+6. Include entries from other projects in a new project and publish them together
 
 ---
 
@@ -409,6 +410,40 @@ Publishing makes the project permanent and allows you to assign a DOI.
 </div>
 
 If you publish the project with an embargo, its files and entries remain accessible only to you and the users with whom you shared it. Selected metadata remain publicly visible. You can lift the embargo before its scheduled end date by selecting **LIFT EMBARGO**.
+
+### Include entries of other projects
+
+The data behind a publication is often spread over several projects, for example, one project per measurement campaign or simulation series. To publish these data together, create a new project and include the entries of these projects in it. The included entries stay in their original projects.
+
+??? info "What happens when you include entries from other projects?"
+    - The included entries appear in the **ENTRIES** tab of the new project, marked as **included**. You can search and filter them together with the project's own entries.
+    - The entries are not copied or moved. They can only be edited in their original project.
+    - Only entries are included. Files that do not belong to an entry, e.g., the PDF and image files that you uploaded in this tutorial, are not included.
+    - NOMAD includes the entries that exist when you click **SAVE**. If entries are added to an included project later, open **Include entries from other projects** again and click **SAVE** to include them as well.
+    - You can include entries from your own projects and from projects that are shared with you.
+
+To try this, create a new project, e.g., named `My first NOMAD collection`, as described in [Create a new project](#create-a-new-project), and include the entries of your project from this tutorial. You need its ID, which is shown under **Project ID** on the **OVERVIEW** tab of that project.
+
+**Use the arrow buttons ⬅️➡️ below to follow the steps for including the entries of your project in the new project.**
+
+<div class="image-slider" id="slider6">
+    <div class="nav-arrow left" id="prev6">←</div>
+    <img src="images/upload_publish_23.png" alt="Click the arrow next to NEW ENTRY, then Include entries from other projects" class="active">
+    <img src="images/upload_publish_24.png" alt="Paste the ID of your project, select it, then click NEXT">
+    <img src="images/upload_publish_25.png" alt="Check the result, then click SAVE">
+    <img src="images/upload_publish_26.png" alt="The included entries appear in the ENTRIES tab">
+    <div class="nav-arrow right" id="next6">→</div>
+</div>
+
+To include entries from more projects, add each of them under **Add a project** before you click **NEXT**.
+
+!!! warning "Included entries must be published first"
+    You can only publish a project after all of its included entries are published and no longer under embargo. If this is not yet the case, e.g., because your project is unpublished or under embargo, NOMAD shows a warning after you click **NEXT**, as in the third image above. You can still save your selection and publish the new project later.
+
+To publish the new project, follow the publishing steps above. You can then assign it a single DOI for all of its entries, as described in the next section.
+
+<!-- TODO: Link to the section "Include entries from other projects" (#include-entries-from-other-projects) once PR #414 is merged. -->
+For more details, see [How-to guides > ... > Create and publish projects](../howto/manage/gui/upload.md).
 
 ## Assign a DOI to your project
 
