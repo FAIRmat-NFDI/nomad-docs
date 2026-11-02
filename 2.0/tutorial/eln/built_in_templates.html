@@ -21,7 +21,7 @@
       
       
       <link rel="icon" href="../../assets/favicon.png">
-      <meta name="generator" content="mkdocs-ProperDocs 1.6.7, mkdocs-material-9.7.7">
+      <meta name="generator" content="mkdocs-ProperDocs 1.6.7, mkdocs-material-9.8.0">
     
     
       
@@ -29,10 +29,10 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
 
@@ -4210,7 +4210,7 @@
 
 <h1 id="use-built-in-eln-templates-in-nomad">Use built-in ELN templates in NOMAD<a class="headerlink" href="#use-built-in-eln-templates-in-nomad" title="Permanent link">¶</a></h1>
 <p>In this tutorial, we use NOMAD’s Electronic Lab Notebook (ELN) functionality to document an experiment in the NOMAD GUI. We follow the experimental workflow from defining substances and instruments to recording processing steps and measurements, using built-in ELN templates to structure and interlink the resulting entries. By the end of the tutorial, we will have documented an example experiment as a coherent, navigable ELN record in NOMAD.</p>
-<p></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_0.png" data-desc-position="bottom"><img alt="From entities and activities to structure ELN" src="images/ELN_0.png"></a></p>
 <hr>
 <h2 id="what-you-will-learn">What you will learn<a class="headerlink" href="#what-you-will-learn" title="Permanent link">¶</a></h2>
 <p>In this tutorial, you will learn how to:</p>
@@ -4254,7 +4254,7 @@
 </li>
 </ol>
 <p>To effectively document this experiment, you will create and interlink electronic lab notebook (ELN) entries in NOMAD. These entries will include key entities such as substances, instruments, and samples, as well as activities like material processing and measurements. By structuring the data in this way, you get a comprehensive and FAIR-compliant record of the experiment.</p>
-<p></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/ELN_2.webp" data-desc-position="bottom"><img alt="Overview of the example entities and activities" src="images/ELN_2.webp"></a></p>
 </details>
 <hr>
 <h2 id="create-a-new-eln-project">Create a new ELN project<a class="headerlink" href="#create-a-new-eln-project" title="Permanent link">¶</a></h2>
@@ -4271,9 +4271,9 @@
 <p><strong>Use the arrow buttons ⬅️➡️ below to follow the steps for creating an ELN entry from a built-in schema.</strong></p>
 <div class="image-slider" id="slider1">
     <div class="nav-arrow left" id="prev1">←</div>
-    
-    
-    
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/built_in_templates_1.png" data-desc-position="bottom"><img src="images/built_in_templates_1.png" alt="Click NEW ENTRY on the OVERVIEW tab of the project page" class="active"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/built_in_templates_2.png" data-desc-position="bottom"><img src="images/built_in_templates_2.png" alt="Search for the built-in schema and click it"></a>
+    <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/built_in_templates_3.png" data-desc-position="bottom"><img src="images/built_in_templates_3.png" alt="Enter a filename and click CREATE"></a>
     <div class="nav-arrow right" id="next1">→</div>
 </div>
 
@@ -4292,7 +4292,7 @@
 <li>Click <strong>SAVE</strong>.</li>
 </ol>
 <p>NOMAD searches PubChem for the substance name and fills in the other fields, e.g., <strong>Iupac name</strong>, <strong>Molecular formula</strong>, <strong>Molar mass</strong>, and <strong>Cas number</strong>. For <code>P3HT</code>, PubChem provides the data of its monomer, 3-hexylthiophene.</p>
-<p></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/built_in_templates_4.png" data-desc-position="bottom"><img alt="Pure substance section of the P3HT_powder entry, filled in with data from PubChem" src="images/built_in_templates_4.png"></a></p>
 <details class="task">
 <summary>Create an ELN entry for substances</summary>
 <p>Create an ELN entry with the <em>Substance ELN</em> schema for each of the following substances. Use the given filenames:</p>
@@ -4368,7 +4368,7 @@
 </ol>
 <p>You can also fill in the <strong>starting time</strong> and a <strong>Comment</strong> for each step. If you enter a <strong>Duration</strong> for every step, NOMAD calculates the <strong>starting time</strong> of each step from the process <strong>starting Time</strong> and fills in the process <strong>ending time</strong>.</p>
 <p>NOMAD uses the steps to create a workflow graph. To view it, click the <strong>OVERVIEW</strong> tab of the entry and scroll down to the <strong>Workflow</strong> card. The process steps appear as tasks, and entries referenced under <strong>Samples</strong>, such as <code>P3HT_solution_in_CF</code>, appear as outputs.</p>
-<p></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/built_in_templates_5.png" data-desc-position="bottom"><img alt="Workflow graph of the process entry with its three steps and the P3HT solution as output" src="images/built_in_templates_5.png"></a></p>
 <hr>
 <h3 id="create-a-measurement-entry">Create a measurement entry<a class="headerlink" href="#create-a-measurement-entry" title="Permanent link">¶</a></h3>
 <p>Create an entry for the <strong>optical absorption measurement</strong>. Follow the steps in <a href="#create-eln-entries">Create ELN entries</a>: select <strong>Measurement ELN</strong> as the built-in schema and enter <code>Optical_absorption_measurement</code> as the <strong>Filename</strong>.</p>
@@ -4416,7 +4416,7 @@
 <li>Enter <code>My ELN tags</code> in the <strong>Title</strong> field and click <strong>DONE</strong>.</li>
 </ol>
 <p>You now have a search interface that supports keyword searches and filtering by ELN section type and custom tags.</p>
-<p></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/built_in_templates_6.png" data-desc-position="bottom"><img alt="ENTRIES tab of the Example NOMAD ELN project with the My ELN sections and My ELN tags widgets" src="images/built_in_templates_6.png"></a></p>
 <p>To filter the entries, select <code>polymer</code> in the <strong>My ELN tags</strong> widget. Then enter <code>P3HT</code> in the search bar and press <strong>Enter</strong>. NOMAD displays entries that match both the selected tag and the search term. In this example, only the <code>P3HT</code> entry is left.</p>
 <hr>
 
@@ -4511,10 +4511,10 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.path", "navigation.footer", "navigation.top", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.path", "navigation.footer", "navigation.top", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      <script src="../../assets/javascripts/bundle.c21346df.min.js"></script>
       
         <script src="../../create-image-sliders.js"></script>
       
