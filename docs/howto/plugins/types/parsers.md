@@ -84,7 +84,7 @@ If you are using the `MatchingParser` interface, the minimal requirement is that
 - `archive`: The [`EntryArchive` object](../../../reference/glossary.md#archive) in which the parsing results will be stored
 - `logger`: Logger that you can use to log parsing events into
 
-Note here that if using `MatchingParser`, the process of identifying which files the `parse` method is run against is take care of by passing in the required parameters to the instance in the `load` mehod. In the previous section, the `load` method looked something like this:
+Note here that if using `MatchingParser`, the process of identifying which files the `parse` method is run against is take care of by passing in the required parameters to the instance in the `load` method. In the previous section, the `load` method looked something like this:
 
 ```python
     def load(self):
@@ -244,7 +244,7 @@ and examine the file to be parsed in `tests/data/example.out`:
 system 1
 --------
 sites: H(1.23, 0, 0), H(-1.23, 0, 0), O(0, 0.33, 0)
-latice: (0, 0, 0), (1, 0, 0), (1, 1, 0)
+lattice: (0, 0, 0), (1, 0, 0), (1, 1, 0)
 energy: 1.29372
 
 *** This was done with magic source                                ***
@@ -260,7 +260,7 @@ energy: 1.29372
 
 At the top there is some general information such as date, name of the code (`super_code`)
 and its version (`v2`). Then is information for two systems (`system 1` and `system 2`),
-separated with a string containing a code-specific value `magic source`. Both system sections contain the quantities `sites` and `energy`, but each have a unique quantity as well, `latice` and `cell`, respectively.
+separated with a string containing a code-specific value `magic source`. Both system sections contain the quantities `sites` and `energy`, but each have a unique quantity as well, `lattice` and `cell`, respectively.
 
 In order to convert the information from this file into the NOMAD archive, we first have to
 parse the necessary quantities. The `nomad-lab` Python package provides a `text_parser`
@@ -283,7 +283,7 @@ calculation_parser = TextParser(
         ),
         Quantity(
             Model.lattice,
-            r'(?:latice|cell): \((\d)\, (\d), (\d)\)\,?\s*\((\d)\, (\d), (\d)\)\,?\s*\((\d)\, (\d), (\d)\)\,?\s*',
+            r'(?:lattice|cell): \((\d)\, (\d), (\d)\)\,?\s*\((\d)\, (\d), (\d)\)\,?\s*\((\d)\, (\d), (\d)\)\,?\s*',
             repeats=False,
         ),
         Quantity('energy', r'energy: (\d\.\d+)'),

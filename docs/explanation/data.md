@@ -46,7 +46,7 @@ Of these subsections, `data` carries the entry's actual content, while the other
 
 `data` is the subsection that carries the entry's actual content. The others describe the entry around it: `metadata` identifies it, `results` summarizes it, and `workflow2` describes the logical steps on how the data was produced. For most entries, `data` is where the interesting information lives.
 
-It is also the only part of the shared entry structure that is meant to be extended. `EntryData` itself defines no quantities of its own, but NOMAD accepts any section that inherits from it as the content of `data`. Every entry has exactly one `data` section, but the definition behind it differs from entry to entry, and comes from the parser, the plugin schema, or the ELN schema that produced the entry. These definitions should re-use [base sections](./base_sections.md) as much as possible.
+It is also the only part of the shared entry structure that is meant to be extended. `EntryData` itself defines no quantities of its own, but NOMAD accepts any section that inherits from it as the content of `data`. Every entry has exactly one `data` section, but the definition behind it differs from entry to entry, and comes from the parser, the plugin schema, or the ELN schema that produced the entry. These definitions should reuse [base sections](./base_sections.md) as much as possible.
 
 Inheriting `EntryData` does more than place a section in the archive:
 
@@ -84,11 +84,11 @@ A schema reaches NOMAD in one of three ways, and which one you use decides who c
 
 The two syntaxes describe the same thing, and there is a one-to-one translation between them. For the trade-off between them and for the mechanics of each route, see [How-to guides > ... > Start working with schemas](../howto/schemas/schemas.md#choose-python-or-yaml).
 
-### Re-use and interoperability
+### Reuse and interoperability
 
 Schemas are rarely written from scratch. A section definition can inherit from another one, and inheriting brings over not only its quantities and subsections but also the functionality attached to them.
 
-Re-use is also where interoperability comes from. A schema of your own can describe your data in all the detail you want, and that is the point of it — but detail is not the same as interoperability, and users and machines that are not familiar with the specifics will struggle to interpret it. What makes data interpretable beyond the context it was created in is that different schemas describe the same concepts with the same definitions. Because a shared definition presents a fixed interface, search, visualizations, ELN forms, and analysis code can be written once and then work for every schema that inherits it. The goal is to re-use as much as possible instead of re-inventing the same sections over and over again, and the tools built around a definition are what makes re-using it worthwhile.
+Reuse is also where interoperability comes from. A schema of your own can describe your data in all the detail you want, and that is the point of it — but detail is not the same as interoperability, and users and machines that are not familiar with the specifics will struggle to interpret it. What makes data interpretable beyond the context it was created in is that different schemas describe the same concepts with the same definitions. Because a shared definition presents a fixed interface, search, visualizations, ELN forms, and analysis code can be written once and then work for every schema that inherits it. The goal is to reuse as much as possible instead of re-inventing the same sections over and over again, and the tools built around a definition are what makes reusing it worthwhile.
 
 No central structure can do this work for you. NOMAD cannot anticipate what every method and every lab needs to record, so the definitions that describe your data well are ones you and your community share and maintain. Interoperability is built from the bottom up, by agreeing on definitions, rather than handed down from a common format.
 

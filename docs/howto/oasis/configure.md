@@ -3,7 +3,7 @@
 ## Configuration files
 
 The [`nomad-distro-template`](https://github.com/FAIRmat-NFDI/nomad-distro-template){:target="_blank" rel="noopener"}
-provides all the neccessary configuration files. We strongly recommend to create your own distribution
+provides all the necessary configuration files. We strongly recommend to create your own distribution
 project based on the template. This will allow you to version your configuration, build custom
 images with plugins, and much more.
 

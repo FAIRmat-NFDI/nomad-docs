@@ -5,7 +5,7 @@
 NOMAD is used by many research communities with their specific data, workflows, and analysis tools. NOMAD plugins are key
 to adopt NOMAD to these heterogeneous environments.
 You can think of plugins as “add-ons” that provide additional capabilities.
-Each plugin is a small independant software project that integrates with the core NOMAD and provides features without modifictions to the core NOMAD itself.
+Each plugin is a small independent software project that integrates with the core NOMAD and provides features without modifictions to the core NOMAD itself.
 Some key advantages of using plugins:
 
 - **Modularity**: You can pick and choose which features or functions to add, rather than having everything baked into the core NOMAD.
@@ -53,7 +53,7 @@ There are three core components to the plugin system:
   <figcaption>Relation between NOMAD distributions, plugins and entry points.</figcaption>
 </figure>
 
-This architecture allows plugin developers to freely choose a suitable granularity for their use case: they may create a single plugin package that contains everything that e.g. a certain lab needs: schemas, parsers and apps. Alternatively they may also develop multiple plugins, each containing a single entry point. Reduction in package scope can help in developing different parts indepedently and also allows plugin users to choose only the parts that they need.
+This architecture allows plugin developers to freely choose a suitable granularity for their use case: they may create a single plugin package that contains everything that e.g. a certain lab needs: schemas, parsers and apps. Alternatively they may also develop multiple plugins, each containing a single entry point. Reduction in package scope can help in developing different parts independently and also allows plugin users to choose only the parts that they need.
 
 ## Plugin entry points
 

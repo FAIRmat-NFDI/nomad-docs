@@ -235,7 +235,7 @@ Elasticsearch container not running correctly or crashing, try increasing the
 virtual memory limits as shown [Elasticsearch documentation > vm-max-map-count](https://www.elastic.co/guide/en/elasticsearch/reference/current/vm-max-map-count.html){:target="_blank" rel="noopener"}.
 
 To shut down everything, just `ctrl-c` the running output. If you started everything
-in *deamon* mode (`-d`) use:
+in *daemon* mode (`-d`) use:
 
 ```shell
 docker compose down

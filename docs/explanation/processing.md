@@ -91,7 +91,7 @@ after entries with a parser of lower execution order. See also
 ## Customize processing
 
 NOMAD provides just the framework for processing. The actual work depends on plugins, parsers
-and schemas for specific file types. While NOMAD comes with a build-in set of plugins, you can build your own plugins to support new file types, ELNs, and workflows.
+and schemas for specific file types. While NOMAD comes with a built-in set of plugins, you can build your own plugins to support new file types, ELNs, and workflows.
 
 ### Schemas, parsers, plugins
 
@@ -284,7 +284,7 @@ Depending on the deployment's reprocessing configuration, this operation may
 reprocess existing entries, match new entries, or remove entries that no longer
 match.
 
-## Strategies for re-usable processing code
+## Strategies for reusable processing code
 
 Processing takes files as input and creates entries with structured data. It is about
 transforming data from one representation into another. Sometime, different input
@@ -316,7 +316,7 @@ and capture data in a flexible *intermediate* format.
 ### Writers: metadata into archives, data into files
 
 Two readers that produce a dictionary with the same keys and compatible values would
-allow to re-use the same **writer** that populates an archive, e.g.:
+allow to reuse the same **writer** that populates an archive, e.g.:
 
 ```py
 def writer(data: Dict[str, Any], archive: EntryArchive)
@@ -327,7 +327,7 @@ scenarios, we need to write read data both into an archive, but also into an add
 file. For example, if data is large, we can only keep metadata in archives, the
 actual data should be written to additional HFD5 or Nexus files.
 
-Separation of *readers* and *writers* also allows to re-use parser components in a
+Separation of *readers* and *writers* also allows to reuse parser components in a
 `normalize` function. For example, if we consider the [creating files, spawning entries scenario](#creating-files-spawning-entries).
 
 ### Evolution of data representations
@@ -339,7 +339,7 @@ has to be developed.
 
 Since we use a flexible intermediate representation such as a `Dict[str, Any]`, it
 is easy to add new keys, but it is also dangerous because no static or semantic checking
-occurs. *Readers* and *writers* might be a good strategy to re-use parts of a parser,
+occurs. *Readers* and *writers* might be a good strategy to reuse parts of a parser,
 but *reader* and *writer* implementations remain strongly connected and inter-dependent.
 
 <figure markdown>
