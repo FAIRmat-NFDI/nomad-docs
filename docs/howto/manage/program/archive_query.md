@@ -6,6 +6,12 @@ work with the results as schema-aware Python objects. You will also learn when
 to retrieve plain dictionaries, process results in batches, or use the
 asynchronous interface.
 
+Use `ArchiveQuery` when you want to retrieve large collections of processed
+archives efficiently or work with fully deserialized, schema-aware Python
+objects. For direct control over REST requests and responses with minimal
+Python dependencies, use
+{{ nav_link("howto/manage/program/api.md", breadcrumb=True) }}.
+
 ## Before you begin
 
 Install the `nomad-lab` Python package as described in

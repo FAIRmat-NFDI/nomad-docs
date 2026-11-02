@@ -6,6 +6,11 @@ limit the returned metadata and request the next page of results. The API also
 supports other resources and operations, and the same request structure applies
 across NOMAD deployments.
 
+Use the REST API directly when you want full control over requests and
+responses, minimal Python dependencies, or JSON-compatible data. For efficient
+bulk retrieval of processed archives as schema-aware Python objects, use
+{{ nav_link("howto/manage/program/archive_query.md", breadcrumb=True) }}.
+
 The GUI calls the user-facing file container a *Project*. The REST API
 represents the same container as an *upload* resource, so endpoint paths and
 fields retain backend names such as `uploads` and `upload_id`.
