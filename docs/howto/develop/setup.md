@@ -201,7 +201,11 @@ To run NOMAD, some 3rd party services are needed
 
 - Elasticsearch: NOMAD's search and analytics engine
 - MongoDB: used to store processing state
-- RabbitMQ: a task queue used to distribute work in a cluster
+- Temporal: orchestrates processing workflows and NOMAD Actions
+
+Development infrastructure can use a standalone Temporal development server; production deployments use Temporal
+with persistent storage, as configured in the
+[distribution template](https://github.com/FAIRmat-NFDI/nomad-distro-template){:target="_blank" rel="noopener"}.
 
 All 3rd party services should be run via `docker compose` (see below).
 Keep in mind that `docker compose` configures all services in a way that mirrors
@@ -218,7 +222,7 @@ To set this value permanently, see [Elasticsearch documentation > vm-max-map-cou
 
 ```shell
 cd ops/docker-compose/infrastructure
-docker compose up -d elastic mongo rabbitmq
+docker compose up -d elastic mongo temporal
 cd ../../..
 ```
 
@@ -273,7 +277,7 @@ Note that this will lead to failing [backend tests](#backend-tests) for the excl
 
 ### App and worker
 
-NOMAD consists of the NOMAD app/API, a Celery worker, and the GUI. You can run the app and the worker with
+NOMAD consists of the NOMAD app/API, Temporal-based workers, and the GUI. You can run the app and the worker with
 the NOMAD CLI. These commands will run the services and display their log output. You should open
 them in separate shells as they run continuously. They will not watch code changes and
 you have to restart manually.
@@ -302,7 +306,8 @@ Depending on your preference, it is also possible to run the app and worker toge
 python3 scripts/run_dev_env.py
 ```
 
-The `scripts/run_dev_env.py` enables develop mode by default such that only one worker is used for FastAPI and Celery.
+The `scripts/run_dev_env.py` enables development mode by default, limiting the
+FastAPI worker count and the Temporal internal worker pool size to one.
 This helps save resource usage, which is often useful for development purposes.
 
 There are more configurations available.
@@ -312,11 +317,15 @@ You can see them by running the following.
 nomad admin run --help
 ```
 
-To run the worker directly with Celery, do (from the root)
+The `worker` command starts the Temporal internal worker for processing. You can
+also start it explicitly with:
 
 ```shell
-celery -A nomad.processing worker -l info
+nomad admin run action-internal-worker
 ```
+
+Temporal must be reachable at the host and port configured under `temporal` in
+`nomad.yaml`. Use the infrastructure Compose file from the same NOMAD checkout.
 
 If you run the GUI on its own (e.g. with the React dev server below), you also need to start
 the app manually. The GUI and its dependencies run on [Node.js](https://nodejs.org){:target="_blank" rel="noopener"} and
@@ -333,56 +342,28 @@ Note that the current codebase requires Node.js version 20.
 
 ### JupyterHub
 
-NOMAD also has a built-in JupyterHub that is used to launch remote tools (e.g. Jupyter
-notebooks).
+NORTH uses JupyterHub to launch remote tools such as Jupyter notebooks. The current
+[distribution template](https://github.com/FAIRmat-NFDI/nomad-distro-template/blob/main/docker-compose.yaml){:target="_blank" rel="noopener"}
+runs NORTH as a separate `nomad-north` container, not inside the NOMAD app image.
+Use its `north` service, `.env.north`, and nginx configuration as the baseline for
+integration testing. See [NORTH](../../explanation/north.md) and the
+[Oasis configuration guide](../oasis/configure.md#nomadyaml).
 
-To run JupyterHub, some additional configuration might be necessary.
+When adapting this setup to a locally running development API:
 
-```yaml
-north:
-  hub_connect_ip: 'host.docker.internal'
-  jupyterhub_crypt_key: '<crypt key>'
-```
-
-On Windows system, you might have to activate further specific functionality:
-
-```yaml
-north:
-  hub_connect_ip: 'host.docker.internal'
-  hub_connect_url: 'http://host.docker.internal:8081'
-  windows: true
-  jupyterhub_crypt_key: '<crypt key>'
-```
-
-- If you are not on Linux, you need to configure how JupyterHub can reach your host
-  network from docker containers. For Windows and macOS you need to set `hub_connect_ip`
-  to `host.docker.internal`. For Linux you can leave it out and use the default
-  `172.17.0.1`, unless you changed your docker configuration.
-
-- You have to generate a `crypt key` with `openssl rand -hex 32`.
-
-- You might need to install
-  [configurable-http-proxy](https://github.com/jupyterhub/configurable-http-proxy){:target="_blank" rel="noopener"}.
-
-The `configurable-http-proxy` comes as a Node.js package. See
-[Node.js](https://nodejs.org){:target="_blank" rel="noopener"} for how to install `npm`. The proxy can be globally
-installed with:
-
-```shell
-npm install -g configurable-http-proxy
-```
-
-JupyterHub is a separate application. You can run JupyterHub similar to the other part:
-
-```shell
-nomad admin run hub
-```
-
-To run JupyterHub directly, do (from the root)
-
-```shell
-jupyterhub -f nomad/jupyterhub_config.py --port 9000
-```
+- Set the NORTH service's `NOMAD_API_URL` to an API address reachable from the
+  container. `localhost` inside a container is not the host machine; Docker Desktop
+  provides `host.docker.internal`, while Linux may require a host-gateway mapping.
+- Configure NOMAD's NORTH hub address so the API can reach the NORTH container.
+- Keep `SERVICE_API_TOKEN` in `.env.north` equal to
+  `NOMAD_NORTH_HUB_SERVICE_API_TOKEN` supplied to NOMAD. Generate your own secrets
+  following the template quick-start; do not commit them.
+- Configure `KEYCLOAK_URL`, `KEYCLOAK_REALM`, and the OAuth client settings for your
+  development realm. Set `OAUTH_CALLBACK_URL` to the browser-accessible NORTH
+  callback URL, and allow it in Keycloak.
+- NORTH needs access to Docker and a Docker network from which launched tool
+  containers can reach the API and hub. Preserve the template's proxy routing when
+  testing the full stack.
 
 ## Running tests
 
@@ -398,14 +379,14 @@ You have to provide static files to serve the docs and NOMAD distribution:
 rm -rf site && mkdocs build && mv site nomad/app/static/docs
 ```
 
-You need to have the infrastructure partially running: `elastic`, `mongo`, `rabbitmq`.
-The rest should be mocked or provided by the tests. Make sure that you do not run any
-worker, as they will fight for tasks in the queue. To start the infrastructure and run the
+You need the infrastructure services running: `elastic`, `mongo`, and `temporal`.
+The rest should be mocked or provided by the tests. Do not run a separate NOMAD
+worker against the test task queues, since it can consume tasks intended for test workers. To start the infrastructure and run the
 tests, use:
 
 ```shell
 cd ops/docker-compose/infrastructure
-docker compose up -d elastic mongo rabbitmq
+docker compose up -d elastic mongo temporal
 cd ../../..
 pytest -sv tests
 ```
@@ -451,12 +432,6 @@ nomad dev qa
 This mimics the tests and checks that the GitLab CI/CD will perform.
 
 #### Custom pytest options
-
-##### `--celery-inspect-timeout`
-
-To ensure that all tests are independent despite reusing the same queue and workers, the `worker` fixture cleans up all running tasks after the test. This involves by default a timeout of one second, which accumulates over all tests using that fixture. In one local development environment this made a difference of about 14 min vs. 7 min without the timeout.
-
-If you want to speed up your local testing, you can use `pytest --celery-inspect-timeout 0.1` to shorten the timeout to a tenth of a second. Be aware that this might leave tasks running, which can affect later tests.
 
 ##### `--fixture-filters`
 
