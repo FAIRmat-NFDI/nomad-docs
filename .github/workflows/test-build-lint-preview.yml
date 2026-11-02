@@ -18,6 +18,19 @@ env:
   DISABLE_MKDOCS_2_WARNING: "true"
 
 jobs:
+  spellcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Check spelling
+        uses: codespell-project/actions-codespell@v2.4.3
+        with:
+          path: README.md docs examples
+          config: .codespellrc
+          # Use the skip patterns in .codespellrc instead of the action default.
+          skip: ''
+
   lint-markdown:
     runs-on: ubuntu-latest
     steps:
