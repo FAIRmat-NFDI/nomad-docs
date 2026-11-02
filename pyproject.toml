@@ -1,6 +1,6 @@
 [project]
 name = "nomad-docs"
-version = "2.0.0"
+version = "2.0.1"
 description = "The official NOMAD documentation (starting from 2025)"
 readme = "README.md"
 authors = [
@@ -18,7 +18,7 @@ dependencies = [
   "mkdocs-redirects",
   "mkdocs>=1.6.0,<2",
   "mike",
-  "nomad-lab[infrastructure]==2.0.0",
+  "nomad-lab[infrastructure]==2.0.1",
   "pydantic>=2.0",
   "regex",
 ]
