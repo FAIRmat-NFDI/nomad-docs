@@ -3,7 +3,7 @@
 NOMAD is based on a *bottom-up* approach to data management. Instead of only supporting data in a specific
 predefined format, we process files to extract data from an extendable variety of data formats.
 
-Converting heterogenous files into homogeneous machine actionable processed data is the
+Converting heterogeneous files into homogeneous machine actionable processed data is the
 basis to make data FAIR. It allows us to build search interfaces, APIs, visualization, and
 analysis tools independent from specific file formats.
 
@@ -27,7 +27,7 @@ Raw files are managed by users and they are never changed by NOMAD.
     As a *rule*, **raw files** are not changed during processing (or otherwise). However,
     to achieve certain functionality, a parser, normalizer, or schema developer might decide to bend
     this rule. Use-cases include the generation of more mainfiles (and entries) and updating
-    of related mainfiles to automatize ELNs, or
+    of related mainfiles to automate ELNs, or
     generating additional files to convert a mainfile into a standardized format like nexus or cif.
 
 ## Files
@@ -35,7 +35,7 @@ Raw files are managed by users and they are never changed by NOMAD.
 We already said that all uploaded files are **raw files**. Recognized files that have an
 entry are called **mainfiles**. Only the mainfile of the entry is
 passed to the parser during processing. However, a parser can call other tools or read other files.
-Therefore, we consider all files in the same directory of the mainfile as **auxillary files**,
+Therefore, we consider all files in the same directory of the mainfile as **auxiliary files**,
 even though there is not necessarily a formal relationship with the entry. If
 formal relationships with aux files are established, e.g. via a reference to the file within
 the processed data, is up to the parser.

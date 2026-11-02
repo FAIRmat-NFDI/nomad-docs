@@ -36,7 +36,7 @@ uses and hybrids are imaginable:
 !!! warning "Attention"
 
     The data transfer implementation is still under development and not
-    yet relyable for all use-cases. See "Current Limitations and Plans" below.
+    yet reliable for all use-cases. See "Current Limitations and Plans" below.
 
 NOMAD data is inherently file based. You upload raw-files (or in case of ELNs edit raw files
 in the web interface) and the NOMAD processes these files to extract data which
@@ -47,10 +47,10 @@ We implemented a *bundle* format for published data. A bundle is a zip file that
 all raw files, archive files of an *upload*, and a bit of metadata, e.g. with
 information on upload name, dates, authors, and datasets when they are included
 in the export. This bundle format
-is our tranfer file format. Bundles are exported on one end and imported on
+is our transfer file format. Bundles are exported on one end and imported on
 the other.
 
-Upon import, the reciving NOMAD replicates the state of the upload on the
+Upon import, the receiving NOMAD replicates the state of the upload on the
 sending NOMAD. This means that the upload is published and the data is indexed.
 Users can treat the upload as if they had uploaded it on the receiving
 NOMAD themselves.
@@ -94,7 +94,7 @@ However, there are still limitations and plans for future development:
   It is planned to allow transfers for only the "metadata". Here metadata
   refers to the archive files (or even just certain result sections from
   said archive files). This would still allow to index and find entries on the
-  central NOMAD without transfering potentially huge raw files. This would allow
+  central NOMAD without transferring potentially huge raw files. This would allow
   the central NOMAD to act as a portal for all data in the federation. This is not
   yet implemented.
 

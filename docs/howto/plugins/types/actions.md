@@ -138,7 +138,7 @@ The `load`-method of an action entry point returns an instance of a
 `nomad.actions.Action` class which describes the action through
 a collection of activities and workflows that connect them. It also specifies the task queue for which the workflows and activities are registered. Once the
 workflows are made available through the `Action`, they can be triggered
-using the `start_action` funtion. This adds a workflow run instance to the specified task queue. You can learn more about it in the [next section](#integrating-action-with-schemas).
+using the `start_action` function. This adds a workflow run instance to the specified task queue. You can learn more about it in the [next section](#integrating-action-with-schemas).
 
 !!! note "Synchronous vs. Asynchronous Activities"
     When defining activities, it is recommended to use synchronous functions by default. Asynchronous functions should only be used when you need to make asynchronous calls, for example, when interacting with an external API using `aiohttp`. Using blocking synchronous functions in an asynchronous activity can block the event loop and prevent other tasks from running.
@@ -306,7 +306,7 @@ buffer to it.
 
 ## Integrating action with schemas
 
-After actions are defined, it is possible to intergrate their workflows with
+After actions are defined, it is possible to integrate their workflows with
 [schemas](../../../reference/glossary.md#schema) and run them from NOMAD
 entries.
 
@@ -447,7 +447,7 @@ function is triggered from inside the `run_action` method.
 to get the status of the workflow.
 
 When `trigger_get_action_status` is clicked, the status for the available `workflow_id` is requested and is saved as a string in `workflow_status`
-quantity. This status can be mainly `RUNNING`, `COMPLETED`, `FAILED`, `CANCELLED` or `TERMINATED`. Everytime a workflow run is triggered, the status for it is also requested.
+quantity. This status can be mainly `RUNNING`, `COMPLETED`, `FAILED`, `CANCELLED` or `TERMINATED`. Every time a workflow run is triggered, the status for it is also requested.
 
 It is also possible to re-trigger the workflow run if the status is not
 `RUNNING`. Of course, the new workflow run will now have a different workflow

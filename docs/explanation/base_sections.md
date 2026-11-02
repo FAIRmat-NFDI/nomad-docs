@@ -40,7 +40,7 @@ All sections that are intended to eventually become entries in NOMAD by inheriti
 the entity-activity base sections inherit from `BaseSection`.
 This section provides a set of global quantities that provides basic information about the
 entry.
-Theses are:
+These are:
 
 - `name`: A short human readable and descriptive name.
 - `datetime`: The date and time associated with this section.
@@ -241,7 +241,7 @@ It is in turn composed by the following quantities:
 
 If owner is not filled the field will be filled by the first two letters of
 the first name joined with the first two letters of the last name of the author.
-If the institute is not filled a institute abreviations will be constructed from
+If the institute is not filled a institute abbreviations will be constructed from
 the author's affiliation.
 If no datetime is filled, the datetime will be taken from the `datetime`
 property of the parent, if it exists, otherwise the current date and time will be

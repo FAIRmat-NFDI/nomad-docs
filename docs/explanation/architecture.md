@@ -97,7 +97,7 @@ for that data.
 
 The frontend (GUI) of **nomad@FAIRDI** is built on the
 [React](https://reactjs.org/docs/getting-started.html){:target="_blank" rel="noopener"} component framework.
-This allows us to build the GUI as a set of re-usable components to
+This allows us to build the GUI as a set of reusable components to
 achieve a coherent representations for all aspects of nomad, while keeping development
 efforts manageable. React uses [JSX](https://reactjs.org/docs/introducing-jsx.html){:target="_blank" rel="noopener"}
 (a ES6 variety) that allows to mix HTML with Javascript code.

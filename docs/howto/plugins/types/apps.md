@@ -50,7 +50,7 @@ myapp = "nomad_example.apps:myapp"
 
 ## Creating an `App`
 
-The definition fo the actual app is given as an instance of the `App` class specified as part of the entry point. A full breakdown of the model is given below in the [app reference](#app-reference), but here is a small example:
+The definition of the actual app is given as an instance of the `App` class specified as part of the entry point. A full breakdown of the model is given below in the [app reference](#app-reference), but here is a small example:
 
 <!-- fmt: off -->
 ```python
@@ -113,7 +113,7 @@ filters_locked = {'quantities': ['results.properties.catalytic']}
 
 ### Columns
 
-Controls columns show in the table of search results. Here you can control the order, units, labelling, and the data source for the colums. Here is an example:
+Controls columns show in the table of search results. Here you can control the order, units, labelling, and the data source for the columns. Here is an example:
 
 <!-- fmt: off -->
 ```python
@@ -232,6 +232,6 @@ The following actions types are supported:
 
 ## App reference
 
-Here is the full reference for all app configration options.
+Here is the full reference for all app configuration options.
 
 {{ pydantic_model('nomad.config.models.ui.App')}}

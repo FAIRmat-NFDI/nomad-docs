@@ -172,7 +172,7 @@ helm secrets install nomad-oasis nomad/default -f values.yaml -f secrets://secre
 
 #### Required Secrets for Production
 
-The following secrets are used by the NOMAD Oasis deployment. None of the followings are, by default, generated, and we recommend explicitly setting them for a production environment to ensure stability across upgrades.
+The following secrets are used by the NOMAD Oasis deployment. None of the following are, by default, generated, and we recommend explicitly setting them for a production environment to ensure stability across upgrades.
 
 - **`nomad.secrets.api`**: The fundamental API secret for cryptographic operations. **Required.** (Must be provided or `nomad.secrets.api.autoGenerate` set to `true` to avoid installation failure).
 - **`nomad.secrets.north.hubServiceApiToken`**: Required if JupyterHub (NORTH) is enabled (`nomad.config.north.enabled: true`).
@@ -392,7 +392,7 @@ Regardless of the cloud provider, the deployment typically follows these steps:
 
     - Create a NOMAD Oasis distribution using our template [`nomad-distro-template`](https://github.com/FAIRmat-NFDI/nomad-distro-template){:target="_blank" rel="noopener"}. We recommend creating a new repository by selecting **Use this template**, but for testing it is also possible to use the existing template repository directly.
 
-    - Follow the deployment instructions in the `README.md` file under *Deploying the distribution/For a new Oasis*. This typically consists of cloning the repository, setting up file priviledges and then running `docker compose pull` + `docker compose up -d`.
+    - Follow the deployment instructions in the `README.md` file under *Deploying the distribution/For a new Oasis*. This typically consists of cloning the repository, setting up file privileges and then running `docker compose pull` + `docker compose up -d`.
 
 5. Access and test deployment
 
@@ -414,7 +414,7 @@ sudo groupadd docker
 sudo usermod -aG docker $USER
 ```
 
-Note that you may need to reboot to get the docker daemon running and the user priviledges to work.
+Note that you may need to reboot to get the docker daemon running and the user privileges to work.
 
 ## Secured connections using HTTPS
 
@@ -439,7 +439,7 @@ Before entering production, you must set up secure connections through HTTPS. Wi
 
     3. Free certificate from Let's Encrypt
 
-        [Let's Encrypt](https://letsencrypt.org/){:target="_blank" rel="noopener"} is a non-profit organization that provides free TLS certificats. To create a free certificate you must have a domain name. You can follow their tutorials on creating free certificates.
+        [Let's Encrypt](https://letsencrypt.org/){:target="_blank" rel="noopener"} is a non-profit organization that provides free TLS certificates. To create a free certificate you must have a domain name. You can follow their tutorials on creating free certificates.
 
 3. Setup your server to accept HTTPS traffic.
     To enable HTTPS, you need to mount your TLS certificate and ensure that port 443 is open. A template nginx configuration file is available, see the "Deploy Oasis with HTTPS" section of [`nomad-distro-template` documentation](https://github.com/FAIRmat-NFDI/nomad-distro-template?tab=readme-ov-file#for-a-new-oasis){:target="_blank" rel="noopener"}.
