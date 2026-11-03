@@ -436,6 +436,21 @@
     background-color: rgba(255, 255, 255, 0.28);
 }
 
+/* Match the mobile drawer branding to the main header in each color scheme. */
+@media screen and (max-width: 76.234375em) {
+    [data-md-color-scheme="default"] .md-nav--primary > .md-nav__title[for="__drawer"],
+    [data-md-color-scheme="default"] .md-nav--primary > .md-nav__source {
+        background-color: #ffffff;
+        color: #2a4cdf;
+    }
+
+    [data-md-color-scheme="slate"] .md-nav--primary > .md-nav__title[for="__drawer"],
+    [data-md-color-scheme="slate"] .md-nav--primary > .md-nav__source {
+        background-color: #161b22;
+        color: #e6edf3;
+    }
+}
+
 .training-resources-list {
     display: flex;
     flex-direction: column;
