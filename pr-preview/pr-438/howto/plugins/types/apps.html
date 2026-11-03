@@ -2375,17 +2375,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#searchsyntaxes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        SearchSyntaxes
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#column" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2584,10 +2573,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#pagination" class="md-nav__link">
+  <a href="#filters" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Pagination
+        Filters
       
     </span>
   </a>
@@ -2595,10 +2584,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#filters" class="md-nav__link">
+  <a href="#searchsyntaxes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Filters
+        SearchSyntaxes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pagination" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pagination
       
     </span>
   </a>
@@ -4796,17 +4796,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#searchsyntaxes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        SearchSyntaxes
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#column" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5005,10 +4994,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#pagination" class="md-nav__link">
+  <a href="#filters" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Pagination
+        Filters
       
     </span>
   </a>
@@ -5016,10 +5005,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#filters" class="md-nav__link">
+  <a href="#searchsyntaxes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Filters
+        SearchSyntaxes
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pagination" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pagination
       
     </span>
   </a>
@@ -6360,35 +6360,6 @@ Will only show quantities that have been populated in the data.</p>
 </tr>
 </tbody>
 </table>
-<h4 id="searchsyntaxes">SearchSyntaxes<a class="headerlink" href="#searchsyntaxes" title="Permanent link">¶</a></h4>
-<p>Controls the availability of different search syntaxes. These syntaxes
-determine how raw user input in e.g. the search bar is parsed into queries
-supported by the API.</p>
-<p>Currently you can only exclude items. By default, the following options are
-included:</p>
-<ul>
-<li><code>existence</code>: Used to query for the existence of a specific metainfo field in the data.</li>
-<li><code>equality</code>: Used to query for a specific value with exact match.</li>
-<li><code>range_bounded</code>: Queries values that are between two numerical limits, inclusive or exclusive.</li>
-<li><code>range_half_bounded</code>: Queries values that are above/below a numerical limit, inclusive or exclusive.</li>
-<li><code>free_text</code>: For inexact, free-text queries. Requires that a set of keywords has been filled in the entry.</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>name</th>
-<th>type</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>exclude</td>
-<td><code>list[str] | None</code></td>
-<td>List of excluded options.</td>
-</tr>
-</tbody>
-</table>
 <h4 id="column">Column<a class="headerlink" href="#column" title="Permanent link">¶</a></h4>
 <p>Column show in the search results table. With <code>quantity</code> you may target a
 specific part of the data to be shown. Note that the use of JMESPath is
@@ -7164,6 +7135,58 @@ can use glob syntax to target metainfo, e.g. <code>results.*</code> or
 </tr>
 </tbody>
 </table>
+<h4 id="filters">Filters<a class="headerlink" href="#filters" title="Permanent link">¶</a></h4>
+<p>Alias for SearchQuantities.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>include</td>
+<td><code>list[str] | None</code></td>
+<td>List of included options. Supports glob/wildcard syntax.</td>
+</tr>
+<tr>
+<td>exclude</td>
+<td><code>list[str] | None</code></td>
+<td>List of excluded options. Supports glob/wildcard syntax. Has higher precedence than include.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="searchsyntaxes">SearchSyntaxes<a class="headerlink" href="#searchsyntaxes" title="Permanent link">¶</a></h4>
+<p>Controls the availability of different search syntaxes. These syntaxes
+determine how raw user input in e.g. the search bar is parsed into queries
+supported by the API.</p>
+<p>Currently you can only exclude items. By default, the following options are
+included:</p>
+<ul>
+<li><code>existence</code>: Used to query for the existence of a specific metainfo field in the data.</li>
+<li><code>equality</code>: Used to query for a specific value with exact match.</li>
+<li><code>range_bounded</code>: Queries values that are between two numerical limits, inclusive or exclusive.</li>
+<li><code>range_half_bounded</code>: Queries values that are above/below a numerical limit, inclusive or exclusive.</li>
+<li><code>free_text</code>: For inexact, free-text queries. Requires that a set of keywords has been filled in the entry.</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>exclude</td>
+<td><code>list[str] | None</code></td>
+<td>List of excluded options.</td>
+</tr>
+</tbody>
+</table>
 <h4 id="pagination">Pagination<a class="headerlink" href="#pagination" title="Permanent link">¶</a></h4>
 <table>
 <thead>
@@ -7188,29 +7211,6 @@ can use glob syntax to target metainfo, e.g. <code>results.*</code> or
 <td>page_size</td>
 <td><code>int</code></td>
 <td>Number of results on each page.<br><em>default:</em> <code>20</code></td>
-</tr>
-</tbody>
-</table>
-<h4 id="filters">Filters<a class="headerlink" href="#filters" title="Permanent link">¶</a></h4>
-<p>Alias for SearchQuantities.</p>
-<table>
-<thead>
-<tr>
-<th>name</th>
-<th>type</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>include</td>
-<td><code>list[str] | None</code></td>
-<td>List of included options. Supports glob/wildcard syntax.</td>
-</tr>
-<tr>
-<td>exclude</td>
-<td><code>list[str] | None</code></td>
-<td>List of excluded options. Supports glob/wildcard syntax. Has higher precedence than include.</td>
 </tr>
 </tbody>
 </table>

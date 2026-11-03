@@ -4433,10 +4433,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#normalizerentrypoint" class="md-nav__link">
+  <a href="#northtoolentrypoint" class="md-nav__link">
     <span class="md-ellipsis">
       
-        NormalizerEntryPoint
+        NORTHToolEntryPoint
       
     </span>
   </a>
@@ -4444,10 +4444,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#northtoolentrypoint" class="md-nav__link">
+  <a href="#normalizerentrypoint" class="md-nav__link">
     <span class="md-ellipsis">
       
-        NORTHToolEntryPoint
+        NormalizerEntryPoint
       
     </span>
   </a>
@@ -5626,10 +5626,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#normalizerentrypoint" class="md-nav__link">
+  <a href="#northtoolentrypoint" class="md-nav__link">
     <span class="md-ellipsis">
       
-        NormalizerEntryPoint
+        NORTHToolEntryPoint
       
     </span>
   </a>
@@ -5637,10 +5637,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#northtoolentrypoint" class="md-nav__link">
+  <a href="#normalizerentrypoint" class="md-nav__link">
     <span class="md-ellipsis">
       
-        NORTHToolEntryPoint
+        NormalizerEntryPoint
       
     </span>
   </a>
@@ -8709,6 +8709,39 @@ elements and defining the configuration of each element.</p>
 </tr>
 </tbody>
 </table>
+<h4 id="northtoolentrypoint">NORTHToolEntryPoint<a class="headerlink" href="#northtoolentrypoint" title="Permanent link">¶</a></h4>
+<p>Base model for NORTH tool plugin entry points.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>north_tool</td>
+<td><code>NORTHTool</code></td>
+<td><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>id_url_safe</td>
+<td><code>str | None</code></td>
+<td>URL-safe identifier for the plugin entry point. If no custom name is provided, one is automatically generated from the entry point id. Any custom identifier is checked for URL-safety and for collisions with other entry points with the same type within the same NOMAD deployment.</td>
+</tr>
+<tr>
+<td>name</td>
+<td><code>str | None</code></td>
+<td>Name of the plugin entry point.</td>
+</tr>
+<tr>
+<td>description</td>
+<td><code>str | None</code></td>
+<td>A human readable description of the plugin entry point.</td>
+</tr>
+</tbody>
+</table>
 <h4 id="normalizerentrypoint">NormalizerEntryPoint<a class="headerlink" href="#normalizerentrypoint" title="Permanent link">¶</a></h4>
 <p>Base model for normalizer plugin entry points.</p>
 <table>
@@ -8744,39 +8777,6 @@ elements and defining the configuration of each element.</p>
 <td>level</td>
 <td><code>int | None</code></td>
 <td><strong>deprecated</strong></td>
-</tr>
-</tbody>
-</table>
-<h4 id="northtoolentrypoint">NORTHToolEntryPoint<a class="headerlink" href="#northtoolentrypoint" title="Permanent link">¶</a></h4>
-<p>Base model for NORTH tool plugin entry points.</p>
-<table>
-<thead>
-<tr>
-<th>name</th>
-<th>type</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>north_tool</td>
-<td><code>NORTHTool</code></td>
-<td><em>default:</em> <code>PydanticUndefined</code></td>
-</tr>
-<tr>
-<td>id_url_safe</td>
-<td><code>str | None</code></td>
-<td>URL-safe identifier for the plugin entry point. If no custom name is provided, one is automatically generated from the entry point id. Any custom identifier is checked for URL-safety and for collisions with other entry points with the same type within the same NOMAD deployment.</td>
-</tr>
-<tr>
-<td>name</td>
-<td><code>str | None</code></td>
-<td>Name of the plugin entry point.</td>
-</tr>
-<tr>
-<td>description</td>
-<td><code>str | None</code></td>
-<td>A human readable description of the plugin entry point.</td>
 </tr>
 </tbody>
 </table>
