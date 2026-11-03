@@ -1,5 +1,0 @@
-[codespell]
-# SVG files contain encoded drawing data, not just prose.
-skip = *.svg
-# Azure Kubernetes Service (AKS) is a product name.
-ignore-words-list = aks
