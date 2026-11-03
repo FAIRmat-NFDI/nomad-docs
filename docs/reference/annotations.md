@@ -289,7 +289,7 @@ corresponding HDF5 object attributes and are subsequently read by H5Web.
 Usage:
 
 - Use this base section as a type in your quantity.
-- Add addictional annotations to trigger the H5Web visualizer to the section containing the quantity, and, optionally, to its parent sections.
+- Add additional annotations to trigger the H5Web visualizer to the section containing the quantity, and, optionally, to its parent sections.
 
 !!! note
 

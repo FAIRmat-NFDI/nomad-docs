@@ -632,7 +632,7 @@ A *normalize function* runs every time an entry is processed, which happens when
     than data. If you need derived values, write the schema in Python. This is the most common reason
     to move a working YAML schema into a plugin.
 
-In order for the `normalize` function to tbe triggered, the section must inherit `ArchiveSection` (`EntryData` already does):
+In order for the `normalize` function to the triggered, the section must inherit `ArchiveSection` (`EntryData` already does):
 
 ```python
 class Sample(EntryData):

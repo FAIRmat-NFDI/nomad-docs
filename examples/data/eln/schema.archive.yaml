@@ -212,7 +212,7 @@ definitions:
                   quantities:
                     set_temperature:
                       type: np.float64  # For actual numbers, we use numpy datatypes
-                      unit: K  # The unit system is based on Pint and allows all kinds of abreviations, prefixes, and complex units
+                      unit: K  # The unit system is based on Pint and allows all kinds of abbreviations, prefixes, and complex units
                       m_annotations:
                         eln:
                           component: NumberEditQuantity  # A component to enter numbers (with units)

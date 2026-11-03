@@ -56,7 +56,7 @@ For data encryption on disks, we recommend using full-disk or volume-level encry
 The `nomad.yaml` file and the Docker/Kubernetes configuration contains values that are sensitive and should not be exposed. The following rules should be followed to prevent such secrets from leaking:
 
 - Do not commit any secrets to version control.
-- Always use secrets that are strong against brute-force attacs or X.
+- Always use secrets that are strong against brute-force attacks or X.
 - Do not store secrets on disk. Instead use environment variables to pass any secrets to the NOMAD application, and use Docker/Kubernetes secrets.
 
 ## Container security

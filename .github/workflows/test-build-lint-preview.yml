@@ -18,6 +18,17 @@ env:
   DISABLE_MKDOCS_2_WARNING: "true"
 
 jobs:
+  spellcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Check spelling
+        uses: crate-ci/typos@v1.52.0
+        with:
+          files: README.md docs examples
+          config: _typos.toml
+
   lint-markdown:
     runs-on: ubuntu-latest
     steps:

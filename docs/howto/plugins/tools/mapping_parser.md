@@ -2,10 +2,10 @@
 
 `MappingParser` is a NOMAD parsing framework for handling tree-like data structures.
 It is extensively used for processing highly structured files, like computational output.
-This framework acts as an intermediate step in the [parsing phase](../../../explanation/basics.md), where reading the source file is done separtely from building up the archive (i.e. `data`).
+This framework acts as an intermediate step in the [parsing phase](../../../explanation/basics.md), where reading the source file is done separately from building up the archive (i.e. `data`).
 Some functionality can be inserted in the mapping, the rest is relegated to [normalization](../../../explanation/basics.md#normalizing) functionalitites of the schema.
 
-![Responsiblity distribution MappingParser](images/mapping_parser_concept.png)
+![Responsibility distribution MappingParser](images/mapping_parser_concept.png)
 
 <!-- `nomad.parsing.file_parser/mapping_parser.py` to handle the conversion to and from a
 data object and a python dictionary. We refer to an instance of the

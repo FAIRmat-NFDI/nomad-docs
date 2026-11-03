@@ -1,0 +1,16 @@
+[files]
+extend-exclude = [
+  # SVG files contain encoded drawing data, not just prose.
+  "*.svg",
+  # TODO: Remove this exclusion when the obsolete Oasis data folder is deleted.
+  "docs/howto/oasis/data/",
+]
+
+[default.extend-words]
+# Azure Kubernetes Service (AKS) is a product name.
+AKS = "AKS"
+
+[default.extend-identifiers]
+# Example entry ID in docs/howto/manage/program/graph_api.md.
+# Typos flags the substring "iz" as "is", but this opaque ID must remain unchanged.
+"6EMY3osB1O7izLHlh1dXtoZYn0Ms" = "6EMY3osB1O7izLHlh1dXtoZYn0Ms"
