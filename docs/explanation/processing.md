@@ -263,7 +263,7 @@ representation of a measurement. The goal is not to fill an archive with all dat
 directly, but have the created file parsed and create an entry with all data this way.
 
 Another use-case is automation. The `normalize` function of on ELN schema might use
-user input to create many more ELNs. This can be use-ful for parameter studies, where
+user input to create many more ELNs. This can be useful for parameter studies, where
 one experiment has to be repeated many times in a consistent way.
 
 ### Reprocessing
