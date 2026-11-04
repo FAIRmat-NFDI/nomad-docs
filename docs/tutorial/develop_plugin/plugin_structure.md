@@ -260,19 +260,15 @@ source .pyenv/bin/activate
 
 ### Option 2: `nomad-distro-dev`
 
-This option is designed to be used with a local Linux-based machine. The `nomad-distro-dev` also works with macOS or Windows, but some NOMAD plugins might not function correctly there.
+Use this environment when you need to verify plugin behavior in the NOMAD GUI,
+work with multiple plugins, or develop the core NOMAD package.
 
-This setup is required when you need to verify plugin behavior in the NOMAD GUI.
-
-Start with forking the [`nomad-distro-dev`](https://github.com/FAIRmat-NFDI/nomad-distro-dev){:target="_blank" rel="noopener"} repository (**Fork** > **Create a new fork** in the upper-right part of the page). You will also need the following additional software installed on your system:
-
-- [Docker](https://docs.docker.com/engine/install/){:target="_blank" rel="noopener"} - generally, only `docker-compose` functionality will be needed
-
-- [uv](https://docs.astral.sh/uv/getting-started/installation/){:target="_blank" rel="noopener"} python package manager, version 0.5.14 or above
-
-- [node.js](https://nodejs.org/en){:target="_blank" rel="noopener"} version 20 or above and [yarn](https://classic.yarnpkg.com/en/docs/install){:target="_blank" rel="noopener"} version 1.22 or above are necessary to run the GUI
-
-Then, follow the instructions in the `nomad-distro-dev` readme file under the [`Basic infra`](https://github.com/FAIRmat-NFDI/nomad-distro-dev#basic-infra){:target="_blank" rel="noopener"} and [`Developing nomad + plugins locally`](https://github.com/FAIRmat-NFDI/nomad-distro-dev#developing-nomad--plugins-locally){:target="_blank" rel="noopener"} headings.
+Fork the [`nomad-distro-dev`](https://github.com/FAIRmat-NFDI/nomad-distro-dev){:target="_blank" rel="noopener"}
+repository and follow its maintained README instructions under
+[`Basic infra`](https://github.com/FAIRmat-NFDI/nomad-distro-dev#basic-infra){:target="_blank" rel="noopener"}
+and [`Developing nomad + plugins locally`](https://github.com/FAIRmat-NFDI/nomad-distro-dev#developing-nomad--plugins-locally){:target="_blank" rel="noopener"}.
+These cover the current prerequisites, infrastructure, plugin configuration, and
+backend and GUI startup steps.
 
 ## Next steps
 
