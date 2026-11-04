@@ -3,7 +3,7 @@
 ## Configuration files
 
 The [`nomad-distro-template`](https://github.com/FAIRmat-NFDI/nomad-distro-template){:target="_blank" rel="noopener"}
-provides all the neccessary configuration files. We strongly recommend to create your own distribution
+provides all the necessary configuration files. We strongly recommend to create your own distribution
 project based on the template. This will allow you to version your configuration, build custom
 images with plugins, and much more.
 
@@ -11,101 +11,100 @@ In this section, you can learn about settings that you might need to change. The
 
 - `docker-compose.yaml`
 - `configs/nomad.yaml`
-- `configs/nginx.conf`
+- `configs/nginx_http.conf` and `configs/nginx_https.conf`
+- `configs/nginx_base_conf` and `configs/nginx_maps_conf`
+- `.env` and `.env.north`
 
-All docker containers are configured via docker-compose and the respective `docker-compose.yaml` file.
-The other files are mounted into the docker containers.
+Docker Compose configures the containers. The NOMAD image includes `configs/nomad.yaml`;
+nginx configuration and environment files are supplied at runtime. Follow the
+[template quick-start](https://github.com/FAIRmat-NFDI/nomad-distro-template#quick-start-for-a-local-oasis){:target="_blank" rel="noopener"}
+to generate the required secrets and prepare these files before starting services.
 
 ### docker-compose.yaml
 
-The most basic `docker-compose.yaml` to run an Oasis looks like this:
+Use the template's maintained
+[`docker-compose.yaml`](https://github.com/FAIRmat-NFDI/nomad-distro-template/blob/main/docker-compose.yaml){:target="_blank" rel="noopener"}
+as the baseline for your distribution, together with its configuration files and scripts.
+Do not combine it with configuration files from older NOMAD releases.
 
-```yaml
---8<-- "docs/howto/oasis/data/docker-compose/nomad-oasis/docker-compose.yaml"
-```
+The current template uses:
 
-Changes necessary:
+- MongoDB 8.0 for metadata and processing state.
+- Elasticsearch 9.5.0 for search.
+- Temporal with PostgreSQL persistence for processing and Actions, including one-off
+  jobs to initialize the database and create the namespace.
+- The distribution's NOMAD image from GHCR for the `app` and `worker` services.
+- A separate `nomad-north` image for the `north` service.
+- nginx as the `proxy`, exposing ports 80 and 443. Enabling HTTPS also requires
+  configuring a certificate and the HTTPS nginx configuration.
 
-- The group in the value of the hub's user parameter needs to match the docker group
-  on the host. This should ensure that the user which runs the hub, has the rights to access the host's docker.
-- On Windows or macOS computers you have to run the `app` and `worker` container without `user: '1000:1000'` and the `north` container with `user: root`.
+Image overrides are defined in `x-images`, including `APP_IMAGE` and `IMAGE_TAG`.
+Choose images compatible with your distribution's configuration and plugins.
+The default `main` tag tracks development builds; pin a suitable release for production.
 
-A few things to notice:
+Database data is stored in named volumes; NOMAD files are bind-mounted from
+`./.volumes/fs`. Keep `PWD` set to your distribution directory so NORTH can resolve
+host paths. NORTH also needs access to the host Docker socket.
 
-- The app, worker, and north service use the NOMAD docker image. Here we use the `latest` tag, which
-  gives you the latest *beta* version of NOMAD. You might want to change this to `stable`,
-  a version tag (format is `vX.X.X`, you find all releases at [nomad-FAIR > tags](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR/-/tags){:target="_blank" rel="noopener"}), or a specific [nomad-FAIR > branches](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-FAIR/-/branches){:target="_blank" rel="noopener"}.
-- All services use docker volumes for storage. This could be changed to host mounts.
-- It mounts two configuration files that need to be provided (see below): `nomad.yaml`, `nginx.conf`.
-- The only exposed port is `80` (proxy service). This could be changed to a desired port if necessary.
-- The NOMAD images are pulled from our GitLab at MPCDF, the other services use images from a public registry (*dockerhub*).
-- All containers will be named `nomad_oasis_*`. These names can be used later to reference the container with the `docker` cmd.
-- The services are setup to restart `always`, you might want to change this to `no` while debugging errors to prevent indefinite restarts.
-- Make sure that the `PWD` environment variable is set. NORTH needs to create bind mounts that require absolute paths and we need to pass the current working directory to the configuration from the PWD variable (see hub service in the `docker-compose.yaml`).
-- The `north` service needs to run docker containers. We have to use the systems docker group as a group. You might need to replace `991` with your
-  systems docker group ID.
+!!! warning
+    Upgrading an existing Oasis is not just an image-tag change. Follow the
+    [migration guides](migrate.md) before changing database versions or reusing volumes.
 
 ### nomad.yaml
 
-NOMAD app and worker read the `nomad.yaml` for configuration.
+The app and workers read `nomad.yaml`. Start with the template's
+[`configs/nomad.yaml`](https://github.com/FAIRmat-NFDI/nomad-distro-template/blob/main/configs/nomad.yaml){:target="_blank" rel="noopener"}.
 
-```yaml
---8<-- "docs/howto/oasis/data/docker-compose/nomad-oasis/configs/nomad.yaml"
-```
+- Set `services.api_host` to the hostname users can reach, without a scheme or path.
+- Set `meta.deployment` and `meta.maintainer_email` for your installation.
+- The template uses `services.api_base_path: /backend`; the GUI is served at `/`.
+  Changing this prefix also requires corresponding proxy and NORTH changes.
+- `mongo.db_name` and `elastic.entries_index` select the database and search index.
+- Keep Temporal enabled and use the Compose-provided `NOMAD_TEMPORAL_HOST` setting.
+- Configure the separate NORTH service through `.env.north` and its Compose
+  environment, including `OAUTH_CALLBACK_URL`. Follow the template instructions for
+  matching the NORTH service API tokens and generating secrets.
 
-You should change the following:
-
-- Replace `localhost` with the hostname of your server, and user-management will redirect your
-  users back to this host. Make sure this is the hostname that your users can access.
-- Replace `deployment`, `deployment_url`, and `maintainer_email` with representative values.
-  The `deployment_url` should be the URL to the deployment's api (should end with `/api`).
-- You can change `api_base_path` to run NOMAD under a different path prefix.
-- You should generate your own `north.jupyterhub_crypt_key`. You can generate one
-  with `openssl rand -hex 32`.
-- On Windows or macOS, you have to add `hub_connect_ip: 'host.docker.internal'` to the `north` section.
-
-A few things to notice:
-
-- Under `mongo` and `elastic` you can configure database and index names. This might
-  be useful, if you need to run multiple NOMADs with the same databases.
-- All managed files are stored under `.volumes` of the current directory.
+The Docker build includes `configs/nomad.yaml` in the image. After editing it, either
+build and deploy a new image or uncomment the local configuration mount in
+`x-nomad-base.volumes` to supply it to all NOMAD app and worker containers.
 
 ### nginx.conf
 
-The GUI container serves as a proxy that forwards requests to the app container. The
-proxy is an nginx server and needs a configuration similar to this:
+The separate `proxy` service runs nginx. Use the template's maintained
+[nginx configuration files](https://github.com/FAIRmat-NFDI/nomad-distro-template/tree/main/configs){:target="_blank" rel="noopener"}
+together: `nginx_http.conf` (or `nginx_https.conf`), `nginx_base_conf`, and
+`nginx_maps_conf`. They serve the GUI at `/` and route backend requests under `/backend`.
 
-```none
---8<-- "docs/howto/oasis/data/docker-compose/nomad-oasis/configs/nginx.conf"
-```
+`client_max_body_size` limits upload size. You can add additional locations for other
+services, but preserve the template's routing and streaming settings.
 
-A few things to notice:
-
-- It configures the base path (`nomad-oasis`). It needs to be changed, if you use a different base path.
-- You can use the server for additional content if you like.
-- `client_max_body_size` sets a limit to the possible upload size.
-
-You can add an additional reverse proxy in front or modify the `nginx` in the `docker-compose.yaml`
-to [support https](http://nginx.org/en/docs/http/configuring_https_servers.html){:target="_blank" rel="noopener"}.
-If you operate the GUI container behind another proxy, keep in mind that your proxy should
+Before exposing your Oasis publicly, follow the template's
+[production and HTTPS instructions](https://github.com/FAIRmat-NFDI/nomad-distro-template#steps-before-entering-production){:target="_blank" rel="noopener"}.
+You can also place an additional reverse proxy in front.
+If you operate the Oasis proxy behind another reverse proxy, keep in mind that it should
 not buffer requests/responses to allow streaming of large requests/responses for `api/v1/uploads` and `api/v1/.*/download`.
 An `nginx` reverse proxy location on an additional reverse proxy, could have these directives
 to ensure the correct HTTP headers and allow the download and upload of large files:
 
 ```nginx
-client_max_body_size 35g;
-proxy_set_header Host $host;
-proxy_pass_request_headers on;
-proxy_buffering off;
-proxy_request_buffering off;
-proxy_set_header X-Real-IP $remote_addr;
-proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-proxy_pass http://<your-oasis-host>/nomad-oasis;
+location / {
+    client_max_body_size 35g;
+    proxy_set_header Host $host;
+    proxy_pass_request_headers on;
+    proxy_buffering off;
+    proxy_request_buffering off;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_pass http://<your-oasis-host>;
+}
 ```
 
 ## Starting and stopping NOMAD services
 
-If you prepared the above files, simply use the usual `docker compose` commands to start everything.
+Run these commands from your distribution directory after completing the template's
+quick-start setup, including secret generation.
 
 To make sure you have the latest docker images for everything, run this first:
 
@@ -113,18 +112,22 @@ To make sure you have the latest docker images for everything, run this first:
 docker compose pull
 ```
 
-In the beginning and to simplify debugging, it is recommended to start the services separately:
-
-```sh
-docker compose up -d mongo elastic rabbitmq
-docker compose up app worker gui
-```
-
-The `-d` option runs container in the background as *daemons*. Later you can run all at once:
+Start the complete stack so Compose can start dependencies and run Temporal's
+initialization jobs in the correct order:
 
 ```sh
 docker compose up -d
 ```
+
+The `-d` option runs containers in the background. Inspect startup and logs with:
+
+```sh
+docker compose ps -a
+docker compose logs -f app worker temporal proxy north
+```
+
+The `temporal-setup-db` and `temporal-create-namespace` jobs should finish successfully;
+they are not long-running services.
 
 Running all services also contains NORTH. When you use a tool in NORTH for the first time,
 your docker needs to pull the image that contains this tool. Be aware that this might take longer
@@ -137,16 +140,16 @@ docker stop nomad_oasis_app
 docker rm nomad_oasis_app
 ```
 
-You can wait for the start-up with `curl` using the apps `alive` endpoint:
+Check the app through the proxy using its `alive` endpoint:
 
 ```sh
-curl http://<your host>/nomad-oasis/alive
+curl http://<your-host>/backend/alive
 ```
 
 If everything works, the GUI should be available under:
 
 ```none
-http://<your host>/nomad-oasis/gui/
+http://<your-host>/
 ```
 
 If you run into problems, use the dev-tools of your browser to check the javascript logs
@@ -155,8 +158,8 @@ or monitor the network traffic for HTTP 500/400/404/401 responses.
 To see if at least the api works, check
 
 ```none
-http://<your host>/nomad-oasis/alive
-http://<your host>/nomad-oasis/api/info
+http://<your-host>/backend/alive
+http://<your-host>/backend/api/v1/info
 ```
 
 To see logs or "go into" a running container, you can access the individual containers
@@ -170,18 +173,21 @@ docker logs nomad_oasis_app
 docker exec -ti nomad_oasis_app /bin/bash
 ```
 
-If you want to report problems with your Oasis. Please provide the logs for
+When reporting problems, provide relevant service logs, for example:
 
-- nomad_oasis_app
-- nomad_oasis_worker
-- nomad_oasis_gui
+```sh
+docker compose logs app worker temporal proxy north
+```
+
+Use Compose service names rather than fixed container names, since workers can have
+multiple replicas.
 
 ## Plugins
 
 [Plugins](../plugins/plugins.md) allow the customization of a NOMAD deployment in terms of
 which search apps, normalizers, parsers and schema packages are available. In order for these
 customization to be activated, they have to be configured and installed into an Oasis.
-The basic template comes with a core set of plugins. If you want to configure
+The basic template does not include plugins by default. If you want to configure
 your own set of plugins, using the template and creating your own distro project
 is mandatory.
 
@@ -540,79 +546,67 @@ identity providers exist.
 This tutorial assumes that you have some understanding of what keycloak is and
 how it works.
 
-The NOMAD Oasis installation with your own keyloak is very similar to the regular docker-compose
-installation above. There are just a three changes.
+Start with the current distribution template, not a separate full Compose example.
+You can connect an existing Keycloak deployment or add a service to your distribution.
+For hosting Keycloak, follow the
+[Keycloak server guides](https://www.keycloak.org/guides#server){:target="_blank" rel="noopener"}
+for your chosen version, including production database, hostname, TLS, and proxy settings.
 
-- The `docker-compose.yaml` has an added keycloak service.
-- The `nginx.conf` is also modified to add another location for keycloak.
-- The `nomad.yaml` has modifications to tell Oasis to use your and not the official NOMAD keycloak.
+#### Configure a realm and client
 
-You can start with the regular installation above and manually adopt the config or
-download the already updated configuration files: [nomad-oasis-with-keycloak.zip](./data/nomad-oasis-with-keycloak.zip).
-The download also contains an additional `configs/nomad-realm.json` that allows you
-to create an initial keycloak realm that is configured for NOMAD automatically.
+- Create a realm for your Oasis and a client matching `keycloak.client_id`
+  (`nomad_public` by default).
+- Configure the client's valid redirect URIs and web origins for your Oasis URL.
+  Enable the authentication flows required by your users and API clients.
+- Create a user for NOMAD's realm-management operations with the `view-users` role
+  from `realm-management`, so NOMAD can retrieve users for sharing data.
+- Use unique credentials and require HTTPS in production.
 
-First, the `docker-compose.yaml`:
+#### Configure NOMAD
 
-```yaml
---8<-- "docs/howto/oasis/data/docker-compose/nomad-oasis-with-keycloak/docker-compose.yaml"
-```
-
-A few notes:
-
-- You have to change the `KEYCLOAK_FRONTEND_URL` variable to match your host and set a path prefix.
-- The environment variables on the keycloak service allow to use keycloak behind the nginx proxy with a path prefix, e.g. `keycloak`.
-- By default, keycloak will use a simple H2 file database stored in the given volume. Keycloak offers many other options to connect SQL databases.
-- We will use keycloak with our nginx proxy here, but you can also host-bind the port `8080` to access keycloak directly.
-- We mount and use the downloaded `configs/nomad-realm.json` to configure a NOMAD compatible realm on the first startup of keycloak.
-
-Second, we add a keycloak location to the nginx config:
-
-```nginx
---8<-- "docs/howto/oasis/data/docker-compose/nomad-oasis-with-keycloak/configs/nginx.conf"
-```
-
-A few notes:
-
-- Again, we are using `keycloak` as a path prefix. We configure the headers to allow
-  keycloak to pick up the rewritten url.
-
-Third, we modify the keycloak configuration in the `nomad.yaml`:
+Merge the following into `configs/nomad.yaml`, replacing the example values:
 
 ```yaml
---8<-- "docs/howto/oasis/data/docker-compose/nomad-oasis-with-keycloak/configs/nomad.yaml"
+oasis:
+  uses_central_user_management: false
+
+keycloak:
+  server_url: https://auth.example.org
+  public_server_url: https://auth.example.org
+  realm_name: oasis
+  client_id: nomad_public
+  username: nomad-service-user
 ```
 
-You should change the following:
+`server_url` must be reachable from the NOMAD containers. `public_server_url` must
+be reachable from users' browsers. Include any path prefix your Keycloak server
+actually uses; modern Keycloak deployments do not use `/auth` by default.
 
-- There are two urls to configure for keycloak. The `server_url` is used by the NOMAD
-  services to directly communicate with keycloak within the docker network. The `public_server_url`
-  is used by the UI to perform the authentication flow. You need to replace `localhost`
-  in `public_server_url` with `<yourhost>`.
+Supply the realm-management user's password through `NOMAD_KEYCLOAK_PASSWORD` in
+`.env` rather than committing it to your repository. Ensure this environment file
+is passed to the app and worker services. Set `NOMAD_KEYCLOAK_CLIENT_SECRET` as well
+if your client requires a secret. Rebuild the image or enable the local
+`nomad.yaml` mount as described above, then recreate affected services.
 
-A few notes:
+#### Configure NORTH
 
-- The particular `admin_user_id` is the Oasis admin user in the provided example realm
-  configuration. See below.
+The separate NORTH service has its own OAuth configuration. Update `.env.north`
+to use your Keycloak deployment:
 
-If you open `http://<yourhost>/keycloak/auth` in a browser, you can access the admin
-console. The default user and password are `admin` and `password`.
+```sh
+KEYCLOAK_URL="https://auth.example.org"
+KEYCLOAK_REALM="oasis"
+OAUTH_CLIENT_ID="nomad_public"
+```
 
-Keycloak uses `realms` to manage users and clients. A default NOMAD compatible realm
-is imported by default. The realm comes with a test user and password `test` and `password`.
+Set `OAUTH_CLIENT_SECRET` if required by the client. Keep the `north` service's
+`OAUTH_CALLBACK_URL` aligned with your public Oasis URL, for example
+`https://oasis.example.org/backend/north/hub/oauth_callback`, and allow that exact
+callback in Keycloak. Both NORTH and users' browsers must be able to reach Keycloak.
 
-A few notes on the realm configuration:
-
-- Realm and client settings are almost all default keycloak settings.
-- You should change the password of the admin user in the NOMAD realm.
-- The admin user in the NOMAD realm has the additional `view-users` client role for `realm-management`
-  assigned. This is important, because NOMAD will use this user to retrieve the list of possible
-  users for managing co-authors and reviewers on NOMAD uploads.
-- The realm has one client `nomad_public`. This has a basic configuration. You might
-  want to adapt this to your own policies. In particular you can alter the valid redirect URIs to
-  your own host.
-- We disabled the https requirement on the default realm for simplicity. You should change
-  this for a production system.
+If you proxy Keycloak through the Oasis nginx service, add the required location to
+your template-based proxy configuration and configure Keycloak's hostname and proxy
+headers accordingly. An independently hosted Keycloak does not require such a location.
 
 ## Further steps
 

@@ -29,16 +29,15 @@ An example file `~/.docker/config.json` could look like this.
 
 Since not all used services respect proxy variables, one also has to change the docker compose config file `docker-compose.yaml` for elastic search to:
 
-```yaml hl_lines="7 8"
+```yaml hl_lines="7"
 elastic:
   restart: unless-stopped
-  image: elasticsearch:7.17.24
-  container_name: nomad_oasis_elastic
+  image: docker.elastic.co/elasticsearch/elasticsearch:9.5.0
+  container_name: nomad_oasis_elastic_9
   environment:
-    - ES_JAVA_OPTS=-Xms512m -Xmx512m
-    - ES_JAVA_OPTS=-Djava.net.useSystemProxies=true
-    - ES_JAVA_OPTS=-Dhttps.proxyHost=<proxy> -Dhttps.proxyPort=port -Dhttps.nonProxyHosts=localhost|127.0.0.1|elastic
+    - ES_JAVA_OPTS=-Xms512m -Xmx512m -Djava.net.useSystemProxies=true -Dhttps.proxyHost=<proxy> -Dhttps.proxyPort=<port> -Dhttp.nonProxyHosts=localhost|127.0.0.1|elastic
     - discovery.type=single-node
+    - xpack.security.enabled=false
   volumes:
     - elastic:/usr/share/elasticsearch/data
   healthcheck:
