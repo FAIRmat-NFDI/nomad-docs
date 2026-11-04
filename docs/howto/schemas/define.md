@@ -189,6 +189,69 @@ means, can convert it, and can display it in whatever unit the reader prefers.
 Units are parsed by [Pint](https://pint.readthedocs.io/en/stable/){:target="_blank" rel="noopener"},
 so both names and expressions work: `m`, `meter`, `mm`, `m/s`, `m/s**2`. See {{ nav_link("howto/plugins/tools/units.md", breadcrumb=True) }}.
 
+### Set a default value
+
+A quantity can declare the value it has while nothing else is set.
+
+=== "Python"
+
+    ```python
+    class Sample(EntryData):
+        status = Quantity(
+            type=MEnum('planned', 'in progress', 'done'),
+            default='planned',
+        )
+    ```
+
+=== "YAML"
+
+    ```yaml
+    Sample:
+      quantities:
+        status:
+          type:
+            type_kind: Enum
+            type_data: [planned, in progress, done]
+          default: planned
+    ```
+
+A default is assumed, not stored:
+
+- Reading `sample.status` in Python gives `'planned'` as long as no other value is set, but
+  `sample.m_is_set(Sample.status)` is `False`.
+- The value is not written to the archive. It is therefore not searchable, and the API does not
+  return it.
+- The GUI shows the default in place of a missing value and marks it as a default. It is stored only
+  if a user changes it.
+- Changing the default in the schema changes the value of every existing entry that does not set the
+  quantity itself.
+
+This is different from the `default` of the ELN annotation, which only pre-fills the field of the
+ELN form:
+
+```python
+from nomad.datamodel.metainfo.annotations import ELNAnnotation
+
+status = Quantity(
+    type=MEnum('planned', 'in progress', 'done'),
+    a_eln=ELNAnnotation(component='EnumEditQuantity', default='planned'),
+)
+```
+
+The pre-filled value is stored with the entry when it is created or saved in the GUI, even if the user
+did not change it. Entries created any other way, for example from uploaded files, through the API, or
+in Python, do not get it.
+
+If every entry should store the value, so that it can be searched or does not change with the schema,
+set it in a [normalize function](#add-normalize-functions). This works for entries created in any way:
+
+```python
+def normalize(self, archive, logger):
+    super().normalize(archive, logger)
+    if not self.m_is_set(Sample.status):
+        self.status = Sample.status.default
+```
+
 ## Add subsections
 
 A *subsection* nests one section inside another, building a containment hierarchy. Use it when the
@@ -625,7 +688,7 @@ With the schema defined, you create instances of it and fill them in.
 
 ## Add normalize functions
 
-A *normalize function* runs every time an entry is processed, which happens whenever a file is uploaded or changed. Use it to derive values, fill in defaults, or copy data into a more interoperable part of the archive.
+A *normalize function* runs every time an entry is processed, which happens whenever a file is uploaded or changed. Use it to derive values, fill in defaults (see [Set a default value](#set-a-default-value)), or copy data into a more interoperable part of the archive.
 
 !!! note "Python only"
     Normalize functions are the one capability YAML schemas do not have, because they are code rather
