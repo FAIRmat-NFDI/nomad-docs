@@ -442,8 +442,7 @@ To include entries from more projects, add each of them under **Add a project** 
 
 To publish the new project, follow the publishing steps above. You can then assign it a single DOI for all of its entries, as described in the next section.
 
-<!-- TODO: Link to the section "Include entries from other projects" (#include-entries-from-other-projects) once PR #414 is merged. -->
-For more details, see [How-to guides > ... > Create and publish projects](../howto/manage/gui/upload.md).
+For more details, see [How-to guides > ... > Include entries from other projects](../howto/manage/gui/upload.md#include-entries-from-other-projects).
 
 ## Assign a DOI to your project
 
