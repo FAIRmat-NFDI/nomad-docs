@@ -1,5 +1,5 @@
 definitions:
-  name: Processing of polymers thin-films
+  name: Processing of polymer thin-films
   sections:
     Experiment_Information:
       base_sections:

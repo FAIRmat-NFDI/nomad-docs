@@ -21,7 +21,7 @@
       
       
       <link rel="icon" href="../assets/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
     
     
       
@@ -29,10 +29,10 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.57a0d79d.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.fb2fffe2.min.css">
       
       
 
@@ -703,7 +703,7 @@
   <span class="md-ellipsis">
     
   
-    Parse tabular measurement data
+    Parse tabular data
   
 
     
@@ -3757,6 +3757,62 @@
   
   
     <li class="md-nav__item">
+      <a href="../reference/api.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    REST API
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/archive_query.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ArchiveQuery client
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../reference/metainfo.html" class="md-nav__link">
         
   
@@ -3821,6 +3877,34 @@
     
   
     Annotations
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/json_transformer.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    JSON transformer
   
 
     
@@ -4422,11 +4506,12 @@ includes the matching step, creates new entries, and triggers the processing of
 new or affected entries. An upload is considered processing as long as any of its entries
 is still processing (or scheduled to be processed).</p>
 <h3 id="entries">Entries<a class="headerlink" href="#entries" title="Permanent link">¶</a></h3>
-<p>In most scenarios, entry processing is not triggered individually, but as part of upload
-processing. Many entries in one upload might be processed at the same time. Some order
-can be enforced through <em>processing levels</em>. Levels are part of the parser metadata and
-entries paired to parsers with a higher level are processed after entries with a
-parser of lower level. See also <a href="../howto/plugins/types/parsers.html">how to write parsers</a>.</p>
+<p>In most scenarios, entry processing is not triggered individually, but as part of an upload
+processing. Many entries of one upload might be processed at the same time. Some order
+can be enforced through the <em>execution order</em> of parsers. The execution order is part of the
+parser entry point and entries paired to parsers with a higher execution order are processed
+after entries with a parser of lower execution order. See also
+<a href="../howto/plugins/types/parsers.html#control-parser-execution-order">how to control parser execution order</a>.</p>
 <h2 id="customize-processing">Customize processing<a class="headerlink" href="#customize-processing" title="Permanent link">¶</a></h2>
 <p>NOMAD provides just the framework for processing. The actual work depends on plugins, parsers
 and schemas for specific file types. While NOMAD comes with a build-in set of plugins, you can build your own plugins to support new file types, ELNs, and workflows.</p>
@@ -4714,10 +4799,10 @@ an HDF5 file (data).</p>
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.path", "navigation.footer", "navigation.top", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.path", "navigation.footer", "navigation.top", "content.code.copy", "content.code.annotate", "content.tabs.link"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../assets/javascripts/bundle.c21346df.min.js"></script>
       
         <script src="../create-image-sliders.js"></script>
       
