@@ -4191,7 +4191,7 @@ graph LR
 <a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="n">myparser</span> <span class="o">=</span> <span class="n">MyParserEntryPoint</span><span class="p">(</span>
 <a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    <span class="n">name</span><span class="o">=</span><span class="s1">'MyParser'</span><span class="p">,</span>
 <a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    <span class="n">description</span><span class="o">=</span><span class="s1">'My custom parser.'</span><span class="p">,</span>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>    <span class="n">mainfile_name_re</span><span class="o">=</span><span class="s1">'.*\.myparser'</span><span class="p">,</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>    <span class="n">mainfile_name_re</span><span class="o">=</span><span class="sa">r</span><span class="s1">'.*\.myparser'</span><span class="p">,</span>
 <a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="p">)</span>
 </code></pre></div>
 <div class="admonition warning">
@@ -4219,7 +4219,7 @@ exclude them from serialization:</p>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>        <span class="kn">from</span><span class="w"> </span><span class="nn">nomad_example.parsers.myparser</span><span class="w"> </span><span class="kn">import</span> <span class="n">MyParser</span>
 <a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>        <span class="k">return</span> <span class="n">MyParser</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">dict</span><span class="p">())</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>        <span class="k">return</span> <span class="n">MyParser</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">model_dump</span><span class="p">())</span>
 </code></pre></div>
 <p>Often when loading the resource, you will need access to the final entry point configuration defined in <code>nomad.yaml</code>, including any overrides. For details on how to retrieve plugin configuration at runtime using <code>get_plugin_entry_point()</code>, see <a href="../howto/plugins/plugins.html#accessing-plugin-configuration-at-runtime">Accessing plugin configuration at runtime</a>.</p>
 <h2 id="entry-point-discovery">Entry point discovery<a class="headerlink" href="#entry-point-discovery" title="Permanent link">¶</a></h2>
