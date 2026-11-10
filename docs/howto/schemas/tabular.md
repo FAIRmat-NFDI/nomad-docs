@@ -57,7 +57,7 @@ MySection:
 
 `EntryData` is usually also necessary as we will create entries from the section we are defining.<br />
 `TableData` provides a customizable checkbox quantity, called `fill_archive_from_datafile`, to turn the tabular parser `on` or `off`.<br />
-To avoid the parser running everytime a change is made to the archive data, it is sufficient to uncheck the checkbox. It is customizable in the sense that if you do not wish to see this checkbox at all, you can configure the `hide` parameter of the section's `m_annotations` to hide the checkbox. This in turn sets the parser to run everytime you save your archive. To hide it, add the following lines:
+To avoid the parser running every time a change is made to the archive data, it is sufficient to uncheck the checkbox. It is customizable in the sense that if you do not wish to see this checkbox at all, you can configure the `hide` parameter of the section's `m_annotations` to hide the checkbox. This in turn sets the parser to run every time you save your archive. To hide it, add the following lines:
 
 ```yaml
 MySection:
@@ -108,7 +108,7 @@ The parsing mode presented here only differs from the previous for the `sections
 !!! important
     - `data_file` quantity, i.e. the tabular data file name, is located in the same entry of the parsed quantities.
     - double check that `mapping_options > sections` contains the right path. It should point to the (sub)section where the quantities are decorated with `tabular` annotation, i. e., the one to be filled with tabular data.
-    - the section to be parsed can be arbitrarily nested, given that the path provided in `sections` reachs it (e. g. `my_sub_sec/my_sub_sub_sec`).
+    - the section to be parsed can be arbitrarily nested, given that the path provided in `sections` reaches it (e. g. `my_sub_sec/my_sub_sub_sec`).
     - quantities parsed in `column` mode must have the `shape: ['*']` attribute, that means they are arrays and not scalars.
 
 ```yaml
@@ -147,7 +147,7 @@ This structure foresees a parent entry where we collect one or more tabular data
 !!! important
     - `data_file` quantity, i.e. the tabular data file name, is located in the parent entry, the data is parsed in the child entry.
     - double check that `mapping_options > sections` contains the right path. It should point to the (sub)section where the quantities are decorated with `tabular` annotation, i. e., the one to be filled with tabular data.
-    - the section to be parsed can be arbitrarily nested, given that the path provided in `sections` reachs it (e. g. `my_sub_sec/my_sub_sub_sec`)
+    - the section to be parsed can be arbitrarily nested, given that the path provided in `sections` reaches it (e. g. `my_sub_sec/my_sub_sub_sec`)
     - quantities parsed in `column` mode must have the `shape: ['*']` attribute, that means they are arrays and not scalars.
     - inherit also the subsection from `EntryData` as it must be a NOMAD entry archive file.
 
@@ -166,7 +166,7 @@ Example analogous to the previous, where the new created entry contains now a re
 !!! important
     - `data_file` quantity, i.e. the tabular data file name, is located in the parent entry, the data is parsed in the child entry.
     - double check that `mapping_options > sections` contains the right path. It should point to the (sub)section where the quantities are decorated with `tabular` annotation, i. e., the one to be filled with tabular data.
-    - the section to be parsed can be arbitrarily nested, given that the path provided in `sections` reachs it (e. g. `my_sub_sec/my_sub_sub_sec`)
+    - the section to be parsed can be arbitrarily nested, given that the path provided in `sections` reaches it (e. g. `my_sub_sec/my_sub_sub_sec`)
     - quantities parsed in `row` mode are scalars.
     - inherit also the subsection from `EntryData` as it must be a NOMAD entry archive file.
     - make use of `repeats: true` in the subsection within the parent section `MySection`.
@@ -208,7 +208,7 @@ As anticipated in the previous example, `row` mode in connection to `multiple_ne
 !!!important
     - `data_file` quantity, i.e. the tabular data file name, is located in the same entry, the data is parsed in the children entries.
     - double check that `mapping_options > sections` contains the right path. It should point to the (sub)section where the quantities are decorated with `tabular` annotation, i. e., the one to be filled with tabular data.
-    - the section to be parsed can be arbitrarily nested, given that the path provided in `sections` reachs it (e. g. `my_sub_sec/my_sub_sub_sec`)
+    - the section to be parsed can be arbitrarily nested, given that the path provided in `sections` reaches it (e. g. `my_sub_sec/my_sub_sub_sec`)
     - quantities parsed in `row` mode are scalars.
     - inherit also the subsection from `EntryData` as it must be a standalone NOMAD archive file.
     - make use of `repeats: true` in the subsection within the parent section `MySection`.

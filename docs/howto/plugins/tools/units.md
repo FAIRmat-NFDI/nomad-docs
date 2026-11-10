@@ -86,7 +86,7 @@ print(my_section.my_energies)  # [272.11386245988473 272.11386245988473] electro
 
 ## Defining units for displaying data
 
-When data is being displayed by the GUI, the unit can be choosen independently
+When data is being displayed by the GUI, the unit can be chosen independently
 from the unit used in storing the data. There are several reasons for doing
 this:
 
