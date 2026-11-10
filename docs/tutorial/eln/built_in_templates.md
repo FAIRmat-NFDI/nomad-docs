@@ -84,14 +84,14 @@ Create an entry for the **P3HT powder**. Follow the steps in [Create ELN entries
 
 NOMAD creates and opens the entry. You can then fill in its fields and click **SAVE** to save your changes.
 
-NOMAD automatically fills in the **substance name** (from the filename), the **Datetime**, and the **substance ID**. You can edit these values if needed. Complete the substance entry as follows:
+NOMAD automatically fills in the **Substance name** (from the filename), the **Datetime**, and the **Substance ID**. You can edit these values if needed. Complete the substance entry as follows:
 
-1. Enter `Regioregular poly(3-hexylthiophene-2,5-diyl) powder for preparing P3HT solutions.` in the **detailed substance description** field. Optionally, add an image of the substance or its chemical structure to this field.
+1. Enter `Regioregular poly(3-hexylthiophene-2,5-diyl) powder for preparing P3HT solutions.` in the **Detailed substance description** field. Optionally, add an image of the substance or its chemical structure to this field.
 2. Click the **(+)** button next to the **Tags** field and enter `polymer`. Tags improve the searchability of your entries.
 3. Click the **(+)** button next to **Pure substance** under **Subsections**.
 4. Click **CHANGE SCHEMA** and select **PubChem Pure Substance Section**.
 5. Click the check mark (✓) next to **CHANGE SCHEMA** to confirm your selection.
-6. Enter `P3HT` in the **substance name** field.
+6. Enter `P3HT` in the **Substance name** field.
 7. Click **SAVE**.
 
 NOMAD searches PubChem for the substance name and fills in the other fields, e.g., **Iupac name**, **Molecular formula**, **Molar mass**, and **Cas number**. For `P3HT`, PubChem provides the data of its monomer, 3-hexylthiophene.
@@ -104,7 +104,7 @@ NOMAD searches PubChem for the substance name and fills in the other fields, e.g
     - Chloroform: `Chloroform`
     - Glass substrate: `Glass_substrate`
 
-    Include as many details as you like, e.g., a **detailed substance description** and **Tags**. For chloroform, add a **Pure substance** subsection with the *PubChem Pure Substance Section*, and enter `chloroform` as its **substance name**.
+    Include as many details as you like, e.g., a **Detailed substance description** and **Tags**. For chloroform, add a **Pure substance** subsection with the *PubChem Pure Substance Section*, and enter `chloroform` as its **Substance name**.
 
 ---
 
@@ -122,7 +122,7 @@ Fill in the fields of the sample entry in the same way as for the substance entr
 6. Click `P3HT_powder.archive.json`, and then click **Substance ELN (./data)** below it.
 7. Click **SAVE**.
 
-The **System** field now references the `P3HT_powder` entry, and NOMAD fills in the **component label** with the substance name.
+The **System** field now references the `P3HT_powder` entry, and NOMAD fills in the **Component label** with the substance name.
 
 You can reference other entries in the same way wherever an ELN field refers to another entry, e.g., to instruments, samples, or input substances.
 
@@ -138,7 +138,7 @@ You can reference other entries in the same way wherever an ELN field refers to 
 
 Create an entry for the **balance** that is used to weigh the polymer powder. Follow the steps in [Create ELN entries](#create-eln-entries): select **Instrument ELN** as the built-in schema and enter `Balance` as the **Filename**.
 
-As for the substance entry, NOMAD has already filled in the **name**, the **Datetime**, and the **ID**. Fill in further fields, e.g., **Description** and **Tags**, and click **SAVE**.
+As for the substance entry, NOMAD has already filled in the **Name**, the **Datetime**, and the **ID**. Fill in further fields, e.g., **Description** and **Tags**, and click **SAVE**.
 
 ??? task "Create an ELN entry for an instrument"
     Create an ELN entry with the *Instrument ELN* schema for each of the following instruments. Use the given filenames:
@@ -154,11 +154,11 @@ As for the substance entry, NOMAD has already filled in the **name**, the **Date
 
 Create an entry for the **preparation of the P3HT solution** process. Follow the steps in [Create ELN entries](#create-eln-entries): select **Material Processing ELN** as the built-in schema and enter `Preparation_of_P3HT_solution` as the **Filename**.
 
-Enter the process start time in **starting Time** and complete additional fields, such as **Location**, **Description**, and **Tags**. Then reference the `Balance` entry as the instrument used to weigh the powder:
+Enter the process start time in **Starting time** and complete additional fields, such as **Location**, **Description**, and **Tags**. Then reference the `Balance` entry as the instrument used to weigh the powder:
 
 1. Click the **(+)** button next to **Instruments** under **Subsections**.
 2. Keep **InstrumentReference** and click the check mark (✓) next to **CHANGE SCHEMA** to confirm it.
-3. Reference the `Balance` entry in the **instrument reference** field, in the same way as you referenced the P3HT powder in the sample entry.
+3. Reference the `Balance` entry in the **Instrument reference** field, in the same way as you referenced the P3HT powder in the sample entry.
 4. Click **SAVE**, and then click **data** in the path at the top to return to the process.
 
 ??? task "Reference a sample to your process ELN"
@@ -179,12 +179,12 @@ Add the following steps to the **Preparation of P3HT solution** process:
 To add the steps:
 
 1. Click the **(+)** button next to **Steps** under **Subsections**.
-2. Enter `Weighing the powder` in the **step name** field.
+2. Enter `Weighing the powder` in the **Step name** field.
 3. Enter `minute` in the unit field next to **Duration**, select it from the list, and enter `5` as the duration.
 4. Click **SAVE**.
 5. Click **data** in the path at the top to return to the process, and add the other two steps in the same way: `Filling the solvent` with a duration of `2` minutes and `Mixing the solution` with a duration of `30` minutes.
 
-You can also fill in the **starting time** and a **Comment** for each step. If you enter a **Duration** for every step, NOMAD calculates the **starting time** of each step from the process **starting Time** and fills in the process **ending time**.
+You can also fill in the **Starting time** and a **Comment** for each step. If you enter a **Duration** for every step, NOMAD calculates the **Starting time** of each step from the process **Starting time** and fills in the process **Ending time**.
 
 NOMAD uses the steps to create a workflow graph. To view it, click the **OVERVIEW** tab of the entry and scroll down to the **Workflow** card. The process steps appear as tasks, and entries referenced under **Samples**, such as `P3HT_solution_in_CF`, appear as outputs.
 
@@ -196,13 +196,13 @@ NOMAD uses the steps to create a workflow graph. To view it, click the **OVERVIE
 
 Create an entry for the **optical absorption measurement**. Follow the steps in [Create ELN entries](#create-eln-entries): select **Measurement ELN** as the built-in schema and enter `Optical_absorption_measurement` as the **Filename**.
 
-Complete the measurement fields, such as **starting Time**, **Location**, **Description**, and **Tags**. Then add the instrument and measurement result:
+Complete the measurement fields, such as **Starting time**, **Location**, **Description**, and **Tags**. Then add the instrument and measurement result:
 
 1. Click the **(+)** button next to **Instruments** under **Subsections**.
 2. Keep **InstrumentReference** and click the check mark (✓) next to **CHANGE SCHEMA**.
-3. Reference the `Optical_spectrometer` entry from the instrument task in the **instrument reference** field, in the same way as you referenced entries before, and click **SAVE**.
+3. Reference the `Optical_spectrometer` entry from the instrument task in the **Instrument reference** field, in the same way as you referenced entries before, and click **SAVE**.
 4. Click **data** in the path at the top, and then click the **(+)** button next to **Results**.
-5. Enter `Absorption spectrum` in the **name** field and `Absorption maximum at 552 nm.` in the **Result** field. You can also add images to the **Result** field.
+5. Enter `Absorption spectrum` in the **Name** field and `Absorption maximum at 552 nm.` in the **Result** field. You can also add images to the **Result** field.
 6. Click **SAVE**.
 
 ---
@@ -222,7 +222,7 @@ Add `Preparation_of_P3HT_solution` and `Optical_absorption_measurement` as steps
 3. Click **SAVE**.
 4. Click **data** in the path at the top, and add a second step for `Optical_absorption_measurement` in the same way.
 
-NOMAD fills in the **step name**, the **starting time**, and the **activity ID** of each step from the referenced entry.
+NOMAD fills in the **Step name**, the **Starting time**, and the **Activity ID** of each step from the referenced entry.
 
 ---
 
