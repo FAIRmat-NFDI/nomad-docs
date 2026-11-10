@@ -34,7 +34,7 @@ class MyNormalizerEntryPoint(NormalizerEntryPoint):
     def load(self):
         from nomad_example.normalizers.mynormalizer import MyNormalizer
 
-        return MyNormalizer(**self.dict())
+        return MyNormalizer(**self.model_dump())
 
 
 mynormalizer = MyNormalizerEntryPoint(

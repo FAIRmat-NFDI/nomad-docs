@@ -35,7 +35,7 @@ class MyParserEntryPoint(ParserEntryPoint):
     def load(self):
         from nomad_example.parsers.myparser import MyParser
 
-        return MyParser(**self.dict())
+        return MyParser(**self.model_dump())
 
 
 myparser = MyParserEntryPoint(
@@ -90,7 +90,7 @@ Note here that if using `MatchingParser`, the process of identifying which files
     def load(self):
         from nomad_example.parsers.myparser import MyParser
 
-        return MyParser(**self.dict())
+        return MyParser(**self.model_dump())
 ```
 
 There we are passing all of the entry configuration options to the parser instance, including things like `mainfile_name_re` and `mainfile_contents_re`. The `MatchingParser` constructor uses these parameters to set up the file matching appropriately. If you wish to take full control of the file matching process, you can use the `nomad.parsing.Parser` class and override the `is_mainfile` function.
