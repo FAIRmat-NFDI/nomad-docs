@@ -108,6 +108,7 @@ nav:
       - Annotations: reference/annotations.md
       - JSON transformer: reference/json_transformer.md
       - Base sections: reference/basesections.md
+      - Built-in ELN schemas: reference/built_in_eln_schemas.md
       - CLI: reference/cli.md
       - Plugins: reference/plugins.md
       - Code guidelines: reference/code_guidelines.md

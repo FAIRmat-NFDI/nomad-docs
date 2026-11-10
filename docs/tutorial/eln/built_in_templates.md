@@ -78,6 +78,8 @@ NOMAD creates the entry and opens it. You can then fill in its fields.
 
 The following sections refer to these steps and tell you which built-in schema and filename to use for each entry.
 
+**Related pages:** {{ nav_link("reference/built_in_eln_schemas.md", breadcrumb=True) }}.
+
 ### Create a substance entry
 
 Create an entry for the **P3HT powder**. Follow the steps in [Create ELN entries](#create-eln-entries): select **Substance ELN** as the built-in schema and enter `P3HT_powder` as the **Filename**.

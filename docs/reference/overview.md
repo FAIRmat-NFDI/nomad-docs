@@ -16,6 +16,7 @@ Reference pages provide authoritative technical details. Use them when you need 
     "reference/annotations.md": "metainfo annotations and their arguments.",
     "reference/json_transformer.md": "fields of JSON transformation rules and arguments of the `Transformer`.",
     "reference/basesections.md": "generated reference for NOMAD base sections.",
+    "reference/built_in_eln_schemas.md": "fields and subsections of the built-in ELN schemas in the GUI.",
     "reference/cli.md": "command-line interface reference.",
     "reference/plugins.md": "plugin reference material.",
     "reference/code_guidelines.md": "coding conventions used in NOMAD.",
