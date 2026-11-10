@@ -72,7 +72,7 @@ uv run mkdocs serve
 
 This will install all requirements in a virtual environment and start the local development server.
 
-> 💡 **Tip:** To compare your local docs with the latest version once you start making significant changes, use the [DEV Deployment DOCS](https://nomad-lab.eu/prod/v1/develop/docs/index.html).
+> 💡 **Tip:** To compare your local docs with the latest version once you start making significant changes, use the [DEV Deployment DOCS](https://docs.nomad-lab.eu/develop/).
 
 ### How to run the tests
 

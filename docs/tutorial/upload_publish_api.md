@@ -579,7 +579,7 @@ If you wish, you can collaborate on this project by sharing it with selected NOM
 
 Let’s start by searching for the user you want to share your project with. Replace `SearchSurname` in the snippet below with the name of that NOMAD user.
 
-``` python
+```python
 from nomad_utility_workflows.utils.users import search_users_by_name
 
 candidates = search_users_by_name('SearchSurname', url='test')
