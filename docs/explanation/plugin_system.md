@@ -141,7 +141,7 @@ class MyParserEntryPoint(ParserEntryPoint):
     def load(self):
         from nomad_example.parsers.myparser import MyParser
 
-        return MyParser(**self.dict())
+        return MyParser(**self.model_dump())
 ```
 
 Often when loading the resource, you will need access to the final entry point configuration defined in `nomad.yaml`, including any overrides. For details on how to retrieve plugin configuration at runtime using `get_plugin_entry_point()`, see [Accessing plugin configuration at runtime](../howto/plugins/plugins.md#accessing-plugin-configuration-at-runtime).

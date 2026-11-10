@@ -59,7 +59,7 @@ The definition fo the actual app is given as an instance of the `App` class spec
 <!-- fmt: on -->
 
 !!! tip
-    If you want to load an app definition from a YAML file, this can be easily done with the pydantic `parse_obj` function:
+    If you want to load an app definition from a YAML file, this can be easily done with the pydantic `model_validate` method:
 
     ```python
     import yaml
@@ -74,7 +74,7 @@ The definition fo the actual app is given as an instance of the `App` class spec
     myapp = AppEntryPoint(
         name='MyApp',
         description='App defined using the new plugin mechanism.',
-        app=App.parse_obj(yaml.safe_load(yaml_data)),
+        app=App.model_validate(yaml.safe_load(yaml_data)),
     )
     ```
 
@@ -191,7 +191,7 @@ A convenient way to create a layout is to arrange the widgets directly in the GU
 
 You can also edit the YAML in the dialog and click **Save** to try out changes right away. The GUI does not store any of these changes: reloading the page or clicking the reset button restores the dashboard defined in your app.
 
-The exported YAML is a list of widgets that you can load into a `Dashboard` with `parse_obj`, in the same way as in the [tip about loading apps from YAML](#creating-an-app). In this example, two widgets are placed side by side on desktops and stacked on top of each other on phones:
+The exported YAML is a list of widgets that you can load into a `Dashboard` with `model_validate`, in the same way as in the [tip about loading apps from YAML](#creating-an-app). In this example, two widgets are placed side by side on desktops and stacked on top of each other on phones:
 
 <!-- fmt: off -->
 ```python
