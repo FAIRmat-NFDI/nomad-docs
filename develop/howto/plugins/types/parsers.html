@@ -4361,7 +4361,7 @@
 <li><code>archive</code>: The <a href="../../../reference/glossary.html#archive"><code>EntryArchive</code> object</a> in which the parsing results will be stored</li>
 <li><code>logger</code>: Logger that you can use to log parsing events into</li>
 </ul>
-<p>Note here that if using <code>MatchingParser</code>, the process of identifying which files the <code>parse</code> method is run against is take care of by passing in the required parameters to the instance in the <code>load</code> mehod. In the previous section, the <code>load</code> method looked something like this:</p>
+<p>Note here that if using <code>MatchingParser</code>, the process of identifying which files the <code>parse</code> method is run against is take care of by passing in the required parameters to the instance in the <code>load</code> method. In the previous section, the <code>load</code> method looked something like this:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>        <span class="kn">from</span><span class="w"> </span><span class="nn">nomad_example.parsers.myparser</span><span class="w"> </span><span class="kn">import</span> <span class="n">MyParser</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
@@ -4493,7 +4493,7 @@ results as metainfo objects to conveniently analyze the results in Python. You c
 <a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>system 1
 <a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>--------
 <a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>sites: H(1.23, 0, 0), H(-1.23, 0, 0), O(0, 0.33, 0)
-<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>latice: (0, 0, 0), (1, 0, 0), (1, 1, 0)
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>lattice: (0, 0, 0), (1, 0, 0), (1, 1, 0)
 <a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>energy: 1.29372
 <a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>
 <a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>*** This was done with magic source                                ***
@@ -4508,7 +4508,7 @@ results as metainfo objects to conveniently analyze the results in Python. You c
 </code></pre></div>
 <p>At the top there is some general information such as date, name of the code (<code>super_code</code>)
 and its version (<code>v2</code>). Then is information for two systems (<code>system 1</code> and <code>system 2</code>),
-separated with a string containing a code-specific value <code>magic source</code>. Both system sections contain the quantities <code>sites</code> and <code>energy</code>, but each have a unique quantity as well, <code>latice</code> and <code>cell</code>, respectively.</p>
+separated with a string containing a code-specific value <code>magic source</code>. Both system sections contain the quantities <code>sites</code> and <code>energy</code>, but each have a unique quantity as well, <code>lattice</code> and <code>cell</code>, respectively.</p>
 <p>In order to convert the information from this file into the NOMAD archive, we first have to
 parse the necessary quantities. The <code>nomad-lab</code> Python package provides a <code>text_parser</code>
 module for declarative (i.e., semi-automated) parsing of text files. You can define text file parsers as follows:</p>
@@ -4528,7 +4528,7 @@ module for declarative (i.e., semi-automated) parsing of text files. You can def
 <a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a>        <span class="p">),</span>
 <a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a>        <span class="n">Quantity</span><span class="p">(</span>
 <a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a>            <span class="n">Model</span><span class="o">.</span><span class="n">lattice</span><span class="p">,</span>
-<a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a>            <span class="sa">r</span><span class="s1">'(?:latice|cell): \((\d)\, (\d), (\d)\)\,?\s*\((\d)\, (\d), (\d)\)\,?\s*\((\d)\, (\d), (\d)\)\,?\s*'</span><span class="p">,</span>
+<a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a>            <span class="sa">r</span><span class="s1">'(?:lattice|cell): \((\d)\, (\d), (\d)\)\,?\s*\((\d)\, (\d), (\d)\)\,?\s*\((\d)\, (\d), (\d)\)\,?\s*'</span><span class="p">,</span>
 <a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a>            <span class="n">repeats</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 <a id="__codelineno-15-19" name="__codelineno-15-19" href="#__codelineno-15-19"></a>        <span class="p">),</span>
 <a id="__codelineno-15-20" name="__codelineno-15-20" href="#__codelineno-15-20"></a>        <span class="n">Quantity</span><span class="p">(</span><span class="s1">'energy'</span><span class="p">,</span> <span class="sa">r</span><span class="s1">'energy: (\d\.\d+)'</span><span class="p">),</span>

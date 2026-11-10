@@ -4255,9 +4255,9 @@
 <h1 id="how-to-parse-efficiently-with-mapping-annotations">How to parse efficiently with mapping annotations<a class="headerlink" href="#how-to-parse-efficiently-with-mapping-annotations" title="Permanent link">¶</a></h1>
 <p><code>MappingParser</code> is a NOMAD parsing framework for handling tree-like data structures.
 It is extensively used for processing highly structured files, like computational output.
-This framework acts as an intermediate step in the <a href="../../../explanation/basics.html">parsing phase</a>, where reading the source file is done separtely from building up the archive (i.e. <code>data</code>).
+This framework acts as an intermediate step in the <a href="../../../explanation/basics.html">parsing phase</a>, where reading the source file is done separately from building up the archive (i.e. <code>data</code>).
 Some functionality can be inserted in the mapping, the rest is relegated to <a href="../../../explanation/basics.html#normalizing">normalization</a> functionalitites of the schema.</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/mapping_parser_concept.png" data-desc-position="bottom"><img alt="Responsiblity distribution MappingParser" src="images/mapping_parser_concept.png"></a></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/mapping_parser_concept.png" data-desc-position="bottom"><img alt="Responsibility distribution MappingParser" src="images/mapping_parser_concept.png"></a></p>
 <!-- `nomad.parsing.file_parser/mapping_parser.py` to handle the conversion to and from a
 data object and a python dictionary. We refer to an instance of the
 this class as 'mapping parser' throughout this section. In the following, the abstract

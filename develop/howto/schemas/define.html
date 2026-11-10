@@ -5037,7 +5037,7 @@ live in the same file as the schema, or in a file of its own.</p>
 than data. If you need derived values, write the schema in Python. This is the most common reason
 to move a working YAML schema into a plugin.</p>
 </div>
-<p>In order for the <code>normalize</code> function to tbe triggered, the section must inherit <code>ArchiveSection</code> (<code>EntryData</code> already does):</p>
+<p>In order for the <code>normalize</code> function to the triggered, the section must inherit <code>ArchiveSection</code> (<code>EntryData</code> already does):</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Sample</span><span class="p">(</span><span class="n">EntryData</span><span class="p">):</span>
 <a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>    <span class="n">name</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
 <a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>    <span class="n">sample_id</span> <span class="o">=</span> <span class="n">Quantity</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>

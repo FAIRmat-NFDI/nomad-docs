@@ -4574,7 +4574,7 @@ Create a <code>secrets.yaml</code> file (keep out of git):</p>
 <a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>helm<span class="w"> </span>secrets<span class="w"> </span>install<span class="w"> </span>nomad-oasis<span class="w"> </span>nomad/default<span class="w"> </span>-f<span class="w"> </span>values.yaml<span class="w"> </span>-f<span class="w"> </span>secrets://secrets.enc.yaml
 </code></pre></div>
 <h4 id="required-secrets-for-production">Required Secrets for Production<a class="headerlink" href="#required-secrets-for-production" title="Permanent link">¶</a></h4>
-<p>The following secrets are used by the NOMAD Oasis deployment. None of the followings are, by default, generated, and we recommend explicitly setting them for a production environment to ensure stability across upgrades.</p>
+<p>The following secrets are used by the NOMAD Oasis deployment. None of the following are, by default, generated, and we recommend explicitly setting them for a production environment to ensure stability across upgrades.</p>
 <ul>
 <li><strong><code>nomad.secrets.api</code></strong>: The fundamental API secret for cryptographic operations. <strong>Required.</strong> (Must be provided or <code>nomad.secrets.api.autoGenerate</code> set to <code>true</code> to avoid installation failure).</li>
 <li><strong><code>nomad.secrets.north.hubServiceApiToken</code></strong>: Required if JupyterHub (NORTH) is enabled (<code>nomad.config.north.enabled: true</code>).</li>
@@ -4843,7 +4843,7 @@ for creating an account.</p>
 <p>Create a NOMAD Oasis distribution using our template <a href="https://github.com/FAIRmat-NFDI/nomad-distro-template" rel="noopener" target="_blank"><code>nomad-distro-template</code></a>. We recommend creating a new repository by selecting <strong>Use this template</strong>, but for testing it is also possible to use the existing template repository directly.</p>
 </li>
 <li>
-<p>Follow the deployment instructions in the <code>README.md</code> file under <em>Deploying the distribution/For a new Oasis</em>. This typically consists of cloning the repository, setting up file priviledges and then running <code>docker compose pull</code> + <code>docker compose up -d</code>.</p>
+<p>Follow the deployment instructions in the <code>README.md</code> file under <em>Deploying the distribution/For a new Oasis</em>. This typically consists of cloning the repository, setting up file privileges and then running <code>docker compose pull</code> + <code>docker compose up -d</code>.</p>
 </li>
 </ul>
 </li>
@@ -4861,7 +4861,7 @@ for creating an account.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a>sudo<span class="w"> </span>groupadd<span class="w"> </span>docker
 <a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>sudo<span class="w"> </span>usermod<span class="w"> </span>-aG<span class="w"> </span>docker<span class="w"> </span><span class="nv">$USER</span>
 </code></pre></div>
-<p>Note that you may need to reboot to get the docker daemon running and the user priviledges to work.</p>
+<p>Note that you may need to reboot to get the docker daemon running and the user privileges to work.</p>
 <h2 id="secured-connections-using-https">Secured connections using HTTPS<a class="headerlink" href="#secured-connections-using-https" title="Permanent link">¶</a></h2>
 <p>Before entering production, you must set up secure connections through HTTPS. Without it any communication with the server is compromised and e.g. credentials and other sensitive data can be stolen. To set up secure connections, follow these steps (the steps focus on the single-node <code>docker-compose</code> setup):</p>
 <ol>
@@ -4883,7 +4883,7 @@ for setting up a certificate:</p>
 </li>
 <li>
 <p>Free certificate from Let's Encrypt</p>
-<p><a href="https://letsencrypt.org/" rel="noopener" target="_blank">Let's Encrypt</a> is a non-profit organization that provides free TLS certificats. To create a free certificate you must have a domain name. You can follow their tutorials on creating free certificates.</p>
+<p><a href="https://letsencrypt.org/" rel="noopener" target="_blank">Let's Encrypt</a> is a non-profit organization that provides free TLS certificates. To create a free certificate you must have a domain name. You can follow their tutorials on creating free certificates.</p>
 </li>
 </ol>
 </li>

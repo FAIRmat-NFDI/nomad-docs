@@ -3248,10 +3248,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#re-use-and-interoperability" class="md-nav__link">
+  <a href="#reuse-and-interoperability" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Re-use and interoperability
+        Reuse and interoperability
       
     </span>
   </a>
@@ -4021,10 +4021,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#re-use-and-interoperability" class="md-nav__link">
+  <a href="#reuse-and-interoperability" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Re-use and interoperability
+        Reuse and interoperability
       
     </span>
   </a>
@@ -4148,7 +4148,7 @@ flowchart LR
 </div>
 <h3 id="the-data-section">The data section<a class="headerlink" href="#the-data-section" title="Permanent link">¶</a></h3>
 <p><code>data</code> is the subsection that carries the entry's actual content. The others describe the entry around it: <code>metadata</code> identifies it, <code>results</code> summarizes it, and <code>workflow2</code> describes the logical steps on how the data was produced. For most entries, <code>data</code> is where the interesting information lives.</p>
-<p>It is also the only part of the shared entry structure that is meant to be extended. <code>EntryData</code> itself defines no quantities of its own, but NOMAD accepts any section that inherits from it as the content of <code>data</code>. Every entry has exactly one <code>data</code> section, but the definition behind it differs from entry to entry, and comes from the parser, the plugin schema, or the ELN schema that produced the entry. These definitions should re-use <a href="base_sections.html">base sections</a> as much as possible.</p>
+<p>It is also the only part of the shared entry structure that is meant to be extended. <code>EntryData</code> itself defines no quantities of its own, but NOMAD accepts any section that inherits from it as the content of <code>data</code>. Every entry has exactly one <code>data</code> section, but the definition behind it differs from entry to entry, and comes from the parser, the plugin schema, or the ELN schema that produced the entry. These definitions should reuse <a href="base_sections.html">base sections</a> as much as possible.</p>
 <p>Inheriting <code>EntryData</code> does more than place a section in the archive:</p>
 <ul>
 <li>NOMAD offers the section in the dialog for creating a new entry in the GUI.</li>
@@ -4177,9 +4177,9 @@ flowchart LR
 <li><strong>An uploaded archive file.</strong> Any user can upload a <code>.archive.yaml</code> or <code>.archive.json</code> file that fills the <code>definitions</code> section. NOMAD stores the package and makes it available within the project to which it was uploaded. No installation and no plugin development is needed, but the schema does not leave that project, and it cannot carry <code>normalize</code> functions.</li>
 </ul>
 <p>The two syntaxes describe the same thing, and there is a one-to-one translation between them. For the trade-off between them and for the mechanics of each route, see <a href="../howto/schemas/schemas.html#choose-python-or-yaml">How-to guides &gt; ... &gt; Start working with schemas</a>.</p>
-<h3 id="re-use-and-interoperability">Re-use and interoperability<a class="headerlink" href="#re-use-and-interoperability" title="Permanent link">¶</a></h3>
+<h3 id="reuse-and-interoperability">Reuse and interoperability<a class="headerlink" href="#reuse-and-interoperability" title="Permanent link">¶</a></h3>
 <p>Schemas are rarely written from scratch. A section definition can inherit from another one, and inheriting brings over not only its quantities and subsections but also the functionality attached to them.</p>
-<p>Re-use is also where interoperability comes from. A schema of your own can describe your data in all the detail you want, and that is the point of it — but detail is not the same as interoperability, and users and machines that are not familiar with the specifics will struggle to interpret it. What makes data interpretable beyond the context it was created in is that different schemas describe the same concepts with the same definitions. Because a shared definition presents a fixed interface, search, visualizations, ELN forms, and analysis code can be written once and then work for every schema that inherits it. The goal is to re-use as much as possible instead of re-inventing the same sections over and over again, and the tools built around a definition are what makes re-using it worthwhile.</p>
+<p>Reuse is also where interoperability comes from. A schema of your own can describe your data in all the detail you want, and that is the point of it — but detail is not the same as interoperability, and users and machines that are not familiar with the specifics will struggle to interpret it. What makes data interpretable beyond the context it was created in is that different schemas describe the same concepts with the same definitions. Because a shared definition presents a fixed interface, search, visualizations, ELN forms, and analysis code can be written once and then work for every schema that inherits it. The goal is to reuse as much as possible instead of re-inventing the same sections over and over again, and the tools built around a definition are what makes reusing it worthwhile.</p>
 <p>No central structure can do this work for you. NOMAD cannot anticipate what every method and every lab needs to record, so the definitions that describe your data well are ones you and your community share and maintain. Interoperability is built from the bottom up, by agreeing on definitions, rather than handed down from a common format.</p>
 <p>The <a href="workflows.html">workflow schema</a> is one example. It gives every entry a common way to describe tasks with their inputs and outputs, and because all entries use the same definitions, the UI can offer <a href="../howto/manage/gui/workflows.html">a card with workflow visualization and navigation</a> for every entry that has a workflow inside.</p>
 <p>The definitions that schemas inherit from most often are NOMAD's built-in <em>base sections</em>. They are the subject of the next page: <a href="base_sections.html">Base sections</a>.</p>

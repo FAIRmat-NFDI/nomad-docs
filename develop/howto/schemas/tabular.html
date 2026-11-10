@@ -4421,7 +4421,7 @@
 </code></pre></div>
 <p><code>EntryData</code> is usually also necessary as we will create entries from the section we are defining.<br>
 <code>TableData</code> provides a customizable checkbox quantity, called <code>fill_archive_from_datafile</code>, to turn the tabular parser <code>on</code> or <code>off</code>.<br>
-To avoid the parser running everytime a change is made to the archive data, it is sufficient to uncheck the checkbox. It is customizable in the sense that if you do not wish to see this checkbox at all, you can configure the <code>hide</code> parameter of the section's <code>m_annotations</code> to hide the checkbox. This in turn sets the parser to run everytime you save your archive. To hide it, add the following lines:</p>
+To avoid the parser running every time a change is made to the archive data, it is sufficient to uncheck the checkbox. It is customizable in the sense that if you do not wish to see this checkbox at all, you can configure the <code>hide</code> parameter of the section's <code>m_annotations</code> to hide the checkbox. This in turn sets the parser to run every time you save your archive. To hide it, add the following lines:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nt">MySection</span><span class="p">:</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="nt">base_sections</span><span class="p">:</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nomad.datamodel.data.EntryData</span>
@@ -4500,7 +4500,7 @@ losing/overwriting your manually-entered data by the parser!</p>
 <ul>
 <li><code>data_file</code> quantity, i.e. the tabular data file name, is located in the same entry of the parsed quantities.</li>
 <li>double check that <code>mapping_options &gt; sections</code> contains the right path. It should point to the (sub)section where the quantities are decorated with <code>tabular</code> annotation, i. e., the one to be filled with tabular data.</li>
-<li>the section to be parsed can be arbitrarily nested, given that the path provided in <code>sections</code> reachs it (e. g. <code>my_sub_sec/my_sub_sub_sec</code>).</li>
+<li>the section to be parsed can be arbitrarily nested, given that the path provided in <code>sections</code> reaches it (e. g. <code>my_sub_sec/my_sub_sub_sec</code>).</li>
 <li>quantities parsed in <code>column</code> mode must have the <code>shape: ['*']</code> attribute, that means they are arrays and not scalars.</li>
 </ul>
 </div>
@@ -4626,7 +4626,7 @@ This structure foresees a parent entry where we collect one or more tabular data
 <ul>
 <li><code>data_file</code> quantity, i.e. the tabular data file name, is located in the parent entry, the data is parsed in the child entry.</li>
 <li>double check that <code>mapping_options &gt; sections</code> contains the right path. It should point to the (sub)section where the quantities are decorated with <code>tabular</code> annotation, i. e., the one to be filled with tabular data.</li>
-<li>the section to be parsed can be arbitrarily nested, given that the path provided in <code>sections</code> reachs it (e. g. <code>my_sub_sec/my_sub_sub_sec</code>)</li>
+<li>the section to be parsed can be arbitrarily nested, given that the path provided in <code>sections</code> reaches it (e. g. <code>my_sub_sec/my_sub_sub_sec</code>)</li>
 <li>quantities parsed in <code>column</code> mode must have the <code>shape: ['*']</code> attribute, that means they are arrays and not scalars.</li>
 <li>inherit also the subsection from <code>EntryData</code> as it must be a NOMAD entry archive file.</li>
 </ul>
@@ -4698,7 +4698,7 @@ This structure foresees a parent entry where we collect one or more tabular data
 <ul>
 <li><code>data_file</code> quantity, i.e. the tabular data file name, is located in the parent entry, the data is parsed in the child entry.</li>
 <li>double check that <code>mapping_options &gt; sections</code> contains the right path. It should point to the (sub)section where the quantities are decorated with <code>tabular</code> annotation, i. e., the one to be filled with tabular data.</li>
-<li>the section to be parsed can be arbitrarily nested, given that the path provided in <code>sections</code> reachs it (e. g. <code>my_sub_sec/my_sub_sub_sec</code>)</li>
+<li>the section to be parsed can be arbitrarily nested, given that the path provided in <code>sections</code> reaches it (e. g. <code>my_sub_sec/my_sub_sub_sec</code>)</li>
 <li>quantities parsed in <code>row</code> mode are scalars.</li>
 <li>inherit also the subsection from <code>EntryData</code> as it must be a NOMAD entry archive file.</li>
 <li>make use of <code>repeats: true</code> in the subsection within the parent section <code>MySection</code>.</li>
@@ -4833,7 +4833,7 @@ A further comment is needed to explain the combination of this feature with <cod
 <ul>
 <li><code>data_file</code> quantity, i.e. the tabular data file name, is located in the same entry, the data is parsed in the children entries.</li>
 <li>double check that <code>mapping_options &gt; sections</code> contains the right path. It should point to the (sub)section where the quantities are decorated with <code>tabular</code> annotation, i. e., the one to be filled with tabular data.</li>
-<li>the section to be parsed can be arbitrarily nested, given that the path provided in <code>sections</code> reachs it (e. g. <code>my_sub_sec/my_sub_sub_sec</code>)</li>
+<li>the section to be parsed can be arbitrarily nested, given that the path provided in <code>sections</code> reaches it (e. g. <code>my_sub_sec/my_sub_sub_sec</code>)</li>
 <li>quantities parsed in <code>row</code> mode are scalars.</li>
 <li>inherit also the subsection from <code>EntryData</code> as it must be a standalone NOMAD archive file.</li>
 <li>make use of <code>repeats: true</code> in the subsection within the parent section <code>MySection</code>.</li>
