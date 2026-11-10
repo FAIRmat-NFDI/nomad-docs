@@ -4328,7 +4328,7 @@
 <a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="n">myparser</span> <span class="o">=</span> <span class="n">MyParserEntryPoint</span><span class="p">(</span>
 <a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>    <span class="n">name</span><span class="o">=</span><span class="s1">'MyParser'</span><span class="p">,</span>
 <a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>    <span class="n">description</span><span class="o">=</span><span class="s1">'My custom parser.'</span><span class="p">,</span>
-<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>    <span class="n">mainfile_name_re</span><span class="o">=</span><span class="s1">'.*\.myparser'</span><span class="p">,</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>    <span class="n">mainfile_name_re</span><span class="o">=</span><span class="sa">r</span><span class="s1">'.*\.myparser'</span><span class="p">,</span>
 <a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="p">)</span>
 </code></pre></div>
 <p>Here you can see that a new subclass of <code>ParserEntryPoint</code> was defined. In this new class you can override the <code>load</code> method to determine how the <code>Parser</code> class is instantiated, but you can also extend the <code>ParserEntryPoint</code> model to add new configurable parameters for this parser as explained in <a href="../../../explanation/plugin_system.html#plugin-configuration">Explanation &gt; Plugins &gt; Plugin Configuration</a>.</p>
@@ -4373,8 +4373,8 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">myparser</span> <span class="o">=</span> <span class="n">MyParserEntryPoint</span><span class="p">(</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="n">name</span><span class="o">=</span><span class="s1">'MyParser'</span><span class="p">,</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    <span class="n">description</span><span class="o">=</span><span class="s1">'My custom parser.'</span><span class="p">,</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    <span class="n">mainfile_name_re</span><span class="o">=</span><span class="s1">'.*\.myparser'</span><span class="p">,</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    <span class="n">mainfile_contents_re</span><span class="o">=</span><span class="s1">'\s*</span><span class="se">\n</span><span class="s1">\s*HELLO WORLD'</span><span class="p">,</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    <span class="n">mainfile_name_re</span><span class="o">=</span><span class="sa">r</span><span class="s1">'.*\.myparser'</span><span class="p">,</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    <span class="n">mainfile_contents_re</span><span class="o">=</span><span class="sa">r</span><span class="s1">'\s*\n\s*HELLO WORLD'</span><span class="p">,</span>
 <a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="p">)</span>
 </code></pre></div>
 <p>You can find all of the available matching criteria in the <a href="../../../reference/plugins.html#parserentrypoint"><code>ParserEntryPoint</code> reference</a></p>
@@ -4384,7 +4384,7 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">myparser</span> <span class="o">=</span> <span class="n">MyParserEntryPoint</span><span class="p">(</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="n">name</span><span class="o">=</span><span class="s1">'MyParser'</span><span class="p">,</span>
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    <span class="n">description</span><span class="o">=</span><span class="s1">'My custom parser.'</span><span class="p">,</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    <span class="n">mainfile_name_re</span><span class="o">=</span><span class="s1">'.*\.myparser'</span><span class="p">,</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    <span class="n">mainfile_name_re</span><span class="o">=</span><span class="sa">r</span><span class="s1">'.*\.myparser'</span><span class="p">,</span>
 <a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    <span class="n">matching_order</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
 <a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="p">)</span>
 </code></pre></div>
