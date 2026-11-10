@@ -41,7 +41,7 @@ class MyParserEntryPoint(ParserEntryPoint):
 myparser = MyParserEntryPoint(
     name='MyParser',
     description='My custom parser.',
-    mainfile_name_re='.*\.myparser',
+    mainfile_name_re=r'.*\.myparser',
 )
 ```
 
@@ -103,8 +103,8 @@ If you are using the `MatchingParser` interface you can configure which files ar
 myparser = MyParserEntryPoint(
     name='MyParser',
     description='My custom parser.',
-    mainfile_name_re='.*\.myparser',
-    mainfile_contents_re='\s*\n\s*HELLO WORLD',
+    mainfile_name_re=r'.*\.myparser',
+    mainfile_contents_re=r'\s*\n\s*HELLO WORLD',
 )
 ```
 
@@ -120,7 +120,7 @@ Parsers with a lower `matching_order` are checked first. Parsers with the same `
 myparser = MyParserEntryPoint(
     name='MyParser',
     description='My custom parser.',
-    mainfile_name_re='.*\.myparser',
+    mainfile_name_re=r'.*\.myparser',
     matching_order=-1,
 )
 ```

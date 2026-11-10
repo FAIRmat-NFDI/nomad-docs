@@ -102,7 +102,7 @@ class MyParserEntryPoint(ParserEntryPoint):
 myparser = MyParserEntryPoint(
     name='MyParser',
     description='My custom parser.',
-    mainfile_name_re='.*\.myparser',
+    mainfile_name_re=r'.*\.myparser',
 )
 ```
 
