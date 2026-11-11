@@ -4070,13 +4070,10 @@ incident</a>. This document explains the possibilities and best practices when w
 <p>The available unit names are controlled by the <code>nomad/units/defaults_en.txt</code>
 file. This is a plain text file that is internally read by the
 <a href="https://pint.readthedocs.io/en/stable/" rel="noopener" target="_blank">Pint</a> library that we
-use for unit transformations in the NOMAD Python backend. These definitions and the
-associated conversion factors are then used always when transforming between two
-units in the NOMAD platform. Our graphical user interface also performs unit
-conversions in Javascript, and the same definitions and conversion factors are
-translated to the frontend through an environment config file (<code>env.js</code>).</p>
-<p>It is possible to add new units in this file to make them available both in the
-Python and in the Javascript environment. You can read more on how units are
+use for unit transformations in the NOMAD Python backend.</p>
+<p>It is possible to add new units in this file for use in Python. For frontend unit
+handling, refer to the maintained
+<a href="https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-gui" rel="noopener" target="_blank"><code>nomad-gui</code> repository</a>. You can read more on how units are
 defined in the
 <a href="https://pint.readthedocs.io/en/stable/advanced/defining.html" rel="noopener" target="_blank">pint documentation</a>.</p>
 <p>All units support the use of SI-prefixes. This means that if the unit <code>meter</code>
