@@ -4367,6 +4367,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#pluginpackage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PluginPackage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#entrypoints" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4481,17 +4492,6 @@
     <span class="md-ellipsis">
       
         AppEntryPoint
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#pluginpackage" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        PluginPackage
       
     </span>
   </a>
@@ -5560,6 +5560,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#pluginpackage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PluginPackage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#entrypoints" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5674,17 +5685,6 @@
     <span class="md-ellipsis">
       
         AppEntryPoint
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#pluginpackage" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        PluginPackage
       
     </span>
   </a>
@@ -8474,6 +8474,53 @@ elements and defining the configuration of each element.</p>
 </tr>
 </tbody>
 </table>
+<h4 id="pluginpackage">PluginPackage<a class="headerlink" href="#pluginpackage" title="Permanent link">¶</a></h4>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>name</td>
+<td><code>str</code></td>
+<td>Name of the plugin Python package, read from pyproject.toml.<br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>entry_points</td>
+<td><code>list[str]</code></td>
+<td>List of entry point ids contained in this package, read form pyproject.toml<br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>description</td>
+<td><code>str | None</code></td>
+<td>Package description, read from pyproject.toml.</td>
+</tr>
+<tr>
+<td>version</td>
+<td><code>str | None</code></td>
+<td>Plugin package version, read from pyproject.toml.</td>
+</tr>
+<tr>
+<td>homepage</td>
+<td><code>str | None</code></td>
+<td>Link to the plugin package homepage, read from pyproject.toml.</td>
+</tr>
+<tr>
+<td>documentation</td>
+<td><code>str | None</code></td>
+<td>Link to the plugin package documentation page, read from pyproject.toml.</td>
+</tr>
+<tr>
+<td>repository</td>
+<td><code>str | None</code></td>
+<td>Link to the plugin package source code repository, read from pyproject.toml.</td>
+</tr>
+</tbody>
+</table>
 <h4 id="entrypoints">EntryPoints<a class="headerlink" href="#entrypoints" title="Permanent link">¶</a></h4>
 <table>
 <thead>
@@ -8928,53 +8975,6 @@ resource that can be downloaded.</p>
 <td>description</td>
 <td><code>str | None</code></td>
 <td>A human readable description of the plugin entry point.</td>
-</tr>
-</tbody>
-</table>
-<h4 id="pluginpackage">PluginPackage<a class="headerlink" href="#pluginpackage" title="Permanent link">¶</a></h4>
-<table>
-<thead>
-<tr>
-<th>name</th>
-<th>type</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>name</td>
-<td><code>str</code></td>
-<td>Name of the plugin Python package, read from pyproject.toml.<br><em>default:</em> <code>PydanticUndefined</code></td>
-</tr>
-<tr>
-<td>entry_points</td>
-<td><code>list[str]</code></td>
-<td>List of entry point ids contained in this package, read form pyproject.toml<br><em>default:</em> <code>PydanticUndefined</code></td>
-</tr>
-<tr>
-<td>description</td>
-<td><code>str | None</code></td>
-<td>Package description, read from pyproject.toml.</td>
-</tr>
-<tr>
-<td>version</td>
-<td><code>str | None</code></td>
-<td>Plugin package version, read from pyproject.toml.</td>
-</tr>
-<tr>
-<td>homepage</td>
-<td><code>str | None</code></td>
-<td>Link to the plugin package homepage, read from pyproject.toml.</td>
-</tr>
-<tr>
-<td>documentation</td>
-<td><code>str | None</code></td>
-<td>Link to the plugin package documentation page, read from pyproject.toml.</td>
-</tr>
-<tr>
-<td>repository</td>
-<td><code>str | None</code></td>
-<td>Link to the plugin package source code repository, read from pyproject.toml.</td>
 </tr>
 </tbody>
 </table>
