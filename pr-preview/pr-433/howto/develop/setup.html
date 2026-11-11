@@ -2950,62 +2950,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Frontend tests">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#test-structure" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Test structure
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#running-frontend-tests" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Running frontend tests
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Running frontend tests">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#offline-testing" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Offline testing
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#online-testing" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Online testing
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
         
       </ul>
@@ -4110,62 +4054,6 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Frontend tests">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#test-structure" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Test structure
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#running-frontend-tests" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Running frontend tests
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Running frontend tests">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#offline-testing" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Offline testing
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#online-testing" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Online testing
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
 </li>
         
       </ul>
@@ -4301,7 +4189,7 @@ For developing a plugin without running the full NOMAD stack, see
 <h2 id="running-tests">Running tests<a class="headerlink" href="#running-tests" title="Permanent link">¶</a></h2>
 <p>Set up your environment using <code>nomad-distro-dev</code> first. Run the following backend
 commands from the NOMAD source checkout, using the Python environment prepared by
-the development distribution. Run frontend commands from its <code>gui</code> directory.</p>
+the development distribution.</p>
 <h3 id="backend-tests">Backend tests<a class="headerlink" href="#backend-tests" title="Permanent link">¶</a></h3>
 <p>To run the tests some additional settings and files are necessary that are not part
 of the codebase.</p>
@@ -4346,156 +4234,9 @@ CI/CD pipeline:</p>
 <p>You can also negate a fixture by prefixing its name with <code>!</code>. For example, to run all tests that do not depend on the <code>worker</code> fixture, use <code>pytest --fixture-filters '!worker'</code> (quotes are needed for <code>!</code>).</p>
 <p>Note that if <code>test1</code> depends on <code>fixture1</code>, and <code>fixture1</code> depends on <code>fixture2</code>, then <code>test1</code> also depends on <code>fixture2</code>, even though it was not explicitly listed as a parameter.</p>
 <h3 id="frontend-tests">Frontend tests<a class="headerlink" href="#frontend-tests" title="Permanent link">¶</a></h3>
-<p>We use
-<a href="https://testing-library.com/docs/react-testing-library/intro/" rel="noopener" target="_blank"><code>testing-library</code></a>
-to implement our GUI tests and <code>testing-library</code> itself uses
-<a href="https://jestjs.io/" rel="noopener" target="_blank"><code>Jest</code></a> to run the tests. Tests are written in <code>*.spec.js</code>
-files that accompany the implementation. Tests should focus on functionality,
-not on implementation details: <code>testing-library</code> is designed to enforce this kind
-of testing.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>When testing HTML output, the elements are rendered using
-<a href="https://github.com/jsdom/jsdom" rel="noopener" target="_blank">jsdom</a>: this is not completely identical
-to using an actual browser (e.g. does not support WebGL), but in practice
-is realistic enough for the majority of the test.</p>
-</div>
-<h4 id="test-structure">Test structure<a class="headerlink" href="#test-structure" title="Permanent link">¶</a></h4>
-<p>We have adopted a <code>pytest</code>-like structure for organizing the test utilities:
-each source code folder may contain a <code>conftest.spec.js</code> file that contains
-utilities that are relevant for testing the code in that particular folder.
-These utilities can usually be placed into the following categories:</p>
-<ul>
-<li>
-<p>Custom renders: When testing React components, the
-  <a href="https://testing-library.com/docs/react-testing-library/api/#render" rel="noopener" target="_blank"><code>render</code></a> function
-  is used to display them on the test DOM. Typically your components require
-  some parts of the infrastructure to work properly, which is achieved by
-  wrapping your component with other components that provide a context. Custom
-  render functions can do this automatically for you, e.g. the default render
-  as exported from <code>src/components/conftest.spec.js</code> wraps your components with an
-  infrastructure that is very similar to the production app. See
-  <a href="https://testing-library.com/docs/react-testing-library/setup/#custom-render" rel="noopener" target="_blank">React Testing Library &gt; custom-render</a>
-  for more information.</p>
-</li>
-<li>
-<p>Custom queries: See
-  <a href="https://testing-library.com/docs/react-testing-library/setup/#add-custom-queries" rel="noopener" target="_blank">React Testing Library &gt; custom-queries</a>
-  for more information.</p>
-</li>
-<li>
-<p>Custom expects: These are reusable functions that perform actual tests using
-  the <code>expect</code> function. Whenever the same tests are performed by several
-  <code>*.spec.js</code> files, you should formalize these common tests into an
-  <code>expect*</code> function and place it in a relevant <code>conftest.spec.js</code> file.</p>
-</li>
-</ul>
-<p>Often your components will need to communicate with the API during tests. One
-should generally avoid using manually created mocks for the API traffic, and
-instead prefer using API responses that originate from an actual API call
-during testing. It requires a lot of work to manually create mocks
-and keep them up-to-date, and true integration tests are impossible
-to perform with live communication with an API. In order to simplify the API
-communication during testing, you can use the <code>startAPI</code>+<code>closeAPI</code> functions, that
-will prepare the API traffic for you. A simple example could look like this:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">import</span><span class="w"> </span><span class="nx">React</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'react'</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">waitFor</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'@testing-library/dom'</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">startAPI</span><span class="p">,</span><span class="w"> </span><span class="nx">closeAPI</span><span class="p">,</span><span class="w"> </span><span class="nx">screen</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'../../conftest'</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">renderSearchEntry</span><span class="p">,</span><span class="w"> </span><span class="nx">expectInputHeader</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">'../conftest'</span>
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>
-<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="nx">test</span><span class="p">(</span><span class="s1">'periodic table shows the elements retrieved through the API'</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">  </span><span class="nx">startAPI</span><span class="p">(</span><span class="s1">'&lt;state_name&gt;'</span><span class="p">,</span><span class="w"> </span><span class="s1">'&lt;snapshot_name&gt;'</span><span class="p">)</span>
-<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">  </span><span class="nx">renderSearchEntry</span><span class="p">(...)</span>
-<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">  </span><span class="nx">expect</span><span class="p">(...)</span>
-<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">  </span><span class="nx">closeAPI</span><span class="p">()</span>
-<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="p">})</span>
-</code></pre></div>
-<p>Here the important parameters are:</p>
-<ul>
-<li>
-<p><code>&lt;state_name&gt;</code>: Specifies an initial backend configuration for this test. These
-  states are defined as Python functions that are stored in
-  <code>nomad-FAIR/tests/states</code>, example given below. These functions may, for example,
-  prepare several uploads, entries, etc. for the test.</p>
-</li>
-<li>
-<p><code>&lt;snapshot_name&gt;</code>: Specifies a filepath for reading/recording pre-recorded API
-  traffic.</p>
-</li>
-</ul>
-<p>An example of a simple test state could look like this:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad</span><span class="w"> </span><span class="kn">import</span> <span class="n">infrastructure</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">create_uuid</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad.utils.exampledata</span><span class="w"> </span><span class="kn">import</span> <span class="n">ExampleData</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="k">def</span><span class="w"> </span><span class="nf">search</span><span class="p">():</span>
-<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>    <span class="n">infrastructure</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
-<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>    <span class="n">main_author</span> <span class="o">=</span> <span class="n">infrastructure</span><span class="o">.</span><span class="n">user_management</span><span class="o">.</span><span class="n">get_user</span><span class="p">(</span><span class="n">username</span><span class="o">=</span><span class="s1">'test'</span><span class="p">)</span>
-<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>    <span class="n">data</span> <span class="o">=</span> <span class="n">ExampleData</span><span class="p">(</span><span class="n">main_author</span><span class="o">=</span><span class="n">main_author</span><span class="p">)</span>
-<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>    <span class="n">upload_id</span> <span class="o">=</span> <span class="n">create_uuid</span><span class="p">()</span>
-<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>    <span class="n">data</span><span class="o">.</span><span class="n">create_upload</span><span class="p">(</span><span class="n">upload_id</span><span class="o">=</span><span class="n">upload_id</span><span class="p">,</span> <span class="n">published</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">embargo_length</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>    <span class="n">data</span><span class="o">.</span><span class="n">create_entry</span><span class="p">(</span>
-<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>        <span class="n">upload_id</span><span class="o">=</span><span class="n">upload_id</span><span class="p">,</span>
-<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>        <span class="n">entry_id</span><span class="o">=</span><span class="n">create_uuid</span><span class="p">(),</span>
-<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>        <span class="n">mainfile</span><span class="o">=</span><span class="s1">'test_content/test_entry/mainfile.json'</span><span class="p">,</span>
-<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>        <span class="n">results</span><span class="o">=</span><span class="p">{</span><span class="s1">'material'</span><span class="p">:</span> <span class="p">{</span><span class="s1">'elements'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'C'</span><span class="p">,</span> <span class="s1">'H'</span><span class="p">]},</span> <span class="s1">'method'</span><span class="p">:</span> <span class="p">{},</span> <span class="s1">'properties'</span><span class="p">:</span> <span class="p">{}},</span>
-<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a>    <span class="p">)</span>
-<a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a>    <span class="n">data</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
-</code></pre></div>
-<p>When running in the online mode (see below), this function will be executed in
-order to prepare the application backend. The <code>closeAPI</code> function will handle
-cleaning the test state between successive <code>startAPI</code> calls: it will completely
-wipe out MongoDB, Elasticsearch and the upload files.</p>
-<h4 id="running-frontend-tests">Running frontend tests<a class="headerlink" href="#running-frontend-tests" title="Permanent link">¶</a></h4>
-<p>The tests can be run in two different modes. <em>Offline testing</em> uses
-pre-recorded files to mock the API traffic during testing. This allows one to
-run tests more quickly without a server. During <em>online testing</em>, the tests
-perform calls to a running server where a test state has been prepared. This
-mode can be used to perform integration tests but also to record the snapshot
-files needed by the offline testing.</p>
-<p>Before running tests, ensure that the GUI artifacts are up-to-date. Run this from
-the NOMAD source checkout:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>./scripts/generate_gui_test_artifacts.sh
-</code></pre></div>
-<p>As snapshot tests do not connect to the server, the artifacts cannot be
-fetched dynamically from the server and static files need to be used instead.
-Note that you should not push these files to Git: the CI/CD pipeline will
-automatically generate them.</p>
-<h5 id="offline-testing">Offline testing<a class="headerlink" href="#offline-testing" title="Permanent link">¶</a></h5>
-<p>This is the way our CI pipeline runs the tests and should be used locally, e.g.
-whenever you wish to reproduce pipeline errors or when your tests do not
-involve any API traffic.</p>
-<p>Run <code>yarn test</code> to run the whole suite, or <code>yarn test [&lt;filename&gt;]</code> to run a specific test.</p>
-<h5 id="online-testing">Online testing<a class="headerlink" href="#online-testing" title="Permanent link">¶</a></h5>
-<p>When you wish to record API traffic for offline testing, or to perform
-integration tests, you will need to have a server running with the correct
-configuration. To do this, follow these steps:</p>
-<ol>
-<li>
-<p>Start the required infrastructure following the
-   <a href="https://github.com/FAIRmat-NFDI/nomad-distro-dev#basic-infra" rel="noopener" target="_blank"><code>nomad-distro-dev</code> instructions</a>.</p>
-</li>
-<li>
-<p>From the NOMAD source checkout, start <code>nomad admin run appworker</code> with the config
-   found in <code>gui/tests/nomad.yaml</code>:
-   <code>export NOMAD_CONFIG=gui/tests/nomad.yaml &amp;&amp; nomad admin run appworker</code></p>
-</li>
-<li>
-<p>Activate the correct Python virtual environment before running the tests
-   with Yarn (Yarn will run the Python functions that prepare the state).</p>
-</li>
-<li>
-<p>From the <code>gui</code> directory, run <code>yarn test-record [&lt;filename&gt;]</code> to record a
-   snapshot file, or <code>yarn test-integration [&lt;filename&gt;]</code> to perform the test
-   without recording.</p>
-</li>
-</ol>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Online tests delete database contents and uploaded files when resetting test
-state. Use a dedicated test configuration and data, never a production Oasis.</p>
-</div>
+<p>The GUI is maintained in the separate
+<a href="https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-gui" rel="noopener" target="_blank"><code>nomad-gui</code> repository</a>.
+Follow that repository's maintained development and testing instructions.</p>
 <h2 id="build-custom-oasis-image">Build custom Oasis image<a class="headerlink" href="#build-custom-oasis-image" title="Permanent link">¶</a></h2>
 <p>To create a custom Oasis image (e.g. with custom plugins), you could use the <a href="https://github.com/FAIRmat-NFDI/nomad-distro-template" rel="noopener" target="_blank">nomad-distro-template</a> by clicking the <a href="https://github.com/new?template_name=nomad-distro-template&amp;template_owner=FAIRmat-NFDI" rel="noopener" target="_blank"><strong>Use this template</strong> button</a>. For detailed instructions on building and deploying custom Oasis images, please refer to the documentation in that repository.</p>
 <h2 id="setup-your-ide">Setup your IDE<a class="headerlink" href="#setup-your-ide" title="Permanent link">¶</a></h2>

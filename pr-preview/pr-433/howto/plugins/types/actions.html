@@ -4687,7 +4687,7 @@ detected:</p>
 <code>nomad.actions.Action</code> class which describes the action through
 a collection of activities and workflows that connect them. It also specifies the task queue for which the workflows and activities are registered. Once the
 workflows are made available through the <code>Action</code>, they can be triggered
-using the <code>start_action</code> funtion. This adds a workflow run instance to the specified task queue. You can learn more about it in the <a href="#integrating-action-with-schemas">next section</a>.</p>
+using the <code>start_action</code> function. This adds a workflow run instance to the specified task queue. You can learn more about it in the <a href="#integrating-action-with-schemas">next section</a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Synchronous vs. Asynchronous Activities</p>
 <p>When defining activities, it is recommended to use synchronous functions by default. Asynchronous functions should only be used when you need to make asynchronous calls, for example, when interacting with an external API using <code>aiohttp</code>. Using blocking synchronous functions in an asynchronous activity can block the event loop and prevent other tasks from running.</p>
@@ -4839,7 +4839,7 @@ recommend to <strong>always set a custom retry policy</strong> with finite <code
 In addition, <strong>always set appropriate timeouts</strong> for activities to prevent stuck executions.</p>
 </div>
 <h2 id="integrating-action-with-schemas">Integrating action with schemas<a class="headerlink" href="#integrating-action-with-schemas" title="Permanent link">¶</a></h2>
-<p>After actions are defined, it is possible to intergrate their workflows with
+<p>After actions are defined, it is possible to integrate their workflows with
 <a href="../../../reference/glossary.html#schema">schemas</a> and run them from NOMAD
 entries.</p>
 <p>Every action has a unique name based on the package path of its entry point.
@@ -4969,7 +4969,7 @@ function is triggered from inside the <code>run_action</code> method.
 <code>workflow_id</code> quantity is populated as a result, which is used in the next step
 to get the status of the workflow.</p>
 <p>When <code>trigger_get_action_status</code> is clicked, the status for the available <code>workflow_id</code> is requested and is saved as a string in <code>workflow_status</code>
-quantity. This status can be mainly <code>RUNNING</code>, <code>COMPLETED</code>, <code>FAILED</code>, <code>CANCELLED</code> or <code>TERMINATED</code>. Everytime a workflow run is triggered, the status for it is also requested.</p>
+quantity. This status can be mainly <code>RUNNING</code>, <code>COMPLETED</code>, <code>FAILED</code>, <code>CANCELLED</code> or <code>TERMINATED</code>. Every time a workflow run is triggered, the status for it is also requested.</p>
 <p>It is also possible to re-trigger the workflow run if the status is not
 <code>RUNNING</code>. Of course, the new workflow run will now have a different workflow
 ID.</p>

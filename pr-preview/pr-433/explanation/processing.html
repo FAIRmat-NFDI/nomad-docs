@@ -3442,15 +3442,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#strategies-for-re-usable-processing-code" class="md-nav__link">
+  <a href="#strategies-for-reusable-processing-code" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Strategies for re-usable processing code
+        Strategies for reusable processing code
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Strategies for re-usable processing code">
+    <nav class="md-nav" aria-label="Strategies for reusable processing code">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -4320,15 +4320,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#strategies-for-re-usable-processing-code" class="md-nav__link">
+  <a href="#strategies-for-reusable-processing-code" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Strategies for re-usable processing code
+        Strategies for reusable processing code
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Strategies for re-usable processing code">
+    <nav class="md-nav" aria-label="Strategies for reusable processing code">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -4514,7 +4514,7 @@ after entries with a parser of lower execution order. See also
 <a href="../howto/plugins/types/parsers.html#control-parser-execution-order">how to control parser execution order</a>.</p>
 <h2 id="customize-processing">Customize processing<a class="headerlink" href="#customize-processing" title="Permanent link">¶</a></h2>
 <p>NOMAD provides just the framework for processing. The actual work depends on plugins, parsers
-and schemas for specific file types. While NOMAD comes with a build-in set of plugins, you can build your own plugins to support new file types, ELNs, and workflows.</p>
+and schemas for specific file types. While NOMAD comes with a built-in set of plugins, you can build your own plugins to support new file types, ELNs, and workflows.</p>
 <h3 id="schemas-parsers-plugins">Schemas, parsers, plugins<a class="headerlink" href="#schemas-parsers-plugins" title="Permanent link">¶</a></h3>
 <p>The primary function of a parser is to systematically analyze and organize the incoming data, ensuring adherence to the established schema.
 The interaction between a parser and a schema plays a crucial role in ensuring data consistency to a predefined structure. It takes raw data inputs and utilizes the schema as a guide to interpret and organize the information correctly. By connecting the parser to the schema, users can establish a framework for the expected data structure. The modular nature of the parser and schema relationship allows for flexibility, as the parser can be designed to accommodate various schemas, making it adaptable to different data models or updates in research requirements.
@@ -4641,7 +4641,7 @@ settings, this allows to merge proprietary instrument output and manual notes in
 representation of a measurement. The goal is not to fill an archive with all data
 directly, but have the created file parsed and create an entry with all data this way.</p>
 <p>Another use-case is automation. The <code>normalize</code> function of on ELN schema might use
-user input to create many more ELNs. This can be use-ful for parameter studies, where
+user input to create many more ELNs. This can be useful for parameter studies, where
 one experiment has to be repeated many times in a consistent way.</p>
 <h3 id="reprocessing">Reprocessing<a class="headerlink" href="#reprocessing" title="Permanent link">¶</a></h3>
 <p>Adding or changing a file, creating a schema-based entry, and saving an edited
@@ -4657,7 +4657,7 @@ uploads through the CLI; see
 <p>Depending on the deployment's reprocessing configuration, this operation may
 reprocess existing entries, match new entries, or remove entries that no longer
 match.</p>
-<h2 id="strategies-for-re-usable-processing-code">Strategies for re-usable processing code<a class="headerlink" href="#strategies-for-re-usable-processing-code" title="Permanent link">¶</a></h2>
+<h2 id="strategies-for-reusable-processing-code">Strategies for reusable processing code<a class="headerlink" href="#strategies-for-reusable-processing-code" title="Permanent link">¶</a></h2>
 <p>Processing takes files as input and creates entries with structured data. It is about
 transforming data from one representation into another. Sometime, different input
 representations have to be transformed into the same output. Sometimes, the same
@@ -4679,14 +4679,14 @@ would be different.</p>
 <p>and capture data in a flexible <em>intermediate</em> format.</p>
 <h3 id="writers-metadata-into-archives-data-into-files">Writers: metadata into archives, data into files<a class="headerlink" href="#writers-metadata-into-archives-data-into-files" title="Permanent link">¶</a></h3>
 <p>Two readers that produce a dictionary with the same keys and compatible values would
-allow to re-use the same <strong>writer</strong> that populates an archive, e.g.:</p>
+allow to reuse the same <strong>writer</strong> that populates an archive, e.g.:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">writer</span><span class="p">(</span><span class="n">data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">archive</span><span class="p">:</span> <span class="n">EntryArchive</span><span class="p">)</span>
 </code></pre></div>
 <p>Similar to multiple <em>readers</em>, we might also use multiple <em>writers</em>. In certain
 scenarios, we need to write read data both into an archive, but also into an additional
 file. For example, if data is large, we can only keep metadata in archives, the
 actual data should be written to additional HFD5 or Nexus files.</p>
-<p>Separation of <em>readers</em> and <em>writers</em> also allows to re-use parser components in a
+<p>Separation of <em>readers</em> and <em>writers</em> also allows to reuse parser components in a
 <code>normalize</code> function. For example, if we consider the <a href="#creating-files-spawning-entries">creating files, spawning entries scenario</a>.</p>
 <h3 id="evolution-of-data-representations">Evolution of data representations<a class="headerlink" href="#evolution-of-data-representations" title="Permanent link">¶</a></h3>
 <p>If the input representation changes, only the <em>readers</em> have to change. If output
@@ -4695,7 +4695,7 @@ only a <em>reader</em> has to be developed. If a new output becomes necessary, o
 has to be developed.</p>
 <p>Since we use a flexible intermediate representation such as a <code>Dict[str, Any]</code>, it
 is easy to add new keys, but it is also dangerous because no static or semantic checking
-occurs. <em>Readers</em> and <em>writers</em> might be a good strategy to re-use parts of a parser,
+occurs. <em>Readers</em> and <em>writers</em> might be a good strategy to reuse parts of a parser,
 but <em>reader</em> and <em>writer</em> implementations remain strongly connected and inter-dependent.</p>
 <figure>
 <p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/reader-writer.png" data-desc-position="bottom"><img alt="processing" src="images/reader-writer.png"></a>
