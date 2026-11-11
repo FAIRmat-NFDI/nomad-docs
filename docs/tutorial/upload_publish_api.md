@@ -193,7 +193,7 @@ print('Email:', me.email)
 This call confirms which NOMAD account is being used.
 
 <!-- TODO: The package's built-in address for `url='test'` (https://nomad-lab.eu/backend/test/api/v1) rejects uploads larger than 1 MiB (nginx 413), so the first two uploads fail without the `core.NOMAD_TEST_URL` line below. Remove that line once FAIRmat-NFDI/nomad-utility-workflows#56 is fixed. -->
-<!-- TODO: `nomad_gui_url` in nomad-utility-workflows 0.3.2 builds links to the old GUI. Once FAIRmat-NFDI/nomad-utility-workflows#55 is fixed, replace the hand-built `nomad_gui` links with `.nomad_gui_url`. -->
+<!-- TODO: Once FAIRmat-NFDI/nomad-utility-workflows#55 is fixed, replace the hand-built `nomad_gui` links with `.nomad_gui_url`. -->
 
 Finally, define the addresses that the following snippets use:
 

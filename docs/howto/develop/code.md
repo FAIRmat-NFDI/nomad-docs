@@ -96,13 +96,10 @@ but should help you to navigate the codebase:
 
 ## GUI code
 
-The NOMAD UI is written as a [React](https://react.dev/){:target="_blank" rel="noopener"} single-page
-application (SPA). It uses (among many other libraries)
-[MUI](https://mui.com/){:target="_blank" rel="noopener"},
-[Plotly](https://plotly.com/python/){:target="_blank" rel="noopener"}, and
-[D3](https://d3js.org/){:target="_blank" rel="noopener"}. The GUI code is maintained in the `gui`
-directory. Most relevant code can be found in `gui/src/components`. The application entry
-point is `gui/src/index.js`.
+The NOMAD GUI is maintained in the separate
+[`nomad-gui` repository](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-gui){:target="_blank" rel="noopener"}.
+See that repository for the current source layout, development setup, and testing
+instructions.
 
 ## Documentation
 
