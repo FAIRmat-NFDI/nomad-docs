@@ -4042,7 +4042,7 @@ However, this is not recommended due to various security concerns.</p>
 <li>The specific logic of creating/updating the file must be re-entrant safe, see <a href="https://en.wikipedia.org/wiki/Reentrancy_(computing)" rel="noopener" target="_blank">details</a>.
    To put simply, the first call and subsequent calls must yield the same result regardless of what is already stored in the file.</li>
 <li>A child entry must <strong>not</strong> be accessed by multiple parent entries.
-   Because the parent entries are processed in parallel (by multiple <code>celery</code> workers), there is a risk of racing conditions if the child entry is accessed by multiple parent entries.</li>
+   Because the parent entries are processed in parallel (by multiple Temporal workers), there is a risk of racing conditions if the child entry is accessed by multiple parent entries.</li>
 <li>The child entry shall not modify the parent entry (and any other entries).
    Otherwise, there is a risk of infinite loops and data corruption.</li>
 <li>A child entry shall <strong>not</strong> depend on other child entries.</li>
