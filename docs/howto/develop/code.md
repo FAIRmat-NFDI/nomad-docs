@@ -79,7 +79,7 @@ but should help you to navigate the codebase:
   [processing](../../explanation/basics.md#parsing).
 
 - `processing`: It's all about processing uploads and entries. The interface to
-  [Celery](https://docs.celeryq.dev/en/stable/){:target="_blank" rel="noopener"} and
+  [Temporal](https://temporal.io/){:target="_blank" rel="noopener"} and
   [MongoDB](https://www.mongodb.com){:target="_blank" rel="noopener"}.
 
 - `units`: The unit and unit conversion system based on
