@@ -12,7 +12,7 @@ workflow connects can already exist, or you can add their files together with
 the workflow file, as in the downloadable examples in this guide.
 
 The simulation examples in this guide have been tested on
-[NOMAD Central](https://nomad-lab.eu/prod/v1/gui/v2/){:target="_blank" rel="noopener"}.
+[NOMAD Central](https://nomad-lab.eu/){:target="_blank" rel="noopener"}.
 They can also be reproduced on a NOMAD Oasis with the
 [`electronic-parsers` plugin](https://github.com/nomad-coe/electronic-parsers){:target="_blank" rel="noopener"}
 installed.

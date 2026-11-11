@@ -147,10 +147,10 @@ creation, scopes, and secure handling.
 ## Discover available endpoints
 
 Each deployment provides interactive API documentation generated from its
-current OpenAPI contract. Open the [NOMAD API dashboard]({{ nomad_url() }}/v1/){:target="_blank" rel="noopener"}
+current OpenAPI contract. Open the [NOMAD API dashboard]({{ nomad_url() }}/v1/extensions/docs){:target="_blank" rel="noopener"}
 to inspect request and response models or try an operation in the browser.
 
-The GUI's [APIs page]({{ nomad_url() }}/../gui/v2/apis){:target="_blank" rel="noopener"}
+The GUI's [APIs page](https://nomad-lab.eu/apis){:target="_blank" rel="noopener"}
 also lists the built-in NOMAD API and APIs supplied by installed plugins. The
 available plugin APIs therefore depend on the NOMAD deployment.
 

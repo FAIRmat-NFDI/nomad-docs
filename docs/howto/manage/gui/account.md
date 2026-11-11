@@ -11,7 +11,7 @@ sign-in method to use.
 
 ## Sign in or create an account
 
-1. Open [NOMAD Central](https://nomad-lab.eu/prod/v1/gui/v2/){:target="_blank" rel="noopener"}
+1. Open [NOMAD Central](https://nomad-lab.eu/){:target="_blank" rel="noopener"}
    and select the **sign-in icon** (an arrow pointing into a door) in the
    upper-right corner.
 2. On the sign-in page, choose one of these methods:

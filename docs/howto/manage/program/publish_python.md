@@ -26,7 +26,7 @@ The examples below use the NOMAD test deployment. Change `api_url` only when
 you are ready to work with another deployment.
 
 ```python
-api_url = 'https://nomad-lab.eu/prod/v1/test/api/v1'
+api_url = 'https://nomad-lab.eu/test/backend/api/v1'
 ```
 
 !!! warning

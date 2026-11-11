@@ -102,7 +102,7 @@ However, there are still limitations and plans for future development:
 
 There are no detailed how-tos yet. Here are some pointers to reference documentation that might be relevant:
 
-- [The API endpoint to download an upload in bundle format.](https://nomad-lab.eu/prod/v1/api/v1/extensions/docs#/uploads%2Fbundle/get_upload_bundle_uploads__upload_id__bundle_get){:target="_blank" rel="noopener"}
-- [The API endpoint to upload a bundle.](https://nomad-lab.eu/prod/v1/api/v1/extensions/docs#/uploads%2Fbundle/post_upload_bundle_uploads_bundle_post){:target="_blank" rel="noopener"}
-- [The API endpoint to publish an upload, including publishing to the configured central NOMAD.](https://nomad-lab.eu/prod/v1/api/v1/extensions/docs#/uploads%2Faction/post_upload_action_publish_uploads__upload_id__action_publish_post){:target="_blank" rel="noopener"}
+- [The API endpoint to download an upload in bundle format.](https://nomad-lab.eu/backend/api/v1/extensions/docs#/uploads%2Fbundle/get_upload_bundle_uploads__upload_id__bundle_get){:target="_blank" rel="noopener"}
+- [The API endpoint to upload a bundle.](https://nomad-lab.eu/backend/api/v1/extensions/docs#/uploads%2Fbundle/post_upload_bundle_uploads_bundle_post){:target="_blank" rel="noopener"}
+- [The API endpoint to publish an upload, including publishing to the configured central NOMAD.](https://nomad-lab.eu/backend/api/v1/extensions/docs#/uploads%2Faction/post_upload_action_publish_uploads__upload_id__action_publish_post){:target="_blank" rel="noopener"}
 - [The CLI commands to export and import an upload as a bundle.](http://127.0.0.1:8000/reference/cli.html#nomad-admin-uploads-export){:target="_blank" rel="noopener"}

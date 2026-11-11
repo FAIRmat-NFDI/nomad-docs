@@ -6,13 +6,13 @@ endpoint paths, request models, and response models.
 
 ## API discovery and base URLs
 
-The GUI's [APIs page]({{ nomad_url() }}/../gui/v2/apis){:target="_blank" rel="noopener"}
+The GUI's [APIs page](https://nomad-lab.eu/apis){:target="_blank" rel="noopener"}
 lists the built-in NOMAD API and APIs contributed by installed plugins. Plugin
 APIs vary between deployments.
 
 The built-in NOMAD API is documented through:
 
-- an [interactive OpenAPI dashboard]({{ nomad_url() }}/v1/){:target="_blank" rel="noopener"}; and
+- an [interactive OpenAPI dashboard]({{ nomad_url() }}/v1/extensions/docs){:target="_blank" rel="noopener"}; and
 - its [OpenAPI JSON document]({{ nomad_url() }}/v1/openapi.json){:target="_blank" rel="noopener"}.
 
 The built-in NOMAD API uses a base URL ending in `/api/v1`. For example:

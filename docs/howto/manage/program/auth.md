@@ -192,7 +192,7 @@ themselves be granted these scopes. The relevant endpoints are:
 | Revoke | `DELETE /auth/pats/{pat_id}` | `tokens:delete` |
 
 Creation and rotation return the new `raw_token` only once. Consult the
-deployment's [OpenAPI dashboard]({{ nomad_url() }}/v1/){:target="_blank" rel="noopener"}
+deployment's [OpenAPI dashboard]({{ nomad_url() }}/v1/extensions/docs){:target="_blank" rel="noopener"}
 for the current request and response models.
 
 ## Do not use simple tokens for new integrations

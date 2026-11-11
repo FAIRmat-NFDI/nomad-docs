@@ -87,8 +87,8 @@ def define_env(env):
     def metainfo_data():  # pylint: disable=unused-variable
         return utils.strip(
             """
-            You can browse the [NOMAD metainfo schema](https://nomad-lab.eu/prod/v1/gui/analyze/metainfo)
-            or the archive of each entry (e.g. [a VASP example](https://nomad-lab.eu/prod/v1/gui/search/entries/entry/id/mIyITulZli0FPSoAB3OKt3WrsMTq))
+            You can browse the [NOMAD metainfo schema](https://nomad-lab.eu/schemas)
+            or the archive of each entry (e.g. [a VASP example](https://nomad-lab.eu/projects/tVg2dCbkSkKyQmCk3xMOlQ/entries/mIyITulZli0FPSoAB3OKt3WrsMTq))
             in the web-interface."""
         )
 
