@@ -2518,6 +2518,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#menuitemhistogram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MenuItemHistogram
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#menuitemoptimade" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2577,17 +2588,6 @@
     <span class="md-ellipsis">
       
         MenuItemCustomQuantities
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#menuitemhistogram" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        MenuItemHistogram
       
     </span>
   </a>
@@ -4939,6 +4939,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#menuitemhistogram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MenuItemHistogram
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#menuitemoptimade" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4998,17 +5009,6 @@
     <span class="md-ellipsis">
       
         MenuItemCustomQuantities
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#menuitemhistogram" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        MenuItemHistogram
       
     </span>
   </a>
@@ -6882,6 +6882,84 @@ text quantity.</p>
 </tr>
 </tbody>
 </table>
+<h4 id="menuitemhistogram">MenuItemHistogram<a class="headerlink" href="#menuitemhistogram" title="Permanent link">¶</a></h4>
+<p>Menu item that shows a histogram for numerical or timestamp quantities.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>show_input</td>
+<td><code>bool</code></td>
+<td>Whether to show text input field.<br><em>default:</em> <code>True</code></td>
+</tr>
+<tr>
+<td>x</td>
+<td><code>Axis | str</code></td>
+<td>Configures the information source and display options for the x-axis.<br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>y</td>
+<td><code>AxisScale | str</code></td>
+<td>Configures the information source and display options for the y-axis.<br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>autorange</td>
+<td><code>bool</code></td>
+<td>Whether to automatically set the range according to the data limits.<br><em>default:</em> <code>False</code></td>
+</tr>
+<tr>
+<td>width</td>
+<td><code>int</code></td>
+<td>Width of the item, 12 means maximum width. Note that the menu size can be changed.<br><em>default:</em> <code>12</code></td>
+</tr>
+<tr>
+<td>show_header</td>
+<td><code>bool</code></td>
+<td>Whether to show the header.<br><em>default:</em> <code>True</code></td>
+</tr>
+<tr>
+<td>show_statistics</td>
+<td><code>bool</code></td>
+<td>Whether to show the full histogram, or just a range slider.<br><em>default:</em> <code>True</code></td>
+</tr>
+<tr>
+<td>quantity</td>
+<td><code>str | None</code></td>
+<td><strong>deprecated</strong></td>
+</tr>
+<tr>
+<td>scale</td>
+<td><code>str | None</code></td>
+<td><strong>deprecated</strong></td>
+</tr>
+<tr>
+<td>showinput</td>
+<td><code>bool | None</code></td>
+<td><strong>deprecated</strong></td>
+</tr>
+<tr>
+<td>n_bins</td>
+<td><code>int | None</code></td>
+<td>Maximum number of histogram bins to request. Notice that the returned number of bins may be smaller if there are fewer data items available.</td>
+</tr>
+<tr>
+<td>nbins</td>
+<td><code>int | None</code></td>
+<td><strong>deprecated</strong></td>
+</tr>
+<tr>
+<td>title</td>
+<td><code>str | None</code></td>
+<td>Custom item title.</td>
+</tr>
+</tbody>
+</table>
 <h4 id="menuitemoptimade">MenuItemOptimade<a class="headerlink" href="#menuitemoptimade" title="Permanent link">¶</a></h4>
 <p>Menu item that shows a dialog for entering OPTIMADE queries.</p>
 <table>
@@ -7105,84 +7183,6 @@ Will only show quantities that have been populated in the data.</p>
 <td>show_header</td>
 <td><code>bool</code></td>
 <td>Whether to show the header.<br><em>default:</em> <code>True</code></td>
-</tr>
-<tr>
-<td>title</td>
-<td><code>str | None</code></td>
-<td>Custom item title.</td>
-</tr>
-</tbody>
-</table>
-<h4 id="menuitemhistogram">MenuItemHistogram<a class="headerlink" href="#menuitemhistogram" title="Permanent link">¶</a></h4>
-<p>Menu item that shows a histogram for numerical or timestamp quantities.</p>
-<table>
-<thead>
-<tr>
-<th>name</th>
-<th>type</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>show_input</td>
-<td><code>bool</code></td>
-<td>Whether to show text input field.<br><em>default:</em> <code>True</code></td>
-</tr>
-<tr>
-<td>x</td>
-<td><code>Axis | str</code></td>
-<td>Configures the information source and display options for the x-axis.<br><em>default:</em> <code>PydanticUndefined</code></td>
-</tr>
-<tr>
-<td>y</td>
-<td><code>AxisScale | str</code></td>
-<td>Configures the information source and display options for the y-axis.<br><em>default:</em> <code>PydanticUndefined</code></td>
-</tr>
-<tr>
-<td>autorange</td>
-<td><code>bool</code></td>
-<td>Whether to automatically set the range according to the data limits.<br><em>default:</em> <code>False</code></td>
-</tr>
-<tr>
-<td>width</td>
-<td><code>int</code></td>
-<td>Width of the item, 12 means maximum width. Note that the menu size can be changed.<br><em>default:</em> <code>12</code></td>
-</tr>
-<tr>
-<td>show_header</td>
-<td><code>bool</code></td>
-<td>Whether to show the header.<br><em>default:</em> <code>True</code></td>
-</tr>
-<tr>
-<td>show_statistics</td>
-<td><code>bool</code></td>
-<td>Whether to show the full histogram, or just a range slider.<br><em>default:</em> <code>True</code></td>
-</tr>
-<tr>
-<td>quantity</td>
-<td><code>str | None</code></td>
-<td><strong>deprecated</strong></td>
-</tr>
-<tr>
-<td>scale</td>
-<td><code>str | None</code></td>
-<td><strong>deprecated</strong></td>
-</tr>
-<tr>
-<td>showinput</td>
-<td><code>bool | None</code></td>
-<td><strong>deprecated</strong></td>
-</tr>
-<tr>
-<td>n_bins</td>
-<td><code>int | None</code></td>
-<td>Maximum number of histogram bins to request. Notice that the returned number of bins may be smaller if there are fewer data items available.</td>
-</tr>
-<tr>
-<td>nbins</td>
-<td><code>int | None</code></td>
-<td><strong>deprecated</strong></td>
 </tr>
 <tr>
 <td>title</td>
