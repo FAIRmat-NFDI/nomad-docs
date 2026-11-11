@@ -4317,9 +4317,10 @@ The component library <a href="https://material-ui.com/" rel="noopener" target="
 (based on Google's popular material design framework) provides a consistent look-and-feel.</p>
 <h3 id="docker">Docker<a class="headerlink" href="#docker" title="Permanent link">¶</a></h3>
 <p>To run a <strong>nomad@FAIRDI</strong> instance, many services have to be orchestrated:
-the nomad app, nomad worker, mongodb, Elasticsearch, Keycloak, RabbitMQ,
-Elasticstack (logging), the nomad GUI, and a reverse proxy to keep everything together.
-Further services might be needed (e.g. JypiterHUB), when nomad grows.
+the NOMAD app and workers, MongoDB, Elasticsearch, Temporal with PostgreSQL persistence,
+and a reverse proxy. The app serves the GUI, and a separate NORTH service provides
+JupyterHub-based remote tools. Authentication uses Keycloak, either centrally hosted
+or supplied by the deployment.
 The container platform <a href="https://docs.docker.com/" rel="noopener" target="_blank">Docker</a> allows us to provide all services
 as pre-build images that can be run flexibly on all types of platforms, networks,
 and storage solutions. <a href="https://docs.docker.com/compose/" rel="noopener" target="_blank">Docker-compose</a> allows us to
