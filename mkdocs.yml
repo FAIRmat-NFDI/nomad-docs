@@ -75,6 +75,7 @@ nav:
           - Migrate:
               - Overview: howto/oasis/migrate.md
               - NOMAD 2.0: howto/oasis/migrate/v2.0.md
+              - NOMAD 1.4.3: howto/oasis/migrate/v1.4.3.md
               - NOMAD 1.4.2: howto/oasis/migrate/v1.4.2.md
               - NOMAD 1.2.2: howto/oasis/migrate/v1.2.2.md
               - NOMAD 1.2.0: howto/oasis/migrate/v1.2.0.md
