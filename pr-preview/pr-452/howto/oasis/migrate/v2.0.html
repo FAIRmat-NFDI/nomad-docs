@@ -4322,6 +4322,7 @@
 <li><strong>Option 1: Reindex data directly from ES7 to ES9 (running two containers)</strong> — Uses the temporary <code>docker-compose.es7.yaml</code> overlay to run ES7 alongside the main ES9 service and copy the existing index through Elasticsearch's remote <code>_reindex</code> API. This is usually faster because it copies indexed documents without reading archive files.</li>
 <li><strong>Option 2: Start with a fresh ES9 index and reindex uploads</strong> — Rebuilds the search index from MongoDB and the archive files (<code>.volumes/fs</code>), which are NOMAD's source of truth. This is simpler but can be considerably slower because NOMAD must read and index every upload again. ES7 and the overlay are not needed for this option.</li>
 </ol>
+<p>As a rough benchmark, migrating a project with 10,000 perovskite entries took about <strong>1 minute with Option 1</strong> and <strong>15 minutes with Option 2</strong> on the same machine. Actual times depend on your data and hardware.</p>
 <p>Both options keep the NOMAD app and workers stopped during indexing. The main <code>elastic</code> service uses its permanent ES9 volume throughout, so no volume switch is needed after migration.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
