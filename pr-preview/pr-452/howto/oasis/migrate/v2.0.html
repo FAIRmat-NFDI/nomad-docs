@@ -4322,6 +4322,10 @@
 <li><strong>Option 1: Reindex data directly from ES7 to ES9 (running two containers)</strong> — Uses the temporary <code>docker-compose.es7.yaml</code> overlay to run ES7 alongside the main ES9 service and copy the existing index through Elasticsearch's remote <code>_reindex</code> API. This is usually faster because it copies indexed documents without reading archive files.</li>
 <li><strong>Option 2: Start with a fresh ES9 index and reindex uploads</strong> — Rebuilds the search index from MongoDB and the archive files (<code>.volumes/fs</code>), which are NOMAD's source of truth. This is simpler but can be considerably slower because NOMAD must read and index every upload again. ES7 and the overlay are not needed for this option.</li>
 </ol>
+<p><strong>Option 1 requires <code>jq</code> installed on the host</strong> (not inside the containers). Check with <code>jq --version</code>. If it is not installed, install it with your host's package manager, for example on Debian/Ubuntu:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>sudo<span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>jq
+</code></pre></div>
+<p>If you cannot or do not want to install <code>jq</code>, use <a href="#option-2-start-with-a-fresh-es9-index-and-reindex-uploads">Option 2</a>, which does not require it. Complete the shared preparation steps below before following either option.</p>
 <p>As a rough benchmark, migrating a project with 10,000 perovskite entries took about <strong>1 minute with Option 1</strong> and <strong>15 minutes with Option 2</strong> on the same machine. Actual times depend on your data and hardware.</p>
 <p>Both options keep the NOMAD app and workers stopped during indexing. The main <code>elastic</code> service uses its permanent ES9 volume throughout, so no volume switch is needed after migration.</p>
 <div class="admonition note">
@@ -4333,21 +4337,21 @@
 <ol>
 <li>
 <p><strong>Back up MongoDB and file storage</strong> while your existing installation is still running:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>bash<span class="w"> </span>scripts/backup-mongo.sh
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>bash<span class="w"> </span>scripts/backup-mongo.sh
 </code></pre></div>
 <p>Verify the dump and back up <code>.volumes/fs</code>. See <a href="../administer.html#backups">Backups</a>.</p>
 </li>
 <li>
 <p><strong>Record the effective entries index name</strong> before stopping the old app. Configuration overrides can change it from the value in <code>configs/nomad.yaml</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nv">INDEX</span><span class="o">=</span><span class="k">$(</span>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-T<span class="w"> </span>app<span class="w"> </span>python<span class="w"> </span>-c<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="s1">'from nomad.config import config; print(config.elastic.entries_index)'</span><span class="k">)</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nb">printf</span><span class="w"> </span><span class="s1">'Entries index: %s\n'</span><span class="w"> </span><span class="s2">"</span><span class="nv">$INDEX</span><span class="s2">"</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nv">INDEX</span><span class="o">=</span><span class="k">$(</span>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-T<span class="w"> </span>app<span class="w"> </span>python<span class="w"> </span>-c<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="s1">'from nomad.config import config; print(config.elastic.entries_index)'</span><span class="k">)</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nb">printf</span><span class="w"> </span><span class="s1">'Entries index: %s\n'</span><span class="w"> </span><span class="s2">"</span><span class="nv">$INDEX</span><span class="s2">"</span>
 </code></pre></div>
 <p>It is normally <code>nomad_oasis_entries_v1</code> for an Oasis or <code>nomad_entries_v1</code> if unset. If you open a new shell later, set <code>INDEX</code> to the recorded value before continuing.</p>
 </li>
 <li>
 <p><strong>Stop the old stack before updating its Compose configuration</strong>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>down
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>down
 </code></pre></div>
 <p>Do not pass <code>-v</code> or remove database volumes. Keep the app and workers stopped until indexing is complete.</p>
 </li>
@@ -4360,7 +4364,7 @@
 <li><code>NOMAD_ELASTIC_VERSION: 9</code> in the NOMAD services.</li>
 </ul>
 <p>Keep your entries index name unchanged. If you customized volume names, preserve the MongoDB volume and ensure ES9 uses a new, separate volume. <strong>Never mount the ES7 data volume in ES9.</strong> Pull the updated images:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>pull
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>pull
 </code></pre></div>
 </li>
 </ol>
@@ -4369,16 +4373,12 @@
 <p>The <code>docker-compose.es7.yaml</code> file is a migration overlay used together with the main Compose file. It adds an <code>elastic7</code> service using Elasticsearch <code>7.17.28</code> and the existing <code>nomad_oasis_elastic</code> volume, and allows the main ES9 service to reindex from <code>elastic7:9200</code>. Both services share the main Compose network. Elasticsearch ports remain internal to Docker.</p>
 <p>The ES7 volume is declared external: Compose fails if it does not exist instead of silently creating an empty source volume. If your old volume has a different name, update <code>volumes.elastic7.name</code> in the overlay first. If you used a customized ES7 image or configuration, carry the required settings into <code>elastic7</code> as well.</p>
 <h4 id="1-start-only-es7-and-es9">1. Start Only ES7 and ES9<a class="headerlink" href="#1-start-only-es7-and-es9" title="Permanent link">¶</a></h4>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>-f<span class="w"> </span>docker-compose.yaml<span class="w"> </span>-f<span class="w"> </span>docker-compose.es7.yaml<span class="w"> </span>pull<span class="w"> </span>elastic7
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>docker<span class="w"> </span>compose<span class="w"> </span>-f<span class="w"> </span>docker-compose.yaml<span class="w"> </span>-f<span class="w"> </span>docker-compose.es7.yaml<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span>up<span class="w"> </span>-d<span class="w"> </span>--wait<span class="w"> </span>--wait-timeout<span class="w"> </span><span class="m">360</span><span class="w"> </span>elastic<span class="w"> </span>elastic7
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>-f<span class="w"> </span>docker-compose.yaml<span class="w"> </span>-f<span class="w"> </span>docker-compose.es7.yaml<span class="w"> </span>pull<span class="w"> </span>elastic7
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>docker<span class="w"> </span>compose<span class="w"> </span>-f<span class="w"> </span>docker-compose.yaml<span class="w"> </span>-f<span class="w"> </span>docker-compose.es7.yaml<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">  </span>up<span class="w"> </span>-d<span class="w"> </span>--wait<span class="w"> </span>--wait-timeout<span class="w"> </span><span class="m">360</span><span class="w"> </span>elastic<span class="w"> </span>elastic7
 </code></pre></div>
 <p>Do not start the app or workers yet. The destination entries index must not already exist in ES9; if an earlier migration attempt created it, resolve that partial migration before continuing.</p>
-<p>The following commands require <strong><code>jq</code> installed on the host</strong> (not inside the containers). Install it with your host's package manager, for example:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># Debian/Ubuntu</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>sudo<span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>jq
-</code></pre></div>
-<p>Verify the installation with <code>jq --version</code> before continuing. HTTP requests run through the Elasticsearch containers, so no host port bindings are needed.</p>
+<p>HTTP requests run through the Elasticsearch containers, so no host port bindings are needed.</p>
 <h4 id="2-copy-settings-and-mapping-then-create-the-es9-index">2. Copy Settings and Mapping, Then Create the ES9 Index<a class="headerlink" href="#2-copy-settings-and-mapping-then-create-the-es9-index" title="Permanent link">¶</a></h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nb">set</span><span class="w"> </span>-o<span class="w"> </span>pipefail
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
