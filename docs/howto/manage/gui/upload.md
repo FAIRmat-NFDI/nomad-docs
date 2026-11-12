@@ -123,17 +123,19 @@ to the current project folder.
     considered copyrighted material. To ensure compliance, NOMAD automatically handles `POTCAR`
     files for you.
 
-    Upon **publication**, NOMAD removes the original `POTCAR` files and replaces them with
-    `POTCAR.stripped` files. The stripped files contain a checksum of the original file
-    at the top, followed by metadata headers extracted from the original POTCAR, but not
-    the proprietary pseudopotential data. The stripped files can be accessed and downloaded
-    by anyone, while the original `POTCAR` files are automatically removed.
+    During processing, NOMAD creates `POTCAR.stripped` files and, by default,
+    removes the original `POTCAR` files. If a deployment retains the originals
+    in an unpublished project, they are still excluded from the published files.
+    The stripped files contain a checksum of the original file at the top,
+    followed by metadata headers extracted from the original POTCAR, but not
+    the proprietary pseudopotential data. Once the published files are publicly
+    accessible, only the stripped POTCAR copies can be downloaded.
 
     **Important considerations:**
 
     - Stripping is filename-based. Ensure `POTCAR` appears in the filename for licensed files.
     - `POTCAR` files **must be uncompressed** for automated stripping to work. Compressed files (e.g., `POTCAR.gz`) will not be properly processed and may be entirely removed without creating stripped versions.
-    - Stripping only occurs upon publication. We strongly recommend **against** temporarily making unpublished projects publicly visible when they contain licensed material.
+    - If a deployment retains original `POTCAR` files in unpublished projects, do **not** temporarily make those projects publicly visible while they contain licensed material.
 
     While NOMAD provides this service as a courtesy, **uploaders remain responsible for
     verifying overall license compliance**.
