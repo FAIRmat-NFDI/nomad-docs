@@ -4370,8 +4370,9 @@ considered copyrighted material. To ensure compliance, NOMAD automatically handl
 files for you.</p>
 <p>On NOMAD Central, processing creates <code>POTCAR.stripped</code> files and removes the
 original <code>POTCAR</code> files from the unpublished project. NOMAD Oasis does the
-same by default. Oasis operators can set
-<a href="../../../reference/config.html#process"><code>process.exclude_potcar</code></a> to <code>false</code>
+same by default. As described in
+<a href="../../../reference/config.html#process">Reference &gt; Configuration &gt; Process</a>,
+Oasis operators can set <code>process.exclude_potcar</code> to <code>false</code>
 in their <a href="https://github.com/FAIRmat-NFDI/nomad-distro-template/blob/main/configs/nomad.yaml" rel="noopener" target="_blank"><code>configs/nomad.yaml</code></a>
 to retain the originals in unpublished projects; publication still excludes
 them. The stripped files contain a checksum of the original file at the top,
