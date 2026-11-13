@@ -16,7 +16,7 @@
 
 While REST works well for simple data fetching, it often requires multiple requests when building complex pages, since each endpoint provides a fixed response format. Hence queries may under- or over-fetch with respect to the requested data. GraphQL addresses this by letting clients request exactly the fields they need across related resources in a single query, reducing round trips.
 
-NOMAD mimics this behaviour with a GraphQL-like API, available at the `/graph/query` endpoint (see the [NOMAD API Dashboard](https://nomad-lab.eu/prod/v1/api/v1/extensions/docs){:target="_blank" rel="noopener"}).
+NOMAD mimics this behaviour with a GraphQL-like API, available at the `/graph/query` endpoint (see the [NOMAD API Dashboard](https://nomad-lab.eu/backend/api/v1/extensions/docs){:target="_blank" rel="noopener"}).
 
 ??? note "Technical Note"
     The implementation can be categorized as a GraphQL-like API powered by the REST-style framework FastAPI, rather than GraphQL itself.
@@ -26,7 +26,7 @@ NOMAD mimics this behaviour with a GraphQL-like API, available at the `/graph/qu
 
 Imagine there is an example upload with the upload ID `<example_upload_id>`. The metadata of this upload is stored in MongoDB.
 
-If one uses the endpoint `/uploads/{upload_id}` to fetch the upload metadata (see [NOMAD API Dashboard](https://nomad-lab.eu/prod/v1/api/v1/extensions/docs){:target="_blank" rel="noopener"}),
+If one uses the endpoint `/uploads/{upload_id}` to fetch the upload metadata (see [NOMAD API Dashboard](https://nomad-lab.eu/backend/api/v1/extensions/docs){:target="_blank" rel="noopener"}),
 the response would look like:
 
 ```json
@@ -123,7 +123,7 @@ For example, if one wants to fetch the `upload_name` and `upload_create_time`, t
 
 ### Existing Data Resources
 
-There are a few existing data resources (called documents) stored in MongoDB (see [NOMAD API Dashboard](https://nomad-lab.eu/prod/v1/api/v1/extensions/docs){:target="_blank" rel="noopener"} for more details):
+There are a few existing data resources (called documents) stored in MongoDB (see [NOMAD API Dashboard](https://nomad-lab.eu/backend/api/v1/extensions/docs){:target="_blank" rel="noopener"} for more details):
 
 1. `uploads`: The metadata of an upload, including, `upload_id`, `upload_name`, `main_author`, etc.
 2. `entries`: The metadata of an entry, including, `entry_id`, `entry_create_time`, `mainfile`, etc.
@@ -273,7 +273,7 @@ For example, if one wants to fetch all entries under an upload with a specific p
 }
 ```
 
-Both the query and the pagination fields must comply with the underlying models, depending on the specific token (see [NOMAD API Dashboard](https://nomad-lab.eu/prod/v1/api/v1/extensions/docs){:target="_blank" rel="noopener"}).
+Both the query and the pagination fields must comply with the underlying models, depending on the specific token (see [NOMAD API Dashboard](https://nomad-lab.eu/backend/api/v1/extensions/docs){:target="_blank" rel="noopener"}).
 
 ## Accessing archives
 
@@ -315,7 +315,7 @@ This request can be perform in practice with `curl`:
 
 ```bash
 curl -X 'POST' \
-'https://nomad-lab.eu/prod/v1/api/v1/graph/query' \
+'https://nomad-lab.eu/backend/api/v1/graph/query' \
 -H 'accept: application/json' \
 -H 'Content-Type: application/json' \
 -d '{
@@ -1429,7 +1429,7 @@ Some of the entry metadata is also stored in Elasticsearch indices.
 They are similar to the metadata in the MongoDB database, but with more information.
 To fetch data from the Elasticsearch index, one can use the special token `search`.
 The top-level request configuration also supports the `query` field.
-This `query` field shall take a valid `Metadata` query object (which itself also contains a `query` field), see the endpoint `/entries/query` on the [NOMAD API Dashboard](https://nomad-lab.eu/prod/v1/api/v1/extensions/docs){:target="_blank" rel="noopener"} for more details.
+This `query` field shall take a valid `Metadata` query object (which itself also contains a `query` field), see the endpoint `/entries/query` on the [NOMAD API Dashboard](https://nomad-lab.eu/backend/api/v1/extensions/docs){:target="_blank" rel="noopener"} for more details.
 
 The following query fetches all entries created since 2025 that are visible to the logged in user:
 
