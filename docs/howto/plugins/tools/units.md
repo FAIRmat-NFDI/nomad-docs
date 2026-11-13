@@ -9,14 +9,11 @@ incident](https://en.wikipedia.org/wiki/Mars_Climate_Orbiter#Cause_of_failure){:
 The available unit names are controlled by the `nomad/units/defaults_en.txt`
 file. This is a plain text file that is internally read by the
 [Pint](https://pint.readthedocs.io/en/stable/){:target="_blank" rel="noopener"} library that we
-use for unit transformations in the NOMAD Python backend. These definitions and the
-associated conversion factors are then used always when transforming between two
-units in the NOMAD platform. Our graphical user interface also performs unit
-conversions in Javascript, and the same definitions and conversion factors are
-translated to the frontend through an environment config file (`env.js`).
+use for unit transformations in the NOMAD Python backend.
 
-It is possible to add new units in this file to make them available both in the
-Python and in the Javascript environment. You can read more on how units are
+It is possible to add new units in this file for use in Python. For frontend unit
+handling, refer to the maintained
+[`nomad-gui` repository](https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-gui){:target="_blank" rel="noopener"}. You can read more on how units are
 defined in the
 [pint documentation](https://pint.readthedocs.io/en/stable/advanced/defining.html){:target="_blank" rel="noopener"}.
 

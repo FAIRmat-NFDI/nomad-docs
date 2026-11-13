@@ -36,7 +36,7 @@ basic understanding of how plugins and plugin entry points work in the
 NOMAD ecosystem.
 
 !!! note
-    Dashboards are only available in the new NOMAD GUI. The old GUI is
+    Dashboards are only available in the new NOMAD GUI. The legacy GUI is
     not aware of dashboard entry points.
 
 ## Getting started
