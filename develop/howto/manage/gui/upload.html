@@ -4368,16 +4368,24 @@ to the current project folder.</p>
 <p>The VASP license does <strong>not</strong> permit users to freely distribute <code>POTCAR</code> files, which are
 considered copyrighted material. To ensure compliance, NOMAD automatically handles <code>POTCAR</code>
 files for you.</p>
-<p>Upon <strong>publication</strong>, NOMAD removes the original <code>POTCAR</code> files and replaces them with
-<code>POTCAR.stripped</code> files. The stripped files contain a checksum of the original file
-at the top, followed by metadata headers extracted from the original POTCAR, but not
-the proprietary pseudopotential data. The stripped files can be accessed and downloaded
-by anyone, while the original <code>POTCAR</code> files are automatically removed.</p>
+<p>On NOMAD Central, processing creates <code>POTCAR.stripped</code> files and removes the
+original <code>POTCAR</code> files from the unpublished project. NOMAD Oasis does the
+same by default. As described in
+<a href="../../../reference/config.html#process">Reference &gt; Configuration &gt; Process</a>,
+Oasis operators can set <code>process.exclude_potcar</code> to <code>false</code>
+in their <a href="https://github.com/FAIRmat-NFDI/nomad-distro-template/blob/main/configs/nomad.yaml" rel="noopener" target="_blank"><code>configs/nomad.yaml</code></a>
+to retain the originals in unpublished projects; publication still excludes
+them. The stripped files contain a checksum of the original file at the top,
+followed by metadata headers extracted from the original POTCAR, but not
+the proprietary pseudopotential data. Once the published files are publicly
+accessible, only the stripped POTCAR copies can be downloaded.</p>
 <p><strong>Important considerations:</strong></p>
 <ul>
 <li>Stripping is filename-based. Ensure <code>POTCAR</code> appears in the filename for licensed files.</li>
 <li><code>POTCAR</code> files <strong>must be uncompressed</strong> for automated stripping to work. Compressed files (e.g., <code>POTCAR.gz</code>) will not be properly processed and may be entirely removed without creating stripped versions.</li>
-<li>Stripping only occurs upon publication. We strongly recommend <strong>against</strong> temporarily making unpublished projects publicly visible when they contain licensed material.</li>
+<li>Oasis operators who disable <code>process.exclude_potcar</code> must ensure their
+  deployment restricts access to retained original <code>POTCAR</code> files in
+  public, unpublished projects.</li>
 </ul>
 <p>While NOMAD provides this service as a courtesy, <strong>uploaders remain responsible for
 verifying overall license compliance</strong>.</p>
