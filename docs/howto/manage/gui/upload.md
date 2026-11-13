@@ -125,8 +125,9 @@ to the current project folder.
 
     On NOMAD Central, processing creates `POTCAR.stripped` files and removes the
     original `POTCAR` files from the unpublished project. NOMAD Oasis does the
-    same by default. Oasis operators can set
-    [`process.exclude_potcar`](../../../reference/config.md#process) to `false`
+    same by default. As described in
+    [Reference > Configuration > Process](../../../reference/config.md#process),
+    Oasis operators can set `process.exclude_potcar` to `false`
     in their [`configs/nomad.yaml`](https://github.com/FAIRmat-NFDI/nomad-distro-template/blob/main/configs/nomad.yaml){:target="_blank" rel="noopener"}
     to retain the originals in unpublished projects; publication still excludes
     them. The stripped files contain a checksum of the original file at the top,
