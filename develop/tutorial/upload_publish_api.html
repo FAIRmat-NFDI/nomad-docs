@@ -108,7 +108,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="https://nomad-lab.eu" title="Documentation" class="md-header__button md-logo" aria-label="Documentation" data-md-component="logo">
+    <a href="https://about.nomad-lab.eu/" title="Documentation" class="md-header__button md-logo" aria-label="Documentation" data-md-component="logo">
       
   
   <!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
@@ -288,7 +288,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="https://nomad-lab.eu" title="Documentation" class="md-nav__button md-logo" aria-label="Documentation" data-md-component="logo">
+    <a href="https://about.nomad-lab.eu/" title="Documentation" class="md-nav__button md-logo" aria-label="Documentation" data-md-component="logo">
       
   
   <!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
@@ -4419,7 +4419,7 @@ Running code snippets out of order may lead to errors, e.g., due to missing impo
 </code></pre></div>
 </details>
 <p>This call confirms which NOMAD account is being used.</p>
-<!-- TODO: The package's built-in address for `url='test'` (https://nomad-lab.eu/prod/v1/test/api/v1) rejects uploads larger than 1 MiB (nginx 413), so the first two uploads fail without the `core.NOMAD_TEST_URL` line below. Remove that line once FAIRmat-NFDI/nomad-utility-workflows#56 is fixed. -->
+<!-- TODO: The package's built-in address for `url='test'` (https://nomad-lab.eu/backend/test/api/v1) rejects uploads larger than 1 MiB (nginx 413), so the first two uploads fail without the `core.NOMAD_TEST_URL` line below. Remove that line once FAIRmat-NFDI/nomad-utility-workflows#56 is fixed. -->
 <!-- TODO: `nomad_gui_url` in nomad-utility-workflows 0.3.2 builds links to the old GUI. Once FAIRmat-NFDI/nomad-utility-workflows#55 is fixed, replace the hand-built `nomad_gui` links with `.nomad_gui_url`. -->
 
 <p>Finally, define the addresses that the following snippets use:</p>
@@ -4433,7 +4433,7 @@ Running code snippets out of order may lead to errors, e.g., due to missing impo
 </code></pre></div>
 <details class="info">
 <summary>Using the production deployment</summary>
-<p>To work with your own data on the production deployment, use <code>url='prod'</code> instead of <code>url='test'</code> in all helper functions, set <code>nomad_gui</code> to <code>https://nomad-lab.eu/prod/v1/gui/v2</code>, and leave out the <code>core.NOMAD_TEST_URL</code> line. Publishing there is irreversible.</p>
+<p>To work with your own data on the production deployment, use <code>url='prod'</code> instead of <code>url='test'</code> in all helper functions, set <code>nomad_gui</code> to <code>https://nomad-lab.eu</code>, and leave out the <code>core.NOMAD_TEST_URL</code> line. Publishing there is irreversible.</p>
 </details>
 <hr>
 <h2 id="create-projects">Create projects<a class="headerlink" href="#create-projects" title="Permanent link">¶</a></h2>

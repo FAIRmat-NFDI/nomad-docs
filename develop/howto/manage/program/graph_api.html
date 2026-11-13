@@ -108,7 +108,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="https://nomad-lab.eu" title="Documentation" class="md-header__button md-logo" aria-label="Documentation" data-md-component="logo">
+    <a href="https://about.nomad-lab.eu/" title="Documentation" class="md-header__button md-logo" aria-label="Documentation" data-md-component="logo">
       
   
   <!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
@@ -288,7 +288,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="https://nomad-lab.eu" title="Documentation" class="md-nav__button md-logo" aria-label="Documentation" data-md-component="logo">
+    <a href="https://about.nomad-lab.eu/" title="Documentation" class="md-nav__button md-logo" aria-label="Documentation" data-md-component="logo">
       
   
   <!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
@@ -4641,7 +4641,7 @@
 </ul>
 <h2 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">¶</a></h2>
 <p>While REST works well for simple data fetching, it often requires multiple requests when building complex pages, since each endpoint provides a fixed response format. Hence queries may under- or over-fetch with respect to the requested data. GraphQL addresses this by letting clients request exactly the fields they need across related resources in a single query, reducing round trips.</p>
-<p>NOMAD mimics this behaviour with a GraphQL-like API, available at the <code>/graph/query</code> endpoint (see the <a href="https://nomad-lab.eu/prod/v1/api/v1/extensions/docs" rel="noopener" target="_blank">NOMAD API Dashboard</a>).</p>
+<p>NOMAD mimics this behaviour with a GraphQL-like API, available at the <code>/graph/query</code> endpoint (see the <a href="https://nomad-lab.eu/backend/api/v1/extensions/docs" rel="noopener" target="_blank">NOMAD API Dashboard</a>).</p>
 <details class="note">
 <summary>Technical Note</summary>
 <p>The implementation can be categorized as a GraphQL-like API powered by the REST-style framework FastAPI, rather than GraphQL itself.
@@ -4649,7 +4649,7 @@ This architectural choice allows for NOMAD's support of dynamic schemas, circumv
 </details>
 <h2 id="basic-data-fetching">Basic Data Fetching<a class="headerlink" href="#basic-data-fetching" title="Permanent link">¶</a></h2>
 <p>Imagine there is an example upload with the upload ID <code>&lt;example_upload_id&gt;</code>. The metadata of this upload is stored in MongoDB.</p>
-<p>If one uses the endpoint <code>/uploads/{upload_id}</code> to fetch the upload metadata (see <a href="https://nomad-lab.eu/prod/v1/api/v1/extensions/docs" rel="noopener" target="_blank">NOMAD API Dashboard</a>),
+<p>If one uses the endpoint <code>/uploads/{upload_id}</code> to fetch the upload metadata (see <a href="https://nomad-lab.eu/backend/api/v1/extensions/docs" rel="noopener" target="_blank">NOMAD API Dashboard</a>),
 the response would look like:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">{</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">"uploads"</span><span class="p">:{</span>
@@ -4728,7 +4728,7 @@ For example, if one wants to fetch the <code>upload_name</code> and <code>upload
 <a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="p">}</span>
 </code></pre></div>
 <h3 id="existing-data-resources">Existing Data Resources<a class="headerlink" href="#existing-data-resources" title="Permanent link">¶</a></h3>
-<p>There are a few existing data resources (called documents) stored in MongoDB (see <a href="https://nomad-lab.eu/prod/v1/api/v1/extensions/docs" rel="noopener" target="_blank">NOMAD API Dashboard</a> for more details):</p>
+<p>There are a few existing data resources (called documents) stored in MongoDB (see <a href="https://nomad-lab.eu/backend/api/v1/extensions/docs" rel="noopener" target="_blank">NOMAD API Dashboard</a> for more details):</p>
 <ol>
 <li><code>uploads</code>: The metadata of an upload, including, <code>upload_id</code>, <code>upload_name</code>, <code>main_author</code>, etc.</li>
 <li><code>entries</code>: The metadata of an entry, including, <code>entry_id</code>, <code>entry_create_time</code>, <code>mainfile</code>, etc.</li>
@@ -4856,7 +4856,7 @@ For example, if one wants to fetch all entries under an upload with a specific p
 <a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="p">}</span>
 </code></pre></div>
-<p>Both the query and the pagination fields must comply with the underlying models, depending on the specific token (see <a href="https://nomad-lab.eu/prod/v1/api/v1/extensions/docs" rel="noopener" target="_blank">NOMAD API Dashboard</a>).</p>
+<p>Both the query and the pagination fields must comply with the underlying models, depending on the specific token (see <a href="https://nomad-lab.eu/backend/api/v1/extensions/docs" rel="noopener" target="_blank">NOMAD API Dashboard</a>).</p>
 <h2 id="accessing-archives">Accessing archives<a class="headerlink" href="#accessing-archives" title="Permanent link">¶</a></h2>
 <p>The <a href="#basic-data-fetching">Basic Data Fetching</a> functionality can be extended to fetching NOMAD archives.
 An archive is the processed data of an entry, which is stored on the file system as a binary file.
@@ -4887,7 +4887,7 @@ Thus, to fetch the contents of an archive with entry ID <code>&lt;example_entry_
 </code></pre></div>
 <p>This request can be perform in practice with <code>curl</code>:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>curl<span class="w"> </span>-X<span class="w"> </span><span class="s1">'POST'</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="s1">'https://nomad-lab.eu/prod/v1/api/v1/graph/query'</span><span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="s1">'https://nomad-lab.eu/backend/api/v1/graph/query'</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>-H<span class="w"> </span><span class="s1">'accept: application/json'</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span><span class="se">\</span>
 <a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>-d<span class="w"> </span><span class="s1">'{</span>
@@ -5874,7 +5874,7 @@ For example, the following query will list all uploads of the currently logged i
 They are similar to the metadata in the MongoDB database, but with more information.
 To fetch data from the Elasticsearch index, one can use the special token <code>search</code>.
 The top-level request configuration also supports the <code>query</code> field.
-This <code>query</code> field shall take a valid <code>Metadata</code> query object (which itself also contains a <code>query</code> field), see the endpoint <code>/entries/query</code> on the <a href="https://nomad-lab.eu/prod/v1/api/v1/extensions/docs" rel="noopener" target="_blank">NOMAD API Dashboard</a> for more details.</p>
+This <code>query</code> field shall take a valid <code>Metadata</code> query object (which itself also contains a <code>query</code> field), see the endpoint <code>/entries/query</code> on the <a href="https://nomad-lab.eu/backend/api/v1/extensions/docs" rel="noopener" target="_blank">NOMAD API Dashboard</a> for more details.</p>
 <p>The following query fetches all entries created since 2025 that are visible to the logged in user:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a><span class="p">{</span>
 <a id="__codelineno-47-2" name="__codelineno-47-2" href="#__codelineno-47-2"></a><span class="w">   </span><span class="nt">"search"</span><span class="p">:{</span>
