@@ -139,7 +139,9 @@ to the current project folder.
 
     - Stripping is filename-based. Ensure `POTCAR` appears in the filename for licensed files.
     - `POTCAR` files **must be uncompressed** for automated stripping to work. Compressed files (e.g., `POTCAR.gz`) will not be properly processed and may be entirely removed without creating stripped versions.
-    - If an Oasis retains original `POTCAR` files in unpublished projects, do **not** temporarily make those projects publicly visible while they contain licensed material.
+    - Oasis operators who disable `process.exclude_potcar` must ensure their
+      deployment restricts access to retained original `POTCAR` files in
+      public, unpublished projects.
 
     While NOMAD provides this service as a courtesy, **uploaders remain responsible for
     verifying overall license compliance**.
