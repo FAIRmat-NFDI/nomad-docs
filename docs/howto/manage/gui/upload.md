@@ -123,10 +123,13 @@ to the current project folder.
     considered copyrighted material. To ensure compliance, NOMAD automatically handles `POTCAR`
     files for you.
 
-    During processing, NOMAD creates `POTCAR.stripped` files and, by default,
-    removes the original `POTCAR` files. If a deployment retains the originals
-    in an unpublished project, they are still excluded from the published files.
-    The stripped files contain a checksum of the original file at the top,
+    On NOMAD Central, processing creates `POTCAR.stripped` files and removes the
+    original `POTCAR` files from the unpublished project. NOMAD Oasis does the
+    same by default. Oasis operators can set
+    [`process.exclude_potcar`](../../../reference/config.md#process) to `false`
+    in their [`configs/nomad.yaml`](https://github.com/FAIRmat-NFDI/nomad-distro-template/blob/main/configs/nomad.yaml){:target="_blank" rel="noopener"}
+    to retain the originals in unpublished projects; publication still excludes
+    them. The stripped files contain a checksum of the original file at the top,
     followed by metadata headers extracted from the original POTCAR, but not
     the proprietary pseudopotential data. Once the published files are publicly
     accessible, only the stripped POTCAR copies can be downloaded.
@@ -135,7 +138,7 @@ to the current project folder.
 
     - Stripping is filename-based. Ensure `POTCAR` appears in the filename for licensed files.
     - `POTCAR` files **must be uncompressed** for automated stripping to work. Compressed files (e.g., `POTCAR.gz`) will not be properly processed and may be entirely removed without creating stripped versions.
-    - If a deployment retains original `POTCAR` files in unpublished projects, do **not** temporarily make those projects publicly visible while they contain licensed material.
+    - If an Oasis retains original `POTCAR` files in unpublished projects, do **not** temporarily make those projects publicly visible while they contain licensed material.
 
     While NOMAD provides this service as a courtesy, **uploaders remain responsible for
     verifying overall license compliance**.
