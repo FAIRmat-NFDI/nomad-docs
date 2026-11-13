@@ -2276,17 +2276,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#widgetscatterplot" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        WidgetScatterPlot
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#widgethistogram" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2302,6 +2291,17 @@
     <span class="md-ellipsis">
       
         AxisScale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#widgetscatterplot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WidgetScatterPlot
       
     </span>
   </a>
@@ -4697,17 +4697,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#widgetscatterplot" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        WidgetScatterPlot
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#widgethistogram" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4723,6 +4712,17 @@
     <span class="md-ellipsis">
       
         AxisScale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#widgetscatterplot" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        WidgetScatterPlot
       
     </span>
   </a>
@@ -6074,74 +6074,6 @@ the path without the need for specifying a schema, e.g. <code>results.material.s
 </tr>
 </tbody>
 </table>
-<h4 id="widgetscatterplot">WidgetScatterPlot<a class="headerlink" href="#widgetscatterplot" title="Permanent link">¶</a></h4>
-<p>Scatter plot widget configuration.</p>
-<table>
-<thead>
-<tr>
-<th>name</th>
-<th>type</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>layout</td>
-<td><code>dict[str, Layout]</code></td>
-<td>Defines widget size and grid positioning for different breakpoints. The following breakpoints are supported: <code>sm</code>, <code>md</code>, <code>lg</code>, <code>xl</code> and <code>xxl</code>.<br><em>default:</em> <code>PydanticUndefined</code></td>
-</tr>
-<tr>
-<td>x</td>
-<td><code>AxisLimitedScale | str</code></td>
-<td>Configures the information source and display options for the x-axis.<br><em>default:</em> <code>PydanticUndefined</code></td>
-</tr>
-<tr>
-<td>y</td>
-<td><code>AxisLimitedScale | str</code></td>
-<td>Configures the information source and display options for the y-axis.<br><em>default:</em> <code>PydanticUndefined</code></td>
-</tr>
-<tr>
-<td>size</td>
-<td><code>int</code></td>
-<td>Maximum number of entries to fetch. Notice that the actual number may be more or less, depending on how many entries exist and how many of the requested values each entry contains.<br><em>default:</em> <code>1000</code><br><strong>deprecated</strong></td>
-</tr>
-<tr>
-<td>sample_size</td>
-<td><code>int</code></td>
-<td>Maximum number of samples to fetch. Notice that the actual number of data points may be more or less, depending on how many entries exist and how many of the requested values each entry contains.<br><em>default:</em> <code>1000</code></td>
-</tr>
-<tr>
-<td>drag_mode</td>
-<td><code>str</code></td>
-<td>Action to perform on mouse drag.<br><em>default:</em> <code>DragModeEnum.ZOOM</code></td>
-</tr>
-<tr>
-<td>autorange</td>
-<td><code>bool</code></td>
-<td>Whether to automatically set the range according to the data limits.<br><em>default:</em> <code>True</code></td>
-</tr>
-<tr>
-<td>title</td>
-<td><code>str | None</code></td>
-<td>Custom widget title. If not specified, a widget-specific default title is used.</td>
-</tr>
-<tr>
-<td>description</td>
-<td><code>str | None</code></td>
-<td>Optional description of the widget and the data it is showing. Can contain markdown notation. If populated, an icon is shown next to the title that can be clicked to show the description.</td>
-</tr>
-<tr>
-<td>markers</td>
-<td><code>Markers | None</code></td>
-<td>Configures the information source and display options for the markers.</td>
-</tr>
-<tr>
-<td>color</td>
-<td><code>str | None</code></td>
-<td>Quantity used for coloring points. Note that this field is deprecated and <code>markers</code> should be used instead.</td>
-</tr>
-</tbody>
-</table>
 <h4 id="widgethistogram">WidgetHistogram<a class="headerlink" href="#widgethistogram" title="Permanent link">¶</a></h4>
 <p>Histogram widget configuration.</p>
 <table>
@@ -6230,6 +6162,74 @@ the path without the need for specifying a schema, e.g. <code>results.material.s
 <td>scale</td>
 <td><code>str | None</code></td>
 <td>Defines the axis scaling. Defaults to linear scaling.<br><em>default:</em> <code>ScaleEnum.LINEAR</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="widgetscatterplot">WidgetScatterPlot<a class="headerlink" href="#widgetscatterplot" title="Permanent link">¶</a></h4>
+<p>Scatter plot widget configuration.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>layout</td>
+<td><code>dict[str, Layout]</code></td>
+<td>Defines widget size and grid positioning for different breakpoints. The following breakpoints are supported: <code>sm</code>, <code>md</code>, <code>lg</code>, <code>xl</code> and <code>xxl</code>.<br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>x</td>
+<td><code>AxisLimitedScale | str</code></td>
+<td>Configures the information source and display options for the x-axis.<br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>y</td>
+<td><code>AxisLimitedScale | str</code></td>
+<td>Configures the information source and display options for the y-axis.<br><em>default:</em> <code>PydanticUndefined</code></td>
+</tr>
+<tr>
+<td>size</td>
+<td><code>int</code></td>
+<td>Maximum number of entries to fetch. Notice that the actual number may be more or less, depending on how many entries exist and how many of the requested values each entry contains.<br><em>default:</em> <code>1000</code><br><strong>deprecated</strong></td>
+</tr>
+<tr>
+<td>sample_size</td>
+<td><code>int</code></td>
+<td>Maximum number of samples to fetch. Notice that the actual number of data points may be more or less, depending on how many entries exist and how many of the requested values each entry contains.<br><em>default:</em> <code>1000</code></td>
+</tr>
+<tr>
+<td>drag_mode</td>
+<td><code>str</code></td>
+<td>Action to perform on mouse drag.<br><em>default:</em> <code>DragModeEnum.ZOOM</code></td>
+</tr>
+<tr>
+<td>autorange</td>
+<td><code>bool</code></td>
+<td>Whether to automatically set the range according to the data limits.<br><em>default:</em> <code>True</code></td>
+</tr>
+<tr>
+<td>title</td>
+<td><code>str | None</code></td>
+<td>Custom widget title. If not specified, a widget-specific default title is used.</td>
+</tr>
+<tr>
+<td>description</td>
+<td><code>str | None</code></td>
+<td>Optional description of the widget and the data it is showing. Can contain markdown notation. If populated, an icon is shown next to the title that can be clicked to show the description.</td>
+</tr>
+<tr>
+<td>markers</td>
+<td><code>Markers | None</code></td>
+<td>Configures the information source and display options for the markers.</td>
+</tr>
+<tr>
+<td>color</td>
+<td><code>str | None</code></td>
+<td>Quantity used for coloring points. Note that this field is deprecated and <code>markers</code> should be used instead.</td>
 </tr>
 </tbody>
 </table>

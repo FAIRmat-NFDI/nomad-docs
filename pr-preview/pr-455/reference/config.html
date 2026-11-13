@@ -4400,17 +4400,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#normalizerentrypoint" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        NormalizerEntryPoint
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#exampleuploadentrypoint" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4437,6 +4426,17 @@
     <span class="md-ellipsis">
       
         AppEntryPoint
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#normalizerentrypoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NormalizerEntryPoint
       
     </span>
   </a>
@@ -5593,17 +5593,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#normalizerentrypoint" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        NormalizerEntryPoint
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#exampleuploadentrypoint" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5630,6 +5619,17 @@
     <span class="md-ellipsis">
       
         AppEntryPoint
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#normalizerentrypoint" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        NormalizerEntryPoint
       
     </span>
   </a>
@@ -8636,44 +8636,6 @@ elements and defining the configuration of each element.</p>
 </tr>
 </tbody>
 </table>
-<h4 id="normalizerentrypoint">NormalizerEntryPoint<a class="headerlink" href="#normalizerentrypoint" title="Permanent link">¶</a></h4>
-<p>Base model for normalizer plugin entry points.</p>
-<table>
-<thead>
-<tr>
-<th>name</th>
-<th>type</th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>execution_order</td>
-<td><code>int</code></td>
-<td>Integer that determines the execution order of this normalizer within the processing of an individual entry. Normalizers with the lowest execution order are run first.<br><em>default:</em> <code>0</code></td>
-</tr>
-<tr>
-<td>id_url_safe</td>
-<td><code>str | None</code></td>
-<td>URL-safe identifier for the plugin entry point. If no custom name is provided, one is automatically generated from the entry point id. Any custom identifier is checked for URL-safety and for collisions with other entry points with the same type within the same NOMAD deployment.</td>
-</tr>
-<tr>
-<td>name</td>
-<td><code>str | None</code></td>
-<td>Name of the plugin entry point.</td>
-</tr>
-<tr>
-<td>description</td>
-<td><code>str | None</code></td>
-<td>A human readable description of the plugin entry point.</td>
-</tr>
-<tr>
-<td>level</td>
-<td><code>int | None</code></td>
-<td><strong>deprecated</strong></td>
-</tr>
-</tbody>
-</table>
 <h4 id="exampleuploadentrypoint">ExampleUploadEntryPoint<a class="headerlink" href="#exampleuploadentrypoint" title="Permanent link">¶</a></h4>
 <p>Base model for example upload plugin entry points.</p>
 <table>
@@ -8772,6 +8734,44 @@ resource that can be downloaded.</p>
 <td>description</td>
 <td><code>str | None</code></td>
 <td>A human readable description of the plugin entry point.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="normalizerentrypoint">NormalizerEntryPoint<a class="headerlink" href="#normalizerentrypoint" title="Permanent link">¶</a></h4>
+<p>Base model for normalizer plugin entry points.</p>
+<table>
+<thead>
+<tr>
+<th>name</th>
+<th>type</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>execution_order</td>
+<td><code>int</code></td>
+<td>Integer that determines the execution order of this normalizer within the processing of an individual entry. Normalizers with the lowest execution order are run first.<br><em>default:</em> <code>0</code></td>
+</tr>
+<tr>
+<td>id_url_safe</td>
+<td><code>str | None</code></td>
+<td>URL-safe identifier for the plugin entry point. If no custom name is provided, one is automatically generated from the entry point id. Any custom identifier is checked for URL-safety and for collisions with other entry points with the same type within the same NOMAD deployment.</td>
+</tr>
+<tr>
+<td>name</td>
+<td><code>str | None</code></td>
+<td>Name of the plugin entry point.</td>
+</tr>
+<tr>
+<td>description</td>
+<td><code>str | None</code></td>
+<td>A human readable description of the plugin entry point.</td>
+</tr>
+<tr>
+<td>level</td>
+<td><code>int | None</code></td>
+<td><strong>deprecated</strong></td>
 </tr>
 </tbody>
 </table>
