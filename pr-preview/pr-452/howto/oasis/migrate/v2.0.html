@@ -2719,10 +2719,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-copy-settings-and-mapping-then-create-the-es9-index" class="md-nav__link">
+  <a href="#2-create-the-es9-index-reindex-and-verify" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Copy Settings and Mapping, Then Create the ES9 Index
+        2. Create the ES9 Index, Reindex, and Verify
       
     </span>
   </a>
@@ -2730,32 +2730,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-reindex-from-es7-to-es9" class="md-nav__link">
+  <a href="#3-remove-the-temporary-es7-container" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Reindex from ES7 to ES9
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-verify-document-counts" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. Verify Document Counts
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#5-remove-the-temporary-es7-container" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. Remove the Temporary ES7 Container
+        3. Remove the Temporary ES7 Container
       
     </span>
   </a>
@@ -4098,10 +4076,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#2-copy-settings-and-mapping-then-create-the-es9-index" class="md-nav__link">
+  <a href="#2-create-the-es9-index-reindex-and-verify" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Copy Settings and Mapping, Then Create the ES9 Index
+        2. Create the ES9 Index, Reindex, and Verify
       
     </span>
   </a>
@@ -4109,32 +4087,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#3-reindex-from-es7-to-es9" class="md-nav__link">
+  <a href="#3-remove-the-temporary-es7-container" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Reindex from ES7 to ES9
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#4-verify-document-counts" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. Verify Document Counts
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#5-remove-the-temporary-es7-container" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. Remove the Temporary ES7 Container
+        3. Remove the Temporary ES7 Container
       
     </span>
   </a>
@@ -4311,10 +4267,7 @@
 <li><strong>Option 1: Reindex data directly from ES7 to ES9 (running two containers)</strong> — Uses the temporary <code>docker-compose.es7.yaml</code> overlay to run ES7 alongside the main ES9 service and copy the existing index through Elasticsearch's remote <code>_reindex</code> API. This is usually faster because it copies indexed documents without reading archive files.</li>
 <li><strong>Option 2: Start with a fresh ES9 index and reindex uploads</strong> — Rebuilds the search index from MongoDB and the archive files (<code>.volumes/fs</code>), which are NOMAD's source of truth. This is simpler but can be considerably slower because NOMAD must read and index every upload again. ES7 and the overlay are not needed for this option.</li>
 </ol>
-<p><strong>Option 1 requires <code>jq</code> installed on the host</strong> (not inside the containers). Check with <code>jq --version</code>. If it is not installed, install it with your host's package manager, for example on Debian/Ubuntu:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>sudo<span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>jq
-</code></pre></div>
-<p>If you cannot or do not want to install <code>jq</code>, use <a href="#option-2-start-with-a-fresh-es9-index-and-reindex-uploads">Option 2</a>, which does not require it. Complete the shared preparation steps below before following either option.</p>
+<p><strong>Option 1 requires Python 3 on the host</strong> (not inside the containers) and uses only its standard library. Check with <code>python3 --version</code>. If Python 3 is unavailable, use <a href="#option-2-start-with-a-fresh-es9-index-and-reindex-uploads">Option 2</a>, which does not require Python on the host. Complete the shared preparation steps below before following either option.</p>
 <p>As a rough benchmark, migrating a project with 10,000 perovskite entries took about <strong>1 minute with Option 1</strong> and <strong>15 minutes with Option 2</strong> on the same machine. Actual times depend on your data and hardware.</p>
 <p>Both options keep the NOMAD app and workers stopped during indexing. The main <code>elastic</code> service uses its permanent ES9 volume throughout, so no volume switch is needed after migration.</p>
 <div class="admonition note">
@@ -4326,21 +4279,21 @@
 <ol>
 <li>
 <p><strong>Back up MongoDB and file storage</strong> while your existing installation is still running:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>bash<span class="w"> </span>scripts/backup-mongo.sh
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>bash<span class="w"> </span>scripts/backup-mongo.sh
 </code></pre></div>
 <p>Verify the dump and back up <code>.volumes/fs</code>. See <a href="../administer.html#backups">Backups</a>.</p>
 </li>
 <li>
 <p><strong>Record the effective entries index name</strong> before stopping the old app. Configuration overrides can change it from the value in <code>configs/nomad.yaml</code>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nv">INDEX</span><span class="o">=</span><span class="k">$(</span>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-T<span class="w"> </span>app<span class="w"> </span>python<span class="w"> </span>-c<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="s1">'from nomad.config import config; print(config.elastic.entries_index)'</span><span class="k">)</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nb">printf</span><span class="w"> </span><span class="s1">'Entries index: %s\n'</span><span class="w"> </span><span class="s2">"</span><span class="nv">$INDEX</span><span class="s2">"</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nv">INDEX</span><span class="o">=</span><span class="k">$(</span>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-T<span class="w"> </span>app<span class="w"> </span>python<span class="w"> </span>-c<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">  </span><span class="s1">'from nomad.config import config; print(config.elastic.entries_index)'</span><span class="k">)</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nb">printf</span><span class="w"> </span><span class="s1">'Entries index: %s\n'</span><span class="w"> </span><span class="s2">"</span><span class="nv">$INDEX</span><span class="s2">"</span>
 </code></pre></div>
 <p>It is normally <code>nomad_oasis_entries_v1</code> for an Oasis or <code>nomad_entries_v1</code> if unset. If you open a new shell later, set <code>INDEX</code> to the recorded value before continuing.</p>
 </li>
 <li>
 <p><strong>Stop the old stack before updating its Compose configuration</strong>:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>down
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>down
 </code></pre></div>
 <p>Do not pass <code>-v</code> or remove database volumes. Keep the app and workers stopped until indexing is complete.</p>
 </li>
@@ -4353,7 +4306,7 @@
 <li><code>NOMAD_ELASTIC_VERSION: 9</code> in the NOMAD services.</li>
 </ul>
 <p>Keep your entries index name unchanged. If you customized volume names, preserve the MongoDB volume and ensure ES9 uses a new, separate volume. <strong>Never mount the ES7 data volume in ES9.</strong> Pull the updated images:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>pull
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>pull
 </code></pre></div>
 </li>
 </ol>
@@ -4362,95 +4315,116 @@
 <p>The <code>docker-compose.es7.yaml</code> file is a migration overlay used together with the main Compose file. It adds an <code>elastic7</code> service using Elasticsearch <code>7.17.28</code> and the existing <code>nomad_oasis_elastic</code> volume, and allows the main ES9 service to reindex from <code>elastic7:9200</code>. Both services share the main Compose network. Elasticsearch ports remain internal to Docker.</p>
 <p>The ES7 volume is declared external: Compose fails if it does not exist instead of silently creating an empty source volume. If your old volume has a different name, update <code>volumes.elastic7.name</code> in the overlay first. If you used a customized ES7 image or configuration, carry the required settings into <code>elastic7</code> as well.</p>
 <h4 id="1-start-only-es7-and-es9">1. Start Only ES7 and ES9<a class="headerlink" href="#1-start-only-es7-and-es9" title="Permanent link">¶</a></h4>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>-f<span class="w"> </span>docker-compose.yaml<span class="w"> </span>-f<span class="w"> </span>docker-compose.es7.yaml<span class="w"> </span>pull<span class="w"> </span>elastic7
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>docker<span class="w"> </span>compose<span class="w"> </span>-f<span class="w"> </span>docker-compose.yaml<span class="w"> </span>-f<span class="w"> </span>docker-compose.es7.yaml<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">  </span>up<span class="w"> </span>-d<span class="w"> </span>--wait<span class="w"> </span>--wait-timeout<span class="w"> </span><span class="m">360</span><span class="w"> </span>elastic<span class="w"> </span>elastic7
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>-f<span class="w"> </span>docker-compose.yaml<span class="w"> </span>-f<span class="w"> </span>docker-compose.es7.yaml<span class="w"> </span>pull<span class="w"> </span>elastic7
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>docker<span class="w"> </span>compose<span class="w"> </span>-f<span class="w"> </span>docker-compose.yaml<span class="w"> </span>-f<span class="w"> </span>docker-compose.es7.yaml<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">  </span>up<span class="w"> </span>-d<span class="w"> </span>--wait<span class="w"> </span>--wait-timeout<span class="w"> </span><span class="m">360</span><span class="w"> </span>elastic<span class="w"> </span>elastic7
 </code></pre></div>
 <p>Do not start the app or workers yet. The destination entries index must not already exist in ES9; if an earlier migration attempt created it, resolve that partial migration before continuing.</p>
 <p>HTTP requests run through the Elasticsearch containers, so no host port bindings are needed.</p>
-<h4 id="2-copy-settings-and-mapping-then-create-the-es9-index">2. Copy Settings and Mapping, Then Create the ES9 Index<a class="headerlink" href="#2-copy-settings-and-mapping-then-create-the-es9-index" title="Permanent link">¶</a></h4>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nb">set</span><span class="w"> </span>-o<span class="w"> </span>pipefail
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="c1"># Export settings and mapping from ES7.</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>docker<span class="w"> </span>compose<span class="w"> </span>-f<span class="w"> </span>docker-compose.yaml<span class="w"> </span>-f<span class="w"> </span>docker-compose.es7.yaml<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">  </span><span class="nb">exec</span><span class="w"> </span>-T<span class="w"> </span>elastic7<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">  </span>curl<span class="w"> </span>-fsS<span class="w"> </span><span class="s2">"http://localhost:9200/</span><span class="si">${</span><span class="nv">INDEX</span><span class="si">}</span><span class="s2">/_settings?flat_settings=false"</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">  </span>&gt;<span class="w"> </span><span class="s2">"/tmp/</span><span class="si">${</span><span class="nv">INDEX</span><span class="si">}</span><span class="s2">-settings.json"</span>
-<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>docker<span class="w"> </span>compose<span class="w"> </span>-f<span class="w"> </span>docker-compose.yaml<span class="w"> </span>-f<span class="w"> </span>docker-compose.es7.yaml<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">  </span><span class="nb">exec</span><span class="w"> </span>-T<span class="w"> </span>elastic7<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">  </span>curl<span class="w"> </span>-fsS<span class="w"> </span><span class="s2">"http://localhost:9200/</span><span class="si">${</span><span class="nv">INDEX</span><span class="si">}</span><span class="s2">/_mapping"</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">  </span>&gt;<span class="w"> </span><span class="s2">"/tmp/</span><span class="si">${</span><span class="nv">INDEX</span><span class="si">}</span><span class="s2">-mapping.json"</span>
-<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>
-<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="c1"># Create the ES9 index with matching analysis settings and no replicas.</span>
-<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>jq<span class="w"> </span>-n<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="w">  </span>--arg<span class="w"> </span>index<span class="w"> </span><span class="s2">"</span><span class="nv">$INDEX</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="w">  </span>--slurpfile<span class="w"> </span>settings<span class="w"> </span><span class="s2">"/tmp/</span><span class="si">${</span><span class="nv">INDEX</span><span class="si">}</span><span class="s2">-settings.json"</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="w">  </span>--slurpfile<span class="w"> </span>mapping<span class="w"> </span><span class="s2">"/tmp/</span><span class="si">${</span><span class="nv">INDEX</span><span class="si">}</span><span class="s2">-mapping.json"</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="w">  </span><span class="s1">'{</span>
-<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="s1">    settings: {</span>
-<a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a><span class="s1">      number_of_shards:</span>
-<a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a><span class="s1">        (($settings[0][$index].settings.index.number_of_shards // "1") | tonumber),</span>
-<a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a><span class="s1">      number_of_replicas: 0,</span>
-<a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a><span class="s1">      analysis: ($settings[0][$index].settings.index.analysis // {})</span>
-<a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a><span class="s1">    },</span>
-<a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a><span class="s1">    mappings: $mapping[0][$index].mappings</span>
-<a id="__codelineno-6-26" name="__codelineno-6-26" href="#__codelineno-6-26"></a><span class="s1">  }'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-6-27" name="__codelineno-6-27" href="#__codelineno-6-27"></a><span class="w">  </span>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-T<span class="w"> </span>elastic<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-6-28" name="__codelineno-6-28" href="#__codelineno-6-28"></a><span class="w">    </span>curl<span class="w"> </span>-sS<span class="w"> </span>--fail-with-body<span class="w"> </span>-X<span class="w"> </span>PUT<span class="w"> </span><span class="s2">"http://localhost:9200/</span><span class="si">${</span><span class="nv">INDEX</span><span class="si">}</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-6-29" name="__codelineno-6-29" href="#__codelineno-6-29"></a><span class="w">      </span>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span>--data-binary<span class="w"> </span>@-
+<h4 id="2-create-the-es9-index-reindex-and-verify">2. Create the ES9 Index, Reindex, and Verify<a class="headerlink" href="#2-create-the-es9-index-reindex-and-verify" title="Permanent link">¶</a></h4>
+<p>Run the entire block below in the same shell where you set <code>INDEX</code>. It copies the settings and mapping, creates the destination index, reindexes from ES7, and verifies the response and document counts. If you use a custom Compose project name, add <code>"-p", "your-project-name"</code> to the <code>compose</code> list after <code>"compose"</code>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>python3<span class="w"> </span>-<span class="w"> </span><span class="s2">"</span><span class="nv">$INDEX</span><span class="s2">"</span><span class="w"> </span><span class="s">&lt;&lt;'PY'</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="s">import json</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="s">import subprocess</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="s">import sys</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="s">import tempfile</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="s">from pathlib import Path</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="s">from urllib.parse import quote</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="s">index = sys.argv[1]</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="s">if not index:</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="s">    sys.exit("INDEX is empty. Set it to the recorded entries index name first.")</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="s">index_path = quote(index, safe="")</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="s">compose = [</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="s">    "docker", "compose",</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="s">    "-f", "docker-compose.yaml", "-f", "docker-compose.es7.yaml",</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="s">]</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="s">def request(service, path, method="GET", body=None):</span>
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a><span class="s">    command = compose + [</span>
+<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="s">        "exec", "-T", service, "curl", "-fsS",</span>
+<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a><span class="s">        "-X", method, "http://localhost:9200/" + path,</span>
+<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a><span class="s">    ]</span>
+<a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a><span class="s">    if body is not None:</span>
+<a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a><span class="s">        command += ["-H", "Content-Type: application/json", "--data-binary", "@-"]</span>
+<a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a><span class="s">    response = subprocess.run(</span>
+<a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a><span class="s">        command,</span>
+<a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a><span class="s">        input=json.dumps(body) if body is not None else None,</span>
+<a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a><span class="s">        stdout=subprocess.PIPE,</span>
+<a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a><span class="s">        text=True,</span>
+<a id="__codelineno-5-31" name="__codelineno-5-31" href="#__codelineno-5-31"></a><span class="s">        check=True,</span>
+<a id="__codelineno-5-32" name="__codelineno-5-32" href="#__codelineno-5-32"></a><span class="s">    )</span>
+<a id="__codelineno-5-33" name="__codelineno-5-33" href="#__codelineno-5-33"></a><span class="s">    return json.loads(response.stdout)</span>
+<a id="__codelineno-5-34" name="__codelineno-5-34" href="#__codelineno-5-34"></a>
+<a id="__codelineno-5-35" name="__codelineno-5-35" href="#__codelineno-5-35"></a>
+<a id="__codelineno-5-36" name="__codelineno-5-36" href="#__codelineno-5-36"></a><span class="s">print("Reading ES7 settings and mapping...", flush=True)</span>
+<a id="__codelineno-5-37" name="__codelineno-5-37" href="#__codelineno-5-37"></a><span class="s">settings = request("elastic7", index_path + "/_settings?flat_settings=false")</span>
+<a id="__codelineno-5-38" name="__codelineno-5-38" href="#__codelineno-5-38"></a><span class="s">mapping = request("elastic7", index_path + "/_mapping")</span>
+<a id="__codelineno-5-39" name="__codelineno-5-39" href="#__codelineno-5-39"></a><span class="s">source_settings = settings[index]["settings"]["index"]</span>
+<a id="__codelineno-5-40" name="__codelineno-5-40" href="#__codelineno-5-40"></a>
+<a id="__codelineno-5-41" name="__codelineno-5-41" href="#__codelineno-5-41"></a><span class="s">print("Creating the ES9 index...", flush=True)</span>
+<a id="__codelineno-5-42" name="__codelineno-5-42" href="#__codelineno-5-42"></a><span class="s">created = request("elastic", index_path, method="PUT", body={</span>
+<a id="__codelineno-5-43" name="__codelineno-5-43" href="#__codelineno-5-43"></a><span class="s">    "settings": {</span>
+<a id="__codelineno-5-44" name="__codelineno-5-44" href="#__codelineno-5-44"></a><span class="s">        "number_of_shards": int(source_settings.get("number_of_shards", 1)),</span>
+<a id="__codelineno-5-45" name="__codelineno-5-45" href="#__codelineno-5-45"></a><span class="s">        "number_of_replicas": 0,</span>
+<a id="__codelineno-5-46" name="__codelineno-5-46" href="#__codelineno-5-46"></a><span class="s">        "analysis": source_settings.get("analysis", {}),</span>
+<a id="__codelineno-5-47" name="__codelineno-5-47" href="#__codelineno-5-47"></a><span class="s">    },</span>
+<a id="__codelineno-5-48" name="__codelineno-5-48" href="#__codelineno-5-48"></a><span class="s">    "mappings": mapping[index]["mappings"],</span>
+<a id="__codelineno-5-49" name="__codelineno-5-49" href="#__codelineno-5-49"></a><span class="s">})</span>
+<a id="__codelineno-5-50" name="__codelineno-5-50" href="#__codelineno-5-50"></a><span class="s">if created.get("acknowledged") is not True:</span>
+<a id="__codelineno-5-51" name="__codelineno-5-51" href="#__codelineno-5-51"></a><span class="s">    sys.exit("Index creation was not acknowledged. Inspect ES9 before continuing.")</span>
+<a id="__codelineno-5-52" name="__codelineno-5-52" href="#__codelineno-5-52"></a>
+<a id="__codelineno-5-53" name="__codelineno-5-53" href="#__codelineno-5-53"></a><span class="s">print("Reindexing from ES7 to ES9; waiting for completion...", flush=True)</span>
+<a id="__codelineno-5-54" name="__codelineno-5-54" href="#__codelineno-5-54"></a><span class="s">result = request(</span>
+<a id="__codelineno-5-55" name="__codelineno-5-55" href="#__codelineno-5-55"></a><span class="s">    "elastic", "_reindex?wait_for_completion=true&amp;refresh=true",</span>
+<a id="__codelineno-5-56" name="__codelineno-5-56" href="#__codelineno-5-56"></a><span class="s">    method="POST", body={</span>
+<a id="__codelineno-5-57" name="__codelineno-5-57" href="#__codelineno-5-57"></a><span class="s">        "source": {</span>
+<a id="__codelineno-5-58" name="__codelineno-5-58" href="#__codelineno-5-58"></a><span class="s">            "remote": {"host": "http://elastic7:9200"},</span>
+<a id="__codelineno-5-59" name="__codelineno-5-59" href="#__codelineno-5-59"></a><span class="s">            "index": index,</span>
+<a id="__codelineno-5-60" name="__codelineno-5-60" href="#__codelineno-5-60"></a><span class="s">            "size": 100,</span>
+<a id="__codelineno-5-61" name="__codelineno-5-61" href="#__codelineno-5-61"></a><span class="s">        },</span>
+<a id="__codelineno-5-62" name="__codelineno-5-62" href="#__codelineno-5-62"></a><span class="s">        "dest": {"index": index},</span>
+<a id="__codelineno-5-63" name="__codelineno-5-63" href="#__codelineno-5-63"></a><span class="s">    },</span>
+<a id="__codelineno-5-64" name="__codelineno-5-64" href="#__codelineno-5-64"></a><span class="s">)</span>
+<a id="__codelineno-5-65" name="__codelineno-5-65" href="#__codelineno-5-65"></a><span class="s">response_path = Path(tempfile.mkdtemp(prefix="nomad-es-migration-")) / "reindex.json"</span>
+<a id="__codelineno-5-66" name="__codelineno-5-66" href="#__codelineno-5-66"></a><span class="s">response_path.write_text(json.dumps(result, indent=2) + "\n")</span>
+<a id="__codelineno-5-67" name="__codelineno-5-67" href="#__codelineno-5-67"></a><span class="s">print(json.dumps(result, indent=2))</span>
+<a id="__codelineno-5-68" name="__codelineno-5-68" href="#__codelineno-5-68"></a><span class="s">print("Reindex response saved to:", response_path)</span>
+<a id="__codelineno-5-69" name="__codelineno-5-69" href="#__codelineno-5-69"></a><span class="s">if not (</span>
+<a id="__codelineno-5-70" name="__codelineno-5-70" href="#__codelineno-5-70"></a><span class="s">    result.get("timed_out") is False</span>
+<a id="__codelineno-5-71" name="__codelineno-5-71" href="#__codelineno-5-71"></a><span class="s">    and result.get("version_conflicts") == 0</span>
+<a id="__codelineno-5-72" name="__codelineno-5-72" href="#__codelineno-5-72"></a><span class="s">    and result.get("failures") == []</span>
+<a id="__codelineno-5-73" name="__codelineno-5-73" href="#__codelineno-5-73"></a><span class="s">):</span>
+<a id="__codelineno-5-74" name="__codelineno-5-74" href="#__codelineno-5-74"></a><span class="s">    sys.exit("Reindex validation failed. Inspect the response before continuing.")</span>
+<a id="__codelineno-5-75" name="__codelineno-5-75" href="#__codelineno-5-75"></a>
+<a id="__codelineno-5-76" name="__codelineno-5-76" href="#__codelineno-5-76"></a><span class="s">es7_count = request("elastic7", index_path + "/_count")["count"]</span>
+<a id="__codelineno-5-77" name="__codelineno-5-77" href="#__codelineno-5-77"></a><span class="s">es9_count = request("elastic", index_path + "/_count")["count"]</span>
+<a id="__codelineno-5-78" name="__codelineno-5-78" href="#__codelineno-5-78"></a><span class="s">print("ES7 count:", es7_count)</span>
+<a id="__codelineno-5-79" name="__codelineno-5-79" href="#__codelineno-5-79"></a><span class="s">print("ES9 count:", es9_count)</span>
+<a id="__codelineno-5-80" name="__codelineno-5-80" href="#__codelineno-5-80"></a><span class="s">if es7_count != es9_count:</span>
+<a id="__codelineno-5-81" name="__codelineno-5-81" href="#__codelineno-5-81"></a><span class="s">    sys.exit("Document counts do not match. Do not start the app or workers.")</span>
+<a id="__codelineno-5-82" name="__codelineno-5-82" href="#__codelineno-5-82"></a><span class="s">print("Migration verified successfully.")</span>
+<a id="__codelineno-5-83" name="__codelineno-5-83" href="#__codelineno-5-83"></a><span class="s">PY</span>
 </code></pre></div>
-<p>Check that index creation succeeds before proceeding.</p>
-<h4 id="3-reindex-from-es7-to-es9">3. Reindex from ES7 to ES9<a class="headerlink" href="#3-reindex-from-es7-to-es9" title="Permanent link">¶</a></h4>
-<p>Send the reindex request to ES9, using <code>http://elastic7:9200</code> as the source:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>jq<span class="w"> </span>-n<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span>--arg<span class="w"> </span>index<span class="w"> </span><span class="s2">"</span><span class="nv">$INDEX</span><span class="s2">"</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">  </span><span class="s1">'{</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="s1">    source: {</span>
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="s1">      remote: {host: "http://elastic7:9200"},</span>
-<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="s1">      index: $index,</span>
-<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="s1">      size: 100</span>
-<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="s1">    },</span>
-<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="s1">    dest: {index: $index}</span>
-<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="s1">  }'</span><span class="w"> </span><span class="p">|</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="w">  </span>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-T<span class="w"> </span>elastic<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="w">    </span>curl<span class="w"> </span>-fsS<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="w">      </span><span class="s2">"http://localhost:9200/_reindex?wait_for_completion=true&amp;refresh=true"</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="w">      </span>-H<span class="w"> </span><span class="s1">'Content-Type: application/json'</span><span class="w"> </span>--data-binary<span class="w"> </span>@-<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="w">  </span>&gt;<span class="w"> </span><span class="s2">"/tmp/</span><span class="si">${</span><span class="nv">INDEX</span><span class="si">}</span><span class="s2">-reindex.json"</span>
-<a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>
-<a id="__codelineno-7-17" name="__codelineno-7-17" href="#__codelineno-7-17"></a>jq<span class="w"> </span>.<span class="w"> </span><span class="s2">"/tmp/</span><span class="si">${</span><span class="nv">INDEX</span><span class="si">}</span><span class="s2">-reindex.json"</span>
-<a id="__codelineno-7-18" name="__codelineno-7-18" href="#__codelineno-7-18"></a>jq<span class="w"> </span>-e<span class="w"> </span><span class="s1">'(.timed_out == false) and (.version_conflicts == 0) and (.failures == [])'</span><span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-7-19" name="__codelineno-7-19" href="#__codelineno-7-19"></a><span class="w">  </span><span class="s2">"/tmp/</span><span class="si">${</span><span class="nv">INDEX</span><span class="si">}</span><span class="s2">-reindex.json"</span>
-</code></pre></div>
-<p>Wait for the request to finish. The final check must return <code>true</code>; an HTTP success alone does not rule out partial reindex failures. If the request is interrupted or fails, inspect ES9's reindex tasks and the destination index before retrying.</p>
-<h4 id="4-verify-document-counts">4. Verify Document Counts<a class="headerlink" href="#4-verify-document-counts" title="Permanent link">¶</a></h4>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nv">ES7_COUNT</span><span class="o">=</span><span class="k">$(</span>docker<span class="w"> </span>compose<span class="w"> </span>-f<span class="w"> </span>docker-compose.yaml<span class="w"> </span>-f<span class="w"> </span>docker-compose.es7.yaml<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="nb">exec</span><span class="w"> </span>-T<span class="w"> </span>elastic7<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">  </span>curl<span class="w"> </span>-fsS<span class="w"> </span><span class="s2">"http://localhost:9200/</span><span class="si">${</span><span class="nv">INDEX</span><span class="si">}</span><span class="s2">/_count"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>-er<span class="w"> </span><span class="s1">'.count'</span><span class="k">)</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="nv">ES9_COUNT</span><span class="o">=</span><span class="k">$(</span>docker<span class="w"> </span>compose<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-T<span class="w"> </span>elastic<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">  </span>curl<span class="w"> </span>-fsS<span class="w"> </span><span class="s2">"http://localhost:9200/</span><span class="si">${</span><span class="nv">INDEX</span><span class="si">}</span><span class="s2">/_count"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>jq<span class="w"> </span>-er<span class="w"> </span><span class="s1">'.count'</span><span class="k">)</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>
-<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="nb">printf</span><span class="w"> </span><span class="s1">'ES7 count: %s\nES9 count: %s\n'</span><span class="w"> </span><span class="s2">"</span><span class="nv">$ES7_COUNT</span><span class="s2">"</span><span class="w"> </span><span class="s2">"</span><span class="nv">$ES9_COUNT</span><span class="s2">"</span>
-<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="nb">test</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">"</span><span class="nv">$ES7_COUNT</span><span class="s2">"</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">test</span><span class="w"> </span>-n<span class="w"> </span><span class="s2">"</span><span class="nv">$ES9_COUNT</span><span class="s2">"</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">test</span><span class="w"> </span><span class="s2">"</span><span class="nv">$ES7_COUNT</span><span class="s2">"</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">"</span><span class="nv">$ES9_COUNT</span><span class="s2">"</span>
-</code></pre></div>
-<p>The counts must match and the reindex response must contain no failures before continuing.</p>
-<h4 id="5-remove-the-temporary-es7-container">5. Remove the Temporary ES7 Container<a class="headerlink" href="#5-remove-the-temporary-es7-container" title="Permanent link">¶</a></h4>
+<p>Continue only after the script prints <code>Migration verified successfully.</code> It stops on HTTP errors, invalid JSON, reindex failures, or mismatched document counts; an HTTP success alone does not rule out partial reindex failures. If the script is interrupted or fails, inspect ES9's reindex tasks and the destination index before retrying. Do not rerun it blindly: the destination index may already exist, and a reindex task may still be running.</p>
+<h4 id="3-remove-the-temporary-es7-container">3. Remove the Temporary ES7 Container<a class="headerlink" href="#3-remove-the-temporary-es7-container" title="Permanent link">¶</a></h4>
 <p>Stop and remove only the temporary service, keeping its volume:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>-f<span class="w"> </span>docker-compose.yaml<span class="w"> </span>-f<span class="w"> </span>docker-compose.es7.yaml<span class="w"> </span>stop<span class="w"> </span>elastic7
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>docker<span class="w"> </span>compose<span class="w"> </span>-f<span class="w"> </span>docker-compose.yaml<span class="w"> </span>-f<span class="w"> </span>docker-compose.es7.yaml<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span>elastic7
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>-f<span class="w"> </span>docker-compose.yaml<span class="w"> </span>-f<span class="w"> </span>docker-compose.es7.yaml<span class="w"> </span>stop<span class="w"> </span>elastic7
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>docker<span class="w"> </span>compose<span class="w"> </span>-f<span class="w"> </span>docker-compose.yaml<span class="w"> </span>-f<span class="w"> </span>docker-compose.es7.yaml<span class="w"> </span>rm<span class="w"> </span>-f<span class="w"> </span>elastic7
 </code></pre></div>
 <p>Continue with <a href="#start-the-upgraded-oasis">Start the Upgraded Oasis</a>. Use only the main Compose file from this point onward. It keeps the migrated ES9 volume and removes the temporary remote-reindex setting when it recreates <code>elastic</code>.</p>
 <h3 id="option-2-start-with-a-fresh-es9-index-and-reindex-uploads">Option 2: Start with a Fresh ES9 Index and Reindex Uploads<a class="headerlink" href="#option-2-start-with-a-fresh-es9-index-and-reindex-uploads" title="Permanent link">¶</a></h3>
 <p>In NOMAD, <strong>MongoDB and the archive files (<code>.volumes/fs</code>) are the single source of truth</strong>. This option rebuilds the index in the separate ES9 volume and leaves the old ES7 volume untouched. Do not use the ES7 overlay or start ES7 for this option.</p>
 <h4 id="1-start-only-es9-and-mongodb">1. Start Only ES9 and MongoDB<a class="headerlink" href="#1-start-only-es9-and-mongodb" title="Permanent link">¶</a></h4>
 <p>After completing the preparation steps above:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>--wait<span class="w"> </span>--wait-timeout<span class="w"> </span><span class="m">360</span><span class="w"> </span>elastic<span class="w"> </span>mongo
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>--wait<span class="w"> </span>--wait-timeout<span class="w"> </span><span class="m">360</span><span class="w"> </span>elastic<span class="w"> </span>mongo
 </code></pre></div>
 <p>Compose creates the separate <code>nomad_oasis_elastic_9</code> volume. The app, workers, and proxy remain stopped.</p>
 <h4 id="2-run-the-indexing-cli-command">2. Run the Indexing CLI Command<a class="headerlink" href="#2-run-the-indexing-cli-command" title="Permanent link">¶</a></h4>
 <p>Use a one-off container from the upgraded NOMAD app image to index all uploads:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>--no-deps<span class="w"> </span>app<span class="w"> </span><span class="se">\</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span>python<span class="w"> </span>-m<span class="w"> </span>nomad.cli<span class="w"> </span>admin<span class="w"> </span>uploads<span class="w"> </span>index<span class="w"> </span>--parallel<span class="w"> </span><span class="m">4</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>--no-deps<span class="w"> </span>app<span class="w"> </span><span class="se">\</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span>python<span class="w"> </span>-m<span class="w"> </span>nomad.cli<span class="w"> </span>admin<span class="w"> </span>uploads<span class="w"> </span>index<span class="w"> </span>--parallel<span class="w"> </span><span class="m">4</span>
 </code></pre></div>
 <p>The container uses the app's environment, configuration, and <code>.volumes/fs</code> mount. <code>--no-deps</code> prevents Compose from starting the app's other dependencies; only MongoDB and ES9 are needed for indexing.</p>
 <p>Wait for indexing to finish and check its output for failed uploads or indexing errors. Resolve any errors before starting the remaining services.</p>
@@ -4464,13 +4438,13 @@
 <p>If startup fails with an error such as <code>env file /path/to/oasis/.env.north not found: stat /path/to/oasis/.env.north: no such file or directory</code>, complete the configuration steps in <a href="v1.4.3.html#north-migration">NORTH Migration for v1.4.3</a> first, then retry startup.</p>
 </div>
 <p>After completing either migration option, start the full stack with only the main Compose file:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>docker<span class="w"> </span>compose<span class="w"> </span>ps
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>app<span class="w"> </span>worker<span class="w"> </span>elastic
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>docker<span class="w"> </span>compose<span class="w"> </span>ps
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>docker<span class="w"> </span>compose<span class="w"> </span>logs<span class="w"> </span>app<span class="w"> </span>worker<span class="w"> </span>elastic
 </code></pre></div>
 <p>Verify that services become healthy and that existing entries can be searched in the Oasis UI. Keep the old <code>nomad_oasis_elastic</code> volume until you have verified the migration. Keeping this volume preserves the old search index, but rolling back the whole installation may also require restoring the old software, configuration, MongoDB backup, and file storage.</p>
 <p>Once the migration is verified and you no longer need the old ES7 index, you can optionally remove its volume:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>docker<span class="w"> </span>volume<span class="w"> </span>rm<span class="w"> </span>nomad_oasis_elastic
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>docker<span class="w"> </span>volume<span class="w"> </span>rm<span class="w"> </span>nomad_oasis_elastic
 </code></pre></div>
 
 
