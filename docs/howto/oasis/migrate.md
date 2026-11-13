@@ -21,6 +21,7 @@ The migration guides for specific NOMAD versions are found as subpages:
 
 {{ nav_list(descriptions={
     "howto/oasis/migrate/v2.0.md": "Elasticsearch 7 → 9; the search index must be migrated or rebuilt.",
+    "howto/oasis/migrate/v1.4.3.md": "NORTH config migration.",
     "howto/oasis/migrate/v1.4.2.md": "MongoDB 5 → 8; step-by-step database upgrade.",
     "howto/oasis/migrate/v1.2.2.md": "JupyterHub database upgrade for NORTH.",
     "howto/oasis/migrate/v1.2.0.md": "Plugin mechanism and new archive format; re-processing recommended.",
