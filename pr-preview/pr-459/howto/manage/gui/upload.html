@@ -108,7 +108,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="https://nomad-lab.eu" title="Documentation" class="md-header__button md-logo" aria-label="Documentation" data-md-component="logo">
+    <a href="https://about.nomad-lab.eu/" title="Documentation" class="md-header__button md-logo" aria-label="Documentation" data-md-component="logo">
       
   
   <!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
@@ -288,7 +288,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="https://nomad-lab.eu" title="Documentation" class="md-nav__button md-logo" aria-label="Documentation" data-md-component="logo">
+    <a href="https://about.nomad-lab.eu/" title="Documentation" class="md-nav__button md-logo" aria-label="Documentation" data-md-component="logo">
       
   
   <!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
@@ -4279,7 +4279,7 @@ default NOMAD configuration and NOMAD Central allow:</p>
 </ul>
 <h2 id="create-a-project">Create a project<a class="headerlink" href="#create-a-project" title="Permanent link">¶</a></h2>
 <ol>
-<li>Open the <a href="https://nomad-lab.eu/prod/v1/gui/v2/" rel="noopener" target="_blank">NOMAD GUI</a>
+<li>Open the <a href="https://nomad-lab.eu/" rel="noopener" target="_blank">NOMAD GUI</a>
    and sign in. If you do not have a NOMAD Central account, follow the
    <a href="account.html#create-a-nomad-account">Create a NOMAD user account</a>.</li>
 <li>
@@ -4383,7 +4383,9 @@ accessible, only the stripped POTCAR copies can be downloaded.</p>
 <ul>
 <li>Stripping is filename-based. Ensure <code>POTCAR</code> appears in the filename for licensed files.</li>
 <li><code>POTCAR</code> files <strong>must be uncompressed</strong> for automated stripping to work. Compressed files (e.g., <code>POTCAR.gz</code>) will not be properly processed and may be entirely removed without creating stripped versions.</li>
-<li>If an Oasis retains original <code>POTCAR</code> files in unpublished projects, do <strong>not</strong> temporarily make those projects publicly visible while they contain licensed material.</li>
+<li>Oasis operators who disable <code>process.exclude_potcar</code> must ensure their
+  deployment restricts access to retained original <code>POTCAR</code> files in
+  public, unpublished projects.</li>
 </ul>
 <p>While NOMAD provides this service as a courtesy, <strong>uploaders remain responsible for
 verifying overall license compliance</strong>.</p>
