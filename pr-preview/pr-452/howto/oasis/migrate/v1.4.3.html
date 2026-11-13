@@ -4026,7 +4026,6 @@
 
 <h1 id="migrate-to-nomad-143">Migrate to NOMAD 1.4.3<a class="headerlink" href="#migrate-to-nomad-143" title="Permanent link">¶</a></h1>
 <h2 id="north-migration">NORTH Migration<a class="headerlink" href="#north-migration" title="Permanent link">¶</a></h2>
-<p>This configuration change was introduced in distribution v1.4.3. If you already completed it, no additional NORTH migration is needed when upgrading to NOMAD 2.0.</p>
 <p>If your Oasis uses NORTH, update its configuration before starting the upgraded stack. The updated distribution runs NORTH in a separate image and reads its secrets and authentication settings from <code>.env.north</code> in the distribution directory.</p>
 <ol>
 <li>
