@@ -108,7 +108,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="https://nomad-lab.eu" title="Documentation" class="md-header__button md-logo" aria-label="Documentation" data-md-component="logo">
+    <a href="https://about.nomad-lab.eu/" title="Documentation" class="md-header__button md-logo" aria-label="Documentation" data-md-component="logo">
       
   
   <!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
@@ -288,7 +288,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="https://nomad-lab.eu" title="Documentation" class="md-nav__button md-logo" aria-label="Documentation" data-md-component="logo">
+    <a href="https://about.nomad-lab.eu/" title="Documentation" class="md-nav__button md-logo" aria-label="Documentation" data-md-component="logo">
       
   
   <!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
@@ -4098,13 +4098,10 @@ incident</a>. This document explains the possibilities and best practices when w
 <p>The available unit names are controlled by the <code>nomad/units/defaults_en.txt</code>
 file. This is a plain text file that is internally read by the
 <a href="https://pint.readthedocs.io/en/stable/" rel="noopener" target="_blank">Pint</a> library that we
-use for unit transformations in the NOMAD Python backend. These definitions and the
-associated conversion factors are then used always when transforming between two
-units in the NOMAD platform. Our graphical user interface also performs unit
-conversions in Javascript, and the same definitions and conversion factors are
-translated to the frontend through an environment config file (<code>env.js</code>).</p>
-<p>It is possible to add new units in this file to make them available both in the
-Python and in the Javascript environment. You can read more on how units are
+use for unit transformations in the NOMAD Python backend.</p>
+<p>It is possible to add new units in this file for use in Python. For frontend unit
+handling, refer to the maintained
+<a href="https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-gui" rel="noopener" target="_blank"><code>nomad-gui</code> repository</a>. You can read more on how units are
 defined in the
 <a href="https://pint.readthedocs.io/en/stable/advanced/defining.html" rel="noopener" target="_blank">pint documentation</a>.</p>
 <p>All units support the use of SI-prefixes. This means that if the unit <code>meter</code>
