@@ -189,6 +189,35 @@ means, can convert it, and can display it in whatever unit the reader prefers.
 Units are parsed by [Pint](https://pint.readthedocs.io/en/stable/){:target="_blank" rel="noopener"},
 so both names and expressions work: `m`, `meter`, `mm`, `m/s`, `m/s**2`. See {{ nav_link("howto/plugins/tools/units.md", breadcrumb=True) }}.
 
+### Set a default value
+
+A quantity can declare the value it has while nothing else is set.
+
+=== "Python"
+
+    ```python
+    class Sample(EntryData):
+        status = Quantity(
+            type=MEnum('planned', 'in progress', 'done'),
+            default='planned',
+        )
+    ```
+
+=== "YAML"
+
+    ```yaml
+    Sample:
+      quantities:
+        status:
+          type:
+            type_kind: Enum
+            type_data: [planned, in progress, done]
+          default: planned
+    ```
+
+NOMAD assumes the default while the quantity is not set, but does not store it in the entry. See
+[Work with default values](#work-with-default-values) for what this means and how to store it.
+
 ## Add subsections
 
 A *subsection* nests one section inside another, building a containment hierarchy. Use it when the
@@ -625,7 +654,7 @@ With the schema defined, you create instances of it and fill them in.
 
 ## Add normalize functions
 
-A *normalize function* runs every time an entry is processed, which happens whenever a file is uploaded or changed. Use it to derive values, fill in defaults, or copy data into a more interoperable part of the archive.
+A *normalize function* runs every time an entry is processed, which happens whenever a file is uploaded or changed. Use it to derive values, store defaults (see [Work with default values](#work-with-default-values)), or copy data into a more interoperable part of the archive.
 
 !!! note "Python only"
     Normalize functions are the one capability YAML schemas do not have, because they are code rather
@@ -659,6 +688,58 @@ Usually it is good to design a normalize function so it only needs data from its
     entry point that operates on a whole entry. See
     {{ nav_link("howto/plugins/types/normalizers.md", breadcrumb=True) }} and
     {{ nav_link("explanation/basics.md", breadcrumb=True) }}.
+
+## Work with default values
+
+A [default value](#set-a-default-value) belongs to the schema, not to the data. NOMAD assumes it
+wherever the quantity is not set, but never writes it into an entry for you. The examples below use
+the `status` quantity of `Sample`, with the default `'planned'`.
+
+### What NOMAD does with a default
+
+- **Python** — reading `sample.status` gives `'planned'` as long as no other value is set.
+  `sample.m_is_set(Sample.status)` is still `False`.
+- **GUI** — the archive view shows the default in place of the missing value and marks it as a
+  default. The ELN editor shows it in the field, but stores it only if the user changes it.
+- **Schema information** — the GUI and the Metainfo browser list the default with the quantity's
+  definition.
+- **Schema changes** — changing the default in the schema changes the value of every existing entry
+  that does not set the quantity itself.
+
+### What NOMAD does not do, and why
+
+- The default is not written to the archive, not even when the entry is processed.
+- Because it is not stored, it is not searchable, and the API does not return it.
+- The `default` argument of the ELN annotation is not used. Set the default on the quantity instead.
+
+This keeps existing data as it was created. If processing stored defaults, every entry would gain
+values it never had the next time it is reprocessed, and those values would no longer follow later
+changes to the schema.
+
+### Store a default in every entry
+
+If the value must be stored, for example so that it can be searched or does not change with the
+schema, set it in a [normalize function](#add-normalize-functions):
+
+```python
+class Sample(EntryData):
+    status = Quantity(
+        type=MEnum('planned', 'in progress', 'done'),
+        default='planned',
+    )
+
+    def normalize(self, archive, logger):
+        super().normalize(archive, logger)
+        if not self.m_is_set(Sample.status):
+            self.status = Sample.status.default
+```
+
+This works however the entry was created: from an uploaded file, through the API, or in the GUI.
+Keep in mind:
+
+- From then on, the stored value no longer follows changes to the default in the schema.
+- Existing entries store the value only when they are reprocessed.
+- Normalize functions are Python only, so a YAML schema has to move to Python to do this.
 
 ## The complete example
 
