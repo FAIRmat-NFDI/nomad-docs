@@ -11,6 +11,7 @@ Explanation pages provide context and background. Use them when you want to unde
 {{ nav_list(descriptions={
     "explanation/basics.md": "how NOMAD turns heterogeneous research files into structured data.",
     "explanation/data.md": "the concepts behind NOMAD's archive and schema organization.",
+    "explanation/graph_api.md": "how Graph API requests traverse resources and assemble responses.",
     "explanation/base_sections.md": "the entity-activity model behind NOMAD's built-in base sections.",
     "explanation/processing.md": "how parsing, normalization, and derived data generation fit together.",
     "explanation/architecture.md": "the main system components and how they interact.",
