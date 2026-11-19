@@ -4258,14 +4258,9 @@
 <p>Use the Graph API to retrieve selected fields from related projects, entries,
 and archives in one request. This guide covers a known project, a search for
 public entries, and retrieval of archive data and file information.</p>
-<p><a id="overview"></a>
-<a id="navigating-the-graph-structure"></a>
-<a id="existing-data-resources"></a></p>
 <p>For the relationship between resource selection and response structure, see
 <a href="../../../explanation/graph_api.html">Explanation &gt; Graph API traversal and responses</a>. The Graph API uses
 JSON requests, not GraphQL query syntax.</p>
-<p><a id="what-you-will-learn"></a>
-<a id="recommended-preparation"></a></p>
 <h2 id="before-you-begin">Before you begin<a class="headerlink" href="#before-you-begin" title="Permanent link">¶</a></h2>
 <p>You need a NOMAD API base URL and a tool that can send JSON requests, such as
 <code>curl</code> or Python's <code>requests</code>. Obtain the base URL from your deployment's API
@@ -4281,7 +4276,6 @@ create a personal access token with <code>graph:read</code> and add an
 <a href="auth.html">How-to guides &gt; ... &gt; Authenticate programmatically</a> for token
 creation and secure handling. A token does not grant access to other users'
 private data.</p>
-<p><a id="basic-data-fetching"></a></p>
 <h2 id="retrieve-a-projects-name-and-creation-time">Retrieve a project's name and creation time<a class="headerlink" href="#retrieve-a-projects-name-and-creation-time" title="Permanent link">¶</a></h2>
 <p>Use the project's <strong>Project ID</strong> as the key under <code>uploads</code>. Each GUI project
 corresponds to a backend upload resource; the Graph API retains the names
@@ -4320,8 +4314,6 @@ with values. For example:</p>
 with the same command. Check for <code>m_errors</code> in the JSON response as well as an
 unsuccessful HTTP status: part of a graph may fail while the request returns
 HTTP 200.</p>
-<p><a id="fuzzy-fetching"></a>
-<a id="fuzzy-querying"></a></p>
 <h2 id="list-entries-in-a-project">List entries in a project<a class="headerlink" href="#list-entries-in-a-project" title="Permanent link">¶</a></h2>
 <p>Add <code>entries</code> beneath a known project. Use the <code>"*"</code> key to apply the same
 field selection to each entry on the returned page:</p>
@@ -4351,7 +4343,6 @@ request's <code>m_request.pagination</code>; stop when there is no next page.</p
 project, not a query over indexed scientific quantities. For those, use
 <code>search</code>, as below. The supported filters and pagination models are listed in
 <a href="../../../reference/graph_api.html#collection-queries-and-pagination">Reference &gt; Graph API &gt; Collection queries and pagination</a>.</p>
-<p><a id="elasticsearch-metadata"></a></p>
 <h2 id="find-public-entries-and-retrieve-their-project-and-archive-data">Find public entries and retrieve their project and archive data<a class="headerlink" href="#find-public-entries-and-retrieve-their-project-and-archive-data" title="Permanent link">¶</a></h2>
 <p>Use <code>search</code> when you do not know the entry IDs or need filters on indexed
 metadata. Its <code>m_request.query</code> contains an entry-search request: <code>owner</code>, the
@@ -4421,8 +4412,6 @@ For each result:</p>
 <p>Read the next search cursor from <code>search/m_response/pagination</code> and pass it
 under <code>search.m_request.query.pagination.page_after_value</code>. The <code>"*"</code> key
 applies to the current page, not every matching entry at once.</p>
-<p><a id="accessing-archives"></a>
-<a id="nested-fetching"></a></p>
 <h2 id="retrieve-selected-archive-data-for-a-known-entry">Retrieve selected archive data for a known entry<a class="headerlink" href="#retrieve-selected-archive-data-for-a-known-entry" title="Permanent link">¶</a></h2>
 <p>If you already have an entry ID, start with <code>entries</code> and follow <code>archive</code>;
 there is no need to perform a search first:</p>
@@ -4444,8 +4433,6 @@ produce a large response.</p>
 <code>entries/&lt;entry-id&gt;/metadata</code> instead. This differs from
 <code>entries/&lt;entry-id&gt;/archive/metadata</code>: the first reads the search index, while
 the second reads the stored archive.</p>
-<p><a id="resolving-references"></a>
-<a id="controlling-reference-resolution"></a></p>
 <h3 id="follow-an-archive-reference">Follow an archive reference<a class="headerlink" href="#follow-an-archive-reference" title="Permanent link">¶</a></h3>
 <p>For an entry whose workflow contains input links, request the first input's
 <code>section</code> with <code>directive: resolved</code>:</p>
@@ -4472,21 +4459,10 @@ Follow that response-local path to inspect the target; do not assume it is
 inlined into <code>section</code>. See
 <a href="../../../reference/graph_api.html#archive-references">Reference &gt; Graph API &gt; Archive references</a>
 for resolution limits and response layout.</p>
-<p><a id="advanced-fetching"></a>
-<a id="list-slicing"></a>
-<a id="limiting-depth"></a>
-<a id="limiting-container-size"></a>
-<a id="filtering-unknown-keys"></a></p>
 <p>For list indexing, glob filters, depth, and size limits, use
 <a href="../../../reference/graph_api.html#archive-selection-and-limits">Reference &gt; Graph API &gt; Archive selection and limits</a>.</p>
-<p><a id="accessing-definitions"></a>
-<a id="basic-usage"></a>
-<a id="resolve-dependencies"></a>
-<a id="useful-settings"></a></p>
 <p>For schema definitions and their dependencies, use
 <a href="../../../reference/graph_api.html#schema-definitions">Reference &gt; Graph API &gt; Schema definitions</a>.</p>
-<p><a id="miscellaneous-functionalities"></a>
-<a id="listing-file-information"></a></p>
 <h2 id="inspect-the-files-associated-with-an-entry">Inspect the files associated with an entry<a class="headerlink" href="#inspect-the-files-associated-with-an-entry" title="Permanent link">¶</a></h2>
 <p>Use <code>mainfile</code> beneath an entry to retrieve file information, not file content:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="p">{</span>
@@ -4501,8 +4477,6 @@ directory path and pagination. The syntax is documented in
 <a href="../../../reference/graph_api.html#file-information">Reference &gt; Graph API &gt; File information</a>.
 To download the files themselves, follow
 <a href="download.html">How-to guides &gt; ... &gt; Download data</a>.</p>
-<p><a id="user-information"></a>
-<a id="further-resources"></a></p>
 <h2 id="related-pages">Related pages<a class="headerlink" href="#related-pages" title="Permanent link">¶</a></h2>
 <ul>
 <li><a href="../../../explanation/graph_api.html">Explanation &gt; Graph API traversal and responses</a> — data sources, traversal, and response assembly.</li>
