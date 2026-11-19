@@ -189,6 +189,75 @@ means, can convert it, and can display it in whatever unit the reader prefers.
 Units are parsed by [Pint](https://pint.readthedocs.io/en/stable/){:target="_blank" rel="noopener"},
 so both names and expressions work: `m`, `meter`, `mm`, `m/s`, `m/s**2`. See {{ nav_link("howto/plugins/tools/units.md", breadcrumb=True) }}.
 
+### Set a default value
+
+A quantity can declare the value it has while nothing else is set.
+
+=== "Python"
+
+    ```python
+    class Sample(EntryData):
+        status = Quantity(
+            type=MEnum('planned', 'in progress', 'done'),
+            default='planned',
+        )
+    ```
+
+=== "YAML"
+
+    ```yaml
+    Sample:
+      quantities:
+        status:
+          type:
+            type_kind: Enum
+            type_data: [planned, in progress, done]
+          default: planned
+    ```
+
+A default means that a missing value is the same as the default value: a sample without a `status`
+is `'planned'`. NOMAD assumes the default wherever the quantity is not set, but by default does not
+write it into an entry for you:
+
+- **Python**: reading `sample.status` gives `'planned'` as long as no other value is set.
+  `sample.m_is_set(Sample.status)` is still `False`.
+- **GUI**: the archive view and the ELN show the default in place of the missing value and mark it
+  as a default. Entering a value in the ELN stores it, even if it is the default. Deleting the value
+  unsets it again, and the default comes back once you leave the field. A required quantity with a
+  default counts as filled.
+- **Schema information**: the GUI and the Metainfo browser list the default with the quantity's
+  definition.
+- **Schema changes**: changing the default in the schema changes the value of every existing entry
+  that does not set the quantity itself.
+
+Because the default is not stored, it is not searchable, and the API does not return it. This is on
+purpose. If defaults were stored, any future changes to the default value in the schema would not be
+reflected in the old data, and the semantic meaning of the default value as a placeholder for unset
+data would be lost: it becomes impossible to know whether a value was set by a user, or set because
+it was a default at the time of processing. Storing defaults would also fill the search index with
+values that nobody entered.
+
+If you still wish to store the default value directly into the archive taking into account the
+considerations above, you can achieve it by setting it explicitly using a
+[normalize function](#add-normalize-functions) like this:
+
+```python
+class Sample(EntryData):
+    status = Quantity(
+        type=MEnum('planned', 'in progress', 'done'),
+        default='planned',
+    )
+
+    def normalize(self, archive, logger):
+        super().normalize(archive, logger)
+        if not self.m_is_set(Sample.status):
+            self.status = Sample.status.default
+```
+
+This works however the entry was created: from an uploaded file, through the API, or in the GUI.
+Existing entries store the value only when they are reprocessed. Normalize functions are Python
+only, so a YAML schema has to move to Python to do this.
+
 ## Add subsections
 
 A *subsection* nests one section inside another, building a containment hierarchy. Use it when the
@@ -625,7 +694,7 @@ With the schema defined, you create instances of it and fill them in.
 
 ## Add normalize functions
 
-A *normalize function* runs every time an entry is processed, which happens whenever a file is uploaded or changed. Use it to derive values, fill in defaults, or copy data into a more interoperable part of the archive.
+A *normalize function* runs every time an entry is processed, which happens whenever a file is uploaded or changed. Use it to derive values, store defaults (see [Set a default value](#set-a-default-value)), or copy data into a more interoperable part of the archive.
 
 !!! note "Python only"
     Normalize functions are the one capability YAML schemas do not have, because they are code rather
