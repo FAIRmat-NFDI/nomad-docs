@@ -4,16 +4,9 @@ Use the Graph API to retrieve selected fields from related projects, entries,
 and archives in one request. This guide covers a known project, a search for
 public entries, and retrieval of archive data and file information.
 
-<a id="overview"></a>
-<a id="navigating-the-graph-structure"></a>
-<a id="existing-data-resources"></a>
-
 For the relationship between resource selection and response structure, see
 {{ nav_link("explanation/graph_api.md", breadcrumb=True) }}. The Graph API uses
 JSON requests, not GraphQL query syntax.
-
-<a id="what-you-will-learn"></a>
-<a id="recommended-preparation"></a>
 
 ## Before you begin
 
@@ -35,8 +28,6 @@ create a personal access token with `graph:read` and add an
 {{ nav_link("howto/manage/program/auth.md", breadcrumb=True) }} for token
 creation and secure handling. A token does not grant access to other users'
 private data.
-
-<a id="basic-data-fetching"></a>
 
 ## Retrieve a project's name and creation time
 
@@ -89,9 +80,6 @@ with the same command. Check for `m_errors` in the JSON response as well as an
 unsuccessful HTTP status: part of a graph may fail while the request returns
 HTTP 200.
 
-<a id="fuzzy-fetching"></a>
-<a id="fuzzy-querying"></a>
-
 ## List entries in a project
 
 Add `entries` beneath a known project. Use the `"*"` key to apply the same
@@ -130,8 +118,6 @@ project, not a query over indexed scientific quantities. For those, use
 `search`, as below. The supported filters and pagination models are listed in
 [Reference > Graph API > Collection queries and pagination](../../../reference/graph_api.md#collection-queries-and-pagination).
 
-<a id="elasticsearch-metadata"></a>
-
 ## Find public entries and retrieve their project and archive data
 
 Use `search` when you do not know the entry IDs or need filters on indexed
@@ -165,9 +151,6 @@ Read the next search cursor from `search/m_response/pagination` and pass it
 under `search.m_request.query.pagination.page_after_value`. The `"*"` key
 applies to the current page, not every matching entry at once.
 
-<a id="accessing-archives"></a>
-<a id="nested-fetching"></a>
-
 ## Retrieve selected archive data for a known entry
 
 If you already have an entry ID, start with `entries` and follow `archive`;
@@ -194,9 +177,6 @@ To retrieve indexed metadata for the same entry, use
 `entries/<entry-id>/metadata` instead. This differs from
 `entries/<entry-id>/archive/metadata`: the first reads the search index, while
 the second reads the stored archive.
-
-<a id="resolving-references"></a>
-<a id="controlling-reference-resolution"></a>
 
 ### Follow an archive reference
 
@@ -229,25 +209,11 @@ inlined into `section`. See
 [Reference > Graph API > Archive references](../../../reference/graph_api.md#archive-references)
 for resolution limits and response layout.
 
-<a id="advanced-fetching"></a>
-<a id="list-slicing"></a>
-<a id="limiting-depth"></a>
-<a id="limiting-container-size"></a>
-<a id="filtering-unknown-keys"></a>
-
 For list indexing, glob filters, depth, and size limits, use
 [Reference > Graph API > Archive selection and limits](../../../reference/graph_api.md#archive-selection-and-limits).
 
-<a id="accessing-definitions"></a>
-<a id="basic-usage"></a>
-<a id="resolve-dependencies"></a>
-<a id="useful-settings"></a>
-
 For schema definitions and their dependencies, use
 [Reference > Graph API > Schema definitions](../../../reference/graph_api.md#schema-definitions).
-
-<a id="miscellaneous-functionalities"></a>
-<a id="listing-file-information"></a>
 
 ## Inspect the files associated with an entry
 
@@ -267,9 +233,6 @@ directory path and pagination. The syntax is documented in
 [Reference > Graph API > File information](../../../reference/graph_api.md#file-information).
 To download the files themselves, follow
 {{ nav_link("howto/manage/program/download.md", breadcrumb=True) }}.
-
-<a id="user-information"></a>
-<a id="further-resources"></a>
 
 ## Related pages
 
