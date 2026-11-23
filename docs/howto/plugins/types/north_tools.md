@@ -69,7 +69,7 @@ my_north_tool = NORTHToolEntryPoint(id='my-north-tool', north_tool=tool)
 ```
 
 !!! tip "Important"
-    To test a Docker image in NOMAD, you do not need to publish the Docker image in a registry. You can build it locally and set `image` to a local tag (e.g., `my-tool:dev`) in the `NORTHTool` configuration. The NOMAD checks for a local image first before pulling from a registry.
+    To test a Docker image in NOMAD, you do not need to publish the Docker image in a registry. You can build it locally, set `image` to a local tag (e.g., `my-tool:dev`) and set `image_pull_policy` to `IfNotPresent` or `Never`. With the default `Always`, the NORTH hub tries to pull the image from a registry every time the tool starts, which fails for images that only exist locally. See [Explanation > NORTH > Using a locally built image](../../../explanation/north.md#using-a-locally-built-image) for how to override these settings in the `nomad.yaml` of a deployment, and [Mounting additional host directories](../../../explanation/north.md#mounting-additional-host-directories) for `external_mounts`.
 
 Here you can see that a `NORTHTool` object called `tool` was defined. We also instantiate
 the entry point object `my_north_tool` using the tool. This is the
