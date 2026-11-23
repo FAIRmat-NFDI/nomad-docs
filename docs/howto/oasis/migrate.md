@@ -1,5 +1,12 @@
 # How to migrate a NOMAD Oasis
 
+<!-- TODO: Once https://github.com/FAIRmat-NFDI/nomad-docs/pull/438 merges, scope the Docker Compose guidance below to Compose deployments and add a link to the Kubernetes/Helm migration section. -->
+
+This guide and its version-specific instructions are for administrators of NOMAD Oasis deployments based on `nomad-distro-template`. The migration procedures assume the template's Docker Compose setup and do not apply to development setups based on `nomad-distro-dev`.
+
+!!! note "Migrating a `nomad-distro-dev` setup?"
+    Dedicated migration guides are being developed in the `nomad-distro-dev` repository. Until they are published, see [PR #165](https://github.com/FAIRmat-NFDI/nomad-distro-dev/pull/165) and [PR #166](https://github.com/FAIRmat-NFDI/nomad-distro-dev/pull/166) for the draft guides.
+
 From time to time, you will need to update your Oasis to a new NOMAD version. Usually this is straightforward: you update your Oasis distribution to the corresponding `nomad-distro-template` version. This ensures that you get compatible versions of the infrastructure components (such as databases) and that the Docker image built for your Oasis uses the right NOMAD version.
 
 Sometimes, however, a new NOMAD version also requires migrating your existing data. Different NOMAD versions may represent data differently: the search index definition, database schema, file system layout, or internal file formats can change. For such changes, we may offer a transition period during which NOMAD supports both the old and the new representation. Eventually, though, the existing data must be migrated, either because the change is breaking, because the old representation is deprecated, or because the new representation enables new features.
