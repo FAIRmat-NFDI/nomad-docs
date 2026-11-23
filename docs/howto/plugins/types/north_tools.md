@@ -68,8 +68,7 @@ tool = NORTHTool(
 my_north_tool = NORTHToolEntryPoint(id='my-north-tool', north_tool=tool)
 ```
 
-!!! tip "Important"
-    To test a Docker image in NOMAD, you do not need to publish the Docker image in a registry. You can build it locally, set `image` to a local tag (e.g., `my-tool:dev`) and set `image_pull_policy` to `IfNotPresent` or `Never`. With the default `Always`, the NORTH hub tries to pull the image from a registry every time the tool starts, which fails for images that only exist locally. See [Explanation > NORTH > Using a locally built image](../../../explanation/north.md#using-a-locally-built-image) for how to override these settings in the `nomad.yaml` of a deployment, and [Mounting additional host directories](../../../explanation/north.md#mounting-additional-host-directories) for `external_mounts`.
+The `image_pull_policy` of `Always` in this example pulls the image from its registry every time the tool starts. If you want to test a locally built image, see the tip in [Building the image locally](#building-the-image-locally).
 
 Here you can see that a `NORTHTool` object called `tool` was defined. We also instantiate
 the entry point object `my_north_tool` using the tool. This is the
@@ -84,6 +83,28 @@ table in `pyproject.toml` in order for it to be automatically detected:
 [project.entry-points.'nomad.plugin']
 mynorthtool = "nomad_example.north_tools.my_tool:my_north_tool"
 ```
+
+## Mounting additional host directories
+
+Use `external_mounts` to make additional directories, for example a shared data or software folder, available in every container of a tool. Because the host paths depend on the deployment, they are typically set in the `nomad.yaml` of the deployment rather than in the `NORTHTool` of the plugin:
+
+```yaml
+plugins:
+  entry_points:
+    options:
+      nomad_north_jupyter.north_tools:jupyter:
+        north_tool:
+          external_mounts:
+            - host_path: /data/shared
+              bind: shared
+              mode: ro
+```
+
+- `host_path` is an absolute path **on the host** that runs the tool containers. The tool containers are started by the host's Docker daemon (or Kubernetes node), so this is not a path inside the NOMAD or NORTH containers, and relative paths are not supported.
+- `bind` is the target path in the tool container. A relative path is resolved against the `mount_path` of the tool. For the Jupyter tool, the example above becomes `/home/jovyan/shared`. An absolute path is used as is.
+- `mode` is either `ro` (read-only, the default) or `rw` (writable). The same directory is mounted for every user of the tool, so only use `rw` for data that all users can share. For writable mounts, make sure the container user (`jovyan`, UID `1000`, for Jupyter-based tools) has write permissions on the host directory.
+
+After changing the mounts, restart the `app` and `north` services.
 
 ## Creating NORTH images
 
@@ -276,6 +297,28 @@ Example:
   --build-arg UV_VERSION=0.9 \
   -t ghcr.io/myusername/foobar:latest .
 ```
+
+!!! tip "Important"
+    To test a Docker image in NOMAD, you do not need to publish the Docker image in a registry. You can build it locally, set `image` to a local tag (e.g., `my-tool:dev`) and set `image_pull_policy` to `IfNotPresent` (pull only if the image is missing) or `Never` (never pull, only use local images).
+
+    With the default `image_pull_policy='Always'`, the NORTH hub pulls the image from its registry every time the tool starts. This keeps moving tags such as `latest` up to date, but it also means that:
+
+    - an image that only exists locally cannot be started. The hub fails with an error like `pull access denied for my-tool, repository does not exist`.
+    - a local build that reuses the tag of a published image (like `ghcr.io/myusername/foobar:latest` in the example above) is replaced by the published image every time the tool starts.
+
+    In a deployment, you can override these settings for an installed tool in `nomad.yaml`, and then restart the `app` and `north` services:
+
+    ```yaml
+    plugins:
+      entry_points:
+        options:
+          nomad_north_jupyter.north_tools:jupyter:
+            north_tool:
+              image: my-tool:dev
+              image_pull_policy: IfNotPresent
+    ```
+
+    The image has to be available to the Docker daemon that runs the tool containers, which in a Docker Compose deployment is the Docker daemon of the host.
 
 ### Managing Python dependencies
 

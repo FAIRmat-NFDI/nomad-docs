@@ -65,55 +65,6 @@ plugins:
 
 The NORTH hub reads the tool configuration from NOMAD when it starts. After changing a tool in `nomad.yaml`, restart both the `app` and the `north` services.
 
-### Using a locally built image
-
-By default, NORTH tools use `image_pull_policy: Always`: the NORTH hub pulls the image from its registry every time a tool is started. This keeps moving tags such as `latest` up to date, but it also means that:
-
-- an image that only exists locally (e.g. `my-tool:dev`) cannot be started. The hub fails with an error like `pull access denied for my-tool, repository does not exist`.
-- a local build that reuses the tag of a published image (e.g. `ghcr.io/fairmat-nfdi/nomad-north-jupyter:latest`) is replaced by the published image every time the tool starts.
-
-To run a locally built image, set `image_pull_policy` to `IfNotPresent` (pull only if the image is missing) or `Never` (never pull, only use local images):
-
-```yaml
-plugins:
-  entry_points:
-    options:
-      nomad_north_jupyter.north_tools:jupyter:
-        north_tool:
-          image: my-tool:dev
-          image_pull_policy: IfNotPresent
-```
-
-The image has to be available to the Docker daemon that runs the tool containers, which in a Docker Compose deployment is the Docker daemon of the host.
-
-!!! tip
-
-    In [`nomad-distro-template`](https://github.com/FAIRmat-NFDI/nomad-distro-template){:target="_blank" rel="noopener"}, the `jupyterlab_image` service in `docker-compose.yaml` only exists to pre-pull the default Jupyter image and uses `pull_policy: always`. If you point `JUPYTER_IMAGE` to a local image, change its `pull_policy` to `missing`, otherwise `docker compose up` fails trying to pull it.
-
-### Mounting additional host directories
-
-Use `external_mounts` to make additional directories, for example a shared data or software folder, available in every container of a tool:
-
-```yaml
-plugins:
-  entry_points:
-    options:
-      nomad_north_jupyter.north_tools:jupyter:
-        north_tool:
-          external_mounts:
-            - host_path: /data/shared
-              bind: shared
-              mode: ro
-```
-
-- `host_path` is an absolute path **on the host** that runs the tool containers. The tool containers are started by the host's Docker daemon (or Kubernetes node), so this is not a path inside the NOMAD or NORTH containers, and relative paths are not supported.
-- `bind` is the target path in the tool container. A relative path is resolved against the `mount_path` of the tool. For the Jupyter tool, the example above becomes `/home/jovyan/shared`. An absolute path is used as is.
-- `mode` is either `ro` (read-only, the default) or `rw` (writable). The same directory is mounted for every user of the tool, so only use `rw` for data that all users can share. For writable mounts, make sure the container user (`jovyan`, UID `1000`, for Jupyter-based tools) has write permissions on the host directory.
-
-!!! warning
-
-    The NORTH hub image `nomad-north:2.0.1` fails to start when a tool defines `external_mounts`, with the error `PydanticUserError: NORTHExternalMount is not fully defined; you should define ReadMode`. Use a later version of the hub image.
-
 ## Official base images
 
 Using the base image within the [`nomad-north-desktop-base`](https://github.com/FAIRmat-NFDI/nomad-north-desktop-base){:target="_blank" rel="noopener"} repository is the recommended best practice to build a NORTH tool if that demands a graphical user interface. Its desktop-base image builds on the [Jupyter Docker Stacks project](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html){:target="_blank" rel="noopener"}, offering a [conda](https://anaconda.org){:target="_blank" rel="noopener"} environment with a Jupyter Notebook and graphical user interface via a light-weight [`xfce`](https://www.xfce.org/){:target="_blank" rel="noopener"} desktop environment. Ubuntu Linux is the base layer of this docker image, connecting the container to the operation system of the host computer.
