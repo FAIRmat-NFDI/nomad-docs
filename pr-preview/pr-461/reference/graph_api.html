@@ -4341,7 +4341,7 @@ archive rather than just its explicitly named children.</p>
 <tr>
 <td>Request root</td>
 <td><code>uploads</code>, <code>entries</code>, <code>users</code>, <code>groups</code>, <code>datasets</code></td>
-<td>Resource records keyed by ID; <code>datasets</code> is retained for legacy collections.</td>
+<td>Resource records keyed by ID.</td>
 </tr>
 <tr>
 <td>Request root</td>
@@ -4389,9 +4389,19 @@ archive rather than just its explicitly named children.</p>
 <td>The corresponding entry processing record.</td>
 </tr>
 <tr>
+<td>Raw file</td>
+<td><code>entry</code></td>
+<td>The associated entry processing record, if the file is recognized as a mainfile.</td>
+</tr>
+<tr>
 <td>User</td>
 <td><code>uploads</code>, <code>entries</code>, <code>datasets</code></td>
 <td>Collections associated with that user, subject to permissions.</td>
+</tr>
+<tr>
+<td>Dataset</td>
+<td><code>entries</code></td>
+<td>Entry processing records belonging to the dataset, subject to permissions.</td>
 </tr>
 <tr>
 <td>Archive section</td>

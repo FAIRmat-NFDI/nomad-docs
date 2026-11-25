@@ -4199,20 +4199,78 @@ cross several sources:</p>
 </tr>
 </tbody>
 </table>
-<p>The following diagram shows the principal retrieval paths, not every
-supported relationship:</p>
-<pre class="mermaid"><code>flowchart LR
-    search["search: indexed entry metadata"] --&gt;|entry| entry["entries: processing records"]
-    project["uploads: GUI projects"] --&gt;|entries| entry
-    entry --&gt;|upload| project
-    entry --&gt;|metadata| indexed["Indexed metadata for one entry"]
-    entry --&gt;|archive| archive["Stored archive"]
-    project --&gt;|files| files["Raw-file information"]
-    entry --&gt;|mainfile| files
-    archive --&gt;|m_def| definition["Schema definition"]</code></pre>
+<p>The following UML-style diagram shows the kinds of resources connected by the
+Graph API. Each box lists navigation tokens, not the resource's complete data
+fields. Arrows show which resource a token reaches; they do not represent data
+flow, inheritance, or ownership. This is a resource map, not a sequence of
+steps that every request must follow.</p>
+<figure style="width: 100%">
+<pre class="mermaid"><code>%%{init: {"class": {"hideEmptyMembersBox": true}}}%%
+classDiagram
+    direction TB
+    class User {
+        uploads
+        entries
+        datasets
+    }
+    class Upload["Project (upload)"] {
+        entries
+        files
+    }
+    class Entry {
+        upload
+        archive
+        metadata
+        mainfile
+    }
+    class Dataset {
+        entries
+    }
+    class FileSystem["File system"] {
+        entry
+    }
+    class Metadata["Indexed metadata"] {
+        entry
+    }
+    class ArchiveSection["Archive section"] {
+        m_def
+    }
+    class Definition
+
+    User --&gt; Upload : uploads
+    User --&gt; Entry : entries
+    User --&gt; Dataset : datasets
+    Dataset --&gt; Entry : entries
+    Upload --&gt; Entry : entries
+    Entry --&gt; Upload : upload
+    Upload --&gt; FileSystem : files
+    Entry --&gt; FileSystem : mainfile
+    FileSystem --&gt; Entry : entry
+    Entry --&gt; Metadata : metadata
+    Metadata --&gt; Entry : entry
+    Entry --&gt; ArchiveSection : archive
+    ArchiveSection --&gt; Definition : m_def</code></pre>
+<figcaption>Selected resource types and navigation tokens exposed by the Graph API. Other relationships and ordinary data fields are omitted.</figcaption>
+</figure>
+<p>Root keys such as <code>users</code>, <code>uploads</code>, <code>entries</code>, and <code>datasets</code> select
+collections of resources, whose records are keyed by ID. The <code>search</code> root
+selects indexed entry metadata: <code>search/&lt;entry-id&gt;</code> and
+<code>entries/&lt;entry-id&gt;/metadata</code> reach the same kind of resource, shown once in
+the diagram. The <code>entry</code> token provides the return path from indexed metadata
+to the entry's processing record.</p>
+<p>Collection tokens such as <code>entries</code> require a record ID or a collection
+selection before continuing. Single-resource tokens such as <code>upload</code>,
+<code>archive</code>, and <code>metadata</code> do not require another ID. The <code>files</code> token opens a
+project's directory tree, whereas <code>mainfile</code> starts at the entry's mainfile.
+The file-system <code>entry</code> token reaches an associated entry only when the file
+is recognized as a mainfile. Within an archive, subsection names navigate the
+section hierarchy, and <code>m_def</code> retrieves the definition of the selected
+section, not just the archive root.</p>
 <p><code>uploads</code> is the backend resource corresponding to GUI projects, not an
-additional user-facing container. <code>datasets</code> remains available for existing
-legacy collections; new publication and DOI workflows operate on projects.
+additional user-facing container. <code>datasets</code> is a separate resource for
+collections of entries. The REST API supports dataset creation and, where DOI
+services are configured, DOI assignment. The current GUI no longer creates
+datasets; it uses projects with included entries instead.
 User and group resources provide additional relationships, such as
 <code>users/me/uploads</code>.</p>
 <h2 id="selection-and-response-assembly-are-related-but-distinct">Selection and response assembly are related but distinct<a class="headerlink" href="#selection-and-response-assembly-are-related-but-distinct" title="Permanent link">¶</a></h2>
