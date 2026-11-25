@@ -4205,7 +4205,7 @@ fields. Arrows show which resource a token reaches; they do not represent data
 flow, inheritance, or ownership. This is a resource map, not a sequence of
 steps that every request must follow.</p>
 <figure style="width: 100%">
-<pre class="mermaid"><code>%%{init: {"class": {"hideEmptyMembersBox": true}}}%%
+<pre class="mermaid"><code>%%{init: {"class": {"hideEmptyMembersBox": true, "padding": 24}}}%%
 classDiagram
     direction TB
     class User {
@@ -4226,14 +4226,14 @@ classDiagram
     class Dataset {
         entries
     }
-    class FileSystem["File system"] {
-        entry
+    class ArchiveSection["Archive section"] {
+        m_def
     }
     class Metadata["Indexed metadata"] {
         entry
     }
-    class ArchiveSection["Archive section"] {
-        m_def
+    class FileSystem["File system"] {
+        entry
     }
     class Definition
 
@@ -4243,13 +4243,14 @@ classDiagram
     Dataset --&gt; Entry : entries
     Upload --&gt; Entry : entries
     Entry --&gt; Upload : upload
-    Upload --&gt; FileSystem : files
-    Entry --&gt; FileSystem : mainfile
-    FileSystem --&gt; Entry : entry
+    Entry --&gt; ArchiveSection : archive
+    ArchiveSection --&gt; Definition : m_def
     Entry --&gt; Metadata : metadata
     Metadata --&gt; Entry : entry
-    Entry --&gt; ArchiveSection : archive
-    ArchiveSection --&gt; Definition : m_def</code></pre>
+    Entry --&gt; FileSystem : mainfile
+    %% Declare Entry first so the files edge routes outside these two links.
+    Entry &lt;-- FileSystem : entry
+    Upload --&gt; FileSystem : files</code></pre>
 <figcaption>Selected resource types and navigation tokens exposed by the Graph API. Other relationships and ordinary data fields are omitted.</figcaption>
 </figure>
 <p>Root keys such as <code>users</code>, <code>uploads</code>, <code>entries</code>, and <code>datasets</code> select
