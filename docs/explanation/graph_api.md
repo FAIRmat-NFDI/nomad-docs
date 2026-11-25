@@ -24,24 +24,86 @@ cross several sources:
 | Project files | Directory and file information | `files` beneath a project, or `mainfile` beneath an entry |
 | Metainfo | Definitions needed to interpret archive sections and quantities | `m_def` beneath an archive section, or `metainfo` at the root |
 
-The following diagram shows the principal retrieval paths, not every
-supported relationship:
+The following UML-style diagram shows the kinds of resources connected by the
+Graph API. Each box lists navigation tokens, not the resource's complete data
+fields. Arrows show which resource a token reaches; they do not represent data
+flow, inheritance, or ownership. This is a resource map, not a sequence of
+steps that every request must follow.
+
+<figure markdown style="width: 100%">
 
 ```mermaid
-flowchart LR
-    search["search: indexed entry metadata"] -->|entry| entry["entries: processing records"]
-    project["uploads: GUI projects"] -->|entries| entry
-    entry -->|upload| project
-    entry -->|metadata| indexed["Indexed metadata for one entry"]
-    entry -->|archive| archive["Stored archive"]
-    project -->|files| files["Raw-file information"]
-    entry -->|mainfile| files
-    archive -->|m_def| definition["Schema definition"]
+%%{init: {"class": {"hideEmptyMembersBox": true}}}%%
+classDiagram
+    direction TB
+    class User {
+        uploads
+        entries
+        datasets
+    }
+    class Upload["Project (upload)"] {
+        entries
+        files
+    }
+    class Entry {
+        upload
+        archive
+        metadata
+        mainfile
+    }
+    class Dataset {
+        entries
+    }
+    class FileSystem["File system"] {
+        entry
+    }
+    class Metadata["Indexed metadata"] {
+        entry
+    }
+    class ArchiveSection["Archive section"] {
+        m_def
+    }
+    class Definition
+
+    User --> Upload : uploads
+    User --> Entry : entries
+    User --> Dataset : datasets
+    Dataset --> Entry : entries
+    Upload --> Entry : entries
+    Entry --> Upload : upload
+    Upload --> FileSystem : files
+    Entry --> FileSystem : mainfile
+    FileSystem --> Entry : entry
+    Entry --> Metadata : metadata
+    Metadata --> Entry : entry
+    Entry --> ArchiveSection : archive
+    ArchiveSection --> Definition : m_def
 ```
 
+<figcaption>Selected resource types and navigation tokens exposed by the Graph API. Other relationships and ordinary data fields are omitted.</figcaption>
+</figure>
+
+Root keys such as `users`, `uploads`, `entries`, and `datasets` select
+collections of resources, whose records are keyed by ID. The `search` root
+selects indexed entry metadata: `search/<entry-id>` and
+`entries/<entry-id>/metadata` reach the same kind of resource, shown once in
+the diagram. The `entry` token provides the return path from indexed metadata
+to the entry's processing record.
+
+Collection tokens such as `entries` require a record ID or a collection
+selection before continuing. Single-resource tokens such as `upload`,
+`archive`, and `metadata` do not require another ID. The `files` token opens a
+project's directory tree, whereas `mainfile` starts at the entry's mainfile.
+The file-system `entry` token reaches an associated entry only when the file
+is recognized as a mainfile. Within an archive, subsection names navigate the
+section hierarchy, and `m_def` retrieves the definition of the selected
+section, not just the archive root.
+
 `uploads` is the backend resource corresponding to GUI projects, not an
-additional user-facing container. `datasets` remains available for existing
-legacy collections; new publication and DOI workflows operate on projects.
+additional user-facing container. `datasets` is a separate resource for
+collections of entries. The REST API supports dataset creation and, where DOI
+services are configured, DOI assignment. The current GUI no longer creates
+datasets; it uses projects with included entries instead.
 User and group resources provide additional relationships, such as
 `users/me/uploads`.
 

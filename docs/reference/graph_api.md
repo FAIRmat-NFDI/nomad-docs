@@ -48,7 +48,7 @@ archive rather than just its explicitly named children.
 
 | Context | Key | Target |
 | --- | --- | --- |
-| Request root | `uploads`, `entries`, `users`, `groups`, `datasets` | Resource records keyed by ID; `datasets` is retained for legacy collections. |
+| Request root | `uploads`, `entries`, `users`, `groups`, `datasets` | Resource records keyed by ID. |
 | Request root | `search` | Indexed entry metadata, keyed by entry ID. |
 | Request root | `metainfo` | Registered schema packages. |
 | Project (`uploads/<project-id>`) | `entries` | Entry processing records belonging to the project. |
@@ -58,7 +58,9 @@ archive rather than just its explicitly named children.
 | Entry processing record | `archive` | The stored archive. |
 | Entry processing record | `mainfile` | Mainfile information from the project's raw files. |
 | Search hit | `entry` | The corresponding entry processing record. |
+| Raw file | `entry` | The associated entry processing record, if the file is recognized as a mainfile. |
 | User | `uploads`, `entries`, `datasets` | Collections associated with that user, subject to permissions. |
+| Dataset | `entries` | Entry processing records belonging to the dataset, subject to permissions. |
 | Archive section | `m_def` | Its metainfo definition. |
 
 `users/me` identifies the authenticated user. For example,
