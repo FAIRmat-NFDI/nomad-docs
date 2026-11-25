@@ -33,7 +33,7 @@ steps that every request must follow.
 <figure markdown style="width: 100%">
 
 ```mermaid
-%%{init: {"class": {"hideEmptyMembersBox": true}}}%%
+%%{init: {"class": {"hideEmptyMembersBox": true, "padding": 24}}}%%
 classDiagram
     direction TB
     class User {
@@ -54,14 +54,14 @@ classDiagram
     class Dataset {
         entries
     }
-    class FileSystem["File system"] {
-        entry
+    class ArchiveSection["Archive section"] {
+        m_def
     }
     class Metadata["Indexed metadata"] {
         entry
     }
-    class ArchiveSection["Archive section"] {
-        m_def
+    class FileSystem["File system"] {
+        entry
     }
     class Definition
 
@@ -71,13 +71,14 @@ classDiagram
     Dataset --> Entry : entries
     Upload --> Entry : entries
     Entry --> Upload : upload
-    Upload --> FileSystem : files
-    Entry --> FileSystem : mainfile
-    FileSystem --> Entry : entry
-    Entry --> Metadata : metadata
-    Metadata --> Entry : entry
     Entry --> ArchiveSection : archive
     ArchiveSection --> Definition : m_def
+    Entry --> Metadata : metadata
+    Metadata --> Entry : entry
+    Entry --> FileSystem : mainfile
+    %% Declare Entry first so the files edge routes outside these two links.
+    Entry <-- FileSystem : entry
+    Upload --> FileSystem : files
 ```
 
 <figcaption>Selected resource types and navigation tokens exposed by the Graph API. Other relationships and ordinary data fields are omitted.</figcaption>
