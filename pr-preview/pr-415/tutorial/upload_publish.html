@@ -108,7 +108,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="https://nomad-lab.eu" title="Documentation" class="md-header__button md-logo" aria-label="Documentation" data-md-component="logo">
+    <a href="https://about.nomad-lab.eu/" title="Documentation" class="md-header__button md-logo" aria-label="Documentation" data-md-component="logo">
       
   
   <!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
@@ -288,7 +288,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="https://nomad-lab.eu" title="Documentation" class="md-nav__button md-logo" aria-label="Documentation" data-md-component="logo">
+    <a href="https://about.nomad-lab.eu/" title="Documentation" class="md-nav__button md-logo" aria-label="Documentation" data-md-component="logo">
       
   
   <!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
@@ -2847,6 +2847,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../howto/oasis/migrate/v1.4.3.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NOMAD 1.4.3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../howto/oasis/migrate/v1.4.2.html" class="md-nav__link">
         
   
@@ -4286,9 +4314,9 @@
 <li>Upload raw research data files to NOMAD and organize them using projects</li>
 <li>View the entries that NOMAD generates from your files and check their processing status</li>
 <li>Share projects with collaborators and manage access permissions</li>
+<li>Collect entries from several projects in a single new project</li>
 <li>Publish projects and understand the role of embargoes</li>
 <li>Assign a Digital Object Identifier (DOI) to your published project</li>
-<li>Include entries from other projects in a new project and publish them together</li>
 </ol>
 <hr>
 <h2 id="before-you-begin">Before you begin<a class="headerlink" href="#before-you-begin" title="Permanent link">¶</a></h2>
@@ -4720,19 +4748,9 @@ In the following examples, you will learn how to upload a raw file from a SPECS 
 
 <p>If you publish the project with an embargo, its files and entries remain accessible only to you and the users with whom you shared it. Selected metadata remain publicly visible. You can lift the embargo before its scheduled end date by selecting <strong>LIFT EMBARGO</strong>.</p>
 <h3 id="include-entries-of-other-projects">Include entries of other projects<a class="headerlink" href="#include-entries-of-other-projects" title="Permanent link">¶</a></h3>
-<p>The data behind a publication is often spread over several projects, for example, one project per measurement campaign or simulation series. To publish these data together, create a new project and include the entries of these projects in it. The included entries stay in their original projects.</p>
-<details class="info">
-<summary>What happens when you include entries from other projects?</summary>
-<ul>
-<li>The included entries appear in the <strong>ENTRIES</strong> tab of the new project, marked as <strong>included</strong>. You can search and filter them together with the project's own entries.</li>
-<li>The entries are not copied or moved. They can only be edited in their original project.</li>
-<li>Only entries are included. Files that do not belong to an entry, e.g., the PDF and image files that you uploaded in this tutorial, are not included.</li>
-<li>NOMAD includes the entries that exist when you click <strong>SAVE</strong>. If entries are added to an included project later, open <strong>Include entries from other projects</strong> again and click <strong>SAVE</strong> to include them as well.</li>
-<li>You can include entries from your own projects and from projects that are shared with you.</li>
-</ul>
-</details>
-<p>To try this, create a new project, e.g., named <code>My first NOMAD collection</code>, as described in <a href="#create-a-new-project">Create a new project</a>, and include the entries of your project from this tutorial. You need its ID, which is shown under <strong>Project ID</strong> on the <strong>OVERVIEW</strong> tab of that project.</p>
-<p><strong>Use the arrow buttons ⬅️➡️ below to follow the steps for including the entries of your project in the new project.</strong></p>
+<p>When the data behind a publication spans several projects, you can bring their entries together in a single project and publish them as a collection.</p>
+<p>In this exercise, you’ll include the entries from your tutorial project in a new collection project. Follow the steps in <a href="#create-a-new-project">Create a new project</a> and name the new project <code>My first NOMAD collection</code>. Then open the <strong>OVERVIEW</strong> tab of your original tutorial project and copy the value under <strong>Project ID</strong>. You’ll use this ID to add its entries to the collection.</p>
+<p><strong>Use the arrow buttons ⬅️➡️ below to follow the steps for adding entries from your tutorial project to the new project.</strong></p>
 <div class="image-slider" id="slider6">
     <div class="nav-arrow left" id="prev6">←</div>
     <a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/upload_publish_23.png" data-desc-position="bottom"><img src="images/upload_publish_23.png" alt="Click the arrow next to NEW ENTRY, then Include entries from other projects" class="active"></a>
@@ -4743,10 +4761,17 @@ In the following examples, you will learn how to upload a raw file from a SPECS 
 </div>
 
 <p>To include entries from more projects, add each of them under <strong>Add a project</strong> before you click <strong>NEXT</strong>.</p>
-<div class="admonition warning">
-<p class="admonition-title">Included entries must be published first</p>
-<p>You can only publish a project after all of its included entries are published and no longer under embargo. If this is not yet the case, e.g., because your project is unpublished or under embargo, NOMAD shows a warning after you click <strong>NEXT</strong>, as in the third image above. You can still save your selection and publish the new project later.</p>
-</div>
+<p>The entries from your tutorial project now appear in the <strong>ENTRIES</strong> tab of the <code>My first NOMAD collection</code> project. Each has an <strong>included</strong> label in the <strong>Included</strong> column.</p>
+<details class="info">
+<summary>How included entries work</summary>
+<ul>
+<li>You can include entries from projects you own or that are shared with you.</li>
+<li>Included entries are not copied or moved to the destination project. They can only be edited in their original project.</li>
+<li>Only entries can be included. Files from which NOMAD does not generate an entry, e.g., the PDF and image files in your original tutorial project, are not included.</li>
+<li>NOMAD includes the entries that exist in the original project when you click <strong>SAVE</strong>. To include entries added later, reopen <strong>Include entries from other projects</strong> and click <strong>SAVE</strong> again.</li>
+<li>You can publish the collection once all included entries are published and free of embargo. If any entries are unpublished or under embargo, NOMAD shows a warning when you click <strong>NEXT</strong>. You can still click <strong>SAVE</strong> and publish the collection later.</li>
+</ul>
+</details>
 <p>To publish the new project, follow the publishing steps above. You can then assign it a single DOI for all of its entries, as described in the next section.</p>
 <p>For more details, see <a href="../howto/manage/gui/upload.html#include-entries-from-other-projects">How-to guides &gt; ... &gt; Include entries from other projects</a>.</p>
 <h2 id="assign-a-doi-to-your-project">Assign a DOI to your project<a class="headerlink" href="#assign-a-doi-to-your-project" title="Permanent link">¶</a></h2>
