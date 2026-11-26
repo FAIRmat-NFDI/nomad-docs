@@ -108,7 +108,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="https://nomad-lab.eu" title="Documentation" class="md-header__button md-logo" aria-label="Documentation" data-md-component="logo">
+    <a href="https://about.nomad-lab.eu/" title="Documentation" class="md-header__button md-logo" aria-label="Documentation" data-md-component="logo">
       
   
   <!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
@@ -288,7 +288,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="https://nomad-lab.eu" title="Documentation" class="md-nav__button md-logo" aria-label="Documentation" data-md-component="logo">
+    <a href="https://about.nomad-lab.eu/" title="Documentation" class="md-nav__button md-logo" aria-label="Documentation" data-md-component="logo">
       
   
   <!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
@@ -2635,6 +2635,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../howto/oasis/migrate/v1.4.3.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NOMAD 1.4.3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../howto/oasis/migrate/v1.4.2.html" class="md-nav__link">
         
   
@@ -4309,7 +4337,7 @@ for that data.</p>
 <h3 id="javascript-react-material-ui">Javascript, React, Material-UI<a class="headerlink" href="#javascript-react-material-ui" title="Permanent link">¶</a></h3>
 <p>The frontend (GUI) of <strong>nomad@FAIRDI</strong> is built on the
 <a href="https://reactjs.org/docs/getting-started.html" rel="noopener" target="_blank">React</a> component framework.
-This allows us to build the GUI as a set of re-usable components to
+This allows us to build the GUI as a set of reusable components to
 achieve a coherent representations for all aspects of nomad, while keeping development
 efforts manageable. React uses <a href="https://reactjs.org/docs/introducing-jsx.html" rel="noopener" target="_blank">JSX</a>
 (a ES6 variety) that allows to mix HTML with Javascript code.
@@ -4317,9 +4345,10 @@ The component library <a href="https://material-ui.com/" rel="noopener" target="
 (based on Google's popular material design framework) provides a consistent look-and-feel.</p>
 <h3 id="docker">Docker<a class="headerlink" href="#docker" title="Permanent link">¶</a></h3>
 <p>To run a <strong>nomad@FAIRDI</strong> instance, many services have to be orchestrated:
-the nomad app, nomad worker, mongodb, Elasticsearch, Keycloak, RabbitMQ,
-Elasticstack (logging), the nomad GUI, and a reverse proxy to keep everything together.
-Further services might be needed (e.g. JypiterHUB), when nomad grows.
+the NOMAD app and workers, MongoDB, Elasticsearch, Temporal with PostgreSQL persistence,
+and a reverse proxy. The app serves the GUI, and a separate NORTH service provides
+JupyterHub-based remote tools. Authentication uses Keycloak, either centrally hosted
+or supplied by the deployment.
 The container platform <a href="https://docs.docker.com/" rel="noopener" target="_blank">Docker</a> allows us to provide all services
 as pre-build images that can be run flexibly on all types of platforms, networks,
 and storage solutions. <a href="https://docs.docker.com/compose/" rel="noopener" target="_blank">Docker-compose</a> allows us to
