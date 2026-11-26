@@ -1,31 +1,21 @@
-# How to add a new type
+# How to work with quantity types
 
-The Metainfo type system lives in `nomad.metainfo.data_type`. It is responsible for validating
-incoming values, converting them to a canonical runtime representation, enforcing shapes and units,
-and serializing values to and from JSON.
+Every quantity in a NOMAD schema has a `type`. The Metainfo type system, which lives in
+`nomad.metainfo.data_type`, turns each type declaration into a `Datatype` object. This object
+validates the values you assign to the quantity, converts them to a canonical runtime
+representation, enforces shapes and units, and serializes values to and from JSON.
 
-Adding a custom type means subclassing `NonPrimitive` or `Primitive`, implementing the normalization
-and serialization methods, and registering the type in `normalize_type()`. This is core-software work
-— it requires changes to `nomad-lab` itself. For the types that already exist, see
+This page explains how the built-in types work. Knowing this helps you understand which values a
+quantity accepts, how they are converted when you assign them, and why an assignment can fail. For
+the list of available types and how to declare them, see
 {{ nav_link("reference/metainfo.md", breadcrumb=True) }}.
 
-## Checklist
+## From type declarations to `Datatype` objects
 
-1. **Subclass `NonPrimitive` or `Primitive`.** Inherit from `NonPrimitive` if your type operates on
-   individual scalar values or 1D lists; from `Primitive` if it wraps a native Python or NumPy scalar
-   or array type.
-2. **Implement `_normalize_impl(self, value, **kwargs)`.** Define input validation and parsing.
-   Convert valid input into your canonical runtime representation, or raise `TypeError`/`ValueError`
-   if validation fails.
-3. **Implement `_serialize_impl(self, value, **kwargs)`.** Define how the canonical runtime object
-   becomes a JSON-serializable structure — a string, dict or number.
-4. **Implement `standard_type(self)` and `serialize_self()`.** Specify the generic Python type name
-   used by schema mappers, and the self-serialization metadata dictionary.
-5. **Register in `normalize_type()`.** Add the string lookup aliases for your new type.
+`normalize_type()` is the factory that turns a shorthand type declaration into a `Datatype` instance.
+The accepted spellings are listed in {{ nav_link("reference/metainfo.md", breadcrumb=True) }}.
 
-## Background
-
-### The `Datatype` base class
+## The `Datatype` base class
 
 `Datatype` defines the common interface and state flags shared by every type:
 
@@ -40,7 +30,7 @@ and serialization methods, and registering the type in `normalize_type()`. This 
     - `is_scalar` — `True` if the shape is `None` or empty.
     - `unit` — the physical unit attached to the definition.
 
-### `Primitive` types
+## `Primitive` types
 
 `Primitive` covers the types natively supported by Python and NumPy (`int`, `float`, `complex`,
 `str`, `bool`).
@@ -58,7 +48,7 @@ The concrete primitives are:
 - `m_bool` — boolean values (`bool` or `np.bool_`).
 - `m_str` — string values (`str` or `np.str_`).
 
-### `NonPrimitive` types
+## `NonPrimitive` types
 
 `NonPrimitive` is the base for rich domain-specific types. Unlike primitives, these perform
 element-wise operations through the template methods `_normalize_impl()` and `_serialize_impl()`.
@@ -81,17 +71,13 @@ element-wise operations through the template methods `_normalize_impl()` and `_s
 You will rarely need to touch them directly — see
 {{ nav_link("howto/schemas/define.md", breadcrumb=True) }}.
 
-## `normalize(value, **kwargs)`
+## Normalization
 
-`normalize()` turns raw, unstructured or parsed input into a valid, strongly-typed internal
-representation. All validation and conversion happens here.
-
-!!! warning "Attention"
-    The value you return must be valid and comply with the definition. No further checks are
-    performed, and the rest of the system assumes only valid data.
-
-The parent section holding the destination data is available through `kwargs`, as
-`section=kwargs.get('section')`, when you need to interact with the container.
+When you assign a value to a quantity, `normalize()` turns the raw, unstructured or parsed input
+into a valid, strongly-typed internal representation. All validation and conversion happens here:
+if the value cannot be converted safely, the assignment fails with a `TypeError` or `ValueError`.
+No further checks are performed after normalization, and the rest of the system assumes that stored
+values are valid.
 
 ### Normalization pipeline for primitives
 
@@ -112,7 +98,7 @@ is eventually stored in a JSON-compatible format.
 - Enforces 1D or scalar shape constraints via `_check_shape()`.
 - Iterates over elements for lists, or calls `_normalize_impl(value, **kwargs)` directly for scalars.
 
-## `serialize(value, **kwargs)`
+## Serialization
 
 `serialize()` converts valid runtime values — NumPy arrays, `datetime` objects, `pint.Unit` objects —
 into JSON-serializable structures.
@@ -124,7 +110,7 @@ into JSON-serializable structures.
 - **Non-primitive serialization** — delegates element-wise conversion to `_serialize_impl()`. For
   example `Datetime` calls `isoformat()`, `Unit` returns `str(value)`, and `Bytes` encodes to base64.
 
-## `serialize_self()`
+## Schema serialization
 
 `serialize_self()` serializes the metadata of the `Datatype` object itself into a dictionary with
 `type_kind`, `type_data` and the active flags. It is used when serializing the schema. For `m_int32`
@@ -134,8 +120,25 @@ it produces:
 {'type_kind': 'numpy', 'type_data': 'int32', 'disable_shape_check': False}
 ```
 
-## Register the type
+## Custom types
 
-`normalize_type()` is the factory that turns a shorthand type declaration into a `Datatype` instance.
-Add your string aliases there. The accepted spellings it already supports are listed in
-{{ nav_link("reference/metainfo.md", breadcrumb=True) }}.
+The built-in types cover most needs. Adding a new type means subclassing `NonPrimitive` or
+`Primitive`, implementing the normalization and serialization methods, and registering the type in
+`normalize_type()`. This requires changes to `nomad-lab` itself and cannot be done in a plugin, so
+discuss it with the maintainers before you start (see {{ nav_link("howto/contribute.md") }}).
+
+The steps are:
+
+1. **Subclass `NonPrimitive` or `Primitive`.** Inherit from `NonPrimitive` if your type operates on
+   individual scalar values or 1D lists; from `Primitive` if it wraps a native Python or NumPy scalar
+   or array type.
+2. **Implement `_normalize_impl(self, value, **kwargs)`.** Define input validation and parsing.
+   Convert valid input into your canonical runtime representation, or raise `TypeError`/`ValueError`
+   if validation fails. The value you return must be valid and comply with the definition, because
+   no further checks are performed. If you need the parent section that holds the value, get it with
+   `kwargs.get('section')`.
+3. **Implement `_serialize_impl(self, value, **kwargs)`.** Define how the canonical runtime object
+   becomes a JSON-serializable structure — a string, dict or number.
+4. **Implement `standard_type(self)` and `serialize_self()`.** Specify the generic Python type name
+   used by schema mappers, and the self-serialization metadata dictionary.
+5. **Register in `normalize_type()`.** Add the string lookup aliases for your new type.

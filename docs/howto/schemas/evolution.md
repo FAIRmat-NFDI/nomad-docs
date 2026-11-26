@@ -153,6 +153,5 @@ With such a `normalize` function in place, you can apply the reprocessing strate
 
 ## Related materials
 
-- {{ nav_link("reference/code_guidelines.md", breadcrumb=True) }} — backwards compatibility rules for schema base classes.
 - {{ nav_link("explanation/north.md", breadcrumb=True) }} — schema version mismatches between NORTH tools.
 - {{ nav_link("howto/plugins/types/schema_packages.md", breadcrumb=True) }} — packaging and releasing a schema package.

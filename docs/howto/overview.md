@@ -47,11 +47,11 @@ Install and operate a NOMAD deployment for a lab or institution.
 </div>
 <div markdown="block">
 
-### Develop the core software
+### Contribute
 
-Work on the `nomad-lab` codebase and contribute changes upstream.
+Follow our guidelines for contributing to any repository in the NOMAD ecosystem.
 
-{{ nav_list("Develop the core software") }}
+- {{ nav_link("howto/contribute.md") }}
 
 </div>
 </div>

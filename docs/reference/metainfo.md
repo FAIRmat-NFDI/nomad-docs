@@ -53,8 +53,8 @@ Types are resolved by `nomad.metainfo.data_type.normalize_type()`, which accepts
   The dictionary is the only way to write a quantity reference outside Python, because a bare string
   is always resolved as a *section* reference.
 
-To add a type that is not in this list, see
-[How-to guides > Develop the core software > Add a new type](../howto/develop/new_type.md).
+To learn how these types validate, convert, and serialize values, see
+{{ nav_link("howto/plugins/tools/quantity_types.md", breadcrumb=True) }}.
 
 ## Shapes
 

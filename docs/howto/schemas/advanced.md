@@ -216,5 +216,3 @@ Categories were an earlier mechanism for organizing definitions by generalizatio
 
 - {{ nav_link("howto/plugins/tools/hdf5.md", breadcrumb=True) }} — offload large arrays to HDF5.
 - {{ nav_link("howto/plugins/tools/units.md", breadcrumb=True) }} — physical units and display units.
-- {{ nav_link("howto/develop/search.md", breadcrumb=True) }} — the `a_elasticsearch` Metainfo extension.
-- {{ nav_link("howto/develop/new_type.md", breadcrumb=True) }} — add a new quantity type.
