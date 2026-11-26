@@ -89,8 +89,8 @@ NOMAD automatically fills in the **Substance name** (from the filename), the **D
 1. Enter `Regioregular poly(3-hexylthiophene-2,5-diyl) powder for preparing P3HT solutions.` in the **Detailed substance description** field. Optionally, add an image of the substance or its chemical structure to this field.
 2. Click the **(+)** button next to the **Tags** field and enter `polymer`. Tags improve the searchability of your entries.
 3. Click the **(+)** button next to **Pure substance** under **Subsections**.
-4. Click **CHANGE SCHEMA** and select **PubChem Pure Substance Section**.
-5. Click the check mark (✓) next to **CHANGE SCHEMA** to confirm your selection.
+4. In the **Section schema** box, click the drop-down menu that shows **PureSubstanceSection** and select **PubChem Pure Substance Section**.
+5. Click **CONFIRM**.
 6. Enter `P3HT` in the **Substance name** field.
 7. Click **SAVE**.
 
@@ -115,8 +115,8 @@ Create an entry for the **P3HT thin film**. Follow the steps in [Create ELN entr
 Fill in the fields of the sample entry in the same way as for the substance entry. In addition, reference the substance from which the thin film is made:
 
 1. Click the **(+)** button next to **Components** under **Subsections**.
-2. Click **CHANGE SCHEMA** and select **SystemComponent**.
-3. Click the check mark (✓) next to **CHANGE SCHEMA** to confirm your selection.
+2. In the **Section schema** box, click the drop-down menu that shows **Component** and select **SystemComponent**.
+3. Click **CONFIRM**.
 4. Click the pencil icon at the right end of the **System** field.
 5. Click **This project** in the **Select section** dialog to show only the entries of your project.
 6. Click `P3HT_powder.archive.json`, and then click **Substance ELN (./data)** below it.
@@ -157,7 +157,7 @@ Create an entry for the **preparation of the P3HT solution** process. Follow the
 Enter the process start time in **Starting time** and complete additional fields, such as **Location**, **Description**, and **Tags**. Then reference the `Balance` entry as the instrument used to weigh the powder:
 
 1. Click the **(+)** button next to **Instruments** under **Subsections**.
-2. Keep **InstrumentReference** and click the check mark (✓) next to **CHANGE SCHEMA** to confirm it.
+2. In the **Section schema** box, keep **InstrumentReference** and click **CONFIRM**.
 3. Reference the `Balance` entry in the **Instrument reference** field, in the same way as you referenced the P3HT powder in the sample entry.
 4. Click **SAVE**, and then click **data** in the path at the top to return to the process.
 
@@ -199,7 +199,7 @@ Create an entry for the **optical absorption measurement**. Follow the steps in 
 Complete the measurement fields, such as **Starting time**, **Location**, **Description**, and **Tags**. Then add the instrument and measurement result:
 
 1. Click the **(+)** button next to **Instruments** under **Subsections**.
-2. Keep **InstrumentReference** and click the check mark (✓) next to **CHANGE SCHEMA**.
+2. In the **Section schema** box, keep **InstrumentReference** and click **CONFIRM**.
 3. Reference the `Optical_spectrometer` entry from the instrument task in the **Instrument reference** field, in the same way as you referenced entries before, and click **SAVE**.
 4. Click **data** in the path at the top, and then click the **(+)** button next to **Results**.
 5. Enter `Absorption spectrum` in the **Name** field and `Absorption maximum at 552 nm.` in the **Result** field. You can also add images to the **Result** field.
