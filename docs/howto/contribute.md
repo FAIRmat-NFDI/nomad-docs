@@ -18,7 +18,7 @@ The core `nomad-lab` package is the exception: its main development happens on t
 
 ## Report bugs and request features
 
-Report bugs, request features, and ask questions primarily on our [Discord server](https://discord.gg/TODO-invite-link){:target="_blank" rel="noopener"}, and discuss them there. The maintainers and the community can often help quickly, point you to the right repository, or suggest an existing solution. If the problem needs to be tracked, the maintainers may ask you to open an issue in the relevant repository.
+Report bugs, request features, and ask questions primarily on our [Discord server](https://discord.gg/Se9qHracC8){:target="_blank" rel="noopener"}, and discuss them there. The maintainers and the community can often help quickly, point you to the right repository, or suggest an existing solution. If the problem needs to be tracked, the maintainers may ask you to open an issue in the relevant repository.
 
 - **Bugs**: describe what you observed and how to reproduce it. Include the NOMAD version or URL you are using, any relevant upload or entry IDs, and example files or code snippets. Paste code and error messages as text, not as screenshots.
 - **Features**: describe the use case behind the feature, not only the proposed solution.
@@ -130,4 +130,4 @@ By contributing, you agree that your contribution is released under the license 
 
 If you find a vulnerability or other security-related problem, **do not open a public issue or PR**, because that would disclose the problem before a fix is available.
 
-Instead, email us at [support@nomad-lab.eu](mailto:support@nomad-lab.eu). Include a description of the problem, the affected repository and version, and steps to reproduce it. If the GitHub repository has [private vulnerability reporting](https://docs.github.com/en/code-security/security-advisories/guidance-on-reporting-and-writing-information-about-vulnerabilities/privately-reporting-a-security-vulnerability){:target="_blank" rel="noopener"} enabled, you can also report the problem through its **Security** tab.
+Instead, email us at [support@nomad-lab.eu](mailto:support@nomad-lab.eu). Include a description of the problem, the affected repository and version, and steps to reproduce it.
