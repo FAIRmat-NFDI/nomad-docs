@@ -13,9 +13,9 @@ In this tutorial, you will learn how to:
 1. Upload raw research data files to NOMAD and organize them using projects
 2. View the entries that NOMAD generates from your files and check their processing status
 3. Share projects with collaborators and manage access permissions
-4. Publish projects and understand the role of embargoes
-5. Assign a Digital Object Identifier (DOI) to your published project
-6. Include entries from other projects in a new project and publish them together
+4. Collect entries from several projects in a single new project
+5. Publish projects and understand the role of embargoes
+6. Assign a Digital Object Identifier (DOI) to your published project
 
 ---
 
@@ -413,18 +413,11 @@ If you publish the project with an embargo, its files and entries remain accessi
 
 ### Include entries of other projects
 
-The data behind a publication is often spread over several projects, for example, one project per measurement campaign or simulation series. To publish these data together, create a new project and include the entries of these projects in it. The included entries stay in their original projects.
+When the data behind a publication spans several projects, you can bring their entries together in a single project and publish them as a collection.
 
-??? info "What happens when you include entries from other projects?"
-    - The included entries appear in the **ENTRIES** tab of the new project, marked as **included**. You can search and filter them together with the project's own entries.
-    - The entries are not copied or moved. They can only be edited in their original project.
-    - Only entries are included. Files that do not belong to an entry, e.g., the PDF and image files that you uploaded in this tutorial, are not included.
-    - NOMAD includes the entries that exist when you click **SAVE**. If entries are added to an included project later, open **Include entries from other projects** again and click **SAVE** to include them as well.
-    - You can include entries from your own projects and from projects that are shared with you.
+In this exercise, you’ll include the entries from your tutorial project in a new collection project. Follow the steps in [Create a new project](#create-a-new-project) and name the new project `My first NOMAD collection`. Then open the **OVERVIEW** tab of your original tutorial project and copy the value under **Project ID**. You’ll use this ID to add its entries to the collection.
 
-To try this, create a new project, e.g., named `My first NOMAD collection`, as described in [Create a new project](#create-a-new-project), and include the entries of your project from this tutorial. You need its ID, which is shown under **Project ID** on the **OVERVIEW** tab of that project.
-
-**Use the arrow buttons ⬅️➡️ below to follow the steps for including the entries of your project in the new project.**
+**Use the arrow buttons ⬅️➡️ below to follow the steps for adding entries from your tutorial project to the new project.**
 
 <div class="image-slider" id="slider6">
     <div class="nav-arrow left" id="prev6">←</div>
@@ -437,8 +430,14 @@ To try this, create a new project, e.g., named `My first NOMAD collection`, as d
 
 To include entries from more projects, add each of them under **Add a project** before you click **NEXT**.
 
-!!! warning "Included entries must be published first"
-    You can only publish a project after all of its included entries are published and no longer under embargo. If this is not yet the case, e.g., because your project is unpublished or under embargo, NOMAD shows a warning after you click **NEXT**, as in the third image above. You can still save your selection and publish the new project later.
+The entries from your tutorial project now appear in the **ENTRIES** tab of the `My first NOMAD collection` project. Each has an **included** label in the **Included** column.
+
+??? info "How included entries work"
+    - You can include entries from projects you own or that are shared with you.
+    - Included entries are not copied or moved to the destination project. They can only be edited in their original project.
+    - Only entries can be included. Files from which NOMAD does not generate an entry, e.g., the PDF and image files in your original tutorial project, are not included.
+    - NOMAD includes the entries that exist in the original project when you click **SAVE**. To include entries added later, reopen **Include entries from other projects** and click **SAVE** again.
+    - You can publish the collection once all included entries are published and free of embargo. If any entries are unpublished or under embargo, NOMAD shows a warning when you click **NEXT**. You can still click **SAVE** and publish the collection later.
 
 To publish the new project, follow the publishing steps above. You can then assign it a single DOI for all of its entries, as described in the next section.
 
