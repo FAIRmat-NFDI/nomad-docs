@@ -108,7 +108,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="https://nomad-lab.eu" title="Documentation" class="md-header__button md-logo" aria-label="Documentation" data-md-component="logo">
+    <a href="https://about.nomad-lab.eu/" title="Documentation" class="md-header__button md-logo" aria-label="Documentation" data-md-component="logo">
       
   
   <!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
@@ -288,7 +288,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="https://nomad-lab.eu" title="Documentation" class="md-nav__button md-logo" aria-label="Documentation" data-md-component="logo">
+    <a href="https://about.nomad-lab.eu/" title="Documentation" class="md-nav__button md-logo" aria-label="Documentation" data-md-component="logo">
       
   
   <!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
@@ -2732,6 +2732,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../oasis/migrate/v1.4.3.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NOMAD 1.4.3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../oasis/migrate/v1.4.2.html" class="md-nav__link">
         
   
@@ -4098,13 +4126,10 @@ incident</a>. This document explains the possibilities and best practices when w
 <p>The available unit names are controlled by the <code>nomad/units/defaults_en.txt</code>
 file. This is a plain text file that is internally read by the
 <a href="https://pint.readthedocs.io/en/stable/" rel="noopener" target="_blank">Pint</a> library that we
-use for unit transformations in the NOMAD Python backend. These definitions and the
-associated conversion factors are then used always when transforming between two
-units in the NOMAD platform. Our graphical user interface also performs unit
-conversions in Javascript, and the same definitions and conversion factors are
-translated to the frontend through an environment config file (<code>env.js</code>).</p>
-<p>It is possible to add new units in this file to make them available both in the
-Python and in the Javascript environment. You can read more on how units are
+use for unit transformations in the NOMAD Python backend.</p>
+<p>It is possible to add new units in this file for use in Python. For frontend unit
+handling, refer to the maintained
+<a href="https://gitlab.mpcdf.mpg.de/nomad-lab/nomad-gui" rel="noopener" target="_blank"><code>nomad-gui</code> repository</a>. You can read more on how units are
 defined in the
 <a href="https://pint.readthedocs.io/en/stable/advanced/defining.html" rel="noopener" target="_blank">pint documentation</a>.</p>
 <p>All units support the use of SI-prefixes. This means that if the unit <code>meter</code>
@@ -4161,7 +4186,7 @@ data.</p>
 <a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a><span class="nb">print</span><span class="p">(</span><span class="n">my_section</span><span class="o">.</span><span class="n">my_energies</span><span class="p">)</span>  <span class="c1"># [272.11386245988473 272.11386245988473] electron_volt</span>
 </code></pre></div>
 <h2 id="defining-units-for-displaying-data">Defining units for displaying data<a class="headerlink" href="#defining-units-for-displaying-data" title="Permanent link">¶</a></h2>
-<p>When data is being displayed by the GUI, the unit can be choosen independently
+<p>When data is being displayed by the GUI, the unit can be chosen independently
 from the unit used in storing the data. There are several reasons for doing
 this:</p>
 <ul>

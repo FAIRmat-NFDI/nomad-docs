@@ -108,7 +108,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="https://nomad-lab.eu" title="Documentation" class="md-header__button md-logo" aria-label="Documentation" data-md-component="logo">
+    <a href="https://about.nomad-lab.eu/" title="Documentation" class="md-header__button md-logo" aria-label="Documentation" data-md-component="logo">
       
   
   <!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
@@ -288,7 +288,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="https://nomad-lab.eu" title="Documentation" class="md-nav__button md-logo" aria-label="Documentation" data-md-component="logo">
+    <a href="https://about.nomad-lab.eu/" title="Documentation" class="md-nav__button md-logo" aria-label="Documentation" data-md-component="logo">
       
   
   <!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
@@ -2827,6 +2827,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../oasis/migrate/v1.4.3.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NOMAD 1.4.3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../oasis/migrate/v1.4.2.html" class="md-nav__link">
         
   
@@ -4283,9 +4311,9 @@
 <h1 id="how-to-parse-efficiently-with-mapping-annotations">How to parse efficiently with mapping annotations<a class="headerlink" href="#how-to-parse-efficiently-with-mapping-annotations" title="Permanent link">¶</a></h1>
 <p><code>MappingParser</code> is a NOMAD parsing framework for handling tree-like data structures.
 It is extensively used for processing highly structured files, like computational output.
-This framework acts as an intermediate step in the <a href="../../../explanation/basics.html">parsing phase</a>, where reading the source file is done separtely from building up the archive (i.e. <code>data</code>).
+This framework acts as an intermediate step in the <a href="../../../explanation/basics.html">parsing phase</a>, where reading the source file is done separately from building up the archive (i.e. <code>data</code>).
 Some functionality can be inserted in the mapping, the rest is relegated to <a href="../../../explanation/basics.html#normalizing">normalization</a> functionalitites of the schema.</p>
-<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/mapping_parser_concept.png" data-desc-position="bottom"><img alt="Responsiblity distribution MappingParser" src="images/mapping_parser_concept.png"></a></p>
+<p><a class="glightbox" data-type="image" data-width="auto" data-height="auto" href="images/mapping_parser_concept.png" data-desc-position="bottom"><img alt="Responsibility distribution MappingParser" src="images/mapping_parser_concept.png"></a></p>
 <!-- `nomad.parsing.file_parser/mapping_parser.py` to handle the conversion to and from a
 data object and a python dictionary. We refer to an instance of the
 this class as 'mapping parser' throughout this section. In the following, the abstract

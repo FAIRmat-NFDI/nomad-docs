@@ -108,7 +108,7 @@
 
 <header class="md-header md-header--shadow" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="https://nomad-lab.eu" title="Documentation" class="md-header__button md-logo" aria-label="Documentation" data-md-component="logo">
+    <a href="https://about.nomad-lab.eu/" title="Documentation" class="md-header__button md-logo" aria-label="Documentation" data-md-component="logo">
       
   
   <!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
@@ -288,7 +288,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="https://nomad-lab.eu" title="Documentation" class="md-nav__button md-logo" aria-label="Documentation" data-md-component="logo">
+    <a href="https://about.nomad-lab.eu/" title="Documentation" class="md-nav__button md-logo" aria-label="Documentation" data-md-component="logo">
       
   
   <!--?xml version="1.0" encoding="UTF-8" standalone="no"?-->
@@ -2635,6 +2635,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../howto/oasis/migrate/v1.4.3.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    NOMAD 1.4.3
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../howto/oasis/migrate/v1.4.2.html" class="md-nav__link">
         
   
@@ -4227,14 +4255,10 @@
 
 
 <h1 id="built-in-eln-schemas">Built-in ELN schemas<a class="headerlink" href="#built-in-eln-schemas" title="Permanent link">¶</a></h1>
-<p>This page lists the built-in schemas of the <strong>Basic ELN</strong> category, which are
-part of NOMAD itself. They are listed in the <strong>BUILT-IN SCHEMAS</strong> tab after you
-select <strong>NEW ENTRY</strong> in a project. Plugins can add further built-in schemas in
-other categories.</p>
-<p>For each schema, the tables list the fields and subsections in the order in
-which the GUI shows them for a new entry. Most schemas are based on a section
-from <a href="basesections.html">Base sections</a>, where the complete definitions are
-generated from the NOMAD source code.</p>
+<p>This page documents the built-in schemas of the <strong>Basic ELN</strong> category in NOMAD.</p>
+<p>For each schema, the tables below list the quantities and subsections in the order in
+which the GUI shows them for a new entry. Most schemas inherit from NOMAD's base
+sections documented in <a href="basesections.html">Reference &gt; Base sections</a>.</p>
 <h2 id="values-filled-in-automatically">Values filled in automatically<a class="headerlink" href="#values-filled-in-automatically" title="Permanent link">¶</a></h2>
 <p>When NOMAD processes an ELN entry, it fills in the following fields if they are
 empty:</p>
@@ -4255,658 +4279,786 @@ empty:</p>
 <p><em>Basic ELN</em> and <em>ElnFileManager</em> have no identifiers subsection. Their <strong>ID</strong>
 remains empty unless you enter it.</p>
 <h2 id="analysis-eln">Analysis ELN<a class="headerlink" href="#analysis-eln" title="Permanent link">¶</a></h2>
-<p>For an analysis activity, e.g., processing measured data. Code name
-<code>ELNAnalysis</code>, based on <a href="basesections.html#analysis"><code>Analysis</code></a>.</p>
+<p><strong>Description:</strong> A basic electronic lab notebook for an analysis activity, e.g., processing measured data.</p>
+<p><strong>Class name:</strong> <code>ELNAnalysis</code></p>
+<p><strong>Inherits from:</strong> <a href="basesections.html#analysis">Reference &gt; Base sections &gt; Analysis</a></p>
+<p><strong>Quantities</strong></p>
 <table>
 <thead>
 <tr>
-<th>Field</th>
-<th>Code name</th>
+<th>Name</th>
+<th>Label</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Name</strong></td>
 <td><code>name</code></td>
-<td>Name of the entry.</td>
+<td><strong>Name</strong></td>
+<td><code>str</code></td>
+<td>A short human-readable and descriptive name of the entry.</td>
 </tr>
 <tr>
-<td><strong>Starting time</strong></td>
 <td><code>datetime</code></td>
+<td><strong>Starting time</strong></td>
+<td><code>Datetime</code></td>
 <td>Date and time when the analysis started.</td>
 </tr>
 <tr>
-<td><strong>ID</strong></td>
 <td><code>lab_id</code></td>
+<td><strong>ID</strong></td>
+<td><code>str</code></td>
 <td>Human-readable ID that is unique at least within your lab.</td>
 </tr>
 <tr>
-<td><strong>Description</strong></td>
 <td><code>description</code></td>
-<td>Formatted free text for information that the other fields do not capture.</td>
+<td><strong>Description</strong></td>
+<td><code>str</code></td>
+<td>Any information that cannot be captured in the other fields. Supports formatted text.</td>
 </tr>
 <tr>
-<td><strong>Method</strong></td>
 <td><code>method</code></td>
-<td>Short name of the applied method. Shown read-only.</td>
+<td><strong>Method</strong></td>
+<td><code>str</code></td>
+<td>A short, consistent handle for the applied method. Shown read-only.</td>
 </tr>
 <tr>
-<td><strong>Location</strong></td>
 <td><code>location</code></td>
-<td>Where the analysis took place.</td>
+<td><strong>Location</strong></td>
+<td><code>str</code></td>
+<td>Location of the analysis.</td>
 </tr>
 <tr>
-<td><strong>Tags</strong></td>
 <td><code>tags</code></td>
+<td><strong>Tags</strong></td>
+<td><code>str</code> (array)</td>
 <td>Keywords for finding the entry in searches.</td>
 </tr>
 </tbody>
 </table>
+<p><strong>Subsections</strong></p>
 <table>
 <thead>
 <tr>
-<th>Subsection</th>
-<th>Code name</th>
+<th>Name</th>
+<th>Label</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Steps</strong></td>
 <td><code>steps</code></td>
+<td><strong>Steps</strong></td>
+<td><a href="basesections.html#activitystep"><code>ActivityStep</code></a></td>
 <td>Ordered steps of the analysis, each with a name, start time, and comment. NOMAD shows them as tasks in the workflow of the entry.</td>
 </tr>
 <tr>
-<td><strong>Inputs</strong></td>
 <td><code>inputs</code></td>
+<td><strong>Inputs</strong></td>
+<td><a href="basesections.html#sectionreference"><code>SectionReference</code></a></td>
 <td>References to the input data, shown as inputs in the workflow of the entry.</td>
 </tr>
 <tr>
-<td><strong>Outputs</strong></td>
 <td><code>outputs</code></td>
+<td><strong>Outputs</strong></td>
+<td><code>BasicAnalysisResult</code></td>
 <td>Results of the analysis, each with a name and formatted text, shown as outputs in the workflow of the entry.</td>
 </tr>
 <tr>
-<td><strong>Analysis identifiers</strong></td>
 <td><code>analysis_identifiers</code></td>
+<td><strong>Analysis identifiers</strong></td>
+<td><a href="basesections.html#readableidentifiers"><code>ReadableIdentifiers</code></a></td>
 <td>Values from which NOMAD creates the <strong>ID</strong>.</td>
 </tr>
 </tbody>
 </table>
 <h2 id="basic-eln">Basic ELN<a class="headerlink" href="#basic-eln" title="Permanent link">¶</a></h2>
-<p>The simplest built-in schema, with general fields and no subsections. Code name
-<code>BasicEln</code>, based on <code>ElnBaseSection</code>.</p>
+<p><strong>Description:</strong> The most basic ELN to instantiate, with general fields and no subsections.</p>
+<p><strong>Class name:</strong> <code>BasicEln</code></p>
+<p><strong>Inherits from:</strong> <code>ElnBaseSection</code></p>
+<p><strong>Quantities</strong></p>
 <table>
 <thead>
 <tr>
-<th>Field</th>
-<th>Code name</th>
+<th>Name</th>
+<th>Label</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Short name</strong></td>
 <td><code>name</code></td>
-<td>Short, descriptive name of the entry.</td>
+<td><strong>Short name</strong></td>
+<td><code>str</code></td>
+<td>A short human-readable and descriptive name of the entry.</td>
 </tr>
 <tr>
-<td><strong>Datetime</strong></td>
 <td><code>datetime</code></td>
+<td><strong>Datetime</strong></td>
+<td><code>Datetime</code></td>
 <td>Date and time associated with the entry.</td>
 </tr>
 <tr>
-<td><strong>ID</strong></td>
 <td><code>lab_id</code></td>
+<td><strong>ID</strong></td>
+<td><code>str</code></td>
 <td>Human-readable ID that is unique at least within your lab.</td>
 </tr>
 <tr>
-<td><strong>Description</strong></td>
 <td><code>description</code></td>
-<td>Formatted free text for information that the other fields do not capture.</td>
+<td><strong>Description</strong></td>
+<td><code>str</code></td>
+<td>Any information that cannot be captured in the other fields. Supports formatted text.</td>
 </tr>
 <tr>
-<td><strong>Tags</strong></td>
 <td><code>tags</code></td>
+<td><strong>Tags</strong></td>
+<td><code>str</code> (array)</td>
 <td>Keywords for finding the entry in searches.</td>
 </tr>
 </tbody>
 </table>
 <h2 id="collection-eln">Collection ELN<a class="headerlink" href="#collection-eln" title="Permanent link">¶</a></h2>
-<p>For a group of entities that belong together, e.g., the samples of one batch.
-Code name <code>ELNCollection</code>, based on
-<a href="basesections.html#collection"><code>Collection</code></a>.</p>
+<p><strong>Description:</strong> A basic electronic lab notebook for a collection of entities, e.g., the samples of one batch.</p>
+<p><strong>Class name:</strong> <code>ELNCollection</code></p>
+<p><strong>Inherits from:</strong> <a href="basesections.html#collection">Reference &gt; Base sections &gt; Collection</a></p>
+<p><strong>Quantities</strong></p>
 <table>
 <thead>
 <tr>
-<th>Field</th>
-<th>Code name</th>
+<th>Name</th>
+<th>Label</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Name</strong></td>
 <td><code>name</code></td>
-<td>Name of the entry.</td>
+<td><strong>Name</strong></td>
+<td><code>str</code></td>
+<td>A short human-readable and descriptive name of the entry.</td>
 </tr>
 <tr>
-<td><strong>Datetime</strong></td>
 <td><code>datetime</code></td>
+<td><strong>Datetime</strong></td>
+<td><code>Datetime</code></td>
 <td>Date and time associated with the entry.</td>
 </tr>
 <tr>
-<td><strong>ID</strong></td>
 <td><code>lab_id</code></td>
+<td><strong>ID</strong></td>
+<td><code>str</code></td>
 <td>Human-readable ID that is unique at least within your lab.</td>
 </tr>
 <tr>
-<td><strong>Description</strong></td>
 <td><code>description</code></td>
-<td>Formatted free text for information that the other fields do not capture.</td>
+<td><strong>Description</strong></td>
+<td><code>str</code></td>
+<td>Any information that cannot be captured in the other fields. Supports formatted text.</td>
 </tr>
 <tr>
-<td><strong>Tags</strong></td>
 <td><code>tags</code></td>
+<td><strong>Tags</strong></td>
+<td><code>str</code> (array)</td>
 <td>Keywords for finding the entry in searches.</td>
 </tr>
 </tbody>
 </table>
+<p><strong>Subsections</strong></p>
 <table>
 <thead>
 <tr>
-<th>Subsection</th>
-<th>Code name</th>
+<th>Name</th>
+<th>Label</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Entities</strong></td>
 <td><code>entities</code></td>
+<td><strong>Entities</strong></td>
+<td><a href="basesections.html#entityreference"><code>EntityReference</code></a></td>
 <td>References to the entities in the collection, e.g., samples or substances.</td>
 </tr>
 <tr>
-<td><strong>Collection identifiers</strong></td>
 <td><code>collection_identifiers</code></td>
+<td><strong>Collection identifiers</strong></td>
+<td><a href="basesections.html#readableidentifiers"><code>ReadableIdentifiers</code></a></td>
 <td>Values from which NOMAD creates the <strong>ID</strong>.</td>
 </tr>
 </tbody>
 </table>
 <h2 id="elnfilemanager">ElnFileManager<a class="headerlink" href="#elnfilemanager" title="Permanent link">¶</a></h2>
-<p>For storing files, each with a description. Code name <code>ElnFileManager</code>, based
-on <code>ElnBaseSection</code>.</p>
+<p><strong>Description:</strong> A section for storing files, each with a description.</p>
+<p><strong>Class name:</strong> <code>ElnFileManager</code></p>
+<p><strong>Inherits from:</strong> <code>ElnBaseSection</code></p>
+<p><strong>Quantities</strong></p>
 <table>
 <thead>
 <tr>
-<th>Field</th>
-<th>Code name</th>
+<th>Name</th>
+<th>Label</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Short name</strong></td>
 <td><code>name</code></td>
-<td>Short, descriptive name of the entry.</td>
+<td><strong>Short name</strong></td>
+<td><code>str</code></td>
+<td>A short human-readable and descriptive name of the entry.</td>
 </tr>
 <tr>
-<td><strong>Datetime</strong></td>
 <td><code>datetime</code></td>
+<td><strong>Datetime</strong></td>
+<td><code>Datetime</code></td>
 <td>Date and time associated with the entry.</td>
 </tr>
 <tr>
-<td><strong>ID</strong></td>
 <td><code>lab_id</code></td>
+<td><strong>ID</strong></td>
+<td><code>str</code></td>
 <td>Human-readable ID that is unique at least within your lab.</td>
 </tr>
 <tr>
-<td><strong>Description</strong></td>
 <td><code>description</code></td>
-<td>Formatted free text for information that the other fields do not capture.</td>
+<td><strong>Description</strong></td>
+<td><code>str</code></td>
+<td>Any information that cannot be captured in the other fields. Supports formatted text.</td>
 </tr>
 </tbody>
 </table>
+<p><strong>Subsections</strong></p>
 <table>
 <thead>
 <tr>
-<th>Subsection</th>
-<th>Code name</th>
+<th>Name</th>
+<th>Label</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Files</strong></td>
 <td><code>Files</code></td>
+<td><strong>Files</strong></td>
+<td><code>AnnotatedFile</code></td>
 <td>Files, each with a description.</td>
 </tr>
 </tbody>
 </table>
 <h2 id="experiment-eln">Experiment ELN<a class="headerlink" href="#experiment-eln" title="Permanent link">¶</a></h2>
-<p>For an experiment that combines processes, measurements, and analyses. Code
-name <code>ELNExperiment</code>, based on <a href="basesections.html#experiment"><code>Experiment</code></a>.</p>
+<p><strong>Description:</strong> A basic electronic lab notebook for a collection of activities, e.g., the processes, measurements, and analyses of one experiment.</p>
+<p><strong>Class name:</strong> <code>ELNExperiment</code></p>
+<p><strong>Inherits from:</strong> <a href="basesections.html#experiment">Reference &gt; Base sections &gt; Experiment</a></p>
+<p><strong>Quantities</strong></p>
 <table>
 <thead>
 <tr>
-<th>Field</th>
-<th>Code name</th>
+<th>Name</th>
+<th>Label</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Name</strong></td>
 <td><code>name</code></td>
-<td>Name of the entry.</td>
+<td><strong>Name</strong></td>
+<td><code>str</code></td>
+<td>A short human-readable and descriptive name of the entry.</td>
 </tr>
 <tr>
-<td><strong>Starting time</strong></td>
 <td><code>datetime</code></td>
+<td><strong>Starting time</strong></td>
+<td><code>Datetime</code></td>
 <td>Date and time when the experiment started.</td>
 </tr>
 <tr>
-<td><strong>ID</strong></td>
 <td><code>lab_id</code></td>
+<td><strong>ID</strong></td>
+<td><code>str</code></td>
 <td>Human-readable ID that is unique at least within your lab.</td>
 </tr>
 <tr>
-<td><strong>Description</strong></td>
 <td><code>description</code></td>
-<td>Formatted free text for information that the other fields do not capture.</td>
+<td><strong>Description</strong></td>
+<td><code>str</code></td>
+<td>Any information that cannot be captured in the other fields. Supports formatted text.</td>
 </tr>
 <tr>
-<td><strong>Method</strong></td>
 <td><code>method</code></td>
-<td>Short name of the applied method. Shown read-only.</td>
+<td><strong>Method</strong></td>
+<td><code>str</code></td>
+<td>A short, consistent handle for the applied method. Shown read-only.</td>
 </tr>
 <tr>
-<td><strong>Location</strong></td>
 <td><code>location</code></td>
-<td>Where the experiment took place.</td>
+<td><strong>Location</strong></td>
+<td><code>str</code></td>
+<td>Location of the experiment.</td>
 </tr>
 <tr>
-<td><strong>Tags</strong></td>
 <td><code>tags</code></td>
+<td><strong>Tags</strong></td>
+<td><code>str</code> (array)</td>
 <td>Keywords for finding the entry in searches.</td>
 </tr>
 </tbody>
 </table>
+<p><strong>Subsections</strong></p>
 <table>
 <thead>
 <tr>
-<th>Subsection</th>
-<th>Code name</th>
+<th>Name</th>
+<th>Label</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Steps</strong></td>
 <td><code>steps</code></td>
+<td><strong>Steps</strong></td>
+<td><a href="basesections.html#experimentstep"><code>ExperimentStep</code></a></td>
 <td>Ordered steps of the experiment, each with a name, start time, comment, and a reference to a process, measurement, or analysis. NOMAD shows them as tasks in the workflow of the entry.</td>
 </tr>
 <tr>
-<td><strong>Experiment identifiers</strong></td>
 <td><code>experiment_identifiers</code></td>
+<td><strong>Experiment identifiers</strong></td>
+<td><a href="basesections.html#readableidentifiers"><code>ReadableIdentifiers</code></a></td>
 <td>Values from which NOMAD creates the <strong>ID</strong>.</td>
 </tr>
 </tbody>
 </table>
 <h2 id="generic-sample-eln">Generic Sample ELN<a class="headerlink" href="#generic-sample-eln" title="Permanent link">¶</a></h2>
-<p>For a sample, e.g., a material that consists of one or more components. Code
-name <code>ELNSample</code>, based on
-<a href="basesections.html#compositesystem"><code>CompositeSystem</code></a>.</p>
+<p><strong>Description:</strong> A basic electronic lab notebook for a generic sample, e.g., a material that consists of one or more components.</p>
+<p><strong>Class name:</strong> <code>ELNSample</code></p>
+<p><strong>Inherits from:</strong> <a href="basesections.html#compositesystem">Reference &gt; Base sections &gt; CompositeSystem</a></p>
+<p><strong>Quantities</strong></p>
 <table>
 <thead>
 <tr>
-<th>Field</th>
-<th>Code name</th>
+<th>Name</th>
+<th>Label</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Name</strong></td>
 <td><code>name</code></td>
-<td>Name of the entry.</td>
+<td><strong>Name</strong></td>
+<td><code>str</code></td>
+<td>A short human-readable and descriptive name of the entry.</td>
 </tr>
 <tr>
-<td><strong>Datetime</strong></td>
 <td><code>datetime</code></td>
+<td><strong>Datetime</strong></td>
+<td><code>Datetime</code></td>
 <td>Date and time associated with the entry.</td>
 </tr>
 <tr>
-<td><strong>ID</strong></td>
 <td><code>lab_id</code></td>
+<td><strong>ID</strong></td>
+<td><code>str</code></td>
 <td>Human-readable ID that is unique at least within your lab.</td>
 </tr>
 <tr>
-<td><strong>Description</strong></td>
 <td><code>description</code></td>
-<td>Formatted free text for information that the other fields do not capture.</td>
+<td><strong>Description</strong></td>
+<td><code>str</code></td>
+<td>Any information that cannot be captured in the other fields. Supports formatted text.</td>
 </tr>
 <tr>
-<td><strong>Tags</strong></td>
 <td><code>tags</code></td>
+<td><strong>Tags</strong></td>
+<td><code>str</code> (array)</td>
 <td>Keywords for finding the entry in searches.</td>
 </tr>
 </tbody>
 </table>
+<p><strong>Subsections</strong></p>
 <table>
 <thead>
 <tr>
-<th>Subsection</th>
-<th>Code name</th>
+<th>Name</th>
+<th>Label</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Elemental composition</strong></td>
 <td><code>elemental_composition</code></td>
+<td><strong>Elemental composition</strong></td>
+<td><a href="basesections.html#elementalcomposition"><code>ElementalComposition</code></a></td>
 <td>Elements in the sample, each with its atomic and mass fraction.</td>
 </tr>
 <tr>
-<td><strong>Components</strong></td>
 <td><code>components</code></td>
+<td><strong>Components</strong></td>
+<td><a href="basesections.html#component"><code>Component</code></a></td>
 <td>Components of the sample, each with a name, mass, and mass fraction. A component can reference another entry, e.g., a substance.</td>
 </tr>
 <tr>
-<td><strong>Sample identifiers</strong></td>
 <td><code>sample_identifiers</code></td>
+<td><strong>Sample identifiers</strong></td>
+<td><a href="basesections.html#readableidentifiers"><code>ReadableIdentifiers</code></a></td>
 <td>Values from which NOMAD creates the <strong>ID</strong>.</td>
 </tr>
 </tbody>
 </table>
 <h2 id="instrument-eln">Instrument ELN<a class="headerlink" href="#instrument-eln" title="Permanent link">¶</a></h2>
-<p>For an instrument that is used in processes or measurements. Code name
-<code>ELNInstrument</code>, based on <a href="basesections.html#instrument"><code>Instrument</code></a>.</p>
+<p><strong>Description:</strong> A basic electronic lab notebook for a generic instrument, e.g., one that is used in processes or measurements.</p>
+<p><strong>Class name:</strong> <code>ELNInstrument</code></p>
+<p><strong>Inherits from:</strong> <a href="basesections.html#instrument">Reference &gt; Base sections &gt; Instrument</a></p>
+<p><strong>Quantities</strong></p>
 <table>
 <thead>
 <tr>
-<th>Field</th>
-<th>Code name</th>
+<th>Name</th>
+<th>Label</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Name</strong></td>
 <td><code>name</code></td>
-<td>Name of the entry.</td>
+<td><strong>Name</strong></td>
+<td><code>str</code></td>
+<td>A short human-readable and descriptive name of the entry.</td>
 </tr>
 <tr>
-<td><strong>Datetime</strong></td>
 <td><code>datetime</code></td>
+<td><strong>Datetime</strong></td>
+<td><code>Datetime</code></td>
 <td>Date and time associated with the entry.</td>
 </tr>
 <tr>
-<td><strong>ID</strong></td>
 <td><code>lab_id</code></td>
+<td><strong>ID</strong></td>
+<td><code>str</code></td>
 <td>Human-readable ID that is unique at least within your lab.</td>
 </tr>
 <tr>
-<td><strong>Description</strong></td>
 <td><code>description</code></td>
-<td>Formatted free text for information that the other fields do not capture.</td>
+<td><strong>Description</strong></td>
+<td><code>str</code></td>
+<td>Any information that cannot be captured in the other fields. Supports formatted text.</td>
 </tr>
 <tr>
-<td><strong>Tags</strong></td>
 <td><code>tags</code></td>
+<td><strong>Tags</strong></td>
+<td><code>str</code> (array)</td>
 <td>Keywords for finding the entry in searches.</td>
 </tr>
 </tbody>
 </table>
+<p><strong>Subsections</strong></p>
 <table>
 <thead>
 <tr>
-<th>Subsection</th>
-<th>Code name</th>
+<th>Name</th>
+<th>Label</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Instrument identifiers</strong></td>
 <td><code>instrument_identifiers</code></td>
+<td><strong>Instrument identifiers</strong></td>
+<td><a href="basesections.html#readableidentifiers"><code>ReadableIdentifiers</code></a></td>
 <td>Values from which NOMAD creates the <strong>ID</strong>.</td>
 </tr>
 </tbody>
 </table>
 <h2 id="material-processing-eln">Material Processing ELN<a class="headerlink" href="#material-processing-eln" title="Permanent link">¶</a></h2>
-<p>For a process that produces or changes a material, e.g., a synthesis or a
-deposition. Code name <code>ELNProcess</code>, based on
-<a href="basesections.html#process"><code>Process</code></a>.</p>
+<p><strong>Description:</strong> A basic electronic lab notebook for a material processing activity, e.g., a synthesis or a deposition.</p>
+<p><strong>Class name:</strong> <code>ELNProcess</code></p>
+<p><strong>Inherits from:</strong> <a href="basesections.html#process">Reference &gt; Base sections &gt; Process</a></p>
+<p><strong>Quantities</strong></p>
 <table>
 <thead>
 <tr>
-<th>Field</th>
-<th>Code name</th>
+<th>Name</th>
+<th>Label</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Name</strong></td>
 <td><code>name</code></td>
-<td>Name of the entry.</td>
+<td><strong>Name</strong></td>
+<td><code>str</code></td>
+<td>A short human-readable and descriptive name of the entry.</td>
 </tr>
 <tr>
-<td><strong>Starting time</strong></td>
 <td><code>datetime</code></td>
+<td><strong>Starting time</strong></td>
+<td><code>Datetime</code></td>
 <td>Date and time when the process started.</td>
 </tr>
 <tr>
-<td><strong>ID</strong></td>
 <td><code>lab_id</code></td>
+<td><strong>ID</strong></td>
+<td><code>str</code></td>
 <td>Human-readable ID that is unique at least within your lab.</td>
 </tr>
 <tr>
-<td><strong>Description</strong></td>
 <td><code>description</code></td>
-<td>Formatted free text for information that the other fields do not capture.</td>
+<td><strong>Description</strong></td>
+<td><code>str</code></td>
+<td>Any information that cannot be captured in the other fields. Supports formatted text.</td>
 </tr>
 <tr>
-<td><strong>Method</strong></td>
 <td><code>method</code></td>
-<td>Short name of the applied method. Shown read-only.</td>
+<td><strong>Method</strong></td>
+<td><code>str</code></td>
+<td>A short, consistent handle for the applied method. Shown read-only.</td>
 </tr>
 <tr>
-<td><strong>Location</strong></td>
 <td><code>location</code></td>
-<td>Where the process took place.</td>
+<td><strong>Location</strong></td>
+<td><code>str</code></td>
+<td>Location of the process.</td>
 </tr>
 <tr>
-<td><strong>Ending time</strong></td>
 <td><code>end_time</code></td>
+<td><strong>Ending time</strong></td>
+<td><code>Datetime</code></td>
 <td>Date and time when the process finished. If it is empty, NOMAD can calculate it from <strong>Starting time</strong> and the step durations.</td>
 </tr>
 <tr>
-<td><strong>Tags</strong></td>
 <td><code>tags</code></td>
+<td><strong>Tags</strong></td>
+<td><code>str</code> (array)</td>
 <td>Keywords for finding the entry in searches.</td>
 </tr>
 </tbody>
 </table>
+<p><strong>Subsections</strong></p>
 <table>
 <thead>
 <tr>
-<th>Subsection</th>
-<th>Code name</th>
+<th>Name</th>
+<th>Label</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Steps</strong></td>
 <td><code>steps</code></td>
+<td><strong>Steps</strong></td>
+<td><a href="basesections.html#processstep"><code>ProcessStep</code></a></td>
 <td>Ordered steps of the process, each with a name, start time, duration, and comment. NOMAD shows them as tasks in the workflow of the entry.</td>
 </tr>
 <tr>
-<td><strong>Instruments</strong></td>
 <td><code>instruments</code></td>
+<td><strong>Instruments</strong></td>
+<td><a href="basesections.html#instrumentreference"><code>InstrumentReference</code></a></td>
 <td>References to the instruments used in the process.</td>
 </tr>
 <tr>
-<td><strong>Samples</strong></td>
 <td><code>samples</code></td>
+<td><strong>Samples</strong></td>
+<td><a href="basesections.html#compositesystemreference"><code>CompositeSystemReference</code></a></td>
 <td>References to the samples that the process produced or changed, shown as outputs in the workflow of the entry.</td>
 </tr>
 <tr>
-<td><strong>Process identifiers</strong></td>
 <td><code>process_identifiers</code></td>
+<td><strong>Process identifiers</strong></td>
+<td><a href="basesections.html#readableidentifiers"><code>ReadableIdentifiers</code></a></td>
 <td>Values from which NOMAD creates the <strong>ID</strong>.</td>
 </tr>
 </tbody>
 </table>
 <h2 id="measurement-eln">Measurement ELN<a class="headerlink" href="#measurement-eln" title="Permanent link">¶</a></h2>
-<p>For a measurement on one or more samples. Code name <code>ELNMeasurement</code>, based on
-<a href="basesections.html#measurement"><code>Measurement</code></a>.</p>
+<p><strong>Description:</strong> A basic electronic lab notebook for a measurement activity, e.g., a measurement on one or more samples.</p>
+<p><strong>Class name:</strong> <code>ELNMeasurement</code></p>
+<p><strong>Inherits from:</strong> <a href="basesections.html#measurement">Reference &gt; Base sections &gt; Measurement</a></p>
+<p><strong>Quantities</strong></p>
 <table>
 <thead>
 <tr>
-<th>Field</th>
-<th>Code name</th>
+<th>Name</th>
+<th>Label</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Name</strong></td>
 <td><code>name</code></td>
-<td>Name of the entry.</td>
+<td><strong>Name</strong></td>
+<td><code>str</code></td>
+<td>A short human-readable and descriptive name of the entry.</td>
 </tr>
 <tr>
-<td><strong>Starting time</strong></td>
 <td><code>datetime</code></td>
+<td><strong>Starting time</strong></td>
+<td><code>Datetime</code></td>
 <td>Date and time when the measurement started.</td>
 </tr>
 <tr>
-<td><strong>ID</strong></td>
 <td><code>lab_id</code></td>
+<td><strong>ID</strong></td>
+<td><code>str</code></td>
 <td>Human-readable ID that is unique at least within your lab.</td>
 </tr>
 <tr>
-<td><strong>Description</strong></td>
 <td><code>description</code></td>
-<td>Formatted free text for information that the other fields do not capture.</td>
+<td><strong>Description</strong></td>
+<td><code>str</code></td>
+<td>Any information that cannot be captured in the other fields. Supports formatted text.</td>
 </tr>
 <tr>
-<td><strong>Method</strong></td>
 <td><code>method</code></td>
-<td>Short name of the applied method. Shown read-only.</td>
+<td><strong>Method</strong></td>
+<td><code>str</code></td>
+<td>A short, consistent handle for the applied method. Shown read-only.</td>
 </tr>
 <tr>
-<td><strong>Location</strong></td>
 <td><code>location</code></td>
-<td>Where the measurement took place.</td>
+<td><strong>Location</strong></td>
+<td><code>str</code></td>
+<td>Location of the measurement.</td>
 </tr>
 <tr>
-<td><strong>Tags</strong></td>
 <td><code>tags</code></td>
+<td><strong>Tags</strong></td>
+<td><code>str</code> (array)</td>
 <td>Keywords for finding the entry in searches.</td>
 </tr>
 </tbody>
 </table>
+<p><strong>Subsections</strong></p>
 <table>
 <thead>
 <tr>
-<th>Subsection</th>
-<th>Code name</th>
+<th>Name</th>
+<th>Label</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Steps</strong></td>
 <td><code>steps</code></td>
+<td><strong>Steps</strong></td>
+<td><a href="basesections.html#activitystep"><code>ActivityStep</code></a></td>
 <td>Ordered steps of the measurement, each with a name, start time, and comment. NOMAD shows them as tasks in the workflow of the entry.</td>
 </tr>
 <tr>
-<td><strong>Samples</strong></td>
 <td><code>samples</code></td>
+<td><strong>Samples</strong></td>
+<td><a href="basesections.html#compositesystemreference"><code>CompositeSystemReference</code></a></td>
 <td>References to the measured samples, shown as inputs in the workflow of the entry.</td>
 </tr>
 <tr>
-<td><strong>Instruments</strong></td>
 <td><code>instruments</code></td>
+<td><strong>Instruments</strong></td>
+<td><a href="basesections.html#instrumentreference"><code>InstrumentReference</code></a></td>
 <td>References to the instruments used in the measurement.</td>
 </tr>
 <tr>
-<td><strong>Results</strong></td>
 <td><code>results</code></td>
+<td><strong>Results</strong></td>
+<td><code>BasicMeasurementResult</code></td>
 <td>Results of the measurement, each with a name and formatted text, shown as outputs in the workflow of the entry.</td>
 </tr>
 <tr>
-<td><strong>Measurement identifiers</strong></td>
 <td><code>measurement_identifiers</code></td>
+<td><strong>Measurement identifiers</strong></td>
+<td><a href="basesections.html#readableidentifiers"><code>ReadableIdentifiers</code></a></td>
 <td>Values from which NOMAD creates the <strong>ID</strong>.</td>
 </tr>
 </tbody>
 </table>
 <h2 id="substance-eln">Substance ELN<a class="headerlink" href="#substance-eln" title="Permanent link">¶</a></h2>
-<p>For a pure substance, e.g., a purchased chemical. Code name <code>ELNSubstance</code>,
-based on <a href="basesections.html#puresubstance"><code>PureSubstance</code></a>.</p>
+<p><strong>Description:</strong> A basic electronic lab notebook for a pure substance, e.g., a purchased chemical.</p>
+<p><strong>Class name:</strong> <code>ELNSubstance</code></p>
+<p><strong>Inherits from:</strong> <a href="basesections.html#puresubstance">Reference &gt; Base sections &gt; PureSubstance</a></p>
+<p><strong>Quantities</strong></p>
 <table>
 <thead>
 <tr>
-<th>Field</th>
-<th>Code name</th>
+<th>Name</th>
+<th>Label</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Substance name</strong></td>
 <td><code>name</code></td>
+<td><strong>Substance name</strong></td>
+<td><code>str</code></td>
 <td>Name of the substance.</td>
 </tr>
 <tr>
-<td><strong>Datetime</strong></td>
 <td><code>datetime</code></td>
+<td><strong>Datetime</strong></td>
+<td><code>Datetime</code></td>
 <td>Date and time associated with the entry.</td>
 </tr>
 <tr>
-<td><strong>Substance ID</strong></td>
 <td><code>lab_id</code></td>
+<td><strong>Substance ID</strong></td>
+<td><code>str</code></td>
 <td>Human-readable ID of the substance that is unique at least within your lab.</td>
 </tr>
 <tr>
-<td><strong>Detailed substance description</strong></td>
 <td><code>description</code></td>
-<td>Formatted free text for information that the other fields and subsections do not capture.</td>
+<td><strong>Detailed substance description</strong></td>
+<td><code>str</code></td>
+<td>Any information that cannot be captured in the other fields and subsections. Supports formatted text.</td>
 </tr>
 <tr>
-<td><strong>Tags</strong></td>
 <td><code>tags</code></td>
+<td><strong>Tags</strong></td>
+<td><code>str</code> (array)</td>
 <td>Keywords for finding the entry in searches.</td>
 </tr>
 </tbody>
 </table>
+<p><strong>Subsections</strong></p>
 <table>
 <thead>
 <tr>
-<th>Subsection</th>
-<th>Code name</th>
+<th>Name</th>
+<th>Label</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><strong>Elemental composition</strong></td>
 <td><code>elemental_composition</code></td>
+<td><strong>Elemental composition</strong></td>
+<td><a href="basesections.html#elementalcomposition"><code>ElementalComposition</code></a></td>
 <td>Elements in the substance, each with its atomic and mass fraction.</td>
 </tr>
 <tr>
-<td><strong>Pure substance</strong></td>
 <td><code>pure_substance</code></td>
+<td><strong>Pure substance</strong></td>
+<td><a href="basesections.html#puresubstancesection"><code>PureSubstanceSection</code></a></td>
 <td>Properties of the substance, e.g., IUPAC name, molecular formula, molar mass, and CAS number.</td>
 </tr>
 <tr>
-<td><strong>Substance identifiers</strong></td>
 <td><code>substance_identifiers</code></td>
+<td><strong>Substance identifiers</strong></td>
+<td><a href="basesections.html#readableidentifiers"><code>ReadableIdentifiers</code></a></td>
 <td>Values from which NOMAD creates the <strong>Substance ID</strong>.</td>
 </tr>
 </tbody>
