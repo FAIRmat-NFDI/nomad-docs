@@ -1,14 +1,10 @@
 # Built-in ELN schemas
 
-This page lists the built-in schemas of the **Basic ELN** category, which are
-part of NOMAD itself. They are listed in the **BUILT-IN SCHEMAS** tab after you
-select **NEW ENTRY** in a project. Plugins can add further built-in schemas in
-other categories.
+This page documents the built-in schemas of the **Basic ELN** category in NOMAD.
 
-For each schema, the tables list the fields and subsections in the order in
-which the GUI shows them for a new entry. Most schemas are based on a section
-from [Base sections](basesections.md), where the complete definitions are
-generated from the NOMAD source code.
+For each schema, the tables below list the quantities and subsections in the order in
+which the GUI shows them for a new entry. Most schemas inherit from NOMAD's base
+sections documented in [Reference > Base sections](basesections.md).
 
 ## Values filled in automatically
 
@@ -33,196 +29,261 @@ remains empty unless you enter it.
 
 ## Analysis ELN
 
-For an analysis activity, e.g., processing measured data. Code name
-`ELNAnalysis`, based on [`Analysis`](basesections.md#analysis).
+**Description:** A basic electronic lab notebook for an analysis activity, e.g., processing measured data.
 
-| Field | Code name | Description |
-| --- | --- | --- |
-| **Name** | `name` | Name of the entry. |
-| **Starting time** | `datetime` | Date and time when the analysis started. |
-| **ID** | `lab_id` | Human-readable ID that is unique at least within your lab. |
-| **Description** | `description` | Formatted free text for information that the other fields do not capture. |
-| **Method** | `method` | Short name of the applied method. Shown read-only. |
-| **Location** | `location` | Where the analysis took place. |
-| **Tags** | `tags` | Keywords for finding the entry in searches. |
+**Class name:** `ELNAnalysis`
 
-| Subsection | Code name | Description |
-| --- | --- | --- |
-| **Steps** | `steps` | Ordered steps of the analysis, each with a name, start time, and comment. NOMAD shows them as tasks in the workflow of the entry. |
-| **Inputs** | `inputs` | References to the input data, shown as inputs in the workflow of the entry. |
-| **Outputs** | `outputs` | Results of the analysis, each with a name and formatted text, shown as outputs in the workflow of the entry. |
-| **Analysis identifiers** | `analysis_identifiers` | Values from which NOMAD creates the **ID**. |
+**Inherits from:** [Reference > Base sections > Analysis](basesections.md#analysis)
+
+**Quantities**
+
+| Name | Label | Type | Description |
+| --- | --- | --- | --- |
+| `name` | **Name** | `str` | A short human-readable and descriptive name of the entry. |
+| `datetime` | **Starting time** | `Datetime` | Date and time when the analysis started. |
+| `lab_id` | **ID** | `str` | Human-readable ID that is unique at least within your lab. |
+| `description` | **Description** | `str` | Any information that cannot be captured in the other fields. Supports formatted text. |
+| `method` | **Method** | `str` | A short, consistent handle for the applied method. Shown read-only. |
+| `location` | **Location** | `str` | Location of the analysis. |
+| `tags` | **Tags** | `str` (array) | Keywords for finding the entry in searches. |
+
+**Subsections**
+
+| Name | Label | Type | Description |
+| --- | --- | --- | --- |
+| `steps` | **Steps** | [`ActivityStep`](basesections.md#activitystep) | Ordered steps of the analysis, each with a name, start time, and comment. NOMAD shows them as tasks in the workflow of the entry. |
+| `inputs` | **Inputs** | [`SectionReference`](basesections.md#sectionreference) | References to the input data, shown as inputs in the workflow of the entry. |
+| `outputs` | **Outputs** | `BasicAnalysisResult` | Results of the analysis, each with a name and formatted text, shown as outputs in the workflow of the entry. |
+| `analysis_identifiers` | **Analysis identifiers** | [`ReadableIdentifiers`](basesections.md#readableidentifiers) | Values from which NOMAD creates the **ID**. |
 
 ## Basic ELN
 
-The simplest built-in schema, with general fields and no subsections. Code name
-`BasicEln`, based on `ElnBaseSection`.
+**Description:** The most basic ELN to instantiate, with general fields and no subsections.
 
-| Field | Code name | Description |
-| --- | --- | --- |
-| **Short name** | `name` | Short, descriptive name of the entry. |
-| **Datetime** | `datetime` | Date and time associated with the entry. |
-| **ID** | `lab_id` | Human-readable ID that is unique at least within your lab. |
-| **Description** | `description` | Formatted free text for information that the other fields do not capture. |
-| **Tags** | `tags` | Keywords for finding the entry in searches. |
+**Class name:** `BasicEln`
+
+**Inherits from:** `ElnBaseSection`
+
+**Quantities**
+
+| Name | Label | Type | Description |
+| --- | --- | --- | --- |
+| `name` | **Short name** | `str` | A short human-readable and descriptive name of the entry. |
+| `datetime` | **Datetime** | `Datetime` | Date and time associated with the entry. |
+| `lab_id` | **ID** | `str` | Human-readable ID that is unique at least within your lab. |
+| `description` | **Description** | `str` | Any information that cannot be captured in the other fields. Supports formatted text. |
+| `tags` | **Tags** | `str` (array) | Keywords for finding the entry in searches. |
 
 ## Collection ELN
 
-For a group of entities that belong together, e.g., the samples of one batch.
-Code name `ELNCollection`, based on
-[`Collection`](basesections.md#collection).
+**Description:** A basic electronic lab notebook for a collection of entities, e.g., the samples of one batch.
 
-| Field | Code name | Description |
-| --- | --- | --- |
-| **Name** | `name` | Name of the entry. |
-| **Datetime** | `datetime` | Date and time associated with the entry. |
-| **ID** | `lab_id` | Human-readable ID that is unique at least within your lab. |
-| **Description** | `description` | Formatted free text for information that the other fields do not capture. |
-| **Tags** | `tags` | Keywords for finding the entry in searches. |
+**Class name:** `ELNCollection`
 
-| Subsection | Code name | Description |
-| --- | --- | --- |
-| **Entities** | `entities` | References to the entities in the collection, e.g., samples or substances. |
-| **Collection identifiers** | `collection_identifiers` | Values from which NOMAD creates the **ID**. |
+**Inherits from:** [Reference > Base sections > Collection](basesections.md#collection)
+
+**Quantities**
+
+| Name | Label | Type | Description |
+| --- | --- | --- | --- |
+| `name` | **Name** | `str` | A short human-readable and descriptive name of the entry. |
+| `datetime` | **Datetime** | `Datetime` | Date and time associated with the entry. |
+| `lab_id` | **ID** | `str` | Human-readable ID that is unique at least within your lab. |
+| `description` | **Description** | `str` | Any information that cannot be captured in the other fields. Supports formatted text. |
+| `tags` | **Tags** | `str` (array) | Keywords for finding the entry in searches. |
+
+**Subsections**
+
+| Name | Label | Type | Description |
+| --- | --- | --- | --- |
+| `entities` | **Entities** | [`EntityReference`](basesections.md#entityreference) | References to the entities in the collection, e.g., samples or substances. |
+| `collection_identifiers` | **Collection identifiers** | [`ReadableIdentifiers`](basesections.md#readableidentifiers) | Values from which NOMAD creates the **ID**. |
 
 ## ElnFileManager
 
-For storing files, each with a description. Code name `ElnFileManager`, based
-on `ElnBaseSection`.
+**Description:** A section for storing files, each with a description.
 
-| Field | Code name | Description |
-| --- | --- | --- |
-| **Short name** | `name` | Short, descriptive name of the entry. |
-| **Datetime** | `datetime` | Date and time associated with the entry. |
-| **ID** | `lab_id` | Human-readable ID that is unique at least within your lab. |
-| **Description** | `description` | Formatted free text for information that the other fields do not capture. |
+**Class name:** `ElnFileManager`
 
-| Subsection | Code name | Description |
-| --- | --- | --- |
-| **Files** | `Files` | Files, each with a description. |
+**Inherits from:** `ElnBaseSection`
+
+**Quantities**
+
+| Name | Label | Type | Description |
+| --- | --- | --- | --- |
+| `name` | **Short name** | `str` | A short human-readable and descriptive name of the entry. |
+| `datetime` | **Datetime** | `Datetime` | Date and time associated with the entry. |
+| `lab_id` | **ID** | `str` | Human-readable ID that is unique at least within your lab. |
+| `description` | **Description** | `str` | Any information that cannot be captured in the other fields. Supports formatted text. |
+
+**Subsections**
+
+| Name | Label | Type | Description |
+| --- | --- | --- | --- |
+| `Files` | **Files** | `AnnotatedFile` | Files, each with a description. |
 
 ## Experiment ELN
 
-For an experiment that combines processes, measurements, and analyses. Code
-name `ELNExperiment`, based on [`Experiment`](basesections.md#experiment).
+**Description:** A basic electronic lab notebook for a collection of activities, e.g., the processes, measurements, and analyses of one experiment.
 
-| Field | Code name | Description |
-| --- | --- | --- |
-| **Name** | `name` | Name of the entry. |
-| **Starting time** | `datetime` | Date and time when the experiment started. |
-| **ID** | `lab_id` | Human-readable ID that is unique at least within your lab. |
-| **Description** | `description` | Formatted free text for information that the other fields do not capture. |
-| **Method** | `method` | Short name of the applied method. Shown read-only. |
-| **Location** | `location` | Where the experiment took place. |
-| **Tags** | `tags` | Keywords for finding the entry in searches. |
+**Class name:** `ELNExperiment`
 
-| Subsection | Code name | Description |
-| --- | --- | --- |
-| **Steps** | `steps` | Ordered steps of the experiment, each with a name, start time, comment, and a reference to a process, measurement, or analysis. NOMAD shows them as tasks in the workflow of the entry. |
-| **Experiment identifiers** | `experiment_identifiers` | Values from which NOMAD creates the **ID**. |
+**Inherits from:** [Reference > Base sections > Experiment](basesections.md#experiment)
+
+**Quantities**
+
+| Name | Label | Type | Description |
+| --- | --- | --- | --- |
+| `name` | **Name** | `str` | A short human-readable and descriptive name of the entry. |
+| `datetime` | **Starting time** | `Datetime` | Date and time when the experiment started. |
+| `lab_id` | **ID** | `str` | Human-readable ID that is unique at least within your lab. |
+| `description` | **Description** | `str` | Any information that cannot be captured in the other fields. Supports formatted text. |
+| `method` | **Method** | `str` | A short, consistent handle for the applied method. Shown read-only. |
+| `location` | **Location** | `str` | Location of the experiment. |
+| `tags` | **Tags** | `str` (array) | Keywords for finding the entry in searches. |
+
+**Subsections**
+
+| Name | Label | Type | Description |
+| --- | --- | --- | --- |
+| `steps` | **Steps** | [`ExperimentStep`](basesections.md#experimentstep) | Ordered steps of the experiment, each with a name, start time, comment, and a reference to a process, measurement, or analysis. NOMAD shows them as tasks in the workflow of the entry. |
+| `experiment_identifiers` | **Experiment identifiers** | [`ReadableIdentifiers`](basesections.md#readableidentifiers) | Values from which NOMAD creates the **ID**. |
 
 ## Generic Sample ELN
 
-For a sample, e.g., a material that consists of one or more components. Code
-name `ELNSample`, based on
-[`CompositeSystem`](basesections.md#compositesystem).
+**Description:** A basic electronic lab notebook for a generic sample, e.g., a material that consists of one or more components.
 
-| Field | Code name | Description |
-| --- | --- | --- |
-| **Name** | `name` | Name of the entry. |
-| **Datetime** | `datetime` | Date and time associated with the entry. |
-| **ID** | `lab_id` | Human-readable ID that is unique at least within your lab. |
-| **Description** | `description` | Formatted free text for information that the other fields do not capture. |
-| **Tags** | `tags` | Keywords for finding the entry in searches. |
+**Class name:** `ELNSample`
 
-| Subsection | Code name | Description |
-| --- | --- | --- |
-| **Elemental composition** | `elemental_composition` | Elements in the sample, each with its atomic and mass fraction. |
-| **Components** | `components` | Components of the sample, each with a name, mass, and mass fraction. A component can reference another entry, e.g., a substance. |
-| **Sample identifiers** | `sample_identifiers` | Values from which NOMAD creates the **ID**. |
+**Inherits from:** [Reference > Base sections > CompositeSystem](basesections.md#compositesystem)
+
+**Quantities**
+
+| Name | Label | Type | Description |
+| --- | --- | --- | --- |
+| `name` | **Name** | `str` | A short human-readable and descriptive name of the entry. |
+| `datetime` | **Datetime** | `Datetime` | Date and time associated with the entry. |
+| `lab_id` | **ID** | `str` | Human-readable ID that is unique at least within your lab. |
+| `description` | **Description** | `str` | Any information that cannot be captured in the other fields. Supports formatted text. |
+| `tags` | **Tags** | `str` (array) | Keywords for finding the entry in searches. |
+
+**Subsections**
+
+| Name | Label | Type | Description |
+| --- | --- | --- | --- |
+| `elemental_composition` | **Elemental composition** | [`ElementalComposition`](basesections.md#elementalcomposition) | Elements in the sample, each with its atomic and mass fraction. |
+| `components` | **Components** | [`Component`](basesections.md#component) | Components of the sample, each with a name, mass, and mass fraction. A component can reference another entry, e.g., a substance. |
+| `sample_identifiers` | **Sample identifiers** | [`ReadableIdentifiers`](basesections.md#readableidentifiers) | Values from which NOMAD creates the **ID**. |
 
 ## Instrument ELN
 
-For an instrument that is used in processes or measurements. Code name
-`ELNInstrument`, based on [`Instrument`](basesections.md#instrument).
+**Description:** A basic electronic lab notebook for a generic instrument, e.g., one that is used in processes or measurements.
 
-| Field | Code name | Description |
-| --- | --- | --- |
-| **Name** | `name` | Name of the entry. |
-| **Datetime** | `datetime` | Date and time associated with the entry. |
-| **ID** | `lab_id` | Human-readable ID that is unique at least within your lab. |
-| **Description** | `description` | Formatted free text for information that the other fields do not capture. |
-| **Tags** | `tags` | Keywords for finding the entry in searches. |
+**Class name:** `ELNInstrument`
 
-| Subsection | Code name | Description |
-| --- | --- | --- |
-| **Instrument identifiers** | `instrument_identifiers` | Values from which NOMAD creates the **ID**. |
+**Inherits from:** [Reference > Base sections > Instrument](basesections.md#instrument)
+
+**Quantities**
+
+| Name | Label | Type | Description |
+| --- | --- | --- | --- |
+| `name` | **Name** | `str` | A short human-readable and descriptive name of the entry. |
+| `datetime` | **Datetime** | `Datetime` | Date and time associated with the entry. |
+| `lab_id` | **ID** | `str` | Human-readable ID that is unique at least within your lab. |
+| `description` | **Description** | `str` | Any information that cannot be captured in the other fields. Supports formatted text. |
+| `tags` | **Tags** | `str` (array) | Keywords for finding the entry in searches. |
+
+**Subsections**
+
+| Name | Label | Type | Description |
+| --- | --- | --- | --- |
+| `instrument_identifiers` | **Instrument identifiers** | [`ReadableIdentifiers`](basesections.md#readableidentifiers) | Values from which NOMAD creates the **ID**. |
 
 ## Material Processing ELN
 
-For a process that produces or changes a material, e.g., a synthesis or a
-deposition. Code name `ELNProcess`, based on
-[`Process`](basesections.md#process).
+**Description:** A basic electronic lab notebook for a material processing activity, e.g., a synthesis or a deposition.
 
-| Field | Code name | Description |
-| --- | --- | --- |
-| **Name** | `name` | Name of the entry. |
-| **Starting time** | `datetime` | Date and time when the process started. |
-| **ID** | `lab_id` | Human-readable ID that is unique at least within your lab. |
-| **Description** | `description` | Formatted free text for information that the other fields do not capture. |
-| **Method** | `method` | Short name of the applied method. Shown read-only. |
-| **Location** | `location` | Where the process took place. |
-| **Ending time** | `end_time` | Date and time when the process finished. If it is empty, NOMAD can calculate it from **Starting time** and the step durations. |
-| **Tags** | `tags` | Keywords for finding the entry in searches. |
+**Class name:** `ELNProcess`
 
-| Subsection | Code name | Description |
-| --- | --- | --- |
-| **Steps** | `steps` | Ordered steps of the process, each with a name, start time, duration, and comment. NOMAD shows them as tasks in the workflow of the entry. |
-| **Instruments** | `instruments` | References to the instruments used in the process. |
-| **Samples** | `samples` | References to the samples that the process produced or changed, shown as outputs in the workflow of the entry. |
-| **Process identifiers** | `process_identifiers` | Values from which NOMAD creates the **ID**. |
+**Inherits from:** [Reference > Base sections > Process](basesections.md#process)
+
+**Quantities**
+
+| Name | Label | Type | Description |
+| --- | --- | --- | --- |
+| `name` | **Name** | `str` | A short human-readable and descriptive name of the entry. |
+| `datetime` | **Starting time** | `Datetime` | Date and time when the process started. |
+| `lab_id` | **ID** | `str` | Human-readable ID that is unique at least within your lab. |
+| `description` | **Description** | `str` | Any information that cannot be captured in the other fields. Supports formatted text. |
+| `method` | **Method** | `str` | A short, consistent handle for the applied method. Shown read-only. |
+| `location` | **Location** | `str` | Location of the process. |
+| `end_time` | **Ending time** | `Datetime` | Date and time when the process finished. If it is empty, NOMAD can calculate it from **Starting time** and the step durations. |
+| `tags` | **Tags** | `str` (array) | Keywords for finding the entry in searches. |
+
+**Subsections**
+
+| Name | Label | Type | Description |
+| --- | --- | --- | --- |
+| `steps` | **Steps** | [`ProcessStep`](basesections.md#processstep) | Ordered steps of the process, each with a name, start time, duration, and comment. NOMAD shows them as tasks in the workflow of the entry. |
+| `instruments` | **Instruments** | [`InstrumentReference`](basesections.md#instrumentreference) | References to the instruments used in the process. |
+| `samples` | **Samples** | [`CompositeSystemReference`](basesections.md#compositesystemreference) | References to the samples that the process produced or changed, shown as outputs in the workflow of the entry. |
+| `process_identifiers` | **Process identifiers** | [`ReadableIdentifiers`](basesections.md#readableidentifiers) | Values from which NOMAD creates the **ID**. |
 
 ## Measurement ELN
 
-For a measurement on one or more samples. Code name `ELNMeasurement`, based on
-[`Measurement`](basesections.md#measurement).
+**Description:** A basic electronic lab notebook for a measurement activity, e.g., a measurement on one or more samples.
 
-| Field | Code name | Description |
-| --- | --- | --- |
-| **Name** | `name` | Name of the entry. |
-| **Starting time** | `datetime` | Date and time when the measurement started. |
-| **ID** | `lab_id` | Human-readable ID that is unique at least within your lab. |
-| **Description** | `description` | Formatted free text for information that the other fields do not capture. |
-| **Method** | `method` | Short name of the applied method. Shown read-only. |
-| **Location** | `location` | Where the measurement took place. |
-| **Tags** | `tags` | Keywords for finding the entry in searches. |
+**Class name:** `ELNMeasurement`
 
-| Subsection | Code name | Description |
-| --- | --- | --- |
-| **Steps** | `steps` | Ordered steps of the measurement, each with a name, start time, and comment. NOMAD shows them as tasks in the workflow of the entry. |
-| **Samples** | `samples` | References to the measured samples, shown as inputs in the workflow of the entry. |
-| **Instruments** | `instruments` | References to the instruments used in the measurement. |
-| **Results** | `results` | Results of the measurement, each with a name and formatted text, shown as outputs in the workflow of the entry. |
-| **Measurement identifiers** | `measurement_identifiers` | Values from which NOMAD creates the **ID**. |
+**Inherits from:** [Reference > Base sections > Measurement](basesections.md#measurement)
+
+**Quantities**
+
+| Name | Label | Type | Description |
+| --- | --- | --- | --- |
+| `name` | **Name** | `str` | A short human-readable and descriptive name of the entry. |
+| `datetime` | **Starting time** | `Datetime` | Date and time when the measurement started. |
+| `lab_id` | **ID** | `str` | Human-readable ID that is unique at least within your lab. |
+| `description` | **Description** | `str` | Any information that cannot be captured in the other fields. Supports formatted text. |
+| `method` | **Method** | `str` | A short, consistent handle for the applied method. Shown read-only. |
+| `location` | **Location** | `str` | Location of the measurement. |
+| `tags` | **Tags** | `str` (array) | Keywords for finding the entry in searches. |
+
+**Subsections**
+
+| Name | Label | Type | Description |
+| --- | --- | --- | --- |
+| `steps` | **Steps** | [`ActivityStep`](basesections.md#activitystep) | Ordered steps of the measurement, each with a name, start time, and comment. NOMAD shows them as tasks in the workflow of the entry. |
+| `samples` | **Samples** | [`CompositeSystemReference`](basesections.md#compositesystemreference) | References to the measured samples, shown as inputs in the workflow of the entry. |
+| `instruments` | **Instruments** | [`InstrumentReference`](basesections.md#instrumentreference) | References to the instruments used in the measurement. |
+| `results` | **Results** | `BasicMeasurementResult` | Results of the measurement, each with a name and formatted text, shown as outputs in the workflow of the entry. |
+| `measurement_identifiers` | **Measurement identifiers** | [`ReadableIdentifiers`](basesections.md#readableidentifiers) | Values from which NOMAD creates the **ID**. |
 
 ## Substance ELN
 
-For a pure substance, e.g., a purchased chemical. Code name `ELNSubstance`,
-based on [`PureSubstance`](basesections.md#puresubstance).
+**Description:** A basic electronic lab notebook for a pure substance, e.g., a purchased chemical.
 
-| Field | Code name | Description |
-| --- | --- | --- |
-| **Substance name** | `name` | Name of the substance. |
-| **Datetime** | `datetime` | Date and time associated with the entry. |
-| **Substance ID** | `lab_id` | Human-readable ID of the substance that is unique at least within your lab. |
-| **Detailed substance description** | `description` | Formatted free text for information that the other fields and subsections do not capture. |
-| **Tags** | `tags` | Keywords for finding the entry in searches. |
+**Class name:** `ELNSubstance`
 
-| Subsection | Code name | Description |
-| --- | --- | --- |
-| **Elemental composition** | `elemental_composition` | Elements in the substance, each with its atomic and mass fraction. |
-| **Pure substance** | `pure_substance` | Properties of the substance, e.g., IUPAC name, molecular formula, molar mass, and CAS number. |
-| **Substance identifiers** | `substance_identifiers` | Values from which NOMAD creates the **Substance ID**. |
+**Inherits from:** [Reference > Base sections > PureSubstance](basesections.md#puresubstance)
+
+**Quantities**
+
+| Name | Label | Type | Description |
+| --- | --- | --- | --- |
+| `name` | **Substance name** | `str` | Name of the substance. |
+| `datetime` | **Datetime** | `Datetime` | Date and time associated with the entry. |
+| `lab_id` | **Substance ID** | `str` | Human-readable ID of the substance that is unique at least within your lab. |
+| `description` | **Detailed substance description** | `str` | Any information that cannot be captured in the other fields and subsections. Supports formatted text. |
+| `tags` | **Tags** | `str` (array) | Keywords for finding the entry in searches. |
+
+**Subsections**
+
+| Name | Label | Type | Description |
+| --- | --- | --- | --- |
+| `elemental_composition` | **Elemental composition** | [`ElementalComposition`](basesections.md#elementalcomposition) | Elements in the substance, each with its atomic and mass fraction. |
+| `pure_substance` | **Pure substance** | [`PureSubstanceSection`](basesections.md#puresubstancesection) | Properties of the substance, e.g., IUPAC name, molecular formula, molar mass, and CAS number. |
+| `substance_identifiers` | **Substance identifiers** | [`ReadableIdentifiers`](basesections.md#readableidentifiers) | Values from which NOMAD creates the **Substance ID**. |
 
 ## Related pages
 
