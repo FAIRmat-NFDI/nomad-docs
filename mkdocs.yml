@@ -41,7 +41,7 @@ nav:
               - Manage data with Python: howto/manage/program/publish_python.md
               - Access processed data: howto/manage/program/archive_query.md
               - Transform JSON data structures: howto/manage/program/json_transformer.md
-              - Make Graph API calls: howto/manage/program/graph_api.md # TODO consolidate into a single page with supporting explanation/reference material
+              - Make Graph API calls: howto/manage/program/graph_api.md
       - Work with schemas:
           - Start working with schemas: howto/schemas/schemas.md
           - Define a schema: howto/schemas/define.md
@@ -92,6 +92,7 @@ nav:
       - Overview: explanation/overview.md
       - From files to data: explanation/basics.md
       - Data structure: explanation/data.md
+      - Graph API traversal and responses: explanation/graph_api.md
       - Base sections: explanation/base_sections.md
       - Processing: explanation/processing.md
       - Architecture: explanation/architecture.md
@@ -103,6 +104,7 @@ nav:
   - Reference:
       - Overview: reference/overview.md
       - REST API: reference/api.md
+      - Graph API: reference/graph_api.md
       - ArchiveQuery client: reference/archive_query.md
       - Schema language: reference/metainfo.md
       - Configuration: reference/config.md

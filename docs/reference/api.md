@@ -36,7 +36,7 @@ deployment's API dashboard.
 | `groups` | Create, inspect, update, and delete user groups. |
 | `users` | Look up NOMAD users and their IDs. |
 | `auth` | Obtain and manage supported authentication tokens. |
-| `datasets` | Retained backend resources for existing legacy collections. New publication and DOI workflows operate on Projects. |
+| `datasets` | Manage collections of entries, including dataset creation and DOI assignment through the API. |
 
 Many resources support both a collection path, such as `/entries`, and an
 individual-resource path, such as `/entries/{entry_id}`. Consult the OpenAPI

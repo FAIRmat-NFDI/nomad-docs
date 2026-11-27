@@ -10,6 +10,7 @@ Reference pages provide authoritative technical details. Use them when you need 
 
 {{ nav_list(descriptions={
     "reference/api.md": "the built-in NOMAD API: resources, requests, queries, pagination, errors, and API usage limits.",
+    "reference/graph_api.md": "Graph API resources, request trees, collection queries, and archive retrieval options.",
     "reference/archive_query.md": "the Python ArchiveQuery client: options, methods, result formats, and transfer behavior.",
     "reference/metainfo.md": "the Metainfo schema language: definition attributes, quantity types, and conventions.",
     "reference/config.md": "deployment and application configuration options.",
