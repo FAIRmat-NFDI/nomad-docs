@@ -4447,14 +4447,14 @@ Running code snippets out of order may lead to errors, e.g., due to missing impo
 </code></pre></div>
 </details>
 <p>This call confirms which NOMAD account is being used.</p>
-<!-- TODO: The package's built-in address for `url='test'` (https://nomad-lab.eu/backend/test/api/v1) rejects uploads larger than 1 MiB (nginx 413), so the first two uploads fail without the `core.NOMAD_TEST_URL` line below. Remove that line once FAIRmat-NFDI/nomad-utility-workflows#56 is fixed. -->
+<!-- TODO: The package's built-in address for `url='test'` (https://nomad-lab.eu/prod/v1/test/api/v1) rejects uploads larger than 1 MiB (nginx 413), so the first two uploads fail without the `core.NOMAD_TEST_URL` line below. Remove that line once FAIRmat-NFDI/nomad-utility-workflows#56 is fixed. -->
 <!-- TODO: Once FAIRmat-NFDI/nomad-utility-workflows#55 is fixed, replace the hand-built `nomad_gui` links with `.nomad_gui_url`. -->
 
 <p>Finally, define the addresses that the following snippets use:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">nomad_utility_workflows.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">core</span>
 <a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>
 <a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="c1"># API address of the NOMAD test deployment</span>
-<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="n">core</span><span class="o">.</span><span class="n">NOMAD_TEST_URL</span> <span class="o">=</span> <span class="s1">'https://nomad-lab.eu/test/backend/api/v1'</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="n">core</span><span class="o">.</span><span class="n">NOMAD_TEST_URL</span> <span class="o">=</span> <span class="s1">'https://nomad-lab.eu/backend/test/api/v1'</span>
 <a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>
 <a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="c1"># NOMAD GUI of the test deployment, for links to projects and entries</span>
 <a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="n">nomad_gui</span> <span class="o">=</span> <span class="s1">'https://nomad-lab.eu/test'</span>
