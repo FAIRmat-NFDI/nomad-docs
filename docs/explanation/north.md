@@ -63,6 +63,8 @@ plugins:
           image: ghcr.io/fairmat-nfdi/nomad-north-jupyter:<another_tag>
 ```
 
+The NORTH hub reads the tool configuration from NOMAD when it starts. After changing a tool in `nomad.yaml`, restart both the `app` and the `north` services.
+
 ## Official base images
 
 Using the base image within the [`nomad-north-desktop-base`](https://github.com/FAIRmat-NFDI/nomad-north-desktop-base){:target="_blank" rel="noopener"} repository is the recommended best practice to build a NORTH tool if that demands a graphical user interface. Its desktop-base image builds on the [Jupyter Docker Stacks project](https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html){:target="_blank" rel="noopener"}, offering a [conda](https://anaconda.org){:target="_blank" rel="noopener"} environment with a Jupyter Notebook and graphical user interface via a light-weight [`xfce`](https://www.xfce.org/){:target="_blank" rel="noopener"} desktop environment. Ubuntu Linux is the base layer of this docker image, connecting the container to the operation system of the host computer.
