@@ -161,7 +161,8 @@ a schema-based entry that you can edit directly in NOMAD. To create an ELN entry
    it in the data editor.
 
 **Related pages:** {{ nav_link("tutorial/eln/built_in_templates.md") }};
-{{ nav_link("howto/schemas/define.md") }}.
+{{ nav_link("howto/schemas/define.md") }};
+{{ nav_link("reference/built_in_eln_schemas.md") }}.
 
 ### Include entries from other projects
 
